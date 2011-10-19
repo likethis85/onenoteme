@@ -1,14 +1,15 @@
 <?php
-defined('CDC_DEBUG') or define('CDC_DEBUG', true);
+defined('DS') or define('DS', DIRECTORY_SEPARATOR);
+defined('YII_DEBUG') or define('YII_DEBUG', true);
+//!YII_DEBUG && error_reporting(0);
 
-//$cdc = dirname(__FILE__) . '/../framework/cdc.php';
-//$cdc = '/Volumes/data/Webroot/cdcframework/framework/cdc.php';
-$cdc = 'e:/Webroot/cdcframework/framework/cdc.php';
+$cdc = dirname(__FILE__) . '/../library/framework/yii.php';
+$short = dirname(__FILE__) . '/../library/shortcut.php';
+require_once($cdc);
+require_once($short);
+
 $cfg = CDC_DEBUG ? 'main_develop.php' : 'main_product.php';
-
 $config = dirname(__FILE__) . '/../protected/config/' . $cfg;
 
-require_once($cdc);
-
-$app = Cdc::createApplication($config);
+$app = Yii::createWebApplication($config);
 $app->run();

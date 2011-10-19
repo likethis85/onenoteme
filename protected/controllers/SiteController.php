@@ -1,10 +1,10 @@
 <?php
-class SiteController extends DController
+class SiteController extends Controller
 {
     public function actionIndex()
     {
         
-        $this->render('site/index', array(
+        $this->render('index', array(
             'data' => time(),
         ));
         

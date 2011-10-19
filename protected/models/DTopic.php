@@ -1,5 +1,5 @@
 <?php
-class Book extends DActiveRecord
+class DTopic extends DModel
 {
     public static function model($class = __CLASS__)
     {
@@ -8,7 +8,7 @@ class Book extends DActiveRecord
     
     public function table()
     {
-        return '{{book}}';
+        return '{{topic}}';
     }
 
     public function pk()
@@ -18,6 +18,6 @@ class Book extends DActiveRecord
     
     public function columns()
     {
-        return array('id', 'name', 'user_id', 'create_time', 'isdefault');
+        return array('id', 'name', 'create_time', 'post_nums', 'orderid');
     }
 }

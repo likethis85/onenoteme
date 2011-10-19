@@ -1,5 +1,5 @@
 <?php
-class Controller extends DController
+class Controller extends CController
 {
     
 }
