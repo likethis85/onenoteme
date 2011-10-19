@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+.me-wrapper {width:980px; margin:0px auto; overflow:hidden;}
+.me-header {}
+.me-main {margin:10px auto;}
+.me-footer {margin-top:10px; margin:10px auto;}
+.breadcrumbs {text-indent:10px; line-height:24px; height:24px; margin-bottom:10px;}
+
+/* left nav */
+.me-sidebar {width:338px;}
+.me-sidebar li {margin:8px 5px 8px 10px;}
+
+/* container */
+.me-container {width:632px;}

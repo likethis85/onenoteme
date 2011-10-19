@@ -1,6 +1,11 @@
 <?php
 return array(
 
+    'uploadBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'uploads' . DS,
+    'uploadBaseUrl' => 'http://f.onenote.me/',
+    'resourceBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'resources' . DS,
+    'resourceBaseUrl' => 'http://s.onenote.me/',
+
     /*
      * datetime format
      */

@@ -10,6 +10,21 @@ class SiteController extends Controller
         
     }
     
+    public function actionLogin()
+    {
+        
+    }
+    
+    public function actionLogout()
+    {
+        
+    }
+    
+    public function signup()
+    {
+        
+    }
+    
     public function actionTest()
     {
         header('Content-Type: text/html; charset=utf-8');
