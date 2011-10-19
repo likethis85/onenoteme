@@ -1,7 +1,7 @@
 <?php
-/** 
+/**
  * @author chendong
- * 
+ *
  * @abstract
  * @version 1.0
  */
@@ -15,10 +15,52 @@ abstract class DModel
     
     function __construct()
     {
-        $this->setIsNewRecord(true);
+        // @todo update insert 使用
+//        $this->setIsNewRecord(true);
         $this->_pk = $this->pk();
         
         $this->init();
+    }
+    
+
+    public function __set($name, $value)
+    {
+        if ($this->setAttribute($name, $value) === false) {
+            $setter = 'set' . ucfirst(strtolower($name));
+    		if (method_exists($this, $setter))
+    			return $this->$setter($value);
+		}
+    }
+    
+    public function __get($name)
+    {
+        if (isset($this->_attributes[$name]))
+			return $this->_attributes[$name];
+		else {
+            $getter = 'get' . ucfirst(strtolower($name));
+            return $this->$getter();
+		}
+    }
+    
+    public function __isset($name)
+    {
+    	return isset($this->_attributes[$name]);
+    }
+    
+    public function  __unset($name)
+    {
+        $setter = 'set' . ucfirst(strtolower($name));
+        $getter = 'get' . ucfirst(strtolower($name));
+    	if (in_array($name, $this->columns()))
+			unset($this->_attributes[$name]);
+		elseif (method_exists($this, $setter))
+			$this->$setter(null);
+	    elseif (method_exists($this, $getter))
+	        throw new CException(Yii::t('yii','Property "{class}.{property}" is read only.',
+				array('{class}'=>get_class($this), '{property}'=>$name)));
+		else
+			throw new CException(Yii::t('yii','Property "{class}.{property}" is not defined.',
+				array('{class}'=>get_class($this), '{property}'=>$name)));
     }
     
     /**
@@ -33,7 +75,7 @@ abstract class DModel
      * @param string $class
      * @param Dmodel
      */
-    public function model($class = __CLASS__)
+    public static function model($class = __CLASS__)
     {
         if (isset(self::$_models[$class]))
 			return self::$_models[$class];
@@ -51,7 +93,7 @@ abstract class DModel
     {
         if ($this->_db)
             return $this->_db;
-        else 
+        else
             return $this->_db = Yii::app()->getDb();
     }
     
@@ -64,10 +106,10 @@ abstract class DModel
     {
         if ($this->_cmd)
             return $this->_cmd;
-        else 
+        else
             return $this->_cmd = Yii::app()->getDb()->createCommand($query);
     }
-    
+
     /**
      * fetch the rows by pk
      * @param mixed $pk
@@ -76,12 +118,12 @@ abstract class DModel
      * @param boolean $fetchAssociative
      * @return array the record found. Null if none is found.
      */
-    public function findByPk($pk, $select = '*', $params = array(), $fetchAssociative = true)
+    public function queryByPk($pk, $select = '*', $params = array(), $fetchAssociative = true)
     {
         $cmd = $this->getDbCommand()
             ->select($select)
-            ->where(':pk = $value', array(':pk'=>$this->pk(), ':value'=>$pk));
-        return $this->queryRow($cmd, $params, $fetchAssociative);
+            ->where($this->pk() . ' = :value', array(':value'=>$pk));
+        return $this->query($cmd, $params, $fetchAssociative);
     }
     
     /**
@@ -91,10 +133,10 @@ abstract class DModel
      * @param boolean $fetchAssociative
      * @return array the record found. Null if none is found.
      */
-    public function queryRow(CDbCommand $cmd, $params = array(), $fetchAssociative = true)
+    public function query(CDbCommand $cmd, $params = array(), $fetchAssociative = true)
     {
-        $cmd->from($this->table());
-        return $cmd->limit(1)->queryRow($fetchAssociative, $params);
+        return $cmd->from($this->table())
+            ->limit(1)->queryRow($fetchAssociative, $params);
     }
     
     /**
@@ -110,6 +152,44 @@ abstract class DModel
         $cmd->from($this->table());
         return $cmd->queryAll($fetchAssociative, $params);
     }
+
+    /**
+     * fetch the rows by pk
+     * @param mixed $pk
+     * @param mixed $select string|array
+     * @param array $params
+     * @param boolean $fetchAssociative
+     * @return DCategory the record found. Null if none is found.
+     */
+    public function findByPk($pk, $select = '*', $params = array(), $fetchAssociative = true)
+    {
+        return $this->toModel($this->queryByPk($pk, $select, $params, $fetchAssociative));
+    }
+    
+    /**
+     * fetch the model
+     * @param CDbCommand $cmd
+     * @param array $params
+     * @param boolean $fetchAssociative
+     * @return DCategory the record found. Null if none is found.
+     */
+    public function find(CDbCommand $cmd, $params = array(), $fetchAssociative = true)
+    {
+        return $this->toModel($this->query($cmd, $params, $fetchAssociative));
+    }
+    
+    /**
+     * fetch the models
+     * @param CDbCommand $cmd
+     * @param array $params
+     * @param boolean $fetchAssociative
+     * @return DCategory the record found. Null if none is found.
+     */
+    public function findAll(CDbCommand $cmd, $params = array(), $fetchAssociative = true)
+    {
+        return $this->toModels($this->queryAll($cmd, $params, $fetchAssociative));
+    }
+    
     
     /**
      * init model
@@ -126,7 +206,7 @@ abstract class DModel
 	 * make data array row to model
 	 * @param array $row
 	 * @param boolean $callAfterFind
-	 * @return DModel the dmodel object found. Null if no record is found. 
+	 * @return DModel the dmodel object found. Null if no record is found.
 	 */
     public function toModel($row, $callAfterFind = true)
     {
@@ -139,6 +219,7 @@ abstract class DModel
                 
             if ($callAfterFind)
                 $model->afterFind();
+            return $model;
         }
         else
             return null;
@@ -156,7 +237,7 @@ abstract class DModel
             foreach ($rows as $row) {
                 if (is_array($row))
                     $models[] = $this->toModel($row, $callAfterFind);
-                else 
+                else
                     throw new CDbException('$row is not a associative array');
             }
         }
@@ -169,6 +250,8 @@ abstract class DModel
     {
         if ($this->beforeSave()) {
             $result = $this->getDbCommand()->insert($this->table(), $this->getAttributes($attributes)) > 0;
+            if ($result)
+                $this->{$this->pk()} = Yii::app()->db->getLastInsertID();
             return $result;
         }
         else
@@ -188,7 +271,7 @@ abstract class DModel
             $this->afterSave();
             return $result;
         }
-        else 
+        else
             return false;
     }
     
@@ -261,7 +344,7 @@ abstract class DModel
      * @param array $params
      * @return integer number of rows affected by the execution.
      */
-    public function deleteByPk($pk, $conditions, $params)
+    public function deleteByPk($pk, $conditions = '', $params = array())
     {
         if (is_numeric($pk) || is_string($pk))
             $pk = array($pk);
@@ -403,46 +486,6 @@ abstract class DModel
     
     protected function afterSave()
     {
-    }
-    
-    public function __set($name, $value)
-    {
-        if ($this->setAttribute($name, $value) === false) {
-            $setter = 'set' . ucfirst(strtolower($name));
-    		if (method_exists($this, $setter))
-    			return $this->$setter($value);
-		}
-    }
-    
-    public function __get($name)
-    {
-        if(isset($this->_attributes[$name]))
-			return $this->_attributes[$name];
-		else {
-            $getter = 'get' . ucfirst(strtolower($name));
-            return $this->$getter();
-		}
-    }
-    
-    public function __isset($name)
-    {
-    	return isset($this->_attributes[$name]);
-    }
-    
-    public function  __unset($name)
-    {
-        $setter = 'set' . ucfirst(strtolower($name));
-        $getter = 'get' . ucfirst(strtolower($name));
-    	if (in_array($name, $this->columns()))
-			unset($this->_attributes[$name]);
-		elseif (method_exists($this, $setter))
-			$this->$setter(null);
-	    elseif (method_exists($this, $getter))
-	        throw new CException(Yii::t('yii','Property "{class}.{property}" is read only.',
-				array('{class}'=>get_class($this), '{property}'=>$name)));
-		else 
-			throw new CException(Yii::t('yii','Property "{class}.{property}" is not defined.',
-				array('{class}'=>get_class($this), '{property}'=>$name)));
     }
     
     abstract public function table();

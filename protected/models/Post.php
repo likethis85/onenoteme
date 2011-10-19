@@ -4,13 +4,13 @@
  * This is the model class for table "{{post}}".
  *
  * The followings are the available columns in table '{{post}}':
- * @property string $id
- * @property string $category_id
- * @property string $topic_id
+ * @property integer $id
+ * @property integer $category_id
+ * @property integer $topic_id
  * @property string $title
  * @property string $content
- * @property string $create_time
- * @property string $comment_nums
+ * @property integer $create_time
+ * @property integer $comment_nums
  * @property integer $state
  */
 class Post extends CActiveRecord
@@ -40,10 +40,8 @@ class Post extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('state', 'numerical', 'integerOnly'=>true),
-			array('category_id, topic_id, comment_nums', 'length', 'max'=>19),
-			array('title', 'length', 'max'=>100),
-			array('create_time', 'length', 'max'=>10),
+			array('category_id, topic_id, comment_nums, state, create_time', 'numerical', 'integerOnly'=>true),
+			array('title', 'length', 'max'=>200),
 			array('content', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

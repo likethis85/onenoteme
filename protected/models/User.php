@@ -4,11 +4,11 @@
  * This is the model class for table "{{user}}".
  *
  * The followings are the available columns in table '{{user}}':
- * @property string $id
+ * @property integer $id
  * @property string $email
  * @property string $name
  * @property string $password
- * @property string $create_time
+ * @property integer $create_time
  * @property string $create_ip
  * @property integer $state
  */
@@ -39,11 +39,10 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('state', 'numerical', 'integerOnly'=>true),
+			array('create_time, state', 'numerical', 'integerOnly'=>true),
 			array('email', 'length', 'max'=>100),
 			array('name', 'length', 'max'=>50),
-			array('password', 'length', 'max'=>32),
-			array('create_time', 'length', 'max'=>10),
+			array('password', 'length', 'is'=>32),
 			array('create_ip', 'length', 'max'=>15),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.

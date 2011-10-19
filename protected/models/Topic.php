@@ -4,11 +4,11 @@
  * This is the model class for table "{{topic}}".
  *
  * The followings are the available columns in table '{{topic}}':
- * @property string $id
+ * @property integer $id
  * @property string $name
- * @property string $create_time
- * @property string $post_nums
- * @property string $orderid
+ * @property integer $create_time
+ * @property integer $post_nums
+ * @property integer $orderid
  */
 class Topic extends CActiveRecord
 {
@@ -37,9 +37,8 @@ class Topic extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+		    array('create_time, post_nums, orderid', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>50),
-			array('create_time', 'length', 'max'=>10),
-			array('post_nums, orderid', 'length', 'max'=>19),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name, create_time, post_nums, orderid', 'safe', 'on'=>'search'),

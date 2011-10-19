@@ -12,18 +12,11 @@ class SiteController extends Controller
     
     public function actionTest()
     {
-        var_dump(app()->cache);
-        var_dump(app()->db);
-        exit;
+        header('Content-Type: text/html; charset=utf-8');
         
-        echo param('myname');
-        exit;
-        echo app()->getStaticBasePath();
-        exit;
-        echo time() . '<hr />';
-        throw new DException(Cdc::t('cdc','Application base path "{path}" is not a valid directory.',
-				array('{path}'=>'/ba')));
-
-        echo __FILE__ . '<hr />' . __FUNCTION__;
+        $model = DCategory::model()->findByPk(1);
+        $result = $model->delete();
+        
+        var_dump($result);
     }
 }

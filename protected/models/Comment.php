@@ -4,12 +4,12 @@
  * This is the model class for table "{{comment}}".
  *
  * The followings are the available columns in table '{{comment}}':
- * @property string $id
- * @property string $post_id
+ * @property integer $id
+ * @property integer $post_id
  * @property string $content
- * @property string $user_id
+ * @property integer $user_id
  * @property string $user_name
- * @property string $create_time
+ * @property integer $create_time
  * @property string $create_ip
  * @property integer $state
  */
@@ -40,10 +40,8 @@ class Comment extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('state', 'numerical', 'integerOnly'=>true),
-			array('id, post_id, user_id', 'length', 'max'=>19),
+			array('state, post_id, user_id, create_time', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
-			array('create_time', 'length', 'max'=>10),
 			array('create_ip', 'length', 'max'=>15),
 			array('content', 'safe'),
 			// The following rule is used by search().

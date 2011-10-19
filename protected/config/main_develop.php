@@ -9,6 +9,7 @@ return array(
     'charset' => 'utf-8',
 
     'import' => array(
+        'application.dmodels.*',
         'application.models.*',
         'application.components.*',
         'application.apis.*',
@@ -24,6 +25,11 @@ return array(
 					'levels' => 'trace, info, error, warning, watch',
 				    'categories' => 'system.*',
 				),
+				array(
+					'class' => 'CWebLogRoute',
+					'levels' => 'trace, info, error, warning, watch',
+				    'categories' => 'system.db.*',
+				),
             ),
         ),
         'db' => array(
@@ -34,6 +40,7 @@ return array(
 		    'charset' => 'utf8',
 		    'persistent' => true,
 		    'tablePrefix' => 'cd_',
+            'enableParamLogging' => true,
 		    //'schemaCacheID' => 'cache',
 		    //'schemaCachingDuration' => 3600,    // metadata 缓存超时时间(s)
         ),
@@ -48,7 +55,5 @@ return array(
         ),
     ),
     
-    'params' => array(
-        'myname' => 'chen dong',
-    ),
+    'params' => require(dirname(__FILE__) . DS . YII_DEBUG ? 'params_develop.php' : 'params.php'),
 );
