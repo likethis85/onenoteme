@@ -1,6 +1,9 @@
 <?php
 return array(
 
+    'postCountOfPage' => 20,
+    'commentCountOfPage' => 20,
+
     'uploadBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'uploads' . DS,
     'uploadBaseUrl' => 'http://f.onenote.me/',
     'resourceBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'resources' . DS,

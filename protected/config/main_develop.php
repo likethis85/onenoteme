@@ -1,6 +1,8 @@
 <?php
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 
+$params = require(dirname(__FILE__) . DS . YII_DEBUG ? 'params_develop.php' : 'params.php');
+
 return array(
     'basePath' => dirname(__FILE__) . DS . '..',
     'id' => 'onenote.me',
@@ -49,6 +51,10 @@ return array(
             'class' => 'CFileCache',
 		    'directoryLevel' => 2,
         ),
+        'assetManager' => array(
+            'basePath' => $params['resourceBasePath'] . 'assets',
+            'baseUrl' => $params['resourceBaseUrl'] . 'assets',
+        ),
         'urlManager' => array(
             'urlFormat' => 'path',
 		    'showScriptName' => false,
@@ -56,5 +62,5 @@ return array(
         ),
     ),
     
-    'params' => require(dirname(__FILE__) . DS . YII_DEBUG ? 'params_develop.php' : 'params.php'),
+    'params' => $params,
 );

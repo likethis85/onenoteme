@@ -38,5 +38,6 @@ a:visited {color:#0000CC; text-decoration:none;}
 .line1px {display:block; clean:both; height:1px; line-height:1px; font-size:1px; overflow:hidden; background-color:#8f8f8f; margin:5px 0px;}
 
 .pages {padding:5px;}
+.pages ul.yiiPager {font-size:14px;}
 .cdc {margin:0px auto; text-align:center;}
 

@@ -35,7 +35,7 @@ class PostController extends Controller
         $time = $date->getTimestamp();
         $condition = 'create_time > ' . $time;
         
-        $models = self::topOfTime($condition);
+        $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
         $this->render('list', array('models' => $models));
     }
     
@@ -46,7 +46,7 @@ class PostController extends Controller
         $time = $date->getTimestamp();
         $condition = 'create_time > ' . $time;
         
-        $models = self::topOfTime($condition);
+        $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
         $this->render('list', array('models' => $models));
     }
     
@@ -57,7 +57,7 @@ class PostController extends Controller
         $time = $date->getTimestamp();
         $condition = 'create_time > ' . $time;
         
-        $models = self::topOfTime($condition);
+        $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
         $this->render('list', array('models' => $models));
     }
     
@@ -68,7 +68,7 @@ class PostController extends Controller
         $time = $date->getTimestamp();
         $condition = 'create_time > ' . $time;
         
-        $models = self::topOfTime($condition);
+        $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
         $this->render('list', array('models' => $models));
     }
     
@@ -79,29 +79,59 @@ class PostController extends Controller
         $time = $date->getTimestamp();
         $condition = 'create_time > ' . $time;
         
-        $models = self::topOfTime($condition);
+        $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
         $this->render('list', array('models' => $models));
     }
     
-    private static function topOfTime($where = '', $limit = 30, $order = 'id desc')
+    public function actionList($cid)
     {
-        $defaultWhere = 'state != ' . DPost::STATE_DISABLED;
-        if ($where)
-            $where = array('and', $defaultWhere, $where);
+        $cid = (int)$cid;
+        $limit = param('postCountOfPage');
+        $where = 'state != :state and category_id = :cid';
+        $params = array(':state'=>DPost::STATE_DISABLED, ':cid'=>$cid);
         $cmd = app()->db->createCommand()
             ->order('id desc')
-            ->limit(30)
-            ->where($where);
-        return DPost::model()->findAll($cmd);
-    }
-    
-    public function actionTu()
-    {
-        // @todo 表中还未添加此图的字段pic
+            ->limit($limit)
+            ->where($where, $params);
+            
+        $count = DPost::model()->count($where, $params);
+        $pages = new CPagination($count);
+        $pages->setPageSize($limit);
+        
+        $offset = $pages->getCurrentPage() * $limit;
+        $cmd->offset($offset);
+        $models = DPost::model()->findAll($cmd);
+        
+        $this->render('list', array(
+        	'models' => $models,
+            'pages' => $pages,
+        ));
     }
     
     public function actionVote()
     {
+        $cmd = app()->db->createCommand()
+            ->order('id asc')
+            ->where('state = :state', array(':state'=>DPost::STATE_DISABLED));
+        $model = DPost::model()->find($cmd);
         
+        $this->render('vote', array(
+        	'model' => $model,
+        ));
+    }
+    
+    public function actionScore($id)
+    {
+        $id = (int)$id;
+        $column = ((int)$_POST['score'] > 0) ? 'up_score' : 'down_score';
+        $counters = array($column => 1);
+        $result = Post::model()->updateCounters($counters, 'id = :id', array(':id'=>$id));
+        echo (int)$result;
+        exit(0);
+    }
+    
+    public function actionDown($id)
+    {
+        $socre = ((int)$_POST['score'] > 0) ? 1 : -1;
     }
 }

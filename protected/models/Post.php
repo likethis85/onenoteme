@@ -10,6 +10,8 @@
  * @property string $title
  * @property string $content
  * @property integer $create_time
+ * @property integer $up_score
+ * @property integer $down_score
  * @property integer $comment_nums
  * @property integer $state
  */
@@ -44,12 +46,12 @@ class Post extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('category_id, topic_id, comment_nums, state, create_time', 'numerical', 'integerOnly'=>true),
+			array('category_id, topic_id, up_score, down_score, comment_nums, state, create_time', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>200),
 			array('content', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, category_id, topic_id, title, content, create_time, comment_nums, state', 'safe', 'on'=>'search'),
+			array('id, category_id, topic_id, title, content, create_time, up_score, down_score, comment_nums, state', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,13 +73,15 @@ class Post extends CActiveRecord
 	{
 		return array(
 			'id' => 'Id',
-			'category_id' => 'Category',
-			'topic_id' => 'Topic',
-			'title' => 'Title',
-			'content' => 'Content',
-			'create_time' => 'Create Time',
-			'comment_nums' => 'Comment Nums',
-			'state' => 'State',
+			'category_id' => '分类',
+			'topic_id' => '专题',
+			'title' => '标题',
+			'content' => '内容',
+			'create_time' => '发布时间',
+		    'up_score' => '顶数',
+		    'down_score' => '浏览',
+			'comment_nums' => '评论',
+			'state' => '状态',
 		);
 	}
 

@@ -10,6 +10,8 @@
  * @property string $title
  * @property string $content
  * @property integer $create_time
+ * @property integer $up_score
+ * @property integer $down_score
  * @property integer $comment_nums
  * @property integer $state
  */
@@ -40,6 +42,23 @@ class DPost extends DModel
     
     public function columns()
     {
-        return array('id', 'category_id', 'topic_id', 'title', 'content', 'create_time', 'comment_nums', 'state');
+        return array('id', 'category_id', 'topic_id', 'title', 'content', 'create_time', 'up_score', 'down_score', 'comment_nums', 'state');
+    }
+    
+
+    public static function fetchValidList($limit = 20, $page = 1, $conditions = '', $order = 'id desc')
+    {
+        $limit = $limit ? $limit : param('countOfPage');
+        $page = ($page > 0) ? $page : 1;
+        $offset = ($page - 1) * $limit;
+        $defaultWhere = 'state != ' . self::STATE_DISABLED;
+        if ($conditions)
+            $where = array('and', $defaultWhere, $conditions);
+        $cmd = app()->db->createCommand()
+            ->order($order)
+            ->limit($limit)
+            ->offset($offset)
+            ->where($where);
+        return DPost::model()->findAll($cmd);
     }
 }

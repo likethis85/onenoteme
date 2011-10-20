@@ -190,6 +190,15 @@ abstract class DModel
         return $this->toModels($this->queryAll($cmd, $params, $fetchAssociative));
     }
     
+    public function count($conditions = '', $params = array())
+    {
+        $cmd = $this->getDbCommand()
+            ->select('count(*)')
+            ->from($this->table());
+        if ($conditions)
+            $cmd->where($conditions, $params);
+        return $cmd->queryScalar();
+    }
     
     /**
      * init model
@@ -316,9 +325,12 @@ abstract class DModel
         return $this->getDbCommand()->update($this->table(), $columns, $conditions, $params);
     }
     
-    public function updateCounters($counters)
+    public function updateCounters(array $counters, $conditions, $params = array())
     {
-        
+        foreach ($counters as $key => $value)
+            $columns[$key] = "$key + $value";
+        return $this->getDbCommand()
+            ->update($this->table(), $columns, $conditions, $params);
     }
     
     /**
