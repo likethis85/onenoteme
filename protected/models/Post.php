@@ -89,12 +89,18 @@ class Post extends CActiveRecord
     	        return false;
 	        }
 	        $this->create_time = $_SERVER['REQUEST_TIME'];
-	        $this->title = mb_substr($this->content, 0, 20);
+	        $this->title = mb_substr($this->content, 0, 20, app()->charset);
 	        $this->comment_nums = 0;
 	        $this->state = Post::STATE_DISABLED;
 	    }
 	    return true;
 	}
+	
+	public function getUrl()
+	{
+	    return aurl('post/show', array('id' => $this->id));
+	}
+	
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.

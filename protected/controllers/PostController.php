@@ -7,8 +7,12 @@ class PostController extends Controller
         if (request()->getIsPostRequest() && isset($_POST['Post'])) {
             $model->attributes = $_POST['Post'];
             if ($model->save()) {
-                // @todo 保存成功后的操作
+                $msg = '<span class="cgreen f12px">发布成功，' . CHtml::link('点击查看', $model->url, array('target'=>'_blank')) . '，您还可以继续发布。</span>';
+                user()->setFlash('createPostResult', $msg);
+                $this->redirect(aurl('post/create'));
             }
+            else
+                user()->setFlash('createPostResult', '<span class="cred f12px">发布出错，查看下面详细错误信息。</span>');
         }
         $this->render('create', array('model'=>$model));
     }

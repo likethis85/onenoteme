@@ -27,7 +27,8 @@ a:visited {color:#0000CC; text-decoration:none;}
 .f12px {font-size:12px;}
 .f14px {font-size:14px;}
 .cgray {color:#676767;}
-.cred {color:#FF0000;}
+.cred {color:red;}
+.cgreen {color:green;}
 
 .indent10px {text-indent:10px;}
 .bottom10px {margin-bottom:10px;}

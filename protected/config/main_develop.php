@@ -7,6 +7,7 @@ return array(
     'name' => 'onenote.me',
     'language' => 'zh_cn',
     'charset' => 'utf-8',
+    'timezone' => 'Asia/Shanghai',
 
     'import' => array(
         'application.dmodels.*',
