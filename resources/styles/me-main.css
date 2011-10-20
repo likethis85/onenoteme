@@ -7,8 +7,15 @@
 .breadcrumbs {text-indent:10px; line-height:24px; height:24px; margin-bottom:10px;}
 
 /* left nav */
-.me-sidebar {width:338px;}
+.me-sidebar {width:300px;}
 .me-sidebar li {margin:8px 5px 8px 10px;}
 
 /* container */
-.me-container {width:632px;}
+.me-container {width:670px;}
+
+
+/* create */
+.create-form textarea {width:630px; height:180px;}
+.create-form li {margin-bottom:15px;}
+.create-form .txt {width:300px; height:20px; line-height:20px;}
+.create-form .button {padding:5px 10px;}

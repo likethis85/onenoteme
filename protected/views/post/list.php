@@ -1,2 +1,3 @@
-<?php
-var_dump($models);
+<?php foreach ($models as $model):?>
+<li><?php echo $model->content;?></li>
+<?php endforeach;?>

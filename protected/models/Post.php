@@ -15,6 +15,10 @@
  */
 class Post extends CActiveRecord
 {
+    const STATE_DISABLED = 0;
+    const STATE_ENABLED = 1;
+    const STATE_TOP = 2;
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Post the static model class
@@ -77,6 +81,20 @@ class Post extends CActiveRecord
 		);
 	}
 
+	protected function beforeSave()
+	{
+	    if ($this->getIsNewRecord()) {
+	        if (empty($this->content)) {
+	            $this->addError('content', '内容必须填写');
+    	        return false;
+	        }
+	        $this->create_time = $_SERVER['REQUEST_TIME'];
+	        $this->title = mb_substr($this->content, 0, 20);
+	        $this->comment_nums = 0;
+	        $this->state = Post::STATE_DISABLED;
+	    }
+	    return true;
+	}
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
