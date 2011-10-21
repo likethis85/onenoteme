@@ -13,28 +13,34 @@
 </head>
 <body>
 <div class="me-wrapper me-header">
+	<a name="top"></a>
 	<ul>
 		<li><a href="<?php echo aurl('post/latest');?>">最新</a></li>
 		<li><a href="<?php echo aurl('post/hour8');?>">最热</a></li>
-		<li><a href="<?php echo aurl('post/hour');?>">60分钟</a></li>
-		<li><a href="<?php echo aurl('post/day');?>">24小时</a></li>
-		<li><a href="<?php echo aurl('post/week');?>">7天</a></li>
-		<li><a href="<?php echo aurl('post/month');?>">30天</a></li>
 		<li><a href="<?php echo aurl('post/list', array('cid'=>11));?>">瞅瞅</a></li>
-		<li><a href="<?php echo aurl('post/list', array('cid'=>11));?>">太糗了</a></li>
-		<li><a href="<?php echo aurl('post/list', array('cid'=>12));?>">太搞了</a></li>
-		<li><a href="<?php echo aurl('post/list', array('cid'=>13));?>">太对了</a></li>
 		<li><a href="<?php echo aurl('tag/list');?>">标签</a></li>
-		<li><a href="<?php echo aurl('post/vote');?>">鉴定</a></li>
+		<li><a href="<?php echo aurl('post/appraise');?>">鉴定</a></li>
 		<li><a href="<?php echo aurl('post/create');?>">加料</a></li>
 	</ul>
 </div>
-<div class="me-wrapper">
+<div class="me-wrapper me-mainwrapper">
 	<?php echo $content;?>
     <div class="clear"></div>
 </div>
+<div class="me-wrapper cdc-block cdc-bottom-banner">
+	<script type="text/javascript">
+	<!--
+        google_ad_client = "ca-pub-6304134167250488";
+        /* meiapps_728x90 */
+        google_ad_slot = "4771080120";
+        google_ad_width = 728;
+        google_ad_height = 90;
+    //-->
+    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>
 <div class="me-wrapper me-footer">
-	footer
+	<p class="fl">内容版权所有 ©2005-2011 qiushibaike.com  苏ICP备11024271号-2</p><p class="fr">快乐就是要建立在别人的痛苦之上TOP</p>
 </div>
 </body>
 </html>

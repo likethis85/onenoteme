@@ -1,6 +1,19 @@
 <?php
 class PostController extends Controller
 {
+    public function filters()
+    {
+        return array(
+            'ajaxOnly  + vote, score',
+            'postOnly + vote, score',
+        );
+    }
+    
+    public function actionIndex()
+    {
+        $this->forward('post/latest');
+    }
+
     public function actionCreate()
     {
         $model = new Post();
@@ -19,13 +32,26 @@ class PostController extends Controller
     
     public function actionLatest()
     {
+        $limit = param('postCountOfPage');
+        $where = 'state != :state';
+        $params = array(':state' => DPost::STATE_DISABLED);
         $cmd = app()->db->createCommand()
             ->order('id desc')
-            ->limit(30)
-            ->where('state != :state', array(':state' => DPost::STATE_DISABLED));
+            ->limit($limit)
+            ->where($where, $params);
+            
+        $count = DPost::model()->count($where, $params);
+        $pages = new CPagination($count);
+        $pages->setPageSize($limit);
+        
+        $offset = $pages->getCurrentPage() * $limit;
+        $cmd->offset($offset);
         $models = DPost::model()->findAll($cmd);
         
-        $this->render('list', array('models' => $models));
+        $this->render('latest', array(
+        	'models' => $models,
+            'pages' => $pages,
+        ));
     }
     
     public function actionHour()
@@ -36,7 +62,7 @@ class PostController extends Controller
         $condition = 'create_time > ' . $time;
         
         $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
-        $this->render('list', array('models' => $models));
+        $this->render('hot_list', array('models' => $models));
     }
     
     public function actionHour8()
@@ -47,7 +73,7 @@ class PostController extends Controller
         $condition = 'create_time > ' . $time;
         
         $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
-        $this->render('list', array('models' => $models));
+        $this->render('hot_list', array('models' => $models));
     }
     
     public function actionDay()
@@ -58,7 +84,7 @@ class PostController extends Controller
         $condition = 'create_time > ' . $time;
         
         $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
-        $this->render('list', array('models' => $models));
+        $this->render('hot_list', array('models' => $models));
     }
     
     public function actionWeek()
@@ -69,7 +95,7 @@ class PostController extends Controller
         $condition = 'create_time > ' . $time;
         
         $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
-        $this->render('list', array('models' => $models));
+        $this->render('hot_list', array('models' => $models));
     }
     
     public function actionMonth()
@@ -80,7 +106,7 @@ class PostController extends Controller
         $condition = 'create_time > ' . $time;
         
         $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
-        $this->render('list', array('models' => $models));
+        $this->render('hot_list', array('models' => $models));
     }
     
     public function actionList($cid)
@@ -102,17 +128,28 @@ class PostController extends Controller
         $cmd->offset($offset);
         $models = DPost::model()->findAll($cmd);
         
-        $this->render('list', array(
+        $cmd = app()->db->createCommand()
+            ->order('orderid desc, id asc');
+        $categories = DCategory::model()->findAll($cmd);
+        
+        $this->render('list_of_category', array(
         	'models' => $models,
             'pages' => $pages,
+            'categories' => $categories,
         ));
     }
     
-    public function actionVote()
+    public function actionAppraise()
     {
+        $where = 'state = :state';
+        $params = array(':state'=>DPost::STATE_DISABLED);
         $cmd = app()->db->createCommand()
             ->order('id asc')
-            ->where('state = :state', array(':state'=>DPost::STATE_DISABLED));
+            ->where($where, $params);
+            
+        $count = DPost::model()->count($where, $params);
+        $offset = mt_rand(0, abs($count-1));
+        $cmd->offset($offset);
         $model = DPost::model()->find($cmd);
         
         $this->render('vote', array(
@@ -120,9 +157,37 @@ class PostController extends Controller
         ));
     }
     
-    public function actionScore($id)
+    public function actionVote()
     {
-        $id = (int)$id;
+        // this request require post and ajax
+        $id = (int)$_POST['id'];
+        $column = ((int)$_POST['score'] > 0) ? 'up_score' : 'down_score';
+        $cmd = app()->getDb()->createCommand()
+            ->where('id = :id and state = :state', array(':id'=>$id, ':state'=>DPost::STATE_DISABLED));
+        $model = DPost::model()->find($cmd);
+        
+        if ($model === null)
+            throw new CHttpException(500, '该段子不存在或已经通过签定');
+        
+        if (null === $model)
+            throw new CHttpException(500, '非法请求');
+            var_dump($model);
+        $model->$column += 1;
+        
+        $attributes = array($column);
+        if ($model->getCanShow()) {
+            $model->state = DPost::STATE_ENABLED;
+            $attributes[] = 'state';
+        }
+
+        echo (int)$model->update($attributes);
+        exit(0);
+    }
+    
+    public function actionScore()
+    {
+        // this request require post and ajax
+        $id = (int)$_POST['id'];
         $column = ((int)$_POST['score'] > 0) ? 'up_score' : 'down_score';
         $counters = array($column => 1);
         $result = Post::model()->updateCounters($counters, 'id = :id', array(':id'=>$id));
@@ -130,8 +195,4 @@ class PostController extends Controller
         exit(0);
     }
     
-    public function actionDown($id)
-    {
-        $socre = ((int)$_POST['score'] > 0) ? 1 : -1;
-    }
 }

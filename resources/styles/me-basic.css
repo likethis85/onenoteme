@@ -1,8 +1,8 @@
 @CHARSET "UTF-8";
 
 html,body,div,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,th,td,ol,ul,li,dl,dt,dd,p {margin:0px; padding:0px;}
-img, body, html {border:0px;}
-body {color:#222222; font:14px Verdana, Lucida, Helvetica, Arial, sans-serif; background:#FFFFFF;}
+img, body, html {border:0px; height:100%;}
+body {color:#222222; font:14px Verdana, Lucida, Helvetica, Arial, sans-serif; background:#FFFFFF; height:100%;}
 ul, li, ol, li {list-style:none outside none; margin:0px; padding:0px;}
 table {border-collapse:collapse; border:none;}
 
@@ -39,5 +39,5 @@ a:visited {color:#0000CC; text-decoration:none;}
 
 .pages {padding:5px;}
 .pages ul.yiiPager {font-size:14px;}
-.cdc {margin:0px auto; text-align:center;}
+.cdc-block {margin:0px auto; text-align:center;}
 

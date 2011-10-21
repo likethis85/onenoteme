@@ -61,4 +61,20 @@ class DPost extends DModel
             ->where($where);
         return DPost::model()->findAll($cmd);
     }
+    
+    public function getCanShow()
+    {
+        return ($this->state == self::STATE_DISABLED
+            && ($this->up_score / ($this->down_score ? $this->down_score : 1)) > param('pecentOfSetPostIsShow')
+            && ($this->up_score + $this->down_score) > param('numsOfSetPostIsShow'));
+    }
+    
+    public function updateIsShow()
+    {
+        if ($this->getCanShow()) {
+            $this->state = self::STATE_ENABLED;
+            return $this->update(array('state'));
+        }
+        return false;
+    }
 }

@@ -40,4 +40,14 @@ class DCategory extends DModel
         $format = (null === $format) ? param('formatDateTime') : $format;
         return date($format, $this->create_time);
     }
+    
+    public function getPostUrl()
+    {
+        return aurl('post/list', array('cid'=>$this->id));
+    }
+    
+    public function getPostLink($htmlOptions = array())
+    {
+        return CHtml::link($this->name, $this->getPostUrl(), $htmlOptions);
+    }
 }

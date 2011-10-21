@@ -109,6 +109,23 @@ abstract class DModel
         else
             return $this->_cmd = Yii::app()->getDb()->createCommand($query);
     }
+    
+    /**
+	 * Sets the parameters about query caching.
+	 * This is a shortcut method to {@link CDbConnection::cache()}.
+	 * It changes the query caching parameter of the {@link dbConnection} instance.
+	 * @param integer $duration the number of seconds that query results may remain valid in cache.
+	 * If this is 0, the caching will be disabled.
+	 * @param CCacheDependency $dependency the dependency that will be used when saving the query results into cache.
+	 * @param integer $queryCount number of SQL queries that need to be cached after calling this method. Defaults to 1,
+	 * meaning that the next SQL query will be cached.
+	 * @return DModel the active record instance itself.
+	 */
+    public function cache($duration, $dependency=null, $queryCount=1)
+	{
+		$this->getDb()->cache($duration, $dependency, $queryCount);
+		return $this;
+	}
 
     /**
      * fetch the rows by pk
@@ -159,7 +176,7 @@ abstract class DModel
      * @param mixed $select string|array
      * @param array $params
      * @param boolean $fetchAssociative
-     * @return DCategory the record found. Null if none is found.
+     * @return DModel the record found. Null if none is found.
      */
     public function findByPk($pk, $select = '*', $params = array(), $fetchAssociative = true)
     {
@@ -171,7 +188,7 @@ abstract class DModel
      * @param CDbCommand $cmd
      * @param array $params
      * @param boolean $fetchAssociative
-     * @return DCategory the record found. Null if none is found.
+     * @return DModel the record found. Null if none is found.
      */
     public function find(CDbCommand $cmd, $params = array(), $fetchAssociative = true)
     {
@@ -183,7 +200,7 @@ abstract class DModel
      * @param CDbCommand $cmd
      * @param array $params
      * @param boolean $fetchAssociative
-     * @return DCategory the record found. Null if none is found.
+     * @return DModel the record found. Null if none is found.
      */
     public function findAll(CDbCommand $cmd, $params = array(), $fetchAssociative = true)
     {

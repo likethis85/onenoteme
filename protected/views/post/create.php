@@ -19,7 +19,7 @@
 <?php endif;?>
 
 <ul class="create-form">
-    <li>发贴前请阅读 审核标准 和 发贴规范</li>
-    <li>内容版权为糗事百科所有</li>
+    <li>发贴前请阅读<?php echo CHtml::link('审核标准', aurl('site/page', array('view'=>'biaozhun')), array('target'=>'_blank'));?>和<?php echo CHtml::link('发贴规范', aurl('site/page', array('view'=>'guifan')), array('target'=>'_blank'));?></li>
+    <li>内容版权为<?php echo CHtml::link(app()->name, app()->homeUrl, array('target'=>'_blank'));?>所有</li>
 </ul>
 <?php echo CHtml::endForm();?>

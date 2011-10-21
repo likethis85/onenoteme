@@ -6,7 +6,7 @@ $params = require(dirname(__FILE__) . DS . YII_DEBUG ? 'params_develop.php' : 'p
 return array(
     'basePath' => dirname(__FILE__) . DS . '..',
     'id' => 'onenote.me',
-    'name' => 'onenote.me',
+    'name' => '挖段子',
     'language' => 'zh_cn',
     'charset' => 'utf-8',
     'timezone' => 'Asia/Shanghai',
@@ -26,7 +26,7 @@ return array(
 				array(
 					'class' => 'CFileLogRoute',
 					'levels' => 'trace, info, error, warning, watch',
-				    'categories' => 'system.*',
+				    'categories' => 'system.db.*',
 				),
 				array(
 					'class' => 'CWebLogRoute',
@@ -44,8 +44,11 @@ return array(
 		    'persistent' => true,
 		    'tablePrefix' => 'cd_',
             'enableParamLogging' => true,
-		    //'schemaCacheID' => 'cache',
-		    //'schemaCachingDuration' => 3600,    // metadata 缓存超时时间(s)
+            'enableProfiling' => true,
+//		    'schemaCacheID' => 'cache',
+//		    'schemaCachingDuration' => 3600,    // metadata 缓存超时时间(s)
+//		    'queryCacheID' => 'cache',
+//		    'queryCachingDuration' => 3600,
         ),
         'cache' => array(
             'class' => 'CFileCache',
@@ -59,6 +62,15 @@ return array(
             'urlFormat' => 'path',
 		    'showScriptName' => false,
             'cacheID' => 'cache',
+            'rules' => array(
+                '' => 'site/index',
+                'site-<_a:[\w\d]+>' => 'site/<_a>',
+                'list-<cid:\d+>-<page:\d+>' => 'post/list',
+                'list-<cid:\d+>' => 'post/list',
+                '<_a:[\w\d]+>-<page:\d+>' => 'post/<_a>',
+                '<_a:[\w\d]+>' => 'post/<_a>',
+                'static/<view:[\w\d]+>' => 'site/page',
+            ),
         ),
     ),
     
