@@ -13,6 +13,7 @@
  * @property integer $up_score
  * @property integer $down_score
  * @property integer $comment_nums
+ * @property integer $tags
  * @property integer $state
  */
 class DPost extends DModel
@@ -42,7 +43,7 @@ class DPost extends DModel
     
     public function columns()
     {
-        return array('id', 'category_id', 'topic_id', 'title', 'content', 'create_time', 'up_score', 'down_score', 'comment_nums', 'state');
+        return array('id', 'category_id', 'topic_id', 'title', 'content', 'create_time', 'up_score', 'down_score', 'comment_nums', 'tags', 'state');
     }
     
 
@@ -76,5 +77,31 @@ class DPost extends DModel
             return $this->update(array('state'));
         }
         return false;
+    }
+    
+    /**
+     * 获取标签的数组形式
+     * @return array
+     */
+    public function getTagsArray()
+    {
+        static $tags;
+        if ($tags[$this->id]) return $tags[$this->id];
+
+        if (empty($this->tags))
+            return array();
+            
+        $data = DTag::filterTags($this->tags);
+        return $tags[$this->id] = explode(',', $data);
+    }
+    
+    public function getTagsLinks($operator = '&nbsp;', $target = '_blank')
+    {
+        if (empty($this->tagsArray))
+            return '';
+
+        foreach ($this->tagsArray as $tag)
+            $data[] = CHtml::link($tag, aurl('tag/posts', array('tag'=>urlencode($tag))), array('target'=>$target));
+        return implode($operator, $data);
     }
 }

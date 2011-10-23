@@ -1,6 +1,9 @@
 <ul class="post-list">
     <?php foreach ($models as $model):?>
-    <li><?php echo $model->content;?></li>
+    <li>
+        <div><?php echo $model->content;?></div>
+        <p><?php echo $model->tagsLinks;?></p>
+    </li>
     <?php endforeach;?>
 </ul>
 

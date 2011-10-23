@@ -44,7 +44,8 @@ abstract class DModel
     
     public function __isset($name)
     {
-    	return isset($this->_attributes[$name]);
+        $getter = 'get' . ucfirst(strtolower($name));
+    	return isset($this->_attributes[$name]) || method_exists($this, $getter) || false;
     }
     
     public function  __unset($name)
@@ -152,7 +153,7 @@ abstract class DModel
      */
     public function query(CDbCommand $cmd, $params = array(), $fetchAssociative = true)
     {
-        return $cmd->from($this->table())
+        return $cmd->from($this->table() . ' t')
             ->limit(1)->queryRow($fetchAssociative, $params);
     }
     
@@ -166,7 +167,7 @@ abstract class DModel
     public function queryAll(CDbCommand $cmd, $params = array(), $fetchAssociative = true)
     {
         $this->beforeFind();
-        $cmd->from($this->table());
+        $cmd->from($this->table() . ' t');
         return $cmd->queryAll($fetchAssociative, $params);
     }
 

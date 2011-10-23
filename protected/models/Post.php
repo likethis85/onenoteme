@@ -13,6 +13,7 @@
  * @property integer $up_score
  * @property integer $down_score
  * @property integer $comment_nums
+ * @property integer $tags
  * @property integer $state
  */
 class Post extends CActiveRecord
@@ -47,11 +48,11 @@ class Post extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('category_id, topic_id, up_score, down_score, comment_nums, state, create_time', 'numerical', 'integerOnly'=>true),
-			array('title', 'length', 'max'=>200),
+			array('title, tags', 'length', 'max'=>200),
 			array('content', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, category_id, topic_id, title, content, create_time, up_score, down_score, comment_nums, state', 'safe', 'on'=>'search'),
+			array('id, category_id, topic_id, title, content, create_time, up_score, down_score, comment_nums, tags, state', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -82,6 +83,7 @@ class Post extends CActiveRecord
 		    'down_score' => '浏览',
 			'comment_nums' => '评论',
 			'state' => '状态',
+		    'tags' => '标签',
 		);
 	}
 
@@ -96,8 +98,16 @@ class Post extends CActiveRecord
 	        $this->title = mb_substr($this->content, 0, 20, app()->charset);
 	        $this->comment_nums = 0;
 	        $this->state = Post::STATE_DISABLED;
+            $this->tags = DTag::filterTags($this->tags);
 	    }
 	    return true;
+	}
+	
+	protected function afterSave()
+	{
+	    if ($this->getIsNewRecord()) {
+	        self::savePostTags($this->id, $this->tags);
+	    }
 	}
 	
 	public function getUrl()
@@ -136,4 +146,48 @@ class Post extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+    /**
+     * 获取标签的数组形式
+     * @return array
+     */
+    public function getTagsArray()
+    {
+        if (empty($this->tags))
+            return array();
+            
+        $tags = DTag::filterTags($this->tags);
+        return explode(',', $tags);
+    }
+    
+    
+    public static function savePostTags($postid, $tags)
+    {
+        $postid = (int)$postid;
+        if (0 === $postid || empty($tags))
+            return false;
+
+        if (is_string($tags))
+            $tags = explode(',', $tags);
+
+        $count = 0;
+        foreach ((array)$tags as $v) {
+            $model = Tag::model()->findByAttributes(array('name'=>$v));
+            if ($model === null) {
+                $model = new Tag();
+                $model->name = $v;
+                $model->post_nums = 1;
+                if ($model->save())
+                    $count++;
+            }
+            else {
+                $model->post_nums = $mode->post_nums + 1;
+                $model->save(array('post_nums'));
+            }
+            $columns = array('post_id'=>$postid, 'tag_id'=>$model->id);
+            app()->getDb()->createCommand()->insert('{{post2tag}}', $columns);
+            unset($model);
+        }
+        return $count;
+    }
 }

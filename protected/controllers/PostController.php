@@ -171,7 +171,7 @@ class PostController extends Controller
         
         if (null === $model)
             throw new CHttpException(500, '非法请求');
-            var_dump($model);
+
         $model->$column += 1;
         
         $attributes = array($column);

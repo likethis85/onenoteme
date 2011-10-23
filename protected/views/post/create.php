@@ -3,7 +3,7 @@
 	<li><?php echo CHtml::activeTextArea($model, 'content');?></li>
     <li>
         <label>标签：</label>
-        <?php echo CHtml::textField('tags', '', array('class'=>'txt'));?>
+        <?php echo CHtml::activeTextField($model, 'tags', array('class'=>'txt'));?>
         <span class="cgray f12px">（每个糗事最多5个标签，用空格分隔）</span>
     </li>
     <li>
