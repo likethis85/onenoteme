@@ -64,12 +64,12 @@ return array(
             'cacheID' => 'cache',
             'rules' => array(
                 '' => 'site/index',
+                'static/<view:[\w\d]+>' => 'site/page',
                 'site-<_a:[\w\d]+>' => 'site/<_a>',
                 'list-<cid:\d+>-<page:\d+>' => 'post/list',
                 'list-<cid:\d+>' => 'post/list',
                 '<_a:[\w\d]+>-<page:\d+>' => 'post/<_a>',
                 '<_a:[\w\d]+>' => 'post/<_a>',
-                'static/<view:[\w\d]+>' => 'site/page',
             ),
         ),
     ),

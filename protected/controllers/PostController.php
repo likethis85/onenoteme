@@ -16,6 +16,7 @@ class PostController extends Controller
 
     public function actionCreate()
     {
+        $this->layout = 'site';
         $model = new Post();
         if (request()->getIsPostRequest() && isset($_POST['Post'])) {
             $model->attributes = $_POST['Post'];

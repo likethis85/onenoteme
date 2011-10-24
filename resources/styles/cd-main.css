@@ -46,4 +46,20 @@
 .comment-list li {float:left; font-size:12px; margin-right:15px;}
 .comment-list li img {height:20px;}
 
+/* post/appraise */
+.post-content {background:#E8E7E3; line-height:24px; padding:20px;}
+.buttons {margin-top:20px; margin-bottom:30px; text-align:center;}
+.buttons a {display:block; float:left; width:180px; height:40px; line-height:40px; margin-left:20px; border:none; color:#FFF; font-size:14px; cursor:pointer;}
+.buttons a:hover {text-decoration:underline;}
+#refuse-post {background:red; margin-left:40px;}
+#accept-post {background:green;}
+#skip-post {background:#BDE3EC;}
+
+/* tag/list */
+.tag-list a {margin:0px 5px;}
+.tag-level1:link, .tag-level1:visited {font-size:20px;}
+.tag-level2:link, .tag-level2:visited {font-size:28px; color:#F79E1C; font-weight:600;}
+.tag-level2:hover {color:white; background:#F79E1C;}
+.tag-level3:link, .tag-level3:visited {font-size:38px; background:white; color:#91C21C; font-weight:700;}
+.tag-level3:hover {color:white; background:#91C21C;}
 
