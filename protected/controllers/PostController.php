@@ -195,4 +195,19 @@ class PostController extends Controller
         exit(0);
     }
     
+    public function actionShow($id)
+    {
+        $id = (int)$id;
+        if ($id <= 0)
+            throw new CHttpException(500, '非法请求');
+            
+        $post = DPost::model()->findByPk($id);
+        if (null === $post)
+            throw new CHttpException(500, '非法请求');
+            
+        $this->render('show', array(
+            'post' => $post,
+        ));
+    }
+    
 }

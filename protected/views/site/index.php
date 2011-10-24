@@ -1,6 +1,6 @@
-<div class="fl me-container">
+<div class="fl cd-container">
 	main
 </div>
-<div class="fr me-wrapper me-sidebar">
+<div class="fr cd-wrapper cd-sidebar">
 	sidebar
 </div>

@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+
+.cd-wrapper {width:980px; margin:0px auto; overflow:hidden;}
+.cd-mainwrapper {background:white; border-radius:5px; overflow-y:visible;}
+.cd-footer {margin-top:20px; margin-bottom:10px;}
+.breadcrumbs {text-indent:10px; line-height:24px; height:24px; margin-bottom:10px;}
+
+/* header */
+.cd-header {margin-top:5px; margin-bottom:20px;}
+.cd-header .site-nav {width:800px; background:#E9F4E9;}
+.cd-header .site-nav li {float:left; height:36px; line-height:36px;}
+.cd-header .site-nav ul.fl li {margin-left:30px;}
+.cd-header .site-nav ul.fr li {margin-right:15px;}
+
+/* footer */
+.cdc-bottom-banner {background:#EFEFEF; padding:15px 0px;}
+
+/* sidebar */
+.cd-sidebar {width:300px;}
+.cd-sidebar li {margin:8px 5px 8px 10px;}
+.cd-sidebar .content-block {margin-bottom:10px; background:#E6F0F4; border:1px solid #DCEEF5;}
+.cd-sidebar .cdc-block {margin-bottom:10px; background:#E6F0F4;}
+
+/* container */
+.cd-container {width:660px;}
+.cd-catption {color:#060; padding:0px 0px 12px 0px; line-height:150%; font-size:14px;}
+
+
+/* create */
+.create-form textarea {width:630px; height:180px;}
+.create-form li {margin-bottom:10px;}
+.create-form .txt {width:300px; height:20px; line-height:20px;}
+.create-form .button {padding:5px 10px;}
+
+/* post/list */
+.subnav-links li {float:left;}
+.post-list .post-item {line-height:24px; width:100%; border-bottom:1px dashed #D8D8D8; margin-bottom:15px;}
+.item-toolbar {margin:10px 5px 15px 5px;}
+.item-toolbar .upscore, .item-toolbar .downscore {width:80px; padding-left:20px;}

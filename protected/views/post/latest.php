@@ -1,10 +1,9 @@
-<div class="fl me-container">
-	<div class="me-container-block">
+<div class="fl cd-container">
+	<h2 class="cd-catption">最新段子· · · · · · </h2>
     <?php $this->renderPartial('list', array('models'=>$models, 'pages'=>$pages));?>
-    </div>
 </div>
 
-<div class="fr me-sidebar">
+<div class="fr cd-sidebar">
 	<div class="cdc-block">
 		<script type="text/javascript">
 		<!--
