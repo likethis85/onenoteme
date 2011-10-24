@@ -17,17 +17,21 @@ class CommentController extends Controller
         $pages->setPageSize($limit);
         $offset = $pages->getCurrentPage() * $limit;
         $cmd->offset($offset);
-        
+        $models = DComment::model()->findAll($cmd);
+            
         if (request()->getIsAjaxRequest()) {
-            echo json_encode(DComment::model()->queryAll($cmd));
+            $this->render('ajax_list', array(
+            	'models' => $models,
+                'postid' => $pid,
+            ));
             exit(0);
         }
         else {
-            $models = DComment::model()->findAll($cmd);
             $this->render('list', array(
             	'models' => $models,
                 'pages' => $pages,
             ));
+            exit(0);
         }
     }
     

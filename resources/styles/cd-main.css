@@ -33,7 +33,17 @@
 .create-form .button {padding:5px 10px;}
 
 /* post/list */
-.subnav-links li {float:left;}
+.subnav-links {background:#E9F4E9; height:30px; margin-bottom:15px;}
+.subnav-links li {float:left; height:30px; line-height:30px; margin-left:20px;}
 .post-list .post-item {line-height:24px; width:100%; border-bottom:1px dashed #D8D8D8; margin-bottom:15px;}
-.item-toolbar {margin:10px 5px 15px 5px;}
-.item-toolbar .upscore, .item-toolbar .downscore {width:80px; padding-left:20px;}
+.item-toolbar {margin:10px 5px 15px 5px; color:gray;}
+.item-toolbar .upscore, .item-toolbar .downscore {width:60px; padding-left:20px; cursor:pointer; margin-right:10px;}
+.item-toolbar .upscore {background:url(../images/up.gif) no-repeat 0px 5px;}
+.item-toolbar .downscore {background:url(../images/down.gif) no-repeat 0px 5px;}
+
+/* comment/list */
+.comment-list {margin-bottom:15px;}
+.comment-list li {float:left; font-size:12px; margin-right:15px;}
+.comment-list li img {height:20px;}
+
+

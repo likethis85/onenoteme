@@ -104,4 +104,9 @@ class DPost extends DModel
             $data[] = CHtml::link($tag, aurl('tag/posts', array('tag'=>urlencode($tag))), array('target'=>$target));
         return implode($operator, $data);
     }
+
+    public function getCommentListUrl()
+    {
+        return aurl('comment/list', array('pid'=>$this->id));
+    }
 }

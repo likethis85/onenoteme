@@ -1,10 +1,35 @@
-<ul class="subnav-links category-links">
-    <?php foreach ($categories as $category):?>
-	<li><?php echo $category->postLink;?></li>
-    <?php endforeach;?>
-</ul>
-<br />
-<?php foreach ($models as $model):?>
-<li><?php echo $model->content;?></li>
-<?php endforeach;?>
-<div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
+<div class="fl cd-container">
+    <ul class="subnav-links category-links">
+        <?php foreach ($categories as $category):?>
+    	<li><?php echo $category->postLink;?></li>
+        <?php endforeach;?>
+    </ul>
+    <?php $this->renderPartial('list', array('models'=>$models, 'pages'=>$pages));?>
+	<div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
+</div>
+
+<div class="fr cd-sidebar">
+	<div class="cdc-block">
+		<script type="text/javascript">
+		<!--
+            google_ad_client = "ca-pub-6304134167250488";
+            /* meiapps_300x250_image_text */
+            google_ad_slot = "7220156016";
+            google_ad_width = 300;
+            google_ad_height = 250;
+        //-->
+        </script>
+        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+	</div>
+	<div class="content-block">
+		这是一个内容块<br />
+		这是一个内容块<br />
+		这是一个内容块<br />
+		这是一个内容块<br />
+		这是一个内容块<br />
+		这是一个内容块<br />
+		这是一个内容块<br />
+		这是一个内容块<br />
+		这是一个内容块<br />
+	</div>
+</div>

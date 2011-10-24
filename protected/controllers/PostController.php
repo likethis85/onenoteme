@@ -152,7 +152,7 @@ class PostController extends Controller
         $cmd->offset($offset);
         $model = DPost::model()->find($cmd);
         
-        $this->render('vote', array(
+        $this->render('appraise', array(
         	'model' => $model,
         ));
     }

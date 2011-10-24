@@ -18,7 +18,7 @@ table {border-collapse:collapse; border:none;}
 
 a:link {text-decoration:none; color:#369; text-decoration:none; cursor:pointer;}
 a:visited {color:#669;}
-a:hover {color:white; background:#039;}
+a:hover {color:white; background-color:#039;}
 .lh20px {line-height:20px;}
 .lh24px {line-height:20px;}
 .radius {-moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px;}

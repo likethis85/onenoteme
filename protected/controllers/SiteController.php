@@ -1,6 +1,11 @@
 <?php
 class SiteController extends Controller
 {
+    public function init()
+    {
+        $this->layout = 'site';
+    }
+    
     public function actions()
     {
         return array(
@@ -17,7 +22,7 @@ class SiteController extends Controller
     
     public function actionLogin()
     {
-        
+        $this->render('login');
     }
     
     public function actionLogout()
@@ -25,9 +30,9 @@ class SiteController extends Controller
         
     }
     
-    public function signup()
+    public function actionSignup()
     {
-        
+        $this->render('signup');
     }
     
     public function actionTest()
