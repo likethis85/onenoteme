@@ -29,6 +29,11 @@ class PostController extends Controller
             else
                 user()->setFlash('createPostResult', '<span class="cred f12px">发布出错，查看下面详细错误信息。</span>');
         }
+        
+        $this->pageTitle = '发段子 - 挖吧段子';
+        $this->setKeywords('发布段子,发布经典语录,发布糗事,发布秘密,发布笑话');
+        $this->setDescription('发布段子,发布经典语录,发布糗事,发布秘密,发布笑话');
+        
         $this->render('create', array('model'=>$model));
     }
     
@@ -50,6 +55,10 @@ class PostController extends Controller
         $cmd->offset($offset);
         $models = DPost::model()->findAll($cmd);
         
+        $this->pageTitle = '挖段子 - 挖吧挖吧我们是来挖的';
+        $this->setKeywords('最新段子,最全的段子,经典语录,糗事百科,秘密,笑话段子,笑话大全,搞笑大全,我们爱讲冷笑话,哈哈笑');
+        $this->setDescription('最新发布的段子。网罗互联网各种精品段子，各种糗事，各种笑话，各种秘密，各种经典语录，应有尽有。烦了、累了、无聊了，就来挖段子逛一逛。');
+        
         $this->render('latest', array(
         	'models' => $models,
             'pages' => $pages,
@@ -64,6 +73,11 @@ class PostController extends Controller
         $condition = 'create_time > ' . $time;
         
         $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
+        
+        $this->pageTitle = '1小时最热门 - 挖段子';
+        $this->setKeywords('热门段子,热门经典语录,热门糗事百科,热门秘密,热门笑话,热门搞笑,笑话热门排行,冷笑话排行');
+        $this->setDescription('一小时内段子排行，一小时内笑话排行，一小时内经典语录排行 ，一小时糗事排行。');
+        
         $this->render('hot_list', array('models' => $models));
     }
     
@@ -75,6 +89,11 @@ class PostController extends Controller
         $condition = 'create_time > ' . $time;
         
         $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
+        
+        $this->pageTitle = '8小时最热门 - 挖段子';
+        $this->setKeywords('热门段子,热门经典语录,热门糗事百科,热门秘密,热门笑话,热门搞笑,笑话热门排行,冷笑话排行');
+        $this->setDescription('8小时内段子排行，8小时内笑话排行，8小时内经典语录排行 ，8小时糗事排行。');
+        
         $this->render('hot_list', array('models' => $models));
     }
     
@@ -86,6 +105,11 @@ class PostController extends Controller
         $condition = 'create_time > ' . $time;
         
         $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
+        
+        $this->pageTitle = '一天最热门 - 挖段子';
+        $this->setKeywords('热门段子,热门经典语录,热门糗事百科,热门秘密,热门笑话,热门搞笑,笑话热门排行,冷笑话排行');
+        $this->setDescription('一天内段子排行，一天内笑话排行，一天内经典语录排行 ，一天糗事排行。');
+        
         $this->render('hot_list', array('models' => $models));
     }
     
@@ -97,6 +121,11 @@ class PostController extends Controller
         $condition = 'create_time > ' . $time;
         
         $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
+        
+        $this->pageTitle = '一周最热门 - 挖段子';
+        $this->setKeywords('热门段子,热门经典语录,热门糗事百科,热门秘密,热门笑话,热门搞笑,笑话热门排行,冷笑话排行');
+        $this->setDescription('一周内段子排行，一周内笑话排行，一周内经典语录排行 ，一周糗事排行。');
+        
         $this->render('hot_list', array('models' => $models));
     }
     
@@ -108,6 +137,11 @@ class PostController extends Controller
         $condition = 'create_time > ' . $time;
         
         $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
+        
+        $this->pageTitle = '一周最热门 - 挖段子';
+        $this->setKeywords('热门段子,热门经典语录,热门糗事百科,热门秘密,热门笑话,热门搞笑,笑话热门排行,冷笑话排行');
+        $this->setDescription('一周内段子排行，一周内笑话排行，一周内经典语录排行 ，一周糗事排行。');
+        
         $this->render('hot_list', array('models' => $models));
     }
     
@@ -134,6 +168,10 @@ class PostController extends Controller
             ->order('orderid desc, id asc');
         $categories = DCategory::model()->findAll($cmd);
         
+        $this->pageTitle = '瞅瞅 - 挖段子';
+        $this->setKeywords('段子分类,' . implode(',', CHtml::listData($categories, 'id', 'name')));
+        $this->setDescription('挖段子分类和每个分类的段子列表。');
+        
         $this->render('list_of_category', array(
         	'models' => $models,
             'pages' => $pages,
@@ -153,6 +191,10 @@ class PostController extends Controller
         $offset = mt_rand(0, abs($count-1));
         $cmd->offset($offset);
         $model = DPost::model()->find($cmd);
+        
+        $this->pageTitle = '鉴定 - 挖段子';
+        $this->setKeywords('审核段子,鉴定段子');
+        $this->setDescription('审核鉴定网友发布的段子是否符合挖段子标准，为挖段子增砖添瓦。');
         
         $this->render('appraise', array(
         	'model' => $model,
@@ -217,9 +259,31 @@ class PostController extends Controller
         }
         if (null === $post)
             throw new CHttpException(404, '该段子不存在或未被审核');
+        
+        // 获取评论
+        $limit = param('commentCountOfPage');
+        $conditions = array('and', 'post_id = :pid', 'state = :state');
+        $params = array(':pid' => $id, ':state' => DComment::STATE_ENABLED);
+        
+        $cmd = app()->db->createCommand()
+            ->order('id asc')
+            ->limit($limit)
+            ->where($conditions, $params);
             
+        $count = DComment::model()->count($conditions, $params);
+        $pages = new CPagination($count);
+        $pages->setPageSize($limit);
+        $offset = $pages->getCurrentPage() * $limit;
+        $cmd->offset($offset);
+        $comments = (array)DComment::model()->findAll($cmd);
+        
+        $this->pageTitle = trim(strip_tags($post->title)) . ' - 挖段子';
+        $this->setKeywords($this->pageTitle);
+        $this->setDescription($this->pageTitle);
+        
         $this->render('show', array(
             'post' => $post,
+            'comments' => $comments,
         ));
     }
     

@@ -3,10 +3,23 @@
 		<h1><?php echo $post->title;?></h1>
 		<div class="content"><?php echo $post->content;?></div>
 		<ul class="item-toolbar">
-        	<li class="downscore fr" pid="<?php echo $post->id;?>"><?php echo $post->down_score;?></li>
-        	<li class="upscore fr" pid="<?php echo $post->id;?>"><?php echo $post->up_score;?></li>
+			<li class="fr"><?php echo $post->comment_nums;?>条评论</li>
+        	<li class="upscore fl" pid="<?php echo $post->id;?>"><?php echo $post->up_score;?></li>
+        	<li class="downscore fl" pid="<?php echo $post->id;?>"><?php echo $post->down_score;?></li>
         	<div class="clear"></div>
         </ul>
+	</div>
+	<div class="comment-list">
+		<ul>
+	    <?php foreach ($comments as $c):?>
+			<li>
+				<span><img src="http://www.qiushibaike.com/system/avatars/289248/thumb/20111009173804159.jpg" /></span>
+			    <span><?php echo CHtml::link('买根苦瓜吧', '#', array('target'=>'_blank'));?></span>
+			    <span class="comment-content"><?php echo $c->content;?></span>
+			    <div class="clear"></div>
+			</li>
+	    <?php endforeach;?>
+		</ul>
 	</div>
 </div>
 

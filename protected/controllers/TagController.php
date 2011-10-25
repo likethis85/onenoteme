@@ -29,6 +29,10 @@ class TagController extends Controller
             }
         }
         
+        $this->pageTitle = '各种段子标签 - 挖段子';
+        $this->setKeywords('各种段子标签');
+        $this->setDescription('各种段子标签');
+        
         $this->render('list', array(
         	'tags' => (array)$tags,
         	'levels'=>$levels,
@@ -51,6 +55,11 @@ class TagController extends Controller
         $cmd->offset($offset);
         
         $models = DPost::model()->findAll($cmd);
+        
+        $this->pageTitle = $name . '相关段子 - 挖段子';
+        $this->setKeywords("{$name}相关段子,{$name}相关冷笑话,{$name}相关糗事,{$name}相关语录");
+        $this->setDescription("与{$name}有关的相关段子、笑话、冷笑话、糗事、经典语录");
+        
         $this->render('posts', array(
         	'models' => $models,
             'pages' => $pages,

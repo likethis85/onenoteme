@@ -48,6 +48,8 @@ class DPost extends DModel
     
     protected function afterFind()
     {
+        if (empty($this->title))
+            $this->title = mb_substr($this->content, 0, 20, app()->charset);
         $this->content = nl2br($this->content);
     }
     
@@ -121,4 +123,5 @@ class DPost extends DModel
     {
         return aurl('comment/list', array('pid'=>$this->id));
     }
+    
 }

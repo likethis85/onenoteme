@@ -50,6 +50,8 @@
 <div class="cd-wrapper cd-footer">
 	<p class="fl">内容版权所有 ©2005-2011 qiushibaike.com  苏ICP备11024271号-2</p><p class="fr">快乐就是要建立在别人的痛苦之上TOP</p>
 </div>
+
+<?php $this->renderPartial('/public/tongji');?>
 </body>
 </html>
 

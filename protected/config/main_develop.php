@@ -76,6 +76,10 @@ return array(
                 'tag-<name:[\w\d%]+>' => 'tag/posts',
             ),
         ),
+        'user' => array(
+            'allowAutoLogin' => true,
+            'loginUrl' => 'site/login',
+        ),
     ),
     
     'params' => $params,

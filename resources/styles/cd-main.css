@@ -23,7 +23,7 @@
 
 /* container */
 .cd-container {width:660px;}
-.cd-catption {color:#060; padding:0px 0px 12px 0px; line-height:150%; font-size:14px;}
+.cd-catption {color:#060; padding:0px 0px 12px 0px; line-height:150%; font-size:18px;}
 
 
 /* create */
@@ -35,16 +35,11 @@
 /* post/list */
 .subnav-links {background:#E9F4E9; height:30px; margin-bottom:15px;}
 .subnav-links li {float:left; height:30px; line-height:30px; margin-left:20px;}
-.post-list .post-item {line-height:26px; width:100%; border-bottom:1px dashed #D8D8D8; margin-bottom:15px;}
-.item-toolbar {margin:10px 5px 15px 5px; color:gray;}
+.post-list .post-item {line-height:24px; width:100%; border-bottom:1px dashed #D8D8D8; margin-bottom:8px;}
+.item-toolbar {margin:5px 5px 5px 5px; color:gray;}
 .item-toolbar .upscore, .item-toolbar .downscore {width:50px; padding-left:20px; cursor:pointer; margin-right:10px;}
 .item-toolbar .upscore {background:url(../images/up.gif) no-repeat 0px 5px;}
 .item-toolbar .downscore {background:url(../images/down.gif) no-repeat 0px 5px;}
-
-/* comment/list */
-.comment-list {margin-bottom:15px;}
-.comment-list li {float:left; font-size:12px; margin-right:15px;}
-.comment-list li img {height:20px;}
 
 /* post/appraise */
 .post-content {background:#E8E7E3; line-height:24px; padding:20px; min-height:200px; margin-bottom:20px;}
@@ -66,5 +61,12 @@
 /* post/show */
 .post-detail h1 {font-size:22px; text-align:center; margin-bottom:20px;}
 .post-detail .content {line-height:26px; text-indent:28px;}
-.post-detail .item-toolbar {margin:30px;}
+.post-detail .item-toolbar {margin:30px 0px 15px 0px; padding:0px 30px}
 
+/* comment/list */
+.comment-list {margin-bottom:15px; border-top:3px solid #D8D8D8;}
+.comment-list ul {margin-top:10px; margin-left:10px;}
+.comment-list li {font-size:12px; margin:5px 0px; border-bottom:1px solid #E8E8E8; padding:5px;}
+.comment-list li span {display:block; float:left; margin-left:15px; height:22px; line-height:22px;}
+.comment-list li img {height:20px;}
+.comment-list .comment-content {color:gray;}

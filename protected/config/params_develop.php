@@ -1,6 +1,7 @@
 <?php
 return array(
 
+    'autoLoginDuration' => 3600 * 24 * 7,
     'postCountOfPage' => 20,
     'commentCountOfPage' => 20,
     'numsOfSetPostIsShow' => 10,
