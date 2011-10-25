@@ -54,6 +54,6 @@ class DTag extends DModel
 	
 	public function getUrl()
 	{
-	    return aurl('tag/posts', array('tag'=>urlencode($this->name)));
+	    return aurl('tag/posts', array('name'=>urlencode($this->name)));
 	}
 }

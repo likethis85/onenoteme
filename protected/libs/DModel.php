@@ -210,9 +210,15 @@ abstract class DModel
     
     public function count($conditions = '', $params = array())
     {
+        if ($conditions instanceof CDbCommand) {
+            return $conditions->select('count(*)')
+                ->from($this->table() . ' t')
+                ->queryScalar();
+        }
+        
         $cmd = $this->getDbCommand()
             ->select('count(*)')
-            ->from($this->table());
+            ->from($this->table() . ' t');
         if ($conditions)
             $cmd->where($conditions, $params);
         return $cmd->queryScalar();

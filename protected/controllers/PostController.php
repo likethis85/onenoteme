@@ -23,6 +23,7 @@ class PostController extends Controller
             if ($model->save()) {
                 $msg = '<span class="cgreen f12px">发布成功，' . CHtml::link('点击查看', $model->url, array('target'=>'_blank')) . '，您还可以继续发布。</span>';
                 user()->setFlash('createPostResult', $msg);
+                user()->setFlash('allowUserView', 1);
                 $this->redirect(aurl('post/create'));
             }
             else
@@ -172,6 +173,11 @@ class PostController extends Controller
         
         if (null === $model)
             throw new CHttpException(500, '非法请求');
+            
+        if ($model->getCanDelete()) {
+            echo (int)$model->delete();
+            exit(0);
+        }
 
         $model->$column += 1;
         
@@ -180,7 +186,7 @@ class PostController extends Controller
             $model->state = DPost::STATE_ENABLED;
             $attributes[] = 'state';
         }
-
+        
         echo (int)$model->update($attributes);
         exit(0);
     }
@@ -201,10 +207,16 @@ class PostController extends Controller
         $id = (int)$id;
         if ($id <= 0)
             throw new CHttpException(500, '非法请求');
-            
-        $post = DPost::model()->findByPk($id);
+        
+        $cmd = app()->getDb()->createCommand();
+        if (user()->getFlash('allowUserView'))
+            $post = DPost::model()->findByPk($id);
+        else {
+            $cmd->where('id = :id and state != :state', array('id' => $id, ':state' => DPost::STATE_DISABLED));
+            $post = DPost::model()->find($cmd);
+        }
         if (null === $post)
-            throw new CHttpException(500, '非法请求');
+            throw new CHttpException(404, '该段子不存在或未被审核');
             
         $this->render('show', array(
             'post' => $post,

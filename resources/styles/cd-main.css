@@ -35,9 +35,9 @@
 /* post/list */
 .subnav-links {background:#E9F4E9; height:30px; margin-bottom:15px;}
 .subnav-links li {float:left; height:30px; line-height:30px; margin-left:20px;}
-.post-list .post-item {line-height:24px; width:100%; border-bottom:1px dashed #D8D8D8; margin-bottom:15px;}
+.post-list .post-item {line-height:26px; width:100%; border-bottom:1px dashed #D8D8D8; margin-bottom:15px;}
 .item-toolbar {margin:10px 5px 15px 5px; color:gray;}
-.item-toolbar .upscore, .item-toolbar .downscore {width:60px; padding-left:20px; cursor:pointer; margin-right:10px;}
+.item-toolbar .upscore, .item-toolbar .downscore {width:50px; padding-left:20px; cursor:pointer; margin-right:10px;}
 .item-toolbar .upscore {background:url(../images/up.gif) no-repeat 0px 5px;}
 .item-toolbar .downscore {background:url(../images/down.gif) no-repeat 0px 5px;}
 
@@ -47,8 +47,8 @@
 .comment-list li img {height:20px;}
 
 /* post/appraise */
-.post-content {background:#E8E7E3; line-height:24px; padding:20px;}
-.buttons {margin-top:20px; margin-bottom:30px; text-align:center;}
+.post-content {background:#E8E7E3; line-height:24px; padding:20px; min-height:200px; margin-bottom:20px;}
+.buttons {margin-bottom:30px; text-align:center;}
 .buttons a {display:block; float:left; width:180px; height:40px; line-height:40px; margin-left:20px; border:none; color:#FFF; font-size:14px; cursor:pointer;}
 .buttons a:hover {text-decoration:underline;}
 #refuse-post {background:red; margin-left:40px;}
@@ -62,4 +62,9 @@
 .tag-level2:hover {color:white; background:#F79E1C;}
 .tag-level3:link, .tag-level3:visited {font-size:38px; background:white; color:#91C21C; font-weight:700;}
 .tag-level3:hover {color:white; background:#91C21C;}
+
+/* post/show */
+.post-detail h1 {font-size:22px; text-align:center; margin-bottom:20px;}
+.post-detail .content {line-height:26px; text-indent:28px;}
+.post-detail .item-toolbar {margin:30px;}
 

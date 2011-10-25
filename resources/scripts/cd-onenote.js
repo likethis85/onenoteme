@@ -25,7 +25,19 @@ var Onenote = {
 		});
 	},
 	downScore: function(event) {
-		
+		var pid = parseInt($(this).attr('pid'));
+		if (pid < 1) return false;
+		var url = $('#jqvar').attr('scoreurl');
+		var data = 'id=' + pid + '&score=-1';
+		var jqXhr = $.post(url, data);
+		var tthis = this;
+		jqXhr.success(function(data){
+			if (data == 1)
+				$(tthis).html(parseInt($(tthis).html()) + 1)
+		});
+		jqXhr.fail(function(){
+			console.log('fail');
+		});
 	},
 	acceptPost: function(){
 		var pid = parseInt($(this).attr('pid'));

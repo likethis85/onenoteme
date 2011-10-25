@@ -46,6 +46,11 @@ class DPost extends DModel
         return array('id', 'category_id', 'topic_id', 'title', 'content', 'create_time', 'up_score', 'down_score', 'comment_nums', 'tags', 'state');
     }
     
+    protected function afterFind()
+    {
+        $this->content = nl2br($this->content);
+    }
+    
 
     public static function fetchValidList($limit = 20, $page = 1, $conditions = '', $order = 'id desc')
     {
@@ -79,13 +84,20 @@ class DPost extends DModel
         return false;
     }
     
+    public function getCanDelete()
+    {
+        return ($this->state == self::STATE_DISABLED
+            && ($this->up_score / ($this->down_score ? $this->down_score : 1)) < param('pecentOfDeletePost')
+            && ($this->up_score + $this->down_score) > param('numsOfDeletePost'));
+    }
+    
     /**
      * 获取标签的数组形式
      * @return array
      */
     public function getTagsArray()
     {
-        static $tags;
+        static $tags = array();
         if ($tags[$this->id]) return $tags[$this->id];
 
         if (empty($this->tags))
@@ -101,7 +113,7 @@ class DPost extends DModel
             return '';
 
         foreach ($this->tagsArray as $tag)
-            $data[] = CHtml::link($tag, aurl('tag/posts', array('tag'=>urlencode($tag))), array('target'=>$target));
+            $data[] = CHtml::link($tag, aurl('tag/posts', array('name'=>urlencode($tag))), array('target'=>$target));
         return implode($operator, $data);
     }
 

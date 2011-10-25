@@ -1,5 +1,5 @@
 <ul class="post-list">
-    <?php foreach ($models as $model):?>
+    <?php foreach ((array)$models as $model):?>
     <li class="post-item">
         <div><?php echo $model->content;?></div>
         <div><?php echo $model->tagsLinks;?></div>
@@ -8,6 +8,7 @@
         	<li class="downscore fl" pid="<?php echo $model->id;?>"><?php echo $model->down_score;?></li>
         	<li class="comment-nums fr">
         	    <a href="<?php echo aurl('post/show', array('id'=>$model->id), '', 'comment-list');?>" title="查看评论" target="_blank"><?php echo $model->comment_nums;?>条评论</a>
+        	    <a href="<?php echo aurl('post/show', array('id'=>$model->id));?>" target="_blank" title="新窗口中查看段子">: :</a>
         	</li>
         	<div class="clear"></div>
         </ul>

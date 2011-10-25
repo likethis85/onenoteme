@@ -1,5 +1,13 @@
 <div class="fl cd-container">
-	<?php var_dump($post);?>
+	<div class="post-detail">
+		<h1><?php echo $post->title;?></h1>
+		<div class="content"><?php echo $post->content;?></div>
+		<ul class="item-toolbar">
+        	<li class="downscore fr" pid="<?php echo $post->id;?>"><?php echo $post->down_score;?></li>
+        	<li class="upscore fr" pid="<?php echo $post->id;?>"><?php echo $post->up_score;?></li>
+        	<div class="clear"></div>
+        </ul>
+	</div>
 </div>
 
 <div class="fr cd-sidebar">
@@ -27,3 +35,6 @@
 		这是一个内容块<br />
 	</div>
 </div>
+
+
+<span id="jqvar" scoreurl="<?php echo aurl('post/score');?>" class="hide"></span>

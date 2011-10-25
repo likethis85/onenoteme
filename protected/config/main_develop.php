@@ -65,11 +65,15 @@ return array(
             'rules' => array(
                 '' => 'site/index',
                 'static/<view:[\w\d]+>' => 'site/page',
-                'site-<_a:[\w\d]+>' => 'site/<_a>',
-                'list-<cid:\d+>-<page:\d+>' => 'post/list',
-                'list-<cid:\d+>' => 'post/list',
-                '<_a:[\w\d]+>-<page:\d+>' => 'post/<_a>',
-                '<_a:[\w\d]+>' => 'post/<_a>',
+        
+                'post/list-<cid:\d+>-<page:\d+>' => 'post/list',
+                'post/list-<cid:\d+>' => 'post/list',
+                'post-<id:\d+>' => 'post/show',
+                'post-<_a:[\w\d]+>-<page:\d+>' => 'post/<_a>',
+                'post-<_a:[\w\d]+>' => 'post/<_a>',
+        
+                'tags' => 'tag/list',
+                'tag-<name:[\w\d%]+>' => 'tag/posts',
             ),
         ),
     ),

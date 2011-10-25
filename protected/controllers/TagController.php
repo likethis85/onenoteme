@@ -29,17 +29,32 @@ class TagController extends Controller
             }
         }
         
-        $this->render('list', array('tags' => $tags, 'levels'=>$levels));
+        $this->render('list', array(
+        	'tags' => (array)$tags,
+        	'levels'=>$levels,
+        ));
     }
     
-    public function actionPosts($tag)
+    public function actionPosts($name)
     {
-        $tag = urldecode($tag);
+        $limit = (int)param('postCountOfPage');
+        $name = urldecode($name);
         $cmd = app()->getDb()->createCommand()
+            ->select('t.*')
             ->join('{{post2tag}} pt', 't.id = pt.post_id')
             ->join('{{tag}} tag', 'tag.id = pt.tag_id')
-            ->where('tag.name = :tagname', array(':tagname' => $tag));
-        $posts = DPost::model()->findAll($cmd);
-        $this->render('posts', array('posts'=>$posts));
+            ->where('tag.name = :tagname', array(':tagname' => $name));
+        $pages = new CPagination(DPost::model()->count(clone $cmd));
+        $pages->setPageSize($limit);
+        
+        $offset = $pages->getCurrentPage() * $limit;
+        $cmd->offset($offset);
+        
+        $models = DPost::model()->findAll($cmd);
+        $this->render('posts', array(
+        	'models' => $models,
+            'pages' => $pages,
+            'tagname' => $name,
+        ));
     }
 }
