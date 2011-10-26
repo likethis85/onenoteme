@@ -10,7 +10,7 @@
         </li>
         <li>
             <?php echo CHtml::submitButton('马上发布', array('class'=>'button'));?>
-            <?php echo user()->getFlash('createPostResult');?>
+            <?php if (user()->hasFlash('createPostResult')) echo user()->getFlash('createPostResult');?>
         </li>
     </ul>
     <div class="space20px"></div>
