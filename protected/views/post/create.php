@@ -1,6 +1,6 @@
 <div class="fl cd-container">
     <h2>有好段子？一块分享下吧。</h2>
-    <?php echo CHtml::form(null, 'POST');?>
+    <?php echo CHtml::form('', 'POST');?>
     <ul class="create-form">
     	<li><?php echo CHtml::activeTextArea($model, 'content');?></li>
         <li>
@@ -10,7 +10,7 @@
         </li>
         <li>
             <?php echo CHtml::submitButton('马上发布', array('class'=>'button'));?>
-            <?php if (user()->hasFlash('createPostResult')) echo user()->getFlash('createPostResult');?>
+            <?php //if (user()->hasFlash('createPostResult')) echo user()->getFlash('createPostResult');?>
         </li>
     </ul>
     <div class="space20px"></div>
