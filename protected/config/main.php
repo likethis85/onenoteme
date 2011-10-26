@@ -22,7 +22,7 @@ $config = array(
     'components' => array(
         'db' => array(
             'class' => 'CDbConnection',
-			'connectionString' => 'mysql:host=127.0.0.1; port=3306; dbname=cd_onenote',
+			'connectionString' => 'mysql:host=localhost; port=3306; dbname=cd_onenote',
 			'username' => 'root',
 		    'password' => 'cdc_790406',
 		    'charset' => 'utf8',
