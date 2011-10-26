@@ -35,18 +35,7 @@
 	<?php echo $content;?>
     <div class="clear"></div>
 </div>
-<div class="cd-wrapper cdc-block cdc-bottom-banner">
-	<script type="text/javascript">
-	<!--
-        google_ad_client = "ca-pub-6304134167250488";
-        /* meiapps_728x90 */
-        google_ad_slot = "4771080120";
-        google_ad_width = 728;
-        google_ad_height = 90;
-    //-->
-    </script>
-    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-</div>
+
 <div class="cd-wrapper cd-footer">
 	<p class="fl">内容版权所有 ©2005-2011 qiushibaike.com  苏ICP备11024271号-2</p><p class="fr">快乐就是要建立在别人的痛苦之上TOP</p>
 </div>
