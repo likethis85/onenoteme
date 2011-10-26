@@ -8,8 +8,7 @@ $short = dirname(__FILE__) . '/../library/shortcut.php';
 require_once($cdc);
 require_once($short);
 
-$cfg = CDC_DEBUG ? 'main_develop.php' : 'main_product.php';
-$config = dirname(__FILE__) . '/../protected/config/' . $cfg;
+$config = dirname(__FILE__) . '/../protected/config/main.php';
 
 $app = Yii::createWebApplication($config);
 $app->run();

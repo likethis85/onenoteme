@@ -3,7 +3,7 @@ defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 
 $params = require(dirname(__FILE__) . DS . YII_DEBUG ? 'params_develop.php' : 'params.php');
 
-return array(
+$config = array(
     'basePath' => dirname(__FILE__) . DS . '..',
     'id' => 'onenote.me',
     'name' => '挖段子',
@@ -20,35 +20,20 @@ return array(
     ),
     'preload' => array('log'),
     'components' => array(
-        'log' => array(
-            'class' => 'CLogRouter',
-			'routes' => array(
-				array(
-					'class' => 'CFileLogRoute',
-					'levels' => 'trace, info, error, warning, watch',
-				    'categories' => 'system.db.*',
-				),
-				array(
-					'class' => 'CWebLogRoute',
-					'levels' => 'trace, info, error, warning, watch',
-				    'categories' => 'system.db.*',
-				),
-            ),
-        ),
         'db' => array(
             'class' => 'CDbConnection',
 			'connectionString' => 'mysql:host=127.0.0.1; port=3306; dbname=cd_onenote',
 			'username' => 'root',
-		    'password' => '123',
+		    'password' => 'cdc_790406',
 		    'charset' => 'utf8',
 		    'persistent' => true,
 		    'tablePrefix' => 'cd_',
             'enableParamLogging' => true,
             'enableProfiling' => true,
-//		    'schemaCacheID' => 'cache',
-//		    'schemaCachingDuration' => 3600,    // metadata 缓存超时时间(s)
-//		    'queryCacheID' => 'cache',
-//		    'queryCachingDuration' => 3600,
+		    'schemaCacheID' => 'cache',
+		    'schemaCachingDuration' => 3600,    // metadata 缓存超时时间(s)
+		    'queryCacheID' => 'cache',
+		    'queryCachingDuration' => 3600,
         ),
         'cache' => array(
             'class' => 'CFileCache',
@@ -84,3 +69,7 @@ return array(
     
     'params' => $params,
 );
+
+$debugConfig = require(dirname(__FILE__) . DS . 'main_debug.php');
+return YII_DEBUG ? array_merge($config, $debugConfig) : $config;
+
