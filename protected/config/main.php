@@ -71,5 +71,5 @@ $config = array(
 );
 
 $debugConfig = require(dirname(__FILE__) . DS . 'main_debug.php');
-return YII_DEBUG ? array_merge($config, $debugConfig) : $config;
+return YII_PRODUCT ? $config : array_merge($config, $debugConfig);
 
