@@ -34,7 +34,7 @@ class PostController extends Controller
         $this->setKeywords('发布段子,发布经典语录,发布糗事,发布秘密,发布笑话');
         $this->setDescription('发布段子,发布经典语录,发布糗事,发布秘密,发布笑话');
         
-        $this->render('create', array('model'=>$model));
+        //$this->render('create', array('model'=>$model));
     }
     
     public function actionLatest()
