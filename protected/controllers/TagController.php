@@ -8,8 +8,8 @@ class TagController extends Controller
         $tags = DTag::model()->findAll($cmd);
         foreach ($tags as $tag)
             $postNums[] = $tag->post_nums;
-        $max = max($postNums);
-        $min = min($postNums);
+        $max = max((array)$postNums);
+        $min = min((array)$postNums);
         $half1 = (int)(($max - $min) / 3 + $min);
         $half2 = (int)(($max - $min) / 3 * 2 + $min);
         
