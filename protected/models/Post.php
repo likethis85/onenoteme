@@ -6,7 +6,6 @@
  * The followings are the available columns in table '{{post}}':
  * @property integer $id
  * @property integer $category_id
- * @property integer $topic_id
  * @property string $title
  * @property string $content
  * @property integer $create_time
@@ -47,12 +46,12 @@ class Post extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('category_id, topic_id, up_score, down_score, comment_nums, state, create_time', 'numerical', 'integerOnly'=>true),
+			array('category_id, up_score, down_score, comment_nums, state, create_time', 'numerical', 'integerOnly'=>true),
 			array('title, tags', 'length', 'max'=>200),
 			array('content', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, category_id, topic_id, title, content, create_time, up_score, down_score, comment_nums, tags, state', 'safe', 'on'=>'search'),
+			array('id, category_id, title, content, create_time, up_score, down_score, comment_nums, tags, state', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,7 +74,6 @@ class Post extends CActiveRecord
 		return array(
 			'id' => 'Id',
 			'category_id' => '分类',
-			'topic_id' => '专题',
 			'title' => '标题',
 			'content' => '内容',
 			'create_time' => '发布时间',
