@@ -22,7 +22,9 @@
 /* sidebar */
 .cd-sidebar {width:300px;}
 .cd-sidebar li {margin:8px 5px 8px 10px;}
-.cd-sidebar .content-block {margin-bottom:10px; background:#E6F0F4; border:1px solid #DCEEF5;}
+.cd-sidebar .content-block {margin-bottom:10px; background:#E6F0F4; border:1px solid #DCEEF5; padding:10px; line-height:24px;}
+.cd-sidebar .content-title {font-size:20px; color:#2ca090; margin-bottom:10px;}
+.cd-sidebar .content-block a {margin-right:5px;}
 .cd-sidebar .cdc-block {margin-bottom:10px; background:#E6F0F4;}
 
 /* container */
@@ -62,7 +64,7 @@
 .tag-level1:link, .tag-level1:visited {font-size:20px;}
 .tag-level2:link, .tag-level2:visited {font-size:28px; color:#F79E1C; font-weight:600;}
 .tag-level2:hover {color:white; background:#F79E1C;}
-.tag-level3:link, .tag-level3:visited {font-size:38px; background:white; color:#91C21C; font-weight:700;}
+.tag-level3:link, .tag-level3:visited {font-size:38px; color:#91C21C; font-weight:700;}
 .tag-level3:hover {color:white; background:#91C21C;}
 
 /* post/show */

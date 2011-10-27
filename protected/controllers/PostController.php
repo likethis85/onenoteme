@@ -190,7 +190,7 @@ class PostController extends Controller
         $count = DPost::model()->count($where, $params);
         $offset = mt_rand(0, abs($count-1));
         $cmd->offset($offset);
-        $model = DPost::model()->find($cmd);
+        $model = DPost::model()->cache(0)->find($cmd);
         
         $this->pageTitle = '鉴定 - 挖段子';
         $this->setKeywords('审核段子,鉴定段子');

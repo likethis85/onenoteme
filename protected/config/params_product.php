@@ -2,7 +2,7 @@
 return array(
 
     'autoLoginDuration' => 3600 * 24 * 7,
-    'postCountOfPage' => 20,
+    'postCountOfPage' => 15,
     'commentCountOfPage' => 20,
     'numsOfSetPostIsShow' => 10,
     'pecentOfSetPostIsShow' => 2.0,

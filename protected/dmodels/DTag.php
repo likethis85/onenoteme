@@ -12,7 +12,7 @@ class DTag extends DModel
 {
     /**
      * Returns the static model of the specified DModel class.
-	 * @return DTopic the static model class
+	 * @return DTag the static model class
      */
     public static function model($class = __CLASS__)
     {

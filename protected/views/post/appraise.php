@@ -1,5 +1,5 @@
 <div class="fl cd-container">
-	<h2>我得这个段子。。。</h2>
+	<h2>我觉得这个段子@#$%^*^%$#</h2>
 	<div class="post-content"><?php echo $model->content ? $model->content : '当前没有需要鉴定的段子';?></div>
 	<?php if ($model):?>
 	<div class="buttons">

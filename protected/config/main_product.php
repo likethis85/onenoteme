@@ -16,6 +16,7 @@ return array(
         'application.components.*',
         'application.apis.*',
         'application.libs.*',
+        'application.components.widgets.*',
     ),
     'preload' => array('log'),
     'components' => array(
@@ -30,9 +31,9 @@ return array(
             'enableParamLogging' => true,
             'enableProfiling' => true,
 		    'schemaCacheID' => 'cache',
-		    'schemaCachingDuration' => 3600,    // metadata 缓存超时时间(s)
+		    'schemaCachingDuration' => 3600 * 24,    // metadata 缓存超时时间(s)
 		    'queryCacheID' => 'cache',
-		    'queryCachingDuration' => 3600,
+		    'queryCachingDuration' => 60,
         ),
         'cache' => array(
             'class' => 'CFileCache',
