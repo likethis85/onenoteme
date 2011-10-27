@@ -62,10 +62,10 @@
 
 /* tag/list */
 .tag-list a {margin:0px 5px;}
-.tag-level1:link, .tag-level1:visited {font-size:20px;}
-.tag-level2:link, .tag-level2:visited {font-size:28px; color:#F79E1C; font-weight:600;}
+.tag-level1:link, .tag-level1:visited {font-size:18px;}
+.tag-level2:link, .tag-level2:visited {font-size:24px; color:#F79E1C; font-weight:600;}
 .tag-level2:hover {color:white; background:#F79E1C;}
-.tag-level3:link, .tag-level3:visited {font-size:38px; color:#91C21C; font-weight:700;}
+.tag-level3:link, .tag-level3:visited {font-size:32px; color:#91C21C; font-weight:700;}
 .tag-level3:hover {color:white; background:#91C21C;}
 
 /* post/show */

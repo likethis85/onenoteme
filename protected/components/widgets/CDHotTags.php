@@ -55,11 +55,8 @@ class CDHotTags extends CWidget
     
     private function fetchHotTags()
     {
-        $cmd = app()->getDb()->createCommand();
-        $count = DTag::model()->count(clone $cmd);
-        $offset = ($count > self::TAG_NUMS) ? mt_rand(0,  $count - self::TAG_NUMS) : 0;
-        $cmd->limit($this->tagsNums)
-            ->offset($offset)
+        $cmd = app()->getDb()->createCommand()
+            ->limit($this->tagsNums)
             ->order('post_nums desc');
         return DTag::model()->findAll($cmd);
     }
