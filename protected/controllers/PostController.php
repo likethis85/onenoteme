@@ -23,7 +23,7 @@ class PostController extends Controller
             if ($model->save()) {
                 $msg = '<span class="cgreen f12px">发布成功，' . CHtml::link('点击查看', $model->url, array('target'=>'_blank')) . '，您还可以继续发布。</span>';
                 user()->setFlash('createPostResult', $msg);
-                user()->setFlash('allowUserView', 1);
+                user()->setFlash('allowUserView', user()->name);
                 $this->redirect(aurl('post/create'));
             }
             else
