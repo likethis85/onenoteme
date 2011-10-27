@@ -22,28 +22,19 @@ class CDHotTags extends CWidget
     public function run()
     {
         $tags = $this->fetchHotTags();
-        foreach ($tags as $tag)
-            $postNums[] = $tag->post_nums;
         
         if (!empty($tags)) {
-            $max = max($postNums);
-            $min = min($postNums);
-            $level2 = (int)(($max - $min) / 2 + $min);
-            $level3 = (int)(($max - $min) / 4 * 3 + $min);
-            
-            $nums = 0;
-            foreach ($tags as $tag) {
-                if ($nums < 2) {
+            foreach ($tags as $key => $tag) {
+                if ($key < 2) {
                     $tag_level = 'tag-level1';
                 }
-                elseif ($nums < 5) {
+                elseif ($key < 5) {
                     $tag_level = 'tag-level2';
                 }
                 else
                     $tag_level = 'tag-level3';
                 
                 $links[] = CHtml::link($tag->name, $tag->getUrl(), array('target'=>'_blank', 'class'=>$tag_level));
-                $nums++;
             }
             shuffle($links);
             $this->html .= implode('', $links);
