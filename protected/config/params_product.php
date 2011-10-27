@@ -10,9 +10,9 @@ return array(
     'pecentOfDeletePost' => 0.5,
 
     'uploadBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'uploads' . DS,
-    'uploadBaseUrl' => 'http://f.onenote.com/',
+    'uploadBaseUrl' => 'http://f.onenote.me/',
     'resourceBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'resources' . DS,
-    'resourceBaseUrl' => 'http://s.onenote.com/',
+    'resourceBaseUrl' => 'http://s.onenote.me/',
 
     /*
      * datetime format

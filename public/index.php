@@ -9,7 +9,7 @@ $short = dirname(__FILE__) . '/../library/shortcut.php';
 require_once($cdc);
 require_once($short);
 
-$config = dirname(__FILE__) . '/../protected/config/main.php';
+$config = dirname(__FILE__) . '/../protected/config/' . (YII_PRODUCT ? 'main_product.php' : 'main_develop.php');
 
 $app = Yii::createWebApplication($config);
 $app->run();

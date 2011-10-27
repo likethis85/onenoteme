@@ -15,21 +15,27 @@
 	<a name="top"></a>
 	<div id="logo" class="fl"><a href="<?php echo app()->homeUrl;?>" title="点击返回首页"><img src="<?php echo sbu('images/logo.png');?>" alt="挖段子LOGO" /></a></div>
 	<div class="site-nav fr">
-    	<ul class="fl">
+		<div class="user-nav ar">
+    		<a href="<?php echo aurl('site/signup');?>">注册</a>
+			<a href="<?php echo aurl('site/login');?>">登录</a>
+		</div>
+    	<ul class="channel-nav">
     		<li><a href="<?php echo aurl('post/latest');?>">最新</a></li>
+    		<li>/</li>
     		<li><a href="<?php echo aurl('post/hour8');?>">最热</a></li>
+    		<li>/</li>
     		<li><a href="<?php echo aurl('post/list', array('cid'=>11));?>">瞅瞅</a></li>
+    		<li>/</li>
     		<li><a href="<?php echo aurl('tag/list');?>">标签</a></li>
+    		<li>/</li>
     		<li><a href="<?php echo aurl('post/appraise');?>">鉴定</a></li>
+    		<li>/</li>
     		<li><a href="<?php echo aurl('post/create');?>">加料</a></li>
+    		<div class="clear"></div>
     	</ul>
-    	<ul class="fr">
-    		<li><a href="<?php echo aurl('site/login');?>">登录</a></li>
-    		<li><a href="<?php echo aurl('site/signup');?>">注册</a></li>
-    	</ul>
-    	<div class="clear"></div>
 	</div>
 	<div class="clear"></div>
+	<div class="bgline"></div>
 </div>
 <div class="cd-wrapper cd-mainwrapper">
 	<?php echo $content;?>

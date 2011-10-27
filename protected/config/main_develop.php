@@ -1,9 +1,8 @@
 <?php
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
+$params = require(dirname(__FILE__) . DS . 'params_develop.php');
 
-$params = require(dirname(__FILE__) . DS . YII_DEBUG ? 'params_develop.php' : 'params.php');
-
-$config = array(
+return array(
     'basePath' => dirname(__FILE__) . DS . '..',
     'id' => 'onenote.me',
     'name' => '挖段子',
@@ -22,9 +21,9 @@ $config = array(
     'components' => array(
         'db' => array(
             'class' => 'CDbConnection',
-			'connectionString' => 'mysql:host=localhost; port=3306; dbname=cd_onenote',
+			'connectionString' => 'mysql:host=127.0.0.1; port=3306; dbname=cd_onenote',
 			'username' => 'root',
-		    'password' => 'cdc_790406',
+		    'password' => '123',
 		    'charset' => 'utf8',
 		    'persistent' => true,
 		    'tablePrefix' => 'cd_',
@@ -70,6 +69,5 @@ $config = array(
     'params' => $params,
 );
 
-$debugConfig = require(dirname(__FILE__) . DS . 'main_debug.php');
-return YII_PRODUCT ? $config : array_merge($config, $debugConfig);
 
+    

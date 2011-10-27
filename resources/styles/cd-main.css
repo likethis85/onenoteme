@@ -7,10 +7,14 @@
 
 /* header */
 .cd-header {margin-top:5px; margin-bottom:20px;}
-.cd-header .site-nav {width:800px; background:#E9F4E9;}
-.cd-header .site-nav li {float:left; height:36px; line-height:36px;}
-.cd-header .site-nav ul.fl li {margin-left:30px;}
-.cd-header .site-nav ul.fr li {margin-right:15px;}
+.cd-header .site-nav {}
+.cd-header .site-nav .user-nav {margin-bottom:30px;}
+.user-nav a:link, .user-nav a:visited {margin-left:10px; color:gray;}
+.user-nav a:hover {color:white;}
+.channel-nav li {float:left; margin-left:20px; font-size:22px; color:lightgray; height:48px; line-height:28px; margin-bottom:-10px;}
+.channel-nav li a:link, .channel-nav li a:visited {color:#008c78; height:48px; line-height:28px; font-size:28px; font-family:"微软雅黑"; display:block;}
+.channel-nav li a:hover {background:url(../images/sanjiao.png) no-repeat 22px bottom;}
+.cd-header .bgline {background:#daf2ef; height:9px; font-size:0px; overflow:hidden; border-bottom:2px solid #008c78;}
 
 /* footer */
 .cdc-bottom-banner {background:#EFEFEF; padding:15px 0px;}
@@ -27,6 +31,7 @@
 
 
 /* create */
+.create-form {margin-top:5px;}
 .create-form textarea {width:630px; height:180px; font-size:14px; line-height:24px;}
 .create-form li {margin-bottom:10px;}
 .create-form .txt {width:300px; height:20px; line-height:20px;}
@@ -35,14 +40,16 @@
 /* post/list */
 .subnav-links {background:#E9F4E9; height:30px; margin-bottom:15px;}
 .subnav-links li {float:left; height:30px; line-height:30px; margin-left:20px;}
-.post-list .post-item {line-height:24px; width:100%; border-bottom:1px dashed #D8D8D8; margin-bottom:8px;}
+.post-list .post-item {line-height:24px; width:100%; border-bottom:1px solid #D8D8D8; margin-bottom:15px;}
 .item-toolbar {margin:5px 5px 5px 5px; color:gray;}
-.item-toolbar .upscore, .item-toolbar .downscore {width:50px; padding-left:20px; cursor:pointer; margin-right:10px;}
+.item-toolbar .upscore, .item-toolbar .downscore {width:50px; padding-left:20px; cursor:pointer; margin-right:10px; color:#969696;}
 .item-toolbar .upscore {background:url(../images/up.gif) no-repeat 0px 5px;}
 .item-toolbar .downscore {background:url(../images/down.gif) no-repeat 0px 5px;}
+.item-toolbar .comment-nums a:link, .item-toolbar .comment-nums a:visited {color:#969696;}
+.item-toolbar .comment-nums a:hover {color:white;}
 
 /* post/appraise */
-.post-content {background:#E8E7E3; line-height:24px; padding:20px; min-height:200px; margin-bottom:20px;}
+.post-content {background:#E8E7E3; line-height:24px; padding:20px; min-height:200px; margin-bottom:20px; margin-top:5px;}
 .buttons {margin-bottom:30px; text-align:center;}
 .buttons a {display:block; float:left; width:180px; height:40px; line-height:40px; margin-left:20px; border:none; color:#FFF; font-size:14px; cursor:pointer;}
 .buttons a:hover {text-decoration:underline;}
