@@ -13,7 +13,7 @@
 <body>
 <div class="cd-wrapper cd-header">
 	<a name="top"></a>
-	<div id="logo" class="fl"><a href="<?php echo app()->homeUrl;?>"><img src="http://img3.douban.com/pics/nav/lg_main_a7.png" /></a></div>
+	<div id="logo" class="fl"><a href="<?php echo app()->homeUrl;?>" title="点击返回首页"><img src="<?php echo sbu('images/logo.png');?>" alt="挖段子LOGO" /></a></div>
 	<div class="site-nav fr">
     	<ul class="fl">
     		<li><a href="<?php echo aurl('post/latest');?>">最新</a></li>
@@ -37,7 +37,7 @@
 </div>
 
 <div class="cd-wrapper cd-footer">
-	<p class="fl">内容版权所有 ©2005-2011 qiushibaike.com  苏ICP备11024271号-2</p><p class="fr">快乐就是要建立在别人的痛苦之上TOP</p>
+	<p class="fl">内容版权所有 ©2011 <a href="">onenote.me</a>  鲁ICP备11024271号-2</p><p class="fr">快乐就是要建立在别人的痛苦之上TOP</p>
 </div>
 
 <?php $this->renderPartial('/public/tongji');?>

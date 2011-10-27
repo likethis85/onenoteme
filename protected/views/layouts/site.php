@@ -13,7 +13,7 @@
 <body>
 <div class="cd-wrapper cd-header">
 	<a name="top"></a>
-	<div id="logo" class="fl"><a href="<?php echo app()->homeUrl;?>"><img src="http://img3.douban.com/pics/nav/lg_main_a7.png" /></a></div>
+	<div id="logo" class="fl"><a href="<?php echo app()->homeUrl;?>" title="点击返回首页"><img src="<?php echo sbu('images/logo.png');?>" alt="挖段子LOGO" /></a></div>
 	<div class="site-nav fr">
     	<ul class="fl">
     		<li><a href="<?php echo aurl('post/latest');?>">最新</a></li>
