@@ -26,13 +26,13 @@ class CDHotTags extends CWidget
         if (!empty($tags)) {
             foreach ($tags as $key => $tag) {
                 if ($key < 2) {
-                    $tag_level = 'tag-level1';
+                    $tag_level = 'tag-level3';
                 }
                 elseif ($key < 5) {
                     $tag_level = 'tag-level2';
                 }
                 else
-                    $tag_level = 'tag-level3';
+                    $tag_level = 'tag-level1';
                 
                 $links[] = CHtml::link($tag->name, $tag->getUrl(), array('target'=>'_blank', 'class'=>$tag_level));
             }
