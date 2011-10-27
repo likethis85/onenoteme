@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-.cd-wrapper {width:960px; margin:0px auto; overflow:hidden;}
+.cd-wrapper {width:950px; margin:0px auto; overflow:hidden;}
 .cd-mainwrapper {background:white; border-radius:5px; overflow-y:visible;}
 .cd-footer {margin-top:20px; margin-bottom:10px;}
 .breadcrumbs {text-indent:10px; line-height:24px; height:24px; margin-bottom:10px;}
@@ -28,7 +28,7 @@
 .cd-sidebar .hot-tags a {line-height:26px;}
 
 /* container */
-.cd-container {width:640px;}
+.cd-container {width:630px;}
 .cd-catption {color:#060; padding:0px 0px 12px 0px; line-height:150%; font-size:18px;}
 
 
