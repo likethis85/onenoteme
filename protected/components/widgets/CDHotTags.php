@@ -22,7 +22,6 @@ class CDHotTags extends CWidget
     public function run()
     {
         $tags = $this->fetchHotTags();
-        shuffle($tags);
         foreach ($tags as $tag)
             $postNums[] = $tag->post_nums;
         
@@ -32,19 +31,22 @@ class CDHotTags extends CWidget
             $level2 = (int)(($max - $min) / 2 + $min);
             $level3 = (int)(($max - $min) / 4 * 3 + $min);
             
+            $nums = 0;
             foreach ($tags as $tag) {
-                $nums = $tag->post_nums;
-                if ($nums >= $min && $nums < $level2) {
+                if ($nums < 2) {
                     $tag_level = 'tag-level1';
                 }
-                elseif ($nums >= $level2 && $nums < $level3) {
+                elseif ($nums < 5) {
                     $tag_level = 'tag-level2';
                 }
-                elseif ($nums >= $level3 && $nums <= $max) {
+                else
                     $tag_level = 'tag-level3';
-                }
-                $this->html .= CHtml::link($tag->name, $tag->getUrl(), array('target'=>'_blank', 'class'=>$tag_level));
+                
+                $links[] = CHtml::link($tag->name, $tag->getUrl(), array('target'=>'_blank', 'class'=>$tag_level));
+                $nums++;
             }
+            shuffle($links);
+            $this->html .= implode('', $links);
         }
         
         $this->html .= '</div>';
