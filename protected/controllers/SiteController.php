@@ -1,11 +1,6 @@
 <?php
 class SiteController extends Controller
 {
-    public function init()
-    {
-        $this->layout = 'site';
-    }
-    
     public function actions()
     {
         return array(
