@@ -1,8 +1,10 @@
 <?php
 class CDHotTags extends CWidget
 {
+    const TAG_NUMS = 20;
+    
     public $title = null;
-    public $tagsNums = 20;
+    public $tagsNums = self::TAG_NUMS;
     public $className;
     public $html;
 
@@ -14,7 +16,7 @@ class CDHotTags extends CWidget
             $this->html .= '<h2 class="content-title">' . $this->title . '</h2>';
             
         if (empty($this->tagsNums))
-            $this->tagsNums = 20;
+            $this->tagsNums = self::TAG_NUMS;
     }
     
     public function run()
@@ -51,8 +53,8 @@ class CDHotTags extends CWidget
     private function fetchHotTags()
     {
         $cmd = app()->getDb()->createCommand();
-        $count = DTag::model()->count($cmd);
-        $offset = mt_rand(0, $count - 1);
+        $count = DTag::model()->count(clone $cmd);
+        $offset = ($count > self::TAG_NUMS) ? mt_rand(0,  $count - 20) : 0;
         $cmd->limit($this->tagsNums)
             ->offset($offset)
             ->order('id asc');
