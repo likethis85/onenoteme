@@ -30,7 +30,7 @@ class PostController extends Controller
                 user()->setFlash('createPostResult', '<span class="cred f12px">发布出错，查看下面详细错误信息。</span>');
         }
         
-        $this->pageTitle = '发段子 - 挖吧段子';
+        $this->pageTitle = '发段子 - 挖段子';
         $this->setKeywords('发布段子,发布经典语录,发布糗事,发布秘密,发布笑话');
         $this->setDescription('发布段子,发布经典语录,发布糗事,发布秘密,发布笑话');
         
