@@ -7,12 +7,11 @@
 
 /* header */
 .cd-header {margin-top:5px; margin-bottom:20px;}
-.cd-header .site-nav {}
 .cd-header .site-nav .user-nav {margin-bottom:30px;}
 .user-nav a:link, .user-nav a:visited {margin-left:10px; color:gray;}
 .user-nav a:hover {color:white;}
 .channel-nav li {float:left; margin-left:20px; font-size:22px; color:lightgray; height:48px; line-height:28px; margin-bottom:-10px;}
-.channel-nav li a:link, .channel-nav li a:visited {color:#008c78; height:48px; line-height:28px; font-size:28px; font-family:"微软雅黑"; display:block;}
+.channel-nav li a:link, .channel-nav li a:visited {color:#008c78; height:48px; line-height:28px; font-size:26px; font-family:"微软雅黑"; display:block;}
 .channel-nav li a:hover {background:url(../images/sanjiao.png) no-repeat 22px bottom;}
 .cd-header .bgline {background:#daf2ef; height:9px; font-size:0px; overflow:hidden; border-bottom:2px solid #008c78;}
 
@@ -26,7 +25,7 @@
 .cd-sidebar .content-title {font-size:22px; color:#2ca090; margin-bottom:10px;}
 .cd-sidebar .content-block a {margin-right:5px;}
 .cd-sidebar .cdc-block {margin-bottom:10px; background:#E6F0F4;}
-.cd-sidebar .hot-tags {line-height:38px;}
+.cd-sidebar .hot-tags a {line-height:26px;}
 
 /* container */
 .cd-container {width:660px;}
@@ -62,10 +61,10 @@
 
 /* tag/list */
 .tag-list a {margin:0px 5px;}
-.tag-level1:link, .tag-level1:visited {font-size:18px;}
-.tag-level2:link, .tag-level2:visited {font-size:24px; color:#F79E1C; font-weight:600;}
+.tag-level1:link, .tag-level1:visited {font-size:16px;}
+.tag-level2:link, .tag-level2:visited {font-size:20px; color:#F79E1C; font-weight:600;}
 .tag-level2:hover {color:white; background:#F79E1C;}
-.tag-level3:link, .tag-level3:visited {font-size:32px; color:#91C21C; font-weight:700;}
+.tag-level3:link, .tag-level3:visited {font-size:26px; color:#91C21C; font-weight:700;}
 .tag-level3:hover {color:white; background:#91C21C;}
 
 /* post/show */
