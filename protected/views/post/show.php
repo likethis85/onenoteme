@@ -36,17 +36,7 @@
         </script>
         <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 	</div>
-	<div class="content-block">
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-	</div>
+	<?php $this->widget('CDHotTags', array('title'=>'热门标签'));?>
 </div>
 
 

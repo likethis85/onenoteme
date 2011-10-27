@@ -13,16 +13,9 @@
 
 <div class="fr cd-sidebar">
 	<div class="content-block">
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
+		段子鉴定说明
 	</div>
+	<?php $this->widget('CDHotTags', array('title'=>'热门标签'));?>
 </div>
 
 <span id="jqvar" scoreurl="<?php echo aurl('post/vote');?>" class="hide"></span>

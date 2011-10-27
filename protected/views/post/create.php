@@ -29,14 +29,6 @@
 
 <div class="fr cd-sidebar">
 	<div class="content-block">
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
+		段子发表说明
 	</div>
 </div>

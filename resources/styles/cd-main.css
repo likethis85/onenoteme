@@ -22,10 +22,11 @@
 /* sidebar */
 .cd-sidebar {width:300px;}
 .cd-sidebar li {margin:8px 5px 8px 10px;}
-.cd-sidebar .content-block {margin-bottom:10px; background:#E6F0F4; border:1px solid #DCEEF5; padding:10px; line-height:38px;}
-.cd-sidebar .content-title {font-size:20px; color:#2ca090; margin-bottom:10px;}
+.cd-sidebar .content-block {margin-bottom:10px; background:#E6F0F4; border:1px solid #DCEEF5; padding:10px; line-height:24px;}
+.cd-sidebar .content-title {font-size:22px; color:#2ca090; margin-bottom:10px;}
 .cd-sidebar .content-block a {margin-right:5px;}
 .cd-sidebar .cdc-block {margin-bottom:10px; background:#E6F0F4;}
+.cd-sidebar .hot-tags {line-height:38px;}
 
 /* container */
 .cd-container {width:660px;}
@@ -79,3 +80,4 @@
 .comment-list li span {display:block; float:left; margin-left:15px; height:22px; line-height:22px;}
 .comment-list li img {height:20px;}
 .comment-list .comment-content {color:gray;}
+

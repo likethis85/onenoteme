@@ -10,7 +10,7 @@ class CDHotTags extends CWidget
 
     public function init()
     {
-        $this->className = empty($this->className) ? 'content-block' : 'content-block ' . $this->className;
+        $this->className = empty($this->className) ? 'content-block hot-tags' : 'content-block hot-tags ' . $this->className;
         $this->html = '<div class="' . $this->className . '">';
         if (!empty($this->title))
             $this->html .= '<h2 class="content-title">' . $this->title . '</h2>';
@@ -22,6 +22,7 @@ class CDHotTags extends CWidget
     public function run()
     {
         $tags = $this->fetchHotTags();
+        shuffle($tags);
         foreach ($tags as $tag)
             $postNums[] = $tag->post_nums;
         
@@ -54,10 +55,10 @@ class CDHotTags extends CWidget
     {
         $cmd = app()->getDb()->createCommand();
         $count = DTag::model()->count(clone $cmd);
-        $offset = ($count > self::TAG_NUMS) ? mt_rand(0,  $count - 20) : 0;
+        $offset = ($count > self::TAG_NUMS) ? mt_rand(0,  $count - self::TAG_NUMS) : 0;
         $cmd->limit($this->tagsNums)
             ->offset($offset)
-            ->order('id asc');
+            ->order('post_nums desc');
         return DTag::model()->findAll($cmd);
     }
 }

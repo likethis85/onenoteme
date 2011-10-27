@@ -8,15 +8,5 @@
 </div>
 
 <div class="fr cd-sidebar">
-	<div class="content-block">
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-		这是一个内容块<br />
-	</div>
+	<?php $this->widget('CDHotTags', array('title'=>'热门标签'));?>
 </div>
