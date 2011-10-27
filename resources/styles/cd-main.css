@@ -38,6 +38,7 @@
 .create-form li {margin-bottom:10px;}
 .create-form .txt {width:300px; height:20px; line-height:20px;}
 .create-form .button {padding:5px 10px;}
+.create-form .captcha {width:40px; font-weight:bold; padding-left:10px; margin-right:5px;}
 
 /* post/list */
 .subnav-links {background:#E9F4E9; height:30px; margin-bottom:15px;}
@@ -80,3 +81,6 @@
 .comment-list li img {height:20px;}
 .comment-list .comment-content {color:gray;}
 
+.errorSummary {border:1px solid #FF0000; padding:10px; color:gray;}
+.errorSummary p {font-weight:bold;}
+.errorSummary ul, .errorSummary ul li {margin-left:20px; list-style-type:disc;}

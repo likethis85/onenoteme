@@ -21,6 +21,8 @@ class Post extends CActiveRecord
     const STATE_ENABLED = 1;
     const STATE_TOP = 2;
     
+    public $captcha;
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Post the static model class
@@ -46,12 +48,14 @@ class Post extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+		    array('content', 'required', 'message'=>'段子内容必须填写'),
 			array('category_id, up_score, down_score, comment_nums, state, create_time', 'numerical', 'integerOnly'=>true),
 			array('title, tags', 'length', 'max'=>200),
 			array('content', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, category_id, title, content, create_time, up_score, down_score, comment_nums, tags, state', 'safe', 'on'=>'search'),
+			array('captcha', 'captcha'),
 		);
 	}
 

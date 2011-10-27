@@ -4,12 +4,21 @@
     <ul class="create-form">
     	<li><?php echo CHtml::activeTextArea($model, 'content');?></li>
         <li>
-            <label>标签：</label>
+            <label>标　签：</label>
             <?php echo CHtml::activeTextField($model, 'tags', array('class'=>'txt'));?>
             <span class="cgray f12px">（每个糗事最多5个标签，用空格分隔）</span>
         </li>
         <li>
-            <?php echo CHtml::submitButton('马上发布', array('class'=>'button'));?>
+            <label>验证码：</label>
+            <?php echo CHtml::activeTextField($model, 'captcha', array('class'=>'txt captcha'));?>
+            <?php $this->widget('CCaptcha', array(
+            	'buttonLabel' => '看不清，换一张',
+            	'clickableImage' => true,
+                'imageOptions' => array('alt'=>'验证码', 'align'=>'top'),
+            ));?>
+        </li>
+        <li>
+            <?php echo CHtml::submitButton('马上发布', array('class'=>'button'));?>&nbsp;&nbsp;
             <?php if (user()->hasFlash('createPostResult')) echo user()->getFlash('createPostResult');?>
         </li>
     </ul>
