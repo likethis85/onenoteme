@@ -1,7 +1,7 @@
 <?php
 class CDHotTags extends CWidget
 {
-    const TAG_NUMS = 20;
+    const TAG_NUMS = 40;
     
     public $title = null;
     public $tagsNums = self::TAG_NUMS;
