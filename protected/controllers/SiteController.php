@@ -33,6 +33,9 @@ class SiteController extends Controller
                 $this->redirect($returnUrl);
             }
         }
+        $this->pageTitle = '登录' . app()->name;
+        $this->setKeywords($this->pageTitle);
+        $this->setDescription('登录' . app()->name . '后，可以发表评论、投稿及审核段子。');
         $this->render('login', array('model'=>$model));
     }
     
@@ -43,7 +46,7 @@ class SiteController extends Controller
         else {
             user()->logout();
             $returnUrl = request()->getUrlReferrer() ? request()->getUrlReferrer() : user()->returnUrl;
-            $this->redirect($returnUrl); 
+            $this->redirect($returnUrl);
         }
     }
     
@@ -57,9 +60,12 @@ class SiteController extends Controller
         if (request()->getIsPostRequest() && isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
             $model->state = param('userIsRequireEmailVerify') ? User::STATE_DISABLED : User::STATE_ENABLED;
-            if ($model->save()) 
+            if ($model->save())
                 $this->redirect(user()->loginUrl);
         }
+        $this->pageTitle = '注册成为' . app()->name . '会员';
+        $this->setKeywords($this->pageTitle);
+        $this->setDescription('注册成为' . app()->name . '会员后，可以发表评论、投稿及审核段子。');
         $this->render('signup', array('model'=>$model));
     }
     
