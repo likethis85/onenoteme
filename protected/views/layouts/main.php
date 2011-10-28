@@ -43,6 +43,7 @@
 
 <div class="cd-wrapper cd-footer">
 	<p class="fl">内容版权所有 ©2011 <a href="">onenote.me</a>  鲁ICP备11024271号-2</p><p class="fr">快乐就是要建立在别人的痛苦之上TOP</p>
+	<div class="clear"></div>
 </div>
 
 <?php $this->renderPartial('/public/tongji');?>
