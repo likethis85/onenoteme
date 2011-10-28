@@ -7,7 +7,7 @@
 
 /* header */
 .cd-header {margin-top:5px; margin-bottom:20px;}
-.cd-header .site-nav .user-nav {margin-bottom:30px;}
+.cd-header .site-nav .user-nav {margin-bottom:20px;}
 .user-nav a:link, .user-nav a:visited {margin-left:10px; color:gray;}
 .user-nav a:hover {color:white;}
 .channel-nav li {float:left; margin-left:20px; font-size:22px; color:lightgray; height:48px; line-height:28px; margin-bottom:-10px;}
