@@ -16,8 +16,7 @@
 	<div id="logo" class="fl"><a href="<?php echo app()->homeUrl;?>" title="点击返回首页"><img src="<?php echo sbu('images/logo.png');?>" alt="挖段子LOGO" /></a></div>
 	<div class="site-nav fr">
 		<div class="user-nav ar">
-    		<a href="<?php echo aurl('site/signup');?>">注册</a>
-			<a href="<?php echo aurl('site/login');?>">登录</a>
+    		<?php $this->renderDynamic('userToolbar');?>
 		</div>
     	<ul class="channel-nav">
     		<li><a href="<?php echo aurl('post/latest');?>">最新</a></li>

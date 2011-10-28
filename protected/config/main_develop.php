@@ -20,6 +20,20 @@ return array(
     ),
     'preload' => array('log'),
     'components' => array(
+        'log' => array(
+            'class'=>'CLogRouter',
+            'routes'=>array(
+                array(
+                    'class'=>'CFileLogRoute',
+                    'categories'=>'system.db.*',
+                ),
+                array(
+                    'class'=>'CWebLogRoute',
+                    'levels'=>'trace,info,error,notic',
+                    'categories'=>'system.db.*',
+                ),
+            ),
+        ),
         'db' => array(
             'class' => 'CDbConnection',
 			'connectionString' => 'mysql:host=127.0.0.1; port=3306; dbname=cd_onenote',
@@ -63,7 +77,7 @@ return array(
         ),
         'user' => array(
             'allowAutoLogin' => true,
-            'loginUrl' => 'site/login',
+            'loginUrl' => array('site/login'),
         ),
     ),
     

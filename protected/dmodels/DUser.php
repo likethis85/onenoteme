@@ -16,6 +16,8 @@ class DUser extends DModel
 {
     const STATE_DISABLED = 0;
     const STATE_ENABLED = 1;
+    const STATE_EDITOR = 150;
+    const STATE_ADMIN = 199;
     
     /**
      * Returns the static model of the specified DModel class.

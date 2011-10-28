@@ -12,7 +12,7 @@ class CdCaptchaAction extends CCaptchaAction
         $length = rand($this->minLength, $this->maxLength);
         $letters = '0123456789';
         for ($i = 0; $i < $length; ++ $i) {
-            $code .= $letters[rand(0, 9)];
+            $code .= $letters[mt_rand(0, 9)];
         }
         return $code;
     }

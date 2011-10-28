@@ -14,6 +14,13 @@
  */
 class User extends CActiveRecord
 {
+    const STATE_DISABLED = 0;
+    const STATE_ENABLED = 1;
+    const STATE_EDITOR = 150;
+    const STATE_ADMIN = 199;
+    
+    public $captcha;
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return User the static model class
@@ -39,10 +46,16 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('captcha', 'captcha', 'captchaAction'=>'bigCaptcha', 'on'=>'insert', 'message'=>'验证码不正确哦，仔细瞅瞅'),
+		    array('email', 'required', 'message'=>'邮箱 必须要填写'),
+		    array('name', 'required', 'message'=>'名字 必须要填写'),
+		    array('password', 'required', 'message'=>'密码 必须要填写'),
+		    array('email, name', 'unique'),
+		    array('email', 'email', 'message'=>'请输入一个有效的email作为账号'),
 			array('create_time, state', 'numerical', 'integerOnly'=>true),
 			array('email', 'length', 'max'=>100),
-			array('name', 'length', 'max'=>50),
-			array('password', 'length', 'is'=>32),
+			array('name', 'length', 'min'=>3, 'max'=>50),
+			array('password', 'length', 'min'=>3, 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -67,14 +80,26 @@ class User extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Id',
-			'email' => 'Email',
-			'name' => 'Name',
-			'password' => 'Password',
-			'create_time' => 'Create Time',
-			'create_ip' => 'Create Ip',
-			'state' => 'State',
+			'id' => 'ID',
+			'email' => '邮箱',
+			'name' => '名字',
+			'password' => '密码',
+			'create_time' => '注册时间',
+			'create_ip' => '注册IP',
+			'state' => '状态',
+		    'captcha' => '验证码',
 		);
+	}
+	
+	protected function beforeSave()
+	{
+	    if ($this->getIsNewRecord()) {
+	        $this->password = md5($this->password);
+	        $this->create_time = $_SERVER['REQUEST_TIME'];
+	        $this->create_ip = request()->getUserHostAddress();
+	    }
+	    
+	    return true;
 	}
 
 	/**

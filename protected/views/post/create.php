@@ -1,16 +1,16 @@
 <div class="fl cd-container">
     <h2>有好段子？一块分享下吧。</h2>
-    <?php echo CHtml::form('', 'POST');?>
-    <ul class="create-form">
-    	<li><?php echo CHtml::activeTextArea($model, 'content');?></li>
+    <?php echo CHtml::form('', 'POST', array('class'=>'create-form post-form'));?>
+    <ul>
+    	<li><?php echo CHtml::activeTextArea($model, 'content', array('tabindex'=>1));?></li>
         <li>
             <label>标　签：</label>
-            <?php echo CHtml::activeTextField($model, 'tags', array('class'=>'txt'));?>
+            <?php echo CHtml::activeTextField($model, 'tags', array('class'=>'txt', 'tabindex'=>5));?>
             <span class="cgray f12px">（每个糗事最多5个标签，用空格分隔）</span>
         </li>
         <li>
             <label>验证码：</label>
-            <?php echo CHtml::activeTextField($model, 'captcha', array('class'=>'txt captcha'));?>
+            <?php echo CHtml::activeTextField($model, 'captcha', array('class'=>'txt captcha', 'tabindex'=>10));?>
             <?php $this->widget('CCaptcha', array(
             	'buttonLabel' => '看不清，换一张',
             	'clickableImage' => true,
@@ -18,7 +18,7 @@
             ));?>
         </li>
         <li>
-            <?php echo CHtml::submitButton('马上发布', array('class'=>'button'));?>&nbsp;&nbsp;
+            <?php echo CHtml::submitButton('马上发布', array('class'=>'button', 'tabindex'=>15));?>&nbsp;&nbsp;
             <?php if (user()->hasFlash('createPostResult')) echo user()->getFlash('createPostResult');?>
         </li>
     </ul>

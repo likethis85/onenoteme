@@ -55,7 +55,7 @@ class Post extends CActiveRecord
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, category_id, title, content, create_time, up_score, down_score, comment_nums, tags, state', 'safe', 'on'=>'search'),
-			array('captcha', 'captcha'),
+			array('captcha', 'captcha', 'captchaAction'=>'captcha', 'on'=>'insert'),
 		);
 	}
 
@@ -99,7 +99,6 @@ class Post extends CActiveRecord
 	        $this->create_time = $_SERVER['REQUEST_TIME'];
 	        $this->title = mb_substr($this->content, 0, 20, app()->charset);
 	        $this->comment_nums = 0;
-	        $this->state = Post::STATE_DISABLED;
             $this->tags = DTag::filterTags($this->tags);
 	    }
 	    return true;

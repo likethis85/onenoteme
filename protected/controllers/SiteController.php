@@ -3,11 +3,11 @@ class SiteController extends Controller
 {
     public function actions()
     {
-        return array(
+        return array_merge(parent::actions(), array(
             'page' => array(
                 'class' => 'CViewAction',
             ),
-        );
+        ));
     }
     
     public function actionIndex()
@@ -20,18 +20,47 @@ class SiteController extends Controller
     
     public function actionLogin()
     {
+        if (!user()->isGuest) {
+            $this->redirect(user()->returnUrl);
+        }
         
-        $this->render('login');
+        $model = new LoginForm();
+        if (request()->getIsPostRequest() && isset($_POST['LoginForm'])) {
+            $model->attributes = $_POST['LoginForm'];
+            if ($model->validate()) {
+                $model->login();
+                $returnUrl = request()->getUrlReferrer() ? request()->getUrlReferrer() : user()->returnUrl;
+                $this->redirect($returnUrl);
+            }
+        }
+        $this->render('login', array('model'=>$model));
     }
     
     public function actionLogout()
     {
-        
+        if (user()->getIsGuest())
+            $this->redirect(user()->returnUrl);
+        else {
+            user()->logout();
+            $returnUrl = request()->getUrlReferrer() ? request()->getUrlReferrer() : user()->returnUrl;
+            $this->redirect($returnUrl); 
+        }
     }
     
     public function actionSignup()
     {
-        $this->render('signup');
+        if (!user()->isGuest) {
+            $this->redirect(user()->returnUrl);
+        }
+        
+        $model = new User();
+        if (request()->getIsPostRequest() && isset($_POST['User'])) {
+            $model->attributes = $_POST['User'];
+            $model->state = param('userIsRequireEmailVerify') ? User::STATE_DISABLED : User::STATE_ENABLED;
+            if ($model->save()) 
+                $this->redirect(user()->loginUrl);
+        }
+        $this->render('signup', array('model'=>$model));
     }
     
     public function actionTest()
@@ -40,6 +69,5 @@ class SiteController extends Controller
         $dependency = new CDbCacheDependency('SELECT MAX(id) FROM {{post}}');
         Post::model()->cache(1000, $dependency)->findAll();
         
-        var_dump($result);
     }
 }

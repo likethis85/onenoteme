@@ -18,7 +18,6 @@ return array(
         'application.libs.*',
         'application.components.widgets.*',
     ),
-    'preload' => array('log'),
     'components' => array(
         'db' => array(
             'class' => 'CDbConnection',

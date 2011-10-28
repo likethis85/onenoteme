@@ -9,6 +9,8 @@ return array(
     'numsOfDeletePost' => 10,
     'pecentOfDeletePost' => 0.5,
 
+    'userIsRequireEmailVerify' => false,
+
     'uploadBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'uploads' . DS,
     'uploadBaseUrl' => 'http://f.onenote.me/',
     'resourceBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'resources' . DS,
