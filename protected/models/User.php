@@ -54,7 +54,7 @@ class User extends CActiveRecord
 		    array('email', 'email', 'message'=>'请输入一个有效的email作为账号'),
 			array('create_time, state', 'numerical', 'integerOnly'=>true),
 			array('email', 'length', 'max'=>100),
-			array('name', 'length', 'min'=>3, 'max'=>50),
+			array('name', 'length', 'min'=>2, 'max'=>50),
 			array('password', 'length', 'min'=>3, 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
 			// The following rule is used by search().
