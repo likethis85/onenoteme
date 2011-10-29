@@ -43,7 +43,7 @@ class PostController extends Controller
         $where = 'state != :state';
         $params = array(':state' => DPost::STATE_DISABLED);
         $cmd = app()->db->createCommand()
-            ->order('id desc')
+            ->order('create_time desc, id desc')
             ->limit($limit)
             ->where($where, $params);
             
@@ -152,7 +152,7 @@ class PostController extends Controller
         $where = 'state != :state and category_id = :cid';
         $params = array(':state'=>DPost::STATE_DISABLED, ':cid'=>$cid);
         $cmd = app()->db->createCommand()
-            ->order('id desc')
+            ->order('create_time desc, id desc')
             ->limit($limit)
             ->where($where, $params);
             
@@ -226,6 +226,8 @@ class PostController extends Controller
         $attributes = array($column);
         if ($model->getCanShow()) {
             $model->state = DPost::STATE_ENABLED;
+            $model->create_time = $_SERVER['REQUEST_TIME'];
+            $attributes[] = 'create_time';
             $attributes[] = 'state';
         }
         
