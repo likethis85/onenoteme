@@ -1,6 +1,8 @@
 <?php
 class Controller extends CController
 {
+    public $channel = 'latest';
+    
     public function actions()
 	{
 		return array(

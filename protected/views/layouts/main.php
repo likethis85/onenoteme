@@ -19,17 +19,17 @@
     		<?php $this->renderDynamic('userToolbar');?>
 		</div>
     	<ul class="channel-nav">
-    		<li><a href="<?php echo aurl('post/latest');?>">最新</a></li>
+    		<li <?php echo ($this->channel == 'latest') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/latest');?>">最新</a></li>
     		<li>/</li>
-    		<li><a href="<?php echo aurl('post/day');?>">最热</a></li>
+    		<li <?php echo ($this->channel == 'hottop') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/day');?>">最热</a></li>
     		<li>/</li>
-    		<li><a href="<?php echo aurl('post/list', array('cid'=>11));?>">瞅瞅</a></li>
+    		<li <?php echo ($this->channel == 'chouchou') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/list', array('cid'=>11));?>">瞅瞅</a></li>
     		<li>/</li>
-    		<li><a href="<?php echo aurl('tag/list');?>">标签</a></li>
+    		<li <?php echo ($this->channel == 'tag') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('tag/list');?>">标签</a></li>
     		<li>/</li>
-    		<li><a href="<?php echo aurl('post/appraise');?>">鉴定</a></li>
+    		<li <?php echo ($this->channel == 'appraise') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/appraise');?>">鉴定</a></li>
     		<li>/</li>
-    		<li><a href="<?php echo aurl('post/create');?>">加料</a></li>
+    		<li <?php echo ($this->channel == 'create') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/create');?>">加料</a></li>
     		<div class="clear"></div>
     	</ul>
 	</div>

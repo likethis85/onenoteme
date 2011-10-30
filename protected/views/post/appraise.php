@@ -1,5 +1,5 @@
+<h2>我觉得这个段子@#$%^*^%$#</h2>
 <div class="fl cd-container">
-	<h2>我觉得这个段子@#$%^*^%$#</h2>
 	<div class="post-content"><?php echo $model->content ? $model->content : '当前没有需要鉴定的段子';?></div>
 	<?php if ($model):?>
 	<div class="buttons">
@@ -13,9 +13,12 @@
 
 <div class="fr cd-sidebar">
 	<div class="content-block">
-		段子鉴定说明
+		<h2 class="content-title">审核标准</h2>
+		<ul class="site-notice">
+			<li>允许通过的帖子：好笑、幽默、看了让人有所思考、经典名句、至理名言。</li>
+			<li>不允许通过的帖子：云里雾里，让人看了不知所云、链接广告、老贴重发、低谷、色情、恶心、违法内容、不好笑或不经典、垃圾内容。</li>
+		</ul>
 	</div>
-	<?php $this->widget('CDHotTags', array('title'=>'热门标签'));?>
 </div>
 
 <span id="jqvar" scoreurl="<?php echo aurl('post/vote');?>" class="hide"></span>

@@ -1,5 +1,5 @@
+<h2>有好段子？一块分享下吧。</h2>
 <div class="fl cd-container">
-    <h2>有好段子？一块分享下吧。</h2>
     <?php echo CHtml::form('', 'POST', array('class'=>'create-form post-form'));?>
     <ul>
     	<li><?php echo CHtml::activeTextArea($model, 'content', array('tabindex'=>1));?></li>
@@ -38,6 +38,11 @@
 
 <div class="fr cd-sidebar">
 	<div class="content-block">
-		段子发表说明
+		<h2 class="content-title">发贴说明</h2>
+		<ul class="site-notice">
+			<li>禁止发广告贴。文章不得出现广告倾向；文章不得包含网站链接。</li>
+			<li>不推荐低俗内容。过于恶心或者私密可能会引起人反感的内容请慎重考虑后再决定发表与否，此类内容的通过率可能会非常低。此类内容包括但不仅限于：过于低俗的粗口、和排泄物有关、和生殖器官有关、和性有关的内容等。</li>
+			<li>不推荐敏感内容：与政治、时政、政府、国家制度、国家领导人相关的内容请慎重考虑后再决定发表与否，避免出现对于敏感内容的描述，避免出现对于此类内容的不恰当评论和隐射。</li>
+		</ul>
 	</div>
 </div>

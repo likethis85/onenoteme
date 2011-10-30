@@ -34,6 +34,7 @@ class PostController extends Controller
         $this->setKeywords('发布段子,发布经典语录,发布糗事,发布秘密,发布笑话');
         $this->setDescription('发布段子,发布经典语录,发布糗事,发布秘密,发布笑话');
         
+        $this->channel = 'create';
         $this->render('create', array('model'=>$model));
     }
     
@@ -59,6 +60,7 @@ class PostController extends Controller
         $this->setKeywords('最新段子,最全的段子,经典语录,糗事百科,秘密,笑话段子,笑话大全,搞笑大全,我们爱讲冷笑话,哈哈笑');
         $this->setDescription('最新发布的段子。网罗互联网各种精品段子，各种糗事，各种笑话，各种秘密，各种经典语录，应有尽有。烦了、累了、无聊了，就来挖段子逛一逛。');
         
+        $this->channel = 'latest';
         $this->render('latest', array(
         	'models' => $models,
             'pages' => $pages,
@@ -78,6 +80,7 @@ class PostController extends Controller
         $this->setKeywords('热门段子,热门经典语录,热门糗事百科,热门秘密,热门笑话,热门搞笑,笑话热门排行,冷笑话排行');
         $this->setDescription('一小时内段子排行，一小时内笑话排行，一小时内经典语录排行 ，一小时糗事排行。');
         
+        $this->channel = 'hottop';
         $this->render('hot_list', array('models' => $models));
     }
     
@@ -94,6 +97,7 @@ class PostController extends Controller
         $this->setKeywords('热门段子,热门经典语录,热门糗事百科,热门秘密,热门笑话,热门搞笑,笑话热门排行,冷笑话排行');
         $this->setDescription('8小时内段子排行，8小时内笑话排行，8小时内经典语录排行 ，8小时糗事排行。');
         
+        $this->channel = 'hottop';
         $this->render('hot_list', array('models' => $models));
     }
     
@@ -110,6 +114,7 @@ class PostController extends Controller
         $this->setKeywords('热门段子,热门经典语录,热门糗事百科,热门秘密,热门笑话,热门搞笑,笑话热门排行,冷笑话排行');
         $this->setDescription('一天内段子排行，一天内笑话排行，一天内经典语录排行 ，一天糗事排行。');
         
+        $this->channel = 'hottop';
         $this->render('hot_list', array('models' => $models));
     }
     
@@ -126,6 +131,7 @@ class PostController extends Controller
         $this->setKeywords('热门段子,热门经典语录,热门糗事百科,热门秘密,热门笑话,热门搞笑,笑话热门排行,冷笑话排行');
         $this->setDescription('一周内段子排行，一周内笑话排行，一周内经典语录排行 ，一周糗事排行。');
         
+        $this->channel = 'hottop';
         $this->render('hot_list', array('models' => $models));
     }
     
@@ -142,6 +148,7 @@ class PostController extends Controller
         $this->setKeywords('热门段子,热门经典语录,热门糗事百科,热门秘密,热门笑话,热门搞笑,笑话热门排行,冷笑话排行');
         $this->setDescription('一周内段子排行，一周内笑话排行，一周内经典语录排行 ，一周糗事排行。');
         
+        $this->channel = 'hottop';
         $this->render('hot_list', array('models' => $models));
     }
     
@@ -172,6 +179,7 @@ class PostController extends Controller
         $this->setKeywords('段子分类,' . implode(',', CHtml::listData($categories, 'id', 'name')));
         $this->setDescription('挖段子分类和每个分类的段子列表。');
         
+        $this->channel = 'chouchou';
         $this->render('list_of_category', array(
         	'models' => $models,
             'pages' => $pages,
@@ -196,6 +204,7 @@ class PostController extends Controller
         $this->setKeywords('审核段子,鉴定段子');
         $this->setDescription('审核鉴定网友发布的段子是否符合挖段子标准，为挖段子增砖添瓦。');
         
+        $this->channel = 'appraise';
         $this->render('appraise', array(
         	'model' => $model,
         ));
@@ -283,6 +292,7 @@ class PostController extends Controller
         $this->setKeywords($this->pageTitle);
         $this->setDescription($this->pageTitle);
         
+        $this->channel = 'post';
         $this->render('show', array(
             'post' => $post,
             'comments' => $comments,

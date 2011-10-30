@@ -12,7 +12,7 @@
 .user-nav a:hover {color:white;}
 .channel-nav li {float:left; margin-left:20px; font-size:22px; color:lightgray; height:48px; line-height:28px; margin-bottom:-10px;}
 .channel-nav li a:link, .channel-nav li a:visited {color:#008c78; height:48px; line-height:28px; font-size:26px; font-family:"微软雅黑"; display:block;}
-.channel-nav li a:hover {background:url(../images/sanjiao.png) no-repeat 22px bottom;}
+.channel-nav li a:hover, .channel-nav li.channel-hover a {background:url(../images/sanjiao.png) no-repeat 22px bottom;}
 .cd-header .bgline {background:#daf2ef; height:9px; font-size:0px; overflow:hidden; border-bottom:2px solid #008c78;}
 
 /* footer */
@@ -20,7 +20,6 @@
 
 /* sidebar */
 .cd-sidebar {width:300px;}
-.cd-sidebar li {margin:8px 5px 8px 10px;}
 .cd-sidebar .content-block {margin-bottom:10px; background:#E6F0F4; border:1px solid #DCEEF5; padding:10px; line-height:24px;}
 .cd-sidebar .content-title {font-size:22px; color:#2ca090; margin-bottom:10px;}
 .cd-sidebar .content-block a {margin-right:5px;}
@@ -33,7 +32,6 @@
 
 
 /* create */
-.create-form {margin-top:5px;}
 .create-form textarea {width:630px; height:180px; font-size:14px; line-height:24px;}
 .create-form li {margin-bottom:10px;}
 .create-form .txt {width:300px; height:20px; line-height:20px;}
@@ -54,7 +52,7 @@
 .item-toolbar .comment-nums a:hover {color:white;}
 
 /* post/appraise */
-.post-content {background:#E8E7E3; line-height:24px; padding:20px; min-height:200px; margin-bottom:20px; margin-top:5px;}
+.post-content {background:#E8E7E3; line-height:24px; padding:20px; min-height:200px; margin-bottom:20px;}
 .buttons {margin-bottom:30px; text-align:center;}
 .buttons a {display:block; float:left; width:180px; height:40px; line-height:40px; margin-left:20px; border:none; color:#FFF; font-size:14px; cursor:pointer;}
 .buttons a:hover {text-decoration:underline;}
@@ -96,3 +94,7 @@
 .user-form span {font-size:14px; color:gray;}
 .user-form .button {margin-left:80px;}
 .login-signup-tip {margin-top:50px;}
+
+/* site notice */
+.site-notice li {color:gray; list-style-type:disc; font-size:12px; margin:0px;}
+
