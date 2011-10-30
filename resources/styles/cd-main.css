@@ -16,7 +16,7 @@
 .cd-header .bgline {background:#daf2ef; height:9px; font-size:0px; overflow:hidden; border-bottom:2px solid #008c78;}
 
 /* footer */
-.cdc-bottom-banner {background:#EFEFEF; padding:15px 0px;}
+.cdc-bottom-banner {background:#EFEFEF; padding:15px 0px; margin-top:15px;}
 
 /* sidebar */
 .cd-sidebar {width:300px;}
@@ -27,7 +27,7 @@
 .cd-sidebar .hot-tags a {line-height:26px;}
 
 /* container */
-.cd-container {width:630px;}
+.cd-container {width:640px;}
 .cd-catption {color:#060; padding:0px 0px 12px 0px; line-height:150%; font-size:18px;}
 
 
@@ -43,8 +43,9 @@
 /* post/list */
 .subnav-links {background:#E9F4E9; height:30px; margin-bottom:15px;}
 .subnav-links li {float:left; height:30px; line-height:30px; margin-left:20px;}
-.post-list .post-item {line-height:24px; width:100%; border-bottom:1px solid #D8D8D8; margin-bottom:15px;}
-.item-toolbar {margin:5px 5px 5px 5px; color:gray;}
+.post-list .post-item {line-height:24px; border-bottom:1px solid #D8D8D8; padding:10px;}
+.post-list .post-item-hover {background:#EFEFEF;}
+.post-list .post-tags {margin:5px 0px;}
 .item-toolbar .upscore, .item-toolbar .downscore {width:50px; padding-left:20px; cursor:pointer; margin-right:10px; color:#969696;}
 .item-toolbar .upscore {background:url(../images/up.gif) no-repeat 0px 5px;}
 .item-toolbar .downscore {background:url(../images/down.gif) no-repeat 0px 5px;}
@@ -96,5 +97,5 @@
 .login-signup-tip {margin-top:50px;}
 
 /* site notice */
-.site-notice li {color:gray; list-style-type:disc; font-size:12px; margin:0px;}
+.site-notice li {color:gray; list-style-type:disc; font-size:12px; margin:5px 10px;}
 

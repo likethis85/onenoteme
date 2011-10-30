@@ -8,8 +8,8 @@
 		<script type="text/javascript">
 		<!--
             google_ad_client = "ca-pub-6304134167250488";
-            /* meiapps_300x250_image_text */
-            google_ad_slot = "7220156016";
+			/* onenote_300x250 */
+        	google_ad_slot = "4559886257";
             google_ad_width = 300;
             google_ad_height = 250;
         //-->
@@ -18,3 +18,4 @@
 	</div>
 	<?php $this->widget('CDHotTags', array('title'=>'热门标签'));?>
 </div>
+<div class="clear"></div>

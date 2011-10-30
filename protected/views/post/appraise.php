@@ -20,5 +20,7 @@
 		</ul>
 	</div>
 </div>
+<div class="clear"></div>
+
 
 <span id="jqvar" scoreurl="<?php echo aurl('post/vote');?>" class="hide"></span>

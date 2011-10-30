@@ -3,7 +3,7 @@
 html,body,div,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,th,td,ol,ul,li,dl,dt,dd,p {margin:0px; padding:0px;}
 body, html {border:0px; height:100%;}
 body {color:#333; font:14px/1.75 Tahoma, Arial, sans-serif, Verdana, Lucida, Helvetica; background:#FFFFFF; height:100%;}
-ul, li, ol {list-style:none inside none; margin:0px; padding:0px;}
+ul, li, ol {list-style:none outside none; margin:0px; padding:0px;}
 table {border-collapse:collapse; border:none;}
 
 .fl {float:left;}

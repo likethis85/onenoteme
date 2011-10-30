@@ -10,3 +10,4 @@
 <div class="fr cd-sidebar">
 	<?php $this->widget('CDHotTags', array('title'=>'热门标签'));?>
 </div>
+<div class="clear"></div>
