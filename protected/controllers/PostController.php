@@ -19,6 +19,9 @@ class PostController extends Controller
         $model = new Post();
         if (request()->getIsPostRequest() && isset($_POST['Post'])) {
             $model->attributes = $_POST['Post'];
+            $model->user_id = user()->getIsGuest() ? 0 : user()->id;
+            if (!user()->getIsGuest() && empty($this->user_name))
+                $model->user_name = user()->name;
             $model->state = (app()->session['state'] >= User::STATE_EDITOR) ? Post::STATE_ENABLED : Post::STATE_DISABLED;
             if ($model->save()) {
                 $msg = '<span class="cgreen f12px">发布成功，' . CHtml::link('点击查看', $model->url, array('target'=>'_blank')) . '，您还可以继续发布。</span>';
@@ -41,10 +44,10 @@ class PostController extends Controller
     public function actionLatest()
     {
         $limit = param('postCountOfPage');
-        $where = 'state != :state';
+        $where = 't.state != :state';
         $params = array(':state' => DPost::STATE_DISABLED);
         $cmd = app()->db->createCommand()
-            ->order('create_time desc, id desc')
+            ->order('t.create_time desc, t.id desc')
             ->limit($limit)
             ->where($where, $params);
             

@@ -78,6 +78,7 @@ return array(
         'user' => array(
             'allowAutoLogin' => true,
             'loginUrl' => array('site/login'),
+            'guestName' => '匿名人士',
         ),
     ),
     

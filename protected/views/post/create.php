@@ -9,6 +9,11 @@
             <span class="cgray f12px">（每个糗事最多5个标签，用空格分隔）</span>
         </li>
         <li>
+            <label>名　字：</label>
+            <?php echo CHtml::activeTextField($model, 'user_name', array('class'=>'txt post-username', 'tabindex'=>5));?>
+            <span class="cgray f12px">（可以不填）</span>
+        </li>
+        <li>
             <label>验证码：</label>
             <?php echo CHtml::activeTextField($model, 'captcha', array('class'=>'txt captcha', 'tabindex'=>10));?>
             <?php $this->widget('CCaptcha', array(

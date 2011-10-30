@@ -12,6 +12,8 @@
  * @property integer $up_score
  * @property integer $down_score
  * @property integer $comment_nums
+ * @property integer $user_id
+ * @property string $user_name
  * @property integer $tags
  * @property integer $state
  */
@@ -42,14 +44,15 @@ class DPost extends DModel
     
     public function columns()
     {
-        return array('id', 'category_id', 'title', 'content', 'create_time', 'up_score', 'down_score', 'comment_nums', 'tags', 'state');
+        return array('id', 'category_id', 'title', 'content', 'create_time', 'up_score', 'down_score', 'comment_nums', 'user_id', 'user_name', 'tags', 'state');
     }
     
     protected function afterFind()
     {
         if (empty($this->title))
             $this->title = mb_substr($this->content, 0, 20, app()->charset);
-        $this->content = nl2br($this->content);
+
+        $this->content = nl2br(strip_tags($this->content, '<b><strong><img><span>'));
     }
     
 
@@ -121,6 +124,20 @@ class DPost extends DModel
     public function getCommentListUrl()
     {
         return aurl('comment/list', array('pid'=>$this->id));
+    }
+    
+    public function getCreateTime($format = null)
+    {
+        if (empty($this->create_time))
+            return '';
+            
+        $format = $format ? $format : param('formatDateTime');
+        return date($format, $this->create_time);
+    }
+    
+    public function getPostUserName()
+    {
+        return $this->user_name ? $this->user_name : user()->name;
     }
     
 }

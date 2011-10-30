@@ -12,6 +12,8 @@
  * @property integer $up_score
  * @property integer $down_score
  * @property integer $comment_nums
+ * @property integer $user_id
+ * @property string $user_name
  * @property integer $tags
  * @property integer $state
  */
@@ -49,8 +51,9 @@ class Post extends CActiveRecord
 		// will receive user inputs.
 		return array(
 		    array('content', 'required', 'message'=>'段子内容必须填写'),
-			array('category_id, up_score, down_score, comment_nums, state, create_time', 'numerical', 'integerOnly'=>true),
+			array('category_id, up_score, down_score, comment_nums, state, create_time, user_id', 'numerical', 'integerOnly'=>true),
 			array('title, tags', 'length', 'max'=>200),
+			array('user_name', 'length', 'max'=>50),
 			array('content', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -84,6 +87,8 @@ class Post extends CActiveRecord
 		    'up_score' => '顶数',
 		    'down_score' => '浏览',
 			'comment_nums' => '评论',
+		    'user_id' => '用户ID',
+		    'user_name' => '名字',
 			'state' => '状态',
 		    'tags' => '标签',
 		);
@@ -100,6 +105,7 @@ class Post extends CActiveRecord
 	        $this->title = mb_substr($this->content, 0, 20, app()->charset);
 	        $this->comment_nums = 0;
             $this->tags = DTag::filterTags($this->tags);
+            $this->user_name = strip_tags(trim($this->user_name));
 	    }
 	    return true;
 	}
