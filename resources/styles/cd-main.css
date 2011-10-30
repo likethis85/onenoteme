@@ -2,7 +2,7 @@
 
 .cd-wrapper {width:950px; margin:0px auto; overflow:hidden;}
 .cd-mainwrapper {background:white; border-radius:5px; overflow-y:visible;}
-.cd-footer {margin-top:20px; margin-bottom:10px;}
+.cd-footer {margin-top:20px;}
 .breadcrumbs {text-indent:10px; line-height:24px; height:24px; margin-bottom:10px;}
 
 /* header */

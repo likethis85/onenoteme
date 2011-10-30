@@ -44,11 +44,9 @@
 	<p class="fl">内容版权所有 ©2011 <a href="">onenote.me</a>  鲁ICP备11024271号-2</p><p class="fr"><a href="#top">TOP</a></p>
 	<div class="clear"></div>
 </div>
-
+<div class="space10px"></div>
 <?php $this->renderPartial('/public/tongji');?>
 </body>
 </html>
 
 <?php cs()->registerScriptFile(sbu('scripts/cd-onenote.js'), CClientScript::POS_END);?>
-
-

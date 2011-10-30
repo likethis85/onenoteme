@@ -20,7 +20,7 @@ return array(
     ),
     'preload' => array('log'),
     'components' => array(
-        'log' => array(
+        /*'log' => array(
             'class'=>'CLogRouter',
             'routes'=>array(
                 array(
@@ -33,7 +33,7 @@ return array(
                     'categories'=>'system.db.*',
                 ),
             ),
-        ),
+        ),*/
         'db' => array(
             'class' => 'CDbConnection',
 			'connectionString' => 'mysql:host=127.0.0.1; port=3306; dbname=cd_onenote',
