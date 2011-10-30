@@ -21,7 +21,7 @@
     	<ul class="channel-nav">
     		<li><a href="<?php echo aurl('post/latest');?>">最新</a></li>
     		<li>/</li>
-    		<li><a href="<?php echo aurl('post/hour8');?>">最热</a></li>
+    		<li><a href="<?php echo aurl('post/day');?>">最热</a></li>
     		<li>/</li>
     		<li><a href="<?php echo aurl('post/list', array('cid'=>11));?>">瞅瞅</a></li>
     		<li>/</li>
