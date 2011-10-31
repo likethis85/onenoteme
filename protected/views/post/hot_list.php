@@ -7,9 +7,8 @@
     	<li><a href="<?php echo aurl('post/month');?>">30天</a></li>
     	<div class="clear"></div>
     </ul>
-	<?php if ($pages->pageCount > 1):?>    
-    <div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
-    <?php endif;?>
+    
+    <?php $this->renderPartial('list', array('models'=>$models, 'pages'=>$pages));?>
 </div>
 
 <div class="fr cd-sidebar">
