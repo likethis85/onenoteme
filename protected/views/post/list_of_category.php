@@ -4,8 +4,9 @@
     	<li><?php echo $category->postLink;?></li>
         <?php endforeach;?>
     </ul>
-    <?php $this->renderPartial('list', array('models'=>$models, 'pages'=>$pages));?>
+    <?php if ($pages->pageCount > 1):?>
 	<div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
+	<?php endif;?>
 </div>
 
 <div class="fr cd-sidebar">
