@@ -137,7 +137,7 @@ class DPost extends DModel
     
     public function getPostUserName()
     {
-        return $this->user_name ? $this->user_name : user()->name;
+        return $this->user_name ? $this->user_name : user()->guestName;
     }
     
 }
