@@ -8,6 +8,13 @@
             <?php echo CHtml::activeTextField($model, 'tags', array('class'=>'txt', 'tabindex'=>5));?>
             <span class="cgray f12px">（每个糗事最多5个标签，用空格分隔）</span>
         </li>
+        <?php if (!user()->isGuest):?>
+        <li>
+            <label>分　类：</label>
+            <?php echo CHtml::activeDropDownList($model, 'category_id', $categories, array('prompt'=>'请选择分类', 'class'=>'txt post-username', 'tabindex'=>5));?>
+            <span class="cgray f12px">（可以不选）</span>
+        </li>
+        <?php endif;?>
         <li>
             <label>名　字：</label>
             <?php echo CHtml::activeTextField($model, 'user_name', array('class'=>'txt post-username', 'tabindex'=>5));?>

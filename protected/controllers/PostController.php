@@ -32,13 +32,20 @@ class PostController extends Controller
             else
                 user()->setFlash('createPostResult', '<span class="cred f12px">发布出错，查看下面详细错误信息。</span>');
         }
+        $cmd = app()->getDb()->createCommand()
+            ->select(array('id', 'name'))
+            ->order('orderid desc, id asc');
+        $categories = CHtml::listData(DCategory::model()->findAll($cmd), 'id', 'name');
         
         $this->pageTitle = '发段子 - 挖段子';
         $this->setKeywords('发布段子,发布经典语录,发布糗事,发布秘密,发布笑话');
         $this->setDescription('发布段子,发布经典语录,发布糗事,发布秘密,发布笑话');
         
         $this->channel = 'create';
-        $this->render('create', array('model'=>$model));
+        $this->render('create', array(
+        	'model'=>$model,
+            'categories' => $categories,
+        ));
     }
     
     public function actionLatest()
