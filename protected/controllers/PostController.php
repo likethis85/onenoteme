@@ -20,7 +20,7 @@ class PostController extends Controller
         if (request()->getIsPostRequest() && isset($_POST['Post'])) {
             $model->attributes = $_POST['Post'];
             $model->user_id = user()->getIsGuest() ? 0 : user()->id;
-            if (!user()->getIsGuest() && empty($this->user_name))
+            if (!user()->getIsGuest() && empty($model->user_name))
                 $model->user_name = user()->name;
             $model->state = (app()->session['state'] >= User::STATE_EDITOR) ? Post::STATE_ENABLED : Post::STATE_DISABLED;
             if ($model->save()) {

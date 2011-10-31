@@ -71,6 +71,8 @@ class SiteController extends Controller
     
     public function actionTest()
     {
+        echo time();
+        exit;
         header('Content-Type: text/html; charset=utf-8');
         $dependency = new CDbCacheDependency('SELECT MAX(id) FROM {{post}}');
         Post::model()->cache(1000, $dependency)->findAll();
