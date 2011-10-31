@@ -1,7 +1,8 @@
 {
-	"name": "onenote.me快速发布插件",
+	"name": "挖段子发布助手",
 	"version": "1.0",
 	"description": "onenote.me 快速发布插件，随时随地记录点点滴滴",
+	"options_page": "options.html",
 	"background_page": "background.html",
 	"icons": {
 		"16": "images/icon.png",

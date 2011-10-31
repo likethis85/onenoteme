@@ -34,8 +34,8 @@ class AppApi
     private function init()
     {
 //        sleep(3);
-        set_error_handler(array($this, 'errorHandler'), E_ERROR);
-    	set_exception_handler(array($this, 'exceptionHandler'));
+//        set_error_handler(array($this, 'errorHandler'), E_ERROR);
+//    	set_exception_handler(array($this, 'exceptionHandler'));
     }
     
     /**
@@ -70,8 +70,8 @@ class AppApi
     private function checkArgs()
     {
         $this->checkFormat()
-            ->checkApiKey()
-            ->checkSignature();
+            ->checkApiKey();
+//            ->checkSignature();
             
         return $this;
     }
@@ -201,8 +201,8 @@ class AppApi
      */
     private function checkSignature()
     {
-        $sig1 = ($this->_sig);
-        $sig2 = urldecode($this->makeSignature());
+        $sig1 = $this->_sig;
+        $sig2 = $this->makeSignature();
         if ($sig1 != $sig2) {
             throw new ApiException('$sig 签名不正确', ApiError::SIGNATURE_ERROR);
         }
@@ -225,7 +225,7 @@ class AppApi
         
         foreach ($args as $key => $value)
             $request->set_parameter($key, $value, false);
-        
+//        echo $request->get_signature_base_string();exit;
         $sig = $request->build_signature($sigMethod, $consumer, null);
         return $sig;
     }

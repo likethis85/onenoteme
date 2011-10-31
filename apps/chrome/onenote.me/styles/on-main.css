@@ -2,50 +2,14 @@
 
 .on-wrapper {width:600px; height:500px; overflow:hidden; -webkit-border-radius:3px;}
 
-#main-container {display:none;}
 
-/* toolbar */
-#on-tip {background:yellow; -webkit-box-shadow:2px 2px 5px gray; height:20px; line-height:20px; margin-top:5px; color:#222222; -webkit-border-radius:3px;}
-.on-toolbar {height:30px; overflow:hidden;}
-.on-toolbar {border-bottom:1px solid #B2B2B2;}
-.on-toolbar li {text-align:center; float:left; line-height:30px; display:block; background:#B2B2B2; padding:0px 10px; color:white; margin-right:2px; cursor:pointer;}
-.on-toolbar .toolbar li {}
-.on-toolbar .usernav li {width:auto;}
-.on-toolbar li:last-child {margin-right:0px;}
-.on-toolbar li:hover {font-weight:bold;}
-
-/* left nav */
-.on-sidebar {width:140px; height:445px; border-right:1px solid #B2B2B2; overflow:visible;}
-.on-sidebar ul {margin-top:5px;}
-.on-sidebar li {width:138px; text-indent:10px; line-height:26px; height:26px; background:lightgray; margin-bottom:2px; cursor:pointer;}
-.on-sidebar li:last-child {margin-bottom:0px;}
-.on-sidebar .booklist li:hover {background:gray; color:white; font-weight:bold; width:140px;}
-.on-sidebar .booklist li:active{color:red;}
-.on-sidebar .booklist-hover {background:gray; width:140px; color:white; font-weight:bold;}
-
-/* container */
-.on-container {width:450px; height:445px; overflow:hidden;}
-
-/* footer */
-.on-footer {height:25px; line-height:25px; overflow:hidden; text-align:center; background:lightgray;}
-
-/* create */
-.create-form {width:100%;}
-.create-form li {margin:10px 0px;}
-.create-form li span {color:gray; margin-left:-437px;}
-.create-form input[type=text] {width:394px; padding-left:36px;}
-.create-form textarea {width:430px; height:300px;}
-.create-form input[type=button] {padding:5px 10px;}
-.create-form .lbl-default {margin-left:5px;}
-
-/* top-container */
-#top-container {position:absolute; z-index:9999; top:-500px; left:0px; background:white;}
-
-/* user signup login */
-#signup-tip {background:yellow; -webkit-box-shadow:2px 2px 5px gray; margin-top:5px; color:#222222; -webkit-border-radius:3px; margin:10px 20px; padding:10px;}
-.login-signup {margin:30px 30px 0px 50px;}
-.login-signup li {margin:10px 0px; font-size:16px;}
-.login-signup li label {margin-right:10px;}
-.login-signup input[type=text] {width:250px; height:20px; line-height:20px;}
-.login-signup input[type=button] {margin-left:120px; padding:7px 20px; font-size:14px;}
-
+/* options */
+#login-tip {display:none; background:yellow; -webkit-box-shadow:2px 2px 5px gray; margin-top:5px; color:#222222; -webkit-border-radius:3px; margin:10px 20px; padding:10px;}
+#login-tip li {margin:0px;}
+.option-item h2 {background:#EFEFEF; padding:5px 10px;}
+.option-item {margin:20px 0px 0px 10px;}
+.option-item li {margin:10px 0px; font-size:14px;}
+.option-item li label {margin-right:5px; display:inline-block; width:50px; text-align:right;}
+.login-form input[type=text] {width:200px; height:16px; line-height:16px;}
+.login-form input[type=button] {margin-left:60px; width:60px; font-size:16px;}
+.option-header {font-size:26px; font-weight:bold;}

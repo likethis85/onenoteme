@@ -7,7 +7,7 @@
  */
 
 
-class Api_Note extends ApiBase
+class Api_Post extends ApiBase
 {
     public function getone()
     {

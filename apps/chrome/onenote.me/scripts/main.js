@@ -1,13 +1,13 @@
 $(function(){
-	Api_Onenote.windowInit();
+	Onenote.windowInit();
     
-    $('.on-toolbar').delegate('#newcategory', 'click', function(event){Api_Onenote.newCategory();});
-    $('.on-toolbar').delegate('#newtopic', 'click', function(event){Api_Onenote.newTopic();});
-    $('.on-toolbar').delegate('#newpost', 'click', function(event){Api_Onenote.newPost();});
+    $('.on-toolbar').delegate('#newcategory', 'click', function(event){Onenote.newCategory();});
+    $('.on-toolbar').delegate('#newtopic', 'click', function(event){Onenote.newTopic();});
+    $('.on-toolbar').delegate('#newpost', 'click', function(event){Onenote.newPost();});
 	
-    $('.on-toolbar').delegate('#logout', 'click', function(event){Api_Onenote.logout();});
-    $('.on-toolbar').delegate('#login', 'click', function(event){Api_Onenote.login();});
-    $('.on-toolbar').delegate('#signup', 'click', function(event){Api_Onenote.signup();});
+    $('.on-toolbar').delegate('#logout', 'click', function(event){Onenote.logout();});
+    $('.on-toolbar').delegate('#login', 'click', function(event){Onenote.login();});
+    $('.on-toolbar').delegate('#signup', 'click', function(event){Onenote.signup();});
     
 
 	$(document).ajaxStart(function(){

@@ -11,15 +11,16 @@ class Api_User extends ApiBase
     public function login()
     {
         self::requirePost();
-        $this->requiredParams(array('name', 'password'));
-        $params = $this->filterParams(array('name', 'password'));
+        $this->requiredParams(array('email', 'password'));
+        $params = $this->filterParams(array('email', 'password'));
         
         try {
-	        $criteria = new DDbCriteria();
-	        $criteria->select = array('id', 'name', 'create_time');
-	        $columns = array('state'=>1, 'name'=>$params['name'], 'password'=>$params['password']);
+	        $criteria = new CDbCriteria();
+	        $criteria->select = array('id', 'email', 'name', 'create_time');
+	        $columns = array('email'=>$params['email'], 'password'=>$params['password']);
 	        $criteria->addColumnCondition($columns);
-	        
+	        $criteria->addCondition('state != ' . User::STATE_DISABLED);
+//	        echo $criteria->condition;exit;
 	        $user = User::model()->find($criteria);
         }
         catch (ApiException $e) {

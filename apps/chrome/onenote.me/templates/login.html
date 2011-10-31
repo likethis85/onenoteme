@@ -1,20 +1,21 @@
-<ul id="login-form" class="login-signup">
-	<li><h1>登录</h1></li>
-    <li>
-        <label>名字</label>
-        <input type="text" name="username" />
-    </li>
-    <li>
-        <label>密码</label>
-        <input type="text" name="password" />
-    </li>
-    <li><input type="button" id="user-login" value="马上登录" /></li>
-	<li class="ar"><a href="javascript:void(0);" id="go-signup">还没有注册？</a></li>
-</ul>
+<form id="login-form" class="login-form">
+	<h2 class="item-title">登录</h2>
+	<ul>
+		<li>
+			<label>邮箱</label>
+			<input type="text" name="email" id="email" />
+		</li>
+		<li>
+			<label>密码</label>
+			<input type="text" name="password" id="password" />
+		</li>
+		<li><input type="button" id="user-login" value="登录" /></li>
+	</ul>
+	<ul id="login-tip"></ul>
+</form>
 
 <script type="text/javascript">
 $(function(){
-    $('#login-form').delegate('#user-login', 'click', function(event){Api_Onenote.submitLogin();});
-	$('#login-form').delegate('#go-signup', 'click', function(event){Api_Onenote.signup();});
+    $('#login-form').delegate('#user-login', 'click', function(event){Onenote.submitLogin();});
 });
 </script>
