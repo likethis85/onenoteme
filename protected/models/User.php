@@ -11,6 +11,7 @@
  * @property integer $create_time
  * @property string $create_ip
  * @property integer $state
+ * @property string $token
  */
 class User extends CActiveRecord
 {
@@ -57,9 +58,10 @@ class User extends CActiveRecord
 			array('name', 'length', 'min'=>2, 'max'=>50),
 			array('password', 'length', 'min'=>3, 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
+			array('token', 'length', 'is'=>32),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, email, name, password, create_time, create_ip, state', 'safe', 'on'=>'search'),
+			array('id, email, name, password, create_time, create_ip, state, token', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -88,6 +90,7 @@ class User extends CActiveRecord
 			'create_ip' => '注册IP',
 			'state' => '状态',
 		    'captcha' => '验证码',
+		    'token' => '标识'
 		);
 	}
 	

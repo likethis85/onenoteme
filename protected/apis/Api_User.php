@@ -16,11 +16,10 @@ class Api_User extends ApiBase
         
         try {
 	        $criteria = new CDbCriteria();
-	        $criteria->select = array('id', 'email', 'name', 'create_time');
+	        $criteria->select = array('id', 'email', 'name', 'create_time', 'state');
 	        $columns = array('email'=>$params['email'], 'password'=>$params['password']);
 	        $criteria->addColumnCondition($columns);
 	        $criteria->addCondition('state != ' . User::STATE_DISABLED);
-//	        echo $criteria->condition;exit;
 	        $user = User::model()->find($criteria);
         }
         catch (ApiException $e) {
@@ -28,10 +27,13 @@ class Api_User extends ApiBase
         }
         
 	    if (null !== $user) {
-	    	// @todo 此处的token需要制定规则，生成返回给客户端，客户端以后请求需要登录才能使用的api时，要带上此参数
-        	$user->token = md5(param('name'));
+        	$user->token = md5($params['name'] . $_SERVER['REQUEST_TIME'] . uniqid());
+        	$user->save(true, array('token'));
         	$this->afterLogin($user, $params);
-        	return $user;
+        	$data = $user->attributes;
+        	unset($user);
+        	unset($data['password'], $data['create_ip']);
+        	return $data;
         }
         else {
         	// @todo 此处处理错误
@@ -43,7 +45,7 @@ class Api_User extends ApiBase
     {
     	// @todo 处理验证通过后的事情
     	try {
-    		app()->cache->set($user->name, $user->token);
+    		app()->cache->set($user->token, $user->name);
     	}
     	catch (ApiException $e) {
     		throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);

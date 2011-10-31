@@ -28,9 +28,13 @@
 
 <script type="text/javascript">
 $(function(){
-	if (Onenote.userLogined())
-		$('#login-item').html('已经登录');
+	if (Onenote.userLogined()) {
+		var user = Onenote.userinfo();
+		$('#login-item').html(user.name + ' 已经登录，<a href="javascript:void(0);" id="user-logout">退出</a>');
+	}
 	else
 		Onenote.login();
+		
+    $('#login-item').delegate('#user-logout', 'click', function(event){Onenote.logout();});
 });
 </script>

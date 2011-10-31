@@ -12,14 +12,13 @@ class Api_Post extends ApiBase
     public function getone()
     {
         self::requireGet();
-        $params = array('noteid');
-        $params = $this->filterParams(array('noteid', 'fields'));
+        $params = $this->filterParams(array('postid', 'fields'));
         
         try {
-	        $criteria = new DDbCriteria();
+	        $criteria = new CDbCriteria();
 	        $criteria->select = (isset($params['fields']) && $params['fields']) ? $params['fields'] : '*';
 	        $criteria->addColumnCondition(array('id'=>$params['noteid']));
-	        $data = Note::model()->find($criteria);
+	        $data = Post::model()->findByPk($params['postid'], $criteria);
 	        return $data;
         }
         catch (Exception $e) {
@@ -27,18 +26,18 @@ class Api_Post extends ApiBase
         }
     }
     
-    public function getListOfBook()
+    public function getListOfCategory()
     {
         self::requireGet();
-        $this->requiredParams(array('bookid'));
-        $params = $this->filterParams(array('bookid', 'fields'));
+        $this->requiredParams(array('cid'));
+        $params = $this->filterParams(array('cid', 'fields'));
         
     	try {
-	        $criteria = new DDbCriteria();
+	        $criteria = new CDbCriteria();
 	        $criteria->select = (isset($params['fields']) && $params['fields']) ? $params['fields'] : '*';
-	        $criteria->order = 'id asc';
-	        $criteria->addColumnCondition(array('book_id'=>$params['bookid']));
-	        $data = Note::model()->findAll($criteria);
+	        $criteria->order = 'create_time desc, id desc';
+	        $criteria->addColumnCondition(array('category_id'=>$params['cid']));
+	        $data = Post::model()->findAll($criteria);
 	        return $data;
         }
         catch (Exception $e) {
@@ -50,14 +49,11 @@ class Api_Post extends ApiBase
     {
     	self::requirePost();
     	$this->requireLogin();
-        $this->requiredParams(array('noteid'));
-        $params = $this->filterParams(array('noteid'));
+        $this->requiredParams(array('postid'));
+        $params = $this->filterParams(array('postid'));
         
         try {
-	        $criteria = new DDbCriteria();
-	        $criteria->addColumnCondition(array('id'=>$params['noteid']));
-	        $data = Note::model()->deleteAll($criteria);
-	        return $data;
+	        return Post::model()->findByPk($params['postid'])->delete();
         }
         catch (Exception $e) {
         	throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
@@ -69,25 +65,17 @@ class Api_Post extends ApiBase
     	self::requirePost();
     	$this->requireLogin();
     	$this->requiredParams(array('title', 'content', 'token'));
-    	$params = $this->filterParams(array('id', 'book_id', 'title', 'content', 'token', 'lat', 'lon'));
+    	$params = $this->filterParams(array('id', 'category_id', 'title', 'content', 'tags', 'token'));
     	
-    	$note = new Note();
-    	$note->title = $params['title'];
-    	$note->content = $params['content'];
-    	$note->create_time = $_SERVER['REQUEST_TIME'];
-    	if (empty($params['book_id'])) {
-    	    $c = new DDbCriteria();
-    	    $c->order = 'id desc';
-    	    $c->select = 'id';
-    	    $c->addColumnCondition(array('user_id'=>1));
-    	    $book = Book::model()->find($c);
-    	    $note->book_id = $book->id;
-    	}
-    	else
-    	    $note->book_id = $params['book_id'];
+    	$post = new Post();
+    	$post->title = $params['title'];
+    	$post->category_id = (int)$params['category_id'];
+    	$post->content = $params['content'];
+    	$post->tags = $params['tags'];
+    	$post->create_time = $_SERVER['REQUEST_TIME'];
     	    
     	try {
-    		return (int)$note->insert();
+    		return (int)$post->save();
     	}
     	catch (ApiException $e) {
     		throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);

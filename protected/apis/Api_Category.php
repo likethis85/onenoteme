@@ -6,18 +6,18 @@
  * @package api
  */
 
-class Api_Book extends ApiBase
+class Api_Category extends ApiBase
 {
 	public function getone()
 	{
 		self::requireGet();
-        $params = array('bookid');
-        $params = $this->filterParams(array('bookid'));
+        $params = array('cid');
+        $params = $this->filterParams(array('cid'));
         
         try {
-	        $criteria = new DDbCriteria();
-	        $criteria->addColumnCondition(array('id'=>$params['bookid']));
-	        $data = Book::model()->find($criteria);
+	        $criteria = new CDbCriteria();
+	        $criteria->addColumnCondition(array('id'=>$params['cid']));
+	        $data = Category::model()->find($criteria);
 	        return $data;
         }
         catch (Exception $e) {
@@ -31,10 +31,10 @@ class Api_Book extends ApiBase
         $params = $this->filterParams();
         
     	try {
-	        $criteria = new DDbCriteria();
-	        $criteria->order = 'id asc';
-	        $data = Book::model()->findAll($criteria);
-	        return $data;
+	        return app()->getDb()->createCommand()
+	            ->order('orderid desc, id asc')
+	            ->from(Category::model()->tableName())
+	            ->queryAll();
         }
         catch (Exception $e) {
         	throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
@@ -48,11 +48,10 @@ class Api_Book extends ApiBase
     	$this->requiredParams(array('name'));
     	$params = $this->filterParams(array('name', 'isdefault'));
     	
-    	$book = new Book();
-    	$book->name = $params['name'];
-    	$book->isdefault = $params['isdefault'];
+    	$category = new Category();
+    	$category->name = $params['name'];
     	try {
-    		return (int)$book->insert();
+    		return (int)$category->save();
     	}
     	catch (ApiException $e) {
     		throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
@@ -63,14 +62,11 @@ class Api_Book extends ApiBase
     {
     	self::requirePost();
     	$this->requireLogin();
-        $this->requiredParams(array('bookid'));
-        $params = $this->filterParams(array('bookid'));
+        $this->requiredParams(array('cid'));
+        $params = $this->filterParams(array('cid'));
         
     	try {
-	        $criteria = new DDbCriteria();
-	        $criteria->addColumnCondition(array('id'=>$params['bookid']));
-	        $data = Book::model()->deleteAll($criteria);
-	        return $data;
+	        return Category::model()->findByPk($params['cid'])->delete();
         }
         catch (Exception $e) {
         	throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);

@@ -26,8 +26,9 @@ var Onenote = {
 		apiUserLogout: 'user.logout',
 		apiCreateUser: 'user.create'
 	},
-	uploadPost: function(){
-		alert('post page');
+	uploadPost: function(info, tab){
+		alert(tab.id);
+		chrome.extension.sendRequest(tab.id, {method:'insert_script'});
 	},
 	windowInit: function() {
 		var user = Onenote.userinfo();
@@ -113,7 +114,6 @@ var Onenote = {
 		user = JSON.parse(user ? user : '{}');
 		delete user.token;
 		localStorage.setItem('user', JSON.stringify(user));
-		$('#main-container').slideUp('fast');
 		Onenote.login();
 	},
 	submitLogin: function() {
@@ -132,6 +132,7 @@ var Onenote = {
             if (data != 'ERROR') {
 				console.log('登录成功');
                 localStorage.setItem('user', JSON.stringify(data));
+				window.location.reload();
             }
             else
                 console.log('登录失败')
@@ -141,68 +142,18 @@ var Onenote = {
 			$('#login-tip').html('<li>用户名不存在或密码错误。</li>').fadeIn('fast').delay(5000).fadeOut('fast');
         });
 	},
-	userShare: function(info, tab){
-		var context = Onenote.config.contexts[info.menuItemId - 1];
-        var apiUrl = Onenote.config.apiHost + Onenote.config.shareApi;
-		
-	    var contents = {
-			context: context,
-	        pageUrl: info.pageUrl,
-	        srcUrl: info.srcUrl,
-	        selectionText: info.selectionText,
-	        linkUrl: info.linkUrl,
-			url: tab.url,
-			title: tab.title,
-			favIconUrl: tab.favIconUrl,
-			method: 'showPostPage'
-	    };
-	    var data = $.param(contents);
-		//alert(data);
-		
-		chrome.tabs.sendRequest(tab.id, contents);
-
-		return ;
-		
-	    $.ajax({
-			url: apiUrl,
-			type: 'post',
-			dataType: 'text',
-			data: data,
-			beforeSend: function(xhr, setting){
-				
-			},
-			error: function(xhr, textStatus, errorThrown){
-				Onenote.showToast('收藏失败', '很抱歉，这些宝贝没有收藏成功！');
-			},
-			success: function(data){
-				if (data == 'error')
-				    Onenote.showToast('收藏失败', '很抱歉，这些宝贝没有收藏成功！');
-				else
-				    Onenote.showToast('收藏成功', '这些宝贝已经属于您的了！');
-			}
-		});
-	}
-};
-
-var Api_Tip = {
-	show: function(html){
-		$('#on-tip').html(html).fadeIn('fast');
-		return this;
-	},
-	successShow: function(html){
-		$('#on-tip').css('color', 'green').html(html).fadeIn('fast');
-		return this;
-	},
-	errorShow: function(html){
-		$('#on-tip').css('color', 'red').html(html).fadeIn('fast');
-		return this;
-	},
-	hide: function(delay, duration){
-		$('#on-tip').delay(delay).fadeOut(duration);
-		return this;
-	},
-	empty: function(){
-		$('#on-tip').empty();
-		return this;
+	getCategories: function(){
+        var params = [['methods', 'category.getlist'], ['debug',  Onenote.debug]];
+        var jqXhr = Onenote.sendRequest('GET', params, true);
+        jqXhr.always(function(){
+            console.log('always');
+        });
+        jqXhr.success(function(data){
+            console.log(data);
+			localStorage.setItem('categories', JSON.stringify(data));
+        });
+        jqXhr.fail(function(jqXhr){
+            console.log(jqXhr);
+        });
 	}
 };

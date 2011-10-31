@@ -70,6 +70,14 @@ class Category extends CActiveRecord
 		);
 	}
 
+	protected function beforeSave()
+	{
+	    if ($this->getIsNewRecord()) {
+	        $this->create_time = $_SERVER['REQUEST_TIME'];
+	    }
+	    return true;
+	}
+	
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
