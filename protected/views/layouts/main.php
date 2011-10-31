@@ -23,7 +23,7 @@
     		<li>/</li>
     		<li <?php echo ($this->channel == 'hottop') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/day');?>">最热</a></li>
     		<li>/</li>
-    		<li <?php echo ($this->channel == 'chouchou') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/list', array('cid'=>11));?>">瞅瞅</a></li>
+    		<li <?php echo ($this->channel == 'chouchou') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/list', array('cid'=>2));?>">瞅瞅</a></li>
     		<li>/</li>
     		<li <?php echo ($this->channel == 'tag') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('tag/list');?>">标签</a></li>
     		<li>/</li>
