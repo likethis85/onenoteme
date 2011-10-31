@@ -1,0 +1,25 @@
+<ul id="user-create" class="login-signup">
+	<li><h1>注册</h1></li>
+    <li>
+        <label>名字</label>
+        <input type="text" name="username" />
+    </li>
+    <li>
+        <label>密码</label>
+        <input type="text" name="password" />
+    </li>
+    <li>
+        <label>邮箱</label>
+        <input type="text" name="email" />
+    </li>
+    <li><input type="button" id="user-save" value="填好了, 马上注册" /></li>
+    <li class="ar"><a href="javascript:void(0);" id="go-login">已经注册？马上登录</a></li>
+</ul>
+<div id="signup-tip" class="hide"></div>
+
+<script type="text/javascript">
+$(function(){
+    $('#user-create').delegate('#user-save', 'click', function(event){Api_Onenote.saveNewUser();})
+    $('#user-create').delegate('#go-login', 'click', function(event){Api_Onenote.login();});
+});
+</script>

@@ -1,0 +1,34 @@
+{
+	"name": "onenote.me快速发布插件",
+	"version": "1.0",
+	"description": "onenote.me 快速发布插件，随时随地记录点点滴滴",
+	"background_page": "background.html",
+	"icons": {
+		"16": "images/icon.png",
+		"18": "images/icon.png",
+		"24": "images/icon.png",
+		"48": "images/icon.png",
+		"64": "images/icon.png",
+		"128": "images/icon.png"
+	},
+	"permissions": [
+		"notifications",
+		"http://*/*",
+		"https://*/*",
+		"tabs",
+		"unlimitedStorage",
+		"contextMenus"
+	],
+	"browser_action": {
+		"default_icon": "images/icon.png",
+		"popup": "main.html",
+		"default_title": "onenote.me快速发布插件"
+	},
+	"content_scripts": [
+		{
+			"matches": ["http://*/*"],
+			"css": ["styles/content.css"],
+			"js": ["scripts/libs/jquery-1.6.4.min.js", "scripts/content.js"]
+		}
+    ]
+}
