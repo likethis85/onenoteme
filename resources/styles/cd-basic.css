@@ -5,6 +5,7 @@ body, html {border:0px; height:100%;}
 body {color:#333; font:14px/1.75 Tahoma, Arial, sans-serif, Verdana, Lucida, Helvetica; background:#FFFFFF; height:100%;}
 ul, li, ol {list-style:none outside none; margin:0px; padding:0px;}
 table {border-collapse:collapse; border:none;}
+img {border:0px;}
 
 .fl {float:left;}
 .fr {float:right;}

@@ -11,7 +11,7 @@
 .user-nav a:link, .user-nav a:visited {margin-left:10px; color:gray;}
 .user-nav a:hover {color:white;}
 .channel-nav li {float:left; margin-left:20px; font-size:22px; color:lightgray; height:48px; line-height:28px; margin-bottom:-10px;}
-.channel-nav li a:link, .channel-nav li a:visited {color:#008c78; height:48px; line-height:28px; font-size:26px; font-family:"微软雅黑"; display:block;}
+.channel-nav li a:link, .channel-nav li a:visited {color:#008c78; height:48px; line-height:28px; font-size:26px; font-family:"微软雅黑"; display:inline-block;}
 .channel-nav li a:hover, .channel-nav li.channel-hover a {background:url(../images/sanjiao.png) no-repeat 22px bottom;}
 .cd-header .bgline {background:#daf2ef; height:9px; font-size:0px; overflow:hidden; border-bottom:2px solid #008c78;}
 
