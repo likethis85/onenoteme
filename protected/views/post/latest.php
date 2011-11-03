@@ -5,6 +5,9 @@
 
 <div class="fr cd-sidebar">
 	<div class="content-block">
+		<iframe width="275" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" frameborder="No" border="0" src="http://widget.weibo.com/relationship/followbutton.php?width=300&height=24&uid=1639121454&style=3&btn=red&dpc=1"></iframe>
+	</div>
+	<div class="content-block">
 		<h2 class="content-title">动员令</h2>
 		<ul class="site-notice">
 			<li><?php echo app()->name;?>正式上线啦！请速来挖啊挖啊挖段子。</li>
