@@ -309,4 +309,19 @@ class PostController extends Controller
         ));
     }
     
+    public function actionSitemap()
+    {
+        $cmd = app()->getDb()->createCommand()
+            ->select('id')
+            ->from(DPost::model()->table())
+            ->where('state != 0')
+            ->order('id desc')
+            ->limit(5000);
+        $posts = $cmd->queryAll();
+        $this->renderPartial('sitemap', array(
+            'posts' => $posts
+        ));
+        app()->end();
+    }
+    
 }
