@@ -41,7 +41,7 @@
 </div>
 
 <div class="cd-wrapper cd-footer">
-	<p class="fl">内容版权所有 ©2011 <a href="">onenote.me</a>  鲁ICP备11024271号-2</p><p class="fr"><a href="#top">TOP</a></p>
+	<p class="fl">内容版权所有 ©2011 <a href="">onenote.me</a>  鲁ICP备11024271号-2</p><p class="fr">笑死人不尝命&nbsp;<a href="#top">TOP</a></p>
 	<div class="clear"></div>
 </div>
 <div class="space10px"></div>
