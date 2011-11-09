@@ -84,8 +84,9 @@
 .comment-list li {float:left; font-size:12px; padding:5px;}
 .comment-list li span {display:block; float:left; margin-left:15px; height:22px; line-height:22px;}
 .comment-list li img {height:20px;}
-.comment-list .comment-content {color:gray;}
-.comment-list .view-more {text-align:center; font-size:14px; color:gray; padding-top:5px;}
+.comment-list .user-small-thumbnail {width:20px; overflow:hidden;}
+.comment-list .comment-content {color:gray; width:450px; overflow:hidden;}
+.comment-list .view-more {text-align:center; font-size:14px; color:gray; padding-top:5px; overflow-x:hidden;}
 
 .errorSummary {border:1px solid #FF0000; padding:10px; color:gray;}
 .errorSummary p {font-weight:bold;}
