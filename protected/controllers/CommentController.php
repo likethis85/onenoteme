@@ -20,9 +20,10 @@ class CommentController extends Controller
         $models = DComment::model()->findAll($cmd);
             
         if (request()->getIsAjaxRequest()) {
-            $this->render('ajax_list', array(
+            $this->renderPartial('ajax_list', array(
             	'models' => $models,
                 'postid' => $pid,
+                'count' => $count,
             ));
             exit(0);
         }
@@ -31,7 +32,7 @@ class CommentController extends Controller
             	'models' => $models,
                 'pages' => $pages,
             ));
-            exit(0);
+            app()->end();
         }
     }
     

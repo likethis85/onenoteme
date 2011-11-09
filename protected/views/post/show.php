@@ -54,16 +54,15 @@
         </ul>
 	</div>
 	<div class="comment-list">
-		<ul>
 	    <?php foreach ($comments as $c):?>
-			<li>
-				<span><img src="http://www.qiushibaike.com/system/avatars/289248/thumb/20111009173804159.jpg" /></span>
-			    <span><?php echo CHtml::link('买根苦瓜吧', '#', array('target'=>'_blank'));?></span>
-			    <span class="comment-content"><?php echo $c->content;?></span>
-			    <div class="clear"></div>
-			</li>
-	    <?php endforeach;?>
+		<ul class="comment-item">
+			<li><img src="http://www.qiushibaike.com/system/avatars/289248/thumb/20111009173804159.jpg" /></li>
+		    <li><?php echo CHtml::link($c->commentUserName, '#', array('target'=>'_blank'));?></li>
+		    <li class="comment-content"><?php echo $c->content;?></li>
+		    <div class="clear"></div>
 		</ul>
+	    <?php endforeach;?>
+	    <div class="pages"><?php $this->widget('CLinkPager', array('pages' => $pages));?></div>
 	</div>
 </div>
 

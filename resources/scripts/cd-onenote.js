@@ -6,6 +6,7 @@ $(function(){
 	$('.item-toolbar').delegate('.downscore', 'click', Onenote.downScore);
 	$('.buttons').delegate('#refuse-post', 'click', Onenote.refusePost);
 	$('.buttons').delegate('#accept-post', 'click', Onenote.acceptPost);
+	$('.comment-nums').delegate('.view-comments', 'click', Onenote.loadComments);
 });
 
 var Onenote = {
@@ -33,7 +34,7 @@ var Onenote = {
 		var tthis = this;
 		jqXhr.success(function(data){
 			if (data == 1)
-				$(tthis).html(parseInt($(tthis).html()) + 1)
+				$(tthis).html(parseInt($(tthis).html()) + 1);
 		});
 		jqXhr.fail(function(){
 			console.log('fail');
@@ -70,22 +71,22 @@ var Onenote = {
 	loadComments: function(event){
 		event.preventDefault();
 		var key = 'comment-list-' + $(this).attr('pid');
-		if ($(key)) {
-			$(key).toggle();
-			return false;
+		var comment = $(this).parents('.item-toolbar').next('.comment-list');
+		if (comment.html()) {
+			comment.toggle();
+			return true;
 		}
 		var html = $('body').data(key);
 		if (html) {
-			$(this).parents('.item-toolbar').after(html);
+			comment.html(html).show();
 		}
 		else {
 			var url = $(this).attr('href');
 			var jqXhr = $.get(url);
 			var tthis = this;
 			jqXhr.success(function(data){
-				console.log(data);
-				$(tthis).parents('.item-toolbar').after(html);
-				$('body').data(key, html);
+				comment.html(data).show();
+				$('body').data(key, data);
 			});
 			jqXhr.fail(function(){
 				console.log('fail');

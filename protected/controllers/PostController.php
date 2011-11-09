@@ -306,6 +306,7 @@ class PostController extends Controller
         $this->render('show', array(
             'post' => $post,
             'comments' => $comments,
+            'pages' => $pages,
         ));
     }
     

@@ -1,6 +1,11 @@
-<a name="comment-list"></a>
-<?php foreach ($models as $model):?>
-<li><?php echo $model->content;?></li>
-<?php endforeach;?>
-<div class="pages"><?php $this->widget('CLinkPager', array('pages' => $pages));?></div>
-
+<div class="comment-list">
+    <?php foreach ($models as $c):?>
+    <ul class="comment-item">
+    	<li><img src="http://www.qiushibaike.com/system/avatars/289248/thumb/20111009173804159.jpg" /></li>
+        <li><?php echo CHtml::link($c->commentUserName, '#', array('target'=>'_blank'));?></li>
+        <li class="comment-content"><?php echo $c->content;?></li>
+        <div class="clear"></div>
+    </ul>
+    <?php endforeach;?>
+    <div class="pages"><?php $this->widget('CLinkPager', array('pages' => $pages));?></div>
+</div>

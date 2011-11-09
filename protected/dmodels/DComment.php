@@ -41,4 +41,9 @@ class DComment extends DModel
     {
         return array('id', 'post_id', 'content', 'user_id', 'user_name', 'create_time', 'create_ip');
     }
+    
+    public function getCommentUserName()
+    {
+        return $this->user_name ? $this->user_name : user()->guestName;
+    }
 }
