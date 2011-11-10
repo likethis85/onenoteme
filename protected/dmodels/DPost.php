@@ -111,13 +111,13 @@ class DPost extends DModel
         return $tags[$this->id] = explode(',', $data);
     }
     
-    public function getTagsLinks($operator = '&nbsp;', $target = '_blank')
+    public function getTagsLinks($operator = '&nbsp;', $target = '_blank', $route = 'tag/posts')
     {
         if (empty($this->tagsArray))
             return '';
 
         foreach ($this->tagsArray as $tag)
-            $data[] = CHtml::link($tag, aurl('tag/posts', array('name'=>urlencode($tag))), array('target'=>$target));
+            $data[] = CHtml::link($tag, aurl($route, array('name'=>urlencode($tag))), array('target'=>$target));
         return implode($operator, $data);
     }
 

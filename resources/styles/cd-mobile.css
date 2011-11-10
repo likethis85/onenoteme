@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+.m-wrapper {display:block; margin:0px auto; overflow:hidden;}
+.m-footer {margin-top:20px;}
+
+.m-logo {font-size:20px; background:white; height:30px; line-height:30px; color:#008C78; padding-left:10px;}
+.m-nav {background:#DAF2EF; padding-left:10px;}
+
+/* post/list */
+.subnav-links {background:#E9F4E9; height:30px; margin-bottom:15px;}
+.subnav-links li {float:left; height:30px; line-height:30px; margin-left:20px;}
+.post-list .post-item {line-height:24px; border-bottom:1px solid #D8D8D8; padding:10px;}
+.post-list .post-item-hover {background:#EFEFEF;}
+.post-list .post-tags {margin:5px 0px;}
+.post-list .post-user {margin-bottom:10px; color:gray; font-size:12px;}
+.item-toolbar .upscore, .item-toolbar .downscore {width:50px; padding-left:20px; cursor:pointer; margin-right:10px; color:#969696;}
+.item-toolbar .upscore {background:url(../images/up.gif) no-repeat 0px 5px;}
+.item-toolbar .downscore {background:url(../images/down.gif) no-repeat 0px 5px;}
+.item-toolbar .comment-nums a:link, .item-toolbar .comment-nums a:visited {color:#969696;}
+.item-toolbar .comment-nums a:hover {color:white;}
+
+.list-title {font-size:14px;}
