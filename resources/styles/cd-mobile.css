@@ -15,4 +15,4 @@ body {font-size:36px;}
 .post-list .post-user {margin-bottom:10px; color:gray; font-size:30px;}
 
 .list-title {font-size:38px; margin-left:10px;}
-.pages, .pages a:link, .pages a:visted {font-size:40px;}
+.pages ul.yiiPager {font-size:40px;} 
