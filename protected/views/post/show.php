@@ -53,6 +53,7 @@
         	<div class="clear"></div>
         </ul>
 	</div>
+	<?php $this->renderPartial('/comment/create_form', array('postid'=>$post->id));?>
 	<div class="comment-list">
 	    <?php foreach ($comments as $c):?>
 		<ul class="comment-item">

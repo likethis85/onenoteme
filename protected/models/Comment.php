@@ -81,6 +81,25 @@ class Comment extends CActiveRecord
 		);
 	}
 
+	protected function beforeSave()
+	{
+	    if ($this->getIsNewRecord()) {
+	        $this->content = strip_tags(trim($this->content));
+	        $this->create_time = $_SERVER['REQUEST_TIME'];
+	        $this->create_ip = request()->getUserHostAddress();
+	    }
+	    
+	    return true;
+	}
+	
+	protected function afterSave()
+	{
+	    if ($this->getIsNewRecord()) {
+	        $counters = array('comment_nums' => 1);
+	        Post::model()->updateCounters($counters, 'id = :postid', array(':postid'=>$this->post_id));
+	    }
+	}
+	
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.

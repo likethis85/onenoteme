@@ -1,3 +1,13 @@
+<form action="<?php echo aurl('comment/create');?>" method="post" id="comment-form">
+<input type="hidden" name="postid" id="postid" value="<?php echo $postid;?>" />
+<table class="tbl-comment">
+	<tr>
+		<td><textarea name="content" id="comment-content"></textarea></td>
+		<td><input type="button" value="发布" id="submit-button" /></td>
+		<td id="result-tip"></td>
+	</tr>
+</table>
+</form>
 <div class="comment-list">
     <?php foreach ($models as $c):?>
     <ul class="comment-item">

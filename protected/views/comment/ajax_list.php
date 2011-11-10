@@ -1,3 +1,4 @@
+<?php $this->renderPartial('/comment/create_form', array('postid'=>$postid));?>
 <?php foreach ($models as $model):?>
 <ul class="comment-item">
 	<li class="user-small-thumbnail"><img src="http://www.qiushibaike.com/system/avabak/150036/thumb/UC_Photo_1.jpg" /></li>

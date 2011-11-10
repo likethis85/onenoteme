@@ -1,6 +1,14 @@
 <?php
 class CommentController extends Controller
 {
+    public function filters()
+    {
+        return array(
+            'ajaxOnly + create',
+            'postOnly + create',
+        );
+    }
+    
     public function actionList($pid)
     {
         $limit = param('commentCountOfPage');
@@ -30,6 +38,7 @@ class CommentController extends Controller
         else {
             $this->render('list', array(
             	'models' => $models,
+                'postid' => $pid,
                 'pages' => $pages,
             ));
             app()->end();
@@ -38,10 +47,13 @@ class CommentController extends Controller
     
     public function actionCreate()
     {
-        // @todo ajax添加评论
-        $comment = new DComment();
-        $comment->attributes = $_POST['Comment'];
-        echo (int)$comment->insert();
+        $c = new Comment();
+        $c->post_id = $_POST['postid'];
+        $c->content = $_POST['content'];
+        $c->user_id = user()->isGuest ? 0 : user()->id;
+        $c->user_name = user()->isGuest ? '' : user()->name;
+        $c->state = (app()->session['state'] >= User::STATE_EDITOR) ? Comment::STATE_ENABLED : Comment::STATE_DISABLED;
+        echo (int)$c->save();
         exit(0);
     }
 }

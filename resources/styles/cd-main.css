@@ -105,3 +105,10 @@
 /* site notice */
 .site-notice li {color:gray; list-style-type:disc; font-size:12px; margin:5px 10px;}
 
+/* comment/create */
+.tbl-comment {margin:10px;}
+.ccontent {width:450px; height:45px; border:1px solid lightgray; line-height:22px; font-size:14px; padding:5px;}
+.submit-button {width:80px; height:55px; font-size:14px;}
+.result-tip {padding-left:10px;}
+.login-tip {text-align:center; line-height:30px; height:30px; color:gray; font-size:12px;}
+

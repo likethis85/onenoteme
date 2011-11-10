@@ -7,6 +7,7 @@ $(function(){
 	$('.buttons').delegate('#refuse-post', 'click', Onenote.refusePost);
 	$('.buttons').delegate('#accept-post', 'click', Onenote.acceptPost);
 	$('.comment-nums').delegate('.view-comments', 'click', Onenote.loadComments);
+	$('.submit-button').live('click', Onenote.createComment);
 });
 
 var Onenote = {
@@ -70,8 +71,8 @@ var Onenote = {
 	},
 	loadComments: function(event){
 		event.preventDefault();
-		var key = 'comment-list-' + $(this).attr('pid');
-		var comment = $(this).parents('.item-toolbar').next('.comment-list');
+		var key = '.comment-list-' + $(this).attr('pid');
+		var comment = $(this).parents('.item-toolbar').next(key);
 		if (comment.html()) {
 			comment.toggle();
 			return true;
@@ -81,7 +82,7 @@ var Onenote = {
 			comment.html(html).show();
 		}
 		else {
-			var url = $(this).attr('href');
+			var url = $(this).attr('url');
 			var jqXhr = $.get(url);
 			var tthis = this;
 			jqXhr.success(function(data){
@@ -92,5 +93,30 @@ var Onenote = {
 				console.log('fail');
 			});
 		}
+	},
+	createComment: function(){
+		var content = $(this).parents('.tbl-comment').find('.ccontent');
+		console.log(content.val());
+		if ($.trim(content.val()) == '')
+			return false;
+		
+		var data = $(this).parents('.comment-form').serialize();
+		console.log(data);
+		var url = $(this).parents('.comment-form').attr('action');
+		var tip = $(this).parents('.tbl-comment').find('.result-tip'); 
+		tip.removeClass('cred').removeClass('cgreen');
+		var jqXhr = $.post(url, data);
+		var tthis = this;
+		jqXhr.success(function(data){
+			if (data == 1) {
+				tip.html('谢谢<br />参与').addClass('cgreen').delay(3000).fadeOut('slow');
+				content.val('');
+			}
+			else
+				tip.html('发布<br />错误').addClass('cred').delay(3000).fadeOut('slow');
+		});
+		jqXhr.fail(function(){
+			tip.html('发布<br />错误').addClass('cred').delay(3000).fadeOut('slow');
+		});
 	}
 };
