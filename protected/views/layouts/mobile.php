@@ -27,5 +27,3 @@
 <?php $this->renderPartial('/public/tongji');?>
 </body>
 </html>
-
-<?php cs()->registerScriptFile(sbu('scripts/cd-onenote.js'), CClientScript::POS_END);?>

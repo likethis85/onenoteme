@@ -7,16 +7,6 @@
             <?php echo $model->content;?>
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->getTagsLinks('&nbsp;', '_self', 'mobile/tag');?></div><?php endif;?>
-        <ul class="item-toolbar cgray" postid="<?php echo $model->id;?>">
-        	<li class="upscore fl" pid="<?php echo $model->id;?>"><?php echo $model->up_score;?></li>
-        	<li class="downscore fl" pid="<?php echo $model->id;?>"><?php echo $model->down_score;?></li>
-        	<li class="comment-nums fr">
-        	    <a href="<?php echo aurl('post/show', array('id'=>$model->id), '', 'comment-list');?>" title="新窗口中查看查看评论" target="_blank"><?php echo $model->comment_nums;?>条评论</a>
-        	</li>
-        	<div class="clear"></div>
-        </ul>
-        <div class="comment-list hide"></div>
-        <div class="clear"></div>
     </div>
     <?php endforeach;?>
 </div>
