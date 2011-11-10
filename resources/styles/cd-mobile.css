@@ -5,8 +5,8 @@ body {font-size:36px;}
 .m-wrapper {display:block; margin:0px auto; overflow:hidden;}
 .m-footer {padding:10px; background:#008C78; color:white;}
 
-.m-logo {font-size:70px; background:#008C78; padding-left:10px;}
-.m-logo a:link, m-logo a:visited {color:white;}
+.m-logo {font-size:70px; background:#008C78; padding-left:10px; color:white;}
+.m-logo a:link,.m-logo a:hover, m-logo a:visited {color:white;}
 .m-nav {background:#DAF2EF; padding-left:20px; font-size:40px; height:70px; line-height:70px;}
 
 /* post/list */
