@@ -1,4 +1,3 @@
-<h2 class="list-title"><?php echo $listTitle;?></h2>
 <div class="post-list">
     <?php foreach ((array)$models as $model):?>
     <div class="post-item">

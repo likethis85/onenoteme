@@ -3,16 +3,16 @@
 body {font-size:36px;}
 
 .m-wrapper {display:block; margin:0px auto; overflow:hidden;}
-.m-footer {padding:10px;}
+.m-footer {padding:10px; background:#008C78; color:white;}
 
-.m-logo {font-size:70px; background:white; color:#008C78; padding-left:10px;}
-.m-nav {background:#DAF2EF; padding-left:10px; font-size:40px;}
+.m-logo {font-size:70px; background:#008C78; padding-left:10px;}
+.m-logo a:link, m-logo a:visited {color:white;}
+.m-nav {background:#DAF2EF; padding-left:20px; font-size:40px; height:70px; line-height:70px;}
 
 /* post/list */
-.post-list .post-item {line-height:50px; border-bottom:1px solid #D8D8D8; padding:10px;}
+.post-list .post-item {line-height:50px; border-bottom:1px solid #D8D8D8; padding:10px 20px;}
 .post-list .post-item-hover {background:#EFEFEF;}
 .post-list .post-tags {margin:5px 0px;}
 .post-list .post-user {margin-bottom:10px; color:gray; font-size:30px;}
 
-.list-title {font-size:38px; margin-left:10px;}
 .pages ul.yiiPager {font-size:40px;} 

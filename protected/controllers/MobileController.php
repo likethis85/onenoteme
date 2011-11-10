@@ -1,6 +1,8 @@
 <?php
 class MobileController extends Controller
 {
+    public $subtitle;
+    
     public function init()
     {
         $this->layout = 'mobile';    
@@ -29,10 +31,10 @@ class MobileController extends Controller
         $this->setDescription('最新发布的段子。网罗互联网各种精品段子，各种糗事，各种笑话，各种秘密，各种经典语录，应有尽有。烦了、累了、无聊了，就来挖段子逛一逛。');
         
         $this->channel = 'latest';
+        $this->subtitle = "最新段子。。。";
         $this->render('index', array(
         	'models' => $models,
             'pages' => $pages,
-            'listTitle' => "最新段子。。。",
         ));
     }
     
@@ -79,9 +81,9 @@ class MobileController extends Controller
         $this->setDescription('一周内段子排行，一周内笑话排行，一周内经典语录排行 ，一周糗事排行。');
         
         $this->channel = 'hottop';
+        $this->subtitle = "最热段子。。。";
         $this->render('index', array(
         	'models' => $models,
-            'listTitle' => "最热段子。。。",
         ));
     }
     

@@ -10,10 +10,12 @@
 <script type="text/javascript" src="<?php echo sbu('scripts/jquery-1.6.4.min.js');?>"></script>
 </head>
 <body>
+<a name="top"></a>
 <div class="m-wrapper">
 	<h1 class="m-logo"><a href="<?php echo aurl('mobile/index');?>" title="返回挖段子首页">挖段子</a></h1>
 </div>
 <div class="m-wrapper m-nav">
+	<span class="list-title"><?php echo $this->subtitle;?></span>&nbsp;&nbsp;
 	<a href="<?php echo aurl('mobile/index');?>">最新</a>&nbsp;|&nbsp;<a href="<?php echo aurl('mobile/week');?>">最热</a>
 </div>
 
@@ -21,7 +23,7 @@
 
 
 <div class="m-wrapper m-footer">
-	<p class="fl">版权所有 ©2011 <a href="">onenote.me</a></p><p class="fr">笑死人不尝命&nbsp;<a href="#top">TOP</a></p>
+	<p class="fl">版权所有 ©2011 <a href="<?php echo aurl('mobile');?>">onenote.me</a></p><p class="fr">笑死人不尝命&nbsp;<a href="#top">TOP</a></p>
 	<div class="clear"></div>
 </div>
 <?php $this->renderPartial('/public/tongji');?>
