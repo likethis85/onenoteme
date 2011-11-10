@@ -2,7 +2,7 @@
     <?php foreach ((array)$models as $model):?>
     <div class="post-item">
     	<div class="post-user"><?php echo $model->PostUserName . '&nbsp;' . $model->createTime;?></div>
-        <div>
+        <div class="item-detail">
             <a href="<?php echo aurl('post/show', array('id'=>$model->id));?>" target="_blank" title="新窗口中查看段子">: :</a>
             <?php echo $model->content;?>
         </div>
@@ -17,7 +17,6 @@
         	<div class="clear"></div>
         </ul>
         <div class="comment-list comment-list-<?php echo $model->id;?> hide"></div>
-        <div class="clear"></div>
     </div>
     <?php endforeach;?>
 </div>

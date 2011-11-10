@@ -23,7 +23,7 @@
 
 
 <div class="m-wrapper m-footer">
-	<p class="fl">版权所有 ©2011 <a href="<?php echo aurl('mobile');?>">onenote.me</a></p><p class="fr">笑死人不尝命&nbsp;<a href="#top">TOP</a></p>
+	<p class="fl">版权所有 &copy;2011 <a href="<?php echo aurl('mobile');?>">onenote.me</a></p><p class="fr">笑死人不尝命&nbsp;<a href="#top">TOP</a></p>
 	<div class="clear"></div>
 </div>
 <?php $this->renderPartial('/public/tongji');?>
