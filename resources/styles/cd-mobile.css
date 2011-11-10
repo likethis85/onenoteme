@@ -1,14 +1,14 @@
 @CHARSET "UTF-8";
 
+body {font-size:18px;}
+
 .m-wrapper {display:block; margin:0px auto; overflow:hidden;}
-.m-footer {margin-top:20px;}
+.m-footer {padding:10px;}
 
 .m-logo {font-size:40px; background:white; color:#008C78; padding-left:10px;}
 .m-nav {background:#DAF2EF; padding-left:10px; font-size:30px;}
 
 /* post/list */
-.post-list {font-size:18px;}
-
 .post-list .post-item {line-height:30px; border-bottom:1px solid #D8D8D8; padding:10px;}
 .post-list .post-item-hover {background:#EFEFEF;}
 .post-list .post-tags {margin:5px 0px;}
@@ -19,4 +19,4 @@
 .item-toolbar .comment-nums a:link, .item-toolbar .comment-nums a:visited {color:#969696;}
 .item-toolbar .comment-nums a:hover {color:white;}
 
-.list-title {font-size:20px;}
+.list-title {font-size:20px; margin-left:10px;}

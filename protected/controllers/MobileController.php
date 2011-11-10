@@ -32,7 +32,7 @@ class MobileController extends Controller
         $this->render('index', array(
         	'models' => $models,
             'pages' => $pages,
-            'listTitle' => "最新段了。。。",
+            'listTitle' => "最新段子。。。",
         ));
     }
     
@@ -64,4 +64,26 @@ class MobileController extends Controller
             'listTitle' => "与{$name}相关的段子。。。",
         ));
     }
+    
+    public function actionWeek()
+    {
+        $date = new DateTime();
+        $date->sub(new DateInterval('P1W'));
+        $time = $date->getTimestamp();
+        $condition = 'create_time > ' . $time;
+        
+        $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
+        
+        $this->pageTitle = '一周最热门 - 挖段子';
+        $this->setKeywords('热门段子,热门经典语录,热门糗事百科,热门秘密,热门笑话,热门搞笑,笑话热门排行,冷笑话排行');
+        $this->setDescription('一周内段子排行，一周内笑话排行，一周内经典语录排行 ，一周糗事排行。');
+        
+        $this->channel = 'hottop';
+        $this->render('index', array(
+        	'models' => $models,
+            'listTitle' => "最热段子。。。",
+        ));
+    }
+    
+    
 }
