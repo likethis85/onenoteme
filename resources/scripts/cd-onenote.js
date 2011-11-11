@@ -23,7 +23,7 @@ var Onenote = {
 				$(tthis).html(parseInt($(tthis).html()) + 1)
 		});
 		jqXhr.fail(function(){
-			console.log('fail');
+//			console.log('fail');
 		});
 	},
 	downScore: function(event) {
@@ -38,7 +38,7 @@ var Onenote = {
 				$(tthis).html(parseInt($(tthis).html()) + 1);
 		});
 		jqXhr.fail(function(){
-			console.log('fail');
+//			console.log('fail');
 		});
 	},
 	acceptPost: function(){
@@ -52,7 +52,7 @@ var Onenote = {
 			window.location.reload();
 		});
 		jqXhr.fail(function(){
-			console.log('fail');
+//			console.log('fail');
 		});
 	},
 	refusePost: function(){
@@ -66,7 +66,7 @@ var Onenote = {
 			window.location.reload();
 		});
 		jqXhr.fail(function(){
-			console.log('fail');
+//			console.log('fail');
 		});
 	},
 	loadComments: function(event){
@@ -90,18 +90,18 @@ var Onenote = {
 				$('body').data(key, data);
 			});
 			jqXhr.fail(function(){
-				console.log('fail');
+//				console.log('fail');
 			});
 		}
 	},
 	createComment: function(){
 		var content = $(this).parents('.tbl-comment').find('.ccontent');
-		console.log(content.val());
+//		console.log(content.val());
 		if ($.trim(content.val()) == '')
 			return false;
 		
 		var data = $(this).parents('.comment-form').serialize();
-		console.log(data);
+//		console.log(data);
 		var url = $(this).parents('.comment-form').attr('action');
 		var tip = $(this).parents('.tbl-comment').find('.result-tip'); 
 		tip.removeClass('cred').removeClass('cgreen');
