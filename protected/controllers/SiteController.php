@@ -14,7 +14,12 @@ class SiteController extends Controller
     {
         $agents = array('android', 'iphone', 'blackberry', 'webos', 'windows phone');
         $agent = strtolower($_SERVER['HTTP_USER_AGENT']);
-        return in_array($agent, $agents);
+        
+        foreach ($agents as $v)
+            if (strpos($agent, $v))
+                return true;
+        
+        return false;
     }
     
     public function actionIndex()
