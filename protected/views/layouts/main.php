@@ -17,7 +17,7 @@
 	<div class="site-nav fr">
 		<div class="user-nav ar">
     		<?php $this->renderDynamic('userToolbar');?>
-    		&nbsp;&nbsp;|&nbsp;<a href="http://m.onenote.me;?>">手机版</a>
+    		&nbsp;&nbsp;|&nbsp;<a href="http://m.onenote.me">手机版</a>
 		</div>
     	<ul class="channel-nav">
     		<li <?php echo ($this->channel == 'latest') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/latest');?>">最新</a></li>
