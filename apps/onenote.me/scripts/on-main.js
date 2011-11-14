@@ -10,19 +10,19 @@ $(function(){
     $('.on-toolbar').delegate('#signup', 'click', function(event){Api_Onenote.signup();});
     
 
-	$(document).ajaxStart(function(){
-		$('#on-tip').stop(true, true);
-		Api_Tip.show('开始请求');
-	});
-	$(document).ajaxSend(function(event, jqXHR, ajaxSetting){
-		Api_Tip.show('发送请求');
-	});
-	$(document).ajaxError(function(event, jqXhr, ajaxSetting, throwError){
-		Api_Tip.errorShow('请求错误');
-    });
-	$(document).ajaxComplete(function(event, xhr, ajaxSetting){
-        Api_Tip.hide(5000, 'slow');
-    });
+//	$(document).ajaxStart(function(){
+//		$('#on-tip').stop(true, true);
+//		Api_Tip.show('开始请求');
+//	});
+//	$(document).ajaxSend(function(event, jqXHR, ajaxSetting){
+//		Api_Tip.show('发送请求');
+//	});
+//	$(document).ajaxError(function(event, jqXhr, ajaxSetting, throwError){
+//		Api_Tip.errorShow('请求错误');
+//    });
+//	$(document).ajaxComplete(function(event, xhr, ajaxSetting){
+//        Api_Tip.hide(5000, 'slow');
+//    });
 	
 	
     
