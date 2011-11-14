@@ -72,9 +72,8 @@ class Api_Post extends ApiBase
     	$post->content = $params['content'];
     	$post->tags = $params['tags'];
     	$post->create_time = $_SERVER['REQUEST_TIME'];
-    	return 1;
+    	
     	try {
-    	    return $post->validate();
     		return (int)$post->save();
     	}
     	catch (ApiException $e) {
