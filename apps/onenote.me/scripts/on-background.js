@@ -22,6 +22,6 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 
 var bgMethods = {
 	'shareText': function(request, sender, sendResponse) {
-		console.log(request);
+		Api_Onenote.createPost(request.data);
 	}
 };

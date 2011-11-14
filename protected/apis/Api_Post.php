@@ -63,12 +63,11 @@ class Api_Post extends ApiBase
     public function create()
     {
     	self::requirePost();
-    	$this->requireLogin();
-    	$this->requiredParams(array('title', 'content', 'token'));
-    	$params = $this->filterParams(array('id', 'category_id', 'title', 'content', 'tags', 'token'));
+//    	$this->requireLogin();
+    	$this->requiredParams(array('content', 'token'));
+    	$params = $this->filterParams(array('content', 'tags', 'category_d', 'token'));
     	
-    	$post = new Post();
-    	$post->title = $params['title'];
+    	$post = new Post('api');
     	$post->category_id = (int)$params['category_id'];
     	$post->content = $params['content'];
     	$post->tags = $params['tags'];

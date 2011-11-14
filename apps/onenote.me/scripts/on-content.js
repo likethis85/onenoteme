@@ -32,7 +32,7 @@ var postPages = {
 		+ 		'</div>'
 		+ 		'<label for="oncategories">分类</label>'
 		+ 		'<div>'
-		+ 			'<select name="oncategories" id="oncategories"><option value="">请选择分类</option><option value="1">太糗了</option><option value="2">太搞了</option><option value="3">太冷了</option><option value="4">太经典了</option></select>'
+		+ 			'<select name="oncategory" id="oncategory"><option value="">请选择分类</option><option value="1">太糗了</option><option value="2">太搞了</option><option value="3">太冷了</option><option value="4">太经典了</option></select>'
 		+ 		'</div>'
 		+ 	'</div>'
 		+	'<div class="actions">'
@@ -61,7 +61,7 @@ $(function(){
 	});
 	
 	$('#chrome-post').live('click', function(e){
-		var data = $('#chrome-post-form').serialize();
+		var data = $('#chrome-post-form').serializeArray();
 		console.log(data);
 		var request = {
 			method: 'shareText',

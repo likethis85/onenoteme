@@ -2,12 +2,12 @@
 var Api_Onenote = {
 	debug: 1,
 	config: {
-		apiHost: 'http://onenote.me/api/',
+		apiHost: 'http://onenote.com/api/',
 		apiKey: '123',
 		apiSecret: '123',
 		apiFormat: 'json',
 		apiGetCategories: 'category.getlist',
-        apiCreateNote: 'post.create',
+        apiCreatePost: 'post.create',
 		apiUserLogin: 'user.login',
 		apiUserLogout: 'user.logout',
 	},
@@ -68,26 +68,25 @@ var Api_Onenote = {
             console.log(jqXhr);
         });
 	},
-	newPost: function(){
-		var jqXhr = $.get('templates/newnote.html', function(data){}, 'html');
-		jqXhr.done(function(data, textStatus, jqXHR){
-			$('#container').html(data);
-			//Api_Tip.successShow('载入成功');
-		});
-	},
-	saveNewPost: function(){
-		var title = $('#note-create input[name=title]').val();
-		var content = $('#note-create textarea[name=content]').val();
-		var params = [['methods', 'note.create'], ['title', title], ['content', content], ['debug',  Api_Onenote.debug]];
+	createPost: function(data){
+		var content = data[0].value;
+		var tags = data[1].value;
+		var category_id = data[2].value;
+		var params = [['methods', Api_Onenote.config.apiCreatePost], ['content', content], ['tags', tags], ['category_id', category_id], ['debug',  Api_Onenote.debug]];
         var jqXhr = Api_Onenote.sendRequest('POST', params, true);
         jqXhr.always(function(){
             console.log('always');
         });
         jqXhr.done(function(data){
             console.log(data);
+			if (data == 1 && !data.errno)
+                Api_Onenote.showToast('发布成功', '投递成功，感谢您的参与');
+			else
+                Api_Onenote.showToast('发布出错', '投递出错，感谢您的参与，您可以再试一下');
         });
         jqXhr.fail(function(jqXhr){
             console.log(jqXhr);
+			Api_Onenote.showToast('发布出错', '投递出错，感谢您的参与，您可以再试一下');
         });
 	},
 	login: function() {
