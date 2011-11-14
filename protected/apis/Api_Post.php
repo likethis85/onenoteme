@@ -74,6 +74,7 @@ class Api_Post extends ApiBase
     	$post->create_time = $_SERVER['REQUEST_TIME'];
     	    
     	try {
+    	    return $post->validate();
     		return (int)$post->save();
     	}
     	catch (ApiException $e) {
