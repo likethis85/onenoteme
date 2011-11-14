@@ -165,7 +165,7 @@ class AppApi
             throw new ApiException('methods参数格式不正确', ApiError::METHOD_FORMAT_ERROR);
         }
         
-        $class = 'Api_' . $class;
+        $class = 'Api_' . ucfirst($class);
         if (!class_exists($class, false))
             self::importClass($class);
 
