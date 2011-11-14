@@ -1,7 +1,10 @@
+var tab;
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-    if (request.method)
+    if (request.method) {
+		tab = request.tab;
 		requestMethods[request.method](request, sender, sendResponse);
-	else
+	}
+	else 
 		console.log('request is invalid.');
 });
 
@@ -11,6 +14,11 @@ var requestMethods = {
 			postPages[request.context](request);
 		else
 			console.log('request context is invalid.');
+	},
+	closePostPage: function(request, sender, sendResponse){
+		console.log(request);
+		if (request.result == 1)
+            $('#chrome-close').click();
 	}
 };
 
@@ -65,7 +73,8 @@ $(function(){
 		console.log(data);
 		var request = {
 			method: 'shareText',
-			data: data
+			data: data,
+			tab: tab
 		};
 		chrome.extension.sendRequest(request);
 	});

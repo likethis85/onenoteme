@@ -1,7 +1,7 @@
 {
-	"name": "onenote.me快速发布插件",
+	"name": "挖段子快速发布插件",
 	"version": "1.0",
-	"description": "onenote.me 快速发布插件，随时随地记录点点滴滴",
+	"description": "挖段子快速发布插件，随时随地挖段子",
 	"background_page": "background.html",
 	"icons": {
 		"16": "images/icon.png",
@@ -22,7 +22,7 @@
 	"browser_action": {
 		"default_icon": "images/icon.png",
 		"popup": "main.html",
-		"default_title": "onenote.me快速发布插件"
+		"default_title": "挖段子快速发布插件"
 	},
 	"content_scripts": [
 		{

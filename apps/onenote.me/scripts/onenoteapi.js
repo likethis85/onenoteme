@@ -1,6 +1,6 @@
 
 var Api_Onenote = {
-	debug: 1,
+	debug: 0,
 	config: {
 		apiHost: 'http://onenote.me/api',
 		apiKey: '123',
@@ -68,7 +68,8 @@ var Api_Onenote = {
             console.log(jqXhr);
         });
 	},
-	createPost: function(data){
+	createPost: function(data, tab){
+		console.log(tab);
 		var content = data[0].value;
 		var tags = data[1].value;
 		var category_id = data[2].value;
@@ -79,10 +80,16 @@ var Api_Onenote = {
         });
         jqXhr.done(function(data){
             console.log(data);
-			if (data == 1 && !data.errno)
-                Api_Onenote.showToast('发布成功', '投递成功，感谢您的参与');
-			else
-                Api_Onenote.showToast('发布出错', '投递出错，感谢您的参与，您可以再试一下');
+			if (data == 1 && !data.errno) {
+				var contents = {
+					method: 'closePostPage',
+					result: 1
+				};
+				chrome.tabs.sendRequest(tab.id, contents);
+				Api_Onenote.showToast('发布成功', '投递成功，感谢您的参与');
+			}
+			else 
+				Api_Onenote.showToast('发布出错', '投递出错，感谢您的参与，您可以再试一下');
         });
         jqXhr.fail(function(jqXhr){
             console.log(jqXhr);
