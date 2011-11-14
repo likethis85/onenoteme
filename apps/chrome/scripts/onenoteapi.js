@@ -53,7 +53,9 @@ var Api_Onenote = {
         return jqXhr;
     },
 	showToast: function($title, $text){
-		webkitNotifications.createNotification('images/48.png', $title, $text).show();
+		var notification  = webkitNotifications.createNotification('images/48.png', $title, $text);
+		notification.onshow = function(){setTimeout(notification.cancel(), 3000);};
+		notification.show();
 	},
 	loadCategories: function(offset, count) {
 		var params = [['methods', 'category.getlist'], ['debug', Api_Onenote.debug]];
