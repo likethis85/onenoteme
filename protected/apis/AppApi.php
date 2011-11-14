@@ -34,8 +34,8 @@ class AppApi
     private function init()
     {
 //        sleep(3);
-        set_error_handler(array($this, 'errorHandler'), E_ERROR);
-    	set_exception_handler(array($this, 'exceptionHandler'));
+//        set_error_handler(array($this, 'errorHandler'), E_ERROR);
+//    	set_exception_handler(array($this, 'exceptionHandler'));
     }
     
     /**
