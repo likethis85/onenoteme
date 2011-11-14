@@ -17,7 +17,7 @@
         			    type:'3',
         			    count:'',
         			    appkey:'3658366445',
-        			    title: $.trim($('#content').html()),
+        			    title: '#笑话#' + $.trim($('#content').html()),
         			    pic:'',
         			    ralateUid:'1639121454',
         			    rnd:new Date().valueOf()
@@ -37,7 +37,7 @@
         			var p = {
     					url:location.href,
     					desc:'哈哈，太搞笑了',
-    					summary: $.trim($('#content').html()),
+    					summary: '#笑话#' + $.trim($('#content').html()),
     					title:'哈哈，太搞笑了',
     					site:'挖段子',
     					pics:''
