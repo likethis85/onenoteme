@@ -2,7 +2,7 @@
 var Api_Onenote = {
 	debug: 1,
 	config: {
-		apiHost: 'http://onenote.me/api/',
+		apiHost: 'http://onenote.me/api',
 		apiKey: '123',
 		apiSecret: '123',
 		apiFormat: 'json',
