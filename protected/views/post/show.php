@@ -17,14 +17,14 @@
         			    type:'3',
         			    count:'',
         			    appkey:'3658366445',
-        			    title: $('#content').html(),
+        			    title: $.trim($('#content').html()),
         			    pic:'',
         			    ralateUid:'1639121454',
         			    rnd:new Date().valueOf()
         			}
         			var temp = [];
         			for( var p in param ){
-        				temp.push(p + '=' + encodeURIComponent( param[p] || '' ) )
+        				temp.push(p + '=' + encodeURIComponent( param[p] || '' ));
         			}
         			document.write('<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="'+ _w+'" height="'+_h+'"></iframe>')
         		})();
@@ -37,7 +37,7 @@
         			var p = {
     					url:location.href,
     					desc:'哈哈，太搞笑了',
-    					summary:$('#content').html(),
+    					summary: $.trim($('#content').html()),
     					title:'哈哈，太搞笑了',
     					site:'挖段子',
     					pics:''
