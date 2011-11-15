@@ -12,9 +12,9 @@ return array(
     'userIsRequireEmailVerify' => false,
 
     'uploadBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'uploads' . DS,
-    'uploadBaseUrl' => 'http://f.onenote.me/',
+    'uploadBaseUrl' => 'http://f.waduanzi.com/',
     'resourceBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'resources' . DS,
-    'resourceBaseUrl' => 'http://s.onenote.me/',
+    'resourceBaseUrl' => 'http://s.waduanzi.com/',
 
     /*
      * datetime format

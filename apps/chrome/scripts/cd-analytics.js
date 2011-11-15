@@ -1,5 +1,6 @@
 var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-7803750-8']);
+_gaq.push(['_setAccount', 'UA-7803750-9']);
+_gaq.push(['_setDomainName', '.waduanzi.com']);
 _gaq.push(['_trackPageview']);
 
 (function() {

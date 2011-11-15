@@ -4,7 +4,7 @@ $params = require(dirname(__FILE__) . DS . 'params_product.php');
 
 return array(
     'basePath' => dirname(__FILE__) . DS . '..',
-    'id' => 'onenote.me',
+    'id' => 'waduanzi.com',
     'name' => '挖段子',
     'language' => 'zh_cn',
     'charset' => 'utf-8',
@@ -21,7 +21,7 @@ return array(
     'components' => array(
         'db' => array(
             'class' => 'CDbConnection',
-			'connectionString' => 'mysql:host=localhost; port=3306; dbname=cd_onenote',
+			'connectionString' => 'mysql:host=localhost; port=3306; dbname=cd_waduanzi',
 			'username' => 'root',
 		    'password' => 'cdc_790406',
 		    'charset' => 'utf8',

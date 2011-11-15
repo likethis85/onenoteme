@@ -1,23 +1,23 @@
 
-var Api_Onenote = {
+var Api_Waduanzi = {
 	debug: 0,
 	config: {
-		apiHost: 'http://onenote.me/api',
+		apiHost: 'http://www.waduanzi.com/api',
 		apiKey: '123',
 		apiSecret: '123',
 		apiFormat: 'json',
 		apiGetCategories: 'category.getlist',
         apiCreatePost: 'post.create',
 		apiUserLogin: 'user.login',
-		apiUserLogout: 'user.logout',
+		apiUserLogout: 'user.logout'
 	},
 	windowInit: function() {
-		var user = Api_Onenote.userinfo();
+		var user = Api_Waduanzi.userinfo();
         if (user.token) {
             console.log('user logined.');
         }
         else {
-            Api_Onenote.login();
+            Api_Waduanzi.login();
         }
 	},
 	userinfo: function() {
@@ -26,28 +26,28 @@ var Api_Onenote = {
 		return user;
 	},
 	getRequestUrl: function(method, params) {
-		var accessor = {consumerSecret: Api_Onenote.config.apiSecret, tokenSecret: '', accessorSecret: ''};
-        params.push(['oauth_consumer_key', Api_Onenote.config.apiKey]);
-        params.push(['format', Api_Onenote.config.apiFormat]);
-        var message = {method: method, action: Api_Onenote.config.apiHost, parameters: params};
+		var accessor = {consumerSecret: Api_Waduanzi.config.apiSecret, tokenSecret: '', accessorSecret: ''};
+        params.push(['oauth_consumer_key', Api_Waduanzi.config.apiKey]);
+        params.push(['format', Api_Waduanzi.config.apiFormat]);
+        var message = {method: method, action: Api_Waduanzi.config.apiHost, parameters: params};
 		
         OAuth.completeRequest(message, accessor);
 		//var bs = OAuth.SignatureMethod.getBaseString(message);
 		//console.log(bs);
 		var parameters = OAuth.SignatureMethod.normalizeParameters(message.parameters);
-		var url = OAuth.addToURL(Api_Onenote.config.apiHost, parameters) + '&oauth_signature=' + OAuth.getParameter(message.parameters, "oauth_signature");
+		var url = OAuth.addToURL(Api_Waduanzi.config.apiHost, parameters) + '&oauth_signature=' + OAuth.getParameter(message.parameters, "oauth_signature");
 		return url;
     },
     sendRequest: function(method, params/*, requireLogined*/) {
 		if (arguments[2]) {
-			var user = Api_Onenote.userinfo();
+			var user = Api_Waduanzi.userinfo();
 			params.push(['token', user.token]);
 		}
 		  
-        var url = Api_Onenote.getRequestUrl(method, params);
+        var url = Api_Waduanzi.getRequestUrl(method, params);
 		var jqXhr = $.ajax({
 			url: url,
-			dataType: Api_Onenote.config.apiFormat,
+			dataType: Api_Waduanzi.config.apiFormat,
 			type: method
 		});
         return jqXhr;
@@ -58,8 +58,8 @@ var Api_Onenote = {
 		notification.show();
 	},
 	loadCategories: function(offset, count) {
-		var params = [['methods', 'category.getlist'], ['debug', Api_Onenote.debug]];
-        var jqXhr = Api_Onenote.sendRequest('GET', params, true);
+		var params = [['methods', 'category.getlist'], ['debug', Api_Waduanzi.debug]];
+        var jqXhr = Api_Waduanzi.sendRequest('GET', params, true);
 		jqXhr.always(function(){
 			console.log('always');
 		});
@@ -75,8 +75,8 @@ var Api_Onenote = {
 		var content = data[0].value;
 		var tags = data[1].value;
 		var category_id = data[2].value;
-		var params = [['methods', Api_Onenote.config.apiCreatePost], ['content', content], ['tags', tags], ['category_id', category_id], ['debug',  Api_Onenote.debug]];
-        var jqXhr = Api_Onenote.sendRequest('POST', params, true);
+		var params = [['methods', Api_Waduanzi.config.apiCreatePost], ['content', content], ['tags', tags], ['category_id', category_id], ['debug',  Api_Waduanzi.debug]];
+        var jqXhr = Api_Waduanzi.sendRequest('POST', params, true);
         jqXhr.always(function(){
             console.log('always');
         });
@@ -88,14 +88,14 @@ var Api_Onenote = {
 					result: 1
 				};
 				chrome.tabs.sendRequest(tab.id, contents);
-				Api_Onenote.showToast('发布成功', '投递成功，感谢您的参与');
+				Api_Waduanzi.showToast('发布成功', '投递成功，感谢您的参与');
 			}
 			else 
-				Api_Onenote.showToast('发布出错', '投递出错，感谢您的参与，您可以再试一下');
+				Api_Waduanzi.showToast('发布出错', '投递出错，感谢您的参与，您可以再试一下');
         });
         jqXhr.fail(function(jqXhr){
             console.log(jqXhr);
-			Api_Onenote.showToast('发布出错', '投递出错，感谢您的参与，您可以再试一下');
+			Api_Waduanzi.showToast('发布出错', '投递出错，感谢您的参与，您可以再试一下');
         });
 	},
 	login: function() {
@@ -110,7 +110,7 @@ var Api_Onenote = {
 		delete user.token;
 		localStorage.setItem('user', JSON.stringify(user));
 		$('#main-container').slideUp('fast');
-		Api_Onenote.login();
+		Api_Waduanzi.login();
 	},
 	submitLogin: function() {
 		var name = $('#login-form input[name=username]').val();
@@ -118,8 +118,8 @@ var Api_Onenote = {
 		if ($.trim(name).length == 0) return false;
 		
         var passwd = $('#login-form input[name=password]').val();
-        var params = [['methods', 'user.login'], ['name', name], ['password', hex_md5(passwd)], ['debug',  Api_Onenote.debug]];
-        var jqXhr = Api_Onenote.sendRequest('POST', params, true);
+        var params = [['methods', 'user.login'], ['name', name], ['password', hex_md5(passwd)], ['debug',  Api_Waduanzi.debug]];
+        var jqXhr = Api_Waduanzi.sendRequest('POST', params, true);
         jqXhr.always(function(){
             console.log('always');
         });
@@ -129,7 +129,7 @@ var Api_Onenote = {
 				console.log('登录成功');
                 localStorage.setItem('user', JSON.stringify(data));
                 $('#top-container').animate({top: "-500px"});
-                Api_Onenote.windowInit();
+                Api_Waduanzi.windowInit();
             }
             else
                 console.log('登录失败')
