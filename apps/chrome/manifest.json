@@ -1,6 +1,6 @@
 {
 	"name": "挖段子快速发布插件",
-	"version": "1.2",
+	"version": "1.3",
 	"description": "挖段子快速发布插件，随时随地挖段子",
 	"background_page": "background.html",
 	"update_url": "http://s.waduanzi.com/chrome/updates.xml",
@@ -28,8 +28,8 @@
 	"content_scripts": [
 		{
 			"matches": ["http://*/*"],
-			"css": ["styles/on-content.css"],
-			"js": ["scripts/libs/jquery-1.7.min.js", "scripts/on-content.js"]
+			"css": ["styles/cd-content.css"],
+			"js": ["scripts/libs/jquery-1.7.min.js", "scripts/cd-content.js"]
 		}
     ]
 }
