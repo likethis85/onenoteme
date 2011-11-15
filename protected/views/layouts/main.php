@@ -17,7 +17,7 @@
 	<div class="site-nav fr">
 		<div class="user-nav ar">
     		<?php $this->renderDynamic('userToolbar');?>
-    		&nbsp;&nbsp;|&nbsp;<a href="http://m.onenote.me">手机版</a>
+    		&nbsp;&nbsp;|&nbsp;<a href="http://m.waduanzi.com">手机版</a>
 		</div>
     	<ul class="channel-nav">
     		<li <?php echo ($this->channel == 'latest') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/latest');?>">最新</a></li>
@@ -42,7 +42,7 @@
 </div>
 
 <div class="cd-wrapper cd-footer">
-	<p class="fl">内容版权所有 ©2011 <a href="">onenote.me</a>  鲁ICP备11024271号-2</p><p class="fr">笑死人不尝命&nbsp;<a href="#top">TOP</a></p>
+	<p class="fl">内容版权所有 ©2011 <a href="">waduanzi.com</a>  鲁ICP备11024271号-2</p><p class="fr">笑死人不尝命&nbsp;<a href="#top">TOP</a></p>
 	<div class="clear"></div>
 </div>
 <div class="space10px"></div>
@@ -50,4 +50,4 @@
 </body>
 </html>
 
-<?php cs()->registerScriptFile(sbu('scripts/cd-onenote.js'), CClientScript::POS_END);?>
+<?php cs()->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END);?>
