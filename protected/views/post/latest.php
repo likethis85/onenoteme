@@ -1,5 +1,5 @@
 <div class="fl cd-container">
-	<h2 class="cd-catption"><span class="fl">最新段子· · · · · ·</span><span class="fr">手机版正式上线: <a href="http://m.onenote.me">http://m.onenote.me</a></span><div class="clear"></div></h2>
+	<h2 class="cd-catption"><span class="fl">最新段子· · · · · ·</span><span class="fr">手机版正式上线: <a href="http://m.waduanzi.com">http://m.waduanzi.com</a></span><div class="clear"></div></h2>
     <?php $this->renderPartial('list', array('models'=>$models, 'pages'=>$pages));?>
 </div>
 
