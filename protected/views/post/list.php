@@ -57,6 +57,5 @@ $(function(){
 });
 </script>
 
-
-
 <?php cs()->registerScriptFile(sbu('scripts/snsshare.js'), CClientScript::POS_END);?>
+

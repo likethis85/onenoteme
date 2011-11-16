@@ -2,15 +2,15 @@
  * 
  */
 $(function(){
-	$('.item-toolbar').delegate('.upscore', 'click', Onenote.upScore);
-	$('.item-toolbar').delegate('.downscore', 'click', Onenote.downScore);
-	$('.buttons').delegate('#refuse-post', 'click', Onenote.refusePost);
-	$('.buttons').delegate('#accept-post', 'click', Onenote.acceptPost);
-	$('.comment-nums').delegate('.view-comments', 'click', Onenote.loadComments);
-	$('.submit-button').live('click', Onenote.createComment);
+	$('.item-toolbar .upscore').click(Waduanzi.upScore);
+	$('.item-toolbar .downscore').click(Waduanzi.downScore);
+	$('.buttons #refuse-post').click(Waduanzi.refusePost);
+	$('.buttons #accept-post').click(Waduanzi.acceptPost);
+	$('.comment-nums .view-comments').click(Waduanzi.loadComments);
+	$(document).on('click', '.submit-button', Waduanzi.createComment);
 });
 
-var Onenote = {
+var Waduanzi = {
 	upScore: function(event) {
 		var pid = parseInt($(this).attr('pid'));
 		if (pid < 1) return false;

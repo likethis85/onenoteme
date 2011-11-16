@@ -7,7 +7,7 @@
 <meta name="copyright" content="Copyright (c) 2011 onenote.me All Rights Reserved." />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-basic.css');?>" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-mobile.css?v=20111110.02');?>" />
-<script type="text/javascript" src="<?php echo sbu('scripts/jquery-1.6.4.min.js');?>"></script>
+<script type="text/javascript" src="<?php echo sbu('scripts/jquery-1.7.min.js');?>"></script>
 </head>
 <body>
 <a name="top"></a>
