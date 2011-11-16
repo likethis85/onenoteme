@@ -77,6 +77,10 @@
 .post-detail .item-toolbar {margin:30px 0px 15px 0px; padding:0px 30px}
 .snsshare {width:22px; padding-top:3px;}
 .snsshare a:hover {text-decoration:none;}
+.sns-share {background-image:url(../images/sitebg.png); background-repeat:no-repeat; width:16px; height:16px; overflow:hidden; display:block; margin-left:5px; margin-top:5px; cursor:pointer;}
+.sns-share.weibo {background-position:left 0px;}
+.sns-share.qqt {background-position:left -24px;}
+.sns-share.qzone {background-position:left -48px;}
 
 /* comment/list */
 .comment-list {margin-bottom:15px; border-top:3px solid #D8D8D8;}
