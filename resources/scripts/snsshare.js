@@ -18,7 +18,7 @@ function postToWb(title)
     window.open( _u,'', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' );
 }
 
-function shareToWeibo(url, content)
+function shareToQQT(url, content)
 {
 	var _url = encodeURIComponent(url);
 	var _assname = encodeURI("cdcchen");
@@ -31,7 +31,7 @@ function shareToWeibo(url, content)
     window.open( _u,'', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' );
 }
 
-function shareToQQT(url, content)
+function shareToWeibo(url, content)
 {
 	var _url = encodeURIComponent(url);
 	var _ralateUid = encodeURI("1639121454");
