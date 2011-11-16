@@ -4,7 +4,7 @@
     	<div class="post-user"><?php echo $model->PostUserName . '&nbsp;' . $model->createTime;?></div>
         <div class="item-detail">
             <a class="item-link" href="<?php echo aurl('post/show', array('id'=>$model->id));?>" target="_blank" title="新窗口中查看段子">: :</a>
-            <div class="item-content"><?php echo $model->content;?></div>
+            <span class="item-content"><?php echo $model->content;?></span>
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->tagsLinks;?></div><?php endif;?>
         <ul class="item-toolbar cgray" postid="<?php echo $model->id;?>">

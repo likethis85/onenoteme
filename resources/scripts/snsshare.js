@@ -35,7 +35,7 @@ function shareToWeibo(url, content)
 {
 	var _url = encodeURIComponent(url);
 	var _ralateUid = encodeURI("1639121454");
-    var _appkey = encodeURI("3658366445");
+    var _appkey = encodeURI("2981913360");
     var _t = content;
     if (_t.length > 170)
         _t= _t.substr(0,167) + '...';
