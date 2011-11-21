@@ -11,6 +11,7 @@
  * @property integer $create_time
  * @property string $create_ip
  * @property integer $state
+ * @property sting token
  */
 class DUser extends DModel
 {
@@ -40,6 +41,6 @@ class DUser extends DModel
     
     public function columns()
     {
-        return array('id', 'email', 'name', 'password', 'create_time', 'create_ip', 'state');
+        return array('id', 'email', 'name', 'password', 'create_time', 'create_ip', 'state', 'token');
     }
 }

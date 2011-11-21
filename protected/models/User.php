@@ -100,6 +100,7 @@ class User extends CActiveRecord
 	        $this->password = md5($this->password);
 	        $this->create_time = $_SERVER['REQUEST_TIME'];
 	        $this->create_ip = request()->getUserHostAddress();
+	        $this->token = md5($_SERVER['REQUEST_TIME'] . uniqid());
 	    }
 	    
 	    return true;
