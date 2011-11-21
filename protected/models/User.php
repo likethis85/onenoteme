@@ -58,7 +58,7 @@ class User extends CActiveRecord
 			array('name', 'length', 'min'=>2, 'max'=>50),
 			array('password', 'length', 'min'=>3, 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
-			array('token', 'length', 'is'=>32),
+			array('token', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, email, name, password, create_time, create_ip, state, token', 'safe', 'on'=>'search'),
@@ -130,6 +130,8 @@ class User extends CActiveRecord
 		$criteria->compare('create_ip',$this->create_ip,true);
 
 		$criteria->compare('state',$this->state);
+		
+		$criteria->compare('token',$this->token);
 
 		return new CActiveDataProvider('User', array(
 			'criteria'=>$criteria,
