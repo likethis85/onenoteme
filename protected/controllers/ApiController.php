@@ -8,4 +8,12 @@ class ApiController extends Controller
         
         $api->run();
     }
+    
+    public function actionJsonp()
+    {
+        $apiUrl = 'http://waduanzi.com/api/jsonp';
+        $api = new AppApi($apiUrl, $_REQUEST);
+        
+        $api->run();
+    }
 }

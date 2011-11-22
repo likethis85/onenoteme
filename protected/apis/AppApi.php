@@ -147,7 +147,7 @@ class AppApi
      */
     private function checkFormat()
     {
-        if (!in_array(strtolower($this->_format), array('json', 'xml'))) {
+        if (!in_array(strtolower($this->_format), array('json', 'xml', 'jsonp'))) {
             throw new ApiException('format 参数错误', ApiError::FORMAT_INVALID);
         }
         return $this;
@@ -254,6 +254,11 @@ class AppApi
     private static function outputXml($data)
     {
         return 'xml';
+    }
+    
+    private static function outputJsonp($data)
+    {
+        return $this->_args['callback'] . '(' . json_encode($data) . ')';
     }
     
     public function errorHandler($errno, $message, $file, $line)

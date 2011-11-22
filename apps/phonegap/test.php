@@ -29,5 +29,5 @@ $data = array(
 $offset = (int)$_GET['start'];
 
 $data = array_splice($data, $offset, (int)$_GET['limit']);
-sleep(2);
-echo json_encode($data);
+sleep(1);
+echo $_GET['callback'] . '(' . json_encode($data) . ')';
