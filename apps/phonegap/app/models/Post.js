@@ -15,11 +15,11 @@ app.stores.LatestPosts = new Ext.data.Store({
 //		property: 'id',
 //		direction: 'desc'
 //	}],
-	pageSize: 5,
+	pageSize: 10,
 	autoLoad: true,
     proxy: {
         type: 'scripttag',
-        url: 'http://waduanzi.cn/phone/latest',
+        url: 'http://www.waduanzi.com/phone/latest',
         reader: {
             type: 'json'
         },
@@ -36,11 +36,11 @@ app.stores.HottestPosts = new Ext.data.Store({
 //		property: 'id',
 //		direction: 'desc'
 //	}],
-	pageSize: 5,
+	pageSize: 10,
 	autoLoad: true,
     proxy: {
         type: 'scripttag',
-        url: 'http://waduanzi.cn/phone/hottest',
+        url: 'http://www.waduanzi.com/phone/hottest',
         reader: {
             type: 'json'
         },
@@ -57,11 +57,11 @@ app.stores.CategoryPosts = new Ext.data.Store({
 //		property: 'id',
 //		direction: 'desc'
 //	}],
-	pageSize: 5,
+	pageSize: 10,
 	autoLoad: true,
     proxy: {
         type: 'scripttag',
-        url: 'http://waduanzi.cn/phone/category',
+        url: 'http://www.waduanzi.com/phone/category',
         reader: {
             type: 'json'
         },

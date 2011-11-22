@@ -8,7 +8,7 @@ app.views.CategoryList = Ext.extend(Ext.Panel, {
 		items: [{
             xtype: 'segmentedbutton',
             items: [{
-					text: '太搞了',
+					text: '太糗了',
 					pressed: true,
 					handler: function() {
 						Ext.apply(app.stores.CategoryPosts.getProxy().extraParams, {
@@ -17,7 +17,7 @@ app.views.CategoryList = Ext.extend(Ext.Panel, {
 	                    app.stores.CategoryPosts.load();
 	                }
 				}, {
-					text: '太冷了',
+					text: '太搞了',
 					handler: function() {
 						Ext.apply(app.stores.CategoryPosts.getProxy().extraParams, {
 							cid: 2
@@ -25,10 +25,18 @@ app.views.CategoryList = Ext.extend(Ext.Panel, {
 	                    app.stores.CategoryPosts.load();
 	                }
 				}, {
-					text: '太经典了',
+					text: '太冷了',
 					handler: function() {
 						Ext.apply(app.stores.CategoryPosts.getProxy().extraParams, {
 							cid: 3
+						});
+	                    app.stores.CategoryPosts.load();
+	                }
+				}, {
+					text: '太经典了',
+					handler: function() {
+						Ext.apply(app.stores.CategoryPosts.getProxy().extraParams, {
+							cid: 4
 						});
 	                    app.stores.CategoryPosts.load();
 	                }
