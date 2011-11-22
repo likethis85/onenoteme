@@ -7,10 +7,7 @@ app.views.viewport = Ext.extend(Ext.TabPanel, {
     },
     fullscreen: true,
     ui: 'light',
-    cardSwitchAnimation: {
-        type: 'slide',
-        cover: true
-    },
+    cardSwitchAnimation: false,
     defaults: {
         scroll: 'vertical'
     },
