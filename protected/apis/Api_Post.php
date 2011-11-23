@@ -65,17 +65,28 @@ class Api_Post extends ApiBase
     	self::requirePost();
 //    	$this->requireLogin();
     	$this->requiredParams(array('content', 'token'));
-    	$params = $this->filterParams(array('content', 'tags', 'category_d', 'token'));
+    	$params = $this->filterParams(array('content', 'tags', 'category_id', 'pic', 'token'));
     	
     	$post = new Post('api');
     	$post->category_id = (int)$params['category_id'];
     	$post->content = $params['content'];
+    	$post->pic = $params['pic'];
     	$post->tags = $params['tags'];
     	$post->create_time = $_SERVER['REQUEST_TIME'];
     	$post->state = Post::STATE_ENABLED;
     	$post->up_score = mt_rand(3, 15);
     	$post->down_score = mt_rand(0, 2);
     	
+    	if ($url = $params['pic']) {
+    	    $path = CDBase::makeUploadPath('pics');
+            $file = CDBase::makeUploadFileName($model->pic->extensionName);
+            $filename = $path['path'] . $file;
+    	    $curl = new CdCurl();
+    	    $curl->get($url);
+    	    $data = $curl->rawdata();
+    	    file_put_contents($filename, $data);
+    	    $post->pic = fbu($path['url'] . $filename);
+    	}
     	
     	try {
     		return (int)$post->save();

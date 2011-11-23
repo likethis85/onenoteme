@@ -13,6 +13,7 @@ return array(
     'import' => array(
         'application.dmodels.*',
         'application.models.*',
+        'application.extensions.*',
         'application.components.*',
         'application.apis.*',
         'application.libs.*',

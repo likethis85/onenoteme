@@ -8,6 +8,7 @@
  * @property integer $category_id
  * @property string $title
  * @property string $content
+ * @property string $pic
  * @property integer $create_time
  * @property integer $up_score
  * @property integer $down_score
@@ -55,6 +56,7 @@ class Post extends CActiveRecord
 			array('title, tags', 'length', 'max'=>200),
 			array('user_name', 'length', 'max'=>50),
 			array('content', 'safe'),
+			array('pic', 'file', 'allowEmpty'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, category_id, title, content, create_time, up_score, down_score, comment_nums, tags, state', 'safe', 'on'=>'search'),
@@ -84,6 +86,7 @@ class Post extends CActiveRecord
 			'category_id' => '分类',
 			'title' => '标题',
 			'content' => '内容',
+		    'pic' => '图片',
 			'create_time' => '发布时间',
 		    'up_score' => '顶数',
 		    'down_score' => '浏览',

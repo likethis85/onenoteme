@@ -8,6 +8,7 @@
  * @property integer $category_id
  * @property string $title
  * @property string $content
+ * @property string $pic
  * @property integer $create_time
  * @property integer $up_score
  * @property integer $down_score
@@ -44,7 +45,7 @@ class DPost extends DModel
     
     public function columns()
     {
-        return array('id', 'category_id', 'title', 'content', 'create_time', 'up_score', 'down_score', 'comment_nums', 'user_id', 'user_name', 'tags', 'state');
+        return array('id', 'category_id', 'title', 'content', 'pic', 'create_time', 'up_score', 'down_score', 'comment_nums', 'user_id', 'user_name', 'tags', 'state');
     }
     
     protected function afterFind()

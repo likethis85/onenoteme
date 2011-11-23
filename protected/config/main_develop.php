@@ -13,6 +13,7 @@ return array(
     'import' => array(
         'application.dmodels.*',
         'application.models.*',
+        'application.extensions.*',
         'application.components.*',
         'application.apis.*',
         'application.libs.*',
@@ -36,7 +37,7 @@ return array(
         ),
         'db' => array(
             'class' => 'CDbConnection',
-			'connectionString' => 'mysql:host=127.0.0.1; port=3306; dbname=cd_onenote',
+			'connectionString' => 'mysql:host=127.0.0.1; port=3306; dbname=cd_waduanzi',
 			'username' => 'root',
 		    'password' => '123',
 		    'charset' => 'utf8',

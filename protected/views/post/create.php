@@ -1,6 +1,6 @@
 <h2>有好段子？一块分享下吧。</h2>
 <div class="fl cd-container">
-    <?php echo CHtml::form('', 'POST', array('class'=>'create-form post-form'));?>
+    <?php echo CHtml::form('', 'POST', array('class'=>'create-form post-form', 'enctype'=>'multipart/form-data'));?>
     <ul>
     	<li><?php echo CHtml::activeTextArea($model, 'content', array('tabindex'=>1));?></li>
         <li>
@@ -15,6 +15,11 @@
             <span class="cgray f12px">（可以不选）</span>
         </li>
         <?php endif;?>
+        <li>
+            <label>图　片：</label>
+            <?php echo CHtml::activeFileField($model, 'pic', array('tabindex'=>4));?>
+            <span class="cgray f12px">（可以不选）</span>
+        </li>
         <li>
             <label>名　字：</label>
             <?php echo CHtml::activeTextField($model, 'user_name', array('class'=>'txt post-username', 'tabindex'=>5));?>

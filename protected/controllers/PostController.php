@@ -23,10 +23,24 @@ class PostController extends Controller
             if (!user()->getIsGuest() && empty($model->user_name))
                 $model->user_name = user()->name;
             $model->state = (app()->session['state'] >= User::STATE_EDITOR) ? Post::STATE_ENABLED : Post::STATE_DISABLED;
+            
+            $model->pic = CUploadedFile::getInstance($model, 'pic');
             if ($model->save()) {
                 $msg = '<span class="cgreen f12px">发布成功，' . CHtml::link('点击查看', $model->url, array('target'=>'_blank')) . '，您还可以继续发布。</span>';
                 user()->setFlash('createPostResult', $msg);
                 user()->setFlash('allowUserView', user()->name);
+                
+                if ($model->pic) {
+                    $path = CDBase::makeUploadPath('pics');
+                    $file = CDBase::makeUploadFileName($model->pic->extensionName);
+                    $filename = $path['path'] . $file;
+                    
+                    if ($r = $model->pic->saveAs($filename)) {
+                        $model->pic = fbu($path['url'] . $filename);
+                        $model->update(array('pic'));
+                    }
+                }
+                
                 $this->redirect(aurl('post/create'));
             }
             else
