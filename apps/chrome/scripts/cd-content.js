@@ -38,6 +38,11 @@ var postPages = {
 		+ 			'<input type="text" class="chrome-tags" name="ontags" id="ontags" />'
 		+ 			'<span class="help-block">多个用逗号或空格分隔</span>'
 		+ 		'</div>'
+		+ 		'<label for="ontags">图片</label>'
+		+ 		'<div class="input">'
+		+ 			'<input type="text" class="chrome-tags" name="ontags" id="ontags" />'
+		+ 			'<span class="help-block">多个用逗号或空格分隔</span>'
+		+ 		'</div>'
 		+ 		'<label for="oncategories">分类</label>'
 		+ 		'<div>'
 		+ 			'<select name="oncategory" id="oncategory"><option value="">请选择分类</option><option value="1">太糗了</option><option value="2">太搞了</option><option value="3">太冷了</option><option value="4">太经典了</option></select>'
@@ -51,7 +56,35 @@ var postPages = {
 		$('body').append(html);
 	},
 	image: function(request){
-		console.log('image');
+		var html = '<div class="chrome-container" id="chrome-container">'
+        + '<form action="" class="form-stacked" id="chrome-post-form">'
+        +   '<div class="clearfix">'
+        +       '<label for="content">内容</label>'
+        +       '<div class="input">'
+        +           '<textarea class="chrome-content" name="oncontent" id="oncontent" rows="10"></textarea>'
+        +           '<span class="help-block">内容中不允许出现html代码和广告链接</span>'
+        +       '</div>'
+        +       '<label for="ontags">标签</label>'
+        +       '<div class="input">'
+        +           '<input type="text" class="chrome-tags" name="ontags" id="ontags" />'
+        +           '<span class="help-block">多个用逗号或空格分隔</span>'
+        +       '</div>'
+        +       '<label for="ontags">图片</label>'
+        +       '<div class="input">'
+        +           '<input type="text" class="chrome-tags" name="onpic" id="ontags" value="' + request.info.srcUrl + '" />'
+        +           '<span class="help-block">多个用逗号或空格分隔</span>'
+        +       '</div>'
+        +       '<label for="oncategories">分类</label>'
+        +       '<div>'
+        +           '<select name="oncategory" id="oncategory"><option value="">请选择分类</option><option value="1">太糗了</option><option value="2">太搞了</option><option value="3">太冷了</option><option value="4">太经典了</option></select>'
+        +       '</div>'
+        +   '</div>'
+        +   '<div class="actions">'
+        +       '<input type="button" class="btn primary" id="chrome-post" value="发布" />&nbsp;<input type="button" class="btn" id="chrome-close" value="关闭" />'
+        +   '</div>'
+        + '</form></div>';
+        
+        $('body').append(html);
 	},
 	page: function(request){
 		console.log('page');

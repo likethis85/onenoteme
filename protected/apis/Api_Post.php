@@ -77,16 +77,23 @@ class Api_Post extends ApiBase
     	$post->up_score = mt_rand(3, 15);
     	$post->down_score = mt_rand(0, 2);
     	
-    	if ($url = $params['pic']) {
-    	    $path = CDBase::makeUploadPath('pics');
-            $file = CDBase::makeUploadFileName($model->pic->extensionName);
-            $filename = $path['path'] . $file;
-    	    $curl = new CdCurl();
-    	    $curl->get($url);
-    	    $data = $curl->rawdata();
-    	    file_put_contents($filename, $data);
-    	    $post->pic = fbu($path['url'] . $file);
+    	try {
+        	if ($url = $params['pic']) {
+        	    $path = CDBase::makeUploadPath('pics');
+        	    $info = parse_url($url);
+                $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);
+                $file = CDBase::makeUploadFileName($extensionName);
+                $filename = $path['path'] . $file;
+        	    $curl = new CdCurl();
+        	    $curl->get($url);
+        	    $data = $curl->rawdata();
+        	    file_put_contents($filename, $data);
+        	    $post->pic = fbu($path['url'] . $file);
+        	}
     	}
+        catch (CException $e) {
+            var_dump($e);
+        }
     	
     	try {
     		return (int)$post->save();

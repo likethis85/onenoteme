@@ -74,8 +74,9 @@ var Api_Waduanzi = {
 		console.log(tab);
 		var content = data[0].value;
 		var tags = data[1].value;
-		var category_id = data[2].value;
-		var params = [['methods', Api_Waduanzi.config.apiCreatePost], ['content', content], ['tags', tags], ['category_id', category_id], ['debug',  Api_Waduanzi.debug]];
+		var pic = data[2].value;
+		var category_id = data[3].value;
+		var params = [['methods', Api_Waduanzi.config.apiCreatePost], ['content', content], ['tags', tags], ['pic', pic], ['category_id', category_id], ['debug',  Api_Waduanzi.debug]];
         var jqXhr = Api_Waduanzi.sendRequest('POST', params, true);
         jqXhr.always(function(){
             console.log('always');
@@ -151,10 +152,20 @@ var Api_Waduanzi = {
 		
 		chrome.tabs.sendRequest(tab.id, contents);
 	},
+    shareImage: function(info, tab){
+        var contents = {
+            tab: tab,
+            info: info,
+            context: 'image',
+            method: 'showPostPage'
+        };
+        var data = $.param(contents);
+//      alert(data);
+//      console.log(data);
+        
+        chrome.tabs.sendRequest(tab.id, contents);
+    },
 	sharePage: function(info, tab){
-		
-	},
-	shareImage: function(info, tab){
 		
 	},
 	shareLink: function(info, tab){
