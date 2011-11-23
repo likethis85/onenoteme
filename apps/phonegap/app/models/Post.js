@@ -9,27 +9,93 @@ app.models.Post = Ext.regModel('app.models.Post', {
 	]
 });
 
-app.stores.Posts = new Ext.data.Store({
+app.stores.LatestPosts = new Ext.data.Store({
 	model: 'app.models.Post',
-	sorters: [{
-		property: 'id',
-		direction: 'asc'
-	}],
-	pageSize: 5,
+//	sorters: [{
+//		property: 'id',
+//		direction: 'desc'
+//	}],
+	pageSize: 10,
 	autoLoad: true,
     proxy: {
-        type: 'ajax',
-        url: '/test.php',
+        type: 'scripttag',
+        url: 'http://www.waduanzi.com/phone/latest',
         reader: {
             type: 'json'
-        }
+        },
+		noCache: true
     }
 });
 
-app.stores.Posts.on('beforeload', function(store, operation){
+app.stores.HottestPosts = new Ext.data.Store({
+	model: 'app.models.Post',
+//	sorters: [{
+//		property: 'up_score',
+//		direction: 'desc'
+//	}, {
+//		property: 'id',
+//		direction: 'desc'
+//	}],
+	pageSize: 10,
+	autoLoad: true,
+    proxy: {
+        type: 'scripttag',
+        url: 'http://www.waduanzi.com/phone/hottest',
+        reader: {
+            type: 'json'
+        },
+		noCache: true,
+		extraParams: {
+			interval: 'P1D'
+		}
+    }
+});
+
+app.stores.CategoryPosts = new Ext.data.Store({
+	model: 'app.models.Post',
+//	sorters: [{
+//		property: 'id',
+//		direction: 'desc'
+//	}],
+	pageSize: 10,
+	autoLoad: true,
+    proxy: {
+        type: 'scripttag',
+        url: 'http://www.waduanzi.com/phone/category',
+        reader: {
+            type: 'json'
+        },
+		noCache: true,
+		extraParams: {
+			cid: 1
+		}
+    }
+});
+
+app.stores.LatestPosts.on('beforeload', function(store, operation){
 	Ext.getBody().mask();
 });
 
-app.stores.Posts.on('load', function(store, records, successful){
+app.stores.LatestPosts.on('load', function(store, records, successful){
     Ext.getBody().unmask();
 });
+
+app.stores.HottestPosts.on('beforeload', function(store, operation){
+	Ext.getBody().mask();
+});
+
+app.stores.HottestPosts.on('load', function(store, records, successful){
+    Ext.getBody().unmask();
+});
+
+app.stores.CategoryPosts.on('beforeload', function(store, operation){
+	Ext.getBody().mask();
+});
+
+app.stores.CategoryPosts.on('load', function(store, records, successful){
+    Ext.getBody().unmask();
+});
+
+
+
+

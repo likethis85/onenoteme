@@ -5,8 +5,6 @@ app.controllers.HomeController = new Ext.Controller({
 		console.log(Ext.getCmp('tab1').tab.setBadge('5'));
 		console.log('home/index');
 		
-		var row = app.stores.Posts.findRecord('id', 2);
-		console.log(row);
 	},
 	
 	login: function(options){

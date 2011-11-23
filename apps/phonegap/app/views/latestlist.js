@@ -8,23 +8,20 @@ app.views.LatestList = Ext.extend(Ext.Panel, {
 	items: [{
 		xtype: 'list',
 		id: 'latest',
-		store: app.stores.Posts,
+		store: app.stores.LatestPosts,
 		itemTpl: '{id} {content} {create_time}',
 		listeners: {
-			'added': function(component, container, pos){
-				console.log('added ' + pos);
-			},
 			'itemtap': function(dataView, index, item, e){
 				console.log('itemtap, item index: ' + index);
 				console.log(item);
-                var row = app.stores.Posts.getById(index);
+                var row = app.stores.LatestPosts.getById(index);
                 console.log(row.data);
 				console.log(dataView.getRecord(item));
 			}
 		},
 		plugins: [ new Ext.plugins.ListPagingPlugin({
 	        autoPaging: false,
-	        loadMoreText: "Load More"
+	        loadMoreText: "载入更多..."
 	    })]
 	}],
 	initComponent: function(){

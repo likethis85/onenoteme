@@ -9,16 +9,29 @@ app.views.HottestList = Ext.extend(Ext.Panel, {
             xtype: 'segmentedbutton',
 			centered: true,
             items: [{
-				text: '24小时', pressed: true
+					text: '24小时',
+					pressed: true,
+	                handler: function() {
+						Ext.apply(app.stores.HottestPosts.getProxy().extraParams, {
+							interval: 'P1D'
+						});
+	                    app.stores.HottestPosts.load();
+	                }
 				}, {
 					text: '7天',
                     handler: function() {
-                        app.stores.Posts.loadPage(3);
+						Ext.apply(app.stores.HottestPosts.getProxy().extraParams, {
+							interval: 'P1W'
+						});
+                        app.stores.HottestPosts.load();
                     }
 				}, {
 					text: '1个月',
 					handler: function() {
-						app.stores.Posts.loadPage(2);
+						Ext.apply(app.stores.HottestPosts.getProxy().extraParams, {
+							interval: 'P1M'
+						});
+                        app.stores.HottestPosts.load();
 		      		}
 			}]
         }]
@@ -26,7 +39,7 @@ app.views.HottestList = Ext.extend(Ext.Panel, {
 	layout: 'fit',
 	items: [{
 		xtype: 'list',
-		store: app.stores.Posts,
+		store: app.stores.HottestPosts,
         itemTpl: '{id} {content} {create_time}',
 		listeners: {
 			'added': function(component, container, pos){
@@ -35,7 +48,7 @@ app.views.HottestList = Ext.extend(Ext.Panel, {
 			'itemtap': function(dataView, index, item, e){
 				console.log('itemtap, item index: ' + index);
 				console.log(item);
-                var row = app.stores.Posts.getById(index);
+                var row = app.stores.HottestPosts.getById(index);
                 console.log(row.data);
 				console.log(dataView.getRecord(item));
 			}
