@@ -60,8 +60,16 @@ class PhoneController extends Controller
     
     private static function output($rows)
     {
-        header('Content-Type: text/javascript');
-        echo $_GET['callback'] . '(' . json_encode($rows) . ')';
+        $format = strtolower(trim($_REQUEST['format']));
+        
+        if ($format === 'jsonp') {
+            header('Content-Type: text/javascript');
+            echo $_GET['callback'] . '(' . json_encode($rows) . ')';
+        }
+        else {
+            header('Content-Type: application/x-json');
+            echo json_encode($rows);
+        }
         exit(0);
     }
 }
