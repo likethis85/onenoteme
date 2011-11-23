@@ -36,7 +36,7 @@ class PostController extends Controller
                     $filename = $path['path'] . $file;
                     
                     if ($r = $model->pic->saveAs($filename)) {
-                        $model->pic = fbu($path['url'] . $filename);
+                        $model->pic = fbu($path['url'] . $file);
                         $model->update(array('pic'));
                     }
                 }

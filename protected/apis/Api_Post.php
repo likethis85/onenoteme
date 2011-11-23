@@ -85,7 +85,7 @@ class Api_Post extends ApiBase
     	    $curl->get($url);
     	    $data = $curl->rawdata();
     	    file_put_contents($filename, $data);
-    	    $post->pic = fbu($path['url'] . $filename);
+    	    $post->pic = fbu($path['url'] . $file);
     	}
     	
     	try {

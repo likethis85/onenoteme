@@ -35,7 +35,7 @@ class CDBase
         $relativePath = (($additional === null) ? '' : $additional . DS)
             . date(addslashes(sprintf('Y%sm%sd%s', DS, DS, DS)), $_SERVER['REQUEST_TIME']);
 
-        $path = realpath(param('uploadBasePath') . $relativePath) . DS;
+        $path = param('uploadBasePath') . $relativePath;
 
         if (!file_exists($path) && !mkdir($path, 0755, true)) {
             return self::FILE_NO_EXIST;
@@ -43,7 +43,7 @@ class CDBase
             return self::FILE_NO_WRITABLE;
         } else
             return array(
-            	'path' => $path,
+            	'path' => realpath($path) . DS,
                 'url' => $relativeUrl,
             );
     }
