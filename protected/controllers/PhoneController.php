@@ -15,7 +15,7 @@ class PhoneController extends Controller
         }
         $cmd = app()->db->createCommand()
         ->from('{{post}} t')
-        ->order('t.create_time desc, t.id desc')
+        ->order('t.id desc')
         ->where($where, $params);
         
         $rows = $cmd->queryAll();
@@ -74,7 +74,7 @@ class PhoneController extends Controller
         $params = array(':state' => DPost::STATE_DISABLED, ':cid'=>$cid);
         $cmd = app()->db->createCommand()
         ->from('{{post}} t')
-        ->order('t.up_score desc, t.id desc')
+        ->order('t.id desc')
         ->limit($limit)
         ->offset($offset)
         ->where($where, $params);
