@@ -3,8 +3,9 @@ class PhoneController extends Controller
 {
     public function actionLatest()
     {
-        $offset = $_GET['start'] ? (int)$_GET['start'] : 0;
+        $page = $_GET['page'] ? (int)$_GET['page'] : 1;
         $limit = $_GET['limit'] ? (int)$_GET['limit'] : 10;
+        $offset = ($page - 1) * $limit;
         $where = 't.state != :state';
         $params = array(':state' => DPost::STATE_DISABLED);
         $cmd = app()->db->createCommand()
@@ -20,8 +21,9 @@ class PhoneController extends Controller
     
     public function actionHottest($interval)
     {
-        $offset = $_GET['start'] ? (int)$_GET['start'] : 0;
+        $page = $_GET['page'] ? (int)$_GET['page'] : 1;
         $limit = $_GET['limit'] ? (int)$_GET['limit'] : 10;
+        $offset = ($page - 1) * $limit;
         
         $date = new DateTime();
         $date->sub(new DateInterval($interval));
@@ -43,8 +45,10 @@ class PhoneController extends Controller
     public function actionCategory($cid)
     {
         $cid = (int)$cid;
-        $offset = $_GET['start'] ? (int)$_GET['start'] : 0;
+        $page = $_GET['page'] ? (int)$_GET['page'] : 1;
         $limit = $_GET['limit'] ? (int)$_GET['limit'] : 10;
+        $offset = ($page - 1) * $limit;
+        
         $where = 't.state != :state and category_id = :cid';
         $params = array(':state' => DPost::STATE_DISABLED, ':cid'=>$cid);
         $cmd = app()->db->createCommand()
