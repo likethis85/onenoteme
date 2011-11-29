@@ -1,6 +1,23 @@
 <?php
 class PhoneController extends Controller
 {
+    
+    public function actionNew($time)
+    {
+        if (empty($time))
+            self::output(array());
+        
+        $where = 't.state != :state and create_time > :timestamp';
+        $params = array(':state' => DPost::STATE_DISABLED, ':timestamp'=>$time);
+        $cmd = app()->db->createCommand()
+        ->from('{{post}} t')
+        ->order('t.create_time desc, t.id desc')
+        ->where($where, $params);
+        
+        $rows = $cmd->queryAll();
+        self::output($rows);
+    }
+    
     public function actionLatest()
     {
         $page = $_GET['page'] ? (int)$_GET['page'] : 1;
