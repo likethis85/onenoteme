@@ -8,7 +8,7 @@ class PhoneController extends Controller
             self::output(array());
         
         $where = 't.state != :state and id > :lastid';
-        $params = array(':state' => DPost::STATE_DISABLED, ':last'=>$lastid);
+        $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid);
         $cmd = app()->db->createCommand()
         ->from('{{post}} t')
         ->order('t.create_time desc, t.id desc')
