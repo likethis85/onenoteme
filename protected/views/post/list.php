@@ -57,6 +57,11 @@ $(function(){
 		var content = encodeURIComponent('#挖段子冷笑话#') + $(this).parents('.post-item').find('.item-content').text();
 	    shareToQzone(url, content);
 	});
+
+	$('.item-pic').toggle(
+		function(){$(this).css('max-height', '600px')},
+		function(){$(this).css('max-height', '300px')}
+	);
 });
 </script>
 

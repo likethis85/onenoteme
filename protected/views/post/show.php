@@ -2,7 +2,10 @@
 	<div class="post-detail">
 		<h1><?php echo $post->title;?></h1>
 		
-		<div class="content" id="content"><?php echo $post->content;?></div>
+		<div class="content" id="content">
+		    <?php echo $post->content;?>
+		    <?php if ($post->pic) echo '<br />' . CHtml::image($post->pic, $post->title, array('class'=>'item-pic'));?>
+		</div>
 		<ul class="item-toolbar">
 			<li class="fr"><?php echo $post->comment_nums;?>条评论</li>
         	<li class="upscore fl" pid="<?php echo $post->id;?>"><?php echo $post->up_score;?></li>
