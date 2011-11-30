@@ -29,6 +29,12 @@
         <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 	</div>
 	<?php $this->widget('CDHotTags', array('title'=>'热门标签'));?>
+	<div class="content-block">
+		<h2 class="content-title">友情链接</h2>
+		<ul class="friend-links">
+			<li><a href="http://www.kascend.com/" target="_blank">开迅音乐</a></li>
+		</ul>
+	</div>
 </div>
 <div class="clear"></div>
 <div class="cdc-bottom-banner">
