@@ -6,7 +6,7 @@
             <a class="item-link" href="<?php echo aurl('post/show', array('id'=>$model->id));?>" target="_blank" title="新窗口中查看段子">: :</a>
             <span class="item-content">
                 <?php echo $model->content;?>
-                <?php if ($model->pic) echo '<br />' . CHtml::image($model->pic, $model->title, array('class'=>'item-pic'));?>
+                <?php if ($model->pic) echo '<br />' . CHtml::image($model->pic, $model->title, array('class'=>'item-pic item-pic-real'));?>
             </span>
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->tagsLinks;?></div><?php endif;?>
@@ -40,9 +40,10 @@ $(function(){
 		function(e){$(this).removeClass('post-item-hover');}
 	);
 
-	$('.item-pic').toggle(
-		function(){$(this).css('max-height', 'auto')},
-		function(){$(this).css('max-height', '300px')}
+	$('.item-pic').on('click',
+		function(){
+			$(this).toggleClass('item-pic-real');
+		}
 	);
 });
 </script>
