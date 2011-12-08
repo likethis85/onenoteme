@@ -41,7 +41,7 @@ $(function(){
 	);
 
 	$('.item-pic').toggle(
-		function(){$(this).css('max-width', '550px').css('max-height', 'auto')},
+		function(){$(this).css('max-height', 'auto')},
 		function(){$(this).css('max-height', '300px')}
 	);
 });
