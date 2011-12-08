@@ -1,5 +1,5 @@
 /**
- * sns share function 
+ * sns share function
  */
 
 function postToWb(title)
@@ -59,3 +59,22 @@ function shareToQzone(url, content)
     window.open( _u,'', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' );
 }
 
+$(function(){
+	$('.post-item .weibo').click(function(e){
+		var url = $(this).parents('.post-item').find('.item-link').attr('href');
+		var content = encodeURIComponent('#挖段子冷笑话#') + $(this).parents('.post-item').find('.item-content').text();
+	    shareToWeibo(url, content);
+	});
+
+	$('.post-item .qqt').click(function(e){
+		var url = $(this).parents('.post-item').find('.item-link').attr('href');
+		var content = encodeURIComponent('#挖段子冷笑话#') + $(this).parents('.post-item').find('.item-content').text();
+	    shareToQQT(url, content);
+	});
+
+	$('.post-item .qzone').click(function(e){
+		var url = $(this).parents('.post-item').find('.item-link').attr('href');
+		var content = encodeURIComponent('#挖段子冷笑话#') + $(this).parents('.post-item').find('.item-content').text();
+	    shareToQzone(url, content);
+	});
+});

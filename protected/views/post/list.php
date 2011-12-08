@@ -40,26 +40,8 @@ $(function(){
 		function(e){$(this).removeClass('post-item-hover');}
 	);
 
-	$('.post-item .weibo').click(function(e){
-		var url = $(this).parents('.post-item').find('.item-link').attr('href');
-		var content = encodeURIComponent('#挖段子冷笑话#') + $(this).parents('.post-item').find('.item-content').text();
-	    shareToWeibo(url, content);
-	});
-	
-	$('.post-item .qqt').click(function(e){
-		var url = $(this).parents('.post-item').find('.item-link').attr('href');
-		var content = encodeURIComponent('#挖段子冷笑话#') + $(this).parents('.post-item').find('.item-content').text();
-	    shareToQQT(url, content);
-	});
-	
-	$('.post-item .qzone').click(function(e){
-		var url = $(this).parents('.post-item').find('.item-link').attr('href');
-		var content = encodeURIComponent('#挖段子冷笑话#') + $(this).parents('.post-item').find('.item-content').text();
-	    shareToQzone(url, content);
-	});
-
 	$('.item-pic').toggle(
-		function(){$(this).css('max-height', '600px')},
+		function(){$(this).css('max-width', '550px').css('max-height', 'auto')},
 		function(){$(this).css('max-height', '300px')}
 	);
 });
