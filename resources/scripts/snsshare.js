@@ -18,7 +18,7 @@ function postToWb(title)
     window.open( _u,'', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' );
 }
 
-function shareToQQT(url, content)
+function shareToQQT(url, content, pic)
 {
 	var _url = encodeURIComponent(url);
 	var _assname = encodeURI("cdcchen");
@@ -26,12 +26,12 @@ function shareToQQT(url, content)
     var _t = content;
     if (_t.length > 180)
         _t= _t.substr(0,177) + '...';
-    var _pic = encodeURI('');
+    var _pic = encodeURI(pic);
 	var _u = 'http://share.v.t.qq.com/index.php?c=share&a=index&url='+_url+'&appkey='+_appkey+'&pic='+_pic+'&assname='+_assname+'&title='+_t;
     window.open( _u,'', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' );
 }
 
-function shareToWeibo(url, content)
+function shareToWeibo(url, content, pic)
 {
 	var _url = encodeURIComponent(url);
 	var _ralateUid = encodeURI("1639121454");
@@ -39,12 +39,12 @@ function shareToWeibo(url, content)
     var _t = content;
     if (_t.length > 170)
         _t= _t.substr(0,167) + '...';
-    var _pic = encodeURI('');
+    var _pic = encodeURI(pic);
     var _u = 'http://service.weibo.com/share/share.php?url='+_url+'&appkey='+_appkey+'&title='+_t+'&pic='+_pic+'&ralateUid=' + _ralateUid;
     window.open( _u,'', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' );
 }
 
-function shareToQzone(url, content)
+function shareToQzone(url, content, pic)
 {
 	var _url = encodeURIComponent(url);
 	var _desc = encodeURIComponent('哈哈，一点也不好笑。');
@@ -54,7 +54,7 @@ function shareToQzone(url, content)
     var _t = content;
 //    if (_t.length > 120)
 //        _t= _t.substr(0,117) + '...';
-    var _pic = encodeURI('');
+    var _pic = encodeURI(pic);
     var _u = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+_url+'&desc='+_desc+'&summary='+_t+'&title='+_desc+'&site='+_site+'&pics=' + _pic;
     window.open( _u,'', 'width=700, height=680, top=0, left=0, toolbar=no, menubar=no, scrollbars=no, location=yes, resizable=no, status=no' );
 }
@@ -63,18 +63,21 @@ $(function(){
 	$('.post-item .weibo').click(function(e){
 		var url = $(this).parents('.post-item').find('.item-link').attr('href');
 		var content = encodeURIComponent('#挖段子冷笑话#') + $.trim($(this).parents('.post-item').find('.item-content').text());
-	    shareToWeibo(url, content);
+		var pic = $(this).parents('.post-item').find('.item-pic').attr('src');
+	    shareToWeibo(url, content, pic);
 	});
 
 	$('.post-item .qqt').click(function(e){
 		var url = $(this).parents('.post-item').find('.item-link').attr('href');
 		var content = encodeURIComponent('#挖段子冷笑话#') + $.trim($(this).parents('.post-item').find('.item-content').text());
-	    shareToQQT(url, content);
+		var pic = $(this).parents('.post-item').find('.item-pic').attr('src');
+	    shareToQQT(url, content, pic);
 	});
 
 	$('.post-item .qzone').click(function(e){
 		var url = $(this).parents('.post-item').find('.item-link').attr('href');
 		var content = encodeURIComponent('#挖段子冷笑话#') + $.trim($(this).parents('.post-item').find('.item-content').text());
-	    shareToQzone(url, content);
+		var pic = $(this).parents('.post-item').find('.item-pic').attr('src');
+	    shareToQzone(url, content, pic);
 	});
 });
