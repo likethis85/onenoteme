@@ -8,7 +8,11 @@
 		<iframe width="275" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" frameborder="No" border="0" src="http://widget.weibo.com/relationship/followbutton.php?width=300&height=24&uid=1639121454&style=3&btn=red&dpc=1"></iframe>
 	</div>
 	<div class="content-block">
-		<h2 class="content-title">动员令</h2>
+		<a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank"><img src="http://f.meiapps.com/apps/waduanzi_icon.png" width="80" alt="挖段子IOS应用" align="middle" border="0" /></a>
+		<span class="f16px"><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank"><strong>点击下载iPhone手机应用</strong></a></span>
+	</div>
+	<div class="content-block">
+		<h2 class="content-title">公告</h2>
 		<ul class="site-notice">
 			<li><?php echo app()->name;?>正式上线啦！请速来挖啊挖啊挖段子。</li>
 			<li>我每天都有很多好段子，想共享一下做点贡献，请点击&nbsp;<a href="<?php echo aurl('post/create');?>">发段子</a></li>
