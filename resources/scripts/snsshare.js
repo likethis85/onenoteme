@@ -63,18 +63,18 @@ $(function(){
 	$('.post-item .weibo').click(function(e){
 		var url = $(this).parents('.post-item').find('.item-link').attr('href');
 		var content = encodeURIComponent('#挖段子冷笑话#') + $(this).parents('.post-item').find('.item-content').text();
-	    shareToWeibo(url, content);
+	    shareToWeibo(url, $.trim(content));
 	});
 
 	$('.post-item .qqt').click(function(e){
 		var url = $(this).parents('.post-item').find('.item-link').attr('href');
 		var content = encodeURIComponent('#挖段子冷笑话#') + $(this).parents('.post-item').find('.item-content').text();
-	    shareToQQT(url, content);
+	    shareToQQT(url, $.trim(content));
 	});
 
 	$('.post-item .qzone').click(function(e){
 		var url = $(this).parents('.post-item').find('.item-link').attr('href');
 		var content = encodeURIComponent('#挖段子冷笑话#') + $(this).parents('.post-item').find('.item-content').text();
-	    shareToQzone(url, content);
+	    shareToQzone(url, $.trim(content));
 	});
 });
