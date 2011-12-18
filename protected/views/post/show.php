@@ -33,7 +33,7 @@
         		})();
         	</script>
         	</li>
-        	<li class="fl snsshare"><a href="javascript:void(0)" onclick="postToWb( $.trim($('#content').text());return false;" style="height:16px;font-size:12px;line-height:16px;"><img src="http://v.t.qq.com/share/images/s/weiboicon16.png" border="0" alt="" /></a></script></li>
+        	<li class="fl snsshare"><a href="javascript:void(0)" onclick="postToWb($.trim($('#content').text());return false;" style="height:16px;font-size:12px;line-height:16px;"><img src="http://v.t.qq.com/share/images/s/weiboicon16.png" border="0" alt="" /></a></script></li>
         	<li class="fl snsshare">
         	<script type="text/javascript">
         		(function(){
