@@ -7,7 +7,7 @@ class PhoneController extends Controller
         if (empty($lastid))
             self::output(array());
         
-        $where = "t.state != :state and id > :lastid and pic == ''";
+        $where = "t.state != :state and id > :lastid and pic = ''";
         $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid);
         if ($cid > 0) {
             $where .= ' and category_id = :cid';
@@ -27,7 +27,7 @@ class PhoneController extends Controller
         $page = $_GET['page'] ? (int)$_GET['page'] : 1;
         $limit = $_GET['limit'] ? (int)$_GET['limit'] : 10;
         $offset = ($page - 1) * $limit;
-        $where = "t.state != :state and pic == ''";
+        $where = "t.state != :state and pic = ''";
         $params = array(':state' => DPost::STATE_DISABLED);
         $cmd = app()->db->createCommand()
             ->from('{{post}} t')
@@ -50,7 +50,7 @@ class PhoneController extends Controller
         $date->sub(new DateInterval($interval));
         $time = $date->getTimestamp();
         
-        $where = "t.state != :state and create_time > :createtime and pic == ''";
+        $where = "t.state != :state and create_time > :createtime and pic = ''";
         $params = array(':state' => DPost::STATE_DISABLED, ':createtime' => $time);
         $cmd = app()->db->createCommand()
         ->from('{{post}} t')
@@ -70,7 +70,7 @@ class PhoneController extends Controller
         $limit = $_GET['limit'] ? (int)$_GET['limit'] : 10;
         $offset = ($page - 1) * $limit;
         
-        $where = "t.state != :state and category_id = :cid  and pic == ''";
+        $where = "t.state != :state and category_id = :cid  and pic = ''";
         $params = array(':state' => DPost::STATE_DISABLED, ':cid'=>$cid);
         $cmd = app()->db->createCommand()
         ->from('{{post}} t')
