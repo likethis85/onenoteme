@@ -20,6 +20,7 @@ function postToWb(title)
 
 function shareToQQT(url, content, pic)
 {
+	pic = (pic == undefined) ? '' : pic;
 	var _url = encodeURIComponent(url);
 	var _assname = encodeURI("cdcchen");
     var _appkey = encodeURI("8fcd940fb4e54897ad5d07320468d8fd");
@@ -33,6 +34,7 @@ function shareToQQT(url, content, pic)
 
 function shareToWeibo(url, content, pic)
 {
+	pic = (pic == undefined) ? '' : pic;
 	var _url = encodeURIComponent(url);
 	var _ralateUid = encodeURI("1639121454");
     var _appkey = encodeURI("2981913360");
@@ -46,6 +48,7 @@ function shareToWeibo(url, content, pic)
 
 function shareToQzone(url, content, pic)
 {
+	pic = (pic == undefined) ? '' : pic;
 	var _url = encodeURIComponent(url);
 	var _desc = encodeURIComponent('哈哈，一点也不好笑。');
 	var _ralateUid = encodeURI("1639121454");
