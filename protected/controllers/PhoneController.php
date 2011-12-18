@@ -22,6 +22,26 @@ class PhoneController extends Controller
         self::output($rows);
     }
     
+    public function actionNewTest($lastid, $cid = 0)
+    {
+        if (empty($lastid))
+            self::output(array());
+        
+        $where = "t.state != :state and id > :lastid";
+        $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid);
+        if ($cid > 0) {
+            $where .= ' and category_id = :cid';
+            $params[':cid'] = $cid;
+        }
+        $cmd = app()->db->createCommand()
+        ->from('{{post}} t')
+        ->order('t.id desc')
+        ->where($where, $params);
+        
+        $rows = $cmd->queryAll();
+        self::output($rows);
+    }
+    
     public function actionLatest()
     {
         $page = $_GET['page'] ? (int)$_GET['page'] : 1;
