@@ -78,7 +78,8 @@ class Api_Post extends ApiBase
     	$post->down_score = mt_rand(0, 2);
     	
     	try {
-        	if ($url = $params['pic']) {
+    	    $url = trim($params['pic']);
+        	if (!empty($url)) {
         	    $path = CDBase::makeUploadPath('pics');
         	    $info = parse_url($url);
                 $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);
@@ -90,6 +91,8 @@ class Api_Post extends ApiBase
         	    file_put_contents($filename, $data);
         	    $post->pic = fbu($path['url'] . $file);
         	}
+        	else
+        	    $post->pic = '';
     	}
         catch (CException $e) {
             var_dump($e);

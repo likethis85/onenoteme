@@ -59,7 +59,7 @@ class Post extends CActiveRecord
 			array('pic', 'file', 'allowEmpty'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, category_id, title, content, create_time, up_score, down_score, comment_nums, tags, state', 'safe', 'on'=>'search'),
+			array('id, category_id, title, content, pic, create_time, up_score, down_score, comment_nums, tags, state', 'safe', 'on'=>'search'),
 			array('captcha', 'captcha', 'captchaAction'=>'captcha', 'on'=>'insert'),
 		);
 	}

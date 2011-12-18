@@ -25,7 +25,7 @@ class PostController extends Controller
             $model->state = (app()->session['state'] >= User::STATE_EDITOR) ? Post::STATE_ENABLED : Post::STATE_DISABLED;
             
             $model->pic = CUploadedFile::getInstance($model, 'pic');
-            if ($model->save()) {
+            if ($model->save(true, array('id', 'category_id', 'title', 'content', 'create_time', 'up_score', 'down_score', 'comment_nums', 'tags', 'state'))) {
                 $msg = '<span class="cgreen f12px">发布成功，' . CHtml::link('点击查看', $model->url, array('target'=>'_blank')) . '，您还可以继续发布。</span>';
                 user()->setFlash('createPostResult', $msg);
                 user()->setFlash('allowUserView', user()->name);
@@ -35,7 +35,7 @@ class PostController extends Controller
                     $file = CDBase::makeUploadFileName($model->pic->extensionName);
                     $filename = $path['path'] . $file;
                     
-                    if ($r = $model->pic->saveAs($filename)) {
+                    if ($model->pic->saveAs($filename)) {
                         $model->pic = fbu($path['url'] . $file);
                         $model->update(array('pic'));
                     }

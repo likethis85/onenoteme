@@ -7,7 +7,7 @@ class PhoneController extends Controller
         if (empty($lastid))
             self::output(array());
         
-        $where = 't.state != :state and id > :lastid';
+        $where = "t.state != :state and id > :lastid and pic == ''";
         $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid);
         if ($cid > 0) {
             $where .= ' and category_id = :cid';
