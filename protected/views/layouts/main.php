@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-basic.css');?>" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-main.css?v=2011112401');?>" />
-<script type="text/javascript" src="<?php echo sbu('scripts/jquery-1.7.min.js');?>"></script>
+<script type="text/javascript" src="<?php echo sbu('libs/jquery-1.7.1.min.js');?>"></script>
 </head>
 <body>
 <div class="cd-wrapper cd-header">

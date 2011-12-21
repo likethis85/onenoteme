@@ -65,11 +65,13 @@ class DPost extends DModel
         $defaultWhere = 'state != ' . self::STATE_DISABLED;
         if ($conditions)
             $where = array('and', $defaultWhere, $conditions);
+        
         $cmd = app()->db->createCommand()
             ->order($order)
             ->limit($limit)
             ->offset($offset)
             ->where($where);
+        
         return DPost::model()->findAll($cmd);
     }
     

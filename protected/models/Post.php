@@ -82,7 +82,7 @@ class Post extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Id',
+			'id' => 'ID',
 			'category_id' => '分类',
 			'title' => '标题',
 			'content' => '内容',
@@ -200,5 +200,25 @@ class Post extends CActiveRecord
             unset($model);
         }
         return $count;
+    }
+
+    
+    public function getCreateTime($format = null)
+    {
+        if (empty($this->create_time))
+            return '';
+    
+        $format = $format ? $format : param('formatDateTime');
+        return date($format, $this->create_time);
+    }
+    
+    public function getPostUserName()
+    {
+        return $this->user_name ? $this->user_name : user()->guestName;
+    }
+    
+    public function getTitleLink($target = '_blank')
+    {
+        return l(h($this->title), $this->getUrl(), array('target'=>$target));
     }
 }

@@ -106,35 +106,13 @@ class User extends CActiveRecord
 	    return true;
 	}
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
+	
+	public function getCreateTime($format = null)
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id,true);
-
-		$criteria->compare('email',$this->email,true);
-
-		$criteria->compare('name',$this->name,true);
-
-		$criteria->compare('password',$this->password,true);
-
-		$criteria->compare('create_time',$this->create_time,true);
-
-		$criteria->compare('create_ip',$this->create_ip,true);
-
-		$criteria->compare('state',$this->state);
-		
-		$criteria->compare('token',$this->token);
-
-		return new CActiveDataProvider('User', array(
-			'criteria'=>$criteria,
-		));
+	    if (empty($this->create_time))
+	        return '';
+	
+	    $format = $format ? $format : param('formatDateTime');
+	    return date($format, $this->create_time);
 	}
 }
