@@ -1,0 +1,9 @@
+@CHARSET "GB18030";
+
+frame.menutop {background:white; border-bottom:1px solid gray; overflow:hidden;}
+frame.menu-sidebar {background:white; border-right:1px solid gray;}
+
+.main-container {margin:10px;}
+.create-level-form {margin-top:50px;}
+.levels-list .inputs-list {margin-left:20px;}
+.levels-list .inputs-list label {margin-left:0px;}

@@ -19,6 +19,16 @@ return array(
         'application.libs.*',
         'application.components.widgets.*',
     ),
+    'modules' => array(
+        'admin' => array(
+            'layout' => 'main',
+        ),
+        'gii'=>array(
+            'class'=>'system.gii.GiiModule',
+            'password'=>'123',
+            // 'ipFilters'=>array(...a list of IPs...),
+        ),
+    ),
     'preload' => array('log'),
     'components' => array(
         'log' => array(

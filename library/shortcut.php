@@ -73,6 +73,18 @@ function l($text, $url = '#', $htmlOptions = array())
 {
     return CHtml::link($text, $url, $htmlOptions);
 }
+
+/**
+ * This is the shortcut to CHtml::image()
+ * @param string $src 图片url
+ * @param string $alt img标签alt属性
+ * @param array $htmlOptions <img>标签附加属性
+ * @return string <img>html代码
+ */
+function image($src, $alt='', $htmlOptions=array())
+{
+    return CHtml::image($src, $alt, $htmlOptions);
+}
  
 /**
  * This is the shortcut to Yii::t() with default category = 'stay'
@@ -135,12 +147,24 @@ function user()
  * @param string $url
  * @return string Yii::app()->theme->baseUrl
  */
-function tbu($url = null)
+function tbu($url = null, $useDefault = true)
 {
-    static $themeBaseUrl = null;
-    if ($themeBaseUrl === null)
+    if (empty(Yii::app()->theme))
+        return sbu($url);
+    
+    static $themeBasePath;
+    static $themeBaseUrl;
+    $themeBasePath = rtrim(param('themeResourceBasePath'), DS) . DS . Yii::app()->theme->name . DS;
+    $filename = realpath($themeBasePath . $url);
+    if (file_exists($filename)) {
         $themeBaseUrl = rtrim(Yii::app()->theme->baseUrl, '/') . '/';
-    return $url === null ? $themeBaseUrl : $themeBaseUrl . ltrim($url, '/');
+        return ($url === null) ? $themeBaseUrl : $themeBaseUrl . ltrim($url, '/');
+    }
+    elseif ($useDefault) {
+        return sbu($url);
+    }
+    else
+        return 'javascript:void(0);';
 }
 
 /**
@@ -152,6 +176,19 @@ function auth()
     return Yii::app()->authManager;
 }
 
+/**
+ * 此函数返回附件地址相对于BasePath的物理路径
+ * @param string $file 附件文件相对path地址
+ * @return string
+ */
+function fbp($file = null)
+{
+    static $uploadBasePath = null;
+    if ($uploadBasePath === null)
+        $uploadBasePath = rtrim(param('uploadBasePath'), DS) . DS;
+
+    return empty($url) ? $uploadBasePath : $uploadBasePath . ltrim($file, DS);
+}
 
 /**
  * 此函数返回附件地址的BaseUrl
@@ -164,7 +201,24 @@ function fbu($url = null)
     if ($uploadBaseUrl === null)
         $uploadBaseUrl = rtrim(param('uploadBaseUrl'), '/') . '/';
     
-    return $url === null ? $uploadBaseUrl : $uploadBaseUrl . ltrim($url, '/');
+    if (empty($url))
+        return $uploadBaseUrl;
+    else
+        return (stripos($url, 'http://') === 0) ? $url : $uploadBaseUrl . ltrim($url, '/');
+}
+
+/**
+ * 此函数返回附件地址相对于BasePath的物理路径
+ * @param string $file 附件文件相对path地址
+ * @return string
+ */
+function sbp($file = null)
+{
+    static $resourcePath = null;
+    if ($resourcePath === null)
+        $resourcePath = rtrim(param('resourcePath'), DS) . DS;
+
+    return empty($url) ? $resourcePath : $resourcePath . ltrim($file, DS);
 }
 
 /**
@@ -178,7 +232,10 @@ function sbu($url = null)
     if ($resourceBaseUrl === null)
         $resourceBaseUrl = rtrim(param('resourceBaseUrl'), '/') . '/';
     
-    return $url === null ? $resourceBaseUrl : $resourceBaseUrl . ltrim($url, '/');
+    if (empty($url))
+        return $resourceBaseUrl;
+    else
+        return (stripos($url, 'http://') === 0) ? $url : $resourceBaseUrl . ltrim($url, '/');
 }
 
 /**
@@ -213,10 +270,7 @@ function dp($path = null)
     return $path ?  $dp . $path : $dp;
 }
 
-function db($component = 'db')
-{
-    return app()->$component;
-}
+
 
 
 

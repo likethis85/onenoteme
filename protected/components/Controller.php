@@ -1,6 +1,7 @@
 <?php
 class Controller extends CController
 {
+    public $breadcrumbs;
     public $channel = 'latest';
     
     public function actions()

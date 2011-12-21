@@ -19,6 +19,11 @@ return array(
         'application.libs.*',
         'application.components.widgets.*',
     ),
+    'modules' => array(
+        'admin' => array(
+            'layout' => 'main',
+        ),
+    ),
     'components' => array(
         'db' => array(
             'class' => 'CDbConnection',
