@@ -43,10 +43,9 @@ return array(
         ),
         'apn' => array(
             'class' => 'CDApnProvider',
-            'sandbox' => true,
-            'cert' => dirname(__FILE__) . DS . 'waduanzi_ck.pem',
+            'sandbox' => YII_PRODUCT ? false : true,
+            'cert' => dirname(__FILE__) . DS . (YII_PRODUCT ? 'product_ck.pem' : 'develop_ck.pem'),
             'pass' => '',
-            
         ),
 	),
     'params' => $params,

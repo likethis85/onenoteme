@@ -103,6 +103,29 @@ class PhoneController extends Controller
         self::output($rows);
     }
     
+    public function actionDeviceToken()
+    {
+        if (request()->getIsPostRequest() && isset($_POST)) {
+            $token = trim($_POST['device_token']);
+            if (empty($token))
+                $result = -1;
+            else {
+                $model = Token::model()->findByAttributes(array('device_token'=>$token));
+                if ($model === null)
+                    $result = '0';
+                else {
+                    $model = new Token();
+                    $model->device_token = $token;
+                    $result = (int)$model->save();
+                }
+            }
+        }
+        else
+            $result = -1;
+        
+        self::output($result);
+    }
+    
     private static function output($rows)
     {
         $format = strtolower(trim($_REQUEST['format']));
