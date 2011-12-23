@@ -111,13 +111,13 @@ class PhoneController extends Controller
                 $result = -1;
             else {
                 $model = Token::model()->findByAttributes(array('device_token'=>$token));
-                if ($model === null)
-                    $result = '0';
-                else {
+                if ($model === null) {
                     $model = new Token();
                     $model->device_token = $token;
                     $result = (int)$model->save();
                 }
+                else
+                    $result = 2;
             }
         }
         else
