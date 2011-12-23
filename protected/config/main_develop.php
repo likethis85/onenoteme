@@ -4,7 +4,7 @@ $params = require(dirname(__FILE__) . DS . 'params_develop.php');
 
 return array(
     'basePath' => dirname(__FILE__) . DS . '..',
-    'id' => 'onenote.me',
+    'id' => 'waduanzi.com',
     'name' => '挖段子',
     'language' => 'zh_cn',
     'charset' => 'utf-8',
