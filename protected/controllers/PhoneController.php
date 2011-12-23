@@ -107,6 +107,7 @@ class PhoneController extends Controller
     {
         if (request()->getIsPostRequest() && isset($_POST)) {
             $token = trim($_POST['device_token']);
+            $token = trim($token, '<>');
             if (empty($token))
                 $result = -1;
             else {
