@@ -124,8 +124,6 @@ class PhoneController extends Controller
         else
             $result = -2;
         
-        $filename = app()->runtimePath . DS . 'result.log';
-        file_put_contents($filename, $result);
         self::output($result);
     }
     
