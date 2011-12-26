@@ -86,6 +86,22 @@ class SiteController extends Controller
     
     public function actionTest()
     {
+        
+        $ids = app()->getDb()->createCommand()
+            ->from('{{post}}')
+            ->order('id asc')
+            ->limit(2)
+            ->where('state = :disable_state', array(':disable_state'=>Post::STATE_DISABLED))
+            ->queryColumn();
+        
+        $nums = app()->getDb()->createCommand()
+            ->update('{{post}}',
+                array('state'=>Post::STATE_ENABLED),
+                array('in', 'id', $ids)
+            );
+        
+        printf('update %d rows',$nums);
+        
 //        echo time();
 //        exit;
 //        header('Content-Type: text/html; charset=utf-8');
