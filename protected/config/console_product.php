@@ -1,24 +1,47 @@
 <?php
+defined('DS') or define('DS', DIRECTORY_SEPARATOR);
+$params = require(dirname(__FILE__) . DS . 'params_product.php');
 
-// This is the configuration for yiic console application.
-// Any writable CConsoleApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Console Application',
-	// application components
+    'id' => 'waduanzi.com',
+	'name'=>'Daily Jokes',
+    'language' => 'zh_cn',
+    'charset' => 'utf-8',
+    'timezone' => 'Asia/Shanghai',
+
+    'import' => array(
+        'application.dmodels.*',
+        'application.models.*',
+        'application.extensions.*',
+        'application.libs.*',
+    ),
 	'components'=>array(
-		'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-		),
-		// uncomment the following to use a MySQL database
-		/*
-		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
-			'emulatePrepare' => true,
+		'db' => array(
+            'class' => 'CDbConnection',
+			'connectionString' => 'mysql:host=localhost; port=3306; dbname=cd_waduanzi',
 			'username' => 'root',
-			'password' => '',
-			'charset' => 'utf8',
-		),
-		*/
+		    'password' => 'cdc_790406',
+		    'charset' => 'utf8',
+		    'persistent' => true,
+		    'tablePrefix' => 'cd_',
+//             'enableParamLogging' => true,
+//             'enableProfiling' => true,
+	        'schemaCacheID' => 'cache',
+	        'schemaCachingDuration' => 3600 * 24,    // metadata 缓存超时时间(s)
+	        'queryCacheID' => 'cache',
+	        'queryCachingDuration' => 60,
+        ),
+        'cache' => array(
+            'class' => 'CFileCache',
+		    'directoryLevel' => 2,
+        ),
+        'apn' => array(
+            'class' => 'CDApnProvider',
+            'sandbox' => YII_PRODUCT ? false : true,
+            'cert' => dirname(__FILE__) . DS . (YII_PRODUCT ? 'develop_ck.pem' : 'develop_ck.pem'),
+            'pass' => '',
+        ),
 	),
+    'params' => $params,
 );

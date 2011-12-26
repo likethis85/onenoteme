@@ -115,6 +115,7 @@ class PhoneController extends Controller
         if (request()->getIsPostRequest() && isset($_POST)) {
             $token = trim($_POST['device_token']);
             $token = trim($token, '<>');
+            $token = str_replace(' ', '', $token);
             if (empty($token))
                 $result = -1;
             else {
@@ -155,6 +156,7 @@ class PhoneController extends Controller
             return false;
         
         $token = trim($deviceToken, '<>');
+        $token = str_replace(' ', '', $token);
         Device::model()->updateAll(array('last_time'=>$_SERVER['REQUEST_TIME']), 'device_token = :token', array(':token'=>$token));
     }
 }
