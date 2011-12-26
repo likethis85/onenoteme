@@ -38,7 +38,7 @@ return array(
         ),
         'apn' => array(
             'class' => 'CDApnProvider',
-            'sandbox' => YII_PRODUCT ? false : true,
+            'sandbox' => true,
             'cert' => dirname(__FILE__) . DS . (YII_PRODUCT ? 'develop_ck.pem' : 'develop_ck.pem'),
             'pass' => '',
         ),
