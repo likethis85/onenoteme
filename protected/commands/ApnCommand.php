@@ -21,7 +21,13 @@ class ApnCommand extends CConsoleCommand
             
             $message = sprintf('挖段子刚刚更新%d个精品笑话段子，不要错过哦。', $count['all']);
             $others = array('category_count' => $count);
-            $apn->createNote($token, $message, $count['all'], '', $others)->send();
+            try {
+                $apn->createNote($token, $message, $count['all'], '', $others)->send();
+                self::updateLastTime($token);
+            }
+            catch (Exception $e) {
+                echo $e->getMessage() . "\n";
+            }
         }
         $apn->close();
         
@@ -51,6 +57,12 @@ class ApnCommand extends CConsoleCommand
         $count['all'] = (int)array_sum($count);
         
         return $count;
+    }
+    
+    private static function updateLastTime($token)
+    {
+        app()->getDb()->createCommand()
+            ->update('{{device}}', array('last_time'=>$_SERVER['REQUEST_TIME']), 'device_token = :token', array(':token'=>$token));
     }
     
     public function actionSendpush()
