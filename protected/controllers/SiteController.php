@@ -86,7 +86,7 @@ class SiteController extends Controller
     
     public function actionTest()
     {
-        
+        exit;
         $ids = app()->getDb()->createCommand()
             ->from('{{post}}')
             ->order('id asc')
