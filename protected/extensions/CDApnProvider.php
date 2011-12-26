@@ -44,7 +44,7 @@ class CDApnProvider extends CApplicationComponent
         
         if ($this->_connection && is_resource($this->_connection))
             $result = fwrite($this->_connection, $msg);
-        elseif ($retry_count <= $count) {
+        elseif ($retry_count < $count) {
             $retry_count++;
             $this->connect();
             $this->send();
@@ -75,7 +75,7 @@ class CDApnProvider extends CApplicationComponent
         }
         catch (Exception $e) {
             $retry_count++;
-            if ($retry_count <= $count)
+            if ($retry_count < $count)
                 $this->connect();
         }
         
