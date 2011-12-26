@@ -33,14 +33,22 @@ class CDApnProvider extends CApplicationComponent
         
     }
     
-    public function send()
+    public function send($count = 3)
     {
+        $retry_count = 0;
+        
         if ($this->_note instanceof CDApnNote)
             $msg = $this->_note->package();
         else
             $msg = trim($this->_note);
         
-        $result = fwrite($this->_connection, $msg);
+        if ($this->_connection && is_resource($this->_connection))
+            $result = fwrite($this->_connection, $msg);
+        elseif ($retry_count <= $count) {
+            $retry_count++;
+            $this->connect();
+            $this->send();
+        }
         
         echo "msg: $msg\n";
         
@@ -52,15 +60,24 @@ class CDApnProvider extends CApplicationComponent
         return $this;
     }
     
-    public function connect()
+    public function connect($count = 3)
     {
+        $retry_count = 0;
+        
         $ctx = stream_context_create();
         stream_context_set_option($ctx, 'ssl', 'local_cert', $this->cert);
         // assume the private key passphase was removed.
         stream_context_set_option($ctx, 'ssl', 'passphrase', $this->pass);
         $host = 'ssl://' . $this->_host . ':' . $this->port;
         echo "host: $host\n";
-        $this->_connection = stream_socket_client($host, $errno, $errstr, $this->timeout, STREAM_CLIENT_CONNECT, $ctx);
+        try {
+            $this->_connection = stream_socket_client($host, $errno, $errstr, $this->timeout, STREAM_CLIENT_CONNECT, $ctx);
+        }
+        catch (Exception $e) {
+            $retry_count++;
+            if ($retry_count <= $count)
+                $this->connect();
+        }
         
         if ($this->_connection) {
             echo "Connection OK\n";

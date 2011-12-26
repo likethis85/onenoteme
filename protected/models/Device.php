@@ -7,12 +7,13 @@
  * @property integer $id
  * @property integer $user_id
  * @property string $device_token
+ * @property integer $last_time
  */
-class Token extends CActiveRecord
+class Device extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Token the static model class
+	 * @return Device the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -24,7 +25,7 @@ class Token extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{token}}';
+		return '{{device}}';
 	}
 
 	/**
@@ -36,9 +37,8 @@ class Token extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('device_token', 'required'),
-			array('user_id', 'numerical', 'integerOnly'=>true),
+			array('user_id, last_time', 'numerical', 'integerOnly'=>true),
 			array('device_token', 'length', 'max'=>100),
-			
 		);
 	}
 
@@ -62,26 +62,7 @@ class Token extends CActiveRecord
 			'id' => 'ID',
 			'user_id' => 'User',
 			'device_token' => 'Device Token',
+	        'last_time' => 'Last Time',
 		);
-	}
-
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id,true);
-		$criteria->compare('user_id',$this->user_id,true);
-		$criteria->compare('device_token',$this->device_token,true);
-
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
 	}
 }

@@ -1,8 +1,7 @@
 <?php
 class PhoneController extends Controller
 {
-    
-    public function actionNew($lastid, $cid = 0)
+    public function actionNew($lastid, $cid = 0, $device_token = '')
     {
         if (empty($lastid))
             self::output(array());
@@ -19,10 +18,14 @@ class PhoneController extends Controller
         ->where($where, $params);
         
         $rows = $cmd->queryAll();
+        
+        // 更新最后请求时间
+        self::updateLastRequestTime($device_token);
+        
         self::output($rows);
     }
     
-    public function actionNewTest($lastid, $cid = 0)
+    public function actionNewTest($lastid, $cid = 0, $device_token = '')
     {
         if (empty($lastid))
             self::output(array());
@@ -39,6 +42,10 @@ class PhoneController extends Controller
         ->where($where, $params);
         
         $rows = $cmd->queryAll();
+        
+        // 更新最后请求时间
+        self::updateLastRequestTime($device_token);
+        
         self::output($rows);
     }
     
@@ -111,9 +118,9 @@ class PhoneController extends Controller
             if (empty($token))
                 $result = -1;
             else {
-                $model = Token::model()->findByAttributes(array('device_token'=>$token));
+                $model = Device::model()->findByAttributes(array('device_token'=>$token));
                 if ($model === null) {
-                    $model = new Token();
+                    $model = new Device();
                     $model->device_token = $token;
                     $result = (int)$model->save();
                 }
@@ -141,4 +148,16 @@ class PhoneController extends Controller
         }
         exit(0);
     }
+
+    private static function updateLastRequestTime($deviceToken)
+    {
+        if (empty($deviceToken))
+            return false;
+        
+        $token = trim($deviceToken, '<>');
+        Device::model()->updateAll(array('last_time'=>$_SERVER['REQUEST_TIME']), 'device_token = :token', array(':token'=>$token));
+    }
 }
+
+
+

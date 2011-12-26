@@ -8,7 +8,7 @@
  * @property integer $user_id
  * @property string $device_token
  */
-class DToken extends DModel
+class DDevice extends DModel
 {
     /**
      * Returns the static model of the specified DModel class.
@@ -21,7 +21,7 @@ class DToken extends DModel
     
     public function table()
     {
-        return '{{token}}';
+        return '{{device}}';
     }
 
     public function pk()
@@ -31,7 +31,7 @@ class DToken extends DModel
     
     public function columns()
     {
-        return array('id', 'user_id', 'device_token');
+        return array('id', 'user_id', 'device_token', 'last_time');
     }
 
 }
