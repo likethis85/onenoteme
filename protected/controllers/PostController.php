@@ -64,21 +64,22 @@ class PostController extends Controller
     
     public function actionLatest()
     {
+        $duration = 60;
         $limit = param('postCountOfPage');
         $where = 't.state != :state';
         $params = array(':state' => DPost::STATE_DISABLED);
-        $cmd = app()->db->createCommand()
+        $cmd = app()->db->cache($duration)->createCommand()
             ->order('t.create_time desc, t.id desc')
             ->limit($limit)
             ->where($where, $params);
             
-        $count = DPost::model()->count($where, $params);
+        $count = DPost::model()->cache($duration)->count($where, $params);
         $pages = new CPagination($count);
         $pages->setPageSize($limit);
         
         $offset = $pages->getCurrentPage() * $limit;
         $cmd->offset($offset);
-        $models = DPost::model()->findAll($cmd);
+        $models = DPost::model()->cache($duration)->findAll($cmd);
         
         $this->pageTitle = '挖段子 - 笑死人不尝命 - 每日精品笑话连载';
         $this->setKeywords('每日精品笑话连载,笑话大全 爆笑,黄色笑话,幽默笑话,成人笑话,经典笑话,笑话短信,爆笑笑话,幽默笑话大全,夫妻笑话,笑话集锦,搞笑笑话,荤笑话,极品笑话,黄段子,爆笑短信,最新笑话,最全的笑话,经典语录,糗事百科,秘密,笑话段子,经典笑话,笑话大全,搞笑大全,我们爱讲冷笑话,哈哈笑');
