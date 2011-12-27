@@ -73,7 +73,7 @@ class Api_Post extends ApiBase
     	$post->pic = $params['pic'];
     	$post->tags = $params['tags'];
     	$post->create_time = $_SERVER['REQUEST_TIME'];
-    	$post->state = Post::STATE_ENABLED;
+    	$post->state = Post::STATE_DISABLED;
     	$post->up_score = mt_rand(3, 15);
     	$post->down_score = mt_rand(0, 2);
     	
