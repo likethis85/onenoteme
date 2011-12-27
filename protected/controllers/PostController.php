@@ -64,7 +64,7 @@ class PostController extends Controller
     
     public function actionLatest()
     {
-        $duration = 60;
+        $duration = 600;
         $limit = param('postCountOfPage');
         $where = 't.state != :state';
         $params = array(':state' => DPost::STATE_DISABLED);
