@@ -74,9 +74,9 @@
 	<div class="cdc-block">
 		<script type="text/javascript">
 		<!--
-            google_ad_client = "ca-pub-6304134167250488";
+            google_ad_client = "ca-pub-9725980429199769";
 			/* onenote_300x250 */
-        	google_ad_slot = "4559886257";
+        	google_ad_slot = "0475885806";
             google_ad_width = 300;
             google_ad_height = 250;
         //-->

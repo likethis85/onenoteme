@@ -23,9 +23,9 @@
 	<div class="cdc-block">
 		<script type="text/javascript">
 		<!--
-            google_ad_client = "ca-pub-6304134167250488";
-            /* onenote_300x250 */
-            google_ad_slot = "4559886257";
+    		google_ad_client = "ca-pub-9725980429199769";
+    		/* onenote_300x250 */
+            google_ad_slot = "0475885806";
             google_ad_width = 300;
             google_ad_height = 250;
         //-->
@@ -44,9 +44,9 @@
 <div class="cdc-bottom-banner">
 	<script type="text/javascript">
 		<!--
-            google_ad_client = "ca-pub-6304134167250488";
+            google_ad_client = "ca-pub-9725980429199769";
             /* onenote_728x90 */
-            google_ad_slot = "8095191720";
+            google_ad_slot = "1629631196";
             google_ad_width = 728;
             google_ad_height = 90;
         //-->
