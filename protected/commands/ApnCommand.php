@@ -1,7 +1,7 @@
 <?php
 class ApnCommand extends CConsoleCommand
 {
-    public function actionIndex()
+    public function actionMessageNotice()
     {
         $devices = app()->getDb()->createCommand()
             ->from('{{device}}')
@@ -30,11 +30,35 @@ class ApnCommand extends CConsoleCommand
             }
         }
         $apn->close();
+    }
+    
+    public function actionBadgeNotice()
+    {
+        $devices = app()->getDb()->createCommand()
+            ->from('{{device}}')
+            ->order('last_time desc')
+            ->queryAll();
         
+        if (empty($devices))
+            return false;
         
-//         $token = '7e88716c b7323807 515b8a12 03fe41e3 71382da5 77d55caa 991db8b4 f0610f44';
-//         $apn = app()->apn->createNote($token, '妈了个XX的', 1, '', $others)->connect()->send()->close();
-        
+        $apn = app()->apn->connect();
+        foreach ($devices as $device) {
+            $token = $device['device_token'];
+            $lasttime = (int)$device['last_time'];
+            $count = self::fetchUpdateCount($lasttime);
+            
+            if ($count['all'] === 0) continue;
+            
+            $others = array('category_count' => $count);
+            try {
+                $apn->createNote($token, '', $count['all'], '', $others)->send();
+            }
+            catch (Exception $e) {
+                echo $e->getMessage() . "\n";
+            }
+        }
+        $apn->close();
     }
     
     private static function fetchUpdateCount($lasttime)
@@ -64,9 +88,5 @@ class ApnCommand extends CConsoleCommand
         app()->getDb()->createCommand()
             ->update('{{device}}', array('last_time'=>$_SERVER['REQUEST_TIME']), 'device_token = :token', array(':token'=>$token));
     }
-    
-    public function actionSendpush()
-    {
-        echo __FILE__;
-    }
+
 }
