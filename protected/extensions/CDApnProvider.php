@@ -121,7 +121,8 @@ class CDApnNote
     
     private function payload()
     {
-        $aps['alert'] = $this->message;
+        if ($this->message)
+            $aps['alert'] = $this->message;
         if ($this->badge > 0)
             $aps['badge'] = $this->badge;
         if ($this->sound)
