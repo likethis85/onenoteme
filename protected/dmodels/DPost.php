@@ -59,7 +59,7 @@ class DPost extends DModel
 
     public static function fetchValidList($limit = 20, $page = 1, $conditions = '', $order = 'create_time desc, id desc')
     {
-        $duration = 600;
+        $duration = 300;
         $limit = $limit ? $limit : param('countOfPage');
         $page = ($page > 0) ? $page : 1;
         $offset = ($page - 1) * $limit;
