@@ -66,10 +66,10 @@ class ApnCommand extends CConsoleCommand
         exit;
         $token = '7e88716cb7323807515b8a1203fe41e371382da577d55caa991db8b4f0610f44';
     
-        $others = array('category_count' => array('1'=>2, '2'=>3, '3'=>1, '4'=>4));
+        $others = array('category_count' => array('1'=>'2', '2'=>'3', '3'=>'1', '4'=>'4', 'all'=>'12'));
         $apn = app()->apn->connect();
         try {
-            $apn->createNote($token, 'testtest', 11, '', $others)->send();
+            $apn->createNote($token, 'testtest', 12, '', $others)->send();
         }
         catch (Exception $e) {
             echo $e->getMessage() . "\n";
