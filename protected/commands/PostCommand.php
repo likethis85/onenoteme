@@ -12,7 +12,7 @@ class PostCommand extends CConsoleCommand
         
         $nums = app()->getDb()->createCommand()
             ->update('{{post}}',
-                array('state'=>Post::STATE_ENABLED),
+                array('state'=>Post::STATE_ENABLED, 'create_time'=>(int)$_SERVER['REQUEST_TIME']),
                 array('in', 'id', $ids)
             );
         
