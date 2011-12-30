@@ -39,8 +39,7 @@ class ApnCommand extends CConsoleCommand
             ->order('last_time desc')
             ->queryAll();
         
-        if (empty($devices))
-            return false;
+        if (empty($devices)) return false;
         
         $apn = app()->apn->connect();
         foreach ($devices as $device) {
