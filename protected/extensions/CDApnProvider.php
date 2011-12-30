@@ -92,10 +92,12 @@ class CDApnProvider extends CApplicationComponent
     public function close()
     {
         fclose($this->_connection);
+        echo "Connection Closed\n";
     }
 
     public function createNote($deviceToken, $message, $badge = 0, $sound = '', array $others = null)
     {
+        $this->_note = null;
         $this->_note = new CDApnNote($deviceToken, $message, $badge, $sound, $others);
         return $this;
     }
