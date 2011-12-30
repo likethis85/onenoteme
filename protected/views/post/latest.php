@@ -36,8 +36,11 @@
 	<div class="content-block">
 		<h2 class="content-title">友情链接</h2>
 		<ul class="friend-links">
+			<li><a href="http://www.douban.com/group/382457/" target="_blank">挖段子豆瓣小组</a></li>
 			<li><a href="http://www.kascend.com/" target="_blank">开迅音乐</a></li>
 			<li><a href="http://www.fila.cc/" target="_blank">fila官网</a></li>
+			<li><a href=”http://lengxiaohua.net/” title=”冷笑话“>冷笑话</a></li>
+			<li><a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=UjE2MTE6NzwSJDsifCMjfDE9Pw" style="text-decoration:none;">申请友情链接</a></li>
 		</ul>
 	</div>
 </div>
