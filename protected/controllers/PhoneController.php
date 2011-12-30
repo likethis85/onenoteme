@@ -123,6 +123,7 @@ class PhoneController extends Controller
                 if ($model === null) {
                     $model = new Device();
                     $model->device_token = $token;
+                    $model->last_time = $_SERVER['REQUEST_TIME'];
                     $result = (int)$model->save();
                 }
                 else
