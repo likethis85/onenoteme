@@ -38,8 +38,8 @@ return array(
         ),
         'apn' => array(
             'class' => 'CDApnProvider',
-            'sandbox' => false,
-            'cert' => dirname(__FILE__) . DS . 'product_ck.pem',
+            'sandbox' => true,
+            'cert' => dirname(__FILE__) . DS . 'develop_ck.pem',
             'pass' => '',
         ),
 	),
