@@ -8,7 +8,7 @@
 		<iframe width="275" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" frameborder="No" border="0" src="http://widget.weibo.com/relationship/followbutton.php?width=300&height=24&uid=1639121454&style=3&btn=red&dpc=1"></iframe>
 	</div>
 	<div class="content-block">
-		<a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank"><img src="http://f.meiapps.com/apps/waduanzi_icon.png" width="80" alt="挖段子IOS应用" align="middle" border="0" /></a>
+		<a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank"><img src="http://f.meiapps.com/apps/waduanzi_icon.png" width="80" height="80" alt="挖段子IOS应用" align="middle" border="0" /></a>
 		<span class="f16px"><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank"><strong>点击下载iPhone手机应用</strong></a></span>
 	</div>
 	<div class="content-block">
