@@ -6,6 +6,15 @@
 <div class="fr cd-sidebar">
 	<div class="content-block">
 		<iframe width="275" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" frameborder="No" border="0" src="http://widget.weibo.com/relationship/followbutton.php?width=300&height=24&uid=1639121454&style=3&btn=red&dpc=1"></iframe>
+		<ul>
+		    <li>&nbsp;</li>
+		    <li>QQ群：
+		        <a target="_blank" href="http://qun.qq.com/#jointhegroup/gid/49401589">49401589</a>
+		        <a target="_blank" href="http://qun.qq.com/#jointhegroup/gid/2153698">2153698</a>
+	        </li>
+		    <li><a href="http://site.douban.com/138635/" target="_blank" title="挖段子豆瓣小组">挖段子豆瓣小站</a></li>
+			<li><a href="http://www.douban.com/group/382457/" target="_blank" title="挖段子豆瓣小组">挖段子豆瓣小组</a></li>
+		</ul>
 	</div>
 	<div class="content-block">
 		<a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank"><img src="http://f.meiapps.com/apps/waduanzi_icon.png" width="80" height="80" alt="挖段子IOS应用" align="middle" border="0" /></a>
@@ -36,8 +45,6 @@
 	<div class="content-block">
 		<h2 class="content-title">友情链接</h2>
 		<ul class="friend-links">
-			<li><a href="http://site.douban.com/138635/" target="_blank" title="挖段子豆瓣小组">挖段子豆瓣小站</a></li>
-			<li><a href="http://www.douban.com/group/382457/" target="_blank" title="挖段子豆瓣小组">挖段子豆瓣小组</a></li>
 			<li><a href="http://www.kascend.com/" target="_blank">开迅音乐</a></li>
 			<li><a href="http://www.fila.cc/" target="_blank">fila官网</a></li>
 			<li><a href="http://lengxiaohua.net/" title=”冷笑话“>冷笑话</a></li>
