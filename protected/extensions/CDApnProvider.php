@@ -55,7 +55,7 @@ class CDApnProvider extends CApplicationComponent
         if ($result === false)
             echo "Send Error\n";
         else
-            echo sprintf("%d - Send Success - %s\n", date('Y-m-d H:i:s'), $token);
+            echo sprintf("%d - Send Success - %s\n", date('Y-m-d H:i:s'), $this->_note->deviceToken);
         
         return $this;
     }
