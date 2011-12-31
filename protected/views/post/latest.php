@@ -51,6 +51,7 @@
 			<li><a href="http://www.xiaohuayoumo.com/">幽默笑话百分百</a></li>
 			<li><a href="http://www.yiqixiaoxiao.com/">一起笑笑</a></li>
 			<li><a href="http://www.funnyba.com/">有趣吧</a></li>
+			<li><a href="http://ipdaohang.com/">iPhone网址导航</a></li>
 			<li><a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=UjE2MTE6NzwSJDsifCMjfDE9Pw" style="text-decoration:none;">申请友情链接</a></li>
 		</ul>
 	</div>
