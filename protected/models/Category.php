@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table '{{category}}':
  * @property integer $id
+ * @property integer $type_id
  * @property string $name
  * @property integer $create_time
  * @property string $post_nums
@@ -37,11 +38,8 @@ class Category extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-		    array('create_time, post_nums, orderid', 'numerical', 'integerOnly'=>true),
+		    array('type_id, create_time, post_nums, orderid', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>50),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, name, create_time, post_nums, orderid', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,6 +61,7 @@ class Category extends CActiveRecord
 	{
 		return array(
 			'id' => 'Id',
+	        'type_id' => 'Type ID',
 			'name' => 'Name',
 			'create_time' => 'Create Time',
 			'post_nums' => 'Post Nums',
@@ -77,30 +76,6 @@ class Category extends CActiveRecord
 	    }
 	    return true;
 	}
-	
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
 
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id,true);
-
-		$criteria->compare('name',$this->name,true);
-
-		$criteria->compare('create_time',$this->create_time,true);
-
-		$criteria->compare('post_nums',$this->post_nums,true);
-
-		$criteria->compare('orderid',$this->orderid,true);
-
-		return new CActiveDataProvider('Category', array(
-			'criteria'=>$criteria,
-		));
-	}
 }
+

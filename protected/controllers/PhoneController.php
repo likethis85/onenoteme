@@ -25,7 +25,7 @@ class PhoneController extends Controller
         self::output($rows);
     }
     
-    public function actionNewTest($lastid, $cid = 0, $device_token = '')
+    public function actionNew15($lastid, $cid = 0, $device_token = '')
     {
         if (empty($lastid))
             self::output(array());
