@@ -75,8 +75,9 @@ var Api_Waduanzi = {
 		var content = data[0].value;
 		var tags = data[1].value;
 		var pic = data[2].value;
-		var category_id = data[3].value;
-		var params = [['methods', Api_Waduanzi.config.apiCreatePost], ['content', content], ['tags', tags], ['pic', pic], ['category_id', category_id], ['debug',  Api_Waduanzi.debug]];
+		var channel_id = data[3].value;
+		var category_id = data[4].value;
+		var params = [['methods', Api_Waduanzi.config.apiCreatePost], ['content', content], ['tags', tags], ['pic', pic], ['channel_id', channel_id], ['category_id', category_id], ['debug',  Api_Waduanzi.debug]];
         var jqXhr = Api_Waduanzi.sendRequest('POST', params, true);
         jqXhr.always(function(){
             console.log('always');

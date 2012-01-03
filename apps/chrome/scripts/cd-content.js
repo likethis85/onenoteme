@@ -30,7 +30,7 @@ var postPages = {
 		+ 	'<div class="clearfix">'
 		+ 		'<label for="content">内容</label>'
 		+ 		'<div class="input">'
-		+ 			'<textarea class="chrome-content" name="oncontent" id="oncontent" rows="10">' + request.info.selectionText + '</textarea>'
+		+ 			'<textarea class="chrome-content" name="oncontent" id="oncontent" rows="7">' + request.info.selectionText + '</textarea>'
 		+ 			'<span class="help-block">内容中不允许出现html代码和广告链接</span>'
 		+ 		'</div>'
 		+ 		'<label for="ontags">标签</label>'
@@ -42,6 +42,10 @@ var postPages = {
 		+ 		'<div class="input">'
 		+ 			'<input type="text" class="chrome-tags" name="ontags" id="ontags" />'
 		+ 			'<span class="help-block">多个用逗号或空格分隔</span>'
+		+ 		'</div>'
+		+ 		'<label for="onchannel">频道</label>'
+		+ 		'<div>'
+		+ 			'<select name="onchannel" id="onchannel"><option value="">请选择频道</option><option value="0" selected="selected">挖段子</option><option value="20">挖冷图</option><option value="30">挖福利</option><option value="40">挖好片</option></select>'
 		+ 		'</div>'
 		+ 		'<label for="oncategories">分类</label>'
 		+ 		'<div>'
@@ -61,7 +65,7 @@ var postPages = {
         +   '<div class="clearfix">'
         +       '<label for="content">内容</label>'
         +       '<div class="input">'
-        +           '<textarea class="chrome-content" name="oncontent" id="oncontent" rows="10"></textarea>'
+        +           '<textarea class="chrome-content" name="oncontent" id="oncontent" rows="7"></textarea>'
         +           '<span class="help-block">内容中不允许出现html代码和广告链接</span>'
         +       '</div>'
         +       '<label for="ontags">标签</label>'
@@ -73,6 +77,10 @@ var postPages = {
         +       '<div class="input">'
         +           '<input type="text" class="chrome-tags" name="onpic" id="ontags" value="' + request.info.srcUrl + '" />'
         +           '<span class="help-block">多个用逗号或空格分隔</span>'
+        +       '</div>'
+        +       '<label for="onchannel">频道</label>'
+        +       '<div>'
+        +           '<select name="onchannel" id="onchannel"><option value="">请选择频道</option><option value="0">挖段子</option><option value="20" selected="selected">挖冷图</option><option value="30">挖福利</option><option value="40">挖好片</option></select>'
         +       '</div>'
         +       '<label for="oncategories">分类</label>'
         +       '<div>'
@@ -110,6 +118,14 @@ $(function(){
 			tab: tab
 		};
 		chrome.extension.sendRequest(request);
+	});
+	
+	$('#onchannel').live('click', function(e){
+		var duanzi_id = 0;
+		if ($(this).val() == duanzi_id)
+            $('#oncategory').removeAttr('disabled');
+        else
+            $('#oncategory').attr('disabled', 'disabled');
 	});
 	
 });
