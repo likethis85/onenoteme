@@ -4,7 +4,6 @@
  *
  * The followings are the available columns in table '{{category}}':
  * @property integer $id
- * @property integer $type_id
  * @property string $name
  * @property integer $create_time
  * @property string $post_nums
@@ -33,7 +32,7 @@ class DCategory extends DModel
     
     public function columns()
     {
-        return array('id', 'type_id', 'name', 'create_time', 'post_nums', 'orderid');
+        return array('id', 'name', 'create_time', 'post_nums', 'orderid');
     }
     
     public function getCreateTime($format = null)

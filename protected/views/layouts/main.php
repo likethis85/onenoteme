@@ -20,16 +20,22 @@
     		&nbsp;&nbsp;|&nbsp;<a href="http://m.waduanzi.com">手机版</a>
 		</div>
     	<ul class="channel-nav">
-    		<li <?php echo ($this->channel == 'latest') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/latest');?>">最新</a></li>
+    		<li <?php echo ($this->channel == 'live') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/live');?>">直播</a></li>
     		<li>/</li>
-    		<li <?php echo ($this->channel == 'hottop') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/day');?>">最热</a></li>
+    		<li <?php echo ($this->channel == 'hottest') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/hottest');?>">热门</a></li>
     		<li>/</li>
-    		<li <?php echo ($this->channel == 'chouchou') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/list', array('cid'=>2));?>">瞅瞅</a></li>
+    		<li <?php echo ($this->channel == 'duanzi') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/duanzi');?>">挖段子</a></li>
     		<li>/</li>
+    		<li <?php echo ($this->channel == 'lengtu') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/lengtu');?>">挖冷图</a></li>
+    		<li>/</li>
+    		<li <?php echo ($this->channel == 'girl') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/girl');?>">挖福利</a></li>
+    		<li>/</li>
+    		<!-- <li <?php echo ($this->channel == 'video') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/video');?>">挖好片</a></li>
+    		<li>/</li> -->
     		<li <?php echo ($this->channel == 'tag') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('tag/list');?>">标签</a></li>
     		<li>/</li>
-    		<li <?php echo ($this->channel == 'appraise') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/appraise');?>">鉴定</a></li>
-    		<li>/</li>
+    		<!-- <li <?php echo ($this->channel == 'appraise') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/appraise');?>">鉴定</a></li>
+    		<li>/</li> -->
     		<li <?php echo ($this->channel == 'create') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/create');?>">加料</a></li>
     		<div class="clear"></div>
     	</ul>

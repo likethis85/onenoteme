@@ -71,14 +71,18 @@ return array(
         'urlManager' => array(
             'urlFormat' => 'path',
 		    'showScriptName' => false,
-            'cacheID' => 'cache',
+//             'cacheID' => 'cache',
             'rules' => array(
                 '' => 'site/index',
                 'static/<view:[\w\d]+>' => 'site/page',
         
                 'post/list-<cid:\d+>-<page:\d+>' => 'post/list',
                 'post/list-<cid:\d+>' => 'post/list',
+                '<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',
+                '<_a:(duanzi|lengtu|girl|video)>' => 'channel/<_a>',
                 'post-<id:\d+>' => 'post/show',
+                'live' => 'post/live',
+                'hottest' => 'post/hottest',
                 'post-<_a:[\w\d]+>-<page:\d+>' => 'post/<_a>',
                 'post-<_a:[\w\d]+>' => 'post/<_a>',
         

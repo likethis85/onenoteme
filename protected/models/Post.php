@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table '{{post}}':
  * @property integer $id
+ * @property integer $channel_id
  * @property integer $category_id
  * @property string $title
  * @property string $content
@@ -52,14 +53,11 @@ class Post extends CActiveRecord
 		// will receive user inputs.
 		return array(
 		    array('content', 'required', 'message'=>'段子内容必须填写'),
-			array('category_id, up_score, down_score, comment_nums, state, create_time, user_id', 'numerical', 'integerOnly'=>true),
+			array('channel_id, category_id, up_score, down_score, comment_nums, state, create_time, user_id', 'numerical', 'integerOnly'=>true),
 			array('title, tags', 'length', 'max'=>200),
 			array('user_name', 'length', 'max'=>50),
 			array('content', 'safe'),
 			array('pic', 'file', 'allowEmpty'=>true),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, category_id, title, content, pic, create_time, up_score, down_score, comment_nums, tags, state', 'safe', 'on'=>'search'),
 			array('captcha', 'captcha', 'captchaAction'=>'captcha', 'on'=>'insert'),
 		);
 	}
@@ -83,6 +81,7 @@ class Post extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+		    'channel_id' => '频道',
 			'category_id' => '分类',
 			'title' => '标题',
 			'content' => '内容',
@@ -125,40 +124,8 @@ class Post extends CActiveRecord
 	{
 	    return aurl('post/show', array('id' => $this->id));
 	}
-	
+
 	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id,true);
-
-		$criteria->compare('category_id',$this->category_id,true);
-
-		$criteria->compare('topic_id',$this->topic_id,true);
-
-		$criteria->compare('title',$this->title,true);
-
-		$criteria->compare('content',$this->content,true);
-
-		$criteria->compare('create_time',$this->create_time,true);
-
-		$criteria->compare('comment_nums',$this->comment_nums,true);
-
-		$criteria->compare('state',$this->state);
-
-		return new CActiveDataProvider('Post', array(
-			'criteria'=>$criteria,
-		));
-	}
-	
-    /**
      * 获取标签的数组形式
      * @return array
      */
@@ -222,3 +189,5 @@ class Post extends CActiveRecord
         return l(h($this->title), $this->getUrl(), array('target'=>$target));
     }
 }
+
+

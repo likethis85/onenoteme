@@ -64,6 +64,11 @@ class PostController extends Controller
     
     public function actionLatest()
     {
+        $this->redirect(url('post/live'));
+    }
+    
+    public function actionLive()
+    {
         $duration = 300;
         $limit = param('postCountOfPage');
         $where = 't.state != :state';
@@ -85,11 +90,16 @@ class PostController extends Controller
         $this->setKeywords('每日精品笑话连载,笑话大全 爆笑,黄色笑话,幽默笑话,成人笑话,经典笑话,笑话短信,爆笑笑话,幽默笑话大全,夫妻笑话,笑话集锦,搞笑笑话,荤笑话,极品笑话,黄段子,爆笑短信,最新笑话,最全的笑话,经典语录,糗事百科,秘密,笑话段子,经典笑话,笑话大全,搞笑大全,我们爱讲冷笑话,哈哈笑');
         $this->setDescription('最新发布的段子，每日精品笑话连载。网罗互联网各种精品段子，各种糗事，各种笑话，各种秘密，各种经典语录，应有尽有。烦了、累了、无聊了，就来挖段子逛一逛。');
         
-        $this->channel = 'latest';
+        $this->channel = 'live';
         $this->render('latest', array(
         	'models' => $models,
             'pages' => $pages,
         ));
+    }
+    
+    public function actionHottest()
+    {
+        $this->forward('post/hour');
     }
     
     public function actionHour()
@@ -105,7 +115,7 @@ class PostController extends Controller
         $this->setKeywords('每日精品笑话连载,笑话大全 爆笑,黄色笑话,幽默笑话,成人笑话,经典笑话,笑话短信,爆笑笑话,幽默笑话大全,夫妻笑话,笑话集锦,搞笑笑话,荤笑话,极品笑话,黄段子,爆笑短信,最新笑话,最全的笑话,经典语录,糗事百科,秘密,笑话段子,经典笑话,笑话大全,搞笑大全,我们爱讲冷笑话,哈哈笑');
         $this->setDescription('一小时内段子排行，一小时内笑话排行，一小时内经典语录排行 ，一小时糗事排行。');
         
-        $this->channel = 'hottop';
+        $this->channel = 'hottest';
         $this->render('hot_list', array('models' => $models));
     }
     
@@ -122,7 +132,7 @@ class PostController extends Controller
         $this->setKeywords('每日精品笑话连载,笑话大全 爆笑,黄色笑话,幽默笑话,成人笑话,经典笑话,笑话短信,爆笑笑话,幽默笑话大全,夫妻笑话,笑话集锦,搞笑笑话,荤笑话,极品笑话,黄段子,爆笑短信,最新笑话,最全的笑话,经典语录,糗事百科,秘密,笑话段子,经典笑话,笑话大全,搞笑大全,我们爱讲冷笑话,哈哈笑');
         $this->setDescription('8小时内段子排行，8小时内笑话排行，8小时内经典语录排行 ，8小时糗事排行。');
         
-        $this->channel = 'hottop';
+        $this->channel = 'hottest';
         $this->render('hot_list', array('models' => $models));
     }
     
@@ -139,7 +149,7 @@ class PostController extends Controller
         $this->setKeywords('每日精品笑话连载,笑话大全 爆笑,黄色笑话,幽默笑话,成人笑话,经典笑话,笑话短信,爆笑笑话,幽默笑话大全,夫妻笑话,笑话集锦,搞笑笑话,荤笑话,极品笑话,黄段子,爆笑短信,最新笑话,最全的笑话,经典语录,糗事百科,秘密,笑话段子,经典笑话,笑话大全,搞笑大全,我们爱讲冷笑话,哈哈笑');
         $this->setDescription('一天内段子排行，一天内笑话排行，一天内经典语录排行 ，一天糗事排行。');
         
-        $this->channel = 'hottop';
+        $this->channel = 'hottest';
         $this->render('hot_list', array('models' => $models));
     }
     
@@ -156,7 +166,7 @@ class PostController extends Controller
         $this->setKeywords('每日精品笑话连载,笑话大全 爆笑,黄色笑话,幽默笑话,成人笑话,经典笑话,笑话短信,爆笑笑话,幽默笑话大全,夫妻笑话,笑话集锦,搞笑笑话,荤笑话,极品笑话,黄段子,爆笑短信,最新笑话,最全的笑话,经典语录,糗事百科,秘密,笑话段子,经典笑话,笑话大全,搞笑大全,我们爱讲冷笑话,哈哈笑');
         $this->setDescription('一周内段子排行，一周内笑话排行，一周内经典语录排行 ，一周糗事排行。');
         
-        $this->channel = 'hottop';
+        $this->channel = 'hottest';
         $this->render('hot_list', array('models' => $models));
     }
     
@@ -173,7 +183,7 @@ class PostController extends Controller
         $this->setKeywords('每日精品笑话连载,笑话大全 爆笑,黄色笑话,幽默笑话,成人笑话,经典笑话,笑话短信,爆笑笑话,幽默笑话大全,夫妻笑话,笑话集锦,搞笑笑话,荤笑话,极品笑话,黄段子,爆笑短信,最新笑话,最全的笑话,经典语录,糗事百科,秘密,笑话段子,经典笑话,笑话大全,搞笑大全,我们爱讲冷笑话,哈哈笑');
         $this->setDescription('一周内段子排行，一周内笑话排行，一周内经典语录排行 ，一周糗事排行。');
         
-        $this->channel = 'hottop';
+        $this->channel = 'hottest';
         $this->render('hot_list', array('models' => $models));
     }
     
@@ -204,13 +214,15 @@ class PostController extends Controller
         $this->setKeywords('段子分类,' . implode(',', CHtml::listData($categories, 'id', 'name')));
         $this->setDescription('挖段子分类和每个分类的笑话列表。');
         
-        $this->channel = 'chouchou';
+        $this->channel = 'waduanzi';
         $this->render('list_of_category', array(
         	'models' => $models,
             'pages' => $pages,
             'categories' => $categories,
         ));
     }
+    
+    
     
     public function actionAppraise()
     {

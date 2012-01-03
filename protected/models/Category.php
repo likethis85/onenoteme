@@ -5,7 +5,6 @@
  *
  * The followings are the available columns in table '{{category}}':
  * @property integer $id
- * @property integer $type_id
  * @property string $name
  * @property integer $create_time
  * @property string $post_nums
@@ -38,7 +37,7 @@ class Category extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-		    array('type_id, create_time, post_nums, orderid', 'numerical', 'integerOnly'=>true),
+		    array('create_time, post_nums, orderid', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>50),
 		);
 	}
@@ -61,7 +60,6 @@ class Category extends CActiveRecord
 	{
 		return array(
 			'id' => 'Id',
-	        'type_id' => 'Type ID',
 			'name' => 'Name',
 			'create_time' => 'Create Time',
 			'post_nums' => 'Post Nums',
