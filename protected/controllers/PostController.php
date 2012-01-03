@@ -99,7 +99,7 @@ class PostController extends Controller
     
     public function actionHottest()
     {
-        $this->forward('post/hour');
+        $this->forward('post/hour8');
     }
     
     public function actionHour()
@@ -221,8 +221,6 @@ class PostController extends Controller
             'categories' => $categories,
         ));
     }
-    
-    
     
     public function actionAppraise()
     {
