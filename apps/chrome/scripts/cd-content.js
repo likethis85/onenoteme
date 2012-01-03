@@ -49,7 +49,7 @@ var postPages = {
 		+ 		'</div>'
 		+ 		'<label for="oncategories">分类</label>'
 		+ 		'<div>'
-		+ 			'<select name="oncategory" id="oncategory"><option value="">请选择分类</option><option value="1">太糗了</option><option value="2">太搞了</option><option value="3">太冷了</option><option value="4">太经典了</option></select>'
+		+ 			'<select name="oncategory" id="oncategory"><option value="0">请选择分类</option><option value="1">太糗了</option><option value="2">太搞了</option><option value="3">太冷了</option><option value="4">太经典了</option></select>'
 		+ 		'</div>'
 		+ 	'</div>'
 		+	'<div class="actions">'
@@ -80,11 +80,11 @@ var postPages = {
         +       '</div>'
         +       '<label for="onchannel">频道</label>'
         +       '<div>'
-        +           '<select name="onchannel" id="onchannel"><option value="">请选择频道</option><option value="0">挖段子</option><option value="20" selected="selected">挖冷图</option><option value="30">挖福利</option><option value="40">挖好片</option></select>'
+        +           '<select name="onchannel" id="onchannel"><option value="0">请选择频道</option><option value="0">挖段子</option><option value="20" selected="selected">挖冷图</option><option value="30">挖福利</option><option value="40">挖好片</option></select>'
         +       '</div>'
         +       '<label for="oncategories">分类</label>'
         +       '<div>'
-        +           '<select name="oncategory" id="oncategory"><option value="">请选择分类</option><option value="1">太糗了</option><option value="2">太搞了</option><option value="3">太冷了</option><option value="4">太经典了</option></select>'
+        +           '<select name="oncategory" id="oncategory"><option value="0">请选择分类</option><option value="1">太糗了</option><option value="2">太搞了</option><option value="3">太冷了</option><option value="4">太经典了</option></select>'
         +       '</div>'
         +   '</div>'
         +   '<div class="actions">'
@@ -119,13 +119,4 @@ $(function(){
 		};
 		chrome.extension.sendRequest(request);
 	});
-	
-	$('#onchannel').live('click', function(e){
-		var duanzi_id = 0;
-		if ($(this).val() == duanzi_id)
-            $('#oncategory').removeAttr('disabled');
-        else
-            $('#oncategory').attr('disabled', 'disabled');
-	});
-	
 });

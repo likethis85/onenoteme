@@ -64,7 +64,7 @@ class Api_Post extends ApiBase
     {
     	self::requirePost();
 //    	$this->requireLogin();
-    	$this->requiredParams(array('content', 'token'));
+    	$this->requiredParams(array('content', 'token', 'channel_id'));
     	$params = $this->filterParams(array('content', 'tags', 'channel_id', 'category_id', 'pic', 'token'));
     	
     	$post = new Post('api');
