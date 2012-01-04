@@ -48,48 +48,7 @@ class PhoneController extends Controller
         
         self::output($rows);
     }
-    
-    public function actionLatest()
-    {
-        $page = $_GET['page'] ? (int)$_GET['page'] : 1;
-        $limit = $_GET['limit'] ? (int)$_GET['limit'] : 10;
-        $offset = ($page - 1) * $limit;
-        $where = "t.state != :state and pic = ''";
-        $params = array(':state' => DPost::STATE_DISABLED);
-        $cmd = app()->db->createCommand()
-            ->from('{{post}} t')
-            ->order('t.create_time desc, t.id desc')
-            ->limit($limit)
-            ->offset($offset)
-            ->where($where, $params);
-        
-        $rows = $cmd->queryAll();
-        self::output($rows);
-    }
-    
-    public function actionHottest($interval)
-    {
-        $page = $_GET['page'] ? (int)$_GET['page'] : 1;
-        $limit = $_GET['limit'] ? (int)$_GET['limit'] : 10;
-        $offset = ($page - 1) * $limit;
-        
-        $date = new DateTime();
-        $date->sub(new DateInterval($interval));
-        $time = $date->getTimestamp();
-        
-        $where = "t.state != :state and create_time > :createtime and pic = ''";
-        $params = array(':state' => DPost::STATE_DISABLED, ':createtime' => $time);
-        $cmd = app()->db->createCommand()
-        ->from('{{post}} t')
-        ->order('t.up_score desc, t.id desc')
-        ->limit($limit)
-        ->offset($offset)
-        ->where($where, $params);
-    
-        $rows = $cmd->queryAll();
-        self::output($rows);
-    }
-    
+
     public function actionCategory($cid)
     {
         $cid = (int)$cid;
@@ -99,6 +58,53 @@ class PhoneController extends Controller
         
         $where = "t.state != :state and category_id = :cid  and pic = ''";
         $params = array(':state' => DPost::STATE_DISABLED, ':cid'=>$cid);
+        $cmd = app()->db->createCommand()
+        ->from('{{post}} t')
+        ->order('t.id desc')
+        ->limit($limit)
+        ->offset($offset)
+        ->where($where, $params);
+    
+        $rows = $cmd->queryAll();
+        self::output($rows);
+    }
+    
+    public function actionNew15($lastid, $channelid = 0, $device_token = '')
+    {
+        $lastid = (int)$lastid;
+        $channelid = (int)$channelid;
+        
+        if (empty($lastid))
+            self::output(array());
+    
+        $where = "t.state != :state and id > :lastid";
+        $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid);
+        if ($channelid > 0) {
+            $where .= ' and channel_id = :channelid';
+            $params[':channelid'] = $channelid;
+        }
+        $cmd = app()->db->createCommand()
+        ->from('{{post}} t')
+        ->order('t.id desc')
+        ->where($where, $params);
+    
+        $rows = $cmd->queryAll();
+    
+        // 更新最后请求时间
+        self::updateLastRequestTime($device_token);
+    
+        self::output($rows);
+    }
+    
+    public function actionChannel($channelid)
+    {
+        $channelid = (int)$channelid;
+        $page = $_GET['page'] ? (int)$_GET['page'] : 1;
+        $limit = $_GET['limit'] ? (int)$_GET['limit'] : 10;
+        $offset = ($page - 1) * $limit;
+        
+        $where = "t.state != :state and channel_id = :channelid";
+        $params = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$channelid);
         $cmd = app()->db->createCommand()
         ->from('{{post}} t')
         ->order('t.id desc')
