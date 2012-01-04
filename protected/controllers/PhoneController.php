@@ -69,7 +69,7 @@ class PhoneController extends Controller
         self::output($rows);
     }
     
-    public function actionNew15($lastid, $channelid = 0, $device_token = '')
+    public function actionLatest($lastid, $channelid = 0, $device_token = '')
     {
         $lastid = (int)$lastid;
         $channelid = (int)$channelid;
