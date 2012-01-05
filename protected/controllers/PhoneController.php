@@ -77,16 +77,12 @@ class PhoneController extends Controller
         if (empty($lastid))
             self::output(array());
     
-        $where = "t.state != :state and id > :lastid";
-        $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid);
-        if ($channelid > 0) {
-            $where .= ' and channel_id = :channelid';
-            $params[':channelid'] = $channelid;
-        }
+        $where = "t.state != :state and id > :lastid and channel_id = :channelid";
+        $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid, ':channelid'=>$channelid);
         $cmd = app()->db->createCommand()
-        ->from('{{post}} t')
-        ->order('t.id desc')
-        ->where($where, $params);
+            ->from('{{post}} t')
+            ->order('t.id desc')
+            ->where($where, $params);
     
         $rows = $cmd->queryAll();
     
