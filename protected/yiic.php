@@ -6,6 +6,8 @@ defined('YII_DEBUG') or define('YII_DEBUG', true);
 !YII_DEBUG && error_reporting(0);
 
 $short = dirname(__FILE__) . '/../library/shortcut.php';
+$define = dirname(__FILE__) . '/config/define.php';
+require_once($define);
 require_once($short);
 
 // change the following paths if necessary
