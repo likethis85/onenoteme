@@ -39,10 +39,10 @@ a:hover {color:white; background-color:#039;}
 .space20px {display:block; clear:both; height:20px; line-height:20px; font-size:1px; overflow:hidden;}
 .line1px {display:block; clean:both; height:1px; line-height:1px; font-size:1px; overflow:hidden; background-color:#8f8f8f; margin:5px 0px;}
 
-.pages {padding:5px;}
-.pages ul.yiiPager {font-size:14px;}
-.pages ul.yiiPager a:link, .pages ul.yiiPager a:visited {border:1px solid ##008C78;}
-.pages ul.yiiPager a:hover {color:white; background:##006600;}
-.pages ul.yiiPager .selected a {background:#008C78;}
+div.pages {padding:5px;}
+div.pages ul.yiiPager {font-size:14px;}
+div.pages ul.yiiPager a:link, div.pages ul.yiiPager a:visited {border:1px solid ##008C78;}
+div.pages ul.yiiPager a:hover {color:white; background:##006600;}
+div.pages ul.yiiPager .selected a {background:#008C78;}
 .cdc-block {margin:0px auto; text-align:center;}
 
