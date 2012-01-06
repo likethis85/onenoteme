@@ -41,6 +41,8 @@ a:hover {color:white; background-color:#039;}
 
 .pages {padding:5px;}
 .pages ul.yiiPager {font-size:14px;}
-.pages ul.yiiPager a:hover {color:white;}
+.pages ul.yiiPager a:link, ul.yiiPager a:visited {border:1px solid ##008C78;}
+.pages ul.yiiPager a:hover {color:white; background:##006600;}
+.pages ul.yiiPager .selected a {background:#008C78;}
 .cdc-block {margin:0px auto; text-align:center;}
 
