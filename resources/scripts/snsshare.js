@@ -65,21 +65,21 @@ function shareToQzone(url, content, pic)
 $(function(){
 	$('.post-item .weibo').click(function(e){
 		var url = $(this).parents('.post-item').find('.item-link').attr('href');
-		var content = encodeURIComponent('#挖段子冷笑话#') + $.trim($(this).parents('.post-item').find('.item-content').text());
+		var content = $.trim($(this).parents('.post-item').find('.item-content').text());
 		var pic = $(this).parents('.post-item').find('.item-pic').attr('src');
 	    shareToWeibo(url, content, pic);
 	});
 
 	$('.post-item .qqt').click(function(e){
 		var url = $(this).parents('.post-item').find('.item-link').attr('href');
-		var content = encodeURIComponent('#挖段子冷笑话#') + $.trim($(this).parents('.post-item').find('.item-content').text());
+		var content = $.trim($(this).parents('.post-item').find('.item-content').text());
 		var pic = $(this).parents('.post-item').find('.item-pic').attr('src');
 	    shareToQQT(url, content, pic);
 	});
 
 	$('.post-item .qzone').click(function(e){
 		var url = $(this).parents('.post-item').find('.item-link').attr('href');
-		var content = encodeURIComponent('#挖段子冷笑话#') + $.trim($(this).parents('.post-item').find('.item-content').text());
+		var content = $.trim($(this).parents('.post-item').find('.item-content').text());
 		var pic = $(this).parents('.post-item').find('.item-pic').attr('src');
 	    shareToQzone(url, content, pic);
 	});

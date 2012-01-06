@@ -20,7 +20,7 @@
         			    type:'3',
         			    count:'',
         			    appkey:'3658366445',
-        			    title: '#笑话#' + $.trim($('#content').text()),
+        			    title: $.trim($('#content').text()),
         			    pic:'',
         			    ralateUid:'1639121454',
         			    rnd:new Date().valueOf()
