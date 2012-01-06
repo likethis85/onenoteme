@@ -7,7 +7,12 @@
             <span class="item-content">
                 <?php echo $model->content;?>
             </span>
-            <?php if ($model->pic):?><div class="post-image"><?php echo CHtml::image($model->pic, $model->title, array('class'=>'item-pic item-pic-real'));?></div><?php endif;?>
+            <?php if ($model->pic):?>
+            <div class="post-image">
+                <span class="image-more">点击图片查看更多精彩～～～</span>
+                <?php echo CHtml::image($model->pic, $model->title, array('class'=>'item-pic'));?>
+            </div>
+            <?php endif;?>
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->tagsLinks;?></div><?php endif;?>
         <ul class="item-toolbar cgray" postid="<?php echo $model->id;?>">
