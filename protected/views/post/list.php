@@ -47,8 +47,7 @@ $(function(){
 
 	$('.item-pic').toggle(
 		function(e) {
-		    var imageHeight = parseInt($(this).height()) + 30;
-		    $(this).parent().css('max-height', imageHeight);
+		    $(this).parent().css('max-height', '9999px');
 	    },
 	    function(e) {
 	        $(this).parent().css('max-height', '300px');
