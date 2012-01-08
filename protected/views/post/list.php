@@ -50,6 +50,8 @@ $(function(){
 		    $(this).parent().css('max-height', '9999px');
 	    },
 	    function(e) {
+		    var offset = $(this).offset();
+		    $('body').scrollTop(offset.top);
 	        $(this).parent().css('max-height', '300px');
     	}
 	);
