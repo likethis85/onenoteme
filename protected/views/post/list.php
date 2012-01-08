@@ -47,10 +47,12 @@ $(function(){
 
 	$('.item-pic').toggle(
 		function(e) {
-		    $(this).parent().css('max-height', '9999px');
+			var offset = $(this).parent().offset();
+		    $('body').scrollTop(offset.top);
+	        $(this).parent().css('max-height', '9999px');
 	    },
 	    function(e) {
-		    var offset = $(this).offset();
+		    var offset = $(this).parent().offset();
 		    $('body').scrollTop(offset.top);
 	        $(this).parent().css('max-height', '300px');
     	}
