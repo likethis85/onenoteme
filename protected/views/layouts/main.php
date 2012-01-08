@@ -22,13 +22,13 @@
     	<ul class="channel-nav">
     		<li <?php echo ($this->channel == 'live') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/live');?>">直播</a></li>
     		<li>/</li>
-    		<li <?php echo ($this->channel == 'hottest') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/hottest');?>">热门</a></li>
+    		<li <?php echo ($this->channel == 'hottest') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('post/hottest');?>">排行榜</a></li>
     		<li>/</li>
-    		<li <?php echo ($this->channel == 'duanzi') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/duanzi');?>">挖段子</a></li>
+    		<li <?php echo ($this->channel == 'girl') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/girl');?>">挖福利</a></li>
     		<li>/</li>
     		<li <?php echo ($this->channel == 'lengtu') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/lengtu');?>">挖冷图</a></li>
     		<li>/</li>
-    		<li <?php echo ($this->channel == 'girl') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/girl');?>">挖福利</a></li>
+    		<li <?php echo ($this->channel == 'duanzi') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/duanzi');?>">挖段子</a></li>
     		<li>/</li>
     		<!-- <li <?php echo ($this->channel == 'video') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/video');?>">挖好片</a></li>
     		<li>/</li> -->
