@@ -37,7 +37,7 @@ $(function(){
 	window.onresize = changeImageSize;
 	function changeImageSize()
 	{
-		var width = parseInt($('.post-item').width()) - 10;
+		var width = parseInt($('.post-item').width());
 		$('.post-item img').css('max-width', width);
 	}
 });
