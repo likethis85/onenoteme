@@ -3,7 +3,7 @@
 body {font-size:16px; -webkit-text-size-adjust:none;}
 
 .m-wrapper {display:block; margin:0px auto; overflow:hidden;}
-.m-footer {padding:10px; background:#008C78; color:white;}
+.m-footer {padding:10px 5px; background:#008C78; color:white;}
 .m-footer a:link, .m-footer a:hover, .m-footer a:visited {color:white;}
 
 .m-logo {font-size:24px; background:#008C78; padding-left:10px; color:white;}
