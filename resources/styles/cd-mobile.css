@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-body {font-size:14px;}
+body {font-size:14px; -webkit-text-size-adjust:none;}
 
 .m-wrapper {display:block; margin:0px auto; overflow:hidden;}
 .m-footer {padding:10px; background:#008C78; color:white;}
