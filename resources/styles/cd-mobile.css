@@ -4,16 +4,17 @@ body {font-size:14px; -webkit-text-size-adjust:none;}
 
 .m-wrapper {display:block; margin:0px auto; overflow:hidden;}
 .m-footer {padding:10px; background:#008C78; color:white;}
+.m-footer a:link, .m-footer a:hover, .m-footer a:visited {color:white;}
 
 .m-logo {font-size:24px; background:#008C78; padding-left:10px; color:white;}
 .m-logo a:link, .m-logo a:hover, .m-logo a:visited {color:white;}
 .m-nav {background:#DAF2EF; padding-left:10px; font-size:14px; height:26px; line-height:26px;}
 
 /* post/list */
-.post-list .post-item {line-height:22px; border-bottom:1px solid #D8D8D8; padding:5px;}
+.post-list .post-item {line-height:18px; border-bottom:1px solid #D8D8D8; padding:5px;}
 .post-list .post-item-hover {background:#EFEFEF;}
 .post-list .post-tags {margin:5px 0px;}
 .post-list .post-user {margin-bottom:5px; color:gray; font-size:12px;}
-.post-list .post-content {margin-bottom:10px;}
+.post-list .post-content {margin-bottom:5px;}
 
 .pages ul.yiiPager {font-size:16px;} 
