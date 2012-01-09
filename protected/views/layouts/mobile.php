@@ -3,8 +3,13 @@
 <head>
 <title><?php echo $this->pageTitle;?></title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="author" content="onenote.me" />
-<meta name="copyright" content="Copyright (c) 2011 onenote.me All Rights Reserved." />
+<meta name="author" content="waduanzi.com" />
+<meta name="copyright" content="Copyright (c) 2011-2012 waduanzi.com All Rights Reserved." />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<link rel="shortcut icon" href="<?php echo sbu('images/favicon.ico');?>" type="image/vnd.microsoft.icon" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-basic.css');?>" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-mobile.css?v=20111110.02');?>" />
 <script type="text/javascript" src="<?php echo sbu('libs/jquery-1.7.1.min.js');?>"></script>
