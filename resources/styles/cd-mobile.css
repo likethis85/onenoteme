@@ -11,7 +11,7 @@ body {font-size:16px; -webkit-text-size-adjust:none;}
 .m-nav {background:#DAF2EF; padding-left:10px; height:26px; line-height:26px;}
 
 /* post/list */
-.post-list .post-item {line-height:18px; border-bottom:1px solid #D8D8D8; padding:5px;}
+.post-list .post-item {line-height:20px; border-bottom:1px solid #D8D8D8; padding:5px;}
 .post-list .post-item-hover {background:#EFEFEF;}
 .post-list .post-tags {margin:5px 0px;}
 .post-list .post-user {margin-bottom:5px; color:gray; font-size:12px;}
