@@ -33,7 +33,7 @@
 </div>
 <script type="text/javascript">
 $(function(){
-	var width = parseInt($('body').width() * 0.9);
+	var width = parseInt($('.post-item').width()) - 10;
 	$('.post-item img').css('max-width', width);
 });
 </script>
