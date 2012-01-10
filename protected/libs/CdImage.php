@@ -353,7 +353,7 @@ class CdImage
     public function outputRawJpeg($quality = 100)
     {
         ob_start();
-        imagejpeg($this->_image);
+        imagejpeg($this->_image, null, $quality);
         $content = ob_get_contents();
         ob_end_clean();
         return $content;
@@ -362,7 +362,7 @@ class CdImage
     public function outputRawPng($quality = 100, $filters = 0)
     {
         ob_start();
-        imagepng($this->_image);
+        imagepng($this->_image, null, $quality);
         $content = ob_get_contents();
         ob_end_clean();
         return $content;
@@ -371,7 +371,7 @@ class CdImage
     public function outputRawWbmp($foreground  = 0)
     {
         ob_start();
-        imagewbmp($this->_image);
+        imagewbmp($this->_image, null, $foreground);
         $content = ob_get_contents();
         ob_end_clean();
         return $content;
@@ -380,7 +380,7 @@ class CdImage
     public function outputRawXbm($foreground  = 0)
     {
         ob_start();
-        imagewxbm($this->_image);
+        imagewxbm($this->_image, null, $foreground);
         $content = ob_get_contents();
         ob_end_clean();
         return $content;
