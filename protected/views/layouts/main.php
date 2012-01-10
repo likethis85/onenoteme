@@ -3,9 +3,10 @@
 <head>
 <title><?php echo $this->pageTitle;?></title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="author" content="onenote.me" />
-<meta name="copyright" content="Copyright (c) 2011 onenote.me All Rights Reserved." />
+<meta name="author" content="waduanzi.com" />
+<meta name="copyright" content="Copyright (c) 2011-2912 waduanzi.com All Rights Reserved." />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link rel="shortcut icon" href="<?php echo sbu('images/favicon.ico');?>" type="image/vnd.microsoft.icon" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-basic.css');?>" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-main.css?v=2011112401');?>" />
 <script type="text/javascript" src="<?php echo sbu('libs/jquery-1.7.1.min.js');?>"></script>

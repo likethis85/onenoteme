@@ -12,7 +12,7 @@
 </div>
 
 <?php if ($pages->pageCount > 1):?>
-<div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
+<div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'header'=>'', 'maxButtonCount'=>6));?></div>
 <?php endif;?>
 
 <span id="jqvar" scoreurl="<?php echo aurl('post/score');?>" class="hide"></span>
