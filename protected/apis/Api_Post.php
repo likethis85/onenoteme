@@ -89,7 +89,9 @@ class Api_Post extends ApiBase
         	    $curl = new CdCurl();
         	    $curl->get($url);
         	    $data = $curl->rawdata();
-        	    file_put_contents($filename, $data);
+        	    $im = new CdImage();
+        	    $im->load($data)->resizeToWidth(640);
+        	    file_put_contents($filename, $im->output());
         	    $post->pic = fbu($path['url'] . $file);
         	}
         	else
