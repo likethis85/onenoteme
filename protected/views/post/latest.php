@@ -47,11 +47,12 @@
 		<ul class="friend-links">
 			<li><a href="http://www.kascend.com/" target="_blank">开迅音乐</a></li>
 			<li><a href="http://www.fila.cc/" target="_blank">fila官网</a></li>
-			<li><a href="http://lengxiaohua.net/" title=”冷笑话“>冷笑话</a></li>
-			<li><a href="http://www.xiaohuayoumo.com/">幽默笑话百分百</a></li>
-			<li><a href="http://www.yiqixiaoxiao.com/">一起笑笑</a></li>
-			<li><a href="http://www.funnyba.com/">有趣吧</a></li>
-			<li><a href="http://ipdaohang.com/">iPhone网址导航</a></li>
+			<li><a href="http://lengxiaohua.net/" target="_blank">冷笑话</a></li>
+			<li><a href="http://www.xiaohuayoumo.com/" target="_blank">幽默笑话百分百</a></li>
+			<li><a href="http://www.yiqixiaoxiao.com/" target="_blank">一起笑笑</a></li>
+			<li><a href="http://www.funnyba.com/" target="_blank">有趣吧</a></li>
+			<li><a href="http://ipdaohang.com/" target="_blank">iPhone网址导航</a></li>
+			<li><a href="http://lian86.com/" target="_blank">☆中国图片链</a></li>
 			<li><a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=UjE2MTE6NzwSJDsifCMjfDE9Pw" style="text-decoration:none;">申请友情链接</a></li>
 		</ul>
 	</div>
