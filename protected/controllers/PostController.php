@@ -32,16 +32,27 @@ class PostController extends Controller
                 
                 if ($model->pic) {
                     $path = CDBase::makeUploadPath('pics');
-                    $file = CDBase::makeUploadFileName($model->pic->extensionName);
+                    $file = CDBase::makeUploadFileName('');
+                    $bigFile = 'big_' . $file;
                     $filename = $path['path'] . $file;
+                    $bigFilename = $path['path'] . $bigFile;
                     
-                    if ($model->pic->saveAs($filename)) {
-                        $model->pic = fbu($path['url'] . $file);
+                    $im = new CdImage();
+                    $im->load($model->pic->tempName);
+                    
+                    try {
+                        $im->saveAsJpeg($filename, 50);
+                        $post->pic = fbu($path['url'] . $im->filename());
+                        $im->revert()->saveAsJpeg($bigFilename);
+                        $post->big_pic = fbu($path['url'] . $im->filename());
                         $model->update(array('pic'));
                     }
+                    catch (Exception $e) {
+                        $model->addError('pic', '上传图片错误');
+                    }
                 }
-                
-                $this->redirect(aurl('post/create'));
+                if (!$model->hasErrors())
+                    $this->redirect(aurl('post/create'));
             }
             else
                 user()->setFlash('createPostResult', '<span class="cred f12px">发布出错，查看下面详细错误信息。</span>');
@@ -50,6 +61,7 @@ class PostController extends Controller
             ->select(array('id', 'name'))
             ->order('orderid desc, id asc');
         $categories = CHtml::listData(DCategory::model()->findAll($cmd), 'id', 'name');
+        global $channels;
         
         $this->pageTitle = '发段子 - 挖段子';
         $this->setKeywords('发布段子,发布经典语录,发布糗事,发布秘密,发布笑话');
@@ -58,6 +70,7 @@ class PostController extends Controller
         $this->channel = 'create';
         $this->render('create', array(
         	'model'=>$model,
+            'channels' => $channels,
             'categories' => $categories,
         ));
     }

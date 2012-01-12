@@ -48,12 +48,7 @@ class ChannelController extends Controller
         ->order('orderid desc, id asc');
         $categories = DCategory::model()->findAll($cmd);
     
-        $channels = array(
-            CHANNEL_DUANZI => '挖段子',
-            CHANNEL_LENGTU => '挖冷图',
-            CHANNEL_GIRL => '挖福利',
-            CHANNEL_VIDEO => '挖好片',
-        );
+        global $channels;
         
         $channel = $channels[$channelid];
         $this->pageTitle = $channel;

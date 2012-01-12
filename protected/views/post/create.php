@@ -10,6 +10,13 @@
         </li>
         <?php if (!user()->isGuest):?>
         <li>
+            <label>频　道：</label>
+            <?php echo CHtml::activeDropDownList($model, 'channel_id', $channels, array('prompt'=>'请选择频道', 'class'=>'txt post-username', 'tabindex'=>5));?>
+            <span class="cgray f12px">（可以不选）</span>
+        </li>
+        <?php endif;?>
+        <?php if (!user()->isGuest):?>
+        <li>
             <label>分　类：</label>
             <?php echo CHtml::activeDropDownList($model, 'category_id', $categories, array('prompt'=>'请选择分类', 'class'=>'txt post-username', 'tabindex'=>5));?>
             <span class="cgray f12px">（可以不选）</span>

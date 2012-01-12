@@ -86,6 +86,7 @@ class SiteController extends Controller
     
     public function actionTest()
     {
+        exit;
         $url = 'http://img.1626.com/images/userup/1201/511201111823251.jpg';
         $curl = new CdCurl();
         $curl->get($url);
