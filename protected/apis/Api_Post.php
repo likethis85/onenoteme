@@ -83,7 +83,7 @@ class Api_Post extends ApiBase
         	    $path = CDBase::makeUploadPath('pics');
         	    $info = parse_url($url);
                 $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);
-                $file = CDBase::makeUploadFileName($extensionName);
+                $file = CDBase::makeUploadFileName('');
                 $smallFile = 'small_' . $file;
                 $filename = $path['path'] . $file;
                 $smallFilename = $path['path'] . $smallFile;
