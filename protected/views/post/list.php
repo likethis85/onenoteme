@@ -52,7 +52,7 @@ $(function(){
 	        $(this).parent().css('max-height', '9999px');
 	    },
 	    function(e) {
-		    var offset = $(this).parent().offset();
+		    var offset = $(this).parents('.post-item').offset();
 		    $('body').scrollTop(offset.top);
 	        $(this).parent().css('max-height', '300px');
     	}
