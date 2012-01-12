@@ -199,7 +199,7 @@ class Post extends CActiveRecord
         elseif ($this->pic)
             return $this->pic;
         else
-            return 'javascript:void(0);';
+            return '';
     }
 }
 
