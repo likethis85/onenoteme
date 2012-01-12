@@ -191,6 +191,16 @@ class Post extends CActiveRecord
     {
         return l(h($this->title), $this->getUrl(), array('target'=>$target));
     }
+    
+    public function getPicture()
+    {
+        if ($this->big_pic)
+            return $this->big_pic;
+        elseif ($this->pic)
+            return $this->pic;
+        else
+            return 'javascript:void(0);';
+    }
 }
 
 

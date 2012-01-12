@@ -7,10 +7,10 @@
             <span class="item-content">
                 <?php echo $model->content;?>
             </span>
-            <?php if ($model->big_pic):?>
+            <?php if ($model->picture):?>
             <div class="post-image">
                 <span class="image-more">点击图片查看更多精彩～～～</span>
-                <?php echo CHtml::image($model->big_pic, $model->title, array('class'=>'item-pic'));?>
+                <?php echo CHtml::image($model->picture, $model->title, array('class'=>'item-pic'));?>
             </div>
             <?php endif;?>
         </div>

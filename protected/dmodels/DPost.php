@@ -146,4 +146,14 @@ class DPost extends DModel
         return $this->user_name ? $this->user_name : user()->guestName;
     }
     
+    public function getPicture()
+    {
+        if ($this->big_pic)
+            return $this->big_pic;
+        elseif ($this->pic)
+            return $this->pic;
+        else
+            return 'javascript:void(0);';
+    }
+    
 }

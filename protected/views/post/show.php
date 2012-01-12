@@ -4,7 +4,7 @@
 		
 		<div class="content" id="content">
 		    <?php echo $post->content;?>
-		    <?php if ($post->big_pic) echo '<br />' . CHtml::image($post->big_pic, $post->title, array('class'=>'item-pic'));?>
+		    <?php if ($post->picture) echo '<br />' . CHtml::image($post->picture, $post->title, array('class'=>'item-pic'));?>
 		</div>
 		<ul class="item-toolbar">
 			<li class="fr"><?php echo $post->comment_nums;?>条评论</li>
