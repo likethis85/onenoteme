@@ -71,7 +71,6 @@ class Api_Post extends ApiBase
     	$post->channel_id = (int)$params['channel_id'];
     	$post->category_id = (int)$params['category_id'];
     	$post->content = $params['content'];
-    	$post->pic = $params['pic'];
     	$post->tags = $params['tags'];
     	$post->create_time = $_SERVER['REQUEST_TIME'];
     	$post->state = Post::STATE_DISABLED;
@@ -85,17 +84,24 @@ class Api_Post extends ApiBase
         	    $info = parse_url($url);
                 $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);
                 $file = CDBase::makeUploadFileName($extensionName);
+                $smallFile = 'small_' . $file;
                 $filename = $path['path'] . $file;
+                $smallFilename = $path['path'] . $smallFile;
+                
         	    $curl = new CdCurl();
         	    $curl->get($url);
         	    $data = $curl->rawdata();
-//         	    $im = new CdImage();
-//         	    $im->load($data)->resizeToWidth(640);
-        	    file_put_contents($filename, $data);
+        	    $curl->close();
+        	    $im = new CdImage();
+        	    $im->load($data);
+        	    unset($data, $curl);
+        	    $im->saveAsJpeg($filename);
         	    $post->pic = fbu($path['url'] . $file);
+        	    $im->revert()->crop(200, 200)->saveAsJpeg($smallFilename);
+        	    $post->small_pic = fbu($path['url'] . $smallFile);
         	}
         	else
-        	    $post->pic = '';
+        	    $post->pic = $post->small_pic = '';
     	}
         catch (CException $e) {
             var_dump($e);

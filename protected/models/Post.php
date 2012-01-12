@@ -10,6 +10,7 @@
  * @property string $title
  * @property string $content
  * @property string $pic
+ * @property string $small_pic
  * @property integer $create_time
  * @property integer $up_score
  * @property integer $down_score
@@ -56,6 +57,7 @@ class Post extends CActiveRecord
 			array('channel_id, category_id, up_score, down_score, comment_nums, state, create_time, user_id', 'numerical', 'integerOnly'=>true),
 			array('title, tags', 'length', 'max'=>200),
 			array('user_name', 'length', 'max'=>50),
+			array('pic, small_pic', 'length', 'max'=>250),
 			array('content', 'safe'),
 			array('pic', 'file', 'allowEmpty'=>true),
 			array('captcha', 'captcha', 'captchaAction'=>'captcha', 'on'=>'insert'),
@@ -86,6 +88,7 @@ class Post extends CActiveRecord
 			'title' => '标题',
 			'content' => '内容',
 		    'pic' => '图片',
+		    'small_pic' => '缩略图',
 			'create_time' => '发布时间',
 		    'up_score' => '顶数',
 		    'down_score' => '浏览',
