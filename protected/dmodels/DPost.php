@@ -153,7 +153,7 @@ class DPost extends DModel
         elseif ($this->pic)
             return $this->pic;
         else
-            return 'javascript:void(0);';
+            return '';
     }
     
 }
