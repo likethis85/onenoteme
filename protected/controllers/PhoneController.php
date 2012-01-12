@@ -48,14 +48,6 @@ class PhoneController extends Controller
         
         self::output($rows);
     }
-    
-    private function changePicField($rows)
-    {
-        foreach ($rows as $key => $row) {
-            $tmp = $row['pic'];
-            $rows[$key]['pic'] = $row['small_pic'];
-        }
-    }
 
     public function actionCategory($cid)
     {

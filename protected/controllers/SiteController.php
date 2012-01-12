@@ -93,9 +93,9 @@ class SiteController extends Controller
         $curl->close();
         $im = new CdImage();
         $im->load($data);
-        $im->crop(240, 240);
-        $filename = app()->runtimePath . '/ttt';
-        $im->saveAsJpeg($filename);
+//         $im->crop(640, 960);
+        $filename = app()->runtimePath . '/640';
+        $im->saveAsJpeg($filename, 50);
         
         exit;
         
