@@ -229,7 +229,7 @@ class CdImage
 	/**
      * 将图像保存为png类型
      * @param string $filename 图片文件路径，不带扩展名
-     * @param integer $quality 图像质量，取值为0-100
+     * @param integer $quality 图像质量，取值为0-9
      * @param integer $filters PNG图像过滤器，取值参考imagepng函数
      * @param integer $mode 图像文件的权限
      * @return CdImage CdImage对象本身
@@ -324,6 +324,8 @@ class CdImage
 
     /**
      * 以png类型输出图像数据
+     * @param integer $quality 图像质量，取值为0-9
+     * @param integer $filters PNG图像过滤器，取值参考imagepng函数
      */
     public function outputPng($quality = 9, $filters = 0)
     {
@@ -377,7 +379,7 @@ class CdImage
         return $content;
     }
     
-    public function outputRawPng($quality = 100, $filters = 0)
+    public function outputRawPng($quality = 9, $filters = 0)
     {
         ob_start();
         imagepng($this->_image, null, $quality, $filters);

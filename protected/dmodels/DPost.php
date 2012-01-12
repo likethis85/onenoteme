@@ -10,7 +10,7 @@
  * @property string $title
  * @property string $content
  * @property string $pic
- * @property string $small_pic
+ * @property string $big_pic
  * @property integer $create_time
  * @property integer $up_score
  * @property integer $down_score
@@ -47,7 +47,7 @@ class DPost extends DModel
     
     public function columns()
     {
-        return array('id', 'channel_id', 'category_id', 'title', 'content', 'pic', 'small_pic', 'create_time', 'up_score', 'down_score', 'comment_nums', 'user_id', 'user_name', 'tags', 'state');
+        return array('id', 'channel_id', 'category_id', 'title', 'content', 'pic', 'big_pic', 'create_time', 'up_score', 'down_score', 'comment_nums', 'user_id', 'user_name', 'tags', 'state');
     }
     
     protected function afterFind()

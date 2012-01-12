@@ -84,9 +84,9 @@ class Api_Post extends ApiBase
         	    $info = parse_url($url);
                 $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);
                 $file = CDBase::makeUploadFileName('');
-                $smallFile = 'small_' . $file;
+                $bigFile = 'small_' . $file;
                 $filename = $path['path'] . $file;
-                $smallFilename = $path['path'] . $smallFile;
+                $bigFilename = $path['path'] . $bigFile;
                 
         	    $curl = new CdCurl();
         	    $curl->get($url);
@@ -95,13 +95,13 @@ class Api_Post extends ApiBase
         	    $im = new CdImage();
         	    $im->load($data);
         	    unset($data, $curl);
-        	    $im->saveAsJpeg($filename);
+        	    $im->saveAsJpeg($filename, 50);
         	    $post->pic = fbu($path['url'] . $im->filename());
-        	    $im->revert()->crop(200, 200)->saveAsJpeg($smallFilename);
-        	    $post->small_pic = fbu($path['url'] . $im->filename());
+        	    $im->revert()->saveAsJpeg($bigFilename);
+        	    $post->big_pic = fbu($path['url'] . $im->filename());
         	}
         	else
-        	    $post->pic = $post->small_pic = '';
+        	    $post->pic = $post->big_pic = '';
     	}
         catch (CException $e) {
             var_dump($e);

@@ -37,9 +37,9 @@ class PhoneController extends Controller
             $params[':cid'] = $cid;
         }
         $cmd = app()->db->createCommand()
-        ->from('{{post}} t')
-        ->order('t.id desc')
-        ->where($where, $params);
+            ->from('{{post}} t')
+            ->order('t.id desc')
+            ->where($where, $params);
         
         $rows = $cmd->queryAll();
         
@@ -47,6 +47,14 @@ class PhoneController extends Controller
         self::updateLastRequestTime($device_token);
         
         self::output($rows);
+    }
+    
+    private function changePicField($rows)
+    {
+        foreach ($rows as $key => $row) {
+            $tmp = $row['pic'];
+            $rows[$key]['pic'] = $row['small_pic'];
+        }
     }
 
     public function actionCategory($cid)
