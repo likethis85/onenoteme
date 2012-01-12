@@ -86,27 +86,19 @@ class SiteController extends Controller
     
     public function actionTest()
     {
+        $url = 'http://img.1626.com/images/userup/1201/511201111823251.jpg';
+        $curl = new CdCurl();
+        $curl->get($url);
+        $data = $curl->rawdata();
+        $curl->close();
+        $im = new CdImage();
+        $im->load($data);
+        $im->crop(240, 240);
+        $filename = app()->runtimePath . '/ttt';
+        $im->saveAsJpeg($filename);
+        
         exit;
-        $ids = app()->getDb()->createCommand()
-            ->from('{{post}}')
-            ->order('id asc')
-            ->limit(2)
-            ->where('state = :disable_state', array(':disable_state'=>Post::STATE_DISABLED))
-            ->queryColumn();
         
-        $nums = app()->getDb()->createCommand()
-            ->update('{{post}}',
-                array('state'=>Post::STATE_ENABLED),
-                array('in', 'id', $ids)
-            );
-        
-        printf('update %d rows',$nums);
-        
-//        echo time();
-//        exit;
-//        header('Content-Type: text/html; charset=utf-8');
-//        $dependency = new CDbCacheDependency('SELECT MAX(id) FROM {{post}}');
-//        Post::model()->cache(1000, $dependency)->findAll();
         $this->render('test');
     }
 }

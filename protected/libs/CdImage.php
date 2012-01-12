@@ -14,6 +14,7 @@ class CdImage
     private $_image;
     private $_original;
     private $_imageType = IMAGETYPE_GIF;
+    private $_lastSaveFile;
     
     private static $_createFunctions = array(
         IMAGETYPE_GIF => 'imagecreatefromgif',
@@ -178,6 +179,8 @@ class CdImage
         self::saveAlpha($this->_image);
         if (!$func($this->_image, $filename))
             return false;
+        
+        $this->_lastSaveFile = $filename;
         if ($mode !== null) {
             chmod($filename, $mode);
         }
@@ -195,6 +198,8 @@ class CdImage
         $filename .= image_type_to_extension(IMAGETYPE_GIF);
         if (!imagegif($this->_image, $filename))
             return false;
+        
+        $this->_lastSaveFile = $filename;
         if ($mode !== null) {
             chmod($filename, $mode);
         }
@@ -213,10 +218,12 @@ class CdImage
         $filename .= image_type_to_extension(IMAGETYPE_JPEG);
         if (!imagejpeg($this->_image, $filename, $quality))
             return false;
+        
+        $this->_lastSaveFile = $filename;
         if ($mode !== null) {
             chmod($filename, $mode);
         }
-        return $this;
+        return $filename;
     }
 
 	/**
@@ -233,6 +240,8 @@ class CdImage
         self::saveAlpha($this->_image);
         if (!imagepng($this->_image, $filename, $quality, $filters))
             return false;
+        
+        $this->_lastSaveFile = $filename;
         if ($mode !== null) {
             chmod($filename, $mode);
         }
@@ -251,6 +260,8 @@ class CdImage
         $filename .= image_type_to_extension(IMAGETYPE_WBMP);
         if (!imagewbmp($this->_image, $filename, $foreground))
             return false;
+        
+        $this->_lastSaveFile = $filename;
         if ($mode !== null) {
             chmod($filename, $mode);
         }
@@ -269,10 +280,17 @@ class CdImage
         $filename .= image_type_to_extension(IMAGETYPE_XBM);
         if (!imagexbm($this->_image, $filename, $foreground))
             return false;
+        
+        $this->_lastSaveFile = $filename;
         if ($mode !== null) {
             chmod($filename, $mode);
         }
         return $this;
+    }
+    
+    public function filename()
+    {
+        return $this->_lastSaveFile ? basename($this->_lastSaveFile) : '';
     }
 
     /**

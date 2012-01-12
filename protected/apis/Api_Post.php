@@ -96,9 +96,9 @@ class Api_Post extends ApiBase
         	    $im->load($data);
         	    unset($data, $curl);
         	    $im->saveAsJpeg($filename);
-        	    $post->pic = fbu($path['url'] . $file);
+        	    $post->pic = fbu($path['url'] . $im->filename());
         	    $im->revert()->crop(200, 200)->saveAsJpeg($smallFilename);
-        	    $post->small_pic = fbu($path['url'] . $smallFile);
+        	    $post->small_pic = fbu($path['url'] . $im->filename());
         	}
         	else
         	    $post->pic = $post->small_pic = '';
