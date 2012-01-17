@@ -45,7 +45,7 @@ class PostController extends Controller
                         $post->pic = fbu($path['url'] . $im->filename());
                         $im->revert()->saveAsJpeg($bigFilename);
                         $post->big_pic = fbu($path['url'] . $im->filename());
-                        $model->update(array('pic'));
+                        $model->update(array('pic', 'big_pic'));
                     }
                     catch (Exception $e) {
                         $model->addError('pic', '上传图片错误');
