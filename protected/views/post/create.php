@@ -5,8 +5,8 @@
     	<li><?php echo CHtml::activeTextArea($model, 'content', array('tabindex'=>1));?></li>
         <li>
             <label>标　签：</label>
-            <?php echo CHtml::activeTextField($model, 'tags', array('class'=>'txt', 'tabindex'=>5));?>
-            <span class="cgray f12px">（每个糗事最多5个标签，用空格分隔）</span>
+            <?php echo CHtml::activeTextField($model, 'tags', array('class'=>'txt', 'tabindex'=>3));?>
+            <span class="cgray f12px">（每个段子最多5个标签，用空格分隔）</span>
         </li>
         <?php if (!user()->isGuest):?>
         <li>
@@ -18,23 +18,23 @@
         <?php if (!user()->isGuest):?>
         <li>
             <label>分　类：</label>
-            <?php echo CHtml::activeDropDownList($model, 'category_id', $categories, array('prompt'=>'请选择分类', 'class'=>'txt post-username', 'tabindex'=>5));?>
+            <?php echo CHtml::activeDropDownList($model, 'category_id', $categories, array('prompt'=>'请选择分类', 'class'=>'txt post-username', 'tabindex'=>7));?>
             <span class="cgray f12px">（可以不选）</span>
         </li>
         <?php endif;?>
         <li>
             <label>图　片：</label>
-            <?php echo CHtml::activeFileField($model, 'pic', array('tabindex'=>4));?>
+            <?php echo CHtml::activeFileField($model, 'pic', array('tabindex'=>9));?>
             <span class="cgray f12px">（可以不选）</span>
         </li>
         <li>
             <label>名　字：</label>
-            <?php echo CHtml::activeTextField($model, 'user_name', array('class'=>'txt post-username', 'tabindex'=>5));?>
+            <?php echo CHtml::activeTextField($model, 'user_name', array('class'=>'txt post-username', 'tabindex'=>11));?>
             <span class="cgray f12px">（可以不填）</span>
         </li>
         <li>
             <label>验证码：</label>
-            <?php echo CHtml::activeTextField($model, 'captcha', array('class'=>'txt captcha', 'tabindex'=>10));?>
+            <?php echo CHtml::activeTextField($model, 'captcha', array('class'=>'txt captcha', 'tabindex'=>13));?>
             <?php $this->widget('CCaptcha', array(
             	'buttonLabel' => '看不清，换一张',
             	'clickableImage' => true,

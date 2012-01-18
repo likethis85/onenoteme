@@ -25,7 +25,7 @@ class PostController extends Controller
             $model->state = (app()->session['state'] >= User::STATE_EDITOR) ? Post::STATE_ENABLED : Post::STATE_DISABLED;
             
             $model->pic = CUploadedFile::getInstance($model, 'pic');
-            if ($model->save(true, array('id', 'category_id', 'title', 'content', 'create_time', 'up_score', 'down_score', 'comment_nums', 'tags', 'state'))) {
+            if ($model->save(true, array('id', 'channel_id', 'category_id', 'title', 'content', 'create_time', 'up_score', 'down_score', 'comment_nums', 'tags', 'state'))) {
                 $msg = '<span class="cgreen f12px">发布成功，' . CHtml::link('点击查看', $model->url, array('target'=>'_blank')) . '，您还可以继续发布。</span>';
                 user()->setFlash('createPostResult', $msg);
                 user()->setFlash('allowUserView', user()->name);
@@ -41,10 +41,10 @@ class PostController extends Controller
                     $im->load($model->pic->tempName);
                     
                     try {
+                        $im->saveAsJpeg($bigFilename);
+                        $post->big_pic = fbu($path['url'] . $im->filename());
                         $im->saveAsJpeg($filename, 50);
                         $post->pic = fbu($path['url'] . $im->filename());
-                        $im->revert()->saveAsJpeg($bigFilename);
-                        $post->big_pic = fbu($path['url'] . $im->filename());
                         $model->update(array('pic', 'big_pic'));
                     }
                     catch (Exception $e) {
