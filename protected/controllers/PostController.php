@@ -36,11 +36,10 @@ class PostController extends Controller
                     $bigFile = 'big_' . $file;
                     $filename = $path['path'] . $file;
                     $bigFilename = $path['path'] . $bigFile;
-                    
-                    $im = new CdImage();
-                    $im->load($model->pic->tempName);
-                    
+
                     try {
+                        $im = new CdImage();
+                        $im->load($model->pic->tempName);
                         $im->saveAsJpeg($bigFilename);
                         $post->big_pic = fbu($path['url'] . $im->filename());
                         $im->saveAsJpeg($filename, 50);
