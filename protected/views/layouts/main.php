@@ -12,6 +12,7 @@
 <script type="text/javascript" src="<?php echo sbu('libs/jquery-1.7.1.min.js');?>"></script>
 </head>
 <body>
+<div class="cd-wrapper"><img src="<?php echo sbu('images/long.jpg');?>" alt="新春如意，龙年吉祥" /></div>
 <div class="cd-wrapper cd-header">
 	<a name="top"></a>
 	<div id="logo" class="fl"><a href="<?php echo app()->homeUrl;?>" title="点击返回首页"><img src="<?php echo sbu('images/logo.png');?>" alt="挖段子LOGO" /></a></div>
