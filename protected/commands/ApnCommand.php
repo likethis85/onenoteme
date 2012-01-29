@@ -104,4 +104,27 @@ class ApnCommand extends CConsoleCommand
             ->update('{{device}}', array('last_time'=>$_SERVER['REQUEST_TIME']), 'device_token = :token', array(':token'=>$token));
     }
 
+    public function actionOnce()
+    {
+        $devices = app()->getDb()->createCommand()
+            ->from('{{device}}')
+            ->order('last_time desc')
+            ->queryAll();
+        
+        if (empty($devices))
+            return false;
+        
+        $apn = app()->apn->connect();
+        foreach ($devices as $device) {
+            $token = $device['device_token'];
+            $message = '挖段子祝所有段友们龙年吉祥，万事如意，笑口常开，身体健康，我们将会一如既往的为大家呈现更多更精彩的段子。';
+            try {
+                $apn->createNote($token, $message, 0, '', null)->send();
+            }
+            catch (Exception $e) {
+                echo $e->getMessage() . "\n";
+            }
+        }
+        $apn->close();
+    }
 }
