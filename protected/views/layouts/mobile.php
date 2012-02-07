@@ -26,7 +26,7 @@
 <div class="admob">
 <script type="text/javascript">
 var admob_vars = {
- pubid: 'a14f2f69ebbaa42', // publisher id
+ pubid: 'a14f30bb2964827', // publisher id
  bgcolor: '45973F', // background color (hex)
  text: 'FFFFFF', // font-color (hex)
  test: true // test mode, set to false to receive live ads
@@ -39,7 +39,7 @@ var admob_vars = {
 <div class="admob">
 <script type="text/javascript">
 var admob_vars = {
- pubid: 'a14f2f69ebbaa42', // publisher id
+ pubid: 'a14f30bb2964827', // publisher id
  bgcolor: '45973F', // background color (hex)
  text: 'FFFFFF', // font-color (hex)
  test: true // test mode, set to false to receive live ads
