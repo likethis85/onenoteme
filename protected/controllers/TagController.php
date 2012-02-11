@@ -53,6 +53,7 @@ class TagController extends Controller
         $pages->setPageSize($limit);
         
         $offset = $pages->getCurrentPage() * $limit;
+        $cmd->limit($limit);
         $cmd->offset($offset);
         
         $models = DPost::model()->findAll($cmd);
