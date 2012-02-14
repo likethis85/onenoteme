@@ -148,8 +148,10 @@ class Post extends CActiveRecord
         if (0 === $postid || empty($tags))
             return false;
 
-        if (is_string($tags))
+        if (is_string($tags)) {
+            $tags = Dtag::filterTags($tags);
             $tags = explode(',', $tags);
+        }
 
         $count = 0;
         foreach ((array)$tags as $v) {
