@@ -1,5 +1,5 @@
 <div class="post-list">
-    <?php foreach ((array)$models as $model):?>
+    <?php foreach ((array)$models as $key => $model):?>
     <div class="post-item">
     	<div class="post-user"><?php echo $model->PostUserName . '&nbsp;' . $model->createTime;?></div>
         <div class="item-detail">
@@ -29,6 +29,21 @@
         </ul>
         <div class="comment-list comment-list-<?php echo $model->id;?> hide"></div>
     </div>
+    <?php if ($key == 1):?>
+    <div class="post-item">
+    <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-9725980429199769";
+        /* wdz_468x60 */
+        google_ad_slot = "5967469316";
+        google_ad_width = 468;
+        google_ad_height = 60;
+        //-->
+        </script>
+        <script type="text/javascript"
+        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+    </div>
+    <?php endif;?>
     <?php endforeach;?>
 </div>
 
