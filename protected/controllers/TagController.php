@@ -48,7 +48,8 @@ class TagController extends Controller
             ->select('t.*')
             ->join('{{post2tag}} pt', 't.id = pt.post_id')
             ->join('{{tag}} tag', 'tag.id = pt.tag_id')
-            ->where('tag.name = :tagname', array(':tagname' => $name));
+            ->where('t.state != :state and tag.name = :tagname', array(':state'=>DPost::STATE_DISABLED, ':tagname' => $name))
+            ->order('t.create_time desc, t.id desc');
         $pages = new CPagination(DPost::model()->count(clone $cmd));
         $pages->setPageSize($limit);
         
