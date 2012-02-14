@@ -55,7 +55,7 @@
 .item-toolbar .downscore {background:url(../images/down.gif) no-repeat 0px 5px;}
 .item-toolbar .comment-nums a:link, .item-toolbar .comment-nums a:visited {color:#969696;}
 .item-toolbar .comment-nums a:hover {color:white;}
-.post-item .post-image {max-height:400px; overflow:hidden; margin:10px 20px;}
+.post-item .post-image {max-height:450px; overflow:hidden; margin:10px 20px;}
 .post-item .item-pic, .post-detail .item-pic {max-width:500px; cursor:pointer;}
 .post-item .post-image .image-more {display:block; font-size:14px; color:#008C78;}
 
