@@ -29,7 +29,7 @@
         </ul>
         <div class="comment-list comment-list-<?php echo $model->id;?> hide"></div>
     </div>
-    <?php if ($key == 1):?>
+    <?php if ($key == 0):?>
     <div class="post-item">
     <script type="text/javascript"><!--
         google_ad_client = "ca-pub-9725980429199769";
