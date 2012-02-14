@@ -164,7 +164,7 @@ class Post extends CActiveRecord
                     $count++;
             }
             else {
-                $model->post_nums = $mode->post_nums + 1;
+                $model->post_nums = $model->post_nums + 1;
                 $model->save(array('post_nums'));
             }
             $columns = array('post_id'=>$postid, 'tag_id'=>$model->id);
