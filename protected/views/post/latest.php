@@ -20,15 +20,6 @@
 		<a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank"><img src="http://f.meiapps.com/apps/waduanzi_icon.png" width="80" height="80" alt="挖段子IOS应用" align="middle" border="0" /></a>
 		<span class="f16px"><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank"><strong>点击下载iPhone手机应用</strong></a></span>
 	</div>
-	<div class="content-block">
-		<h2 class="content-title">公告</h2>
-		<ul class="site-notice">
-			<li><?php echo app()->name;?>正式上线啦！请速来挖啊挖啊挖段子。</li>
-			<li>我每天都有很多好段子，想共享一下做点贡献，请点击&nbsp;<a href="<?php echo aurl('post/create');?>">发段子</a></li>
-			<li>我每天有很多时间，我想做审核员，请发e-mail到80171597@qq.com</li>
-			<li>我已经发过很多段子了，但都需要审核，可以不用审核直接显示吗？也请发e-mail到80171597@qq.com审核成为编辑</li>
-		</ul>
-	</div>
 	<div class="cdc-block">
 		<script type="text/javascript">
 		<!--
@@ -40,6 +31,15 @@
         //-->
         </script>
         <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+	</div>
+	<div class="content-block">
+		<h2 class="content-title">公告</h2>
+		<ul class="site-notice">
+			<li><?php echo app()->name;?>正式上线啦！请速来挖啊挖啊挖段子。</li>
+			<li>我每天都有很多好段子，想共享一下做点贡献，请点击&nbsp;<a href="<?php echo aurl('post/create');?>">发段子</a></li>
+			<li>我每天有很多时间，我想做审核员，请发e-mail到80171597@qq.com</li>
+			<li>我已经发过很多段子了，但都需要审核，可以不用审核直接显示吗？也请发e-mail到80171597@qq.com审核成为编辑</li>
+		</ul>
 	</div>
 	<?php $this->widget('CDHotTags', array('title'=>'热门标签'));?>
 	<div class="content-block">
