@@ -112,6 +112,27 @@ class PhoneController extends Controller
         self::output($rows);
     }
     
+    public function actionChannel16($channelid, $offset, $limit)
+    {
+        $channelid = (int)$channelid;
+        $offset = (int)$offset;
+        $limit = (int)$limit;
+        $limit = $limit ? $limit : 10;
+        $offset = $offset ? $offset : 0;
+        
+        $where = "t.state != :state and channel_id = :channelid";
+        $params = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$channelid);
+        $cmd = app()->db->createCommand()
+        ->from('{{post}} t')
+        ->order('t.id desc')
+        ->limit($limit)
+        ->offset($offset)
+        ->where($where, $params);
+    
+        $rows = $cmd->queryAll();
+        self::output($rows);
+    }
+    
     public function actionDeviceToken()
     {
         if (request()->getIsPostRequest() && isset($_POST)) {
