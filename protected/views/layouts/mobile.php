@@ -20,32 +20,42 @@
 	<h1 class="m-logo"><a href="<?php echo aurl('mobile/index');?>" title="返回挖段子首页">挖段子</a></h1>
 </div>
 <div class="m-wrapper m-nav">
-	<span class="list-title"><?php echo $this->subtitle;?></span>&nbsp;&nbsp;
-	<a href="<?php echo aurl('mobile/index');?>">最新</a>&nbsp;|&nbsp;<a href="<?php echo aurl('mobile/week');?>">最热</a>
+	<a href="<?php echo aurl('mobile/channel', array('id'=>CHANNEL_GIRL));?>">福利</a>
+	<a href="<?php echo aurl('mobile/channel', array('id'=>CHANNEL_DUANZI));?>">段子</a>
+	<a href="<?php echo aurl('mobile/channel', array('id'=>CHANNEL_LENGTU));?>">冷图</a>
+	&nbsp;|&nbsp;
+	<a href="<?php echo aurl('mobile/index');?>">最新</a>
+	<a href="<?php echo aurl('mobile/week');?>">最热</a>
 </div>
 <div class="admob">
-<script type="text/javascript">
-var admob_vars = {
- pubid: 'a14f30bb2964827', // publisher id
- bgcolor: '45973F', // background color (hex)
- text: 'FFFFFF', // font-color (hex)
- test: true // test mode, set to false to receive live ads
-};
-</script>
-<script type="text/javascript" src="http://mmv.admob.com/static/iphone/iadmob.js"></script>
+<script type="text/javascript"><!--
+  // XHTML should not attempt to parse these strings, declare them CDATA.
+  /* <![CDATA[ */
+  window.googleAfmcRequest = {
+    client: 'ca-mb-pub-9725980429199769',
+    format: '320x50_mb',
+    output: 'HTML',
+    slotname: '1805318491',
+  };
+  /* ]]> */
+//--></script>
+<script type="text/javascript"    src="http://pagead2.googlesyndication.com/pagead/show_afmc_ads.js"></script>
 </div>
 <div class="m-wrapper"><?php echo $content;?></div>
 
 <div class="admob">
-<script type="text/javascript">
-var admob_vars = {
- pubid: 'a14f30bb2964827', // publisher id
- bgcolor: '45973F', // background color (hex)
- text: 'FFFFFF', // font-color (hex)
- test: true // test mode, set to false to receive live ads
-};
-</script>
-<script type="text/javascript" src="http://mmv.admob.com/static/iphone/iadmob.js"></script>
+<script type="text/javascript"><!--
+  // XHTML should not attempt to parse these strings, declare them CDATA.
+  /* <![CDATA[ */
+  window.googleAfmcRequest = {
+    client: 'ca-mb-pub-9725980429199769',
+    format: '320x50_mb',
+    output: 'HTML',
+    slotname: '1805318491',
+  };
+  /* ]]> */
+//--></script>
+<script type="text/javascript"    src="http://pagead2.googlesyndication.com/pagead/show_afmc_ads.js"></script>
 </div>
 
 <div class="m-wrapper m-footer">
