@@ -1,6 +1,8 @@
 <?php
 class MobileController extends Controller
 {
+    const COUNT_OF_PAGE = 10;
+    
     public function init()
     {
         $this->layout = 'mobile';
@@ -8,7 +10,7 @@ class MobileController extends Controller
     
     public function actionIndex()
     {
-        $limit = param('postCountOfPage');
+        $limit = self::COUNT_OF_PAGE;
         $where = 't.state != :state';
         $params = array(':state' => DPost::STATE_DISABLED);
         $cmd = app()->db->createCommand()
@@ -37,7 +39,7 @@ class MobileController extends Controller
     
     public function actionTag($name)
     {
-        $limit = (int)param('postCountOfPage');
+        $limit = self::COUNT_OF_PAGE;
         $name = urldecode($name);
         $cmd = app()->getDb()->createCommand()
             ->select('t.*')
@@ -71,7 +73,7 @@ class MobileController extends Controller
         $time = $date->getTimestamp();
         $condition = 'create_time > ' . $time;
         
-        $models = DPost::fetchValidList(param('postCountOfPage'), 1, $condition, '(up_score-down_score) desc, id desc');
+        $models = DPost::fetchValidList(self::COUNT_OF_PAGE, 1, $condition, '(up_score-down_score) desc, id desc');
         
         $this->pageTitle = '一周最热门 - 挖段子';
         $this->setKeywords('热门段子,热门经典语录,热门糗事百科,热门秘密,热门笑话,热门搞笑,笑话热门排行,冷笑话排行');
@@ -86,7 +88,7 @@ class MobileController extends Controller
     public function actionChannel($id)
     {
         $id = (int)$id;
-        $limit = param('postCountOfPage');
+        $limit = self::COUNT_OF_PAGE;
         $where = 't.state != :state and channel_id = :channelid';
         $params = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$id);
         $cmd = app()->db->createCommand()
