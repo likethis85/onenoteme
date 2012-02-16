@@ -27,6 +27,8 @@ class ChannelController extends Controller
     
     private function fetchChannelPosts($channelid)
     {
+        $duration = 120;
+        
         $channelid = (int)$channelid;
         $limit = param('postCountOfPage');
         $where = 'state != :state and channel_id = :channel_id';
@@ -42,7 +44,7 @@ class ChannelController extends Controller
     
         $offset = $pages->getCurrentPage() * $limit;
         $cmd->offset($offset);
-        $models = DPost::model()->findAll($cmd);
+        $models = DPost::model()->cache($duration)->findAll($cmd);
     
         $cmd = app()->db->createCommand()
         ->order('orderid desc, id asc');

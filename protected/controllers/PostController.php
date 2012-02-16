@@ -81,7 +81,7 @@ class PostController extends Controller
     
     public function actionLive()
     {
-        $duration = 300;
+        $duration = 120;
         $limit = param('postCountOfPage');
         $where = 't.state != :state';
         $params = array(':state' => DPost::STATE_DISABLED);
