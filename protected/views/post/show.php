@@ -1,6 +1,7 @@
 <div class="fl cd-container">
 	<div class="post-detail">
 		<h1><?php echo $post->title;?></h1>
+		<div class="post-user"><?php echo $post->PostUserName . '&nbsp;' . $post->createTime;?></div>
 		<?php if ($post->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $post->tagsLinks;?></div><?php endif;?>
 		<div class="content" id="content">
 		    <?php echo $post->content;?>
