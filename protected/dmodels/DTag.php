@@ -39,7 +39,7 @@ class DTag extends DModel
 	    if (empty($tags))
 	        return '';
 
-	    $tags = preg_replace('/(\s+|，|　)/i', ',', $tags);
+	    $tags = str_replace('，', ',', $tags);
         $tags = explode(',', $tags);
     	foreach ((array)$tags as $key => $tag) {
             $tags[$key] = strip_tags(trim($tag));
