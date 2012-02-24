@@ -120,7 +120,8 @@ class PhoneController extends Controller
         if (empty($lastid))
             self::output(array());
     
-        $where = 'id in (6078,5823,5822,6113,6112,6111,6110,6109,6108,6224,6223,6211,6210,6209,6208,6206,6251,6249,6245,6241,5761,5760,5759,5758,5757,5612,5607,5842)';
+        $where = 'id in (6078,5823,5822,6113,6112,6111,6110,6109,6108,6224,6223,6211,6210,6209,6208,6206,6251,6249,6245,6241,5761,5760,5759,5758,5757,5612,5607,5842) and channel_id = :channelid';
+        $params = array(':channelid'=>$channelid);
 //         $where = "t.state != :state and id > :lastid and channel_id = :channelid";
 //         $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid, ':channelid'=>$channelid);
         $cmd = app()->db->createCommand()
@@ -144,7 +145,8 @@ class PhoneController extends Controller
         $limit = $limit ? $limit : 10;
         $offset = $offset ? $offset : 0;
         
-        $where = 'id in (6078,5823,5822,6113,6112,6111,6110,6109,6108,6224,6223,6211,6210,6209,6208,6206,6251,6249,6245,6241,5761,5760,5759,5758,5757,5612,5607,5842)';
+        $where = 'id in (6078,5823,5822,6113,6112,6111,6110,6109,6108,6224,6223,6211,6210,6209,6208,6206,6251,6249,6245,6241,5761,5760,5759,5758,5757,5612,5607,5842) and channel_id = :channelid';
+        $params = array(':channelid'=>$channelid);
 //         $where = "t.state != :state and channel_id = :channelid";
 //         $params = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$channelid);
         $cmd = app()->db->createCommand()
