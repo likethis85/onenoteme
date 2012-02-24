@@ -112,6 +112,30 @@ class PhoneController extends Controller
         self::output($rows);
     }
     
+    public function actionLatest16($lastid, $channelid = 0, $device_token = '')
+    {
+        $lastid = (int)$lastid;
+        $channelid = (int)$channelid;
+    
+        if (empty($lastid))
+            self::output(array());
+    
+        $where = 'id in (6078,5823,5822,6113,6112,6111,6110,6109,6108,6224,6223,6211,6210,6209,6208,6206,6251,6249,6245,6241,5761,5760,5759,5758,5757,5612,5607,5842)';
+//         $where = "t.state != :state and id > :lastid and channel_id = :channelid";
+//         $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid, ':channelid'=>$channelid);
+        $cmd = app()->db->createCommand()
+        ->from('{{post}} t')
+        ->order('t.id desc')
+        ->where($where, $params);
+    
+        $rows = $cmd->queryAll();
+    
+        // 更新最后请求时间
+        self::updateLastRequestTime($device_token);
+    
+        self::output($rows);
+    }
+    
     public function actionChannel16($channelid, $offset, $limit)
     {
         $channelid = (int)$channelid;
@@ -121,8 +145,8 @@ class PhoneController extends Controller
         $offset = $offset ? $offset : 0;
         
         $where = 'id in (6078,5823,5822,6113,6112,6111,6110,6109,6108,6224,6223,6211,6210,6209,6208,6206,6251,6249,6245,6241,5761,5760,5759,5758,5757,5612,5607,5842)';
-        //$where = "t.state != :state and channel_id = :channelid";
-        $params = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$channelid);
+//         $where = "t.state != :state and channel_id = :channelid";
+//         $params = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$channelid);
         $cmd = app()->db->createCommand()
         ->from('{{post}} t')
         ->order('t.id desc')
