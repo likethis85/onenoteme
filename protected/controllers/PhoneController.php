@@ -102,11 +102,11 @@ class PhoneController extends Controller
         $where = "t.state != :state and channel_id = :channelid";
         $params = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$channelid);
         $cmd = app()->db->createCommand()
-        ->from('{{post}} t')
-        ->order('t.id desc')
-        ->limit($limit)
-        ->offset($offset)
-        ->where($where, $params);
+            ->from('{{post}} t')
+            ->order('t.id desc')
+            ->limit($limit)
+            ->offset($offset)
+            ->where($where, $params);
     
         $rows = $cmd->queryAll();
         self::output($rows);
@@ -120,18 +120,13 @@ class PhoneController extends Controller
         if (empty($lastid))
             self::output(array());
     
-        if ($channelid == CHANNEL_GIRL) {
-            $where = 'id in (6078,5823,5822,6113,6112,6111,6110,6109,2759,2758,2756,2741,2740,2832,2831,2830,2828,2827,2826,6108,6224,6223,6211,6210,6209,6208,6206,6251,6249,6245,6241,5761,5760,5759,5758,5757,5612,5607,5842) and id > :lastid';
-            $params = array(':lastid'=>$lastid);
-        }
-        else {
-            $where = "t.state != :state and id > :lastid and channel_id = :channelid";
-            $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid, ':channelid'=>$channelid);
-        }
+        $where = "t.state != :state and id > :lastid and channel_id = :channelid";
+        $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid, ':channelid'=>$channelid);
+
         $cmd = app()->db->createCommand()
-        ->from('{{post}} t')
-        ->order('t.id desc')
-        ->where($where, $params);
+            ->from('{{post}} t')
+            ->order('t.id desc')
+            ->where($where, $params);
     
         $rows = $cmd->queryAll();
     
@@ -149,19 +144,15 @@ class PhoneController extends Controller
         $limit = $limit ? $limit : 10;
         $offset = $offset ? $offset : 0;
         
-        if ($channelid == CHANNEL_GIRL)
-            $where = 'id in (6078,5823,5822,6113,6112,6111,6110,6109,6108,6224,6223,6211,6210,6209,6208,6206,6251,6249,6245,6241,5761,5760,5759,5758,5757,5612,5607,5842)';
-        else {
-            $where = "t.state != :state and channel_id = :channelid";
-            $params = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$channelid);
-        }
+        $where = "t.state != :state and channel_id = :channelid";
+        $params = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$channelid);
         
         $cmd = app()->db->createCommand()
-        ->from('{{post}} t')
-        ->order('t.id desc')
-        ->limit($limit)
-        ->offset($offset)
-        ->where($where, $params);
+            ->from('{{post}} t')
+            ->order('t.id desc')
+            ->limit($limit)
+            ->offset($offset)
+            ->where($where, $params);
     
         $rows = $cmd->queryAll();
         self::output($rows);
