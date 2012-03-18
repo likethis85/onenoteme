@@ -136,6 +136,11 @@ class AppapiController extends Controller
         
         foreach ($rows as $index => $row) {
             $row['create_time_text'] = date(param('formatShortDateTime'), (int)$row['create_time']);
+            $row['visit_count'] = '阅:' . $row['comment_nums'];
+            $row['comment_count'] = '评:' . $row['comment_nums'];
+            $row['support_count'] = '顶:' . $row['up_score'];
+            $row['oppose_count'] = '踩:' . $row['down_score'];
+            $row['thumbnail'] = $row['big_pic'];
             $rows[$index] = $row;
         }
         
