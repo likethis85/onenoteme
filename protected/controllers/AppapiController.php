@@ -1,6 +1,7 @@
 <?php
-class AppApiController extends Controller
+class AppapiController extends Controller
 {
+    const DEFAULT_LATEST_POST_MAX_COUNT = 50;
     const DEFAULT_RECOMMEND_POST_COUNT = 10;
     
     public function actionNew($lastid, $cid = 0, $device_token = '')
@@ -38,6 +39,7 @@ class AppApiController extends Controller
         $cmd = app()->db->createCommand()
             ->from('{{post}} t')
             ->order('t.id desc')
+            ->limit(self::DEFAULT_LATEST_POST_MAX_COUNT)
             ->where($where, $params);
     
         $rows = $cmd->queryAll();
