@@ -140,8 +140,16 @@ class AppapiController extends Controller
             $row['comment_count'] = '评:' . $row['comment_nums'];
             $row['support_count'] = '顶:' . $row['up_score'];
             $row['oppose_count'] = '踩:' . $row['down_score'];
-            $row['thumbnail'] = $row['big_pic'];
+            
+            if (!empty($row['pic']))
+                $thumbnail = $row['pic'];
+            elseif (!empty($row['big_pic']))
+                $thumbnail = $row['big_pic'];
+            else
+                $thumbnail = '';
+            $row['thumbnail'] = $thumbnail;
             $rows[$index] = $row;
+            
         }
         
         return $rows;
