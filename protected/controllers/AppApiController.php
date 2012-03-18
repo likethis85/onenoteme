@@ -1,6 +1,8 @@
 <?php
 class AppApiController extends Controller
 {
+    const DEFAULT_RECOMMEND_POST_COUNT = 10;
+    
     public function actionNew($lastid, $cid = 0, $device_token = '')
     {
         if (empty($lastid))
@@ -21,17 +23,14 @@ class AppApiController extends Controller
         
         // 更新最后请求时间
         self::updateLastRequestTime($device_token);
-        
+        $rows = self::processRows($rows);
         self::output($rows);
     }
     
-    public function actionLatest($lastid, $channelid = 0, $device_token = '')
+    public function actionLatest($lastid = 0, $channelid = 0, $device_token = '')
     {
         $lastid = (int)$lastid;
         $channelid = (int)$channelid;
-    
-        if (empty($lastid))
-            self::output(array());
     
         $where = "t.state != :state and id > :lastid and channel_id = :channelid";
         $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid, ':channelid'=>$channelid);
@@ -45,16 +44,16 @@ class AppApiController extends Controller
     
         // 更新最后请求时间
         self::updateLastRequestTime($device_token);
-    
+        $rows = self::processRows($rows);
         self::output($rows);
     }
     
-    public function actionChannel($channelid, $offset, $limit)
+    public function actionChannel($channelid, $offset = 0, $limit = self::DEFAULT_RECOMMEND_POST_COUNT)
     {
         $channelid = (int)$channelid;
         $offset = (int)$offset;
         $limit = (int)$limit;
-        $limit = $limit ? $limit : 10;
+        $limit = $limit ? $limit : self::DEFAULT_RECOMMEND_POST_COUNT;
         $offset = $offset ? $offset : 0;
         
         $where = "t.state != :state and channel_id = :channelid";
@@ -68,6 +67,37 @@ class AppApiController extends Controller
             ->where($where, $params);
     
         $rows = $cmd->queryAll();
+        $rows = self::processRows($rows);
+        self::output($rows);
+    }
+    
+    public function actionRandom($channelid = -1, $offset = 0, $limit = self::DEFAULT_RECOMMEND_POST_COUNT)
+    {
+        $offset = (int)$offset;
+        $limit = (int)$limit;
+        $limit = $limit ? $limit : self::DEFAULT_RECOMMEND_POST_COUNT;
+        $offset = $offset ? $offset : 0;
+        
+        $channelid = (int)$channelid;
+        if ($channelid === -1) {
+            $where = "t.state != :state";
+            $params = array(':state' => DPost::STATE_DISABLED);
+        }
+        else {
+            $where = "t.state != :state and channel_id = :channelid";
+            $params = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$channelid);
+        }
+        
+        
+        $cmd = app()->db->createCommand()
+            ->from('{{post}} t')
+            ->order('t.id desc')
+            ->limit($limit)
+            ->offset($offset)
+            ->where($where, $params);
+    
+        $rows = $cmd->queryAll();
+        $rows = self::processRows($rows);
         self::output($rows);
     }
     
@@ -96,6 +126,20 @@ class AppApiController extends Controller
         
         self::output($result);
     }
+    
+    private static function processRows($rows)
+    {
+        if (empty($rows) || !is_array($rows))
+            return $rows;
+        
+        foreach ($rows as $index => $row) {
+            $row['create_time_text'] = date(param('formatShortDateTime'), (int)$row['create_time']);
+            $rows[$index] = $row;
+        }
+        
+        return $rows;
+    }
+    
     
     private static function output($rows)
     {
