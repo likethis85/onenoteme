@@ -8,7 +8,7 @@
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->getTagsLinks('&nbsp;', '_self', 'mobile/tag');?></div><?php endif;?>
     </div>
-    <?php if ($index == 1 || $index == 3):?>
+    <?php if ($index == 1):?>
     <div class="post-item">
         <script type="text/javascript"><!--
           // XHTML should not attempt to parse these strings, declare them CDATA.

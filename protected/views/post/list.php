@@ -32,16 +32,14 @@
     <?php if ($key == 0):?>
     <div class="post-item">
     <script type="text/javascript"><!--
-        google_ad_client = "ca-pub-9725980429199769";
-        /* wdz_468x60 */
-        google_ad_slot = "5967469316";
+        google_ad_client = "ca-pub-0852804202998726";
+        /* waduanzi_468x60 */
+        google_ad_slot = "2183760832";
         google_ad_width = 468;
         google_ad_height = 60;
         //-->
-        </script>
-        <script type="text/javascript"
-        src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
     </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
     </div>
     <?php endif;?>
     <?php endforeach;?>
