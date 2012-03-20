@@ -2,8 +2,8 @@
 class AppapiController extends Controller
 {
     const DEFAULT_LATEST_POST_MAX_COUNT = 50;
-    const DEFAULT_RECOMMEND_POST_COUNT = 10;
-    
+    const DEFAULT_RECOMMEND_POST_COUNT = 15;
+
     public function actionNew($lastid, $cid = 0, $device_token = '')
     {
         if (empty($lastid))
