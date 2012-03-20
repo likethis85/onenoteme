@@ -106,7 +106,7 @@ class AppapiController extends Controller
 //         print_r($ids);exit;
         $where = array('and', array('in', 'id', $ids), $where);
         
-        $cmd = app()->db->createCommand()->select('create_time')
+        $cmd = app()->db->createCommand()
             ->from('{{post}} t')
             ->order('t.id desc')
             ->limit($limit)
