@@ -73,7 +73,7 @@ class AppapiController extends Controller
         self::output($rows);
     }
     
-    public function actionRandom($channelid = -1, $offset = 0, $limit = self::DEFAULT_RECOMMEND_POST_COUNT)
+    public function actionRandom($channelid = -1, $limit = self::DEFAULT_RECOMMEND_POST_COUNT)
     {
         $offset = (int)$offset;
         $limit = (int)$limit;
@@ -90,12 +90,24 @@ class AppapiController extends Controller
             $params = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$channelid);
         }
         
+        $maxIdMinId = app()->getDb()->createCommand()
+            ->select(array('max(id) maxid', 'min(id) minid'))
+            ->from('{{post}} t')
+            ->queryRow();
+        $minid = $maxIdMinId['minid'];
+        $maxid = $maxIdMinId['maxid'];
+        for ($i=0; $i<50; $i++)
+            $randomIds[] = mt_rand($minid, $maxid);
+        
+        shuffle($randomIds);
+        $ids = array_unique(array_values($randomIds));
+        
+        $where = array('and', array('in', 'id', $ids), $where);
         
         $cmd = app()->db->createCommand()
             ->from('{{post}} t')
             ->order('t.id desc')
             ->limit($limit)
-            ->offset($offset)
             ->where($where, $params);
     
         $rows = $cmd->queryAll();
