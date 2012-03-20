@@ -95,7 +95,7 @@ class AppapiController extends Controller
             ->from('{{post}} t')
             ->queryRow();
         
-        print_r($maxIdMinId);
+//         print_r($maxIdMinId);
         
         $minid = $maxIdMinId['minid'];
         $maxid = $maxIdMinId['maxid'];
@@ -103,7 +103,7 @@ class AppapiController extends Controller
             $randomIds[] = mt_rand($minid, $maxid);
         
         $ids = array_unique($randomIds);
-        print_r($ids);exit;
+//         print_r($ids);exit;
         $where = array('and', array('in', 'id', $ids), $where);
         
         $cmd = app()->db->createCommand()->select('create_time')
