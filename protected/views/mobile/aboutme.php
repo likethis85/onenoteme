@@ -12,6 +12,9 @@ body {font-size:16px; line-height:24px; color:#333; background:#EFEFEF; margin:0
 .phone-container {background:white; padding:7px;margin:7px; height:100%;}
 .post-title {text-align:center; font-size:20px; padding:10px 0 15px 0; margin:0; border-bottom:1px solid #DFDFDF; text-shadow:1px 1px #DFDFDF;}
 .phone-container img {max-width:300px;}
+p {line-height:22px;}
+ul {padding-left:0px;}
+li {margin-left:20px;}
 </style>
 </head>
 <body>
