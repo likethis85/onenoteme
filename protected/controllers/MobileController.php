@@ -114,4 +114,9 @@ class MobileController extends Controller
             'pages' => $pages,
         ));
     }
+
+    public function actionAboutme()
+    {
+        $this->renderPartial('aboutme');
+    }
 }
