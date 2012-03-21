@@ -178,10 +178,10 @@ class Phone2Controller extends Controller
         self::output($data);
     }
     
-    public function actionCreateComment()
+    public function actionCreateComment($postid, $content)
     {
-        $postid = (int)request()->getPost('postid');
-        $content = strip_tags(trim(request()->getPost('content')));
+        $postid = (int)$postid;
+        $content = strip_tags(trim($content));
         if (empty($postid))
             $data = array('errno'=>1, 'message'=>'非法操作');
         else {
