@@ -1,4 +1,9 @@
 <?php
+/**
+ * 手机应用2.0专用接口
+ * @author chendong
+ *
+ */
 class Phone2Controller extends Controller
 {
     const DEFAULT_LATEST_POST_MAX_COUNT = 50;
@@ -143,6 +148,36 @@ class Phone2Controller extends Controller
         self::output($result);
     }
     
+    public function actionSupport($id)
+    {
+        try {
+            $id = (int)$id;
+            $counters = array('up_score'=>1);
+            $result = Post::model()->updateCounters($counters, 'id=:pid', array(':pid'=>$id));
+            $data = array('errno'=>0);
+        }
+        catch (Exception $e) {
+            $data = array('errno'=>1);
+        }
+        
+        self::output($data);
+    }
+    
+    public function actionOppose($id)
+    {
+        try {
+            $id = (int)$id;
+            $counters = array('down_score'=>1);
+            $result = Post::model()->updateCounters($counters, 'id=:pid', array(':pid'=>$id));
+            $data = array('errno'=>0);
+        }
+        catch (Exception $e) {
+            $data = array('errno'=>1);
+        }
+        
+        self::output($data);
+    }
+    
     private static function processRows($rows)
     {
         if (empty($rows) || !is_array($rows))
@@ -168,7 +203,6 @@ class Phone2Controller extends Controller
         
         return $rows;
     }
-    
     
     private static function output($rows)
     {
