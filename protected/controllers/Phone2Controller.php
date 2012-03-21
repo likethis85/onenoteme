@@ -183,7 +183,7 @@ class Phone2Controller extends Controller
         $postid = (int)request()->getPost('postid');
         $content = strip_tags(trim(request()->getPost('content')));
         if (empty($postid))
-            $data = array('errno'=>1);
+            $data = array('errno'=>1, 'message'=>'非法操作');
         else {
             $columns = array(
                 'post_id' => $postid,
@@ -197,7 +197,10 @@ class Phone2Controller extends Controller
             $result = app()->getDb()->createCommand()
                 ->insert('{{comment}}', $columns);
             
-            $data = array('errno' => (int)!$result);
+            $data = array(
+                'errno' => (int)!$result,
+                'message' => '数据库操作错误'
+            );
         }
         
         self::output($data);
