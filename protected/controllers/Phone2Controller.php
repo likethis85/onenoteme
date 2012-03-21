@@ -180,7 +180,7 @@ class Phone2Controller extends Controller
     
     public function actionCreateComment()
     {
-        $postid = (int)request()->getPost('post_id');
+        $postid = (int)request()->getPost('postid');
         $content = strip_tags(trim(request()->getPost('content')));
         if (empty($postid))
             $data = array('errno'=>1);
@@ -200,7 +200,7 @@ class Phone2Controller extends Controller
             $data = array('errno' => (int)$result);
         }
         
-        self::output($rows);
+        self::output($data);
     }
     
     public function actionComments($postid)
