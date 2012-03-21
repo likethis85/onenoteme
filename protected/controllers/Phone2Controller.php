@@ -114,11 +114,11 @@ class Phone2Controller extends Controller
         $cmd = app()->db->createCommand()
             ->from('{{post}} t')
             ->order('t.id desc')
-            ->limit($limit)
             ->where($where, $params);
     
         $rows = $cmd->queryAll();
         $rows = self::processRows($rows);
+        shuffle($rows);
         self::output($rows);
     }
     
