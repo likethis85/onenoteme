@@ -178,6 +178,56 @@ class Phone2Controller extends Controller
         self::output($data);
     }
     
+    public function actionCreateComment()
+    {
+        $postid = (int)request()->getPost('post_id');
+        $content = strip_tags(trim(request()->getPost('content')));
+        if (empty($postid))
+            $data = array('errno'=>1);
+        else {
+            $columns = array(
+                'post_id' => $postid,
+                'content' => $content,
+                'create_time' => $_SERVER['REQUEST_TIME'],
+                'create_ip' => CDBase::getClientIp(),
+                'state' => DComment::STATE_ENABLED,
+                'user_id' => 0,
+                'user_name' => '',
+            );
+            $result = app()->getDb()->createCommand()
+                ->insert('{{comment}}', $columns);
+            
+            $data = array('errno' => (int)$result);
+        }
+        
+        self::output($rows);
+    }
+    
+    public function actionComments($postid)
+    {
+        $commentCount = 10;
+        $postid = (int)$postid;
+        if (empty($postid)) {
+            $data = array('errno' => 1);
+            self::output($data);
+        }
+        else {
+            $rows = app()->getDb()->createCommand()
+                ->from('{{comment}}')
+                ->limit($commentCount)
+                ->order('id desc')
+                ->where('post_id = :postid', array(':postid'=>$postid))
+                ->queryAll();
+            
+            foreach ($rows as $key => $row) {
+                $row['create_time_text'] = date(param('formatShortDateTime'), $row['create_time']);
+                $row['content'] = strip_tags(trim($row['content']));
+                $rows[$key] = $row;
+            }
+            self::output($rows);
+        }
+    }
+    
     private static function processRows($rows)
     {
         if (empty($rows) || !is_array($rows))
