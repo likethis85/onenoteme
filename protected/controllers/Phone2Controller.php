@@ -197,7 +197,7 @@ class Phone2Controller extends Controller
             $result = app()->getDb()->createCommand()
                 ->insert('{{comment}}', $columns);
             
-            $data = array('errno' => (int)$result);
+            $data = array('errno' => (int)!$result);
         }
         
         self::output($data);
