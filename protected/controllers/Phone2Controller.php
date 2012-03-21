@@ -1,5 +1,5 @@
 <?php
-class AppapiController extends Controller
+class Phone2Controller extends Controller
 {
     const DEFAULT_LATEST_POST_MAX_COUNT = 50;
     const DEFAULT_RECOMMEND_POST_COUNT = 15;
@@ -99,7 +99,7 @@ class AppapiController extends Controller
         
         $minid = $maxIdMinId['minid'];
         $maxid = $maxIdMinId['maxid'];
-        for ($i=0; $i<50; $i++)
+        for ($i=0; $i<100; $i++)
             $randomIds[] = mt_rand($minid, $maxid);
         
         $ids = array_unique($randomIds);
