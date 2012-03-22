@@ -6,6 +6,7 @@
  * The followings are the available columns in table '{{token}}':
  * @property integer $id
  * @property integer $user_id
+ * @property string $uuid
  * @property string $device_token
  * @property integer $last_time
  */
@@ -38,7 +39,7 @@ class Device extends CActiveRecord
 		return array(
 			array('device_token', 'required'),
 			array('user_id, last_time', 'numerical', 'integerOnly'=>true),
-			array('device_token', 'length', 'max'=>100),
+			array('device_token, uuid', 'length', 'max'=>100),
 		);
 	}
 

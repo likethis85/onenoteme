@@ -129,23 +129,24 @@ class Phone2Controller extends Controller
             $token = trim($token, '<>');
             $token = str_replace(' ', '', $token);
             if (empty($token))
-                $data = array('errno'=>-1);
+                $data = array('errno'=>'-1');
             else {
                 $model = Device::model()->findByAttributes(array('device_token'=>$token));
                 if ($model === null) {
                     $model = new Device();
                     $model->device_token = $token;
+                    $model->uuid = '';
                     $model->last_time = $_SERVER['REQUEST_TIME'];
                     $result = (int)$model->save();
                 }
                 else
-                    $result = 2;
+                    $result = '2';
                 
                 $data = array('errno'=>$result);
             }
         }
         else
-            $data = array('errno'=>-2);
+            $data = array('errno'=>'-2');
         
         self::output($data);
     }
