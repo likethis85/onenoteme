@@ -124,8 +124,8 @@ class Phone2Controller extends Controller
     
     public function actionDeviceToken()
     {
-        if (request()->getIsPostRequest() && isset($_POST)) {
-            $token = trim($_POST['device_token']);
+//         if (request()->getIsPostRequest() && isset($_POST)) {
+            $token = trim($_GET['device_token']);
             $token = trim($token, '<>');
             $token = str_replace(' ', '', $token);
             $a = array('token'=>$token);
@@ -146,9 +146,9 @@ class Phone2Controller extends Controller
                 
                 $data = array('errno'=>$result);
             }
-        }
-        else
-            $data = array('errno'=>'-2');
+//         }
+//         else
+//             $data = array('errno'=>'-2');
         
         self::output($data);
     }
