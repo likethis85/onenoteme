@@ -122,29 +122,34 @@ class Phone2Controller extends Controller
         self::output($rows);
     }
     
-    public function actionDeviceToken($device_token, $device_uuid)
+    public function actionDeviceToken()
     {
-        $token = trim($device_token);
-        $token = trim($token, '<>');
-        $token = str_replace(' ', '', $token);
-
-        if (empty($token))
-            $data = array('errno'=>-1);
-        else {
-            $model = Device::model()->findByAttributes(array('device_token'=>$token));
-            if ($model === null) {
-                $model = new Device();
-                $model->device_token = $token;
-                $model->uuid = '';
-                $model->last_time = $_SERVER['REQUEST_TIME'];
-                $result = (int)!$model->save();
-            }
-            else
-                $result = 2;
-            
-            $data = array('errno'=>$result);
-        }
+        if (request()->isPostRequest && isset($_POST)) {
+            $uuid = trim($_POST['device_uuid']);
+            $token = trim($_POST['device_token']);
+            $token = trim($token, '<>');
+            $token = str_replace(' ', '', $token);
     
+            if (empty($token))
+                $data = array('errno'=>-1);
+            else {
+                $model = Device::model()->findByAttributes(array('device_token'=>$token));
+                if ($model === null) {
+                    $model = new Device();
+                    $model->device_token = $token;
+                    $model->uuid = '';
+                    $model->last_time = $_SERVER['REQUEST_TIME'];
+                    $result = (int)!$model->save();
+                }
+                else
+                    $result = 2;
+                
+                $data = array('errno'=>$result);
+            }
+        }
+        else
+            $data = array('errno'=>-2);
+        
         self::output($data);
     }
     
