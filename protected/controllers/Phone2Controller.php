@@ -128,6 +128,8 @@ class Phone2Controller extends Controller
             $token = trim($_POST['device_token']);
             $token = trim($token, '<>');
             $token = str_replace(' ', '', $token);
+            $a = array('token'=>$token);
+            self::output($a);
             if (empty($token))
                 $data = array('errno'=>'-1');
             else {
@@ -265,11 +267,11 @@ class Phone2Controller extends Controller
         $format = strtolower(trim($_REQUEST['format']));
         
         if ($format === 'jsonp') {
-            header('Content-Type: application/javascript');
+            header('Content-Type: application/javascript; charset=utf-8');
             echo $_GET['callback'] . '(' . CJSON::encode($rows) . ')';
         }
         else {
-            header('Content-Type: application/json');
+            header('Content-Type: application/json; charset=utf-8');
             echo CJSON::encode($rows);
         }
         exit(0);
