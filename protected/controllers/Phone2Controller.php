@@ -178,30 +178,34 @@ class Phone2Controller extends Controller
         self::output($data);
     }
     
-    public function actionCreateComment($postid, $content)
+    public function actionCreateComment()
     {
-        $postid = (int)$postid;
-        $content = strip_tags(trim($content));
-        if (empty($postid))
-            $data = array('errno'=>1, 'message'=>'非法操作');
-        else {
-            $columns = array(
-                'post_id' => $postid,
-                'content' => $content,
-                'create_time' => $_SERVER['REQUEST_TIME'],
-                'create_ip' => CDBase::getClientIp(),
-                'state' => DComment::STATE_ENABLED,
-                'user_id' => 0,
-                'user_name' => '',
-            );
-            $result = app()->getDb()->createCommand()
-                ->insert('{{comment}}', $columns);
-            
-            $data = array(
-                'errno' => (int)!$result,
-                'message' => '数据库操作错误'
-            );
+        if (request()->isPostRequest && isset($_POST)) {
+            $postid = (int)$_POST['postid'];
+            $content = strip_tags(trim($_POST['content']));
+            if (empty($postid))
+                $data = array('errno'=>1, 'message'=>'非法操作');
+            else {
+                $columns = array(
+                    'post_id' => $postid,
+                    'content' => $content,
+                    'create_time' => $_SERVER['REQUEST_TIME'],
+                    'create_ip' => CDBase::getClientIp(),
+                    'state' => DComment::STATE_ENABLED,
+                    'user_id' => 0,
+                    'user_name' => '',
+                );
+                $result = app()->getDb()->createCommand()
+                    ->insert('{{comment}}', $columns);
+                
+                $data = array(
+                    'errno' => (int)!$result,
+                    'message' => '数据库操作错误'
+                );
+            }
         }
+        else
+            $data = array('errno'=>1, 'message'=>'非法操作');
         
         self::output($data);
     }
