@@ -29,19 +29,6 @@
         </ul>
         <div class="comment-list comment-list-<?php echo $model->id;?> hide"></div>
     </div>
-    <?php if ($key == 0):?>
-    <div class="post-item">
-    <script type="text/javascript"><!--
-        google_ad_client = "ca-pub-0852804202998726";
-        /* waduanzi_468x60 */
-        google_ad_slot = "2183760832";
-        google_ad_width = 468;
-        google_ad_height = 60;
-        //-->
-    </script>
-    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-    </div>
-    <?php endif;?>
     <?php endforeach;?>
 </div>
 

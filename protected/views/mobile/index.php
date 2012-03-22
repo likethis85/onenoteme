@@ -14,14 +14,14 @@
           // XHTML should not attempt to parse these strings, declare them CDATA.
           /* <![CDATA[ */
           window.googleAfmcRequest = {
-            client: 'ca-mb-pub-0852804202998726',
+            client: 'ca-mb-pub-9725980429199769',
             format: '320x50_mb',
             output: 'HTML',
-            slotname: '2500142833',
+            slotname: '1805318491',
           };
           /* ]]> */
         //--></script>
-        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_afmc_ads.js"></script>
+        <script type="text/javascript"    src="http://pagead2.googlesyndication.com/pagead/show_afmc_ads.js"></script>
     </div>
     <?php endif;?>
     <?php endforeach;?>

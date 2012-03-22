@@ -20,17 +20,6 @@
 		<a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank"><img src="http://f.meiapps.com/apps/waduanzi_icon.png" width="80" height="80" alt="挖段子IOS应用" align="middle" border="0" /></a>
 		<span class="f16px"><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank"><strong>点击下载iPhone手机应用</strong></a></span>
 	</div>
-	<div class="cdc-block">
-		<script type="text/javascript"><!--
-            google_ad_client = "ca-pub-0852804202998726";
-            /* waduanzi_300x250 */
-            google_ad_slot = "7715744702";
-            google_ad_width = 300;
-            google_ad_height = 250;
-            //-->
-        </script>
-        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-	</div>
 	<div class="content-block">
 		<h2 class="content-title">公告</h2>
 		<ul class="site-notice">
@@ -59,17 +48,5 @@
 	</div>
 </div>
 <div class="clear"></div>
-<div class="cdc-bottom-banner">
-	<script type="text/javascript">
-		<!--
-            google_ad_client = "ca-pub-0852804202998726";
-		/* waduanzi_728x90 */
-            google_ad_slot = "5058095378";
-            google_ad_width = 728;
-            google_ad_height = 90;
-        //-->
-        </script>
-        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-</div>
 <div class="clear"></div>
 
