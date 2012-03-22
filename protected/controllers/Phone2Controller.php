@@ -129,7 +129,7 @@ class Phone2Controller extends Controller
             $token = trim($token, '<>');
             $token = str_replace(' ', '', $token);
             if (empty($token))
-                $result = -1;
+                $data = array('errno'=>-1);
             else {
                 $model = Device::model()->findByAttributes(array('device_token'=>$token));
                 if ($model === null) {
@@ -140,12 +140,14 @@ class Phone2Controller extends Controller
                 }
                 else
                     $result = 2;
+                
+                $data = array('errno'=>$result);
             }
         }
         else
-            $result = -2;
+            $data = array('errno'=>-2);
         
-        self::output($result);
+        self::output($data);
     }
     
     public function actionSupport($id)

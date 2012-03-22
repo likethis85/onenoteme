@@ -68,7 +68,7 @@ class ApnCommand extends CConsoleCommand
         $others = array('channel_count' => array('1'=>'2', '2'=>'3', '3'=>'1', '4'=>'4', 'all'=>'12'));
         $apn = app()->apn->connect();
         try {
-            $apn->createNote($token, '', 12, '', $others)->send();
+            $apn->createNote($token, '2.0测试', 12, '', $others)->send();
         }
         catch (Exception $e) {
             echo $e->getMessage() . "\n";
