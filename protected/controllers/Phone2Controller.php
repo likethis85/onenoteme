@@ -200,13 +200,22 @@ class Phone2Controller extends Controller
                     'user_id' => 0,
                     'user_name' => '',
                 );
-                $result = app()->getDb()->createCommand()
-                    ->insert('{{comment}}', $columns);
+                $comment = new Comment();
+                $comment->post_id = $postid;
+                $comment->content = $content;
+                $comment->state = Comment::STATE_ENABLED;
+                $comment->user_id = 0;
+                $comment->user_name = '';
+                $result = $comment->save();
                 
-                $data = array(
-                    'errno' => (int)!$result,
-                    'message' => '数据库操作错误'
-                );
+                if ($result) {
+                    $data = array('errno'=>0);
+                }
+                else
+                    $data = array(
+                        'errno' => 1,
+                        'message' => '数据库操作错误'
+                    );
             }
         }
         else
