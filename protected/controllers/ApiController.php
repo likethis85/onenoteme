@@ -3,17 +3,29 @@ class ApiController extends Controller
 {
     public function actionIndex()
     {
-        $apiUrl = 'http://www.waduanzi.com/api';
-        $api = new AppApi($apiUrl, $_REQUEST);
-        
+        AppApi::setDataFormat(AppApi::FORMAT_JSON);
+        $api = new AppApi();
+        $api->run();
+    }
+    
+    public function actionJson()
+    {
+        AppApi::setDataFormat(AppApi::FORMAT_JSON);
+        $api = new AppApi();
         $api->run();
     }
     
     public function actionJsonp()
     {
-        $apiUrl = 'http://waduanzi.com/api/jsonp';
-        $api = new AppApi($apiUrl, $_REQUEST);
-        
+        AppApi::setDataFormat(AppApi::FORMAT_JSONP);
+        $api = new AppApi();
+        $api->run();
+    }
+    
+    public function actionXml()
+    {
+        AppApi::setDataFormat(AppApi::FORMAT_XML);
+        $api = new AppApi();
         $api->run();
     }
 }
