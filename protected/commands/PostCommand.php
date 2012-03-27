@@ -3,12 +3,24 @@ class PostCommand extends CConsoleCommand
 {
     public function actionUpdateStateEnable($count)
     {
-        $ids = app()->getDb()->createCommand()
+        $cmd = app()->getDb()->createCommand()
+            ->select('id')
             ->from('{{post}}')
             ->order('id asc')
-            ->limit($count)
-            ->where('state = :disable_state', array(':disable_state'=>Post::STATE_DISABLED))
-            ->queryColumn();
+            ->limit($count);
+        
+        $conditions = array('and', 'channel_id = :channelID', 'state = :disable_state');
+        
+        $params = array(':disable_state'=>Post::STATE_DISABLED, ':channelID'=>CHANNEL_DUANZI);
+        $duanziIDs = $cmd->where($conditions, $params)->queryColumn();
+        
+        $params = array(':disable_state'=>Post::STATE_DISABLED, ':channelID'=>CHANNEL_LENGTU);
+        $lengtuIDs = $cmd->where($conditions, $params)->queryColumn();
+        
+        $params = array(':disable_state'=>Post::STATE_DISABLED, ':channelID'=>CHANNEL_GIRL);
+        $fuliIDs = $cmd->where($conditions, $params)->queryColumn();
+        
+        $ids = array_merge($duanziIDs, $lengtuIDs, $fuliIDs);
         
         $nums = app()->getDb()->createCommand()
             ->update('{{post}}',
