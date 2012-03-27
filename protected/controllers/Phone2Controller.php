@@ -209,8 +209,6 @@ class Phone2Controller extends Controller
                 $result = $comment->save();
                 
                 if ($result) {
-                    $counters = array('comment_nums'=>1);
-                    Post::model()->updateCounters($counters, 'id = :postid', array(':postid'=>$postid));
                     $data = array('errno'=>0);
                 }
                 else
