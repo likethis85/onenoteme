@@ -119,4 +119,9 @@ class MobileController extends Controller
     {
         $this->renderPartial('aboutme');
     }
+
+    public function actionNextversion()
+    {
+        $this->renderPartial('nextversion');
+    }
 }
