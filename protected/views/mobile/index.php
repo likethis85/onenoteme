@@ -11,17 +11,14 @@
     <?php if ($index == 1):?>
     <div class="post-item">
         <script type="text/javascript"><!--
-        // XHTML should not attempt to parse these strings, declare them CDATA.
-        /* <![CDATA[ */
-        window.googleAfmcRequest = {
-            client: 'ca-mb-pub-9725980429199769',
-            format: '320x50_mb',
-            output: 'HTML',
-            slotname: '1805318491',
-        };
-        /* ]]> */
-        //--></script>
-        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_afmc_ads.js"></script>
+            google_ad_client = "ca-pub-9725980429199769";
+            /* iphone_320x50 */
+            google_ad_slot = "7800978598";
+            google_ad_width = 320;
+            google_ad_height = 50;
+            //-->
+        </script>
+        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
     </div>
     <?php endif;?>
     <?php endforeach;?>
