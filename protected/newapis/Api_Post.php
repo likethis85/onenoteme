@@ -178,10 +178,48 @@ class Api_Post extends ApiBase
         }
     }
    
+    public function support()
+    {
+        self::requirePost();
+        $this->requiredParams(array('postid'));
+        $params = $this->filterParams(array('postid'));
+        
+        try {
+            $id = (int)$params['postid'];
+            $counters = array('up_score'=>1);
+            $result = Post::model()->updateCounters($counters, 'id=:pid', array(':pid'=>$id));
+            $data = array('errno'=>0);
+        }
+        catch (Exception $e) {
+            $data = array('errno'=>1);
+        }
+        
+        return $data;
+    }
+   
+    public function oppose()
+    {
+        self::requirePost();
+        $this->requiredParams(array('postid'));
+        $params = $this->filterParams(array('postid'));
+        
+        try {
+            $id = (int)$params['postid'];
+            $counters = array('down_score'=>1);
+            $result = Post::model()->updateCounters($counters, 'id=:pid', array(':pid'=>$id));
+            $data = array('errno'=>0);
+        }
+        catch (Exception $e) {
+            $data = array('errno'=>1);
+        }
+        
+        return $data;
+    }
+    
     public function create()
     {
     	self::requirePost();
-//    	$this->requireLogin();
+//        	$this->requireLogin();
     	$this->requiredParams(array('content', 'token', 'channel_id'));
     	$params = $this->filterParams(array('content', 'tags', 'channel_id', 'category_id', 'pic', 'token'));
     	
@@ -234,3 +272,5 @@ class Api_Post extends ApiBase
     }
     
 }
+
+

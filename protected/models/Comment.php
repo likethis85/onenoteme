@@ -86,7 +86,7 @@ class Comment extends CActiveRecord
 	    if ($this->getIsNewRecord()) {
 	        $this->content = strip_tags(trim($this->content));
 	        $this->create_time = $_SERVER['REQUEST_TIME'];
-	        $this->create_ip = request()->getUserHostAddress();
+	        $this->create_ip = CDBase::getClientIp();
 	    }
 	    
 	    return true;
