@@ -140,7 +140,7 @@ class Phone2Controller extends Controller
             else
                 $rows[$row['id']] = $row;
         
-            if (count($rows) >= $count)
+            if (count($rows) >= $limit)
                 break;
         }
         
