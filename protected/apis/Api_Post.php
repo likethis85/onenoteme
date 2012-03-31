@@ -156,7 +156,7 @@ class Api_Post extends ApiBase
             
             $conditoin = array('and', 't.state = :enalbed',  'channel_id = :channelid');
             $param = array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID);
-            $conditoin = array('and', array('in', 'id', $ids), $conditoin);
+            $conditoin = array('and', array('in', 'id', $randomIds), $conditoin);
             
             $cmd = app()->db->createCommand()
                 ->select($fields)
