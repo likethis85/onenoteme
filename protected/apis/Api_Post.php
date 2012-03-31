@@ -95,10 +95,12 @@ class Api_Post extends ApiBase
         
         $channelID = (int)$params['channelid'];
         $count = $defaultCount = 50;
+        if (!empty($params['count']))
+            $count = (int)$params['count'];
+        
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
             $lastid = empty($params['lastid']) ? 0 : (int)$params['lastid'];
-            $count = empty($params['count']) ? 50 : (int)$params['count'];
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
                 ->from(TABLE_NAME_POST)
