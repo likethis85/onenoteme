@@ -50,6 +50,7 @@ var Api_Waduanzi = {
 		params.apikey = Api_Waduanzi.config.apiKey;
 		params.sig = Api_Waduanzi.config.apiKey;
 		params.timestamp = '183632982';
+		params.token = '894159137';
         var url = Api_Waduanzi.getRequestUrl(method, []);
 		var jqXhr = $.ajax({
 			url: url,
