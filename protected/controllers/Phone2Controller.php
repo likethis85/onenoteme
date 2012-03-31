@@ -143,7 +143,9 @@ class Phone2Controller extends Controller
             if (count($rows) >= $count)
                 break;
         }
+        
         $rows = self::processRows($rows);
+        $rows = array_values($rows);
         
         self::output($rows);
     }

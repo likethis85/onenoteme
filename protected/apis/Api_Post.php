@@ -170,8 +170,9 @@ class Api_Post extends ApiBase
                 if (count($rows) >= $count)
                     break;
             }
+            
             $rows = self::formateRows($rows);
-            shuffle($rows);
+            $rows = array_values($rows);
             
             return $rows;
         }
