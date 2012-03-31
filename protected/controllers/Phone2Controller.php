@@ -80,6 +80,8 @@ class Phone2Controller extends Controller
     
     public function actionRandom($channelid = -1, $limit = self::DEFAULT_RECOMMEND_POST_COUNT)
     {
+        $this->forward('latest');
+        exit;
         $offset = (int)$offset;
         $limit = (int)$limit;
         $limit = $limit ? $limit : self::DEFAULT_RECOMMEND_POST_COUNT;
