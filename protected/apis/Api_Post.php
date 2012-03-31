@@ -148,7 +148,7 @@ class Api_Post extends ApiBase
             
             $minid = (int)$maxIdMinId['minid'];
             $maxid = (int)$maxIdMinId['maxid'];
-            
+            echo $maxid;
             $conditoin = array('and', 't.state = :enalbed',  'channel_id = :channelid', 'id >= (select floor(rand() * :maxid))');
             $param = array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID, ':maxid'=>$maxid);
             $rows = array();
