@@ -157,7 +157,7 @@ class Api_Post extends ApiBase
                     ->select($fields)
                     ->from(TABLE_NAME_POST)
                     ->where($conditoin, $param);
-                
+                echo $cmd->text;
                 $row = $cmd->queryRow();
                 if (array_key_exists($row['id'], $rows))
                     continue;
