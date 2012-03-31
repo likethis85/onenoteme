@@ -91,7 +91,7 @@ class Api_Post extends ApiBase
     public function timeline()
     {
         self::requiredParams(array('channelid'));
-        $params = $this->filterParams(array('channelid', 'count', 'fields'));
+        $params = $this->filterParams(array('channelid', 'count', 'fields', 'lastid'));
         
         $channelID = (int)$params['channelid'];
         $count = $defaultCount = 50;
@@ -100,10 +100,11 @@ class Api_Post extends ApiBase
         
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
+            $lastid = empty($params['lastid']) ? 0 : (int)$params['lastid'];
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
                 ->from(TABLE_NAME_POST)
-                ->where('channel_id = :channelid', array(':channelid' => $channelID));
+                ->where(array('and', 'channel_id = :channelid', 'id > :lastid'), array(':channelid' => $channelID, ':lastid'=>$lastid));
             $rows = $cmd->queryAll();
             
             foreach ($rows as $index => $row)
