@@ -106,7 +106,7 @@ class Api_Post extends ApiBase
             if ($count <= 0 || $count > self::DEFAULT_TIMELINE_MAX_COUNT)
                 $count = self::DEFAULT_TIMELINE_MAX_COUNT;
             
-            $conditoin = array('and', 'channel_id = :channelid', 'id > :lastid');
+            $condition = array('and', 'channel_id = :channelid', 'id > :lastid');
             $param = array(':channelid' => $channelID, ':lastid'=>$lastid);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
@@ -151,18 +151,18 @@ class Api_Post extends ApiBase
             if ($count <= 0 || $count > self::DEFAULT_RANDOM_MAX_COUNT)
                 $count = self::DEFAULT_TIMELINE_MAX_COUNT;
             
-            $where = array('and', 't.state = :enalbed',  'channel_id = :channelid');
+            $conditoin = array('and', 't.state = :enalbed',  'channel_id = :channelid');
             $param = array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID);
             
             $ids = array_unique($randomIds);
-            $where = array('and', array('in', 'id', $ids), $where);
+            $conditoin = array('and', array('in', 'id', $ids), $conditoin);
             
             $cmd = app()->db->createCommand()
                 ->select($fields)
                 ->from(TABLE_NAME_POST)
                 ->order('t.id desc')
                 ->limit($count)
-                ->where($where, $param);
+                ->where($conditoin, $param);
             
             $rows = $cmd->queryAll();
             $rows = self::formateRows($rows);
