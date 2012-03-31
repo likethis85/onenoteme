@@ -149,24 +149,24 @@ class Api_Post extends ApiBase
             $minid = (int)$maxIdMinId['minid'];
             $maxid = (int)$maxIdMinId['maxid'];
             
+            $conditoin = array('and', 't.state = :enalbed',  'channel_id = :channelid', 'id >= (select floor(rand() * :maxid))');
+            $param = array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID, ':maxid'=>$maxid);
+            $rows = array();
             for ($i=0; $i<$maxid; $i++) {
-                $randomIds[] = mt_rand($minid, $maxid);
-                $randomIds = array_unique($randomIds);
-                if (count($randomIds) > $count*10)
+                $cmd = app()->getDb()->createCommand()
+                    ->select($fields)
+                    ->from(TABLE_NAME_POST)
+                    ->where($conditoin, $param);
+                
+                $row = $cmd->queryRow();
+                if (array_key_exists($row['id'], $rows))
+                    continue;
+                else
+                    $rows[$row['id']] = $row;
+
+                if (count($rows) >= $count)
                     break;
             }
-            
-            $conditoin = array('and', 't.state = :enalbed',  'channel_id = :channelid');
-            $param = array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID);
-            $conditoin = array('and', array('in', 'id', $randomIds), $conditoin);
-            
-            $cmd = app()->db->createCommand()
-                ->select($fields)
-                ->from(TABLE_NAME_POST)
-                ->limit($count)
-                ->where($conditoin, $param);
-            
-            $rows = $cmd->queryAll();
             $rows = self::formateRows($rows);
             shuffle($rows);
             
