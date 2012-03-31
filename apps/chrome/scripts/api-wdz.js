@@ -1,10 +1,10 @@
 
 var Api_Waduanzi = {
-	debug: 0,
+	debug: 1,
 	config: {
-		apiHost: 'http://www.waduanzi.com/api',
-		apiKey: '123',
-		apiSecret: '123',
+		apiHost: 'http://api.waduanzi.com/json',
+		apiKey: '4f7710dc0f9ac',
+		apiSecret: '68c4e213397c009dfcc149e7fee936f7',
 		apiFormat: 'json',
 		apiGetCategories: 'category.getlist',
         apiCreatePost: 'post.create',
@@ -29,6 +29,8 @@ var Api_Waduanzi = {
 		var accessor = {consumerSecret: Api_Waduanzi.config.apiSecret, tokenSecret: '', accessorSecret: ''};
         params.push(['oauth_consumer_key', Api_Waduanzi.config.apiKey]);
         params.push(['format', Api_Waduanzi.config.apiFormat]);
+        params.push(['apikey', Api_Waduanzi.config.apiKey]);
+        params.push(['timestamp', '183632982']);
         var message = {method: method, action: Api_Waduanzi.config.apiHost, parameters: params};
 		
         OAuth.completeRequest(message, accessor);
@@ -39,14 +41,19 @@ var Api_Waduanzi = {
 		return url;
     },
     sendRequest: function(method, params/*, requireLogined*/) {
+/*
 		if (arguments[2]) {
 			var user = Api_Waduanzi.userinfo();
 			params.push(['token', user.token]);
 		}
-		  
-        var url = Api_Waduanzi.getRequestUrl(method, params);
+*/
+		params.apikey = Api_Waduanzi.config.apiKey;
+		params.sig = Api_Waduanzi.config.apiKey;
+		params.timestamp = '183632982';
+        var url = Api_Waduanzi.getRequestUrl(method, []);
 		var jqXhr = $.ajax({
 			url: url,
+			data: $.param(params),
 			dataType: Api_Waduanzi.config.apiFormat,
 			type: method
 		});
@@ -77,7 +84,16 @@ var Api_Waduanzi = {
 		var pic = data[2].value;
 		var channel_id = data[3].value;
 		var category_id = data[4].value;
-		var params = [['methods', Api_Waduanzi.config.apiCreatePost], ['content', content], ['tags', tags], ['pic', pic], ['channel_id', channel_id], ['category_id', category_id], ['debug',  Api_Waduanzi.debug]];
+		var params = [['method', Api_Waduanzi.config.apiCreatePost], ['content', content], ['tags', tags], ['pic', pic], ['channel_id', channel_id], ['category_id', category_id], ['debug',  Api_Waduanzi.debug]];
+		var params = {
+			'method': Api_Waduanzi.config.apiCreatePost,
+			'content': content,
+			'tags': tags,
+			'pic': pic,
+			'channel_id': channel_id,
+			'category_id': category_id,
+			'debug': Api_Waduanzi.debug
+		};
         var jqXhr = Api_Waduanzi.sendRequest('POST', params, true);
         jqXhr.always(function(){
             console.log('always');

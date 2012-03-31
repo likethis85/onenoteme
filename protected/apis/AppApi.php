@@ -81,8 +81,8 @@ class AppApi
     private function checkParams()
     {
         $this->checkFormat()
-            ->checkApiKey()
-           ->checkSignature();
+            ->checkApiKey();
+//         $this->checkSignature();
             
         return $this;
     }
