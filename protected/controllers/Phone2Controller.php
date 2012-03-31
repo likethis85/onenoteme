@@ -111,18 +111,18 @@ class Phone2Controller extends Controller
         $maxIdMinId = app()->getDb()->createCommand()
             ->select(array('max(id) maxid', 'min(id) minid'))
             ->from('{{post}} t')
-            ->where(array('and', 't.state = :enalbed',  'channel_id = :channelid'), array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID))
+            ->where(array('and', 't.state = :enalbed'), array(':enalbed' => Post::STATE_ENABLED))
             ->queryRow();
         $minid = $maxIdMinId['minid'];
         $maxid = $maxIdMinId['maxid'];
         
         if ($channelid === -1) {
             $conditoin = array('and', 't.state != :state', 'id = :randid');
-            $params = array(':state' => DPost::STATE_DISABLED, ':randid'=>0);
+            $param = array(':state' => DPost::STATE_DISABLED, ':randid'=>0);
         }
         else {
             $conditoin = array('and', 't.state != :state', 'channel_id = :channelid', 'id = :randid');
-            $params = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$channelid, ':randid'=>0);
+            $param = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$channelid, ':randid'=>0);
         }
         
         $rows = array();
