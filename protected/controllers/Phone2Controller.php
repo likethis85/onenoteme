@@ -80,71 +80,72 @@ class Phone2Controller extends Controller
     
     public function actionRandom($channelid = -1, $limit = self::DEFAULT_RECOMMEND_POST_COUNT)
     {
-        $lastid = (int)$lastid;
-        $channelid = (int)$channelid;
+//         $lastid = (int)$lastid;
+//         $channelid = (int)$channelid;
     
-        $where = "t.state != :state and id > :lastid and channel_id = :channelid";
-        $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid, ':channelid'=>$channelid);
+//         $where = "t.state != :state and id > :lastid and channel_id = :channelid";
+//         $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid, ':channelid'=>$channelid);
 
-        $cmd = app()->db->createCommand()
-            ->from('{{post}} t')
-            ->order('t.id desc')
-            ->limit(self::DEFAULT_RECOMMEND_POST_COUNT)
-            ->where($where, $params);
+//         $cmd = app()->db->createCommand()
+//             ->from('{{post}} t')
+//             ->order('t.id desc')
+//             ->limit(self::DEFAULT_RECOMMEND_POST_COUNT)
+//             ->where($where, $params);
     
-        $rows = $cmd->queryAll();
+//         $rows = $cmd->queryAll();
     
-        // 更新最后请求时间
-        self::updateLastRequestTime($device_token);
-        $rows = self::processRows($rows);
-        shuffle($rows);
-        self::output($rows);
-        exit;
+//         // 更新最后请求时间
+//         self::updateLastRequestTime($device_token);
+//         $rows = self::processRows($rows);
+//         shuffle($rows);
+//         self::output($rows);
+//         exit;
         
         
         
         
-        $offset = (int)$offset;
         $limit = (int)$limit;
         $limit = $limit ? $limit : self::DEFAULT_RECOMMEND_POST_COUNT;
-        $offset = $offset ? $offset : 0;
         
         $channelid = (int)$channelid;
-        if ($channelid === -1) {
-            $where = "t.state != :state";
-            $params = array(':state' => DPost::STATE_DISABLED);
-        }
-        else {
-            $where = "t.state != :state and channel_id = :channelid";
-            $params = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$channelid);
-        }
-        
         $maxIdMinId = app()->getDb()->createCommand()
             ->select(array('max(id) maxid', 'min(id) minid'))
             ->from('{{post}} t')
+            ->where(array('and', 't.state = :enalbed',  'channel_id = :channelid'), array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID))
             ->queryRow();
-        
-//         print_r($maxIdMinId);
-        
         $minid = $maxIdMinId['minid'];
         $maxid = $maxIdMinId['maxid'];
-        for ($i=0; $i<100; $i++) {
-            $randomIds[] = mt_rand($minid, $maxid);
-            $randomIds = array_unique($randomIds);
-            if (count($randomIds) > $limit)
-                break;
+        
+        if ($channelid === -1) {
+            $conditoin = array('and', 't.state != :state', 'id = :randid');
+            $params = array(':state' => DPost::STATE_DISABLED, ':randid'=>0);
+        }
+        else {
+            $conditoin = array('and', 't.state != :state', 'channel_id = :channelid', 'id = :randid');
+            $params = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$channelid, ':randid'=>0);
         }
         
-        $where = array('and', array('in', 'id', $randomIds), $where);
+        $rows = array();
+        for ($i=0; $i<$maxid; $i++) {
+            $randid = mt_rand($minid, $maxid);
+            $param['randid'] = $randid;
+            $cmd = app()->getDb()->createCommand()
+                ->select($fields)
+                ->from(TABLE_NAME_POST)
+                ->where($conditoin, $param)
+                ->limit(1);
         
-        $cmd = app()->db->createCommand()
-            ->from('{{post}} t')
-            ->order('t.id desc')
-            ->where($where, $params);
-    
-        $rows = $cmd->queryAll();
+            $row = $cmd->queryRow();
+            if (array_key_exists($row['id'], $rows))
+                continue;
+            else
+                $rows[$row['id']] = $row;
+        
+            if (count($rows) >= $count)
+                break;
+        }
         $rows = self::processRows($rows);
-        shuffle($rows);
+        
         self::output($rows);
     }
     

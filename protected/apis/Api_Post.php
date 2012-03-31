@@ -139,7 +139,7 @@ class Api_Post extends ApiBase
             $maxIdMinId = app()->getDb()->createCommand()
                 ->select(array('max(id) maxid', 'min(id) minid'))
                 ->from(TABLE_NAME_POST)
-                ->where('channel_id = :channelid', array(':channelid'=>$channelID))
+                ->where(array('and', 't.state = :enalbed',  'channel_id = :channelid'), array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID))
                 ->queryRow();
             
             $count = (int)$params['count'];
