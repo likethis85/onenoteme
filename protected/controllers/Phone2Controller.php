@@ -110,7 +110,7 @@ class Phone2Controller extends Controller
         $channelid = (int)$channelid;
         $maxIdMinId = app()->getDb()->createCommand()
             ->select(array('max(id) maxid', 'min(id) minid'))
-            ->from('{{post}} t')
+            ->from(TABLE_NAME_POST)
             ->where(array('and', 't.state = :enalbed'), array(':enalbed' => Post::STATE_ENABLED))
             ->queryRow();
         $minid = $maxIdMinId['minid'];
@@ -130,13 +130,12 @@ class Phone2Controller extends Controller
             $randid = mt_rand($minid, $maxid);
             $param['randid'] = $randid;
             $cmd = app()->getDb()->createCommand()
-                ->select($fields)
                 ->from(TABLE_NAME_POST)
                 ->where($conditoin, $param)
                 ->limit(1);
         
             $row = $cmd->queryRow();
-            if (array_key_exists($row['id'], $rows))
+            if ($row === false || array_key_exists($row['id'], $rows))
                 continue;
             else
                 $rows[$row['id']] = $row;

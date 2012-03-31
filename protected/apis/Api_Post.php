@@ -162,7 +162,7 @@ class Api_Post extends ApiBase
                     ->limit(1);
                 
                 $row = $cmd->queryRow();
-                if (array_key_exists($row['id'], $rows))
+                if ($row === false || array_key_exists($row['id'], $rows))
                     continue;
                 else
                     $rows[$row['id']] = $row;
