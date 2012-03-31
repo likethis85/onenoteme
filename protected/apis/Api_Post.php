@@ -149,7 +149,7 @@ class Api_Post extends ApiBase
             $minid = (int)$maxIdMinId['minid'];
             $maxid = (int)$maxIdMinId['maxid'];
             
-            $conditoin = array('and', 't.state = :enalbed',  'channel_id = :channelid', 'id = :randid');
+            $conditoins = array('and', 't.state = :enalbed',  'channel_id = :channelid', 'id = :randid');
             $param = array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID, ':randid'=>0);
             $rows = array();
             for ($i=0; $i<$maxid; $i++) {
@@ -158,7 +158,7 @@ class Api_Post extends ApiBase
                 $cmd = app()->getDb()->createCommand()
                     ->select($fields)
                     ->from(TABLE_NAME_POST)
-                    ->where($conditoin, $param)
+                    ->where($conditoins, $param)
                     ->limit(1);
                 
                 $row = $cmd->queryRow();
