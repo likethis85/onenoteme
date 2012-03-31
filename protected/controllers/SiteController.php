@@ -86,10 +86,11 @@ class SiteController extends Controller
     
     public function actionTest()
     {
-        for ($i=0; $i<10000; $i++) {
-            $d = mt_rand(0, 20000);
+        for ($i=0; $i<1000; $i++) {
+            $d = mt_rand(0, 5000);
             $id[] = $d;
             echo $d . '<br />';
+            $id = array_unique($id);
             if (count($id) >=30) break;
         }
         exit;

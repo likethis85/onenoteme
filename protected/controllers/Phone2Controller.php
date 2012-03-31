@@ -131,7 +131,7 @@ class Phone2Controller extends Controller
         for ($i=0; $i<100; $i++) {
             $randomIds[] = mt_rand($minid, $maxid);
             $randomIds = array_unique($randomIds);
-            if (count($randomIds) == $limit)
+            if (count($randomIds) > $limit)
                 break;
         }
         

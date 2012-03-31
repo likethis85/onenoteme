@@ -139,6 +139,7 @@ class Api_Post extends ApiBase
             $maxIdMinId = app()->getDb()->createCommand()
                 ->select(array('max(id) maxid', 'min(id) minid'))
                 ->from(TABLE_NAME_POST)
+                ->where('channel_id = :channelid', array(':channelid'=>$channelID))
                 ->queryRow();
             
             $count = (int)$params['count'];
@@ -147,16 +148,18 @@ class Api_Post extends ApiBase
             
             $minid = (int)$maxIdMinId['minid'];
             $maxid = (int)$maxIdMinId['maxid'];
+            $randID = mt_rand($minid, $maxid-$count*10);
+            
             for ($i=0; $i<$maxid; $i++) {
                 $randomIds[] = mt_rand($minid, $maxid);
                 $randomIds = array_unique($randomIds);
-                if (count($randomIds) == $count)
+                if (count($randomIds) > $count*10)
                     break;
             }
             
-            $conditoin = array('and', 't.state = :enalbed',  'channel_id = :channelid');
-            $param = array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID);
-            $conditoin = array('and', array('in', 'id', $randomIds), $conditoin);
+            $conditoin = array('and', 't.state = :enalbed',  'channel_id = :channelid', 'id > :randid');
+            $param = array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID, ':randid'=>$randID);
+//             $conditoin = array('and', array('in', 'id', $randomIds), $conditoin);
             
             $cmd = app()->db->createCommand()
                 ->select($fields)
