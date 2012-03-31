@@ -100,13 +100,17 @@ class Api_Post extends ApiBase
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
             $lastid = empty($params['lastid']) ? 0 : (int)$params['lastid'];
-            $count = empty($params['count']) ? self::DEFAULT_TIMELINE_MAX_COUNT : (int)$params['count'];
+            $count = (int)$params['count'];
+            if ($count <= 0 || $count > self::DEFAULT_TIMELINE_MAX_COUNT)
+                $count = self::DEFAULT_TIMELINE_MAX_COUNT;
+            
+            $conditoin = array('and', 'channel_id = :channelid', 'id > :lastid');
+            $param = array(':channelid' => $channelID, ':lastid'=>$lastid);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
                 ->from(TABLE_NAME_POST)
-                ->where(array('and', 'channel_id = :channelid', 'id > :lastid'), array(':channelid' => $channelID, ':lastid'=>$lastid));
-            
-            if ($count > 0) $cmd->limit($count);
+                ->where($condition, $param)
+                ->limit($count);
             
             $rows = $cmd->queryAll();
             
@@ -125,13 +129,10 @@ class Api_Post extends ApiBase
         self::requiredParams(array('channelid'));
         $params = $this->filterParams(array('channelid', 'count', 'fields'));
         
-        $channelID = (int)$params['channelid'];
-        $fields = empty($params['fields']) ? '*' : $params['fields'];
-        $where = array('and', 't.state = :enalbed',  'channel_id = :channelid');
-        $params = array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID);
-        $count = empty($params['count']) ? self::DEFAULT_RANDOM_MAX_COUNT : (int)$params['count'];
-        
         try {
+            $channelID = (int)$params['channelid'];
+            $fields = empty($params['fields']) ? '*' : $params['fields'];
+            
             $maxIdMinId = app()->getDb()->createCommand()
                 ->select(array('max(id) maxid', 'min(id) minid'))
                 ->from(TABLE_NAME_POST)
@@ -142,6 +143,14 @@ class Api_Post extends ApiBase
             for ($i=0; $i<$count*10; $i++)
                 $randomIds[] = mt_rand($minid, $maxid);
             
+            
+            $count = (int)$params['count'];
+            if ($count <= 0 || $count > self::DEFAULT_RANDOM_MAX_COUNT)
+                $count = self::DEFAULT_TIMELINE_MAX_COUNT;
+            
+            $where = array('and', 't.state = :enalbed',  'channel_id = :channelid');
+            $param = array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID);
+            
             $ids = array_unique($randomIds);
             $where = array('and', array('in', 'id', $ids), $where);
             
@@ -150,7 +159,7 @@ class Api_Post extends ApiBase
                 ->from(TABLE_NAME_POST)
                 ->order('t.id desc')
                 ->limit($count)
-                ->where($where, $params);
+                ->where($where, $param);
             
             $rows = $cmd->queryAll();
             $rows = self::formateRows($rows);
