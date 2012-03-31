@@ -1,47 +1,165 @@
 <?php
 /**
- * 笔记Api接口
+ * Post Api接口
  * @author Chris
  * @copyright cdcchen@gmail.com
  * @package api
  */
 
-
 class Api_Post extends ApiBase
 {
-    public function getone()
+    public function show()
     {
-        self::requireGet();
         $params = $this->filterParams(array('postid', 'fields'));
         
         try {
-	        $criteria = new CDbCriteria();
-	        $criteria->select = (isset($params['fields']) && $params['fields']) ? $params['fields'] : '*';
-	        $criteria->addColumnCondition(array('id'=>$params['noteid']));
-	        $data = Post::model()->findByPk($params['postid'], $criteria);
-	        return $data;
+            $postid = (int)$params['postid'];
+            $fields = empty($params['fields']) ? '*' : $params['fields'];
+            $cmd = app()->getDb()->createCommand()
+                ->select($fields)
+                ->from(TABLE_NAME_POST)
+                ->where('id = :postid', array(':postid' => $postid));
+            $row = $cmd->queryRow();
+            $row = ($row === false) ? array() : self::formatRow($row);
+	        return $row;
         }
         catch (Exception $e) {
         	throw new ApiException('系统错误', ApiError::SYSTEM_ERROR, $params['debug']);
         }
     }
     
-    public function getListOfCategory()
+    private static function formatRow($row)
     {
-        self::requireGet();
-        $this->requiredParams(array('cid'));
-        $params = $this->filterParams(array('cid', 'fields'));
+        if (isset($row['comment_nums']))
+            $row['visit_count_text'] = '阅:' . $row['comment_nums'];
+        if (isset($row['comment_nums']))
+            $row['comment_count_text'] = '评:' . $row['comment_nums'];
+        if (isset($row['up_score']))
+            $row['support_count_text'] = '顶:' . $row['up_score'];
+        if (isset($row['down_score']))
+            $row['oppose_count_text'] = '踩:' . $row['down_score'];
         
-    	try {
-	        $criteria = new CDbCriteria();
-	        $criteria->select = (isset($params['fields']) && $params['fields']) ? $params['fields'] : '*';
-	        $criteria->order = 'create_time desc, id desc';
-	        $criteria->addColumnCondition(array('category_id'=>$params['cid']));
-	        $data = Post::model()->findAll($criteria);
-	        return $data;
+        if (isset($row['create_time']) && $row['create_time'])
+            $row['create_time_text'] = date(param('formatShortDateTime'), $row['create_time']);
+        
+        if (isset($row['pic'])) {
+            $pic = $row['pic'];
+            if (empty($pic))
+                $thumbnail = '';
+            else {
+                if (filter_var($pic, FILTER_VALIDATE_URL) === false){
+                    $pic = fbu($pic);
+                    $thumbnail = (filter_var($pic, FILTER_VALIDATE_URL) === false) ? $pic : '';
+                }
+                else
+                    $thumbnail = $pic;
+            }
+            $row['thumbnail'] = $thumbnail;
+            unset($row['pic']);
+        }
+        
+        if (isset($row['big_pic'])) {
+            $bigPic = $row['big_pic'];
+            if (empty($bigPic))
+                $originalPic = '';
+            else {
+                if (filter_var($bigPic, FILTER_VALIDATE_URL) === false){
+                    $bigPic = fbu($bigPic);
+                    $originalPic = (filter_var($bigPic, FILTER_VALIDATE_URL) === false) ? $bigPic : '';
+                }
+                else
+                    $originalPic = $pic;
+            }
+            $row['original_pic'] = $originalPic;
+            unset($row['big_pic']);
+        }
+        
+        return $row;
+    }
+    
+    private static function formateRows($rows)
+    {
+        if (empty($rows))
+            return array();
+        
+        foreach ($rows as $index => $row)
+            $rows[$index] = self::formatRow($row);
+        
+        return $rows;
+    }
+    
+    public function timeline()
+    {
+        self::requiredParams(array('channelid'));
+        $params = $this->filterParams(array('channelid', 'count', 'fields'));
+        
+        $channelID = (int)$params['channelid'];
+        $count = $defaultCount = 50;
+        if (!empty($params['count']))
+            $count = (int)$params['count'];
+        
+        try {
+            $fields = empty($params['fields']) ? '*' : $params['fields'];
+            $cmd = app()->getDb()->createCommand()
+                ->select($fields)
+                ->from(TABLE_NAME_POST)
+                ->where('channel_id = :channelid', array(':channelid' => $channelID));
+            $rows = $cmd->queryAll();
+            
+            foreach ($rows as $index => $row)
+                $rows[$index] = self::formatRow($row);
+            
+            return $rows;
         }
         catch (Exception $e) {
-        	throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
+            throw new ApiException('系统错误', ApiError::SYSTEM_ERROR, $params['debug']);
+        }
+    }
+    
+    public function random()
+    {
+        self::requiredParams(array('channelid'));
+        $params = $this->filterParams(array('channelid', 'count', 'fields'));
+        
+        $count = $defaultCount = 15;
+        if (!empty($params['count']))
+            $count = (int)$params['count'];
+        
+        $channelID = (int)$params['channelid'];
+        $fields = empty($params['fields']) ? '*' : $params['fields'];
+        $where = array('and', 't.state = :enalbed',  'channel_id = :channelid');
+        $params = array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID);
+        
+        try {
+            $maxIdMinId = app()->getDb()->createCommand()
+                ->select(array('max(id) maxid', 'min(id) minid'))
+                ->from(TABLE_NAME_POST)
+                ->queryRow();
+            
+            $minid = (int)$maxIdMinId['minid'];
+            $maxid = (int)$maxIdMinId['maxid'];
+            for ($i=0; $i<$count*10; $i++)
+                $randomIds[] = mt_rand($minid, $maxid);
+            
+            $ids = array_unique($randomIds);
+            $where = array('and', array('in', 'id', $ids), $where);
+            
+            $cmd = app()->db->createCommand()
+                ->select($fields)
+                ->from(TABLE_NAME_POST)
+                ->order('t.id desc')
+                ->limit($count)
+                ->where($where, $params);
+            
+            $rows = $cmd->queryAll();
+            $rows = self::formateRows($rows);
+            shuffle($rows);
+            
+            return $rows;
+        }
+        catch (Exception $e) {
+            echo $e->getMessage();
+            throw new ApiException('系统错误', ApiError::SYSTEM_ERROR, $params['debug']);
         }
     }
     
@@ -60,10 +178,48 @@ class Api_Post extends ApiBase
         }
     }
    
+    public function support()
+    {
+        self::requirePost();
+        $this->requiredParams(array('postid'));
+        $params = $this->filterParams(array('postid'));
+        
+        try {
+            $id = (int)$params['postid'];
+            $counters = array('up_score'=>1);
+            $result = Post::model()->updateCounters($counters, 'id=:pid', array(':pid'=>$id));
+            $data = array('errno'=>0);
+        }
+        catch (Exception $e) {
+            $data = array('errno'=>1);
+        }
+        
+        return $data;
+    }
+   
+    public function oppose()
+    {
+        self::requirePost();
+        $this->requiredParams(array('postid'));
+        $params = $this->filterParams(array('postid'));
+        
+        try {
+            $id = (int)$params['postid'];
+            $counters = array('down_score'=>1);
+            $result = Post::model()->updateCounters($counters, 'id=:pid', array(':pid'=>$id));
+            $data = array('errno'=>0);
+        }
+        catch (Exception $e) {
+            $data = array('errno'=>1);
+        }
+        
+        return $data;
+    }
+    
     public function create()
     {
     	self::requirePost();
-//    	$this->requireLogin();
+//        	$this->requireLogin();
     	$this->requiredParams(array('content', 'token', 'channel_id'));
     	$params = $this->filterParams(array('content', 'tags', 'channel_id', 'category_id', 'pic', 'token'));
     	
@@ -116,3 +272,5 @@ class Api_Post extends ApiBase
     }
     
 }
+
+

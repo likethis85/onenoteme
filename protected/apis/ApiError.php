@@ -11,7 +11,7 @@ class ApiError
      * api 路径不存在
      * @var integer
      */
-    const APIPATH_NO_EXIST = 10;
+    const API_PATH_NO_EXIST = 10;
     
     /**
      * http 请求方式错误
@@ -41,7 +41,7 @@ class ApiError
      * 用户提交参数不完整
      * @var integer
      */
-    const ARGS_NOT_COMPLETE = 200;
+    const PARAM_NOT_COMPLETE = 200;
 
     /**
      * apikey 不合法

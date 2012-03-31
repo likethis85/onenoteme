@@ -27,8 +27,7 @@ class ApiBase
     
     protected static function requireMethods($methods)
     {
-        if (is_string($methods))
-            $methods = array($methods);
+        $methods = array($methods);
 
         $methods = array_map('strtoupper', $methods);
         if (!isset($_SERVER['REQUEST_METHOD']) || !in_array($_SERVER['REQUEST_METHOD'], $methods, true)) {
@@ -39,24 +38,18 @@ class ApiBase
     
     protected function requiredParams($params)
     {
-        if (is_string($params))
-            $params = array($params);
+        $params = (array)$params;
         
         $allParams = array_keys($this->_params);
-        $diff = join('|', array_diff($params, array_intersect($params, $allParams)));
+        $diff = join('|', array_diff($params, $allParams));
         if ($diff) {
-            throw new ApiException("请求参数不完整，缺少参数：{$diff}", ApiError::ARGS_NOT_COMPLETE);
+            throw new ApiException("请求参数不完整，缺少参数：{$diff}", ApiError::PARAM_NOT_COMPLETE);
         }
     }
     
     protected function filterParams($params = array())
     {
-        if (is_string($params))
-            $params = array($params);
-        elseif (is_array($params))
-            ;
-        else
-            $params = array();
+        $params = (array)$params;
         
         $params[] = 'debug';
         foreach ($params as $key) {
@@ -69,7 +62,7 @@ class ApiBase
     
     protected function requireLogin()
     {
-    	if (!isset($this->_params['token']) || empty($this->_params['token'])) 
+    	if (!isset($this->_params['token']) || empty($this->_params['token']))
     		throw new ApiException('此api需要用户登录', ApiError::USER_TOKEN_ERROR);
     }
 }

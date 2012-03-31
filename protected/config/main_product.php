@@ -53,6 +53,9 @@ return array(
 		    'showScriptName' => false,
             'cacheID' => 'cache',
             'rules' => array(
+                'http://api.waduanzi.com/<_a>' => 'api2/<_a>',
+                    
+                    
                 '' => 'site/index',
                 'static/<view:[\w\d]+>' => 'site/page',
         

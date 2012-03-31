@@ -1,38 +1,46 @@
 <?php
 class AppApi
 {
-    private static $_apiPath;
+    const FORMAT_XML = 'xml';
+    const FORMAT_JSON = 'json';
+    const FORMAT_JSONP = 'jsonp';
     
-    private $_apiUrl;
+    private static $_apiPath;
+    private static $_format = 'json';
+    private static $_formats = array(
+        self::FORMAT_JSON,
+        self::FORMAT_JSONP,
+        self::FORMAT_XML,
+    );
+    
     private $_apikey;
     private $_secretKey;
-    private $_format = 'json';
-    private $_methods;
+    private $_method;
     private $_sig;
-    private $_args;
+    private $_params;
     
     private $_class;
     private $_function;
     
     /**
      * 构造函数
-     * @param string $apiUrl ApiBaseUrl
-     * @param array $args
      */
-    public function __construct($apiUrl, $args)
+    public function __construct($apiPath = '')
     {
-        $this->_args = $args;
-    	$this->init();
+        $this->init();
     	
-        if (empty($this->_apikey))
+        if (empty(self::$_apiPath))
             $this->setApiPath(dirname(__FILE__));
-        $this->_apiUrl = $apiUrl;
         
-        $this->parseArgs($args);
     }
     
     private function init()
     {
+        if (strtolower($_SERVER['REQUEST_METHOD']) === 'get')
+            $this->_params = $_GET;
+        elseif (strtolower($_SERVER['REQUEST_METHOD']) === 'post')
+            $this->_params = $_POST;
+        
 //        sleep(3);
         set_error_handler(array($this, 'errorHandler'), E_ERROR);
     	set_exception_handler(array($this, 'exceptionHandler'));
@@ -49,7 +57,7 @@ class AppApi
         if (file_exists(realpath($path)))
             self::$_apiPath = rtrim($path, '\/') . DIRECTORY_SEPARATOR;
         else
-            throw new ApiException('$path 不存在', ApiError::APIPATH_NO_EXIST);
+            throw new ApiException("{$path}目录不存在", ApiError::API_PATH_NO_EXIST);
             
         return $this;
     }
@@ -59,7 +67,10 @@ class AppApi
      */
     public function run()
     {
-        $this->checkArgs()->execute();
+        $this->checkRequiredParams();
+        $this->parseParams($this->_params);
+        
+        $this->checkParams()->execute();
         exit(0);
     }
     
@@ -67,17 +78,17 @@ class AppApi
      * 检查参数
      * @return AppApi
      */
-    private function checkArgs()
+    private function checkParams()
     {
         $this->checkFormat()
-            ->checkApiKey();
-//            ->checkSignature();
+            ->checkApiKey()
+           ->checkSignature();
             
         return $this;
     }
     
     /**
-     * 执行methods对应的命令
+     * 执行method对应的命令
      * @throws ApiException
      */
     private function execute()
@@ -86,25 +97,22 @@ class AppApi
         if (false === $result)
             throw new ApiException('$class->$method 执行错误', ApiError::CLASS_METHOD_EXECUTE_ERROR);
         else
-            self::output($result, $this->_format);
+            self::output($result, self::$_format);
     }
     
     /**
      * 分析用户提交的参数
-     * @param array $args
+     * @param array $params
      * @return AppApi
      */
-    private function parseArgs($args)
+    private function parseParams($params)
     {
-        $this->checkRequiredArgs();
-        
-        foreach ($args as $key => $value)
-            $args[$key] = strip_tags(trim($value));
+        foreach ($params as $key => $value)
+            $params[$key] = strip_tags(trim($value));
             
-        $args['oauth_consumer_key'] && $this->_apikey = $args['oauth_consumer_key'];
-        $args['format'] && $this->_format = $args['format'];
-        $args['methods'] && $this->_methods = $args['methods'];
-        $args['oauth_signature'] && $this->_sig = $args['oauth_signature'];
+        $this->_apikey = $params['apikey'];
+        $this->_method = $params['method'];
+        $this->_sig = $params['sig'];
         
         return $this;
     }
@@ -114,12 +122,12 @@ class AppApi
      * @throws ApiException
      * @return AppApi
      */
-    private function checkRequiredArgs()
+    private function checkRequiredParams()
     {
-        $args = array('oauth_consumer_key', 'oauth_signature', 'methods');
-        $keys = array_keys($this->_args);
-        if ($keys != ($keys + $args)) {
-            throw new ApiException('缺少必须的参数', ApiError::ARGS_NOT_COMPLETE);
+        $params = array('apikey', 'sig', 'method', 'timestamp');
+        $keys = array_keys($this->_params);
+        if (array_diff($params, $keys)) {
+            throw new ApiException('缺少必须的参数', ApiError::PARAM_NOT_COMPLETE);
         }
         return $this;
     }
@@ -147,7 +155,8 @@ class AppApi
      */
     private function checkFormat()
     {
-        if (!in_array(strtolower($this->_format), array('json', 'xml', 'jsonp'))) {
+        $format = strtolower(trim(self::$_format));
+        if (!in_array($format, self::$_formats)) {
             throw new ApiException('format 参数错误', ApiError::FORMAT_INVALID);
         }
         return $this;
@@ -160,9 +169,9 @@ class AppApi
      */
     private function parsekMethods()
     {
-        list($class, $method) = explode('.', $this->_methods);
+        list($class, $method) = explode('.', $this->_method);
         if (empty($class) || empty($method)) {
-            throw new ApiException('methods参数格式不正确', ApiError::METHOD_FORMAT_ERROR);
+            throw new ApiException('method参数格式不正确', ApiError::METHOD_FORMAT_ERROR);
         }
         
         $class = 'Api_' . ucfirst($class);
@@ -172,7 +181,7 @@ class AppApi
         if (!class_exists($class, false))
             throw new ApiException('$class 类定义不存在', ApiError::CLASS_FILE_NOT_EXIST);
             
-        $object = new $class($this->_args);
+        $object = new $class($this->_params);
         if (!method_exists($object, $method))
             throw new ApiException('$method 方法不存在', ApiError::CLASS_METHOD_NOT_EXIST);
         
@@ -215,18 +224,7 @@ class AppApi
      */
     private function makeSignature()
     {
-        $args = $this->_args;
-        unset($args['oauth_signature']);
-
-        require('OAuth.php');
-        $consumer = new OAuthConsumer($this->_apikey, $this->_secretKey);
-        $sigMethod = new OAuthSignatureMethod_HMAC_SHA1();
-        $request = new OAuthRequest($_SERVER['REQUEST_METHOD'], $this->_apiUrl);
-        
-        foreach ($args as $key => $value)
-            $request->set_parameter($key, $value, false);
-//        echo $request->get_signature_base_string();exit;
-        $sig = $request->build_signature($sigMethod, $consumer, null);
+        $sig = '123';
         return $sig;
     }
     
@@ -243,7 +241,7 @@ class AppApi
      */
     private static function outputJson($data)
     {
-        return json_encode($data);
+        return CJSON::encode($data);
     }
     
     /**
@@ -258,12 +256,23 @@ class AppApi
     
     private static function outputJsonp($data)
     {
-        return $this->_args['callback'] . '(' . json_encode($data) . ')';
+        return $this->_params['callback'] . '(' . CJSON::encode($data) . ')';
+    }
+    
+    public static function setDataFormat($format)
+    {
+        $format = strtolower(trim($format));
+        if (in_array($format, self::$_formats)) {
+            self::$_format = $format;
+            return true;
+        }
+        else
+            throw new ApiException('format 参数错误', ApiError::FORMAT_INVALID);
     }
     
     public function errorHandler($errno, $message, $file, $line)
     {
-        if (isset($this->_args[debug]) && $this->_args[debug])
+        if (isset($this->_params[debug]) && $this->_params[debug])
             $error = array('errno'=>$errno, 'message'=>$error, 'line'=>$line, 'file'=>$file);
         else
             $error = 'ERROR';
@@ -273,7 +282,7 @@ class AppApi
     
     public function exceptionHandler($e)
     {
-    	if (isset($this->_args['debug']) && $this->_args['debug'])
+    	if (isset($this->_params['debug']) && $this->_params['debug'])
     		$error = array('errno'=>$e->getCode(), 'message'=>$e->getMessage());
     	else
     		$error = 'ERROR';
