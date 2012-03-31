@@ -89,7 +89,7 @@ class Phone2Controller extends Controller
         $cmd = app()->db->createCommand()
             ->from('{{post}} t')
             ->order('t.id desc')
-            ->limit(self::DEFAULT_LATEST_POST_MAX_COUNT)
+            ->limit(self::DEFAULT_RECOMMEND_POST_COUNT)
             ->where($where, $params);
     
         $rows = $cmd->queryAll();
