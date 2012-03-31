@@ -73,6 +73,8 @@ class Api_Post extends ApiBase
                 else
                     $originalPic = $pic;
             }
+            if (empty($originalPic))
+                $originalPic = $thumbnail;
             $row['original_pic'] = $originalPic;
             unset($row['big_pic']);
         }
