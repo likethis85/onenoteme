@@ -50,11 +50,11 @@ class Api_Comment extends ApiBase
     {
         self::requirePost();
         $this->requiredParams(array('postid', 'content'));
-        $params = $this->filterParams(array('postid', 'content', 'user_id'));
+        $params = $this->filterParams(array('postid', 'content', 'userid'));
         
         $postid = (int)$params['postid'];
         $content = strip_tags(trim($params['content']));
-        $use_id = (int)$params['user_id'];
+        $useid = (int)$params['userid'];
         
         if ($postid <= 0 || empty($content))
             $data = array(
