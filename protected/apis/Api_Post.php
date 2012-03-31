@@ -148,16 +148,19 @@ class Api_Post extends ApiBase
             
             $minid = (int)$maxIdMinId['minid'];
             $maxid = (int)$maxIdMinId['maxid'];
-            echo $maxid;
-            $conditoin = array('and', 't.state = :enalbed',  'channel_id = :channelid', 'id >= (select floor(rand() * :maxid))');
-            $param = array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID, ':maxid'=>$maxid);
+            
+            $conditoin = array('and', 't.state = :enalbed',  'channel_id = :channelid', 'id = :randid');
+            $param = array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID, ':randid'=>0);
             $rows = array();
             for ($i=0; $i<$maxid; $i++) {
+                $randid = mt_rand($minid, $maxid);
+                $param['randid'] = $randid;
                 $cmd = app()->getDb()->createCommand()
                     ->select($fields)
                     ->from(TABLE_NAME_POST)
-                    ->where($conditoin, $param);
-                echo $cmd->text;
+                    ->where($conditoin, $param)
+                    ->limit(1);
+                
                 $row = $cmd->queryRow();
                 if (array_key_exists($row['id'], $rows))
                     continue;
