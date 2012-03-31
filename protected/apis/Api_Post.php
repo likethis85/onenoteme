@@ -8,6 +8,9 @@
 
 class Api_Post extends ApiBase
 {
+    const DEFAULT_TIMELINE_MAX_COUNT = 50;
+    const DEFAULT_RANDOM_MAX_COUNT = 15;
+    
     public function show()
     {
         $params = $this->filterParams(array('postid', 'fields'));
@@ -94,18 +97,17 @@ class Api_Post extends ApiBase
         $params = $this->filterParams(array('channelid', 'count', 'fields', 'lastid'));
         
         $channelID = (int)$params['channelid'];
-        $count = $defaultCount = 50;
-        if (!empty($params['count']))
-            $count = (int)$params['count'];
-        
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
             $lastid = empty($params['lastid']) ? 0 : (int)$params['lastid'];
+            $count = empty($params['count']) ? self::DEFAULT_TIMELINE_MAX_COUNT : (int)$params['count'];
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
                 ->from(TABLE_NAME_POST)
-                ->where(array('and', 'channel_id = :channelid', 'id > :lastid'), array(':channelid' => $channelID, ':lastid'=>$lastid))
-                ->limit($count);
+                ->where(array('and', 'channel_id = :channelid', 'id > :lastid'), array(':channelid' => $channelID, ':lastid'=>$lastid));
+            
+            if ($count > 0) $cmd->limit($count);
+            
             $rows = $cmd->queryAll();
             
             foreach ($rows as $index => $row)
@@ -123,14 +125,11 @@ class Api_Post extends ApiBase
         self::requiredParams(array('channelid'));
         $params = $this->filterParams(array('channelid', 'count', 'fields'));
         
-        $count = $defaultCount = 15;
-        if (!empty($params['count']))
-            $count = (int)$params['count'];
-        
         $channelID = (int)$params['channelid'];
         $fields = empty($params['fields']) ? '*' : $params['fields'];
         $where = array('and', 't.state = :enalbed',  'channel_id = :channelid');
         $params = array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID);
+        $count = empty($params['count']) ? self::DEFAULT_RANDOM_MAX_COUNT : (int)$params['count'];
         
         try {
             $maxIdMinId = app()->getDb()->createCommand()
