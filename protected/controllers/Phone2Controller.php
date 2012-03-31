@@ -128,12 +128,14 @@ class Phone2Controller extends Controller
         
         $minid = $maxIdMinId['minid'];
         $maxid = $maxIdMinId['maxid'];
-        for ($i=0; $i<100; $i++)
+        for ($i=0; $i<100; $i++) {
             $randomIds[] = mt_rand($minid, $maxid);
+            $randomIds = array_unique($randomIds);
+            if (count($randomIds) == $limit)
+                break;
+        }
         
-        $ids = array_unique($randomIds);
-//         print_r($ids);exit;
-        $where = array('and', array('in', 'id', $ids), $where);
+        $where = array('and', array('in', 'id', $randomIds), $where);
         
         $cmd = app()->db->createCommand()
             ->from('{{post}} t')
