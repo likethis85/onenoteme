@@ -112,6 +112,7 @@ class Api_Post extends ApiBase
                 ->select($fields)
                 ->from(TABLE_NAME_POST)
                 ->where($condition, $param)
+                ->order('id desc')
                 ->limit($count);
             
             $rows = $cmd->queryAll();
