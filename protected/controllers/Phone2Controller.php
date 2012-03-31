@@ -80,26 +80,26 @@ class Phone2Controller extends Controller
     
     public function actionRandom($channelid = -1, $limit = self::DEFAULT_RECOMMEND_POST_COUNT)
     {
-//         $lastid = (int)$lastid;
-//         $channelid = (int)$channelid;
+        $lastid = (int)$lastid;
+        $channelid = (int)$channelid;
     
-//         $where = "t.state != :state and id > :lastid and channel_id = :channelid";
-//         $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid, ':channelid'=>$channelid);
+        $where = "t.state != :state and id > :lastid and channel_id = :channelid";
+        $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid, ':channelid'=>$channelid);
 
-//         $cmd = app()->db->createCommand()
-//             ->from('{{post}} t')
-//             ->order('t.id desc')
-//             ->limit(self::DEFAULT_RECOMMEND_POST_COUNT)
-//             ->where($where, $params);
+        $cmd = app()->db->createCommand()
+            ->from('{{post}} t')
+            ->order('t.id desc')
+            ->limit(self::DEFAULT_RECOMMEND_POST_COUNT)
+            ->where($where, $params);
     
-//         $rows = $cmd->queryAll();
+        $rows = $cmd->queryAll();
     
-//         // 更新最后请求时间
-//         self::updateLastRequestTime($device_token);
-//         $rows = self::processRows($rows);
-//         shuffle($rows);
-//         self::output($rows);
-//         exit;
+        // 更新最后请求时间
+        self::updateLastRequestTime($device_token);
+        $rows = self::processRows($rows);
+        shuffle($rows);
+        self::output($rows);
+        exit;
         
         
         
