@@ -86,6 +86,11 @@ class SiteController extends Controller
     
     public function actionTest()
     {
+        echo md5('i am ios secret key') . '<br />';
+        echo md5('i am chrome secret key') . '<br />';
+        echo uniqid() . '<br />';
+        echo uniqid() . '<br />';
+        
         exit;
         $url = 'http://img.1626.com/images/userup/1201/511201111823251.jpg';
         $curl = new CdCurl();
