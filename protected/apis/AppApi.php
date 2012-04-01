@@ -241,7 +241,6 @@ class AppApi
      */
     private static function outputJson($data)
     {
-        header('Content-Type: application/json; charset=utf-8');
         return CJSON::encode($data);
     }
     
@@ -252,13 +251,11 @@ class AppApi
      */
     private static function outputXml($data)
     {
-        header('Content-Type: text/xml; charset=utf-8');
         return 'xml';
     }
     
     private static function outputJsonp($data)
     {
-        header('Content-Type: application/javascript; charset=utf-8');
         return $this->_params['callback'] . '(' . CJSON::encode($data) . ')';
     }
     
