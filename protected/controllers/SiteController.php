@@ -86,6 +86,9 @@ class SiteController extends Controller
     
     public function actionTest()
     {
+        exit;
+        echo time();
+        exit;
         for ($i=0; $i<1000; $i++) {
             $d = mt_rand(0, 5000);
             $id[] = $d;
