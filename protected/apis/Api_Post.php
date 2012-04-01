@@ -21,7 +21,7 @@ class Api_Post extends ApiBase
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
                 ->from(TABLE_NAME_POST)
-                ->where('id = :postid', array(':postid' => $postid));
+                ->where('id = :postid and state = :enabled', array(':postid' => $postid, ':enabled'=>Post::STATE_ENABLED));
             $row = $cmd->queryRow();
             $row = ($row === false) ? array() : self::formatRow($row);
 	        return $row;
@@ -106,8 +106,8 @@ class Api_Post extends ApiBase
             if ($count <= 0 || $count > self::DEFAULT_TIMELINE_MAX_COUNT)
                 $count = self::DEFAULT_TIMELINE_MAX_COUNT;
             
-            $condition = array('and', 'channel_id = :channelid', 'id > :lastid');
-            $param = array(':channelid' => $channelID, ':lastid'=>$lastid);
+            $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'id > :lastid');
+            $param = array(':enabled'=>Post::STATE_ENABLED, ':channelid' => $channelID, ':lastid'=>$lastid);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
                 ->from(TABLE_NAME_POST)
