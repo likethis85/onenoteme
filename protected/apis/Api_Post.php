@@ -127,6 +127,40 @@ class Api_Post extends ApiBase
         }
     }
     
+    public function latest()
+    {
+        self::requiredParams(array('channelid'));
+        $params = $this->filterParams(array('channelid', 'count', 'fields', 'lasttime'));
+        
+        $channelID = (int)$params['channelid'];
+        try {
+            $fields = empty($params['fields']) ? '*' : $params['fields'];
+            $lasttime = empty($params['lasttime']) ? 0 : (int)$params['lasttime'];
+            $count = (int)$params['count'];
+            if ($count <= 0 || $count > self::DEFAULT_TIMELINE_MAX_COUNT)
+                $count = self::DEFAULT_TIMELINE_MAX_COUNT;
+            
+            $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'create_time > :lasttime');
+            $param = array(':enabled'=>Post::STATE_ENABLED, ':channelid' => $channelID, ':lasttime'=>$lasttime);
+            $cmd = app()->getDb()->createCommand()
+                ->select($fields)
+                ->from(TABLE_NAME_POST)
+                ->where($condition, $param)
+                ->order('create_time desc, id desc')
+                ->limit($count);
+            
+            $rows = $cmd->queryAll();
+            
+            foreach ($rows as $index => $row)
+                $rows[$index] = self::formatRow($row);
+            
+            return $rows;
+        }
+        catch (Exception $e) {
+            throw new ApiException('系统错误', ApiError::SYSTEM_ERROR, $params['debug']);
+        }
+    }
+    
     public function random()
     {
         self::requiredParams(array('channelid'));
