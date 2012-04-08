@@ -87,6 +87,35 @@ class SiteController extends Controller
     public function actionTest()
     {
         exit;
+        require CD_CONFIG_ROOT . '/oss_config.inc.php';
+        require LIBRARY_ROOT . '/oss_sdk/sdk.class.php';
+        
+        $oss = new ALIOSS();
+        $oss->set_debug_mode(true);
+        
+        $content = file_get_contents('http://f.waduanzi.com/pics/2012/04/06/big_20120406121928_4f7e6ed10aa2d.jpeg');
+        $upload_file_options = array(
+        	'content' => $content,
+        	'length' => strlen($content),
+         );
+        $upload_file = $oss->upload_file_by_content('wdz_images', '2012/04/06/test.jpg', $upload_file_options);
+        print_r($upload_file->header['_info']['url']);
+        exit;
+        
+        $create_dir = $oss->create_object_dir('wdz_images', '2012/04');
+        print_r($create_dir); exit;
+        
+        $buckets = $oss->list_bucket();
+        print_r($buckets);
+        exit;
+        
+        $bucket = 'wdz_images';
+        $acl = ALIOSS::OSS_ACL_TYPE_PUBLIC_READ_WRITE;
+        $create_bucket = $oss->create_bucket($bucket, $acl);
+        print_r($create_bucket);
+        
+        
+        exit;
         echo time();
         exit;
         for ($i=0; $i<1000; $i++) {

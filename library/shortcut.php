@@ -4,6 +4,9 @@
  * @version v1.0
  * @since 2010-9-7 10:39
  */
+
+defined('LIBRARY_ROOT') or define('LIBRARY_ROOT', dirname(__FILE__));
+
 /**
  * This is the shortcut to DIRECTORY_SEPARATOR
  */

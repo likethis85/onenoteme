@@ -1,4 +1,5 @@
 <?php
+define('CD_CONFIG_ROOT', dirname(__FILE__));
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 $params = require(dirname(__FILE__) . DS . 'params_product.php');
 
