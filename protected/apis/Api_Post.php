@@ -9,6 +9,7 @@
 class Api_Post extends ApiBase
 {
     const DEFAULT_TIMELINE_MAX_COUNT = 50;
+    const DEFAULT_HISTORY_MAX_COUNT = 50;
     const DEFAULT_RANDOM_MAX_COUNT = 15;
     
     public function show()
@@ -120,6 +121,40 @@ class Api_Post extends ApiBase
             foreach ($rows as $index => $row)
                 $rows[$index] = self::formatRow($row);
             
+            return $rows;
+        }
+        catch (Exception $e) {
+            throw new ApiException('系统错误', ApiError::SYSTEM_ERROR, $params['debug']);
+        }
+    }
+    
+    public function history()
+    {
+        self::requiredParams(array('channelid', 'firstid'));
+        $params = $this->filterParams(array('channelid', 'count', 'fields', 'firstid'));
+        
+        $channelID = (int)$params['channelid'];
+        $firstID = (int)$params['firstid'];
+        try {
+            $fields = empty($params['fields']) ? '*' : $params['fields'];
+            $count = (int)$params['count'];
+            if ($count <= 0 || $count > self::DEFAULT_HISTORY_MAX_COUNT)
+                $count = self::DEFAULT_HISTORY_MAX_COUNT;
+        
+            $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'id < :firstid');
+            $param = array(':enabled'=>Post::STATE_ENABLED, ':channelid' => $channelID, ':firstid'=>$firstID);
+            $cmd = app()->getDb()->createCommand()
+                ->select($fields)
+                ->from(TABLE_NAME_POST)
+                ->where($condition, $param)
+                ->order('id desc')
+                ->limit($count);
+        
+            $rows = $cmd->queryAll();
+        
+            foreach ($rows as $index => $row)
+                $rows[$index] = self::formatRow($row);
+        
             return $rows;
         }
         catch (Exception $e) {
