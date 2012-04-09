@@ -130,19 +130,19 @@ class Api_Post extends ApiBase
     
     public function history()
     {
-        self::requiredParams(array('channelid', 'firstid'));
-        $params = $this->filterParams(array('channelid', 'count', 'fields', 'firstid'));
+        self::requiredParams(array('channelid', 'beforetime'));
+        $params = $this->filterParams(array('channelid', 'count', 'fields', 'beforetime'));
         
         $channelID = (int)$params['channelid'];
-        $firstID = (int)$params['firstid'];
+        $beforeTime = (int)$params['beforetime'];
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
             $count = (int)$params['count'];
             if ($count <= 0 || $count > self::DEFAULT_HISTORY_MAX_COUNT)
                 $count = self::DEFAULT_HISTORY_MAX_COUNT;
         
-            $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'id < :firstid');
-            $param = array(':enabled'=>Post::STATE_ENABLED, ':channelid' => $channelID, ':firstid'=>$firstID);
+            $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'create_time < :beforetime');
+            $param = array(':enabled'=>Post::STATE_ENABLED, ':channelid' => $channelID, ':beforetime'=>$beforeTime);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
                 ->from(TABLE_NAME_POST)
