@@ -96,13 +96,16 @@ class Api_Post extends ApiBase
     
     public function timeline()
     {
-        return self::fetchTestRows();
-        ////////////////////////////////////
-        
         self::requiredParams(array('channelid'));
         $params = $this->filterParams(array('channelid', 'count', 'fields', 'lastid'));
-        
         $channelID = (int)$params['channelid'];
+        
+        if ($channelID == CHANNEL_DUANZI)
+            return self::fetchTestRows();
+        ////////////////////////////////////
+        
+        
+        
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
             $lastid = empty($params['lastid']) ? 0 : (int)$params['lastid'];
@@ -133,17 +136,15 @@ class Api_Post extends ApiBase
     
     public function history()
     {
-        return self::fetchTestRows();
-        ////////////////////////////////////
-        
-        
-        
-        
         self::requiredParams(array('channelid', 'beforetime'));
         $params = $this->filterParams(array('channelid', 'count', 'fields', 'beforetime'));
         
         $channelID = (int)$params['channelid'];
         $beforeTime = (int)$params['beforetime'];
+        
+        if ($channelID == CHANNEL_DUANZI)
+            return self::fetchTestRows();
+        
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
             $count = (int)$params['count'];
@@ -173,15 +174,14 @@ class Api_Post extends ApiBase
     
     public function latest()
     {
-        return self::fetchTestRows();
-        ////////////////////////////////////
-        
-        
-        
         self::requiredParams(array('channelid'));
         $params = $this->filterParams(array('channelid', 'count', 'fields', 'lasttime'));
-        
         $channelID = (int)$params['channelid'];
+        
+        if ($channelID == CHANNEL_DUANZI)
+            return self::fetchTestRows();
+        
+        
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
             $lasttime = empty($params['lasttime']) ? 0 : (int)$params['lasttime'];
@@ -212,15 +212,14 @@ class Api_Post extends ApiBase
     
     public function random()
     {
-        return self::fetchTestRows();
-        ////////////////////////////////////
-        
-        
         self::requiredParams(array('channelid'));
         $params = $this->filterParams(array('channelid', 'count', 'fields'));
+        $channelID = (int)$params['channelid'];
+        
+        if ($channelID == CHANNEL_DUANZI)
+            return self::fetchTestRows();
         
         try {
-            $channelID = (int)$params['channelid'];
             $fields = empty($params['fields']) ? '*' : $params['fields'];
             
             $maxIdMinId = app()->getDb()->createCommand()
