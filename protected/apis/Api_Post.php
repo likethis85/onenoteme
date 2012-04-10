@@ -166,7 +166,7 @@ class Api_Post extends ApiBase
     
             foreach ($rows as $index => $row)
                 $rows[$index] = self::formatRow($row);
-    
+            shuffle($rows);
             return $rows;
         }
         catch (Exception $e) {
