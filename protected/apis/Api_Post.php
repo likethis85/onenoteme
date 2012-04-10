@@ -134,6 +134,46 @@ class Api_Post extends ApiBase
         }
     }
     
+    public function random()
+    {
+        self::requiredParams(array('channelid'));
+        $params = $this->filterParams(array('channelid', 'count', 'fields', 'lastid'));
+        $channelID = (int)$params['channelid'];
+    
+        if ($channelID == CHANNEL_DUANZI)
+            return self::fetchTestRows();
+        ////////////////////////////////////
+    
+    
+    
+        try {
+            $fields = empty($params['fields']) ? '*' : $params['fields'];
+            $lastid = empty($params['lastid']) ? 0 : (int)$params['lastid'];
+            $count = (int)$params['count'];
+            if ($count <= 0 || $count > self::DEFAULT_TIMELINE_MAX_COUNT)
+                $count = self::DEFAULT_TIMELINE_MAX_COUNT;
+    
+            $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'id > :lastid');
+            $param = array(':enabled'=>Post::STATE_ENABLED, ':channelid' => $channelID, ':lastid'=>$lastid);
+            $cmd = app()->getDb()->createCommand()
+            ->select($fields)
+            ->from(TABLE_NAME_POST)
+            ->where($condition, $param)
+            ->order('id desc')
+            ->limit($count);
+    
+            $rows = $cmd->queryAll();
+    
+            foreach ($rows as $index => $row)
+                $rows[$index] = self::formatRow($row);
+    
+            return $rows;
+        }
+        catch (Exception $e) {
+            throw new ApiException('系统错误', ApiError::SYSTEM_ERROR, $params['debug']);
+        }
+    }
+    
     public function history()
     {
         self::requiredParams(array('channelid', 'beforetime'));
@@ -210,7 +250,7 @@ class Api_Post extends ApiBase
         }
     }
     
-    public function random()
+    public function random1()
     {
         self::requiredParams(array('channelid'));
         $params = $this->filterParams(array('channelid', 'count', 'fields'));
