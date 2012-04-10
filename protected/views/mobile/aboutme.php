@@ -22,7 +22,8 @@ li {margin-left:20px;}
     <h3 class="post-title">关于我们</h3>
     <div class="content">
         <ul>
-            <li><h3>当前最新版本：v2.0</h3></li>
+            <li><h3>当前iPhone最新版本：v2.1.0</h3></li>
+            <li><h3>当前Android最新版本：v1.0</h3></li>
             <li>
                 <h3>应用及网站简介</h3>
                 <p>2.0版本经过重新设计，重写了全部代码，注重每日更新，对以往内容的浏览采用精品推荐的翻页方式，更加方便用户使用，同时添加了多种分享方式、图片可能保存到相册、段子可以进行复制、内容字体可以选择。</p>
@@ -31,7 +32,8 @@ li {margin-left:20px;}
             <li>
                 <h3>团队</h3>
                 <ul>
-                    <li>目前站长：东子(Chris Chen)，负责技术开发。邮箱：cdcchen@163.com</li>
+                    <li>目前站长：东子(Chris Chen)，负责网站及IOS应用开发。邮箱：cdcchen@163.com</li>
+                    <li>Android应用开发：Tranfer（QQ：37415461）</li>
         　　         <li>设计：Peter，曾效命去火星探险队。</li>
         　　         <li>编辑主要以网友为主，我们是一个开放的平台，希望有兴趣的朋友可以一起加入。</li>
                 </ul>
@@ -43,6 +45,7 @@ li {margin-left:20px;}
             <li>
                 <h3>大事记</h3>
                 <ul>
+                    <li>2012-04 挖段子Android v1.0 正式登录上线，在各大app市场中均可以下载到。</li>
                     <li>2012-04 挖段子iPhone v2.0 正式登录App Store。2.0经过重新设计，更加适合用户进行浏览，彻底解决崩溃的问题。</li>
         　　         <li>2012-02 挖段子iPhone v1.6 正式登录App Store。</li>
         　　         <li>2011-12 挖段子iPhone v1.5 正式登录App Store。</li>
