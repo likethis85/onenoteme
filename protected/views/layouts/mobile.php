@@ -28,6 +28,9 @@
 	<a href="<?php echo aurl('mobile/index');?>">最新</a>
 	<a href="<?php echo aurl('mobile/week');?>">最热</a>
 </div>
+<div class="app-link">
+    <a href="http://s.waduanzi.com/android/WaDuanZi_v1.0.apk" target="_blank">Android版正式上线啦！！点击直接下载。</a>
+</div>
 <div class="admob">
     <script type="text/javascript"><!--
         google_ad_client = "ca-pub-9725980429199769";

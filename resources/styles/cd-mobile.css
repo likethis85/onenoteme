@@ -18,3 +18,5 @@ body {font-size:16px; -webkit-text-size-adjust:none;}
 .post-list .post-content {margin-bottom:5px;}
 
 .pages ul.yiiPager {font-size:16px;} 
+
+.app-link {background:#E6F0F4; padding:10px 10px; text-align:center; margin:10px 0 20px; -webkit-border-radius:5px; -webkit-border-radius:5px; border-radius:5px;}
