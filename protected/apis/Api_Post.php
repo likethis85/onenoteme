@@ -379,6 +379,7 @@ class Api_Post extends ApiBase
     private static function fetchTestRows()
     {
         $ids = array(14079,14078,14077,14071,14061,14060,14053,14049,14046,14044,14043,14042,14041,14038,14036,14035,14034,14033,14032,14031,14030,14029,14027,14026,14025,14024,14023,14022,14021,14020,14019,14018,14017,14016,14015,14014,14013,14012,14011,13995,13994,13993,13992,13991,13990,13989,13988,13987,13986,13985,13984,13983,13982,13980,13979);
+        shuffle($ids);
         $cmd = app()->getDb()->createCommand()
             ->from(TABLE_NAME_POST)
             ->where(array('in', 'id', $ids));
@@ -387,7 +388,6 @@ class Api_Post extends ApiBase
         foreach ($rows as $index => $row)
             $rows[$index] = self::formatRow($row);
         
-        shuffle($rows);
         return $rows;
     }
 }
