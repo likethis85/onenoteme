@@ -8,19 +8,6 @@
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->getTagsLinks('&nbsp;', '_self', 'mobile/tag');?></div><?php endif;?>
     </div>
-    <?php if ($index == 1):?>
-    <div class="post-item">
-        <script type="text/javascript"><!--
-            google_ad_client = "ca-pub-9725980429199769";
-            /* iphone_320x50 */
-            google_ad_slot = "7800978598";
-            google_ad_width = 320;
-            google_ad_height = 50;
-            //-->
-        </script>
-        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-    </div>
-    <?php endif;?>
     <?php endforeach;?>
 </div>
 

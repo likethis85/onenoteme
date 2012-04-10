@@ -31,30 +31,12 @@
 <div class="app-link">
     <a href="http://s.waduanzi.com/android/WaDuanZi_v1.0.apk" target="_blank">Android版正式上线啦！！点击直接下载。</a>
 </div>
-<div class="admob">
-    <script type="text/javascript"><!--
-        google_ad_client = "ca-pub-9725980429199769";
-        /* iphone_320x50 */
-        google_ad_slot = "7800978598";
-        google_ad_width = 320;
-        google_ad_height = 50;
-        //-->
-    </script>
-    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-</div>
+<!-- <div class="admob">
+</div> -->
 <div class="m-wrapper"><?php echo $content;?></div>
 
-<div class="admob">
-    <script type="text/javascript"><!--
-        google_ad_client = "ca-pub-9725980429199769";
-        /* iphone_320x50 */
-        google_ad_slot = "7800978598";
-        google_ad_width = 320;
-        google_ad_height = 50;
-        //-->
-    </script>
-    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-</div>
+<!-- <div class="admob">
+</div> -->
 
 <div class="m-wrapper m-footer">
 	<p class="fl">版权所有 &copy;2011-2012 <a href="<?php echo aurl('mobile');?>">waduanzi.com</a></p><p class="fr"><a href="#top">TOP</a></p>
