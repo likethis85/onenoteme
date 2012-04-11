@@ -100,12 +100,6 @@ class Api_Post extends ApiBase
         $params = $this->filterParams(array('channelid', 'count', 'fields', 'lastid'));
         $channelID = (int)$params['channelid'];
         
-        // @todo 审核数据
-        if ($this->test($channelID))
-            return $this->test();
-        
-        
-        
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
             $lastid = empty($params['lastid']) ? 0 : (int)$params['lastid'];
@@ -139,12 +133,6 @@ class Api_Post extends ApiBase
         self::requiredParams(array('channelid'));
         $params = $this->filterParams(array('channelid', 'count', 'fields', 'lastid'));
         $channelID = (int)$params['channelid'];
-    
-        if ($channelID == CHANNEL_DUANZI)
-            return self::fetchTestRows();
-        ////////////////////////////////////
-    
-    
     
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
@@ -182,10 +170,6 @@ class Api_Post extends ApiBase
         $channelID = (int)$params['channelid'];
         $beforeTime = (int)$params['beforetime'];
 
-        // @todo 审核数据
-        if ($this->test($channelID))
-            return $this->test();
-        
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
             $count = (int)$params['count'];
@@ -218,10 +202,6 @@ class Api_Post extends ApiBase
         self::requiredParams(array('channelid'));
         $params = $this->filterParams(array('channelid', 'count', 'fields', 'lasttime'));
         $channelID = (int)$params['channelid'];
-        
-        // @todo 审核数据
-        if ($this->test($channelID))
-            return $this->test();
         
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
@@ -257,10 +237,6 @@ class Api_Post extends ApiBase
         $params = $this->filterParams(array('channelid', 'count', 'fields'));
         $channelID = (int)$params['channelid'];
 
-        // @todo 审核数据
-        if ($this->test($channelID))
-            return $this->test();
-        
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
             
