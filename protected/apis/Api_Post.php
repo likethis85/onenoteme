@@ -100,9 +100,9 @@ class Api_Post extends ApiBase
         $params = $this->filterParams(array('channelid', 'count', 'fields', 'lastid'));
         $channelID = (int)$params['channelid'];
         
-//         if ($channelID == CHANNEL_DUANZI)
-//             return self::fetchTestRows();
-        ////////////////////////////////////
+        // @todo 审核数据
+        if ($this->test($channelID))
+            return $this->test();
         
         
         
@@ -181,9 +181,10 @@ class Api_Post extends ApiBase
         
         $channelID = (int)$params['channelid'];
         $beforeTime = (int)$params['beforetime'];
-        
-//         if ($channelID == CHANNEL_DUANZI)
-//             return self::fetchTestRows();
+
+        // @todo 审核数据
+        if ($this->test($channelID))
+            return $this->test();
         
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
@@ -218,9 +219,9 @@ class Api_Post extends ApiBase
         $params = $this->filterParams(array('channelid', 'count', 'fields', 'lasttime'));
         $channelID = (int)$params['channelid'];
         
-//         if ($channelID == CHANNEL_DUANZI)
-//             return self::fetchTestRows();
-        
+        // @todo 审核数据
+        if ($this->test($channelID))
+            return $this->test();
         
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
@@ -255,9 +256,10 @@ class Api_Post extends ApiBase
         self::requiredParams(array('channelid'));
         $params = $this->filterParams(array('channelid', 'count', 'fields'));
         $channelID = (int)$params['channelid'];
-        
-//         if ($channelID == CHANNEL_DUANZI)
-//             return self::fetchTestRows();
+
+        // @todo 审核数据
+        if ($this->test($channelID))
+            return $this->test();
         
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
@@ -414,6 +416,17 @@ class Api_Post extends ApiBase
     	catch (ApiException $e) {
     		throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
     	}
+    }
+    
+    private function test($channelID)
+    {
+        $agent = strtolower($_SERVER['User-Agent']);
+        if (strpos($agent, 'android') !== false) {
+            if ($channelID == CHANNEL_DUANZI)
+                return self::fetchTestRows();
+        }
+        else
+            return null;
     }
     
     private static function fetchTestRows()
