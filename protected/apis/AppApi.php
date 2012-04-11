@@ -272,6 +272,9 @@ class AppApi
     
     public function errorHandler($errno, $message, $file, $line)
     {
+        echo '';
+        exit(0);
+        
         if (isset($this->_params[debug]) && $this->_params[debug])
             $error = array('errno'=>$errno, 'message'=>$error, 'line'=>$line, 'file'=>$file);
         else
@@ -282,6 +285,9 @@ class AppApi
     
     public function exceptionHandler($e)
     {
+        echo '';
+        exit(0);
+        
     	if (isset($this->_params['debug']) && $this->_params['debug'])
     		$error = array('errno'=>$e->getCode(), 'message'=>$e->getMessage());
     	else
