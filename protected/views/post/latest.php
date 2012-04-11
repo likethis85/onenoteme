@@ -1,5 +1,5 @@
 <div class="fl cd-container">
-	<h1 class="home-ad"><a href="<?php echo sbu('android/WaDuanZi_v1.0.apk');?>" target="_blank">挖段子安卓(Android)版正式上线，点击下载</a></h1>
+	<h1 class="home-ad"><a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank">挖段子安卓(Android)版正式上线，点击下载</a></h1>
     <h2 class="cd-catption"><span class="fl">最新段子· · · · · ·</span><span class="fr">手机版正式上线: <a href="http://m.waduanzi.com">http://m.waduanzi.com</a></span><div class="clear"></div></h2>
 	<?php $this->renderPartial('list', array('models'=>$models, 'pages'=>$pages));?>
 </div>
