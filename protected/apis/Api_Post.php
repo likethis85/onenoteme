@@ -100,8 +100,8 @@ class Api_Post extends ApiBase
         $params = $this->filterParams(array('channelid', 'count', 'fields', 'lastid'));
         $channelID = (int)$params['channelid'];
         
-        if ($channelID == CHANNEL_DUANZI)
-            return self::fetchTestRows();
+//         if ($channelID == CHANNEL_DUANZI)
+//             return self::fetchTestRows();
         ////////////////////////////////////
         
         
@@ -134,7 +134,7 @@ class Api_Post extends ApiBase
         }
     }
     
-    public function random()
+    public function randomTest()
     {
         self::requiredParams(array('channelid'));
         $params = $this->filterParams(array('channelid', 'count', 'fields', 'lastid'));
@@ -182,8 +182,8 @@ class Api_Post extends ApiBase
         $channelID = (int)$params['channelid'];
         $beforeTime = (int)$params['beforetime'];
         
-        if ($channelID == CHANNEL_DUANZI)
-            return self::fetchTestRows();
+//         if ($channelID == CHANNEL_DUANZI)
+//             return self::fetchTestRows();
         
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
@@ -218,8 +218,8 @@ class Api_Post extends ApiBase
         $params = $this->filterParams(array('channelid', 'count', 'fields', 'lasttime'));
         $channelID = (int)$params['channelid'];
         
-        if ($channelID == CHANNEL_DUANZI)
-            return self::fetchTestRows();
+//         if ($channelID == CHANNEL_DUANZI)
+//             return self::fetchTestRows();
         
         
         try {
@@ -250,14 +250,14 @@ class Api_Post extends ApiBase
         }
     }
     
-    public function random1()
+    public function random()
     {
         self::requiredParams(array('channelid'));
         $params = $this->filterParams(array('channelid', 'count', 'fields'));
         $channelID = (int)$params['channelid'];
         
-        if ($channelID == CHANNEL_DUANZI)
-            return self::fetchTestRows();
+//         if ($channelID == CHANNEL_DUANZI)
+//             return self::fetchTestRows();
         
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
