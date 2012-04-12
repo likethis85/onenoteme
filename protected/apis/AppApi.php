@@ -272,7 +272,7 @@ class AppApi
     
     public function errorHandler($errno, $message, $file, $line)
     {
-        echo '';
+        echo json_encode(array());
         exit(0);
         
         if (isset($this->_params[debug]) && $this->_params[debug])
@@ -285,7 +285,7 @@ class AppApi
     
     public function exceptionHandler($e)
     {
-        echo '';
+        echo json_encode(array());
         exit(0);
         
     	if (isset($this->_params['debug']) && $this->_params['debug'])
