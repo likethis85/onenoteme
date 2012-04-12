@@ -48,6 +48,7 @@
 			<li><a href="http://lian86.com/" target="_blank">☆中国图片链</a></li>
 			<li><a href="http://btlajiao.com/" target="_blank">变态辣椒</a></li>
 			<li><a href="http://www.jiongnews.com/" target="_blank">囧闻联播</a></li>
+			<li><a href="http://www.youquba.net/" target="_blank">有趣吧</a></li>
 			<li><a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=UjE2MTE6NzwSJDsifCMjfDE9Pw" style="text-decoration:none;">申请友情链接</a></li>
 		</ul>
 	</div>
