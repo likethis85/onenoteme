@@ -1,5 +1,5 @@
 <?php
-class UserController extends Controller
+class UserController extends AdminController
 {
     public function actionVerify()
     {

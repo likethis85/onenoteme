@@ -144,11 +144,11 @@ class Api_Post extends ApiBase
             $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'id > :lastid');
             $param = array(':enabled'=>Post::STATE_ENABLED, ':channelid' => $channelID, ':lastid'=>$lastid);
             $cmd = app()->getDb()->createCommand()
-            ->select($fields)
-            ->from(TABLE_NAME_POST)
-            ->where($condition, $param)
-            ->order('id desc')
-            ->limit($count);
+                ->select($fields)
+                ->from(TABLE_NAME_POST)
+                ->where($condition, $param)
+                ->order('id desc')
+                ->limit($count);
     
             $rows = $cmd->queryAll();
     

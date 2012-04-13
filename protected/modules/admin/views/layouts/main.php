@@ -10,6 +10,7 @@
 </html>
 
 <?php cs()->registerCssFile(sbu('admin/css/cd-admin.css'));?>
-<?php cs()->registerCssFile(sbu('libs/bootstrap/bootstrap.min.css'));?>
+<?php cs()->registerCssFile(sbu('libs/bootstrap/css/bootstrap.min.css'));?>
 <?php cs()->registerScriptFile(sbu('libs/jquery-1.7.1.min.js'), CClientScript::POS_BEGIN);?>
 <?php cs()->registerScriptFile(sbu('admin/js/cd-admin.js'), CClientScript::POS_END);?>
+<?php cs()->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END);?>

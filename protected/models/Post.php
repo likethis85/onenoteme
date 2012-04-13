@@ -22,6 +22,7 @@
  */
 class Post extends CActiveRecord
 {
+    const STATE_UNVERIFY = -1;
     const STATE_DISABLED = 0;
     const STATE_ENABLED = 1;
     const STATE_TOP = 2;

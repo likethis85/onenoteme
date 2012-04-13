@@ -1,11 +1,11 @@
-<table class="zebra-striped bordered-table post-list-table ">
+<table class="table table-striped table-bordered post-list-table">
     <thead>
         <tr>
             <th class="span1">#</th>
-            <th class="span2"><?php echo $sort->link('id');?></th>
-            <th class="span11">标题</th>
-            <th class="span4"><?php echo $sort->link('create_time');?></th>
-            <th class="span3">发表人</th>
+            <th class="span1"><?php echo $sort->link('id');?></th>
+            <th class="span6">标题</th>
+            <th class="span2"><?php echo $sort->link('create_time');?></th>
+            <th class="span2">发表人</th>
             <th>#</th>
         </tr>
     </thead>
@@ -18,8 +18,8 @@
             <td><?php echo $model->createTime;?></td>
             <td><?php echo $model->postUserName;?></td>
             <td>
-                <button class="btn primary" id="pass-post">通过</button>
-                <button class="btn danger" id="refuse-post">删除</button>
+                <a href="#" class="one-verify">通过</a>
+                <a href="#" class="one-delete">删除</a>
             </td>
         </tr>
         <?php endforeach;?>

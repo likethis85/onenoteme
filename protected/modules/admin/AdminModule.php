@@ -4,9 +4,6 @@ class AdminModule extends CWebModule
 {
 	public function init()
 	{
-		exit(0);
-
-		// import the module-level models and components
 		$this->setImport(array(
 			'admin.models.*',
 			'admin.components.*',
@@ -17,9 +14,10 @@ class AdminModule extends CWebModule
 	{
 		if(parent::beforeControllerAction($controller, $action))
 		{
-			// this method is called before any module controller action is performed
-			// you may place customized code here
-			return true;
+			if (user()->getIsGuest())
+			    request()->redirect(url('site/login'));
+			else
+    			return true;
 		}
 		else
 			return false;

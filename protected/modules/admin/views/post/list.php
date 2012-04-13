@@ -1,15 +1,15 @@
-<table class="zebra-striped bordered-table post-list-table">
+<table class="table table-striped table-bordered post-list-table">
     <thead>
         <tr>
             <th class="span1">#</th>
-            <th class="span2"><?php echo $sort->link('id');?></th>
-            <th class="span10">标题</th>
-            <th class="span2"><?php echo $sort->link('up_score');?></th>
-            <th class="span2"><?php echo $sort->link('down_score');?></th>
-            <th class="span2"><?php echo $sort->link('comment_nums');?></th>
+            <th class="span1"><?php echo $sort->link('id');?></th>
+            <th class="span6">标题</th>
+            <th class="span1"><?php echo $sort->link('up_score');?></th>
+            <th class="span1"><?php echo $sort->link('down_score');?></th>
+            <th class="span1"><?php echo $sort->link('comment_nums');?></th>
             <th class="span2">标签</th>
-            <th class="span4"><?php echo $sort->link('create_time');?></th>
-            <th class="span3">发表人</th>
+            <th class="span2"><?php echo $sort->link('create_time');?></th>
+            <th>发表人</th>
         </tr>
     </thead>
     <tbody>

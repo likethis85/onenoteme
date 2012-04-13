@@ -18,7 +18,7 @@ class User extends CActiveRecord
     const STATE_DISABLED = 0;
     const STATE_ENABLED = 1;
     const STATE_EDITOR = 150;
-    const STATE_ADMIN = 199;
+    const STATE_ADMIN = 200;
     
     public $captcha;
     
