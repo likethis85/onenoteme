@@ -15,9 +15,9 @@ class Api_Comment extends ApiBase
         else {
             $cmd = app()->getDb()->createCommand()
                 ->select(array('t.id', 't.content', 't.create_time'))
-                ->from(TABLE_NAME_COMMENT)
-                ->order('id desc')
-                ->where('post_id = :postid', array(':postid'=>$postid));
+                ->from(TABLE_NAME_COMMENT . ' t')
+                ->order('t.id desc')
+                ->where('t.post_id = :postid', array(':postid'=>$postid));
                 
             if ($count > 0)
                 $cmd->limit = $count;

@@ -242,7 +242,7 @@ class Api_Post extends ApiBase
             
             $maxIdMinId = app()->getDb()->createCommand()
                 ->select(array('max(id) maxid', 'min(id) minid'))
-                ->from(TABLE_NAME_POST)
+                ->from(TABLE_NAME_POST . ' t')
                 ->where(array('and', 't.state = :enalbed',  'channel_id = :channelid'), array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID))
                 ->queryRow();
             
