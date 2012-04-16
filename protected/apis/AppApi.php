@@ -272,8 +272,8 @@ class AppApi
     
     public function errorHandler($errno, $message, $file, $line)
     {
-        echo CJSON::encode(array());
-        exit(0);
+//         echo CJSON::encode(array());
+//         exit(0);
         
         if (isset($this->_params[debug]) && $this->_params[debug])
             $error = array('errno'=>$errno, 'message'=>$error, 'line'=>$line, 'file'=>$file);
@@ -286,8 +286,8 @@ class AppApi
     
     public function exceptionHandler($e)
     {
-        echo CJSON::encode(array());
-        exit(0);
+//         echo CJSON::encode(array());
+//         exit(0);
         
     	if (isset($this->_params['debug']) && $this->_params['debug'])
     		$error = array('errno'=>$e->getCode(), 'message'=>$e->getMessage());
