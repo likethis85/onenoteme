@@ -25,10 +25,10 @@ class CDHotTags extends CWidget
         
         if (!empty($tags)) {
             foreach ($tags as $key => $tag) {
-                if ($key < 2) {
+                if ($key < 5) {
                     $tag_level = 'tag-level3';
                 }
-                elseif ($key < 5) {
+                elseif ($key < 10) {
                     $tag_level = 'tag-level2';
                 }
                 else

@@ -21,7 +21,7 @@ class Api_Post extends ApiBase
             $fields = empty($params['fields']) ? '*' : $params['fields'];
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
-                ->from(TABLE_NAME_POST)
+                ->from(TABLE_NAME_POST . ' t')
                 ->where('id = :postid and state = :enabled', array(':postid' => $postid, ':enabled'=>Post::STATE_ENABLED));
             $row = $cmd->queryRow();
             $row = ($row === false) ? array() : self::formatRow($row);
@@ -111,7 +111,7 @@ class Api_Post extends ApiBase
             $param = array(':enabled'=>Post::STATE_ENABLED, ':channelid' => $channelID, ':lastid'=>$lastid);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
-                ->from(TABLE_NAME_POST)
+                ->from(TABLE_NAME_POST . ' t')
                 ->where($condition, $param)
                 ->order('id desc')
                 ->limit($count);
@@ -145,7 +145,7 @@ class Api_Post extends ApiBase
             $param = array(':enabled'=>Post::STATE_ENABLED, ':channelid' => $channelID, ':lastid'=>$lastid);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
-                ->from(TABLE_NAME_POST)
+                ->from(TABLE_NAME_POST . ' t')
                 ->where($condition, $param)
                 ->order('id desc')
                 ->limit($count);
@@ -180,7 +180,7 @@ class Api_Post extends ApiBase
             $param = array(':enabled'=>Post::STATE_ENABLED, ':channelid' => $channelID, ':beforetime'=>$beforeTime);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
-                ->from(TABLE_NAME_POST)
+                ->from(TABLE_NAME_POST . ' t')
                 ->where($condition, $param)
                 ->order('id desc')
                 ->limit($count);
@@ -214,7 +214,7 @@ class Api_Post extends ApiBase
             $param = array(':enabled'=>Post::STATE_ENABLED, ':channelid' => $channelID, ':lasttime'=>$lasttime);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
-                ->from(TABLE_NAME_POST)
+                ->from(TABLE_NAME_POST . ' t')
                 ->where($condition, $param)
                 ->order('create_time desc, id desc')
                 ->limit($count);
@@ -242,7 +242,7 @@ class Api_Post extends ApiBase
             
             $maxIdMinId = app()->getDb()->createCommand()
                 ->select(array('max(id) maxid', 'min(id) minid'))
-                ->from(TABLE_NAME_POST)
+                ->from(TABLE_NAME_POST . ' t')
                 ->where(array('and', 't.state = :enalbed',  'channel_id = :channelid'), array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID))
                 ->queryRow();
             
@@ -261,7 +261,7 @@ class Api_Post extends ApiBase
                 $param['randid'] = $randid;
                 $cmd = app()->getDb()->createCommand()
                     ->select($fields)
-                    ->from(TABLE_NAME_POST)
+                    ->from(TABLE_NAME_POST . ' t')
                     ->where($conditoins, $param)
                     ->limit(1);
                 
@@ -410,7 +410,7 @@ class Api_Post extends ApiBase
         $ids = array(14079,14078,14077,14071,14061,14060,14053,14049,14046,14044,14043,14042,14041,14038,14036,14035,14034,14033,14032,14031,14030,14029,14027,14026,14025,14024,14023,14022,14021,14020,14019,14018,14017,14016,14015,14014,14013,14012,14011,13995,13994,13993,13992,13991,13990,13989,13988,13987,13986,13985,13984,13983,13982,13980,13979);
         shuffle($ids);
         $cmd = app()->getDb()->createCommand()
-            ->from(TABLE_NAME_POST)
+            ->from(TABLE_NAME_POST . ' t')
             ->where(array('in', 'id', $ids));
         $rows = $cmd->queryAll();
         
