@@ -9,6 +9,7 @@
  * @property string $uuid
  * @property string $device_token
  * @property integer $last_time
+ * @property integer $close_push
  */
 class Device extends CActiveRecord
 {
@@ -38,7 +39,7 @@ class Device extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('device_token', 'required'),
-			array('user_id, last_time', 'numerical', 'integerOnly'=>true),
+			array('user_id, last_time, close_push', 'numerical', 'integerOnly'=>true),
 			array('device_token, uuid', 'length', 'max'=>100),
 		);
 	}
@@ -64,6 +65,19 @@ class Device extends CActiveRecord
 			'user_id' => 'User',
 			'device_token' => 'Device Token',
 	        'last_time' => 'Last Time',
+		    'close_push' => 'Close Push',
 		);
 	}
+
+    public static function convertToken($token)
+    {
+        $token = trim($token);
+        if (empty($token))
+            return '';
+        
+        $token = trim($token, '<>');
+        $token = str_replace(' ', '', $token);
+        
+        return $token;
+    }
 }

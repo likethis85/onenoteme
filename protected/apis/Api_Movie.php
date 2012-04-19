@@ -43,6 +43,17 @@ class Api_Movie extends ApiBase
         return $rows;
     }
     
+    public function latestsets()
+    {
+        $cmd = app()->getDb()->createCommand()
+            ->from(TABLE_NAME_MOVIE_SETS)
+            ->order('id desc');
+        
+        $rows = $cmd->queryAll();
+        $rows = self::processSetsRows($rows);
+        return $rows;
+    }
+    
     // @todo 暂时没有实现
     public function listofspecial(/*$special_id*/)
     {

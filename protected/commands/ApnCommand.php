@@ -6,6 +6,7 @@ class ApnCommand extends CConsoleCommand
         $devices = app()->getDb()->createCommand()
             ->from('{{device}}')
             ->order('last_time desc')
+            ->where('close_push = :notclosed', array(':notclosed' => CD_NO))
             ->queryAll();
         
         if (empty($devices))
@@ -37,6 +38,7 @@ class ApnCommand extends CConsoleCommand
         $devices = app()->getDb()->createCommand()
             ->from('{{device}}')
             ->order('last_time desc')
+            ->where('close_push = :closed', array(':closed' => CD_NO))
             ->queryAll();
         
         if (empty($devices)) return false;

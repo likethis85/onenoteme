@@ -1,4 +1,7 @@
 <?php
+define('CD_YES', 1);
+define('CD_NO', 0);
+
 define('CHANNEL_DUANZI', 0);
 define('CHANNEL_LENGTU', 20);
 define('CHANNEL_GIRL', 30);
