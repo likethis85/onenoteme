@@ -29,7 +29,7 @@ class Api_Device extends ApiBase
         return $data;
     }
     
-    public function pushstate(/*$device_token*/)
+    public function pushstate(/*$device_token, $state*/)
     {
         self::requirePost();
         $this->requiredParams(array('device_token', 'state'));
