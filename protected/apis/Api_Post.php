@@ -97,7 +97,7 @@ class Api_Post extends ApiBase
     public function timeline()
     {
         self::requiredParams(array('channelid'));
-        $params = $this->filterParams(array('channelid', 'count', 'fields', 'lastid'));
+        $params = $this->filterParams(array('channelid', 'count', 'fields', 'lastid', 'token'));
         $channelID = (int)$params['channelid'];
         
         try {
@@ -120,6 +120,8 @@ class Api_Post extends ApiBase
             
             foreach ($rows as $index => $row)
                 $rows[$index] = self::formatRow($row);
+            
+            self::updateLastRequestTime($token);
             
             return $rows;
         }
@@ -200,7 +202,7 @@ class Api_Post extends ApiBase
     public function latest()
     {
         self::requiredParams(array('channelid'));
-        $params = $this->filterParams(array('channelid', 'count', 'fields', 'lasttime'));
+        $params = $this->filterParams(array('channelid', 'count', 'fields', 'lasttime', 'token'));
         $channelID = (int)$params['channelid'];
         
         try {
@@ -223,6 +225,8 @@ class Api_Post extends ApiBase
             
             foreach ($rows as $index => $row)
                 $rows[$index] = self::formatRow($row);
+            
+            self::updateLastRequestTime($token);
             
             return $rows;
         }
@@ -419,6 +423,16 @@ class Api_Post extends ApiBase
         
         shuffle($rows);
         return $rows;
+    }
+
+
+    private static function updateLastRequestTime($token)
+    {
+        if (empty($token))
+            return false;
+    
+        $token = Device::convertToken($token);
+        Device::model()->updateAll(array('last_time'=>$_SERVER['REQUEST_TIME']), 'device_token = :token', array(':token'=>$token));
     }
 }
 

@@ -135,8 +135,7 @@ class PhoneController extends Controller
             ->where($where, $params);
     
         $rows = $cmd->queryAll();
-        array_unshift($rows, self::versionALertArray((int)$rows[0]['id'] + 1));
-    
+
         // 更新最后请求时间
         self::updateLastRequestTime($device_token);
     
@@ -162,7 +161,6 @@ class PhoneController extends Controller
             ->where($where, $params);
     
         $rows = $cmd->queryAll();
-        array_unshift($rows, self::versionALertArray((int)$rows[0]['id'] + 1));
         
         self::output($rows);
     }
@@ -228,10 +226,10 @@ class PhoneController extends Controller
     private static function versionALertArray($lastid)
     {
         return array (
-          'id' => "$lastid",
+          'id' => $lastid,
           'channel_id' => '0',
           'category_id' => '20',
-          'title' => '对不起，我们对1.0版本已经不再支持，当前最新版本为2.1.0，最新版本内容更多、更新速度更快，、使用起来更加方便，我们强烈推荐您马上更新',
+          'title' => '对不起，我们对1.x版本已经不再支持，当前最新版本为2.1.0，最新版本内容更多、更新速度更快，、使用起来更加方便，我们强烈推荐您马上更新',
           'pic' => '',
           'big_pic' => '',
           'create_time' => '1334455200',
