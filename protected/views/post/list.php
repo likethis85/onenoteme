@@ -1,3 +1,6 @@
+<div class="cdc-block">
+	<script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=336&h=280"></script>
+</div>
 <div class="post-list">
     <?php foreach ((array)$models as $key => $model):?>
     <div class="post-item">
@@ -35,6 +38,10 @@
 <?php if ($pages->pageCount > 1):?>
 <div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
 <?php endif;?>
+
+<div class="cdc-block">
+	<script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=336&h=280"></script>
+</div>
 
 <span id="jqvar" scoreurl="<?php echo aurl('post/score');?>" class="hide"></span>
 

@@ -8,6 +8,11 @@
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->getTagsLinks('&nbsp;', '_self', 'mobile/tag');?></div><?php endif;?>
     </div>
+    <?php if ($index == 1):?>
+    <div class="admob">
+    	<script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=336&h=280"></script>
+    </div>
+    <?php endif;?>
     <?php endforeach;?>
 </div>
 
