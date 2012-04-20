@@ -13,7 +13,7 @@
             <?php if ($model->picture):?>
             <div class="post-image">
                 <span class="image-more">点击图片查看更多精彩～～～</span>
-                <?php echo CHtml::image(sbu('images/grey.gif'), $model->title, array('data-original'=>$model->picture, 'class'=>'item-pic'));?>
+                <?php echo CHtml::image($model->picture, $model->title, array('class'=>'item-pic'));?>
             </div>
             <?php endif;?>
         </div>
