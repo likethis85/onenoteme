@@ -1,5 +1,5 @@
 <div class="cdc-block">
-	<script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=336&h=280"></script>
+	<script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=640&h=60"></script>
 </div>
 <div class="post-list">
     <?php foreach ((array)$models as $key => $model):?>
@@ -40,7 +40,7 @@
 <?php endif;?>
 
 <div class="cdc-block">
-	<script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=336&h=280"></script>
+	<script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=640&h=60"></script>
 </div>
 
 <span id="jqvar" scoreurl="<?php echo aurl('post/score');?>" class="hide"></span>
