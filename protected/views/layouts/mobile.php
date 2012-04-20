@@ -39,7 +39,7 @@
 </div> -->
 
 <div class="m-wrapper m-footer">
-	<p class="fl">版权所有 &copy;2011-2012 <a href="<?php echo aurl('mobile');?>">waduanzi.com</a></p><p class="fr"><a href="#top">TOP</a></p>
+	<p class="fl">版权所有 &copy;2011-2012&nbsp;冀ICP备12006196号-5<a href="<?php echo aurl('mobile');?>">waduanzi.com</a></p><p class="fr"><a href="#top">TOP</a></p>
 	<div class="clear"></div>
 </div>
 <script type="text/javascript">

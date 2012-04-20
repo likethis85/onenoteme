@@ -54,4 +54,24 @@ class Api_Device extends ApiBase
         $data = array('errno'=>$result);
         return $data;
     }
+    
+    public function getpushstate(/*$device_token*/)
+    {
+        $this->requiredParams(array('device_token'));
+        $params = $this->filterParams(array('device_token'));
+        
+        $token = Device::convertToken($params['device_token']);
+        
+        if (empty($token))
+            $result = 0;
+        else {
+            $cmd = app()->getDb()->createCommand()
+                ->select('close_push')
+                ->from(TABLE_NAME_DEVICE)
+                ->where('device_token = :token', array(':token'=>$token));
+            $result = (int)$cmd->queryScalar();
+        }
+        
+        return $result;
+    }
 }
