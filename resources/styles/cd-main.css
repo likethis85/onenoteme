@@ -25,7 +25,7 @@
 .cd-sidebar .content-block {margin-bottom:10px; background:#E6F0F4; border:1px solid #DCEEF5; padding:10px; line-height:24px;}
 .cd-sidebar .content-title {font-size:22px; color:#2ca090; margin-bottom:10px;}
 .cd-sidebar .content-block a {margin-right:5px;}
-.cd-sidebar .cdc-block {margin-bottom:10px; background:#E6F0F4;}
+.cd-sidebar .cdc-block {margin-bottom:10px; background:#E6F0F4; text-align:center;}
 .cd-sidebar .hot-tags a {line-height:26px;}
 
 /* container */
