@@ -32,12 +32,12 @@
     <a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">Android版正式上线啦！！点击直接下载。</a>
 </div>
 <div class="admob">
-	<script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=336&h=280"></script>
+	<script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=640&h=60"></script>
 </div>
 <div class="m-wrapper"><?php echo $content;?></div>
 
 <div class="admob">
-	<script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=336&h=280"></script>
+	<script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=640&h=60"></script>
 </div>
 
 <div class="m-wrapper m-footer">
