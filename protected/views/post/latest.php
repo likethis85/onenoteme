@@ -26,7 +26,23 @@
 		<div class="clear"></div>
 	</div>
 	<div class="cdc-block">
-		<script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=336&h=280"></script>
+		<script type="text/javascript">
+            alimama_pid="mm_12551250_2904829_9981541";
+            alimama_titlecolor="0000FF";
+            alimama_descolor ="000000";
+            alimama_bgcolor="FFFFFF";
+            alimama_bordercolor="E6E6E6";
+            alimama_linkcolor="008000";
+            alimama_bottomcolor="FFFFFF";
+            alimama_anglesize="0";
+            alimama_bgpic="0";
+            alimama_icon="0";
+            alimama_sizecode="36";
+            alimama_width=336;
+            alimama_height=280;
+            alimama_type=2;
+        </script>
+        <script src="http://a.alimama.cn/inf.js" type="text/javascript"></script>
 	</div>
 	<?php $this->widget('CDHotTags', array('title'=>'热门标签'));?>
 	<div class="content-block">
