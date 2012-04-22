@@ -74,7 +74,7 @@
 <div class="fr cd-sidebar">
 	<div class="cdc-block">
 		<script type="text/javascript">
-            alimama_pid="mm_12551250_2904829_9981541";
+            alimama_pid="mm_12551250_2904829_9981564";
             alimama_titlecolor="0000FF";
             alimama_descolor ="000000";
             alimama_bgcolor="FFFFFF";
@@ -84,9 +84,9 @@
             alimama_anglesize="0";
             alimama_bgpic="0";
             alimama_icon="0";
-            alimama_sizecode="36";
-            alimama_width=336;
-            alimama_height=280;
+            alimama_sizecode="37";
+            alimama_width=300;
+            alimama_height=250;
             alimama_type=2;
         </script>
         <script src="http://a.alimama.cn/inf.js" type="text/javascript"></script>
