@@ -1,11 +1,11 @@
 <div class="fl cd-container">
 	<div class="post-detail">
 		<h1><?php echo $post->title;?></h1>
-		<div class="post-user"><?php echo $post->PostUserName . '&nbsp;' . $post->createTime;?></div>
-		<?php if ($post->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $post->tagsLinks;?></div><?php endif;?>
 		<div class="cdc-block">
 		    <script type="text/javascript">/*wdz_640*60*/ var cpro_id = 'u863393';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script>
 		</div>
+		<div class="post-user"><?php echo $post->PostUserName . '&nbsp;' . $post->createTime;?></div>
+		<?php if ($post->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $post->tagsLinks;?></div><?php endif;?>
 		<div class="content" id="content">
 		    <?php echo $post->content;?>
 		    <?php if ($post->picture) echo '<br />' . CHtml::image($post->picture, $post->title, array('class'=>'item-pic'));?>
