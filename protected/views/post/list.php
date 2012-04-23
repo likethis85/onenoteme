@@ -41,5 +41,29 @@
 
 <span id="jqvar" scoreurl="<?php echo aurl('post/score');?>" class="hide"></span>
 
+<script type="text/javascript">
+$(function(){
+	$('.post-item').hover(
+		function(e){$(this).addClass('post-item-hover');},
+		function(e){$(this).removeClass('post-item-hover');}
+	);
+
+	$('.item-pic').toggle(
+		function(e) {
+			var offset = $(this).parent().offset();
+		    $('body').scrollTop(offset.top);
+	        $(this).parent().css('max-height', '9999px');
+	    },
+	    function(e) {
+		    var offset = $(this).parents('.post-item').offset();
+		    $('body').scrollTop(offset.top);
+	        $(this).parent().css('max-height', '450px');
+    	}
+	);
+
+	$('.post-item .post-image img').lazyload({effect: 'fadeIn', threshold: 200});
+});
+</script>
+
 <?php cs()->registerScriptFile(sbu('scripts/snsshare.js'), CClientScript::POS_END);?>
 
