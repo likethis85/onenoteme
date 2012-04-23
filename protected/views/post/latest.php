@@ -21,7 +21,7 @@
 		<div class="fl"><img src="http://f.meiapps.com/apps/waduanzi_icon.png" width="50" height="50" alt="挖段子IOS应用" border="0" /></div>
 		<div class="fl app-list">
     		<p class="f16px"><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank"><strong>点击下载iPhone手机应用</strong></a></p>
-    		<p class="f16px"><a href="<?php echo sbu('android/WaDuanZi_v1.0.apk');?>" target="_blank"><strong>点击下载Android手机应用</strong></a></p>
+    		<p class="f16px"><a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank"><strong>点击下载Android手机应用</strong></a></p>
 		</div>
 		<div class="clear"></div>
 	</div>
