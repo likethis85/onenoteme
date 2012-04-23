@@ -1,5 +1,5 @@
 <div class="cdc-block">
-	<script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=640&h=60"></script>
+	<script type="text/javascript">/*wdz_640*60*/ var cpro_id = 'u863393';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script>
 </div>
 <div class="post-list">
     <?php foreach ((array)$models as $key => $model):?>
