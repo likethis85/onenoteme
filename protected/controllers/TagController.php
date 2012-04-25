@@ -9,7 +9,7 @@ class TagController extends Controller
             $cmd = app()->getDb()->createCommand()
                 ->order('id asc');
             $tags = DTag::model()->findAll($cmd);
-            app()->getCache()->set($cacheKey, $tags);
+            app()->getCache()->set($cacheKey, $tags, 24*60*60);
         }
         foreach ($tags as $tag)
             $postNums[] = $tag->post_nums;
