@@ -9,7 +9,7 @@
 
 <div class="fr cd-sidebar">
     <div class="cdc-block">
-		<script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=336&h=280"></script>
+		<script type="text/javascript">/*wdz_300*250，创建于2012-4-25*/ var cpro_id = 'u866941';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script>
 	</div>
 	<?php $this->widget('CDHotTags', array('title'=>'热门标签'));?>
 </div>

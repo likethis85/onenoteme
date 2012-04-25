@@ -3,9 +3,14 @@ class TagController extends Controller
 {
     public function actionList()
     {
-        $cmd = app()->getDb()->createCommand()
-            ->order('id asc');
-        $tags = DTag::model()->findAll($cmd);
+        $cacheKey = 'all_tags';
+        $tags = app()->getCache()->get($cacheKey);
+        if ($tags === false) {
+            $cmd = app()->getDb()->createCommand()
+                ->order('id asc');
+            $tags = DTag::model()->findAll($cmd);
+            app()->getCache()->set($cacheKey, $tags);
+        }
         foreach ($tags as $tag)
             $postNums[] = $tag->post_nums;
         
