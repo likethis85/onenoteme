@@ -54,7 +54,6 @@
 	<div class="clear"></div>
 </div>
 <div class="space10px"></div>
-<script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/2"></script>
 <?php $this->renderPartial('/public/tongji');?>
 </body>
 </html>
