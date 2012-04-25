@@ -32,7 +32,6 @@
 	<div class="content-block">
 		<h2 class="content-title">友情链接</h2>
 		<ul class="friend-links">
-			<li><a href="http://www.kascend.com/" target="_blank">开迅音乐</a></li>
 			<li><a href="http://www.fila.cc/" target="_blank">fila官网</a></li>
 			<li><a href="http://lengxiaohua.net/" target="_blank">冷笑话</a></li>
 			<li><a href="http://www.xiaohuayoumo.com/" target="_blank">幽默笑话百分百</a></li>
