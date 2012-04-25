@@ -34,9 +34,9 @@ class ChannelController extends Controller
         $where = 'state != :state and channel_id = :channel_id';
         $params = array(':state'=>DPost::STATE_DISABLED, ':channel_id'=>$channelid);
         $cmd = app()->db->createCommand()
-        ->order('create_time desc, id desc')
-        ->limit($limit)
-        ->where($where, $params);
+            ->order('create_time desc, id desc')
+            ->limit($limit)
+            ->where($where, $params);
     
         $count = DPost::model()->count($where, $params);
         $pages = new CPagination($count);

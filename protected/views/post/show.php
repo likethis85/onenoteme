@@ -85,3 +85,5 @@
 <span id="jqvar" scoreurl="<?php echo aurl('post/score');?>" class="hide"></span>
 
 <?php cs()->registerScriptFile(sbu('scripts/snsshare.js'), CClientScript::POS_END);?>
+
+

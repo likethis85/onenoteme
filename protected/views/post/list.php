@@ -60,8 +60,6 @@ $(function(){
 	        $(this).parent().css('max-height', '450px');
     	}
 	);
-
-	$('.post-item .post-image img').lazyload({effect: 'fadeIn', threshold: 200});
 });
 </script>
 
