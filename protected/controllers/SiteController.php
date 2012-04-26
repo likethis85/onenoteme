@@ -84,8 +84,63 @@ class SiteController extends Controller
         $this->render('signup', array('model'=>$model));
     }
     
-    public function actionTest()
+    public function actionTest($page = 1)
     {
+        header('content-type: text/html; charset=utf-8');
+        
+        $page = (int)$page;
+        $prevPage = $page > 1 ? $page - 1 : 1;
+        $nextPage = $page + 1;
+        echo sprintf('<h2><a href="?page=%d">上一页</a> - <a href="?page=%d">下一页</a></h2>', $prevPage, $nextPage);
+
+        $appKey = '456860706';
+        $appSecert = '19168ffef668231aa22f74683d3d18e7';
+        
+        $url = 'https://api.weibo.com/2/statuses/user_timeline.json';
+        $params = array(
+                'source' => $appKey,
+                'screen_name' => '这个漫画很邪恶',
+                'count' => 10,
+                'trim_user' => 1,
+                'page' => $page,
+        );
+        $fetch = new CdCurl();
+        $fetch->ssl()->get($url, $params);
+        $jsonData = $fetch->rawdata();
+        
+//         echo $fetch->errno();
+//         echo $fetch->error();
+        echo '<br />';
+        $rows = json_decode($jsonData, true);
+        foreach ((array)$rows['statuses'] as $row) {
+            if (array_key_exists('retweeted_status', $row))
+                $row = $row['retweeted_status'];
+            
+            $text = $row['text'];
+            $text = preg_replace('/(#.*?#)|(（.*?）)|(\(.*?\))|(【.*?】)|(http:\/\/t\.cn\/\w+)|(@.+?\s{1})/is', '', $text);
+            if (array_key_exists('thumbnail_pic', $row)) {
+                $temp['thumbnail_pic'] = $row['thumbnail_pic'];
+                $temp['bmiddle_pic'] = $row['bmiddle_pic'];
+                $temp['original_pic'] = $row['original_pic'];
+                $temp['text'] = $text;
+            }
+            elseif (mb_strlen($text) > 10) {
+                $temp['text'] = $text;
+            }
+            $data[] = $temp;
+            unset($temp);
+        }
+        
+        foreach ((array)$data as $row) {
+            echo '<dl style="width:600px; font-size:14px; border:1px solid #DFDFDF; padding:15px;">';
+            echo '<dt style="line-height:22px; color:#666; margin-bottom:10px;">' . $row['text'] . '</dt>';
+            if (array_key_exists('thumbnail_pic', $row))
+                echo '<dd><a href="' . $row['bmiddle_pic'] . '"><img src="' . $row['thumbnail_pic'] . '" /></a></dd>';
+            
+            echo '</dl>';
+        }
+        
+        
         exit;
         
         $s = '{"id":"20000","channel_id":"0","category_id":"20","title":"\u5bf9\u4e0d\u8d77\uff0c\u6211\u4eec\u5bf91.0\u7248\u672c\u5df2\u7ecf\u4e0d\u518d\u652f\u6301\uff0c\u5f53\u524d\u6700\u65b0\u7248\u672c\u4e3a2.1.0\uff0c\u6700\u65b0\u7248\u672c\u5185\u5bb9\u66f4\u591a\u3001\u66f4\u65b0\u901f\u5ea6\u66f4\u5feb\uff0c\u3001\u4f7f\u7528\u8d77\u6765\u66f4\u52a0\u65b9\u4fbf\uff0c\u6211\u4eec\u5f3a\u70c8\u63a8\u8350\u60a8\u9a6c\u4e0a\u66f4\u65b0","pic":"","big_pic":"","create_time":"1334455200","up_score":"17","down_score":"2","comment_nums":"0","user_id":"0","user_name":"","tags":"","state":"1"}';

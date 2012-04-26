@@ -22,6 +22,13 @@ class PostController extends AdminController
         $this->render('list', $data);
     }
     
+    public function actionList()
+    {
+        $data = self::fetchPostList(null, true, true);
+        
+        $this->render('list', $data);
+    }
+    
     public function actionSearch()
     {
         
@@ -43,11 +50,11 @@ class PostController extends AdminController
         
         if ($sort) {
             $sort = new CSort('Post');
-            $sort->defaultOrder = 'id';
+            $sort->defaultOrder = 't.id desc';
             $sort->applyOrder($criteria);
         }
         else
-            $criteria->order = 'id desc';
+            $criteria->order = 't.id desc';
         
         $models = Post::model()->findAll($criteria);
         $data = array(

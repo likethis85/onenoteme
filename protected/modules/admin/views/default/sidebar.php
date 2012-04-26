@@ -2,6 +2,7 @@
 <ul>
     <li><a href="<?php echo url('admin/post/verify');?>" target="main">审核</a></li>
     <li><a href="<?php echo url('admin/post/today');?>" target="main">今天</a></li>
+    <li><a href="<?php echo url('admin/post/list');?>" target="main">列表</a></li>
     <li><a href="<?php echo url('admin/post/search');?>" target="main">搜索</a></li>
     <li><a href="<?php echo url('admin/comment/index');?>" target="main">评论</a></li>
     <li><a href="<?php echo url('admin/tag/index');?>" target="main">标签</a></li>

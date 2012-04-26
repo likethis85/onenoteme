@@ -22,12 +22,6 @@ class AdminController extends CController
 	
 	public function init()
 	{
-	    $uid = (int)user()->id;
-	    if (empty($uid))
-	        throw new CHttpException(500);
 	    
-	    $user = AdminUser::model()->findByPk($uid);
-	    if ($user === null || $user->state != AdminUser::STATE_ADMIN)
-	        throw new CHttpException(500);
 	}
 }
