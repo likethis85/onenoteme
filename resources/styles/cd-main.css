@@ -58,6 +58,7 @@
 .post-item .post-image {max-height:450px; overflow:hidden; margin:10px 20px;}
 .post-item .item-pic, .post-detail .item-pic {max-width:500px; cursor:pointer;}
 .post-item .post-image .image-more {display:block; font-size:14px; color:#008C78;}
+.post-item-title {display:block; font-size:0; width:0; height:0;}
 
 /* post/appraise */
 .post-content {background:#E8E7E3; line-height:24px; padding:20px; min-height:200px; margin-bottom:20px;}
