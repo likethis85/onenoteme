@@ -32,7 +32,7 @@
     <a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">Android版正式上线啦！！点击直接下载。</a>
 </div>
 <div class="admob">
-	<script type="text/javascript">/*wdz_234*60，创建于2012-4-28*/ var cpro_id = 'u871006';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script>
+	<script type="text/javascript">/*wdz_300*250，创建于2012-4-25*/ var cpro_id = 'u866941';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script>
 </div>
 <div class="m-wrapper"><?php echo $content;?></div>
 
