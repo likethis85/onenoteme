@@ -8,6 +8,11 @@
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->getTagsLinks('&nbsp;', '_self', 'mobile/tag');?></div><?php endif;?>
     </div>
+    <?php if ($index == 1):?>
+    <div class="admob">
+    	<script type="text/javascript">/*wdz_300*250，创建于2012-4-25*/ var cpro_id = 'u866941';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script>
+    </div>
+    <?php endif;?>
     <?php endforeach;?>
 </div>
 
