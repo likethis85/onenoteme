@@ -1,6 +1,3 @@
-<div class="cdc-block">
-	<script type="text/javascript">/*wdz_640*60*/ var cpro_id = 'u863393';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script>
-</div>
 <div class="post-list">
     <?php foreach ((array)$models as $key => $model):?>
     <div class="post-item">
@@ -33,6 +30,11 @@
         </ul>
         <div class="comment-list comment-list-<?php echo $model->id;?> hide"></div>
     </div>
+    <?php if ($key == 0):?>
+    <div class="cdc-block">
+    	<script type="text/javascript">/*wdz_640*60*/ var cpro_id = 'u863393';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script>
+    </div>
+    <?php endif;?>
     <?php endforeach;?>
 </div>
 
