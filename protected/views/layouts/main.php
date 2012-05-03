@@ -54,6 +54,15 @@
 	<div class="clear"></div>
 </div>
 <div class="space10px"></div>
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=slide&amp;img=4&amp;uid=541407" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+</script>
+<!-- Baidu Button END -->
+
 <?php $this->renderPartial('/public/tongji');?>
 </body>
 </html>
