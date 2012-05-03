@@ -16,7 +16,9 @@
 <div class="cd-wrapper cd-header">
 	<a name="top"></a>
 	<div id="logo" class="fl"><a href="<?php echo app()->homeUrl;?>" title="点击返回首页"><img src="<?php echo sbu('images/logo.png');?>" alt="挖段子LOGO" /></a></div>
-	<div class="site-nav fr">
+	<!-- 将此标记放在您希望显示like按钮的位置 -->
+    <div class="bdlikebutton fl" style="margin-top:10px;"></div>
+    <div class="site-nav fr">
 		<div class="user-nav ar">
     		<?php $this->renderDynamic('userToolbar');?>
     		&nbsp;&nbsp;|&nbsp;<a href="http://m.waduanzi.com">手机版</a>
@@ -55,6 +57,18 @@
 </div>
 <div class="space10px"></div>
 
+<!-- 将此代码放在适当的位置，建议在body结束前 -->
+<script id="bdlike_shell"></script>
+<script>
+    var bdShare_config = {
+    	"type":"small",
+    	"color":"orange",
+    	"uid":"541407"
+    };
+    document.getElementById("bdlike_shell").src="http://bdimg.share.baidu.com/static/js/like_shell.js?t=" + new Date().getHours();
+</script>
+	
+	
 <!-- Baidu Button BEGIN -->
 <script type="text/javascript" id="bdshare_js" data="type=slide&amp;img=4&amp;pos=left&amp;uid=541407" ></script>
 <script type="text/javascript" id="bdshell_js"></script>
