@@ -119,7 +119,7 @@ class ApnCommand extends CConsoleCommand
         $apn = app()->apn->connect();
         foreach ($devices as $device) {
             $token = $device['device_token'];
-            $message = '挖段子祝所有段友们龙年吉祥，万事如意，笑口常开，身体健康，我们将会一如既往的为大家呈现更多更精彩的段子。';
+            $message = '挖段子最新2.1.1版正式发布，新增搞笑视频频道，速度升级啦！';
             try {
                 $apn->createNote($token, $message, 0, '', null)->send();
             }
