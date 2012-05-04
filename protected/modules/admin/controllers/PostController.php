@@ -39,7 +39,6 @@ class PostController extends AdminController
                 $data = (int)$result;
             }
             catch (Exception $e) {
-                echo $e->getMessage();
                 $data = 0;
             }
         }
