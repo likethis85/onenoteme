@@ -13,8 +13,10 @@
                 <?php echo l(image($model->thumbnail_pic, ''), $model->bmiddle_pic, array('target'=>'_blank'));?>
             </td>
             <td>
-                <p><a href="<?php echo aurl('admin/post/weiboVerify', array('id'=>$model->id));?>" class="btn btn-success row-verify">通过</a></p>
-                <p><a href="<?php echo aurl('admin/post/weiboDelete', array('id'=>$model->id));?>" class="btn btn-warning row-delete">删除</a></p>
+                <p><a href="<?php echo aurl('admin/post/weiboVerify', array('id'=>$model->id, 'channel_id'=>CHANNEL_DUANZI));?>" class="btn btn-small btn-success row-verify">段子</a></p>
+                <p><a href="<?php echo aurl('admin/post/weiboVerify', array('id'=>$model->id, 'channel_id'=>CHANNEL_LENGTU));?>" class="btn btn-small btn-success row-verify">冷图</a></p>
+                <p><a href="<?php echo aurl('admin/post/weiboVerify', array('id'=>$model->id, 'channel_id'=>CHANNEL_GIRL));?>" class="btn btn-small btn-success row-verify">福利</a></p>
+                <p><a href="<?php echo aurl('admin/post/weiboDelete', array('id'=>$model->id));?>" class="btn btn-small btn-warning row-delete">删除</a></p>
             </td>
         </tr>
         <?php endforeach;?>

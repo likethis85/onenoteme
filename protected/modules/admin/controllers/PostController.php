@@ -20,9 +20,10 @@ class PostController extends AdminController
         $this->render('weibo', $data);
     }
     
-    public function actionWeiboVerify($id, $callback)
+    public function actionWeiboVerify($id, $channel_id, $callback)
     {
         $id = (int)$id;
+        $channel_id = (int)$channel_id;
         $temp = PostTemp::model()->findByPk($id);
         if ($temp === null)
             $data = 1;
@@ -33,6 +34,7 @@ class PostController extends AdminController
                 $post->thumbnail = $temp->thumbnail_pic;
                 $post->pic = $temp->bmiddle_pic;
                 $post->big_pic = $temp->original_pic;
+                $post->channel_id = $channel_id;
                 $result = $post->save();
                 if ($result)
                     $temp->delete();
