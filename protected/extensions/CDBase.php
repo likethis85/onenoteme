@@ -61,4 +61,13 @@ class CDBase
             . ($extension ? '.' . $extension : '');
     }
     
+    
+    public static function jsonp($callback, $data, $exit = true)
+    {
+        if (empty($callback))
+            throw new CException('callback is not allowed empty');
+    
+        echo $callback . '(' . CJSON::encode($data) . ')';
+        if ($exit) exit(0);
+    }
 }

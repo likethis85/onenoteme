@@ -63,7 +63,7 @@ class Post extends CActiveRecord
 			array('thumbnail, pic, big_pic', 'length', 'max'=>250),
 			array('content, video_url', 'safe'),
 			array('pic', 'file', 'allowEmpty'=>true),
-			array('captcha', 'captcha', 'captchaAction'=>'captcha', 'on'=>'insert'),
+			array('captcha', 'captcha', 'captchaAction'=>'captcha', 'on'=>'insert', 'allowEmpty'=>true),
 		);
 	}
 

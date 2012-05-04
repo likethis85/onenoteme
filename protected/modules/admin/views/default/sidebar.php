@@ -1,6 +1,7 @@
 <h4>段子管理</h4>
 <ul>
-    <li><a href="<?php echo url('admin/post/verify');?>" target="main">审核</a></li>
+    <li><a href="<?php echo url('admin/post/weibo');?>" target="main">采集审核</a></li>
+    <li><a href="<?php echo url('admin/post/verify');?>" target="main">投稿审核</a></li>
     <li><a href="<?php echo url('admin/post/today');?>" target="main">今天</a></li>
     <li><a href="<?php echo url('admin/post/list');?>" target="main">列表</a></li>
     <li><a href="<?php echo url('admin/post/search');?>" target="main">搜索</a></li>

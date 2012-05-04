@@ -7,9 +7,9 @@
  * @property integer $id
  * @property integer $channel_id
  * @property integer $category_id
- * @property string $pic
- * @property string $big_pic
- * @property string $thumbnail
+ * @property string $thumbnail_pic
+ * @property string $bmiddle_pic
+ * @property string $original_pic
  * @property integer $create_time
  * @property string $content
  * @property string $video_url
@@ -31,7 +31,7 @@ class PostTemp extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{post_temp}}';
+		return TABLE_NAME_POST_TEMP;
 	}
 
 	/**
@@ -43,9 +43,8 @@ class PostTemp extends CActiveRecord
 		// will receive user inputs.
 		return array(
 		    array('content', 'required'),
-		    array('content', 'unique'),
 			array('channel_id, category_id, create_time', 'numerical', 'integerOnly'=>true),
-			array('pic, big_pic, thumbnail', 'length', 'max'=>250),
+			array('thumbnail_pic, bmiddle_pic, original_pic', 'length', 'max'=>250),
 			array('content, video_url', 'safe'),
 		);
 	}

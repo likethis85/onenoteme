@@ -1,6 +1,57 @@
 <?php
 class PostController extends AdminController
 {
+    public function actionWeibo()
+    {
+        $pageSize = 20;
+        $criteria = new CDbCriteria();
+        
+        $count = PostTemp::model()->count($criteria);
+        $pages = new CPagination($count);
+        $pages->setPageSize($pageSize);
+        $pages->applyLimit($criteria);
+        $criteria->order = 't.id desc';
+        
+        $models = PostTemp::model()->findAll($criteria);
+        $data = array(
+            'pages' => $pages,
+            'models' => $models,
+        );
+        $this->render('weibo', $data);
+    }
+    
+    public function actionWeiboVerify($id, $callback)
+    {
+        $id = (int)$id;
+        $temp = PostTemp::model()->findByPk($id);
+        if ($temp === null)
+            $data = 1;
+        else {
+            try {
+                $post = new Post();
+                $post->content = $temp->content;
+                $post->thumbnail = $temp->thumbnail_pic;
+                $post->pic = $temp->bmiddle_pic;
+                $post->big_pic = $temp->original_pic;
+                $result = $post->save();print_r($post->getErrors());
+                if ($result)
+                    $temp->delete();
+                $data = (int)$result;
+            }
+            catch (Exception $e) {
+                $data = 0;
+            }
+        }
+        CDBase::jsonp($callback, $data);
+    }
+    
+    public function actionWeiboDelete($id, $callback)
+    {
+        $id = (int)$id;
+        $result = PostTemp::model()->findByPk($id)->delete();
+        CDBase::jsonp($callback, (int)$result);
+    }
+    
     public function actionVerify()
     {
         $criteria = new CDbCriteria();

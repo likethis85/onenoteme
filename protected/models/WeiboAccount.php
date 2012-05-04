@@ -4,8 +4,7 @@
  * This is the model class for table "{{weibo_account}}".
  *
  * The followings are the available columns in table '{{weibo_account}}':
- * @property string $id
- * @property string $user_id
+ * @property integer $id
  * @property string $display_name
  * @property integer $last_time
  * @property string $last_pid
@@ -38,13 +37,9 @@ class WeiboAccount extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('last_time', 'numerical', 'integerOnly'=>true),
-			array('user_id', 'length', 'max'=>20),
+			array('last_time, last_pid', 'numerical', 'integerOnly'=>true),
 			array('display_name', 'length', 'max'=>250),
-			array('last_pid', 'length', 'max'=>19),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, user_id, display_name, last_time, last_pid', 'safe', 'on'=>'search'),
+			array('last_pid', 'length', 'max'=>30),
 		);
 	}
 
@@ -66,7 +61,6 @@ class WeiboAccount extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'user_id' => 'User',
 			'display_name' => 'Display Name',
 			'last_time' => 'Last Time',
 			'last_pid' => 'Last Pid',

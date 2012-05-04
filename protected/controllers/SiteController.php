@@ -100,9 +100,10 @@ class SiteController extends Controller
         $params = array(
                 'source' => $appKey,
                 'screen_name' => '这个漫画很邪恶',
-                'count' => 10,
+                'count' => 2,
                 'trim_user' => 1,
                 'page' => $page,
+                'since_id' => '3442119500893413',
         );
         $fetch = new CdCurl();
         $fetch->ssl()->get($url, $params);
@@ -112,7 +113,7 @@ class SiteController extends Controller
 //         echo $fetch->error();
         echo '<br />';
         $rows = json_decode($jsonData, true);
-        foreach ((array)$rows['statuses'] as $row) {
+        foreach ((array)$rows['statuses'] as $row) {print_r($row);
             if (array_key_exists('retweeted_status', $row))
                 $row = $row['retweeted_status'];
             
@@ -131,9 +132,9 @@ class SiteController extends Controller
             unset($temp);
         }
         
-        foreach ((array)$data as $row) {
+        foreach ((array)$data as $index => $row) {
             echo '<dl style="width:600px; font-size:14px; border:1px solid #DFDFDF; padding:15px;">';
-            echo '<dt style="line-height:22px; color:#666; margin-bottom:10px;">' . $row['text'] . '</dt>';
+            echo '<dt style="line-height:22px; color:#666; margin-bottom:10px;">' . $index . ' - ' . $row['text'] . '</dt>';
             if (array_key_exists('thumbnail_pic', $row))
                 echo '<dd><a href="' . $row['bmiddle_pic'] . '"><img src="' . $row['thumbnail_pic'] . '" /></a></dd>';
             
