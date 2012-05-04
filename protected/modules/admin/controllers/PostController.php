@@ -31,10 +31,12 @@ class PostController extends AdminController
             try {
                 $post = new Post();
                 $post->content = $temp->content;
-                $post->thumbnail = $temp->thumbnail_pic;
-                $post->pic = $temp->bmiddle_pic;
-                $post->big_pic = $temp->original_pic;
                 $post->channel_id = $channel_id;
+                if ($channel_id == CHANNEL_LENGTU || $channel_id == CHANNEL_GIRL) {
+                    $post->thumbnail = $temp->thumbnail_pic;
+                    $post->pic = $temp->bmiddle_pic;
+                    $post->big_pic = $temp->original_pic;
+                }
                 $result = $post->save();
                 if ($result)
                     $temp->delete();
