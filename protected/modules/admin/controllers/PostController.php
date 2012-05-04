@@ -33,7 +33,7 @@ class PostController extends AdminController
                 $post->thumbnail = $temp->thumbnail_pic;
                 $post->pic = $temp->bmiddle_pic;
                 $post->big_pic = $temp->original_pic;
-                $result = $post->save();
+                $result = $post->save();print_r($post->getErrors());
                 if ($result)
                     $temp->delete();
                 $data = (int)$result;
