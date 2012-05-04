@@ -18,6 +18,8 @@ $channels = array(
 // 以下是表名
 define('TABLE_NAME_CATEGORY', '{{category}}');
 define('TABLE_NAME_POST', '{{post}}');
+define('TABLE_NAME_POST_TEMP', '{{post_temp}}');
+define('TABLE_NAME_WEIBO_ACCOUNT', '{{weibo_account}}');
 define('TABLE_NAME_USER', '{{user}}');
 define('TABLE_NAME_COMMENT', '{{comment}}');
 define('TABLE_NAME_DEVICE', '{{device}}');

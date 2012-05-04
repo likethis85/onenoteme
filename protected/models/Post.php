@@ -8,7 +8,7 @@
  * @property integer $channel_id
  * @property integer $category_id
  * @property string $title
- * @property string $content
+ * @property string $thumbnail
  * @property string $pic
  * @property string $big_pic
  * @property integer $create_time
@@ -19,6 +19,8 @@
  * @property string $user_name
  * @property integer $tags
  * @property integer $state
+ * @property string $content
+ * @property string $video_url
  */
 class Post extends CActiveRecord
 {
@@ -58,8 +60,8 @@ class Post extends CActiveRecord
 			array('channel_id, category_id, up_score, down_score, comment_nums, state, create_time, user_id', 'numerical', 'integerOnly'=>true),
 			array('title, tags', 'length', 'max'=>200),
 			array('user_name', 'length', 'max'=>50),
-			array('pic, big_pic', 'length', 'max'=>250),
-			array('content', 'safe'),
+			array('thumbnail, pic, big_pic', 'length', 'max'=>250),
+			array('content, video_url', 'safe'),
 			array('pic', 'file', 'allowEmpty'=>true),
 			array('captcha', 'captcha', 'captchaAction'=>'captcha', 'on'=>'insert'),
 		);
@@ -87,7 +89,7 @@ class Post extends CActiveRecord
 		    'channel_id' => '频道',
 			'category_id' => '分类',
 			'title' => '标题',
-			'content' => '内容',
+		    'thumbnail' => '缩略图',
 		    'pic' => '图片',
 		    'big_pic' => '原图',
 			'create_time' => '发布时间',
@@ -98,6 +100,8 @@ class Post extends CActiveRecord
 		    'user_name' => '名字',
 			'state' => '状态',
 		    'tags' => '标签',
+			'content' => '内容',
+		    'video_url' => '视频URL',
 		);
 	}
 
