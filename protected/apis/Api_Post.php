@@ -47,7 +47,8 @@ class Api_Post extends ApiBase
             $row['create_time_text'] = date(param('formatShortDateTime'), $row['create_time']);
         
         if (isset($row['thumbnail']) || isset($row['pic'])) {
-            $pic = $row['thumbnail'];
+            // 这里应该是thumbnail，客户端全部使用的是pic,若换成thumbnail，点击图片后会非常不清楚，所以暂时不使用thumbnail
+            $pic = $row['pic'];
             if (empty($pic))
                 $pic = $row['pic'];
             
