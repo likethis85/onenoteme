@@ -30,3 +30,4 @@ define('TABLE_NAME_MOVIE_SETS', '{{movie_sets}}');
 define('TABLE_NAME_MOVIE_FAVORITE', '{{movie_favorite}}');
 define('TABLE_NAME_MOVIE_SPECIAL', '{{movie_special}}');
 define('TABLE_NAME_SPECIAL2MOVIE', '{{special2movie}}');
+define('TABLE_NAME_POST_FAVORITE', '{{post_favorite}}');

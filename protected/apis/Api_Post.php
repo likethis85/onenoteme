@@ -32,7 +32,7 @@ class Api_Post extends ApiBase
         }
     }
     
-    private static function formatRow($row)
+    public static function formatRow($row)
     {
         if (isset($row['comment_nums']))
             $row['visit_count_text'] = '阅:' . $row['comment_nums'];
@@ -83,7 +83,7 @@ class Api_Post extends ApiBase
         return $row;
     }
     
-    private static function formateRows($rows)
+    public static function formatRows($rows)
     {
         if (empty($rows))
             return array();
@@ -279,7 +279,7 @@ class Api_Post extends ApiBase
                     break;
             }
             
-            $rows = self::formateRows($rows);
+            $rows = self::formatRows($rows);
             $rows = array_values($rows);
             
             return $rows;
