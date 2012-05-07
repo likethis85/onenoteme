@@ -29,8 +29,10 @@ class PostController extends AdminController
             $data = 1;
         else {
             try {
+                $content = trim($_POST['weibotext']);
+                $content = empty($content) ? $temp->content : $content;
                 $post = new Post();
-                $post->content = $temp->content;
+                $post->content = $content;
                 $post->channel_id = $channel_id;
                 if ($channel_id == CHANNEL_LENGTU || $channel_id == CHANNEL_GIRL) {
                     $post->thumbnail = $temp->thumbnail_pic;

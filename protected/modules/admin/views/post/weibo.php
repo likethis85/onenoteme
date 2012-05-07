@@ -9,7 +9,7 @@
     <tbody>
         <?php foreach ((array)$models as $model):?>
         <tr>
-            <td>
+            <td class="weibo-text">
                 <p><?php echo $model->content;?></p>
                 <?php echo l(image($model->thumbnail_pic, ''), $model->bmiddle_pic, array('target'=>'_blank'));?>
             </td>
@@ -31,16 +31,27 @@
 
 <script type="text/javascript">
 $(function(){
+    $(document).on('dblclick', '.weibo-text', function(event){
+        event.preventDefault();
+        var p = $(this).find('p');
+        var html = '<textarea name="newtext">' + $.trim(p.html()) + '</textarea>';
+        p.html(html);
+        p.find('textarea').height(p.height() + 30);
+    });
+	
 	$(document).on('click', '.row-verify, .row-delete', function(event){
 		event.preventDefault();
 		
 		var tthis = $(this);
-		var jqXhr = $.ajax({
+		var jqXhrOptions = {
 			url: tthis.attr('href'),
 			type: 'post',
 			dataType: 'jsonp',
-			cache: false,
-		});
+			cache: false
+		};
+		if (tthis.parents('tr').find('.weibo-text textarea').length > 0)
+			jqXhrOptions.data = 'weibotext=' + tthis.parents('tr').find('.weibo-text textarea').val();
+		var jqXhr = $.ajax(jqXhrOptions);
 		jqXhr.done(function(data){
 			if (data == 1)
 				tthis.parents('tr').remove();
