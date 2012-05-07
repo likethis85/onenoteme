@@ -46,8 +46,11 @@ class Api_Post extends ApiBase
         if (isset($row['create_time']) && $row['create_time'])
             $row['create_time_text'] = date(param('formatShortDateTime'), $row['create_time']);
         
-        if (isset($row['pic'])) {
-            $pic = $row['pic'];
+        if (isset($row['thumbnail']) || isset($row['pic'])) {
+            $pic = $row['thumbnail'];
+            if (empty($pic))
+                $pic = $row['pic'];
+            
             if (empty($pic))
                 $thumbnail = '';
             else {
@@ -398,6 +401,34 @@ class Api_Post extends ApiBase
     	}
     }
     
+    public function tofavorite()
+    {
+//         self::requirePost();
+        $this->requiredParams(array('user_id', 'token', 'post_id'));
+        $params = $this->filterParams(array('user_id', 'token', 'post_id'));
+        $userID = (int)$params['user_id'];
+        $postID = (int)$params['post_id'];
+        $cmd = app()->getDb()->createCommand()
+            ->select('id')
+            ->from(TABLE_NAME_POST_FAVORITE)
+            ->where('user_id = :userid and post_id = :postid', array(':userid' => $userID, ':postid' => $postID));
+
+        $row = $cmd->queryRow();
+        if ($row === false) {
+            $columns = array(
+                'user_id' => $userID,
+                'post_id' => $postID,
+            );
+            $result = app()->getDb()->createCommand()
+                ->insert(TABLE_NAME_POST_FAVORITE, $columns);
+            $errno = (int)($result == 0);
+        }
+        else
+            $errno = -1;
+
+        return $errno;
+    }
+    
     private function test($channelID)
     {
         $agent = strtolower($_SERVER['User-Agent']);
@@ -424,7 +455,6 @@ class Api_Post extends ApiBase
         shuffle($rows);
         return $rows;
     }
-
 
     private static function updateLastRequestTime($token)
     {

@@ -112,19 +112,20 @@ class Api_User extends ApiBase
     
     public function favorite()
     {
-//         $this->requiredParams(array('email', 'token'));
+        $this->requiredParams(array('email', 'token'));
         $params = $this->filterParams(array('email', 'token', 'fields', 'maxid'));
         
-//         $user = self::checkUserAccess($params['email'], $params['token']);
+        $user = self::checkUserAccess($params['email'], $params['token']);
         
         if ($user === false)
             throw new ApiException('$token 验证失败', ApiError::USER_TOKEN_ERROR);
         else {
-            $uid = 1;//(int)$user['id'];
+            $uid = (int)$user['id'];
             $cmd = app()->getDb()->createCommand()
                 ->select('post_id')
                 ->from(TABLE_NAME_POST_FAVORITE)
-                ->where('user_id = :userid', array(':userid' => $uid));
+                ->where('user_id = :userid', array(':userid' => $uid))
+                ->order('id desc');
             
             $ids = $cmd->queryColumn();
             
@@ -143,7 +144,6 @@ class Api_User extends ApiBase
                 ->select($fields)
                 ->from(TABLE_NAME_POST)
                 ->limit($count)
-                ->order('id desc')
                 ->where($conditions, $conditionParams);
             
             $rows = $cmd->queryAll();
@@ -153,6 +153,7 @@ class Api_User extends ApiBase
         }
             
     }
+    
 }
 
 
