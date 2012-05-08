@@ -8,9 +8,9 @@
 
 class Api_Post extends ApiBase
 {
-    const DEFAULT_TIMELINE_MAX_COUNT = 50;
-    const DEFAULT_HISTORY_MAX_COUNT = 50;
-    const DEFAULT_RANDOM_MAX_COUNT = 15;
+    const DEFAULT_TIMELINE_MAX_COUNT = 35;
+    const DEFAULT_HISTORY_MAX_COUNT = 35;
+    const DEFAULT_RANDOM_MAX_COUNT = 12;
     
     public function show()
     {
