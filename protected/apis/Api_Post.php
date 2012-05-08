@@ -60,8 +60,6 @@ class Api_Post extends ApiBase
                     $smallPic = fbu($smallPic);
                     $smallPic = (filter_var($smallPic, FILTER_VALIDATE_URL) === false) ? $smallPic : '';
                 }
-                else
-                    $smallPic = '';
             }
             $row['small_pic'] = $smallPic;
             unset($row['thumbnail']);
@@ -96,8 +94,6 @@ class Api_Post extends ApiBase
                     $middlePic = fbu($middlePic);
                     $middlePic = (filter_var($middlePic, FILTER_VALIDATE_URL) === false) ? $middlePic : '';
                 }
-                else
-                    $middlePic = '';
             }
             if (empty($middlePic))
                 $middlePic = $smallPic;
