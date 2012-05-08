@@ -34,7 +34,7 @@ class Api_Post extends ApiBase
     
     public static function formatRow($row)
     {
-        if (isset($row['visit_nums']))
+        if (isset($row['comment_nums']))
             $row['visit_count_text'] = '阅:' . $row['comment_nums'];
         if (isset($row['comment_nums']))
             $row['comment_count_text'] = '评:' . $row['comment_nums'];
@@ -45,25 +45,6 @@ class Api_Post extends ApiBase
         
         if (isset($row['create_time']) && $row['create_time'])
             $row['create_time_text'] = date(param('formatShortDateTime'), $row['create_time']);
-        
-        if (empty($row['video_url']))
-            $row['video_url'] = '';
-        
-        if (isset($row['thumbnail'])) {
-            // 这里应该是thumbnail，客户端全部使用的是pic,若换成thumbnail，点击图片后会非常不清楚，所以暂时不使用thumbnail
-            $smallPic = $row['thumbnail'];
-        
-            if (empty($smallPic))
-                $smallPic = '';
-            else {
-                if (filter_var($smallPic, FILTER_VALIDATE_URL) === false){
-                    $smallPic = fbu($smallPic);
-                    $smallPic = (filter_var($smallPic, FILTER_VALIDATE_URL) === false) ? $smallPic : '';
-                }
-            }
-            $row['small_pic'] = $smallPic;
-            unset($row['thumbnail']);
-        }
         
         if (isset($row['thumbnail']) || isset($row['pic'])) {
             // 这里应该是thumbnail，客户端全部使用的是pic,若换成thumbnail，点击图片后会非常不清楚，所以暂时不使用thumbnail
@@ -85,22 +66,6 @@ class Api_Post extends ApiBase
             unset($row['pic']);
         }
         
-        if (isset($row['pic'])) {
-            $middlePic = $row['pic'];
-            if (empty($middlePic))
-                $middlePic = '';
-            else {
-                if (filter_var($middlePic, FILTER_VALIDATE_URL) === false){
-                    $middlePic = fbu($middlePic);
-                    $middlePic = (filter_var($middlePic, FILTER_VALIDATE_URL) === false) ? $middlePic : '';
-                }
-            }
-            if (empty($middlePic))
-                $middlePic = $smallPic;
-            $row['middle_pic'] = $middlePic;
-            unset($row['pic']);
-        }
-        
         if (isset($row['big_pic'])) {
             $bigPic = $row['big_pic'];
             if (empty($bigPic))
@@ -114,7 +79,7 @@ class Api_Post extends ApiBase
                     $originalPic = $pic;
             }
             if (empty($originalPic))
-                $originalPic = $middlePic;
+                $originalPic = $thumbnail;
             $row['original_pic'] = $originalPic;
             unset($row['big_pic']);
         }
