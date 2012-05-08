@@ -49,6 +49,24 @@ class Api_Post extends ApiBase
         if (empty($row['video_url']))
             $row['video_url'] = '';
         
+        if (isset($row['thumbnail'])) {
+            // 这里应该是thumbnail，客户端全部使用的是pic,若换成thumbnail，点击图片后会非常不清楚，所以暂时不使用thumbnail
+            $smallPic = $row['thumbnail'];
+        
+            if (empty($smallPic))
+                $smallPic = '';
+            else {
+                if (filter_var($smallPic, FILTER_VALIDATE_URL) === false){
+                    $smallPic = fbu($smallPic);
+                    $smallPic = (filter_var($smallPic, FILTER_VALIDATE_URL) === false) ? $smallPic : '';
+                }
+                else
+                    $smallPic = '';
+            }
+            $row['small_pic'] = $smallPic;
+            unset($row['thumbnail']);
+        }
+        
         if (isset($row['thumbnail']) || isset($row['pic'])) {
             // 这里应该是thumbnail，客户端全部使用的是pic,若换成thumbnail，点击图片后会非常不清楚，所以暂时不使用thumbnail
             $pic = $row['pic'];
