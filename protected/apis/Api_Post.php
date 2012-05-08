@@ -34,7 +34,7 @@ class Api_Post extends ApiBase
     
     public static function formatRow($row)
     {
-        if (isset($row['comment_nums']))
+        if (isset($row['visit_nums']))
             $row['visit_count_text'] = '阅:' . $row['comment_nums'];
         if (isset($row['comment_nums']))
             $row['comment_count_text'] = '评:' . $row['comment_nums'];
@@ -45,6 +45,9 @@ class Api_Post extends ApiBase
         
         if (isset($row['create_time']) && $row['create_time'])
             $row['create_time_text'] = date(param('formatShortDateTime'), $row['create_time']);
+        
+        if (empty($row['video_url']))
+            $row['video_url'] = '';
         
         if (isset($row['thumbnail']) || isset($row['pic'])) {
             // 这里应该是thumbnail，客户端全部使用的是pic,若换成thumbnail，点击图片后会非常不清楚，所以暂时不使用thumbnail
