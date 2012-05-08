@@ -34,6 +34,7 @@ class Api_Post extends ApiBase
     
     public static function formatRow($row)
     {
+        unset($row['video_ur']);
         if (isset($row['comment_nums']))
             $row['visit_count_text'] = '阅:' . $row['comment_nums'];
         if (isset($row['comment_nums']))
