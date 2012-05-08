@@ -87,6 +87,24 @@ class Api_Post extends ApiBase
             unset($row['pic']);
         }
         
+        if (isset($row['pic'])) {
+            $middlePic = $row['pic'];
+            if (empty($middlePic))
+                $middlePic = '';
+            else {
+                if (filter_var($middlePic, FILTER_VALIDATE_URL) === false){
+                    $middlePic = fbu($middlePic);
+                    $middlePic = (filter_var($middlePic, FILTER_VALIDATE_URL) === false) ? $middlePic : '';
+                }
+                else
+                    $middlePic = '';
+            }
+            if (empty($middlePic))
+                $middlePic = $smallPic;
+            $row['middle_pic'] = $middlePic;
+            unset($row['pic']);
+        }
+        
         if (isset($row['big_pic'])) {
             $bigPic = $row['big_pic'];
             if (empty($bigPic))
@@ -100,7 +118,7 @@ class Api_Post extends ApiBase
                     $originalPic = $pic;
             }
             if (empty($originalPic))
-                $originalPic = $thumbnail;
+                $originalPic = $middlePic;
             $row['original_pic'] = $originalPic;
             unset($row['big_pic']);
         }
