@@ -13,6 +13,8 @@
  * @property integer $create_time
  * @property string $content
  * @property string $video_url
+ * @property integer $repost_count
+ * @property integer $comment_count
  */
 class PostTemp extends CActiveRecord
 {
@@ -43,7 +45,7 @@ class PostTemp extends CActiveRecord
 		// will receive user inputs.
 		return array(
 		    array('content', 'required'),
-			array('channel_id, category_id, create_time', 'numerical', 'integerOnly'=>true),
+			array('channel_id, category_id, create_time, repost_count, comment_count', 'numerical', 'integerOnly'=>true),
 			array('thumbnail_pic, bmiddle_pic, original_pic', 'length', 'max'=>250),
 			array('content, video_url', 'safe'),
 		);
