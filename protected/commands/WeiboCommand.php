@@ -1,8 +1,13 @@
 <?php
 class WeiboCommand extends CConsoleCommand
 {
+    const ERROR_WEIBO_EXIST = -1;
+    
     const ACCOUNT_SLEEP_TIME = 30;
     const WEIBO_ROWS_COUNT = 50;
+    
+    const APP_KEY = '456860706';
+    const APP_SECERET = '19168ffef668231aa22f74683d3d18e7';
     
     public function actionCollect()
     {
@@ -19,11 +24,9 @@ class WeiboCommand extends CConsoleCommand
     private function collectOnce($account, $since_id)
     {
         $since_id = $since_id ? $since_id : 0;
-        $appKey = '456860706';
-        $appSecert = '19168ffef668231aa22f74683d3d18e7';
         $url = 'https://api.weibo.com/2/statuses/user_timeline.json';
         $params = array(
-            'source' => $appKey,
+            'source' => self::APP_KEY,
             'screen_name' => $account,
             'since_id' => $since_id,
             'count' => self::WEIBO_ROWS_COUNT,
@@ -73,7 +76,15 @@ class WeiboCommand extends CConsoleCommand
     
     private static function saveRow($row)
     {
-        $temp['id'] = $row['idstr'];
+        $text = date('Y-m-d H:i:s', time()) . ' - ID: ' . $idstr . ' - ';
+        
+        $idstr = strip_tags(trim($row['idstr']));
+        $exist = self::checkWeiboExist($idstr);
+        if ($exist) {
+            $text .= "This row is exist\n";
+            return self::ERROR_WEIBO_EXIST;
+        }
+        
         $text = $row['text'];
         $text = preg_replace('/(#.*?#)|(（.*?）)|(\(.*?\))|(【.*?】)|(http:\/\/t\.cn\/\w+)|(@.+?\s{1})/is', '', $text);
         if (array_key_exists('thumbnail_pic', $row)) {
@@ -90,11 +101,12 @@ class WeiboCommand extends CConsoleCommand
         $model->attributes = $temp;
         $result = $model->save();
         
-        $text = date('Y-m-d H:i:s', time()) . ' - ID: ' . $row['idstr'] . ' - ';
         if ($model->hasErrors())
             $text .= join('; ', $model->getErrors());
-        else
+        else {
+            self::saveWeiboID($idstr);
             $text .= 'Save Success';
+        }
         
         $text .= "\n";
         echo $text;
@@ -122,6 +134,26 @@ class WeiboCommand extends CConsoleCommand
         $result = app()->getDb()->createCommand()
             ->update(TABLE_NAME_WEIBO_ACCOUNT, $columns, 'display_name = :name', array(':name' => $account));
         
+    }
+    
+    private static function checkWeiboExist($id)
+    {
+        $count = app()->getDb()->createCommand()
+            ->select('count(*)')
+            ->from(TABLE_NAME_WEIBO_ID)
+            ->where('wid = :id', array(':id'=>$id))
+            ->queryScalar();
+        
+        return $count > 0;
+    }
+    
+    private static function saveWeiboID($idstr)
+    {
+        $columns = array('wid' => $idstr);
+        $result = app()->getDb()->createCommand()
+            ->insert(TABLE_NAME_WEIBO_ID, $columns);
+        
+        return $result > 0;
     }
     
     public function actionPost()
