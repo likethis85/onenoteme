@@ -3,8 +3,7 @@
     <div class="post-item">
     	<div class="post-user"><?php echo $model->PostUserName . '&nbsp;' . $model->createTime;?></div>
         <div class="item-detail">
-            <h2 class="post-item-title"><a href="<?php echo aurl('post/show', array('id'=>$model->id));?>" target="_blank" title="新窗口中查看段子"><?php echo h($model->title);?></a></h2>
-            <a class="item-link" href="<?php echo aurl('post/show', array('id'=>$model->id));?>" target="_blank" title="新窗口中查看段子">: :</a>
+            <a class="item-link" href="<?php echo aurl('post/show', array('id'=>$model->id));?>" target="_blank" title="新窗口中查看段子：<?php echo h($model->title);?>">: :</a>
             <span class="item-content">
                 <?php echo $model->content;?>
             </span>
