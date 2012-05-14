@@ -74,7 +74,7 @@ class Api_User extends ApiBase
         $this->requiredParams(array('username', 'password'));
         $params = $this->filterParams(array('username', 'password'));
         
-        $user = new User();
+        $user = new User('apiinsert');
         $user->password = $params['password'];
         $user->email = $params['username'];
         $user->name = $params['username'];
