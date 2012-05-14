@@ -88,7 +88,7 @@ class Api_User extends ApiBase
             	return array('error'=>'OK', 'userinfo'=>$data);
         	}
         	else
-        	    return array('error'=>'FAIL');
+        	    return array('error'=>'FAIL', 'message'=>CHtml::errorSummary($user));
         }
         catch (ApiException $e) {
         	throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
