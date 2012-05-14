@@ -89,7 +89,7 @@ class Api_User extends ApiBase
         	}
         	else {
         	    $messages = $user->getErrors();
-        	    $message = current($messages[0]);
+        	    $message = join(';', current($messages));
         	    return array('error'=>'FAIL', 'message'=>$message);
         	}
         }
