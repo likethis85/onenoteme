@@ -75,7 +75,7 @@ class Api_User extends ApiBase
         $params = $this->filterParams(array('username', 'password'));
         
         $user = new User();
-        $user->password = md5($params['password']);
+        $user->password = $params['password'];
         $user->email = $params['username'];
         $user->name = $params['username'];
         $user->token = self::makeToken($user->email);
@@ -85,10 +85,10 @@ class Api_User extends ApiBase
         	    $data = $user->attributes;
             	unset($user);
             	unset($data['password'], $data['create_ip']);
-            	return $data;
+            	return array('error'=>'OK', 'userinfo'=>$data);
         	}
         	else
-        	    return 0;
+        	    return array('error'=>'FAIL');
         }
         catch (ApiException $e) {
         	throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
