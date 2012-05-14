@@ -71,13 +71,13 @@ class Api_User extends ApiBase
     public function create()
     {
         self::requirePost();
-        $this->requiredParams(array('email', 'password'));
-        $params = $this->filterParams(array('email', 'password'));
+        $this->requiredParams(array('username', 'password'));
+        $params = $this->filterParams(array('username', 'password'));
         
         $user = new User();
         $user->password = md5($params['password']);
-        $user->email = $params['email'];
-        $user->name = $params['email'];
+        $user->email = $params['username'];
+        $user->name = $params['username'];
         $user->token = self::makeToken($user->email);
         try {
         	if ($user->save()) {
