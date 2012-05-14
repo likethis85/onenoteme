@@ -78,6 +78,7 @@ class Api_User extends ApiBase
         $user->password = $params['password'];
         $user->email = $params['username'];
         $user->name = substr($params['username'], 0, strpos($params['username'], '@'));
+        $user->state = User::STATE_ENABLED;
         $user->token = self::makeToken($user->email);
         try {
         	if ($user->save()) {
