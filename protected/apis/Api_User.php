@@ -33,7 +33,7 @@ class Api_User extends ApiBase
         	$data = $user->attributes;
         	unset($user);
         	unset($data['password'], $data['create_ip']);
-        	return $data;
+        	return array('error'=>'OK', 'userinfo'=>$data);
         }
         else {
         	// @todo 此处处理错误
