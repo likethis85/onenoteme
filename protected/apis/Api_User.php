@@ -75,7 +75,7 @@ class Api_User extends ApiBase
         $params = $this->filterParams(array('username', 'password'));
         
         $user = new User('apiinsert');
-        $user->password = $params['password'];
+        $user->password = md5($params['password']);
         $user->email = $params['username'];
         $user->name = $params['username'];
         $user->token = self::makeToken($user->email);
