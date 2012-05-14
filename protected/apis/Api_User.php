@@ -87,8 +87,11 @@ class Api_User extends ApiBase
             	unset($data['password'], $data['create_ip']);
             	return array('error'=>'OK', 'userinfo'=>$data);
         	}
-        	else
-        	    return array('error'=>'FAIL', 'message'=>CHtml::errorSummary($user));
+        	else {
+        	    $messages = $user->getErrors();
+        	    $message = current($messages[0]);
+        	    return array('error'=>'FAIL', 'message'=>$message);
+        	}
         }
         catch (ApiException $e) {
         	throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
