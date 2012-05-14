@@ -90,7 +90,7 @@ class Api_User extends ApiBase
         	else {
         	    $messages = $user->getErrors();
         	    $message = join(';', current($messages));
-        	    return array('error'=>'FAIL', 'message'=>$message);
+        	    return array('error'=>'FAIL', 'message'=>$message.var_export($messages, true));
         	}
         }
         catch (ApiException $e) {
