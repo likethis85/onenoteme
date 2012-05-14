@@ -37,7 +37,7 @@ class Api_User extends ApiBase
         }
         else {
         	// @todo 此处处理错误
-        	throw new ApiException('用户登录错误', ApiError::USER_NOT_EXIST);
+        	return array('error'=>'FAIL');
         }
     }
     
