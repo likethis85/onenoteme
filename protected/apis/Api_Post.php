@@ -457,7 +457,8 @@ class Api_Post extends ApiBase
         $cmd = app()->getDb()->createCommand()
             ->select($fields)
             ->from(TABLE_NAME_POST)
-            ->limit($count);
+            ->limit($count)
+            ->where($conditions, $conditionParams);
 
         $rows = $cmd->queryAll();
         $rows = self::formatRows($rows);
