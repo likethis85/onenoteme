@@ -450,12 +450,13 @@ class Api_Post extends ApiBase
                 ->where('and', array('user_id = :userid', 'post_id = :postid'), array(':userid' => $uid, ':postid' => $maxid))
                 ->queryScalar();
         }
-        
+        echo $rowID;
         $cmd = app()->getDb()->createCommand()
             ->select('post_id')
             ->from(TABLE_NAME_POST_FAVORITE)
             ->order('id desc')
             ->limit($count);
+        
         if ($rowID)
             $cmd->where('and', array('user_id = :userid', 'id < :maxid'), array(':userid' => $uid, ':maxid' => $rowID));
         else
