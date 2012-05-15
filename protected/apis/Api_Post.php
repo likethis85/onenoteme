@@ -435,17 +435,31 @@ class Api_Post extends ApiBase
     {
         $count = 30;
         
-        $this->requiredParams(array('userid'));
-        $params = $this->filterParams(array('userid', 'email', 'token', 'fields'));
+        $this->requiredParams(array('userid', 'maxid'));
+        $params = $this->filterParams(array('userid', 'email', 'token', 'fields', 'maxid'));
     
     
         $uid = (int)$params['userid'];
+        $maxid = (int)$params['maxid'];
+        
+        
+        if ($maxid > 0) {
+            $rowID = app()->getDb()->createCommand()
+                ->select('id')
+                ->from(TABLE_NAME_POST_FAVORITE)
+                ->where('and', array('user_id = :userid', 'post_id = :postid'), array(':userid' => $uid, ':postid' => $maxid))
+                ->queryScalar();
+        }
+        
         $cmd = app()->getDb()->createCommand()
             ->select('post_id')
             ->from(TABLE_NAME_POST_FAVORITE)
-            ->where('user_id = :userid', array(':userid' => $uid))
             ->order('id desc')
             ->limit($count);
+        if ($rowID)
+            $cmd->where('and', array('user_id = :userid', 'id < :maxid'), array(':userid' => $uid, ':maxid' => $rowID));
+        else
+            $cmd->where('user_id = :userid', array(':userid' => $uid));
 
         $ids = $cmd->queryColumn();
 
