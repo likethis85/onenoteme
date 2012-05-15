@@ -430,6 +430,45 @@ class Api_Post extends ApiBase
 
         return $errno;
     }
+
+    public function favorite()
+    {
+        $this->requiredParams(array('userid'));
+        $params = $this->filterParams(array('userid', 'email', 'token', 'fields', 'maxid'));
+    
+    
+        $uid = (int)$params['userid'];
+        $cmd = app()->getDb()->createCommand()
+            ->select('post_id')
+            ->from(TABLE_NAME_POST_FAVORITE)
+            ->where('user_id = :userid', array(':userid' => $uid))
+            ->order('id desc');
+
+        $ids = $cmd->queryColumn();
+
+        if (empty($ids)) return array();
+
+        $count = 30;
+        $maxid = (int)$params['maxid'];
+        $fields = empty($params['fields']) ? '*' : $params['fields'];
+        $conditions = array('and', array('in', 'id', $ids), 'state = :enabled');
+        $conditionParams = array(':enabled' => Post::STATE_ENABLED);
+        if ($maxid > 0) {
+            $conditions[] = 'id < :maxid';
+            $conditionParams[':maxid'] = $maxid;
+        }
+        $cmd = app()->getDb()->createCommand()
+            ->select($fields)
+            ->from(TABLE_NAME_POST)
+            ->limit($count)
+            ->where($conditions, $conditionParams);
+
+        $rows = $cmd->queryAll();
+        $rows = self::formatRows($rows);
+
+        return $rows;
+    
+    }
     
     private function test($channelID)
     {
