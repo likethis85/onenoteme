@@ -444,13 +444,16 @@ class Api_Post extends ApiBase
         
         
         if ($maxid > 0) {
-            $rowID = app()->getDb()->createCommand()
+            $cmd = app()->getDb()->createCommand()
                 ->select('id')
                 ->from(TABLE_NAME_POST_FAVORITE)
-                ->where('and', array('user_id = :userid', 'post_id = :postid'), array(':userid' => $uid, ':postid' => $maxid))
-                ->queryScalar();
+                ->where('and', array('user_id = :userid', 'post_id = :postid'), array(':userid' => $uid, ':postid' => $maxid));
+                
+            echo $cmd->text;
+            $rowID = $cmd->queryScalar();
+            var_dump($rowID);
         }
-        echo $rowID;
+        
         $cmd = app()->getDb()->createCommand()
             ->select('post_id')
             ->from(TABLE_NAME_POST_FAVORITE)
