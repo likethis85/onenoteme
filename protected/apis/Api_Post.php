@@ -447,11 +447,11 @@ class Api_Post extends ApiBase
             $cmd = app()->getDb()->createCommand()
                 ->select('id')
                 ->from(TABLE_NAME_POST_FAVORITE)
-                ->where('and', array('user_id = :userid', 'post_id = :postid'), array(':userid' => $uid, ':postid' => $maxid));
+                ->where(array('and', 'user_id = :userid', 'post_id = :postid'), array(':userid' => $uid, ':postid' => $maxid));
                 
-            echo $cmd->text;
+//             echo $cmd->text;
             $rowID = $cmd->queryScalar();
-            var_dump($rowID);
+//             var_dump($rowID);
         }
         
         $cmd = app()->getDb()->createCommand()
@@ -461,7 +461,7 @@ class Api_Post extends ApiBase
             ->limit($count);
         
         if ($rowID)
-            $cmd->where('and', array('user_id = :userid', 'id < :maxid'), array(':userid' => $uid, ':maxid' => $rowID));
+            $cmd->where(array('and', 'user_id = :userid', 'id < :maxid'), array(':userid' => $uid, ':maxid' => $rowID));
         else
             $cmd->where('user_id = :userid', array(':userid' => $uid));
 
