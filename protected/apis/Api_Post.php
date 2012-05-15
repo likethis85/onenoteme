@@ -433,8 +433,10 @@ class Api_Post extends ApiBase
 
     public function favorite()
     {
+        $count = 30;
+        
         $this->requiredParams(array('userid'));
-        $params = $this->filterParams(array('userid', 'email', 'token', 'fields', 'maxid'));
+        $params = $this->filterParams(array('userid', 'email', 'token', 'fields'));
     
     
         $uid = (int)$params['userid'];
@@ -442,26 +444,20 @@ class Api_Post extends ApiBase
             ->select('post_id')
             ->from(TABLE_NAME_POST_FAVORITE)
             ->where('user_id = :userid', array(':userid' => $uid))
-            ->order('id desc');
+            ->order('id desc')
+            ->limit($count);
 
         $ids = $cmd->queryColumn();
 
         if (empty($ids)) return array();
 
-        $count = 30;
-        $maxid = (int)$params['maxid'];
         $fields = empty($params['fields']) ? '*' : $params['fields'];
         $conditions = array('and', array('in', 'id', $ids), 'state = :enabled');
         $conditionParams = array(':enabled' => Post::STATE_ENABLED);
-        if ($maxid > 0) {
-            $conditions[] = 'id < :maxid';
-            $conditionParams[':maxid'] = $maxid;
-        }
         $cmd = app()->getDb()->createCommand()
             ->select($fields)
             ->from(TABLE_NAME_POST)
-            ->limit($count)
-            ->where($conditions, $conditionParams);
+            ->limit($count);
 
         $rows = $cmd->queryAll();
         $rows = self::formatRows($rows);
