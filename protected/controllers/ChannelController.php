@@ -12,7 +12,7 @@ class ChannelController extends Controller
     {
         $this->channel = 'lengtu';
         $data = $this->fetchChannelPosts(CHANNEL_LENGTU);
-        $this->render('posts', $data);
+        $this->render('new_posts', $data);
     }
     
     public function actionGirl()
