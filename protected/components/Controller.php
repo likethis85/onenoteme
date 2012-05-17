@@ -3,6 +3,11 @@ class Controller extends CController
 {
     public $breadcrumbs;
     public $channel = 'latest';
+
+    public function init()
+    {
+        $this->layout = 'new_main';
+    }
     
     public function actions()
 	{
@@ -41,7 +46,6 @@ class Controller extends CController
     {
         cs()->registerMetaTag($content, 'description');
     }
-    
     
     public function userToolbar()
     {
