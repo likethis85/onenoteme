@@ -405,7 +405,7 @@ class Api_Post extends ApiBase
     
     public function tofavorite()
     {
-//         self::requirePost();
+        self::requirePost();
         $this->requiredParams(array('user_id', 'token', 'post_id'));
         $params = $this->filterParams(array('user_id', 'token', 'post_id'));
         $userID = (int)$params['user_id'];
@@ -428,7 +428,62 @@ class Api_Post extends ApiBase
         else
             $errno = -1;
 
-        return $errno;
+        $data['errno'] = $errno;
+        return $data;
+    }
+
+    public function favorite()
+    {
+        $count = 5;
+        
+        $this->requiredParams(array('userid', 'maxid'));
+        $params = $this->filterParams(array('userid', 'email', 'token', 'fields', 'maxid'));
+    
+    
+        $uid = (int)$params['userid'];
+        $maxid = (int)$params['maxid'];
+        
+        
+        if ($maxid > 0) {
+            $cmd = app()->getDb()->createCommand()
+                ->select('id')
+                ->from(TABLE_NAME_POST_FAVORITE)
+                ->where(array('and', 'user_id = :userid', 'post_id = :postid'), array(':userid' => $uid, ':postid' => $maxid));
+                
+//             echo $cmd->text;
+            $rowID = $cmd->queryScalar();
+//             var_dump($rowID);
+        }
+        
+        $cmd = app()->getDb()->createCommand()
+            ->select('post_id')
+            ->from(TABLE_NAME_POST_FAVORITE)
+            ->order('id desc')
+            ->limit($count);
+        
+        if ($rowID)
+            $cmd->where(array('and', 'user_id = :userid', 'id < :maxid'), array(':userid' => $uid, ':maxid' => $rowID));
+        else
+            $cmd->where('user_id = :userid', array(':userid' => $uid));
+
+        $ids = $cmd->queryColumn();
+
+        if (empty($ids)) return array();
+
+        $fields = empty($params['fields']) ? '*' : $params['fields'];
+        $conditions = array('and', array('in', 'id', $ids), 'state = :enabled');
+        $conditionParams = array(':enabled' => Post::STATE_ENABLED);
+        $cmd = app()->getDb()->createCommand()
+            ->select($fields)
+            ->from(TABLE_NAME_POST)
+            ->limit($count)
+            ->where($conditions, $conditionParams);
+
+        $rows = $cmd->queryAll();
+        $rows = self::formatRows($rows);
+
+        return $rows;
+    
     }
     
     private function test($channelID)

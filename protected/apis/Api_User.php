@@ -11,13 +11,13 @@ class Api_User extends ApiBase
     public function login()
     {
         self::requirePost();
-        $this->requiredParams(array('email', 'password'));
-        $params = $this->filterParams(array('email', 'password'));
+        $this->requiredParams(array('username', 'password'));
+        $params = $this->filterParams(array('username', 'password'));
         
         try {
 	        $criteria = new CDbCriteria();
 	        $criteria->select = array('id', 'email', 'name', 'create_time', 'state');
-	        $columns = array('email'=>$params['email'], 'password'=>$params['password']);
+	        $columns = array('email'=>$params['username'], 'password'=>$params['password']);
 	        $criteria->addColumnCondition($columns);
 	        $criteria->addCondition('state != ' . User::STATE_DISABLED);
 	        $user = User::model()->find($criteria);
@@ -33,11 +33,11 @@ class Api_User extends ApiBase
         	$data = $user->attributes;
         	unset($user);
         	unset($data['password'], $data['create_ip']);
-        	return $data;
+        	return array('error'=>'OK', 'userinfo'=>$data);
         }
         else {
         	// @todo 此处处理错误
-        	throw new ApiException('用户登录错误', ApiError::USER_NOT_EXIST);
+        	return array('error'=>'FAIL');
         }
     }
     
@@ -71,13 +71,14 @@ class Api_User extends ApiBase
     public function create()
     {
         self::requirePost();
-        $this->requiredParams(array('email', 'password'));
-        $params = $this->filterParams(array('email', 'password'));
+        $this->requiredParams(array('username', 'password'));
+        $params = $this->filterParams(array('username', 'password'));
         
-        $user = new User();
-        $user->password = md5($params['password']);
-        $user->email = $params['email'];
-        $user->name = $params['email'];
+        $user = new User('apiinsert');
+        $user->password = $params['password'];
+        $user->email = $params['username'];
+        $user->name = $user->email; // substr($params['username'], 0, strpos($params['username'], '@'));
+        $user->state = User::STATE_ENABLED;
         $user->token = self::makeToken($user->email);
         try {
         	if ($user->save()) {
@@ -85,10 +86,13 @@ class Api_User extends ApiBase
         	    $data = $user->attributes;
             	unset($user);
             	unset($data['password'], $data['create_ip']);
-            	return $data;
+            	return array('error'=>'OK', 'userinfo'=>$data);
         	}
-        	else
-        	    return 0;
+        	else {
+        	    $messages = $user->getErrors();
+        	    $message = current($messages);
+        	    return array('error'=>'FAIL', 'message'=>$message[0]);
+        	}
         }
         catch (ApiException $e) {
         	throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
