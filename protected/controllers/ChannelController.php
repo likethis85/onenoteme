@@ -4,25 +4,29 @@ class ChannelController extends Controller
     public function actionDuanzi()
     {
         $this->channel = 'duanzi';
-        $this->fetchChannelPosts(CHANNEL_DUANZI);
+        $data = $this->fetchChannelPosts(CHANNEL_DUANZI);
+        $this->render('posts', $data);
     }
     
     public function actionLengtu()
     {
         $this->channel = 'lengtu';
-        $this->fetchChannelPosts(CHANNEL_LENGTU);
+        $data = $this->fetchChannelPosts(CHANNEL_LENGTU);
+        $this->render('posts', $data);
     }
     
     public function actionGirl()
     {
         $this->channel = 'girl';
-        $this->fetchChannelPosts(CHANNEL_GIRL);
+        $data = $this->fetchChannelPosts(CHANNEL_GIRL);
+        $this->render('new_posts', $data);
     }
     
     public function actionVideo()
     {
         $this->channel = 'video';
-        $this->fetchChannelPosts(CHANNEL_VIDEO);
+        $data = $this->fetchChannelPosts(CHANNEL_VIDEO);
+        $this->render('new_posts', $data);
     }
     
     private function fetchChannelPosts($channelid)
@@ -57,10 +61,12 @@ class ChannelController extends Controller
         $this->setKeywords($channel . ',段子分类,' . implode(',', CHtml::listData($categories, 'id', 'name')));
         $this->setDescription($channel . '频道,挖段子分类和每个分类的笑话列表。');
     
-        $this->render('posts', array(
+        $data  = array(
             'models' => $models,
             'pages' => $pages,
             'categories' => $categories,
-        ));
+        );
+        
+        return $data;
     }
 }
