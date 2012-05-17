@@ -1,5 +1,6 @@
 @CHARSET "UTF-8";
 
 .pic-list {background:#2B2B2B; padding:25px; -webkit-border-radius:10px; border-radius:10px; -moz-border-radius:10px;}
-.pic-item {width:135px; height:135px; overflow:hidden; float:left; border:3px solid #444442; background:#181817; margin:3px;}
+.pic-item a {display:block; width:135px; height:135px; overflow:hidden; float:left; border:3px solid #444442; background:#181817; margin:3px;}
+.pic-item a:hover {border:3px solid #C29F37!important;}
 .pic-item img {width:135px;}
