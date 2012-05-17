@@ -405,7 +405,7 @@ class Api_Post extends ApiBase
     
     public function tofavorite()
     {
-//         self::requirePost();
+        self::requirePost();
         $this->requiredParams(array('user_id', 'token', 'post_id'));
         $params = $this->filterParams(array('user_id', 'token', 'post_id'));
         $userID = (int)$params['user_id'];
@@ -428,7 +428,8 @@ class Api_Post extends ApiBase
         else
             $errno = -1;
 
-        return $errno;
+        $data['errno'] = $errno;
+        return $data;
     }
 
     public function favorite()
