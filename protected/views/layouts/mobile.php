@@ -36,7 +36,7 @@
     <script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=300&h=250"></script>
 </div>
 <div class="m-wrapper m-footer">
-	<p class="fl">版权所有 &copy;2011-2012&nbsp;冀ICP备12006196号-5<a href="<?php echo aurl('mobile');?>">waduanzi.com</a></p><p class="fr"><a href="#top">TOP</a></p>
+	<p class="fl">版权所有 &copy;2011-2012&nbsp;<a href="<?php echo aurl('mobile');?>">waduanzi.com</a></p><p class="fr"><a href="#top">TOP</a></p>
 	<div class="clear"></div>
 </div>
 <script type="text/javascript">
