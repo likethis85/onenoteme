@@ -67,6 +67,7 @@ body {background-color:#121211;}
 .post-list .post-item-hover {background:#EFEFEF;}
 .post-list .post-tags {margin:5px 0px;}
 .post-detail h1 {color:#DDDDD1;}
+.item-toolbar {list-style:none;}
 .post-list .post-user, .post-detail .post-user {margin-bottom:10px; color:gray; font-size:12px;}
 .item-toolbar .upscore, .item-toolbar .downscore {width:50px; padding-left:20px; cursor:pointer; margin-right:10px; color:#969696;}
 .item-toolbar .upscore {background:url(../images/up.gif) no-repeat 0px 5px;}

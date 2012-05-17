@@ -1,4 +1,4 @@
-<div class="fl cd-container">
+<div class="fleft cd-container">
     <ul class="subnav-links hot-links">
     	<!-- <li><a href="<?php echo aurl('post/hour');?>">60分钟</a></li> -->
     	<li><a href="<?php echo aurl('post/hour8');?>">8小时</a></li>
@@ -11,7 +11,7 @@
     <?php $this->renderPartial('list', array('models'=>$models, 'pages'=>$pages));?>
 </div>
 
-<div class="fr cd-sidebar">
+<div class="fright cd-sidebar">
 	<?php $this->widget('CDHotTags', array('title'=>'热门标签'));?>
 </div>
 <div class="clear"></div>

@@ -1,4 +1,4 @@
-<div class="fl cd-container">
+<div class="fleft cd-container">
 	<h2 class="cd-catption">热门标签· · · · · · </h2>
 	<div class="tag-list">
 	<?php foreach($tags as $key => $tag):?>
@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<div class="fr cd-sidebar">
+<div class="fright cd-sidebar">
 	<?php $this->widget('CDHotTags', array('title'=>'热门标签'));?>
 </div>
 <div class="clear"></div>

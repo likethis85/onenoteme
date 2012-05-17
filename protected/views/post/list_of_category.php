@@ -1,4 +1,4 @@
-<div class="fl cd-container">
+<div class="fleft cd-container">
     <ul class="subnav-links category-links">
         <?php foreach ($categories as $category):?>
     	<li><?php echo $category->postLink;?></li>
@@ -7,7 +7,7 @@
     <?php $this->renderPartial('list', array('models'=>$models, 'pages'=>$pages));?>
 </div>
 
-<div class="fr cd-sidebar">
+<div class="fright cd-sidebar">
 	<?php $this->widget('CDHotTags', array('title'=>'热门标签'));?>
 </div>
 <div class="clear"></div>
