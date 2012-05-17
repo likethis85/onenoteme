@@ -25,9 +25,6 @@
 		</div>
 		<div class="clear"></div>
 	</div>
-	<div class="cdc-block">
-		<script type="text/javascript">/*wdz_300*250，创建于2012-4-25*/ var cpro_id = 'u866941';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script>
-	</div>
 	<?php $this->widget('CDHotTags', array('title'=>'热门标签'));?>
 	<div class="content-block">
 		<h2 class="content-title">友情链接</h2>
@@ -54,9 +51,6 @@
 			<li><a href="http://www.lvse.com/site/waduanzi-com-6433.html" target="_blank">绿色网址大全</a></li>
 			<li><a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=UjE2MTE6NzwSJDsifCMjfDE9Pw" style="text-decoration:none;">申请友情链接</a></li>
 		</ul>
-	</div>
-	<div class="cdc-block">
-		<script type="text/javascript">/*wdz_300*250，创建于2012-4-25*/ var cpro_id = 'u866941';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script>
 	</div>
 </div>
 <div class="clear"></div>

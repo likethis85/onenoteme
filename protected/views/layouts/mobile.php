@@ -32,11 +32,10 @@
     <a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">Android版正式上线啦！！点击直接下载。</a>
 </div>
 <div class="m-wrapper"><?php echo $content;?></div>
-
+<?php if ($index == 1):?>
 <div class="admob">
-	<script type="text/javascript">/*wdz_300*250，创建于2012-4-25*/ var cpro_id = 'u866941';</script><script src="http://cpro.baidu.com/cpro/ui/c.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=300&h=250"></script>
 </div>
-
 <div class="m-wrapper m-footer">
 	<p class="fl">版权所有 &copy;2011-2012&nbsp;冀ICP备12006196号-5<a href="<?php echo aurl('mobile');?>">waduanzi.com</a></p><p class="fr"><a href="#top">TOP</a></p>
 	<div class="clear"></div>
