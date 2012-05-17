@@ -13,9 +13,9 @@
 </head>
 <body>
 <div class="cd-wrapper cd-header">
-	<div id="logo" class="fl"><a href="<?php echo app()->homeUrl;?>" title="点击返回首页">挖段子</a></div>
-    <div class="site-nav fr">
-		<div class="user-nav ar">
+	<div id="logo" class="fleft"><a href="<?php echo app()->homeUrl;?>" title="点击返回首页">挖段子</a></div>
+    <div class="site-nav fright">
+		<div class="user-nav aright">
     		<?php $this->renderDynamic('userToolbar');?>
     		&nbsp;&nbsp;|&nbsp;<a href="http://m.waduanzi.com">手机版</a>
 		</div>
@@ -39,12 +39,12 @@
 	<div class="clear"></div>
 	<div class="bgline"></div>
 </div>
-<div class="cd-wrapper cd-mainwrapper">
+<div class="cd-wrapper">
 	<?php echo $content;?>
 </div>
 
 <div class="cd-wrapper cd-footer">
-	<p class="fl">内容版权所有 ©2011-2012 <a href="">waduanzi.com</a>&nbsp;&nbsp;冀ICP备12006196号-5</p><p class="fr">笑死人不尝命&nbsp;<a href="#top">TOP</a></p>
+	<p class="fleft">内容版权所有 ©2011-2012 <a href="">waduanzi.com</a>&nbsp;&nbsp;冀ICP备12006196号-5</p><p class="fright">笑死人不尝命&nbsp;<a href="#top">TOP</a></p>
 	<div class="clear"></div>
 </div>
 <div class="space10px"></div>
@@ -54,3 +54,4 @@
 </html>
 
 <?php cs()->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END);?>
+

@@ -2,7 +2,6 @@
 
 body {background-color:#121211;}
 .cd-wrapper {width:950px; margin:0px auto; overflow:hidden;}
-.cd-mainwrapper {border-radius:5px; overflow-y:visible;}
 .cd-footer {margin-top:20px;}
 .breadcrumbs {text-indent:10px; line-height:24px; height:24px; margin-bottom:10px;}
 
@@ -11,11 +10,12 @@ body {background-color:#121211;}
 .cd-header .site-nav .user-nav {margin:5px 0;}
 .user-nav a:link, .user-nav a:visited {margin-left:10px; color:gray;}
 .user-nav a:hover {color:white;}
-.channel-nav li {float:left; margin-left:20px; font-size:22px; color:lightgray; height:43px; line-height:28px; margin-bottom:-10px;}
-.channel-nav li a:link, .channel-nav li a:visited {color:#FFF; height:43px; line-height:28px; font-size:22px; font-family:"微软雅黑"; display:inline-block;}
+.channel-nav li {list-style:none; float:left; margin-left:20px; font-size:22px; color:lightgray; height:43px; line-height:28px; margin-bottom:-10px;}
+.channel-nav li a:link, .channel-nav li a:visited {color:#D0D0D0; height:43px; line-height:28px; font-size:22px; font-family:"微软雅黑"; display:inline-block;}
 .channel-nav li a:hover, .channel-nav li.channel-hover a {background:url(../images/sanjiao.png) no-repeat 22px bottom; text-decoration:none;}
 .cd-header .bgline {background:#daf2ef; height:9px; font-size:0px; overflow:hidden; border-bottom:2px solid #008c78;}
-#logo a {color:white; font-size:36px; font-family:微软雅黑; text-decoration:none;}
+#logo {line-height:70px;}
+#logo a {color:#DDDDD1; font-size:36px; font-family:微软雅黑; text-decoration:none;}
 #logo img {width:140px; height:50px;}
 
 /* footer */

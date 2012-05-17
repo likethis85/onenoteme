@@ -1,4 +1,4 @@
-<div class="fl cd-container">
+<div class="fleft cd-container">
 	<div class="post-detail">
 		<h1><?php echo $post->title;?></h1>
 		<div class="post-user"><?php echo $post->PostUserName . '&nbsp;' . $post->createTime;?></div>
@@ -71,7 +71,7 @@
 	</div>
 </div>
 
-<div class="fr cd-sidebar">
+<div class="fright cd-sidebar">
 	<?php $this->widget('CDHotTags', array('title'=>'热门标签'));?>
 </div>
 <div class="clear"></div>
