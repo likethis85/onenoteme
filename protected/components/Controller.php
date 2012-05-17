@@ -4,11 +4,6 @@ class Controller extends CController
     public $breadcrumbs;
     public $channel = 'latest';
 
-    public function init()
-    {
-        $this->layout = 'new_main';
-    }
-    
     public function actions()
 	{
 		return array(

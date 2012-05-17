@@ -8,11 +8,11 @@
 		    <?php if ($post->picture) echo '<br />' . CHtml::image($post->picture, $post->title, array('class'=>'item-pic'));?>
 		</div>
 		<ul class="item-toolbar">
-			<li class="fr"><?php echo $post->comment_nums;?>条评论</li>
-        	<li class="upscore fl" pid="<?php echo $post->id;?>"><?php echo $post->up_score;?></li>
-        	<li class="downscore fl" pid="<?php echo $post->id;?>"><?php echo $post->down_score;?></li>
-        	<li class="fl cgray">分享到：</li>
-        	<li class="fl snsshare">
+			<li class="fright"><?php echo $post->comment_nums;?>条评论</li>
+        	<li class="upscore fleft" pid="<?php echo $post->id;?>"><?php echo $post->up_score;?></li>
+        	<li class="downscore fleft" pid="<?php echo $post->id;?>"><?php echo $post->down_score;?></li>
+        	<li class="fleft cgray">分享到：</li>
+        	<li class="fleft snsshare">
         	<script type="text/javascript">
         		(function(){
         			var _w = 16 , _h = 16;
@@ -34,8 +34,8 @@
         		})();
         	</script>
         	</li>
-        	<li class="fl snsshare"><a href="javascript:void(0)" onclick="postToWb($.trim($('#content').text());return false;" style="height:16px;font-size:12px;line-height:16px;"><img src="http://v.t.qq.com/share/images/s/weiboicon16.png" border="0" alt="分享到腾讯微博" /></a></script></li>
-        	<li class="fl snsshare">
+        	<li class="fleft snsshare"><a href="javascript:void(0)" onclick="postToWb($.trim($('#content').text());return false;" style="height:16px;font-size:12px;line-height:16px;"><img src="http://v.t.qq.com/share/images/s/weiboicon16.png" border="0" alt="分享到腾讯微博" /></a></script></li>
+        	<li class="fleft snsshare">
         	<script type="text/javascript">
         		(function(){
         			var p = {

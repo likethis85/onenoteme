@@ -24,7 +24,7 @@ body {background-color:#121211;}
 /* sidebar */
 .cd-sidebar {width:300px;}
 .cd-sidebar .content-block {margin-bottom:10px; background:#E6F0F4; border:1px solid #DCEEF5; padding:10px; line-height:24px;}
-.cd-sidebar .content-title {font-size:22px; color:#2ca090; margin-bottom:10px;}
+.cd-sidebar .content-title {font-size:22px; color:#2ca090; margin-bottom:10px; margin:0 0 5px;}
 .cd-sidebar .content-block a {margin-right:5px;}
 .cd-sidebar .cdc-block {margin-bottom:10px; background:#E6F0F4; text-align:center;}
 .cd-sidebar .hot-tags a {line-height:26px;}
@@ -66,6 +66,7 @@ body {background-color:#121211;}
 .post-list .post-item {line-height:24px; border-bottom:1px solid #D8D8D8; padding:10px;}
 .post-list .post-item-hover {background:#EFEFEF;}
 .post-list .post-tags {margin:5px 0px;}
+.post-detail h1 {color:#DDDDD1;}
 .post-list .post-user, .post-detail .post-user {margin-bottom:10px; color:gray; font-size:12px;}
 .item-toolbar .upscore, .item-toolbar .downscore {width:50px; padding-left:20px; cursor:pointer; margin-right:10px; color:#969696;}
 .item-toolbar .upscore {background:url(../images/up.gif) no-repeat 0px 5px;}
