@@ -35,8 +35,8 @@ class ChannelController extends Controller
         
         $channelid = (int)$channelid;
         $limit = param('postCountOfPage');
-        $where = 'state != :state and channel_id = :channel_id';
-        $params = array(':state'=>DPost::STATE_DISABLED, ':channel_id'=>$channelid);
+        $where = 'state = :state and channel_id = :channel_id';
+        $params = array(':state'=>POST_STATE_ENABLED, ':channel_id'=>$channelid);
         $cmd = app()->db->createCommand()
             ->order('create_time desc, id desc')
             ->limit($limit)
@@ -50,15 +50,10 @@ class ChannelController extends Controller
         $cmd->offset($offset);
         $models = DPost::model()->cache($duration)->findAll($cmd);
     
-        $cmd = app()->db->createCommand()
-            ->order('orderid desc, id asc');
-        $categories = DCategory::model()->findAll($cmd);
-    
         global $channels;
         
         $channel = $channels[$channelid];
         $this->pageTitle = $channel;
-        $this->setKeywords($channel . ',段子分类,' . implode(',', CHtml::listData($categories, 'id', 'name')));
         $this->setDescription($channel . '频道,挖段子分类和每个分类的笑话列表。');
     
         $data  = array(

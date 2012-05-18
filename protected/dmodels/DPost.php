@@ -18,6 +18,9 @@
  * @property string $user_name
  * @property integer $tags
  * @property integer $state
+ * @property string $thumbnail_pic
+ * @property string $bmiddle_pic
+ * @property string $original_pic
  */
 class DPost extends DModel
 {
@@ -46,7 +49,7 @@ class DPost extends DModel
     
     public function columns()
     {
-        return array('id', 'channel_id', 'title', 'content', 'pic', 'big_pic', 'create_time', 'up_score', 'down_score', 'comment_nums', 'user_id', 'user_name', 'tags', 'state');
+        return array('id', 'channel_id', 'title', 'content', 'pic', 'big_pic', 'create_time', 'up_score', 'down_score', 'comment_nums', 'user_id', 'user_name', 'tags', 'state', 'thumbnail_pic', 'bmiddle_pic', 'original_pic');
     }
     
     protected function afterFind()
@@ -147,10 +150,12 @@ class DPost extends DModel
     
     public function getPicture()
     {
-        if ($this->big_pic)
-            return $this->big_pic;
-        elseif ($this->pic)
-            return $this->pic;
+        if ($this->original_pic)
+            return $this->original_pic;
+        elseif ($this->bmiddle_pic)
+            return $this->bmiddle_pic;
+        elseif ($this->thumbnail_pic)
+            return $this->thumbnail_pic;
         else
             return '';
     }

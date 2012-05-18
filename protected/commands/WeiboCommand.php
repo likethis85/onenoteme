@@ -7,7 +7,6 @@ class WeiboCommand extends CConsoleCommand
     const WEIBO_ROWS_COUNT = 50;
     const JINGXUAN_SLEEP_TIME = 60;
     const WEIBO_JINGXUAN_ROWS_COUNT = 100;
-    const WEIBO_DAILY_HOT_ROWS_COUNT = 1;
     
     const APP_KEY = '456860706';
     const APP_SECERET = '19168ffef668231aa22f74683d3d18e7';

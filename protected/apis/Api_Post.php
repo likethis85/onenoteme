@@ -28,7 +28,7 @@ class Api_Post extends ApiBase
             $row['create_time_text'] = date(param('formatShortDateTime'), $row['create_time']);
         
         if (isset($row['thumbnail_pic']) || isset($row['bmiddle_pic'])) {
-            // 这里应该是thumbnail，客户端全部使用的是pic,若换成thumbnail，点击图片后会非常不清楚，所以暂时不使用thumbnail
+            // 这里应该是thumbnail_pic，客户端全部使用的是bmiddle_pic,若换成thumbnail_pic，点击图片后会非常不清楚，所以暂时不使用bmiddle_pic
             $pic = $row['bmiddle_pic'];
             if (empty($pic))
                 $pic = $row['bmiddle_pic'];
@@ -45,23 +45,6 @@ class Api_Post extends ApiBase
             }
             $row['thumbnail'] = $thumbnail;
             unset($row['bmiddle_pic']);
-        }
-        
-        if (isset($row['original_pic'])) {
-            $bigPic = $row['original_pic'];
-            if (empty($bigPic))
-                $originalPic = '';
-            else {
-                if (filter_var($bigPic, FILTER_VALIDATE_URL) === false){
-                    $bigPic = fbu($bigPic);
-                    $originalPic = (filter_var($bigPic, FILTER_VALIDATE_URL) === false) ? $bigPic : '';
-                }
-                else
-                    $originalPic = $pic;
-            }
-            if (empty($originalPic))
-                $originalPic = $thumbnail;
-            $row['original_pic'] = $originalPic;
         }
         
         return $row;
