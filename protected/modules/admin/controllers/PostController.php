@@ -47,7 +47,7 @@ class PostController extends AdminController
                 $data = $post->getErrors();//(int)$result;
             }
             catch (Exception $e) {
-                $data = 0;
+                $data = $e->getMessage();//0;
             }
         }
         CDBase::jsonp($callback, $data);
