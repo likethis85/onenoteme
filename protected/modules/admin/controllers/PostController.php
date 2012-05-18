@@ -37,9 +37,9 @@ class PostController extends AdminController
                 $post->up_score = mt_rand(100, 300);
                 $post->down_score = mt_rand(10, 40);
                 if ($channel_id == CHANNEL_LENGTU || $channel_id == CHANNEL_GIRL) {
-                    $post->thumbnail = $temp->thumbnail_pic;
-                    $post->pic = $temp->bmiddle_pic;
-                    $post->big_pic = $temp->original_pic;
+                    $post->thumbnail_pic = $temp->thumbnail_pic;
+                    $post->bmiddle_pic = $temp->bmiddle_pic;
+                    $post->original_pic = $temp->original_pic;
                 }
                 $result = $post->save();
                 if ($result)
