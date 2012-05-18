@@ -41,7 +41,7 @@ class PostController extends AdminController
                     $post->bmiddle_pic = $temp->bmiddle_pic;
                     $post->original_pic = $temp->original_pic;
                 }
-                $result = $post->save();
+                $result = $post->save();return $post->getErrors();
                 if ($result)
                     $temp->delete();
                 $data = (int)$result;
