@@ -35,26 +35,23 @@ class ChannelController extends Controller
         
         $channelid = (int)$channelid;
         $limit = param('postCountOfPage');
-        $where = 'state = :state and channel_id = :channel_id';
-        $params = array(':state'=>POST_STATE_ENABLED, ':channel_id'=>$channelid);
-        $cmd = app()->db->createCommand()
-            ->order('create_time desc, id desc')
-            ->limit($limit)
-            ->where($where, $params);
-    
-        $count = DPost::model()->count($where, $params);
+        
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array('channel_id'=>$channelid, 'state'=>POST_STATE_ENABLED));
+        $criteria->order = 'create_time desc, id desc';
+        $criteria->limit = $limit;
+        
+        $count = Post::model()->cache($duration)->count($criteria);
         $pages = new CPagination($count);
         $pages->setPageSize($limit);
+        $pages->applyLimit($criteria);
     
-        $offset = $pages->getCurrentPage() * $limit;
-        $cmd->offset($offset);
-        $models = DPost::model()->cache($duration)->findAll($cmd);
+        $models = Post::model()->cache($duration)->findAll($criteria);
     
-        global $channels;
-        
+        $channels = param('channels');
         $channel = $channels[$channelid];
         $this->pageTitle = $channel;
-        $this->setDescription($channel . '频道,挖段子分类和每个分类的笑话列表。');
+        $this->setDescription($channel . '频道, 挖段子分类和每个分类的笑话列表。');
     
         $data  = array(
             'models' => $models,

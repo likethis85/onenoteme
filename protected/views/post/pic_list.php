@@ -1,7 +1,7 @@
 <div class="pic-list">
     <?php foreach ((array)$models as $key => $model):?>
     <div class="pic-item">
-        <a href="<?php echo aurl('post/show', array('id'=>$model->id));?>" target="_blank"><?php echo CHtml::image($model->picture, $model->title);?></a>
+        <a href="<?php echo $model->url;?>" target="_blank"><?php echo CHtml::image($model->thumbnail, $model->title);?></a>
     </div>
     <?php endforeach;?>
     <div class="clear"></div>

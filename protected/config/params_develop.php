@@ -24,4 +24,11 @@ return array(
     'formatDate' => 'Y-m-d',
     'formatTime' => 'H:i:s',
     'formatShortTime' => 'H:i',
+        
+    'channels' => array(
+        CHANNEL_DUANZI => '挖段子',
+        CHANNEL_LENGTU => '挖冷图',
+        CHANNEL_GIRL => '挖福利',
+        CHANNEL_VIDEO => '挖好片',
+    ),
 );

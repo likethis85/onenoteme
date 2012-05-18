@@ -7,9 +7,6 @@
  * @property integer $id
  * @property integer $channel_id
  * @property string $title
- * @property string $thumbnail
- * @property string $pic
- * @property string $big_pic
  * @property integer $create_time
  * @property integer $create_ip
  * @property integer $up_score
@@ -93,25 +90,6 @@ class Post extends CActiveRecord
 			'content' => '内容',
 		);
 	}
-
-	protected function beforeSave()
-	{
-	    if ($this->getIsNewRecord()) {
-	        $this->create_time = $_SERVER['REQUEST_TIME'];
-	        $this->title = mb_substr($this->content, 0, 20, app()->charset);
-	        $this->comment_nums = 0;
-            $this->tags = DTag::filterTags($this->tags);
-            $this->user_name = strip_tags(trim($this->user_name));
-	    }
-	    return true;
-	}
-	
-	protected function afterSave()
-	{
-	    if ($this->getIsNewRecord()) {
-	        self::savePostTags($this->id, $this->tags);
-	    }
-	}
 	
 	public function getUrl()
 	{
@@ -119,52 +97,32 @@ class Post extends CActiveRecord
 	}
 
 	/**
-     * 获取标签的数组形式
-     * @return array
-     */
-    public function getTagsArray()
-    {
-        if (empty($this->tags))
-            return array();
-            
-        $tags = DTag::filterTags($this->tags);
-        return explode(',', $tags);
-    }
-    
-    
-    public static function savePostTags($postid, $tags)
-    {
-        $postid = (int)$postid;
-        if (0 === $postid || empty($tags))
-            return false;
+	 * 获取标签的数组形式
+	 * @return array
+	 */
+	public function getTagArray()
+	{
+	    return Tag::filterTagsArray($this->tags);
+	}
+	
+	public function getTagText($operator = ',')
+	{
+	    $tagsArray = $this->getTagArray();
+	     
+	    return (empty($tagsArray)) ? '' : join($operator, $tagsArray);
+	}
+	
+	public function getTagLinks($operator = ',', $target = '_blank', $class='beta-tag')
+	{
+	    $tags = $this->getTagArray();
+	    if (empty($tags)) return '';
+	
+	    foreach ($tags as $tag)
+	        $data[] = l($tag, aurl('tag/posts', array('name'=>urlencode($tag))), array('target'=>$target, 'class'=>$class));
+	    
+	    return join($operator, $data);
+	}
 
-        if (is_string($tags)) {
-            $tags = Dtag::filterTags($tags);
-            $tags = explode(',', $tags);
-        }
-
-        $count = 0;
-        foreach ((array)$tags as $v) {
-            $model = Tag::model()->findByAttributes(array('name'=>$v));
-            if ($model === null) {
-                $model = new Tag();
-                $model->name = $v;
-                $model->post_nums = 1;
-                if ($model->save())
-                    $count++;
-            }
-            else {
-                $model->post_nums = $model->post_nums + 1;
-                $model->save(array('post_nums'));
-            }
-            $columns = array('post_id'=>$postid, 'tag_id'=>$model->id);
-            app()->getDb()->createCommand()->insert(TABLE_POST_TAG, $columns);
-            unset($model);
-        }
-        return $count;
-    }
-
-    
     public function getCreateTime($format = null)
     {
         if (empty($this->create_time))
@@ -174,7 +132,7 @@ class Post extends CActiveRecord
         return date($format, $this->create_time);
     }
     
-    public function getPostUserName()
+    public function getAuthorName()
     {
         return $this->user_name ? $this->user_name : user()->guestName;
     }
@@ -184,14 +142,47 @@ class Post extends CActiveRecord
         return l(h($this->title), $this->getUrl(), array('target'=>$target));
     }
     
-    public function getPicture()
+    public function getBmiddle()
     {
-        if ($this->big_pic)
-            return $this->big_pic;
-        elseif ($this->pic)
-            return $this->pic;
+        if ($this->bmiddle_pic)
+            return $this->bmiddle_pic;
+        elseif ($this->original_pic)
+            return $this->original_pic;
         else
             return '';
+    }
+    
+    public function getThumbnail()
+    {
+        if ($this->thumbnail_pic)
+            return $this->thumbnail_pic;
+        elseif ($this->bmiddle_pic)
+            return $this->bmiddle_pic;
+        else
+            return '';
+    }
+    
+    
+    protected function beforeSave()
+    {
+        if ($this->getIsNewRecord()) {
+            $this->create_time = $_SERVER['REQUEST_TIME'];
+            $this->comment_nums = 0;
+        }
+        
+        $this->user_name = strip_tags(trim($this->user_name));
+        if (empty($this->title))
+            $this->title = mb_substr($this->content, 0, 20, app()->charset);
+        if ($this->tags) {
+            $tags = join(',', Tag::filterTagsArray($this->tags));
+            $this->tags = $tags;
+        }
+        return true;
+    }
+    
+    protected function afterSave()
+    {
+        Tag::savePostTags($this->id, $this->tags);
     }
 }
 

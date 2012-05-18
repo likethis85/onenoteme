@@ -8,9 +8,8 @@
  * @property integer $channel_id
  * @property string $title
  * @property string $content
- * @property string $pic
- * @property string $big_pic
  * @property integer $create_time
+ * @property integer $create_ip
  * @property integer $up_score
  * @property integer $down_score
  * @property integer $comment_nums

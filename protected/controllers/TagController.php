@@ -6,9 +6,7 @@ class TagController extends Controller
         $cacheKey = 'all_tags';
         $tags = app()->getCache()->get($cacheKey);
         if ($tags === false) {
-            $cmd = app()->getDb()->createCommand()
-                ->order('id asc');
-            $tags = DTag::model()->findAll($cmd);
+            $tags = Tag::model()->findAll();
             app()->getCache()->set($cacheKey, $tags, 24*60*60);
         }
         foreach ($tags as $tag)
@@ -47,22 +45,41 @@ class TagController extends Controller
     
     public function actionPosts($name)
     {
-        $limit = (int)param('postCountOfPage');
+        $duration = 120;
         $name = urldecode($name);
-        $cmd = app()->getDb()->createCommand()
-            ->select('t.*')
-            ->join(TABLE_POST_TAG . ' pt', 't.id = pt.post_id')
-            ->join(TABLE_TAG . ' tag', 'tag.id = pt.tag_id')
-            ->where('t.state != :state and tag.name = :tagname', array(':state'=>DPost::STATE_DISABLED, ':tagname' => $name))
-            ->order('t.create_time desc, t.id desc');
-        $pages = new CPagination(DPost::model()->count(clone $cmd));
+        
+        $tagID = app()->getDb()->createCommand()
+            ->select('id')
+            ->from(TABLE_TAG)
+            ->where('name = :tagname', array(':tagname' => $name))
+            ->queryScalar();
+        
+        if ($tagID === false)
+            throw new CHttpException(403, "当前还没有与{$name}标签有关的段子");
+        
+        $limit = (int)param('postCountOfPage');
+        $postIDs = app()->getDb()->cache($duration)->createCommand()
+            ->select('post_id')
+            ->from(TABLE_POST_TAG)
+            ->where('tag_id = :tagid', array(':tagid' => $tagID))
+            ->order('post_id desc')
+            ->limit($limit)
+            ->queryColumn();
+        
+        $criteria = new CDbCriteria();
+        $criteria->addInCondition('id', $postIDs);
+
+        $count = app()->getDb()->cache($duration)->createCommand()
+            ->select('count(*)')
+            ->from(TABLE_POST_TAG)
+            ->where('tag_id = :tagid', array(':tagid' => $tagID))
+            ->queryScalar();
+        
+        $pages = new CPagination($count);
         $pages->setPageSize($limit);
+        $pages->applyLimit($criteria);
         
-        $offset = $pages->getCurrentPage() * $limit;
-        $cmd->limit($limit);
-        $cmd->offset($offset);
-        
-        $models = DPost::model()->findAll($cmd);
+        $models = Post::model()->cache($duration)->findAll($criteria);
         
         $this->pageTitle = $name . '相关段子 - 挖段子';
         $this->setKeywords("{$name}相关段子,{$name}相关冷笑话,{$name}相关糗事,{$name}相关语录");

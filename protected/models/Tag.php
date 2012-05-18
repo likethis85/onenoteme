@@ -66,27 +66,68 @@ class Tag extends CActiveRecord
 			'post_nums' => '段子数',
 		);
 	}
-
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
+	
+	public static function filterTagsArray($tags)
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id,true);
-
-		$criteria->compare('name',$this->name,true);
-
-		$criteria->compare('post_nums',$this->post_nums,true);
-
-		return new CActiveDataProvider('cd_Tag', array(
-			'criteria'=>$criteria,
-		));
+	    if (empty($tags)) return array();
+	
+	    $tags = str_replace('，', ',', $tags);
+	    $tags = explode(',', $tags);
+	    $tagsArray = array();
+	    foreach ((array)$tags as $tag) {
+	        if (!empty($tag))
+	            $tagsArray[] = strip_tags(trim($tag));
+	    }
+	
+	    unset($tags, $tag);
+	    return $tagsArray;
 	}
 	
+	public static function savePostTags($postid, $tags)
+	{
+	    $postid = (int)$postid;
+	    if (0 === $postid || empty($tags))
+	        return false;
+	
+	    if (is_string($tags))
+	        $tags = self::filterTagsArray($tags);
+	
+	    $count = 0;
+	    foreach ((array)$tags as $v) {
+	        $model = self::model()->findByAttributes(array('name'=>$v));
+	        if ($model === null) {
+	            $model = new Tag();
+	            $model->name = $v;
+	            if ($model->save()) $count++;
+	        }
+	
+	        $row = app()->getDb()->createCommand()
+	        ->select('id')
+	        ->from(TABLE_POST_TAG)
+	        ->where(array('and', 'post_id = :postid', 'tag_id = :tagid'), array(':postid'=>$postid, ':tagid'=>$model->id))
+	        ->queryScalar();
+	
+	        if ($row === false) {
+	            $columns = array('post_id'=>$postid, 'tag_id'=>$model->id);
+	            $count = app()->getDb()->createCommand()->insert('{{post2tag}}', $columns);
+	            if ($count > 0) {
+	                $model->post_nums = $model->post_nums + 1;
+	                $model->save(true, array('post_nums'));
+	            }
+	        }
+	        unset($model);
+	    }
+	    return $count;
+	}
+
+	
+	public function getNameLink($target = '_blank')
+	{
+	    return CHtml::link($this->name, $this->getUrl(), array('target'=>$target));
+	}
+	
+	public function getUrl()
+	{
+	    return aurl('tag/posts', array('name'=>urlencode($this->name)));
+	}
 }
