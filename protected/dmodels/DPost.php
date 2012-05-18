@@ -6,7 +6,6 @@
  * The followings are the available columns in table '{{post}}':
  * @property integer $id
  * @property integer $channel_id
- * @property integer $category_id
  * @property string $title
  * @property string $content
  * @property string $pic
@@ -47,7 +46,7 @@ class DPost extends DModel
     
     public function columns()
     {
-        return array('id', 'channel_id', 'category_id', 'title', 'content', 'pic', 'big_pic', 'create_time', 'up_score', 'down_score', 'comment_nums', 'user_id', 'user_name', 'tags', 'state');
+        return array('id', 'channel_id', 'title', 'content', 'pic', 'big_pic', 'create_time', 'up_score', 'down_score', 'comment_nums', 'user_id', 'user_name', 'tags', 'state');
     }
     
     protected function afterFind()

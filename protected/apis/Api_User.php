@@ -139,7 +139,7 @@ class Api_User extends ApiBase
             $maxid = (int)$params['maxid'];
             $fields = empty($params['fields']) ? '*' : $params['fields'];
             $conditions = array('and', array('in', 'id', $ids), 'state = :enabled');
-            $conditionParams = array(':enabled' => Post::STATE_ENABLED);
+            $conditionParams = array(':enabled' => POST_STATE_ENABLED);
             if ($maxid > 0) {
                 $conditions[] = 'id < :maxid';
                 $conditionParams[':maxid'] = $maxid;

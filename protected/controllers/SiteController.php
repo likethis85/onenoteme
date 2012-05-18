@@ -74,4 +74,19 @@ class SiteController extends Controller
         $this->setDescription('注册成为' . app()->name . '会员后，可以发表评论、投稿及审核段子。');
         $this->render('signup', array('model'=>$model));
     }
+
+    public function actionSitemap()
+    {
+        $cmd = app()->getDb()->createCommand()
+            ->select('id')
+            ->from(TABLE_POST)
+            ->where('state = ' . POST_STATE_ENABLED)
+            ->order('id desc')
+            ->limit(2000);
+        $posts = $cmd->queryAll();
+        $this->renderPartial('sitemap', array(
+            'posts' => $posts
+        ));
+        app()->end();
+    }
 }

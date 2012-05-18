@@ -6,12 +6,12 @@
  * The followings are the available columns in table '{{post}}':
  * @property integer $id
  * @property integer $channel_id
- * @property integer $category_id
  * @property string $title
  * @property string $thumbnail
  * @property string $pic
  * @property string $big_pic
  * @property integer $create_time
+ * @property integer $create_ip
  * @property integer $up_score
  * @property integer $down_score
  * @property integer $comment_nums
@@ -20,17 +20,12 @@
  * @property integer $tags
  * @property integer $state
  * @property string $content
- * @property string $video_url
+ * @property string $thumbnail_pic
+ * @property string $bmiddle_pic
+ * @property string $original_pic
  */
 class Post extends CActiveRecord
 {
-    const STATE_UNVERIFY = -1;
-    const STATE_DISABLED = 0;
-    const STATE_ENABLED = 1;
-    const STATE_TOP = 2;
-    
-    public $captcha;
-    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Post the static model class
@@ -57,13 +52,11 @@ class Post extends CActiveRecord
 		// will receive user inputs.
 		return array(
 		    array('content', 'required', 'message'=>'段子内容必须填写'),
-			array('channel_id, category_id, up_score, down_score, comment_nums, state, create_time, user_id', 'numerical', 'integerOnly'=>true),
-			array('title, tags', 'length', 'max'=>200),
+			array('channel_id, up_score, down_score, comment_nums, state, create_time, user_id', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
-			array('thumbnail, pic, big_pic', 'length', 'max'=>250),
-			array('content, video_url', 'safe'),
-			array('pic', 'file', 'allowEmpty'=>true),
-			array('captcha', 'captcha', 'captchaAction'=>'captcha', 'on'=>'insert', 'allowEmpty'=>true),
+			array('create_ip', 'length', 'max'=>15),
+			array('title, tags, thumbnail_pic, bmiddle_pic, original_pic, thumbnail, pic, big_pic', 'length', 'max'=>250),
+			array('content', 'safe'),
 		);
 	}
 
@@ -72,8 +65,6 @@ class Post extends CActiveRecord
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
 		    'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
@@ -87,11 +78,10 @@ class Post extends CActiveRecord
 		return array(
 			'id' => 'ID',
 		    'channel_id' => '频道',
-			'category_id' => '分类',
 			'title' => '标题',
-		    'thumbnail' => '缩略图',
-		    'pic' => '图片',
-		    'big_pic' => '原图',
+		    'thumbnail_pic' => '缩略图',
+		    'bmiddle_pic' => '图片',
+		    'original_pic' => '原图',
 			'create_time' => '发布时间',
 		    'up_score' => '顶数',
 		    'down_score' => '浏览',
@@ -101,17 +91,12 @@ class Post extends CActiveRecord
 			'state' => '状态',
 		    'tags' => '标签',
 			'content' => '内容',
-		    'video_url' => '视频URL',
 		);
 	}
 
 	protected function beforeSave()
 	{
 	    if ($this->getIsNewRecord()) {
-	        if (empty($this->content)) {
-	            $this->addError('content', '内容必须填写');
-    	        return false;
-	        }
 	        $this->create_time = $_SERVER['REQUEST_TIME'];
 	        $this->title = mb_substr($this->content, 0, 20, app()->charset);
 	        $this->comment_nums = 0;

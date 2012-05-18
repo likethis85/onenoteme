@@ -4,8 +4,8 @@ class PostController extends Controller
     public function filters()
     {
         return array(
-            'ajaxOnly  + vote, score',
-            'postOnly + vote, score',
+            'ajaxOnly  + score',
+            'postOnly + score',
         );
     }
     
@@ -13,73 +13,13 @@ class PostController extends Controller
     {
         $this->forward('post/latest');
     }
-
-    public function actionCreate()
-    {
-        $model = new Post();
-        if (request()->getIsPostRequest() && isset($_POST['Post'])) {
-            $model->attributes = $_POST['Post'];
-            $model->user_id = user()->getIsGuest() ? 0 : user()->id;
-            if (!user()->getIsGuest() && empty($model->user_name))
-                $model->user_name = user()->name;
-            $model->state = (app()->session['state'] >= User::STATE_EDITOR) ? Post::STATE_ENABLED : Post::STATE_DISABLED;
-            
-            $model->pic = CUploadedFile::getInstance($model, 'pic');
-            if ($model->save(true, array('id', 'channel_id', 'category_id', 'title', 'content', 'create_time', 'up_score', 'down_score', 'comment_nums', 'tags', 'state'))) {
-                $msg = '<span class="cgreen f12px">发布成功，' . CHtml::link('点击查看', $model->url, array('target'=>'_blank')) . '，您还可以继续发布。</span>';
-                user()->setFlash('createPostResult', $msg);
-                user()->setFlash('allowUserView', user()->name);
-                
-                if ($model->pic) {
-                    $path = CDBase::makeUploadPath('pics');
-                    $file = CDBase::makeUploadFileName('');
-                    $bigFile = 'big_' . $file;
-                    $filename = $path['path'] . $file;
-                    $bigFilename = $path['path'] . $bigFile;
-
-                    try {
-                        $im = new CdImage();
-                        $im->load($model->pic->tempName);
-                        $im->saveAsJpeg($bigFilename);
-                        $post->big_pic = fbu($path['url'] . $im->filename());
-                        $im->saveAsJpeg($filename, 50);
-                        $post->pic = fbu($path['url'] . $im->filename());
-                        $model->update(array('pic', 'big_pic'));
-                    }
-                    catch (Exception $e) {
-                        $model->addError('pic', '上传图片错误');
-                    }
-                }
-                if (!$model->hasErrors())
-                    $this->redirect(aurl('post/create'));
-            }
-            else
-                user()->setFlash('createPostResult', '<span class="cred f12px">发布出错，查看下面详细错误信息。</span>');
-        }
-        $cmd = app()->getDb()->createCommand()
-            ->select(array('id', 'name'))
-            ->order('orderid desc, id asc');
-        $categories = CHtml::listData(DCategory::model()->findAll($cmd), 'id', 'name');
-        global $channels;
-        
-        $this->pageTitle = '发段子 - 挖段子';
-        $this->setKeywords('发布段子,发布经典语录,发布糗事,发布秘密,发布笑话');
-        $this->setDescription('发布段子,发布经典语录,发布糗事,发布秘密,发布笑话');
-        
-        $this->channel = 'create';
-        $this->render('create', array(
-        	'model'=>$model,
-            'channels' => $channels,
-            'categories' => $categories,
-        ));
-    }
     
     public function actionLatest()
     {
         $duration = 120;
         $limit = param('postCountOfPage');
-        $where = 't.state != :state';
-        $params = array(':state' => DPost::STATE_DISABLED);
+        $where = 't.state = :state';
+        $params = array(':state' => POST_STATE_ENABLED);
         $cmd = app()->db->cache($duration)->createCommand()
             ->order('t.create_time desc, t.id desc')
             ->limit($limit)
@@ -104,49 +44,8 @@ class PostController extends Controller
         ));
     }
     
-    public function actionHottest()
-    {
-        $this->forward('post/hour8');
-    }
-    
-    public function actionList($cid)
-    {
-        $cid = (int)$cid;
-        $limit = param('postCountOfPage');
-        $where = 'state != :state and category_id = :cid';
-        $params = array(':state'=>DPost::STATE_DISABLED, ':cid'=>$cid);
-        $cmd = app()->db->createCommand()
-            ->order('create_time desc, id desc')
-            ->limit($limit)
-            ->where($where, $params);
-            
-        $count = DPost::model()->count($where, $params);
-        $pages = new CPagination($count);
-        $pages->setPageSize($limit);
-        
-        $offset = $pages->getCurrentPage() * $limit;
-        $cmd->offset($offset);
-        $models = DPost::model()->findAll($cmd);
-        
-        $cmd = app()->db->createCommand()
-            ->order('orderid desc, id asc');
-        $categories = DCategory::model()->findAll($cmd);
-        
-        $this->pageTitle = '瞅瞅 - 挖段子';
-        $this->setKeywords('段子分类,' . implode(',', CHtml::listData($categories, 'id', 'name')));
-        $this->setDescription('挖段子分类和每个分类的笑话列表。');
-        
-        $this->channel = 'waduanzi';
-        $this->render('list_of_category', array(
-        	'models' => $models,
-            'pages' => $pages,
-            'categories' => $categories,
-        ));
-    }
-
     public function actionScore()
     {
-        // this request require post and ajax
         $id = (int)$_POST['id'];
         $column = ((int)$_POST['score'] > 0) ? 'up_score' : 'down_score';
         $counters = array($column => 1);
@@ -165,7 +64,7 @@ class PostController extends Controller
         if (user()->getFlash('allowUserView'))
             $post = DPost::model()->findByPk($id);
         else {
-            $cmd->where('id = :id and state != :state', array('id' => $id, ':state' => DPost::STATE_DISABLED));
+            $cmd->where('id = :id and state = :state', array('id' => $id, ':state' => POST_STATE_ENABLED));
             $post = DPost::model()->find($cmd);
         }
         if (null === $post)
@@ -174,7 +73,7 @@ class PostController extends Controller
         // 获取评论
         $limit = param('commentCountOfPage');
         $conditions = array('and', 'post_id = :pid', 'state = :state');
-        $params = array(':pid' => $id, ':state' => DComment::STATE_ENABLED);
+        $params = array(':pid' => $id, ':state' => COMMENT_STATE_ENABLED);
         
         $cmd = app()->db->createCommand()
             ->order('id asc')
@@ -200,19 +99,6 @@ class PostController extends Controller
         ));
     }
     
-    public function actionSitemap()
-    {
-        $cmd = app()->getDb()->createCommand()
-            ->select('id')
-            ->from(DPost::model()->table())
-            ->where('state != 0')
-            ->order('id desc')
-            ->limit(5000);
-        $posts = $cmd->queryAll();
-        $this->renderPartial('sitemap', array(
-            'posts' => $posts
-        ));
-        app()->end();
-    }
+    
     
 }

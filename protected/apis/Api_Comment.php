@@ -65,7 +65,7 @@ class Api_Comment extends ApiBase
             $comment = new Comment();
             $comment->post_id = $postid;
             $comment->content = $content;
-            $comment->state = Comment::STATE_ENABLED;
+            $comment->state = Comment_STATE_ENABLED;
             $comment->user_id = $userid;
             $result = $comment->save();
             

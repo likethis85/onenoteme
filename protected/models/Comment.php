@@ -11,13 +11,12 @@
  * @property string $user_name
  * @property integer $create_time
  * @property string $create_ip
+ * @property integer $up_score
+ * @property integer $down_score
  * @property integer $state
  */
 class Comment extends CActiveRecord
 {
-    const STATE_DISABLED = 0;
-    const STATE_ENABLED = 1;
-    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Comment the static model class
@@ -40,16 +39,12 @@ class Comment extends CActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
-			array('state, post_id, user_id, create_time', 'numerical', 'integerOnly'=>true),
+	        array('content', 'required'),
+			array('state, post_id, user_id, create_time, up_score, down_score', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
 			array('create_ip', 'length', 'max'=>15),
 			array('content', 'safe'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, post_id, content, user_id, user_name, create_time, create_ip, state', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,9 +53,9 @@ class Comment extends CActiveRecord
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
+	        'post' => array(self::BELONGS_TO, 'Post', 'post_id'),
+	        'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 
@@ -70,24 +65,24 @@ class Comment extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'Id',
-			'post_id' => 'Post',
-			'content' => 'Content',
-			'user_id' => 'User',
-			'user_name' => 'User Name',
-			'create_time' => 'Create Time',
-			'create_ip' => 'Create Ip',
-			'state' => 'State',
+			'id' => 'ID',
+			'post_id' => '段子',
+			'content' => '内容',
+			'user_id' => '用户ID',
+			'user_name' => '用户名',
+			'create_time' => '创建时间',
+			'create_ip' => '创建IP',
+			'state' => '状态',
 		);
 	}
 
 	protected function beforeSave()
 	{
 	    if ($this->getIsNewRecord()) {
-	        $this->content = strip_tags(trim($this->content));
 	        $this->create_time = $_SERVER['REQUEST_TIME'];
 	        $this->create_ip = CDBase::getClientIp();
 	    }
+	    $this->content = strip_tags(trim($this->content));
 	    
 	    return true;
 	}
@@ -100,35 +95,11 @@ class Comment extends CActiveRecord
 	    }
 	}
 	
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
+	protected function afterDelete()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
-		$criteria=new CDbCriteria;
-
-		$criteria->compare('id',$this->id,true);
-
-		$criteria->compare('post_id',$this->post_id,true);
-
-		$criteria->compare('content',$this->content,true);
-
-		$criteria->compare('user_id',$this->user_id,true);
-
-		$criteria->compare('user_name',$this->user_name,true);
-
-		$criteria->compare('create_time',$this->create_time,true);
-
-		$criteria->compare('create_ip',$this->create_ip,true);
-
-		$criteria->compare('state',$this->state);
-
-		return new CActiveDataProvider('Comment', array(
-			'criteria'=>$criteria,
-		));
+        $counters = array('comment_nums' => -1);
+        Post::model()->updateCounters($counters, 'id = :postid', array(':postid'=>$this->post_id));
 	}
 }
+
+

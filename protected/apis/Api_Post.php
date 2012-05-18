@@ -12,26 +12,6 @@ class Api_Post extends ApiBase
     const DEFAULT_HISTORY_MAX_COUNT = 35;
     const DEFAULT_RANDOM_MAX_COUNT = 12;
     
-    public function show()
-    {
-        $params = $this->filterParams(array('postid', 'fields'));
-        
-        try {
-            $postid = (int)$params['postid'];
-            $fields = empty($params['fields']) ? '*' : $params['fields'];
-            $cmd = app()->getDb()->createCommand()
-                ->select($fields)
-                ->from(TABLE_POST . ' t')
-                ->where('id = :postid and state = :enabled', array(':postid' => $postid, ':enabled'=>Post::STATE_ENABLED));
-            $row = $cmd->queryRow();
-            $row = ($row === false) ? array() : self::formatRow($row);
-	        return $row;
-        }
-        catch (Exception $e) {
-        	throw new ApiException('系统错误', ApiError::SYSTEM_ERROR, $params['debug']);
-        }
-    }
-    
     public static function formatRow($row)
     {
         unset($row['video_ur'], $row['state'], $row['tags']);
@@ -47,11 +27,11 @@ class Api_Post extends ApiBase
         if (isset($row['create_time']) && $row['create_time'])
             $row['create_time_text'] = date(param('formatShortDateTime'), $row['create_time']);
         
-        if (isset($row['thumbnail']) || isset($row['pic'])) {
+        if (isset($row['thumbnail_pic']) || isset($row['bmiddle_pic'])) {
             // 这里应该是thumbnail，客户端全部使用的是pic,若换成thumbnail，点击图片后会非常不清楚，所以暂时不使用thumbnail
-            $pic = $row['pic'];
+            $pic = $row['bmiddle_pic'];
             if (empty($pic))
-                $pic = $row['pic'];
+                $pic = $row['bmiddle_pic'];
             
             if (empty($pic))
                 $thumbnail = '';
@@ -64,11 +44,11 @@ class Api_Post extends ApiBase
                     $thumbnail = $pic;
             }
             $row['thumbnail'] = $thumbnail;
-            unset($row['pic']);
+            unset($row['bmiddle_pic']);
         }
         
-        if (isset($row['big_pic'])) {
-            $bigPic = $row['big_pic'];
+        if (isset($row['original_pic'])) {
+            $bigPic = $row['original_pic'];
             if (empty($bigPic))
                 $originalPic = '';
             else {
@@ -82,7 +62,6 @@ class Api_Post extends ApiBase
             if (empty($originalPic))
                 $originalPic = $thumbnail;
             $row['original_pic'] = $originalPic;
-            unset($row['big_pic']);
         }
         
         return $row;
@@ -113,7 +92,7 @@ class Api_Post extends ApiBase
                 $count = self::DEFAULT_TIMELINE_MAX_COUNT;
             
             $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'id > :lastid');
-            $param = array(':enabled'=>Post::STATE_ENABLED, ':channelid' => $channelID, ':lastid'=>$lastid);
+            $param = array(':enabled'=>POST_STATE_ENABLED, ':channelid' => $channelID, ':lastid'=>$lastid);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
                 ->from(TABLE_POST . ' t')
@@ -128,40 +107,6 @@ class Api_Post extends ApiBase
             
             self::updateLastRequestTime($token);
             
-            return $rows;
-        }
-        catch (Exception $e) {
-            throw new ApiException('系统错误', ApiError::SYSTEM_ERROR, $params['debug']);
-        }
-    }
-    
-    public function randomTest()
-    {
-        self::requiredParams(array('channelid'));
-        $params = $this->filterParams(array('channelid', 'count', 'fields', 'lastid'));
-        $channelID = (int)$params['channelid'];
-    
-        try {
-            $fields = empty($params['fields']) ? '*' : $params['fields'];
-            $lastid = empty($params['lastid']) ? 0 : (int)$params['lastid'];
-            $count = (int)$params['count'];
-            if ($count <= 0 || $count > self::DEFAULT_TIMELINE_MAX_COUNT)
-                $count = self::DEFAULT_TIMELINE_MAX_COUNT;
-    
-            $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'id > :lastid');
-            $param = array(':enabled'=>Post::STATE_ENABLED, ':channelid' => $channelID, ':lastid'=>$lastid);
-            $cmd = app()->getDb()->createCommand()
-                ->select($fields)
-                ->from(TABLE_POST . ' t')
-                ->where($condition, $param)
-                ->order('id desc')
-                ->limit($count);
-    
-            $rows = $cmd->queryAll();
-    
-            foreach ($rows as $index => $row)
-                $rows[$index] = self::formatRow($row);
-            shuffle($rows);
             return $rows;
         }
         catch (Exception $e) {
@@ -184,7 +129,7 @@ class Api_Post extends ApiBase
                 $count = self::DEFAULT_HISTORY_MAX_COUNT;
         
             $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'create_time < :beforetime');
-            $param = array(':enabled'=>Post::STATE_ENABLED, ':channelid' => $channelID, ':beforetime'=>$beforeTime);
+            $param = array(':enabled'=>POST_STATE_ENABLED, ':channelid' => $channelID, ':beforetime'=>$beforeTime);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
                 ->from(TABLE_POST . ' t')
@@ -218,7 +163,7 @@ class Api_Post extends ApiBase
                 $count = self::DEFAULT_TIMELINE_MAX_COUNT;
             
             $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'create_time > :lasttime');
-            $param = array(':enabled'=>Post::STATE_ENABLED, ':channelid' => $channelID, ':lasttime'=>$lasttime);
+            $param = array(':enabled'=>POST_STATE_ENABLED, ':channelid' => $channelID, ':lasttime'=>$lasttime);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
                 ->from(TABLE_POST . ' t')
@@ -252,7 +197,7 @@ class Api_Post extends ApiBase
             $maxIdMinId = app()->getDb()->createCommand()
                 ->select(array('max(id) maxid', 'min(id) minid'))
                 ->from(TABLE_POST . ' t')
-                ->where(array('and', 't.state = :enalbed',  'channel_id = :channelid'), array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID))
+                ->where(array('and', 't.state = :enalbed',  'channel_id = :channelid'), array(':enalbed' => POST_STATE_ENABLED, ':channelid'=>$channelID))
                 ->queryRow();
             
             $count = (int)$params['count'];
@@ -263,7 +208,7 @@ class Api_Post extends ApiBase
             $maxid = (int)$maxIdMinId['maxid'];
             
             $conditoins = array('and', 't.state = :enalbed',  'channel_id = :channelid', 'id = :randid');
-            $param = array(':enalbed' => Post::STATE_ENABLED, ':channelid'=>$channelID, ':randid'=>0);
+            $param = array(':enalbed' => POST_STATE_ENABLED, ':channelid'=>$channelID, ':randid'=>0);
             $rows = array();
             for ($i=0; $i<$maxid; $i++) {
                 $randid = mt_rand($minid, $maxid);
@@ -292,21 +237,6 @@ class Api_Post extends ApiBase
         catch (Exception $e) {
             echo $e->getMessage();
             throw new ApiException('系统错误', ApiError::SYSTEM_ERROR, $params['debug']);
-        }
-    }
-    
-    public function delete()
-    {
-    	self::requirePost();
-    	$this->requireLogin();
-        $this->requiredParams(array('postid'));
-        $params = $this->filterParams(array('postid'));
-        
-        try {
-	        return Post::model()->findByPk($params['postid'])->delete();
-        }
-        catch (Exception $e) {
-        	throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
         }
     }
    
@@ -361,7 +291,7 @@ class Api_Post extends ApiBase
     	$post->content = $params['content'];
     	$post->tags = $params['tags'];
     	$post->create_time = $_SERVER['REQUEST_TIME'];
-    	$post->state = Post::STATE_DISABLED;
+    	$post->state = POST_STATE_ENABLED;
     	$post->up_score = mt_rand(3, 15);
     	$post->down_score = mt_rand(0, 2);
     	
@@ -472,7 +402,7 @@ class Api_Post extends ApiBase
 
         $fields = empty($params['fields']) ? '*' : $params['fields'];
         $conditions = array('and', array('in', 'id', $ids), 'state = :enabled');
-        $conditionParams = array(':enabled' => Post::STATE_ENABLED);
+        $conditionParams = array(':enabled' => POST_STATE_ENABLED);
         $cmd = app()->getDb()->createCommand()
             ->select($fields)
             ->from(TABLE_POST)
@@ -484,33 +414,6 @@ class Api_Post extends ApiBase
 
         return $rows;
     
-    }
-    
-    private function test($channelID)
-    {
-        $agent = strtolower($_SERVER['User-Agent']);
-        if (strpos($agent, 'android') !== false) {
-            if ($channelID == CHANNEL_DUANZI)
-                return self::fetchTestRows();
-        }
-        else
-            return null;
-    }
-    
-    private static function fetchTestRows()
-    {
-        $ids = array(14079,14078,14077,14071,14061,14060,14053,14049,14046,14044,14043,14042,14041,14038,14036,14035,14034,14033,14032,14031,14030,14029,14027,14026,14025,14024,14023,14022,14021,14020,14019,14018,14017,14016,14015,14014,14013,14012,14011,13995,13994,13993,13992,13991,13990,13989,13988,13987,13986,13985,13984,13983,13982,13980,13979);
-        shuffle($ids);
-        $cmd = app()->getDb()->createCommand()
-            ->from(TABLE_POST . ' t')
-            ->where(array('in', 'id', $ids));
-        $rows = $cmd->queryAll();
-        
-        foreach ($rows as $index => $row)
-            $rows[$index] = self::formatRow($row);
-        
-        shuffle($rows);
-        return $rows;
     }
 
     private static function updateLastRequestTime($token)

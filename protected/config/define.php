@@ -27,3 +27,8 @@ define('TABLE_POST_TAG', '{{post_tag}}');
 define('TABLE_MOVIE_SETS', '{{movie_sets}}');
 define('TABLE_POST_FAVORITE', '{{post_favorite}}');
 define('TABLE_WEIBO_ID', '{{weibo_id}}');
+
+define('POST_STATE_ENABLED', 1);
+define('POST_STATE_DISABLED', 0);
+define('COMMENT_STATE_ENABLED', 1);
+define('COMMENT_STATE_DISABLED', 0);
