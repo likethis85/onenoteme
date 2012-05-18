@@ -52,7 +52,7 @@ class Post extends CActiveRecord
 			array('channel_id, up_score, down_score, comment_nums, state, create_time, user_id', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
 			array('create_ip', 'length', 'max'=>15),
-			array('title, tags, thumbnail_pic, bmiddle_pic, original_pic, thumbnail, pic, big_pic', 'length', 'max'=>250),
+			array('title, tags, thumbnail_pic, bmiddle_pic, original_pic', 'length', 'max'=>250),
 			array('content', 'safe'),
 		);
 	}

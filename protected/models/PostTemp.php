@@ -41,7 +41,7 @@ class PostTemp extends CActiveRecord
 	{
 		return array(
 		    array('content', 'required'),
-			array('channel_id, category_id, create_time, repost_count, comment_count', 'numerical', 'integerOnly'=>true),
+			array('channel_id, create_time, repost_count, comment_count', 'numerical', 'integerOnly'=>true),
 			array('thumbnail_pic, bmiddle_pic, original_pic', 'length', 'max'=>250),
 			array('content', 'safe'),
 		);
