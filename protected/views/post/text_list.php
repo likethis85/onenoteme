@@ -1,6 +1,6 @@
 <div class="post-list">
     <?php foreach ((array)$models as $key => $model):?>
-    <div class="post-item">
+    <div class="post-item radius5px">
     	<div class="post-user"><?php echo $model->PostUserName . '&nbsp;' . $model->createTime;?></div>
         <div class="item-detail">
             <a class="item-link" href="<?php echo aurl('post/show', array('id'=>$model->id));?>" target="_blank" title="新窗口中查看段子：<?php echo h($model->title);?>">: :</a>

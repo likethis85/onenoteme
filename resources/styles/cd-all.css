@@ -28,7 +28,6 @@ body {background-color:#121211;}
 
 /* footer */
 .cd-footer {margin-top:20px;}
-.cdc-bottom-banner {background:#EFEFEF; padding:15px 0px; margin-top:15px;}
 
 /* pages */
 .pages {padding:5px;}
@@ -90,7 +89,6 @@ body {background-color:#121211;}
 .subnav-links {background:#E9F4E9; height:30px; margin-bottom:15px;}
 .subnav-links li {float:left; height:30px; line-height:30px; margin-left:20px;}
 .post-list .post-item {line-height:24px; border-bottom:1px solid #D8D8D8; padding:10px;}
-.post-list .post-item-hover {background:#EFEFEF;}
 .post-list .post-tags {margin:5px 0px;}
 .post-detail h1 {color:#DDDDD1;}
 .item-toolbar {list-style:none;}
@@ -105,4 +103,7 @@ body {background-color:#121211;}
 .post-item .post-image .image-more {display:block; font-size:14px; color:#008C78;}
 .post-item-title {display:block; font-size:0; width:0; height:0;}
 .post-list .item-detail {color:#DDDDD1;}
+.post-list .post-item-hover {background:#DDDDD1;}
 .post-list .post-item-hover .item-detail {color:#333;}
+
+
