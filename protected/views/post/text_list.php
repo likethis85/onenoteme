@@ -20,10 +20,8 @@
 </div>
 
 <?php if ($pages->pageCount > 1):?>
-<div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
+<div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, array('header'=>null, 'footer'=>null)));?></div>
 <?php endif;?>
-
-<span id="jqvar" scoreurl="<?php echo aurl('post/score');?>" class="hide"></span>
 
 <script type="text/javascript">
 $(function(){
@@ -46,6 +44,4 @@ $(function(){
 	);
 });
 </script>
-
-<?php cs()->registerScriptFile(sbu('scripts/snsshare.js'), CClientScript::POS_END);?>
 
