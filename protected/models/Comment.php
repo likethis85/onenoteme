@@ -14,6 +14,8 @@
  * @property integer $up_score
  * @property integer $down_score
  * @property integer $state
+ *
+ * @property string $authorName
  */
 class Comment extends CActiveRecord
 {
@@ -76,6 +78,11 @@ class Comment extends CActiveRecord
 		);
 	}
 
+	public function getAuthorName()
+	{
+	    return $this->user_name ? $this->user_name : user()->guestName;
+	}
+	
 	protected function beforeSave()
 	{
 	    if ($this->getIsNewRecord()) {

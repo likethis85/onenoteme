@@ -21,7 +21,7 @@ define('TABLE_POST_TEMP', '{{post_temp}}');
 define('TABLE_WEIBO_ACCOUNT', '{{weibo_account}}');
 define('TABLE_USER', '{{user}}');
 define('TABLE_COMMENT', '{{comment}}');
-define('TABLE_DEVICE', '{{device}}');
+define('TABLE_IOS_DEVICE', '{{ios_device}}');
 define('TABLE_TAG', '{{tag}}');
 define('TABLE_POST_TAG', '{{post_tag}}');
 define('TABLE_MOVIE_SETS', '{{movie_sets}}');

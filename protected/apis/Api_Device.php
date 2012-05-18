@@ -7,16 +7,16 @@ class Api_Device extends ApiBase
         $this->requiredParams(array('device_token'));
         $params = $this->filterParams(array('device_token'));
         
-        $token = Device::convertToken($params['device_token']);
+        $token = IOSDevice::convertToken($params['device_token']);
     
         if (empty($token))
             $data = array('errno'=>-1);
         else {
-            $model = Device::model()->findByAttributes(array('device_token'=>$token));
+            $model = IOSDevice::model()->findByAttributes(array('device_token'=>$token));
             if ($model === null) {
-                $model = new Device();
+                $model = new IOSDevice();
                 $model->device_token = $token;
-                $model->uuid = '';
+                $model->udid = '';
                 $model->last_time = $_SERVER['REQUEST_TIME'];
                 $result = (int)!$model->save();
             }
@@ -35,13 +35,13 @@ class Api_Device extends ApiBase
         $this->requiredParams(array('device_token', 'state'));
         $params = $this->filterParams(array('device_token', 'state'));
         
-        $token = Device::convertToken($params['device_token']);
+        $token = IOSDevice::convertToken($params['device_token']);
         $state = (int)$params['state'];
         
         if (empty($token))
             $result = -1;
         else {
-            $model = Device::model()->findByAttributes(array('device_token'=>$token));
+            $model = IOSDevice::model()->findByAttributes(array('device_token'=>$token));
             if ($model === null) {
                 $result = -2;
             }
@@ -60,7 +60,7 @@ class Api_Device extends ApiBase
         $this->requiredParams(array('device_token'));
         $params = $this->filterParams(array('device_token'));
         
-        $token = Device::convertToken($params['device_token']);
+        $token = IOSDevice::convertToken($params['device_token']);
         
         if (empty($token))
             $result = 0;

@@ -11,7 +11,7 @@
  * @property integer $last_time
  * @property integer $close_push
  */
-class Device extends CActiveRecord
+class IOSDevice extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -27,7 +27,7 @@ class Device extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return TABLE_DEVICE;
+		return TABLE_IOS_DEVICE;
 	}
 
 	/**
@@ -35,8 +35,6 @@ class Device extends CActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
 			array('device_token', 'required'),
 			array('user_id, last_time, close_push', 'numerical', 'integerOnly'=>true),
@@ -49,9 +47,8 @@ class Device extends CActiveRecord
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
+	        'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 
@@ -62,10 +59,10 @@ class Device extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'user_id' => 'User',
+			'user_id' => '用户ID',
 			'device_token' => 'Device Token',
-	        'last_time' => 'Last Time',
-		    'close_push' => 'Close Push',
+	        'last_time' => '最后使用时间',
+		    'close_push' => '关闭PUSH推送',
 		);
 	}
 

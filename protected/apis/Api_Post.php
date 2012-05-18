@@ -404,8 +404,8 @@ class Api_Post extends ApiBase
         if (empty($token))
             return false;
     
-        $token = Device::convertToken($token);
-        Device::model()->updateAll(array('last_time'=>$_SERVER['REQUEST_TIME']), 'device_token = :token', array(':token'=>$token));
+        $token = IOSDevice::convertToken($token);
+        IOSDevice::model()->updateAll(array('last_time'=>$_SERVER['REQUEST_TIME']), 'device_token = :token', array(':token'=>$token));
     }
 }
 
