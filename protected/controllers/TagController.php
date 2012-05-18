@@ -46,6 +46,8 @@ class TagController extends Controller
     public function actionPosts($name)
     {
         $duration = 120;
+        $limit = (int)param('postCountOfPage');
+        
         $name = urldecode($name);
         
         $tagID = app()->getDb()->createCommand()
@@ -58,15 +60,14 @@ class TagController extends Controller
             throw new CHttpException(403, "当前还没有与{$name}标签有关的段子");
         
         $count = app()->getDb()->cache($duration)->createCommand()
-        ->select('count(*)')
-        ->from(TABLE_POST_TAG)
-        ->where('tag_id = :tagid', array(':tagid' => $tagID))
-        ->queryScalar();
+            ->select('count(*)')
+            ->from(TABLE_POST_TAG)
+            ->where('tag_id = :tagid', array(':tagid' => $tagID))
+            ->queryScalar();
         
         $pages = new CPagination($count);
         $pages->setPageSize($limit);
         $offset = ($pages->currentPage - 1) * $limit;
-        $limit = (int)param('postCountOfPage');
         $postIDs = app()->getDb()->createCommand()
             ->select('post_id')
             ->from(TABLE_POST_TAG)
