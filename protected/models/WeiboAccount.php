@@ -26,7 +26,7 @@ class WeiboAccount extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{weibo_account}}';
+		return TABLE_WEIBO_ACCOUNT;
 	}
 
 	/**

@@ -6,16 +6,16 @@ class PhoneController extends Controller
         if (empty($lastid))
             self::output(array());
         
-        $where = "t.state != :state and id > :lastid and pic = ''";
+        $where = "state != :state and id > :lastid and pic = ''";
         $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid);
         if ($cid > 0) {
             $where .= ' and category_id = :cid';
             $params[':cid'] = $cid;
         }
         $cmd = app()->db->createCommand()
-        ->from('{{post}} t')
-        ->order('t.id desc')
-        ->where($where, $params);
+            ->from(TABLE_POST)
+            ->order('id desc')
+            ->where($where, $params);
         
         $rows = $cmd->queryAll();
         
@@ -30,15 +30,15 @@ class PhoneController extends Controller
         if (empty($lastid))
             self::output(array());
         
-        $where = "t.state != :state and id > :lastid";
+        $where = "state != :state and id > :lastid";
         $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid);
         if ($cid > 0) {
             $where .= ' and category_id = :cid';
             $params[':cid'] = $cid;
         }
         $cmd = app()->db->createCommand()
-            ->from('{{post}} t')
-            ->order('t.id desc')
+            ->from(TABLE_POST)
+            ->order('id desc')
             ->where($where, $params);
         
         $rows = $cmd->queryAll();
@@ -56,14 +56,14 @@ class PhoneController extends Controller
         $limit = $_GET['limit'] ? (int)$_GET['limit'] : 10;
         $offset = ($page - 1) * $limit;
         
-        $where = "t.state != :state and category_id = :cid  and pic = ''";
+        $where = "state != :state and category_id = :cid  and pic = ''";
         $params = array(':state' => DPost::STATE_DISABLED, ':cid'=>$cid);
         $cmd = app()->db->createCommand()
-        ->from('{{post}} t')
-        ->order('t.id desc')
-        ->limit($limit)
-        ->offset($offset)
-        ->where($where, $params);
+            ->from(TABLE_POST)
+            ->order('id desc')
+            ->limit($limit)
+            ->offset($offset)
+            ->where($where, $params);
     
         $rows = $cmd->queryAll();
         self::output($rows);
@@ -80,11 +80,11 @@ class PhoneController extends Controller
         if (empty($lastid))
             self::output(array());
     
-        $where = "t.state != :state and id > :lastid and channel_id = :channelid";
+        $where = "state != :state and id > :lastid and channel_id = :channelid";
         $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid, ':channelid'=>$channelid);
         $cmd = app()->db->createCommand()
-            ->from('{{post}} t')
-            ->order('t.id desc')
+            ->from(TABLE_POST)
+            ->order('id desc')
             ->where($where, $params);
     
         $rows = $cmd->queryAll();
@@ -105,11 +105,11 @@ class PhoneController extends Controller
         $limit = $_GET['limit'] ? (int)$_GET['limit'] : 10;
         $offset = ($page - 1) * $limit;
         
-        $where = "t.state != :state and channel_id = :channelid";
+        $where = "state != :state and channel_id = :channelid";
         $params = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$channelid);
         $cmd = app()->db->createCommand()
-            ->from('{{post}} t')
-            ->order('t.id desc')
+            ->from(TABLE_POST)
+            ->order('id desc')
             ->limit($limit)
             ->offset($offset)
             ->where($where, $params);
@@ -126,12 +126,12 @@ class PhoneController extends Controller
         if (empty($lastid))
             self::output(array());
     
-        $where = "t.state != :state and id > :lastid and channel_id = :channelid";
+        $where = "state != :state and id > :lastid and channel_id = :channelid";
         $params = array(':state' => DPost::STATE_DISABLED, ':lastid'=>$lastid, ':channelid'=>$channelid);
 
         $cmd = app()->db->createCommand()
-            ->from('{{post}} t')
-            ->order('t.id desc')
+            ->from(TABLE_POST)
+            ->order('id desc')
             ->where($where, $params);
     
         $rows = $cmd->queryAll();
@@ -150,12 +150,12 @@ class PhoneController extends Controller
         $limit = $limit ? $limit : 10;
         $offset = $offset ? $offset : 0;
         
-        $where = "t.state != :state and channel_id = :channelid";
+        $where = "state != :state and channel_id = :channelid";
         $params = array(':state' => DPost::STATE_DISABLED, ':channelid'=>$channelid);
         
         $cmd = app()->db->createCommand()
-            ->from('{{post}} t')
-            ->order('t.id desc')
+            ->from(TABLE_POST)
+            ->order('id desc')
             ->limit($limit)
             ->offset($offset)
             ->where($where, $params);

@@ -16,19 +16,14 @@ $channels = array(
 
 
 // 以下是表名
-define('TABLE_NAME_CATEGORY', '{{category}}');
-define('TABLE_NAME_POST', '{{post}}');
-define('TABLE_NAME_POST_TEMP', '{{post_temp}}');
-define('TABLE_NAME_WEIBO_ACCOUNT', '{{weibo_account}}');
-define('TABLE_NAME_USER', '{{user}}');
-define('TABLE_NAME_COMMENT', '{{comment}}');
-define('TABLE_NAME_DEVICE', '{{device}}');
-define('TABLE_NAME_TAG', '{{tag}}');
-define('TABLE_NAME_MOVIE', '{{movie}}');
-define('TABLE_NAME_MOVIE_CATEGORY', '{{movie_category}}');
-define('TABLE_NAME_MOVIE_SETS', '{{movie_sets}}');
-define('TABLE_NAME_MOVIE_FAVORITE', '{{movie_favorite}}');
-define('TABLE_NAME_MOVIE_SPECIAL', '{{movie_special}}');
-define('TABLE_NAME_SPECIAL2MOVIE', '{{special2movie}}');
-define('TABLE_NAME_POST_FAVORITE', '{{post_favorite}}');
-define('TABLE_NAME_WEIBO_ID', '{{weibo_id}}');
+define('TABLE_POST', '{{post}}');
+define('TABLE_POST_TEMP', '{{post_temp}}');
+define('TABLE_WEIBO_ACCOUNT', '{{weibo_account}}');
+define('TABLE_USER', '{{user}}');
+define('TABLE_COMMENT', '{{comment}}');
+define('TABLE_DEVICE', '{{device}}');
+define('TABLE_TAG', '{{tag}}');
+define('TABLE_POST_TAG', '{{post_tag}}');
+define('TABLE_MOVIE_SETS', '{{movie_sets}}');
+define('TABLE_POST_FAVORITE', '{{post_favorite}}');
+define('TABLE_WEIBO_ID', '{{weibo_id}}');

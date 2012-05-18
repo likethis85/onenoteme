@@ -29,7 +29,7 @@ class MovieSets extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{movie_sets}}';
+		return TABLE_MOVIE_SETS;
 	}
 
 	/**
@@ -53,7 +53,7 @@ class MovieSets extends CActiveRecord
 	{
 	    $count = app()->getDb()->createCommand()
 	        ->select('count(*)')
-	        ->from(TABLE_NAME_MOVIE_SETS)
+	        ->from(TABLE_MOVIE_SETS)
 	        ->where(array('and', 'movie_id = :movieid', 'name = :setname'), array(':movieid'=>$this->movie_id, ':setname'=>$this->name))
 	        ->queryScalar();
 	    

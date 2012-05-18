@@ -15,7 +15,7 @@ class Api_Movie extends ApiBase
         $count = $count > 0 ? $count : self::LIST_MAC_COUNT;
         
         $cmd = app()->getDb()->createCommand()
-            ->from(TABLE_NAME_MOVIE)
+            ->from(TABLE_MOVIE)
             ->limit($count)
             ->order('orderid desc, id desc')
             ->where(array('and', 'category_id = :cid', 'state = :valid'), array(':cid'=>$cid, ':valid'=>Movie::STATE_ENABLED));
@@ -34,7 +34,7 @@ class Api_Movie extends ApiBase
         if ($movieid <= 0) return array();
         
         $cmd = app()->getDb()->createCommand()
-            ->from(TABLE_NAME_MOVIE_SETS)
+            ->from(TABLE_MOVIE_SETS)
             ->order('id asc')
             ->where(array('and', 'movie_id = :movieid'), array(':movieid'=>$movieid));
         
@@ -46,7 +46,7 @@ class Api_Movie extends ApiBase
     public function latestsets()
     {
         $cmd = app()->getDb()->createCommand()
-            ->from(TABLE_NAME_MOVIE_SETS)
+            ->from(TABLE_MOVIE_SETS)
             ->order('id desc');
         
         $rows = $cmd->queryAll();
@@ -65,9 +65,9 @@ class Api_Movie extends ApiBase
         
         $cmd = app()->getDb()->createCommand()
             ->select('m.*')
-            ->from(TABLE_NAME_SPECIAL2MOVIE . ' sm')
+            ->from(TABLE_SPECIAL2MOVIE . ' sm')
             ->where('sm.special_id = :specialid', array(':specialid'=>$specialID))
-            ->join(TABLE_NAME_MOVIE . ' m', 'sm.movie_id = m.id and m.state = :enabled', array(':enabled'=>Movie::STATE_ENABLED))
+            ->join(TABLE_MOVIE . ' m', 'sm.movie_id = m.id and m.state = :enabled', array(':enabled'=>Movie::STATE_ENABLED))
             ->order('m.id desc');
         
         $rows = $cmd->queryAll();

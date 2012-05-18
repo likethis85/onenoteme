@@ -33,7 +33,7 @@ class PostTemp extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return TABLE_NAME_POST_TEMP;
+		return TABLE_POST_TEMP;
 	}
 
 	/**

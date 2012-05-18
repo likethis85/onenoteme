@@ -127,7 +127,7 @@ class Api_User extends ApiBase
             $uid = (int)$user['id'];
             $cmd = app()->getDb()->createCommand()
                 ->select('post_id')
-                ->from(TABLE_NAME_POST_FAVORITE)
+                ->from(TABLE_POST_FAVORITE)
                 ->where('user_id = :userid', array(':userid' => $uid))
                 ->order('id desc');
             
@@ -146,7 +146,7 @@ class Api_User extends ApiBase
             }
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
-                ->from(TABLE_NAME_POST)
+                ->from(TABLE_POST)
                 ->limit($count)
                 ->where($conditions, $conditionParams);
             

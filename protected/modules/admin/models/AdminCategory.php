@@ -14,7 +14,7 @@ class AdminCategory extends Category
     {
         $rows = app()->getDb()->createCommand()
             ->select(array('id', 'name'))
-            ->from(TABLE_NAME_CATEGORY)
+            ->from(TABLE_CATEGORY)
             ->order(array('orderid desc', 'id'))
             ->queryAll();
         

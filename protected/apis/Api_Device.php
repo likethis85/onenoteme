@@ -67,7 +67,7 @@ class Api_Device extends ApiBase
         else {
             $cmd = app()->getDb()->createCommand()
                 ->select('close_push')
-                ->from(TABLE_NAME_DEVICE)
+                ->from(TABLE_DEVICE)
                 ->where('device_token = :token', array(':token'=>$token));
             $result = (int)$cmd->queryScalar();
         }

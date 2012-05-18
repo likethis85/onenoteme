@@ -27,7 +27,7 @@ class Device extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{device}}';
+		return TABLE_DEVICE;
 	}
 
 	/**

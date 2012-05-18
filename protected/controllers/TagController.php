@@ -51,8 +51,8 @@ class TagController extends Controller
         $name = urldecode($name);
         $cmd = app()->getDb()->createCommand()
             ->select('t.*')
-            ->join('{{post2tag}} pt', 't.id = pt.post_id')
-            ->join('{{tag}} tag', 'tag.id = pt.tag_id')
+            ->join(TABLE_POST_TAG . ' pt', 't.id = pt.post_id')
+            ->join(TABLE_TAG . ' tag', 'tag.id = pt.tag_id')
             ->where('t.state != :state and tag.name = :tagname', array(':state'=>DPost::STATE_DISABLED, ':tagname' => $name))
             ->order('t.create_time desc, t.id desc');
         $pages = new CPagination(DPost::model()->count(clone $cmd));

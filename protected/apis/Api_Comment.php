@@ -15,7 +15,7 @@ class Api_Comment extends ApiBase
         else {
             $cmd = app()->getDb()->createCommand()
                 ->select(array('t.id', 't.content', 't.create_time'))
-                ->from(TABLE_NAME_COMMENT . ' t')
+                ->from(TABLE_COMMENT . ' t')
                 ->order('t.id desc')
                 ->where('t.post_id = :postid', array(':postid'=>$postid));
                 

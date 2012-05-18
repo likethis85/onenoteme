@@ -184,7 +184,7 @@ class WeiboCommand extends CConsoleCommand
     {
         $rows = app()->getDb()->createCommand()
             ->select('display_name, last_pid')
-            ->from(TABLE_NAME_WEIBO_ACCOUNT)
+            ->from(TABLE_WEIBO_ACCOUNT)
             ->order('id asc')
             ->queryAll();
         
@@ -198,7 +198,7 @@ class WeiboCommand extends CConsoleCommand
             'last_pid' => $pid,
         );
         $result = app()->getDb()->createCommand()
-            ->update(TABLE_NAME_WEIBO_ACCOUNT, $columns, 'display_name = :name', array(':name' => $account));
+            ->update(TABLE_WEIBO_ACCOUNT, $columns, 'display_name = :name', array(':name' => $account));
         
     }
     
@@ -206,7 +206,7 @@ class WeiboCommand extends CConsoleCommand
     {
         $count = app()->getDb()->createCommand()
             ->select('count(*)')
-            ->from(TABLE_NAME_WEIBO_ID)
+            ->from(TABLE_WEIBO_ID)
             ->where('wid = :id', array(':id'=>$id))
             ->queryScalar();
         
@@ -217,7 +217,7 @@ class WeiboCommand extends CConsoleCommand
     {
         $columns = array('wid' => $idstr);
         $result = app()->getDb()->createCommand()
-            ->insert(TABLE_NAME_WEIBO_ID, $columns);
+            ->insert(TABLE_WEIBO_ID, $columns);
         
         return $result > 0;
     }

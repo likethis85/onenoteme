@@ -45,7 +45,7 @@ class Post extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{post}}';
+		return TABLE_POST;
 	}
 
 	/**
@@ -173,7 +173,7 @@ class Post extends CActiveRecord
                 $model->save(array('post_nums'));
             }
             $columns = array('post_id'=>$postid, 'tag_id'=>$model->id);
-            app()->getDb()->createCommand()->insert('{{post2tag}}', $columns);
+            app()->getDb()->createCommand()->insert(TABLE_POST_TAG, $columns);
             unset($model);
         }
         return $count;
