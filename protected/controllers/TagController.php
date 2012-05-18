@@ -57,29 +57,29 @@ class TagController extends Controller
         if ($tagID === false)
             throw new CHttpException(403, "当前还没有与{$name}标签有关的段子");
         
+        $count = app()->getDb()->cache($duration)->createCommand()
+        ->select('count(*)')
+        ->from(TABLE_POST_TAG)
+        ->where('tag_id = :tagid', array(':tagid' => $tagID))
+        ->queryScalar();
+        
+        $pages = new CPagination($count);
+        $pages->setPageSize($limit);
+        $offset = ($pages->currentPage - 1) * $limit;
         $limit = (int)param('postCountOfPage');
-        $postIDs = app()->getDb()->cache($duration)->createCommand()
+        $postIDs = app()->getDb()->createCommand()
             ->select('post_id')
             ->from(TABLE_POST_TAG)
             ->where('tag_id = :tagid', array(':tagid' => $tagID))
             ->order('post_id desc')
             ->limit($limit)
+            ->offset($offset)
             ->queryColumn();
         
         $criteria = new CDbCriteria();
         $criteria->addInCondition('id', $postIDs);
 
-        $count = app()->getDb()->cache($duration)->createCommand()
-            ->select('count(*)')
-            ->from(TABLE_POST_TAG)
-            ->where('tag_id = :tagid', array(':tagid' => $tagID))
-            ->queryScalar();
-        
-        $pages = new CPagination($count);
-        $pages->setPageSize($limit);
-        $pages->applyLimit($criteria);
-        
-        $models = Post::model()->cache($duration)->findAll($criteria);
+        $models = Post::model()->findAll($criteria);
         
         $this->pageTitle = $name . '相关段子 - 挖段子';
         $this->setKeywords("{$name}相关段子,{$name}相关冷笑话,{$name}相关糗事,{$name}相关语录");
