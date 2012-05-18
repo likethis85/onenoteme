@@ -5,28 +5,28 @@ class ChannelController extends Controller
     {
         $this->channel = 'duanzi';
         $data = $this->fetchChannelPosts(CHANNEL_DUANZI);
-        $this->render('posts', $data);
+        $this->render('text_posts', $data);
     }
     
     public function actionLengtu()
     {
         $this->channel = 'lengtu';
         $data = $this->fetchChannelPosts(CHANNEL_LENGTU);
-        $this->render('new_posts', $data);
+        $this->render('pic_posts', $data);
     }
     
     public function actionGirl()
     {
         $this->channel = 'girl';
         $data = $this->fetchChannelPosts(CHANNEL_GIRL);
-        $this->render('new_posts', $data);
+        $this->render('pic_posts', $data);
     }
     
     public function actionVideo()
     {
         $this->channel = 'video';
         $data = $this->fetchChannelPosts(CHANNEL_VIDEO);
-        $this->render('new_posts', $data);
+        $this->render('video_posts', $data);
     }
     
     private function fetchChannelPosts($channelid)
@@ -51,7 +51,7 @@ class ChannelController extends Controller
         $models = DPost::model()->cache($duration)->findAll($cmd);
     
         $cmd = app()->db->createCommand()
-        ->order('orderid desc, id asc');
+            ->order('orderid desc, id asc');
         $categories = DCategory::model()->findAll($cmd);
     
         global $channels;
@@ -64,7 +64,6 @@ class ChannelController extends Controller
         $data  = array(
             'models' => $models,
             'pages' => $pages,
-            'categories' => $categories,
         );
         
         return $data;

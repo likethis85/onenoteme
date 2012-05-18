@@ -2,43 +2,67 @@
 
 body {background-color:#121211;}
 .cd-wrapper {width:980px; margin:0px auto; overflow:hidden;}
-.cd-footer {margin-top:20px;}
-.breadcrumbs {text-indent:10px; line-height:24px; height:24px; margin-bottom:10px;}
-
-/* header */
-.cd-header {margin-bottom:20px;}
-.cd-header .site-nav .user-nav {margin:5px 0;}
-.user-nav a:link, .user-nav a:visited {margin-left:10px; color:gray;}
-.user-nav a:hover {color:white;}
-.channel-nav li {list-style:none; float:left; margin-left:20px; font-size:22px; color:lightgray; height:43px; line-height:28px; margin-bottom:-10px;}
-.channel-nav li a:link, .channel-nav li a:visited {color:#D0D0D0; height:43px; line-height:28px; font-size:22px; font-family:"微软雅黑"; display:inline-block;}
-.channel-nav li a:hover, .channel-nav li.channel-hover a {background:url(../images/sanjiao.png) no-repeat 22px bottom; text-decoration:none;}
-.cd-header .bgline {background:#daf2ef; height:9px; font-size:0px; overflow:hidden; border-bottom:2px solid #008c78;}
-#logo {line-height:70px;}
-#logo a {color:#DDDDD1; font-size:36px; font-family:微软雅黑; text-decoration:none;}
-#logo img {width:140px; height:50px;}
-
-/* footer */
-.cdc-bottom-banner {background:#EFEFEF; padding:15px 0px; margin-top:15px;}
-
-/* sidebar */
-.cd-sidebar {width:330px; overflow:hidden;}
-.cd-sidebar .content-block {margin-bottom:10px; background:#E6F0F4; border:1px solid #DCEEF5; padding:10px; line-height:24px;}
-.cd-sidebar .content-title {font-size:22px; color:#2ca090; margin-bottom:10px; margin:0 0 5px;}
-.cd-sidebar .content-block a {margin-right:5px;}
-.cd-sidebar .cdc-block {margin-bottom:10px; background:#E6F0F4; text-align:center;}
-.cd-sidebar .hot-tags a {line-height:26px;}
 
 /* container */
 .cd-container {width:640px; overflow:hidden;}
-.cd-catption {color:#060; padding:0px 0px 12px 0px; line-height:150%; font-size:18px;}
+
+/* sidebar */
+.cd-sidebar {width:330px; overflow:hidden;}
+.cd-sidebar .content-block {margin-bottom:10px; line-height:24px;}
+.cd-sidebar .content-title {font-size:22px; color:#2ca090; margin-bottom:10px; margin:0 0 5px;}
+.cd-sidebar .content-block a {margin-right:5px;}
+.cd-sidebar .cdc-block {margin-bottom:10px; text-align:center;}
+
+/* header */
+.cd-header {margin-bottom:10px; height:60px;}
+.cd-header .site-nav .user-nav {margin:5px 0;}
+.cd-header .user-nav a:link, .user-nav a:visited {margin-left:10px; color:gray;}
+.cd-header .user-nav a:hover {color:white;}
+.cd-header .channel-nav {margin:0; padding:0; list-style:none;}
+.cd-header .channel-nav li {list-style:none; float:left; margin-left:20px; color:#CFCFCF; line-height:28px;}
+.cd-header .channel-nav li a:link, .cd-header .channel-nav li a:visited {color:#D0D0D0; line-height:28px; font-size:18px; font-family:"微软雅黑"; display:inline-block;}
+.cd-header .channel-nav li a:hover, .cd-header .channel-nav li.channel-hover a {text-decoration:none;}
+.cd-header #logo {line-height:60px;}
+.cd-header #logo a {color:#DDDDD1; font-size:36px; font-family:微软雅黑; text-decoration:none;}
+.cd-header #logo img {width:140px; height:50px;}
+
+/* footer */
+.cd-footer {margin-top:20px;}
+.cdc-bottom-banner {background:#EFEFEF; padding:15px 0px; margin-top:15px;}
+
+/* pages */
+.pages {padding:5px;}
+.pages ul.yiiPager {font-size:14px;}
+.pages ul.yiiPager a:link, .pages ul.yiiPager a:visited {border:1px solid #DAF0EF; color:#DDDDD1;}
+.pages ul.yiiPager a:hover {color:white; background:#4E76C9;}
+.pages ul.yiiPager .selected a {background:#4E76C9; color:white;}
+.cdc-block {margin:0px auto; text-align:center;}
+
+
+/* panel */
 .panel {background-color:#2B2B2B; -webkit-border-radius:10px; border-radius:10px; -moz-border-radius:10px; position:relative;}
-.cd-container .panel {padding:25px;}
-.cd-sidebar .panel {padding:15px;}
+.panel25 {padding:25px;}
+.panel20 {padding:20px;}
+.panel15 {padding:15px;}
+
+
 
 .pic-item a {display:block; width:135px; height:135px; overflow:hidden; float:left; border:3px solid #444442; background-color:#181817; margin:3px;}
 .pic-item a:hover {border:3px solid #C29F37!important;}
 .pic-item img {width:135px;}
+
+
+
+
+/* site/signup, user signup */
+.user-form {font-size:18px;}
+.user-form li {margin-bottom:20px; list-style:none;}
+.user-form label {display:inline-block; width:70px; text-align:right; margin-right:10px; color:#DDDDD1;}
+.user-form .txt {height:30px; line-height:30px; font-size:18px; width:250px;}
+.user-form .captcha {width:60px;}
+.user-form span {font-size:14px; color:gray;}
+.user-form .button {margin-left:80px;}
+.login-signup-tip {margin-top:50px; color:#DDDDD1; text-align:center;}
 
 
 

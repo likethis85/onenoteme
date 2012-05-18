@@ -15,15 +15,6 @@
             <?php endif;?>
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->tagsLinks;?></div><?php endif;?>
-        <ul class="item-toolbar cgray" postid="<?php echo $model->id;?>">
-        	<li class="upscore fleft" pid="<?php echo $model->id;?>"><?php echo $model->up_score;?></li>
-        	<li class="downscore fleft" pid="<?php echo $model->id;?>"><?php echo $model->down_score;?></li>
-        	<li class="fright"><span class="sns-share qzone"></span></li>
-        	<li class="fright"><span class="sns-share qqt"></span></li>
-        	<li class="fright"><span class="sns-share weibo"></span></li>
-        	<div class="clear"></div>
-        </ul>
-        <div class="comment-list comment-list-<?php echo $model->id;?> hide"></div>
     </div>
     <?php endforeach;?>
 </div>
