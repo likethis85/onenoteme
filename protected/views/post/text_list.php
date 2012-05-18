@@ -20,7 +20,7 @@
 </div>
 
 <?php if ($pages->pageCount > 1):?>
-<div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'header'=>null, 'footer'=>null));?></div>
+<div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'header'=>'', 'footer'=>''));?></div>
 <?php endif;?>
 
 <script type="text/javascript">
