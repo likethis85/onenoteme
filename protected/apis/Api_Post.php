@@ -270,7 +270,6 @@ class Api_Post extends ApiBase
     	
     	$post = new Post('api');
     	$post->channel_id = (int)$params['channel_id'];
-    	$post->category_id = (int)$params['category_id'];
     	$post->content = $params['content'];
     	$post->tags = $params['tags'];
     	$post->create_time = $_SERVER['REQUEST_TIME'];
@@ -297,12 +296,12 @@ class Api_Post extends ApiBase
         	    $im->load($data);
         	    unset($data, $curl);
         	    $im->saveAsJpeg($filename, 50);
-        	    $post->pic = fbu($path['url'] . $im->filename());
+        	    $post->bmiddle_pic = fbu($path['url'] . $im->filename());
         	    $im->revert()->saveAsJpeg($bigFilename);
-        	    $post->big_pic = fbu($path['url'] . $im->filename());
+        	    $post->original_pic = fbu($path['url'] . $im->filename());
         	}
         	else
-        	    $post->pic = $post->big_pic = '';
+        	    $post->thumbnail_pic = $post->bmiddle_pic = $post->original_pic = '';
     	}
         catch (CException $e) {
             var_dump($e);
