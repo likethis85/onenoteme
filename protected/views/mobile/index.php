@@ -1,12 +1,12 @@
 <div class="post-list">
     <?php foreach ((array)$models as $index => $model):?>
     <div class="post-item">
-    	<div class="post-user"><?php echo $model->PostUserName . '&nbsp;' . $model->createTime;?></div>
+    	<div class="post-user"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
         <div class="post-content">
             <?php echo $model->content;?>
-            <?php if ($model->pic) echo '<br />' . CHtml::image($model->pic, $model->title, array('class'=>'item-pic'));?>
+            <?php if ($model->bmiddle) echo '<br />' . CHtml::image($model->bmiddle, $model->title, array('class'=>'item-pic'));?>
         </div>
-        <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->getTagsLinks('&nbsp;', '_self', 'mobile/tag');?></div><?php endif;?>
+        <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->getTagLinks('mobile/tag', '&nbsp;', '_self');?></div><?php endif;?>
     </div>
     <?php if ($index == 1):?>
     <div class="admob">

@@ -26,7 +26,6 @@
 	<a href="<?php echo aurl('mobile/channel', array('id'=>CHANNEL_LENGTU));?>">冷图</a>
 	&nbsp;|&nbsp;
 	<a href="<?php echo aurl('mobile/index');?>">最新</a>
-	<a href="<?php echo aurl('mobile/week');?>">最热</a>
 </div>
 <div class="app-link">
     <a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">Android版正式上线啦！！点击直接下载。</a>

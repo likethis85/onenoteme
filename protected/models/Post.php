@@ -112,13 +112,13 @@ class Post extends CActiveRecord
 	    return (empty($tagsArray)) ? '' : join($operator, $tagsArray);
 	}
 	
-	public function getTagLinks($operator = ',', $target = '_blank', $class='beta-tag')
+	public function getTagLinks($route = 'tag/posts', $operator = ',', $target = '_blank', $class='beta-tag')
 	{
 	    $tags = $this->getTagArray();
 	    if (empty($tags)) return '';
 	
 	    foreach ($tags as $tag)
-	        $data[] = l($tag, aurl('tag/posts', array('name'=>urlencode($tag))), array('target'=>$target, 'class'=>$class));
+	        $data[] = l($tag, aurl($route, array('name'=>urlencode($tag))), array('target'=>$target, 'class'=>$class));
 	    
 	    return join($operator, $data);
 	}
