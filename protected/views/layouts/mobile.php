@@ -11,7 +11,7 @@
 <meta content="telephone=no" name="format-detection" />
 <link rel="shortcut icon" href="<?php echo sbu('images/favicon.ico');?>" type="image/vnd.microsoft.icon" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-basic.css');?>" />
-<link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-mobile.css?v=20120110.01');?>" />
+<link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-mobile.css?v=20120519.01');?>" />
 <script type="text/javascript" src="<?php echo sbu('libs/jquery-1.7.2.min.js');?>"></script>
 </head>
 <body>
@@ -28,7 +28,7 @@
 	<a href="<?php echo aurl('mobile/index');?>">最新</a>
 </div>
 <div class="app-link">
-    <a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">Android版正式上线啦！！点击直接下载。</a>
+    <a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">Android版正式上线啦！！点击下载。</a>
 </div>
 <div class="m-wrapper"><?php echo $content;?></div>
 <div class="admob">
