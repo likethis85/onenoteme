@@ -20,6 +20,17 @@
  * @property string $thumbnail_pic
  * @property string $bmiddle_pic
  * @property string $original_pic
+ * @property string $url
+ * @property string $tagArray
+ * @property string $tagText
+ * @property string $tagLinks
+ * @property string $createTime
+ * @property string $authorName
+ * @property string $titleLink
+ * @property string $bmiddle
+ * @property string $thumbnail
+ * @property string $bmiddleLink
+ * @property string $thumbnailLink
  */
 class Post extends CActiveRecord
 {
@@ -160,6 +171,24 @@ class Post extends CActiveRecord
             return $this->bmiddle_pic;
         else
             return '';
+    }
+    
+    public function getBmiddleLink($target = '_blank')
+    {
+        $html = '';
+        if ($this->getBmiddle())
+            $html = l(image($this->getBmiddle(), $this->title), $this->getUrl(), array('target'=>$target));
+        
+        return $html;
+    }
+    
+    public function getThumbnailLink($target = '_blank')
+    {
+        $html = '';
+        if ($this->getThumbnail())
+            $html = l(image($this->getThumbnail(), $this->title), $this->getUrl(), array('target'=>$target));
+        
+        return $html;
     }
     
     

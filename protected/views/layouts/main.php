@@ -23,7 +23,7 @@
     		<li <?php echo ($this->channel == 'duanzi') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/duanzi');?>">挖段子</a></li>
     	</ul>
 		<ul class="user-nav fright">
-    		<li><?php $this->renderDynamic('userToolbar');?></li>
+    		<?php $this->renderDynamic('userToolbar');?>
     		<li><a href="http://m.waduanzi.com">手机版</a></li>
 		</ul>
     	<div class="clear"></div>
@@ -44,6 +44,5 @@
 </body>
 </html>
 
-<?php cs()->registerScriptFile(sbu('libs/jquery.masonry.min.js'), CClientScript::POS_END);?>
 <?php cs()->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END);?>
 

@@ -37,7 +37,7 @@ class PostController extends Controller
         
         $this->channel = 'live';
         $this->render('mixed_list', array(
-        	'models' => $models,
+            'models' => $models,
             'pages' => $pages,
         ));
     }
