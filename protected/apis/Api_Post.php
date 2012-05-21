@@ -288,7 +288,7 @@ class Api_Post extends ApiBase
                 $file = CDBase::makeUploadFileName('');
                 $thumbnailFile = 'thubmnail_' . $file;
                 $thumbnailFileName = $path['path'] . $thumbnailFile;
-                $middleFileName = $path['path'] . $file;
+                $middleFileName = $path['path'] . 'bmiddle_' . $file;
                 $bigFile = 'original_' . $file;
                 $bigFileName = $path['path'] . $bigFile;
                 
@@ -299,7 +299,7 @@ class Api_Post extends ApiBase
         	    $im = new CdImage();
         	    $im->load($data);
         	    unset($data, $curl);
-        	    $im->resizeToWidth($thumbnailImageSize['width'])->crop($thumbnailImageSize['width'], $thumbnailImageSize['height'])->saveAsJpeg($thumbnailFileName, 50);
+        	    $im->resizeToWidth($thumbnailImageSize['width'])->crop($thumbnailImageSize['width'], $thumbnailImageSize['height'])->saveAsJpeg($thumbnailFileName, 90);
         	    $post->thumbnail_pic = fbu($path['url'] . $im->filename());
         	    $im->revert()->saveAsJpeg($middleFileName, 50);
         	    $post->bmiddle_pic = fbu($path['url'] . $im->filename());
