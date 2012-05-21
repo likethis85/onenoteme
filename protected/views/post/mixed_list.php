@@ -26,7 +26,15 @@ $(function(){
     	loading: {
     		finishedMsg: '数据载入成功',
     		msgText: '正在载入更多内容'
-    	}
+    	},
+    	state: {
+    	    isDuringAjax: false,
+    	    isInvalidPage: false,
+    	    isDestroyed: false,
+    	    isDone: false, // For when it goes all the way through the archive.
+    	    isPaused: false,
+    	    currPage: 1
+        },
     },
     function(newElements) {
         var newElems = $(newElements).css({opacity:0});
