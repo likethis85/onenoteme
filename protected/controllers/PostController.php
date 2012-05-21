@@ -16,10 +16,8 @@ class PostController extends Controller
     
     public function actionLatest()
     {
-//         if (request()->getIsAjaxRequest())
-//             sleep(10);
         $duration = 120;
-        $limit = 4;//param('postCountOfPage');
+        $limit = param('postCountOfPage');
         
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
