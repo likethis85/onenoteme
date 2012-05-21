@@ -59,7 +59,7 @@ a:link {text-decoration:none; color:#4E76C9; text-decoration:none; cursor:pointe
 a:visited {color:#4E76C9; text-decoration:none;}
 a:hover {text-decoration:underline;}
 
-.clear {clear:both; font-size:0px; height:0px; line-height:0px;}
+.clear {clear:both; font-size:0px; height:0px; line-height:0px; content:""; display:block;}
 .radius3px {-moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;}
 .radius5px {-moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px;}
 .fright{float:right;}

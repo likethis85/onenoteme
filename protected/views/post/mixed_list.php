@@ -13,8 +13,8 @@
 $(function(){
     var container = $('#waterfall-container');
     container.imagesLoaded(function(){
-        $(this).masonry({
-            itemSelector : '.waterfall-item',
+    	container.masonry({
+            itemSelector : '.waterfall-item'
         });
     });
 
@@ -25,12 +25,16 @@ $(function(){
     	dataType: 'html',
     	loading: {
     		finishedMsg: '数据载入成功',
-    		msgText: '正在载入更多内容',
-    		speed: 'fast',
+    		msgText: '正在载入更多内容'
     	}
     },
     function(newElements) {
-    	container.masonry('appended', $(newElements));
+        var newElems = $(newElements).css({opacity:0});
+        newElems.imagesLoaded(function(){
+            newElems.animate({opacity:1});
+            container.masonry('appended', newElems, true);
+        });
+    	
     });
 
     $('#waterfall-container').on('hover', '.waterfall-item', function(event){
