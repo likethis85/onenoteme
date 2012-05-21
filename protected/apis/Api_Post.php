@@ -287,8 +287,9 @@ class Api_Post extends ApiBase
                 $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);
                 $file = CDBase::makeUploadFileName('');
                 $thumbnailFile = 'thubmnail_' . $file;
-                $bigFile = 'original_' . $file;
+                $thumbnailFileName = $path['path'] . $thumbnailFile;
                 $middleFileName = $path['path'] . $file;
+                $bigFile = 'original_' . $file;
                 $bigFileName = $path['path'] . $bigFile;
                 
         	    $curl = new CdCurl();
