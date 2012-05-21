@@ -299,11 +299,11 @@ class Api_Post extends ApiBase
         	    $im = new CdImage();
         	    $im->load($data);
         	    unset($data, $curl);
-        	    $im->resizeToWidth($thumbnailImageSize['width'])->crop($thumbnailImageSize['width'], $thumbnailImageSize['height'])->saveAsJpeg($thumbnailFileName, 90);
+        	    $im->resizeToWidth($thumbnailImageSize['width'])->crop($thumbnailImageSize['width'], $thumbnailImageSize['height'])->saveAsJpeg($thumbnailFileName);
         	    $post->thumbnail_pic = fbu($path['url'] . $im->filename());
         	    $im->revert()->saveAsJpeg($middleFileName, 50);
         	    $post->bmiddle_pic = fbu($path['url'] . $im->filename());
-        	    $im->revert()->save($bigFileName);
+        	    $im->revert()->saveAsJpeg($bigFileName, 90);
         	    $post->original_pic = fbu($path['url'] . $im->filename());
         	}
         	else
