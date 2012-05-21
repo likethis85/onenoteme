@@ -23,7 +23,6 @@ $(function(){
     	nextSelector: 'div.pages .next a',
     	itemSelector: '.waterfall-item',
     	dataType: 'html',
-    	debug: true,
     	loading: {
     		finishedMsg: '数据载入成功',
     		msgText: '正在载入更多内容'
