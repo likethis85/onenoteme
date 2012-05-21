@@ -15,7 +15,6 @@ $(function(){
     container.imagesLoaded(function(){
         $(this).masonry({
             itemSelector : '.waterfall-item',
-            cornerStampSelector: '.corner-stamp'
         });
     });
 
