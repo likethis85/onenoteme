@@ -273,20 +273,23 @@ class Api_Post extends ApiBase
     	$post->content = $params['content'];
     	$post->tags = $params['tags'];
     	$post->create_time = $_SERVER['REQUEST_TIME'];
-    	$post->state = POST_STATE_ENABLED;
+    	$post->state = POST_STATE_DISABLED;
     	$post->up_score = mt_rand(3, 15);
     	$post->down_score = mt_rand(0, 2);
     	
     	try {
+    	    $thumbnailImageSize = array('width'=>120, 'height'=>120);
+    	    
     	    $url = trim($params['pic']);
         	if (!empty($url)) {
         	    $path = CDBase::makeUploadPath('pics');
         	    $info = parse_url($url);
                 $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);
                 $file = CDBase::makeUploadFileName('');
-                $bigFile = 'big_' . $file;
-                $filename = $path['path'] . $file;
-                $bigFilename = $path['path'] . $bigFile;
+                $thumbnailFile = 'thubmnail_' . $file;
+                $bigFile = 'original_' . $file;
+                $middleFileName = $path['path'] . $file;
+                $bigFileName = $path['path'] . $bigFile;
                 
         	    $curl = new CdCurl();
         	    $curl->get($url);
@@ -295,9 +298,11 @@ class Api_Post extends ApiBase
         	    $im = new CdImage();
         	    $im->load($data);
         	    unset($data, $curl);
-        	    $im->saveAsJpeg($filename, 50);
+        	    $im->resizeToWidth($thumbnailImageSize['width'])->crop($thumbnailImageSize['width'], $thumbnailImageSize['height'])->saveAsJpeg($thumbnailFile, 50);
+        	    $post->thumbnail_pic = fbu($path['url'] . $im->filename());
+        	    $im->revert()->saveAsJpeg($middleFileName, 50);
         	    $post->bmiddle_pic = fbu($path['url'] . $im->filename());
-        	    $im->revert()->saveAsJpeg($bigFilename);
+        	    $im->revert()->save($bigFileName);
         	    $post->original_pic = fbu($path['url'] . $im->filename());
         	}
         	else
