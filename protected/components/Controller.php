@@ -45,12 +45,12 @@ class Controller extends CController
     public function userToolbar()
     {
         if (user()->isGuest) {
-            $html = '<a href="' . aurl('site/signup') . '">注册</a>';
-			$html .= '<a href="' . aurl('site/login') . '">登录</a>';
+            $html = '<li><a href="' . aurl('site/signup') . '">注册</a></li>';
+			$html .= '<li><a href="' . aurl('site/login') . '">登录</a></li>';
         }
         else {
-            $html = '<span>' . user()->name . '</span>';
-			$html .= '<a href="' . aurl('site/logout') . '">退出</a>';
+            $html = '<li><span>' . user()->name . '</span></li>';
+			$html .= '<li><a href="' . aurl('site/logout') . '">退出</a></li>';
         }
         return $html;
     }

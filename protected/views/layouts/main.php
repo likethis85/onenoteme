@@ -12,23 +12,22 @@
 <script type="text/javascript" src="<?php echo sbu('libs/jquery-1.7.2.min.js');?>"></script>
 </head>
 <body>
-<div class="cd-wrapper cd-header">
-	<div id="logo" class="fleft"><a href="<?php echo app()->homeUrl;?>" title="点击返回首页">挖段子</a></div>
-    <div class="site-nav fright">
-		<div class="user-nav aright">
-    		<?php $this->renderDynamic('userToolbar');?>
-    		&nbsp;&nbsp;|&nbsp;<a href="http://m.waduanzi.com">手机版</a>
-		</div>
-    	<ul class="channel-nav">
+<div class="cd-header">
+    <div class="cd-wrapper">
+    	<div id="site-logo" class="logo fleft"><a href="<?php echo app()->homeUrl;?>" title="点击返回首页">挖段子</a></div>
+    	<ul class="channel-nav fleft">
     		<li <?php echo ($this->channel == 'lengtu') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/lengtu');?>">挖冷图</a></li>
     		<li>/</li>
     		<li <?php echo ($this->channel == 'girl') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/girl');?>">挖福利</a></li>
     		<li>/</li>
     		<li <?php echo ($this->channel == 'duanzi') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/duanzi');?>">挖段子</a></li>
-    		<div class="clear"></div>
     	</ul>
-	</div>
-	<div class="clear"></div>
+		<ul class="user-nav fright">
+    		<li><?php $this->renderDynamic('userToolbar');?></li>
+    		<li><a href="http://m.waduanzi.com">手机版</a></li>
+		</ul>
+    	<div class="clear"></div>
+    </div>
 </div>
 <div class="cd-wrapper">
 	<?php echo $content;?>
@@ -45,5 +44,6 @@
 </body>
 </html>
 
+<?php cs()->registerScriptFile(sbu('libs/jquery.masonry.min.js'), CClientScript::POS_END);?>
 <?php cs()->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END);?>
 

@@ -87,7 +87,7 @@ class TagController extends Controller
         $this->setDescription("与{$name}有关的相关段子、笑话、冷笑话、糗事、经典语录");
         
         $this->channel = 'tag';
-        $this->render('posts', array(
+        $this->render('/post/mixed_list', array(
         	'models' => $models,
             'pages' => $pages,
             'tagname' => $name,

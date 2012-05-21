@@ -5,21 +5,21 @@ class ChannelController extends Controller
     {
         $this->channel = 'duanzi';
         $data = $this->fetchChannelPosts(CHANNEL_DUANZI);
-        $this->render('text_posts', $data);
+        $this->render('/post/mixed_list', $data);
     }
     
     public function actionLengtu()
     {
         $this->channel = 'lengtu';
         $data = $this->fetchChannelPosts(CHANNEL_LENGTU);
-        $this->render('pic_posts', $data);
+        $this->render('/post/mixed_list', $data);
     }
     
     public function actionGirl()
     {
         $this->channel = 'girl';
         $data = $this->fetchChannelPosts(CHANNEL_GIRL);
-        $this->render('pic_posts', $data);
+        $this->render('/post/mixed_list', $data);
     }
     
     public function actionVideo()
