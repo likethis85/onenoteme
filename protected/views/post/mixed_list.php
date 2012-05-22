@@ -22,6 +22,7 @@ $(function(){
     	navSelector: '#page-nav',
     	nextSelector: '#page-nav .next a',
     	itemSelector: '.waterfall-item',
+    	extraScrollPx: 50,
     	dataType: 'html',
     	infid: 0,
     	loading: {
