@@ -26,6 +26,7 @@ $(function(){
     	bufferPx: 10,
     	dataType: 'html',
     	infid: 0,
+    	debug: true,
     	loading: {
     		finishedMsg: '已经载入全部内容。',
     		msgText: '正在载入更多内容。。。',
@@ -40,7 +41,7 @@ $(function(){
         });
     });
 
-    $.ajaxError(function(event, xhr, opt) {
+    $(document).ajaxError(function(event, xhr, opt) {
     	if (xhr.status == 404) $('div.pages').remove();
 	});
 	
