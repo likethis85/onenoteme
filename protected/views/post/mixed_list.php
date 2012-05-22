@@ -16,31 +16,30 @@ $(function(){
     	container.masonry({
             itemSelector: '.waterfall-item'
         });
-    });
 
-    container.infinitescroll({
-    	navSelector: '#page-nav',
-    	nextSelector: '#page-nav .next a',
-    	itemSelector: '.waterfall-item',
-    	extraScrollPx: 10,
-    	bufferPx: 10,
-    	dataType: 'html',
-    	infid: 0,
-    	debug: true,
-    	loading: {
-    		finishedMsg: '已经载入全部内容。',
-    		msgText: '正在载入更多内容。。。',
-    		img: '<?php echo sbu('images/loading1.gif');?>'
-    	}
-    },
-    function(newElements) {
-        var newElems = $(newElements).css({opacity:0});
-        newElems.imagesLoaded(function(){
-            newElems.animate({opacity:1});
-            container.masonry('appended', newElems, true);
+        container.infinitescroll({
+        	navSelector: '#page-nav',
+        	nextSelector: '#page-nav .next a',
+        	itemSelector: '.waterfall-item',
+        	extraScrollPx: 150,
+        	bufferPx: 40,
+        	dataType: 'html',
+        	infid: 0,
+        	debug: true,
+        	loading: {
+        		finishedMsg: '已经载入全部内容。',
+        		msgText: '正在载入更多内容。。。',
+        		img: '<?php echo sbu('images/loading1.gif');?>'
+        	}
+        },
+        function(newElements) {
+            var newElems = $(newElements).css({opacity:0});
+            newElems.imagesLoaded(function(){
+                newElems.animate({opacity:1});
+                container.masonry('appended', newElems, true);
+            });
         });
     });
-
     $(document).ajaxError(function(event, xhr, opt) {
     	if (xhr.status == 404) $('div.pages').remove();
 	});
