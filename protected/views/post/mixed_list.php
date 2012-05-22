@@ -26,7 +26,8 @@ $(function(){
     	infid: 0,
     	loading: {
     		finishedMsg: '已经载入全部内容。',
-    		msgText: '正在载入更多内容。。。'
+    		msgText: '正在载入更多内容。。。',
+    		img: '<?php echo sbu('images/loading1.gif');?>'
     	}
     },
     function(newElements) {
