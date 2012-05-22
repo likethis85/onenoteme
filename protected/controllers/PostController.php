@@ -97,5 +97,9 @@ class PostController extends Controller
         ));
     }
     
+    public function actionTest()
+    {
+        $this->renderPartial('test');
+    }
 }
 

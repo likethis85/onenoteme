@@ -7,7 +7,7 @@
     </div>
     <?php endforeach;?>
 </div>
-<div class="pages hide"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'header'=>'', 'footer'=>''));?></div>
+<div id="page-nav" class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'header'=>'', 'footer'=>''));?></div>
 
 <script type="text/javascript">
 $(function(){
@@ -19,13 +19,14 @@ $(function(){
     });
 
     container.infinitescroll({
-    	navSelector: 'div.pages',
-    	nextSelector: 'div.pages .next a',
+    	navSelector: '#page-nav',
+    	nextSelector: '#page-nav .next a',
     	itemSelector: '.waterfall-item',
     	dataType: 'html',
+    	infid: 0,
     	loading: {
-    		finishedMsg: '数据载入成功',
-    		msgText: '正在载入更多内容'
+    		finishedMsg: '已经载入全部内容。',
+    		msgText: '正在载入更多内容。。。'
     	}
     },
     function(newElements) {
@@ -37,6 +38,10 @@ $(function(){
     	
     });
 
+    $(document).ajaxError(function(event, xhr, opt) {
+    	if (xhr.status == 404) $('div.pages').remove();
+	});
+	
     $('#waterfall-container').on('hover', '.waterfall-item', function(event){
         $(this).toggleClass('item-bg');
     });

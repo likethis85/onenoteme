@@ -34,7 +34,7 @@ class ChannelController extends Controller
         $duration = 120;
         
         $channelid = (int)$channelid;
-        $limit = param('postCountOfPage');
+        $limit = 8;//param('postCountOfPage');
         
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('channel_id'=>$channelid, 'state'=>POST_STATE_ENABLED));
