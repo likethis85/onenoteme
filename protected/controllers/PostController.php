@@ -96,10 +96,5 @@ class PostController extends Controller
             'pages' => $pages,
         ));
     }
-    
-    public function actionTest()
-    {
-        $this->renderPartial('test');
-    }
 }
 
