@@ -40,7 +40,7 @@ $(function(){
         });
     });
 
-    $(document).ajaxError(function(event, xhr, opt) {
+    $.ajaxError(function(event, xhr, opt) {
     	if (xhr.status == 404) $('div.pages').remove();
 	});
 	
