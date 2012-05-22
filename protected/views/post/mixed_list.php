@@ -22,7 +22,8 @@ $(function(){
     	navSelector: '#page-nav',
     	nextSelector: '#page-nav .next a',
     	itemSelector: '.waterfall-item',
-    	extraScrollPx: 50,
+    	extraScrollPx: 10,
+    	bufferPx: 10,
     	dataType: 'html',
     	infid: 0,
     	loading: {
@@ -37,7 +38,6 @@ $(function(){
             newElems.animate({opacity:1});
             container.masonry('appended', newElems, true);
         });
-    	
     });
 
     $(document).ajaxError(function(event, xhr, opt) {
