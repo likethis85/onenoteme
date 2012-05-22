@@ -5,28 +5,30 @@ class ChannelController extends Controller
     {
         $this->channel = 'duanzi';
         $data = $this->fetchChannelPosts(CHANNEL_DUANZI);
-        $this->render('/post/mixed_list', $data);
+        if (request()->getIsAjaxRequest())
+            $this->renderPartial('/post/mixed_list', $data);
+        else
+            $this->render('/post/mixed_list', $data);
     }
     
     public function actionLengtu()
     {
         $this->channel = 'lengtu';
         $data = $this->fetchChannelPosts(CHANNEL_LENGTU);
-        $this->render('/post/mixed_list', $data);
+        if (request()->getIsAjaxRequest())
+            $this->renderPartial('/post/mixed_list', $data);
+        else
+            $this->render('/post/mixed_list', $data);
     }
     
     public function actionGirl()
     {
         $this->channel = 'girl';
         $data = $this->fetchChannelPosts(CHANNEL_GIRL);
-        $this->render('/post/mixed_list', $data);
-    }
-    
-    public function actionVideo()
-    {
-        $this->channel = 'video';
-        $data = $this->fetchChannelPosts(CHANNEL_VIDEO);
-        $this->render('video_posts', $data);
+        if (request()->getIsAjaxRequest())
+            $this->renderPartial('/post/mixed_list', $data);
+        else
+            $this->render('/post/mixed_list', $data);
     }
     
     private function fetchChannelPosts($channelid)

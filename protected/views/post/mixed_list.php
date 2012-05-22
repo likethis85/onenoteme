@@ -1,13 +1,13 @@
-<div id="waterfall-container">
-    <?php foreach ((array)$models as $key => $model):?>
-    <div class="waterfall-item">
-        <div class="post-time"><?php echo $model->createTime;?></div>
-        <?php if ($model->bmiddle):?><div class="pic-block"><?php echo $model->bmiddleLink;?></div><?php endif;?>
-        <p><?php echo l($model->content, $model->url, array('target'=>'_blank'));?></p>
+    <div id="waterfall-container" class="panel panel20">
+        <?php foreach ((array)$models as $key => $model):?>
+        <div class="waterfall-item">
+            <div class="post-time"><?php echo $model->createTime;?></div>
+            <?php if ($model->bmiddle):?><div class="pic-block"><?php echo $model->bmiddleLink;?></div><?php endif;?>
+            <p><?php echo l($model->content, $model->url, array('target'=>'_blank'));?></p>
+        </div>
+        <?php endforeach;?>
     </div>
-    <?php endforeach;?>
-</div>
-<div id="page-nav" class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'header'=>'', 'footer'=>''));?></div>
+    <div id="page-nav" class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'header'=>'', 'footer'=>''));?></div>
 
 <script type="text/javascript">
 $(function(){
