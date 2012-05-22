@@ -21,11 +21,8 @@ $(function(){
         	navSelector: '#page-nav',
         	nextSelector: '#page-nav .next a',
         	itemSelector: '.waterfall-item',
-        	extraScrollPx: 150,
-        	bufferPx: 40,
         	dataType: 'html',
         	infid: 0,
-        	debug: true,
         	loading: {
         		finishedMsg: '已经载入全部内容。',
         		msgText: '正在载入更多内容。。。',
