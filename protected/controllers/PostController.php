@@ -32,10 +32,11 @@ class PostController extends Controller
         
         $cmd = app()->getDb()->createCommand();
         if (user()->getFlash('allowUserView'))
-            $post = DPost::model()->findByPk($id);
+            $post = Post::model()->findByPk($id);
         else {
-            $cmd->where('id = :id and state = :state', array('id' => $id, ':state' => POST_STATE_ENABLED));
-            $post = DPost::model()->find($cmd);
+            $criteria = new CDbCriteria();
+            $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
+            $post = Post::model()->findByPk($id, $criteria);
         }
         if (null === $post)
             throw new CHttpException(404, '该段子不存在或未被审核');
