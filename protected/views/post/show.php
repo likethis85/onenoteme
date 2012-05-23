@@ -3,7 +3,7 @@
 		<h1><?php echo $post->title;?></h1>
 		<?php if ($post->bmiddle):?><div class="post-picture"><?php echo CHtml::image($post->bmiddle, $post->title);?></div><?php endif;?>
 		<div class="post-content"><?php echo $post->content;?></div>
-		<?php if ($post->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $post->tagsLinks;?></div><?php endif;?>
+		<?php if ($post->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $post->tagLinks;?></div><?php endif;?>
 	</div>
 </div>
 
