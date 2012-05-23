@@ -10,6 +10,7 @@
 </div>
 <div class="clear"></div>
 <div id="page-nav" class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'header'=>'', 'footer'=>''));?></div>
+<div id="manual-load" class="radius5px hide">查看更多</div>
 
 <script type="text/javascript">
 $(function(){
@@ -18,7 +19,7 @@ $(function(){
     	container.masonry({
             itemSelector: '.waterfall-item'
         });
-
+        var count = 0;
         container.infinitescroll({
         	navSelector: '#page-nav',
         	nextSelector: '#page-nav .next a',
@@ -36,6 +37,18 @@ $(function(){
             newElems.imagesLoaded(function(){
                 newElems.animate({opacity:1});
                 container.masonry('appended', newElems, true);
+
+                if (count >= 2) {
+                	$(window).unbind('.infscr');
+                	$(document).on('click', '#manual-load', function(event){
+                        container.infinitescroll('retrieve');
+                        return false;
+              	    });
+                	$('#manual-load').show();
+                    count = 0;
+                }
+                else
+                    count++;
             });
         });
     });
