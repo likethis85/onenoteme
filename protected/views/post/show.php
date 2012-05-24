@@ -36,11 +36,11 @@
             <!-- JiaThis Button END -->
         </div>
         <div class="clear"></div>
-        <div class="content-block social-comments">
-            <!-- UY BEGIN -->
-            <div id="uyan_frame"></div>
-            <script type="text/javascript" id="UYScript" src="http://v1.uyan.cc/js/iframe.js?UYUserId=1622045" async=""></script>
-            <!-- UY END -->
+        <div class="content-block comments">
+            <form action="#" method="post">
+                <textarea name="content" class="content"></textarea>
+                <input type="submit" id="post-comment" value="发表" />
+            </form>
         </div>
 	</div>
 </div>

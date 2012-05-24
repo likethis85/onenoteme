@@ -76,8 +76,8 @@ body {background-color:#121211;}
 .post-detail .arrow a.arrow-down.pushed {background-position:-386px -68px;}
 .post-detail .info {width:265px; height:38px; line-height:38px; padding:0 10px; margin-right:3px;}
 .post-detail .social {padding:3px 3px; margin-left:3px;}
-.post-detail .social-comments {padding:10px;}
-
+.post-detail .comments .content {width:513px; height:33px; border:0;}
+.post-detail .comments #post-comment {width:78px; height:33px; border:0;}
 
 
 
