@@ -9,6 +9,7 @@
  * @property string $title
  * @property integer $create_time
  * @property integer $create_ip
+ * @property integer $view_nums
  * @property integer $up_score
  * @property integer $down_score
  * @property integer $comment_nums
@@ -21,6 +22,7 @@
  * @property string $bmiddle_pic
  * @property string $original_pic
  * @property string $url
+ * @property integer $score
  * @property string $tagArray
  * @property string $tagText
  * @property string $tagLinks
@@ -65,7 +67,7 @@ class Post extends CActiveRecord
 		// will receive user inputs.
 		return array(
 		    array('content', 'required', 'message'=>'段子内容必须填写'),
-			array('channel_id, up_score, down_score, comment_nums, state, create_time, user_id', 'numerical', 'integerOnly'=>true),
+			array('channel_id, view_nums, up_score, down_score, comment_nums, state, create_time, user_id', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
 			array('create_ip', 'length', 'max'=>15),
 			array('title, tags, thumbnail_pic, bmiddle_pic, original_pic', 'length', 'max'=>250),
@@ -92,17 +94,18 @@ class Post extends CActiveRecord
 			'id' => 'ID',
 		    'channel_id' => '频道',
 			'title' => '标题',
-		    'thumbnail_pic' => '缩略图',
-		    'bmiddle_pic' => '图片',
-		    'original_pic' => '原图',
-			'create_time' => '发布时间',
-		    'up_score' => '顶数',
+	        'view_nums' => '浏览',
+	        'up_score' => '顶数',
 		    'down_score' => '浏览',
 			'comment_nums' => '评论',
 		    'user_id' => '用户ID',
 		    'user_name' => '名字',
 			'state' => '状态',
 		    'tags' => '标签',
+		    'thumbnail_pic' => '缩略图',
+		    'bmiddle_pic' => '图片',
+		    'original_pic' => '原图',
+			'create_time' => '发布时间',
 			'content' => '内容',
 		);
 	}
@@ -110,6 +113,11 @@ class Post extends CActiveRecord
 	public function getUrl()
 	{
 	    return aurl('post/show', array('id' => $this->id));
+	}
+	
+	public function getScore()
+	{
+	    return (int)($this->up_score - $this->down_score);
 	}
 
 	/**

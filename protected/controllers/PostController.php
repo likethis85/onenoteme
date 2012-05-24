@@ -11,10 +11,10 @@ class PostController extends Controller
     
     public function actionScore()
     {
-        $id = (int)$_POST['id'];
+        $pid = (int)$_POST['pid'];
         $column = ((int)$_POST['score'] > 0) ? 'up_score' : 'down_score';
         $counters = array($column => 1);
-        $result = Post::model()->updateCounters($counters, 'id = :id', array(':id'=>$id));
+        $result = Post::model()->updateCounters($counters, 'id = :id', array(':id'=>$pid));
         echo (int)$result;
         exit(0);
     }
@@ -55,7 +55,7 @@ class PostController extends Controller
         
         $this->pageTitle = trim(strip_tags($post->title)) . ' - 挖段子';
         $this->setKeywords($this->pageTitle);
-        $this->setDescription($this->pageTitle);
+        $this->setDescription($post->content);
         
         $this->channel = (int)$post->channel_id;
         $this->render('show', array(

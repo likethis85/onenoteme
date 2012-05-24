@@ -44,5 +44,6 @@
 </body>
 </html>
 
+<?php cs()->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END);?>
 <?php cs()->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END);?>
 
