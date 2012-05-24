@@ -116,14 +116,14 @@ class Post extends CActiveRecord
 	    return Tag::filterTagsArray($this->tags);
 	}
 	
-	public function getTagText($operator = ',')
+	public function getTagText($operator = '&nbsp;')
 	{
 	    $tagsArray = $this->getTagArray();
 	     
 	    return (empty($tagsArray)) ? '' : join($operator, $tagsArray);
 	}
 	
-	public function getTagLinks($route = 'tag/posts', $operator = ',', $target = '_blank', $class='beta-tag')
+	public function getTagLinks($route = 'tag/posts', $operator = '&nbsp;', $target = '_blank', $class='beta-tag')
 	{
 	    $tags = $this->getTagArray();
 	    if (empty($tags)) return '';
