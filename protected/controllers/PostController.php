@@ -9,11 +9,6 @@ class PostController extends Controller
         );
     }
     
-    public function actionIndex()
-    {
-        $this->forward('post/latest');
-    }
-    
     public function actionScore()
     {
         $id = (int)$_POST['id'];
@@ -62,7 +57,7 @@ class PostController extends Controller
         $this->setKeywords($this->pageTitle);
         $this->setDescription($this->pageTitle);
         
-        $this->channel = 'post';
+        $this->channel = (int)$post->channel_id;
         $this->render('show', array(
             'post' => $post,
             'comments' => $comments,

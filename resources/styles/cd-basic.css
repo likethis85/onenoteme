@@ -57,7 +57,7 @@ pre code{padding:0;background-color:transparent;}
 
 a:link {text-decoration:none; color:#4E76C9; text-decoration:none; cursor:pointer;}
 a:visited {color:#4E76C9; text-decoration:none;}
-a:hover {text-decoration:underline;}
+a:hover {text-decoration:none;}
 
 .clear {clear:both; font-size:0px; height:0px; line-height:0px; content:""; display:block;}
 .radius3px {-moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;}

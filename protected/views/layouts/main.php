@@ -16,11 +16,11 @@
     <div class="cd-wrapper">
     	<div id="site-logo" class="logo fleft"><a href="<?php echo app()->homeUrl;?>" title="点击返回首页">挖段子</a></div>
     	<ul class="channel-nav fleft">
-    		<li <?php echo ($this->channel == 'lengtu') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/lengtu');?>">挖冷图</a></li>
-    		<li>/</li>
-    		<li <?php echo ($this->channel == 'girl') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/girl');?>">挖福利</a></li>
-    		<li>/</li>
-    		<li <?php echo ($this->channel == 'duanzi') ? 'class="channel-hover"' : '';?>><a href="<?php echo aurl('channel/duanzi');?>">挖段子</a></li>
+    		<li<?php echo ($this->channel===CHANNEL_LENGTU) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/lengtu');?>">挖冷图</a></li>
+    		<li>|</li>
+    		<li<?php echo ($this->channel===CHANNEL_GIRL) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/girl');?>">挖福利</a></li>
+    		<li>|</li>
+    		<li<?php echo ($this->channel===CHANNEL_DUANZI) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/duanzi');?>">挖段子</a></li>
     	</ul>
 		<ul class="user-nav fright">
     		<?php $this->renderDynamic('userToolbar');?>

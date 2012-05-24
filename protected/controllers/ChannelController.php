@@ -3,7 +3,7 @@ class ChannelController extends Controller
 {
     public function actionDuanzi()
     {
-        $this->channel = 'duanzi';
+        $this->channel = CHANNEL_DUANZI;
         $data = $this->fetchChannelPosts(CHANNEL_DUANZI);
         if (request()->getIsAjaxRequest())
             $this->renderPartial('/post/mixed_list', $data);
@@ -13,7 +13,7 @@ class ChannelController extends Controller
     
     public function actionLengtu()
     {
-        $this->channel = 'lengtu';
+        $this->channel = CHANNEL_LENGTU;
         $data = $this->fetchChannelPosts(CHANNEL_LENGTU);
         if (request()->getIsAjaxRequest())
             $this->renderPartial('/post/mixed_list', $data);
@@ -23,7 +23,7 @@ class ChannelController extends Controller
     
     public function actionGirl()
     {
-        $this->channel = 'girl';
+        $this->channel = CHANNEL_GIRL;
         $data = $this->fetchChannelPosts(CHANNEL_GIRL);
         if (request()->getIsAjaxRequest())
             $this->renderPartial('/post/mixed_list', $data);

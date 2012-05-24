@@ -34,6 +34,11 @@
  */
 class Post extends CActiveRecord
 {
+    public static function channels()
+    {
+        return array(CHANNEL_DUANZI, CHANNEL_LENGTU, CHANNEL_GIRL, CHANNEL_VIDEO);
+    }
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Post the static model class

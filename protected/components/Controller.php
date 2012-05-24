@@ -49,7 +49,7 @@ class Controller extends CController
 			$html .= '<li><a href="' . aurl('site/login') . '">登录</a></li>';
         }
         else {
-            $html = '<li><span>' . user()->name . '</span></li>';
+            $html = '<li><span class="active">' . user()->name . '</span></li>';
 			$html .= '<li><a href="' . aurl('site/logout') . '">退出</a></li>';
         }
         return $html;
