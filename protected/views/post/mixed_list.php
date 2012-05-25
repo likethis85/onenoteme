@@ -1,4 +1,7 @@
 <div id="waterfall-container" class="panel panel20">
+    <div class="waterfall-item">
+        <script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=200&h=300"></script>
+    </div>
     <?php foreach ((array)$models as $key => $model):?>
     <div class="waterfall-item">
         <div class="post-time"><?php echo $model->createTime;?></div>
