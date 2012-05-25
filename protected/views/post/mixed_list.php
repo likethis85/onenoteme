@@ -1,11 +1,11 @@
 <div id="waterfall-container" class="panel panel20">
-    <?php foreach ((array)$models as $key => $model):?>
+    <?php foreach ((array)$models as $index => $model):?>
     <div class="waterfall-item">
         <div class="post-time"><?php echo $model->createTime;?></div>
         <?php if ($model->bmiddle):?><div class="pic-block"><?php echo $model->bmiddleLink;?></div><?php endif;?>
         <p><?php echo l($model->content, $model->url, array('target'=>'_blank'));?></p>
     </div>
-    <?php if ($key == mt_rand(0, 7)):?>
+    <?php if ($index == mt_rand(0, 7)):?>
     <div class="waterfall-item">
         <div class="post-time">广告赞助商</div>
         <p><script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=200&h=300"></script></p>
