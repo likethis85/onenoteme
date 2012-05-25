@@ -61,6 +61,7 @@ a:hover {text-decoration:none;}
 
 .clear {clear:both; font-size:0px; height:0px; line-height:0px; content:""; display:block;}
 .radius3px {-moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;}
+.radius4px {-moz-border-radius:4px; -webkit-border-radius:4px; border-radius:4px;}
 .radius5px {-moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px;}
 .fright{float:right;}
 .fleft{float:left;}

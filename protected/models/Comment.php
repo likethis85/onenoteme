@@ -16,6 +16,7 @@
  * @property integer $state
  *
  * @property string $authorName
+ * @property string $filterContent
  */
 class Comment extends CActiveRecord
 {
@@ -81,6 +82,21 @@ class Comment extends CActiveRecord
 	public function getAuthorName()
 	{
 	    return $this->user_name ? $this->user_name : user()->guestName;
+	}
+	
+	public function getFilterContent()
+	{
+	    return strip_tags(trim($this->content));
+	}
+	
+	public function getCreateTime($format = '')
+	{
+	    if (empty($this->create_time)) return '';
+	    
+	    if (empty($format))
+	        $format = param('formatShortDateTime');
+	    
+	    return date($format, $this->create_time);
 	}
 	
 	protected function beforeSave()

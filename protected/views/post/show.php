@@ -5,7 +5,7 @@
 		    <?php if ($post->tags):?><div class="post-tags">标签：<?php echo $post->tagLinks;?></div><?php endif;?>
         </div>
         <?php if ($post->bmiddle):?><div class="content-block post-picture"><?php echo CHtml::image($post->bmiddle, $post->title);?></div><?php endif;?>
-		<div class="content-block arrow fleft">
+		<div class="content-block post-arrows fleft">
             <a class="site-bg arrow-up" data-id="<?php echo $post->id;?>" data-value="1" data-url="<?php echo aurl('post/score');?>" href="javascript:void(0);">喜欢</a>
             <a class="site-bg arrow-down" data-id="<?php echo $post->id;?>" data-value="0" data-url="<?php echo aurl('post/score');?>" href="javascript:void(0);">讨厌</a>
             <div class="clear"></div>
@@ -36,12 +36,25 @@
             <!-- JiaThis Button END -->
         </div>
         <div class="clear"></div>
-        <div class="content-block comments">
-            <form action="#" method="post">
-                <textarea name="content" class="content"></textarea>
-                <input type="submit" id="post-comment" value="发表" />
-            </form>
+        <form action="#" method="post" class="content-block comment-form">
+            <textarea name="content" class="content fleft"></textarea>
+            <input type="submit" id="submit-comment" value="发表" class="site-bg fright" />
+            <div class="clear"></div>
+        </form>
+        
+        <?php foreach ((array)$comments as $model):?>
+        <div class="content-block comment-item">
+            <div class="comment-arrows fleft radius4px">
+                <a class="like site-bg up" href="javascript:void(0);">喜欢</a>
+                <a class="dislike site-bg down" href="javascript:void(0);">讨厌</a>
+            </div>
+            <dl class="radius4px">
+                <dt><?php echo $model->createTime;?></dt>
+                <dd><?php echo $model->filterContent;?></dd>
+            </dl>
+            <div class="clear"></div>
         </div>
+        <?php endforeach;?>
 	</div>
 </div>
 

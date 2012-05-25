@@ -41,17 +41,7 @@ class PostController extends Controller
         $conditions = array('and', 'post_id = :pid', 'state = :state');
         $params = array(':pid' => $id, ':state' => COMMENT_STATE_ENABLED);
         
-        $cmd = app()->db->createCommand()
-            ->order('id asc')
-            ->limit($limit)
-            ->where($conditions, $params);
-            
-        $count = DComment::model()->count($conditions, $params);
-        $pages = new CPagination($count);
-        $pages->setPageSize($limit);
-        $offset = $pages->getCurrentPage() * $limit;
-        $cmd->offset($offset);
-        $comments = (array)DComment::model()->findAll($cmd);
+        $commentsData = self::fetchComments($id);
         
         $this->pageTitle = trim(strip_tags($post->title)) . ' - 挖段子';
         $this->setKeywords($this->pageTitle);
@@ -60,9 +50,38 @@ class PostController extends Controller
         $this->channel = (int)$post->channel_id;
         $this->render('show', array(
             'post' => $post,
-            'comments' => $comments,
-            'pages' => $pages,
+            'comments' => $commentsData['models'],
+            'pages' => $commentsData['pages'],
         ));
     }
+    
+    private static function fetchComments($pid)
+    {
+        $pid = (int)$pid;
+        if ($pid <=0) return array();
+        
+        $criteria = new CDbCriteria();
+        $columns = array(
+            'post_id' => $pid,
+            'state' => COMMENT_STATE_ENABLED,
+        );
+        $criteria->addColumnCondition($columns);
+        $criteria->limit = param('commentCountOfPage');
+        $criteria->order = 'create_time asc';
+        
+        $pages = new CPagination(Comment::model()->count($criteria));
+        $pages->setPageSize($criteria->limit);
+        $pages->applyLimit($criteria);
+        
+        $models = Comment::model()->findAll($criteria);
+        
+        return array(
+            'models' => $models,
+            'pages' => $pages,
+        );
+    }
 }
+
+
+
 
