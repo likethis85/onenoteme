@@ -41,8 +41,9 @@ body {background-color:#121211;}
 .waterfall-item .pic-block {max-height:400px; overflow:hidden; margin-bottom:10px;}
 .waterfall-item .pic-block img {max-width:197px; min-width:150px; vertical-align:top;}
 .waterfall-item p {line-height:24px; text-align:left; padding:0 10px 5px; margin:0;}
+.waterfall-item p {display:block;}
 .waterfall-item p a:link, .waterfall-item p a:visited {color:#DDDDD1;}
-.waterfall-item p a:hover {color:#DDDDD1;}
+.waterfall-item.item-bg p a:link, .waterfall-item.item-bg p a:visited, .waterfall-item.item-bg p a:hover {color:#666666;}
 .waterfall-item .post-time {font-size:12px; color:#999; padding:0px 10px 10px; text-align:left;}
 ::selection {background-color:#C3E99E; text-shadow:none;}
 #infscr-loading {position:fixed; z-index:999; text-align:center; bottom:30%; left:42%; background:gray; border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px; opacity:0.8; padding:15px; color:white;}

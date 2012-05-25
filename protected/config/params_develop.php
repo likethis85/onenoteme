@@ -2,12 +2,8 @@
 return array(
 
     'autoLoginDuration' => 3600 * 24 * 7,
-    'postCountOfPage' => 20,
+    'postCountOfPage' => 32,
     'commentCountOfPage' => 20,
-    'numsOfSetPostIsShow' => 10,
-    'pecentOfSetPostIsShow' => 2.0,
-    'numsOfDeletePost' => 10,
-    'pecentOfDeletePost' => 0.5,
 
     'userIsRequireEmailVerify' => false,
 
