@@ -11,9 +11,9 @@
             <div class="clear"></div>
         </div>
         <div class="content-block info fleft">
-            <span>评分:<?php echo $post->score;?></span>&nbsp;&nbsp;
-            <span>浏览:<?php echo (int)$post->view_nums;?></span>&nbsp;&nbsp;
-            <span>喜欢:<?php echo (int)$post->up_score;?></span>
+            评分:<span id="score-count"><?php echo $post->score;?></span>&nbsp;&nbsp;
+            浏览:<span id="view-count"><?php echo (int)$post->view_nums;?></span>&nbsp;&nbsp;
+            喜欢:<span id="like-count"><?php echo (int)$post->up_score;?></span>
         </div>
         <div class="content-block social fright">
             <!-- JiaThis Button BEGIN -->
