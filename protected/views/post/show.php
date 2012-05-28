@@ -36,7 +36,7 @@
             		"t163":"Cwn0IrjtEY6KHD6m",
             		"tsouhu":"dze98woifnwQGH4wN0QL"
             	},
-            	hideMore:false
+            	hideMore:true
             }
             </script>
             <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js?uid=1622045" charset="utf-8"></script>
