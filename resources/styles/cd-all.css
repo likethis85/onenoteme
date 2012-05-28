@@ -98,6 +98,7 @@ body {background-color:#121211;}
 .comment-item .comment-arrows .arrow-up.pushed {background-position:-188px -78px;}
 .comment-item .comment-arrows .arrow-down.pushed {background-position:-188px -99px;}
 .next-posts {margin-bottom:10px;}
+.next-posts .post-nav {margin-bottom:10px;}
 .next-posts .post-nav a:link, .next-posts .post-nav a:visited {display:block; padding:0; text-align:center; line-height:33px; color:white; margin-right:5px;}
 .next-posts .thumb {float:left; background-color:#181817; margin:2px;}
 .next-posts .thumb a:link, .next-posts .thumb a:visited {display:block; border:3px solid #444442;  width:80px; height:80px; overflow:hidden;}
