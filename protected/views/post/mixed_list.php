@@ -20,6 +20,8 @@
 
 <script type="text/javascript">
 $(function(){
+	Waduanzi.AjustImgWidth($('.pic-block img'), 197);
+	
     var container = $('#waterfall-container');
     container.imagesLoaded(function(){
     	container.masonry({

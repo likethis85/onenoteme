@@ -69,7 +69,7 @@ body {background-color:#121211;}
 .post-detail .content-block {border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px; background:#181817; margin-bottom:5px;}
 .post-detail .post-content {line-height:24px; color:inherit; padding:10px;}
 .post-detail .post-picture {text-align:center; overflow:hidden;}
-.post-detail .post-picture img {max-width:700px;}
+.post-detail .post-picture img {max-width:600px;}
 .post-detail .post-arrows {padding:3px; width:64px; margin-right:3px; font-size:0; text-indent:-9999px;}
 .post-detail .post-arrows a {display:block; float:left; width:30px; height:30px; margin:1px;}
 .post-detail .post-arrows a.arrow-up {background-position:-231px -68px;}
