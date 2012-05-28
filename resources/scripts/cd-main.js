@@ -49,5 +49,9 @@ var Waduanzi = {
 				// success
 			}
 		});
+	},
+	AjustImgWidth: function(selector, max){
+		if (selector.width() > max)
+			selector.css('width', max);
 	}
 };

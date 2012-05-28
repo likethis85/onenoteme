@@ -66,6 +66,7 @@
 <script type="text/javascript">
 $(function(){
     $('.post-detail').on('click', '.arrow a', Waduanzi.RatingPost);
+    Waduanzi.AjustImgWidth($('.post-picture img'), 650);
 });
 </script>
 
