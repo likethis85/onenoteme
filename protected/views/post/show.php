@@ -24,12 +24,14 @@
             <a class="jiathis_button_renren"></a>
             <a class="jiathis_button_kaixin001"></a>
             <a href="http://www.jiathis.com/share?uid=1622045" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
-            <a class="jiathis_counter_style"></a>
             </div>
             <script type="text/javascript" >
             var jiathis_config={
             	data_track_clickback:true,
             	summary:"",
+            	ralateuid:{
+            		"tsina":"1639121454"
+            	},
             	appkey:{
             		"tsina":"456860706",
             		"tqq":"801092195",
