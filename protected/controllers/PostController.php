@@ -65,10 +65,12 @@ class PostController extends Controller
     private static function prevPostUrl(Post $post)
     {
         $createTime = (int)$post->create_time;
+        $channelID = (int)$post->channel_id;
         $id = app()->getDb()->createCommand()
             ->select('id')
             ->from(TABLE_POST)
-            ->where("create_time > :createtime and state = :enabled and thumbnail_pic != ''", array(':createtime' => $createTime, ':enabled' => POST_STATE_ENABLED))
+            ->where(array('and', 'create_time > :createtime', 'channel_id = :channelid', 'state = :enabled', "thumbnail_pic != ''"),
+                array(':createtime' => $createTime, ':enabled' => POST_STATE_ENABLED, ':channelid'=>$channelID))
             ->order('create_time asc, id asc')
             ->limit(1)
             ->queryScalar();
@@ -80,10 +82,12 @@ class PostController extends Controller
     private static function nextPostUrl(Post $post)
     {
         $createTime = (int)$post->create_time;
+        $channelID = (int)$post->channel_id;
         $id = app()->getDb()->createCommand()
             ->select('id')
             ->from(TABLE_POST)
-            ->where("create_time < :createtime and state = :enabled and thumbnail_pic != ''", array(':createtime' => $createTime, ':enabled' => POST_STATE_ENABLED))
+            ->where(array('and', 'create_time < :createtime', 'channel_id = :channelid', 'state = :enabled', "thumbnail_pic != ''"),
+                array(':createtime' => $createTime, ':enabled' => POST_STATE_ENABLED, ':channelid'=>$channelID))
             ->order('create_time desc, id desc')
             ->limit(1)
             ->queryScalar();
@@ -119,6 +123,7 @@ class PostController extends Controller
     private static function fetchNextPosts(Post $post, $count = 6, $column = 3)
     {
         $createTime = (int)$post->create_time;
+        $channelID = (int)$post->channel_id;
         $count = (int)$count;
         $column = (int)$column;
         
@@ -129,7 +134,7 @@ class PostController extends Controller
         
         $criteria = new CDbCriteria();
         $criteria->addCondition("create_time < $createTime");
-        $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
+        $criteria->addColumnCondition(array('channel_id'=>$channelID, 'state'=>POST_STATE_ENABLED));
         $criteria->addCondition("thumbnail_pic != ''");
         $criteria->order = 'create_time desc, id desc';
         $criteria->limit = $count;
