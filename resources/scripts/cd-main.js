@@ -51,7 +51,9 @@ var Waduanzi = {
 		});
 	},
 	AjustImgWidth: function(selector, max){
-		if (selector.width() > max)
-			selector.css('width', max);
+		if ($.browser.msie && parseInt($.browser.version) < 7) {
+			if (selector.width() > max)
+				selector.css('width', max);
+		}
 	}
 };
