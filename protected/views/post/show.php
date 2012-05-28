@@ -24,12 +24,19 @@
             <a class="jiathis_button_renren"></a>
             <a class="jiathis_button_kaixin001"></a>
             <a href="http://www.jiathis.com/share?uid=1622045" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+            <a class="jiathis_counter_style"></a>
             </div>
             <script type="text/javascript" >
             var jiathis_config={
             	data_track_clickback:true,
             	summary:"",
-            	hideMore:true
+            	appkey:{
+            		"tsina":"456860706",
+            		"tqq":"801092195",
+            		"t163":"Cwn0IrjtEY6KHD6m",
+            		"tsouhu":"dze98woifnwQGH4wN0QL"
+            	},
+            	hideMore:false
             }
             </script>
             <script type="text/javascript" src="http://v2.jiathis.com/code/jia.js?uid=1622045" charset="utf-8"></script>
