@@ -67,7 +67,7 @@ class PostController extends Controller
         $id = app()->getDb()->createCommand()
             ->select('id')
             ->from(TABLE_POST)
-            ->where('create_time > :createtime', array(':createtime' => $post->create_time))
+            ->where('create_time > :createtime and state = :enabled', array(':createtime' => $post->create_time, ':enabled' => POST_STATE_ENABLED))
             ->order('create_time asc, id asc')
             ->limit(1)
             ->queryScalar();
@@ -81,7 +81,7 @@ class PostController extends Controller
         $id = app()->getDb()->createCommand()
             ->select('id')
             ->from(TABLE_POST)
-            ->where('create_time < :createtime', array(':createtime' => $post->create_time))
+            ->where('create_time < :createtime and state = :enabled', array(':createtime' => $post->create_time, ':enabled' => POST_STATE_ENABLED))
             ->order('create_time desc, id desc')
             ->limit(1)
             ->queryScalar();
