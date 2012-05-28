@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 
 body {background-color:#121211;}
+::selection {background-color:#C3E99E; text-shadow:none;}
 .site-bg {background-image:url(../images/site-sprite.png); background-repeat:no-repeat;}
 .cd-wrapper {width:950px; margin:0px auto; overflow:hidden;}
 
@@ -45,7 +46,7 @@ body {background-color:#121211;}
 .waterfall-item p a:link, .waterfall-item p a:visited {color:#DDDDD1;}
 .waterfall-item.item-bg p a:link, .waterfall-item.item-bg p a:visited, .waterfall-item.item-bg p a:hover {color:#666666;}
 .waterfall-item .post-time {font-size:12px; color:#999; padding:0px 10px 10px; text-align:left;}
-::selection {background-color:#C3E99E; text-shadow:none;}
+.waterfall-item iframe {width:197px; overflow:hidden;}
 #infscr-loading {position:fixed; z-index:999; text-align:center; bottom:30%; left:42%; background:gray; border-radius:10px; -moz-border-radius:10px; -webkit-border-radius:10px; opacity:0.8; padding:15px; color:white;}
 #infscr-loading img {margin-bottom:10px;}
 #manual-load {background:#444442; width:50%; height:40px; line-height:40px; font-size:16px; font-weight:bold; color:#DDDDD1; text-align:center; margin:20px auto; cursor:pointer;}
