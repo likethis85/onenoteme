@@ -67,9 +67,11 @@
             <div class="clear"></div>
         </div>
         <?php foreach ((array)$nextPosts as $next):?>
+        <?php if ($next->channel_id != CHANNEL_DUANZI):?>
         <div class="thumb">
             <?php echo $next->getThumbnailLink('_self');?>
         </div>
+        <?php endif;?>
         <?php endforeach;?>
         <div class="clear"></div>
     </div>

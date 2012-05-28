@@ -69,7 +69,7 @@ class PostController extends Controller
         $id = app()->getDb()->createCommand()
             ->select('id')
             ->from(TABLE_POST)
-            ->where(array('and', 'create_time > :createtime', 'channel_id = :channelid', 'state = :enabled', "thumbnail_pic != ''"),
+            ->where(array('and', 'create_time > :createtime', 'channel_id = :channelid', 'state = :enabled'),
                 array(':createtime' => $createTime, ':enabled' => POST_STATE_ENABLED, ':channelid'=>$channelID))
             ->order('create_time asc, id asc')
             ->limit(1)
@@ -86,7 +86,7 @@ class PostController extends Controller
         $id = app()->getDb()->createCommand()
             ->select('id')
             ->from(TABLE_POST)
-            ->where(array('and', 'create_time < :createtime', 'channel_id = :channelid', 'state = :enabled', "thumbnail_pic != ''"),
+            ->where(array('and', 'create_time < :createtime', 'channel_id = :channelid', 'state = :enabled'),
                 array(':createtime' => $createTime, ':enabled' => POST_STATE_ENABLED, ':channelid'=>$channelID))
             ->order('create_time desc, id desc')
             ->limit(1)
@@ -124,6 +124,10 @@ class PostController extends Controller
     {
         $createTime = (int)$post->create_time;
         $channelID = (int)$post->channel_id;
+        
+        if ($channelID == CHANNEL_DUANZI)
+            return array();
+        
         $count = (int)$count;
         $column = (int)$column;
         
@@ -135,7 +139,6 @@ class PostController extends Controller
         $criteria = new CDbCriteria();
         $criteria->addCondition("create_time < $createTime");
         $criteria->addColumnCondition(array('channel_id'=>$channelID, 'state'=>POST_STATE_ENABLED));
-        $criteria->addCondition("thumbnail_pic != ''");
         $criteria->order = 'create_time desc, id desc';
         $criteria->limit = $count;
         
