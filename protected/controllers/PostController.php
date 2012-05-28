@@ -37,7 +37,7 @@ class PostController extends Controller
             throw new CHttpException(404, '该段子不存在或未被审核');
         
         // 获取后几个Post
-        $nextPosts = self::fetchNextPosts($id, 7);
+        $nextPosts = self::fetchNextPosts($post, 7);
         
         // 获取评论
         $limit = param('commentCountOfPage');
@@ -114,9 +114,9 @@ class PostController extends Controller
         return $url;
     }
     
-    private static function fetchNextPosts($pid, $count = 6, $column = 3)
+    private static function fetchNextPosts(Post $post, $count = 6, $column = 3)
     {
-        $pid = (int)$pid;
+        $createTime = (int)$post->create_time;
         $count = (int)$count;
         $column = (int)$column;
         
@@ -126,8 +126,8 @@ class PostController extends Controller
         $count = ceil($count / $column) * $column;
         
         $criteria = new CDbCriteria();
-        $criteria->addCondition("id > $pid");
         $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
+        $criteria->addCondition("create_time < $createTime");
         $criteria->addCondition("thumbnail_pic != ''");
         $criteria->order = 'create_time desc, id desc';
         $criteria->limit = $count;
