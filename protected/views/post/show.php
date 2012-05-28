@@ -61,8 +61,8 @@
 <div class="fright cd-sidebar">
     <div class="panel panel15 next-posts">
         <div class="post-nav">
-            <a href="<?php echo $prevUrl;?>" class="fleft site-bg button">上一个</a>
-            <a href="<?php echo $nextUrl;?>" class="fleft site-bg button">下一个</a>
+            <?php if ($prevUrl):?><a href="<?php echo $prevUrl;?>" class="fleft site-bg button">上一个</a><?php endif;?>
+            <?php if ($nextUrl):?><a href="<?php echo $nextUrl;?>" class="fleft site-bg button">下一个</a><?php endif;?>
             <a href="<?php echo $returnUrl;?>" class="fright site-bg button">返回列表</a>
             <div class="clear"></div>
         </div>
