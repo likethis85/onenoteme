@@ -129,7 +129,7 @@ class PostController extends Controller
         $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
         $criteria->addCondition("create_time < $createTime");
         $criteria->addCondition("thumbnail_pic != ''");
-        $criteria->order = 'create_time desc, id desc';
+        $criteria->order = 'create_time asc, id asc';
         $criteria->limit = $count;
         
         $models = Post::model()->findAll($criteria);
