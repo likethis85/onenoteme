@@ -54,9 +54,64 @@ class PostController extends Controller
         $this->render('show', array(
             'post' => $post,
             'nextPosts' => $nextPosts,
+            'prevUrl' => self::prevPostUrl($post),
+            'nextUrl' => self::nextPostUrl($post),
+            'returnUrl' => self::returnUrl($post->channel_id),
             'comments' => $commentsData['models'],
             'pages' => $commentsData['pages'],
         ));
+    }
+    
+    private static function prevPostUrl(Post $post)
+    {
+        $id = app()->getDb()->createCommand()
+            ->select('id')
+            ->from(TABLE_POST)
+            ->where('create_time > :createtime', array(':createtime' => $post->create_time))
+            ->order('create_time asc, id asc')
+            ->limit(1)
+            ->queryScalar();
+        
+        $url = ($id > 0) ? aurl('post/show', array('id' => $id)) : '';
+        return $url;
+    }
+    
+    private static function nextPostUrl(Post $post)
+    {
+        $id = app()->getDb()->createCommand()
+            ->select('id')
+            ->from(TABLE_POST)
+            ->where('create_time < :createtime', array(':createtime' => $post->create_time))
+            ->order('create_time desc, id desc')
+            ->limit(1)
+            ->queryScalar();
+        
+        $url = ($id > 0) ? aurl('post/show', array('id' => $id)) : '';
+        return $url;
+    }
+    
+    private static function returnUrl($channel_id)
+    {
+        $channelID = (int)$channel_id;
+        if (!in_array($channelID, Post::channels()))
+            return false;
+        
+        switch ($channelID) {
+            case CHANNEL_DUANZI:
+                $url = aurl('channel/duanzi');
+                break;
+            case CHANNEL_LENGTU:
+                $url = aurl('channel/lengtu');
+                break;
+            case CHANNEL_GIRL:
+                $url = aurl('channel/girl');
+                break;
+            default:
+                $url = app()->homeUrl;
+                break;
+        }
+        
+        return $url;
     }
     
     private static function fetchNextPosts($pid, $count = 6, $column = 3)
@@ -71,8 +126,9 @@ class PostController extends Controller
         $count = ceil($count / $column) * $column;
         
         $criteria = new CDbCriteria();
+        $criteria->addCondition("id > $pid");
         $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
-        $criteria->addCondition('thumbnail_pic != \'\'');
+        $criteria->addCondition("thumbnail_pic != ''");
         $criteria->order = 'create_time desc, id desc';
         $criteria->limit = $count;
         
