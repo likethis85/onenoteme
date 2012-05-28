@@ -38,18 +38,18 @@
         <div class="clear"></div>
         <form action="#" method="post" class="content-block comment-form">
             <textarea name="content" class="content fleft"></textarea>
-            <input type="submit" id="submit-comment" value="发表" class="site-bg fright" />
+            <input type="submit" id="submit-comment" value="发表" class="button site-bg fright" />
             <div class="clear"></div>
         </form>
         
         <?php foreach ((array)$comments as $model):?>
         <div class="content-block comment-item">
             <div class="comment-arrows fleft radius4px">
-                <a class="like site-bg up" href="javascript:void(0);">喜欢</a>
-                <a class="dislike site-bg down" href="javascript:void(0);">讨厌</a>
+                <a class="like site-bg arrow-up" data-id="<?php echo $model->id;?>" data-value="1" data-url="<?php echo aurl('comment/score');?>" href="javascript:void(0);">喜欢</a>
+                <a class="dislike site-bg arrow-down" data-id="<?php echo $model->id;?>" data-value="0" data-url="<?php echo aurl('comment/score');?>" href="javascript:void(0);">讨厌</a>
             </div>
             <dl class="radius4px">
-                <dt><?php echo $model->createTime;?></dt>
+                <dt>评分:&nbsp;<span class="comment-score"><?php echo $model->score;?></span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $model->createTime;?></dt>
                 <dd><?php echo $model->filterContent;?></dd>
             </dl>
             <div class="clear"></div>
@@ -59,13 +59,28 @@
 </div>
 
 <div class="fright cd-sidebar">
+    <div class="panel panel15 next-posts">
+        <div class="post-nav">
+            <a href="#" class="fleft site-bg button">上一个</a>
+            <a href="#" class="fleft site-bg button">下一个</a>
+            <a href="#" class="fright site-bg button">返回列表</a>
+            <div class="clear"></div>
+        </div>
+        <?php foreach ((array)$nextPosts as $next):?>
+        <div class="thumb">
+            <?php echo $next->getThumbnailLink('_self');?>
+        </div>
+        <?php endforeach;?>
+        <div class="clear"></div>
+    </div>
 	<div class="panel panel15"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
 </div>
 <div class="clear"></div>
 
 <script type="text/javascript">
 $(function(){
-    $('.post-detail').on('click', '.arrow a', Waduanzi.RatingPost);
+    $('.post-detail').on('click', '.post-arrows a', Waduanzi.RatingPost);
+    $('.post-detail').on('click', '.comment-arrows a', Waduanzi.RatingComment);
     Waduanzi.AjustImgWidth($('.post-picture img'), 600);
 });
 </script>

@@ -99,6 +99,12 @@ class Comment extends CActiveRecord
 	    return date($format, $this->create_time);
 	}
 	
+
+	public function getScore()
+	{
+	    return (int)($this->up_score - $this->down_score);
+	}
+	
 	protected function beforeSave()
 	{
 	    if ($this->getIsNewRecord()) {

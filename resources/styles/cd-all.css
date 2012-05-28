@@ -42,7 +42,7 @@ body {background-color:#121211;}
 .waterfall-item .pic-block {max-height:400px; overflow:hidden; margin-bottom:10px;}
 .waterfall-item .pic-block img {max-width:197px; min-width:150px; vertical-align:top;}
 .waterfall-item p {line-height:24px; text-align:left; padding:0 10px 5px; margin:0;}
-.waterfall-item p {display:block;}
+.waterfall-item p a {display:block;}
 .waterfall-item p a:link, .waterfall-item p a:visited {color:#DDDDD1;}
 .waterfall-item.item-bg p a:link, .waterfall-item.item-bg p a:visited, .waterfall-item.item-bg p a:hover {color:#666666;}
 .waterfall-item .post-time {font-size:12px; color:#999; padding:0px 10px 10px; text-align:left;}
@@ -73,28 +73,36 @@ body {background-color:#121211;}
 .post-detail .post-arrows {padding:3px; width:64px; margin-right:3px; font-size:0; text-indent:-9999px;}
 .post-detail .post-arrows a {display:block; float:left; width:30px; height:30px; margin:1px;}
 .post-detail .post-arrows a.arrow-up {background-position:-231px -68px;}
+.post-detail .post-arrows a.arrow-up:hover {background-position:-262px -68px;}
 .post-detail .post-arrows a.arrow-up.pushed {background-position:-293px -68px;}
 .post-detail .post-arrows a.arrow-down {background-position:-324px -68px;}
+.post-detail .post-arrows a.arrow-down:hover {background-position:-355px -68px;}
 .post-detail .post-arrows a.arrow-down.pushed {background-position:-386px -68px;}
 .post-detail .info {width:265px; height:38px; line-height:38px; padding:0 10px; margin-right:3px;}
 .post-detail .social {padding:3px 3px; margin-left:3px;}
 .post-detail .comment-form {background-color:#2B2B2B; display:block;}
 .post-detail .comment-form textarea {width:503px; height:20px; border:0; color:#888; margin:0; padding:5px 5px 7px; background:#121211; border:1px solid #444442; font-size:12px;}
-#submit-comment {width:78px; height:33px; border:0; margin:0; padding:0; background-color:transparent; background-position:-231px 0; color:white; font-weight:bold; padding-top:3px; cursor:pointer;}
-#submit-comment:hover {background-position:-310px 0;}
-#sumbit-comment:active {background-position:-389px 0;}
+.button {width:78px; height:33px; border:0; margin:0; padding:0; background-color:transparent; background-position:-231px 0; color:white; font-weight:bold; padding-top:3px; cursor:pointer;}
+.button:hover {background-position:-310px 0;}
+.button:active {background-position:-389px 0;}
 .post-detail .comment-item {margin:0 0 5px; background-color:#2B2B2B;}
 .post-detail .comment-item .comment-arrows {background:#181817; margin:0 3px 0 0; padding:4px 3px; color:#AAA; width:22px;}
 .post-detail .comment-item dl {margin:0; margin-left:32px; padding:10px; background-color:#181817;}
 .post-detail .comment-item dt {font-weight:normal; font-size:12px; color:#AAA; margin-bottom:5px;}
 .post-detail .comment-item dd {line-height:20px; font-size:12px; padding:0; margin:0;}
 .comment-item .comment-arrows a {display:block; width:20px; height:20px; margin:2px auto; text-indent:-9999px;}
-.comment-item .comment-arrows .up {background-position:-146px -78px;}
-.comment-item .comment-arrows .down {background-position:-146px -99px;}
-.comment-item .comment-arrows .up:hover {background-position:-188px -78px;}
-.comment-item .comment-arrows .down:hover {background-position:-188px -99px;}
-
-
+.comment-item .comment-arrows .arrow-up {background-position:-146px -78px;}
+.comment-item .comment-arrows .arrow-down {background-position:-146px -99px;}
+.comment-item .comment-arrows .arrow-up:hover {background-position:-167px -78px;}
+.comment-item .comment-arrows .arrow-down:hover {background-position:-167px -99px;}
+.comment-item .comment-arrows .arrow-up.pushed {background-position:-188px -78px;}
+.comment-item .comment-arrows .arrow-down.pushed {background-position:-188px -99px;}
+.next-posts {margin-bottom:10px;}
+.next-posts .post-nav a:link, .next-posts .post-nav a:visited {display:block; padding:0; text-align:center; line-height:33px; color:white; margin-right:5px;}
+.next-posts .thumb {float:left; background-color:#181817; margin:2px;}
+.next-posts .thumb a:link, .next-posts .thumb a:visited {display:block; border:3px solid #444442;  width:80px; height:80px; overflow:hidden;}
+.next-posts .thumb a:hover {border-color:#C29F37;}
+.next-posts .thumb img {border:0; width:80px;}
 
 
 /* site/signup, user signup */

@@ -190,7 +190,7 @@ class Post extends CActiveRecord
     {
         $html = '';
         if ($this->getBmiddle())
-            $html = l(image($this->getBmiddle(), $this->title), $this->getUrl(), array('target'=>$target));
+            $html = l(image($this->getBmiddle(), $this->title, array('class'=>'bmiddle')), $this->getUrl(), array('target'=>$target));
         
         return $html;
     }
@@ -199,7 +199,7 @@ class Post extends CActiveRecord
     {
         $html = '';
         if ($this->getThumbnail())
-            $html = l(image($this->getThumbnail(), $this->title), $this->getUrl(), array('target'=>$target));
+            $html = l(image($this->getThumbnail(), $this->title, array('class'=>'thumbnail')), $this->getUrl(), array('target'=>$target));
         
         return $html;
     }

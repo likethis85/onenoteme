@@ -25,4 +25,14 @@ class CommentController extends Controller
         echo (int)$c->save();
         exit(0);
     }
+
+    public function actionScore()
+    {
+        $id = (int)$_POST['id'];
+        $column = ((int)$_POST['score'] > 0) ? 'up_score' : 'down_score';
+        $counters = array($column => 1);
+        $result = Comment::model()->updateCounters($counters, 'id = :id', array(':id'=>$id));
+        echo (int)$result;
+        exit(0);
+    }
 }

@@ -11,10 +11,10 @@ class PostController extends Controller
     
     public function actionScore()
     {
-        $pid = (int)$_POST['pid'];
+        $id = (int)$_POST['id'];
         $column = ((int)$_POST['score'] > 0) ? 'up_score' : 'down_score';
         $counters = array($column => 1);
-        $result = Post::model()->updateCounters($counters, 'id = :id', array(':id'=>$pid));
+        $result = Post::model()->updateCounters($counters, 'id = :id', array(':id'=>$id));
         echo (int)$result;
         exit(0);
     }
@@ -36,6 +36,9 @@ class PostController extends Controller
         if (null === $post)
             throw new CHttpException(404, '该段子不存在或未被审核');
         
+        // 获取后几个Post
+        $nextPosts = self::fetchNextPosts($id, 7);
+        
         // 获取评论
         $limit = param('commentCountOfPage');
         $conditions = array('and', 'post_id = :pid', 'state = :state');
@@ -50,9 +53,32 @@ class PostController extends Controller
         $this->channel = (int)$post->channel_id;
         $this->render('show', array(
             'post' => $post,
+            'nextPosts' => $nextPosts,
             'comments' => $commentsData['models'],
             'pages' => $commentsData['pages'],
         ));
+    }
+    
+    private static function fetchNextPosts($pid, $count = 6, $column = 3)
+    {
+        $pid = (int)$pid;
+        $count = (int)$count;
+        $column = (int)$column;
+        
+        if ($column < 1 || $count < 1)
+            throw new CException('$column和$count 不能小于1');
+        
+        $count = ceil($count / $column) * $column;
+        
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
+        $criteria->addCondition('thumbnail_pic != \'\'');
+        $criteria->order = 'create_time desc, id desc';
+        $criteria->limit = $count;
+        
+        $models = Post::model()->findAll($criteria);
+        
+        return $models;
     }
     
     private static function fetchComments($pid)
