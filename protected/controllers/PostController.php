@@ -37,7 +37,7 @@ class PostController extends Controller
             throw new CHttpException(404, '该段子不存在或未被审核');
         
         // 获取后几个Post
-        $nextPosts = self::fetchNextPosts($id, 7);
+        $nextPosts = self::fetchNextPosts($post, 7);
         
         // 获取评论
         $limit = param('commentCountOfPage');
@@ -54,21 +54,21 @@ class PostController extends Controller
         $this->render('show', array(
             'post' => $post,
             'nextPosts' => $nextPosts,
-            'prevUrl' => self::prevPostUrl($id),
-            'nextUrl' => self::nextPostUrl($id),
+            'prevUrl' => self::prevPostUrl($post),
+            'nextUrl' => self::nextPostUrl($post),
             'returnUrl' => self::returnUrl($post->channel_id),
             'comments' => $commentsData['models'],
             'pages' => $commentsData['pages'],
         ));
     }
     
-    private static function prevPostUrl($pid)
+    private static function prevPostUrl(Post $post)
     {
-        $pid = (int)$pid;
+        $createTime = (int)$post->create_time;
         $id = app()->getDb()->createCommand()
             ->select('id')
             ->from(TABLE_POST)
-            ->where("id > :pid and state = :enabled and thumbnail_pic != ''", array(':pid' => $pid, ':enabled' => POST_STATE_ENABLED))
+            ->where("create_time > :createtime and state = :enabled and thumbnail_pic != ''", array(':createtime' => $createTime, ':enabled' => POST_STATE_ENABLED))
             ->order('create_time asc, id asc')
             ->limit(1)
             ->queryScalar();
@@ -77,13 +77,13 @@ class PostController extends Controller
         return $url;
     }
     
-    private static function nextPostUrl($pid)
+    private static function nextPostUrl(Post $post)
     {
-        $pid = (int)$pid;
+        $createTime = (int)$post->create_time;
         $id = app()->getDb()->createCommand()
             ->select('id')
             ->from(TABLE_POST)
-            ->where("id < :pid and state = :enabled and thumbnail_pic != ''", array(':pid' => $pid, ':enabled' => POST_STATE_ENABLED))
+            ->where("create_time < :createtime and state = :enabled and thumbnail_pic != ''", array(':createtime' => $createTime, ':enabled' => POST_STATE_ENABLED))
             ->order('create_time desc, id desc')
             ->limit(1)
             ->queryScalar();
@@ -116,9 +116,9 @@ class PostController extends Controller
         return $url;
     }
     
-    private static function fetchNextPosts($pid, $count = 6, $column = 3)
+    private static function fetchNextPosts(Post $post, $count = 6, $column = 3)
     {
-        $pid = (int)$pid;
+        $createTime = (int)$post->create_time;
         $count = (int)$count;
         $column = (int)$column;
         
@@ -128,10 +128,10 @@ class PostController extends Controller
         $count = ceil($count / $column) * $column;
         
         $criteria = new CDbCriteria();
-        $criteria->addCondition("id < $pid");
+        $criteria->addCondition("create_time < $createTime");
         $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
         $criteria->addCondition("thumbnail_pic != ''");
-        $criteria->order = 'id desc';
+        $criteria->order = 'create_time desc, id desc';
         $criteria->limit = $count;
         
         $models = Post::model()->findAll($criteria);

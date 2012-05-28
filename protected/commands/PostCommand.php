@@ -22,12 +22,17 @@ class PostCommand extends CConsoleCommand
         
         $ids = array_merge($duanziIDs, $lengtuIDs, $fuliIDs);
         
-        $nums = app()->getDb()->createCommand()
-            ->update('{{post}}',
-                array('state'=>POST_STATE_ENABLED, 'create_time'=>(int)$_SERVER['REQUEST_TIME']),
-                array('in', 'id', $ids)
-            );
-        
+        $nums = 0;
+        foreach ($ids as $id) {
+            $num = app()->getDb()->createCommand()
+                ->update('{{post}}',
+                    array('state'=>POST_STATE_ENABLED, 'create_time'=>(int)$_SERVER['REQUEST_TIME'] + $nums*2),
+                    'id = :pid',
+                    array(':pid' => $id)
+                );
+            
+            if ($num > 0) $nums++;
+        }
         printf("update %d rows\n", $nums);
     }
 }
