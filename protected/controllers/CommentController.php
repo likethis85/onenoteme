@@ -21,8 +21,15 @@ class CommentController extends Controller
         $c->content = $_POST['content'];
         $c->user_id = user()->isGuest ? 0 : user()->id;
         $c->user_name = user()->isGuest ? '' : user()->name;
-        $c->state = (app()->session['state'] >= User::STATE_EDITOR) ? Comment::STATE_ENABLED : Comment::STATE_DISABLED;
-        echo (int)$c->save();
+        $c->state = COMMENT_STATE_ENABLED;
+        $result = (int)$c->save();
+        $data['errno'] = (int)!$result;
+        if ($result)
+            $data['html'] = $this->renderPartial('/comment/list', array('comments'=>array($c)), true);
+        else
+            $data['error'] = '发表评论出错';
+        
+        echo CJSON::encode($data);
         exit(0);
     }
 

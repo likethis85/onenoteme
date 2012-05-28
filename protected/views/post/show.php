@@ -45,25 +45,17 @@
             <!-- JiaThis Button END -->
         </div>
         <div class="clear"></div>
-        <form action="#" method="post" class="content-block comment-form">
-            <textarea name="content" class="content fleft"></textarea>
-            <input type="submit" id="submit-comment" value="发表" class="button site-bg fright" />
+        <form action="<?php echo aurl('comment/create');?>" method="post" class="content-block comment-form" id="comment-form">
+            <input type="hidden" name="postid" value="<?php echo $post->id;?>" />
+            <textarea name="content" id="comment-content" class="mini-content fleft">请输入评论内容。。。</textarea>
+            <input type="button" id="submit-comment" value="发表" class="button site-bg fright" />
             <div class="clear"></div>
+            <span class="counter">140</span>
+            <div class="save-caption-loader hide"></div>
         </form>
+        <div id="caption-error" class="content-block hide"></div>
         
-        <?php foreach ((array)$comments as $model):?>
-        <div class="content-block comment-item">
-            <div class="comment-arrows fleft radius4px">
-                <a class="like site-bg arrow-up" data-id="<?php echo $model->id;?>" data-value="1" data-url="<?php echo aurl('comment/score');?>" href="javascript:void(0);">喜欢</a>
-                <a class="dislike site-bg arrow-down" data-id="<?php echo $model->id;?>" data-value="0" data-url="<?php echo aurl('comment/score');?>" href="javascript:void(0);">讨厌</a>
-            </div>
-            <dl class="radius4px">
-                <dt>评分:&nbsp;<span class="comment-score"><?php echo $model->score;?></span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $model->createTime;?></dt>
-                <dd><?php echo $model->filterContent;?></dd>
-            </dl>
-            <div class="clear"></div>
-        </div>
-        <?php endforeach;?>
+        <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'pages'=>$pages));?>
 	</div>
 </div>
 
@@ -90,9 +82,22 @@
 
 <script type="text/javascript">
 $(function(){
+	var commentInitVal = $('#comment-content').val();
     $('.post-detail').on('click', '.post-arrows a', Waduanzi.RatingPost);
     $('.post-detail').on('click', '.comment-arrows a', Waduanzi.RatingComment);
     Waduanzi.AjustImgWidth($('.post-picture img'), 600);
+    $('.post-detail').on('focus', '#comment-content', function(event){
+        $(this).addClass('expand');
+        if ($.trim($(this).val()) == commentInitVal)
+            $(this).val('');
+    });
+    $('.post-detail').on('blur', '#comment-content', function(event){
+        if ($.trim($(this).val()).length == 0) {
+            $(this).val(commentInitVal);
+            $(this).removeClass('expand');
+        }
+    });
+    $('.post-detail').on('click', '#submit-comment', Waduanzi.PostComment);
 });
 </script>
 

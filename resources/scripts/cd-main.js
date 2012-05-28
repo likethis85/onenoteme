@@ -5,7 +5,7 @@ var Waduanzi = {
 		var pid = parseInt(tthis.attr('data-id'));
 		var score = parseInt(tthis.attr('data-value'));
 		var url = tthis.attr('data-url');
-		
+
 		var this_pushed = tthis.hasClass('pushed');
 		var up_pushed = tthis.parent().find('a.arrow-up').hasClass('pushed');
 		var down_pushed = tthis.parent().find('a.arrow-down').hasClass('pushed');
@@ -35,7 +35,7 @@ var Waduanzi = {
 		// 此处先更新页面数字，不管成功与否
 		$('#score-count').text(parseInt($('#score-count').text()) + score_step);
 		$('#like-count').text(parseInt($('#like-count').text()) + like_step);
-		
+
 		var xhr = $.ajax({
 			url: url,
 			type: 'post',
@@ -55,7 +55,7 @@ var Waduanzi = {
 		var score = parseInt(tthis.attr('data-value'));
 		var scoreEl = tthis.parents('.comment-item').find('.comment-score');
 		var url = tthis.attr('data-url');
-		
+
 		var this_pushed = tthis.hasClass('pushed');
 		var up_pushed = tthis.parent().find('a.arrow-up').hasClass('pushed');
 		var down_pushed = tthis.parent().find('a.arrow-down').hasClass('pushed');
@@ -78,10 +78,10 @@ var Waduanzi = {
 				score_step = -1;
 			}
 		}
-		
+
 		// 此处先更新页面数字，不管成功与否
 		scoreEl.text(parseInt(scoreEl.text()) + score_step);
-		
+
 		var xhr = $.ajax({
 			url: url,
 			type: 'post',
@@ -99,5 +99,38 @@ var Waduanzi = {
 			if (selector.width() > max)
 				selector.css('width', max);
 		}
+	},
+	PostComment: function(event) {
+		event.preventDefault();
+		var content = $.trim($('#comment-content').val());
+		var postid = parseInt($('input[name=postid]').val());
+		if (postid <= 0 || content.length <= 0)
+			return false;
+		var form = $(this).parents('form');
+
+		var xhr = $.ajax({
+			url: form.attr('action'),
+			type: 'post',
+			dataType: 'json',
+			data: $('#comment-form').serialize(),
+			beforeSend: function(){
+				$('#caption-error').empty().hide();
+				form.find('.save-caption-loader').show();
+			}
+		});
+		xhr.done(function(data){
+			form.find('.save-caption-loader').hide();
+			if (data.errno == 0) {
+				$('#caption-error').after(data.html);
+				$('#comment-content').val('');
+				$('#comment-content').removeClass('expand');
+			}
+			else
+				$('#caption-error').html(data.error).show();
+		});
+		xhr.fail(function(){
+			form.find('.save-caption-loader').hide();
+			$('#caption-error').html('发送请求错误！').show();
+		});
 	}
 };

@@ -80,8 +80,13 @@ body {background-color:#121211;}
 .post-detail .post-arrows a.arrow-down.pushed {background-position:-386px -68px;}
 .post-detail .info {width:265px; height:38px; line-height:38px; padding:0 10px; margin-right:3px;}
 .post-detail .social {padding:3px 3px; margin-left:3px;}
-.post-detail .comment-form {background-color:#2B2B2B; display:block;}
-.post-detail .comment-form textarea {width:503px; height:20px; border:0; color:#888; margin:0; padding:5px 5px 7px; background:#121211; border:1px solid #444442; font-size:12px;}
+.post-detail .comment-form {background-color:#2B2B2B; display:block; position:relative; overflow:hidden;}
+.post-detail .comment-form textarea {width:503px; border:0; color:#888; margin:0; padding:7px 5px 4px; background:#121211; border:1px solid #444442; font-size:12px;}
+.post-detail .comment-form textarea.mini-content {height:20px;}
+.post-detail .comment-form textarea.expand {height:60px; color:#DDDDD1;}
+.post-detail .comment-form .save-caption-loader {background:url(../images/small-loader.gif) no-repeat; width:24px; height:24px; position:absolute; top:39px; right:5px;}
+.post-detail .comment-form .counter {font-size:22px; position:absolute; top:40px; right:40px; font-weight:bold; font-family:'Helvetica Neue','Helvetica','Arial',sans-serif;}
+.post-detail #caption-error {margin:5px 0; padding:6px; color:#E44;}
 .button {width:78px; height:33px; border:0; margin:0; padding:0; background-color:transparent; background-position:-231px 0; color:white; font-weight:bold; padding-top:3px; cursor:pointer;}
 .button:hover {background-position:-310px 0;}
 .button:active {background-position:-389px 0;}

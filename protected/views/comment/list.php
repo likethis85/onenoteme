@@ -1,21 +1,16 @@
-<form action="<?php echo aurl('comment/create');?>" method="post" id="comment-form">
-<input type="hidden" name="postid" id="postid" value="<?php echo $postid;?>" />
-<table class="tbl-comment">
-	<tr>
-		<td><textarea name="content" id="comment-content"></textarea></td>
-		<td><input type="button" value="发布" id="submit-button" /></td>
-		<td id="result-tip"></td>
-	</tr>
-</table>
-</form>
-<div class="comment-list">
-    <?php foreach ($models as $c):?>
-    <ul class="comment-item">
-    	<li class="user-small-thumbnail"><img src="http://www.qiushibaike.com/system/avatars/289248/thumb/20111009173804159.jpg" /></li>
-        <li class="user-name"><?php echo CHtml::link($c->commentUserName, '#', array('target'=>'_blank'));?></li>
-        <li class="comment-content"><?php echo $c->content;?></li>
-        <div class="clear"></div>
-    </ul>
-    <?php endforeach;?>
-    <div class="pages"><?php $this->widget('CLinkPager', array('pages' => $pages));?></div>
+<?php foreach ((array)$comments as $model):?>
+<div class="content-block comment-item">
+    <div class="comment-arrows fleft radius4px">
+        <a class="like site-bg arrow-up" data-id="<?php echo $model->id;?>" data-value="1" data-url="<?php echo aurl('comment/score');?>" href="javascript:void(0);">喜欢</a>
+        <a class="dislike site-bg arrow-down" data-id="<?php echo $model->id;?>" data-value="0" data-url="<?php echo aurl('comment/score');?>" href="javascript:void(0);">讨厌</a>
+    </div>
+    <dl class="radius4px">
+        <dt>评分:&nbsp;<span class="comment-score"><?php echo $model->score;?></span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $model->createTime;?></dt>
+        <dd><?php echo $model->filterContent;?></dd>
+    </dl>
+    <div class="clear"></div>
 </div>
+<?php endforeach;?>
+<?php if ($pages):?>
+<div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'header'=>'', 'footer'=>''));?></div>
+<?php endif;?>
