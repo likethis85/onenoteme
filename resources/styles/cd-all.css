@@ -52,7 +52,7 @@ body {background-color:#121211;}
 #manual-load {background:#444442; width:50%; height:40px; line-height:40px; font-size:16px; font-weight:bold; color:#DDDDD1; text-align:center; margin:20px auto; cursor:pointer;}
 
 /* footer */
-.cd-footer {margin-top:20px; padding-top:20px; font-size:12px; color:#AFAFAF; border-top:1px solid #DFDFDF;}
+.cd-footer {margin-top:10px; padding-top:5px; font-size:12px; color:#AFAFAF; border-top:1px solid #DFDFDF;}
 .cd-footer a:link, .cd-footer a:visited, .cd-footer a:hover {color:#9F9F9F;}
 
 /* pages */
