@@ -4,7 +4,7 @@
     	<div class="post-user"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
         <div class="post-content">
             <?php echo $model->content;?>
-            <?php if ($model->bmiddle) echo '<br />' . CHtml::image($model->bmiddle, $model->title, array('class'=>'item-pic'));?>
+            <?php if ($model->bmiddlePic) echo '<br />' . CHtml::image($model->bmiddlePic, $model->title, array('class'=>'item-pic'));?>
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->getTagLinks('mobile/tag', '&nbsp;', '_self');?></div><?php endif;?>
     </div>
