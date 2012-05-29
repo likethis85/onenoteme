@@ -71,10 +71,12 @@ class PostController extends Controller
         $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
         $model = Post::model()->findByPk($id, $criteria);
             
-        if (null === $model)
+        if (null === $model || empty($model->originalPic))
             throw new CHttpException(403, '该段子不存在或未被审核');
-        
-        $this->renderPartial('/post/original_pic', array('model'=>$model));
+
+        $this->pageTitle = '原始图片' . ' - ' . trim(strip_tags($model->title)) . '  ' . $model->tagText;
+        $this->layout = 'blank';
+        $this->render('/post/original_pic', array('model'=>$model));
     }
     
     private static function prevPostUrl(Post $post)

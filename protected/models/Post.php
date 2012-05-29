@@ -29,7 +29,8 @@
  * @property string $createTime
  * @property string $authorName
  * @property string $titleLink
- * @property string $bmiddle
+ * @property string $bmiddlePic
+ * @property string $originalPic
  * @property string $thumbnail
  * @property string $bmiddleLink
  * @property string $thumbnailLink
