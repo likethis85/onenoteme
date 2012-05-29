@@ -3,7 +3,7 @@
     <?php foreach ((array)$models as $index => $model):?>
     <div class="waterfall-item">
         <div class="post-time"><?php echo $model->createTime;?></div>
-        <?php if ($model->bmiddle):?><div class="pic-block"><?php echo $model->bmiddleLink;?></div><?php endif;?>
+        <?php if ($model->bmiddlePic):?><div class="pic-block"><?php echo $model->bmiddleLink;?></div><?php endif;?>
         <p><?php echo l($model->content, $model->url, array('target'=>'_blank'));?></p>
     </div>
     <?php if ($index == $adpos):?>

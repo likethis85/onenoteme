@@ -25,7 +25,6 @@ class PostController extends Controller
         if ($id <= 0)
             throw new CHttpException(500, '非法请求');
         
-        $cmd = app()->getDb()->createCommand();
         if (user()->getFlash('allowUserView'))
             $post = Post::model()->findByPk($id);
         else {
@@ -34,7 +33,7 @@ class PostController extends Controller
             $post = Post::model()->findByPk($id, $criteria);
         }
         if (null === $post)
-            throw new CHttpException(404, '该段子不存在或未被审核');
+            throw new CHttpException(403, '该段子不存在或未被审核');
         
         // 获取后几个Post
         $nextPosts = self::fetchNextPosts($post, 7);
@@ -60,6 +59,22 @@ class PostController extends Controller
             'comments' => $commentsData['models'],
             'pages' => $commentsData['pages'],
         ));
+    }
+    
+    public function actionOriginalPic($id)
+    {
+        $id = (int)$id;
+        if ($id <= 0)
+            throw new CHttpException(500, '非法请求');
+        
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
+        $model = Post::model()->findByPk($id, $criteria);
+            
+        if (null === $model)
+            throw new CHttpException(403, '该段子不存在或未被审核');
+        
+        $this->renderPartial('/post/original_pic', array('model'=>$model));
     }
     
     private static function prevPostUrl(Post $post)
