@@ -1,7 +1,7 @@
 <?php
 class CDHotTags extends CWidget
 {
-    const TAG_NUMS = 40;
+    const TAG_NUMS = 50;
     
     public $title = null;
     public $tagsNums = self::TAG_NUMS;
@@ -28,7 +28,7 @@ class CDHotTags extends CWidget
                 if ($key < 5) {
                     $tag_level = 'tag-level3';
                 }
-                elseif ($key < 10) {
+                elseif ($key < 20) {
                     $tag_level = 'tag-level2';
                 }
                 else
