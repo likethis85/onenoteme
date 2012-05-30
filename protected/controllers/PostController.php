@@ -182,7 +182,7 @@ class PostController extends Controller
             'state' => COMMENT_STATE_ENABLED,
         );
         $criteria->addColumnCondition($columns);
-        $criteria->limit = 1;//param('commentCountOfPage');
+        $criteria->limit = param('commentCountOfPage');
         $criteria->order = 'create_time asc';
         
         $pages = new CPagination(Comment::model()->count($criteria));
