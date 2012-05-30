@@ -29,7 +29,8 @@
  * @property string $createTime
  * @property string $authorName
  * @property string $titleLink
- * @property string $bmiddle
+ * @property string $bmiddlePic
+ * @property string $originalPic
  * @property string $thumbnail
  * @property string $bmiddleLink
  * @property string $thumbnailLink
@@ -166,12 +167,22 @@ class Post extends CActiveRecord
         return l(h($this->title), $this->getUrl(), array('target'=>$target));
     }
     
-    public function getBmiddle()
+    public function getBmiddlePic()
     {
         if ($this->bmiddle_pic)
             return $this->bmiddle_pic;
         elseif ($this->original_pic)
             return $this->original_pic;
+        else
+            return '';
+    }
+    
+    public function getOriginalPic()
+    {
+        if ($this->original_pic)
+            return $this->original_pic;
+        elseif ($this->bmiddle_pic)
+            return $this->bmiddle_pic;
         else
             return '';
     }
@@ -189,8 +200,8 @@ class Post extends CActiveRecord
     public function getBmiddleLink($target = '_blank')
     {
         $html = '';
-        if ($this->getBmiddle())
-            $html = l(image($this->getBmiddle(), $this->title, array('class'=>'bmiddle')), $this->getUrl(), array('target'=>$target));
+        if ($this->getBmiddlePic())
+            $html = l(image($this->getBmiddlePic(), $this->title, array('class'=>'bmiddle')), $this->getUrl(), array('target'=>$target));
         
         return $html;
     }

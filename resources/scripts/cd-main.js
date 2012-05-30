@@ -121,7 +121,7 @@ var Waduanzi = {
 		xhr.done(function(data){
 			form.find('.save-caption-loader').hide();
 			if (data.errno == 0) {
-				$('#caption-error').after(data.html);
+				$('#comments').prepend(data.html);
 				$('#comment-content').val('');
 				$('#comment-content').removeClass('expand');
 			}

@@ -52,7 +52,7 @@ body {background-color:#121211;}
 #manual-load {background:#444442; width:50%; height:40px; line-height:40px; font-size:16px; font-weight:bold; color:#DDDDD1; text-align:center; margin:20px auto; cursor:pointer;}
 
 /* footer */
-.cd-footer {margin-top:20px; padding-top:20px; font-size:12px; color:#AFAFAF; border-top:1px solid #DFDFDF;}
+.cd-footer {margin-top:10px; padding-top:5px; font-size:12px; color:#AFAFAF; border-top:1px solid #DFDFDF;}
 .cd-footer a:link, .cd-footer a:visited, .cd-footer a:hover {color:#9F9F9F;}
 
 /* pages */
@@ -83,7 +83,7 @@ body {background-color:#121211;}
 .post-detail .comment-form {background-color:#2B2B2B; display:block; position:relative; overflow:hidden;}
 .post-detail .comment-form textarea {width:503px; border:0; color:#888; margin:0; padding:7px 5px 4px; background:#121211; border:1px solid #444442; font-size:12px;}
 .post-detail .comment-form textarea.mini-content {height:20px;}
-.post-detail .comment-form textarea.expand {height:60px; color:#DDDDD1;}
+.post-detail .comment-form textarea.expand {height:50px; color:#DDDDD1;}
 .post-detail .comment-form .save-caption-loader {background:url(../images/small-loader.gif) no-repeat; width:24px; height:24px; position:absolute; top:39px; right:5px;}
 .post-detail .comment-form .counter {font-size:22px; position:absolute; top:40px; right:40px; font-weight:bold; font-family:'Helvetica Neue','Helvetica','Arial',sans-serif;}
 .post-detail #caption-error {margin:5px 0; padding:6px; color:#E44;}

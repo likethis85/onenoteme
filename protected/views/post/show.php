@@ -4,7 +4,7 @@
 		    <p><?php echo $post->content;?></p>
 		    <?php if ($post->tags):?><div class="post-tags">标签：<?php echo $post->tagLinks;?></div><?php endif;?>
         </div>
-        <?php if ($post->bmiddle):?><div class="content-block post-picture"><?php echo CHtml::image($post->bmiddle, $post->title);?></div><?php endif;?>
+        <?php if ($post->bmiddlePic):?><div class="content-block post-picture"><?php echo l(CHtml::image($post->bmiddlePic, $post->title), aurl('post/originalpic', array('id'=>$post->id)), array('target'=>'_blank'));?></div><?php endif;?>
 		<div class="content-block post-arrows fleft">
             <a class="site-bg arrow-up" data-id="<?php echo $post->id;?>" data-value="1" data-url="<?php echo aurl('post/score');?>" href="javascript:void(0);">喜欢</a>
             <a class="site-bg arrow-down" data-id="<?php echo $post->id;?>" data-value="0" data-url="<?php echo aurl('post/score');?>" href="javascript:void(0);">讨厌</a>
@@ -54,8 +54,9 @@
             <div class="save-caption-loader hide"></div>
         </form>
         <div id="caption-error" class="content-block hide"></div>
-        
+        <div id="comments">
         <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'pages'=>$pages));?>
+        </div>
 	</div>
 </div>
 
@@ -98,6 +99,46 @@ $(function(){
         }
     });
     $('.post-detail').on('click', '#submit-comment', Waduanzi.PostComment);
+
+    
+	var container = $('#comments');
+	container.infinitescroll({
+    	navSelector: '#page-nav',
+    	nextSelector: '#page-nav .next a',
+    	itemSelector: '.comment-item',
+    	dataType: 'html',
+    	infid: 0,
+    	loading: {
+    		finishedMsg: '已经载入全部内容。',
+    		msgText: '正在载入更多内容。。。',
+    		img: '<?php echo sbu('images/loading1.gif');?>'
+    	}
+    },
+    function(newElements) {
+        var newElems = $(newElements).css({opacity:0});
+        newElems.animate({opacity:1});
+        container.masonry('appended', newElems, true);
+
+        if (count >= 2) {
+        	$(window).unbind('.infscr');
+        	$(document).on('click', '#manual-load', function(event){
+                container.infinitescroll('retrieve');
+                return false;
+      	    });
+        	$('#manual-load').show();
+            count = 0;
+        }
+        else
+            count++;
+    });
+    
+    $(document).ajaxError(function(event, xhr, opt) {
+    	if (xhr.status == 404) $('div.pages').remove();
+	});
+	
 });
 </script>
+
+<?php cs()->registerScriptFile(sbu('libs/jquery.infinitescroll.min.js'), CClientScript::POS_END);?>
+
 

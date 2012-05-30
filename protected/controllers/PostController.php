@@ -25,7 +25,13 @@ class PostController extends Controller
         if ($id <= 0)
             throw new CHttpException(500, '非法请求');
         
-        $cmd = app()->getDb()->createCommand();
+        if (request()->getIsAjaxRequest()) {
+            $commentsData = self::fetchComments($id);
+            $html = $this->renderPartial('/comment/list', $commentsData, true);
+            echo $html;
+            exit(0);
+        }
+        
         if (user()->getFlash('allowUserView'))
             $post = Post::model()->findByPk($id);
         else {
@@ -34,7 +40,7 @@ class PostController extends Controller
             $post = Post::model()->findByPk($id, $criteria);
         }
         if (null === $post)
-            throw new CHttpException(404, '该段子不存在或未被审核');
+            throw new CHttpException(403, '该段子不存在或未被审核');
         
         // 获取后几个Post
         $nextPosts = self::fetchNextPosts($post, 7);
@@ -57,9 +63,27 @@ class PostController extends Controller
             'prevUrl' => self::prevPostUrl($post),
             'nextUrl' => self::nextPostUrl($post),
             'returnUrl' => self::returnUrl($post->channel_id),
-            'comments' => $commentsData['models'],
+            'comments' => $commentsData['comments'],
             'pages' => $commentsData['pages'],
         ));
+    }
+    
+    public function actionOriginalPic($id)
+    {
+        $id = (int)$id;
+        if ($id <= 0)
+            throw new CHttpException(500, '非法请求');
+        
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
+        $model = Post::model()->findByPk($id, $criteria);
+            
+        if (null === $model || empty($model->originalPic))
+            throw new CHttpException(403, '该段子不存在或未被审核');
+
+        $this->pageTitle = '原始图片' . ' - ' . trim(strip_tags($model->title)) . '  ' . $model->tagText;
+        $this->layout = 'blank';
+        $this->render('/post/original_pic', array('model'=>$model));
     }
     
     private static function prevPostUrl(Post $post)
@@ -165,10 +189,12 @@ class PostController extends Controller
         $pages->setPageSize($criteria->limit);
         $pages->applyLimit($criteria);
         
-        $models = Comment::model()->findAll($criteria);
+        if ($pages->getCurrentPage() < $_GET[$pages->pageVar]-1)
+            return array();
         
+        $models = Comment::model()->findAll($criteria);
         return array(
-            'models' => $models,
+            'comments' => $models,
             'pages' => $pages,
         );
     }

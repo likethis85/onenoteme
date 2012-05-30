@@ -78,6 +78,7 @@ return array(
                 '<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',
                 '<_a:(duanzi|lengtu|girl|video)>' => 'channel/<_a>',
                 'post-<id:\d+>' => 'post/show',
+                'originalpic/<id:\d+>' => 'post/originalpic',
                 'tags' => 'tag/list',
                 'tag-<name:[\w\s\%\-\+\.]+>' => 'tag/posts',
             ),

@@ -1,7 +1,8 @@
 <?php
 class CDHotTags extends CWidget
 {
-    const TAG_NUMS = 40;
+    const TAG_NUMS = 50;
+    const CACHE_DURATION = 86400;
     
     public $title = null;
     public $tagsNums = self::TAG_NUMS;
@@ -28,7 +29,7 @@ class CDHotTags extends CWidget
                 if ($key < 5) {
                     $tag_level = 'tag-level3';
                 }
-                elseif ($key < 10) {
+                elseif ($key < 15) {
                     $tag_level = 'tag-level2';
                 }
                 else
@@ -50,7 +51,7 @@ class CDHotTags extends CWidget
         $criteria->select = 'id, name';
         $criteria->limit = $this->tagsNums;
         $criteria->order = 'post_nums desc';
-        $models = Tag::model()->findAll($criteria);
+        $models = Tag::model()->cache(self::CACHE_DURATION)->findAll($criteria);
         return $models;
     }
 }

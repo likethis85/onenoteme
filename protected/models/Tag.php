@@ -12,7 +12,7 @@ class Tag extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return cd_Tag the static model class
+	 * @return Tag the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
