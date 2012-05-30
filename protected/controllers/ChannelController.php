@@ -47,6 +47,9 @@ class ChannelController extends Controller
         $pages = new CPagination($count);
         $pages->setPageSize($limit);
         $pages->applyLimit($criteria);
+        
+        if ($pages->getCurrentPage() < $_GET[$pages->pageVar]-1)
+            return array();
     
         $models = Post::model()->cache($duration)->findAll($criteria);
     
