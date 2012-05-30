@@ -54,8 +54,9 @@
             <div class="save-caption-loader hide"></div>
         </form>
         <div id="caption-error" class="content-block hide"></div>
-        
+        <div id="comments">
         <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'pages'=>$pages));?>
+        </div>
 	</div>
 </div>
 
@@ -98,6 +99,46 @@ $(function(){
         }
     });
     $('.post-detail').on('click', '#submit-comment', Waduanzi.PostComment);
+
+    
+	var container = $('#comments');
+	container.infinitescroll({
+    	navSelector: '#page-nav',
+    	nextSelector: '#page-nav .next a',
+    	itemSelector: '.comment-item',
+    	dataType: 'html',
+    	infid: 0,
+    	loading: {
+    		finishedMsg: '已经载入全部内容。',
+    		msgText: '正在载入更多内容。。。',
+    		img: '<?php echo sbu('images/loading1.gif');?>'
+    	}
+    },
+    function(newElements) {
+        var newElems = $(newElements).css({opacity:0});
+        newElems.animate({opacity:1});
+        container.masonry('appended', newElems, true);
+
+        if (count >= 2) {
+        	$(window).unbind('.infscr');
+        	$(document).on('click', '#manual-load', function(event){
+                container.infinitescroll('retrieve');
+                return false;
+      	    });
+        	$('#manual-load').show();
+            count = 0;
+        }
+        else
+            count++;
+    });
+    
+    $(document).ajaxError(function(event, xhr, opt) {
+    	if (xhr.status == 404) $('div.pages').remove();
+	});
+	
 });
 </script>
+
+<?php cs()->registerScriptFile(sbu('libs/jquery.infinitescroll.min.js'), CClientScript::POS_END);?>
+
 

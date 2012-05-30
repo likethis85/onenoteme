@@ -25,6 +25,13 @@ class PostController extends Controller
         if ($id <= 0)
             throw new CHttpException(500, '非法请求');
         
+        if (request()->getIsAjaxRequest()) {
+            $commentsData = self::fetchComments($id);
+            $html = $this->renderPartial('/comment/list', $commentsData, true);
+            echo $html;
+            exit(0);
+        }
+        
         if (user()->getFlash('allowUserView'))
             $post = Post::model()->findByPk($id);
         else {
@@ -56,7 +63,7 @@ class PostController extends Controller
             'prevUrl' => self::prevPostUrl($post),
             'nextUrl' => self::nextPostUrl($post),
             'returnUrl' => self::returnUrl($post->channel_id),
-            'comments' => $commentsData['models'],
+            'comments' => $commentsData['comments'],
             'pages' => $commentsData['pages'],
         ));
     }
@@ -183,9 +190,8 @@ class PostController extends Controller
         $pages->applyLimit($criteria);
         
         $models = Comment::model()->findAll($criteria);
-        
         return array(
-            'models' => $models,
+            'comments' => $models,
             'pages' => $pages,
         );
     }
