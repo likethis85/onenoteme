@@ -31,7 +31,9 @@ class SiteController extends Controller
         $pages->setPageSize($limit);
         $pages->applyLimit($criteria);
 
-        if ($pages->getCurrentPage() >= $_GET[$pages->pageVar])
+        if ($pages->getCurrentPage() < $_GET[$pages->pageVar]-1)
+            $models = array();
+        else
             $models = Post::model()->findAll($criteria);
         
         $this->pageTitle = '挖段子 - 笑死人不尝命 - 每日精品笑话连载';
