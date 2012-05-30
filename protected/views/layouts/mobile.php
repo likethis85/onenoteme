@@ -32,7 +32,16 @@
 </div>
 <div class="m-wrapper"><?php echo $content;?></div>
 <div class="admob">
-    <script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=300&h=250"></script>
+    <script type="text/javascript">
+        netease_union_user_id = 6156606;
+        netease_union_site_id = 25143;
+        netease_union_worktype = null;
+        netease_union_promote_type = 1;
+        netease_union_width = 300;
+        netease_union_height = 120;
+        netease_union_link_id = null;
+    </script>
+    <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
 </div>
 <div class="m-wrapper m-footer">
 	<p class="fl">版权所有 &copy;2011-2012&nbsp;<a href="<?php echo aurl('mobile');?>">waduanzi.com</a></p><p class="fr"><a href="#top">TOP</a></p>

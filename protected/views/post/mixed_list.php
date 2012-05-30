@@ -9,7 +9,18 @@
     <?php if ($index == $adpos):?>
     <div class="waterfall-item">
         <div class="post-time">广告赞助商</div>
-        <p><script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=200&h=300"></script></p>
+        <p>
+            <script type="text/javascript">
+                netease_union_user_id = 6156606;
+                netease_union_site_id = 25143;
+                netease_union_worktype = null;
+                netease_union_promote_type = 1;
+                netease_union_width = 200;
+                netease_union_height = 300;
+                netease_union_link_id = null;
+            </script>
+            <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
+        </p>
     </div>
     <?php endif;?>
     <?php endforeach;?>

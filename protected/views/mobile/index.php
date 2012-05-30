@@ -10,7 +10,16 @@
     </div>
     <?php if ($index == 1):?>
     <div class="admob">
-        <script type="text/javascript" src="http://union.163.com/gs2/union/adjs/6156606/0/1?w=300&h=120"></script>
+        <script type="text/javascript">
+            netease_union_user_id = 6156606;
+            netease_union_site_id = 25143;
+            netease_union_worktype = null;
+            netease_union_promote_type = 1;
+            netease_union_width = 300;
+            netease_union_height = 120;
+            netease_union_link_id = null;
+        </script>
+        <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
     </div>
     <?php endif;?>
     <?php endforeach;?>
