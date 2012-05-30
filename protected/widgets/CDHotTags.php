@@ -29,7 +29,7 @@ class CDHotTags extends CWidget
                 if ($key < 5) {
                     $tag_level = 'tag-level3';
                 }
-                elseif ($key < 20) {
+                elseif ($key < 15) {
                     $tag_level = 'tag-level2';
                 }
                 else
