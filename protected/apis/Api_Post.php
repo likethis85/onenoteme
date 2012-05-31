@@ -6,6 +6,8 @@
  * @package api
  */
 
+define('APP_STORE_VERIFY', false);
+
 class Api_Post extends ApiBase
 {
     const DEFAULT_TIMELINE_MAX_COUNT = 35;
@@ -67,6 +69,12 @@ class Api_Post extends ApiBase
         $params = $this->filterParams(array('channelid', 'count', 'fields', 'lastid', 'token'));
         $channelID = (int)$params['channelid'];
         
+        // @todo test data
+        if (APP_STORE_VERIFY && $channelID == CHANNEL_GIRL) {
+            $rows = self::fetchTestRows();
+            return $rows;
+        }
+        
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
             $lastid = empty($params['lastid']) ? 0 : (int)$params['lastid'];
@@ -104,6 +112,12 @@ class Api_Post extends ApiBase
         
         $channelID = (int)$params['channelid'];
         $beforeTime = (int)$params['beforetime'];
+        
+        // @todo test data
+        if (APP_STORE_VERIFY && $channelID == CHANNEL_GIRL) {
+            $rows = self::fetchTestRows();
+            return $rows;
+        }
 
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
@@ -137,6 +151,12 @@ class Api_Post extends ApiBase
         self::requiredParams(array('channelid'));
         $params = $this->filterParams(array('channelid', 'count', 'fields', 'lasttime', 'token'));
         $channelID = (int)$params['channelid'];
+        
+        // @todo test data
+        if (APP_STORE_VERIFY && $channelID == CHANNEL_GIRL) {
+            $rows = self::fetchTestRows();
+            return $rows;
+        }
         
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
@@ -173,6 +193,12 @@ class Api_Post extends ApiBase
         self::requiredParams(array('channelid'));
         $params = $this->filterParams(array('channelid', 'count', 'fields'));
         $channelID = (int)$params['channelid'];
+        
+        // @todo test data
+        if (APP_STORE_VERIFY && $channelID == CHANNEL_GIRL) {
+            $rows = self::fetchTestRows();
+            return $rows;
+        }
 
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
@@ -411,6 +437,22 @@ class Api_Post extends ApiBase
     
         $token = IOSDevice::convertToken($token);
         IOSDevice::model()->updateAll(array('last_time'=>$_SERVER['REQUEST_TIME']), 'device_token = :token', array(':token'=>$token));
+    }
+
+    private static function fetchTestRows()
+    {var_dump(CHANNEL_DUANZI);
+        $ids = array(14079,14078,14077,14071,14061,14060,14053,14049,14046,14044,14043,14042,14041,14038,14036,14035,14034,14033,14032,14031,14030,14029,14027,14026,14025,14024,14023,14022,14021,14020,14019,14018,14017,14016,14015,14014,14013,14012,14011,13995,13994,13993,13992,13991,13990,13989,13988,13987,13986,13985,13984,13983,13982,13980,13979);
+        shuffle($ids);
+        $cmd = app()->getDb()->createCommand()
+            ->from(TABLE_POST . ' t')
+            ->where(array('in', 'id', $ids));
+        $rows = $cmd->queryAll();
+    
+        foreach ($rows as $index => $row)
+            $rows[$index] = self::formatRow($row);
+    
+        shuffle($rows);
+        return $rows;
     }
 }
 
