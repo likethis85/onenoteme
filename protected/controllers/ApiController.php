@@ -27,6 +27,7 @@ class ApiController extends Controller
     
     public function actionXml()
     {
+        header('Content-Type: application/xml; charset=utf-8');
         AppApi::setDataFormat(AppApi::FORMAT_XML);
         $api = new AppApi();
         $api->run();
