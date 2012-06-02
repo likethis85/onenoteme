@@ -31,6 +31,7 @@
     <a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">Android版正式上线啦！！点击下载。</a>
 </div>
 <div class="m-wrapper"><?php echo $content;?></div>
+<div class="space10px"></div>
 <div class="admob">
     <script type="text/javascript">
         netease_union_user_id = 6156606;
@@ -44,7 +45,7 @@
     <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
 </div>
 <div class="m-wrapper m-footer">
-	<p class="fl">版权所有 &copy;2011-2012&nbsp;<a href="<?php echo aurl('mobile');?>">waduanzi.com</a></p><p class="fr"><a href="#top">TOP</a></p>
+	<p class="fleft">版权所有 &copy;2011-2012&nbsp;<a href="<?php echo aurl('mobile');?>">waduanzi.com</a></p><p class="fright"><a href="#top">TOP</a></p>
 	<div class="clear"></div>
 </div>
 <script type="text/javascript">
