@@ -163,6 +163,7 @@ class WeiboCommand extends CConsoleCommand
         $temp['username'] = $row['user']['screen_name'];
         $model = new PostTemp();
         $model->attributes = $temp;
+        
         $result = $model->save();
         
         if ($model->hasErrors()) {
