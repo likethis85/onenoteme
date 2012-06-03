@@ -29,6 +29,13 @@ class PostController extends AdminController
             $data = 1;
         else {
             try {
+                $username = $temp['username'];
+                $userid = app()->getDb()->createCommand()
+                    ->select('id')
+                    ->from(TABLE_USER)
+                    ->where('name = :username', array(':username' => $username))
+                    ->queryScalar();
+                
                 $content = trim($_POST['weibotext']);
                 $content = empty($content) ? $temp->content : $content;
                 $post = new Post();
@@ -36,6 +43,10 @@ class PostController extends AdminController
                 $post->channel_id = $channel_id;
                 $post->up_score = mt_rand(100, 300);
                 $post->down_score = mt_rand(10, 40);
+                if ($userid > 0) {
+                    $post->user_id = (int)$userid;
+                    $post->user_name = $username;
+                }
                 if ($channel_id == CHANNEL_LENGTU || $channel_id == CHANNEL_GIRL) {
                     $post->thumbnail_pic = $temp->thumbnail_pic;
                     $post->bmiddle_pic = $temp->bmiddle_pic;
