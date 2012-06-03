@@ -104,6 +104,36 @@ class SiteController extends Controller
         $this->render('signup', array('model'=>$model));
     }
 
+    public function actionBaidumap()
+    {
+        $pageSize = 30;
+        $duration = 3600 * 24;
+        $count = app()->getDb()->cache($duration)->createCommand()
+            ->select('count(*)')
+            ->from(TABLE_POST)
+            ->where('state = :enabled', array(':enabled' => POST_STATE_ENABLED))
+            ->queryScalar();
+        
+        $pages = new CPagination($count);
+        $pages->setPageSize($pageSize);
+        $offset = ($pages->getCurrentPage() - 1) * $pageSize;
+        
+        $cmd = app()->getDb()->cache($duration)->createCommand()
+            ->select('id, title, content, tags')
+            ->from(TABLE_POST)
+            ->where('state = ' . POST_STATE_ENABLED)
+            ->order('id asc')
+            ->limit($pageSize)
+            ->offset($offset);
+        
+        $posts = $cmd->queryAll();
+        
+        $this->render('baidumap', array(
+            'posts' => $posts,
+            'pages' => $pages,
+        ));
+    }
+    
     public function actionSitemap()
     {
         $cmd = app()->getDb()->createCommand()
