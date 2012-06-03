@@ -151,7 +151,6 @@ class WeiboCommand extends CConsoleCommand
             $temp['bmiddle_pic'] = $row['bmiddle_pic'];
             $temp['original_pic'] = $row['original_pic'];
             $temp['content'] = $text;
-            $temp['username'] = $row['user']['screen_name'];
         }
         elseif (mb_strlen($text) > 10) {
             $temp['content'] = $text;
@@ -161,6 +160,7 @@ class WeiboCommand extends CConsoleCommand
         
         $temp['repost_count'] = (int)$row['repost_count'];
         $temp['comment_count'] = (int)$row['comment_count'];
+        $temp['username'] = $row['user']['screen_name'];
         $model = new PostTemp();
         $model->attributes = $temp;
         $result = $model->save();
