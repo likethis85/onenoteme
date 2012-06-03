@@ -89,7 +89,7 @@ class WeiboCommand extends CConsoleCommand
             'screen_name' => $account,
             'since_id' => $since_id,
             'count' => self::WEIBO_ROWS_COUNT,
-            'trim_user' => 1,
+            'trim_user' => 0,
         );
         
         $fetch = new CdCurl();
@@ -151,6 +151,7 @@ class WeiboCommand extends CConsoleCommand
             $temp['bmiddle_pic'] = $row['bmiddle_pic'];
             $temp['original_pic'] = $row['original_pic'];
             $temp['content'] = $text;
+            $temp['username'] = $row['user']['screen_name'];
         }
         elseif (mb_strlen($text) > 10) {
             $temp['content'] = $text;

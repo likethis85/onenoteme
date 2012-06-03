@@ -13,6 +13,7 @@
  * @property string $content
  * @property integer $repost_count
  * @property integer $comment_count
+ * @property string $username
  */
 class PostTemp extends CActiveRecord
 {
@@ -43,6 +44,7 @@ class PostTemp extends CActiveRecord
 		    array('content', 'required'),
 			array('channel_id, create_time, repost_count, comment_count', 'numerical', 'integerOnly'=>true),
 			array('thumbnail_pic, bmiddle_pic, original_pic', 'length', 'max'=>250),
+			array('username', 'length', 'max'=>50),
 			array('content', 'safe'),
 		);
 	}
@@ -71,6 +73,7 @@ class PostTemp extends CActiveRecord
 			'create_time' => '创建时间',
 	        'repost_count' => '转发数',
 	        'comment_count' => '评论数',
+	        'username' => '微博名字',
 		);
 	}
 }
