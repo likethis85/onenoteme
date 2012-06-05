@@ -27,7 +27,7 @@ body {background-color:#121211;}
 .cd-header .channel-nav li a:hover, .cd-header .channel-nav li.active a {color:white; background:#121211; margin:5px 0; height:35px; line-height:35px; border-radius:8px; -webkite-border-radius:8px; -moz-border-radius:8px;}
 .cd-header .logo a {height:45px; line-height:45px; color:#DDDDD1; font-size:28px; font-family:微软雅黑; font-weight:bold;}
 .cd-header .logo a:hover {color:white; line-height:44px;}
-.cd-header .logo img {width:120px; height:45px;}
+.cd-header .logo img {height:40px; margin-top:3px;}
 
 /* panel */
 .panel {background-color:#2B2B2B; -webkit-border-radius:10px; border-radius:10px; -moz-border-radius:10px; position:relative;}
