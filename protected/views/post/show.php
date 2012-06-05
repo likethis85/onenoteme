@@ -28,8 +28,7 @@
             <script type="text/javascript" >
             var jiathis_config={
             	data_track_clickback:true,
-            	title: '#挖段子# <?php echo $post->title?>',
-            	summary:'<?php echo $post->content;?>',
+            	title: '<?php echo $post->content?>',
             	pic: '<?php echo $post->bmiddlePic;?>',
             	ralateuid:{
             		"tsina":"1639121454"
