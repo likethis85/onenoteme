@@ -28,7 +28,8 @@
 	<a href="<?php echo aurl('mobile/index');?>">最新</a>
 </div>
 <div class="app-link">
-    <a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">Android版正式上线啦！！点击下载。</a>
+    <a href="itms-apps://itunes.apple.com/cn/app//id486268988?mt=8" target="_blank">iPhone应用 v2.2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">Android应用 v1.0.7</a>
 </div>
 <div class="m-wrapper"><?php echo $content;?></div>
 <div class="space10px"></div>
