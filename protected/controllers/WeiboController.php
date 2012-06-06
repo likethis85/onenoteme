@@ -15,6 +15,7 @@ class WeiboController extends Controller
     public function actionCallback($code)
     {
         $code = strip_tags(trim($code));
+        $redirectUrl = aurl('weibo/test');
         $url = sprintf('https://api.weibo.com/oauth2/access_token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s', self::APP_KEY, self::APP_SECRETE, $redirectUrl, $code);
         $curl = new CdCurl();
         $curl->post($url);
@@ -26,6 +27,7 @@ class WeiboController extends Controller
     
     public function actionTest()
     {
-        print_r($_REQUEST);
+        $file = app()->getRuntimePath() . DS . 'test.log';
+        file_put_contents($file, var_export($_REQUEST, true));
     }
 }
