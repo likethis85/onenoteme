@@ -65,3 +65,4 @@ class UserIdentity extends CUserIdentity
         $s['image_url'] = $this->user->profile->image_url;
     }
 }
+
