@@ -19,7 +19,7 @@ class WeiboController extends Controller
         $callback = aurl('weibo/callback');
         $url = sprintf('https://api.weibo.com/oauth2/access_token?grant_type=authorization_code&redirect_uri=%s&code=%s', $callback, $code);
         $curl = new CdCurl();
-        $curl->basic_auth(WEIBO_APP_KEY, WEIBO_APP_SECRETE);
+        $curl->basic_auth(WEIBO_APP_KEY, WEIBO_APP_SECRET);
         $curl->post($url);
         if ($curl->errno() != 0)
             throw new CHttpException(503, '获取token出错');
