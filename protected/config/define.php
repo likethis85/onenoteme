@@ -25,3 +25,6 @@ define('POST_STATE_ENABLED', 1);
 define('POST_STATE_DISABLED', 0);
 define('COMMENT_STATE_ENABLED', 1);
 define('COMMENT_STATE_DISABLED', 0);
+
+define('WEIBO_APP_KEY', '');
+define('WEIBO_APP_SECRET', '');

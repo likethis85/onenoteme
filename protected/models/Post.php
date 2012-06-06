@@ -21,6 +21,7 @@
  * @property string $thumbnail_pic
  * @property string $bmiddle_pic
  * @property string $original_pic
+ * @property string $weibo_id
  * @property string $url
  * @property integer $score
  * @property string $tagArray
@@ -70,6 +71,7 @@ class Post extends CActiveRecord
 		    array('content', 'required', 'message'=>'段子内容必须填写'),
 			array('channel_id, view_nums, up_score, down_score, comment_nums, state, create_time, user_id', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
+			array('weibo_id', 'length', 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
 			array('title, tags, thumbnail_pic, bmiddle_pic, original_pic', 'length', 'max'=>250),
 			array('content', 'safe'),
@@ -108,6 +110,7 @@ class Post extends CActiveRecord
 		    'original_pic' => '原图',
 			'create_time' => '发布时间',
 			'content' => '内容',
+            'weibo_id' => '新浪微博ID',
 		);
 	}
 	
