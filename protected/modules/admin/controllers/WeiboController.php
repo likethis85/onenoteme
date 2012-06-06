@@ -57,6 +57,7 @@ class WeiboController extends AdminController
         
         
         $shortUrl = self::shortUrl($model->getUrl());
+        echo $shortUrl;exit;
         $urlLen = empty($shortUrl) ? 0 : strlen($shortUrl);
         $content = mb_strimwidth($model->content, 0, 135 - $urlLen, '...', app()->charset) . $shortUrl;
         $data = array(
