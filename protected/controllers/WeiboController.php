@@ -67,6 +67,7 @@ class WeiboController extends Controller
         $user = new User();
         $user->username = $user->screen_name = $profile['screen_name'];
         $user->password = '123321';
+        $user->state = User::STATE_ENABLED;
         
         if (!$user->save()) return false;
         
