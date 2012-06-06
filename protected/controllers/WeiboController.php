@@ -42,7 +42,7 @@ class WeiboController extends Controller
                 }
             }
             else
-                throw new CException('保存用户资料出错');
+                throw new CException('获取access_token出错');
         }
     }
     
