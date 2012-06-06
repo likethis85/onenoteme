@@ -94,8 +94,11 @@ class WeiboController extends AdminController
     
         $curl = new CdCurl();
         $curl->get('http://static.php.net/www.php.net/images/php.gif');
-        if ($curl->errno() == 0)
+        if ($curl->errno() == 0) {
             $picData = $curl->rawdata();
+            $picfile = app()->getRuntimePath() . DS . uniqid();
+            file_put_contents($picfile, $picData);
+        }
         else
             return false;
         
@@ -103,7 +106,7 @@ class WeiboController extends AdminController
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->session['access_token'],
             'status' => urlencode('这是一条测试数据'),
-            'pic' => base64_encode($picData),
+            'pic' => $picfile,
         );
         
         $curl = new CdCurl();
