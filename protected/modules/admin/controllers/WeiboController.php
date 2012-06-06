@@ -89,6 +89,7 @@ class WeiboController extends AdminController
     
     public function actionTest()
     {
+        header('Content-Type:application/json;charset=UTF-8');
         $url = 'https://upload.api.weibo.com/2/statuses/upload.json';
         $url = 'https://api.weibo.com/2/statuses/update.json';
     
