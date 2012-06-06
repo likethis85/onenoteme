@@ -136,7 +136,6 @@ class CdCurl
     public final function post($url, $data = '')
     {
         $this->add_option(CURLOPT_POST, true);
-        if (!empty($data))
             $this->add_option(CURLOPT_POSTFIELDS, $data);
         return $this->exec($url);
     }
