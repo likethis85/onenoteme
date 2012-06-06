@@ -5,16 +5,11 @@ class PostController extends AdminController
     {
         $pageSize = 20;
         $criteria = new CDbCriteria();
-        
-        $count = PostTemp::model()->count($criteria);
-        $pages = new CPagination($count);
-        $pages->setPageSize($pageSize);
-        $pages->applyLimit($criteria);
+        $criteria->limit = $pageSize;
         $criteria->order = 't.id desc';
         
         $models = PostTemp::model()->findAll($criteria);
         $data = array(
-            'pages' => $pages,
             'models' => $models,
         );
         $this->render('weibo', $data);
@@ -33,7 +28,7 @@ class PostController extends AdminController
                 $userid = app()->getDb()->createCommand()
                     ->select('id')
                     ->from(TABLE_USER)
-                    ->where('name = :username', array(':username' => $username))
+                    ->where('screen_name = :username', array(':username' => $username))
                     ->queryScalar();
                 
                 $content = trim($_POST['weibotext']);
@@ -59,6 +54,7 @@ class PostController extends AdminController
             }
             catch (Exception $e) {
                 $data = 0;
+                echo $e->getMessage();
             }
         }
         CDBase::jsonp($callback, $data);

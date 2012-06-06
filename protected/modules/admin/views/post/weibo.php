@@ -25,9 +25,7 @@
         <?php endforeach;?>
     </tbody>
 </table>
-<div class="pages">
-<?php $this->widget('CLinkPager', array('pages'=>$pages));?>
-</div>
+<a class="btn btn-small btn-success" href=''>重新载入</a>
 
 <script type="text/javascript">
 $(function(){

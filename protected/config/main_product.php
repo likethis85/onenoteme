@@ -55,7 +55,7 @@ return array(
             'cacheID' => 'cache',
             'rules' => array(
                 'http://api.waduanzi.com/<_a>' => 'api/<_a>',
-                '' => 'site/index',
+                '/' => 'site/index',
                 '<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',
                 '<_a:(duanzi|lengtu|girl|video)>' => 'channel/<_a>',
                 'post-<id:\d+>' => 'post/show',
