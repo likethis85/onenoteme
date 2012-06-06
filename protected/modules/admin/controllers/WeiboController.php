@@ -50,8 +50,6 @@ class WeiboController extends AdminController
         
         $curl = new CdCurl();
         $curl->post($url, $data);
-//         $jsonText = $curl->rawdata();
-//         echo $jsonText;exit;
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
             return $result['id'];
@@ -81,10 +79,28 @@ class WeiboController extends AdminController
         
         $curl = new CdCurl();
         $curl->post($url, $data);
-        $jsonText = $curl->rawdata();
-        echo $jsonText;exit;
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
+            return $result['id'];
+        }
+        else
+            return false;
+    }
+    
+    public function actionTest()
+    {
+        $url = 'https://upload.api.weibo.com/2/statuses/update.json';
+        $data = array(
+            'source' => WEIBO_APP_KEY,
+            'access_token' => app()->session['access_token'],
+            'status' => '这是一条测试数据',
+        );
+    
+        $curl = new CdCurl();
+        $curl->post($url, $data);
+        if ($curl->errno() == 0) {
+            $result = json_decode($curl->rawdata(), true);
+            print_r($result);
             return $result['id'];
         }
         else
