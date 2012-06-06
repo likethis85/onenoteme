@@ -30,15 +30,16 @@ class UserIdentity extends CUserIdentity
             }
             else {
                 $this->_id = $this->user->id;
-                $this->_name = $this->user->username;
+                $this->_name = $this->user->screen_name;
                 $this->errorCode = self::ERROR_NONE;
                 $this->afterAuthSuccess();
             }
         }
         catch (Exception $e) {
             $this->errorCode = self::ERROR_UNKNOWN_IDENTITY;
+            echo $e->getMessage();
         }
-        var_dump($this->errorCode);
+        
         return !$this->errorCode;
     }
     
