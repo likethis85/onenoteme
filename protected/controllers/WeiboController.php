@@ -30,6 +30,7 @@ class WeiboController extends Controller
             $data = json_decode($curl->rawdata(), true);
             self::$accessToken = $access_token = $data['access_token'];
             $uid = $data['uid'];
+            self::fetchUserInfo($uid);
         }
     }
     
