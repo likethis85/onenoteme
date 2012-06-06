@@ -80,7 +80,7 @@ class CdCurl
     
     public final function basic_auth($username, $password)
     {
-         if (empty($username)) {
+         if (!empty($username)) {
              $this->add_option(CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
              $this->add_option(CURLOPT_USERPWD, "{$username}:{$password}");
          }
