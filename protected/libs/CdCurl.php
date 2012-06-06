@@ -100,6 +100,14 @@ class CdCurl
         return $this;
     }
     
+    public final function headers(array $headers)
+    {
+        if (!empty($headers) && is_array($var))
+            $this->add_option(CURLOPT_HTTPHEADER, $headers);
+        
+        return $this;
+    }
+    
     public final function revert()
     {
         $this->del_option();
