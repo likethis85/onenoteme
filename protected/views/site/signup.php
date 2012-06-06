@@ -3,8 +3,8 @@
     	<?php echo CHtml::form('', 'POST', array('class'=>'create-form user-form'));?>
     	<ul>
     		<li>
-    			<?php echo CHtml::activeLabel($model, 'email');?>
-    			<?php echo CHtml::activeTextField($model, 'email', array('class'=>'txt'));?>
+    			<?php echo CHtml::activeLabel($model, 'username');?>
+    			<?php echo CHtml::activeTextField($model, 'username', array('class'=>'txt'));?>
     			<span>请输入有效的电子邮箱</span>
     		</li>
     		<li>
