@@ -88,7 +88,7 @@ class WeiboController extends AdminController
     }
     
     public function actionTest()
-    {
+    {exit;
         $url = 'https://upload.api.weibo.com/2/statuses/upload.json';
 //         $url = 'https://api.weibo.com/2/statuses/update.json';
     
