@@ -26,5 +26,5 @@ define('POST_STATE_DISABLED', 0);
 define('COMMENT_STATE_ENABLED', 1);
 define('COMMENT_STATE_DISABLED', 0);
 
-define('WEIBO_APP_KEY', '');
-define('WEIBO_APP_SECRET', '');
+define('WEIBO_APP_KEY', '2981913360');
+define('WEIBO_APP_SECRET', 'f06fd0b530f3d9daa56db67e5e8610e1');
