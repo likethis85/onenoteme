@@ -30,7 +30,7 @@ body {background-color:#121211;}
 .cd-header .logo a:hover {color:white; line-height:44px;}
 .cd-header .logo img {height:40px; margin-top:3px;}
 .cd-header .user-nav .user-login a {padding:4px 3px;}
-.cd-header .user-nav .user-login img {width:20px; height:20px;}
+.cd-header .user-nav .user-login img, .cd-header .user-nav .user-name img {width:20px; height:20px;}
 
 /* panel */
 .panel {background-color:#2B2B2B; -webkit-border-radius:10px; border-radius:10px; -moz-border-radius:10px; position:relative;}
