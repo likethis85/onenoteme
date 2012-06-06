@@ -51,7 +51,7 @@ class WeiboController extends AdminController
         
         $shortUrl = self::shortUrl($model->getUrl());
         $urlLen = empty($shortUrl) ? 0 : strlen($shortUrl);
-        $content = mb_strimwidth($model->content, 0, 135 - $urlLen, '...', app()->charset) . $postUrl;
+        $content = mb_strimwidth($model->content, 0, 135 - $urlLen, '...', app()->charset) . $shortUrl;
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->session['access_token'],
@@ -90,7 +90,7 @@ class WeiboController extends AdminController
         
         $shortUrl = self::shortUrl($model->getUrl());
         $urlLen = empty($shortUrl) ? 0 : strlen($shortUrl);
-        $content = mb_strimwidth($model->content, 0, 135 - $urlLen, '...', app()->charset) . $postUrl;
+        $content = mb_strimwidth($model->content, 0, 135 - $urlLen, '...', app()->charset) . $shortUrl;
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->session['access_token'],
