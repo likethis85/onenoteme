@@ -71,7 +71,7 @@ class WeiboController extends AdminController
         $curl->post($url, join('&', $args));
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
-            return $result['id'] ? $result['id'] : false;
+            return $result['idstr'] ? $result['idstr'] : false;
         }
         else
             return false;
@@ -110,7 +110,7 @@ class WeiboController extends AdminController
         @unlink($picfile);
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
-            return $result['id'] ? $result['id'] : false;
+            return $result['idstr'] ? $result['idstr'] : false;
         }
         else
             return false;
@@ -129,6 +129,7 @@ class WeiboController extends AdminController
         if ($curl->errno() == 0) {
             $urls = json_decode($curl->rawdata(), true);
             $short = $urls[0];
+            var_dump($short);
             return ($short['result']) ? $short['url_short'] : false;
         }
         else
