@@ -108,9 +108,10 @@ class WeiboController extends AdminController
             'status' => '这是一条测试数据',
 //             'pic' => '@' . $picfile,
         );
-        
+        foreach ($data as $key => $item)
+            $args[] = urlencode($key) . '=' . $item;
         $curl = new CdCurl();
-        $curl->post($url, $data);
+        $curl->post($url, join('&', $args));
 //         unlink($picfile);
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
