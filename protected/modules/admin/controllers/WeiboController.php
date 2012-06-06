@@ -122,11 +122,12 @@ class WeiboController extends AdminController
         $url = 'https://api.weibo.com/2/short_url/shorten.json';
         $data = array(
             'source' => WEIBO_APP_KEY,
-            'url_long' => $longUrl,
+            'url_long' => urlencode($longUrl),
         );
         
         $curl = new CdCurl();
         $curl->get($url, $data);
+        var_dump($curl->rawdata());exit;
         if ($curl->errno() == 0) {
             $urls = json_decode($curl->rawdata(), true);
             $short = $urls[0];
