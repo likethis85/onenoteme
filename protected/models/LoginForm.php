@@ -1,7 +1,7 @@
 <?php
 class LoginForm extends CFormModel
 {
-    public $email;
+    public $username;
     public $password;
     public $rememberMe = 1;
     public $captcha;
@@ -12,8 +12,7 @@ class LoginForm extends CFormModel
     {
         return array(
             array('captcha', 'captcha', 'captchaAction'=>'bigCaptcha', 'message'=>'验证码不正确哦，仔细瞅瞅'),
-            array('email', 'required', 'message'=>'嫩还没有写email，怎么能登录哦'),
-            array('email', 'email', 'message'=>'请输入一个email账号登录'),
+            array('username', 'required', 'message'=>'嫩还没有写账号名称，怎么能登录哦'),
             array('password', 'authenticate'),
         );
     }
@@ -22,7 +21,7 @@ class LoginForm extends CFormModel
     {
         if ($this->hasErrors()) return false;
         
-        $this->identity = new UserIdentity($this->email, $this->password);
+        $this->identity = new UserIdentity($this->username, $this->password);
 
         if (!$this->identity->authenticate()) {
             $this->addError($attribute, '账号不存在或密码错误');
@@ -35,14 +34,14 @@ class LoginForm extends CFormModel
             'password' => '密码',
             'captcha' => '验证码',
             'rememberMe' => '记住我',
-            'email' => '邮箱',
+            'username' => '账号',
         );
     }
     
     public function login()
     {
         if (empty($this->identity))
-            $this->identity = new UserIdentity($this->email, $this->password);
+            $this->identity = new UserIdentity($this->username, $this->password);
         if ($this->identity->authenticate()) {
             $duration = (user()->allowAutoLogin && $this->rememberMe) ? param('autoLoginDuration') : 0;
             user()->login($this->identity, $duration);
