@@ -44,8 +44,10 @@ class LoginForm extends CFormModel
             $this->identity = new UserIdentity($this->username, $this->password);
         if ($this->identity->authenticate()) {
             $duration = (user()->allowAutoLogin && $this->rememberMe) ? param('autoLoginDuration') : 0;
-            user()->login($this->identity, $duration);
+            return user()->login($this->identity, $duration);
         }
+        else
+            return false;
     }
     
     public static function incrementErrorLoginNums()

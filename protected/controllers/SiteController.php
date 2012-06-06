@@ -53,10 +53,13 @@ class SiteController extends Controller
             ));
     }
     
-    public function actionLogin()
+    public function actionLogin($url = '')
     {
+        $returnUrl = strip_tags(trim($url));
+        if (empty($returnUrl)) $returnUrl = app()->homeUrl;
+        
         if (!user()->isGuest) {
-            $this->redirect(user()->returnUrl);
+            request()->redirect($returnUrl);
         }
         
         $model = new LoginForm();
@@ -64,7 +67,6 @@ class SiteController extends Controller
             $model->attributes = $_POST['LoginForm'];
             if ($model->validate()) {
                 $model->login();
-                $returnUrl = request()->getUrlReferrer() ? request()->getUrlReferrer() : user()->returnUrl;
                 $this->redirect($returnUrl);
             }
         }
