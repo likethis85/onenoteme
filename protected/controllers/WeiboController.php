@@ -37,7 +37,7 @@ class WeiboController extends Controller
                 $identity = new UserIdentity($user->username, $user->password);
                 if ($identity->authenticate(true)) {
                     user()->login($identity, param('autoLoginDuration'));
-                    $this->redirect(app()->homeUrl);
+                    $this->redirect(url('site/index'));
                 }
             }
         }
