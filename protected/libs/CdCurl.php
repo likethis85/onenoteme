@@ -145,6 +145,7 @@ class CdCurl
     {
         $this->add_option(CURLOPT_POST, true);
         $this->add_option(CURLOPT_POSTFIELDS, $data);
+        $this->add_option(CURLOPT_HEADER, array('content-type'=>'application/json;charset=UTF-8'));
         return $this->exec($url);
     }
     

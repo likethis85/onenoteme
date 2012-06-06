@@ -89,7 +89,6 @@ class WeiboController extends AdminController
     
     public function actionTest()
     {
-        header('Content-Type:application/json;charset=UTF-8');
         $url = 'https://upload.api.weibo.com/2/statuses/upload.json';
         $url = 'https://api.weibo.com/2/statuses/update.json';
     
@@ -108,7 +107,7 @@ class WeiboController extends AdminController
         );
         
         $curl = new CdCurl();
-        $curl->headers(array('content-type'=>'text/plain'));
+        $curl->headers(array('content-type'=>'application/json;charset=UTF-8'));
         $curl->post($url, $data);
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
