@@ -63,7 +63,7 @@ class WeiboController extends AdminController
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->session['access_token'],
-            'status' => urlencode($content),
+            'status' => $content,
         );
         foreach ($data as $key => $item)
             $args[] = urlencode($key) . '=' . $item;
@@ -102,7 +102,7 @@ class WeiboController extends AdminController
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->session['access_token'],
-            'status' => urlencode($content),
+            'status' => $content,
             'pic' => '@' . $picfile,
         );
         
@@ -127,7 +127,6 @@ class WeiboController extends AdminController
         
         $curl = new CdCurl();
         $curl->get($url, $data);
-        var_dump($curl->rawdata());exit;
         if ($curl->errno() == 0) {
             $urls = json_decode($curl->rawdata(), true);
             $short = $urls[0];
