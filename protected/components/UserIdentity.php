@@ -5,6 +5,10 @@ class UserIdentity extends CUserIdentity
     
     private $_id;
     private $_name;
+    /**
+     * 用户model
+     * @var User
+     */
     private $user;
     
     public function authenticate($md5 = false)
@@ -58,5 +62,6 @@ class UserIdentity extends CUserIdentity
         $s = app()->session;
         $s['state'] = $this->user->state;
         $s['username'] = $this->username;
+        $s['image_url'] = $this->user->profile->image_url;
     }
 }

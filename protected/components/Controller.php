@@ -47,10 +47,10 @@ class Controller extends CController
         if (user()->isGuest) {
             $html = '<li><a href="' . aurl('site/signup') . '">注册</a></li>';
 			$html .= '<li class="user-login"><a class="fleft" href="' . aurl('site/login') . '">登录</a>';
-			$html .= '<a class="fright" href="' . aurl('weibo/authorize') . '">' . image('http://www.sinaimg.cn/blog/developer/wiki/24x24.png', '') .'</a></li>';
+			$html .= '<a class="fright" href="' . aurl('weibo/authorize') . '">' . image('http://www.sinaimg.cn/blog/developer/wiki/24x24.png', '用新浪微博账号登录') .'</a></li>';
         }
         else {
-            $html = '<li><span class="active">' . user()->name . '</span></li>';
+            $html = '<li>' . image(app()->session['image_url'], '') .'<span class="active">' . user()->name . '</span></li>';
 			$html .= '<li><a href="' . aurl('site/logout') . '">退出</a></li>';
         }
         return $html;
