@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wb="http://open.weibo.com/wb">
 <head>
 <title><?php echo $this->pageTitle;?></title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -10,15 +10,13 @@
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-basic.css');?>" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-all.css');?>" />
 <script type="text/javascript" src="<?php echo sbu('libs/jquery-1.7.2.min.js');?>"></script>
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=2981913360" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 <div class="cd-header">
     <div class="cd-wrapper">
     	<div id="site-logo" class="logo fleft">
-    	    <a href="<?php echo app()->homeUrl;?>" title="点击返回首页">
-    	        <img src="<?php echo sbu('images/logo.jpg');?>" alt="网站LOGO" title="返回首页" align="top" />
-    	                挖段子
-    	    </a>
+    	    <a href="<?php echo app()->homeUrl;?>" title="点击返回首页"><img src="<?php echo sbu('images/logo.jpg');?>" alt="网站LOGO" title="返回首页" align="top" />挖段子</a>
 	    </div>
     	<ul class="channel-nav fleft">
     		<li<?php echo ($this->channel===CHANNEL_LENGTU) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/lengtu');?>">挖冷图</a></li>
@@ -29,6 +27,7 @@
     	</ul>
 		<ul class="user-nav fright">
     		<?php $this->renderDynamic('userToolbar');?>
+    		<li><wb:login-button type="3,2" onlogin="login" onlogout="logout">登录按钮</wb:login-button></li>
     		<li><a href="http://m.waduanzi.com">手机版</a></li>
     		<li><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank">iPhone应用</a></li>
     		<li><a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">安卓应用</a></li>
