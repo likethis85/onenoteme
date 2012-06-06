@@ -7,7 +7,7 @@ class UserIdentity extends CUserIdentity
     private $_name;
     private $user;
     
-    public function authenticate()
+    public function authenticate($md5 = false)
     {
         if ($this->isAuthenticated) {
             $this->errorCode = self::ERROR_NONE;
@@ -16,21 +16,22 @@ class UserIdentity extends CUserIdentity
         
         try {
             $cmd = app()->getDb()->createCommand()
-                ->select('id, email, name, password, state')
-                ->where('email = :email');
-            $params = array(':email'=>$this->username);
+                ->select('id, username, screen_name, password, state')
+                ->where('username = :username');
+            $params = array(':username'=>$this->username);
             $this->user = DUser::model()->find($cmd, $params);
             
+            $password = $md5 ? $this->password : md5($this->password);
             if ($this->user === null)
                 $this->errorCode = self::ERROR_USERNAME_INVALID;
             elseif ($this->user->state == DUser::STATE_DISABLED)
                 $this->errorCode = self::ERROR_USER_FORBIDDEN;
-            elseif ($this->user->password != md5($this->password)) {
+            elseif ($this->user->password != $password) {
                 $this->errorCode = self::ERROR_PASSWORD_INVALID;
             }
             else {
                 $this->_id = $this->user->id;
-                $this->_name = $this->user->name;
+                $this->_name = $this->user->username;
                 $this->errorCode = self::ERROR_NONE;
                 $this->afterAuthSuccess();
             }
@@ -56,5 +57,6 @@ class UserIdentity extends CUserIdentity
     {
         $s = app()->session;
         $s['state'] = $this->user->state;
+        $s['username'] = $this->username;
     }
 }

@@ -30,7 +30,16 @@ class WeiboController extends Controller
             $data = json_decode($curl->rawdata(), true);
             self::$accessToken = $access_token = $data['access_token'];
             $uid = $data['uid'];
-            self::fetchUserInfo($uid);
+            $profile = self::fetchUserInfo($uid);
+            
+            $user = self::saveUserProfile($profile);
+            if ($user !== false) {
+                $identity = new UserIdentity($user->username, $user->password);
+                if ($identity->authenticate(true)) {
+                    user()->login($identity, param('autoLoginDuration'));
+                    $this->redirect(app()->homeUrl);
+                }
+            }
         }
     }
     
@@ -43,9 +52,38 @@ class WeiboController extends Controller
         $curl->get($url, $data);
         if ($curl->errno() == 0) {
             $userinfo = json_decode($curl->rawdata(), true);
-            print_r($userinfo);
+            return $userinfo;
         }
         else
             throw new CHttpException(503, '获取用户信息出错');
+    }
+    
+    private static function saveUserProfile($profile)
+    {
+        if (empty($profile)) return false;
+        
+        $user = new User();
+        $user->username = $user->screen_name = $profile['screen_name'];
+        $user->password = '123321';
+        
+        if (!$user->save()) return false;
+        
+        $userProfile = new UserProfile();
+        $userProfile->user_id = $user->id;
+        $userProfile->weibo_uid = $profile['id'];
+        $userProfile->province = $profile['province'];
+        $userProfile->city = $profile['city'];
+        $userProfile->location = $profile['location'];
+        $userProfile->gender = $profile['gender'];
+        $userProfile->description = $profile['description'];
+        $userProfile->website = $profile['url'];
+        $userProfile->image_url = $profile['profile_image_url'];
+        $userProfile->avatar_large = $profile['avatar_large'];
+        
+        if ($userProfile->save()) {
+            return $user;
+        }
+        else
+            return false;
     }
 }

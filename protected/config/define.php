@@ -12,6 +12,7 @@ define('TABLE_POST', '{{post}}');
 define('TABLE_POST_TEMP', '{{post_temp}}');
 define('TABLE_WEIBO_ACCOUNT', '{{weibo_account}}');
 define('TABLE_USER', '{{user}}');
+define('TABLE_USER_PROFILE', '{{user_profile}}');
 define('TABLE_COMMENT', '{{comment}}');
 define('TABLE_IOS_DEVICE', '{{ios_device}}');
 define('TABLE_TAG', '{{tag}}');
