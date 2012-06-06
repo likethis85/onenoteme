@@ -37,7 +37,7 @@ class WeiboController extends Controller
     private static function fetchUserInfo($uid)
     {
         $url = 'https://api.weibo.com/2/users/show.json';
-        $data = array('access_token' => self::$accessToken, 'uid' => $uid);
+        $data = array('source' => self::APP_KEY, 'access_token' => self::$accessToken, 'uid' => $uid);
         
         $curl = new CdCurl();
         $curl->get($url, $data);
