@@ -17,7 +17,7 @@ class WeiboController extends Controller
         $code = strip_tags(trim($code));
         $url = sprintf('https://api.weibo.com/oauth2/access_token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s', self::APP_KEY, self::APP_SECRETE, $redirectUrl, $code);
         $curl = new CdCurl();
-        $curl->get($url);
+        $curl->post($url);
         if ($curl->errno() != 0)
             throw new CHttpException(503, '获取token出错');
         else
