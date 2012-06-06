@@ -47,7 +47,11 @@ class WeiboController extends AdminController
         if (empty($model->content)) return false;
         
         $url = 'https://upload.api.weibo.com/2/statuses/update.json';
-        $content = mb_substr($model->content, 0, 135, app()->charset);
+        
+        
+        $shortUrl = self::shortUrl($model->getUrl());
+        $urlLen = empty($shortUrl) ? 0 : strlen($shortUrl);
+        $content = mb_strimwidth($model->content, 0, 135 - $urlLen, '...', app()->charset) . $postUrl;
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->session['access_token'],
@@ -83,7 +87,10 @@ class WeiboController extends AdminController
             return false;
         
         $url = 'https://upload.api.weibo.com/2/statuses/upload.json';
-        $content = mb_substr($model->content, 0, 135, app()->charset);
+        
+        $shortUrl = self::shortUrl($model->getUrl());
+        $urlLen = empty($shortUrl) ? 0 : strlen($shortUrl);
+        $content = mb_strimwidth($model->content, 0, 135 - $urlLen, '...', app()->charset) . $postUrl;
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->session['access_token'],
@@ -97,6 +104,25 @@ class WeiboController extends AdminController
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
             return $result['id'] ? $result['id'] : false;
+        }
+        else
+            return false;
+    }
+    
+    private static function shortUrl($url)
+    {
+        $url = 'https://api.weibo.com/2/short_url/shorten.json';
+        $data = array(
+            'source' => WEIBO_APP_KEY,
+            'url_long' => $url,
+        );
+        
+        $curl = new CdCurl();
+        $curl->get($url, $data);
+        if ($curl->errno() == 0) {
+            $urls = json_decode($curl->rawdata(), true);
+            $short = $urls[0];
+            return ($short['result']) ? $short['url_short'] : false;
         }
         else
             return false;
