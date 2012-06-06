@@ -32,7 +32,10 @@ class WeiboController extends Controller
             $uid = $data['uid'];
             $profile = self::fetchUserInfo($uid);
             
-            $user = self::saveUserProfile($profile);
+            $user = self::checkUserExist($profile['id']);
+            if ($user !== null)
+                $user = self::saveUserProfile($profile);
+            
             if ($user !== false) {
                 $identity = new UserIdentity($user->username, $user->password);
                 if ($identity->authenticate(true)) {
@@ -89,4 +92,16 @@ class WeiboController extends Controller
         else
             return false;
     }
+    
+    private static function checkUserExist($uid)
+    {
+        $uid = (int)$uid;
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array('weibo_uid' => $uid));
+        $profile = UserProfile::model()->find($criteria);
+        
+        return $profile === null ? null : $profile->user;
+    }
 }
+
+
