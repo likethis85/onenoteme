@@ -103,7 +103,7 @@ class WeiboController extends AdminController
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->session['access_token'],
             'status' => urlencode('这是一条测试数据'),
-            'pic' => $picData,
+            'pic' => base64_encode($picData),
         );
         
         $curl = new CdCurl();
