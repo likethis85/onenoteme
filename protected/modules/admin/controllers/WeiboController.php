@@ -47,10 +47,11 @@ class WeiboController extends AdminController
         if (empty($model->content)) return false;
         
         $url = 'https://upload.api.weibo.com/2/statuses/update.json';
+        $content = mb_substr($model->content, 0, 135, app()->charset);
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->session['access_token'],
-            'status' => urlencode($model->content),
+            'status' => urlencode($content),
         );
         foreach ($data as $key => $item)
             $args[] = urlencode($key) . '=' . $item;
@@ -82,10 +83,11 @@ class WeiboController extends AdminController
             return false;
         
         $url = 'https://upload.api.weibo.com/2/statuses/upload.json';
+        $content = mb_substr($model->content, 0, 135, app()->charset);
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->session['access_token'],
-            'status' => urlencode($model->content),
+            'status' => urlencode($content),
             'pic' => '@' . $picfile,
         );
         
