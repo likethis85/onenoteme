@@ -4,6 +4,9 @@ class WeiboController extends Controller
     const APP_KEY = '2981913360';
     const APP_SECRETE = 'f06fd0b530f3d9daa56db67e5e8610e1';
     
+    private static $accessToken = '';
+    private static $uid = 0;
+    
     public function actionAuthorize()
     {
         $callback = aurl('weibo/callback');
@@ -16,18 +19,32 @@ class WeiboController extends Controller
     {
         $code = strip_tags(trim($code));
         $redirectUrl = aurl('weibo/test');
-        $url = sprintf('https://api.weibo.com/oauth2/access_token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s', self::APP_KEY, self::APP_SECRETE, $redirectUrl, $code);
+        $callback = aurl('weibo/callback');
+        $url = sprintf('https://api.weibo.com/oauth2/access_token?grant_type=authorization_code&redirect_uri=%s&code=%s', $callback, $code);
         $curl = new CdCurl();
+        $curl->basic_auth(self::APP_KEY, self::APP_SECRETE);
         $curl->post($url);
         if ($curl->errno() != 0)
             throw new CHttpException(503, '获取token出错');
-        else
-            print_r($curl->rawdata());
+        else {
+            $data = json_decode($curl->rawdata(), true);
+            self::$accessToken = $access_token = $data['access_token'];
+            $uid = $data['uid'];
+        }
     }
     
-    public function actionTest()
+    private static function fetchUserInfo($uid)
     {
-        $file = app()->getRuntimePath() . DS . 'test.log';
-        file_put_contents($file, var_export($_REQUEST, true));
+        $url = 'https://api.weibo.com/2/users/show.json';
+        $data = array('access_token' => self::$accessToken, 'uid' => $uid);
+        
+        $curl = new CdCurl();
+        $curl->get($url, $data);
+        if ($curl->errno() == 0) {
+            $userinfo = json_decode($curl->rawdata(), true);
+            print_r($userinfo);
+        }
+        else
+            throw new CHttpException(503, '获取用户信息出错');
     }
 }
