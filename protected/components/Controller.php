@@ -53,8 +53,10 @@ class Controller extends CController
             $html = '<li class="user-name"><a class="active">' . image(app()->session['image_url'], '', array('align'=>'top')) . user()->name . '</a></li>';
 			$html .= '<li><a href="' . aurl('site/logout') . '">退出</a></li>';
         }
-        else
+        else {
+            $html = '<li><a class="active">' . user()->name . '</a></li>';
             $html .= '<li><a href="' . aurl('site/logout') . '">退出</a></li>';
+        }
         
         return $html;
     }
