@@ -93,7 +93,7 @@ class WeiboController extends AdminController
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->session['access_token'],
-            'status' => '这是一条测试数据',
+            'status' => urlencode('这是一条测试数据'),
         );
     
         $curl = new CdCurl();
