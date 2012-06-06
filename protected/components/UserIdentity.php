@@ -34,7 +34,7 @@ class UserIdentity extends CUserIdentity
             }
             else {
                 $this->_id = $this->user->id;
-                $this->_name = $this->user->screen_name;
+                $this->_name = $this->user->getDisplayName();
                 $this->errorCode = self::ERROR_NONE;
                 $this->afterAuthSuccess();
             }

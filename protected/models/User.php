@@ -99,6 +99,10 @@ class User extends CActiveRecord
 	    return true;
 	}
 
+	public function getDisplayName()
+	{
+	    return empty($this->screen_name) ? $this->username : $this->screen_name;
+	}
 	
 	public function getCreateTime($format = null)
 	{
