@@ -33,7 +33,7 @@ class WeiboController extends Controller
             $profile = self::fetchUserInfo($uid);
             
             $user = self::checkUserExist($profile['id']);
-            if ($user !== null)
+            if ($user === null)
                 $user = self::saveUserProfile($profile);
             
             if ($user !== false) {
@@ -100,7 +100,7 @@ class WeiboController extends Controller
         $criteria->addColumnCondition(array('weibo_uid' => $uid));
         $profile = UserProfile::model()->find($criteria);
         
-        return $profile === null ? null : $profile->user;
+        return ($profile === null) ? null : $profile->user;
     }
 }
 
