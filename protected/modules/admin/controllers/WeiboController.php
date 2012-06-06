@@ -89,13 +89,23 @@ class WeiboController extends AdminController
     
     public function actionTest()
     {
-        $url = 'https://upload.api.weibo.com/2/statuses/update.json';
+        $url = 'https://upload.api.weibo.com/2/statuses/upload.json';
+        
+    
+        $curl = new CdCurl();
+        $curl->get('http://static.php.net/www.php.net/images/php.gif');
+        if ($curl->errno() == 0)
+            $picData = $curl->rawdata();
+        else
+            return false;
+        
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->session['access_token'],
             'status' => urlencode('这是一条测试数据'),
+            'pic' => $picData,
         );
-    
+        
         $curl = new CdCurl();
         $curl->headers(array('content-type'=>'text/plain'));
         $curl->post($url, $data);
