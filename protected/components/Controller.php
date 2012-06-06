@@ -50,7 +50,7 @@ class Controller extends CController
 			$html .= '<a class="fright" href="' . aurl('weibo/authorize') . '">' . image('http://www.sinaimg.cn/blog/developer/wiki/24x24.png', '用新浪微博账号登录') .'</a></li>';
         }
         elseif (app()->session['image_url']) {
-            $html = '<li class="user-n"><a class="active">' . image(app()->session['image_url'], '', array('align'=>'top')) . user()->name . '</a></li>';
+            $html = '<li class="user-name"><a class="active">' . image(app()->session['image_url'], '', array('align'=>'top')) . user()->name . '</a></li>';
 			$html .= '<li><a href="' . aurl('site/logout') . '">退出</a></li>';
         }
         else
