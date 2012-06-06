@@ -133,10 +133,10 @@ class CdCurl
         return curl_error($this->_ch);
     }
     
-    public final function post($url, $data = '')
+    public final function post($url, $data = null)
     {
         $this->add_option(CURLOPT_POST, true);
-            $this->add_option(CURLOPT_POSTFIELDS, $data);
+        $this->add_option(CURLOPT_POSTFIELDS, $data);
         return $this->exec($url);
     }
     
