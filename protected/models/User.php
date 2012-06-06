@@ -56,7 +56,6 @@ class User extends CActiveRecord
 			array('password', 'length', 'min'=>3, 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
 			array('token', 'length', 'max'=>32),
-			array('captcha', 'captcha', 'captchaAction'=>'bigCaptcha', 'on'=>'insert', 'message'=>'验证码不正确哦，仔细瞅瞅'),
 		);
 	}
 

@@ -37,7 +37,7 @@ class UserIdentity extends CUserIdentity
         }
         catch (Exception $e) {
             $this->errorCode = self::ERROR_UNKNOWN_IDENTITY;
-            echo $e->getMessage();
+//             echo $e->getMessage();
         }
         
         return !$this->errorCode;
