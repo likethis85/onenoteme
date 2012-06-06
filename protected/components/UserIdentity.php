@@ -15,11 +15,10 @@ class UserIdentity extends CUserIdentity
         }
         
         try {
-            $cmd = app()->getDb()->createCommand()
-                ->select('id, username, screen_name, password, state')
-                ->where('username = :username');
-            $params = array(':username'=>$this->username);
-            $this->user = DUser::model()->find($cmd, $params);
+            $criteria = new CDbCriteria();
+            $criteria->select = array('t.id', 't.username', 't.screen_name', 't.password', 't.state');
+            $criteria->addColumnCondition(array('username'=>$this->username));
+            $this->user = User::model()->find($criteria);
             
             $password = $md5 ? $this->password : md5($this->password);
             if ($this->user === null)

@@ -76,3 +76,4 @@ class LoginForm extends CFormModel
             self::clearErrorLoginNums();
     }
 }
+
