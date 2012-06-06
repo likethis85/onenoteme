@@ -18,7 +18,7 @@ class WeiboController extends AdminController
     
     public function actionSkip($id)
     {
-        $result = AdminPost::model()->findByPk($id)->update(array('weibo_id'=>'0'));
+        $result = AdminPost::model()->updateByPk($id, array('weibo_id'=>'0'));
         echo (int)$result;
         exit(0);
     }
@@ -127,7 +127,7 @@ class WeiboController extends AdminController
         
         $curl = new CdCurl();
         $curl->get($url, $data);
-        var_dump($curl->rawdata());exit;
+        var_dump($data);exit;
         if ($curl->errno() == 0) {
             $urls = json_decode($curl->rawdata(), true);
             $short = $urls[0];
