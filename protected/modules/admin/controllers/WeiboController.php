@@ -45,11 +45,13 @@ class WeiboController extends AdminController
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->session['access_token'],
-            'status' => $model->content,
+            'status' => urlencode($model->content),
         );
+        foreach ($data as $key => $item)
+            $args[] = urlencode($key) . '=' . $item;
         
         $curl = new CdCurl();
-        $curl->post($url, $data);
+        $curl->post($url, join('&', $args));
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
             return $result['id'];
@@ -64,8 +66,13 @@ class WeiboController extends AdminController
         
         $curl = new CdCurl();
         $curl->get($model->getBmiddlePic());
-        if ($curl->errno() == 0)
+        if ($curl->errno() == 0) {
             $picData = $curl->rawdata();
+            $picfile = app()->getRuntimePath() . DS . uniqid();
+            $result = file_put_contents($picfile, $picData);
+            if ($result === false)
+                throw new CException('生成临时文件出错', 0);
+        }
         else
             return false;
         
@@ -73,12 +80,13 @@ class WeiboController extends AdminController
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->session['access_token'],
-            'status' => $model->content,
-            'pic' => $picData,
+            'status' => urlencode($model->content),
+            'pic' => '@' . $picfile,
         );
         
         $curl = new CdCurl();
         $curl->post($url, $data);
+        @unlink($picfile);
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
             return $result['id'];
@@ -95,9 +103,9 @@ class WeiboController extends AdminController
 //         $curl = new CdCurl();
 //         $curl->get('http://static.php.net/www.php.net/images/php.gif');
 //         if ($curl->errno() == 0) {
-//             $picData = $curl->rawdata();
-//             $picfile = app()->getRuntimePath() . DS . uniqid() . '.gif';
-//             file_put_contents($picfile, $picData);
+            $picData = $curl->rawdata();
+            $picfile = app()->getRuntimePath() . DS . uniqid() . '.gif';
+            file_put_contents($picfile, $picData);
 //         }
 //         else
 //             return false;
