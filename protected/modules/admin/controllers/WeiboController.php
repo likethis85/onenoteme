@@ -90,28 +90,28 @@ class WeiboController extends AdminController
     public function actionTest()
     {
         $url = 'https://upload.api.weibo.com/2/statuses/upload.json';
-//         $url = 'https://api.weibo.com/2/statuses/update.json';
+        $url = 'https://api.weibo.com/2/statuses/update.json';
     
-        $curl = new CdCurl();
-        $curl->get('http://static.php.net/www.php.net/images/php.gif');
-        if ($curl->errno() == 0) {
-            $picData = $curl->rawdata();
-            $picfile = app()->getRuntimePath() . DS . uniqid() . '.gif';
-            file_put_contents($picfile, $picData);
-        }
-        else
-            return false;
+//         $curl = new CdCurl();
+//         $curl->get('http://static.php.net/www.php.net/images/php.gif');
+//         if ($curl->errno() == 0) {
+//             $picData = $curl->rawdata();
+//             $picfile = app()->getRuntimePath() . DS . uniqid() . '.gif';
+//             file_put_contents($picfile, $picData);
+//         }
+//         else
+//             return false;
         
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->session['access_token'],
             'status' => '这是一条测试数据',
-            'pic' => '@' . $picfile,
+//             'pic' => '@' . $picfile,
         );
         
         $curl = new CdCurl();
         $curl->post($url, $data);
-        unlink($picfile);
+//         unlink($picfile);
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
             print_r($result);
