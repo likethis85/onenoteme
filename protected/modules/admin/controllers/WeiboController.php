@@ -127,9 +127,8 @@ class WeiboController extends AdminController
         $curl = new CdCurl();
         $curl->get($url, $data);
         if ($curl->errno() == 0) {
-            $urls = json_decode($curl->rawdata(), true);
-            $short = $urls[0];
-            var_dump($short);
+            $result = json_decode($curl->rawdata(), true);
+            $short = $result['urls'][0];
             return ($short['result']) ? $short['url_short'] : false;
         }
         else
