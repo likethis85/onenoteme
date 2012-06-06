@@ -40,6 +40,8 @@ class WeiboController extends Controller
                     $this->redirect(url('site/index'));
                 }
             }
+            else
+                throw new CException('保存用户资料出错');
         }
     }
     
