@@ -107,7 +107,6 @@ class WeiboController extends AdminController
         );
         
         $curl = new CdCurl();
-        $curl->headers(array('content-type'=>'application/json;charset=UTF-8'));
         $curl->post($url, $data);
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
