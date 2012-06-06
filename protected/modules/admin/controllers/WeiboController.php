@@ -33,7 +33,7 @@ class WeiboController extends AdminController
             $result = self::upload($model);
         }
         
-        echo ($result === false) ? 0 : 1;
+        echo ($result === false) ? 0 : $result;
         exit(0);
     }
     
