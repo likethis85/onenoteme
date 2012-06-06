@@ -96,7 +96,7 @@ class WeiboController extends AdminController
         $curl->get('http://static.php.net/www.php.net/images/php.gif');
         if ($curl->errno() == 0) {
             $picData = $curl->rawdata();
-            $picfile = app()->getRuntimePath() . DS . uniqid();
+            $picfile = app()->getRuntimePath() . DS . uniqid() . '.gif';
             file_put_contents($picfile, $picData);
         }
         else
