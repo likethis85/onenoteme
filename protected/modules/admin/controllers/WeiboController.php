@@ -16,6 +16,13 @@ class WeiboController extends AdminController
         $this->render('posts', $data);
     }
     
+    public function actionSkip($id)
+    {
+        $result = AdminPost::model()->findByPk($id)->update(array('weibo_id'=>'0'));
+        echo (int)$result;
+        exit(0);
+    }
+    
     public function actionCreate($id)
     {
         $id = (int)$id;
@@ -109,12 +116,12 @@ class WeiboController extends AdminController
             return false;
     }
     
-    private static function shortUrl($url)
+    private static function shortUrl($longUrl)
     {
         $url = 'https://api.weibo.com/2/short_url/shorten.json';
         $data = array(
             'source' => WEIBO_APP_KEY,
-            'url_long' => $url,
+            'url_long' => $longUrl,
         );
         
         $curl = new CdCurl();
