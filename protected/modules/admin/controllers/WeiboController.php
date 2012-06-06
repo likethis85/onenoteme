@@ -33,6 +33,11 @@ class WeiboController extends AdminController
             $result = self::upload($model);
         }
         
+        if ($result !== false) {
+            $model->weibo_id = $result;
+            $model->save(true, array('weibo_id'));
+        }
+        
         echo ($result === false) ? 0 : $result;
         exit(0);
     }
@@ -54,7 +59,7 @@ class WeiboController extends AdminController
         $curl->post($url, join('&', $args));
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
-            return $result['id'];
+            return $result['id'] ? $result['id'] : false;
         }
         else
             return false;
@@ -89,44 +94,10 @@ class WeiboController extends AdminController
         @unlink($picfile);
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
-            return $result['id'];
-        }
-        else
-            return false;
-    }
-    
-    public function actionTest()
-    {
-        $url = 'https://upload.api.weibo.com/2/statuses/upload.json';
-        $url = 'https://api.weibo.com/2/statuses/update.json';
-    
-//         $curl = new CdCurl();
-//         $curl->get('http://static.php.net/www.php.net/images/php.gif');
-//         if ($curl->errno() == 0) {
-            $picData = $curl->rawdata();
-            $picfile = app()->getRuntimePath() . DS . uniqid() . '.gif';
-            file_put_contents($picfile, $picData);
-//         }
-//         else
-//             return false;
-        
-        $data = array(
-            'source' => WEIBO_APP_KEY,
-            'access_token' => app()->session['access_token'],
-            'status' => '这是一条测试数据',
-//             'pic' => '@' . $picfile,
-        );
-        foreach ($data as $key => $item)
-            $args[] = urlencode($key) . '=' . $item;
-        $curl = new CdCurl();
-        $curl->post($url, join('&', $args));
-//         unlink($picfile);
-        if ($curl->errno() == 0) {
-            $result = json_decode($curl->rawdata(), true);
-            print_r($result);
-            return $result['id'];
+            return $result['id'] ? $result['id'] : false;
         }
         else
             return false;
     }
 }
+
