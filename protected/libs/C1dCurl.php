@@ -1,5 +1,5 @@
 <?php
-class CdCurl
+class C1dCurl
 {
     private $_ch;
     private $_headers;
@@ -9,7 +9,7 @@ class CdCurl
     private $_data;
     private $_timeout = 30;
     private $_connection_timeout = 60;
-    private $user_agent = 'Mozilla/5.0 (Windows NT 6.1; rv:2.0) Gecko/20100101 Firefox/4.0';
+    private static $user_agent = 'Mozilla/5.0 (Windows NT 6.1; rv:2.0) Gecko/20100101 Firefox/4.0';
 
     public function __construct()
     {
@@ -21,7 +21,7 @@ class CdCurl
     
     private function _option_init()
     {
-        $this->add_option(CURLOPT_USERAGENT, $this->user_agent);
+        $this->add_option(CURLOPT_USERAGENT, self::$user_agent);
         $this->add_option(CURLOPT_CONNECTTIMEOUT, $this->_connection_timeout);
         $this->add_option(CURLOPT_TIMEOUT, $this->_timeout);
         $this->add_option(CURLOPT_RETURNTRANSFER, true);
@@ -87,6 +87,7 @@ class CdCurl
          return $this;
      }
     
+    
     public final function referer($url = true)
     {
         if (is_string($url) && !empty($url)) {
@@ -99,19 +100,12 @@ class CdCurl
         return $this;
     }
     
-
     public final function headers(array $headers)
     {
         if (!empty($headers) && is_array($var))
             $this->add_option(CURLOPT_HTTPHEADER, $headers);
-    
+        
         return $this;
-    }
-    
-    public function user_agent($agent)
-    {
-        if ($agent)
-            $this->user_agent = $agent;
     }
     
     public final function revert()
@@ -208,6 +202,7 @@ class CdCurl
         $this->add_option(CURLOPT_FOLLOWLOCATION, $val);
         return $this;
     }
+
     
     public final function get_ch()
     {
@@ -215,4 +210,3 @@ class CdCurl
     }
     
 }
-
