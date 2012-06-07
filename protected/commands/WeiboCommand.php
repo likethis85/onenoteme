@@ -145,6 +145,10 @@ class WeiboCommand extends CConsoleCommand
         }
         
         $text = $row['text'];
+        
+        if (self::keywordsFilter($text) === false)
+            return false;
+        
         $text = preg_replace('/(#.*?#)|(（.*?）)|(\(.*?\))|(【.*?】)|(http:\/\/t\.cn\/\w+)|(@.+?\s{1})/is', '', $text);
         if (array_key_exists('thumbnail_pic', $row)) {
             $temp['thumbnail_pic'] = $row['thumbnail_pic'];
@@ -179,6 +183,18 @@ class WeiboCommand extends CConsoleCommand
         }
         
         return $result;
+    }
+    
+    private static function keywordsFilter($text)
+    {
+        $words = array('代购', '地址在这里', '推荐给大家', '宝贝地址', '推荐MM');
+        foreach ($words as $word) {
+            $pos = strpos($text, $word);
+            if ($pos !== false)
+                return false;
+        }
+            
+        return true;
     }
     
     private static function fetchWeiboAccounts()
