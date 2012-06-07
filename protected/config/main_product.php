@@ -64,6 +64,12 @@ return array(
                 'tag-<name:[\w\s\%\-\+\.]+>' => 'tag/posts',
             ),
         ),
+        'session' => array(
+            'autoStart' => true,
+            'cookieParams' => array(
+                'lifetime' => $params['autoLoginDuration'],
+            ),
+        ),
         'user' => array(
             'allowAutoLogin' => true,
             'loginUrl' => array('site/login'),
