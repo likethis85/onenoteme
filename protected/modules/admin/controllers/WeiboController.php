@@ -69,6 +69,8 @@ class WeiboController extends AdminController
         
         $curl = new CdCurl();
         $curl->post($url, join('&', $args));
+        var_dump($curl->rawdata());
+        var_dump($curl->errno());exit;
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
             return $result['idstr'] ? $result['idstr'] : false;
