@@ -13,8 +13,8 @@
     			<span>密码最少为5位</span>
     		</li>
     		<li>
-    			<?php echo CHtml::activeLabel($model, 'name');?>
-    			<?php echo CHtml::activeTextField($model, 'name', array('class'=>'txt'));?>
+    			<?php echo CHtml::activeLabel($model, 'screen_name');?>
+    			<?php echo CHtml::activeTextField($model, 'screen_name', array('class'=>'txt'));?>
     			<span>给自己起一个名字吧</span>
     		</li>
     		<li>

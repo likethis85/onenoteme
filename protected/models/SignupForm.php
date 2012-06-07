@@ -1,8 +1,8 @@
 <?php
 class SignupForm extends CFormModel
 {
-    public $email;
-    public $name;
+    public $username;
+    public $screen_name;
     public $password;
     public $captcha;
     
@@ -11,10 +11,10 @@ class SignupForm extends CFormModel
     public function rules()
     {
         return array(
-            array('email, name, password', 'required'),
-            array('email', 'email'),
-            array('email', 'unique', 'className'=>'User', 'attribute'=>'email'),
-            array('name', 'unique', 'className'=>'User', 'attribute'=>'name'),
+            array('username, screen_name, password', 'required'),
+            array('username', 'username'),
+            array('username', 'unique', 'classscreen_name'=>'User', 'attribute'=>'username'),
+            array('screen_name', 'unique', 'classscreen_name'=>'User', 'attribute'=>'screen_name'),
             array('password', 'length', 'min'=>5, 'max'=>30),
             array('captcha', 'captcha'),
         );
@@ -23,18 +23,18 @@ class SignupForm extends CFormModel
     public function attributeLabels()
     {
         return array(
-            'name' => '大名',
+            'screen_name' => '大名',
             'password' => '密码',
             'captcha' => '验证码',
-            'email' => '邮箱',
+            'username' => '邮箱',
         );
     }
     
     public function createUser()
     {
         $user = new User();
-        $user->email = $this->email;
-        $user->name = $this->name;
+        $user->username = $this->username;
+        $user->screen_name = $this->screen_name;
         $user->password = $this->password;
         $result =  $user->save();
         return $result ? $user : false;
