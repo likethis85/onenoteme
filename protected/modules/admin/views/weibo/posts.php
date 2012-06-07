@@ -14,7 +14,8 @@
             </td>
             <td>
                 <p><a href="<?php echo aurl('admin/weibo/create', array('id'=>$model->id));?>" class="btn btn-small btn-success row-create">发布</a></p>
-                <p><a href="<?php echo aurl('admin/weibo/skip', array('id'=>$model->id));?>" class="btn btn-small btn-warning row-skip">跳过</a></p>
+                <p>&nbsp;</p>
+                <p><a href="<?php echo aurl('admin/weibo/skip', array('id'=>$model->id));?>" class="btn btn-small row-skip">跳过</a></p>
             </td>
         </tr>
         <?php endforeach;?>

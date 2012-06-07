@@ -5,7 +5,7 @@
         <a class="dislike site-bg arrow-down" data-id="<?php echo $model->id;?>" data-value="0" data-url="<?php echo aurl('comment/score');?>" href="javascript:void(0);">讨厌</a>
     </div>
     <dl class="radius4px">
-        <dt>评分:&nbsp;<span class="comment-score"><?php echo $model->score;?></span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $model->createTime;?></dt>
+        <dt><?php echo $model->authorName;?>&nbsp;评分:&nbsp;<span class="comment-score"><?php echo $model->score;?></span>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $model->createTime;?></dt>
         <dd><?php echo $model->filterContent;?></dd>
     </dl>
     <div class="clear"></div>

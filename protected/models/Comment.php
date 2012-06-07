@@ -84,6 +84,11 @@ class Comment extends CActiveRecord
 	    return $this->user_name ? $this->user_name : user()->guestName;
 	}
 	
+	public function getAuthorHomeUrl()
+	{
+	     return aurl('user/home');
+	}
+	
 	public function getFilterContent()
 	{
 	    return strip_tags(trim($this->content));
