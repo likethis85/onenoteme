@@ -32,6 +32,7 @@ class Api_User extends ApiBase
         	$this->afterLogin($user, $params);
         	$data = $user->attributes;
         	$data['name'] = $data['screen_name'];
+        	$data['email'] = $data['username'];
         	unset($user);
         	unset($data['password'], $data['create_ip']);
         	return array('error'=>'OK', 'userinfo'=>$data);
