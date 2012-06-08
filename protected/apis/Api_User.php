@@ -10,6 +10,9 @@ class Api_User extends ApiBase
 {
     public function login()
     {
+        $text = var_export($_REQUEST, true);
+        $filename = app()->getRuntimePath() . DS . 'login.log';
+        @file_put_contents($filename, $text);
         $data = array(
             'id' => '40',
             'email' => 'test@waduanzi.com',
