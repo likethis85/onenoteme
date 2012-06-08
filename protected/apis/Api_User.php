@@ -73,19 +73,21 @@ class Api_User extends ApiBase
     public function create()
     {
         self::requirePost();
-        $this->requiredParams(array('username', 'password'));
-        $params = $this->filterParams(array('username', 'password'));
+        $this->requiredParams(array('email', 'password'));
+        $params = $this->filterParams(array('email', 'password'));
         
         $user = new User('apiinsert');
         $user->password = $params['password'];
-        $user->email = $params['username'];
-        $user->name = $user->email; // substr($params['username'], 0, strpos($params['username'], '@'));
+        $user->username = $params['email'];
+        $user->screen_name = $user->username; // substr($params['username'], 0, strpos($params['username'], '@'));
         $user->state = User::STATE_ENABLED;
-        $user->token = self::makeToken($user->email);
+        $user->token = self::makeToken($user->username);
         try {
         	if ($user->save()) {
         	    $this->afterLogin($user, $params);
         	    $data = $user->attributes;
+        	    $data['name'] = $data['screen_name'];
+        	    $data['email'] = $data['username'];
             	unset($user);
             	unset($data['password'], $data['create_ip']);
             	return array('error'=>'OK', 'userinfo'=>$data);
