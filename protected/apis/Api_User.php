@@ -11,13 +11,13 @@ class Api_User extends ApiBase
     public function login()
     {
         self::requirePost();
-        $this->requiredParams(array('username', 'password'));
-        $params = $this->filterParams(array('username', 'password'));
+        $this->requiredParams(array('email', 'password'));
+        $params = $this->filterParams(array('email', 'password'));
         
         try {
 	        $criteria = new CDbCriteria();
-	        $criteria->select = array('id', 'email', 'name', 'create_time', 'state');
-	        $columns = array('email'=>$params['username'], 'password'=>$params['password']);
+	        $criteria->select = array('id', 'username', 'name', 'create_time', 'state');
+	        $columns = array('username'=>$params['email'], 'password'=>$params['password']);
 	        $criteria->addColumnCondition($columns);
 	        $criteria->addCondition('state != ' . User::STATE_DISABLED);
 	        $user = User::model()->find($criteria);
@@ -27,7 +27,7 @@ class Api_User extends ApiBase
         }
         
 	    if (null !== $user) {
-        	$user->token = self::makeToken($user->email);
+        	$user->token = self::makeToken($user->username);
         	$user->save(true, array('token'));
         	$this->afterLogin($user, $params);
         	$data = $user->attributes;
@@ -45,7 +45,7 @@ class Api_User extends ApiBase
     {
     	$data = $user->attributes;
     	try {
-    		app()->cache->set($user->email, $data, 3600*24*30);
+    		app()->cache->set($user->username, $data, 3600*24*30);
     	}
     	catch (ApiException $e) {
     		throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
