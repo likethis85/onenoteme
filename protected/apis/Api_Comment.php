@@ -48,6 +48,9 @@ class Api_Comment extends ApiBase
     
     public function create()
     {
+        $data = var_export($_REQUEST, true);
+        $filename = app()->getRuntimePath().DS.'comment.log';
+        @file_put_contents($filename, $data);
         self::requirePost();
         $this->requiredParams(array('postid', 'content'));
         $params = $this->filterParams(array('postid', 'content', 'userid'));
