@@ -80,13 +80,13 @@ class Api_User extends ApiBase
     
     public function create()
     {
-        self::requirePost();
-        $this->requiredParams(array('email', 'password'));
-        $params = $this->filterParams(array('email', 'password'));
+//         self::requirePost();
+//         $this->requiredParams(array('email', 'password'));
+//         $params = $this->filterParams(array('email', 'password'));
         
         $data = array(
             'id' => '40',
-            'email' => $params['email'],
+            'email' => 'cdc@waduanzi.com',
             'name' => '测试账号',
             'create_time' => '1337839013',
             'state' => '1',
