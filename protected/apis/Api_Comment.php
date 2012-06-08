@@ -59,7 +59,7 @@ class Api_Comment extends ApiBase
         if ($postid <= 0 || empty($content))
             $data = array(
                 'errno'=>1,
-                'message'=>'非法操作',
+                'message'=>'invaild request',
             );
         else {
             $comment = new Comment();
@@ -75,7 +75,7 @@ class Api_Comment extends ApiBase
             else
                 $data = array(
                     'errno' => 1,
-                    'message' => '数据库操作错误'
+                    'message' => 'db error'
                 );
         }
         $text = var_export($data, true);
