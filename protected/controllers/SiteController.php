@@ -47,7 +47,7 @@ class SiteController extends Controller
                 'pages' => $pages,
             ));
         else
-            $this->render('/post/mixed_list', array(
+            $this->render('index', array(
                 'models' => $models,
                 'pages' => $pages,
             ));
