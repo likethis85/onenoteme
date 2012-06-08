@@ -28,7 +28,7 @@
             <script type="text/javascript" >
             var jiathis_config={
             	data_track_clickback:true,
-            	title: '<?php echo urlencode($post->filterContent)?>',
+            	title: '<?php echo h($post->filterContent)?>',
             	pic: '<?php echo $post->bmiddlePic;?>',
             	ralateuid:{
             		"tsina":"1639121454"
