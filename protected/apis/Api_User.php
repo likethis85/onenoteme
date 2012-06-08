@@ -34,7 +34,7 @@ class Api_User extends ApiBase
         	$data['name'] = $data['screen_name'];
         	$data['email'] = $data['username'];
         	unset($user);
-        	unset($data['password'], $data['create_ip']);
+        	unset($data['password'], $data['create_ip'], $data['username'], $data['screen_name']);
         	return array('error'=>'OK', 'userinfo'=>$data);
         }
         else {
@@ -89,7 +89,7 @@ class Api_User extends ApiBase
         	    $data['name'] = $data['screen_name'];
         	    $data['email'] = $data['username'];
             	unset($user);
-            	unset($data['password'], $data['create_ip']);
+            	unset($data['password'], $data['create_ip'], $data['username'], $data['screen_name']);
             	return array('error'=>'OK', 'userinfo'=>$data);
         	}
         	else {
