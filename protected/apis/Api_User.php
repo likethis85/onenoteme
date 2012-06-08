@@ -10,7 +10,7 @@ class Api_User extends ApiBase
 {
     public function login()
     {
-//         self::requirePost();
+        self::requirePost();
         $this->requiredParams(array('email', 'password'));
         $params = $this->filterParams(array('email', 'password'));
         
