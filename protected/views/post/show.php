@@ -1,7 +1,7 @@
 <div class="fleft cd-container">
 	<div class="panel panel20 post-detail">
 		<div class="content-block post-content">
-		    <p><?php echo $post->content;?></p>
+		    <p><?php echo $post->filterContent;?></p>
 		    <?php if ($post->tags):?><div class="post-tags">标签：<?php echo $post->tagLinks;?></div><?php endif;?>
         </div>
         <?php if ($post->bmiddlePic):?><div class="content-block post-picture"><?php echo l(CHtml::image($post->bmiddlePic, $post->title), aurl('post/originalpic', array('id'=>$post->id)), array('target'=>'_blank'));?></div><?php endif;?>
@@ -28,7 +28,7 @@
             <script type="text/javascript" >
             var jiathis_config={
             	data_track_clickback:true,
-            	title: '<?php echo h($post->content)?>',
+            	title: '<?php echo urlencode($post->filterContent)?>',
             	pic: '<?php echo $post->bmiddlePic;?>',
             	ralateuid:{
             		"tsina":"1639121454"

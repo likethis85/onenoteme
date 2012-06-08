@@ -23,6 +23,7 @@
  * @property string $original_pic
  * @property string $weibo_id
  * @property string $url
+ * @property string $filterContent
  * @property integer $score
  * @property string $tagArray
  * @property string $tagText
@@ -117,6 +118,11 @@ class Post extends CActiveRecord
 	public function getUrl()
 	{
 	    return aurl('post/show', array('id' => $this->id));
+	}
+	
+	public function getFilterContent()
+	{
+	    return strip_tags($this->content);
 	}
 	
 	public function getScore()
