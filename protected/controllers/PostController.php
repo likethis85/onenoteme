@@ -4,8 +4,8 @@ class PostController extends Controller
     public function filters()
     {
         return array(
-            'ajaxOnly  + score',
-            'postOnly + score',
+            'ajaxOnly  + score, views',
+            'postOnly + score, views',
         );
     }
     
@@ -72,7 +72,7 @@ class PostController extends Controller
     {
         $id = (int)$id;
         if ($id <= 0)
-            throw new CHttpException(500, '非法请求');
+            throw new CHttpException(503, '非法请求');
         
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
@@ -84,6 +84,14 @@ class PostController extends Controller
         $this->pageTitle = '原始图片' . ' - ' . trim(strip_tags($model->title)) . '  ' . $model->tagText;
         $this->layout = 'blank';
         $this->render('/post/original_pic', array('model'=>$model));
+    }
+    
+    public function actionViews($callback)
+    {
+        $id = (int)$_POST['id'];
+        $counters = array('view_nums' => 1);
+        $result = Post::model()->updateCounters($counters, 'id = :postid', array(':postid' => $id));
+        CDBase::jsonp($callback, $result);
     }
     
     private static function prevPostUrl(Post $post)

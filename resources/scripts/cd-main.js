@@ -1,4 +1,12 @@
 var Waduanzi = {
+	IncreasePostViewNums: function(postid, url){
+		var xhr = $.ajax({
+			url: url,
+			type: 'post',
+			dataType: 'jsonp',
+			data: {id:postid},
+		});
+	},
 	RatingPost: function(event){
 		event.preventDefault();
 		var tthis = $(this);

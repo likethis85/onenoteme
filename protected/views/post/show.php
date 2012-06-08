@@ -84,6 +84,8 @@
 
 <script type="text/javascript">
 $(function(){
+	var postid = <?php echo $post->id;?>;
+	Waduanzi.IncreasePostViewNums(postid, '<?php echo aurl('post/views');?>');
 	var commentInitVal = $('#comment-content').val();
     $('.post-detail').on('click', '.post-arrows a', Waduanzi.RatingPost);
     $('.post-detail').on('click', '.comment-arrows a', Waduanzi.RatingComment);
