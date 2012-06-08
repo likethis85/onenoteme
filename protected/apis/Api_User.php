@@ -10,27 +10,27 @@ class Api_User extends ApiBase
 {
     public function login()
     {
-        $text = var_export($_GET, true) . "\n" . var_export($_POST, true);
-        $filename = app()->getRuntimePath() . DS . 'login.log';
-        @file_put_contents($filename, $text);
-        $data = array(
-            'id' => '40',
-            'email' => 'test@waduanzi.com',
-            'name' => '测试账号',
-            'create_time' => '1337839013',
-            'state' => '1',
-        );
-        return array('error'=>'OK', 'userinfo'=>$data);
-//         self::requirePost();
-        $this->requiredParams(array('email', 'password'));
-        $params = $this->filterParams(array('email', 'password'));
+//         $text = var_export($_GET, true) . "\n" . var_export($_POST, true);
+//         $filename = app()->getRuntimePath() . DS . 'login.log';
+//         @file_put_contents($filename, $text);
+//         $data = array(
+//             'id' => '40',
+//             'email' => 'test@waduanzi.com',
+//             'name' => '测试账号',
+//             'create_time' => '1337839013',
+//             'state' => '1',
+//         );
+//         return array('error'=>'OK', 'userinfo'=>$data);
+        self::requirePost();
+        $this->requiredParams(array('username', 'password'));
+        $params = $this->filterParams(array('username', 'password'));
         
         try {
 	        $criteria = new CDbCriteria();
 	        $criteria->select = array('id', 'username', 'screen_name', 'create_time', 'state');
-	        $columns = array('username'=>$params['email'], 'password'=>$params['password']);
+	        $columns = array('username'=>$params['username'], 'password'=>$params['password']);
 	        $criteria->addColumnCondition($columns);
-	        $criteria->addCondition('state > ' . User::STATE_DISABLED);
+	        $criteria->addCondition('state = ' . User::STATE_ENABLED);
 	        $user = User::model()->find($criteria);
         }
         catch (ApiException $e) {
