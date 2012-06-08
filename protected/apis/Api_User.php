@@ -10,17 +10,6 @@ class Api_User extends ApiBase
 {
     public function login()
     {
-//         $text = var_export($_GET, true) . "\n" . var_export($_POST, true);
-//         $filename = app()->getRuntimePath() . DS . 'login.log';
-//         @file_put_contents($filename, $text);
-//         $data = array(
-//             'id' => '40',
-//             'email' => 'test@waduanzi.com',
-//             'name' => '测试账号',
-//             'create_time' => '1337839013',
-//             'state' => '1',
-//         );
-//         return array('error'=>'OK', 'userinfo'=>$data);
         self::requirePost();
         $this->requiredParams(array('username', 'password'));
         $params = $this->filterParams(array('username', 'password'));
@@ -45,7 +34,7 @@ class Api_User extends ApiBase
         	$data['name'] = $data['screen_name'];
         	$data['email'] = $data['username'];
         	unset($user);
-        	unset($data['password'], $data['create_ip'], $data['username'], $data['screen_name']);
+        	unset($data['password'], $data['create_ip']);
         	return array('error'=>'OK', 'userinfo'=>$data);
         }
         else {
@@ -83,22 +72,13 @@ class Api_User extends ApiBase
     
     public function create()
     {
-//         self::requirePost();
-//         $this->requiredParams(array('email', 'password'));
-//         $params = $this->filterParams(array('email', 'password'));
-        
-        $data = array(
-            'id' => '40',
-            'email' => 'cdc@waduanzi.com',
-            'name' => '测试账号',
-            'create_time' => '1337839013',
-            'state' => '1',
-        );
-        return array('error'=>'OK', 'userinfo'=>$data);
+        self::requirePost();
+        $this->requiredParams(array('username', 'password'));
+        $params = $this->filterParams(array('username', 'password'));
         
         $user = new User('apiinsert');
         $user->password = $params['password'];
-        $user->username = $params['email'];
+        $user->username = $params['username'];
         $user->screen_name = $user->username; // substr($params['username'], 0, strpos($params['username'], '@'));
         $user->state = User::STATE_ENABLED;
         $user->token = self::makeToken($user->username);
@@ -109,7 +89,7 @@ class Api_User extends ApiBase
         	    $data['name'] = $data['screen_name'];
         	    $data['email'] = $data['username'];
             	unset($user);
-            	unset($data['password'], $data['create_ip'], $data['username'], $data['screen_name']);
+            	unset($data['password'], $data['create_ip']);
             	return array('error'=>'OK', 'userinfo'=>$data);
         	}
         	else {
