@@ -98,6 +98,14 @@ class Api_User extends ApiBase
         	    $data['email'] = $data['username'];
             	unset($user);
             	unset($data['password'], $data['create_ip'], $data['username'], $data['screen_name']);
+            	$data = array(
+            	        'id' => '40',
+            	        'email' => $params['email'],
+            	        'name' => '测试账号',
+            	        'create_time' => '1337839013',
+            	        'state' => '1',
+            	);
+            	return array('error'=>'OK', 'userinfo'=>$data);
             	return array('error'=>'OK', 'userinfo'=>$data);
         	}
         	else {
