@@ -10,6 +10,14 @@ class Api_User extends ApiBase
 {
     public function login()
     {
+        $data = array(
+            'id' => '40',
+            'email' => 'test@waduanzi.com',
+            'name' => '测试账号',
+            'create_time' => '1337839013',
+            'state' => '1',
+        );
+        return array('error'=>'OK', 'userinfo'=>$data);
 //         self::requirePost();
         $this->requiredParams(array('email', 'password'));
         $params = $this->filterParams(array('email', 'password'));
