@@ -17,7 +17,7 @@ class Api_Comment extends ApiBase
                 ->select(array('t.id', 't.content', 't.create_time'))
                 ->from(TABLE_COMMENT . ' t')
                 ->order('t.id desc')
-                ->where('t.post_id = :postid', array(':postid'=>$postid));
+                ->where(array('and', 't.post_id = :postid', 't.state = :enabled'), array(':postid'=>$postid, ':enabled'=>COMMENT_STATE_ENABLED));
                 
             if ($count > 0)
                 $cmd->limit = $count;
@@ -78,9 +78,6 @@ class Api_Comment extends ApiBase
                     'message' => 'db error'
                 );
         }
-        $text = var_export($data, true);
-        $filename = app()->getRuntimePath().DS.'comment.log';
-        @file_put_contents($filename, $text);
         
         return $data;
     }
