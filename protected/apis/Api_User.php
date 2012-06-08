@@ -10,7 +10,7 @@ class Api_User extends ApiBase
 {
     public function login()
     {
-        self::requirePost();
+//         self::requirePost();
         $this->requiredParams(array('email', 'password'));
         $params = $this->filterParams(array('email', 'password'));
         
@@ -19,7 +19,7 @@ class Api_User extends ApiBase
 	        $criteria->select = array('id', 'username', 'screen_name', 'create_time', 'state');
 	        $columns = array('username'=>$params['email'], 'password'=>$params['password']);
 	        $criteria->addColumnCondition($columns);
-	        $criteria->addCondition('state != ' . User::STATE_DISABLED);
+	        $criteria->addCondition('state > ' . User::STATE_DISABLED);
 	        $user = User::model()->find($criteria);
         }
         catch (ApiException $e) {
