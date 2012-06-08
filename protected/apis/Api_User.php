@@ -16,7 +16,7 @@ class Api_User extends ApiBase
         
         try {
 	        $criteria = new CDbCriteria();
-	        $criteria->select = array('id', 'username', 'name', 'create_time', 'state');
+	        $criteria->select = array('id', 'username', 'screen_name', 'create_time', 'state');
 	        $columns = array('username'=>$params['email'], 'password'=>$params['password']);
 	        $criteria->addColumnCondition($columns);
 	        $criteria->addCondition('state != ' . User::STATE_DISABLED);
@@ -31,6 +31,7 @@ class Api_User extends ApiBase
         	$user->save(true, array('token'));
         	$this->afterLogin($user, $params);
         	$data = $user->attributes;
+        	$data['name'] = $data['screen_name'];
         	unset($user);
         	unset($data['password'], $data['create_ip']);
         	return array('error'=>'OK', 'userinfo'=>$data);
