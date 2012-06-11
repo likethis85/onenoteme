@@ -29,26 +29,25 @@ class Api_Post extends ApiBase
         if (isset($row['create_time']) && $row['create_time'])
             $row['create_time_text'] = date(param('formatShortDateTime'), $row['create_time']);
         
-        if (isset($row['thumbnail_pic']) || isset($row['bmiddle_pic'])) {
-            // 这里应该是thumbnail_pic，客户端全部使用的是bmiddle_pic,若换成thumbnail_pic，点击图片后会非常不清楚，所以暂时不使用bmiddle_pic
-            $pic = $row['bmiddle_pic'];
-            if (empty($pic))
-                $pic = $row['bmiddle_pic'];
-            
-            if (empty($pic))
-                $thumbnail = '';
-            else {
-                if (filter_var($pic, FILTER_VALIDATE_URL) === false){
-                    $pic = fbu($pic);
-                    $thumbnail = (filter_var($pic, FILTER_VALIDATE_URL) === false) ? $pic : '';
-                }
-                else
-                    $thumbnail = $pic;
-            }
-            $row['thumbnail'] = $thumbnail;
-            unset($row['bmiddle_pic']);
-        }
+        $smallPic = $row['thumbnail_pic'];
+        if (empty($smallPic))
+            $smallPic = $row['bmiddle_pic'];
+        $smallPic =  (filter_var($smallPic, FILTER_VALIDATE_URL) === false) ? $smallPic : '';
+        $row['pic_thumbnail'] = $smallPic;
         
+        $middlePic = $row['bmiddle_pic'];
+        if (empty($middlePic))
+            $middlePic = $row['bmiddle_pic'];
+        $middlePic =  (filter_var($middlePic, FILTER_VALIDATE_URL) === false) ? $middlePic : '';
+        $row['pic_middle'] = $middlePic;
+        
+        $originalPic = $row['original_pic'];
+        if (empty($originalPic))
+            $originalPic = $row['original_pic'];
+        $originalPic =  (filter_var($originalPic, FILTER_VALIDATE_URL) === false) ? $originalPic : '';
+        $row['pic_original'] = $originalPic;
+        
+        unset($row['thumbnail_pic'], $row['bmiddle_pic'], $row['original_pic']);
         return $row;
     }
     
