@@ -31,9 +31,6 @@ class Api_User extends ApiBase
         	$user->save(true, array('token'));
         	$this->afterLogin($user, $params);
         	$data = $user->attributes;
-        	// 以下两个值是为了兼容原来的ios应用
-        	$data['name'] = $data['screen_name'];
-        	$data['email'] = $data['username'];
         	unset($user);
         	unset($data['password'], $data['create_ip']);
         	return array('error'=>'OK', 'userinfo'=>$data);
