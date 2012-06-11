@@ -14,11 +14,6 @@ class Api_Post extends ApiBase
     const DEFAULT_HISTORY_MAX_COUNT = 35;
     const DEFAULT_RANDOM_MAX_COUNT = 12;
     
-    public function init()
-    {
-        
-    }
-    
     public static function formatRow($row)
     {
         unset($row['video_ur'], $row['state'], $row['tags']);
