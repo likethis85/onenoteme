@@ -277,18 +277,24 @@ class AppApi
     
     public function errorHandler($errno, $message, $file, $line)
     {
-        $data = array('error' => 1);
-        if (isset($this->_params[debug]) && $this->_params[debug])
-            $data = array_merge($data, array('errno'=>$errno, 'message'=>$error, 'line'=>$line, 'file'=>$file));
+        $data = array(
+            'error' => 1,
+            'errno'=>$errno,
+            'message'=>$error,
+            'line'=>$line,
+            'file'=>$file,
+        );
     	echo self::outputJson($data);
     	exit(0);
     }
     
     public function exceptionHandler($e)
     {
-        $data = array('error' => 1);
-    	if (isset($this->_params['debug']) && $this->_params['debug'])
-    		$data = array_merge($data, array('errno'=>$e->getCode(), 'message'=>$e->getMessage()));
+        $data = array(
+            'error' => 1,
+            'errno'=>$e->getCode(),
+            'message'=>$e->getMessage(),
+        );
         echo self::outputJson($data);
     	exit(0);
     }

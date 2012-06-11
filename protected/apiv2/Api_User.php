@@ -33,11 +33,11 @@ class Api_User extends ApiBase
         	$data = $user->attributes;
         	unset($user);
         	unset($data['password'], $data['create_ip']);
-        	return array('error'=>'OK', 'userinfo'=>$data);
+        	return $data;
         }
         else {
         	// @todo 此处处理错误
-        	return array('error'=>'FAIL');
+        	throw new ApiException('user or password is error');
         }
     }
     
