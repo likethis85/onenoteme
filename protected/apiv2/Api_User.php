@@ -89,12 +89,12 @@ class Api_User extends ApiBase
         	    $data = $user->attributes;
             	unset($user);
             	unset($data['password'], $data['create_ip']);
-            	return array('error'=>'OK', 'userinfo'=>$data);
+            	return $data;
         	}
         	else {
         	    $messages = $user->getErrors();
         	    $message = current($messages);
-        	    return array('error'=>'FAIL', 'message'=>$message[0]);
+        	    throw new ApiException($message);
         	}
         }
         catch (ApiException $e) {
