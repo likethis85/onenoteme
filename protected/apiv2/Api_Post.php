@@ -32,19 +32,19 @@ class Api_Post extends ApiBase
         $smallPic = $row['thumbnail_pic'];
         if (empty($smallPic))
             $smallPic = $row['bmiddle_pic'];
-        $smallPic =  (filter_var($smallPic, FILTER_VALIDATE_URL) === false) ? $smallPic : '';
+        $smallPic =  (filter_var($smallPic, FILTER_VALIDATE_URL) === false) ? '' : $smallPic;
         $row['pic_thumbnail'] = $smallPic;
         
         $middlePic = $row['bmiddle_pic'];
         if (empty($middlePic))
-            $middlePic = $row['bmiddle_pic'];
-        $middlePic =  (filter_var($middlePic, FILTER_VALIDATE_URL) === false) ? $middlePic : '';
+            $middlePic = $row['original_pic'];
+        $middlePic =  (filter_var($middlePic, FILTER_VALIDATE_URL) === false) ? '' : $middlePic;
         $row['pic_middle'] = $middlePic;
         
         $originalPic = $row['original_pic'];
         if (empty($originalPic))
-            $originalPic = $row['original_pic'];
-        $originalPic =  (filter_var($originalPic, FILTER_VALIDATE_URL) === false) ? $originalPic : '';
+            $originalPic = $row['bmiddle_pic'];
+        $originalPic =  (filter_var($originalPic, FILTER_VALIDATE_URL) === false) ? '' : $originalPic;
         $row['pic_original'] = $originalPic;
         
         unset($row['thumbnail_pic'], $row['bmiddle_pic'], $row['original_pic']);
