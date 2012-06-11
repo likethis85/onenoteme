@@ -147,8 +147,8 @@ $(function(){
 
 <script type="text/javascript">
     var wumiiPermaLink = '<?php echo aurl('post/show', array('id'=>$post->id));?>';
-    var wumiiTitle = '<?php echo json_encode($post->title);?>';
-    var wumiiTags = '<?php echo json_encode($post->tagText);?>';
+    var wumiiTitle = <?php echo json_encode($post->title);?>;
+    var wumiiTags = <?php echo json_encode($post->tagText);?>;
     var wumiiSitePrefix = 'http://www.waduanzi.com/';
     var wumiiParams = '&num=5&mode=3&pf=JAVASCRIPT';
 </script>
