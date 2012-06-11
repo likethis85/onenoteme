@@ -45,7 +45,8 @@ class Api_User extends ApiBase
     {
     	$data = $user->attributes;
     	try {
-    		app()->cache->set($user->username, $data, 3600*24*30);
+    	    $key = 'app_user_info_' . $user->id;
+    		app()->cache->set($key, $data, 3600*24*30);
     	}
     	catch (ApiException $e) {
     		throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
@@ -55,13 +56,15 @@ class Api_User extends ApiBase
     public function logout()
     {
         self::requirePost();
-        $this->requiredParams(array('email', 'token'));
-        $params = $this->filterParams(array('email', 'token'));
+        $this->requiredParams(array('user_id', 'token'));
+        $params = $this->filterParams(array('userid', 'token'));
         
-        $user = app()->getCache()->get($params['email']);
+        $key = 'app_user_info_' . $params['userid'];
+        
+        $user = app()->getCache()->get($key);
         $token = $user['token'];
         if ($token == $params['token']) {
-        	$result = app()->getCache()->delete($params['email']);
+        	$result = app()->getCache()->delete($key);
         	return (int)$result;
         }
         else
@@ -99,64 +102,22 @@ class Api_User extends ApiBase
         }
     }
     
-    public static function makeToken($email)
+    public static function makeToken($username)
     {
-        $token = md5($email . $_SERVER['REQUEST_TIME'] . uniqid());
+        $token = md5(makeToken . $_SERVER['REQUEST_TIME'] . uniqid());
         return $token;
     }
 
-    public static function checkUserAccess($email, $token)
+    public static function checkUserAccess($userid, $token)
     {
-        $user = app()->getCache()->get($email);
+        $key = 'app_user_info_' . $userid;
+        $user = app()->getCache()->get($key);
         if ($user['token'] == $token)
             return $user;
         else
             return false;
     }
     
-    public function favorite()
-    {
-        $this->requiredParams(array('email', 'token'));
-        $params = $this->filterParams(array('email', 'token', 'fields', 'maxid'));
-        
-        $user = self::checkUserAccess($params['email'], $params['token']);
-        
-        if ($user === false)
-            throw new ApiException('$token 验证失败', ApiError::USER_TOKEN_ERROR);
-        else {
-            $uid = (int)$user['id'];
-            $cmd = app()->getDb()->createCommand()
-                ->select('post_id')
-                ->from(TABLE_POST_FAVORITE)
-                ->where('user_id = :userid', array(':userid' => $uid))
-                ->order('id desc');
-            
-            $ids = $cmd->queryColumn();
-            
-            if (empty($ids)) return array();
-
-            $count = 30;
-            $maxid = (int)$params['maxid'];
-            $fields = empty($params['fields']) ? '*' : $params['fields'];
-            $conditions = array('and', array('in', 'id', $ids), 'state = :enabled');
-            $conditionParams = array(':enabled' => POST_STATE_ENABLED);
-            if ($maxid > 0) {
-                $conditions[] = 'id < :maxid';
-                $conditionParams[':maxid'] = $maxid;
-            }
-            $cmd = app()->getDb()->createCommand()
-                ->select($fields)
-                ->from(TABLE_POST)
-                ->limit($count)
-                ->where($conditions, $conditionParams);
-            
-            $rows = $cmd->queryAll();
-            $rows = Api_Post::formatRows($rows);
-            
-            return $rows;
-        }
-            
-    }
     
 }
 
