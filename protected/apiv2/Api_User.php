@@ -80,7 +80,7 @@ class Api_User extends ApiBase
         $user = new User('apiinsert');
         $user->password = $params['password'];
         $user->username = $params['username'];
-        $user->screen_name = $user->username; // substr($params['username'], 0, strpos($params['username'], '@'));
+        $user->screen_name = substr($params['username'], 0, strpos($params['username'], '@'));
         $user->state = User::STATE_ENABLED;
         $user->token = self::makeToken($user->username);
         try {
