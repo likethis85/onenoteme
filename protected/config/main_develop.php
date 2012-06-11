@@ -16,7 +16,6 @@ return array(
         'application.models.*',
         'application.extensions.*',
         'application.components.*',
-        'application.apis.*',
         'application.libs.*',
         'application.widgets.*',
     ),
