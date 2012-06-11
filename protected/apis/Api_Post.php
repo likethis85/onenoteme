@@ -14,6 +14,11 @@ class Api_Post extends ApiBase
     const DEFAULT_HISTORY_MAX_COUNT = 35;
     const DEFAULT_RANDOM_MAX_COUNT = 12;
     
+    public function init()
+    {
+        
+    }
+    
     public static function formatRow($row)
     {
         unset($row['video_ur'], $row['state'], $row['tags']);
@@ -70,10 +75,9 @@ class Api_Post extends ApiBase
         $channelID = (int)$params['channelid'];
         
         // @todo test data
-        if (APP_STORE_VERIFY && $channelID == CHANNEL_GIRL) {
-            $rows = self::fetchTestRows();
-            return $rows;
-        }
+        $version = $this->_params['version'];
+        $rows = self::fetchTestRows($channelID, $version);
+        if ($rows !== false) return $rows;
         
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
@@ -114,10 +118,9 @@ class Api_Post extends ApiBase
         $beforeTime = (int)$params['beforetime'];
         
         // @todo test data
-        if (APP_STORE_VERIFY && $channelID == CHANNEL_GIRL) {
-            $rows = self::fetchTestRows();
-            return $rows;
-        }
+        $version = $this->_params['version'];
+        $rows = self::fetchTestRows($channelID, $version);
+        if ($rows !== false) return $rows;
 
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
@@ -153,10 +156,9 @@ class Api_Post extends ApiBase
         $channelID = (int)$params['channelid'];
         
         // @todo test data
-        if (APP_STORE_VERIFY && $channelID == CHANNEL_GIRL) {
-            $rows = self::fetchTestRows();
-            return $rows;
-        }
+        $version = $this->_params['version'];
+        $rows = self::fetchTestRows($channelID, $version);
+        if ($rows !== false) return $rows;
         
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
@@ -195,10 +197,9 @@ class Api_Post extends ApiBase
         $channelID = (int)$params['channelid'];
         
         // @todo test data
-        if (APP_STORE_VERIFY && $channelID == CHANNEL_GIRL) {
-            $rows = self::fetchTestRows();
-            return $rows;
-        }
+        $version = $this->_params['version'];
+        $rows = self::fetchTestRows($channelID, $version);
+        if ($rows !== false) return $rows;
 
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
@@ -441,8 +442,12 @@ class Api_Post extends ApiBase
         IOSDevice::model()->updateAll(array('last_time'=>$_SERVER['REQUEST_TIME']), 'device_token = :token', array(':token'=>$token));
     }
 
-    private static function fetchTestRows()
+    private static function fetchTestRows($channelID, $version)
     {
+        if (!(APP_STORE_VERIFY && $channelID == CHANNEL_GIRL && $version >= '2.2.1')) {
+            return false;
+        }
+        
         $ids = array(7207,7208,7209,8177,8178,8179,8180,8181,8182,8183,8184,8185,8186,8187,8188,8189,8190,8191,8192,8193,8194,8195,8196,8197,8198,8199,8200,8201,8202,8204,8205,8206,8207,8208,8209,8210,8211,8212,8213,8214,8215,8216,8217,8218,8219,8220,8221,8222,8223,8224,8225,8226,8227,8228,8229);
         shuffle($ids);
         $cmd = app()->getDb()->createCommand()
