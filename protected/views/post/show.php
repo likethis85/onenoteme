@@ -5,6 +5,7 @@
 		    <?php if ($post->tags):?><div class="post-tags">标签：<?php echo $post->tagLinks;?></div><?php endif;?>
         </div>
         <?php if ($post->bmiddlePic):?><div class="content-block post-picture"><?php echo l(CHtml::image($post->bmiddlePic, $post->title), aurl('post/originalpic', array('id'=>$post->id)), array('target'=>'_blank'));?></div><?php endif;?>
+        <div class="content-block"><script type="text/javascript" id="wumiiRelatedItems"></script></div>
 		<div class="content-block post-arrows fleft">
             <a class="site-bg arrow-up" data-id="<?php echo $post->id;?>" data-value="1" data-url="<?php echo aurl('post/score');?>" href="javascript:void(0);">喜欢</a>
             <a class="site-bg arrow-down" data-id="<?php echo $post->id;?>" data-value="0" data-url="<?php echo aurl('post/score');?>" href="javascript:void(0);">讨厌</a>
@@ -114,7 +115,7 @@ $(function(){
     	loading: {
     		finishedMsg: '已经载入全部内容。',
     		msgText: '正在载入更多内容。。。',
-    		img: '<?php echo sbu('images/loading1.gif');?>'
+    		img: '<?php echo sbu('images/loading.gif');?>'
     	}
     },
     function(newElements) {
@@ -144,4 +145,14 @@ $(function(){
 
 <?php cs()->registerScriptFile(sbu('libs/jquery.infinitescroll.min.js'), CClientScript::POS_END);?>
 
-
+<script type="text/javascript">
+    var wumiiPermaLink = '<?php echo aurl('post/show', array('id'=>$post->id));?>';
+    var wumiiTitle = '<?php echo json_encode($post->title);?>';
+    var wumiiTags = '<?php echo json_encode($post->tagText);?>';
+    var wumiiSitePrefix = 'http://www.waduanzi.com/';
+    var wumiiParams = '&num=5&mode=3&pf=JAVASCRIPT';
+</script>
+<script type="text/javascript" src="http://widget.wumii.com/ext/relatedItemsWidget"></script>
+<a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+    <img src="http://static.wumii.com/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+</a>
