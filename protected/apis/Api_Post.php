@@ -439,7 +439,7 @@ class Api_Post extends ApiBase
 
     private static function fetchTestRows($channelID, $version)
     {
-        if (!(APP_STORE_VERIFY && $channelID == CHANNEL_GIRL && $version >= '2.2.1')) {
+        if (!APP_STORE_VERIFY || $channelID != CHANNEL_GIRL || $version < '2.2.1') {
             return false;
         }
         
