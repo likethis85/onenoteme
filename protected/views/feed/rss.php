@@ -27,7 +27,7 @@
 		<pubDate><?php echo date('D, d M Y H:i:s O', $row['create_time']);?></pubDate>
 		<?php if ($row['user_name']):?><dc:creator><?php echo $row['user_name'];?></dc:creator><?php endif;?>
 		<description><![CDATA[<?php echo $row['content'];?>]]></description>
-		<content:encoded><![CDATA[<?php echo $row['content'];?><p><?php echo image($row['bmiddle_pic'], $row['title']);?></p>]]></content:encoded>
+		<content:encoded><![CDATA[<?php echo $row['content'];?><p><?php if ($row['bmiddle_pic']) echo image($row['bmiddle_pic'], $row['title']);?></p>]]></content:encoded>
 	</item>
 	<?php endforeach;?>
 </channel>
