@@ -5,7 +5,7 @@
 		    <?php if ($post->tags):?><div class="post-tags">标签：<?php echo $post->tagLinks;?></div><?php endif;?>
         </div>
         <?php if ($post->bmiddlePic):?><div class="content-block post-picture"><?php echo l(CHtml::image($post->bmiddlePic, $post->title), aurl('post/originalpic', array('id'=>$post->id)), array('target'=>'_blank'));?></div><?php endif;?>
-        <div class="content-block"><script type="text/javascript" id="wumiiRelatedItems"></script></div>
+        <div class="content-block wumii-posts"><script type="text/javascript" id="wumiiRelatedItems"></script></div>
 		<div class="content-block post-arrows fleft">
             <a class="site-bg arrow-up" data-id="<?php echo $post->id;?>" data-value="1" data-url="<?php echo aurl('post/score');?>" href="javascript:void(0);">喜欢</a>
             <a class="site-bg arrow-down" data-id="<?php echo $post->id;?>" data-value="0" data-url="<?php echo aurl('post/score');?>" href="javascript:void(0);">讨厌</a>
