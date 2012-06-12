@@ -38,6 +38,7 @@ class PostController extends AdminController
                 $post->channel_id = $channel_id;
                 $post->up_score = mt_rand(100, 300);
                 $post->down_score = mt_rand(10, 40);
+                $post->view_nums = mt_rand(100, 500);
                 if ($userid > 0) {
                     $post->user_id = (int)$userid;
                     $post->user_name = $username;
