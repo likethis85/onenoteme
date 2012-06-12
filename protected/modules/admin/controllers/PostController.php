@@ -66,16 +66,31 @@ class PostController extends AdminController
         $data = self::fetchWeiboComments($wid);
         $comments = $data['comments'];
         foreach ($comments as $row) {
-            $text = $row['text'];
-            $pos = mb_strpos($text, '//', 0, app()->charset);
-            if ($pos === 0)
-                continue;
-            elseif ($pos > 0) {
-                $text = mb_substr($text, 0, $pos, app()->charset);
-            }
-                
+            $text = self::filterComment($row['text']);
+            if ($text === false) continue;
             echo '<li>' . $text . '</li>';
         }
+    }
+    
+    private static function filterComment($text)
+    {
+        $pattern = '/\[.+?\]/is';
+        $text = preg_replace($pattern, '', $text);
+        $pos = mb_strpos($text, '//', 0, app()->charset);
+        if ($pos === 0)
+            return false;
+        elseif ($pos > 0) {
+            $text = mb_substr($text, 0, $pos, app()->charset);
+        }
+        
+        $pos = mb_strpos($text, '@', 0, app()->charset);
+        if ($pos === 0)
+            return false;
+        elseif ($pos > 0) {
+            $text = mb_substr($text, 0, $pos, app()->charset);
+        }
+        
+        return $text;
     }
     
     private static function fetchWeiboComments($wid)
