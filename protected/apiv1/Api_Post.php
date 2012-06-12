@@ -326,9 +326,9 @@ class Api_Post extends ApiBase
         	        ->crop($thumbnailImageSize['width'], $thumbnailImageSize['height'])
         	        ->saveAsJpeg($thumbnailFileName);
         	    $post->thumbnail_pic = fbu($path['url'] . $im->filename());
-        	    $im->revert()->saveAsJpeg($middleFileName, 50);
+        	    $im->revert()->saveAsJpeg($middleFileName, 75);
         	    $post->bmiddle_pic = fbu($path['url'] . $im->filename());
-        	    $im->revert()->saveAsJpeg($bigFileName, 90);
+        	    $im->revert()->saveAsJpeg($bigFileName, 100);
         	    $post->original_pic = fbu($path['url'] . $im->filename());
         	}
         	else
