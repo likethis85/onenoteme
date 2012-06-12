@@ -38,9 +38,6 @@ class Tag extends CActiveRecord
 		    array('post_nums', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>50),
 			array('name', 'unique'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('id, name, post_nums', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -102,14 +99,14 @@ class Tag extends CActiveRecord
 	        }
 	
 	        $row = app()->getDb()->createCommand()
-	        ->select('id')
-	        ->from(TABLE_POST_TAG)
-	        ->where(array('and', 'post_id = :postid', 'tag_id = :tagid'), array(':postid'=>$postid, ':tagid'=>$model->id))
-	        ->queryScalar();
+    	        ->select('id')
+    	        ->from(TABLE_POST_TAG)
+    	        ->where(array('and', 'post_id = :postid', 'tag_id = :tagid'), array(':postid'=>$postid, ':tagid'=>$model->id))
+    	        ->queryScalar();
 	
 	        if ($row === false) {
 	            $columns = array('post_id'=>$postid, 'tag_id'=>$model->id);
-	            $count = app()->getDb()->createCommand()->insert('{{post2tag}}', $columns);
+	            $count = app()->getDb()->createCommand()->insert(TABLE_POST_TAG, $columns);
 	            if ($count > 0) {
 	                $model->post_nums = $model->post_nums + 1;
 	                $model->save(true, array('post_nums'));

@@ -296,11 +296,12 @@ class Api_Post extends ApiBase
     	$post->tags = $params['tags'];
     	$post->create_time = $_SERVER['REQUEST_TIME'];
     	$post->state = POST_STATE_DISABLED;
-    	$post->up_score = mt_rand(3, 15);
-    	$post->down_score = mt_rand(0, 2);
+    	$post->up_score = mt_rand(20, 100);
+    	$post->down_score = mt_rand(0, 15);
+    	$post->view_nums = mt_rand(100, 300);
     	
     	try {
-    	    $thumbnailImageSize = array('width'=>120, 'height'=>120);
+    	    $thumbnailImageSize = array('width'=>150, 'height'=>150);
     	    
     	    $url = trim($params['pic']);
         	if (!empty($url)) {
