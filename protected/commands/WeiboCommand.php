@@ -165,6 +165,7 @@ class WeiboCommand extends CConsoleCommand
         $temp['repost_count'] = (int)$row['repost_count'];
         $temp['comment_count'] = (int)$row['comment_count'];
         $temp['username'] = $row['user']['screen_name'];
+        $temp['weibo_id'] = $idstr;
         $model = new PostTemp();
         $model->attributes = $temp;
         
