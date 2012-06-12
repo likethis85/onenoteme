@@ -83,9 +83,7 @@ class PostController extends AdminController
     {
         if (empty($text)) return false;
         
-        $text = str_replace('互粉', '', $text);
-        $text = str_replace('转发', '', $text);
-        $text = str_replace('微博', '', $text);
+        $text = str_replace(array('互粉', '转发', '微博', '沙发'), '', $text);
         
         $pattern = '/\[.+?\]/is';
         $text = preg_replace($pattern, '', $text);
@@ -132,7 +130,8 @@ class PostController extends AdminController
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->session['access_token'],
-            'id' => $wid
+            'id' => $wid,
+            'count' => 100,
         );
         
         $curl = new CdCurl();
