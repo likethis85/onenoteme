@@ -6,7 +6,7 @@ class PostController extends AdminController
         $pageSize = 20;
         $criteria = new CDbCriteria();
         $criteria->limit = $pageSize;
-        $criteria->order = 't.id asc';
+        $criteria->order = 't.id desc';
         
         $models = PostTemp::model()->findAll($criteria);
         $data = array(
