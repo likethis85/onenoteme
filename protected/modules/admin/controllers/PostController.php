@@ -69,7 +69,7 @@ class PostController extends AdminController
             $text = $row['text'];
             $pos = mb_strpos($text, '//', 0, app()->charset);
             if ($pos === 0)
-                return false;
+                continue;
             elseif ($pos > 0) {
                 $text = mb_substr($text, 0, $pos, app()->charset);
             }
