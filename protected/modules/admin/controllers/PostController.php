@@ -67,7 +67,7 @@ class PostController extends AdminController
         $comments = $data['comments'];
         foreach ($comments as $row) {
             $text = self::filterComment($row['text']);
-            if ($text === false) continue;
+            if (empty($text)) continue;
             echo '<li>' . $text . '</li>';
         }
     }
