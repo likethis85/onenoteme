@@ -72,6 +72,7 @@ class PostController extends AdminController
         $url = 'https://api.weibo.com/2/comments/show.json';
         $data = array(
             'source' => WEIBO_APP_KEY,
+            'access_token' => app()->session['access_token'],
             'id' => $wid
         );
         
