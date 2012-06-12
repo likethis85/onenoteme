@@ -64,6 +64,9 @@ class PostController extends AdminController
     
     private static function saveWeiboComments($pid, $wid)
     {
+        if (empty($pid) || empty($wid))
+            return false;
+        
         $data = self::fetchWeiboComments($wid);
         $comments = $data['comments'];
         foreach ($comments as $row) {
