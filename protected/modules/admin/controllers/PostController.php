@@ -68,18 +68,25 @@ class PostController extends AdminController
             return false;
         
         $data = self::fetchWeiboComments($wid);
+        if (empty($data)) return false;
+        
         $comments = $data['comments'];
-        foreach ($comments as $row) {
+        foreach ((array)$comments as $row) {
             $text = self::filterComment($row['text']);
             if (empty($text)) continue;
             
             self::saveCommentRow($pid, $text);
-            echo '<li>' . $text . '</li>';
         }
     }
     
     private static function filterComment($text)
     {
+        if (empty($text)) return false;
+        
+        $text = str_replace('互粉', '', $text);
+        $text = str_replace('转发', '', $text);
+        $text = str_replace('微博', '', $text);
+        
         $pattern = '/\[.+?\]/is';
         $text = preg_replace($pattern, '', $text);
         $pos = mb_strpos($text, '//', 0, app()->charset);
