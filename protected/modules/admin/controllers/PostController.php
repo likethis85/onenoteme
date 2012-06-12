@@ -64,7 +64,9 @@ class PostController extends AdminController
     public function actionComments($wid)
     {
         $data = self::fetchWeiboComments($wid);
-        var_dump($data);
+        $comments = $data['comments'];
+        foreach ($comments as $row)
+            echo '<li>' . $row['text'] . '</li>';
     }
     
     private static function fetchWeiboComments($wid)
