@@ -50,6 +50,7 @@ class PostController extends AdminController
                 $result = $post->save();
                 if ($result) {
                     $temp->delete();
+                    self::saveWeiboComments($post->id, $temp->weibo_id);
                 }
                 $data = (int)$result;
             }
@@ -61,13 +62,15 @@ class PostController extends AdminController
         CDBase::jsonp($callback, $data);
     }
     
-    public function actionComments($wid)
+    private static function saveWeiboComments($pid, $wid)
     {
         $data = self::fetchWeiboComments($wid);
         $comments = $data['comments'];
         foreach ($comments as $row) {
             $text = self::filterComment($row['text']);
             if (empty($text)) continue;
+            
+            self::saveCommentRow($pid, $text);
             echo '<li>' . $text . '</li>';
         }
     }
@@ -90,7 +93,27 @@ class PostController extends AdminController
             $text = mb_substr($text, 0, $pos, app()->charset);
         }
         
-        return $text;
+        return trim($text);
+    }
+    
+    private static function saveCommentRow($pid, $text)
+    {
+        $pid = (int)$pid;
+        if (empty($pid) || empty($text)) return false;
+        
+        try {
+            $model = new Comment();
+            $model->content = $text;
+            $model->post_id = $pid;
+            $model->up_score = mt_rand(20, 70);
+            $model->down_score = mt_rand(0, 10);
+            $model->state = COMMENT_STATE_ENABLED;
+            return $model->save();
+        }
+        catch (Exception $e) {
+            echo $e->getMessage();
+            return false;
+        }
     }
     
     private static function fetchWeiboComments($wid)

@@ -14,6 +14,7 @@
  * @property integer $repost_count
  * @property integer $comment_count
  * @property string $username
+ * @property string $weibo_id
  */
 class PostTemp extends CActiveRecord
 {
@@ -44,7 +45,7 @@ class PostTemp extends CActiveRecord
 		    array('content', 'required'),
 			array('channel_id, create_time, repost_count, comment_count', 'numerical', 'integerOnly'=>true),
 			array('thumbnail_pic, bmiddle_pic, original_pic', 'length', 'max'=>250),
-			array('username', 'length', 'max'=>50),
+			array('username, weibo_id', 'length', 'max'=>50),
 			array('content', 'safe'),
 		);
 	}
@@ -74,6 +75,7 @@ class PostTemp extends CActiveRecord
 	        'repost_count' => '转发数',
 	        'comment_count' => '评论数',
 	        'username' => '微博名字',
+    		'weibo_id' => '微博ID',
 		);
 	}
 }
