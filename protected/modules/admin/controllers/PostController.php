@@ -48,8 +48,9 @@ class PostController extends AdminController
                     $post->original_pic = $temp->original_pic;
                 }
                 $result = $post->save();
-                if ($result)
+                if ($result) {
                     $temp->delete();
+                }
                 $data = (int)$result;
             }
             catch (Exception $e) {
@@ -58,6 +59,32 @@ class PostController extends AdminController
             }
         }
         CDBase::jsonp($callback, $data);
+    }
+    
+    public function actionComments($wid)
+    {
+        $data = self::fetchWeiboComments($wid);
+        var_dump($data);
+    }
+    
+    private static function fetchWeiboComments($wid)
+    {
+        $url = 'https://api.weibo.com/2/comments/show.json';
+        $data = array(
+            'source' => WEIBO_APP_KEY,
+            'id' => $wid
+        );
+        
+        $curl = new CdCurl();
+        $curl->get($url, $data);
+        if ($curl->errno() == 0) {
+            $comments = json_decode($curl->rawdata(), true);
+            return $comments;
+        }
+        else {
+            echo $curl->error();
+            return false;
+        }
     }
     
     public function actionWeiboDelete($id, $callback)
