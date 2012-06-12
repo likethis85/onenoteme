@@ -145,6 +145,7 @@ class WeiboCommand extends CConsoleCommand
         }
         
         $text = $row['text'];
+        if (empty($text)) return false;
         
         if (self::keywordsFilter($text) === false)
             return false;
