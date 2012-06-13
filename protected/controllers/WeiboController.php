@@ -152,8 +152,10 @@ class WeiboController extends Controller
                     $this->redirect(url('site/index'));
                 }
             }
-            else
+            else {
+                var_dump($user);
                 throw new CException('保存用户profile出错');
+            }
         }
     }
     
