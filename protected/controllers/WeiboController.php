@@ -150,7 +150,7 @@ class WeiboController extends Controller
     {
         $url = 'http://open.t.qq.com/api/user/info';
         $data = array(
-            'oauth_consumer_key' => WEIBO_APP_KEY,
+            'oauth_consumer_key' => QQT_APP_KEY,
             'access_token' => self::$_accessToken,
             'openid' => self::$_userID,
             'clientip' => request()->getUserHostAddress(),
