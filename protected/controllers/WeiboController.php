@@ -161,7 +161,6 @@ class WeiboController extends Controller
                 }
             }
             else {
-                var_dump($user);exit;
                 throw new CException('保存用户profile出错');
             }
         }
@@ -239,7 +238,6 @@ class WeiboController extends Controller
             if ($userProfile->save())
                 return $user;
             else {
-                var_dump($userProfile->getErrors());exit;
                 return false;
             }
         }
