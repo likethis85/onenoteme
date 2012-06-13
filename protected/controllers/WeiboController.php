@@ -140,10 +140,9 @@ class WeiboController extends Controller
             self::$_accessToken = $access_token;
             $profile = self::fetchQqtUserInfo(self::$_userID);
             $user = self::checkQqtUserExist(self::$_userID);
-            var_dump($user);
             if ($user === null)
                 $user = self::saveQqtUserProfile($profile);
-            var_dump($user);
+            
             if ($user !== false) {
                 $identity = new UserIdentity($user->username, $user->password);
                 if ($identity->authenticate(true)) {
@@ -224,10 +223,11 @@ class WeiboController extends Controller
         $userProfile->avatar_large = $profile['head'] . '/160';
     
         if ($userProfile->save()) {
+            print_r($user->getErrors());exit;
             return $user;
         }
         else {
-            print_r($userProfile->getErrors());
+            print_r($userProfile->getErrors());exit;
             return false;
         }
     }
