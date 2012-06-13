@@ -49,7 +49,7 @@ $(function(){
         	loading: {
         		finishedMsg: '已经载入全部内容。',
         		msgText: '正在载入更多内容。。。',
-        		img: '<?php echo sbu('images/loading1.gif');?>'
+        		img: '<?php echo sbu('images/loading.gif');?>'
         	}
         },
         function(newElements) {
