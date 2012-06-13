@@ -276,18 +276,6 @@ class WeiboController extends AdminController
     {
         if (empty($model->content)) return false;
         
-        $curl = new CdCurl();
-        $curl->get($model->getBmiddlePic());
-        if ($curl->errno() == 0) {
-            $picData = $curl->rawdata();
-            $picfile = app()->getRuntimePath() . DS . uniqid();
-            $result = file_put_contents($picfile, $picData);
-            if ($result === false)
-                throw new CException('生成临时文件出错', 0);
-        }
-        else
-            return false;
-        
         $url = 'https://open.t.qq.com/api/t/add_pic';
         
         $sinatShortUrl = self::sinatShortUrl($model->getUrl());
@@ -303,7 +291,7 @@ class WeiboController extends AdminController
             'format' => 'json',
             'content' => $content,
             'syncflag' => 0,
-            'pic' => '@' . $picfile,
+            'pic_url' => $model->getBmiddlePic(),
         );
         foreach ($data as $key => $item)
             $args[] = urlencode($key) . '=' . $item;
