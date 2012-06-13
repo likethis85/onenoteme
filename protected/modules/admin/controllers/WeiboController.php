@@ -158,7 +158,7 @@ class WeiboController extends AdminController
         $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $shortUrl . ' @挖段子网';
         $data = array(
             'source' => WEIBO_APP_KEY,
-            'access_token' => app()->session['access_token'],
+            'access_token' => app()->cache->get('sina_weibo_access_token'),
             'status' => $content,
         );
         foreach ($data as $key => $item)
@@ -199,7 +199,7 @@ class WeiboController extends AdminController
         $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $shortUrl . ' @挖段子网';
         $data = array(
             'source' => WEIBO_APP_KEY,
-            'access_token' => app()->session['access_token'],
+            'access_token' => app()->cache->get('sina_weibo_access_token'),
             'status' => $content,
             'pic' => '@' . $picfile,
         );
