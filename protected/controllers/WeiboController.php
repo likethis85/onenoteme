@@ -81,32 +81,36 @@ class WeiboController extends Controller
         if (empty($profile)) return false;
         
         $user = User::model()->findByAttributes(array('username'=>$profile['screen_name']));
-        if ($user !== null) return $user;
+        if ($user === null) {
+            $user = new User();
+            $user->username = $user->screen_name = $profile['screen_name'];
+            $user->password = self::DEFAULT_PASSWORD;
+            $user->state = User::STATE_ENABLED;
+        
+            if (!$user->save()) return false;
+        }
     
-        $user = new User();
-        $user->username = $user->screen_name = $profile['screen_name'];
-        $user->password = self::DEFAULT_PASSWORD;
-        $user->state = User::STATE_ENABLED;
-    
-        if (!$user->save()) return false;
-    
-        $userProfile = new UserProfile();
-        $userProfile->user_id = $user->id;
-        $userProfile->weibo_uid = $profile['id'];
-        $userProfile->province = $profile['province'];
-        $userProfile->city = $profile['city'];
-        $userProfile->location = $profile['location'];
-        $userProfile->gender = $profile['gender'];
-        $userProfile->description = $profile['description'];
-        $userProfile->website = $profile['url'];
-        $userProfile->image_url = $profile['profile_image_url'];
-        $userProfile->avatar_large = $profile['avatar_large'];
-    
-        if ($userProfile->save()) {
-            return $user;
+        $userProfile = UserProfile::model()->findByAttributes(array('user_id' => $user->id));
+        if ($userProfile === null) {
+            $userProfile = new UserProfile();
+            $userProfile->user_id = $user->id;
+            $userProfile->weibo_uid = $profile['id'];
+            $userProfile->province = $profile['province'];
+            $userProfile->city = $profile['city'];
+            $userProfile->location = $profile['location'];
+            $userProfile->gender = $profile['gender'];
+            $userProfile->description = $profile['description'];
+            $userProfile->website = $profile['url'];
+            $userProfile->image_url = $profile['profile_image_url'];
+            $userProfile->avatar_large = $profile['avatar_large'];
+        
+            if ($userProfile->save())
+                return $user;
+            else
+                return false;
         }
         else
-            return false;
+            return true;
     }
     
     
@@ -206,36 +210,37 @@ class WeiboController extends Controller
         if (empty($profile)) return false;
         
         $user = User::model()->findByAttributes(array('username'=>$profile['email']));
-        if ($user !== null) return $user;
-    
-        $user = new User();
-        $user->username = $profile['email'];
-        $user->screen_name = $profile['name'];
-        $user->password = self::DEFAULT_PASSWORD;
-        $user->state = User::STATE_ENABLED;
-    
-        if (!$user->save()) {
-            return false;
+        if ($user === null) {
+            $user = new User();
+            $user->username = $profile['email'];
+            $user->screen_name = $profile['name'];
+            $user->password = self::DEFAULT_PASSWORD;
+            $user->state = User::STATE_ENABLED;
+        
+            if (!$user->save()) return false;
         }
-    
-        $userProfile = new UserProfile();
-        $userProfile->user_id = $user->id;
-        $userProfile->qqt_uid = $profile['openid'];
-        $userProfile->province = $profile['province_code'];
-        $userProfile->city = $profile['city_code'];
-        $userProfile->location = $profile['location'];
-        $userProfile->gender = $profile['sex'];
-        $userProfile->description = $profile['introduction'];
-        $userProfile->website = $profile['homepage'];
-        $userProfile->image_url = $profile['head'] . '/50';
-        $userProfile->avatar_large = $profile['head'] . '/160';
-    
-        if ($userProfile->save()) {
-            return $user;
+        
+        $userProfile = UserProfile::model()->findByAttributes(array('user_id' => $user->id));
+        if ($userProfile === null) {
+            $userProfile = new UserProfile();
+            $userProfile->user_id = $user->id;
+            $userProfile->qqt_uid = $profile['openid'];
+            $userProfile->province = $profile['province_code'];
+            $userProfile->city = $profile['city_code'];
+            $userProfile->location = $profile['location'];
+            $userProfile->gender = $profile['sex'];
+            $userProfile->description = $profile['introduction'];
+            $userProfile->website = $profile['homepage'];
+            $userProfile->image_url = $profile['head'] . '/50';
+            $userProfile->avatar_large = $profile['head'] . '/160';
+        
+            if ($userProfile->save())
+                return $user;
+            else
+                return false;
         }
-        else {
-            return false;
-        }
+        else
+            return true;
     }
 }
 
