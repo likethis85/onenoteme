@@ -32,7 +32,7 @@ class WeiboController extends Controller
             
             $user = self::checkWeiboUserExist($profile['id']);
             if ($user === null)
-                $user = self::saveUserProfile($profile);
+                $user = self::saveWeiboUserProfile($profile);
             
             if ($user !== false) {
                 $identity = new UserIdentity($user->username, $user->password);
@@ -133,7 +133,7 @@ class WeiboController extends Controller
             
             $user = self::checkWeiboUserExist($profile['id']);
             if ($user === null)
-                $user = self::saveUserProfile($profile);
+                $user = self::saveQqtUserProfile($profile);
             
             if ($user !== false) {
                 $identity = new UserIdentity($user->username, $user->password);
