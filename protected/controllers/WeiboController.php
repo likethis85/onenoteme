@@ -126,7 +126,7 @@ class WeiboController extends Controller
             $data = json_decode($curl->rawdata(), true);
             self::$_accessToken = $access_token = $data['access_token'];
             self::$_userID = $data['openid'];
-            $profile = self::fetchWeiboUserInfo(self::$_userID);
+            $profile = self::fetchQqtUserInfo(self::$_userID);
             
             $user = self::checkWeiboUserExist(self::$_userID);
             if ($user === null)
