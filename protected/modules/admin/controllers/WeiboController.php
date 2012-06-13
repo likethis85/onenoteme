@@ -248,7 +248,7 @@ class WeiboController extends AdminController
         $data = array(
             'oauth_consumer_key' => QQT_APP_KEY,
             'access_token' => app()->cache->get('qq_weibo_access_token'),
-            'openid' => self::$_userID,
+            'openid' => app()->cache->get('qq_weibo_user_id'),
             'clientip' => request()->getUserHostAddress(),
             'oauth_version' => '2.a',
             'scope' => 'all',
@@ -296,7 +296,7 @@ class WeiboController extends AdminController
         $data = array(
             'oauth_consumer_key' => QQT_APP_KEY,
             'access_token' => app()->cache->get('qq_weibo_access_token'),
-            'openid' => self::$_userID,
+            'openid' => app()->cache->get('qq_weibo_user_id'),
             'clientip' => request()->getUserHostAddress(),
             'oauth_version' => '2.a',
             'scope' => 'all',
