@@ -234,8 +234,8 @@ class WeiboController extends Controller
             $userProfile->image_url = $profile['head'] . '/50';
             $userProfile->avatar_large = $profile['head'] . '/160';
         
-            if ($userProfile->save())
-                return $user;
+            if ($userProfile->save()){
+                var_dump($userProfile);exit;}//return $user;
             else
                 return false;
         }
