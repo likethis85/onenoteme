@@ -123,7 +123,7 @@ class WeiboController extends Controller
         if ($curl->errno() != 0)
             throw new CHttpException(503, '获取token出错');
         else {
-            $data = json_decode($curl->rawdata(), true);
+            $data = json_decode($curl->rawdata(), true);var_dump($data);exit;
             self::$_accessToken = $access_token = $data['access_token'];
             self::$_userID = $data['openid'];
             $profile = self::fetchQqtUserInfo(self::$_userID);
