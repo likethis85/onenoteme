@@ -139,8 +139,8 @@ class WeiboController extends Controller
             
             self::$_accessToken = $access_token;
             $profile = self::fetchQqtUserInfo(self::$_userID);
-            
-            $user = self::checkWeiboUserExist(self::$_userID);
+            var_dump($profile);
+            $user = self::checkQqtUserExist(self::$_userID);
             if ($user === null)
                 $user = self::saveQqtUserProfile($profile);
             
