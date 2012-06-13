@@ -292,7 +292,7 @@ class WeiboController extends AdminController
         
         $sinatShortUrl = self::sinatShortUrl($model->getUrl());
         $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
-        $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子网';
+        $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子冷笑话';
         $data = array(
             'oauth_consumer_key' => QQT_APP_KEY,
             'access_token' => app()->cache->get('qq_weibo_access_token'),
