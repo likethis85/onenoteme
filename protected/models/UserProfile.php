@@ -46,7 +46,7 @@ class UserProfile extends CActiveRecord
 			array('location', 'length', 'max'=>100),
 			array('description, website, image_url, avatar_large', 'length', 'max'=>250),
 			array('gender', 'safe'),
-    		array('user_id, weibo_uid, qqt_uid', 'unique'),
+    		array('user_id', 'unique'),
 		);
 	}
 
