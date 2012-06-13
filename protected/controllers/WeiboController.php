@@ -126,12 +126,18 @@ class WeiboController extends Controller
         if ($curl->errno() != 0)
             throw new CHttpException(503, '获取token出错');
         else {
-            var_dump($curl->rawdata());exit;
-            $data = json_decode($curl->rawdata(), true);
-            if (empty($data))
+            $returnString = $curl->rawdata();
+            if (empty($returnString))
                 throw new CException('获取access_token错误');
             
-            self::$_accessToken = $access_token = $data['access_token'];
+            /*
+             * $access_token
+             * $expires_in
+             * $refresh_token
+             */
+            parse_str($returnString);
+            
+            self::$_accessToken = $access_token;
             $profile = self::fetchQqtUserInfo(self::$_userID);
             
             $user = self::checkWeiboUserExist(self::$_userID);
