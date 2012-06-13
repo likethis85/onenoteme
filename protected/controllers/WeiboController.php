@@ -219,7 +219,7 @@ class WeiboController extends Controller
         
             if (!$user->save()) {
                 var_dump($user->getErrors());
-                return false
+                return false;
             }
             
         }
