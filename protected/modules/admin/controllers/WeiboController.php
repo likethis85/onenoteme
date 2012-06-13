@@ -3,7 +3,7 @@ class WeiboController extends AdminController
 {
     public function actionSinat()
     {
-        $callback = aurl('weibo/sinacb');
+        $callback = aurl('admin/weibo/sinacb');
         $url = sprintf('https://api.weibo.com/oauth2/authorize?client_id=%s&response_type=code&redirect_uri=%s', WEIBO_APP_KEY, $callback);
         $this->redirect($url);
         exit(0);
@@ -12,7 +12,7 @@ class WeiboController extends AdminController
     public function actionSinacb($code)
     {
         $code = strip_tags(trim($code));
-        $callback = aurl('weibo/sinacb');
+        $callback = aurl('admin/weibo/sinacb');
         $url = sprintf('https://api.weibo.com/oauth2/access_token?grant_type=authorization_code&redirect_uri=%s&code=%s', $callback, $code);
         $curl = new CdCurl();
         $curl->basic_auth(WEIBO_APP_KEY, WEIBO_APP_SECRET);
@@ -34,7 +34,7 @@ class WeiboController extends AdminController
     
     public function actionQqt()
     {
-        $callback = aurl('weibo/qqcb');
+        $callback = aurl('admin/weibo/qqcb');
         $url = sprintf('https://open.t.qq.com/cgi-bin/oauth2/authorize?client_id=%s&response_type=code&redirect_uri=%s', QQT_APP_KEY, $callback);
         $this->redirect($url);
         exit(0);
@@ -43,7 +43,7 @@ class WeiboController extends AdminController
     public function actionQqtcb($code, $openid)
     {
         $code = strip_tags(trim($code));
-        $callback = aurl('weibo/qqcb');
+        $callback = aurl('admin/weibo/qqcb');
         $url = sprintf('https://open.t.qq.com/cgi-bin/oauth2/access_token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s', QQT_APP_KEY, QQT_APP_SECRET, $callback, $code);
         $curl = new CdCurl();
         $curl->post($url);
