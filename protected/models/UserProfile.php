@@ -42,8 +42,9 @@ class UserProfile extends CActiveRecord
 	{
 		return array(
 			array('user_id', 'required'),
-			array('user_id, province, city, weibo_uid, qqt_uid', 'numerical', 'integerOnly'=>true),
+			array('user_id, province, city', 'numerical', 'integerOnly'=>true),
 			array('location', 'length', 'max'=>100),
+			array('weibo_uid, qqt_uid', 'max'=>50),
 			array('description, website, image_url, avatar_large', 'length', 'max'=>250),
 			array('gender', 'safe'),
     		array('user_id', 'unique'),
