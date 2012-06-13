@@ -131,10 +131,12 @@ class WeiboController extends AdminController
         
         $picUrl = $model->getBmiddlePic();
         if (empty($picUrl)) {
-            $result = self::update($model);
+            $result = self::SinatUpdate($model);
+            $result2 = self::qqtUpdate($model);
         }
         else {
-            $result = self::upload($model);
+            $result = self::sinatUpload($model);
+            $result2 = self::qqtUpload($model);
         }
         
         if ($result !== false) {
@@ -146,16 +148,16 @@ class WeiboController extends AdminController
         exit(0);
     }
     
-    private static function update(AdminPost $model)
+    private static function SinatUpdate(AdminPost $model)
     {
         if (empty($model->content)) return false;
         
         $url = 'https://upload.api.weibo.com/2/statuses/update.json';
         
         
-        $shortUrl = self::shortUrl($model->getUrl());
-        $urlLen = empty($shortUrl) ? 0 : strlen($shortUrl);
-        $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $shortUrl . ' @挖段子网';
+        $sinatShortUrl = self::sinatShortUrl($model->getUrl());
+        $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
+        $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子网';
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->cache->get('sina_weibo_access_token'),
@@ -176,7 +178,7 @@ class WeiboController extends AdminController
             return false;
     }
     
-    private static function upload(AdminPost $model)
+    private static function sinatUpload(AdminPost $model)
     {
         if (empty($model->content)) return false;
         
@@ -194,9 +196,9 @@ class WeiboController extends AdminController
         
         $url = 'https://upload.api.weibo.com/2/statuses/upload.json';
         
-        $shortUrl = self::shortUrl($model->getUrl());
-        $urlLen = empty($shortUrl) ? 0 : strlen($shortUrl);
-        $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $shortUrl . ' @挖段子网';
+        $sinatShortUrl = self::sinatShortUrl($model->getUrl());
+        $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
+        $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子网';
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->cache->get('sina_weibo_access_token'),
@@ -215,7 +217,7 @@ class WeiboController extends AdminController
             return false;
     }
     
-    private static function shortUrl($longUrl)
+    private static function sinatShortUrl($longUrl)
     {
         $url = 'https://api.weibo.com/2/short_url/shorten.json';
         $data = array(
@@ -229,6 +231,90 @@ class WeiboController extends AdminController
             $result = json_decode($curl->rawdata(), true);
             $short = $result['urls'][0];
             return ($short['result']) ? $short['url_short'] : false;
+        }
+        else
+            return false;
+    }
+    
+    private static function qqtUpdate(AdminPost $model)
+    {
+        if (empty($model->content)) return false;
+        
+        $url = 'https://open.t.qq.com/api/t/add';
+        
+        $sinatShortUrl = self::sinatShortUrl($model->getUrl());
+        $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
+        $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子网';
+        $data = array(
+            'oauth_consumer_key' => QQT_APP_KEY,
+            'access_token' => app()->cache->get('sina_weibo_access_token'),
+            'openid' => self::$_userID,
+            'clientip' => request()->getUserHostAddress(),
+            'oauth_version' => '2.a',
+            'scope' => 'all',
+            'format' => 'json',
+            'content' => $content,
+            'syncflag' => 0,
+        );
+        foreach ($data as $key => $item)
+            $args[] = urlencode($key) . '=' . $item;
+        
+        $curl = new CdCurl();
+        $curl->post($url, join('&', $args));
+        //         var_dump($curl->rawdata());
+        //         var_dump($curl->errno());exit;
+        if ($curl->errno() == 0) {
+            $data = json_decode($curl->rawdata(), true);
+            return ($data['ret'] == 0) ? $data['data']['id'] : false;
+        }
+        else
+            return false;
+        
+    }
+    
+    private static function qqtUpload(AdminPost $model)
+    {
+        if (empty($model->content)) return false;
+        
+        $curl = new CdCurl();
+        $curl->get($model->getBmiddlePic());
+        if ($curl->errno() == 0) {
+            $picData = $curl->rawdata();
+            $picfile = app()->getRuntimePath() . DS . uniqid();
+            $result = file_put_contents($picfile, $picData);
+            if ($result === false)
+                throw new CException('生成临时文件出错', 0);
+        }
+        else
+            return false;
+        
+        $url = 'https://open.t.qq.com/api/t/add_pic';
+        
+        $sinatShortUrl = self::sinatShortUrl($model->getUrl());
+        $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
+        $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子网';
+        $data = array(
+            'oauth_consumer_key' => QQT_APP_KEY,
+            'access_token' => app()->cache->get('sina_weibo_access_token'),
+            'openid' => self::$_userID,
+            'clientip' => request()->getUserHostAddress(),
+            'oauth_version' => '2.a',
+            'scope' => 'all',
+            'format' => 'json',
+            'content' => $content,
+            'syncflag' => 0,
+            'pic' => '@' . $picfile,
+        );
+        foreach ($data as $key => $item)
+            $args[] = urlencode($key) . '=' . $item;
+        
+        $curl = new CdCurl();
+        $curl->post($url, join('&', $args));
+        //         var_dump($curl->rawdata());
+        //         var_dump($curl->errno());exit;
+        if ($curl->errno() == 0) {
+            $data = json_decode($curl->rawdata(), true);
+            return ($data['ret'] == 0) ? $data['data']['id'] : false;
         }
         else
             return false;

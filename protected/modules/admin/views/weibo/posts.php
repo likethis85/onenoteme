@@ -23,10 +23,10 @@
 </table>
 <a class="btn btn-small btn-success" href=''>重新载入</a>
 <ul>
-    <li>新浪UID：<?php app()->cache->get('sina_weibo_user_id');?></li>
-    <li>新浪Access Token：<?php app()->cache->get('sina_weibo_access_token');?></li>
-    <li>腾讯UID：<?php app()->cache->get('qq_weibo_user_id');?></li>
-    <li>腾讯Access Token：<?php app()->cache->get('qq_weibo_access_token');?></li>
+    <li>新浪UID：<?php echo app()->cache->get('sina_weibo_user_id');?></li>
+    <li>新浪Access Token：<?php echo app()->cache->get('sina_weibo_access_token');?></li>
+    <li>腾讯UID：<?php echo app()->cache->get('qq_weibo_user_id');?></li>
+    <li>腾讯Access Token：<?php echo app()->cache->get('qq_weibo_access_token');?></li>
 </ul>
 
 
