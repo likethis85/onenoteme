@@ -3,13 +3,27 @@ class WeiboController extends AdminController
 {
     public function actionPosts()
     {
-        $pageSize = 20;
+        $pageSize = 1;
         $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('weibo_id' => ''));
+        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_DUANZI, 'weibo_id' => ''));
         $criteria->limit = $pageSize;
         $criteria->order = 't.id asc';
+        $models[] = AdminPost::model()->find($criteria);
         
-        $models = AdminPost::model()->findAll($criteria);
+        $pageSize = 1;
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_LENGTU, 'weibo_id' => ''));
+        $criteria->limit = $pageSize;
+        $criteria->order = 't.id asc';
+        $models[] = AdminPost::model()->find($criteria);
+        
+        $pageSize = 1;
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_GIRL, 'weibo_id' => ''));
+        $criteria->limit = $pageSize;
+        $criteria->order = 't.id asc';
+        $models[] = AdminPost::model()->find($criteria);
+        
         $data = array(
             'models' => $models,
         );

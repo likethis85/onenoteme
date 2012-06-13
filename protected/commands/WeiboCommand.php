@@ -189,7 +189,7 @@ class WeiboCommand extends CConsoleCommand
     
     private static function keywordsFilter($text)
     {
-        $words = array('代购', '地址在这里', '推荐给大家', '宝贝地址', '推荐MM');
+        $words = array('代购', '地址在这里', '推荐给大家', '宝贝地址', '推荐MM', '限时打折');
         foreach ($words as $word) {
             $pos = strpos($text, $word);
             if ($pos !== false)
