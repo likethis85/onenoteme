@@ -247,7 +247,7 @@ class WeiboController extends AdminController
         $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子网';
         $data = array(
             'oauth_consumer_key' => QQT_APP_KEY,
-            'access_token' => app()->cache->get('sina_weibo_access_token'),
+            'access_token' => app()->cache->get('qq_weibo_access_token'),
             'openid' => self::$_userID,
             'clientip' => request()->getUserHostAddress(),
             'oauth_version' => '2.a',
@@ -295,7 +295,7 @@ class WeiboController extends AdminController
         $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子网';
         $data = array(
             'oauth_consumer_key' => QQT_APP_KEY,
-            'access_token' => app()->cache->get('sina_weibo_access_token'),
+            'access_token' => app()->cache->get('qq_weibo_access_token'),
             'openid' => self::$_userID,
             'clientip' => request()->getUserHostAddress(),
             'oauth_version' => '2.a',
