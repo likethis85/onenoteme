@@ -1,6 +1,7 @@
 <?php
 class WeiboController extends Controller
 {
+    const DEFAULT_PASSWORD = '123321';
     private static $_accessToken = '';
     private static $_userID = 0;
     
@@ -84,7 +85,7 @@ class WeiboController extends Controller
     
         $user = new User();
         $user->username = $user->screen_name = $profile['screen_name'];
-        $user->password = '123321';
+        $user->password = self::DEFAULT_PASSWORD;
         $user->state = User::STATE_ENABLED;
     
         if (!$user->save()) return false;
@@ -210,7 +211,7 @@ class WeiboController extends Controller
         $user = new User();
         $user->username = $profile['email'];
         $user->screen_name = $profile['name'];
-        $user->password = '123321';
+        $user->password = self::DEFAULT_PASSWORD;
         $user->state = User::STATE_ENABLED;
     
         if (!$user->save()) {
