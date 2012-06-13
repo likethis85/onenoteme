@@ -78,6 +78,9 @@ class WeiboController extends Controller
     private static function saveWeiboUserProfile($profile)
     {
         if (empty($profile)) return false;
+        
+        $user = User::model()->findByAttributes(array('username'=>$profile['screen_name']));
+        if ($user !== null) return $user;
     
         $user = new User();
         $user->username = $user->screen_name = $profile['screen_name'];
@@ -153,7 +156,7 @@ class WeiboController extends Controller
                 }
             }
             else {
-                var_dump($user);
+                var_dump($user);exit;
                 throw new CException('保存用户profile出错');
             }
         }
@@ -200,6 +203,9 @@ class WeiboController extends Controller
     private static function saveQqtUserProfile($profile)
     {
         if (empty($profile)) return false;
+        
+        $user = User::model()->findByAttributes(array('username'=>$profile['email']));
+        if ($user !== null) return $user;
     
         $user = new User();
         $user->username = $profile['email'];
@@ -208,7 +214,6 @@ class WeiboController extends Controller
         $user->state = User::STATE_ENABLED;
     
         if (!$user->save()) {
-            print_r($user->getErrors());
             return false;
         }
     
@@ -225,11 +230,9 @@ class WeiboController extends Controller
         $userProfile->avatar_large = $profile['head'] . '/160';
     
         if ($userProfile->save()) {
-            print_r($user->getErrors());exit;
             return $user;
         }
         else {
-            print_r($userProfile->getErrors());exit;
             return false;
         }
     }
