@@ -2,8 +2,7 @@
 class WeiboController extends Controller
 {
     private static $_accessToken = '';
-    private static $_openID = '';
-    private static $uid = 0;
+    private static $_userID = 0;
     
     public function actionSinat()
     {
@@ -26,11 +25,10 @@ class WeiboController extends Controller
         else {
             $data = json_decode($curl->rawdata(), true);
             self::$_accessToken = $access_token = $data['access_token'];
-            self::$_openID = $openID = $data['openid'];
-            $uid = $data['uid'];
-            $profile = self::fetchWeiboUserInfo($uid);
+            self::$_userID = $data['uid'];
+            $profile = self::fetchWeiboUserInfo(self::$_userID);
             
-            $user = self::checkWeiboUserExist($profile['id']);
+            $user = self::checkWeiboUserExist(self::$_userID);
             if ($user === null)
                 $user = self::saveWeiboUserProfile($profile);
             
@@ -38,7 +36,7 @@ class WeiboController extends Controller
                 $identity = new UserIdentity($user->username, $user->password);
                 if ($identity->authenticate(true)) {
                     app()->session['access_token'] = self::$_accessToken;
-                    app()->session['openid'] = self::$_openID;
+                    app()->session['sns_userid'] = self::$_userID;
                     user()->login($identity, param('autoLoginDuration'));
                     $this->redirect(url('site/index'));
                 }
@@ -127,11 +125,10 @@ class WeiboController extends Controller
         else {
             $data = json_decode($curl->rawdata(), true);
             self::$_accessToken = $access_token = $data['access_token'];
-            self::$_openID = $openID = $data['openid'];
-            $uid = $data['uid'];
-            $profile = self::fetchWeiboUserInfo($uid);
+            self::$_userID = $data['openid'];
+            $profile = self::fetchWeiboUserInfo(self::$_userID);
             
-            $user = self::checkWeiboUserExist($profile['id']);
+            $user = self::checkWeiboUserExist(self::$_userID);
             if ($user === null)
                 $user = self::saveQqtUserProfile($profile);
             
@@ -139,7 +136,7 @@ class WeiboController extends Controller
                 $identity = new UserIdentity($user->username, $user->password);
                 if ($identity->authenticate(true)) {
                     app()->session['access_token'] = self::$_accessToken;
-                    app()->session['openid'] = self::$_openID;
+                    app()->session['sns_userid'] = self::$_userID;
                     user()->login($identity, param('autoLoginDuration'));
                     $this->redirect(url('site/index'));
                 }
@@ -155,7 +152,7 @@ class WeiboController extends Controller
         $data = array(
             'oauth_consumer_key' => WEIBO_APP_KEY,
             'access_token' => self::$_accessToken,
-            'openid' => self::$_openID,
+            'openid' => self::$_userID,
             'clientip' => request()->getUserHostAddress(),
             'oauth_version' => '2.a',
             'format' => 'json',
