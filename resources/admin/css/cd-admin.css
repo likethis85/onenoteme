@@ -32,3 +32,4 @@ frame.menu-sidebar {background:white; border-right:1px solid gray;}
 
 
 .weibo-text textarea {min-width:540px;}
+.weibo-text img {max-width:150px; max-height:150px;}
