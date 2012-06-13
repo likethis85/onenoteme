@@ -25,9 +25,9 @@ class WeiboController extends AdminController
                 throw new CException('获取access_token错误');
         
             $cacheTokenKey = 'sina_weibo_access_token';
-            $result1 = app()->cache->set($cacheTokenKey, $access_token, $expires_in);
+            $result1 = app()->cache->set($cacheTokenKey, $data['access_token'], $expires_in);
             $cacheUserIDKey = 'sina_weibo_user_id';
-            $result2 = app()->cache->set($cacheUserIDKey, $access_token, $expires_in);
+            $result2 = app()->cache->set($cacheUserIDKey, $data['uid'], $expires_in);
             echo $result1 && $result2 ? '授权登录成功' : '授权登录失败';
         }
     }
@@ -76,10 +76,11 @@ class WeiboController extends AdminController
     
     public function actionTest()
     {
-        echo app()->cache->get('qq_weibo_user_id') . '<br />';
-        echo app()->cache->get('qq_weibo_access_token') . '<br />';
+
         echo app()->cache->get('sina_weibo_user_id') . '<br />';
         echo app()->cache->get('sina_weibo_access_token') . '<br />';
+        echo app()->cache->get('qq_weibo_user_id') . '<br />';
+        echo app()->cache->get('qq_weibo_access_token') . '<br />';
     }
     
     
