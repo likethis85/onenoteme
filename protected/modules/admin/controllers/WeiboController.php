@@ -18,7 +18,7 @@ class WeiboController extends AdminController
         $curl->basic_auth(WEIBO_APP_KEY, WEIBO_APP_SECRET);
         $curl->post($url);
         if ($curl->errno() != 0)
-            throw new CHttpException(503, '获取access_token出错');
+            throw new CException(503, '获取access_token出错');
         else {
             $data = json_decode($curl->rawdata(), true);
             if (empty($data))
@@ -34,7 +34,7 @@ class WeiboController extends AdminController
     
     public function actionQqt()
     {
-        $callback = aurl('admin/weibo/qqcb');
+        $callback = aurl('admin/weibo/qqtcb');
         $url = sprintf('https://open.t.qq.com/cgi-bin/oauth2/authorize?client_id=%s&response_type=code&redirect_uri=%s', QQT_APP_KEY, $callback);
         $this->redirect($url);
         exit(0);
@@ -43,7 +43,7 @@ class WeiboController extends AdminController
     public function actionQqtcb($code, $openid)
     {
         $code = strip_tags(trim($code));
-        $callback = aurl('admin/weibo/qqcb');
+        $callback = aurl('admin/weibo/qqtcb');
         $url = sprintf('https://open.t.qq.com/cgi-bin/oauth2/access_token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s', QQT_APP_KEY, QQT_APP_SECRET, $callback, $code);
         $curl = new CdCurl();
         $curl->post($url);
