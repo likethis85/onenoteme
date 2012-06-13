@@ -276,7 +276,7 @@ class WeiboController extends AdminController
     {
         if (empty($model->content)) return false;
         
-        $url = 'https://open.t.qq.com/api/t/add_pic';
+        $url = 'https://open.t.qq.com/api/t/add_pic_url';
         
         $sinatShortUrl = self::sinatShortUrl($model->getUrl());
         $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
@@ -298,11 +298,12 @@ class WeiboController extends AdminController
         
         $curl = new CdCurl();
         $curl->post($url, join('&', $args));
-                var_dump($curl->rawdata());
-                var_dump($curl->errno());exit;
-        if ($curl->errno() == 0) {
+        $jsonData = json_decode($curl->rawdata(), true);
+//         var_dump($curl->rawdata());
+//         var_dump($curl->errno());exit;
+        if ($curl->errno() == 0 && $jsonData['ret'] == 0) {
             $data = json_decode($curl->rawdata(), true);
-            return ($data['ret'] == 0) ? $data['data']['id'] : false;
+            return $data['data']['id'];
         }
         else
             return false;
