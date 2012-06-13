@@ -115,9 +115,10 @@ class WeiboController extends Controller
         exit(0);
     }
     
-    public function actionQqcb($code)
+    public function actionQqcb($code, $openid)
     {
         $code = strip_tags(trim($code));
+        self::$_userID = strip_tags(trim($openid));
         $callback = aurl('weibo/qqcb');
         $url = sprintf('https://open.t.qq.com/cgi-bin/oauth2/access_token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s', QQT_APP_KEY, QQT_APP_SECRET, $callback, $code);
         $curl = new CdCurl();
@@ -125,12 +126,12 @@ class WeiboController extends Controller
         if ($curl->errno() != 0)
             throw new CHttpException(503, '获取token出错');
         else {
+            var_dump($curl->rawdata());exit;
             $data = json_decode($curl->rawdata(), true);
             if (empty($data))
                 throw new CException('获取access_token错误');
             
             self::$_accessToken = $access_token = $data['access_token'];
-            self::$_userID = $data['openid'];
             $profile = self::fetchQqtUserInfo(self::$_userID);
             
             $user = self::checkWeiboUserExist(self::$_userID);
@@ -160,6 +161,7 @@ class WeiboController extends Controller
             'openid' => self::$_userID,
             'clientip' => request()->getUserHostAddress(),
             'oauth_version' => '2.a',
+            'scope' => 'all',
             'format' => 'json',
         );
         
