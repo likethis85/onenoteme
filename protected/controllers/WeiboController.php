@@ -22,7 +22,7 @@ class WeiboController extends Controller
         $curl->basic_auth(WEIBO_APP_KEY, WEIBO_APP_SECRET);
         $curl->post($url);
         if ($curl->errno() != 0)
-            throw new CHttpException(503, '获取token出错');
+            throw new CHttpException(503, '获取access_token出错');
         else {
             $data = json_decode($curl->rawdata(), true);
             self::$_accessToken = $access_token = $data['access_token'];
@@ -44,7 +44,7 @@ class WeiboController extends Controller
                 }
             }
             else
-                throw new CException('获取access_token出错');
+                throw new CException('保存用户profile出错');
         }
     }
     
@@ -145,7 +145,7 @@ class WeiboController extends Controller
                 }
             }
             else
-                throw new CException('获取access_token出错');
+                throw new CException('保存用户profile出错');
         }
     }
     
@@ -193,7 +193,10 @@ class WeiboController extends Controller
         $user->password = '123321';
         $user->state = User::STATE_ENABLED;
     
-        if (!$user->save()) return false;
+        if (!$user->save()) {
+            print_r($user->getErrors());
+            return false;
+        }
     
         $userProfile = new UserProfile();
         $userProfile->user_id = $user->id;
@@ -210,8 +213,10 @@ class WeiboController extends Controller
         if ($userProfile->save()) {
             return $user;
         }
-        else
+        else {
+            print_r($userProfile->getErrors());
             return false;
+        }
     }
 }
 
