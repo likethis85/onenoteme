@@ -217,7 +217,11 @@ class WeiboController extends Controller
             $user->password = self::DEFAULT_PASSWORD;
             $user->state = User::STATE_ENABLED;
         
-            if (!$user->save()) return false;
+            if (!$user->save()) {
+                var_dump($user->getErrors());
+                return false
+            }
+            
         }
         
         $userProfile = UserProfile::model()->findByAttributes(array('user_id' => $user->id));
@@ -234,8 +238,8 @@ class WeiboController extends Controller
             $userProfile->image_url = $profile['head'] . '/50';
             $userProfile->avatar_large = $profile['head'] . '/160';
         
-            if ($userProfile->save()){
-                var_dump($userProfile);exit;}//return $user;
+            if ($userProfile->save())
+                return $user;
             else
                 return false;
         }
