@@ -14,6 +14,7 @@
  * @property string $image_url
  * @property string $avatar_large
  * @property integer $weibo_uid
+ * @property integer $qqt_uid
  */
 class UserProfile extends CActiveRecord
 {
@@ -40,8 +41,8 @@ class UserProfile extends CActiveRecord
 	public function rules()
 	{
 		return array(
-			array('user_id, weibo_uid', 'required'),
-			array('user_id, province, city', 'numerical', 'integerOnly'=>true),
+			array('user_id', 'required'),
+			array('user_id, province, city, weibo_uid, qqt_uid', 'numerical', 'integerOnly'=>true),
 			array('location', 'length', 'max'=>100),
 			array('description, website, image_url, avatar_large', 'length', 'max'=>250),
 			array('gender', 'safe'),
@@ -75,6 +76,7 @@ class UserProfile extends CActiveRecord
 			'image_url' => '头像',
 			'avatar_large' => '头像大图',
 		    'weibo_uid' => '新浪微博UID',
+		    'qqt_uid' => '腾讯微博UID',
 		);
 	}
 
