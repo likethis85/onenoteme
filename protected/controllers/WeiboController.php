@@ -119,7 +119,7 @@ class WeiboController extends Controller
     {
         $code = strip_tags(trim($code));
         $callback = aurl('weibo/qqcb');
-        $url = sprintf('open.t.qq.com/cgi-bin/oauth2/access_token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s', QQT_APP_KEY, QQT_APP_SECRET, $callback, $code);
+        $url = sprintf('https://open.t.qq.com/cgi-bin/oauth2/access_token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s', QQT_APP_KEY, QQT_APP_SECRET, $callback, $code);
         $curl = new CdCurl();
         $curl->post($url);
         if ($curl->errno() != 0)
@@ -153,7 +153,7 @@ class WeiboController extends Controller
     
     private static function fetchQqtUserInfo($uid)
     {
-        $url = 'http://open.t.qq.com/api/user/info';
+        $url = 'https://open.t.qq.com/api/user/info';
         $data = array(
             'oauth_consumer_key' => QQT_APP_KEY,
             'access_token' => self::$_accessToken,
@@ -166,11 +166,14 @@ class WeiboController extends Controller
         $curl = new CdCurl();
         $curl->get($url, $data);
         if ($curl->errno() == 0) {
-            $userinfo = json_decode($curl->rawdata(), true);
-            return $userinfo;
+            $data = json_decode($curl->rawdata(), true);
+            if ($data['ret'] == 0)
+                return $data['data'];
+            else
+                throw new CException('获取用户信息错误：' . $data['errcode'] . ', ' . $data['message']);
         }
         else
-            throw new CHttpException(503, '获取用户信息出错');
+            throw new CException(503, '获取用户信息出错');
     }
     
     private static function checkQqtUserExist($uid)
