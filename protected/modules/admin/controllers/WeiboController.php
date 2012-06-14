@@ -129,13 +129,14 @@ class WeiboController extends AdminController
         
         $picUrl = $model->getBmiddlePic();
         if (empty($picUrl)) {
-            $result = self::SinatUpdate($model);
-            $result2 = self::qqtUpdate($model);
+//             $result = self::SinatUpdate($model);
+//             $result2 = self::qqtUpdate($model);
         }
         else {
-            $result = self::sinatUpload($model);
-            $result2 = self::qqtUpload($model);
+//             $result = self::sinatUpload($model);
+//             $result2 = self::qqtUpload($model);
         }
+        $result3 = self::neteaseUpload($model);
         
         if ($result !== false) {
             $model->weibo_id = $result;
