@@ -129,12 +129,12 @@ class WeiboController extends AdminController
         
         $picUrl = $model->getBmiddlePic();
         if (empty($picUrl)) {
-//             $result = self::SinatUpdate($model);
-//             $result2 = self::qqtUpdate($model);
+            $result = self::SinatUpdate($model);
+            $result2 = self::qqtUpdate($model);
         }
         else {
-//             $result = self::sinatUpload($model);
-//             $result2 = self::qqtUpload($model);
+            $result = self::sinatUpload($model);
+            $result2 = self::qqtUpload($model);
         }
         $result3 = self::neteaseUpdate($model);
         
@@ -395,11 +395,8 @@ class WeiboController extends AdminController
         $curl = new CdCurl();
         $curl->ssl()->post($url, $data);
         @unlink($picfile);
-        var_dump($curl->error());
-        var_dump($curl->rawdata());exit;
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
-            var_dump($result['upload_image_url']);exit;
             return $result['upload_image_url'] ? $result['upload_image_url'] : false;
         }
         else
