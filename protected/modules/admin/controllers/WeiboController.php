@@ -341,6 +341,7 @@ class WeiboController extends AdminController
     {
         if ($model->getBmiddlePic()) {
             $imageUrl = self::neteaseUploadImage($model->getBmiddlePic());
+            if (empty($imageUrl)) return false;
         }
         
         
