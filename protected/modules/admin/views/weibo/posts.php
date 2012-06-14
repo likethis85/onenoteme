@@ -27,6 +27,7 @@
     <li>新浪Access Token：<?php echo app()->cache->get('sina_weibo_access_token');?></li>
     <li>腾讯UID：<?php echo app()->cache->get('qq_weibo_user_id');?></li>
     <li>腾讯Access Token：<?php echo app()->cache->get('qq_weibo_access_token');?></li>
+    <li>网易Access Token：<?php echo app()->cache->get('netease_weibo_access_token');?></li>
 </ul>
 
 
