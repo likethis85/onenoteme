@@ -331,9 +331,38 @@ class WeiboController extends AdminController
                 throw new CException('获取access_token错误');
         
             $cacheTokenKey = 'netease_weibo_access_token';
-            $result1 = app()->cache->set($cacheTokenKey, $data['access_token'], $expires_in);
-            echo $result1 && $result2 ? '授权登录成功' : '授权登录失败';
+            $result = app()->cache->set($cacheTokenKey, $data['access_token'], $expires_in);
+            echo $result ? '授权登录成功' : '授权登录失败';
         }
+    }
+    
+    public function actionTest163()
+    {
+        $url = 'https://api.t.163.com/statuses/update.json';
+        
+//         $sinatShortUrl = self::sinatShortUrl($model->getUrl());
+//         $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
+//         $content = mb_substr($model->content, 0, 150 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子冷笑话';
+        $content = '“我可以给您介绍个对象，她有10万卢布的嫁妆。” “您有她的照片吗？” “从什么时候开始，10万卢布还需要附带一张照片？”';
+        $data = array(
+            'oauth_consumer_key' => NETEASE_APP_KEY,
+            'access_token' => app()->cache->get('netease_weibo_access_token'),
+            'status' => $content,
+        );
+        foreach ($data as $key => $item)
+            $args[] = urlencode($key) . '=' . $item;
+        
+        $curl = new CdCurl();
+        $curl->ssl()->post($url, join('&', $args));
+        var_dump($curl->rawdata());
+        var_dump($curl->errno());
+        var_dump($curl->error());exit;
+        if ($curl->errno() == 0) {
+            $data = json_decode($curl->rawdata(), true);
+            return ($data['ret'] == 0) ? $data['data']['id'] : false;
+        }
+        else
+            return false;
     }
 }
 
