@@ -361,7 +361,7 @@ class WeiboController extends AdminController
         $curl->ssl()->post($url, join('&', $args));
         if ($curl->errno() == 0) {
             $data = json_decode($curl->rawdata(), true);
-            return empty($data['id']) ? false : $data['data']['id'];
+            return empty($data['id']) ? false : $data['id'];
         }
         else
             return false;
