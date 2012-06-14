@@ -375,7 +375,7 @@ class WeiboController extends AdminController
         $curl->get($imageUrl);
         if ($curl->errno() == 0) {
             $picData = $curl->rawdata();
-            $picfile = app()->getRuntimePath() . DS . uniqid();
+            $picfile = app()->getRuntimePath() . DS . uniqid() . '.jpg';
             $result = file_put_contents($picfile, $picData);
             if ($result === false)
                 throw new CException('生成临时文件出错', 0);
