@@ -323,7 +323,6 @@ class WeiboController extends AdminController
         $url = sprintf('https://api.t.163.com/oauth2/access_token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s', NETEASE_APP_KEY, NETEASE_APP_SECRET, $callback, $code);
         $curl = new CdCurl();
         $curl->ssl()->post($url);
-        var_dump($curl->error());var_dump($curl->rawdata());exit;
         if ($curl->errno() != 0)
             throw new CException(503, '获取access_token出错');
         else {
@@ -333,8 +332,6 @@ class WeiboController extends AdminController
         
             $cacheTokenKey = 'netease_weibo_access_token';
             $result1 = app()->cache->set($cacheTokenKey, $data['access_token'], $expires_in);
-            $cacheUserIDKey = 'netease_weibo_user_id';
-            $result2 = app()->cache->set($cacheUserIDKey, $data['uid'], $expires_in);
             echo $result1 && $result2 ? '授权登录成功' : '授权登录失败';
         }
     }
