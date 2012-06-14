@@ -336,30 +336,66 @@ class WeiboController extends AdminController
         }
     }
     
-    public function actionTest163()
+    private static function neteaseUpdate(AdminPost $model)
     {
+        if ($model->getBmiddlePic()) {
+            $imageUrl = self::neteaseUploadImage($model->getBmiddlePic());
+        }
+        
+        
         $url = 'https://api.t.163.com/statuses/update.json';
         
-//         $sinatShortUrl = self::sinatShortUrl($model->getUrl());
-//         $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
-//         $content = mb_substr($model->content, 0, 150 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子冷笑话';
-        $content = '“我可以给您介绍个对象，她有10万卢布的嫁妆。” “您有她的照片吗？” “从什么时候开始，10万卢布还需要附带一张照片？”';
+        $sinatShortUrl = self::sinatShortUrl($model->getUrl());
+        $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
+        $content = mb_substr($model->content, 0, 150 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子冷笑话';
         $data = array(
             'oauth_consumer_key' => NETEASE_APP_KEY,
             'access_token' => app()->cache->get('netease_weibo_access_token'),
-            'status' => $content,
+            'status' => $content . $imageUrl,
         );
         foreach ($data as $key => $item)
             $args[] = urlencode($key) . '=' . $item;
         
         $curl = new CdCurl();
         $curl->ssl()->post($url, join('&', $args));
-        var_dump($curl->rawdata());
-        var_dump($curl->errno());
-        var_dump($curl->error());exit;
         if ($curl->errno() == 0) {
             $data = json_decode($curl->rawdata(), true);
-            return ($data['ret'] == 0) ? $data['data']['id'] : false;
+            return empty($data['id']) ? false : $data['data']['id'];
+        }
+        else
+            return false;
+    }
+    
+    private static function neteaseUploadImage($imageUrl)
+    {
+        if (empty($imageUrl)) return false;
+    
+        $curl = new CdCurl();
+        $curl->get($imageUrl);
+        if ($curl->errno() == 0) {
+            $picData = $curl->rawdata();
+            $picfile = app()->getRuntimePath() . DS . uniqid();
+            $result = file_put_contents($picfile, $picData);
+            if ($result === false)
+                throw new CException('生成临时文件出错', 0);
+        }
+        else
+            return false;
+    
+        $url = 'https://api.t.163.com/statuses/upload.json';
+    
+        $data = array(
+            'oauth_consumer_key' => NETEASE_APP_KEY,
+            'access_token' => app()->cache->get('netease_weibo_access_token'),
+            'pic' => '@' . $picfile,
+        );
+    
+        $curl = new CdCurl();
+        $curl->ssl()->post($url, $data);
+        @unlink($picfile);
+        if ($curl->errno() == 0) {
+            $result = json_decode($curl->rawdata(), true);
+            return $result['upload_image_url'] ? $result['upload_image_url'] : false;
         }
         else
             return false;
