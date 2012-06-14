@@ -322,8 +322,8 @@ class WeiboController extends AdminController
         $callback = aurl('admin/weibo/neteasecb');
         $url = sprintf('https://api.t.163.com/oauth2/access_token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s', NETEASE_APP_KEY, NETEASE_APP_SECRET, $callback, $code);
         $curl = new CdCurl();
-        $curl->post($url);
-        var_dump($curl->rawdata());exit;
+        $curl->ssl()->post($url);
+        var_dump($curl->error());var_dump($curl->rawdata());exit;
         if ($curl->errno() != 0)
             throw new CException(503, '获取access_token出错');
         else {
