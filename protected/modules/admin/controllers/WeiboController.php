@@ -394,8 +394,11 @@ class WeiboController extends AdminController
         $curl = new CdCurl();
         $curl->ssl()->post($url, $data);
         @unlink($picfile);
+        var_dump($curl->error());
+        var_dump($curl->rawdata());exit;
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
+            var_dump($result['upload_image_url']);exit;
             return $result['upload_image_url'] ? $result['upload_image_url'] : false;
         }
         else
