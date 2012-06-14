@@ -69,10 +69,6 @@ class WeiboController extends AdminController
         }
     }
     
-    public function actionNetease()
-    {
-        
-    }
     
     public function actionTest()
     {
@@ -81,6 +77,8 @@ class WeiboController extends AdminController
         echo app()->cache->get('sina_weibo_access_token') . '<br />';
         echo app()->cache->get('qq_weibo_user_id') . '<br />';
         echo app()->cache->get('qq_weibo_access_token') . '<br />';
+        echo app()->cache->get('netease_weibo_user_id') . '<br />';
+        echo app()->cache->get('netease_weibo_access_token') . '<br />';
     }
     
     
@@ -307,6 +305,38 @@ class WeiboController extends AdminController
         }
         else
             return false;
+    }
+    
+    public function actionNetease()
+    {
+        $callback = aurl('admin/weibo/neteasecb');
+        $url = sprintf('https://api.t.163.com/oauth2/authorize?client_id=%s&response_type=code&redirect_uri=%s', NETEASE_APP_KEY, $callback);
+        $this->redirect($url);
+        exit(0);
+    }
+    
+    
+    public function actionNeteasecb($code)
+    {
+        $code = strip_tags(trim($code));
+        $callback = aurl('admin/weibo/neteasecb');
+        $url = sprintf('https://api.t.163.com/oauth2/access_token?grant_type=authorization_code&redirect_uri=%s&code=%s', $callback, $code);
+        $curl = new CdCurl();
+        $curl->basic_auth(NETEASE_APP_KEY, NETEASE_APP_SECRET);
+        $curl->post($url);
+        if ($curl->errno() != 0)
+            throw new CException(503, '获取access_token出错');
+        else {
+            $data = json_decode($curl->rawdata(), true);
+            if (empty($data))
+                throw new CException('获取access_token错误');
+        
+            $cacheTokenKey = 'netease_weibo_access_token';
+            $result1 = app()->cache->set($cacheTokenKey, $data['access_token'], $expires_in);
+            $cacheUserIDKey = 'netease_weibo_user_id';
+            $result2 = app()->cache->set($cacheUserIDKey, $data['uid'], $expires_in);
+            echo $result1 && $result2 ? '授权登录成功' : '授权登录失败';
+        }
     }
 }
 

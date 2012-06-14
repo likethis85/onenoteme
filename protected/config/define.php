@@ -30,3 +30,5 @@ define('WEIBO_APP_KEY', '2981913360');
 define('WEIBO_APP_SECRET', 'f06fd0b530f3d9daa56db67e5e8610e1');
 define('QQT_APP_KEY', '801080691');
 define('QQT_APP_SECRET', '4e0c4ac86b36120efac4c44a9ac9e895');
+define('NETEASE_APP_KEY', 'owJBrlLb37BqS3ys');
+define('NETEASE_APP_SECRET', 'AOhuaddTejvDUaM1xuFI3SDZ0RNipYt5');
