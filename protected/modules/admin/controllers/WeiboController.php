@@ -136,7 +136,7 @@ class WeiboController extends AdminController
 //             $result = self::sinatUpload($model);
 //             $result2 = self::qqtUpload($model);
         }
-        $result3 = self::neteaseUpload($model);
+        $result3 = self::neteaseUpdate($model);
         
         if ($result !== false) {
             $model->weibo_id = $result;
