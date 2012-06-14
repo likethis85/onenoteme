@@ -39,7 +39,10 @@
 </div>
 
 <div class="cd-wrapper cd-footer">
-	<p class="fleft">内容版权所有 ©2011-2012 <a href="">waduanzi.com</a>&nbsp;&nbsp;冀ICP备12006196号-5&nbsp;&nbsp;<a href="<?php echo aurl('site/baidumap');?>" target="_blank">网站地图</a></p>
+	<p class="fleft">内容版权所有 ©2011-2012 <a href="">waduanzi.com</a>&nbsp;&nbsp;冀ICP备12006196号-5&nbsp;&nbsp;
+	    <a href="<?php echo aurl('site/baidumap');?>" target="_blank">网站地图</a>&nbsp;&nbsp;
+	    <a href="<?php echo aurl('site/links');?>" target="_blank">友情链接</a>
+    </p>
 	<p class="fright">笑死人不尝命&nbsp;<a href="#top">TOP</a></p>
 	<div class="clear"></div>
 </div>

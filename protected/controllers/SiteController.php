@@ -150,4 +150,9 @@ class SiteController extends Controller
         ));
         app()->end();
     }
+
+    public function actionLinks()
+    {
+        $this->render('links');
+    }
 }
