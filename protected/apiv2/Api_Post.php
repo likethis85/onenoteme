@@ -453,6 +453,7 @@ class Api_Post extends ApiBase
             $rows[$index] = self::formatRow($row);
     
         shuffle($rows);
+        $rows = array_slice($rows, 0, self::DEFAULT_TIMELINE_MAX_COUNT);
         return $rows;
     }
 }
