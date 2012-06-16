@@ -375,7 +375,7 @@ class Api_Post extends ApiBase
 
     public function favorite()
     {
-        $count = 5;
+        $count = 20;
         
         $this->requiredParams(array('userid', 'maxid'));
         $params = $this->filterParams(array('userid', 'email', 'token', 'fields', 'maxid'));
