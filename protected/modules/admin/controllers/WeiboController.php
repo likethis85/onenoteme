@@ -24,6 +24,7 @@ class WeiboController extends AdminController
             if (empty($data))
                 throw new CException('获取access_token错误');
         
+            $expires_in = $data['expires_in'];
             $cacheTokenKey = 'sina_weibo_access_token';
             $result1 = app()->cache->set($cacheTokenKey, $data['access_token'], $expires_in);
             $cacheUserIDKey = 'sina_weibo_user_id';
@@ -331,6 +332,7 @@ class WeiboController extends AdminController
             if (empty($data))
                 throw new CException('获取access_token错误');
         
+            $expires_in = $data['expires_in'];
             $cacheTokenKey = 'netease_weibo_access_token';
             $result = app()->cache->set($cacheTokenKey, $data['access_token'], $expires_in);
             echo $result ? '授权登录成功' : '授权登录失败';
@@ -360,7 +362,6 @@ class WeiboController extends AdminController
         
         $curl = new CdCurl();
         $curl->ssl()->post($url, join('&', $args));
-        var_dump($curl->error());var_dump($curl->rawdata());exit;
         if ($curl->errno() == 0) {
             $data = json_decode($curl->rawdata(), true);
             return empty($data['id']) ? false : $data['id'];
