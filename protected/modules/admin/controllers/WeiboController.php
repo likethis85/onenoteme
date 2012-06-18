@@ -360,6 +360,7 @@ class WeiboController extends AdminController
         
         $curl = new CdCurl();
         $curl->ssl()->post($url, join('&', $args));
+        var_dump($curl->error());var_dump($curl->rawdata());exit;
         if ($curl->errno() == 0) {
             $data = json_decode($curl->rawdata(), true);
             return empty($data['id']) ? false : $data['id'];
