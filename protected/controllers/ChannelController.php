@@ -1,6 +1,11 @@
 <?php
 class ChannelController extends Controller
 {
+    public function init()
+    {
+        $this->layout = 'fluid';
+    }
+    
     public function actionDuanzi()
     {
         $this->channel = CHANNEL_DUANZI;
