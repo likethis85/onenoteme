@@ -93,12 +93,14 @@ class SiteController extends Controller
             $this->redirect(user()->returnUrl);
         }
         
-        $model = new User();
-        if (request()->getIsPostRequest() && isset($_POST['User'])) {
-            $model->attributes = $_POST['User'];
-            $model->state = param('userIsRequireEmailVerify') ? User::STATE_DISABLED : User::STATE_ENABLED;
-            if ($model->save())
-                $this->redirect(user()->loginUrl);
+        $model = new SignupForm();
+        if (request()->getIsPostRequest() && isset($_POST['SignupForm'])) {
+            $model->attributes = $_POST['SignupForm'];
+            if ($model->validate()) {
+                $user = $model->createUser();
+                if ($user !== false)
+                    user()->loginRequired();
+            }
         }
         $this->pageTitle = '注册成为' . app()->name . '会员';
         $this->setKeywords($this->pageTitle);

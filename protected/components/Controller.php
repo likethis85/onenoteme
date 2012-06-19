@@ -21,7 +21,7 @@ class Controller extends CController
 			'bigCaptcha'=>array(
 				'class'=>'application.extensions.CdCaptcha.CdCaptchaAction',
 				'backColor' => 0xFFFFFF,
-				'height' => 26,
+				'height' => 30,
 				'width' => 100,
 				'maxLength' => 4,
 				'minLength' => 4,

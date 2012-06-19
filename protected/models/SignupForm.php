@@ -12,11 +12,10 @@ class SignupForm extends CFormModel
     {
         return array(
             array('username, screen_name, password', 'required'),
-            array('username', 'username'),
-            array('username', 'unique', 'classscreen_name'=>'User', 'attribute'=>'username'),
-            array('screen_name', 'unique', 'classscreen_name'=>'User', 'attribute'=>'screen_name'),
+            array('username', 'unique', 'className'=>'User', 'attributeName'=>'username'),
+            array('screen_name', 'unique', 'className'=>'User', 'attributeName'=>'screen_name'),
             array('password', 'length', 'min'=>5, 'max'=>30),
-            array('captcha', 'captcha'),
+            array('captcha', 'captcha', 'captchaAction'=>'bigCaptcha'),
         );
     }
     
@@ -36,18 +35,8 @@ class SignupForm extends CFormModel
         $user->username = $this->username;
         $user->screen_name = $this->screen_name;
         $user->password = $this->password;
+        $user->state = param('userIsRequireEmailVerify') ? User::STATE_DISABLED : User::STATE_ENABLED;
         $result =  $user->save();
         return $result ? $user : false;
-    }
-
-    public function afterValidate()
-    {
-        parent::afterValidate();
-        if (!$this->getErrors()) {
-            if ($this->createUser()) {
-                request()->redirect(user()->loginUrl);
-            }
-        }
-            
     }
 }

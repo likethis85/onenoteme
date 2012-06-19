@@ -122,12 +122,13 @@ body {background-color:#E0E0E0;}
 /* site/signup, user signup */
 .user-form {font-size:18px;}
 .user-form li {margin-bottom:20px; list-style:none;}
-.user-form label {display:inline-block; width:70px; text-align:right; margin-right:10px; color:#DDDDD1;}
+.user-form label {display:inline-block; width:70px; text-align:right; margin-right:10px;}
 .user-form .txt {height:30px; line-height:30px; font-size:18px; width:250px;}
 .user-form .captcha {width:60px;}
 .user-form span {font-size:14px; color:gray;}
-.user-form .button {margin-left:80px;}
-.login-signup-tip {margin-top:50px; color:#DDDDD1; text-align:center;}
+.user-form p {color:#CF0000; margin:5px 0 5px 85px;}
+.user-form .user-button {margin-left:80px; margin-top:10px;}
+.login-signup-tip {margin-top:50px; color:#333; text-align:center;}
 
 
 
