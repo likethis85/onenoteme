@@ -20,7 +20,6 @@ $(function(){
     container.imagesLoaded(function(){
     	container.masonry({
             itemSelector: '.waterfall-item',
-            isFitWidth: true
         });
         var count = 0;
         container.infinitescroll({

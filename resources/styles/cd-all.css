@@ -4,7 +4,6 @@ body {background-color:#E0E0E0;}
 ::selection {background-color:#C3E99E; text-shadow:none;}
 .site-bg {background-image:url(../images/site-sprite.png); background-repeat:no-repeat;}
 .cd-wrapper {width:950px; margin:0px auto; overflow:hidden;}
-.fluid-wrapper {margin:0px auto; overflow:hidden; padding:0 5px;}
 
 /* container */
 .cd-container {width:640px; overflow:hidden;}
@@ -41,7 +40,7 @@ body {background-color:#E0E0E0;}
 .panel15 {padding:15px;}
 
 /* waterfall */
-#waterfall-container {margin:0 auto;}
+#waterfall-container {margin:0 auto; max-width:1200px;}
 .waterfall-item {width:225px; margin:5px; padding:10px 0; float:left; color:#292A2B; background:#FBFBFB; border:1px solid white; font-size:14px; text-align:center; cursor:pointer;}
 .waterfall-item {-webkit-box-shadow:#666 0 1px 3px; -moz-box-shadow:#666 0 1px 3px; box-shadow:#666 0 1px 3px; -moz-border-radius:3px; -webkit-border-radius:3px; border-radisu:3px;}
 .waterfall-item {-webkit-transition:left .5s ease-in-out,top .5s ease-in-out; -moz-transition:left .5s ease-in-out,top .5s ease-in-out; -o-transition: left .5s ease-in-out,top .5s ease-in-out;}
