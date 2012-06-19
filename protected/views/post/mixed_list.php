@@ -1,28 +1,10 @@
-<?php $adpos = mt_rand(0, 7);?>
-<div id="waterfall-container" class="panel panel20">
+<div id="waterfall-container">
     <?php foreach ((array)$models as $index => $model):?>
     <div class="waterfall-item">
         <div class="post-time"><?php echo $model->createTime;?></div>
         <?php if ($model->bmiddlePic):?><div class="pic-block"><?php echo $model->bmiddleLink;?></div><?php endif;?>
         <p><?php echo l($model->content, $model->url, array('target'=>'_blank'));?></p>
     </div>
-    <?php if ($index == $adpos && !request()->getIsAjaxRequest()):?>
-    <div class="waterfall-item">
-        <div class="post-time">广告赞助商</div>
-        <p>
-            <script type="text/javascript">
-                netease_union_user_id = 6156606;
-                netease_union_site_id = 25143;
-                netease_union_worktype = null;
-                netease_union_promote_type = 1;
-                netease_union_width = 200;
-                netease_union_height = 300;
-                netease_union_link_id = null;
-            </script>
-            <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
-        </p>
-    </div>
-    <?php endif;?>
     <?php endforeach;?>
     <div class="clear"></div>
 </div>
