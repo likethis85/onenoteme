@@ -62,8 +62,8 @@ body {background-color:#E0E0E0;}
 /* footer */
 .cd-footer {margin-top:20px; font-size:12px; color:#AFAFAF; background:#2B2B2B; padding:7px 0;}
 .cd-footer p {margin:0; line-height:22px;}
-.cd-footer a:link {color:#CFCFCF;}
-.cd-footer a:visited, .cd-footer a:hover {color:#EFEFEF;}
+.cd-footer a:link, .cd-footer a:visited {color:#AFAFAF;}
+.cd-footer a:hover {color:#EFEFEF;}
 
 /* pages */
 .pages {padding:5px; margin:10px 0;}

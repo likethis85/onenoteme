@@ -48,7 +48,6 @@
     	<div class="clear"></div>
 	</div>
 </div>
-<div class="space10px"></div>
 
 <?php $this->renderPartial('/public/tongji');?>
 </body>
