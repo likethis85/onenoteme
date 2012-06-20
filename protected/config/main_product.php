@@ -23,6 +23,9 @@ return array(
         'admin' => array(
             'layout' => 'main',
         ),
+        'user' => array(
+            'layout' => 'main',
+        ),
     ),
     'components' => array(
         'db' => array(

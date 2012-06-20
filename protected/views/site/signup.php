@@ -26,7 +26,7 @@
     			<?php echo CHtml::activeTextField($model, 'captcha', array('class'=>'txt captcha'));?>
     			<?php $this->widget('CCaptcha', array(
     			    'captchaAction' => 'bigCaptcha',
-                	'buttonLabel' => '看不清，换一张',
+                	'buttonLabel' => '换一张',
                 	'clickableImage' => true,
                     'imageOptions' => array('alt'=>'验证码', 'align'=>'top'),
                 ));?>

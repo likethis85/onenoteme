@@ -47,7 +47,7 @@ body {background-color:#E0E0E0;}
 .waterfall-item {-webkit-box-shadow:#666 0 1px 3px; -moz-box-shadow:#666 0 1px 3px; box-shadow:#666 0 1px 3px; -moz-border-radius:5px; -webkit-border-radius:5px; border-radisu:5px;}
 .waterfall-item {-webkit-transition:left .5s ease-in-out,top .5s ease-in-out; -moz-transition:left .5s ease-in-out,top .5s ease-in-out; -o-transition: left .5s ease-in-out,top .5s ease-in-out;}
 .waterfall-item.item-bg {background-color:#C3E99E; color:#333;}
-.waterfall-item .pic-block {max-height:400px; overflow:hidden; margin-bottom:10px;}
+.waterfall-item .pic-block {max-height:300px; overflow:hidden; margin-bottom:10px;}
 .waterfall-item .pic-block img {max-width:205px; min-width:150px; vertical-align:top;}
 .waterfall-item p {line-height:24px; text-align:left; padding:0 10px 5px; margin:0;}
 .waterfall-item p a {display:block;}
@@ -124,12 +124,13 @@ body {background-color:#E0E0E0;}
 /* site/signup, user signup */
 .user-form {font-size:18px;}
 .user-form li {margin-bottom:20px; list-style:none;}
-.user-form label {display:inline-block; width:70px; text-align:right; margin-right:10px; color:#DDDDD1;}
+.user-form label {display:inline-block; width:70px; text-align:right; margin-right:10px; color:#333;}
 .user-form .txt {height:30px; line-height:30px; font-size:18px; width:250px;}
 .user-form .captcha {width:60px;}
 .user-form span {font-size:14px; color:gray;}
-.user-form .button {margin-left:80px;}
-.login-signup-tip {margin-top:50px; color:#DDDDD1; text-align:center;}
+.user-form p {font-size:14px; color:#DD0000; margin:5px 0 0 85px;}
+.user-form .user-button {margin-left:80px;}
+.login-signup-tip {margin-top:50px; color:#333; text-align:center;}
 
 
 

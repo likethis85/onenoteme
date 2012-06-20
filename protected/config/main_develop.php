@@ -23,6 +23,9 @@ return array(
         'admin' => array(
             'layout' => 'main',
         ),
+        'user' => array(
+            'layout' => 'main',
+        ),
         'gii'=>array(
             'class'=>'system.gii.GiiModule',
             'password'=>'123',

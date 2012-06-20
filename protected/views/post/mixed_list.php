@@ -19,7 +19,7 @@ $(function(){
     var container = $('#waterfall-container');
     container.imagesLoaded(function(){
     	container.masonry({
-            itemSelector: '.waterfall-item',
+            itemSelector: '.waterfall-item'
         });
         var count = 0;
         container.infinitescroll({

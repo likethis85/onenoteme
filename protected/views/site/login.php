@@ -18,7 +18,7 @@
     			<?php echo CHtml::activeTextField($model, 'captcha', array('class'=>'txt captcha'));?>
     			<?php $this->widget('CCaptcha', array(
     			    'captchaAction' => 'bigCaptcha',
-                	'buttonLabel' => '看不清，换一张',
+                	'buttonLabel' => '换一张',
                 	'clickableImage' => true,
                     'imageOptions' => array('alt'=>'验证码', 'align'=>'top'),
                 ));?>
@@ -28,8 +28,8 @@
     			<label>&nbsp;</label>
     			<?php echo CHtml::activeCheckBox($model, 'rememberMe');?>
     			<span>下次自动登录</span>
-    		    <div><?php echo CHtml::submitButton('登录', array('class'=>'beta-btn user-button'));?></div>
     		</li>
+    		<li><?php echo CHtml::submitButton('登录', array('class'=>'beta-btn user-button'));?></li>
     	</ul>
     	<?php echo CHtml::endForm();?>
     </div>

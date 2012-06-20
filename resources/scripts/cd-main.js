@@ -4,7 +4,7 @@ var Waduanzi = {
 			url: url,
 			type: 'post',
 			dataType: 'jsonp',
-			data: {id:postid},
+			data: {id:postid}
 		});
 	},
 	RatingPost: function(event){
