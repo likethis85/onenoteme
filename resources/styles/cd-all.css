@@ -116,7 +116,7 @@ body {background-color:#E0E0E0;}
 .next-posts .post-nav {margin-bottom:10px;}
 .next-posts .post-nav a:link, .next-posts .post-nav a:visited {display:block; padding:0; text-align:center; line-height:33px; color:white; margin-right:5px;}
 .next-posts .thumb {float:left; margin:4px; text-align:center;}
-.next-posts .thumb a:link, .next-posts .thumb a:visited {display:block; background-color:#E9E9E9; border:2px solid #E0E0E0;  width:80px; height:80px; overflow:hidden;}
+.next-posts .thumb a:link, .next-posts .thumb a:visited {display:block; background-color:#E9E9E9; border:2px solid #EBEBEB;  width:80px; height:80px; overflow:hidden;}
 .next-posts .thumb a:hover {border-color:#555555;}
 .next-posts .thumb img {border:0; height:80px;}
 
