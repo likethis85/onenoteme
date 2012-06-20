@@ -94,7 +94,7 @@ var Waduanzi = {
 			url: url,
 			type: 'post',
 			dataType: 'text',
-			data: {id:pid, score:score},
+			data: {id:pid, score:score}
 		});
 		xhr.done(function(data){
 			if (parseInt(data) > 0) {
