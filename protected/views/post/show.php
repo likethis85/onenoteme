@@ -64,7 +64,7 @@
 </div>
 
 <div class="fright cd-sidebar">
-    <div class="panel panel15 next-posts">
+    <div class="panel panel10 next-posts">
         <div class="post-nav">
             <?php if ($prevUrl):?><a href="<?php echo $prevUrl;?>" class="fleft site-bg button">上一个</a><?php endif;?>
             <?php if ($nextUrl):?><a href="<?php echo $nextUrl;?>" class="fleft site-bg button">下一个</a><?php endif;?>
