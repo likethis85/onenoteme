@@ -41,7 +41,6 @@ class SiteController extends Controller
         $this->setDescription('最新发布的段子，每日精品笑话连载。网罗互联网各种精品段子，各种糗事，各种笑话，各种秘密，各种经典语录，各种有趣的图片，各种漂亮mm校花模特正妹，应有尽有。烦了、累了、无聊了，就来挖段子逛一逛。');
         
         $this->channel = 'home';
-        $this->layout = 'fluid';
         if (request()->getIsAjaxRequest())
             $this->renderPartial('/post/mixed_list', array(
                 'models' => $models,
@@ -94,12 +93,14 @@ class SiteController extends Controller
             $this->redirect(user()->returnUrl);
         }
         
-        $model = new User();
-        if (request()->getIsPostRequest() && isset($_POST['User'])) {
-            $model->attributes = $_POST['User'];
-            $model->state = param('userIsRequireEmailVerify') ? User::STATE_DISABLED : User::STATE_ENABLED;
-            if ($model->save())
-                $this->redirect(user()->loginUrl);
+        $model = new SignupForm();
+        if (request()->getIsPostRequest() && isset($_POST['SignupForm'])) {
+            $model->attributes = $_POST['SignupForm'];
+            if ($model->validate()) {
+                $user = $model->createUser();
+                if ($user !== false)
+                    user()->loginRequired();
+            }
         }
         $this->pageTitle = '注册成为' . app()->name . '会员';
         $this->setKeywords($this->pageTitle);
