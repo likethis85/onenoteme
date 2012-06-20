@@ -116,7 +116,7 @@ body {background-color:#E0E0E0;}
 .next-posts .thumb {float:left; background-color:#E0E0E0; margin:2px; text-align:center;}
 .next-posts .thumb a:link, .next-posts .thumb a:visited {display:block; border:3px solid #E0E0E0;  width:80px; height:80px; overflow:hidden;}
 .next-posts .thumb a:hover {border-color:#555555;}
-.next-posts .thumb img {border:0; height:80px;}
+.next-posts .thumb img {border:0; width:auto; height:80px; max-width:auto;}
 
 
 /* site/signup, user signup */
