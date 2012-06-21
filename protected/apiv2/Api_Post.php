@@ -128,7 +128,7 @@ class Api_Post extends ApiBase
                 ->select($fields)
                 ->from(TABLE_POST . ' t')
                 ->where($condition, $param)
-                ->order('id desc')
+                ->order('create_time desc, id desc')
                 ->limit($count);
         
             $rows = $cmd->queryAll();
