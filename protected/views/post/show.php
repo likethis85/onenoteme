@@ -48,6 +48,9 @@
             </div>
             <div class="clear"></div>
         </div>
+        <div class="content-block">
+            <script type="text/javascript" id="wumiiRelatedItems"></script>
+        </div>
         <form action="<?php echo aurl('comment/create');?>" method="post" class="content-block comment-form" id="comment-form">
             <input type="hidden" name="postid" value="<?php echo $post->id;?>" />
             <textarea name="content" id="comment-content" class="mini-content fleft radius3px">请输入评论内容。。。</textarea>
@@ -83,6 +86,18 @@
 	<div class="panel panel15"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
 </div>
 <div class="clear"></div>
+
+<script type="text/javascript">
+    var wumiiPermaLink = '<?php echo $post->url;?>'; //请用代码生成文章永久的链接
+    var wumiiTitle = '<?php echo json_encode($post->title);?>'; //请用代码生成文章标题
+    var wumiiTags = '<?php echo json_encode($post->getTagText(','));?>'; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+    var wumiiSitePrefix = "http://www.waduanzi.com/";
+    var wumiiParams = "&num=6&mode=2&pf=JAVASCRIPT";
+</script>
+<script type="text/javascript" src="http://widget.wumii.com/ext/relatedItemsWidget"></script>
+<a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
+    <img src="http://static.wumii.com/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
+</a>
 
 <script type="text/javascript">
 $(function(){
