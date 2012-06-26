@@ -90,12 +90,12 @@ body {background-color:#E0E0E0;}
 .post-detail .post-arrows a.arrow-down.pushed {background-position:-386px -68px;}
 .post-detail .info {width:265px; height:38px; line-height:38px; padding:0 10px; margin-right:3px;}
 .post-detail .social {padding:3px 3px; margin-left:3px;}
-.post-detail .comment-form {backgroun2d-color:#F4F4F6; display:block; position:relative; overflow:hidden; background-color:#ECECEC; padding:5px; margin-bottom:10px;}
-.post-detail .comment-form textarea {width:493px; border:0; color:#888; margin:0; padding:7px 5px 6px; font-size:12px;}
+.post-detail .comment-form {backgroun2d-color:#F4F4F6; display:block; position:relative; overflow:hidden; background-color:#ECECEC; padding:8px; margin-bottom:10px;}
+.post-detail .comment-form textarea {width:485px; border:0; color:#888; margin:0; padding:7px 5px 6px; font-size:12px;}
 .post-detail .comment-form textarea.mini-content {height:20px;}
 .post-detail .comment-form textarea.expand {height:50px;}
-.post-detail .comment-form .save-caption-loader {background:url(../images/small-loader.gif) no-repeat; width:24px; height:24px; position:absolute; top:39px; right:5px;}
-.post-detail .comment-form .counter {font-size:22px; position:absolute; top:45px; right:45px; font-weight:bold; font-family:'Helvetica Neue','Helvetica','Arial',sans-serif;}
+.post-detail .comment-form .save-caption-loader {background:url(../images/small-loader.gif) no-repeat; width:24px; height:24px; position:absolute; top:47px; right:10px;}
+.post-detail .comment-form .counter {font-size:22px; position:absolute; top:50px; right:50px; font-weight:bold; font-family:'Helvetica Neue','Helvetica','Arial',sans-serif;}
 .post-detail #caption-error {margin:5px 0; padding:6px; color:#E44; background-color:#F4F4F6;}
 .button {width:78px; height:33px; border:0; margin:0; padding:0; background-color:transparent; background-position:-231px 0; color:white; font-weight:bold; padding-top:3px; cursor:pointer;}
 .button:hover {background-position:-310px 0;}
