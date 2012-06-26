@@ -91,11 +91,11 @@
 
 <?php if ($post->bmiddlePic):?>
 <script type="text/javascript">
-    var wumiiPermaLink = '<?php echo $post->url;?>'; //请用代码生成文章永久的链接
-    var wumiiTitle = '<?php echo json_encode($post->title);?>'; //请用代码生成文章标题
-    var wumiiTags = '<?php echo json_encode($post->getTagText(','));?>'; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
+    var wumiiPermaLink = '<?php echo $post->url;?>';
+    var wumiiTitle = '<?php echo json_encode($post->filterContent);?>';
+    var wumiiTags = '<?php echo json_encode($post->getTagText(','));?>';
     var wumiiSitePrefix = "http://www.waduanzi.com/";
-    var wumiiParams = "&num=6&mode=2&pf=JAVASCRIPT";
+    var wumiiParams = "&num=5&mode=2&pf=JAVASCRIPT";
 </script>
 <script type="text/javascript" src="http://widget.wumii.com/ext/relatedItemsWidget"></script>
 <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
