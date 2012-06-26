@@ -48,7 +48,7 @@
             </div>
             <div class="clear"></div>
         </div>
-        <div class="content-block">
+        <div class="content-block wumii-box">
             <script type="text/javascript" id="wumiiRelatedItems"></script>
         </div>
         <form action="<?php echo aurl('comment/create');?>" method="post" class="content-block comment-form" id="comment-form">
