@@ -68,9 +68,11 @@ body {background-color:#E0E0E0;}
 /* pages */
 .pages {padding:5px; margin:10px 0;}
 .pages ul.yiiPager {font-size:14px;}
+/*
 .pages ul.yiiPager a:link, .pages ul.yiiPager a:visited {border:1px solid #DAF0EF; color:#DDDDD1;}
 .pages ul.yiiPager a:hover {color:white; background:#4E76C9;}
 .pages ul.yiiPager .selected a {background:#4E76C9; color:white;}
+*/
 .cdc-block {margin:0px auto; text-align:center;}
 
 /* post/show */
@@ -147,6 +149,7 @@ body {background-color:#E0E0E0;}
 .post-list {margin:0;}
 .post-list, .post-list li {list-style:none;}
 .post-list li {margin:5px 0; line-height:24px;}
+#page-nav.pages {background:white; padding-top:10px; padding-bottom:10px;}
 
 /* video list */
 .video-detail {margin-bottom:15px;}

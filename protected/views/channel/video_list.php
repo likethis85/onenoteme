@@ -15,6 +15,7 @@
         </div>
 	</div>
 	<?php endforeach;?>
+	<div id="page-nav" class="pages radius3px"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'header'=>'', 'footer'=>''));?></div>
 </div>
 
 <div class="fright cd-sidebar">
