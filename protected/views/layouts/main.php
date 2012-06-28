@@ -23,6 +23,8 @@
     		<li<?php echo ($this->channel===CHANNEL_GIRL) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/girl');?>">挖福利</a></li>
     		<li>|</li>
     		<li<?php echo ($this->channel===CHANNEL_DUANZI) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/duanzi');?>">挖段子</a></li>
+    		<li>|</li>
+    		<li<?php echo ($this->channel===CHANNEL_VIDEO) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/video');?>">挖短片</a></li>
     	</ul>
 		<ul class="user-nav fright">
     		<li><a href="http://m.waduanzi.com">手机版</a></li>

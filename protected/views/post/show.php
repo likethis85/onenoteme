@@ -4,7 +4,11 @@
 		    <p><?php echo $post->filterContent;?></p>
 		    <?php if ($post->tags):?><div class="post-tags">标签：<?php echo $post->tagLinks;?></div><?php endif;?>
         </div>
-        <?php if ($post->bmiddlePic):?><div class="content-block post-picture"><?php echo l(CHtml::image($post->bmiddlePic, $post->title), aurl('post/originalpic', array('id'=>$post->id)), array('target'=>'_blank'));?></div><?php endif;?>
+        <?php if ($post->videoHtml):?>
+            <div class="content-block video-player"><?php echo $post->videoHtml;?></div>
+        <?php elseif ($post->bmiddlePic):?>
+            <div class="content-block post-picture"><?php echo l(CHtml::image($post->bmiddlePic, $post->title), aurl('post/originalpic', array('id'=>$post->id)), array('target'=>'_blank'));?></div>
+        <?php endif;?>
         <div class="toolbar radius3px">
     		<div class="content-block post-arrows fleft">
                 <a class="site-bg arrow-up" data-id="<?php echo $post->id;?>" data-value="1" data-url="<?php echo aurl('post/score');?>" href="javascript:void(0);">喜欢</a>

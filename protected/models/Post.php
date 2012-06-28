@@ -36,6 +36,8 @@
  * @property string $thumbnail
  * @property string $bmiddleLink
  * @property string $thumbnailLink
+ * @property string $videoHtml
+ * @property string $videoSourceUrl
  */
 class Post extends CActiveRecord
 {
@@ -180,8 +182,6 @@ class Post extends CActiveRecord
     {
         if ($this->bmiddle_pic)
             return $this->bmiddle_pic;
-        elseif ($this->original_pic)
-            return $this->original_pic;
         else
             return '';
     }
@@ -223,7 +223,24 @@ class Post extends CActiveRecord
         
         return $html;
     }
+
+    public function getVideoHtml()
+    {
+        $html = '';
+        if ($this->channel_id == CHANNEL_VIDEO && $this->bmiddle_pic)
+            $html = $this->bmiddle_pic;
+        
+        return $html;
+    }
     
+    public function getVideoSourceUrl()
+    {
+        $url = '';
+        if ($this->channel_id == CHANNEL_VIDEO && $this->original_pic)
+            $url = $this->original_pic;
+        
+        return $url;
+    }
     
     protected function beforeSave()
     {

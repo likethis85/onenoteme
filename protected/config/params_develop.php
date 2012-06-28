@@ -3,6 +3,7 @@ return array(
 
     'autoLoginDuration' => 3600 * 24 * 7,
     'postCountOfPage' => 32,
+    'videoCountOfPage' => 8,
     'commentCountOfPage' => 20,
 
     'userIsRequireEmailVerify' => false,
@@ -25,6 +26,6 @@ return array(
         CHANNEL_DUANZI => '挖段子',
         CHANNEL_LENGTU => '挖冷图',
         CHANNEL_GIRL => '挖福利',
-        CHANNEL_VIDEO => '挖好片',
+        CHANNEL_VIDEO => '挖短片',
     ),
 );
