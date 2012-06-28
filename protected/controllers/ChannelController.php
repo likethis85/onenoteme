@@ -87,25 +87,5 @@ class ChannelController extends Controller
         return $data;
     }
 
-    public function actionConvert()
-    {
-        $movies = MovieSets::model()->findAll();
-        foreach ($movies as $m) {
-            $post = new Post();
-            $post->channel_id = CHANNEL_VIDEO;
-            $post->title = $m->name;
-            $post->content = $m->story ? $m->story : $m->name;
-            $post->original_pic = $m->url;
-            $post->create_time = $m->create_time;
-            $post->view_nums = mt_rand(100, 1000);
-            $post->up_score = mt_rand(100, 200);
-            $post->down_score = mt_rand(0, 10);
-            $post->state = POST_STATE_ENABLED;
-            if ($post->save()) {
-                echo 'save success<br />';
-            }
-            else
-                echo var_export($post->getErrors()) . '<br />';
-        }
-    }
 }
+
