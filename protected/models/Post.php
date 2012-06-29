@@ -76,8 +76,8 @@ class Post extends CActiveRecord
 			array('user_name', 'length', 'max'=>50),
 			array('weibo_id', 'length', 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
-			array('title, tags, thumbnail_pic, bmiddle_pic, original_pic', 'length', 'max'=>250),
-			array('content', 'safe'),
+			array('title, tags', 'length', 'max'=>250),
+			array('content, thumbnail_pic, bmiddle_pic, original_pic', 'safe'),
 		);
 	}
 
