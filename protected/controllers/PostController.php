@@ -52,7 +52,7 @@ class PostController extends Controller
         
         $commentsData = self::fetchComments($id);
         
-        $this->pageTitle = trim(strip_tags($post->title)) . ' - 挖段子';
+        $this->pageTitle = trim(strip_tags($post->title)) . ', ' . $post->getTagText(',') . ' - 挖段子';
         $this->setKeywords($this->pageTitle);
         $this->setDescription($post->content);
         
