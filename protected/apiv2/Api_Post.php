@@ -427,6 +427,47 @@ class Api_Post extends ApiBase
     
     }
 
+    public function favorite2()
+    {
+        $count = 20;
+        
+        $this->requiredParams(array('userid'));
+        $params = $this->filterParams(array('userid', 'email', 'token', 'fields', 'page'));
+    
+    
+        $uid = (int)$params['userid'];
+        $page = (int)$params['page'];
+        $page = $page > 0 ? $page : 0;
+        $offset = ($page - 1) * $count;
+        
+        $cmd = app()->getDb()->createCommand()
+            ->select('post_id')
+            ->from(TABLE_POST_FAVORITE)
+            ->where('user_id = :userid', array(':userid' => $uid))
+            ->order('id desc')
+            ->limit($count)
+            ->offset($offset);
+                
+        $ids = $cmd->queryColumn();
+
+        if (empty($ids)) return array();
+
+        $fields = empty($params['fields']) ? '*' : $params['fields'];
+        $conditions = array('and', array('in', 'id', $ids), 'state = :enabled');
+        $conditionParams = array(':enabled' => POST_STATE_ENABLED);
+        $cmd = app()->getDb()->createCommand()
+            ->select($fields)
+            ->from(TABLE_POST)
+            ->limit($count)
+            ->where($conditions, $conditionParams);
+
+        $rows = $cmd->queryAll();
+        $rows = self::formatRows($rows);
+
+        return $rows;
+    
+    }
+
     private static function updateLastRequestTime($token)
     {
         if (empty($token))
