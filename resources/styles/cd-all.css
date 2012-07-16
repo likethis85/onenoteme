@@ -33,7 +33,6 @@ body {background-color:#E0E0E0;}
 .cd-header .user-nav .user-login a {padding:4px 3px;}
 .cd-header .user-nav .user-login img, .cd-header .user-nav .user-name img {width:20px; height:20px;}
 .cd-header .user-nav .user-name img {margin-right:2px;}
-
 /* panel */
 .panel {background-color:#FBFBFB; position:relative; margin:0 1px 3px; -webkit-box-shadow:#666 0 1px 3px; -moz-box-shadow:#666 0 1px 3px; box-shadow:#666 0 1px 3px; -moz-border-radius:5px; -webkit-border-radius:5px; border-radisu:5px;}
 .panel25 {padding:25px;}
@@ -159,6 +158,13 @@ body {background-color:#E0E0E0;}
 .sns-list, .sns-list li {list-style:none; margin:0; color:#DDDDD1;}
 .app-list p {margin-left:20px; margin-bottom:0;}
 .friend-links, .friend-links li {list-style:none; margin:0;}
+
+/* index friend links */
+.links-list {margin-top:20px;}
+.links-list .link-title {margin:0 0 5px; padding:0; font-size:12px;}
+.links-list ul.links,.links-list ul.links li {list-style:none;}
+.links-list ul.links li {float:left; margin-right:10px;}
+.links-list ul.links li a {font-size:12px;}
 
 /* wumii */
 .wumii-box {margin-bottom:10px;}

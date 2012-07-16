@@ -9,7 +9,9 @@
     <div class="clear"></div>
 </div>
 <div class="clear"></div>
+<?php if($pages->pageCount > 1):?>
 <div id="page-nav" class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'header'=>'', 'footer'=>''));?></div>
+<?php endif;?>
 <div id="manual-load" class="radius5px hide">查看更多</div>
 
 <script type="text/javascript">
@@ -21,7 +23,7 @@ $(function(){
     	container.masonry({
             itemSelector: '.waterfall-item'
         });
-        var count = 0;
+        var count = 1;
         container.infinitescroll({
         	navSelector: '#page-nav',
         	nextSelector: '#page-nav .next a',
@@ -47,7 +49,7 @@ $(function(){
                         return false;
               	    });
                 	$('#manual-load').show();
-                    count = 0;
+                    count = 1;
                 }
                 else
                     count++;
