@@ -170,7 +170,7 @@ body {background-color:#E0E0E0;}
 
 /* app list */
 .apps-list {text-align:center;}
-.apps-list a, .apps-list span {font-size:16px!important; margin:0 30px;}
+.apps-list a, .apps-list span {font-size:16px!important; margin:0 20px;}
 .apps-list span {color:red;}
 
 /* site/links */
