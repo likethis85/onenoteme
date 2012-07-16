@@ -164,7 +164,9 @@ body {background-color:#E0E0E0;}
 .wumii-box {margin-bottom:10px;}
 #wumiiBtnDiv {display:none;}
 
-
+/* app list */
+.apps-list {text-align:center;}
+.apps-list a {font-size:16px!important; margin:0 30px;}
 
 
 

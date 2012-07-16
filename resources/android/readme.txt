@@ -1,1 +1,1 @@
-latest version: 1.7.0
+latest version: 1.1.0
