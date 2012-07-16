@@ -1,11 +1,12 @@
 <div class="panel panel15 apps-list">
     <a href="http://itunes.apple.com/cn/app//id486268988?mt=8" target="_blank">下载iPhone应用2.2.1版</a>
     <a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">下载Android应用1.1.0版</a>
+    <span>QQ群：49401589</span>
 </div>
 <?php $this->renderPartial('/post/mixed_list', array('models' => $models, 'pages' => $pages));?>
 
 <div class="panel panel15 links-list">
-    <h3 class="link-title">友情链接</h3>
+    <h3 class="link-title">友情链接&nbsp;&nbsp;[<a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=UjE2MTE6NzwSJDsifCMjfDE9Pw" target="_blank">申请友情链接</a>]</h3>
 	<ul class="links">
 		<li><a href="http://www.fila.cc/" target="_blank">fila官网</a></li>
 		<li><a href="http://lengxiaohua.net/" target="_blank">冷笑话</a></li>
