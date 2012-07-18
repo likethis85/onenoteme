@@ -241,6 +241,15 @@ class WeiboCommand extends CConsoleCommand
         return $result > 0;
     }
     
+    public function actionTestToken()
+    {
+        $sinaToken = app()->cache->get('sina_weibo_access_token');
+        $qqToken = app()->cache->get('qq_weibo_access_token');
+
+        var_dump($sinaToken);
+        var_dump($qqToken);
+    }
+    
     public function actionPostToWeibo()
     {
         $sinaToken = app()->cache->get('sina_weibo_access_token');
