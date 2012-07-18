@@ -459,8 +459,8 @@ class WeiboCommand extends CConsoleCommand
         $curl = new CdCurl();
         $curl->post($url, join('&', $args));
         $jsonData = json_decode($curl->rawdata(), true);
-                var_dump($curl->rawdata());
-                var_dump($curl->errno());exit;
+//         var_dump($curl->rawdata());
+//         var_dump($curl->errno());exit;
         if ($curl->errno() == 0 && $jsonData['ret'] == 0) {
             $data = json_decode($curl->rawdata(), true);
             return $data['data']['id'];
