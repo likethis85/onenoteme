@@ -251,6 +251,12 @@ class WeiboCommand extends CConsoleCommand
         }
         
         $models = self::fetchWeiboPosts();
+        
+        if (empty($models)) {
+            echo "models is empty.\n";
+            exit(0);
+        }
+        
         foreach ($models as $model) {
             $picUrl = $model->getBmiddlePic();
             if (empty($picUrl)) {
@@ -289,9 +295,8 @@ class WeiboCommand extends CConsoleCommand
         $criteria->order = 't.id asc';
         $models[] = AdminPost::model()->find($criteria);
     
-        $data = array(
-            'models' => $models,
-        );
+        return $models;
+        
     }
     
     private static function SinatUpdate(AdminPost $model)
