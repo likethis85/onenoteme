@@ -241,8 +241,218 @@ class WeiboCommand extends CConsoleCommand
         return $result > 0;
     }
     
-    public function actionPost()
+    public function actionPostToWeibo()
     {
+        $sinaToken = app()->cache->get('sina_weibo_access_token');
+        $qqToken = app()->cache->get('qq_weibo_access_token');
+        if (empty($sinaToken) || empty($qqToken)) {
+            echo 'token expired.';
+            exit(0);
+        }
         
+        $models = self::fetchWeiboPosts();
+        foreach ($models as $model) {
+            $picUrl = $model->getBmiddlePic();
+            if (empty($picUrl)) {
+                $result = self::SinatUpdate($model);
+                $result2 = self::qqtUpdate($model);
+            }
+            else {
+                $result = self::sinatUpload($model);
+                $result2 = self::qqtUpload($model);
+            }
+            
+            if ($result !== false) {
+                $model->weibo_id = $result;
+                $model->save(true, array('weibo_id'));
+            }
+            
+            echo ($result === false) ? 'sina failed' : 'sina success, weibo id: ' . $result;
+            echo ($result2 === false) ? 'qqt failed' : 'qqt success, weibo id: ' . $result2;
+        }
     }
+    
+    private static function fetchWeiboPosts()
+    {
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_DUANZI, 'weibo_id' => ''));
+        $criteria->order = 't.id asc';
+        $models[] = AdminPost::model()->find($criteria);
+    
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_LENGTU, 'weibo_id' => ''));
+        $criteria->order = 't.id asc';
+        $models[] = AdminPost::model()->find($criteria);
+    
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_GIRL, 'weibo_id' => ''));
+        $criteria->order = 't.id asc';
+        $models[] = AdminPost::model()->find($criteria);
+    
+        $data = array(
+            'models' => $models,
+        );
+    }
+    
+    private static function SinatUpdate(AdminPost $model)
+    {
+        if (empty($model->content)) return false;
+    
+        $url = 'https://upload.api.weibo.com/2/statuses/update.json';
+    
+    
+        $sinatShortUrl = self::sinatShortUrl($model->getUrl());
+        $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
+        $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子网';
+        $data = array(
+            'source' => WEIBO_APP_KEY,
+            'access_token' => app()->cache->get('sina_weibo_access_token'),
+            'status' => $content,
+        );
+        foreach ($data as $key => $item)
+            $args[] = urlencode($key) . '=' . $item;
+    
+        $curl = new CdCurl();
+        $curl->post($url, join('&', $args));
+        //         var_dump($curl->rawdata());
+        //         var_dump($curl->errno());exit;
+        if ($curl->errno() == 0) {
+            $result = json_decode($curl->rawdata(), true);
+            return $result['idstr'] ? $result['idstr'] : false;
+        }
+        else
+            return false;
+    }
+    
+    private static function sinatUpload(AdminPost $model)
+    {
+        if (empty($model->content)) return false;
+    
+        $curl = new CdCurl();
+        $curl->get($model->getBmiddlePic());
+        if ($curl->errno() == 0) {
+            $picData = $curl->rawdata();
+            $picfile = app()->getRuntimePath() . DS . uniqid();
+            $result = file_put_contents($picfile, $picData);
+            if ($result === false)
+                throw new CException('生成临时文件出错', 0);
+        }
+        else
+            return false;
+    
+        $url = 'https://upload.api.weibo.com/2/statuses/upload.json';
+    
+        $sinatShortUrl = self::sinatShortUrl($model->getUrl());
+        $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
+        $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子网';
+        $data = array(
+        'source' => WEIBO_APP_KEY,
+        'access_token' => app()->cache->get('sina_weibo_access_token'),
+        'status' => $content,
+        'pic' => '@' . $picfile,
+        );
+    
+        $curl = new CdCurl();
+        $curl->post($url, $data);
+        @unlink($picfile);
+        if ($curl->errno() == 0) {
+            $result = json_decode($curl->rawdata(), true);
+            return $result['idstr'] ? $result['idstr'] : false;
+        }
+        else
+            return false;
+    }
+    
+    private static function sinatShortUrl($longUrl)
+    {
+        $url = 'https://api.weibo.com/2/short_url/shorten.json';
+        $data = array(
+        'source' => WEIBO_APP_KEY,
+        'url_long' => $longUrl,
+        );
+    
+        $curl = new CdCurl();
+        $curl->get($url, $data);
+        if ($curl->errno() == 0) {
+            $result = json_decode($curl->rawdata(), true);
+            $short = $result['urls'][0];
+            return ($short['result']) ? $short['url_short'] : false;
+        }
+        else
+            return false;
+    }
+    
+    private static function qqtUpdate(AdminPost $model)
+    {
+        if (empty($model->content)) return false;
+    
+        $url = 'https://open.t.qq.com/api/t/add';
+    
+        $sinatShortUrl = self::sinatShortUrl($model->getUrl());
+        $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
+        $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @cdcchen';
+        $data = array(
+            'oauth_consumer_key' => QQT_APP_KEY,
+            'access_token' => app()->cache->get('qq_weibo_access_token'),
+            'openid' => app()->cache->get('qq_weibo_user_id'),
+            'clientip' => request()->getUserHostAddress(),
+            'oauth_version' => '2.a',
+            'scope' => 'all',
+            'format' => 'json',
+            'content' => $content,
+            'syncflag' => 0,
+        );
+        foreach ($data as $key => $item)
+            $args[] = urlencode($key) . '=' . $item;
+    
+        $curl = new CdCurl();
+        $curl->post($url, join('&', $args));
+        //         var_dump($curl->rawdata());
+        //         var_dump($curl->errno());exit;
+        if ($curl->errno() == 0) {
+            $data = json_decode($curl->rawdata(), true);
+            return ($data['ret'] == 0) ? $data['data']['id'] : false;
+        }
+        else
+            return false;
+    
+    }
+    
+    private static function qqtUpload(AdminPost $model)
+    {
+        if (empty($model->content)) return false;
+    
+        $url = 'https://open.t.qq.com/api/t/add_pic_url';
+    
+        $sinatShortUrl = self::sinatShortUrl($model->getUrl());
+        $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
+        $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @cdcchen';
+        $data = array(
+            'oauth_consumer_key' => QQT_APP_KEY,
+            'access_token' => app()->cache->get('qq_weibo_access_token'),
+            'openid' => app()->cache->get('qq_weibo_user_id'),
+            'clientip' => request()->getUserHostAddress(),
+            'oauth_version' => '2.a',
+            'scope' => 'all',
+            'format' => 'json',
+            'content' => $content,
+            'syncflag' => 0,
+            'pic_url' => $model->getBmiddlePic(),
+        );
+        foreach ($data as $key => $item)
+            $args[] = urlencode($key) . '=' . $item;
+    
+        $curl = new CdCurl();
+        $curl->post($url, join('&', $args));
+        $jsonData = json_decode($curl->rawdata(), true);
+        //         var_dump($curl->rawdata());
+        //         var_dump($curl->errno());exit;
+        if ($curl->errno() == 0 && $jsonData['ret'] == 0) {
+            $data = json_decode($curl->rawdata(), true);
+            return $data['data']['id'];
+        }
+        else
+            return false;
+    }
+    
 }
