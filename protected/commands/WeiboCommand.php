@@ -246,7 +246,7 @@ class WeiboCommand extends CConsoleCommand
         $sinaToken = app()->cache->get('sina_weibo_access_token');
         $qqToken = app()->cache->get('qq_weibo_access_token');
         if (empty($sinaToken) || empty($qqToken)) {
-            echo 'token expired.';
+            echo "token expired.\n";
             exit(0);
         }
         
@@ -267,8 +267,8 @@ class WeiboCommand extends CConsoleCommand
                 $model->save(true, array('weibo_id'));
             }
             
-            echo ($result === false) ? 'sina failed' : 'sina success, weibo id: ' . $result;
-            echo ($result2 === false) ? 'qqt failed' : 'qqt success, weibo id: ' . $result2;
+            echo (($result === false) ? 'sina failed' : 'sina success, weibo id: ' . $result) . "\n";
+            echo (($result2 === false) ? 'qqt failed' : 'qqt success, weibo id: ' . $result2) . "\n";
         }
     }
     
