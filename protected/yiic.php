@@ -2,7 +2,7 @@
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 defined('YII_PRODUCT') or define('YII_PRODUCT', true);
 defined('YII_DEBUG') or define('YII_DEBUG', false);
-!YII_DEBUG && error_reporting(0);
+YII_DEBUG || error_reporting(0);
 
 $short = dirname(__FILE__) . '/../library/shortcut.php';
 $define = dirname(__FILE__) . '/config/define.php';

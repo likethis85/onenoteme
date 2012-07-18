@@ -283,23 +283,23 @@ class WeiboCommand extends CConsoleCommand
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('channel_id'=>CHANNEL_DUANZI, 'weibo_id' => ''));
         $criteria->order = 't.id asc';
-        $models[] = AdminPost::model()->find($criteria);
+        $models[] = Post::model()->find($criteria);
     
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('channel_id'=>CHANNEL_LENGTU, 'weibo_id' => ''));
         $criteria->order = 't.id asc';
-        $models[] = AdminPost::model()->find($criteria);
+        $models[] = Post::model()->find($criteria);
     
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('channel_id'=>CHANNEL_GIRL, 'weibo_id' => ''));
         $criteria->order = 't.id asc';
-        $models[] = AdminPost::model()->find($criteria);
+        $models[] = Post::model()->find($criteria);
     
         return $models;
         
     }
     
-    private static function SinatUpdate(AdminPost $model)
+    private static function SinatUpdate(Post $model)
     {
         if (empty($model->content)) return false;
     
@@ -329,7 +329,7 @@ class WeiboCommand extends CConsoleCommand
             return false;
     }
     
-    private static function sinatUpload(AdminPost $model)
+    private static function sinatUpload(Post $model)
     {
         if (empty($model->content)) return false;
     
@@ -387,7 +387,7 @@ class WeiboCommand extends CConsoleCommand
             return false;
     }
     
-    private static function qqtUpdate(AdminPost $model)
+    private static function qqtUpdate(Post $model)
     {
         if (empty($model->content)) return false;
     
@@ -423,7 +423,7 @@ class WeiboCommand extends CConsoleCommand
     
     }
     
-    private static function qqtUpload(AdminPost $model)
+    private static function qqtUpload(Post $model)
     {
         if (empty($model->content)) return false;
     
