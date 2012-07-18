@@ -351,10 +351,10 @@ class WeiboCommand extends CConsoleCommand
         $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
         $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子网';
         $data = array(
-        'source' => WEIBO_APP_KEY,
-        'access_token' => app()->cache->get('sina_weibo_access_token'),
-        'status' => $content,
-        'pic' => '@' . $picfile,
+            'source' => WEIBO_APP_KEY,
+            'access_token' => app()->cache->get('sina_weibo_access_token'),
+            'status' => $content,
+            'pic' => '@' . $picfile,
         );
     
         $curl = new CdCurl();
@@ -450,8 +450,8 @@ class WeiboCommand extends CConsoleCommand
         $curl = new CdCurl();
         $curl->post($url, join('&', $args));
         $jsonData = json_decode($curl->rawdata(), true);
-        //         var_dump($curl->rawdata());
-        //         var_dump($curl->errno());exit;
+                var_dump($curl->rawdata());
+                var_dump($curl->errno());exit;
         if ($curl->errno() == 0 && $jsonData['ret'] == 0) {
             $data = json_decode($curl->rawdata(), true);
             return $data['data']['id'];
