@@ -241,6 +241,8 @@ class WeiboCommand extends CConsoleCommand
         return $result > 0;
     }
     
+/*********** 定时发送到新浪微博和腾讯微博 *************************************/
+    
     public function actionTestToken()
     {
         $sinaToken = app()->cache->get('sina_weibo_access_token');
@@ -252,17 +254,18 @@ class WeiboCommand extends CConsoleCommand
     
     public function actionPostToWeibo()
     {
+        $prompt = date('Y-m-d H:i:s - ', time());
         $sinaToken = app()->cache->get('sina_weibo_access_token');
         $qqToken = app()->cache->get('qq_weibo_access_token');
         if (empty($sinaToken) || empty($qqToken)) {
-            echo "token expired.\n";
+            echo $prompt . "token expired.\n";
             exit(0);
         }
         
         $models = self::fetchWeiboPosts();
         
         if (empty($models)) {
-            echo "models is empty.\n";
+            echo $prompt . "models is empty.\n";
             exit(0);
         }
         
@@ -282,8 +285,8 @@ class WeiboCommand extends CConsoleCommand
                 $model->save(true, array('weibo_id'));
             }
             
-            echo (($result === false) ? 'sina failed' : 'sina success, weibo id: ' . $result) . "\n";
-            echo (($result2 === false) ? 'qqt failed' : 'qqt success, weibo id: ' . $result2) . "\n";
+            echo $prompt . (($result === false) ? 'sina failed' : 'sina success, weibo id: ' . $result) . "\n";
+            echo $prompt . (($result2 === false) ? 'qqt failed' : 'qqt success, weibo id: ' . $result2) . "\n";
         }
     }
     
