@@ -317,8 +317,8 @@ class WeiboCommand extends CConsoleCommand
     
         $url = 'https://upload.api.weibo.com/2/statuses/update.json';
     
-    
-        $sinatShortUrl = self::sinatShortUrl($model->getUrl());
+        $postUrl = 'http://www.waduanzi.com/post-' . $model->id;
+        $sinatShortUrl = self::sinatShortUrl($postUrl);
         $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
         $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子网';
         $data = array(
@@ -359,7 +359,8 @@ class WeiboCommand extends CConsoleCommand
     
         $url = 'https://upload.api.weibo.com/2/statuses/upload.json';
     
-        $sinatShortUrl = self::sinatShortUrl($model->getUrl());
+        $postUrl = 'http://www.waduanzi.com/post-' . $model->id;
+        $sinatShortUrl = self::sinatShortUrl($postUrl);
         $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
         $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子网';
         $data = array(
@@ -405,7 +406,8 @@ class WeiboCommand extends CConsoleCommand
     
         $url = 'https://open.t.qq.com/api/t/add';
     
-        $sinatShortUrl = self::sinatShortUrl($model->getUrl());
+        $postUrl = 'http://www.waduanzi.com/post-' . $model->id;
+        $sinatShortUrl = self::sinatShortUrl($postUrl);
         $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
         $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @cdcchen';
         $data = array(
@@ -441,7 +443,8 @@ class WeiboCommand extends CConsoleCommand
     
         $url = 'https://open.t.qq.com/api/t/add_pic_url';
     
-        $sinatShortUrl = self::sinatShortUrl($model->getUrl());
+        $postUrl = 'http://www.waduanzi.com/post-' . $model->id;
+        $sinatShortUrl = self::sinatShortUrl($postUrl);
         $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
         $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @cdcchen';
         $data = array(
