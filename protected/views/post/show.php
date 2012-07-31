@@ -81,7 +81,7 @@
             <div class="clear"></div>
         </div>
         <?php foreach ((array)$nextPosts as $next):?>
-        <?php if ($next->channel_id != CHANNEL_DUANZI):?>
+        <?php if ($next->channel_id != CHANNEL_DUANZI && $next->channel_id != CHANNEL_VIDEO):?>
         <div class="thumb">
             <?php echo $next->getThumbnailLink('_self');?>
         </div>
@@ -92,18 +92,21 @@
     <?php if ($post->bmiddlePic):?>
     <div class="cdc-block">
         <script type="text/javascript">
-        alimama_pid="mm_12551250_2904829_10392377";
-        alimama_width=300;
-        alimama_height=250;
+            netease_union_user_id = 6156606;
+            netease_union_site_id = 25143;
+            netease_union_worktype = null;
+            netease_union_promote_type = 1;
+            netease_union_width = 300;
+            netease_union_height = 250;
+            netease_union_link_id = null;
         </script>
-        <script src="http://a.alimama.cn/inf.js" type="text/javascript"></script>
+        <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
     </div>
     <?php endif;?>
 	<div class="panel panel15"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
 </div>
 <div class="clear"></div>
 
-<?php if ($post->bmiddlePic):?>
 <script type="text/javascript">
     var wumiiPermaLink = '<?php echo $post->url;?>';
     var wumiiTitle = '<?php echo json_encode($post->filterContent);?>';
@@ -115,7 +118,6 @@
 <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
     <img src="http://static.wumii.com/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
 </a>
-<?php endif;?>
 
 <script type="text/javascript">
 $(function(){
