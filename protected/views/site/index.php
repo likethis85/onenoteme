@@ -10,7 +10,7 @@
 <div class="panel panel15 links-list">
     <h3 class="link-title">友情链接&nbsp;&nbsp;[<a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=UjE2MTE6NzwSJDsifCMjfDE9Pw" target="_blank">申请友情链接</a>]</h3>
 	<ul class="links">
-    	<a href="http://www.tao123.com" target="_blank">淘网址</a>
+    	<li><a href="http://www.tao123.com" target="_blank">淘网址</a></li>
 		<li><a href="http://lengxiaohua.net/" target="_blank">冷笑话</a></li>
 		<li><a href="http://www.xiaohuayoumo.com/" target="_blank">幽默笑话百分百</a></li>
 		<li><a href="http://www.yiqixiaoxiao.com/" target="_blank">一起笑笑</a></li>
