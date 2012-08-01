@@ -81,6 +81,7 @@ body {background-color:#E0E0E0;}
 .post-detail .post-content {line-height:24px; color:inherit; margin-bottom:10px;}
 .post-detail .post-picture {text-align:center; overflow:hidden; margin-bottom:10px; background-color:#F4F4F6;}
 .post-detail .post-picture img {max-width:600px;}
+.post-detail .cdc-block {margin:15px auto;}
 .post-detail .toolbar {background:#F4F4F6; margin-bottom:10px;}
 .post-detail .post-arrows {padding:3px; width:64px; margin-right:3px; font-size:0; text-indent:-9999px;}
 .post-detail .post-arrows a {display:block; float:left; width:30px; height:30px; margin:1px;}
