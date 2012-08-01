@@ -5,9 +5,23 @@
 		    <?php if ($post->tags):?><div class="post-tags">标签：<?php echo $post->tagLinks;?></div><?php endif;?>
         </div>
         <?php if ($post->videoHtml):?>
-            <div class="content-block video-player"><?php echo $post->videoHtml;?></div>
+        <div class="content-block video-player"><?php echo $post->videoHtml;?></div>
         <?php elseif ($post->bmiddlePic):?>
-            <div class="content-block post-picture"><?php echo l(CHtml::image($post->bmiddlePic, $post->filterContent . ', ' . $post->getTagText(',')), aurl('post/originalpic', array('id'=>$post->id)), array('target'=>'_blank', 'title'=>$post->filterContent));?></div>
+        <div class="content-block post-picture"><?php echo l(CHtml::image($post->bmiddlePic, $post->filterContent . ', ' . $post->getTagText(',')), aurl('post/originalpic', array('id'=>$post->id)), array('target'=>'_blank', 'title'=>$post->filterContent));?></div>
+        <?php endif;?>
+        <?php if ($post->channel_id == CHANNEL_DUANZI):?>
+        <div class="cdc-block">
+            <script type="text/javascript">
+                netease_union_user_id = 6156606;
+                netease_union_site_id = 25143;
+                netease_union_worktype = null;
+                netease_union_promote_type = 1;
+                netease_union_width = 580;
+                netease_union_height = 90;
+                netease_union_link_id = null;
+            </script>
+            <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
+        </div>
         <?php endif;?>
         <div class="toolbar radius3px">
     		<div class="content-block post-arrows fleft">
