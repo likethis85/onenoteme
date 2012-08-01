@@ -1,6 +1,17 @@
 <?php
 class TagController extends Controller
 {
+    public function filters()
+    {
+        $duration = 24*60*60;
+        return array(
+            array(
+                'COutputCache + list',
+                'duration' => $duration,
+            ),
+        );
+    }
+    
     public function actionList()
     {
         $cacheKey = 'all_tags';

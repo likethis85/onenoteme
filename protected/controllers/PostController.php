@@ -3,9 +3,15 @@ class PostController extends Controller
 {
     public function filters()
     {
+        $originalPicDuration = 24*60*60*7;
         return array(
             'ajaxOnly  + score, views',
             'postOnly + score, views',
+            array(
+                'COutputCache + originalPic',
+                'duration' => $originalPicDuration,
+                'varyByParam' => array('id'),
+            ),
         );
     }
     
@@ -21,6 +27,7 @@ class PostController extends Controller
     
     public function actionShow($id)
     {
+        $duration = 60*60;
         $id = (int)$id;
         if ($id <= 0)
             throw new CHttpException(500, '非法请求');
@@ -37,7 +44,7 @@ class PostController extends Controller
         else {
             $criteria = new CDbCriteria();
             $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
-            $post = Post::model()->findByPk($id, $criteria);
+            $post = Post::model()->cache($duration)->findByPk($id, $criteria);
         }
         if (null === $post)
             throw new CHttpException(403, '该段子不存在或未被审核');
@@ -96,9 +103,10 @@ class PostController extends Controller
     
     private static function prevPostUrl(Post $post)
     {
+        $duration = 60*60;
         $createTime = (int)$post->create_time;
         $channelID = (int)$post->channel_id;
-        $id = app()->getDb()->createCommand()
+        $id = app()->getDb()->cache($duration)->createCommand()
             ->select('id')
             ->from(TABLE_POST)
             ->where(array('and', 'create_time > :createtime', 'channel_id = :channelid', 'state = :enabled'),
@@ -113,9 +121,10 @@ class PostController extends Controller
     
     private static function nextPostUrl(Post $post)
     {
+        $duration = 60*60;
         $createTime = (int)$post->create_time;
         $channelID = (int)$post->channel_id;
-        $id = app()->getDb()->createCommand()
+        $id = app()->getDb()->cache($duration)->createCommand()
             ->select('id')
             ->from(TABLE_POST)
             ->where(array('and', 'create_time < :createtime', 'channel_id = :channelid', 'state = :enabled'),
@@ -154,6 +163,8 @@ class PostController extends Controller
     
     private static function fetchNextPosts(Post $post, $count = 6, $column = 3)
     {
+        $duration = 60*60;
+        
         $createTime = (int)$post->create_time;
         $channelID = (int)$post->channel_id;
         
@@ -174,13 +185,15 @@ class PostController extends Controller
         $criteria->order = 'create_time desc, id desc';
         $criteria->limit = $count;
         
-        $models = Post::model()->findAll($criteria);
+        $models = Post::model()->cache($duration)->findAll($criteria);
         
         return $models;
     }
     
     private static function fetchComments($pid)
     {
+        $duration = 60*60;
+        
         $pid = (int)$pid;
         if ($pid <=0) return array();
         
@@ -200,7 +213,7 @@ class PostController extends Controller
         if ($pages->getCurrentPage() < $_GET[$pages->pageVar]-1)
             return array();
         
-        $models = Comment::model()->findAll($criteria);
+        $models = Comment::model()->cache($duration)->findAll($criteria);
         return array(
             'comments' => $models,
             'pages' => $pages,

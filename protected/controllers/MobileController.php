@@ -8,6 +8,27 @@ class MobileController extends Controller
         $this->layout = 'mobile';
     }
     
+    public function filters()
+    {
+        $duration = 300;
+        return array(
+            array(
+                'COutputCache + index',
+                'duration' => $duration,
+            ),
+            array(
+                'COutputCache + tag',
+                'duration' => $duration,
+                'varyByParam' => array('name'),
+            ),
+            array(
+                'COutputCache + channel',
+                'duration' => $duration,
+                'varyByParam' => array('id'),
+            )
+        );
+    }
+    
     public function actionIndex()
     {
         $limit = self::COUNT_OF_PAGE;

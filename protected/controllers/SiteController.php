@@ -1,6 +1,17 @@
 <?php
 class SiteController extends Controller
 {
+    public function filters()
+    {
+        $duration = 300;
+        return array(
+            array(
+                'COutputCache + index, baidumap, sitemap, links',
+                'duration' => $duration,
+            ),
+        );
+    }
+    
     private function checkUserAgentIsMobile()
     {
         $agents = array('android', 'iphone', 'blackberry', 'webos', 'windows phone');
