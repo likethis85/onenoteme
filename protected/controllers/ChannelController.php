@@ -1,6 +1,16 @@
 <?php
 class ChannelController extends Controller
 {
+    public function filters()
+    {
+        $duration = 300;
+        return array(
+            array(
+                'COutputCache + duanzi, lengtu, girl, video',
+                'duration' => $duration,
+            ),
+        );
+    }
     
     public function actionDuanzi()
     {
@@ -57,8 +67,6 @@ class ChannelController extends Controller
     
     private function fetchChannelPosts($channelid, $limit = 0)
     {
-        $duration = 120;
-        
         $channelid = (int)$channelid;
         $limit = (int)$limit;
         if ($limit === 0)
@@ -77,7 +85,7 @@ class ChannelController extends Controller
         if ($pages->getCurrentPage() < $_GET[$pages->pageVar]-1)
             return array();
     
-        $models = Post::model()->cache($duration)->findAll($criteria);
+        $models = Post::model()->findAll($criteria);
     
         $data  = array(
             'models' => $models,
