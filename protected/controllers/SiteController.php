@@ -9,6 +9,18 @@ class SiteController extends Controller
                 'COutputCache + baidumap, sitemap, links',
                 'duration' => $duration,
             ),
+            array(
+                'COutputCache + index',
+                'duration' => $duration,
+                'varyByParam' => array('page'),
+                'requestTypes' => array('GET'),
+            ),
+            array(
+                'COutputCache + index',
+                'duration' => $duration,
+                'varyByParam' => array('page'),
+                'requestTypes' => array('POST'),
+            ),
         );
     }
     
@@ -29,7 +41,6 @@ class SiteController extends Controller
         if ($this->checkUserAgentIsMobile())
             $this->redirect(aurl('mobile'));
         
-        $duration = 120;
         $limit = param('postCountOfPage');
         
         $criteria = new CDbCriteria();
@@ -38,7 +49,8 @@ class SiteController extends Controller
         $criteria->order = 'create_time desc, id desc';
         $criteria->limit = $limit;
         
-        $count = Post::model()->cache($duration)->count($criteria);
+        $countDuration = 60*60*24;
+        $count = Post::model()->cache($countDuration)->count($criteria);
         $pages = new CPagination($count);
         $pages->setPageSize($limit);
         $pages->applyLimit($criteria);
@@ -46,7 +58,7 @@ class SiteController extends Controller
         if ($pages->getCurrentPage() < $_GET[$pages->pageVar]-1)
             $models = array();
         else
-            $models = Post::model()->cache($duration)->findAll($criteria);
+            $models = Post::model()->findAll($criteria);
         
         $this->pageTitle = '挖段子 - 笑死人不偿命 - 每日精品笑话连载';
         $this->setKeywords('挖笑话,挖冷图,挖福利,每日精品笑话连载,网络趣图，漫画,邪恶漫画,趣图百科,暴走漫画连载,阳光正妹,爱正妹,糗事百科,笑话大全 爆笑,黄色笑话,幽默笑话,成人笑话,经典笑话,笑话短信,爆笑笑话,幽默笑话大全,夫妻笑话,笑话集锦,搞笑笑话,荤笑话,极品笑话,黄段子,爆笑短信,最新笑话,最全的笑话,经典语录,糗事百科,秘密,笑话段子,经典笑话,笑话大全,搞笑大全,我们爱讲冷笑话,哈哈笑');
