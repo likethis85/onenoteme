@@ -8,6 +8,8 @@ class ChannelController extends Controller
             array(
                 'COutputCache + duanzi, lengtu, girl, video',
                 'duration' => $duration,
+                'varyByParam' => array('page'),
+                'requestTypes' => array('POST'),
             ),
         );
     }
