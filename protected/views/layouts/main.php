@@ -31,7 +31,7 @@
     		<li><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank">iPhone应用</a></li>
     		<li><a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">安卓应用</a></li>
     		<li class="diviler"></li>
-    		<?php //$this->renderDynamic('userToolbar');?>
+    		<?php $this->renderDynamic('userToolbar');?>
 		</ul>
     	<div class="clear"></div>
     </div>
