@@ -24,6 +24,7 @@
 			<li><a href="http://www.daomei.net.cn/" target="_blank">倒霉网</a></li>
 			<li><a href="http://www.lvse.com/site/waduanzi-com-6433.html" target="_blank">绿色网址大全</a></li>
     		<li><a href="http://www.benbenla.com " target="_blank">笔记本网址导航</a></li>
+    		<li><a href="http://www.walxh.com" target="_blank">我爱冷笑话</a></li>
 		</ul>
 	</div>
 </div>
