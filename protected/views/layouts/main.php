@@ -37,7 +37,6 @@
     </div>
 </div>
 <div class="cd-wrapper">
-    <div class="panel panel15 acenter cred" style="margin-bottom:10px;">亲爱的段友们，我们不幸中枪，备案被取消，IP被封，所以只能暂时转移到国外的VPS上，<br />我们会尽快重新备案，将数据迁移回国内，感谢大家对挖段子的支持。</div>
 	<?php echo $content;?>
 </div>
 
