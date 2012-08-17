@@ -1,0 +1,172 @@
+
+Log Info :2012-04-06 13:52:06 : [method:GET][url:http://storage.aliyun.com/]
+
+Log Info :2012-04-06 13:52:07 : 获取Bucket列表成功! Response: [<?xml version="1.0" encoding="UTF-8"?>
+<ListAllMyBucketsResult>
+    <Owner>
+        <ID>1053433687608152</ID>
+        <DisplayName>1053433687608152</DisplayName>
+    </Owner>
+    <Buckets>
+
+    </Buckets>
+</ListAllMyBucketsResult>
+
+]
+
+Log Info :2012-04-06 13:56:00 : [method:GET][url:http://storage.aliyun.com/]
+
+Log Info :2012-04-06 13:56:00 : 获取Bucket列表成功! Response: [<?xml version="1.0" encoding="UTF-8"?>
+<ListAllMyBucketsResult>
+    <Owner>
+        <ID>1053433687608152</ID>
+        <DisplayName>1053433687608152</DisplayName>
+    </Owner>
+    <Buckets>
+
+    </Buckets>
+</ListAllMyBucketsResult>
+
+]
+
+Log Info :2012-04-06 13:56:00 : [method:PUT][url:http://storage.aliyun.com/images]
+
+Log Info :2012-04-06 13:56:00 : 创建Bucket失败 Response: [<?xml version="1.0" ?>
+<Error>
+	<BucketName>
+		images
+	</BucketName>
+	<Code>
+		BucketAlreadyExists
+	</Code>
+	<Message>
+		The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.
+	</Message>
+	<RequestId>
+		65970257-073a-009a-74f1-72dc353283c2
+	</RequestId>
+	<HostId>
+		storage.aliyun.com
+	</HostId>
+</Error>
+]
+
+Log Info :2012-04-06 13:56:03 : [method:GET][url:http://storage.aliyun.com/]
+
+Log Info :2012-04-06 13:56:03 : 获取Bucket列表成功! Response: [<?xml version="1.0" encoding="UTF-8"?>
+<ListAllMyBucketsResult>
+    <Owner>
+        <ID>1053433687608152</ID>
+        <DisplayName>1053433687608152</DisplayName>
+    </Owner>
+    <Buckets>
+
+    </Buckets>
+</ListAllMyBucketsResult>
+
+]
+
+Log Info :2012-04-06 13:56:03 : [method:PUT][url:http://storage.aliyun.com/images]
+
+Log Info :2012-04-06 13:56:03 : 创建Bucket失败 Response: [<?xml version="1.0" ?>
+<Error>
+	<BucketName>
+		images
+	</BucketName>
+	<Code>
+		BucketAlreadyExists
+	</Code>
+	<Message>
+		The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again.
+	</Message>
+	<RequestId>
+		6148855d-6623-ef70-5589-3ff429153c6c
+	</RequestId>
+	<HostId>
+		storage.aliyun.com
+	</HostId>
+</Error>
+]
+
+Log Info :2012-04-06 13:56:24 : [method:GET][url:http://storage.aliyun.com/]
+
+Log Info :2012-04-06 13:56:24 : 获取Bucket列表成功! Response: [<?xml version="1.0" encoding="UTF-8"?>
+<ListAllMyBucketsResult>
+    <Owner>
+        <ID>1053433687608152</ID>
+        <DisplayName>1053433687608152</DisplayName>
+    </Owner>
+    <Buckets>
+
+    </Buckets>
+</ListAllMyBucketsResult>
+
+]
+
+Log Info :2012-04-06 13:56:24 : [method:PUT][url:http://storage.aliyun.com/wdz_images]
+
+Log Info :2012-04-06 13:56:24 : 创建Bucket成功 Response: []
+
+Log Info :2012-04-06 13:56:26 : [method:GET][url:http://storage.aliyun.com/]
+
+Log Info :2012-04-06 13:56:26 : 获取Bucket列表成功! Response: [<?xml version="1.0" encoding="UTF-8"?>
+<ListAllMyBucketsResult>
+    <Owner>
+        <ID>1053433687608152</ID>
+        <DisplayName>1053433687608152</DisplayName>
+    </Owner>
+    <Buckets>
+        <Bucket>
+            <Name>wdz_images</Name>
+            <CreationDate>2012-04-06T05:56:24.000Z</CreationDate>
+        </Bucket>
+    </Buckets>
+</ListAllMyBucketsResult>
+
+]
+
+Log Info :2012-04-06 13:56:26 : [method:PUT][url:http://storage.aliyun.com/wdz_images]
+
+Log Info :2012-04-06 13:56:26 : 创建Bucket成功 Response: []
+
+Log Info :2012-04-06 13:56:34 : [method:GET][url:http://storage.aliyun.com/]
+
+Log Info :2012-04-06 13:56:34 : 获取Bucket列表成功! Response: [<?xml version="1.0" encoding="UTF-8"?>
+<ListAllMyBucketsResult>
+    <Owner>
+        <ID>1053433687608152</ID>
+        <DisplayName>1053433687608152</DisplayName>
+    </Owner>
+    <Buckets>
+        <Bucket>
+            <Name>wdz_images</Name>
+            <CreationDate>2012-04-06T05:56:26.000Z</CreationDate>
+        </Bucket>
+    </Buckets>
+</ListAllMyBucketsResult>
+
+]
+
+Log Info :2012-04-06 14:03:17 : [method:PUT][url:http://storage.aliyun.com/wdz_images/2012/04/]
+
+Log Info :2012-04-06 14:03:17 : 创建OBJECT目录成功 Response: []
+
+Log Info :2012-04-06 14:08:40 : [method:PUT][url:http://storage.aliyun.com/wdz_images/test.txt]
+
+Log Info :2012-04-06 14:08:40 : 通过Http Body上传文件成功 Response: []
+
+Log Info :2012-04-06 14:08:42 : [method:PUT][url:http://storage.aliyun.com/wdz_images/test.txt]
+
+Log Info :2012-04-06 14:08:42 : 通过Http Body上传文件成功 Response: []
+
+Log Info :2012-04-06 14:09:04 : [method:PUT][url:http://storage.aliyun.com/wdz_images/2012/04/06/test.txt]
+
+Log Info :2012-04-06 14:09:05 : 通过Http Body上传文件成功 Response: []
+
+Log Info :2012-04-06 14:13:24 : [method:PUT][url:http://storage.aliyun.com/wdz_images/2012/04/06/test.jpg]
+
+Log Info :2012-04-06 14:13:26 : 通过Http Body上传文件成功 Response: []
+
+Log Info :2012-04-06 14:34:44 : [method:PUT][url:http://storage.aliyun.com/wdz_images/2012/04/06/test.jpg]
+
+Log Info :2012-04-06 14:34:48 : 通过Http Body上传文件成功 Response: []
