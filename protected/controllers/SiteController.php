@@ -181,4 +181,10 @@ class SiteController extends Controller
     {
         $this->render('links');
     }
+
+    public function actionTest()
+    {
+        echo uniqid() . '<br />';
+        echo md5('yaoyiyao phonebook');
+    }
 }
