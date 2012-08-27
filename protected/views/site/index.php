@@ -36,6 +36,7 @@
 		<li><a href="http://aiguipian.com/" target="_blank">爱鬼片电影网</a></li>
 		<li><a href="http://hao.360.cn/" target="_blank" >360安全网址导航</a></li>
 		<li><a href="http://yasuo.360.cn" target="_blank" >360压缩软件</a></li>
+		<li><a href="http://www.aifuns.com/" target="_blank" >爱娱乐AiFuns</a></li>
 		<div class="clear"></div>
 	</ul>
 </div>
