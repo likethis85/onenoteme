@@ -29,6 +29,7 @@
     		<li><a href="http://hao.360.cn/" target="_blank" >360安全网址导航</a></li>
     		<li><a href="http://yasuo.360.cn" target="_blank" >360压缩软件</a></li>
     		<li><a href="http://www.aifuns.com/" target="_blank" >爱娱乐AiFuns</a></li>
+    		<li><a href="http://www.wadongxi.com/" target="_blank" >挖东西</a></li>
 		</ul>
 	</div>
 </div>
