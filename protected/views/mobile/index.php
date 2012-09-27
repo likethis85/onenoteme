@@ -11,15 +11,11 @@
     <?php if ($index == 1):?>
     <div class="admob">
         <script type="text/javascript">
-            netease_union_user_id = 6156606;
-            netease_union_site_id = 25143;
-            netease_union_worktype = null;
-            netease_union_promote_type = 1;
-            netease_union_width = 300;
-            netease_union_height = 120;
-            netease_union_link_id = null;
+        alimama_pid="mm_12551250_2904829_10392377";
+        alimama_width=300;
+        alimama_height=250;
         </script>
-        <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
+        <script src="http://a.alimama.cn/inf.js" type="text/javascript"></script>
     </div>
     <?php endif;?>
     <?php endforeach;?>

@@ -51,6 +51,18 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+    netease_union_user_id = 6156606;
+    netease_union_site_id = 25143;
+    netease_union_worktype = null;
+    netease_union_promote_type = 5;
+    netease_union_width = 250;
+    netease_union_height = 200;
+    netease_union_link_id = null;
+    netease_union_cpv_type = 0;
+</script>
+<script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
+
 <?php $this->renderPartial('/public/tongji');?>
 </body>
 </html>
