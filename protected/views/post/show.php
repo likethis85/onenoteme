@@ -11,16 +11,9 @@
         <?php endif;?>
         <?php if ($post->channel_id == CHANNEL_DUANZI):?>
         <div class="cdc-block">
-            <script type="text/javascript">
-                netease_union_user_id = 6156606;
-                netease_union_site_id = 25143;
-                netease_union_worktype = null;
-                netease_union_promote_type = 1;
-                netease_union_width = 580;
-                netease_union_height = 90;
-                netease_union_link_id = null;
-            </script>
-            <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
+            <p><a href="http://s.click.taobao.com/t_8?e=7HZ6jHSTbIg8q6nQGu%2B62FZKBlLXgG2mwcp6cvy9HYCgmQ%3D%3D&p=mm_12551250_0_0">公猴英伦休闲女鞋休闲鞋女单鞋小白鞋小白皮鞋平底时尚单鞋女051</a></p>
+            <p><a href="http://s.click.taobao.com/t_8?e=7HZ6jHSTbIlJ0FqabRsutUHqDnE4%2B79bP24MnZw9DcCG7w%3D%3D&p=mm_12551250_0_0">【倔强的偏执】中长袖连衣裙秋装新款 秋款秋连衣裙OL1518</a></p>
+            <p><a href="http://s.click.taobao.com/t_8?e=7HZ6jHSTbIg8oI%2FbUXjChSS8HRuUVdw7bnV4OoAz1vtquA%3D%3D&p=mm_12551250_0_0">淘金币 2012春秋装新款连衣裙韩版V领毛衣裙子 时尚女装修身连衣</a></p>
         </div>
         <?php endif;?>
         <div class="toolbar radius3px">
@@ -106,15 +99,11 @@
     <?php if ($post->bmiddlePic):?>
     <div class="cdc-block">
         <script type="text/javascript">
-            netease_union_user_id = 6156606;
-            netease_union_site_id = 25143;
-            netease_union_worktype = null;
-            netease_union_promote_type = 1;
-            netease_union_width = 300;
-            netease_union_height = 250;
-            netease_union_link_id = null;
+        alimama_pid="mm_12551250_2904829_10392377";
+        alimama_width=300;
+        alimama_height=250;
         </script>
-        <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
+        <script src="http://a.alimama.cn/inf.js" type="text/javascript"></script>
     </div>
     <?php endif;?>
 	<div class="panel panel15"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
