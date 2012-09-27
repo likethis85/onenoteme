@@ -15,6 +15,7 @@ class MobileController extends Controller
             array(
                 'COutputCache + index',
                 'duration' => $duration,
+                'varyByParam' => array('page'),
             ),
             array(
                 'COutputCache + tag',
