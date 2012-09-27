@@ -5,6 +5,7 @@ body {background-color:#E0E0E0;}
 .site-bg {background-image:url(../images/site-sprite.png); background-repeat:no-repeat;}
 .cd-wrapper {width:950px; margin:0px auto; overflow:hidden;}
 .fluid-wrapper {margin:0px auto; overflow:hidden; padding:0 5px;}
+.cdc-block {margin:0px auto; text-align:center;}
 
 /* container */
 .cd-container {width:640px; overflow:hidden;}
@@ -73,15 +74,14 @@ body {background-color:#E0E0E0;}
 .pages ul.yiiPager a:hover {color:white; background:#4E76C9;}
 .pages ul.yiiPager .selected a {background:#4E76C9; color:white;}
 */
-.cdc-block {margin:0px auto; text-align:center;}
 
 /* post/show */
 .post-detail {color:#292A2B;}
 .post-detail .content-block {border-radius:4px; -webkit-border-radius:4px; -moz-border-radius:4px;}
-.post-detail .post-content {line-height:24px; color:inherit; margin-bottom:10px;}
+.post-detail .post-content {line-height:24px; color:inherit; margin:10px auto 15px;}
 .post-detail .post-picture {text-align:center; overflow:hidden; margin-bottom:10px; background-color:#F4F4F6;}
 .post-detail .post-picture img {max-width:600px;}
-.post-detail .cdc-block {margin:25px auto 15px;}
+.post-detail .cdc-block {margin:25px auto 15px; list-style:none;}
 .post-detail .toolbar {background:#F4F4F6; margin-bottom:10px;}
 .post-detail .post-arrows {padding:3px; width:64px; margin-right:3px; font-size:0; text-indent:-9999px;}
 .post-detail .post-arrows a {display:block; float:left; width:30px; height:30px; margin:1px;}
