@@ -301,7 +301,7 @@ class Api_Post extends ApiBase
     	$post->view_nums = mt_rand(100, 300);
     	
     	try {
-    	    $thumbnailImageSize = array('width'=>150, 'height'=>150);
+    	    $thumbnailImageSize = array('width'=>IMAGE_THUMBNAIL_WIDTH, 'height'=>IMAGE_THUMBNAIL_HEIGHT);
     	    
     	    $url = trim($params['pic']);
         	if (!empty($url)) {
