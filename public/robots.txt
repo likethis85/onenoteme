@@ -1,0 +1,7 @@
+#
+# robots.txt for 24beta.com
+#
+
+User-agent: *
+
+Disallow: /admin/

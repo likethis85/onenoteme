@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+
+frame.menu-sidebar {background:white; border-right:1px solid gray;}
+.main-container {margin:10px;}
+
+/*#################################*/
+/* pages */
+.pagination .selected a{background-color:#f5f5f5;}
+.pagination .selected a{color:#999999;cursor:default;}
+.pagination .hidden span,.pagination .hidden a,.pagination .hidden a:hover{color:#999999;background-color:transparent;cursor:default;visibility:visible;}
+
+/* custom */
+.align-right {text-align:right;}
+.align-left {text-align:left;}
+.align-center {text-align:center;}
+.cgray {color:gray;}
+.f14px {font-size:14px;}
+.f12px {font-size:12px;}
+.beta-badge {font-weight:normal; -moz-border-radius:7px; border-radius:7px; -webkit-border-radius:7px; padding:1px 7px 2px; font-size:12px;}
+
+/* table cell */
+.table .item-orderid {width:60px; padding:4px 8px;}
+.table .item-orderid input[type=text] {margin:0; padding:3px; text-align:center;}
+.table .item-checkbox {width:13px;}
+.table .align-right {text-align:right;}
+.table .align-center {text-align:center;}
+
+.control-group.bottom10px {margin-bottom:10px;}
+
+.admin-container {margin:0 5px 5px 0;}
+.admin-sidebar {margin:0px; padding:0px;}
+
+
+.weibo-text textarea {min-width:540px;}
+.weibo-text img {max-width:150px; max-height:150px;}

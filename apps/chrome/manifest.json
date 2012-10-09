@@ -1,0 +1,35 @@
+{
+	"name": "挖段子快速发布插件",
+	"version": "1.7.0",
+	"description": "挖段子快速发布插件，随时随地挖段子",
+	"background_page": "background.html",
+	"update_url": "http://s.waduanzi.com/chrome/updates.xml",
+	"icons": {
+		"16": "images/icon.png",
+		"18": "images/icon.png",
+		"24": "images/icon.png",
+		"48": "images/icon.png",
+		"64": "images/icon.png",
+		"128": "images/icon.png"
+	},
+	"permissions": [
+		"notifications",
+		"http://*/*",
+		"https://*/*",
+		"tabs",
+		"unlimitedStorage",
+		"contextMenus"
+	],
+	"browser_action": {
+		"default_icon": "images/icon.png",
+		"popup": "main.html",
+		"default_title": "挖段子快速发布插件"
+	},
+	"content_scripts": [
+		{
+			"matches": ["http://*/*"],
+			"css": ["styles/cd-content.css"],
+			"js": ["scripts/libs/jquery-1.7.1.min.js", "scripts/cd-content.js"]
+		}
+    ]
+}
