@@ -3,7 +3,7 @@
     <div class="panel panel20 post-item">
     	<div class="post-author"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
         <div class="item-detail">
-            <?php echo $model->content;?>
+            <div class="item-content"><?php echo $model->content;?></div>
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->tagLinks;?></div><?php endif;?>
         <ul class="item-toolbar cgray" postid="<?php echo $model->id;?>">
@@ -24,10 +24,8 @@
 </div>
 
 <?php if ($pages->pageCount > 1):?>
-<div class="panel panel10"><div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div></div>
+<div class="panel panel-pages"><div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div></div>
 <?php endif;?>
-
-<span id="jqvar" scoreurl="<?php echo aurl('post/score');?>" class="hide"></span>
 
 <script type="text/javascript">
 $(function(){

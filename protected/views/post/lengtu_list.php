@@ -3,10 +3,7 @@
     <div class="panel panel20 post-item">
     	<div class="post-author"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
         <div class="item-detail">
-            <a class="item-link" href="<?php echo aurl('post/show', array('id'=>$model->id));?>" target="_blank" title="新窗口中查看段子">: :</a>
-            <span class="item-content">
-                <?php echo $model->content;?>
-            </span>
+            <div class="item-content"><?php echo $model->content;?></div>
             <?php if ($model->thumbnail):?>
             <div class="post-image">
                 <div class="thumbnail">
@@ -46,10 +43,8 @@
 </div>
 
 <?php if ($pages->pageCount > 1):?>
-<div class="panel panel10"><div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div></div>
+<div class="panel panel-pages"><div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div></div>
 <?php endif;?>
-
-<span id="jqvar" scoreurl="<?php echo aurl('post/score');?>" class="hide"></span>
 
 <script type="text/javascript">
 $(function(){
