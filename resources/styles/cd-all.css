@@ -149,7 +149,8 @@ body {background-color:#E0E0E0;}
 
 /* post list */
 .post-list .post-item {margin-bottom:15px;}
-.post-item .item-toolbar, .post-item  .item-toolbar li {list-style:none;}
+.post-item .item-toolbar {margin:10px 0 0;}
+.post-item .item-toolbar, .post-item .item-toolbar li {list-style:none;}
 .post-item .item-toolbar li {margin:5px 0; line-height:24px;}
 .post-item .post-image {position:relative; margin-top:10px;}
 .post-image img.thumb {width:150px; max-height:250px; margin:0 auto;}
@@ -160,6 +161,7 @@ body {background-color:#E0E0E0;}
 .post-image .lines .sjx {height:9px; width:71px; margin:3px auto; background:url(../images/thumb_more_sjx.gif) no-repeat;}
 .post-item .post-author {color:gray; margin-bottom:10px;}
 .post-item .item-detail .item-content {line-height:22px;}
+.post-item .post-tags {margin:10px 0 0;}
 
 /* video list */
 .video-detail {margin-bottom:15px;}
