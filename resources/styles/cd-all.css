@@ -167,8 +167,8 @@ body {background-color:#E0E0E0;}
 
 /* video list */
 .video-detail {margin-bottom:15px;}
-.video-player {text-align:center; margin-bottom:15px; background:#F4F4F6;}
-.video-detail .toolbar {background:#F4F4F6; padding:5px 10px; font-size:12px; color:#666;}
+.video-player {text-align:center; margin-top:15px; background:#F4F4F6;}
+.video-detail .toolbar {background:#F4F4F6; padding:5px 10px; font-size:12px; color:#666; margin-top:10px;}
 
 /* index friend links */
 .links-list {margin-top:20px;}

@@ -1,11 +1,11 @@
 <div class="fleft cd-container">
     <?php foreach ((array)$models as $model):?>
 	<div class="panel panel20 video-detail">
-		<div class="content-block post-content">
+		<div class="post-content">
 		    <p><?php echo l($model->filterContent, $model->url, array('target'=>'_blank'));?></p>
 		    <?php if ($model->tags):?><div class="post-tags">标签：<?php echo $model->tagLinks;?></div><?php endif;?>
         </div>
-        <?php if ($model->videoHtml):?><div class="content-block video-player"><?php echo $model->videoHtml;?></div><?php endif;?>
+        <?php if ($model->videoHtml):?><div class="video-player"><?php echo $model->videoHtml;?></div><?php endif;?>
         <div class="toolbar radius3px">
             <div class="content-block info">
                 评分:<span id="score-count"><?php echo $model->score;?></span>&nbsp;&nbsp;
