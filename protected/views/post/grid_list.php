@@ -4,7 +4,7 @@
     	<div class="post-author"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
         <div class="item-detail">
             <div class="item-content"><?php echo $model->content;?></div>
-            <?php if ($model->thumbnail):?>
+            <?php if (($model->channel_id == CHANNEL_LENGTU || $model->channel_id == CHANNEL_GIRL) && $model->thumbnail):?>
             <div class="post-image">
                 <div class="thumbnail">
                 <?php if ($model->channel_id == CHANNEL_LENGTU): //只有冷图采用缩略图方式 ?>
@@ -34,7 +34,7 @@
                 </div>
                 <?php endif;?>
             </div>
-            <?php elseif ($model->videoHtml):?>
+            <?php elseif ($model->channel_id == CHANNEL_VIDEO && $model->videoHtml):?>
             <div class="content-block video-player"><?php echo $model->videoHtml;?></div>
             <?php endif;?>
         </div>
