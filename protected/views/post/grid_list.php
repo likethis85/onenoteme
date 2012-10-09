@@ -15,10 +15,10 @@
                         <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
                     <?php endif;?>
                     </a>
+                    <div class="thumb-pall"></div>
                 </div>
                 <?php if ($model->imageIsLong):?>
                 <div class="thumbnail-more">
-                    <div class="thumb-pall"></div>
                     <div class="lines">
                         <?php for ($i=0; $i<$model->lineCount; $i++):?>
                         <div class="line3"></div>
@@ -59,6 +59,7 @@ $(function(){
 	    var itemDiv = $(this).parents('.post-item');
 	    itemDiv.find('.post-image .thumbnail-more').toggle();
 	    itemDiv.find('.post-image .thumbnail a .thumb').toggle();
+	    itemDiv.find('.post-image .thumb-pall').toggle();
 	    var originalUrl = itemDiv.find('.post-image .thumbnail a').attr('href');
 	    itemDiv.find('.post-image .thumbnail a .original').attr('src', originalUrl).toggle();
 	    var itemPos = itemDiv.position();
