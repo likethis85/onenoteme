@@ -156,7 +156,8 @@ body {background-color:#E0E0E0;}
 .post-item .post-image .thumbnail {position:relative;}
 .post-image img.thumb {width:150px; max-height:250px; margin:0 auto;}
 .post-image img.original {max-width:550px; min-width:150px; min-height:150px; background:url(../images/big_loading.gif) no-repeat;}
-.post-image .lines {width:157px; margin-top:3px;}
+.post-image .thumbnail-more {cursor:pointer;}
+.post-image .lines {width:155px; margin-top:3px;}
 .post-image .line3 {height:3px; width:50px; margin:3px auto; background:#B2B2B2;}
 .post-image .thumb-pall {position:absolute; bottom:0px; height:39px; width:157px; background:transparent url(../images/thumb_more_tip.gif) no-repeat; z-index:100;}
 .post-image .lines .sjx {height:9px; width:71px; margin:3px auto; background:url(../images/thumb_more_sjx.gif) no-repeat;}
