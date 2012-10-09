@@ -315,11 +315,11 @@ class Api_Post extends ApiBase
                 $bigFile = 'original_' . $file;
                 $bigFileName = $path['path'] . $bigFile;
                 
-        	    $curl = new CdCurl();
+        	    $curl = new CDCurl();
         	    $curl->get($url);
         	    $data = $curl->rawdata();
         	    $curl->close();
-        	    $im = new CdImage();
+        	    $im = new CDImage();
         	    $im->load($data);
         	    unset($data, $curl);
         	    $im->resizeToWidth($thumbnailImageSize['width'])
