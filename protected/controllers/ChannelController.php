@@ -52,7 +52,7 @@ class ChannelController extends Controller
         
         $this->channel = CHANNEL_GIRL;
         $data = $this->fetchChannelPosts(CHANNEL_GIRL);
-        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : '/post/gril_list';
+        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : '/post/girl_list';
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
         else
