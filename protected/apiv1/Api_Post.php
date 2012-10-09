@@ -323,9 +323,9 @@ class Api_Post extends ApiBase
         	    $im->load($data);
         	    unset($data, $curl);
         	    if ($im->width()/$im->height() > IMAGE_THUMBNAIL_WIDTH/IMAGE_THUMBNAIL_HEIGHT)
-            	    $im->resizeToWidth(IMAGE_THUMBNAIL_WIDTH);
-        	    else
         	        $im->resizeToHeight(IMAGE_THUMBNAIL_HEIGHT);
+        	    else
+        	        $im->resizeToWidth(IMAGE_THUMBNAIL_WIDTH);
         	    $im->crop(IMAGE_THUMBNAIL_WIDTH, IMAGE_THUMBNAIL_HEIGHT)
         	        ->saveAsJpeg($thumbnailFileName);
         	    $post->thumbnail_width = $im->width();
