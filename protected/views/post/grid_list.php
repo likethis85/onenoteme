@@ -7,7 +7,7 @@
             <?php if ($model->thumbnail):?>
             <div class="post-image">
                 <div class="thumbnail">
-                <?php if ($model->chanel_id == CHANNEL_LENGTU): //只有冷图采用缩略图方式 ?>
+                <?php if ($model->channel_id == CHANNEL_LENGTU): //只有冷图采用缩略图方式 ?>
                     <a href="<?php echo $model->bmiddlePic;?>" target="_blank">
                     <?php if ($model->imageIsLong):?>
                         <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
@@ -17,7 +17,7 @@
                     <?php endif;?>
                     </a>
                     <div class="thumb-pall"></div>
-                <?php elseif ($model->chanel_id == CHANNEL_GIRL): //福利图直接显示 ?>
+                <?php elseif ($model->channel_id == CHANNEL_GIRL): //福利图直接显示 ?>
                     <a href="<?php echo $model->originalPic;?>" target="_blank">
                         <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
                     </a>
