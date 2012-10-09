@@ -12,9 +12,9 @@
                             <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
                             <img class="original hide" />
                         </a>
+                        <div class="thumb-pall"></div>
                     </div>
                     <div class="thumbnail-more">
-                        <div class="thumb-pall"></div>
                         <div class="lines">
                             <?php for ($i=0; $i<$model->lineCount; $i++):?>
                             <div class="line3"></div>
