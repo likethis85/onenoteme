@@ -299,7 +299,7 @@ class Api_Post extends ApiBase
     	$post->down_score = mt_rand(0, 2);
     	
     	try {
-    	    $thumbnailImageSize = array('width'=>120, 'height'=>120);
+    	    $thumbnailImageSize = array('width'=>IMAGE_THUMBNAIL_WIDTH, 'height'=>IMAGE_THUMBNAIL_HEIGHT);
     	    
     	    $url = trim($params['pic']);
         	if (!empty($url)) {
@@ -313,21 +313,29 @@ class Api_Post extends ApiBase
                 $bigFile = 'original_' . $file;
                 $bigFileName = $path['path'] . $bigFile;
                 
-        	    $curl = new CdCurl();
+        	    $curl = new CDCurl();
         	    $curl->get($url);
         	    $data = $curl->rawdata();
         	    $curl->close();
-        	    $im = new CdImage();
+        	    $im = new CDImage();
         	    $im->load($data);
         	    unset($data, $curl);
         	    $im->resizeToWidth($thumbnailImageSize['width'])
         	        ->crop($thumbnailImageSize['width'], $thumbnailImageSize['height'])
         	        ->saveAsJpeg($thumbnailFileName);
+        	    $post->thumbnail_width = $im->width();
+        	    $post->thumbnail_height = $im->height();
         	    $post->thumbnail_pic = fbu($path['url'] . $im->filename());
+        	    
         	    $im->revert()->saveAsJpeg($middleFileName, 50);
         	    $post->bmiddle_pic = fbu($path['url'] . $im->filename());
+        	    $post->bmiddle_width = $im->width();
+        	    $post->bmiddle_height = $im->height();
+        	    
         	    $im->revert()->saveAsJpeg($bigFileName, 90);
         	    $post->original_pic = fbu($path['url'] . $im->filename());
+        	    $post->original_width = $im->width();
+        	    $post->original_height = $im->height();
         	}
         	else
         	    $post->thumbnail_pic = $post->bmiddle_pic = $post->original_pic = '';

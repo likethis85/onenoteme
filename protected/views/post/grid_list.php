@@ -52,17 +52,17 @@
 
 <span id="jqvar" scoreurl="<?php echo aurl('post/score');?>" class="hide"></span>
 
-<?php cs()->registerScriptFile(sbu('scripts/snsshare.js'), CClientScript::POS_END);?>
-
 <script type="text/javascript">
 $(function(){
 	$('.post-image').on('click', '.thumbnail-more, .thumbnail a', function(event){
 	    event.preventDefault();
-	    var div = $(this).parents('.post-image');
-	    div.find('.thumbnail-more').toggle();
-	    div.find('.thumbnail a .thumb').toggle();
-	    var originalUrl = div.find('.thumbnail a').attr('href');
-	    div.find('.thumbnail a .original').attr('src', originalUrl).toggle();
+	    var itemDiv = $(this).parents('.post-item');
+	    itemDiv.find('.post-image .thumbnail-more').toggle();
+	    itemDiv.find('.post-image .thumbnail a .thumb').toggle();
+	    var originalUrl = itemDiv.find('.post-image .thumbnail a').attr('href');
+	    itemDiv.find('.post-image .thumbnail a .original').attr('src', originalUrl).toggle();
+	    var itemPos = itemDiv.position();
+	    $('body').scrollTop(itemPos.top);
 	});
 });
 </script>

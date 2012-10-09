@@ -21,6 +21,12 @@
  * @property string $thumbnail_pic
  * @property string $bmiddle_pic
  * @property string $original_pic
+ * @property string $thumbnail_width
+ * @property string $thumbnail_height
+ * @property string $bmiddle_width
+ * @property string $bmiddle_height
+ * @property string $original_width
+ * @property string $original_height
  * @property string $weibo_id
  * @property string $url
  * @property string $filterContent
@@ -72,12 +78,13 @@ class Post extends CActiveRecord
 		// will receive user inputs.
 		return array(
 		    array('content', 'required', 'message'=>'段子内容必须填写'),
-			array('channel_id, view_nums, up_score, down_score, comment_nums, state, create_time, user_id', 'numerical', 'integerOnly'=>true),
+			array('channel_id, view_nums, up_score, down_score, comment_nums, state, create_time, user_id, thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
 			array('weibo_id', 'length', 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
 			array('title, tags', 'length', 'max'=>250),
 			array('content, thumbnail_pic, bmiddle_pic, original_pic', 'safe'),
+		    array('thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height', 'filter', 'filter'=>'intval'),
 		);
 	}
 
@@ -114,6 +121,12 @@ class Post extends CActiveRecord
 			'create_time' => '发布时间',
 			'content' => '内容',
             'weibo_id' => '新浪微博ID',
+    		'thumbnail_width' => '缩略图宽度',
+    		'thumbnail_height' => '缩略图高度',
+    		'bmiddle_width' => '大图宽度',
+    		'bmiddle_height' => '大图高度',
+    		'original_width' => '原图宽度',
+    		'original_height' => '原图调度',
 		);
 	}
 	

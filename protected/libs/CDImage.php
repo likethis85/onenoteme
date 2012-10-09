@@ -1,5 +1,5 @@
 <?php
-class CdImage
+class CDImage
 {
     const MERGE_TOP_RIGHT = 1;
     const MERGE_TOP_LEFT = 2;
@@ -288,9 +288,16 @@ class CdImage
         return $this;
     }
     
-    public function filename()
+    public function filename($onlyName = true)
     {
-        return $this->_lastSaveFile ? basename($this->_lastSaveFile) : '';
+        if (empty($this->_lastSaveFile))
+            $file = '';
+        elseif ($onlyName)
+            $file = basename($this->_lastSaveFile);
+        else
+            $file = $this->_lastSaveFile;
+        
+        return $file;
     }
 
     /**
