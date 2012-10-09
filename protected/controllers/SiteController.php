@@ -12,13 +12,13 @@ class SiteController extends Controller
             array(
                 'COutputCache + index',
                 'duration' => $duration,
-                'varyByParam' => array('page'),
+                'varyByParam' => array('page', 's'),
                 'requestTypes' => array('GET'),
             ),
             array(
                 'COutputCache + index',
                 'duration' => $duration,
-                'varyByParam' => array('page'),
+                'varyByParam' => array('page', 's'),
                 'requestTypes' => array('POST'),
             ),
         );
