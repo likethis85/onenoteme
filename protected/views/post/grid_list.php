@@ -4,9 +4,10 @@
     	<div class="post-author"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
         <div class="item-detail">
             <div class="item-content"><?php echo $model->content;?></div>
-            <?php if ($model->channel_id == CHANNEL_LENGTU && $model->thumbnail):?>
+            <?php if ($model->thumbnail):?>
             <div class="post-image">
                 <div class="thumbnail">
+                <?php if ($model->chanel_id == CHANNEL_LENGTU): //只有冷图采用缩略图方式 ?>
                     <a href="<?php echo $model->bmiddlePic;?>" target="_blank">
                     <?php if ($model->imageIsLong):?>
                         <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
@@ -16,8 +17,13 @@
                     <?php endif;?>
                     </a>
                     <div class="thumb-pall"></div>
+                <?php elseif ($model->chanel_id == CHANNEL_GIRL): //福利图直接显示 ?>
+                    <a href="<?php echo $model->originalPic;?>" target="_blank">
+                        <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
+                    </a>
+                <?php endif;?>
                 </div>
-                <?php if ($model->imageIsLong):?>
+                <?php if ($model->channel_id == CHANNEL_LENGTU && $model->imageIsLong):?>
                 <div class="thumbnail-more">
                     <div class="lines">
                         <?php for ($i=0; $i<$model->lineCount; $i++):?>
