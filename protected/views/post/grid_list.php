@@ -7,14 +7,19 @@
             <span class="item-content">
                 <?php echo $model->content;?>
             </span>
-            <?php if ($model->bmiddlePic):?>
+            <?php if ($model->thumbnail):?>
             <div class="post-image">
                 <div class="thumbnail">
                     <a href="<?php echo $model->bmiddlePic;?>" target="_blank">
-                    <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
-                    <img class="original hide" />
+                    <?php if ($model->imageIsLong):?>
+                        <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
+                        <img class="original hide" />
+                    <?php else:?>
+                        <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
+                    <?php endif;?>
                     </a>
                 </div>
+                <?php if ($model->imageIsLong):?>
                 <div class="thumbnail-more">
                     <div class="thumb-pall"></div>
                     <div class="lines">
@@ -25,6 +30,7 @@
                         <div class="sjx"></div>
                     </div>
                 </div>
+                <?php endif;?>
             </div>
             <?php endif;?>
         </div>

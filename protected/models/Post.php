@@ -44,6 +44,7 @@
  * @property string $thumbnailLink
  * @property string $videoHtml
  * @property string $videoSourceUrl
+ * @property string $imageIsLong
  */
 class Post extends CActiveRecord
 {
@@ -255,6 +256,15 @@ class Post extends CActiveRecord
             $url = $this->original_pic;
         
         return $url;
+    }
+    
+    public function getImageIsLong()
+    {
+        if (($this->channel_id == CHANNEL_GIRL || $this->channel_id == CHANNEL_LENGTU)
+            && ($this->bmiddle_height > IMAGE_THUMBNAIL_HEIGHT) && $this->getBmiddlePic())
+            return true;
+        
+        return false;
     }
     
     protected function beforeSave()
