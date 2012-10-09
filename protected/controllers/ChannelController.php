@@ -22,7 +22,7 @@ class ChannelController extends Controller
         
         $this->channel = CHANNEL_DUANZI;
         $data = $this->fetchChannelPosts(CHANNEL_DUANZI);
-        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : '/post/text_list';
+        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'text_list';
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
         else
@@ -37,7 +37,7 @@ class ChannelController extends Controller
         
         $this->channel = CHANNEL_LENGTU;
         $data = $this->fetchChannelPosts(CHANNEL_LENGTU);
-        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : '/post/lengtu_list';
+        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'lengtu_list';
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
         else
@@ -52,7 +52,7 @@ class ChannelController extends Controller
         
         $this->channel = CHANNEL_GIRL;
         $data = $this->fetchChannelPosts(CHANNEL_GIRL);
-        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : '/post/girl_list';
+        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'girl_list';
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
         else
