@@ -289,7 +289,7 @@ class Api_Post extends ApiBase
     	$this->requiredParams(array('content', 'token', 'channel_id'));
     	$params = $this->filterParams(array('content', 'tags', 'channel_id', 'category_id', 'pic', 'token'));
     	
-    	$post = new Post('api');
+    	$post = new Post();
     	$post->channel_id = (int)$params['channel_id'];
     	$post->content = $params['content'];
     	$post->tags = $params['tags'];
