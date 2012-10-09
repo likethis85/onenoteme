@@ -3,33 +3,12 @@
     <div class="panel panel20 post-item">
     	<div class="post-author"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
         <div class="item-detail">
-            <a class="item-link" href="<?php echo aurl('post/show', array('id'=>$model->id));?>" target="_blank" title="新窗口中查看段子">: :</a>
-            <span class="item-content">
-                <?php echo $model->content;?>
-            </span>
+            <?php echo $model->content;?>
             <?php if ($model->thumbnail):?>
             <div class="post-image">
-                <div class="thumbnail">
-                    <a href="<?php echo $model->bmiddlePic;?>" target="_blank">
-                    <?php if ($model->imageIsLong):?>
-                        <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
-                        <img class="original hide" />
-                    <?php else:?>
-                        <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
-                    <?php endif;?>
-                    </a>
-                </div>
-                <?php if ($model->imageIsLong):?>
-                <div class="thumbnail-more">
-                    <div class="thumb-pall"></div>
-                    <div class="lines">
-                        <?php for ($i=0; $i<$model->lineCount; $i++):?>
-                        <div class="line3"></div>
-                        <?php endfor;?>
-                        <div class="sjx"></div>
-                    </div>
-                </div>
-                <?php endif;?>
+                <a href="<?php echo $model->originalPic;?>" target="_blank">
+                    <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
+                </a>
             </div>
             <?php endif;?>
         </div>
@@ -59,16 +38,6 @@
 
 <script type="text/javascript">
 $(function(){
-	$('.post-image').on('click', '.thumbnail-more, .thumbnail a', function(event){
-	    event.preventDefault();
-	    var itemDiv = $(this).parents('.post-item');
-	    itemDiv.find('.post-image .thumbnail-more').toggle();
-	    itemDiv.find('.post-image .thumbnail a .thumb').toggle();
-	    var originalUrl = itemDiv.find('.post-image .thumbnail a').attr('href');
-	    itemDiv.find('.post-image .thumbnail a .original').attr('src', originalUrl).toggle();
-	    var itemPos = itemDiv.position();
-	    $('body').scrollTop(itemPos.top);
-	});
 });
 </script>
 

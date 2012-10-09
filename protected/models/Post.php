@@ -45,6 +45,7 @@
  * @property string $videoHtml
  * @property string $videoSourceUrl
  * @property string $imageIsLong
+ * @property string $lineCount
  */
 class Post extends CActiveRecord
 {
@@ -265,6 +266,15 @@ class Post extends CActiveRecord
             return true;
         
         return false;
+    }
+    
+    public function getLineCount()
+    {
+        $count = 0;
+        if ($this->getImageIsLong()) {
+            $count = intval($this->bmiddle_height / IMAGE_THUMBNAIL_HEIGHT);
+        }
+        return $count;
     }
     
     protected function beforeSave()

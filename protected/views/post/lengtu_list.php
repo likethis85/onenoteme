@@ -19,7 +19,6 @@
                     <?php endif;?>
                     </a>
                 </div>
-                <?php if ($model->imageIsLong):?>
                 <div class="thumbnail-more">
                     <div class="thumb-pall"></div>
                     <div class="lines">
@@ -29,7 +28,6 @@
                         <div class="sjx"></div>
                     </div>
                 </div>
-                <?php endif;?>
             </div>
             <?php endif;?>
         </div>
