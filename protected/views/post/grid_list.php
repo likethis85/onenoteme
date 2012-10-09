@@ -34,6 +34,8 @@
                 </div>
                 <?php endif;?>
             </div>
+            <?php elseif ($model->videoHtml):?>
+            <div class="content-block video-player"><?php echo $model->videoHtml;?></div>
             <?php endif;?>
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->tagLinks;?></div><?php endif;?>
