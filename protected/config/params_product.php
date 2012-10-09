@@ -4,7 +4,10 @@ return array(
     'autoLoginDuration' => 3600 * 24 * 7,
     'waterfall_post_count_page' => 32,
     'grid_post_count_page' => 15,
-    'videoCountOfPage' => 8,
+    'video_count_page' => 8,
+    'duanzi_count_page' => 20,
+    'lengtu_count_page' => 15,
+    'girl_count_page' => 10,
     'commentCountOfPage' => 20,
 
     'userIsRequireEmailVerify' => false,

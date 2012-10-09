@@ -4,7 +4,7 @@
     	<div class="post-author"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
         <div class="item-detail">
             <div class="item-content"><?php echo $model->content;?></div>
-            <?php if ($model->thumbnail):?>
+            <?php if ($model->channel_id == CHANNEL_LENGTU && $model->thumbnail):?>
             <div class="post-image">
                 <div class="thumbnail">
                     <a href="<?php echo $model->bmiddlePic;?>" target="_blank">
