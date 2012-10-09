@@ -481,27 +481,28 @@ class CDImage
     public function crop($width, $height)
     {
         $image = imagecreatetruecolor($width, $height);
-        $wm = $this->width() / $width;
-        $hm = $this->height() / $height;
+        $ow = $this->width();
+        $oh = $this->height();
+        $wm = $ow / $width;
+        $hm = $oh / $height;
         $h_height = $height / 2;
         $w_height = $width / 2;
         
-        if ($this->width() > $this->height()) {
-            $adjusted_width = $this->width() / $hm;
+        $oscale = $ow / $oh;
+        $nscale = $width / $height;
+        if ($oscale >= $nscale) {
+            $adjusted_width = $ow / $hm;
             $half_width = $adjusted_width / 2;
             $int_width = $half_width - $w_height;
             
-            imagecopyresampled($image, $this->_image, -$int_width, 0, 0, 0, $adjusted_width, $height, $this->width(), $this->height());
+            imagecopyresampled($image, $this->_image, -$int_width, 0, 0, 0, $adjusted_width, $height, $ow, $oh);
         }
-        elseif (($this->width() < $this->height()) || ($this->width() == $this->height())) {
-            $adjusted_height = $this->height() / $wm;
+        else {
+            $adjusted_height = $oh / $wm;
             $half_height = $adjusted_height / 2;
             $int_height = $half_height - $h_height;
         
-            imagecopyresampled($image, $this->_image, 0, -$int_height, 0, 0, $width, $adjusted_height, $this->width(), $this->height());
-        }
-        else {
-            imagecopyresampled($image, $this->_image, 0, 0, 0, 0, $width, $height, $this->width(), $this->height());
+            imagecopyresampled($image, $this->_image, 0, -$int_height, 0, 0, $width, $adjusted_height, $ow, $oh);
         }
         $this->_image = $image;
         return $this;
