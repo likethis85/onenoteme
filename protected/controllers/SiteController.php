@@ -1,7 +1,7 @@
 <?php
 class SiteController extends Controller
 {
-    public function f2ilters()
+    public function filters()
     {
         $duration = 300;
         return array(
