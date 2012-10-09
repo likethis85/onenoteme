@@ -322,8 +322,11 @@ class Api_Post extends ApiBase
         	    $im = new CDImage();
         	    $im->load($data);
         	    unset($data, $curl);
-        	    $im->resizeToWidth($thumbnailImageSize['width'])
-        	        ->crop($thumbnailImageSize['width'], $thumbnailImageSize['height'])
+        	    if ($im->width()/$im->height() > IMAGE_THUMBNAIL_WIDTH/IMAGE_THUMBNAIL_HEIGHT)
+            	    $im->resizeToWidth(IMAGE_THUMBNAIL_WIDTH);
+        	    else
+        	        $im->resizeToHeight(IMAGE_THUMBNAIL_HEIGHT);
+        	    $im->crop(IMAGE_THUMBNAIL_WIDTH, IMAGE_THUMBNAIL_HEIGHT)
         	        ->saveAsJpeg($thumbnailFileName);
         	    $post->thumbnail_width = $im->width();
         	    $post->thumbnail_height = $im->height();
