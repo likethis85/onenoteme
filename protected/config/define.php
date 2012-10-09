@@ -26,6 +26,9 @@ define('POST_STATE_DISABLED', 0);
 define('COMMENT_STATE_ENABLED', 1);
 define('COMMENT_STATE_DISABLED', 0);
 
+define('POST_LIST_STYLE_GRID', 'grid');
+define('POST_LIST_STYLE_WATERFALL', 'fall');
+
 define('WEIBO_APP_KEY', '2981913360');
 define('WEIBO_APP_SECRET', 'f06fd0b530f3d9daa56db67e5e8610e1');
 define('QQT_APP_KEY', '801080691');

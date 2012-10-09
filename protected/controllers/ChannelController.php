@@ -14,7 +14,7 @@ class ChannelController extends Controller
         );
     }
     
-    public function actionDuanzi()
+    public function actionDuanzi($s = POST_LIST_STYLE_WATERFALL)
     {
         $this->pageTitle = '挖笑话 - 最冷笑话精选，每天分享笑话N枚，你的贴身开心果';
         $this->setDescription($this->pageTitle);
@@ -22,13 +22,14 @@ class ChannelController extends Controller
         
         $this->channel = CHANNEL_DUANZI;
         $data = $this->fetchChannelPosts(CHANNEL_DUANZI);
+        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : '/post/grid_list';
         if (request()->getIsAjaxRequest())
-            $this->renderPartial('/post/mixed_list', $data);
+            $this->renderPartial($view, $data);
         else
-            $this->render('/post/mixed_list', $data);
+            $this->render($view, $data);
     }
     
-    public function actionLengtu()
+    public function actionLengtu($s = POST_LIST_STYLE_WATERFALL)
     {
         $this->pageTitle = '挖趣图 - 最搞笑的，最好玩的，最内涵的图片精选';
         $this->setDescription($this->pageTitle);
@@ -36,13 +37,14 @@ class ChannelController extends Controller
         
         $this->channel = CHANNEL_LENGTU;
         $data = $this->fetchChannelPosts(CHANNEL_LENGTU);
+        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : '/post/grid_list';
         if (request()->getIsAjaxRequest())
-            $this->renderPartial('/post/mixed_list', $data);
+            $this->renderPartial($view, $data);
         else
-            $this->render('/post/mixed_list', $data);
+            $this->render($view, $data);
     }
     
-    public function actionGirl()
+    public function actionGirl($s = POST_LIST_STYLE_WATERFALL)
     {
         $this->pageTitle = '挖福利 - 最新最全的女明星写真、清纯校花、美女模特、正妹性感自拍';
         $this->setDescription($this->pageTitle);
@@ -50,10 +52,11 @@ class ChannelController extends Controller
         
         $this->channel = CHANNEL_GIRL;
         $data = $this->fetchChannelPosts(CHANNEL_GIRL);
+        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : '/post/grid_list';
         if (request()->getIsAjaxRequest())
-            $this->renderPartial('/post/mixed_list', $data);
+            $this->renderPartial($view, $data);
         else
-            $this->render('/post/mixed_list', $data);
+            $this->render($view, $data);
     }
     
     public function actionVideo()
@@ -72,7 +75,7 @@ class ChannelController extends Controller
         $channelid = (int)$channelid;
         $limit = (int)$limit;
         if ($limit === 0)
-            $limit = param('postCountOfPage');
+            $limit = param('waterfall_post_count_page');
         
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('channel_id'=>$channelid, 'state'=>POST_STATE_ENABLED));

@@ -51,6 +51,9 @@ return array(
             'basePath' => $params['resourceBasePath'] . 'assets',
             'baseUrl' => $params['resourceBaseUrl'] . 'assets',
         ),
+        'widgetFactory'=>array(
+            'enableSkin' => true,
+        ),
         'urlManager' => array(
             'urlFormat' => 'path',
 		    'showScriptName' => false,

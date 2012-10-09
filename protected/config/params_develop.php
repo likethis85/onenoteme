@@ -2,7 +2,8 @@
 return array(
 
     'autoLoginDuration' => 3600 * 24 * 7,
-    'postCountOfPage' => 32,
+    'waterfall_post_count_page' => 32,
+    'grid_post_count_page' => 15,
     'videoCountOfPage' => 8,
     'commentCountOfPage' => 20,
 

@@ -1,7 +1,7 @@
 <?php
 class SiteController extends Controller
 {
-    public function filters()
+    public function f2ilters()
     {
         $duration = 300;
         return array(
@@ -36,12 +36,13 @@ class SiteController extends Controller
         return false;
     }
     
-    public function actionIndex()
+    public function actionIndex($s = POST_LIST_STYLE_WATERFALL)
     {
         if ($this->checkUserAgentIsMobile())
             $this->redirect(aurl('mobile'));
         
-        $limit = param('postCountOfPage');
+        $s = strip_tags(trim($s));
+        $limit = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('grid_post_count_page');
         
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
@@ -65,16 +66,19 @@ class SiteController extends Controller
         $this->setDescription('最新发布的段子，每日精品笑话连载。网罗互联网各种精品段子，各种糗事，各种笑话，各种秘密，各种经典语录，各种有趣的图片，各种漂亮mm校花模特正妹，应有尽有。烦了、累了、无聊了，就来挖段子逛一逛。');
         
         $this->channel = 'home';
-        if (request()->getIsAjaxRequest())
-            $this->renderPartial('/post/mixed_list', array(
+        if (request()->getIsAjaxRequest()) {
+            $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : '/post/grid_list';
+            $this->renderPartial($view, array(
                 'models' => $models,
                 'pages' => $pages,
             ));
-        else
-            $this->render('index', array(
+        } else {
+            $view = ($s == POST_LIST_STYLE_WATERFALL) ? 'fall_index' : 'grid_index';
+            $this->render($view, array(
                 'models' => $models,
                 'pages' => $pages,
             ));
+        }
     }
     
     public function actionLogin($url = '')
