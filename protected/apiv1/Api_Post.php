@@ -309,7 +309,7 @@ class Api_Post extends ApiBase
         	    $info = parse_url($url);
                 $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);
                 $file = CDBase::makeUploadFileName('');
-                $thumbnailFile = 'thubmnail_' . $file;
+                $thumbnailFile = 'thumbnail_' . $file;
                 $thumbnailFileName = $path['path'] . $thumbnailFile;
                 $middleFileName = $path['path'] . 'bmiddle_' . $file;
                 $bigFile = 'original_' . $file;
