@@ -14,11 +14,3 @@
 	<div class="panel panel15"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
 </div>
 <div class="clear"></div>
-
-
-<script type="text/javascript">
-$(function(){
-});
-</script>
-
-

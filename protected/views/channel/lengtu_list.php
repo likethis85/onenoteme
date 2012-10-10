@@ -13,23 +13,3 @@
 	<div class="panel panel15"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
 </div>
 <div class="clear"></div>
-
-<script type="text/javascript">
-$(function(){
-	$('.post-image').on('click', '.thumbnail-more, .thumbnail a.size-switcher', function(event){
-	    event.preventDefault();
-	    var itemDiv = $(this).parents('.post-item');
-	    itemDiv.find('.post-image .thumbnail-more').toggle();
-	    itemDiv.find('.post-image .thumbnail a .thumb').toggle();
-	    itemDiv.find('.post-image .thumb-pall').toggle();
-	    var originalUrl = itemDiv.find('.post-image .thumbnail a').attr('href');
-	    itemDiv.find('.post-image .thumbnail a .original').attr('src', originalUrl).toggle();
-	    var itemPos = itemDiv.position();
-	    $('body').scrollTop(itemPos.top);
-	});
-});
-</script>
-
-
-
-

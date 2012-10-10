@@ -14,11 +14,4 @@
 </div>
 <div class="clear"></div>
 
-<script type="text/javascript">
-$(function(){
-});
-</script>
-
-
-
 
