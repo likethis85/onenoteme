@@ -1,7 +1,7 @@
 <?php
 class ChannelController extends Controller
 {
-    public function filters()
+    public function fil2ters()
     {
         $duration = 300;
         return array(
@@ -10,6 +10,12 @@ class ChannelController extends Controller
                 'duration' => $duration,
                 'varyByParam' => array('page', 's'),
                 'requestTypes' => array('POST'),
+            ),
+            array(
+                'COutputCache + duanzi, lengtu, girl, video',
+                'duration' => $duration,
+                'varyByParam' => array('page', 's'),
+                'requestTypes' => array('GET'),
             ),
         );
     }
