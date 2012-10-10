@@ -161,7 +161,7 @@ body {background-color:#E0E0E0;}
 .post-image .line3 {height:3px; width:50px; margin:3px auto; background:#B2B2B2;}
 .post-image .thumb-pall {position:absolute; bottom:0px; height:39px; width:157px; background:transparent url(../images/thumb_more_tip.gif) no-repeat; z-index:100;}
 .post-image .lines .sjx {height:9px; width:71px; margin:3px auto; background:url(../images/thumb_more_sjx.gif) no-repeat;}
-.post-item .post-author {color:gray; margin-bottom:10px;}
+.post-item .post-author {color:gray; margin-bottom:10px; font-size:12px;}
 .post-item .item-detail .item-content {line-height:22px;}
 .post-item .post-tags {margin:10px 0 0;}
 
