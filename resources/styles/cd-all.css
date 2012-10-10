@@ -1,8 +1,8 @@
 @CHARSET "UTF-8";
 
-body {background-color:#E0E0E0;}
+body {background-color:#ECE5D8;}
 ::selection {background-color:#C3E99E; text-shadow:none;}
-.site-bg {background-image:url(../images/site-sprite.png); background-repeat:no-repeat;}
+.site-bg {background-image:url(../images/sitebg.png); background-repeat:no-repeat;}
 .cd-wrapper {width:950px; margin:0px auto; overflow:hidden;}
 .fluid-wrapper {margin:0px auto; overflow:hidden; padding:0 5px;}
 .cdc-block {margin:0px auto; text-align:center;}
@@ -148,10 +148,7 @@ body {background-color:#E0E0E0;}
 
 
 /* post list */
-.post-list .post-item {margin-bottom:15px;}
-.post-item .item-toolbar {margin:10px 0 0;}
-.post-item .item-toolbar, .post-item .item-toolbar li {list-style:none;}
-.post-item .item-toolbar li {margin:5px 0; line-height:24px;}
+.post-list .post-item {margin-bottom:0;}
 .post-item .post-image {margin-top:10px;}
 .post-item .post-image .thumbnail {position:relative;}
 .post-image img.thumb {width:150px; max-height:250px; margin:0 auto;}
@@ -164,6 +161,21 @@ body {background-color:#E0E0E0;}
 .post-item .post-author {color:gray; margin-bottom:10px; font-size:12px;}
 .post-item .item-detail .item-content {line-height:22px;}
 .post-item .post-tags {margin:10px 0 0;}
+.post-list .item-shadow {height:20px; background-position:0 -275px;}
+.post-item .item-toolbar {margin:15px 0 0;}
+.post-item .item-toolbar {list-style:none;}
+.post-item .item-toolbar a {display:block; height:28px; line-height:30px; text-indent:36px; width:80px; border-radius:3px; border:1px solid #DFD5CB; color:#9E8C7B;}
+.post-item .item-toolbar a:hover {box-shadow:0 1px 2px rgba(0, 0, 0, 0.2); border-color:#A78B6F;}
+.post-item .item-toolbar a:active {background-color:#F3EFE7; border-color:#cabdb0; box-shadow:0 1px 1px rgba(0, 0, 0, 0.2) inset;color:#BF4131;}
+.post-item .item-toolbar .upscore a {margin:0 10px 0 0; background-position:0 -716px;}
+.post-item .item-toolbar .upscore a:active {background-position:0 -776px;}
+.post-item .item-toolbar .downscore a {background-position:-80px -716px;}
+.post-item .item-toolbar .downscore a:active {background-position:-80px -776px;}
+.post-item .item-toolbar .comment a {background-position:-160px -716px;}
+.post-item .item-toolbar .comment a:active {background-position:-160px -776px;}
+.post-item .item-toolbar .share a {margin:0 0 0 10px; background-position:0 -806px;}
+.post-item .item-toolbar .share a:active {background-position:0 -866px;}
+
 
 /* video list */
 .video-detail {margin-bottom:15px;}

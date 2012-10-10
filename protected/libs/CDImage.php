@@ -60,7 +60,7 @@ class CDImage
     /**
      * 从文件地址载入图像
      * @param string $data 图像路径或图像数据
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function load($data)
     {
@@ -135,7 +135,7 @@ class CDImage
     
     /**
      * 将图片数据还原为初始值
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function revert()
     {
@@ -170,7 +170,7 @@ class CDImage
      * 保存图像到一个文件中
      * @param string $filename 图片文件路径，不带扩展名
      * @param integer $mode 图像文件的权限
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function save($filename, $mode = null)
     {
@@ -191,7 +191,7 @@ class CDImage
      * 将图像保存为gif类型
      * @param string $filename 图片文件路径，不带扩展名
      * @param integer $mode 图像文件的权限
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function saveAsGif($filename, $mode = null)
     {
@@ -211,7 +211,7 @@ class CDImage
      * @param string $filename 图片文件路径，不带扩展名
      * @param integer $quality 图像质量，取值为0-100
      * @param integer $mode 图像文件的权限
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function saveAsJpeg($filename, $quality = 75, $mode = null)
     {
@@ -232,7 +232,7 @@ class CDImage
      * @param integer $quality 图像质量，取值为0-9
      * @param integer $filters PNG图像过滤器，取值参考imagepng函数
      * @param integer $mode 图像文件的权限
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function saveAsPng($filename, $quality = 9, $filters = 0, $mode = null)
     {
@@ -253,7 +253,7 @@ class CDImage
      * @param string $filename 图片文件路径，不带扩展名
      * @param integer $foreground 前景色，取值为imagecolorallocate()的返回的颜色标识符
      * @param integer $mode 图像文件的权限
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function saveAsWbmp($filename, $foreground  = 0, $mode = null)
     {
@@ -273,7 +273,7 @@ class CDImage
      * @param string $filename 图片文件路径，不带扩展名
      * @param integer $foreground 前景色，取值为imagecolorallocate()的返回的颜色标识符
      * @param integer $mode 图像文件的权限
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function saveAsXbm($filename, $foreground  = 0, $mode = null)
     {
@@ -416,7 +416,7 @@ class CDImage
     /**
      * 等比例绽放图像
      * @param integer $scale 绽放值，取值为0-100
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function scale($scale)
     {
@@ -429,7 +429,7 @@ class CDImage
     /**
      * 根据设定高度等比例绽放图像
      * @param integer $height 图像高度
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function resizeToHeight($height)
     {
@@ -444,7 +444,7 @@ class CDImage
 	/**
      * 根据设定宽度等比例绽放图像
      * @param integer $width 图像宽度
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function resizeToWidth($width)
     {
@@ -460,7 +460,7 @@ class CDImage
      * 改变图像大小
      * @param integer $width 图像宽度
      * @param integer $height 图像高度
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function resize($width, $height)
     {
@@ -476,7 +476,7 @@ class CDImage
      * 裁剪图像
      * @param integer $width 图像宽度
      * @param integer $height 图像高度
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function crop($width, $height)
     {
@@ -511,7 +511,7 @@ class CDImage
     /**
      * 顺时针旋转图片
      * @param integer $degree 取值为0-360
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function rotate($degree = 90)
     {
@@ -522,7 +522,7 @@ class CDImage
     
     /**
      * 将图像转换为灰度的
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function gray()
     {
@@ -532,7 +532,7 @@ class CDImage
     
     /**
      * 将图像颜色反转
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function negate()
     {
@@ -543,7 +543,7 @@ class CDImage
     /**
      * 调整图像亮度
      * @param integer $bright 亮度值
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function brightness($bright)
     {
@@ -555,7 +555,7 @@ class CDImage
     /**
      * 调整图像对比度
      * @param integer $contrast 对比度值
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function contrast($contrast)
     {
@@ -566,7 +566,7 @@ class CDImage
     
     /**
      * 将图像浮雕化
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function emboss()
     {
@@ -577,7 +577,7 @@ class CDImage
     /**
      * 让图像柔滑
      * @param integer $smooth 柔滑度值
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function smooth($smooth)
     {
@@ -588,7 +588,7 @@ class CDImage
 
     /**
      * 将图像使用高斯模糊
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
      */
     public function blur()
     {
@@ -604,11 +604,15 @@ class CDImage
      * @param string $font 字体文件路径
      * @param integer $size 文字大小
      * @param integer $color 颜色值
-     * @return CdImage CdImage对象本身
+     * @return CDImage CDImage对象本身
+     * @todo 未完成, $x, $y 未计算出来
      */
-    public function text($text, $opacity = 0.5, $position = 0, $font, $size, $color)
+    public function text($text, $opacity = 0.5, $position = self::MERGE_BOTTOM_RIGHT, $font, $size, $color)
     {
-        imagettftext($this->_image, $size, 0, $x, $y, $color, $font, $text);
+        $positions = array(self::MERGE_TOP_LEFT, self::MERGE_BOTTOM_RIGHT, self::MERGE_BOTTOM_LEFT, self::MERGE_TOP_LEFT, self::MERGE_CENTER);
+        if (in_array($position, $positions)) {
+            imagettftext($this->_image, $size, 0, $x, $y, $color, $font, $text);
+        }
         return $this;
     }
     
