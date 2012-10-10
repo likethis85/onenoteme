@@ -9,7 +9,7 @@
                 <div class="post-image">
                     <div class="thumbnail">
                         <?php if ($model->imageIsLong):?>
-                        <a href="<?php echo $model->bmiddlePic;?>" target="_blank">
+                        <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" target="_blank" title="点击查看大图">
                             <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
                             <img class="original hide" />
                         </a>
@@ -70,7 +70,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$('.post-image').on('click', '.thumbnail-more, .thumbnail a', function(event){
+	$('.post-image').on('click', '.thumbnail-more, .thumbnail a.size-switcher', function(event){
 	    event.preventDefault();
 	    var itemDiv = $(this).parents('.post-item');
 	    itemDiv.find('.post-image .thumbnail-more').toggle();

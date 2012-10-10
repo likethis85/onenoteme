@@ -9,7 +9,7 @@
                 <div class="thumbnail">
                 <?php if ($model->channel_id == CHANNEL_LENGTU): //只有冷图采用缩略图方式 ?>
                     <?php if ($model->imageIsLong):?>
-                    <a href="<?php echo $model->bmiddlePic;?>" target="_blank">
+                    <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" target="_blank" title="点击查看大图">
                         <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
                         <img class="original hide" />
                     </a>
@@ -20,7 +20,7 @@
                     <div class="thumb-pall"></div>
                     <?php endif;?>
                 <?php elseif ($model->channel_id == CHANNEL_GIRL): //福利图直接显示 ?>
-                    <a href="<?php echo $model->originalPic;?>" target="_blank">
+                    <a href="<?php echo $model->originalPic;?>" target="_blank" title="点击查看大图">
                         <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
                     </a>
                 <?php endif;?>
@@ -64,7 +64,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$('.post-image').on('click', '.thumbnail-more, .thumbnail a', function(event){
+	$('.post-image').on('click', '.thumbnail-more, .thumbnail a.size-switcher', function(event){
 	    event.preventDefault();
 	    var itemDiv = $(this).parents('.post-item');
 	    itemDiv.find('.post-image .thumbnail-more').toggle();
