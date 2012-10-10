@@ -16,7 +16,9 @@
                         <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
                     <?php endif;?>
                     </a>
+                    <?php if ($model->imageIsLong):?>
                     <div class="thumb-pall"></div>
+                    <?php endif;?>
                 <?php elseif ($model->channel_id == CHANNEL_GIRL): //福利图直接显示 ?>
                     <a href="<?php echo $model->originalPic;?>" target="_blank">
                         <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>

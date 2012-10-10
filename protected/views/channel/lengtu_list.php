@@ -16,7 +16,9 @@
                             <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
                         <?php endif;?>
                         </a>
+                        <?php if ($model->imageIsLong):?>
                         <div class="thumb-pall"></div>
+                        <?php endif;?>
                     </div>
                     <?php if ($model->imageIsLong):?>
                     <div class="thumbnail-more">
