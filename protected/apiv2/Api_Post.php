@@ -299,15 +299,20 @@ class Api_Post extends ApiBase
     	$post->down_score = mt_rand(0, 2);
     	
     	try {
-    	    $thumbnailImageSize = array('width'=>IMAGE_THUMBNAIL_WIDTH, 'height'=>IMAGE_THUMBNAIL_HEIGHT);
-    	    
     	    $url = trim($params['pic']);
         	if (!empty($url)) {
+        	    $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
+        	    $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
+        	    if ($post->channel_id == CHANNEL_GIRL) {
+        	        $thumbWidth = GIRL_THUMBNAIL_WIDTH;
+        	        $thumbHeight = GIRL_THUMBNAIL_HEIGHT;
+        	    }
+        	    
         	    $path = CDBase::makeUploadPath('pics');
         	    $info = parse_url($url);
                 $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);
                 $file = CDBase::makeUploadFileName('');
-                $thumbnailFile = 'thubmnail_' . $file;
+                $thumbnailFile = 'thumbnail_' . $file;
                 $thumbnailFileName = $path['path'] . $thumbnailFile;
                 $middleFileName = $path['path'] . 'bmiddle_' . $file;
                 $bigFile = 'original_' . $file;
@@ -320,19 +325,25 @@ class Api_Post extends ApiBase
         	    $im = new CDImage();
         	    $im->load($data);
         	    unset($data, $curl);
-        	    $im->resizeToWidth($thumbnailImageSize['width'])
-        	        ->crop($thumbnailImageSize['width'], $thumbnailImageSize['height'])
+        	    if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
+        	        $im->resizeToHeight($thumbHeight);
+        	    else
+        	        $im->resizeToWidth($thumbWidth);
+        	    $im->crop($thumbWidth, $thumbHeight)
         	        ->saveAsJpeg($thumbnailFileName);
         	    $post->thumbnail_width = $im->width();
         	    $post->thumbnail_height = $im->height();
         	    $post->thumbnail_pic = fbu($path['url'] . $im->filename());
         	    
-        	    $im->revert()->saveAsJpeg($middleFileName, 50);
+        	    $im->revert();
+        	    if ($im->width() > IMAGE_BMIDDLE_MAX_WIDTH)
+        	        $im->resizeToWidth(IMAGE_BMIDDLE_MAX_WIDTH);
+        	    $im->saveAsJpeg($middleFileName, 50);
         	    $post->bmiddle_pic = fbu($path['url'] . $im->filename());
         	    $post->bmiddle_width = $im->width();
         	    $post->bmiddle_height = $im->height();
         	    
-        	    $im->revert()->saveAsJpeg($bigFileName, 90);
+        	    $im->revert()->saveAsJpeg($bigFileName, 100);
         	    $post->original_pic = fbu($path['url'] . $im->filename());
         	    $post->original_width = $im->width();
         	    $post->original_height = $im->height();
