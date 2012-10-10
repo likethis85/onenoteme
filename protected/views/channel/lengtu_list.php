@@ -8,14 +8,16 @@
                 <?php if ($model->thumbnail):?>
                 <div class="post-image">
                     <div class="thumbnail">
-                        <a href="<?php echo $model->bmiddlePic;?>" target="_blank">
                         <?php if ($model->imageIsLong):?>
+                        <a href="<?php echo $model->bmiddlePic;?>" target="_blank" class="thumb-link">
                             <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
                             <img class="original hide" />
-                        <?php else:?>
-                            <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
-                        <?php endif;?>
                         </a>
+                        <?php else:?>
+                        <a href="<?php echo $model->originalPic;?>" target="_blank" class="original-link">
+                            <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
+                        </a>
+                        <?php endif;?>
                         <?php if ($model->imageIsLong):?>
                         <div class="thumb-pall"></div>
                         <?php endif;?>
@@ -70,7 +72,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$('.post-image').on('click', '.thumbnail-more, .thumbnail a', function(event){
+	$('.post-image').on('click', '.thumbnail-more, .thumbnail a.thumb-link', function(event){
 	    event.preventDefault();
 	    var itemDiv = $(this).parents('.post-item');
 	    itemDiv.find('.post-image .thumbnail-more').toggle();
