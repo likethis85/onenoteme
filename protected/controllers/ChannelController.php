@@ -8,12 +8,14 @@ class ChannelController extends Controller
             array(
                 'COutputCache + duanzi, lengtu, girl, video',
                 'duration' => $duration,
+                'varyBySession' => true,
                 'varyByParam' => array('page', 's'),
                 'requestTypes' => array('POST'),
             ),
             array(
                 'COutputCache + duanzi, lengtu, girl, video',
                 'duration' => $duration,
+                'varyBySession' => true,
                 'varyByParam' => array('page', 's'),
                 'requestTypes' => array('GET'),
             ),
