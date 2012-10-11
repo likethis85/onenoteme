@@ -171,7 +171,33 @@ Waduanzi.switchImageSize = function(event){
 
 Waduanzi.postUpDownScore = function(event){
 	event.preventDefault();
-	$('#quick-login').dialog('open');
+	//$('#quick-login').dialog('open');
+	var tthis = $(this);
+	var itemDiv = tthis.parent('.post-item');
+	var score = tthis.attr('data-score');
+	var url = tthis.attr('data-url');
+	
+	var jqXhr = $.ajax({
+		type: post,
+		url: url,
+		data: {score: score},
+		dataType: 'text'
+	});
+	
+	jqXhr.done(function(data){
+		if (data > 0) {
+			var old = parseInt(tthis.text);
+			var newScore = old > 0 ? old + 1 : old - 1;
+			tthis.text(newScore);
+			tthis.addClass('voted');
+		}
+		else
+			alert('x');
+	});
+	
+	jqXhr.fail(function(){
+		alert('x');
+	});
 };
 
 

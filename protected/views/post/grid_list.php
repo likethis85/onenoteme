@@ -44,10 +44,10 @@
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->tagLinks;?></div><?php endif;?>
         <ul class="item-toolbar cgray">
-        	<li class="upscore fleft"><a href="javascript:void(0);" class="site-bg"><?php echo $model->up_score;?></a></li>
-        	<li class="downscore fleft"><a href="javascript:void(0);" class="site-bg"><?php echo $model->downScore;?></a></li>
-        	<li class="share fright"><a href="javascript:void(0);" class="site-bg">分享</a></li>
-        	<li class="comment fright"><a href="javascript:void(0);" class="site-bg"><?php echo $model->comment_nums;?></a></li>
+        	<li class="fleft"><a href="javascript:void(0);" class="upscore site-bg" data-score="1" data-url="<?php echo aurl('post/score');?>"><?php echo $model->up_score;?></a></li>
+        	<li class="fleft"><a href="javascript:void(0);" class="downscore site-bg" data-score="-1" data-url="<?php echo aurl('post/score');?>"><?php echo $model->downScore;?></a></li>
+        	<li class="fright"><a href="javascript:void(0);" class="share site-bg">分享</a></li>
+        	<li class="fright"><a href="javascript:void(0);" class="comment site-bg"><?php echo $model->comment_nums;?></a></li>
         	<div class="clear"></div>
         </ul>
         <div class="comment-list comment-list-<?php echo $model->id;?> hide"></div>
@@ -63,7 +63,7 @@
 <script type="text/javascript">
 $(function(){
 	$('.post-image').on('click', '.thumbnail-more, .thumbnail a.size-switcher', Waduanzi.switchImageSize);
-	$('.item-toolbar').on('click', 'li.upscore a, li.downscore a', Waduanzi.postUpDownScore);
+	$('.item-toolbar').on('click', 'a.upscore, a.downscore', Waduanzi.postUpDownScore);
 });
 </script>
 
