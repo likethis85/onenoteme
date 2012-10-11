@@ -17,12 +17,12 @@ class PostController extends Controller
     
     public function actionScore()
     {
-        $id = (int)$_POST['pid'];
-        if (id <= 0) throw new CHttpException(500);
+        $pid = (int)$_POST['pid'];
+        if ($pid <= 0) throw new CHttpException(500);
         
         $column = ((int)$_POST['score'] > 0) ? 'up_score' : 'down_score';
         $counters = array($column => 1);
-        $result = Post::model()->updateCounters($counters, 'id = :id', array(':id'=>$id));
+        $result = Post::model()->updateCounters($counters, 'id = :id', array(':id'=>$pid));
         echo (int)$result;
         exit(0);
     }
