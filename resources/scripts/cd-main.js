@@ -195,7 +195,7 @@ Waduanzi.postUpDownScore = function(event){
 				newScore = old - 1;
 				
 			tthis.text(newScore);
-			tthis.addClass('voted disabled');
+			itemDiv.find('a.upscore, a.downscore').addClass('voted disabled');
 			itemDiv.find('.item-toolbar').off('click', 'a.upscore, a.downscore');
 		}
 		else
