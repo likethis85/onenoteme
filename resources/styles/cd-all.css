@@ -175,6 +175,7 @@ body {background-color:#ECE5D8;}
 .item-toolbar a.comment:active, .item-toolbar a.comment:voted {background-position:-160px -776px;}
 .item-toolbar a.share {margin:0 0 0 10px; background-position:0 -806px;}
 .item-toolbar a.share:active {background-position:0 -866px;}
+.item-toolbar a.disabled {cursor:default; text-decoration:none;}
 .item-content h2 {display:inline; font-size:14px; margin-right:2px;}
 
 /* video list */
