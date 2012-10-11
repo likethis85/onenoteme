@@ -36,7 +36,7 @@ class SiteController extends Controller
         return false;
     }
     
-    public function actionIndex($s = POST_LIST_STYLE_WATERFALL)
+    public function actionIndex($s = POST_LIST_STYLE_GRID)
     {
         if ($this->checkUserAgentIsMobile())
             $this->redirect(aurl('mobile'));

@@ -20,7 +20,7 @@ class ChannelController extends Controller
         );
     }
     
-    public function actionDuanzi($s = POST_LIST_STYLE_WATERFALL)
+    public function actionDuanzi($s = POST_LIST_STYLE_GRID)
     {
         $this->pageTitle = '挖笑话 - 最冷笑话精选，每天分享笑话N枚，你的贴身开心果';
         $this->setDescription($this->pageTitle);
@@ -35,7 +35,7 @@ class ChannelController extends Controller
             $this->render($view, $data);
     }
     
-    public function actionLengtu($s = POST_LIST_STYLE_WATERFALL)
+    public function actionLengtu($s = POST_LIST_STYLE_GRID)
     {
         $this->pageTitle = '挖趣图 - 最搞笑的，最好玩的，最内涵的图片精选';
         $this->setDescription($this->pageTitle);
@@ -50,7 +50,7 @@ class ChannelController extends Controller
             $this->render($view, $data);
     }
     
-    public function actionGirl($s = POST_LIST_STYLE_WATERFALL)
+    public function actionGirl($s = POST_LIST_STYLE_GRID)
     {
         $this->pageTitle = '挖福利 - 最新最全的女明星写真、清纯校花、美女模特、正妹性感自拍';
         $this->setDescription($this->pageTitle);
