@@ -180,7 +180,7 @@ Waduanzi.postUpDownScore = function(event){
 	var jqXhr = $.ajax({
 		type: 'POST',
 		url: url,
-		data: {score: score},
+		data: {id: itemDiv.attr('data-id'), score: score},
 		dataType: 'text'
 	});
 	
