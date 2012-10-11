@@ -1,4 +1,5 @@
-<div class="post-list">
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" /><div class="post-list">
     <?php foreach ((array)$models as $key => $model):?>
     <div class="panel panel20 post-item" data-id="<?php echo $model->id;?>">
     	<div class="post-author"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
@@ -74,13 +75,14 @@ $(function(){
 	    $('body').scrollTop(itemPos.top);
 	});
 
+	$('#quick-login').dialog({
+	    show: 'fade',
+	    modal: true,
+	    draggable: false
+	});
+	
 	$('.item-toolbar').on('click', 'a', function(event){
-		$('#quick-login').dialog({
-		    show: 'fade',
-		    autoOpen: true,
-		    modal: true,
-		    draggable: false
-		});
+		$('#quick-login').dialog('open');
 	});
 });
 </script>
