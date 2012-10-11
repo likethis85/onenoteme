@@ -150,7 +150,7 @@ class Post extends CActiveRecord
 
 	public function getDownScore()
 	{
-	    return (int)$model->down_score ? '-' . $model->down_score : $model->down_score;
+	    return (int)$this->down_score ? '-' . $this->down_score : $this->down_score;
 	}
 	
 	/**

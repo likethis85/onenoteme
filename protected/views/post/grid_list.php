@@ -77,7 +77,9 @@ $(function(){
 	$('.item-toolbar').on('click', 'a', function(event){
 		$('#quick-login').dialog({
 		    show: 'fade',
-		    autoOpen: true
+		    autoOpen: true,
+		    modal: true,
+		    draggable: false
 		});
 	});
 });
