@@ -1,5 +1,4 @@
 <div class="post-list">
-    <div class=""
     <?php foreach ((array)$models as $key => $model):?>
     <div class="panel panel20 post-item" data-id="<?php echo $model->id;?>">
     	<div class="post-author"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
