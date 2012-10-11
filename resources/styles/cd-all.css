@@ -175,7 +175,7 @@ body {background-color:#ECE5D8;}
 .post-item .item-toolbar .comment a:active {background-position:-160px -776px;}
 .post-item .item-toolbar .share a {margin:0 0 0 10px; background-position:0 -806px;}
 .post-item .item-toolbar .share a:active {background-position:0 -866px;}
-
+.post-item .item-content h2 {display:inline; font-size:14px;}
 
 /* video list */
 .video-detail {margin-bottom:15px;}

@@ -3,7 +3,9 @@
     <div class="panel panel20 post-item" data-id="<?php echo $model->id;?>">
     	<div class="post-author"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
         <div class="item-detail">
-            <div class="item-content"><?php echo $model->content;?></div>
+            <div class="item-content">
+                <h2><a href="<?php echo $model->url;?>" target="_blank" title="在新窗口中查看详细内容">∷</a></h2><?php echo $model->content;?>
+            </div>
             <?php if (($model->channel_id == CHANNEL_LENGTU || $model->channel_id == CHANNEL_GIRL) && $model->thumbnail):?>
             <div class="post-image">
                 <div class="thumbnail">
