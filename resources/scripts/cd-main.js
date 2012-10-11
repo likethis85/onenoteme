@@ -173,11 +173,11 @@ Waduanzi.postUpDownScore = function(event){
 	event.preventDefault();
 	//$('#quick-login').dialog('open');
 	var tthis = $(this);
-	var itemDiv = tthis.parent('.post-item');
+	var itemDiv = tthis.parents('.post-item');
 	var pid = itemDiv.attr('data-id');
 	var score = tthis.attr('data-score');
 	var url = tthis.attr('data-url');
-	console.log(pid);
+	
 	var jqXhr = $.ajax({
 		type: 'POST',
 		url: url,
