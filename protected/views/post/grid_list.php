@@ -75,7 +75,10 @@ $(function(){
 	});
 
 	$('.item-toolbar').on('click', 'a', function(event){
-		$('#quick-login').dialog('open');
+		$('#quick-login').dialog({
+		    show: 'fade',
+		    autoOpen: true
+		});
 	});
 });
 </script>
