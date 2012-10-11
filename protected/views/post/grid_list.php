@@ -1,5 +1,5 @@
-
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" /><div class="post-list">
+<link rel="stylesheet" type="text/css" href="http://s.52wm.com/assets/548485a0/jui/css/base/jquery-ui.css" />
+<div class="post-list">
     <?php foreach ((array)$models as $key => $model):?>
     <div class="panel panel20 post-item" data-id="<?php echo $model->id;?>">
     	<div class="post-author"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
@@ -76,6 +76,7 @@ $(function(){
 	});
 
 	$('#quick-login').dialog({
+		autoOpen: false,
 	    show: 'fade',
 	    modal: true,
 	    draggable: false,
