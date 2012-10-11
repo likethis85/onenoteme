@@ -81,6 +81,8 @@ $(function(){
 	    modal: true,
 	    draggable: false,
 	    resizable: false,
+	    width: 550,
+	    height:300,
 	    dialogClass: 'quick-login'
 	});
 	

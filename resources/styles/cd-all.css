@@ -182,8 +182,8 @@ body {background-color:#ECE5D8;}
 .video-player {text-align:center; margin-top:15px; background:#F4F4F6;}
 .video-detail .toolbar {background:#F4F4F6; padding:5px 10px; font-size:12px; color:#666; margin-top:10px;}
 
-.quick-login {box-shadow:0 4px 16px rgba(0, 0, 0, .6); width:540px; height:285px; background:#F7F5F2;}
-#quick-login .ui-dialog-titlebar {display:none;}
+.quick-login {box-shadow:0 4px 16px rgba(0, 0, 0, .6); width:540px; height:285px; background:#F7F5F2; border-radius:0; -webkit-border-radius:0; -moz-border-radius:0;}
+.quick-login .ui-dialog-titlebar {display:none;}
 
 /* index friend links */
 .links-list {margin-top:20px;}
