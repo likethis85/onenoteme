@@ -178,7 +178,7 @@ Waduanzi.postUpDownScore = function(event){
 	var url = tthis.attr('data-url');
 	
 	var jqXhr = $.ajax({
-		type: post,
+		type: 'POST',
 		url: url,
 		data: {score: score},
 		dataType: 'text'
