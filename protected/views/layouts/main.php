@@ -50,7 +50,9 @@
 	</div>
 </div>
 <?php if (user()->getIsGuest()):?>
-<div id="quick-login">xx</div>
+<div id="quick-login">
+    <h1>还未实现</h1>
+</div>
 <?php endif;?>
 
 <?php $this->renderPartial('/public/tongji');?>

@@ -167,6 +167,11 @@ Waduanzi.switchImageSize = function(event){
     itemDiv.find('.post-image .thumbnail a .original').attr('src', originalUrl).toggle();
     var itemPos = itemDiv.position();
     $('body').scrollTop(itemPos.top);
-}
+};
+
+Waduanzi.postUpDownScore = function(event){
+	event.preventDefault();
+	$('#quick-login').dialog('open');
+};
 
 
