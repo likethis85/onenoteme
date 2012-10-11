@@ -187,8 +187,13 @@ Waduanzi.postUpDownScore = function(event){
 	
 	jqXhr.done(function(data){
 		if (data > 0) {
-			var old = parseInt(tthis.text);
-			var newScore = old > 0 ? old + 1 : old - 1;
+			var old = parseInt(tthis.text());
+			var newScore = 0;
+			if (tthis.hasClass('upscore'))
+				newScore = old + 1;
+			else if (tthis.hasClass('downscore'))
+				newScore = old - 1;
+				
 			tthis.text(newScore);
 			tthis.addClass('voted');
 		}
