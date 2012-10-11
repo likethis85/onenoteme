@@ -1,3 +1,17 @@
+$(function(){
+	$('#quick-login').dialog({
+		autoOpen: false,
+	    show: 'fade',
+	    modal: true,
+	    draggable: false,
+	    resizable: false,
+	    width: 540,
+	    height:280,
+	    dialogClass: 'quick-login'
+	});
+});
+
+
 var Waduanzi = {
 	IncreasePostViewNums: function(postid, url){
 		var xhr = $.ajax({
@@ -142,3 +156,17 @@ var Waduanzi = {
 		});
 	}
 };
+
+Waduanzi.switchImageSize = function(event){
+    event.preventDefault();
+    var itemDiv = $(this).parents('.post-item');
+    itemDiv.find('.post-image .thumbnail-more').toggle();
+    itemDiv.find('.post-image .thumbnail a .thumb').toggle();
+    itemDiv.find('.post-image .thumb-pall').toggle();
+    var originalUrl = itemDiv.find('.post-image .thumbnail a').attr('href');
+    itemDiv.find('.post-image .thumbnail a .original').attr('src', originalUrl).toggle();
+    var itemPos = itemDiv.position();
+    $('body').scrollTop(itemPos.top);
+}
+
+

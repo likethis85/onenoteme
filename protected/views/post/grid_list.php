@@ -1,4 +1,3 @@
-<link rel="stylesheet" type="text/css" href="http://s.52wm.com/assets/548485a0/jui/css/base/jquery-ui.css" />
 <div class="post-list">
     <?php foreach ((array)$models as $key => $model):?>
     <div class="panel panel20 post-item" data-id="<?php echo $model->id;?>">
@@ -63,29 +62,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$('.post-image').on('click', '.thumbnail-more, .thumbnail a.size-switcher', function(event){
-	    event.preventDefault();
-	    var itemDiv = $(this).parents('.post-item');
-	    itemDiv.find('.post-image .thumbnail-more').toggle();
-	    itemDiv.find('.post-image .thumbnail a .thumb').toggle();
-	    itemDiv.find('.post-image .thumb-pall').toggle();
-	    var originalUrl = itemDiv.find('.post-image .thumbnail a').attr('href');
-	    itemDiv.find('.post-image .thumbnail a .original').attr('src', originalUrl).toggle();
-	    var itemPos = itemDiv.position();
-	    $('body').scrollTop(itemPos.top);
-	});
-
-	$('#quick-login').dialog({
-		autoOpen: false,
-	    show: 'fade',
-	    modal: true,
-	    draggable: false,
-	    resizable: false,
-	    width: 550,
-	    height:300,
-	    dialogClass: 'quick-login'
-	});
-	
+	$('.post-image').on('click', '.thumbnail-more, .thumbnail a.size-switcher', Waduanzi.switchImageSize);
 	$('.item-toolbar').on('click', 'a', function(event){
 		$('#quick-login').dialog('open');
 	});
@@ -93,5 +70,7 @@ $(function(){
 </script>
 
 <?php if (user()->getIsGuest()) cs()->registerCoreScript('jquery.ui');?>
+<?php cs()->registerCssFile(cs()->getCoreScriptUrl().'/jui/css/base/jquery-ui.css');?>
+
 
 
