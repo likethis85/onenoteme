@@ -177,11 +177,11 @@ Waduanzi.postUpDownScore = function(event){
 	var pid = itemDiv.attr('data-id');
 	var score = tthis.attr('data-score');
 	var url = tthis.attr('data-url');
-	
+	console.log(pid);
 	var jqXhr = $.ajax({
 		type: 'POST',
 		url: url,
-		data: {id: pid, score: score},
+		data: {pid: pid, score: score},
 		dataType: 'text'
 	});
 	
