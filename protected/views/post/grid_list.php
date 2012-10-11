@@ -63,7 +63,7 @@
 <script type="text/javascript">
 $(function(){
 	$('.post-image').on('click', '.thumbnail-more, .thumbnail a.size-switcher', Waduanzi.switchImageSize);
-	$('.item-toolbar').on('click', 'a.upscore, a.downscore', Waduanzi.postUpDownScore);
+	$('.item-toolbar').on('click', 'li.upscore a, li.downscore a', Waduanzi.postUpDownScore);
 });
 </script>
 
