@@ -81,7 +81,7 @@ $(function(){
 	    modal: true,
 	    draggable: false,
 	    resizable: false,
-	    dialogClass: 'alert'
+	    dialogClass: 'quick-login'
 	});
 	
 	$('.item-toolbar').on('click', 'a', function(event){
