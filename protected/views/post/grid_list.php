@@ -78,7 +78,9 @@ $(function(){
 	$('#quick-login').dialog({
 	    show: 'fade',
 	    modal: true,
-	    draggable: false
+	    draggable: false,
+	    resizable: false,
+	    dialogClass: 'alert'
 	});
 	
 	$('.item-toolbar').on('click', 'a', function(event){
