@@ -1,4 +1,5 @@
 <div class="post-list">
+    <div class=""
     <?php foreach ((array)$models as $key => $model):?>
     <div class="panel panel20 post-item" data-id="<?php echo $model->id;?>">
     	<div class="post-author"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
@@ -45,7 +46,7 @@
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->tagLinks;?></div><?php endif;?>
         <ul class="item-toolbar cgray">
         	<li class="upscore fleft"><a href="javascript:void(0);" class="site-bg"><?php echo $model->up_score;?></a></li>
-        	<li class="downscore fleft"><a href="javascript:void(0);" class="site-bg">-<?php echo $model->down_score;?></a></li>
+        	<li class="downscore fleft"><a href="javascript:void(0);" class="site-bg"><?php echo $model->downScore;?></a></li>
         	<li class="share fright"><a href="javascript:void(0);" class="site-bg">分享</a></li>
         	<li class="comment fright"><a href="javascript:void(0);" class="site-bg"><?php echo $model->comment_nums;?></a></li>
         	<div class="clear"></div>
@@ -73,9 +74,13 @@ $(function(){
 	    var itemPos = itemDiv.position();
 	    $('body').scrollTop(itemPos.top);
 	});
+
+	$('.item-toolbar').on('click', 'a', function(event){
+		$('#quick-login').dialog('open');
+	});
 });
 </script>
 
-
+<?php if (user()->getIsGuest()) cs()->registerCoreScript('jquery.ui');?>
 
 

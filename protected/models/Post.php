@@ -31,6 +31,7 @@
  * @property string $url
  * @property string $filterContent
  * @property integer $score
+ * @property string $downScore
  * @property string $tagArray
  * @property string $tagText
  * @property string $tagLinks
@@ -147,6 +148,11 @@ class Post extends CActiveRecord
 	    return (int)($this->up_score - $this->down_score);
 	}
 
+	public function getDownScore()
+	{
+	    return (int)$model->down_score ? '-' . $model->down_score : $model->down_score;
+	}
+	
 	/**
 	 * 获取标签的数组形式
 	 * @return array

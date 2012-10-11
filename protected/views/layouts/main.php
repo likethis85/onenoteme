@@ -50,6 +50,10 @@
     	<div class="clear"></div>
 	</div>
 </div>
+<?php if (user()->getIsGuest()):?>
+<div id="quick-login">xx</div>
+<?php endif;?>
+
 <?php $this->renderPartial('/public/tongji');?>
 </body>
 </html>
