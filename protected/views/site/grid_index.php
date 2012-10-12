@@ -38,7 +38,7 @@
         <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
     </div>
     <div class="panel panel10">
-        <ul class="has-border" style="border:1px solid #CCC">
+        <ul class="social-widget-list">
             <li class="social-widget-list first">
                 <a class="clearfix" target="_blank" href="http://e.weibo.com/cdcchen" title="新浪微博">
                     <span class="social-widget-img"> <img src="<?php echo sbu('images/weibo_logo.jpg');?>" alt=""></span>

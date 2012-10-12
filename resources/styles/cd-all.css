@@ -225,10 +225,10 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .weixin-qrcode {width:100%;}
 
 /* social list */
-.social-widget-list {border-bottom:1px dotted #DDD; margin:6px 0 0; padding:0 0 6px;}
-.social-widget-list.last {order-bottom:none;}
-.social-widget-list a{ font-size:12px; display:block; margin:10px 0;}
-.widget_ifanr_social_widget span {      display: block;     }
+.social-widget-list span {display: block;}
+.social-widget-item {border-bottom:1px dotted #DDD; margin:6px 0 0; padding:0 0 6px;}
+.social-widget-item.last {order-bottom:none;}
+.social-widget-item a{ font-size:12px; display:block; margin:10px 0;}
 .social-widget-img {float:left; line-height:0;}
 .social-widget-img img {width:40px;}
 .social-widget-right {margin-left:50px;}
