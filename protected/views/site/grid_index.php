@@ -59,7 +59,7 @@
             </li>
             <li class="social-widget-item last">
                 <a class="clearfix" target="_blank" href="<?php echo aurl('feed');?>" title="全文 RSS">
-                    <span class="social-widget-img"> <img src="<?php echo sbu('images/rss_logo.jpg');?>" alt=""></span>
+                    <span class="social-widget-img"> <img src="<?php echo sbu('images/rss_logo.png');?>" alt=""></span>
                     <span class="social-widget-right clearfix">
                         <span class="social-widget-title">全文 RSS</span>
                         <span class="social-widget-content">超过 48,100 人在订阅爱范儿全文 RSS<span class="clear"></span></span>
