@@ -174,10 +174,8 @@ class Post extends CActiveRecord
 	    $tags = $this->getTagArray();
 	    if (empty($tags)) return '';
 	
-	    foreach ($tags as $tag) {
-	        $tagHtml = '<strong>' . $tag . '</strong>';
-	        $data[] = l($tagHtml, aurl($route, array('name'=>urlencode($tag))), array('target'=>$target, 'class'=>$class));
-	    }
+	    foreach ($tags as $tag)
+	        $data[] = l($tag, aurl($route, array('name'=>urlencode($tag))), array('target'=>$target, 'class'=>$class));
 	    
 	    return join($operator, $data);
 	}

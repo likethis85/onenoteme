@@ -15,7 +15,7 @@ body {background-color:#ECE5D8;}
 /* sidebar */
 .cd-sidebar {width:300px; overflow:hidden;}
 .cd-sidebar .content-block {margin-bottom:10px; line-height:24px;}
-.cd-sidebar .content-title {font-size:18px; color:#666; margin-bottom:10px; margin:0 0 5px;}
+.cd-sidebar .content-title {font-size:14px; color:#666; margin:0 0 10px; border-bottom:1px solid #EFEFEF; padding-bottom:3px; line-height:18px;;}
 .cd-sidebar .content-block a {margin-right:5px;}
 .cd-sidebar .cdc-block {margin-bottom:15px; text-align:center; overflow:hidden;}
 .cd-sidebar .cdc-block.border {border:1px solid #CFCFCF;}
@@ -150,10 +150,10 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 
 /* tag/list */
 .tag-list a {margin:0px 5px;}
-.tag-level1:link, .tag-level1:visited {font-size:16px;}
-.tag-level2:link, .tag-level2:visited {font-size:20px; color:#F79E1C; font-weight:600;}
+.tag-level1:link, .tag-level1:visited {font-size:14px;}
+.tag-level2:link, .tag-level2:visited {font-size:18px; color:#F79E1C; font-weight:600;}
 .tag-level2:hover {color:white; background:#F79E1C;}
-.tag-level3:link, .tag-level3:visited {font-size:26px; color:#91C21C; font-weight:700;}
+.tag-level3:link, .tag-level3:visited {font-size:24px; color:#91C21C; font-weight:700;}
 .tag-level3:hover {color:white; background:#91C21C;}
 
 
@@ -171,7 +171,7 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .post-item .post-author {color:gray; margin-bottom:10px; font-size:12px;}
 .post-item .item-detail .item-content {line-height:22px;}
 .post-item .post-tags {margin:10px 0 0;}
-.post-item .post-tags a {color:#9b8878;}
+.post-item .post-tags a {color:#9b8878; word-wrap:break-word; word-break:break-all;}
 .post-item .post-tags a:hover {color:#330000;}
 .post-list .item-shadow {height:15px; background-position:0 -275px;}
 .post-item .item-toolbar {margin:15px 0 0;}
