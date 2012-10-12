@@ -27,10 +27,10 @@ return array(
     'formatShortTime' => 'H:i',
         
     'channels' => array(
-        CHANNEL_DUANZI => '挖段子',
+        CHANNEL_DUANZI => '挖笑话',
         CHANNEL_LENGTU => '挖冷图',
         CHANNEL_GIRL => '挖福利',
-        CHANNEL_VIDEO => '挖短片',
+        CHANNEL_VIDEO => '挖视频',
     ),
 
     'user_required_email_verfiy' => 0,
