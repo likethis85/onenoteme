@@ -15,9 +15,9 @@
                 netease_union_site_id = 25143;
                 netease_union_worktype = 15;
                 netease_union_promote_type = 3;
-                netease_union_width = 580;
-                netease_union_height = 90;
-                netease_union_link_id = 672;
+                netease_union_width = 590;
+                netease_union_height = 150;
+                netease_union_link_id = 673;
             </script>
             <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
         </div>
