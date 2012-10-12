@@ -80,10 +80,11 @@ class ChannelController extends Controller
     
     private function fetchChannelPosts($channelid, $limit = 0)
     {
+        $duration = 60 * 60 * 24;
         $channelid = (int)$channelid;
         $limit = (int)$limit;
         if ($limit === 0)
-            $limit = param('waterfall_post_count_page');
+            $limit = param('grid_post_count_page');
         
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('channel_id'=>$channelid, 'state'=>POST_STATE_ENABLED));
