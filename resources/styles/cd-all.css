@@ -149,8 +149,10 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 
 
 /* tag/list */
-.tag-list a {margin:0px 5px;}
+.cd-catption {font-size:18px; margin:0 0 15px; line-height:18px;}
+.tag-list a {margin:0px 5px 0 0;}
 .tag-level1:link, .tag-level1:visited {font-size:14px;}
+.tag-level1:hover {text-decoration:underline;}
 .tag-level2:link, .tag-level2:visited {font-size:18px; color:#F79E1C; font-weight:600;}
 .tag-level2:hover {color:white; background:#F79E1C;}
 .tag-level3:link, .tag-level3:visited {font-size:24px; color:#91C21C; font-weight:700;}
