@@ -9,6 +9,20 @@ class TagController extends Controller
                 'COutputCache + list',
                 'duration' => $duration,
             ),
+            array(
+                'COutputCache + posts',
+                'duration' => $duration,
+                'varyBySession' => true,
+                'varyByParam' => array('name', 'page', 's'),
+                'requestTypes' => array('GET'),
+            ),
+            array(
+                'COutputCache + posts',
+                'duration' => $duration,
+                'varyBySession' => true,
+                'varyByParam' => array('name', 'page', 's'),
+                'requestTypes' => array('POST'),
+            ),
         );
     }
     
