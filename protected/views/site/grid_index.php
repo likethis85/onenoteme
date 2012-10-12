@@ -39,7 +39,7 @@
     </div>
     <div class="panel panel10">
         <ul class="social-widget-list">
-            <li class="social-widget-list first">
+            <li class="social-widget-item first">
                 <a class="clearfix" target="_blank" href="http://e.weibo.com/cdcchen" title="新浪微博">
                     <span class="social-widget-img"> <img src="<?php echo sbu('images/weibo_logo.jpg');?>" alt=""></span>
                     <span class="social-widget-right clearfix">
@@ -48,7 +48,7 @@
                     </span>
                 </a>
             </li>
-            <li class="social-widget-list">
+            <li class="social-widget-item">
                 <a class="clearfix" target="_blank" href="http://http://t.qq.com/cdcchen" title="腾讯微博">
                     <span class="social-widget-img"> <img src="<?php echo sbu('images/qqt_logo.jpg');?>" alt=""></span>
                     <span class="social-widget-right clearfix">
@@ -57,7 +57,7 @@
                     </span>
                 </a>
             </li>
-            <li class="social-widget-list last">
+            <li class="social-widget-item last">
                 <a class="clearfix" target="_blank" href="<?php echo aurl('feed');?>" title="全文 RSS">
                     <span class="social-widget-img"> <img src="<?php echo sbu('images/rss_logo.jpg');?>" alt=""></span>
                     <span class="social-widget-right clearfix">
