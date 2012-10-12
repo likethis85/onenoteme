@@ -49,7 +49,7 @@
                 </a>
             </li>
             <li class="social-widget-item">
-                <a class="clearfix" target="_blank" href="http://http://t.qq.com/cdcchen" title="腾讯微博">
+                <a class="clearfix" target="_blank" href="http://t.qq.com/cdcchen" title="腾讯微博">
                     <span class="social-widget-img"> <img src="<?php echo sbu('images/qqt_logo.jpg');?>" alt=""></span>
                     <span class="social-widget-right clearfix">
                         <span class="social-widget-title">腾讯微博</span>
