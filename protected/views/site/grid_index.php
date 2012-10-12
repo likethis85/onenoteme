@@ -9,6 +9,18 @@
 <?php $this->renderPartial('/post/grid_list', array('models' => $models, 'pages' => $pages));?>
 </div>
 <div class="fright cd-sidebar">
+    <div class="cdc-block">
+        <script type="text/javascript">
+            netease_union_user_id = 6156606;
+            netease_union_site_id = 24344;
+            netease_union_worktype = 11;
+            netease_union_promote_type = 4;
+            netease_union_width = 300;
+            netease_union_height = 250;
+            netease_union_link_id = 414;
+        </script>
+        <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
+    </div>
     <div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
     <div class="cdc-block">
         <script type="text/javascript">
