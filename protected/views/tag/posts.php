@@ -1,5 +1,5 @@
 <div class="fleft cd-container">
-    <h2 class="cd-catption">与标签“<?php echo $tagname;?>”相关的内容</h2>
+    <h2 class="cd-caption">与标签“<?php echo $tagname;?>”相关的内容</h2>
     <?php $this->renderPartial('/post/grid_list', array('models'=>$models, 'pages'=>$pages));?>
 </div>
 <div class="fright cd-sidebar">

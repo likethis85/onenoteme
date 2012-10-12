@@ -1,5 +1,5 @@
+<?php if ($fallTitle):?>"<h2 class="cd-caption"><?php echo $fallTitle;?></h2><?php endif;?>
 <div id="waterfall-container">
-    <?php if ($fallTitle):?>"<h2 class="cd-caption"><?php echo $fallTitle;?></h2><?php endif;?>
     <?php foreach ((array)$models as $index => $model):?>
     <div class="waterfall-item">
         <div class="post-time"><?php echo $model->createTime;?></div>
