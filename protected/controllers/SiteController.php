@@ -86,25 +86,35 @@ class SiteController extends Controller
     
     public function actionLogin($url = '')
     {
-        $returnUrl = strip_tags(trim($url));
-        if (empty($returnUrl)) $returnUrl = app()->homeUrl;
-        
-        if (!user()->isGuest) {
+        if (!user()->getIsGuest()) {
+            $returnUrl = strip_tags(trim($url));
+            if (empty($returnUrl)) $returnUrl = aurl('site/index'); // @todo 如果有了用户中心，这里应该跳转到用户中心
             request()->redirect($returnUrl);
+            exit(0);
         }
         
-        $model = new LoginForm();
+        
+        $model = new LoginForm('login');
         if (request()->getIsPostRequest() && isset($_POST['LoginForm'])) {
             $model->attributes = $_POST['LoginForm'];
-            if ($model->validate()) {
-                $model->login();
-                $this->redirect($returnUrl);
-            }
+            if ($model->validate() && $model->login())
+                ;
+            else
+                $model->captcha = '';
         }
+        else {
+            $returnUrl = strip_tags(trim($url));
+            if (empty($returnUrl))
+                $returnUrl = request()->getUrlReferrer();
+            if (empty($returnUrl))
+                $returnUrl = aurl('site/index'); // @todo 如果有了用户中心，这里应该跳转到用户中心
+            $model->returnUrl = urlencode($returnUrl);
+        }
+        
+        cs()->registerMetaTag('noindex, follow', 'robots');
         $this->pageTitle = '登录' . app()->name;
-        $this->setKeywords($this->pageTitle);
-        $this->setDescription('登录' . app()->name . '后，可以发表评论、投稿及审核段子。');
-        $this->render('login', array('model'=>$model));
+        
+        $this->render('login', array('form'=>$model));
     }
     
     public function actionLogout()
@@ -120,23 +130,27 @@ class SiteController extends Controller
     
     public function actionSignup()
     {
-        if (!user()->isGuest) {
-            $this->redirect(user()->returnUrl);
+        if (!user()->getIsGuest()) {
+// @todo 如果有了用户中心，这里应该跳转到用户中心
+//             $this->redirect(aurl('user/default'));
+            $this->redirect(aurl('site/index'));
+            exit(0);
         }
         
-        $model = new SignupForm();
-        if (request()->getIsPostRequest() && isset($_POST['SignupForm'])) {
-            $model->attributes = $_POST['SignupForm'];
-            if ($model->validate()) {
-                $user = $model->createUser();
-                if ($user !== false)
-                    user()->loginRequired();
-            }
+        
+        $model = new LoginForm('signup');
+        if (request()->getIsPostRequest() && isset($_POST['LoginForm'])) {
+            $model->attributes = $_POST['LoginForm'];
+            if ($model->validate() && $model->signup())
+                ;
+            else
+                $model->captcha = '';
         }
+        
+        cs()->registerMetaTag('noindex, follow', 'robots');
         $this->pageTitle = '注册成为' . app()->name . '会员';
-        $this->setKeywords($this->pageTitle);
-        $this->setDescription('注册成为' . app()->name . '会员后，可以发表评论、投稿及审核段子。');
-        $this->render('signup', array('model'=>$model));
+        
+        $this->render('signup', array('form'=>$model));
     }
 
     public function actionBaidumap()

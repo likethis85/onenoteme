@@ -3,7 +3,7 @@
 </div>
 
 <div class="fright cd-sidebar">
-    <div class="cdc-block">
+    <div class="cdc-block border">
         <script type="text/javascript">
         alimama_pid="mm_12551250_2904829_10392377";
         alimama_width=300;

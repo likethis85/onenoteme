@@ -20,8 +20,6 @@ class User extends CActiveRecord
     const STATE_EDITOR = 150;
     const STATE_ADMIN = 200;
     
-    public $captcha;
-    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return User the static model class
@@ -47,13 +45,13 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username', 'required', 'message'=>'账号 必须要填写'),
-		    array('screen_name', 'required', 'message'=>'名字 必须要填写'),
+			array('username', 'required', 'message'=>'用户名 必须要填写'),
+		    array('screen_name', 'required', 'message'=>'大名 必须要填写'),
 		    array('password', 'required', 'message'=>'密码 必须要填写'),
 		    array('username', 'unique'),
 			array('create_time, state', 'numerical', 'integerOnly'=>true),
 			array('username, screen_name', 'length', 'min'=>2, 'max'=>50),
-			array('password', 'length', 'min'=>3, 'max'=>30),
+			array('password', 'length', 'min'=>3, 'max'=>32),
 			array('create_ip', 'length', 'max'=>15),
 			array('token', 'length', 'max'=>32),
 		);
@@ -87,17 +85,6 @@ class User extends CActiveRecord
 		);
 	}
 	
-	protected function beforeSave()
-	{
-	    if ($this->getIsNewRecord()) {
-	        $this->password = md5($this->password);
-	        $this->create_time = $_SERVER['REQUEST_TIME'];
-	        $this->create_ip = request()->getUserHostAddress();
-	        $this->token = md5($_SERVER['REQUEST_TIME'] . uniqid());
-	    }
-	    
-	    return true;
-	}
 
 	public function getDisplayName()
 	{
@@ -111,5 +98,25 @@ class User extends CActiveRecord
 	
 	    $format = $format ? $format : param('formatDateTime');
 	    return date($format, $this->create_time);
+	}
+
+	public function encryptPassword()
+	{
+	    $this->password = CDBase::encryptPassword($this->password);
+	}
+	
+	protected function beforeSave()
+	{
+	    if ($this->getIsNewRecord()) {
+	        $this->create_time = $_SERVER['REQUEST_TIME'];
+	        $this->create_ip = request()->getUserHostAddress();
+	    }
+	    
+	    return true;
+	}
+	
+	public function beforeDelete()
+	{
+	    throw new CException('用户不允许删除');
 	}
 }

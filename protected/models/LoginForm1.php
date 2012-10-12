@@ -1,5 +1,5 @@
 <?php
-class LoginForm extends CFormModel
+class LoginForm1 extends CFormModel
 {
     public $username;
     public $password;

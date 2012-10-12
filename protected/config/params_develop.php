@@ -32,4 +32,7 @@ return array(
         CHANNEL_GIRL => '挖福利',
         CHANNEL_VIDEO => '挖短片',
     ),
+
+    'user_required_email_verfiy' => 0,
+    'user_required_admin_verfiy' => 0,
 );

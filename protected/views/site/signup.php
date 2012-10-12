@@ -1,43 +1,57 @@
-<div class="fleft cd-container">
-    <div class="panel panel25">
-        <h2>注册成为会员</h2>
-    	<?php echo CHtml::form('', 'POST', array('class'=>'create-form user-form'));?>
-    	<ul>
-    		<li>
-    			<?php echo CHtml::activeLabel($model, 'username');?>
-    			<?php echo CHtml::activeTextField($model, 'username', array('class'=>'txt'));?>
-    			<span>请输入有效的电子邮箱</span>
-    			<?php if ($model->hasErrors('username')):?><p><?php echo $model->getError('username');?></p><?php endif;?>
-    		</li>
-    		<li>
-    			<?php echo CHtml::activeLabel($model, 'password');?>
-    			<?php echo CHtml::activePasswordField($model, 'password', array('class'=>'txt'));?>
-    			<span>密码最少为5位</span>
-    			<?php if ($model->hasErrors('password')):?><p><?php echo $model->getError('password');?></p><?php endif;?>
-    		</li>
-    		<li>
-    			<?php echo CHtml::activeLabel($model, 'screen_name');?>
-    			<?php echo CHtml::activeTextField($model, 'screen_name', array('class'=>'txt'));?>
-    			<span>给自己起一个名字吧</span>
-    			<?php if ($model->hasErrors('screen_name')):?><p><?php echo $model->getError('screen_name');?></p><?php endif;?>
-    		</li>
-    		<li>
-    			<?php echo CHtml::activeLabel($model, 'captcha');?>
-    			<?php echo CHtml::activeTextField($model, 'captcha', array('class'=>'txt captcha'));?>
-    			<?php $this->widget('CCaptcha', array(
-    			    'captchaAction' => 'bigCaptcha',
-                	'buttonLabel' => '换一张',
-                	'clickableImage' => true,
-                    'imageOptions' => array('alt'=>'验证码', 'align'=>'top'),
-                ));?>
-                <?php if ($model->hasErrors('captcha')):?><p><?php echo $model->getError('captcha');?></p><?php endif;?>
-    		</li>
-    		<li><?php echo CHtml::submitButton('注册', array('class'=>'beta-btn user-button'));?></li>
-    	</ul>
-    	<?php echo CHtml::endForm();?>
-	</div>
-</div>
-
-<div class="fright cd-sidebar">
-	<div class="login-signup-tip">已经有账号？<a href="<?php echo aurl('site/login');?>">立即登录</a></div>
+<div class="panel panel20">
+    <div class="cd-content fleft login-signup">
+        <h2>欢迎加入<?php echo app()->name;?></h2>
+        <?php echo CHtml::form('', 'post', array('class'=>'login-form'));?>
+        <div class="cd-control-group <?php echo $form->hasErrors('username') ? 'error' : '';?>">
+            <label class="cd-control-label"><?php echo CHtml::activeLabel($form, 'username');?></label>
+            <div class="cd-controls">
+                <?php echo CHtml::activeTextField($form, 'username', array('class'=>'cd-text', 'tabindex'=>1));?>
+                <?php if ($form->hasErrors('username')):?><span class="cd-help-inline"><?php echo $form->getError('username');?></span><?php endif;?>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="cd-control-group <?php echo $form->hasErrors('screen_name') ? 'error' : '';?>">
+            <label class="cd-control-label"><?php echo CHtml::activeLabel($form, 'screen_name');?></label>
+            <div class="cd-controls">
+                <?php echo CHtml::activeTextField($form, 'screen_name', array('class'=>'cd-text', 'tabindex'=>2));?>
+                <?php if ($form->hasErrors('screen_name')):?><span class="cd-help-inline"><?php echo $form->getError('screen_name');?></span><?php endif;?>
+                <p class="suggestion">第一印象很重要，起个响亮的名号吧</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="cd-control-group <?php echo $form->hasErrors('password') ? 'error' : '';?>">
+            <label class="cd-control-label"><?php echo CHtml::activeLabel($form, 'password');?></label>
+            <div class="cd-controls">
+                <?php echo CHtml::activePasswordField($form, 'password', array('class'=>'cd-text', 'tabindex'=>2));?>
+                <?php if ($form->hasErrors('password')):?><span class="cd-help-inline"><?php echo $form->getError('password');?></span><?php endif;?>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="cd-control-group <?php echo $form->hasErrors('captcha') ? 'error' : '';?>">
+            <label class="cd-control-label"><?php echo CHtml::activeLabel($form, 'captcha');?></label>
+            <div class="cd-controls">
+                <?php echo CHtml::activeTextField($form, 'captcha', array('class'=>'cd-captcha cd-text', 'tabindex'=>3));?>
+                <?php $this->widget('CCaptcha');?>
+                <?php if ($form->hasErrors('captcha')):?><span class="cd-help-inline"><?php echo $form->getError('captcha');?></span><?php endif;?>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="cd-control-group <?php echo $form->hasErrors('agreement') ? 'error' : '';?>">
+            <label class="cd-control-label">&nbsp;</label>
+            <div class="cd-controls cd-agreement">
+                <?php echo CHtml::activeCheckBox($form, 'agreement', array('id'=>'agreement', 'tabindex'=>5));?>
+                <label for="agreement"><?php echo CHtml::activeLabel($form, 'agreement');?></label>
+                <?php if ($form->hasErrors('agreement')):?><span class="cd-help-inline"><?php echo $form->getError('agreement');?></span><?php endif;?>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="action-buttons">
+            <?php echo CHtml::submitButton('注册', array('class'=>'cd-btn btn-primary', 'tabindex'=>6));?>
+        </div>
+        <?php echo chtml::endForm();?>
+    </div>
+    <div class="cd-sidebar fright">
+        <p class="quick-login-signup">&gt;&nbsp;已经拥有<?php echo app()->name;?>账号？<a href="<?php echo url('site/login');?>">直接登录</a></p>
+    </div>
+    <div class="clear"></div>
 </div>

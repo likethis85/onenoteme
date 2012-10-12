@@ -26,6 +26,11 @@ define('POST_STATE_DISABLED', 0);
 define('COMMENT_STATE_ENABLED', 1);
 define('COMMENT_STATE_DISABLED', 0);
 
+/* user state */
+define('USER_STATE_UNVERIFY', 0);
+define('USER_STATE_ENABLED', 1);
+define('USER_STATE_FORBIDDEN', -1);
+
 define('POST_LIST_STYLE_GRID', 'grid');
 define('POST_LIST_STYLE_WATERFALL', 'fall');
 

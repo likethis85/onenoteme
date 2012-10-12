@@ -9,6 +9,8 @@ body {background-color:#ECE5D8;}
 
 /* container */
 .cd-container {width:640px; overflow:hidden;}
+.cd-entry {background:#FFFFFF; margin:0 auto;}
+.cd-content {width:600px;}
 
 /* sidebar */
 .cd-sidebar {width:300px; overflow:hidden;}
@@ -129,16 +131,21 @@ body {background-color:#ECE5D8;}
 
 
 /* site/signup, user signup */
-.user-form {font-size:18px;}
-.user-form li {margin-bottom:20px; list-style:none;}
-.user-form label {display:inline-block; width:70px; text-align:right; margin-right:10px; color:#333;}
-.user-form .txt {height:30px; line-height:30px; font-size:18px; width:250px;}
-.user-form .captcha {width:60px;}
-.user-form span {font-size:14px; color:gray;}
-.user-form p {font-size:14px; color:#DD0000; margin:5px 0 0 85px;}
-.user-form .user-button {margin-left:80px;}
-.login-signup-tip {margin-top:50px; color:#333; text-align:center;}
 
+/* login form */
+.login-signup h2 {margin:0 auto 30px; line-heig2ht:0;}
+.login-form {padding-bottom:100px;}
+.login-form .cd-control-group {margin:18px 0;}
+.login-form .cd-control-group .cd-control-label {width:70px;}
+.login-form .cd-controls label {font-size:12px;}
+.login-form .cd-controls.agreement input, .login-form .cd-controls.rememberme input {margin-bottom:2px;}
+.login-form .cd-controls.agreement label, .login-form .cd-controls.rememberme label {margin-left:5px;}
+.login-form .suggestion {color:gray; font-size:12px; clear:both; margin-top:2px;}
+.login-form .action-buttons {padding-left:90px;}
+.login-form .action-buttons .cd-btn {padding:4px 18px;}
+.login-form .refresh-captcha {font-size:12px;}
+.quick-login-signup {margin-top:100px;}
+input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 
 
 /* tag/list */
@@ -164,7 +171,7 @@ body {background-color:#ECE5D8;}
 .post-item .post-author {color:gray; margin-bottom:10px; font-size:12px;}
 .post-item .item-detail .item-content {line-height:22px;}
 .post-item .post-tags {margin:10px 0 0;}
-.post-list .item-shadow {height:20px; background-position:0 -275px;}
+.post-list .item-shadow {height:15px; background-position:0 -275px;}
 .post-item .item-toolbar {margin:15px 0 0;}
 .post-item .item-toolbar {list-style:none;}
 .item-toolbar a {display:block; height:28px; line-height:30px; text-indent:36px; width:80px; border-radius:3px; border:1px solid #DFD5CB; color:#9E8C7B;}

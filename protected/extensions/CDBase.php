@@ -5,6 +5,16 @@ class CDBase
     const FILE_NO_WRITABLE = -2; // '目录不可写';
     const VERSION = '1.0';
     
+
+    public static function encryptPassword($password)
+    {
+        $pwd = '';
+        if (!empty($password))
+            $pwd = md5($password);
+        
+        return $pwd;
+    }
+    
     /**
      * 获取客户端IP地址
      * @return string 客户端IP地址
