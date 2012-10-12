@@ -1,14 +1,16 @@
 $(function(){
-	$('#quick-login').dialog({
-		autoOpen: false,
-	    show: 'fade',
-	    modal: true,
-	    draggable: false,
-	    resizable: false,
-	    width: 540,
-	    height:280,
-	    dialogClass: 'quick-login'
-	});
+	if ($('#quick-login').length > 0) {
+		$('#quick-login').dialog({
+			autoOpen: false,
+		    show: 'fade',
+		    modal: true,
+		    draggable: false,
+		    resizable: false,
+		    width: 540,
+		    height:280,
+		    dialogClass: 'quick-login'
+		});
+	}
 });
 
 
