@@ -86,9 +86,9 @@ class TagController extends Controller
 
         $models = Post::model()->findAll($criteria);
         
-        $this->pageTitle = $name . '相关段子 - 挖段子';
+        $this->pageTitle = "与{$name}相关的笑话、冷图、视频 - 挖段子";
         $this->setKeywords("{$name}相关段子,{$name}相关冷笑话,{$name}相关糗事,{$name}相关语录");
-        $this->setDescription("与{$name}有关的相关段子、笑话、冷笑话、糗事、经典语录");
+        $this->setDescription("与{$name}有关的相关段子、笑话、冷笑话、糗事、经典语录、冷图、美女写真、视频");
         
         $this->channel = 'tag';
         $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'posts';
