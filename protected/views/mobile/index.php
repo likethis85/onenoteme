@@ -10,12 +10,15 @@
     </div>
     <?php if ($index == 1):?>
     <div class="admob">
-        <script type="text/javascript">
-        alimama_pid="mm_12551250_2904829_10392377";
-        alimama_width=300;
-        alimama_height=250;
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-9725980429199769";
+        /* wdz_mobile */
+        google_ad_slot = "7150807903";
+        google_ad_width = 320;
+        google_ad_height = 50;
+        //-->
         </script>
-        <script src="http://a.alimama.cn/inf.js" type="text/javascript"></script>
+        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
     </div>
     <?php endif;?>
     <?php endforeach;?>
