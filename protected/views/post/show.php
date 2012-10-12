@@ -9,6 +9,18 @@
         <?php elseif ($post->bmiddlePic):?>
         <div class="content-block post-picture"><?php echo l(CHtml::image($post->bmiddlePic, $post->filterContent . ', ' . $post->getTagText(',')), aurl('post/originalpic', array('id'=>$post->id)), array('target'=>'_blank', 'title'=>$post->filterContent));?></div>
         <?php endif;?>
+        <div class="cdc-block">
+            <script type="text/javascript">
+                netease_union_user_id = 6156606;
+                netease_union_site_id = 25143;
+                netease_union_worktype = 15;
+                netease_union_promote_type = 3;
+                netease_union_width = 580;
+                netease_union_height = 90;
+                netease_union_link_id = 672;
+            </script>
+            <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
+        </div>
         <div class="toolbar radius3px">
     		<div class="content-block post-arrows fleft">
                 <a class="site-bg arrow-up" data-id="<?php echo $post->id;?>" data-value="1" data-url="<?php echo aurl('post/score');?>" href="javascript:void(0);">喜欢</a>
