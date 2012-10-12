@@ -1,18 +1,3 @@
-$(function(){
-	if ($('#quick-login').length > 0) {
-		$('#quick-login').dialog({
-			autoOpen: false,
-		    show: 'fade',
-		    modal: true,
-		    draggable: false,
-		    resizable: false,
-		    width: 540,
-		    height:280,
-		    dialogClass: 'quick-login'
-		});
-	}
-});
-
 
 var Waduanzi = {
 	IncreasePostViewNums: function(postid, url){
@@ -155,6 +140,21 @@ var Waduanzi = {
 		xhr.fail(function(){
 			form.find('.save-caption-loader').hide();
 			$('#caption-error').html('发送请求错误！').show();
+		});
+	}
+};
+
+Waduanzi.initDialog = function(){
+	if ($('#quick-login').length > 0) {
+		$('#quick-login').dialog({
+			autoOpen: false,
+		    show: 'fade',
+		    modal: true,
+		    draggable: false,
+		    resizable: false,
+		    width: 540,
+		    height:280,
+		    dialogClass: 'quick-login'
 		});
 	}
 };
