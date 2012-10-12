@@ -40,6 +40,8 @@ body {background-color:#ECE5D8;}
 .panel20 {padding:20px;}
 .panel15 {padding:15px;}
 .panel10 {padding:10px;}
+.panel.bottom10px {margin-bottom:10px;}
+.panel.bottom15px {margin-bottom:15px;}
 
 /* waterfall */
 #waterfall-container {margin:0 auto;}

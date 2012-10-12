@@ -9,7 +9,7 @@
 <?php $this->renderPartial('/post/grid_list', array('models' => $models, 'pages' => $pages));?>
 </div>
 <div class="fright cd-sidebar">
-    <div class="panel panel15"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
+    <div class="panel panel15 bottom10px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
     <div class="cdc-block">
         <script type="text/javascript"><!--
         google_ad_client = "ca-pub-9725980429199769";
