@@ -173,7 +173,7 @@ Waduanzi.switchImageSize = function(event){
 
 Waduanzi.postUpDownScore = function(event){
 	event.preventDefault();
-	$('#quick-login').dialog('open');
+	//$('#quick-login').dialog('open');
 	var tthis = $(this);
 	var itemDiv = tthis.parents('.post-item');
 	var pid = itemDiv.attr('data-id');

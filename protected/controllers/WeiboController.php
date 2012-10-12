@@ -18,7 +18,7 @@ class WeiboController extends Controller
         $code = strip_tags(trim($code));
         $callback = aurl('weibo/sinacb');
         $url = sprintf('https://api.weibo.com/oauth2/access_token?grant_type=authorization_code&redirect_uri=%s&code=%s', $callback, $code);
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->basic_auth(WEIBO_APP_KEY, WEIBO_APP_SECRET);
         $curl->post($url);
         if ($curl->errno() != 0)
@@ -55,7 +55,7 @@ class WeiboController extends Controller
         $url = 'https://api.weibo.com/2/users/show.json';
         $data = array('source' => WEIBO_APP_KEY, 'access_token' => self::$_accessToken, 'uid' => $uid);
         
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->get($url, $data);
         if ($curl->errno() == 0) {
             $userinfo = json_decode($curl->rawdata(), true);
@@ -129,7 +129,7 @@ class WeiboController extends Controller
         self::$_userID = strip_tags(trim($openid));
         $callback = aurl('weibo/qqcb');
         $url = sprintf('https://open.t.qq.com/cgi-bin/oauth2/access_token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s', QQT_APP_KEY, QQT_APP_SECRET, $callback, $code);
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->post($url);
         if ($curl->errno() != 0)
             throw new CHttpException(503, '获取token出错');
@@ -179,7 +179,7 @@ class WeiboController extends Controller
             'format' => 'json',
         );
         
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->get($url, $data);
         if ($curl->errno() == 0) {
             $data = json_decode($curl->rawdata(), true);
