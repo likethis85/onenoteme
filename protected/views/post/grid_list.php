@@ -67,8 +67,12 @@ $(function(){
 });
 </script>
 
-<?php if (user()->getIsGuest()) cs()->registerCoreScript('jquery.ui');?>
-<?php cs()->registerCssFile(cs()->getCoreScriptUrl().'/jui/css/base/jquery-ui.css');?>
+<?php
+if (user()->getIsGuest()) {
+    cs()->registerCoreScript('jquery.ui');
+    cs()->registerCssFile(cs()->getCoreScriptUrl().'/jui/css/base/jquery-ui.css');
+}
+?>
 
 
 

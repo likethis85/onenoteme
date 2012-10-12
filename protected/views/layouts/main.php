@@ -59,6 +59,10 @@
 </body>
 </html>
 
-<?php if (user()->getIsGuest()) cs()->registerCoreScript('jquery.ui');?>
-<?php cs()->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END);?>
+<?php
+cs()->registerCoreScript('jquery');
+cs()->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END);
+?>
+
+
 
