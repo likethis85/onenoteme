@@ -184,7 +184,10 @@ Waduanzi.postUpDownScore = function(event){
 		type: 'POST',
 		url: url,
 		data: {pid: pid, score: score},
-		dataType: 'text'
+		dataType: 'text',
+		beforeSend: function(){
+			tthis.toggleClass('voted');
+		}
 	});
 	
 	jqXhr.done(function(data){
@@ -197,16 +200,18 @@ Waduanzi.postUpDownScore = function(event){
 				newScore = old - 1;
 				
 			tthis.text(newScore);
-			tthis.addClass('voted disabled');
-			itemDiv.find('a.downscore').addClass('disabled');
+			itemDiv.find('a.upscore, a.downscore').addClass('disabled');
 			itemDiv.find('.item-toolbar').off('click', 'a.upscore, a.downscore');
 		}
-		else
+		else {
 			alert('x');
+			tthis.toggleClass('voted');
+		}
 	});
 	
 	jqXhr.fail(function(){
 		alert('x');
+		tthis.toggleClass('voted');
 	});
 };
 
