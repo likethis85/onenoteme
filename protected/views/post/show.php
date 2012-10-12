@@ -9,7 +9,7 @@
         <?php elseif ($post->bmiddlePic):?>
         <div class="content-block post-picture"><?php echo l(CHtml::image($post->bmiddlePic, $post->filterContent . ', ' . $post->getTagText(',')), aurl('post/originalpic', array('id'=>$post->id)), array('target'=>'_blank', 'title'=>$post->filterContent));?></div>
         <?php endif;?>
-        <div class="cdc-block">
+        <div class="cdc-block border">
             <script type="text/javascript">
                 netease_union_user_id = 6156606;
                 netease_union_site_id = 25143;
