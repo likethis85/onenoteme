@@ -9,7 +9,7 @@
 <?php $this->renderPartial('/post/grid_list', array('models' => $models, 'pages' => $pages));?>
 </div>
 <div class="fright cd-sidebar">
-    <div class="cdc-block border">
+    <div class="cdc-block cd-border">
         <script type="text/javascript">
             netease_union_user_id = 6156606;
             netease_union_site_id = 24344;
@@ -22,7 +22,7 @@
         <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
     </div>
     <div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
-    <div class="cdc-block border">
+    <div class="cdc-block cd-border">
         <script type="text/javascript">
             netease_union_user_id = 6156606;
             netease_union_site_id = 25143;
