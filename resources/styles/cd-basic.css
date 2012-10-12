@@ -59,6 +59,8 @@ a:link {text-decoration:none; color:#4E76C9; text-decoration:none; cursor:pointe
 a:visited {color:#4E76C9; text-decoration:none;}
 a:hover {text-decoration:none;}
 
+.clearfix{*zoom:1;}.clearfix:before,.clearfix:after{display:table;content:"";}
+.clearfix:after{clear:both;}
 .clear {clear:both; font-size:0px; height:0px; line-height:0px; content:""; display:block;}
 .radius3px {-moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;}
 .radius4px {-moz-border-radius:4px; -webkit-border-radius:4px; border-radius:4px;}
