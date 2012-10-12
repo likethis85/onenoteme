@@ -10,6 +10,9 @@
 </div>
 <div class="fright cd-sidebar">
     <div class="cdc-block cd-border">
+        <img src="<?php echo sbu('images/qrcode_wx.jpg');?>" class="weixin-qrcode" alt="挖段子微信二维码"  title="用微信扫描二维码添加挖段子公众号" />
+    </div>
+    <div class="cdc-block cd-border">
         <script type="text/javascript">
             netease_union_user_id = 6156606;
             netease_union_site_id = 24344;
