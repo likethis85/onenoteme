@@ -10,15 +10,16 @@
     </div>
     <?php if ($index == 1):?>
     <div class="admob">
-        <script type="text/javascript"><!--
-        google_ad_client = "ca-pub-9725980429199769";
-        /* wdz_mobile */
-        google_ad_slot = "7150807903";
-        google_ad_width = 320;
-        google_ad_height = 50;
-        //-->
+        <script type="text/javascript">
+            netease_union_user_id = 6156606;
+            netease_union_site_id = 25143;
+            netease_union_worktype = 15;
+            netease_union_promote_type = 3;
+            netease_union_width = 300;
+            netease_union_height = 120;
+            netease_union_link_id = 659;
         </script>
-        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+        <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
     </div>
     <?php endif;?>
     <?php endforeach;?>

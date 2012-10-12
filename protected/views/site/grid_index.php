@@ -9,17 +9,18 @@
 <?php $this->renderPartial('/post/grid_list', array('models' => $models, 'pages' => $pages));?>
 </div>
 <div class="fright cd-sidebar">
-    <div class="panel panel15 bottom10px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
+    <div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
     <div class="cdc-block">
-        <script type="text/javascript"><!--
-        google_ad_client = "ca-pub-9725980429199769";
-        /* wdz_300x250 */
-        google_ad_slot = "0475885806";
-        google_ad_width = 300;
-        google_ad_height = 250;
-        //-->
+        <script type="text/javascript">
+            netease_union_user_id = 6156606;
+            netease_union_site_id = 25143;
+            netease_union_worktype = 15;
+            netease_union_promote_type = 3;
+            netease_union_width = 300;
+            netease_union_height = 250;
+            netease_union_link_id = 660;
         </script>
-        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+        <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
     </div>
 </div>
 <div class="clear"></div>
