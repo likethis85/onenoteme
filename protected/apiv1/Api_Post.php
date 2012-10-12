@@ -340,7 +340,7 @@ class Api_Post extends ApiBase
         	    $im->revert();
         	    if ($im->width() > IMAGE_BMIDDLE_MAX_WIDTH)
         	        $im->resizeToWidth(IMAGE_BMIDDLE_MAX_WIDTH);
-        	    $im->saveAsJpeg($middleFileName, 50);
+        	    $im->saveAsJpeg($middleFileName, 75);
         	    $post->bmiddle_pic = fbu($path['url'] . $im->filename());
         	    $post->bmiddle_width = $im->width();
         	    $post->bmiddle_height = $im->height();
