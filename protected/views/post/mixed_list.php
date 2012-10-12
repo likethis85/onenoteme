@@ -1,4 +1,4 @@
-<?php if ($fallTitle):?>"<h2 class="cd-caption"><?php echo $fallTitle;?></h2><?php endif;?>
+<?php if ($fallTitle):?><h2 class="cd-caption">与标签“<?php echo $fallTitle;?>”相关的内容</h2><?php endif;?>
 <div id="waterfall-container">
     <?php foreach ((array)$models as $index => $model):?>
     <div class="waterfall-item">
