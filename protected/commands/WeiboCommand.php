@@ -294,17 +294,17 @@ class WeiboCommand extends CConsoleCommand
     {
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('channel_id'=>CHANNEL_DUANZI, 'weibo_id' => ''));
-        $criteria->order = 't.id asc';
+        $criteria->order = 't.id desc';
         $models[] = Post::model()->find($criteria);
     
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('channel_id'=>CHANNEL_LENGTU, 'weibo_id' => ''));
-        $criteria->order = 't.id asc';
+        $criteria->order = 't.id desc';
         $models[] = Post::model()->find($criteria);
     
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('channel_id'=>CHANNEL_GIRL, 'weibo_id' => ''));
-        $criteria->order = 't.id asc';
+        $criteria->order = 't.id desc';
         $models[] = Post::model()->find($criteria);
     
         return $models;
