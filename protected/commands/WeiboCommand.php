@@ -30,7 +30,7 @@ class WeiboCommand extends CConsoleCommand
             'type' => (int)$typeID,
         );
         
-        $fetch = new CdCurl();
+        $fetch = new CDCurl();
         $fetch->ssl()->get($url, $params);
         $jsonData = $fetch->rawdata();
         
@@ -92,7 +92,7 @@ class WeiboCommand extends CConsoleCommand
             'trim_user' => 0,
         );
         
-        $fetch = new CdCurl();
+        $fetch = new CDCurl();
         $fetch->ssl()->get($url, $params);
         $jsonData = $fetch->rawdata();
         
@@ -329,7 +329,7 @@ class WeiboCommand extends CConsoleCommand
         foreach ($data as $key => $item)
             $args[] = urlencode($key) . '=' . $item;
     
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->post($url, join('&', $args));
         //         var_dump($curl->rawdata());
         //         var_dump($curl->errno());exit;
@@ -345,7 +345,7 @@ class WeiboCommand extends CConsoleCommand
     {
         if (empty($model->content)) return false;
     
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->get($model->getBmiddlePic());
         if ($curl->errno() == 0) {
             $picData = $curl->rawdata();
@@ -370,7 +370,7 @@ class WeiboCommand extends CConsoleCommand
             'pic' => '@' . $picfile,
         );
     
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->post($url, $data);
         @unlink($picfile);
         if ($curl->errno() == 0) {
@@ -389,7 +389,7 @@ class WeiboCommand extends CConsoleCommand
         'url_long' => $longUrl,
         );
     
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->get($url, $data);
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
@@ -424,7 +424,7 @@ class WeiboCommand extends CConsoleCommand
         foreach ($data as $key => $item)
             $args[] = urlencode($key) . '=' . $item;
     
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->post($url, join('&', $args));
         //         var_dump($curl->rawdata());
         //         var_dump($curl->errno());exit;
@@ -462,7 +462,7 @@ class WeiboCommand extends CConsoleCommand
         foreach ($data as $key => $item)
             $args[] = urlencode($key) . '=' . $item;
     
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->post($url, join('&', $args));
         $jsonData = json_decode($curl->rawdata(), true);
 //         var_dump($curl->rawdata());
