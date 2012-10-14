@@ -14,7 +14,7 @@ class WeiboController extends AdminController
         $code = strip_tags(trim($code));
         $callback = aurl('admin/weibo/sinacb');
         $url = sprintf('https://api.weibo.com/oauth2/access_token?grant_type=authorization_code&redirect_uri=%s&code=%s', $callback, $code);
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->basic_auth(WEIBO_APP_KEY, WEIBO_APP_SECRET);
         $curl->post($url);
         if ($curl->errno() != 0)
@@ -46,7 +46,7 @@ class WeiboController extends AdminController
         $code = strip_tags(trim($code));
         $callback = aurl('admin/weibo/qqtcb');
         $url = sprintf('https://open.t.qq.com/cgi-bin/oauth2/access_token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s', QQT_APP_KEY, QQT_APP_SECRET, $callback, $code);
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->post($url);
         if ($curl->errno() != 0)
             throw new CHttpException(503, '获取token出错');
@@ -160,7 +160,7 @@ class WeiboController extends AdminController
         foreach ($data as $key => $item)
             $args[] = urlencode($key) . '=' . $item;
         
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->post($url, join('&', $args));
 //         var_dump($curl->rawdata());
 //         var_dump($curl->errno());exit;
@@ -176,7 +176,7 @@ class WeiboController extends AdminController
     {
         if (empty($model->content)) return false;
         
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->get($model->getBmiddlePic());
         if ($curl->errno() == 0) {
             $picData = $curl->rawdata();
@@ -200,7 +200,7 @@ class WeiboController extends AdminController
             'pic' => '@' . $picfile,
         );
         
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->post($url, $data);
         @unlink($picfile);
         if ($curl->errno() == 0) {
@@ -219,7 +219,7 @@ class WeiboController extends AdminController
             'url_long' => $longUrl,
         );
         
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->get($url, $data);
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
@@ -253,7 +253,7 @@ class WeiboController extends AdminController
         foreach ($data as $key => $item)
             $args[] = urlencode($key) . '=' . $item;
         
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->post($url, join('&', $args));
         //         var_dump($curl->rawdata());
         //         var_dump($curl->errno());exit;
@@ -290,7 +290,7 @@ class WeiboController extends AdminController
         foreach ($data as $key => $item)
             $args[] = urlencode($key) . '=' . $item;
         
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->post($url, join('&', $args));
         $jsonData = json_decode($curl->rawdata(), true);
 //         var_dump($curl->rawdata());
@@ -317,7 +317,7 @@ class WeiboController extends AdminController
         $code = strip_tags(trim($code));
         $callback = aurl('admin/weibo/neteasecb');
         $url = sprintf('https://api.t.163.com/oauth2/access_token?client_id=%s&client_secret=%s&grant_type=authorization_code&redirect_uri=%s&code=%s', NETEASE_APP_KEY, NETEASE_APP_SECRET, $callback, $code);
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->ssl()->post($url);
         if ($curl->errno() != 0)
             throw new CException(503, '获取access_token出错');
@@ -354,7 +354,7 @@ class WeiboController extends AdminController
         foreach ($data as $key => $item)
             $args[] = urlencode($key) . '=' . $item;
         
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->ssl()->post($url, join('&', $args));
         if ($curl->errno() == 0) {
             $data = json_decode($curl->rawdata(), true);
@@ -368,7 +368,7 @@ class WeiboController extends AdminController
     {
         if (empty($imageUrl)) return false;
     
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->get($imageUrl);
         if ($curl->errno() == 0) {
             $picData = $curl->rawdata();
@@ -388,7 +388,7 @@ class WeiboController extends AdminController
             'pic' => '@' . $picfile,
         );
     
-        $curl = new CdCurl();
+        $curl = new CDCurl();
         $curl->ssl()->post($url, $data);
         @unlink($picfile);
         if ($curl->errno() == 0) {
