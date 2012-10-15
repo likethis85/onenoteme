@@ -290,7 +290,7 @@ class Post extends CActiveRecord
         
         $this->user_name = strip_tags(trim($this->user_name));
         if (empty($this->title))
-            $this->title = mb_substr($this->content, 0, 20, app()->charset);
+            $this->title = mb_substr($this->content, 0, 30, app()->charset);
         if ($this->tags) {
             $tags = join(',', Tag::filterTagsArray($this->tags));
             $this->tags = $tags;

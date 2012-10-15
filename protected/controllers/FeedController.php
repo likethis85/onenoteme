@@ -40,20 +40,19 @@ class FeedController extends Controller
     public function actionChannel($cid)
     {
         $cid = (int)$cid;
-        $where = 'state = :enabled';
-        $params = array(':enabled'=>POST_STATE_ENABLED);
-        if ($cid > 0) {
-            $where = array('and', 'channel_id = :channelID', $where);
-            $params[':channelID'] = $cid;
-        }
-        else
+        $channels = param('channels');
+        if (!in_array($cid, $channels))
             throw new CHttpException(503, '此频道暂时没有开通');
-        
+
+        $where = array('and', 'channel_id = :channelID', 'state = :enabled');
+        $params = array(':channelID'=>$cid, ':enabled'=>POST_STATE_ENABLED);
         $cmd = app()->getDb()->createCommand()
             ->where($where, $params);
         
         $rows = self::fetchPosts($cmd);
-        self::outputXml(app()->name, $rows);
+        
+        $feedName = app()->name . ' » ' . $channels[$cid];
+        self::outputXml($feedName, $rows);
         exit(0);
     }
     
@@ -91,7 +90,7 @@ class FeedController extends Controller
         $channel = new DOMElement('channel');
         $rss->appendChild($channel);
         $channel->appendChild(new DOMElement('copyright', 'Copyright (c) 2012 ' . app()->name . '. All rights reserved.'));
-        $channel->appendChild(new DOMElement('title', $feedname . ' - ' . param('shortdesc')));
+        $channel->appendChild(new DOMElement('title', $feedname));
         $channel->appendChild(new DOMElement('link', app()->homeUrl));
         $channel->appendChild(new DOMElement('description', param('shortdesc')));
         $channel->appendChild(new DOMElement('lastBuildDate', date('D, d M Y H:i:s O', $_SERVER['REQUEST_TIME'])));
