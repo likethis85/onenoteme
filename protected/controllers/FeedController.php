@@ -51,7 +51,7 @@ class FeedController extends Controller
         
         $rows = self::fetchPosts($cmd);
         
-        $feedName = app()->name . ' » ' . $channels[$cid];
+        $feedname = app()->name . ' » ' . $channels[$cid];
         self::outputXml($feedName, $rows);
         exit(0);
     }
