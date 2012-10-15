@@ -1,0 +1,1 @@
+<div class="post-detail"><?php echo $model->content;?></div>

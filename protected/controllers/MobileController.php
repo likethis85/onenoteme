@@ -108,7 +108,6 @@ class MobileController extends Controller
         ));
     }
     
-    
     public function actionChannel($id)
     {
         $id = (int)$id;
@@ -135,6 +134,19 @@ class MobileController extends Controller
             'models' => $models,
             'pages' => $pages,
         ));
+    }
+    
+    public function actionShow($id)
+    {
+        $id = (int)$id;
+        if ($id < 0)
+            throw new CHttpException(403, '该段子不存在');
+        
+        $model = Post::model()->findByPk($id);
+        if ($model === null)
+            throw new CHttpException(403, '该段子不存在');
+        
+        $this->render('show', array('model'=>$model));
     }
 
     public function actionAboutme()
