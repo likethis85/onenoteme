@@ -16,12 +16,28 @@ class FeedController extends Controller
             array(
                 'COutputCache + index',
                 'duration' => $duration,
+            ),
+            array(
+                'COutputCache + channel',
+                'duration' => $duration,
                 'varyByParam' => array('cid'),
-            )
+            ),
         );
     }
     
-    public function actionIndex($cid=0)
+    public function actionIndex()
+    {
+        $where = 'state = :enabled';
+        $params = array(':enabled'=>POST_STATE_ENABLED);
+        $cmd = app()->getDb()->createCommand()
+            ->where($where, $params);
+        
+        $rows = self::fetchPosts($cmd);
+        self::outputXml(app()->name, $rows);
+        exit(0);
+    }
+    
+    public function actionChannel($cid)
     {
         $cid = (int)$cid;
         $where = 'state = :enabled';
@@ -30,6 +46,9 @@ class FeedController extends Controller
             $where = array('and', 'channel_id = :channelID', $where);
             $params[':channelID'] = $cid;
         }
+        else
+            throw new CHttpException(503, '此频道暂时没有开通');
+        
         $cmd = app()->getDb()->createCommand()
             ->where($where, $params);
         
