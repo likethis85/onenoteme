@@ -10,7 +10,7 @@
 </div>
 <div class="fright cd-sidebar">
     <div class="cdc-block cd-border cd-qrcode">
-        <h4>微信扫描左图订阅我们爱讲冷笑话，每日最冷编辑推送</h4>
+        <h4>微信扫描下图订阅挖段子，每日精品段子推送</h4>
         <img src="<?php echo sbu('images/qrcode_wx.jpg');?>" class="weixin-qrcode" alt="挖段子微信二维码"  title="用微信扫描二维码添加挖段子公众号" />
     </div>
     <div class="cdc-block cd-border">
