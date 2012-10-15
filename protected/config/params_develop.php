@@ -1,5 +1,6 @@
 <?php
 return array(
+    'shortdesc' => '笑死人不偿命 - 每日精品笑话连载',
 
     'autoLoginDuration' => 3600 * 24 * 7,
     'waterfall_post_count_page' => 32,
