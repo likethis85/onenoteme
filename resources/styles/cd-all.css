@@ -206,7 +206,7 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .links-list {margin-top:20px;}
 .links-list .link-title {margin:0 0 5px; padding:0; font-size:12px;}
 .links-list .link-title a {color:red;}
-.links-list ul.links,.links-list ul.links li {list-style:none;}
+.links-list ul.links {margin:0; list-style:none;}
 .links-list ul.links li {float:left; margin-right:10px;}
 .links-list ul.links li a {font-size:12px;}
 

@@ -86,6 +86,7 @@ return array(
                 'originalpic/<id:\d+>' => 'post/originalpic',
                 'tags' => 'tag/list',
                 'tag-<name:[\w\s\%\-\+\.]+>' => 'tag/posts',
+                'feed/<cid:\d+>' => 'feed/index',
             ),
         ),
         'session' => array(

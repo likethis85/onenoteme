@@ -64,6 +64,7 @@ class SiteController extends Controller
         else
             $models = Post::model()->findAll($criteria);
         
+        cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed'), null, array('title'=>'RSS 2.0'));
         $this->pageTitle = '挖段子 - 笑死人不偿命 - 每日精品笑话连载';
         $this->setKeywords('挖笑话,挖冷图,挖福利,每日精品笑话连载,网络趣图，漫画,邪恶漫画,趣图百科,暴走漫画连载,阳光正妹,爱正妹,糗事百科,笑话大全 爆笑,黄色笑话,幽默笑话,成人笑话,经典笑话,笑话短信,爆笑笑话,幽默笑话大全,夫妻笑话,笑话集锦,搞笑笑话,荤笑话,极品笑话,黄段子,爆笑短信,最新笑话,最全的笑话,经典语录,糗事百科,秘密,笑话段子,经典笑话,笑话大全,搞笑大全,我们爱讲冷笑话,哈哈笑');
         $this->setDescription('最新发布的段子，每日精品笑话连载。网罗互联网各种精品段子，各种糗事，各种笑话，各种秘密，各种经典语录，各种有趣的图片，各种漂亮mm校花模特正妹，应有尽有。烦了、累了、无聊了，就来挖段子逛一逛。');
