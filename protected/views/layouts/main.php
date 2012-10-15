@@ -63,7 +63,7 @@
 <?php
 cs()->registerCoreScript('jquery');
 cs()->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END);
-cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed'), null, array('title'=>'挖段子 RSS 2.0'));
+cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed'), null, array('title'=>app()->name . ' » Feed'));
 ?>
 
 
