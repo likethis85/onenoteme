@@ -223,7 +223,9 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .friend-links, .friend-links li {list-style:none; margin:0;}
 
 /* weixin qrcode */
+.qrcode h4 {margin:0; background:#EFEFEF; line-height:36px;}
 .weixin-qrcode {width:100%;}
+
 
 /* social list */
 .social-widget-list {list-style:none; margin:0;}

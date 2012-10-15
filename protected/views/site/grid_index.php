@@ -9,7 +9,8 @@
 <?php $this->renderPartial('/post/grid_list', array('models' => $models, 'pages' => $pages));?>
 </div>
 <div class="fright cd-sidebar">
-    <div class="cdc-block cd-border">
+    <div class="cdc-block cd-border cd-qrcode">
+        <h4>微信扫描左图订阅我们爱讲冷笑话，每日最冷编辑推送</h4>
         <img src="<?php echo sbu('images/qrcode_wx.jpg');?>" class="weixin-qrcode" alt="挖段子微信二维码"  title="用微信扫描二维码添加挖段子公众号" />
     </div>
     <div class="cdc-block cd-border">
