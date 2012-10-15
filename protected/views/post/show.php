@@ -69,6 +69,7 @@
             <script type="text/javascript" id="wumiiRelatedItems"></script>
         </div>
         <?php endif;?>
+        <a name="comments"></a>
         <form action="<?php echo aurl('comment/create');?>" method="post" class="content-block comment-form" id="comment-form">
             <input type="hidden" name="postid" value="<?php echo $post->id;?>" />
             <textarea name="content" id="comment-content" class="mini-content fleft radius3px">请输入评论内容。。。</textarea>

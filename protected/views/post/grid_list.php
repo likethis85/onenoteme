@@ -47,7 +47,7 @@
         	<li class="fleft"><a href="javascript:void(0);" class="upscore site-bg" data-score="1" data-url="<?php echo aurl('post/score');?>"><?php echo $model->up_score;?></a></li>
         	<li class="fleft"><a href="javascript:void(0);" class="downscore site-bg" data-score="-1" data-url="<?php echo aurl('post/score');?>"><?php echo $model->downScore;?></a></li>
         	<li class="fright"><a href="javascript:void(0);" class="share site-bg">分享</a></li>
-        	<li class="fright"><a href="javascript:void(0);" class="comment site-bg"><?php echo $model->comment_nums ? $model->comment_nums : '评论';?></a></li>
+        	<li class="fright"><a href="<?php echo aurl('post/show', array('id' => $model->id, '', 'comments'));?>" class="comment site-bg"><?php echo $model->comment_nums ? $model->comment_nums : '评论';?></a></li>
         	<div class="clear"></div>
         </ul>
         <div class="comment-list comment-list-<?php echo $model->id;?> hide"></div>
