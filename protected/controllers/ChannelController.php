@@ -1,7 +1,7 @@
 <?php
 class ChannelController extends Controller
 {
-    public function filters()
+    public function fi2lters()
     {
         $duration = 300;
         return array(

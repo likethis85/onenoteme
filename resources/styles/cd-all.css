@@ -46,6 +46,20 @@ body {background-color:#ECE5D8;}
 .panel.bottom10px {margin-bottom:10px;}
 .panel.bottom15px {margin-bottom:15px;}
 
+/* hot-keyword */
+.hot-keyword {list-style:none; margin:0;}
+.hot-keyword li {display:block; float:left; margin-right:10px; height:25px; line-height:25px;}
+
+/* view mode switcher */
+ul.mode-switch {width:70px; height:25px; po2sition:absolute; overflow:hidden; margin:0; list-style:none; list-style-image:none; border-radius:10px;}
+ul.mode-switch li {width:35px; height:25px; display:block; float:left; overflow:hidden; margin:0;}
+ul.mode-switch a {display:block; width:25px; height:25px; background:#EFEFEF url(http://www.geekpark.net/public/img/icons/view_mode.gif) no-repeat; text-indent:-9999px;}
+ul.mode-switch .on a {background-color:#C3E7A1;}
+ul.mode-switch .fall a {background-position:2px -75px; padding-left:10px;}
+ul.mode-switch .fall.on a {background-position:2px -50px;}
+ul.mode-switch .list a {background-position:-2px -25px; padding-right:10px;}
+ul.mode-switch .list.on a {background-position:-2px 0;}
+
 /* waterfall */
 #waterfall-container {margin:0 auto;}
 .waterfall-item {width:227px; margin:5px; padding:10px 0; float:left; color:#292A2B; background:#FBFBFB; font-size:14px; text-align:center; cursor:pointer;}
@@ -215,7 +229,7 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 #wumiiBtnDiv {display:none;}
 
 /* app list */
-.apps-list {text-align:center; margin-bottom:15px;}
+.apps-list {text-align:center; height:25px; line-height:25px;}
 .apps-list a, .apps-list span {font-size:16px!important; margin:0 20px;}
 .apps-list span {color:red;}
 

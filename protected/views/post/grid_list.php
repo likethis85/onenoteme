@@ -1,3 +1,13 @@
+<div class="panel panel10 bottom10px">
+    <ul class="fleft hot-keyword">
+        <li>挖段子全新改版上线！</li>
+    </ul>
+    <ul class="mode-switch fright">
+        <li class="fall"><a href="<?php echo aurl($this->route, array('s'=>POST_LIST_STYLE_WATERFALL));?>">缩略图</a></li>
+        <li class="list on"><a href="<?php echo aurl($this->route);?>">列表</a></li>
+    </ul>
+    <div class="clear"></div>
+</div>
 <div class="post-list">
     <?php foreach ((array)$models as $key => $model):?>
     <div class="panel panel20 post-item" data-id="<?php echo $model->id;?>">
