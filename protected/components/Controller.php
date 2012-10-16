@@ -2,7 +2,7 @@
 class Controller extends CController
 {
     public $breadcrumbs;
-    public $channel = 'latest';
+    public $channel;
 
     public function actions()
 	{

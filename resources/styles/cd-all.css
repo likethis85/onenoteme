@@ -49,16 +49,17 @@ body {background-color:#ECE5D8;}
 /* hot-keyword */
 .hot-keyword {list-style:none; margin:0;}
 .hot-keyword li {display:block; float:left; margin-right:10px; height:25px; line-height:25px;}
+.hot-keyword .announce {margin-left:10px;}
 
 /* view mode switcher */
 ul.mode-switch {width:70px; height:25px; po2sition:absolute; overflow:hidden; margin:0; list-style:none; list-style-image:none; border-radius:10px;}
 ul.mode-switch li {width:35px; height:25px; display:block; float:left; overflow:hidden; margin:0;}
-ul.mode-switch a {display:block; width:25px; height:25px; background:#EFEFEF url(http://www.geekpark.net/public/img/icons/view_mode.gif) no-repeat; text-indent:-9999px;}
+ul.mode-switch a {display:block; width:25px; height:25px; background:#EFEFEF url(../images/sitebg.png) no-repeat; text-indent:-9999px;}
 ul.mode-switch .on a {background-color:#C3E7A1;}
-ul.mode-switch .fall a {background-position:2px -75px; padding-left:10px;}
-ul.mode-switch .fall.on a {background-position:2px -50px;}
-ul.mode-switch .list a {background-position:-2px -25px; padding-right:10px;}
-ul.mode-switch .list.on a {background-position:-2px 0;}
+ul.mode-switch .fall a {background-position:-908px -70px; padding-left:10px;}
+ul.mode-switch .fall.on a {background-position:-908px -45px;}
+ul.mode-switch .list a {background-position:-913px -20px; padding-right:10px;}
+ul.mode-switch .list.on a {background-position:-913px 5px;}
 
 /* waterfall */
 #waterfall-container {margin:0 auto;}
