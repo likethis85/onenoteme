@@ -116,7 +116,10 @@ class FeedController extends Controller
             $item->appendChild($summary);
     
             $content = $dom->createElement('content:encoded');
-            $content->appendChild($dom->createCDATASection($row['content']));
+            $contentText = $row['content'];
+            if ($row['bmiddle_pic'])
+                $contentText .= sprintf('<p><img src="%s" title="%s" alt="%s" border="0"></p>', $row['bmiddle_pic'], $row['title'], $row['title']);
+            $content->appendChild($dom->createCDATASection($contentText));
             $item->appendChild($content);
         }
     
