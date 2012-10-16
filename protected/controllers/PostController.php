@@ -206,7 +206,7 @@ class PostController extends Controller
     
     private static function fetchComments($pid)
     {
-        $duration = 60*60;
+        $duration = 60 * 10;
         
         $pid = (int)$pid;
         if ($pid <=0) return array();
