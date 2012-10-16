@@ -68,7 +68,7 @@ class PostController extends Controller
         $this->pageTitle = trim(strip_tags($post->title)) . ', ' . $post->getTagText(',') . ' - 挖段子';
         $pageKeyword = '美女写真,美女图片,美女写真,性感美女,清纯少女,大学校花,淘女郎,微女郎';
         if ($post->tags)
-            $pageKeyword = $post->getTagText(',') . $pageKeyword;
+            $pageKeyword = $post->getTagText(',') . ',' . $pageKeyword;
         $this->setKeywords($pageKeyword);
         $this->setDescription($post->content);
         
@@ -100,7 +100,7 @@ class PostController extends Controller
         $this->pageTitle = '原始图片' . ' - ' . trim(strip_tags($model->title)) . '  ' . $model->tagText;
         $pageKeyword = '美女写真,美女图片,美女写真,性感美女,清纯少女,大学校花,淘女郎,微女郎';
         if ($model->tags)
-            $pageKeyword = $model->getTagText(',') . $pageKeyword;
+            $pageKeyword = $model->getTagText(',') . ',' . $pageKeyword;
         $this->setKeywords($pageKeyword);
         $this->setDescription($model->content);
         $this->layout = 'blank';
