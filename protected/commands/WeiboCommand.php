@@ -419,7 +419,7 @@ class WeiboCommand extends CConsoleCommand
             'scope' => 'all',
             'format' => 'json',
             'content' => $content,
-            'syncflag' => 0,
+            'syncflag' => 1, // 不同步到空间
         );
         foreach ($data as $key => $item)
             $args[] = urlencode($key) . '=' . $item;
@@ -456,7 +456,7 @@ class WeiboCommand extends CConsoleCommand
             'scope' => 'all',
             'format' => 'json',
             'content' => $content,
-            'syncflag' => 0,
+            'syncflag' => 1, // 不同步到空间
             'pic_url' => $model->getBmiddlePic(),
         );
         foreach ($data as $key => $item)
