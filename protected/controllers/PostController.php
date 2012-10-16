@@ -3,13 +3,17 @@ class PostController extends Controller
 {
     public function filters()
     {
-        $originalPicDuration = 24*60*60*7;
         return array(
             'ajaxOnly  + score, views',
             'postOnly + score, views',
             array(
+                'COutputCache + show',
+                'duration' => 600,
+                'varyByParam' => array('id'),
+            ),
+            array(
                 'COutputCache + originalPic',
-                'duration' => $originalPicDuration,
+                'duration' => 24*60*60*7,
                 'varyByParam' => array('id'),
             ),
         );
@@ -62,7 +66,10 @@ class PostController extends Controller
         $commentsData = self::fetchComments($id);
         
         $this->pageTitle = trim(strip_tags($post->title)) . ', ' . $post->getTagText(',') . ' - 挖段子';
-        $this->setKeywords($this->pageTitle);
+        $pageKeyword = '美女写真,美女图片,美女写真,性感美女,清纯少女,大学校花,淘女郎,微女郎';
+        if ($post->tags)
+            $pageKeyword = $post->getTagText(',') . $pageKeyword;
+        $this->setKeywords($pageKeyword);
         $this->setDescription($post->content);
         
         $this->channel = (int)$post->channel_id;
@@ -91,6 +98,11 @@ class PostController extends Controller
             throw new CHttpException(403, '该段子不存在或未被审核');
 
         $this->pageTitle = '原始图片' . ' - ' . trim(strip_tags($model->title)) . '  ' . $model->tagText;
+        $pageKeyword = '美女写真,美女图片,美女写真,性感美女,清纯少女,大学校花,淘女郎,微女郎';
+        if ($model->tags)
+            $pageKeyword = $model->getTagText(',') . $pageKeyword;
+        $this->setKeywords($pageKeyword);
+        $this->setDescription($model->content);
         $this->layout = 'blank';
         $this->render('/post/original_pic', array('model'=>$model));
     }

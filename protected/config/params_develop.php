@@ -32,6 +32,8 @@ return array(
         CHANNEL_LENGTU => '挖冷图',
         CHANNEL_GIRL => '挖福利',
         CHANNEL_VIDEO => '挖视频',
+        CHANNEL_MUSIC => '挖音乐',
+        CHANNEL_HOTNEWS => '挖热点',
     ),
 
     'user_required_email_verfiy' => 0,
