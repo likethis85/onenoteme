@@ -27,7 +27,7 @@ class UserIdentity extends CUserIdentity
             $password = $md5 ? $this->password : md5($this->password);
             if ($this->user === null)
                 $this->errorCode = self::ERROR_USERNAME_INVALID;
-            elseif ($this->user->state == User::STATE_DISABLED)
+            elseif ($this->user->state == USER_STATE_FORBIDDEN)
                 $this->errorCode = self::ERROR_USER_FORBIDDEN;
             elseif ($this->user->password != $password) {
                 $this->errorCode = self::ERROR_PASSWORD_INVALID;

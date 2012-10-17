@@ -134,7 +134,7 @@ var BetaAdmin = {
 		var tthis = $(event.currentTarget);
 		var jqXhr = BetaAdmin.handleRow(event);
 		jqXhr.done(function(data){
-			if (data.errno == BETA_NO) {
+			if (data.errno == CD_NO) {
 			    tthis.text(data.label).toggleClass('label-important label-success');
 			}
 			else

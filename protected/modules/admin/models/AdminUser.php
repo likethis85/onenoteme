@@ -21,9 +21,9 @@ class AdminUser extends User
     public static function stateLabels()
     {
         return array(
-            USER_STATE_ENABLED => t('user_enabled', 'admin'),
-            USER_STATE_FORBIDDEN => t('user_forbidden', 'admin'),
-            USER_STATE_UNVERIFY => t('user_unverify', 'admin'),
+            USER_STATE_ENABLED => '启用',
+            USER_STATE_FORBIDDEN => '禁用',
+            USER_STATE_UNVERIFY => '未审核',
         );
     }
     
@@ -34,7 +34,7 @@ class AdminUser extends User
     
     public function getEditUrl()
     {
-        return l(t('edit', 'admin'), url('admin/user/create', array('id'=>$this->id)));
+        return l('编辑', url('admin/user/create', array('id'=>$this->id)));
     }
     
     public function getVerifyUrl()
@@ -45,19 +45,19 @@ class AdminUser extends User
     
     public function getResetPasswordUrl()
     {
-        return l(t('reset_password', 'admin'), url('admin/user/resetPassword', array('id'=>$this->id)));
+        return l('删除', url('admin/user/resetPassword', array('id'=>$this->id)));
     }
     
     public function getStateText()
     {
         if ($this->state == USER_STATE_ENABLED)
-            $html = '<span class="label label-success">' . t('user_enabled', 'admin') . '</span>';
+            $html = '<span class="label label-success">启用</span>';
 	    elseif ($this->state == USER_STATE_FORBIDDEN)
-	        $html = '<span class="label label-important">' . t('user_forbidden', 'admin') . '</span>';
+	        $html = '<span class="label label-important">禁用</span>';
 	    elseif ($this->state == USER_STATE_UNVERIFY)
-    	    $html = '<span class="label label-warning">' . t('user_unverify', 'admin') . '</span>';
+    	    $html = '<span class="label label-warning">未审核</span>';
 	    else
-	        $html = '<span class="label">Unkown</span>';
+	        $html = '<span class="label">未知</span>';
 	    
 	    return $html;
     }
@@ -67,13 +67,13 @@ class AdminUser extends User
         $url = url('admin/user/setVerify', array('id'=>$this->id));
         
         if ($this->state == USER_STATE_ENABLED)
-            $html = '<a class="row-state label label-success" href="%s">' . t('user_enabled', 'admin') . '</a>';
+            $html = '<a class="row-state label label-success" href="%s">启用</a>';
         elseif ($this->state == USER_STATE_FORBIDDEN)
-            $html = '<a class="row-state label label-important" href="%s">' . t('user_forbidden', 'admin') . '</a>';
+            $html = '<a class="row-state label label-important" href="%s">禁用</a>';
         elseif ($this->state == USER_STATE_UNVERIFY)
-            $html = '<a class="row-state label label-warning" href="%s">' . t('user_unverify', 'admin') . '</a>';
+            $html = '<a class="row-state label label-warning" href="%s">未审核</a>';
         else
-            $html = '<a class="label" href="javascript:void(0);">Unkown</a>';
+            $html = '<a class="label" href="javascript:void(0);">未知</a>';
         
         return sprintf($html, $url);
     }

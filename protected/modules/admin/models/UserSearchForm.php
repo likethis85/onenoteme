@@ -2,32 +2,32 @@
 class UserSearchForm extends CFormModel
 {
     public $userid;
-    public $email;
-    public $name;
+    public $username;
+    public $screen_name;
     public $createTime;
     public $createIp;
-    public $emailFuzzy;
-    public $nameFuzzy;
+    public $usernameFuzzy;
+    public $screenNameFuzzy;
     public $state;
     
     public function rules()
     {
         return array(
             array('userid, state', 'numerical', 'integerOnly'=>true),
-            array('email, name', 'filter', 'filter'=>'trim'),
-            array('emailFuzzy, nameFuzzy', 'in', 'range'=>array(BETA_YES, BETA_NO)),
+            array('username, screen_name', 'filter', 'filter'=>'trim'),
+            array('usernameFuzzy, screenNameFuzzy', 'in', 'range'=>array(CD_YES, CD_NO)),
         );
     }
     
     public function attributeLabels()
     {
         return array(
-            'userid' => t('userid', 'admin'),
-            'email' => t('user_email'),
-            'name' => t('user_name'),
-            'createTime' => t('create_time'),
-            'createIp' => t('create_ip'),
-            'state' => t('user_state'),
+            'userid' => 'UID',
+            'username' => '账号',
+            'screen_name' => '名字',
+            'createTime' => '创建时间',
+            'createIp' => '创建IP',
+            'state' => '状态',
         );
     }
     
@@ -38,17 +38,17 @@ class UserSearchForm extends CFormModel
         if ($this->userid)
             $criteria->addColumnCondition(array('t.id'=>$this->userid));
         
-        if ($this->email) {
-            if ($this->emailFuzzy)
-                $criteria->addSearchCondition('t.email', $this->email);
+        if ($this->username) {
+            if ($this->usernameFuzzy)
+                $criteria->addSearchCondition('t.username', $this->username);
             else
-                $criteria->addColumnCondition(array('t.email'=>$this->email));
+                $criteria->addColumnCondition(array('t.username'=>$this->username));
         }
-        if ($this->name) {
-            if ($this->nameFuzzy)
-                $criteria->addSearchCondition('t.name', $this->name);
+        if ($this->screen_name) {
+            if ($this->screenNameFuzzy)
+                $criteria->addSearchCondition('t.screen_name', $this->screen_name);
             else
-                $criteria->addColumnCondition(array('t.name'=>$this->name));
+                $criteria->addColumnCondition(array('t.screen_name'=>$this->screen_name));
         }
          
         $data = $criteria->condition ? AdminUser::fetchList($criteria) : null;

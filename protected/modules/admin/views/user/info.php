@@ -1,8 +1,8 @@
 <h4><?php echo $this->adminTitle;?></h4>
 <div class="btn-toolbar">
-    <a class="btn btn-small btn-danger" href="<?php echo url('admin/user/resetpassword', array('id'=>$model->id));?>"><?php echo t('reset_password', 'admin');?></a>
-    <a class="btn btn-small" href="<?php echo url('admin/user/create', array('id'=>$model->id));?>"><?php echo t('edit_user', 'admin');?></a>
-    <a class="btn btn-small" href="<?php echo url('admin/user/list');?>"><?php echo t('return_list_page', 'admin');?></a>
+    <a class="btn btn-small btn-danger" href="<?php echo url('admin/user/resetpassword', array('id'=>$model->id));?>">重设密码</a>
+    <a class="btn btn-small" href="<?php echo url('admin/user/create', array('id'=>$model->id));?>">编辑</a>
+    <a class="btn btn-small" href="<?php echo url('admin/user/list');?>">返回列表</a>
 </div>
 <table class="table table-striped table-bordered beta-list-table">
     <tr>
@@ -10,12 +10,12 @@
         <td><?php echo $model->id;?></td>
     </tr>
     <tr>
-        <td class="column-label"><?php echo CHtml::activeLabel($model, 'email');?></td>
-        <td><?php echo $model->email;?></td>
+        <td class="column-label"><?php echo CHtml::activeLabel($model, 'username');?></td>
+        <td><?php echo $model->username;?></td>
     </tr>
     <tr>
-        <td class="column-label"><?php echo CHtml::activeLabel($model, 'name');?></td>
-        <td><?php echo $model->name;?></td>
+        <td class="column-label"><?php echo CHtml::activeLabel($model, 'screen_name');?></td>
+        <td><?php echo $model->screen_name;?></td>
     </tr>
     <tr>
         <td class="column-label"><?php echo CHtml::activeLabel($model, 'state');?></td>

@@ -67,7 +67,7 @@ class UserController extends AdminController
 	    }
 	    else {
 	        $model = AdminUser::model()->findByPk($id);
-	        $this->adminTitle = '编辑用户 - ' . $model->name;
+	        $this->adminTitle = '编辑用户 - ' . $model->username;
 	    }
 	    
 	    if (request()->getIsPostRequest() && isset($_POST['AdminUser'])) {
@@ -82,7 +82,7 @@ class UserController extends AdminController
 	            unset($attributes['password']);
 	        
 	        if ($model->save()) {
-	            user()->setFlash('user_create_result', $model->email . '&nbsp;保存成功');
+	            user()->setFlash('user_create_result', $model->username . '&nbsp;保存成功');
 	            $this->redirect(request()->getUrl());
 	        }
 	    }
@@ -121,12 +121,12 @@ class UserController extends AdminController
 	        throw new CHttpException(500);
 	    else {
 	        if ($model->state == USER_STATE_ENABLED)
-	            $text = 'user_enabled';
+	            $text = '启用';
 	        elseif ($model->state == USER_STATE_FORBIDDEN)
-    	        $text = 'user_forbidden';
+    	        $text = '禁用';
 
 	        $data = array(
-	            'errno' => BETA_NO,
+	            'errno' => CD_NO,
 	            'label' => t($text, 'admin')
 	        );
 	        CDBase::jsonp($callback, $data);
@@ -141,7 +141,7 @@ class UserController extends AdminController
 	        throw new CHttpException(500);
 	    
 	    $criteria = new CDbCriteria();
-	    $criteria->select = array('id', 'email', 'name', 'password');
+	    $criteria->select = array('id', 'username', 'screen_name', 'password');
 	    $user = AdminUser::model()->findByPk($id, $criteria);
 	    if ($user === null)
 	        throw new CHttpException(404, '用户不存在');
@@ -150,13 +150,13 @@ class UserController extends AdminController
 	        $user->attributes = $_POST['AdminUser'];
 	        $user->encryptPassword();
 	        if ($user->save(true, array('password'))) {
-	            user()->setFlash('user_create_result', "修改&nbsp;{$user->email}&nbsp;密码成功");
+	            user()->setFlash('user_create_result', "修改&nbsp;{$user->username}&nbsp;密码成功");
 	            $this->redirect(request()->getUrl());
 	        }
 	    }
 	    
 	    $user->password = '';
-	    $this->adminTitle = '重设用户密码 - ' . $user->name;
+	    $this->adminTitle = '重设用户密码 - ' . $user->username;
 	    $this->render('resetpwd', array('model'=>$user));
 	}
 
@@ -173,7 +173,7 @@ class UserController extends AdminController
         if ($model === null)
             throw new CHttpException(404, '用户不存在');
         
-        $this->adminTitle = $model->name;
+        $this->adminTitle = $model->username;
         $this->render('info', array('model' => $model));
     }
 

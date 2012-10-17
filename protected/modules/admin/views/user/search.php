@@ -1,6 +1,6 @@
 <?php echo CHtml::form(url('admin/user/search'), 'get', array('class'=>'form-horizontal'));?>
 <fieldset>
-    <legend><?php echo t('search_user', 'admin')?></legend>
+    <legend>搜索用户</legend>
     <div class="control-group">
         <?php echo CHtml::activeLabel($form, 'userid', array('class'=>'control-label'));?>
         <div class="controls">
@@ -8,17 +8,17 @@
         </div>
     </div>
     <div class="control-group">
-        <?php echo CHtml::activeLabel($form, 'email', array('class'=>'control-label'));?>
+        <?php echo CHtml::activeLabel($form, 'username', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($form, 'email');?>
-            <span class="help-inline"><label class="checkbox"><?php echo CHtml::activeCheckBox($form, 'emailFuzzy');?><?php echo t('fuzzy_search', 'admin')?></label></span>
+            <?php echo CHtml::activeTextField($form, 'username');?>
+            <span class="help-inline"><label class="checkbox"><?php echo CHtml::activeCheckBox($form, 'usernameFuzzy');?>模糊查询</label></span>
         </div>
     </div>
     <div class="control-group">
-        <?php echo CHtml::activeLabel($form, 'name', array('class'=>'control-label'));?>
+        <?php echo CHtml::activeLabel($form, 'screen_name', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($form, 'name');?>
-            <span class="help-inline"><label class="checkbox"><?php echo CHtml::activeCheckBox($form, 'nameFuzzy');?><?php echo t('fuzzy_search', 'admin')?></label></span>
+            <?php echo CHtml::activeTextField($form, 'screen_name');?>
+            <span class="help-inline"><label class="checkbox"><?php echo CHtml::activeCheckBox($form, 'screenNameFuzzy');?>模糊查询</label></span>
         </div>
     </div>
     <div class="control-group">
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="form-actions">
-        <input type="submit" value="<?php echo t('search', 'admin');?>" class="btn btn-primary" />
+        <input type="submit" value="搜索" class="btn btn-primary" />
     </div>
 </fieldset>
 <?php echo CHtml::endForm();?>

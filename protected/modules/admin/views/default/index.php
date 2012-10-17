@@ -68,14 +68,14 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">用户管理<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><?php echo l(t('create_user', 'admin'), url('admin/user/create'), array('target'=>'main'));?></li>
-                        <li><?php echo l(t('verify_user', 'admin'), url('admin/user/verify'), array('target'=>'main'));?></li>
-                        <li><?php echo l(t('search_user', 'admin'), url('admin/user/search'), array('target'=>'main'));?></li>
+                        <li><?php echo l('添加用户', url('admin/user/create'), array('target'=>'main'));?></li>
+                        <li><?php echo l('审核用户', url('admin/user/verify'), array('target'=>'main'));?></li>
+                        <li><?php echo l('搜索用户', url('admin/user/search'), array('target'=>'main'));?></li>
                         <li class="divider"></li>
-                        <li class="nav-header"><?php echo t('statistics', 'admin');?></li>
-                        <li><?php echo l(t('today_signup_user', 'admin'), url('admin/user/today'), array('target'=>'main'));?></li>
-                        <li><?php echo l(t('user_account_list', 'admin'), url('admin/user/list'), array('target'=>'main'));?></li>
-                        <li><?php echo l(t('forbidden_user', 'admin'), url('admin/user/forbidden'), array('target'=>'main'));?></li>
+                        <li class="nav-header">统计</li>
+                        <li><?php echo l('今日注册', url('admin/user/today'), array('target'=>'main'));?></li>
+                        <li><?php echo l('用户列表', url('admin/user/list'), array('target'=>'main'));?></li>
+                        <li><?php echo l('禁用用户', url('admin/user/forbidden'), array('target'=>'main'));?></li>
                     </ul>
                 </li>
                 <li class="dropdown">

@@ -11,13 +11,13 @@
     <div class="control-group">
         <?php echo CHtml::activeLabel($model, 'email', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo $model->email;?>
+            <?php echo $model->username;?>
         </div>
     </div>
     <div class="control-group">
         <?php echo CHtml::activeLabel($model, 'name', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo $model->name;?>
+            <?php echo $model->screen_name;?>
         </div>
     </div>
     <div class="control-group <?php if($model->hasErrors('password')) echo 'error';?>">
