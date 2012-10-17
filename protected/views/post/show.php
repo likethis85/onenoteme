@@ -9,18 +9,7 @@
         <?php elseif ($post->bmiddlePic):?>
         <div class="content-block post-picture"><?php echo l(CHtml::image($post->bmiddlePic, $post->filterContent . ', ' . $post->getTagText(',')), aurl('post/originalpic', array('id'=>$post->id)), array('target'=>'_blank', 'title'=>$post->filterContent));?></div>
         <?php endif;?>
-        <div class="cdc-block cd-border">
-            <script type="text/javascript">
-                netease_union_user_id = 6156606;
-                netease_union_site_id = 25143;
-                netease_union_worktype = 15;
-                netease_union_promote_type = 3;
-                netease_union_width = 590;
-                netease_union_height = 150;
-                netease_union_link_id = 673;
-            </script>
-            <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
-        </div>
+        <!-- 详情内容下方广告位 -->
         <div class="toolbar radius3px">
     		<div class="content-block post-arrows fleft">
                 <a class="site-bg arrow-up" data-id="<?php echo $post->id;?>" data-value="1" data-url="<?php echo aurl('post/score');?>" href="javascript:void(0);">喜欢</a>
@@ -118,7 +107,8 @@
         <div class="clear"></div>
     </div>
     <?php if ($post->bmiddlePic):?>
-    <div class="cdc-block">
+    <!-- 详情页侧边栏广告位开始 -->
+    <div class="cdc-block cd-border">
         <script type="text/javascript">
         alimama_pid="mm_12551250_2904829_10392377";
         alimama_width=300;
@@ -126,24 +116,11 @@
         </script>
         <script src="http://a.alimama.cn/inf.js" type="text/javascript"></script>
     </div>
+    <!-- 详情页侧边栏广告位结束 -->
     <?php endif;?>
 	<div class="panel panel15"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
 </div>
 <div class="clear"></div>
-
-<?php if ($post->bmiddlePic):?>
-<script type="text/javascript">
-    netease_union_user_id = 6156606;
-    netease_union_site_id = 25143;
-    netease_union_worktype = null;
-    netease_union_promote_type = 5;
-    netease_union_width = 250;
-    netease_union_height = 200;
-    netease_union_link_id = null;
-    netease_union_cpv_type = 0;
-</script>
-<script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
-<?php endif;?>
 
 <script type="text/javascript">
     var wumiiPermaLink = '<?php echo $post->url;?>';

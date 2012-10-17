@@ -14,32 +14,7 @@
         <h4>微信扫描下图订阅挖段子，每日精品段子推送</h4>
         <img src="<?php echo sbu('images/qrcode_wx.jpg');?>" class="weixin-qrcode" alt="挖段子微信二维码"  title="用微信扫描二维码添加挖段子公众号" />
     </div>
-    <div class="cdc-block cd-border">
-        <script type="text/javascript">
-            netease_union_user_id = 6156606;
-            netease_union_site_id = 24344;
-            netease_union_worktype = 11;
-            netease_union_promote_type = 4;
-            netease_union_width = 300;
-            netease_union_height = 250;
-            netease_union_link_id = 414;
-        </script>
-        <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
-    </div>
-    <div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
-    <div class="cdc-block cd-border">
-        <script type="text/javascript">
-            netease_union_user_id = 6156606;
-            netease_union_site_id = 25143;
-            netease_union_worktype = 15;
-            netease_union_promote_type = 3;
-            netease_union_width = 300;
-            netease_union_height = 250;
-            netease_union_link_id = 660;
-        </script>
-        <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
-    </div>
-    <div class="panel panel10">
+    <div class="panel panel10 bottom15px">
         <ul class="social-widget-list">
             <li class="social-widget-item first">
                 <a class="clearfix" target="_blank" href="http://e.weibo.com/cdcchen" title="新浪微博">
@@ -70,6 +45,17 @@
             </li>
         </ul>
     </div>
+    <div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
+    <!-- 首页侧边栏广告位1 开始 -->
+    <div class="cdc-block cd-border">
+        <script type="text/javascript">
+        alimama_pid="mm_12551250_2904829_10392377";
+        alimama_width=300;
+        alimama_height=250;
+        </script>
+        <script src="http://a.alimama.cn/inf.js" type="text/javascript"></script>
+    </div>
+    <!-- 首页侧边栏广告位1 结束 -->
 </div>
 <div class="clear"></div>
 
