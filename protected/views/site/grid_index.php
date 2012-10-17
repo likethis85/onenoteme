@@ -99,6 +99,7 @@
 		<li><a href="http://www.aifuns.com/" target="_blank">爱娱乐AiFuns</a></li>
 		<li><a href="http://www.wadongxi.com/" target="_blank">挖东西</a></li>
 		<li><a href="http://www.maoza.com/" target="_blank">奇闻网</a></li>
+		<li><a href="http://www.jianjiande.com/" target="_blank">贱贱的</a></li>
 		<div class="clear"></div>
 	</ul>
 </div>
