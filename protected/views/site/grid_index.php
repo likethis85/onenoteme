@@ -86,6 +86,15 @@
 		<li><a href="http://www.wadongxi.com/" target="_blank">挖东西</a></li>
 		<li><a href="http://www.maoza.com/" target="_blank">奇闻网</a></li>
 		<li><a href="http://www.jianjiande.com/" target="_blank">贱贱的</a></li>
+		<li><a href="http://www.xcoodir.com/" target="_blank" title="爱酷目录，免费收录各类优秀网站">爱酷目录</a></li>
+		<li><a href="http://juetuzhi.net/" target="_blank">掘图志</a></li>
+        <li><a href="http://xiaohua.zol.com.cn/" target="_blank">ZOL笑话</a></li>
+        <li><a href="http://www.pengfu.com" target="_blank">捧腹网</a></li>
+        <li><a href="http://www.jokeji.cn/" target="_blank">笑话集</a></li>
+        <li><a href="http://www.kl688.com/" target="_blank">快乐麻花</a></li>
+        <li><a href="http://www.chinabug.net/" target="_blank">穿帮网</a></li>
+        <li><a href="http://www.laifu.org/" target="_blank">来福岛爆笑娱乐网</a></li>
+        <li><a href="http://www.fanjian.net/" target="_blank"> 犯贱志</a></li>
 		<div class="clear"></div>
 	</ul>
 </div>
