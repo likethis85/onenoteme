@@ -28,10 +28,12 @@ return array(
     'formatShortTime' => 'H:i',
         
     'channels' => array(
-        CHANNEL_DUANZI => '挖段子',
+        CHANNEL_DUANZI => '挖笑话',
         CHANNEL_LENGTU => '挖冷图',
         CHANNEL_GIRL => '挖福利',
-        CHANNEL_VIDEO => '挖短片',
+        CHANNEL_VIDEO => '挖视频',
+        CHANNEL_MUSIC => '挖音乐',
+        CHANNEL_HOTNEWS => '挖热点',
     ),
 
     'user_required_email_verfiy' => 0,
