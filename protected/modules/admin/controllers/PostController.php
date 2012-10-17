@@ -1,220 +1,467 @@
 <?php
+
 class PostController extends AdminController
 {
-    public function actionWeibo()
+    public function filters()
     {
-        $pageSize = 20;
-        $criteria = new CDbCriteria();
-        $criteria->limit = $pageSize;
-        $criteria->order = 't.id desc';
-        
-        $models = PostTemp::model()->findAll($criteria);
-        $data = array(
-            'models' => $models,
+        return array(
+            'ajaxOnly + setVerify, quickUpdate, setDelete, setTrash, multiTrash, multiDelete, multiVerify, multiReject, multiRecommend, multiHottest',
+            'postOnly + setVerify, quickUpdate, setDelete, setTrash, multiTrash,, multiDelete, multiVerify, multiReject, multiRecommend, multiHottest',
         );
-        $this->render('weibo', $data);
     }
     
-    public function actionWeiboVerify($id, $channel_id, $callback)
+    public function actionInfo($id)
     {
         $id = (int)$id;
-        $channel_id = (int)$channel_id;
-        $temp = PostTemp::model()->findByPk($id);
-        if ($temp === null)
-            $data = 1;
-        else {
-            try {
-                $username = $temp['username'];
-                $userid = app()->getDb()->createCommand()
-                    ->select('id')
-                    ->from(TABLE_USER)
-                    ->where('screen_name = :username', array(':username' => $username))
-                    ->queryScalar();
-                
-                $content = trim($_POST['weibotext']);
-                $content = empty($content) ? $temp->content : $content;
-                $post = new Post();
-                $post->content = $content;
-                $post->channel_id = $channel_id;
-                $post->up_score = mt_rand(100, 300);
-                $post->down_score = mt_rand(10, 40);
-                $post->view_nums = mt_rand(100, 500);
-                if ($userid > 0) {
-                    $post->user_id = (int)$userid;
-                    $post->user_name = $username;
-                }
-                if ($channel_id == CHANNEL_LENGTU || $channel_id == CHANNEL_GIRL) {
-                    $post->thumbnail_pic = $temp->thumbnail_pic;
-                    $post->bmiddle_pic = $temp->bmiddle_pic;
-                    $post->original_pic = $temp->original_pic;
-                }
-                $result = $post->save();
-                if ($result) {
-                    $temp->delete();
-                    self::saveWeiboComments($post->id, $temp->weibo_id);
-                }
-                $data = (int)$result;
+        $model = AdminPost::model()->findByPk($id);
+        if ($model === null)
+            throw new CHttpException(404, '段子不存在');
+        
+        $this->render('info', array('model'=>$model));
+    }
+    
+	public function actionCreate($id = 0)
+	{
+	    $id = (int)$id;
+	    if ($id === 0) {
+	        $model = new AdminPost();
+	        $model->homeshow = user()->checkAccess('create_post_in_home') ? BETA_YES : BETA_NO;
+	        $model->state = user()->checkAccess('editor') ? POST_STATE_ENABLED : POST_STATE_NOT_VERIFY;
+	        $this->adminTitle = '添加文章';
+	    }
+	    elseif ($id > 0) {
+	        $model = AdminPost::model()->findByPk($id);
+	        $this->adminTitle = '编辑文章';
+	    }
+	    else
+	        throw new CHttpException(500);
+	    
+	    if (request()->getIsPostRequest() && isset($_POST['AdminPost'])) {
+	        $model->attributes = $_POST['AdminPost'];
+	        // 此处如果以后有多种文章模型了，这一句可以去掉。
+	        if ($model->getIsNewRecord()) {
+	            $model->user_id = user()->id;
+	            $model->user_name = user()->name;
+    	        $model->post_type = POST_TYPE_POST;
+	        }
+	        if ($model->save()) {
+	            $this->afterPostSave($model);
+	            $resultHtml = sprintf('{%s}&nbsp;发表成功，<a href="{%s}" target="_blank">点击查看</a>', $model->title, $model->url);
+	            user()->setFlash('save_post_result', $resultHtml);
+                $this->redirect(request()->getUrl());
+	        }
+	    }
+	    else {
+	        $key = param('sess_post_create_token');
+            if (!app()->session->contains($key) || empty(app()->session[$key])) {
+                $token = $model->getIsNewRecord() ? uniqid('beta', true) : $model->id;
+                app()->session->add($key, $token);
+    	    }
+            else {
+                $token = app()->session[$key];
+                $tempPictures = Upload::model()->findAllByAttributes(array('token'=>$token));
             }
-            catch (Exception $e) {
-                $data = 0;
-                echo $e->getMessage();
+	    }
+	    
+		$this->render('create', array(
+		    'model'=>$model,
+	        'tempPictures' => $tempPictures,
+		));
+	}
+	
+	private function afterPostSave(AdminPost $post)
+	{
+	    $key = param('sess_post_create_token');
+        if (app()->session->contains($key) && $token = app()->session[$key] && !is_numeric($token)) {
+            if (!$post->hasErrors()) {
+                $attributes = array('post_id'=>$post->id, 'token'=>'');
+                AdminUpload::model()->updateAll($attributes, 'token = :token', array(':token'=>$token));
+                app()->session->remove($key);
             }
         }
-        CDBase::jsonp($callback, $data);
-    }
-    
-    private static function saveWeiboComments($pid, $wid)
-    {
-        if (empty($pid) || empty($wid))
-            return false;
         
-        $data = self::fetchWeiboComments($wid);
-        if (empty($data)) return false;
-        
-        $comments = $data['comments'];
-        foreach ((array)$comments as $row) {
-            $text = self::filterComment($row['text']);
-            if (empty($text)) continue;
-            
-            self::saveCommentRow($pid, $text);
-        }
-    }
-    
-    private static function filterComment($text)
-    {
-        if (mb_strlen($text) < 3) return false;
-        
-        $text = str_replace(array('互粉', '转发', '微博', '沙发', '回覆'), '', $text);
-        
-        $pattern = '/\[.+?\]/is';
-        $text = preg_replace($pattern, '', $text);
-        $pos = mb_strpos($text, '//', 0, app()->charset);
-        if ($pos === 0)
-            return false;
-        elseif ($pos > 0) {
-            $text = mb_substr($text, 0, $pos, app()->charset);
-        }
-        
-        $pos = mb_strpos($text, '@', 0, app()->charset);
-        if ($pos === 0)
-            return false;
-        elseif ($pos > 0) {
-            $text = mb_substr($text, 0, $pos, app()->charset);
-        }
-        
-        return trim($text);
-    }
-    
-    private static function saveCommentRow($pid, $text)
-    {
-        $pid = (int)$pid;
-        if (empty($pid) || empty($text)) return false;
-        
-        try {
-            $model = new Comment();
-            $model->content = $text;
-            $model->post_id = $pid;
-            $model->up_score = mt_rand(20, 70);
-            $model->down_score = mt_rand(0, 10);
-            $model->state = COMMENT_STATE_ENABLED;
-            return $model->save();
-        }
-        catch (Exception $e) {
-            echo $e->getMessage();
-            return false;
-        }
-    }
-    
-    private static function fetchWeiboComments($wid)
-    {
-        $url = 'https://api.weibo.com/2/comments/show.json';
-        $data = array(
-            'source' => WEIBO_APP_KEY,
-            'access_token' => app()->session['access_token'],
-            'id' => $wid,
-            'count' => 100,
-        );
-        
-        $curl = new CdCurl();
-        $curl->get($url, $data);
-        if ($curl->errno() == 0) {
-            $comments = json_decode($curl->rawdata(), true);
-            return $comments;
-        }
-        else {
-            echo $curl->error();
-            return false;
-        }
-    }
-    
-    public function actionWeiboDelete($id, $callback)
-    {
-        $id = (int)$id;
-        $result = PostTemp::model()->findByPk($id)->delete();
-        CDBase::jsonp($callback, (int)$result);
-    }
-    
-    public function actionVerify()
-    {
-        $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('state'=>Post::STATE_DISABLED));
-        $data = self::fetchPostList($criteria, true, true);
+        // save remote images to local
+        if (param('auto_remote_image_local'))
+            $this->imagesLocal($post);
+	}
+	
+	private function imagesLocal(AdminPost $post)
+	{
+	    set_time_limit(0);
+	    $summary = CDFileLocal::fetchAndReplaceMultiWithHtml($post->summary);
+	    $content = CDFileLocal::fetchAndReplaceMultiWithHtml($post->content);
+	    if ($summary === false and $content === false) return false;
+	    
+	    $summary === false or $post->summary = $summary;
+	    $content === false or $post->content = $content;
+	    return $post->save(true, array('summary', 'content'));
+	}
+	
+	public function actionLatest($cid = 0, $tid = 0)
+	{
+	    $cid = (int)$cid;
+	    $tid = (int)$tid;
+	    $criteria = new CDbCriteria();
+	    
+	    $title = '最新文章列表';
+	    if ($cid > 0) {
+	        $category = AdminCategory::model()->findByPk($cid);
+	        if ($category === null)
+	            throw new CException('分类不存在');
+	        
+	        $title = $title . ' - ' . $category->postsLink;
+	        $criteria->addColumnCondition(array('category_id'=>$cid));
+	    }
+	    
+	    if ($tid > 0) {
+	        $topic = AdminTopic::model()->findByPk($tid);
+	        if ($topic === null)
+	            throw new CException('主题不存在');
+	         
+	        $title = $title . ' - ' . $topic->postsLink;
+	        $criteria->addColumnCondition(array('topic_id'=>$tid));
+	    }
+	    
+	    $criteria->addCondition('t.state != ' . POST_STATE_TRASH);
+	    $data = AdminPost::fetchList($criteria);
+	    
+	    $this->adminTitle = $title;
+	    $this->render('list', $data);
+	}
+	
+	public function actionVerify()
+	{
+	    $criteria = new CDbCriteria();
+	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_NOT_VERIFY));
+	    $data = AdminPost::fetchList($criteria);
+	    
+	    $this->adminTitle = '未审核文章列表';
+	    $this->render('list', $data);
+	}
+	
+	public function actionSearch()
+	{
+	    $form = new PostSearchForm();
+	    
+	    if (isset($_GET['PostSearchForm'])) {
+	        $form->attributes = $_GET['PostSearchForm'];
+	        if ($form->validate())
+	            $data = $form->search();
+	        user()->setFlash('table_caption', '文章搜索结果');
+	    }
+	    
+        $this->render('search', array('form'=>$form, 'data'=>$data));
+	}
+	
+	public function actionHottest()
+	{
+	    $criteria = new CDbCriteria();
+	    $criteria->addColumnCondition(array('hottest'=>BETA_YES));
+	    $data = AdminPost::fetchList($criteria);
+	     
+	    $this->render('list', $data);
+	}
+	
+	public function actionRecommend()
+	{
+	    $criteria = new CDbCriteria();
+	    $criteria->addColumnCondition(array('recommend'=>BETA_YES));
+	    $data = AdminPost::fetchList($criteria);
+	     
+	    $this->render('list', $data);
+	}
+	
+	public function actionHomeshow()
+	{
+	    $criteria = new CDbCriteria();
+	    $criteria->addColumnCondition(array('homeshow'=>BETA_YES));
+	    $data = AdminPost::fetchList($criteria);
+	     
+	    $this->render('list', $data);
+	}
+	
+	public function actionIstop()
+	{
+	    $criteria = new CDbCriteria();
+	    $criteria->addColumnCondition(array('istop'=>BETA_YES));
+	    $data = AdminPost::fetchList($criteria);
+	     
+	    $this->render('list', $data);
+	}
+	
+	// @todo 回收站，暂时不用
+	public function actionTrash()
+	{
+	    $criteria = new CDbCriteria();
+	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_TRASH));
+	    $data = AdminPost::fetchList($criteria);
+	     
+	    $this->render('list', $data);
+	}
+	
+	public function actionQuickUpdate($id, $callback)
+	{
+	    $id = (int)$id;
+	    
+	    if ($id <= 0)
+	        throw new CHttpException(500, '非法请求');
 
-        $this->render('verify', $data);
-    }
-    
-    public function actionToday()
-    {
-        $date = getdate();
-        $timestamp = mktime(0, 0, 0, $date['mon'], $date['mday'], $date['year']);
-        $criteria = new CDbCriteria();
-        $criteria->addCondition('create_time > :timestamp');
-        $criteria->params = array(':timestamp' => $timestamp);
-        $data = self::fetchPostList($criteria, true, true);
+	    $model = AdminPost::model()->findByPk($id);
+	    if ($model === null)
+	        throw new CHttpException(404, '文章不存在');
+	     
+        $model->attributes = $_POST['AdminPost'];
+        $model = self::updatePostEditor($model);
+        $attributes = array('state', 'hottest', 'recommend', 'istop', 'homeshow', 'disable_comment', 'user_id', 'user_name');
+        $result = (int)$model->save(true, $attributes);
         
-        $this->render('list', $data);
-    }
-    
-    public function actionList()
-    {
-        $data = self::fetchPostList(null, true, true);
-        
-        $this->render('list', $data);
-    }
-    
-    public function actionSearch()
-    {
-        
-    }
-    
-    private static function fetchPostList(CDbCriteria $criteria = null, $pages = true, $sort = false)
-    {
-        $pageSize = 30;
-        $criteria = ($criteria === null) ? new CDbCriteria() : $criteria;
-        
-        if ($pages) {
-            $count = Post::model()->count($criteria);
-            $pages = new CPagination($count);
-            $pages->setPageSize($pageSize);
-            $pages->applyLimit($criteria);
-        }
-        else
-            $criteria->limit = $pageSize;
-        
-        if ($sort) {
-            $sort = new CSort('Post');
-            $sort->defaultOrder = 't.id desc';
-            $sort->applyOrder($criteria);
-        }
-        else
-            $criteria->order = 't.id desc';
-        
-        $models = Post::model()->findAll($criteria);
-        $data = array(
-            'sort' => $sort,
-            'pages' => $pages,
-            'models' => $models,
-        );
-        return $data;
-    }
+        CDBase::jsonp($callback, $result);
+	}
+	
+    public function actionSetVerify($id, $callback)
+	{
+	    $id = (int)$id;
+	    $model = AdminPost::model()->findByPk($id);
+	    if ($model === null)
+	        throw new CHttpException(500);
+	    
+	    $model->state = ($model->state == POST_STATE_NOT_VERIFY) ? POST_STATE_ENABLED : POST_STATE_NOT_VERIFY;
+	    if ($model->state == POST_STATE_ENABLED) {
+	        $model->create_time = $_SERVER['REQUEST_TIME'];
+	        $attributes = array('user_id', 'user_name', 'state', 'create_time');
+	    }
+	    else
+	        $attributes = array('state');
+	    
+	    $model = self::updatePostEditor($model);
+        $model->save(true, $attributes);
+	    if ($model->hasErrors())
+	        throw new CHttpException(500);
+	    else {
+	        $data = array(
+	            'errno' => BETA_NO,
+	            'label' => t($model->state == POST_STATE_ENABLED ? 'sethide' : 'setshow', 'admin')
+	        );
+	        CDBase::jsonp($callback, $data);
+	    }
+	}
+
+	public function actionSetDelete($id, $callback)
+	{
+	    $id = (int)$id;
+	    $model = AdminPost::model()->findByPk($id);
+	    if ($model === null)
+	        throw new CHttpException(500);
+	     
+	    if ($model->delete()) {
+	        $data = array(
+	            'errno' => BETA_NO,
+	            'label' => '删除',
+	        );
+	        CDBase::jsonp($callback, $data);
+	    }
+	    else
+	        throw new CHttpException(500);
+	}
+
+	public function actionSetTrash($id, $callback)
+	{
+	    $id = (int)$id;
+	    $model = AdminPost::model()->findByPk($id);
+	    if ($model === null)
+	        throw new CHttpException(404);
+	     
+	    if ($model->trash()) {
+	        $data = array(
+	            'errno' => BETA_NO,
+	            'label' => '删除成功',
+	        );
+	        CDBase::jsonp($callback, $data);
+	    }
+	    else
+	        throw new CHttpException(500);
+	}
+
+	/**
+	 * 批量删除文章
+	 * @param array $ids ID数组
+	 * @param string $callback jsonp回调函数，自动赋值
+	 */
+	public function actionMultiDelete($callback)
+	{
+	    $ids = (array)request()->getPost('ids');
+	    $successIds = $failedIds = array();
+	    foreach ($ids as $id) {
+	        $model = AdminPost::model()->findByPk($id);
+	        if ($model === null)
+	            continue;
+	        	
+	        $result = $model->delete();
+	        if ($result)
+	            $successIds[] = $id;
+	        else
+	            $failedIds[] = $id;
+	    }
+	    $data = array(
+    	    'success' => $successIds,
+    	    'failed' => $failedIds,
+	    );
+	    CDBase::jsonp($callback, $data);
+	}
+	
+	/**
+	 * 批量将文章扔到回收站
+	 * @param array $ids ID数组
+	 * @param string $callback jsonp回调函数，自动赋值
+	 */
+	public function actionMultiTrash($callback)
+	{
+	    $ids = (array)request()->getPost('ids');
+	    $successIds = $failedIds = array();
+	    foreach ($ids as $id) {
+	        $model = AdminPost::model()->findByPk($id);
+	        if ($model === null)
+	            continue;
+	        	
+	        $result = $model->trash();
+	        if ($result)
+	            $successIds[] = $id;
+	        else
+	            $failedIds[] = $id;
+	    }
+	    $data = array(
+    	    'success' => $successIds,
+    	    'failed' => $failedIds,
+	    );
+	    CDBase::jsonp($callback, $data);
+	}
+	
+
+	/**
+	 * 批量审核文章
+	 * @param array $ids 文章ID数组
+	 * @param string $callback jsonp回调函数，自动赋值
+	 */
+	public function actionMultiVerify($callback)
+	{
+	    $ids = (array)request()->getPost('ids');
+	     
+	    $successIds = $failedIds = array();
+	    $attributes = array('user_id', 'user_name', 'state', 'create_time');
+	    foreach ($ids as $id) {
+	        $model = AdminPost::model()->findByPk($id);
+	        if ($model === null) continue;
+	        
+	        $model->state = POST_STATE_ENABLED;
+	        $model->create_time = $_SERVER['REQUEST_TIME'];
+	        $model = self::updatePostEditor($model);
+	        $result = $model->save(true, $attributes);
+	        if ($result)
+	            $successIds[] = $id;
+	        else
+	            $failedIds[] = $id;
+	    }
+	    $data = array(
+    	    'success' => $successIds,
+    	    'failed' => $failedIds,
+	    );
+	    CDBase::jsonp($callback, $data);
+	}
+
+	/**
+	 * 批量拒绝文章
+	 * @param array $ids 文章ID数组
+	 * @param string $callback jsonp回调函数，自动赋值
+	 */
+	public function actionMultiReject($callback)
+	{
+	    $ids = (array)request()->getPost('ids');
+	     
+	    $successIds = $failedIds = array();
+	    $attributes = array(
+	        'state' => POST_STATE_REJECTED,
+	    );
+	    foreach ($ids as $id) {
+	        $result = AdminPost::model()->updateByPk($id, $attributes);
+	        if ($result)
+	            $successIds[] = $id;
+	        else
+	            $failedIds[] = $id;
+	    }
+	    $data = array(
+    	    'success' => $successIds,
+    	    'failed' => $failedIds,
+	    );
+	    CDBase::jsonp($callback, $data);
+	}
+	
+	/**
+	 * 批量推荐文章
+	 * @param array $ids 文章ID数组
+	 * @param string $callback jsonp回调函数，自动赋值
+	 */
+	public function actionMultiRecommend($callback)
+	{
+	    $ids = (array)request()->getPost('ids');
+	     
+	    $successIds = $failedIds = array();
+	    $attributes = array(
+    	    'state' => POST_STATE_ENABLED,
+    	    'recommend' => BETA_YES,
+    	    'create_time' => $_SERVER['REQUEST_TIME'],
+	    );
+	    foreach ($ids as $id) {
+	        $result = AdminPost::model()->updateByPk($id, $attributes);
+	        if ($result)
+	            $successIds[] = $id;
+	        else
+	            $failedIds[] = $id;
+	    }
+	    $data = array(
+    	    'success' => $successIds,
+    	    'failed' => $failedIds,
+	    );
+	    CDBase::jsonp($callback, $data);
+	}
+	
+	/**
+	 * 批量设置热门文章
+	 * @param array $ids 文章ID数组
+	 * @param string $callback jsonp回调函数，自动赋值
+	 */
+	public function actionMultiHottest($callback)
+	{
+	    $ids = (array)request()->getPost('ids');
+	     
+	    $successIds = $failedIds = array();
+	    foreach ($ids as $id) {
+	        $model = AdminPost::model()->findByPk($id);
+	        if ($model === null) continue;
+	         
+	        $model->hottest = BETA_YES;
+	        $model->state = POST_STATE_ENABLED;
+	         
+	        $result = $model->save(true, array('hottest', 'state'));
+	        if ($result)
+	            $successIds[] = $id;
+	        else
+	            $failedIds[] = $id;
+	    }
+	    $data = array(
+    	    'success' => $successIds,
+    	    'failed' => $failedIds,
+	    );
+	    CDBase::jsonp($callback, $data);
+	}
+
+	private static function updatePostEditor(AdminPost $model)
+	{
+	    if (empty($model->user_id) && $model->state == POST_STATE_ENABLED) {
+	        $model->user_id = user()->id;
+	        $model->user_name = user()->name;
+	    }
+	    
+	    return $model;
+	}
+	
 }

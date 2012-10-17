@@ -2,15 +2,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo app()->charset;?>" />
-<title><?php echo app()->name;?>管理中心</title>
+<title><?php echo app()->name . t('control_center', 'admin');?></title>
 <link rel="stylesheet" type="text/css" href="<?php echo sbu('libs/bootstrap/css/bootstrap.min.css');?>" />
-<link rel="stylesheet" type="text/css" href="<?php echo sbu('admin/css/cd-admin.css');?>" />
-<script type="text/javascript" src="<?php echo sbu('libs/jquery-1.7.2.min.js');?>"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo sbu('styles/beta-admin.css');?>" />
+<script type="text/javascript">
+/*<![CDATA[*/
+var CD_YES = <?php echo CD_YES;?>;
+var CD_NO = <?php echo CD_NO;?>;
+/*]]>*/
+</script>
 </head>
 <body>
-<div class="main-container"><?php echo $content;?></div>
+<div class="beta-container">
+<?php echo $content;?>
+</div>
 </body>
 </html>
 
-<?php cs()->registerScriptFile(sbu('admin/js/cd-admin.js'), CClientScript::POS_END);?>
+<?php cs()->registerCoreScript('jquery');?>
 <?php cs()->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END);?>
+<?php cs()->registerScriptFile(sbu('scripts/beta-admin.js'), CClientScript::POS_END);?>

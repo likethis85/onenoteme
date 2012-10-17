@@ -1,13 +1,17 @@
 <?php
+/**
+ * Controller is the customized base controller class.
+ * All controller classes for this application should extend from this base class.
+ */
 class AdminController extends CController
 {
-    public $title;
+    public $adminTitle;
     
-    public function actions()
+	public function actions()
 	{
 		return array(
 			'captcha'=>array(
-				'class'=>'application.extensions.CdCaptcha.CdCaptchaAction',
+				'class'=>'application.extensions.BetaCaptchaAction.BetaCaptchaAction',
 				'backColor' => 0xFFFFFF,
 				'height' => 22,
 				'width' => 70,
@@ -15,13 +19,23 @@ class AdminController extends CController
 				'minLength' => 4,
 		        'foreColor' => 0xFF0000,
 		        'padding' => 3,
-		        'testLimit' => 3,
+		        'testLimit' => 1,
+// 			    'fixedVerifyCode' => '1231',
 			),
 		);
 	}
 	
-	public function init()
+	public $breadcrumbs = array();
+
+	public function setSiteTitle($value)
 	{
-	    
+        $titleArray = array(param('sitename'));
+        if (param('shortdesc'))
+            array_push($titleArray, param('shortdesc'));
+        if (!empty($value))
+    	    array_unshift($titleArray, $value);
+
+        $text = strip_tags(trim(join(' - ', $titleArray)));
+	    $this->pageTitle = $text;
 	}
 }

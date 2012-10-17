@@ -1,4 +1,9 @@
 <?php
+/**
+ * AdminCategory
+ * @author chendong
+ * @property string $postListLink
+ */
 class AdminCategory extends Category
 {
     /**
@@ -9,17 +14,22 @@ class AdminCategory extends Category
     {
         return parent::model($className);
     }
-    
-    public static function listData()
+
+    public function getPostListLink()
     {
-        $rows = app()->getDb()->createCommand()
-            ->select(array('id', 'name'))
-            ->from(TABLE_CATEGORY)
-            ->order(array('orderid desc', 'id'))
-            ->queryAll();
+        return l($this->name, url('admin/post/latest', array('cid'=>$this->id)));
+    }
+
+    public function getStateHtml()
+    {
+        $class = 'label';
+        $text = t('category_hide', 'admin');
+        if ($this->state == CATEGORY_STATE_IN_NAV) {
+            $class .= ' label-success';
+            $text = t('category_show', 'admin');
+        }
         
-        $data = CHtml::listData($rows, 'id', 'name');
-        
-        return $data;
+        $html = '<span class="' . $class . '">' . $text . '</span>';
+        return $html;
     }
 }

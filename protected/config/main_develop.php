@@ -23,7 +23,7 @@ return array(
         'admin' => array(
             'layout' => 'main',
         ),
-        'user' => array(
+        'member' => array(
             'layout' => 'main',
         ),
         'gii'=>array(
@@ -71,6 +71,12 @@ return array(
             'basePath' => $params['resourceBasePath'] . 'assets',
             'baseUrl' => $params['resourceBaseUrl'] . 'assets',
         ),
+        'authManager' => array(
+            'class' => 'CDbAuthManager',
+            'assignmentTable' => '{{auth_assignment}}',
+            'itemChildTable' => '{{auth_itemchild}}',
+            'itemTable' => '{{auth_item}}',
+        ),
         'widgetFactory'=>array(
             'enableSkin' => true,
         ),
@@ -80,6 +86,7 @@ return array(
 //             'cacheID' => 'cache',
             'rules' => array(
                 '/' => 'site/index',
+                '<_a:(login|signup|logout)>' => 'site/<_a>',
                 '<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',
                 '<_a:(duanzi|lengtu|girl|video)>' => 'channel/<_a>',
                 'post-<id:\d+>' => 'post/show',

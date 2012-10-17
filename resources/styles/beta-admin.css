@@ -1,0 +1,96 @@
+@CHARSET "UTF-8";
+
+/* pages */
+.pagination .selected a{background-color:#f5f5f5;}
+.pagination .selected a{color:#999999;cursor:default;}
+.pagination .hidden span,.pagination .hidden a,.pagination .hidden a:hover{color:#999999;background-color:transparent;cursor:default;visibility:visible;}
+
+/* label */
+.label.label-small {padding:0 1px; margin:0 1px 1px; font-weight:normal; font-size:12px;}
+
+select.select-mini {width:auto;height:auto;line-height:auto; padding:0;}
+
+/* custom */
+.align-right {text-align:right;}
+.align-left {text-align:left;}
+.align-center {text-align:center;}
+.cgray {color:gray;}
+.f14px {font-size:14px;}
+.f12px {font-size:12px;}
+.beta-badge {font-weight:normal; -moz-border-radius:7px; border-radius:7px; -webkit-border-radius:7px; padding:1px 7px 2px; font-size:12px;}
+
+.admin-container {margin:0 5px 5px 0;}
+.admin-sidebar {margin:0px; padding:0px;}
+
+#beta-admin-tip {position:fixed; top:1px; right:1px; z-index:9999; border:1px solid #DFDFDF; background:#EFEFEF; color:gray; padding:0 5px; box-shadow:0 0 2px #808080; -webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px; display:none;}
+
+/* table cell */
+.table .item-orderid {width:60px; padding:4px 8px;}
+.table .item-orderid input[type=text] {margin:0; padding:3px; text-align:center;}
+.table .item-checkbox {width:13px;}
+.table .align-right {text-align:right;}
+.table .align-center {text-align:center;}
+
+.control-group.bottom10px {margin-bottom:10px;}
+
+#summary, #content, #special-desc {width:620px;}
+#summary {height:180px;}
+#content {height:450px;}
+#special-desc {height:200px;}
+
+.topic-icon {max-width:100px; max-height:100px;}
+
+.user-disabled {color:gray;}
+
+/* comment list */
+.author-name {width:80px;}
+
+
+/* config manage */
+.beta-config-table td, .beta-config-table th {vertical-align:middle;}
+.table.beta-config-table td input {margin:0;}
+.config-error-names {margin-top:10px;}
+.config-error-names li {margin-bottom:10px;}
+.beta-config-table textarea {height:70px;}
+
+/* top nav */
+.navbar-fixed-top .admin-nav-container {width:auto; padding-left:10px; padding-right:10px;}
+.admin-sidebar {position:fixed; width:100px; top:45px; left:5px; z-index:999;}
+.admin-container {position:fixed; top:45px; left:115px; right:0px; bottom:0px;}
+#admin-iframe {width:100%; height:100%; border:0;}
+
+/* user */
+td.column-label {width:150px; text-align:right;}
+
+/* comment info */
+.comment-content {padding:10px; line-height:20px;}
+.beta-comment-quote {border:1px solid #CFCFCF; padding:8px; margin:0 0 10px; line-height:20px; display:none; color:gray; }
+.beta-comment-quote legend {text-align:left; text-indent:18px; font-size:12px; font-weight:bold; margin:0; padding:0 5px; width:auto; height:20px; line-height:20px; background:white url(../images/quotetip.gif) no-repeat left center; border:1px solid #CFCFCF;}
+
+/* post create */
+.post-pictures li {float:left; margin-right:5px; cursor:pointer;}
+.post-pictures li:last-child {margin-right:0; clear:both;}
+.post-pictures img {max-height:53px; max-width:80px;}
+.form-horizontal .control-label {width:80px;}
+.form-horizontal .controls {margin-left:100px;}
+
+/* upload manage */
+.table tbody .file-info td {background-color:#DFDFDF;}
+.table tbody .file-info:hover td {background-color:#DFDFDF;}
+.table tbody .file-info td a {margin-left:30px;}
+
+/* post list */
+.beta-list-table form {margin:0; margin-top:3px;}
+.beta-list-table form .checkbox {font-size:12px; margin-left:1px;}
+.table-post-list td {height:42px;}
+.beta-list-table .quick-links {margin-top:5px;}
+.post-info tr td {padding-right:15px; padding-left:15px;}
+.post-info tr td:first-child {width:150px; text-align:right; color:gray;}
+.post-info tr td:first-child label {color:gray;}
+
+/* filter keyword */
+#kwcontent {width:500px; height:200px;}
+
+/* friend link */
+.link-logo {height:31px;}
+

@@ -1,35 +1,50 @@
-<table class="zebra-striped bordered-table user-list-table">
+<h4><?php echo $this->adminTitle;?></h4>
+<div class="btn-toolbar">
+    <button class="btn btn-small" id="select-all"><?php echo t('select_all', 'admin');?></button>
+    <button class="btn btn-small" id="reverse-select"><?php echo t('reverse_select', 'admin');?></button>
+    <button class="btn btn-small btn-primary" id="batch-verify" data-src="<?php echo url('admin/user/multiVerify');?>"><?php echo t('user_enabled', 'admin');?></button>
+    <button class="btn btn-small btn-danger" id="batch-reject" data-src="<?php echo url('admin/user/multiForbidden');?>"><?php echo t('user_disabled', 'admin');?></button>
+    <a class="btn btn-small btn-success" href=''><?php echo t('reload_data', 'admin');?></a>
+</div>
+<table class="table table-striped table-bordered beta-list-table">
     <thead>
         <tr>
-            <th class="span1">#</th>
-            <th class="span2"><?php echo $sort->link('id');?></th>
-            <th class="span4"><?php echo $sort->link('email');?></th>
-            <th class="span4"><?php echo $sort->link('name');?></th>
-            <th class="span4"><?php echo $sort->link('create_time');?></th>
-            <th class="span3"><?php echo $sort->link('create_ip');?></th>
-            <th class="span4">Token</th>
-            <th class="span3">#</th>
+            <th class="item-checkbox align-center">#</th>
+            <th class="span1 align-center"><?php echo $sort->link('id');?></th>
+            <th class="span3"><?php echo $sort->link('email');?></th>
+            <th class="span3"><?php echo $sort->link('name');?></th>
+            <th class="span1 align-center"><?php echo $sort->link('state');?></th>
+            <th class="span2 align-center"><?php echo $sort->link('create_time');?></th>
+            <th>#</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach ((array)$models as $model):?>
+        <?php foreach ($models as $model):?>
         <tr>
-            <td><?php echo CHtml::checkBox('ids[' . $model->id . ']');?></td>
-            <td><?php echo $model->id;?></td>
-            <td><?php echo $model->email;?></td>
+            <td class="item-checkbox"><input type="checkbox" name="itemid[]" value="<?php echo $model->id;?>" /></td>
+            <td class="align-center"><?php echo $model->id;?></td>
+            <td><?php echo l($model->email, $model->getInfoUrl());?></td>
             <td><?php echo $model->name;?></td>
-            <td><?php echo $model->createTime;?></td>
-            <td><?php echo $model->create_ip;?></td>
-            <td><?php echo $model->token;?></td>
+            <td class="span1 align-center"><?php echo $model->stateAjaxLink;?></td>
+            <td class="align-center"><?php echo $model->createTime;?></td>
             <td>
-            <?php
-                if ($model->state == User::STATE_DISABLED)
-                    echo CHtml::button('有效', array('class'=>'btn primary'));
-                else
-                    echo CHtml::button('禁用', array('class'=>'btn danger'));
-            ?>
+                <?php echo $model->editUrl;?>
             </td>
         </tr>
         <?php endforeach;?>
     </tbody>
 </table>
+<?php if ($pages):?>
+<div class="beta-pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'htmlOptions'=>array('class'=>'pagination')));?></div>
+<?php endif;?>
+
+
+<script type="text/javascript">
+$(function(){
+	$(document).on('click', '.row-state', BetaAdmin.ajaxSetBooleanColumn);
+	$(document).on('click', '#select-all', BetaAdmin.selectAll);
+	$(document).on('click', '#reverse-select', BetaAdmin.reverseSelect);
+	$(document).on('click', '#batch-verify, #batch-reject', BetaAdmin.switchMultiUserState);
+
+});
+</script>

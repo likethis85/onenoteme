@@ -11,16 +11,23 @@ define('CHANNEL_MUSIC', 60);
 
 // 以下是表名
 define('TABLE_POST', '{{post}}');
-define('TABLE_POST_TEMP', '{{post_temp}}');
-define('TABLE_WEIBO_ACCOUNT', '{{weibo_account}}');
 define('TABLE_USER', '{{user}}');
+define('TABLE_CONFIG', '{{config}}');
 define('TABLE_USER_PROFILE', '{{user_profile}}');
 define('TABLE_COMMENT', '{{comment}}');
-define('TABLE_IOS_DEVICE', '{{ios_device}}');
 define('TABLE_TAG', '{{tag}}');
 define('TABLE_POST_TAG', '{{post_tag}}');
 define('TABLE_MOVIE_SETS', '{{movie_sets}}');
 define('TABLE_POST_FAVORITE', '{{post_favorite}}');
+define('TABLE_USER', '{{user}}');
+define('TABLE_FILTER_KEYWORD', '{{filter_keyword}}');
+define('TABLE_LINK', '{{link}}');
+define('TABLE_ADVERT', '{{advert}}');
+define('TABLE_ADCODE', '{{adcode}}');
+define('TABLE_UPLOAD', '{{upload}}');
+define('TABLE_IOS_DEVICE', '{{ios_device}}');
+define('TABLE_POST_TEMP', '{{post_temp}}');
+define('TABLE_WEIBO_ACCOUNT', '{{weibo_account}}');
 define('TABLE_WEIBO_ID', '{{weibo_id}}');
 
 define('POST_STATE_ENABLED', 1);
