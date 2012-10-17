@@ -70,7 +70,7 @@ class AdcodeController extends AdminController
         else {
             $model->advert->clearCache();
             $data = array(
-                'errno' => BETA_NO,
+                'errno' => CD_NO,
                 'label' => t($model->state == ADCODE_STATE_ENABLED ? 'adcode_enabled' : 'adcode_disabled', 'admin')
             );
             CDBase::jsonp($callback, $data);
@@ -87,7 +87,7 @@ class AdcodeController extends AdminController
         if ($model->delete()) {
             $model->advert->clearCache();
             $data = array(
-                'errno' => BETA_NO,
+                'errno' => CD_NO,
                 'label' => '删除成功',
             );
             CDBase::jsonp($callback, $data);

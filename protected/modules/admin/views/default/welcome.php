@@ -6,7 +6,7 @@
         <a class="btn btn-primary btn-small" href="<?php echo url('admin/post/verify');?>">查看投稿</a>
     </p>
     <p>
-        有&nbsp;<b><?php echo $userCount;?></b>&nbsp;个评论未审核。'
+        有&nbsp;<b><?php echo $userCount;?></b>&nbsp;个评论未审核。
         <a class="btn btn-primary btn-small" href="<?php echo url('admin/user/verify');?>">审核评论</a>
     </p>
     <p>

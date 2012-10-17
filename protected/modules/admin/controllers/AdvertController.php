@@ -72,7 +72,7 @@ class AdvertController extends AdminController
         else {
             $model->clearCache();
             $data = array(
-                'errno' => BETA_NO,
+                'errno' => CD_NO,
                 'label' => t($model->state == ADVERT_STATE_ENABLED ? 'advert_enabled' : 'advert_disabled', 'admin')
             );
             CDBase::jsonp($callback, $data);
@@ -89,7 +89,7 @@ class AdvertController extends AdminController
         if ($model->delete()) {
             $model->clearCache();
             $data = array(
-                'errno' => BETA_NO,
+                'errno' => CD_NO,
                 'label' => '删除成功',
             );
             CDBase::jsonp($callback, $data);

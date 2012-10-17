@@ -25,7 +25,7 @@ class PostController extends AdminController
 	    $id = (int)$id;
 	    if ($id === 0) {
 	        $model = new AdminPost();
-	        $model->homeshow = user()->checkAccess('create_post_in_home') ? BETA_YES : BETA_NO;
+	        $model->homeshow = user()->checkAccess('create_post_in_home') ? CD_YES : CD_NO;
 	        $model->state = user()->checkAccess('editor') ? POST_STATE_ENABLED : POST_STATE_NOT_VERIFY;
 	        $this->adminTitle = '添加文章';
 	    }
@@ -156,7 +156,7 @@ class PostController extends AdminController
 	public function actionHottest()
 	{
 	    $criteria = new CDbCriteria();
-	    $criteria->addColumnCondition(array('hottest'=>BETA_YES));
+	    $criteria->addColumnCondition(array('hottest'=>CD_YES));
 	    $data = AdminPost::fetchList($criteria);
 	     
 	    $this->render('list', $data);
@@ -165,7 +165,7 @@ class PostController extends AdminController
 	public function actionRecommend()
 	{
 	    $criteria = new CDbCriteria();
-	    $criteria->addColumnCondition(array('recommend'=>BETA_YES));
+	    $criteria->addColumnCondition(array('recommend'=>CD_YES));
 	    $data = AdminPost::fetchList($criteria);
 	     
 	    $this->render('list', $data);
@@ -174,7 +174,7 @@ class PostController extends AdminController
 	public function actionHomeshow()
 	{
 	    $criteria = new CDbCriteria();
-	    $criteria->addColumnCondition(array('homeshow'=>BETA_YES));
+	    $criteria->addColumnCondition(array('homeshow'=>CD_YES));
 	    $data = AdminPost::fetchList($criteria);
 	     
 	    $this->render('list', $data);
@@ -183,7 +183,7 @@ class PostController extends AdminController
 	public function actionIstop()
 	{
 	    $criteria = new CDbCriteria();
-	    $criteria->addColumnCondition(array('istop'=>BETA_YES));
+	    $criteria->addColumnCondition(array('istop'=>CD_YES));
 	    $data = AdminPost::fetchList($criteria);
 	     
 	    $this->render('list', $data);
@@ -239,7 +239,7 @@ class PostController extends AdminController
 	        throw new CHttpException(500);
 	    else {
 	        $data = array(
-	            'errno' => BETA_NO,
+	            'errno' => CD_NO,
 	            'label' => t($model->state == POST_STATE_ENABLED ? 'sethide' : 'setshow', 'admin')
 	        );
 	        CDBase::jsonp($callback, $data);
@@ -255,7 +255,7 @@ class PostController extends AdminController
 	     
 	    if ($model->delete()) {
 	        $data = array(
-	            'errno' => BETA_NO,
+	            'errno' => CD_NO,
 	            'label' => '删除',
 	        );
 	        CDBase::jsonp($callback, $data);
@@ -273,7 +273,7 @@ class PostController extends AdminController
 	     
 	    if ($model->trash()) {
 	        $data = array(
-	            'errno' => BETA_NO,
+	            'errno' => CD_NO,
 	            'label' => '删除成功',
 	        );
 	        CDBase::jsonp($callback, $data);
@@ -407,7 +407,7 @@ class PostController extends AdminController
 	    $successIds = $failedIds = array();
 	    $attributes = array(
     	    'state' => POST_STATE_ENABLED,
-    	    'recommend' => BETA_YES,
+    	    'recommend' => CD_YES,
     	    'create_time' => $_SERVER['REQUEST_TIME'],
 	    );
 	    foreach ($ids as $id) {
@@ -438,7 +438,7 @@ class PostController extends AdminController
 	        $model = AdminPost::model()->findByPk($id);
 	        if ($model === null) continue;
 	         
-	        $model->hottest = BETA_YES;
+	        $model->hottest = CD_YES;
 	        $model->state = POST_STATE_ENABLED;
 	         
 	        $result = $model->save(true, array('hottest', 'state'));
