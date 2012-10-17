@@ -140,7 +140,7 @@ class Post extends CActiveRecord
 	
 	public function getFilterContent()
 	{
-	    return strip_tags($this->content);
+	    return nl2br(strip_tags($this->content));
 	}
 	
 	public function getScore()
