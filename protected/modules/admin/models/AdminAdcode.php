@@ -25,18 +25,18 @@ class AdminAdcode extends Adcode
     
     public function getEditLink()
     {
-        return l(t('edit', 'admin'), $this->getEditUrl());
+        return l('编辑', $this->getEditUrl());
     }
     
     public function getStateLink()
     {
-        $text = t($this->state == ADCODE_STATE_ENABLED ? 'adcode_enabled' : 'adcode_disabled', 'admin');
+        $text = $this->state == ADCODE_STATE_ENABLED ? '启用' : '禁用';
         $class = $this->state == ADCODE_STATE_ENABLED ? 'row-state label label-success' : 'row-state label label-important';
         return l($text, url('admin/adcode/setstate', array('id'=>$this->id)), array('class'=>$class));
     }
     
     public function getDeleteLink()
     {
-        return l(t('delete', 'admin'), url('admin/adcode/setdelete', array('id'=>$this->id)), array('class'=>'set-delete'));
+        return l('删除', url('admin/adcode/setdelete', array('id'=>$this->id)), array('class'=>'set-delete'));
     }
 }

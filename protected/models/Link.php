@@ -55,11 +55,11 @@ class Link extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'name' => t('link_name'),
-			'url' => t('link_url'),
-			'logo' => t('link_logo'),
-			'desc' => t('link_desc'),
-			'orderid' => t('orderid'),
+			'name' => '名称',
+			'url' => '网址',
+			'logo' => 'LOGO',
+			'desc' => '描述',
+			'orderid' => '排序',
 		);
 	}
 	

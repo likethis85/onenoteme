@@ -61,11 +61,11 @@ class Advert extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => t('advert_id'),
-			'name' => t('advert_name'),
-			'solt' => t('advert_solt'),
-			'intro' => t('advert_intro'),
-			'state' => t('advert_state'),
+			'id' => ID,
+			'name' => '广告位名称',
+			'solt' => '广告位标识',
+			'intro' => '描述',
+			'state' => '状态',
 		);
 	}
 

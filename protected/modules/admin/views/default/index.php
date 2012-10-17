@@ -81,18 +81,8 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">工具<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <!--
-                        <li class="nav-header">广告</li>
-                        <li><a href="#">广告单元</a></li>
-                        <li><a href="#">自建广告</a></li>
-                        <li class="divider"></li>
-                        <li class="nav-header">数据</li>
-                        <li><a href="#">备份</a></li>
-                        <li><a href="#">恢复</a></li>
-                        <li class="divider"></li>
-                        -->
-                        <li><?php echo l(t('friend_link', 'admin'), url('admin/link/list'), array('target'=>'main'));?></li>
-                        <li><?php echo l(t('advert_managent', 'admin'), url('admin/advert/list'), array('target'=>'main'));?></li>
+                        <li><?php echo l('友情链接', url('admin/link/list'), array('target'=>'main'));?></li>
+                        <li><?php echo l('广告管理', url('admin/advert/list'), array('target'=>'main'));?></li>
                     </ul>
                 </li>
                 <li class="dropdown">

@@ -60,7 +60,7 @@ var BetaAdmin = {
 	deleteRow: function(event){
 		event.preventDefault();
 		var tthis = $(event.currentTarget);
-		var confirm = window.confirm(event.data.confirmText);
+		var confirm = window.confirm('您确定要执行删除操作？');
 		if (!confirm) return ;
 
 		var jqXhr = BetaAdmin.handleRow(event);
@@ -101,7 +101,7 @@ var BetaAdmin = {
 	deleteMultiRows: function(event) {
 		event.preventDefault();
 
-		var confirm = window.confirm(event.data.confirmText);
+		var confirm = window.confirm('您确定要执行删除操作？');
 		if (!confirm) return ;
 
 		var jqXhr = BetaAdmin.handleMultiRows(event);
@@ -144,7 +144,7 @@ var BetaAdmin = {
 	rejectMultiPosts: function(event) {
 		event.preventDefault();
 
-		var confirm = window.confirm(event.data.confirmText);
+		var confirm = window.confirm('您确定要执行删除操作？');
 		if (!confirm) return ;
 
 		var jqXhr = BetaAdmin.handleMultiRows(event);

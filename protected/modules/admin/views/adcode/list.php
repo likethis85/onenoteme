@@ -1,8 +1,8 @@
-<h4><?php echo user()->getFlash('table_caption', t('advert_solt', 'admin', array('{name}'=>$advert->name, '{solt}'=>$advert->solt)));?></h4>
+<h4><?php echo user()->getFlash('table_caption', sprintf('广告位：%s - %s', $advert->name, $advert->solt));?></h4>
 <div class="btn-toolbar">
-    <a class="btn btn-small btn-success" href="<?php echo url('admin/adcode/create', array('adid'=>$advert->id));?>"><?php echo t('create_adcode', 'admin');?></a>
-    <a href="" class="btn btn-small"><?php echo t('reload_data', 'admin');?></a>
-    <a href="<?php echo url('admin/advert/list');?>" class="btn btn-small"><?php echo t('return_advert_list', 'admin');?></a>
+    <a class="btn btn-small btn-success" href="<?php echo url('admin/adcode/create', array('adid'=>$advert->id));?>">新建广告</a>
+    <a href="" class="btn btn-small">刷新</a>
+    <a href="<?php echo url('admin/advert/list');?>" class="btn btn-small">返回列表</a>
 </div>
 <table class="table table-striped table-bordered beta-list-table">
     <thead>
@@ -34,13 +34,13 @@
 <div class="alert alert-block alert-info">
     <a href="javascript:void(0);" data-dismiss="alert" class="close">&times;</a>
     <ul>
-        <li><?php echo t('multi_adcode_tip', 'admin');?></li>
+        <li>如果一个广告位有多个有效的广告，则启用随机显示其中</li>
     </ul>
 </div>
 
 <script type="text/javascript">
 $(function(){
 	$(document).on('click', '.row-state', BetaAdmin.ajaxSetBooleanColumn);
-	$(document).on('click', '.set-delete', {confirmText:confirmAlertText}, BetaAdmin.deleteRow);
+	$(document).on('click', '.set-delete', BetaAdmin.deleteRow);
 });
 </script>

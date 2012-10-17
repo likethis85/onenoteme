@@ -26,21 +26,21 @@
         <?php echo CHtml::activeLabel($model, 'state', array('class'=>'control-label'));?>
         <div class="controls">
             <label class="checkbox inline">
-                <?php echo CHtml::activeCheckBox($model, 'state');?><?php echo t('advert_enabled', 'admin');?>
+                <?php echo CHtml::activeCheckBox($model, 'state');?>启用
             </label>
             <?php if($model->hasErrors('state')):?><p class="help-block"><?php echo $model->getError('state');?></p><?php endif;?>
         </div>
     </div>
     <div class="control-group bottom10px <?php if ($model->hasErrors('intro')) echo 'error';?>">
-        <label class="control-label"><?php echo t('advert_intro');?></label>
+        <?php echo CHtml::activeLabel($model, 'intro', array('class'=>'control-label'));?>
         <div class="controls">
             <?php echo CHtml::activeTextArea($model, 'intro', array('class'=>'span7', 'rows'=>4));?>
             <?php if ($model->hasErrors('intro')):?><p class="help-block"><?php echo $model->getError('intro');?></p><?php endif;?>
         </div>
     </div>
     <div class="form-actions">
-        <input type="submit" value="<?php echo t('submit', 'admin');?>" class="btn btn-primary" />
-        <a class="btn" href="<?php echo url('admin/advert/list');?>"><?php echo t('return_list_page', 'admin');?></a>
+        <input type="submit" value="提交" class="btn btn-primary" />
+        <a class="btn" href="<?php echo url('admin/advert/list');?>">返回列表</a>
     </div>
 </fieldset>
 <?php echo CHtml::endForm();?>

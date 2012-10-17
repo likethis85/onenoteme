@@ -47,13 +47,13 @@
         <?php echo CHtml::activeLabel($model, 'orderid', array('class'=>'control-label'));?>
         <div class="controls">
             <?php echo CHtml::activeTextField($model, 'orderid', array('class'=>'input-mini'));?>
-            <span class="help-info"><?php echo t('link_orderid_sort_tip', 'admin');?></span>
+            <span class="help-info">排序提示：数字越小，排的越靠前</span>
             <?php if($model->hasErrors('orderid')):?><p class="help-block"><?php echo $model->getError('orderid');?></p><?php endif;?>
         </div>
     </div>
     <div class="form-actions">
-        <input type="submit" value="<?php echo t('submit', 'admin');?>" class="btn btn-primary" />
-        <a class="btn" href="<?php echo url('admin/link/list');?>"><?php echo t('return_list_page', 'admin');?></a>
+        <input type="submit" value="提交" class="btn btn-primary" />
+        <a class="btn" href="<?php echo url('admin/link/list');?>">返回列表</a>
     </div>
 </fieldset>
 <?php echo CHtml::endForm();?>

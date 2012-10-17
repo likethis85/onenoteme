@@ -58,11 +58,11 @@ class Adcode extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => t('adcode_id'),
-			'ad_id' => t('advert_id'),
-			'adcode' => t('advert_code'),
-			'intro' => t('adcode_intro'),
-			'state' => t('adcode_state'),
+			'id' => 'ID',
+			'ad_id' => '广告位ID',
+			'adcode' => '广告代码',
+			'intro' => '说明',
+			'state' => '状态',
 		);
 	}
 

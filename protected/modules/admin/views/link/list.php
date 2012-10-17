@@ -11,7 +11,7 @@
 </div>
 <?php endif;?>
 
-<h4><?php echo user()->getFlash('table_caption', t('link_list_table', 'admin'));?></h4>
+<h4><?php echo user()->getFlash('table_caption', '链接列表');?></h4>
 <?php echo CHtml::form(url('admin/link/updateOrderID'), 'post', array('class'=>'form-horizontal'));?>
 <table class="table table-striped table-bordered beta-list-table">
     <thead>
@@ -22,7 +22,7 @@
             <th class="span3 align-center"><?php echo $sort->link('url');?></th>
             <th class="span3 align-center"><?php echo $sort->link('desc');?></th>
             <th class="span2 align-center"><?php echo $sort->link('logo');?></th>
-            <th><a class="label label-important" href="<?php echo url('admin/link/create');?>"><?php echo t('create_link', 'admin');?></a></th>
+            <th><a class="label label-important" href="<?php echo url('admin/link/create');?>">新建链接</a></th>
         </tr>
     </thead>
     <tbody>
@@ -35,7 +35,7 @@
             <td><?php echo $model->desc;?></td>
             <td><?php echo $model->logoImage;?></td>
             <td>
-                <?php echo l(t('edit', 'admin'), url('admin/link/create', array('id'=>$model->id)));?>
+                <?php echo l('编辑', url('admin/link/create', array('id'=>$model->id)));?>
             </td>
         </tr>
         <?php endforeach;?>
@@ -48,8 +48,9 @@
 <?php if (count($models) > 0):?>
 <fieldset>
     <div class="form-actions">
-        <input type="submit" value="<?php echo t('submit', 'admin');?>" class="btn btn-primary" />
-        <a class="btn" href="<?php echo url('admin/link/create');?>"><?php echo t('create_link', 'admin');?></a>
+        <a class="btn" href="<?php echo url('admin/link/create');?>">新建</a>
+        <a class="btn" href="">刷新</a>
+        <input type="submit" value="提交" class="btn btn-primary" />
     </div>
 </fieldset>
 <?php endif;?>
@@ -57,6 +58,6 @@
 
 <div class="alert alert-danger">
     <a href="javascript:void(0);" data-dismiss="alert" class="close">&times;</a>
-    <?php echo t('link_orderid_sort_tip', 'admin');?>
+    排序提示：数字越小，排的越靠前
 </div>
 

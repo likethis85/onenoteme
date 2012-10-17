@@ -4,11 +4,11 @@
     <?php echo user()->getFlash('clear_advert_all_cache_result');?>
 </div>
 <?php endif;?>
-<h4><?php echo user()->getFlash('table_caption', t('advert_list_table', 'admin'));?></h4>
+<h4><?php echo user()->getFlash('table_caption', '广告位列表');?></h4>
 <div class="btn-toolbar">
-    <a class="btn btn-danger btn-small" href="<?php echo url('admin/advert/clearAllCache');?>"><?php echo t('clear_all_caceh', 'admin');?></a>
-    <a class="btn btn-success btn-small" href="<?php echo url('admin/advert/create');?>"><?php echo t('create_advert', 'admin');?></a>
-    <a href="" class="btn btn-small"><?php echo t('reload_data', 'admin');?></a>
+    <a class="btn btn-danger btn-small" href="<?php echo url('admin/advert/clearAllCache');?>">清除缓存</a>
+    <a class="btn btn-success btn-small" href="<?php echo url('admin/advert/create');?>">新建广告位</a>
+    <a href="" class="btn btn-small">刷新</a>
 </div>
 <table class="table table-striped table-bordered beta-list-table">
     <thead>
@@ -17,7 +17,7 @@
             <th class="span3"><?php echo $sort->link('name');?></th>
             <th class="span3"><?php echo $sort->link('solt');?></th>
             <th class="span1 align-center"><?php echo $sort->link('state');?></th>
-            <th><a class="btn btn-mini btn-success" href="<?php echo url('admin/advert/create');?>"><?php echo t('create_advert', 'admin');?></a></th>
+            <th>&nbsp;</th>
         </tr>
     </thead>
     <tbody>
@@ -42,15 +42,15 @@
 <div class="alert alert-block alert-info">
     <a href="javascript:void(0);" data-dismiss="alert" class="close">&times;</a>
     <ul>
-        <li><?php echo t('clear_all_cache_tip', 'admin');?></li>
-        <li><?php echo t('delete_advert_tip', 'admin');?></li>
+        <li>广告位在编辑过程中会自动处理缓存，如没有必要，不必清除所有缓存。</li>
+        <li>警告：删除广告位会将该广告位下所有广告代码一并删除！</li>
     </ul>
 </div>
 
 <script type="text/javascript">
 $(function(){
 	$(document).on('click', '.row-state', BetaAdmin.ajaxSetBooleanColumn);
-	$(document).on('click', '.set-delete', {confirmText:confirmAlertText}, BetaAdmin.deleteRow);
+	$(document).on('click', '.set-delete', BetaAdmin.deleteRow);
 	$(document).on('hover', '#clear-cache', function(event){
 		$('#clear-cache').popover('toggle');
 	});

@@ -34,11 +34,20 @@ define('POST_STATE_ENABLED', 1);
 define('POST_STATE_DISABLED', 0);
 define('COMMENT_STATE_ENABLED', 1);
 define('COMMENT_STATE_DISABLED', 0);
+define('COMMENT_STATE_NOT_VERIFY', -1);
 
 /* user state */
 define('USER_STATE_UNVERIFY', 0);
 define('USER_STATE_ENABLED', 1);
 define('USER_STATE_FORBIDDEN', -1);
+/* advert state */
+define('ADVERT_STATE_DISABLED', 0);
+define('ADVERT_STATE_ENABLED', 1);
+/* advert state */
+define('ADCODE_STATE_DISABLED', 0);
+define('ADCODE_STATE_ENABLED', 1);
+
+
 
 define('POST_LIST_STYLE_GRID', 'grid');
 define('POST_LIST_STYLE_WATERFALL', 'fall');

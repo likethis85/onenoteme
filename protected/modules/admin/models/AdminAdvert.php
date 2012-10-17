@@ -26,7 +26,7 @@ class AdminAdvert extends Advert
     
     public function getEditLink()
     {
-        return l(t('edit', 'admin'), $this->getEditUrl());
+        return l('编辑', $this->getEditUrl());
     }
     
     public function getNameLink()
@@ -36,14 +36,14 @@ class AdminAdvert extends Advert
     
     public function getStateLink()
     {
-        $text = t($this->state == ADVERT_STATE_ENABLED ? 'advert_enabled' : 'advert_disabled', 'admin');
+        $text = $this->state == ADVERT_STATE_ENABLED ? '启用' : '禁用';
         $class = $this->state == ADVERT_STATE_ENABLED ? 'row-state label label-success' : 'row-state label label-important';
         return l($text, url('admin/advert/setstate', array('id'=>$this->id)), array('class'=>$class));
     }
     
     public function getDeleteLink()
     {
-        return l(t('delete', 'admin'), url('admin/advert/setdelete', array('id'=>$this->id)), array('class'=>'set-delete'));
+        return l('删除', url('admin/advert/setdelete', array('id'=>$this->id)), array('class'=>'set-delete'));
     }
     
 }

@@ -26,14 +26,14 @@
         <?php echo CHtml::activeLabel($model, 'state', array('class'=>'control-label'));?>
         <div class="controls">
             <label class="checkbox inline">
-                <?php echo CHtml::activeCheckBox($model, 'state');?><?php echo t('adcode_enabled', 'admin');?>
+                <?php echo CHtml::activeCheckBox($model, 'state');?>启用
             </label>
             <?php if($model->hasErrors('state')):?><p class="help-block"><?php echo $model->getError('state');?></p><?php endif;?>
         </div>
     </div>
     <div class="form-actions">
-        <input type="submit" value="<?php echo t('submit', 'admin');?>" class="btn btn-primary" />
-        <a class="btn" href="<?php echo url('admin/adcode/list', array('adid'=>$model->ad_id));?>"><?php echo t('return_list_page', 'admin');?></a>
+        <input type="submit" value="提交" class="btn btn-primary" />
+        <a class="btn" href="<?php echo url('admin/adcode/list', array('adid'=>$model->ad_id));?>">返回列表</a>
     </div>
 </fieldset>
 <?php echo CHtml::endForm();?>
