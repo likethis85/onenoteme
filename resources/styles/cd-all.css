@@ -39,6 +39,7 @@ body {background-color:#ECE5D8;}
 .cd-header .user-nav .user-name img {margin-right:2px;}
 /* panel */
 .panel {background-color:#FFFFFF; position:relative; margin:0 1px 3px; -webkit-box-shadow:#666 0 1px 3px; box-shadow:#666 0 1px 3px; -moz-box-shadow:#666 0 1px 3px; -webkit-border-radius:5px; border-radius:5px; -moz-border-radius:5px;}
+.panel-rect {background-color:#FFFFFF; position:relative; margin:0 1px 3px; -webkit-box-shadow:#666 0 1px 3px; box-shadow:#666 0 1px 3px; -moz-box-shadow:#666 0 1px 3px;}
 .panel25 {padding:25px;}
 .panel20 {padding:20px;}
 .panel15 {padding:15px;}
@@ -87,6 +88,7 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 .cd-footer a:hover {color:#EFEFEF;}
 
 /* pages */
+.panel-pages {padding:5px 15px;}
 .cd-pages {font-size:14px; margin:15px 0;}
 .cd-pages a {font-size:14px;}
 .cd-pages ul.yiiPager {font-size:14px;border:0;margin:0;padding:0;}
