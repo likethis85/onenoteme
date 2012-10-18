@@ -19,7 +19,7 @@
         <?php foreach ($models as $model):?>
         <tr>
             <td class="align-center"><?php echo $model['id'];?></td>
-            <td class="align-right" class="config-name">
+            <td class="align-right config-name">
                 <strong><?php echo h($model['name']);?></strong>
                 <span class="cgray f12px"><?php echo $model['config_name'];?></span>
             </td>
