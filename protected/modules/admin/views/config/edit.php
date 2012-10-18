@@ -22,9 +22,9 @@
     <thead>
         <tr>
             <th class="span1 align-center">ID</th>
-            <th class="span2 align-right"><?php echo t('config_var_name');?></th>
-            <th class="span6"><?php echo t('config_value');?></th>
-            <th class="span3"><?php echo t('config_description');?></th>
+            <th class="span2 align-right">参数名称/参数变量名</th>
+            <th class="span6">参数值</th>
+            <th class="span3">描述</th>
             <th>#</th>
         </tr>
     </thead>
@@ -32,8 +32,8 @@
         <?php foreach ($models as $model):?>
         <tr>
             <td class="align-center"><?php echo $model['id'];?></td>
-            <td class="align-right">
-                <h5><?php echo h($model['name']);?></h5>
+            <td class="align-right" class="config-name">
+                <strong><?php echo h($model['name']);?></strong>
                 <span class="cgray f12px"><?php echo $model['config_name'];?></span>
             </td>
             <td>
@@ -50,6 +50,6 @@
     </tbody>
 </table>
 <div class="form-actions">
-    <input type="submit" value="<?php echo t('submit');?>" class="btn btn-primary" />
+    <input type="submit" value="提交" class="btn btn-primary" />
 </div>
 </form>

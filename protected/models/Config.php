@@ -65,11 +65,11 @@ class Config extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-	        'name' => t('config_nickname'),
-			'category_id' => t('config_category'),
-			'config_name' => t('config_var_name'),
-			'config_value' => t('config_value'),
-			'desc' => t('config_description'),
+	        'name' => '参数名称',
+			'category_id' => '分类',
+			'config_name' => '参数变量名',
+			'config_value' => '参数值',
+			'desc' => '描述',
 		);
 	}
 

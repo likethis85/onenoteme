@@ -88,28 +88,26 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">设置<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li class="nav-header"><?php echo t('system_config_params', 'admin');?></li>
-                        <li><?php echo l(t('system_site', 'admin'), url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SYSTEM_SITE)), array('target'=>'main'));?></li>
-                        <li><?php echo l(t('system_cache', 'admin'), url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SYSTEM_CACHE)), array('target'=>'main'));?></li>
-                        <li><?php echo l(t('system_attachments', 'admin'), url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SYSTEM_ATTACHMENTS)), array('target'=>'main'));?></li>
+                        <li class="nav-header">系统功能</li>
+                        <li><?php echo l('网站设置', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SYSTEM_SITE)), array('target'=>'main'));?></li>
+                        <li><?php echo l('缓存设置', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SYSTEM_CACHE)), array('target'=>'main'));?></li>
+                        <li><?php echo l('附件设置', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SYSTEM_ATTACHMENTS)), array('target'=>'main'));?></li>
                         <li class="divider"></li>
-                        <li class="nav-header"><?php echo t('display_config_params', 'admin');?></li>
-                        <li><?php echo l(t('display_template', 'admin'), url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_DISPLAY_TEMPLATE)), array('target'=>'main'));?></li>
-                        <li><?php echo l(t('display_ui', 'admin'), url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_DISPLAY_UI)), array('target'=>'main'));?></li>
+                        <li class="nav-header">网站显示</li>
+                        <li><?php echo l('模板配置', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_DISPLAY_TEMPLATE)), array('target'=>'main'));?></li>
+                        <li><?php echo l('界面元素', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_DISPLAY_UI)), array('target'=>'main'));?></li>
                         <li class="divider"></li>
-                        <li class="nav-header"><?php echo t('filter_keyword_manage', 'admin');?></li>
-                        <li><?php echo l(t('multi_create_filter_keyword', 'admin'), url('admin/keyword/create'), array('target'=>'main'));?></li>
-                        <li><?php echo l(t('filter_keyword_list', 'admin'), url('admin/keyword/list'), array('target'=>'main'));?></li>
-                        <!--
-                        <li class="nav-header"><?php echo t('sns_config_params', 'admin');?></li>
-                        <li><?php echo l(t('sns_interface', 'admin'), url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SNS_INTERFACE)), array('target'=>'main'));?></li>
-                        <li><?php echo l(t('sns_stats', 'admin'), url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SNS_STATS)), array('target'=>'main'));?></li>
-                        <li><?php echo l(t('sns_template', 'admin'), url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SNS_TEMPLATE)), array('target'=>'main'));?></li>
-                         -->
+                        <li class="nav-header">敏感词管理</li>
+                        <li><?php echo l('批量添加', url('admin/keyword/create'), array('target'=>'main'));?></li>
+                        <li><?php echo l('敏感词列表', url('admin/keyword/list'), array('target'=>'main'));?></li>
+                        <li class="nav-header">SNS配置</li>
+                        <li><?php echo l('SNS接口', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SNS_INTERFACE)), array('target'=>'main'));?></li>
+                        <li><?php echo l('SNS统计', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SNS_STATS)), array('target'=>'main'));?></li>
+                        <li><?php echo l('SNS模板', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SNS_TEMPLATE)), array('target'=>'main'));?></li>
                         <li class="divider"></li>
-                        <li class="nav-header"><?php echo t('custom_config_params', 'admin');?></li>
-                        <li><?php echo l(t('custom_config_params', 'admin'), url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_CUSTOM)), array('target'=>'main'));?></li>
-                        <li><?php echo l(t('create_custom_param', 'admin'), url('admin/config/create'), array('target'=>'main'));?></li>
+                        <li class="nav-header">自定义参数</li>
+                        <li><?php echo l('自定义参数列表', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_CUSTOM)), array('target'=>'main'));?></li>
+                        <li><?php echo l('添加自定义参数', url('admin/config/create'), array('target'=>'main'));?></li>
                     </ul>
                 </li>
             </ul>

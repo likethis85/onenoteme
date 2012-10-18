@@ -34,21 +34,21 @@ class AdminConfig extends Config
     {
         // @todo not complete
         return array(
-            self::CATEGORY_CUSTOM => t('custome_config_params', 'admin'),
+            self::CATEGORY_CUSTOM => '自定义参数',
         
-            self::CATEGORY_SYSTEM => t('system_config_params', 'admin'),
-            self::CATEGORY_SYSTEM_SITE => t('system_site', 'admin'),
-            self::CATEGORY_SYSTEM_CACHE => t('system_cache', 'admin'),
-            self::CATEGORY_SYSTEM_ATTACHMENTS => t('system_attachments', 'admin'),
+            self::CATEGORY_SYSTEM => '系统配置',
+            self::CATEGORY_SYSTEM_SITE => '网站设置',
+            self::CATEGORY_SYSTEM_CACHE => '缓存设置',
+            self::CATEGORY_SYSTEM_ATTACHMENTS => '附件设置',
         
-            self::CATEGORY_DISPLAY => t('display_config_params', 'admin'),
-            self::CATEGORY_DISPLAY_TEMPLATE => t('display_template', 'admin'),
-            self::CATEGORY_DISPLAY_UI => t('display_ui', 'admin'),
+            self::CATEGORY_DISPLAY => '网站显示',
+            self::CATEGORY_DISPLAY_TEMPLATE => '模板配置',
+            self::CATEGORY_DISPLAY_UI => '界面元素',
         
-            self::CATEGORY_SNS => t('sns_config_params', 'admin'),
-            self::CATEGORY_SNS_INTERFACE => t('sns_interface', 'admin'),
-            self::CATEGORY_SNS_STATS => t('sns_stats', 'admin'),
-            self::CATEGORY_SNS_TEMPLATE => t('sns_template', 'admin'),
+            self::CATEGORY_SNS => 'SNS配置',
+            self::CATEGORY_SNS_INTERFACE => 'SNS接口',
+            self::CATEGORY_SNS_STATS => 'SNS统计',
+            self::CATEGORY_SNS_TEMPLATE => 'SNS模板',
         );
     }
     

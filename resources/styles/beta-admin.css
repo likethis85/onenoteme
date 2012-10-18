@@ -52,6 +52,7 @@ select.select-mini {width:auto;height:auto;line-height:auto; padding:0;}
 .config-error-names {margin-top:10px;}
 .config-error-names li {margin-bottom:10px;}
 .beta-config-table textarea {height:70px;}
+.beta-config-table .config-name strong {display:block;}
 
 /* top nav */
 .navbar-fixed-top .admin-nav-container {width:auto; padding-left:10px; padding-right:10px;}
