@@ -15,7 +15,7 @@
  * @property integer $comment_nums
  * @property integer $user_id
  * @property string $user_name
- * @property integer $tags
+ * @property string $tags
  * @property integer $state
  * @property string $content
  * @property string $thumbnail_pic

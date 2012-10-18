@@ -320,7 +320,11 @@ class WeiboCommand extends CConsoleCommand
         $postUrl = 'http://www.waduanzi.com/post-' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
         $urlLen = empty($sinatShortUrl) ? 0 : strlen($sinatShortUrl);
-        $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子网';
+        $tail = '...' . $sinatShortUrl . ' @挖段子网';
+        if ($model->tags)
+            $tags = '#' . $model->getTagText('##') . '#';
+        $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset);
+        $content = $tags . mb_substr($model->content, 0, $subLen, app()->charset) . $tail;
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->cache->get('sina_weibo_access_token'),
