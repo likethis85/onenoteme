@@ -87,14 +87,17 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 .cd-footer a:hover {color:#EFEFEF;}
 
 /* pages */
-.pages {padding:5px; margin:10px 0; font-size:20px;}
-.pages ul.yiiPager {font-size:20px;}
-.panel-pages {padding:5px 15px;}
-/*
-.pages ul.yiiPager a:link, .pages ul.yiiPager a:visited {border:1px solid #DAF0EF; color:#DDDDD1;}
-.pages ul.yiiPager a:hover {color:white; background:#4E76C9;}
-.pages ul.yiiPager .selected a {background:#4E76C9; color:white;}
-*/
+.cd-pages {font-size:14px; margin:15px 0;}
+.cd-pages a {font-size:14px;}
+.cd-pages ul.yiiPager {font-size:14px;border:0;margin:0;padding:0;}
+.cd-pages ul.yiiPager li{display:inline-block; line-height:34px;}
+.cd-pages ul.yiiPager a:link,.cd-pages  ul.yiiPager a:visited{border:solid 1px #9aafe5; color:#0e509e; padding:8px 12px; text-decoration:none;}
+.cd-pages ul.yiiPager a:hover{border:solid 1px #0e509e;}
+.cd-pages ul.yiiPager .selected a {background:#2e6ab1;color:#FFFFFF;font-weight:bold;}
+.cd-pages ul.yiiPager .hidden a {border:solid 1px #DEDEDE;color:#888888;}
+.cd-pages ul.yiiPager .first,.cd-pages ul.yiiPager .last {display:none;}
+.cd-pages ul.yiiPager .previous a, .cd-pages ul.yiiPager .next a {padding-left:22px; padding-right:22px;}
+
 
 /* post/show */
 .post-detail {color:#292A2B;}
@@ -210,7 +213,7 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 
 /* video list */
 .video-detail {margin-bottom:15px;}
-.video-player {text-align:center; margin-top:15px; background:#F4F4F6;}
+.video-player {text-align:center; margin-bottom:10px; background:#F4F4F6;}
 .video-detail .toolbar {background:#F4F4F6; padding:5px 10px; font-size:12px; color:#666; margin-top:10px;}
 
 #quick-login {display:none;}

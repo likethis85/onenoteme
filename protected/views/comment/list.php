@@ -11,8 +11,8 @@
     <div class="clear"></div>
 </div>
 <?php endforeach;?>
-<?php if ($pages instanceof CPagination && $pages->getPageCount() > 1):?>
-<div class="pages" id="page-nav"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'header'=>'', 'footer'=>''));?></div>
+<?php if ($pages->pageCount > 1):?>
+<div class="cd-pages" id="page-nav"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
 <?php endif;?>
 
 

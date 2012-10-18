@@ -69,7 +69,7 @@
 </div>
 
 <?php if ($pages->pageCount > 1):?>
-<div class="panel panel-pages"><div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div></div>
+<div class="panel panel-pages"><div class="cd-pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div></div>
 <?php endif;?>
 
 <script type="text/javascript">

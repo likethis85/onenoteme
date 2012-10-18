@@ -6,6 +6,7 @@ return array(
         'maxButtonCount' => 8,
         'nextPageLabel' => '下页',
         'prevPageLabel' => '上页',
+        'cssFile' => false,
     ),
     'classic' => array(
         'header' => '',

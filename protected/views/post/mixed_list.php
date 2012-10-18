@@ -26,7 +26,7 @@
 </div>
 <div class="clear"></div>
 <?php if($pages->pageCount > 1):?>
-<div id="page-nav" class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'header'=>'', 'footer'=>''));?></div>
+<div id="page-nav" class="cd-pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
 <?php endif;?>
 <div id="manual-load" class="radius5px hide">查看更多</div>
 
