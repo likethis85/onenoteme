@@ -1,7 +1,19 @@
 <?php
 define('CD_CONFIG_ROOT', dirname(__FILE__));
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
-$params = require(dirname(__FILE__) . DS . 'params_product.php');
+
+try {
+    $params = require(CD_CONFIG_ROOT . DS . 'params_product.php');
+    $cachefile = $params['dataPath'] . DS . 'setting.config.php';
+    if (file_exists($cachefile)) {
+        $customSetting = require($cachefile);
+        $params = array_merge($params, $customSetting);
+    }
+}
+catch (Exception $e) {
+    echo $e->getMessage();
+    exit(0);
+}
 
 return array(
     'basePath' => dirname(__FILE__) . DS . '..',

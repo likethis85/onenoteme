@@ -39,12 +39,12 @@
     <div class="control-group warning">
         <label class="control-label">&nbsp;</label>
         <div class="controls">
-            <p class="help-block"><?php echo t('create_custom_param_value_tip', 'admin')?></p>
-            <p class="help-block"><?php echo t('create_custom_param_name_tip', 'admin')?></p>
+            <p class="help-block">布尔值使用1和0代表</p>
+            <p class="help-block">变量名只能使用字母数字下划线组成，且只能用字母开头，不区分大小写，长度5-100字符</p>
         </div>
     </div>
     <div class="form-actions">
-        <input type="submit" value="<?php echo t('submit', 'admin');?>" class="btn btn-primary" />
+        <input type="submit" value="提交" class="btn btn-primary" />
     </div>
 </fieldset>
 <?php echo CHtml::endForm();?>

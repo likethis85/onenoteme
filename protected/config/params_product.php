@@ -1,18 +1,7 @@
 <?php
 return array(
-    'shortdesc' => '笑死人不偿命 - 每日精品笑话连载',
-
-    'autoLoginDuration' => 3600 * 24 * 7,
-    'waterfall_post_count_page' => 32,
-    'grid_post_count_page' => 15,
-    'video_count_page' => 8,
-    'duanzi_count_page' => 20,
-    'lengtu_count_page' => 15,
-    'girl_count_page' => 10,
-    'commentCountOfPage' => 20,
-
-    'userIsRequireEmailVerify' => false,
-
+    // 缓存数据目录
+    'dataPath' => CD_CONFIG_ROOT . DS . '..' . DS . 'data' . DS,
     'uploadBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'uploads' . DS,
     'uploadBaseUrl' => 'http://f.waduanzi.com/',
     'resourceBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'resources' . DS,
@@ -36,6 +25,43 @@ return array(
         CHANNEL_HOTNEWS => '挖热点',
     ),
 
+    // 默认评论是否需要审核, 1直接显示，0需要审核
+    'defaultNewCommentState' => 1,
+    
+    // default param and value
+    'post_list_type' => 0,
+    'beian_code' => '',
+    'tongji_code' => '',
+    'header_html' => '',
+    'footer_after_html' => '',
+    'footer_before_html' => '',
+    'site_keywords' => '',
+    'site_description' => '',
+    'filterKeywordReplacement' => '文明用语',
+    'visit_nums_init_min' => 1,
+    'visit_nums_init_max' => 1,
     'user_required_email_verfiy' => 0,
     'user_required_admin_verfiy' => 0,
+    'auto_remote_image_local' => 0,
+    'mobile_post_list_page_count' => 8,
+        
+    'shortdesc' => '笑死人不偿命 - 每日精品笑话连载',
+    
+    'autoLoginDuration' => 3600 * 24 * 7,
+    'waterfall_post_count_page' => 32,
+    'grid_post_count_page' => 15,
+    'video_count_page' => 8,
+    'duanzi_count_page' => 20,
+    'lengtu_count_page' => 15,
+    'girl_count_page' => 10,
+    'commentCountOfPage' => 20,
+
+    'user_required_email_verfiy' => 0,
+    'user_required_admin_verfiy' => 0,
+        
+    /* sns params */
+    'weibo_official_account' => '',
+    'qqt_official_account' => '',
+    'relative_weibo_accounts' => '',
+    'relative_qqt_accounts' => '',
 );
