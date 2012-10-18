@@ -39,7 +39,7 @@
                     <span class="social-widget-img"> <img src="<?php echo sbu('images/rss_logo.png');?>" alt=""></span>
                     <span class="social-widget-right clearfix">
                         <span class="social-widget-title">全文 RSS</span>
-                        <span class="social-widget-content">超过 48,100 人在订阅爱范儿全文 RSS<span class="clear"></span></span>
+                        <span class="social-widget-content">超过 20,000 人在订阅挖段子全文 RSS<span class="clear"></span></span>
                     </span>
                 </a>
             </li>
