@@ -417,7 +417,7 @@ class WeiboCommand extends CConsoleCommand
         $postUrl = 'http://www.waduanzi.com/post-' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
         $tail = '...' . $sinatShortUrl . ' @cdcchen';
-        $accounts = '@冷笑话精选@这个绝对有意思@笑多了会怀孕@我们爱讲冷笑话@当时我就震惊了';
+        $accounts = '@冷笑话精选@我们爱讲冷笑话@当时我就震惊了';
         if ($model->tags)
             $tags = '#' . $model->getTagText('##') . '#';
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
@@ -458,7 +458,7 @@ class WeiboCommand extends CConsoleCommand
         $postUrl = 'http://www.waduanzi.com/post-' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
         $tail = '...' . $sinatShortUrl . ' @cdcchen';
-        $accounts = '@冷笑话精选@这个绝对有意思@笑多了会怀孕@我们爱讲冷笑话@当时我就震惊了';
+        $accounts = '@冷笑话精选@我们爱讲冷笑话@当时我就震惊了';
         if ($model->tags)
             $tags = '#' . $model->getTagText('##') . '#';
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
