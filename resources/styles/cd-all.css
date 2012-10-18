@@ -121,7 +121,7 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 .post-detail .social {padding:3px 3px; margin-left:3px;}
 .post-detail .comment-form {backgroun2d-color:#F4F4F6; display:block; position:relative; overflow:hidden; background-color:#ECECEC; padding:8px; margin-bottom:10px;}
 .post-detail .comment-form textarea {width:485px; border:0; color:#888; margin:0; padding:7px 5px 6px; font-size:12px;}
-.post-detail .comment-form textarea.mini-content {height:20px;}
+.post-detail .comment-form textarea.mini-content {height:20px; resize:none;}
 .post-detail .comment-form textarea.expand {height:50px;}
 .post-detail .comment-form .save-caption-loader {background:url(../images/small-loader.gif) no-repeat; width:24px; height:24px; position:absolute; top:47px; right:10px;}
 .post-detail .comment-form .counter {font-size:22px; position:absolute; top:50px; right:50px; font-weight:bold; font-family:'Helvetica Neue','Helvetica','Arial',sans-serif;}
@@ -260,6 +260,21 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 a:hover .social-widget-title {color:#111111;}
 .social-widget-content {line-height:1.5;}
 a:hover .social-widget-content {color:#666666;}
+
+/* quick create */
+.quick-create {margin-bottom:15px; overflow-x:hidden; overflow-y:auto;}
+.quick-create #quick-content {width:600px; height:80px; overflow-x:hidden; overflow-y:auto; resize:none; -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px;}
+.quick-create .quick-btn {margin-top:5px; float:right;}
+.quick-create .quick-btn a {border:0; width:70px; height:28px; display:block; background-position:-615px -1px; float:right;}
+.quick-create .quick-btn a:hover { background-position:-475px -1px;}
+.quick-create .quick-kind {margin-top:7px; float:left;}
+.quick-create .quick-kind a {font-size:12px; margin:0 15px 0 0; display:inline-block; height:14px; padding:2px 0 2px 19px; line-height:14px; color:#7AA5B9;}
+.quick-create .quick-kind a:hover {text-decoration:underline;}
+.quick-create .quick-kind .image {background-position:0 -32px;}
+.quick-create .quick-kind .video {background-position:0 -67px;}
+.quick-create .quick-kind .music {background-position:0 -100px;}
+
+
 
 
 

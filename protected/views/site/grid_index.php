@@ -7,6 +7,10 @@
 </div>
 
 <div class="fleft cd-container">
+<!-- 快速发表段子 start -->
+<?php $this->renderPartial('/post/quick_create');?>
+<!-- 快速发表段子 end -->
+
 <?php $this->renderPartial('/post/grid_list', array('models' => $models, 'pages' => $pages));?>
 </div>
 <div class="fright cd-sidebar">
