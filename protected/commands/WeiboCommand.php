@@ -290,6 +290,25 @@ class WeiboCommand extends CConsoleCommand
         }
     }
     
+    private static function sinatShortUrl($longUrl)
+    {
+        $url = 'https://api.weibo.com/2/short_url/shorten.json';
+        $data = array(
+        'source' => WEIBO_APP_KEY,
+        'url_long' => $longUrl,
+        );
+    
+        $curl = new CDCurl();
+        $curl->get($url, $data);
+        if ($curl->errno() == 0) {
+            $result = json_decode($curl->rawdata(), true);
+            $short = $result['urls'][0];
+            return ($short['result']) ? $short['url_short'] : false;
+        }
+        else
+            return false;
+    }
+    
     private static function fetchWeiboPosts()
     {
         $criteria = new CDbCriteria();
@@ -320,9 +339,8 @@ class WeiboCommand extends CConsoleCommand
         $postUrl = 'http://www.waduanzi.com/post-' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
         $tail = '...' . $sinatShortUrl . ' @挖段子网';
-        $accounts = '@冷笑话精选@笑多了会怀孕@我们爱讲冷笑话@当时我就震惊了';
-        if ($model->tags)
-            $tags = '#' . $model->getTagText('##') . '#';
+        $accounts = self::fetchRelativeAccounts(1);
+        $tags = self::fetchPostTags($model, 1);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
         $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags . $accounts;
         $data = array(
@@ -366,9 +384,8 @@ class WeiboCommand extends CConsoleCommand
         $postUrl = 'http://www.waduanzi.com/post-' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
         $tail = '...' . $sinatShortUrl . ' @挖段子网';
-        $accounts = '@冷笑话精选@笑多了会怀孕@我们爱讲冷笑话@当时我就震惊了';
-        if ($model->tags)
-            $tags = '#' . $model->getTagText('##') . '#';
+        $accounts = self::fetchRelativeAccounts(1);
+        $tags = self::fetchPostTags($model, 1);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
         $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags. $accounts;
         $data = array(
@@ -389,25 +406,6 @@ class WeiboCommand extends CConsoleCommand
             return false;
     }
     
-    private static function sinatShortUrl($longUrl)
-    {
-        $url = 'https://api.weibo.com/2/short_url/shorten.json';
-        $data = array(
-        'source' => WEIBO_APP_KEY,
-        'url_long' => $longUrl,
-        );
-    
-        $curl = new CDCurl();
-        $curl->get($url, $data);
-        if ($curl->errno() == 0) {
-            $result = json_decode($curl->rawdata(), true);
-            $short = $result['urls'][0];
-            return ($short['result']) ? $short['url_short'] : false;
-        }
-        else
-            return false;
-    }
-    
     private static function qqtUpdate(Post $model)
     {
         if (empty($model->content)) return false;
@@ -417,9 +415,8 @@ class WeiboCommand extends CConsoleCommand
         $postUrl = 'http://www.waduanzi.com/post-' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
         $tail = '...' . $sinatShortUrl . ' @cdcchen';
-        $accounts = '@冷笑话精选@我们爱讲冷笑话@当时我就震惊了';
-        if ($model->tags)
-            $tags = '#' . $model->getTagText('##') . '#';
+        $accounts = self::fetchRelativeAccounts(1);
+        $tags = self::fetchPostTags($model, 1);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
         $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags . $accounts;
         $data = array(
@@ -458,9 +455,8 @@ class WeiboCommand extends CConsoleCommand
         $postUrl = 'http://www.waduanzi.com/post-' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
         $tail = '...' . $sinatShortUrl . ' @cdcchen';
-        $accounts = '@冷笑话精选@我们爱讲冷笑话@当时我就震惊了';
-        if ($model->tags)
-            $tags = '#' . $model->getTagText('##') . '#';
+        $accounts = self::fetchRelativeAccounts(1);
+        $tags = self::fetchPostTags($model, 1);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
         $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags . $accounts;
         $data = array(
@@ -491,4 +487,34 @@ class WeiboCommand extends CConsoleCommand
             return false;
     }
     
+    private static function fetchPostTags(Post $model, $count = 1)
+    {
+        $tags = '';
+        if ($model->tags) {
+            $tags = array_slice($model->getTagArray(), 0, $count);
+            $tags = '#' . join('##', $tags) . '#';
+        }
+        return $tags;
+    }
+    
+    private static function fetchRelativeAccounts($count = 1)
+    {
+        $accounts = array('冷笑话精选', '我们爱讲冷笑话', '当时我就震惊了');
+        $subs = array();
+        for ($i=0; $i<$count; $i++) {
+            $index = mt_rand(0, count($accounts) - 1);
+            $subs[] = $accounts[$index];
+            unset($accounts[$index]);
+        }
+        
+        $text = '';
+        if ($subs) {
+            $text = '@' . join('@', $subs);
+        }
+        return $text;
+    }
+    
 }
+
+
+
