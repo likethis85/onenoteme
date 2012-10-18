@@ -293,17 +293,17 @@ class WeiboCommand extends CConsoleCommand
     private static function fetchWeiboPosts()
     {
         $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_DUANZI, 'weibo_id' => ''));
+        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_DUANZI, 'state'=>POST_STATE_ENABLED, 'weibo_id' => ''));
         $criteria->order = 't.id desc';
         $models[] = Post::model()->find($criteria);
     
         $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_LENGTU, 'weibo_id' => ''));
+        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_LENGTU, 'state'=>POST_STATE_ENABLED, 'weibo_id' => ''));
         $criteria->order = 't.id desc';
         $models[] = Post::model()->find($criteria);
     
         $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_GIRL, 'weibo_id' => ''));
+        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_GIRL, 'state'=>POST_STATE_ENABLED, 'weibo_id' => ''));
         $criteria->order = 't.id desc';
         $models[] = Post::model()->find($criteria);
     
