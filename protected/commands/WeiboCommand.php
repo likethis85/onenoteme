@@ -323,7 +323,7 @@ class WeiboCommand extends CConsoleCommand
         if ($model->tags)
             $tags = '#' . $model->getTagText('##') . '#';
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset);
-        $content = $tags . mb_substr($model->content, 0, $subLen, app()->charset) . $tail;
+        $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags;
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->cache->get('sina_weibo_access_token'),
@@ -368,7 +368,7 @@ class WeiboCommand extends CConsoleCommand
         if ($model->tags)
             $tags = '#' . $model->getTagText('##') . '#';
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset);
-        $content = $tags . mb_substr($model->content, 0, $subLen, app()->charset) . $tail;
+        $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags;
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->cache->get('sina_weibo_access_token'),
@@ -418,7 +418,7 @@ class WeiboCommand extends CConsoleCommand
         if ($model->tags)
             $tags = '#' . $model->getTagText('##') . '#';
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset);
-        $content = $tags . mb_substr($model->content, 0, $subLen, app()->charset) . $tail;
+        $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags;
         $data = array(
             'oauth_consumer_key' => QQT_APP_KEY,
             'access_token' => app()->cache->get('qq_weibo_access_token'),
@@ -458,7 +458,7 @@ class WeiboCommand extends CConsoleCommand
         if ($model->tags)
             $tags = '#' . $model->getTagText('##') . '#';
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset);
-        $content = $tags . mb_substr($model->content, 0, $subLen, app()->charset) . $tail;
+        $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags;
         $data = array(
             'oauth_consumer_key' => QQT_APP_KEY,
             'access_token' => app()->cache->get('qq_weibo_access_token'),
