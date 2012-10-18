@@ -15,6 +15,13 @@
             <?php if($model->hasErrors('name')):?><p class="help-block"><?php echo $model->getError('name');?></p><?php endif;?>
         </div>
     </div>
+    <div class="control-group <?php if($model->hasErrors('category_id')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'category_id', array('class'=>'control-label'));?>
+        <div class="controls">
+            <?php echo CHtml::activeDropDownList($model, 'category_id', AdminConfig::categoryLabels());?>
+            <?php if($model->hasErrors('category_id')):?><p class="help-block"><?php echo $model->getError('category_id');?></p><?php endif;?>
+        </div>
+    </div>
     <div class="control-group <?php if($model->hasErrors('config_name')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'config_name', array('class'=>'control-label'));?>
         <div class="controls">

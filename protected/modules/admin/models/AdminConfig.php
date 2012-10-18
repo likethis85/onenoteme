@@ -36,16 +36,13 @@ class AdminConfig extends Config
         return array(
             self::CATEGORY_CUSTOM => '自定义参数',
         
-            self::CATEGORY_SYSTEM => '系统配置',
             self::CATEGORY_SYSTEM_SITE => '网站设置',
             self::CATEGORY_SYSTEM_CACHE => '缓存设置',
             self::CATEGORY_SYSTEM_ATTACHMENTS => '附件设置',
         
-            self::CATEGORY_DISPLAY => '网站显示',
             self::CATEGORY_DISPLAY_TEMPLATE => '模板配置',
             self::CATEGORY_DISPLAY_UI => '界面元素',
         
-            self::CATEGORY_SNS => 'SNS配置',
             self::CATEGORY_SNS_INTERFACE => 'SNS接口',
             self::CATEGORY_SNS_STATS => 'SNS统计',
             self::CATEGORY_SNS_TEMPLATE => 'SNS模板',

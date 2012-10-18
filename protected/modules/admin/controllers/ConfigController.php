@@ -75,10 +75,10 @@ class ConfigController extends AdminController
         
         if (request()->getIsPostRequest() && isset($_POST['AdminConfig'])) {
             $model->attributes = $_POST['AdminConfig'];
-            $model->category_id = AdminConfig::CATEGORY_CUSTOM;
             if ($model->save()) {
+                $this->afterSaveConfig();
                 user()->setFlash('save_config_success', '参数保存成功');
-                request()->redirect(url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_CUSTOM)));
+                request()->redirect(url('admin/config/view', array('categoryid'=>$model->category_id)));
             }
         }
         
