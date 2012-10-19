@@ -3,22 +3,21 @@ class SiteController extends Controller
 {
     public function filters()
     {
-        $duration = 300;
         return array(
             array(
                 'COutputCache + baidumap, sitemap, links',
-                'duration' => $duration,
+                'duration' => 600,
             ),
             array(
                 'COutputCache + index',
-                'duration' => $duration,
+                'duration' => 120,
                 'varyBySession' => true,
                 'varyByParam' => array('page', 's'),
                 'requestTypes' => array('GET'),
             ),
             array(
                 'COutputCache + index',
-                'duration' => $duration,
+                'duration' => 120,
                 'varyBySession' => true,
                 'varyByParam' => array('page', 's'),
                 'requestTypes' => array('POST'),

@@ -3,7 +3,7 @@ class ChannelController extends Controller
 {
     public function filters()
     {
-        $duration = 300;
+        $duration = 120;
         return array(
             array(
                 'COutputCache + duanzi, lengtu, girl, video',
