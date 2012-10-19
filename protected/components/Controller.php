@@ -51,7 +51,7 @@ class Controller extends CController
 			$html .= '<a class="fright" href="' . aurl('weibo/qqt') . '">' . image(sbu('images/qqt24.png'), '用腾讯微博账号登录') .'</a></li>';
         }
         elseif (app()->session['image_url']) {
-            $html = '<li class="user-name"><a class="active">' . image(app()->session['image_url'], '', array('align'=>'top')) . user()->name . '</a></li>';
+            $html = '<li class="user-name">' . image(app()->session['image_url'], '', array('align'=>'top')) . user()->name . '</li>';
 			$html .= '<li><a href="' . aurl('site/logout') . '">退出</a></li>';
         }
         else {
