@@ -9,6 +9,7 @@ body {background-color:#ECE5D8;}
 .cdc-block h4 {margin:0; background:#EFEFEF; line-height:36px; text-indent:10px; font-size:12px; font-weight:normal;}
 .ad-block {text-align:center;}
 .ad-block.fixed {position:fixed; top:0; z-index:999;}
+.cd-border {border:1px solid #DFDFDF;}
 
 /* container */
 .cd-container {width:640px; overflow:hidden;}
@@ -20,8 +21,8 @@ body {background-color:#ECE5D8;}
 .cd-sidebar .content-block {margin-bottom:10px; line-height:24px;}
 .cd-sidebar .content-title {font-size:14px; color:#666; margin:0 0 10px; border-bottom:1px solid #EFEFEF; padding-bottom:3px; line-height:18px;;}
 .cd-sidebar .content-block a {margin-right:5px;}
-.cd-sidebar .cdc-block {margin-bottom:15px; text-align:center; overflow:hidden;}
-.cd-border {border:1px solid #DFDFDF;}
+.cd-sidebar .cdc-block {margin-bottom:15px; overflow:hidden;}
+
 
 /* mini nav */
 .cd-mini-nav {height:26px; background-color:#EFEFEF; width:100%; overflow:hidden; margin-bottom:1px;}
