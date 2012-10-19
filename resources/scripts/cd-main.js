@@ -215,4 +215,21 @@ Waduanzi.postUpDownScore = function(event){
 	});
 };
 
+Waduanzi.fixedAdBlock = function() {
+	var adblock = $('.cd-sidebar .ad-block').last();
+	if (adblock.length == 0) return false;
+	var adtop = adblock.position().top;
+	
+	$(window).scroll(function(event){
+		if ($('body').scrollTop() >= adtop)
+			!adblock.hasClass('fixed') && adblock.addClass('fixed');
+		else
+			adblock.hasClass('fixed') && adblock.removeClass('fixed');
+	});
+};
+
+$(function(){
+	Waduanzi.fixedAdBlock();
+});
+
 

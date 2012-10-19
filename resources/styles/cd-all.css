@@ -6,6 +6,7 @@ body {background-color:#ECE5D8;}
 .cd-wrapper {width:950px; margin:0px auto; overflow:hidden;}
 .fluid-wrapper {margin:0px auto; overflow:hidden; padding:0 5px;}
 .cdc-block {margin:0px auto; text-align:center;}
+.ad-block.fixed {position:fixed; top:0; z-index:999;}
 
 /* container */
 .cd-container {width:640px; overflow:hidden;}

@@ -108,7 +108,7 @@
     </div>
     <?php if ($post->bmiddlePic):?>
     <!-- 详情页侧边栏广告位开始 -->
-    <div class="cdc-block cd-border">
+    <div class="cdc-block cd-border ad-block">
         <script type="text/javascript">
         alimama_pid="mm_12551250_2904829_10392377";
         alimama_width=300;

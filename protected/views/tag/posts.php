@@ -3,7 +3,7 @@
     <?php $this->renderPartial('/post/grid_list', array('models'=>$models, 'pages'=>$pages));?>
 </div>
 <div class="fright cd-sidebar">
-    <div class="cdc-block border">
+    <div class="cdc-block border ad-block">
         <script type="text/javascript">
         alimama_pid="mm_12551250_2904829_10392377";
         alimama_width=300;
