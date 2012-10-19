@@ -44,7 +44,8 @@ return array(
     'user_required_admin_verfiy' => 0,
     'auto_remote_image_local' => 0,
     'mobile_post_list_page_count' => 8,
-        
+
+    'sitename' => '挖段子',
     'shortdesc' => '笑死人不偿命 - 每日精品笑话连载',
     
     'autoLoginDuration' => 3600 * 24 * 7,
