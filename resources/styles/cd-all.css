@@ -5,7 +5,9 @@ body {background-color:#ECE5D8;}
 .site-bg {background-image:url(../images/sitebg.png); background-repeat:no-repeat;}
 .cd-wrapper {width:950px; margin:0px auto; overflow:hidden;}
 .fluid-wrapper {margin:0px auto; overflow:hidden; padding:0 5px;}
-.cdc-block {margin:0px auto; text-align:center;}
+.cdc-block {margin:0px auto;}
+.cdc-block h4 {margin:0; background:#EFEFEF; line-height:36px; text-indent:10px;}
+.ad-block {text-align:center;}
 .ad-block.fixed {position:fixed; top:0; z-index:999;}
 
 /* container */
@@ -259,7 +261,6 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .friend-links, .friend-links li {list-style:none; margin:0;}
 
 /* weixin qrcode */
-.cd-qrcode h4 {margin:0; background:#EFEFEF; line-height:36px;}
 .weixin-qrcode {width:100%;}
 
 
