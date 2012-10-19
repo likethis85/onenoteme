@@ -17,8 +17,8 @@ class User extends CActiveRecord
 {
     const STATE_DISABLED = 0;
     const STATE_ENABLED = 1;
-    const STATE_EDITOR = 150;
-    const STATE_ADMIN = 200;
+    const STATE_EDITOR = 95;
+    const STATE_ADMIN = 100;
     
 	/**
 	 * Returns the static model of the specified AR class.
