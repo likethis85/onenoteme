@@ -11,12 +11,25 @@
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-all.css');?>" />
 </head>
 <body>
+<div class="cd-mini-nav">
+    <div class="cd-wrapper">
+        <ul class="user-nav fleft">
+    		<li><a href="http://m.waduanzi.com">手机版</a></li>
+    		<li><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank">iPhone应用</a></li>
+    		<li><a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">安卓应用</a></li>
+		</ul>
+		<ul class="user-nav fright">
+		    <?php echo $this->renderDynamic('userToolbar');?>
+		</ul>
+		<div class="clear"></div>
+    </div>
+</div>
 <div class="cd-header">
     <div class="cd-wrapper">
     	<div id="site-logo" class="logo fleft">
     	    <a href="<?php echo app()->homeUrl;?>" title="点击返回首页"><img src="<?php echo sbu('images/logo.jpg');?>" alt="网站LOGO" title="返回首页" align="top" />&nbsp;挖段子</a>
 	    </div>
-    	<ul class="channel-nav fleft">
+    	<ul class="channel-nav">
     		<li<?php echo ($this->channel===CHANNEL_DUANZI) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/duanzi');?>">挖笑话</a></li>
     		<li>|</li>
     		<li<?php echo ($this->channel===CHANNEL_LENGTU) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/lengtu');?>">挖冷图</a></li>
@@ -25,14 +38,6 @@
     		<li>|</li>
     		<li<?php echo ($this->channel===CHANNEL_VIDEO) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/video');?>">挖视频</a></li>
     	</ul>
-		<ul class="user-nav fright">
-    		<li><a href="http://m.waduanzi.com">手机版</a></li>
-    		<li><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank">iPhone应用</a></li>
-    		<li><a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">安卓应用</a></li>
-    		<li class="diviler"></li>
-    		<?php echo $this->renderDynamic('userToolbar');?>
-		</ul>
-    	<div class="clear"></div>
     </div>
 </div>
 <div class="cd-wrapper">
