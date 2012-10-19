@@ -7,9 +7,9 @@
 </div>
 <div class="fright cd-sidebar">
     <div class="cdc-block cd-border app-list">
-        <a href="http://itunes.apple.com/cn/app//id486268988?mt=8" target="_blank"><img src="<?php echo sbu('images/app_ios.png');?>" alt="挖段子iPhone应用" /></a>
-        <a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank"><img src="<?php echo sbu('images/app_android.png');?>" alt="挖段子Andoird应用" /></a>
-        <a href="<?php echo aurl('mobile/index');?>" target="_blank"><img src="<?php echo sbu('images/mobile_site.png');?>" alt="挖段子手机版网站" /></a>
+        <a href="http://itunes.apple.com/cn/app//id486268988?mt=8" target="_blank" title="挖段子iPhone应用, 最新版本 2.2.2"><img src="<?php echo sbu('images/app_ios.png');?>" alt="挖段子iPhone应用" /></a>
+        <a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank" title="挖段子Andoird应用 最新版本 1.1.0"><img src="<?php echo sbu('images/app_android.png');?>" alt="挖段子Andoird应用" /></a>
+        <a href="<?php echo aurl('mobile/index');?>" target="_blank" title="挖段子手机版网站"><img src="<?php echo sbu('images/mobile_site.png');?>" alt="挖段子手机版网站" /></a>
     </div>
     <div class="cdc-block cd-border cd-qrcode">
         <h4>微信扫描下图订阅挖段子，每日精品段子推送</h4>
