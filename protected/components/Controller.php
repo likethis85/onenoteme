@@ -51,7 +51,7 @@ class Controller extends CController
 			$html .= sprintf('<a class="fright" href="%s"><img src="%s" alt="" /></a></li>', aurl('weibo/qqt'), sbu('images/qqt24.png'));
         }
         elseif (app()->session['image_url']) {
-            $html = sprintf('<li class="user-name"><span><img src="%s" alt="进入用户中心" align="top" /></span><a href="%s">%s</a></li>', app()->session['image_url'], aurl('member/defaut/index'), user()->name);
+            $html = sprintf('<li class="user-name"><a href="%s"><img src="%s" alt="进入用户中心" align="top" />%s</a></li>', aurl('member/defaut/index'), app()->session['image_url'], user()->name);
 			$html .= sprintf('<li><a href="%s">退出</a></li>', aurl('site/logout'));
         }
         else {

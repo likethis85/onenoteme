@@ -28,7 +28,7 @@ body {background-color:#ECE5D8;}
 .cd-mini-nav li a, .cd-mini-nav li span {display:block; color:#000000; padding:0px 6px; font-size:12px; line-height:26px;}
 .cd-mini-nav li .active, .cd-mini-nav li a:hover {color:white; background:#121211;}
 .cd-mini-nav .sns-icon a {margin:3px; padding:0; width:20px; height:20px;}
-.cd-mini-nav .sns-icon a:hover {background:none;}
+.cd-mini-nav .sns-icon a:hover, .cd-mini-nav .user-name a:hover {background:none;}
 .cd-mini-nav img {width:20px; height:20px;}
 .cd-mini-nav .user-name img {margin:3px;}
 
