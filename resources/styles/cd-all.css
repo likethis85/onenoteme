@@ -235,6 +235,7 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 #wumiiBtnDiv {display:none;}
 
 /* app list */
+.app-list a {display:block; margin-bottom:1px;}
 .apps-list {text-align:center; height:25px; line-height:25px;}
 .apps-list a, .apps-list span {font-size:16px!important; margin:0 20px;}
 .apps-list span {color:red;}

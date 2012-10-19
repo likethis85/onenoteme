@@ -1,11 +1,3 @@
-<div class="panel panel15 bottom10px apps-list">
-        <a href="http://itunes.apple.com/cn/app//id486268988?mt=8" target="_blank">下载iPhone应用2.2.1版</a>
-        <a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">下载Android应用1.1.0版</a>
-        <a href="http://www.weibo.com/cdcchen" target="_blank">@新浪微博</a>
-        <a href="http://t.qq.com/cdcchen" target="_blank">@腾讯微博</a>
-        <span>QQ群：49401589</span>
-</div>
-
 <div class="fleft cd-container">
 <!-- 快速发表段子 start -->
 <?php $this->renderPartial('/post/quick_create');?>
@@ -14,6 +6,11 @@
 <?php $this->renderPartial('/post/grid_list', array('models' => $models, 'pages' => $pages));?>
 </div>
 <div class="fright cd-sidebar">
+    <div class="cdc-block cd-border app-list">
+        <a href="http://itunes.apple.com/cn/app//id486268988?mt=8"><img src="<?php echo sbu('images/app_ios.png');?>" alt="挖段子iPhone应用" /></a>
+        <a href="<?php echo sbu('android/waduanzi.apk');?>"><img src="<?php echo sbu('images/app_android.png');?>" alt="挖段子Andoird应用" /></a>
+        <a href="<?php echo aurl('mobile/index');?>" target="_blank"><img src="<?php echo sbu('images/mobile_site.png');?>" alt="挖段子手机版网站" /></a>
+    </div>
     <div class="cdc-block cd-border cd-qrcode">
         <h4>微信扫描下图订阅挖段子，每日精品段子推送</h4>
         <img src="<?php echo sbu('images/qrcode_wx.jpg');?>" class="weixin-qrcode" alt="挖段子微信二维码"  title="用微信扫描二维码添加挖段子公众号" />

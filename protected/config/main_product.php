@@ -87,6 +87,9 @@ return array(
                 'tags' => 'tag/list',
                 'tag-<name:[\w\s\%\-\+\.]+>' => 'tag/posts',
                 'feed/<cid:\d+>' => 'feed/channel',
+            
+                'http://m.waduanzi.com' => 'mobile/index',
+                'http://m.waduanzi.com/<_a>' => 'mobile/<_a>',
             ),
         ),
         'session' => array(

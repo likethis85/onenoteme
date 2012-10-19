@@ -106,6 +106,9 @@ return array(
                 'tags' => 'tag/list',
                 'tag-<name:[\w\s\%\-\+\.]+>' => 'tag/posts',
                 'feed/<cid:\d+>' => 'feed/channel',
+                
+                'http://m.waduanzi.cn' => 'mobile/index',
+                'http://m.waduanzi.cn/<_a>' => 'mobile/<_a>',
             ),
         ),
         'session' => array(
