@@ -45,18 +45,18 @@ class Controller extends CController
     public function userToolbar()
     {
         if (user()->getIsGuest()) {
-            $html = '<li><a href="' . aurl('site/signup') . '">注册</a></li>';
-			$html .= '<li class="user-login"><a class="fleft" href="' . aurl('site/login') . '">登录</a></li>';
-			$html .= '<li class="sns-icon"><a class="fright" href="' . aurl('weibo/sinat') . '">' . image(sbu('images/weibo24.png'), '用新浪微博账号登录') .'</a>';
-			$html .= '<a class="fright" href="' . aurl('weibo/qqt') . '">' . image(sbu('images/qqt24.png'), '用腾讯微博账号登录') .'</a></li>';
+            $html = sprintf('<li><a href="%s">注册</a></li>', aurl('site/signup'));
+			$html .= sprintf('<li class="user-login"><a class="fleft" href="%s">登录</a></li>', aurl('site/login'));
+			$html .= sprintf('<li class="sns-icon"><a class="fright" href="%s"><img src="%s" alt="用新浪微博账号登录s" /></a>', aurl('weibo/sinat'), sbu('images/weibo24.png'));
+			$html .= sprintf('<a class="fright" href="%s"><img src="" alt="" /></a></li>', aurl('weibo/qqt'), sbu('images/qqt24.png'));
         }
         elseif (app()->session['image_url']) {
-            $html = '<li class="user-name">' . image(app()->session['image_url'], '', array('align'=>'top')) . user()->name . '</li>';
-			$html .= '<li><a href="' . aurl('site/logout') . '">退出</a></li>';
+            $html = sprintf('<li class="user-name"><a href="%s"><img src="%s" alt="" align="top" />%s</a></li>', app()->session['image_url'], user()->name);
+			$html .= sprintf('<li><a href="%s">退出</a></li>', aurl('site/logout'));
         }
         else {
-            $html = '<li><a class="active">' . user()->name . '</a></li>';
-            $html .= '<li><a href="' . aurl('site/logout') . '">退出</a></li>';
+            $html = sprintf('<li><a class="active">%s</a></li>', user()->name);
+            $html .= sprintf('<li><a href="%s">退出</a></li>', aurl('site/logout'));
         }
         
         return $html;
