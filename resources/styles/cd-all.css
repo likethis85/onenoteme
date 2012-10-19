@@ -30,7 +30,7 @@ body {background-color:#ECE5D8;}
 .cd-mini-nav .sns-icon a {margin:3px; padding:0; width:20px; height:20px;}
 .cd-mini-nav .sns-icon a:hover {background:none;}
 .cd-mini-nav img {width:20px; height:20px;}
-.cd-mini-nav .user-name img {margin-right:3px;}
+.cd-mini-nav .user-name img {margin:3px;}
 
 /* header */
 .cd-header {margin-bottom:15px; height:45px; background-color:#2b2b2b; width:100%; overflow:hidden; border-bottom:1px solid black;}
