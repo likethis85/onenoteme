@@ -95,7 +95,8 @@
         <li><a href="http://www.kl688.com/" target="_blank">快乐麻花</a></li>
         <li><a href="http://www.chinabug.net/" target="_blank">穿帮网</a></li>
         <li><a href="http://www.laifu.org/" target="_blank">来福岛爆笑娱乐网</a></li>
-        <li><a href="http://www.fanjian.net/" target="_blank"> 犯贱志</a></li>
+        <li><a href="http://www.fanjian.net/" target="_blank">犯贱志</a></li>
+        <li><a href="http://www.qiubaimi.com/" target="_blank">糗百邀请码</a></li>
 		<div class="clear"></div>
 	</ul>
 </div>
