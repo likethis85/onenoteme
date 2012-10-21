@@ -38,6 +38,7 @@
         <li><a href="http://www.laifu.org/" target="_blank">来福岛爆笑娱乐网</a></li>
         <li><a href="http://www.fanjian.net/" target="_blank">犯贱志</a></li>
         <li><a href="http://www.qiubaimi.com/" target="_blank">糗百邀请码</a></li>
+        <li><a href="http://www.lcxxg.com/" target="_blank">聊城信息港</a></li>
 		<div class="clear"></div>
 	</ul>
 </div>
