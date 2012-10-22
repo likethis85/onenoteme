@@ -16,7 +16,8 @@
     	<div class="post-author"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
         <div class="item-detail">
             <div class="item-content">
-                <h2><a href="<?php echo $model->url;?>" target="_blank" title="在新窗口中查看详细内容">∷</a></h2><?php echo $model->filterContent;?>
+                <h2><a href="<?php echo $model->url;?>" target="_blank" title="在新窗口中查看详细内容">∷</a></h2>
+                <span class="content"><?php echo $model->filterContent;?></span>
             </div>
             <?php if (($model->channel_id == CHANNEL_LENGTU || $model->channel_id == CHANNEL_GIRL) && $model->thumbnail):?>
             <div class="post-image">
@@ -55,13 +56,24 @@
             <?php endif;?>
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->tagLinks;?></div><?php endif;?>
-        <ul class="item-toolbar cgray">
-        	<li class="fleft"><a rel="nofollow" href="javascript:void(0);" class="upscore site-bg" data-score="1" data-url="<?php echo aurl('post/score');?>"><?php echo $model->up_score;?></a></li>
-        	<li class="fleft"><a rel="nofollow" href="javascript:void(0);" class="downscore site-bg" data-score="-1" data-url="<?php echo aurl('post/score');?>"><?php echo $model->downScore;?></a></li>
-        	<li class="fright"><a rel="nofollow" href="javascript:void(0);" class="share site-bg">分享</a></li>
-        	<li class="fright"><a href="<?php echo aurl('post/show', array('id' => $model->id), '', 'comments');?>" class="comment site-bg" target="_blank"><?php echo $model->comment_nums ? $model->comment_nums : '评论';?></a></li>
-        	<div class="clear"></div>
-        </ul>
+        <div class="item-toolbar">
+            <ul>
+            	<li class="fleft"><a rel="nofollow" href="javascript:void(0);" class="upscore site-bg" data-score="1" data-url="<?php echo aurl('post/score');?>"><?php echo $model->up_score;?></a></li>
+            	<li class="fleft"><a rel="nofollow" href="javascript:void(0);" class="downscore site-bg" data-score="-1" data-url="<?php echo aurl('post/score');?>"><?php echo $model->downScore;?></a></li>
+            	<li class="fright"><a rel="nofollow" href="javascript:void(0);" class="share site-bg">分享</a></li>
+            	<li class="fright"><a href="<?php echo aurl('post/show', array('id' => $model->id), '', 'comments');?>" class="comment site-bg" target="_blank"><?php echo $model->comment_nums ? $model->comment_nums : '评论';?></a></li>
+            	<div class="clear"></div>
+            </ul>
+            <div class="sharebox">
+                <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" data="">
+                    <a class="bds_qzone">QQ空间</a>
+                    <a class="bds_tsina">新浪微博</a>
+                    <a class="bds_tqq">腾讯微博</a>
+                    <a class="bds_renren">人人网</a>
+                    <div class="arrow"></div>
+                </div>
+            </div>
+        </div>
         <div class="comment-list comment-list-<?php echo $model->id;?> hide"></div>
     </div>
         <div class="site-bg item-shadow"></div>
@@ -77,6 +89,8 @@ $(function(){
 	Waduanzi.initDialog();
 	$('.post-image').on('click', '.thumbnail-more, .thumbnail a.size-switcher', Waduanzi.switchImageSize);
 	$('.item-toolbar').on('click', 'a.upscore, a.downscore', Waduanzi.postUpDownScore);
+	$('.item-toolbar').on('mouseenter', 'a.share, .sharebox', Waduanzi.showShareBox);
+	$('.item-toolbar').on('mouseleave', 'a.share, .sharebox', Waduanzi.hideShareBox);
 });
 </script>
 
@@ -85,6 +99,7 @@ if (user()->getIsGuest()) {
     cs()->registerCoreScript('jquery.ui');
     cs()->registerCssFile(cs()->getCoreScriptUrl().'/jui/css/base/jquery-ui.css');
 }
+cs()->registerScriptFile(sbu('libs/json.js'), CClientScript::POS_END);
 ?>
 
 

@@ -80,4 +80,11 @@ class CDBase
         echo $callback . '(' . CJSON::encode($data) . ')';
         if ($exit) exit(0);
     }
+
+    public static function isHttpUrl($url)
+    {
+        $url = trim($url);
+        $pos = stripos($url, 'http://');
+        return $pos === 0;
+    }
 }

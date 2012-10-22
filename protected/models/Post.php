@@ -47,6 +47,7 @@
  * @property string $videoSourceUrl
  * @property string $imageIsLong
  * @property string $lineCount
+ * @property string $baiduShareData
  */
 class Post extends CActiveRecord
 {
@@ -279,6 +280,20 @@ class Post extends CActiveRecord
             $count = ($this->bmiddle_height - IMAGE_THUMBNAIL_HEIGHT) / IMAGE_THUMBNAIL_HEIGHT;
         }
         return (int)$count;
+    }
+
+    public function getBaiduShareJsonData()
+    {
+        $data = array(
+            'url' => $this->getUrl(),
+            'text' => '转自@挖段子网：' . strip_tags(trim($this->content)),
+        );
+        
+        $pic = $this->getBmiddlePic();
+        if (CDBase::isHttpUrl($pic))
+            $data['pic'] = $pic;
+        
+        return json_encode($data);
     }
     
     protected function beforeSave()

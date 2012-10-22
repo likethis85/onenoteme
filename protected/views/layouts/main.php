@@ -62,7 +62,10 @@
 </div>
 <?php endif;?>
 
-<?php $this->renderPartial('/public/tongji');?>
+<?php
+echo param('footer_after_html');
+echo param('tongji_code');
+?>
 </body>
 </html>
 
