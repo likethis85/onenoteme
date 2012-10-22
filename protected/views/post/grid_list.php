@@ -29,7 +29,9 @@
                         <img class="original hide" />
                     </a>
                     <?php else:?>
-                    <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
+                    <a href="<?php echo $model->originalPic;?>" target="_blank" title="点击查看大图">
+                        <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
+                    </a>
                     <?php endif;?>
                     <?php if ($model->imageIsLong):?>
                     <div class="thumb-pall"></div>
