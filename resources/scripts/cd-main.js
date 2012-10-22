@@ -239,7 +239,7 @@ Waduanzi.showShareBox = function(event) {
 			"content": item.find('.item-content .content').text(),
 			"pic": item.find('.post-image .thumbnail a').attr('href'),
 		};
-		bdshare.attr('data', bdshare.attr('data', JSON.stringify(bddata)));
+		bdshare.attr('data', JSON.stringify(bddata));
 	}
 	$(this).parents('.item-toolbar').find('.sharebox:hidden').stop(true, true).delay(50).show();
 };
