@@ -236,7 +236,7 @@ Waduanzi.showShareBox = function(event) {
 		var item = $(this).parents('.post-item');
 		var bddata = {
 			"url": item.find('.item-content h2 a').attr('href'),
-			"text": item.find('.item-content .content').text(),
+			"text": '转自@挖段子网：' + item.find('.item-content .content').text(),
 			"pic": item.find('.post-image .thumbnail a').attr('href'),
 		};
 		bdshare.attr('data', JSON.stringify(bddata));
