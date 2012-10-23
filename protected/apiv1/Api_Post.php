@@ -299,10 +299,10 @@ class Api_Post extends ApiBase
     	$post->up_score = mt_rand(20, 100);
     	$post->down_score = mt_rand(0, 15);
     	$post->view_nums = mt_rand(100, 300);
-    	$post->thumbnail_pic = $post->bmiddle_pic = $post->original_pic = '';
+    	$post->thumbnail_pic = $post->bmiddle_pic = $post->original_pic = $params['pic'];
     	
     	try {
-    		return (int)($post->save() && $post->saveImages($params['pic']));
+    		return (int)$post->save();
     	}
     	catch (ApiException $e) {
     		throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);

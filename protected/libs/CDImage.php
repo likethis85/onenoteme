@@ -478,7 +478,7 @@ class CDImage
      * @param integer $height 图像高度
      * @return CDImage CDImage对象本身
      */
-    public function crop($width, $height, $fromTop = false, $fromLeft)
+    public function crop($width, $height, $fromTop = false, $fromLeft = false)
     {
         $image = imagecreatetruecolor($width, $height);
         $ow = $this->width();

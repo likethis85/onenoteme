@@ -205,6 +205,13 @@ class SiteController extends Controller
     public function actionTest()
     {
         echo uniqid() . '<br />';
-        echo md5('yaoyiyao phonebook');
+        echo md5('yaoyiyao phonebook') . '<br />';
+        
+        $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
+        $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
+        
+        $url = 'http://www.fanjian.net/upload/201210231243255284.jpg';
+        $images = CDBase::saveRemoteImages($url, $thumbWidth, $thumbHeight, true);
+        var_dump($images);
     }
 }

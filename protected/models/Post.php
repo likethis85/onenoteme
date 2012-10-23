@@ -296,58 +296,28 @@ class Post extends CActiveRecord
         return json_encode($data);
     }
 
-    public function saveImages($url)
+    protected function afterSave()
     {
-        $url = strip_tags(trim($url));
+        $url = strip_tags(trim($this->original_pic));
         
-        if (!empty($url)) {
+        if (!empty($url) && stripos($url, fbu()) === false) {
             $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
             $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
             if ($this->channel_id == CHANNEL_GIRL) {
                 $thumbWidth = GIRL_THUMBNAIL_WIDTH;
                 $thumbHeight = GIRL_THUMBNAIL_HEIGHT;
             }
-             
-            $path = CDBase::makeUploadPath('pics');
-            $info = parse_url($url);
-            $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);
-            $file = CDBase::makeUploadFileName('');
-            $thumbnailFile = 'thumbnail_' . $file;
-            $thumbnailFileName = $path['path'] . $thumbnailFile;
-            $middleFileName = $path['path'] . 'bmiddle_' . $file;
-            $bigFile = 'original_' . $file;
-            $bigFileName = $path['path'] . $bigFile;
-        
-            $curl = new CDCurl();
-            $curl->get($url);
-            $data = $curl->rawdata();
-            $curl->close();
-            $im = new CDImage();
-            $im->load($data);
-            unset($data, $curl);
             
-            if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
-                $im->resizeToHeight($thumbHeight);
-            else
-                $im->resizeToWidth($thumbWidth);
-            $im->crop($thumbWidth, $thumbHeight, ($this->channel_id == CHANNEL_GIRL))
-            ->saveAsJpeg($thumbnailFileName);
-            $this->thumbnail_width = $im->width();
-            $this->thumbnail_height = $im->height();
-            $this->thumbnail_pic = fbu($path['url'] . $im->filename());
-             
-            $im->revert();
-            if ($im->width() > IMAGE_BMIDDLE_MAX_WIDTH)
-                $im->resizeToWidth(IMAGE_BMIDDLE_MAX_WIDTH);
-            $im->saveAsJpeg($middleFileName, 75);
-            $this->bmiddle_pic = fbu($path['url'] . $im->filename());
-            $this->bmiddle_width = $im->width();
-            $this->bmiddle_height = $im->height();
-             
-            $im->revert()->saveAsJpeg($bigFileName, 100);
-            $this->original_pic = fbu($path['url'] . $im->filename());
-            $this->original_width = $im->width();
-            $this->original_height = $im->height();
+            $images = CDBase::saveRemoteImages($url, $thumbWidth, $thumbHeight, $this->channel_id == CHANNEL_GIRL);
+            $this->thumbnail_pic = $images[0]['url'];
+            $this->thumbnail_width = $images[0]['width'];
+            $this->thumbnail_height = $images[0]['height'];
+            $this->bmiddle_pic = $images[1]['url'];
+            $this->bmiddle_width = $images[1]['width'];
+            $this->bmiddle_height = $images[1]['height'];
+            $this->original_pic = $images[2]['url'];
+            $this->original_width = $images[2]['width'];
+            $this->original_height = $images[2]['height'];
             $attributes = array('thumbnail_pic', 'thumbnail_width', 'thumbnail_height', 'bmiddle_pic', 'bmiddle_width', 'bmiddle_height', 'original_pic', 'original_width', 'original_height');
             $this->save(true, $attributes);
         }

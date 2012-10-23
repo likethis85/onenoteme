@@ -87,4 +87,59 @@ class CDBase
         $pos = stripos($url, 'http://');
         return $pos === 0;
     }
+
+
+    public static function saveRemoteImages($url, $thumbWidth, $thumbHeight, $cropFromTop = false, $cropFromLeft = false)
+    {
+        $url = strip_tags(trim($url));
+        
+        $images = array();
+        if (!empty($url)) {
+             
+            $path = CDBase::makeUploadPath('pics');
+            $info = parse_url($url);
+            $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);
+            $file = CDBase::makeUploadFileName('');
+            $thumbnailFile = 'thumbnail_' . $file;
+            $thumbnailFileName = $path['path'] . $thumbnailFile;
+            $middleFileName = $path['path'] . 'bmiddle_' . $file;
+            $bigFile = 'original_' . $file;
+            $bigFileName = $path['path'] . $bigFile;
+        
+            $curl = new CDCurl();
+            $curl->get($url);
+            $data = $curl->rawdata();
+            $curl->close();
+            $im = new CDImage();
+            $im->load($data);
+            unset($data, $curl);
+        
+            if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
+                $im->resizeToHeight($thumbHeight);
+            else
+                $im->resizeToWidth($thumbWidth);
+            $im->crop($thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft)
+                ->saveAsJpeg($thumbnailFileName);
+            $thumbnail['width'] = $im->width();
+            $thumbnail['height'] = $im->height();
+            $thumbnail['url'] = fbu($path['url'] . $im->filename());
+             
+            $im->revert();
+            if ($im->width() > IMAGE_BMIDDLE_MAX_WIDTH)
+                $im->resizeToWidth(IMAGE_BMIDDLE_MAX_WIDTH);
+            $im->saveAsJpeg($middleFileName, 75);
+            $middle['url'] = fbu($path['url'] . $im->filename());
+            $middle['width'] = $im->width();
+            $middle['height'] = $im->height();
+             
+            $im->revert()->saveAsJpeg($bigFileName, 100);
+            $original['url'] = fbu($path['url'] . $im->filename());
+            $original['width'] = $im->width();
+            $original['height'] = $im->height();
+            
+            $images = array($thumbnail, $middle, $original);
+        }
+        
+        return $images;
+    }
 }
