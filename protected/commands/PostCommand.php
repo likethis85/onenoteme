@@ -53,6 +53,8 @@ class PostCommand extends CConsoleCommand
                 $originalFilename = realpath(fbp($originalPicPath));
                 if ($model->thumbnail_pic) {
                     $thumbnailPicPath = str_replace(fbu(), '', $model->thumbnail_pic);
+                    $realpath = fbp($thumbnailPicPath);
+                    unlink($realpath);
                     if (stripos($thumbnailPicPath, 'thumbnail_') === false && stripos($thumbnailPicPath, 'thubmnail_') === false)
                         $thumbnailPicPath = substr_replace($thumbnailPicPath, 'thumbnail_', 16, 0);
                     
