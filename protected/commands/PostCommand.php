@@ -36,13 +36,13 @@ class PostCommand extends CConsoleCommand
         printf("update %d rows\n", $nums);
     }
 
-    public function actionMakeThumbnail($page = 1, $count = 200)
+    public function actionMakeThumbnail($page = 1, $count = 500)
     {
         $criteria = new CDbCriteria();
         $criteria->limit = $count;
         $criteria->offset = ($page - 1) * $count;
         $criteria->order = 'id asc';
-        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_GIRL, 'thumbnail_width'=>0));
+        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_LENGTU));
         $models = Post::model()->findAll($criteria);
         
         foreach ($models as $model) {
@@ -68,6 +68,84 @@ class PostCommand extends CConsoleCommand
                 }
                 
             }
+            else
+                continue;
+            
+//             echo $originalFilename . "\n";
+//             echo $thumbnailFileName . "\n------------\n";
+//             continue;
+//             exit();
+            
+            $data = file_get_contents($originalFilename);
+            if ($data === false) {
+                echo '$originalFilename read error.';
+                continue;
+            }
+            
+            $im = new CDImage();
+            $im->load($data);
+            unset($data);
+            
+            $model->original_width = $im->width();
+            $model->original_height = $im->height();
+            
+            $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
+            $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
+            if ($model->channel_id == CHANNEL_GIRL) {
+                $thumbWidth = GIRL_THUMBNAIL_WIDTH;
+                $thumbHeight = GIRL_THUMBNAIL_HEIGHT;
+            }
+            
+            if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
+                $im->resizeToHeight($thumbHeight);
+            else
+                $im->resizeToWidth($thumbWidth);
+            $im->crop($thumbWidth, $thumbHeight, $model->channel_id == CHANNEL_GIRL)
+                ->saveAsJpeg($thumbnailFileName);
+            $model->thumbnail_width = $im->width();
+            $model->thumbnail_height = $im->height();
+            $thumbUrl = dirname($thumbnailPicPath) . '/' . $im->filename();
+            
+            $model->thumbnail_pic = fbu(ltrim($thumbUrl, './'));
+            $result = $model->save(true, array('thumbnail_width', 'thumbnail_height', 'thumbnail_pic', 'original_width', 'original_height'));
+            var_dump($result);
+        }
+    }
+
+    public function actionMakeBmiddle($page = 1, $count = 200)
+    {
+        $criteria = new CDbCriteria();
+        $criteria->limit = $count;
+        $criteria->offset = ($page - 1) * $count;
+        $criteria->order = 'id asc';
+        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_GIRL));
+        $models = Post::model()->findAll($criteria);
+        
+        foreach ($models as $model) {
+            echo $model->id . "\n";
+            $wdzUrl = stripos($model->original_pic, sbu()) == 0;
+            if ($wdzUrl) {
+                $originalPicPath = str_replace(fbu(), '', $model->original_pic);
+                $originalFilename = realpath(fbp($originalPicPath));
+                if ($model->thumbnail_pic) {
+                    $thumbnailPicPath = str_replace(fbu(), '', $model->thumbnail_pic);
+                    if (stripos($thumbnailPicPath, 'thumbnail_') === false && stripos($thumbnailPicPath, 'thubmnail_') === false)
+                        $thumbnailPicPath = substr_replace($thumbnailPicPath, 'thumbnail_', 16, 0);
+                    
+                    $extension = pathinfo($thumbnailPicPath, PATHINFO_EXTENSION);
+                    if ($extension)
+                        $thumbnailPicPath = substr($thumbnailPicPath, 0, stripos($thumbnailPicPath, '.'));
+                    $thumbnailFileName = fbp($thumbnailPicPath);
+                }
+                else {
+                    $newPaths = CDBase::makeUploadFilePath('', 'pics');
+                    $thumbnailPicPath = $newPaths['url'];
+                    $thumbnailFileName = $newPaths['path'];
+                }
+                
+            }
+            else
+                continue;
             
 //             echo $originalFilename . "\n";
 //             echo $thumbnailFileName . "\n------------\n";
