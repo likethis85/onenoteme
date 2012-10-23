@@ -105,7 +105,7 @@ class PostCommand extends CConsoleCommand
             $thumbUrl = dirname($thumbnailPicPath) . '/' . $im->filename();
             
             $model->thumbnail_pic = fbu(ltrim($thumbUrl, './'));
-            $result = $model->save(true, array('thumbnail_width', 'thumbnail_height', 'thumbnail_pic'));
+            $result = $model->save(true, array('thumbnail_width', 'thumbnail_height', 'thumbnail_pic', 'original_width', 'original_height'));
             var_dump($result);
         }
     }
