@@ -478,7 +478,7 @@ class CDImage
      * @param integer $height 图像高度
      * @return CDImage CDImage对象本身
      */
-    public function crop($width, $height)
+    public function crop($width, $height, $fromTop = false, $fromLeft)
     {
         $image = imagecreatetruecolor($width, $height);
         $ow = $this->width();
@@ -490,19 +490,22 @@ class CDImage
         
         $oscale = $ow / $oh;
         $nscale = $width / $height;
+        
+        $adjusted_width = $ow / $hm;
+        $half_width = $adjusted_width / 2;
+        $int_width = $half_width - $w_height;
+        $dstX = $fromLeft? 0 : -$int_width;
+        $adjusted_height = $oh / $wm;
+        $half_height = $adjusted_height / 2;
+        $int_height = $half_height - $h_height;
+        $dstY = $fromTop ? 0 : -$int_height;
         if ($oscale >= $nscale) {
-            $adjusted_width = $ow / $hm;
-            $half_width = $adjusted_width / 2;
-            $int_width = $half_width - $w_height;
             
-            imagecopyresampled($image, $this->_image, -$int_width, 0, 0, 0, $adjusted_width, $height, $ow, $oh);
+            imagecopyresampled($image, $this->_image, $dstX, $dstY, 0, 0, $adjusted_width, $height, $ow, $oh);
         }
         else {
-            $adjusted_height = $oh / $wm;
-            $half_height = $adjusted_height / 2;
-            $int_height = $half_height - $h_height;
-        
-            imagecopyresampled($image, $this->_image, 0, -$int_height, 0, 0, $width, $adjusted_height, $ow, $oh);
+            
+            imagecopyresampled($image, $this->_image, $dstX, $dstY, 0, 0, $width, $adjusted_height, $ow, $oh);
         }
         $this->_image = $image;
         return $this;
