@@ -36,7 +36,7 @@ class PostCommand extends CConsoleCommand
         printf("update %d rows\n", $nums);
     }
 
-    public function actionMakeThumbnail($page = 1, $count = 10)
+    public function actionMakeThumbnail($page = 1, $count = 200)
     {
         $criteria = new CDbCriteria();
         $criteria->limit = $count;
@@ -69,8 +69,8 @@ class PostCommand extends CConsoleCommand
                 
             }
             
-            echo $originalFilename . "\n";
-            echo $thumbnailFileName . "\n------------\n";
+//             echo $originalFilename . "\n";
+//             echo $thumbnailFileName . "\n------------\n";
 //             continue;
 //             exit();
             
