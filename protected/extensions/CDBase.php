@@ -95,7 +95,7 @@ class CDBase
         
         $images = array();
         if (!empty($url)) {
-             
+            set_time_limit(0);
             $path = CDBase::makeUploadPath('pics');
             $info = parse_url($url);
             $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);

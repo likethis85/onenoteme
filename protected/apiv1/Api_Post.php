@@ -303,7 +303,7 @@ class Api_Post extends ApiBase
     	$post->original_pic = $params['pic'];
     	
     	try {
-    		return (int)$post->save();
+    		return (int)($post->save() && $post->saveRemoteImages());
     	}
     	catch (ApiException $e) {
     		throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);

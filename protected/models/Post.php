@@ -296,6 +296,38 @@ class Post extends CActiveRecord
         return json_encode($data);
     }
     
+    public function saveRemoteImages()
+    {
+        $url = strip_tags(trim($this->original_pic));
+        if (!empty($url) && stripos($url, fbu()) === false) {
+            $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
+            $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
+            if ($this->channel_id == CHANNEL_GIRL) {
+                $thumbWidth = GIRL_THUMBNAIL_WIDTH;
+                $thumbHeight = GIRL_THUMBNAIL_HEIGHT;
+            }
+        
+            $images = CDBase::saveRemoteImages($url, $thumbWidth, $thumbHeight, $this->channel_id == CHANNEL_GIRL);
+            if ($images) {
+                $this->thumbnail_pic = $images[0]['url'];
+                $this->thumbnail_width = $images[0]['width'];
+                $this->thumbnail_height = $images[0]['height'];
+                $this->bmiddle_pic = $images[1]['url'];
+                $this->bmiddle_width = $images[1]['width'];
+                $this->bmiddle_height = $images[1]['height'];
+                $this->original_pic = $images[2]['url'];
+                $this->original_width = $images[2]['width'];
+                $this->original_height = $images[2]['height'];
+                $attributes = array('thumbnail_pic', 'thumbnail_width', 'thumbnail_height', 'bmiddle_pic', 'bmiddle_width', 'bmiddle_height', 'original_pic', 'original_width', 'original_height');
+                return $this->save(true, $attributes);
+            }
+            
+            return false;
+        }
+        return true;
+        
+    }
+    
     protected function beforeSave()
     {
         if ($this->getIsNewRecord()) {
@@ -316,31 +348,6 @@ class Post extends CActiveRecord
     protected function afterSave()
     {
         Tag::savePostTags($this->id, $this->tags);
-        
-        $url = strip_tags(trim($this->original_pic));
-        if (!empty($url)) {
-            $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
-            $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
-            if ($this->channel_id == CHANNEL_GIRL) {
-                $thumbWidth = GIRL_THUMBNAIL_WIDTH;
-                $thumbHeight = GIRL_THUMBNAIL_HEIGHT;
-            }
-        
-            $images = CDBase::saveRemoteImages($url, $thumbWidth, $thumbHeight, $this->channel_id == CHANNEL_GIRL);
-            if ($images) {
-                $this->thumbnail_pic = $images[0]['url'];
-                $this->thumbnail_width = $images[0]['width'];
-                $this->thumbnail_height = $images[0]['height'];
-                $this->bmiddle_pic = $images[1]['url'];
-                $this->bmiddle_width = $images[1]['width'];
-                $this->bmiddle_height = $images[1]['height'];
-                $this->original_pic = $images[2]['url'];
-                $this->original_width = $images[2]['width'];
-                $this->original_height = $images[2]['height'];
-                $attributes = array('thumbnail_pic', 'thumbnail_width', 'thumbnail_height', 'bmiddle_pic', 'bmiddle_width', 'bmiddle_height', 'original_pic', 'original_width', 'original_height');
-                $this->save(true, $attributes);
-            }
-        }
     }
 }
 

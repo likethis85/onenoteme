@@ -204,6 +204,13 @@ class SiteController extends Controller
 
     public function actionTest()
     {
+        $post = Post::model()->findByPk(64);
+        $post->comment_nums++;
+        echo $post->original_pic;
+        $post->save(array('comment_nums'));
+        $post->saveRemoteImages();
+        echo $post->original_pic;
+        exit;
         echo uniqid() . '<br />';
         echo md5('yaoyiyao phonebook') . '<br />';
         
