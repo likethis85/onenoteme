@@ -98,7 +98,7 @@ class PostCommand extends CConsoleCommand
                 ->saveAsJpeg($thumbnailFileName);
             $model->thumbnail_width = $im->width();
             $model->thumbnail_height = $im->height();
-            $thumbUrl = dirname($thumbnailFileName) . '/' . $im->filename();
+            $thumbUrl = dirname($newPaths['url']) . '/' . $im->filename();
             
             $model->thumbnail_pic = fbu(ltrim($thumbUrl, './'));
             $result = $model->save(true, array('thumbnail_width', 'thumbnail_height', 'thumbnail_pic'));
