@@ -490,16 +490,20 @@ class CDImage
         
         $oscale = $ow / $oh;
         $nscale = $width / $height;
-        
-        $adjusted_width = $ow / $hm;
-        $half_width = $adjusted_width / 2;
-        $int_width = $half_width - $w_height;
-        $dstX = $fromLeft? 0 : -$int_width;
-        $adjusted_height = $oh / $wm;
-        $half_height = $adjusted_height / 2;
-        $int_height = $half_height - $h_height;
-        $dstY = $fromTop ? 0 : -$int_height;
-        imagecopyresampled($image, $this->_image, $dstX, $dstY, 0, 0, $adjusted_width, $adjusted_height, $ow, $oh);
+        if ($oscale >= $nscale) {
+            $adjusted_width = $ow / $hm;
+            $half_width = $adjusted_width / 2;
+            $int_width = $half_width - $w_height;
+            $dstX = $fromLeft? 0 : -$int_width;
+            imagecopyresampled($image, $this->_image, $dstX, 0, 0, 0, $adjusted_width, $height, $ow, $oh);
+        }
+        else {
+            $adjusted_height = $oh / $wm;
+            $half_height = $adjusted_height / 2;
+            $int_height = $half_height - $h_height;
+            $dstY = $fromTop ? 0 : -$int_height;
+            imagecopyresampled($image, $this->_image, 0, $dstY, 0, 0, $width, $adjusted_height, $ow, $oh);
+        }
         $this->_image = $image;
         return $this;
     }
