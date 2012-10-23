@@ -51,15 +51,21 @@ class PostCommand extends CConsoleCommand
             if ($wdzUrl) {
                 $originalPicPath = str_replace(fbu(), '', $model->original_pic);
                 $originalFilename = realpath(fbp($originalPicPath));
-                $thumbnailPicPath = str_replace(fbu(), '', $model->thumbnail_pic);
-                if (stripos($thumbnailPicPath, 'thumbnail_') === false)
-                    $thumbnailPicPath = substr_replace($thumbnailPicPath, 'thumbnail_', 16, 0);
+                if ($model->thumbnail_pic) {
+                    $thumbnailPicPath = str_replace(fbu(), '', $model->thumbnail_pic);
+                    if (stripos($thumbnailPicPath, 'thumbnail_') === false && stripos($thumbnailPicPath, 'thubmnail_') === false)
+                        $thumbnailPicPath = substr_replace($thumbnailPicPath, 'thumbnail_', 16, 0);
+                    
+                    $extension = pathinfo($thumbnailPicPath, PATHINFO_EXTENSION);
+                    if ($extension)
+                        $thumbnailPicPath = substr($thumbnailPicPath, 0, stripos($thumbnailPicPath, '.'));
+                    $thumbnailFileName = fbp($thumbnailPicPath);
+                }
+                else {
+                    $newPaths = CDBase::makeUploadFilePath('', 'pics');
+                    $thumbnailFileName = $newPaths['path'];
+                }
                 
-                $extension = pathinfo($thumbnailPicPath, PATHINFO_EXTENSION);
-                if ($extension)
-                    $thumbnailPicPath = substr($thumbnailPicPath, 0, stripos($thumbnailPicPath, '.'));
-                
-                $thumbnailFileName = fbp($thumbnailPicPath);
             }
             
             echo $originalFilename . "\n";
@@ -92,7 +98,9 @@ class PostCommand extends CConsoleCommand
                 ->saveAsJpeg($thumbnailFileName);
             $model->thumbnail_width = $im->width();
             $model->thumbnail_height = $im->height();
-            $model->thumbnail_pic = dirname($thumbnailPicPath) . '/' . $im->filename();
+            $thumbUrl = dirname($thumbnailPicPath) . '/' . $im->filename();
+            
+            $model->thumbnail_pic = fbu(ltrim($thumbUrl, './'));
             $result = $model->save(true, array('thumbnail_width', 'thumbnail_height', 'thumbnail_pic'));
             var_dump($result);
         }
