@@ -84,6 +84,9 @@ class PostCommand extends CConsoleCommand
             $im->load($data);
             unset($data);
             
+            $model->original_width = $im->width();
+            $model->original_height = $im->height();
+            
             $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
             $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
             if ($model->channel_id == CHANNEL_GIRL) {
