@@ -93,7 +93,7 @@ class PostCommand extends CConsoleCommand
             $model->thumbnail_width = $im->width();
             $model->thumbnail_height = $im->height();
             $model->thumbnail_pic = dirname($thumbnailPicPath) . '/' . $im->filename();
-            $result = $model->save(true, array('thumbnail_width', 'thumbnail_height'));
+            $result = $model->save(true, array('thumbnail_width', 'thumbnail_height', 'thumbnail_pic'));
             var_dump($result);
         }
     }
