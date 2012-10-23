@@ -57,7 +57,7 @@ class PostCommand extends CConsoleCommand
             
             echo $originalFilename . "\n";
             echo $thumbnailFileName . "\n------------\n";
-//             continue;
+            continue;
 //             exit();
             
             $data = file_get_contents($originalFilename);
