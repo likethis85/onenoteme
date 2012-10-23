@@ -295,6 +295,63 @@ class Post extends CActiveRecord
         
         return json_encode($data);
     }
+
+    public function saveImages($url)
+    {
+        $url = strip_tags(trim($url));
+        
+        if (!empty($url)) {
+            $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
+            $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
+            if ($this->channel_id == CHANNEL_GIRL) {
+                $thumbWidth = GIRL_THUMBNAIL_WIDTH;
+                $thumbHeight = GIRL_THUMBNAIL_HEIGHT;
+            }
+             
+            $path = CDBase::makeUploadPath('pics');
+            $info = parse_url($url);
+            $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);
+            $file = CDBase::makeUploadFileName('');
+            $thumbnailFile = 'thumbnail_' . $file;
+            $thumbnailFileName = $path['path'] . $thumbnailFile;
+            $middleFileName = $path['path'] . 'bmiddle_' . $file;
+            $bigFile = 'original_' . $file;
+            $bigFileName = $path['path'] . $bigFile;
+        
+            $curl = new CDCurl();
+            $curl->get($url);
+            $data = $curl->rawdata();
+            $curl->close();
+            $im = new CDImage();
+            $im->load($data);
+            unset($data, $curl);
+            
+            if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
+                $im->resizeToHeight($thumbHeight);
+            else
+                $im->resizeToWidth($thumbWidth);
+            $im->crop($thumbWidth, $thumbHeight, ($this->channel_id == CHANNEL_GIRL))
+            ->saveAsJpeg($thumbnailFileName);
+            $this->thumbnail_width = $im->width();
+            $this->thumbnail_height = $im->height();
+            $this->thumbnail_pic = fbu($path['url'] . $im->filename());
+             
+            $im->revert();
+            if ($im->width() > IMAGE_BMIDDLE_MAX_WIDTH)
+                $im->resizeToWidth(IMAGE_BMIDDLE_MAX_WIDTH);
+            $im->saveAsJpeg($middleFileName, 75);
+            $this->bmiddle_pic = fbu($path['url'] . $im->filename());
+            $this->bmiddle_width = $im->width();
+            $this->bmiddle_height = $im->height();
+             
+            $im->revert()->saveAsJpeg($bigFileName, 100);
+            $this->original_pic = fbu($path['url'] . $im->filename());
+            $this->original_width = $im->width();
+            $this->original_height = $im->height();
+            $attributes = array('thumbnail_pic', 'thumbnail_width', 'thumbnail_height', 'bmiddle_pic', 'bmiddle_width', 'bmiddle_height', 'original_pic', 'original_width', 'original_height');
+            $this->save(true, $attributes);
+        }
+    }
     
     protected function beforeSave()
     {

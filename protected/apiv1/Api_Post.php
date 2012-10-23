@@ -299,66 +299,10 @@ class Api_Post extends ApiBase
     	$post->up_score = mt_rand(20, 100);
     	$post->down_score = mt_rand(0, 15);
     	$post->view_nums = mt_rand(100, 300);
+    	$post->thumbnail_pic = $post->bmiddle_pic = $post->original_pic = '';
     	
     	try {
-    	    $url = trim($params['pic']);
-        	if (!empty($url)) {
-        	    $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
-        	    $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
-        	    if ($post->channel_id == CHANNEL_GIRL) {
-        	        $thumbWidth = GIRL_THUMBNAIL_WIDTH;
-        	        $thumbHeight = GIRL_THUMBNAIL_HEIGHT;
-        	    }
-        	    
-        	    $path = CDBase::makeUploadPath('pics');
-        	    $info = parse_url($url);
-                $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);
-                $file = CDBase::makeUploadFileName('');
-                $thumbnailFile = 'thumbnail_' . $file;
-                $thumbnailFileName = $path['path'] . $thumbnailFile;
-                $middleFileName = $path['path'] . 'bmiddle_' . $file;
-                $bigFile = 'original_' . $file;
-                $bigFileName = $path['path'] . $bigFile;
-                
-        	    $curl = new CDCurl();
-        	    $curl->get($url);
-        	    $data = $curl->rawdata();
-        	    $curl->close();
-        	    $im = new CDImage();
-        	    $im->load($data);
-        	    unset($data, $curl);
-        	    if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
-        	        $im->resizeToHeight($thumbHeight);
-        	    else
-        	        $im->resizeToWidth($thumbWidth);
-        	    $im->crop($thumbWidth, $thumbHeight, ($post->channel_id == CHANNEL_GIRL))
-        	        ->saveAsJpeg($thumbnailFileName);
-        	    $post->thumbnail_width = $im->width();
-        	    $post->thumbnail_height = $im->height();
-        	    $post->thumbnail_pic = fbu($path['url'] . $im->filename());
-        	    
-        	    $im->revert();
-        	    if ($im->width() > IMAGE_BMIDDLE_MAX_WIDTH)
-        	        $im->resizeToWidth(IMAGE_BMIDDLE_MAX_WIDTH);
-        	    $im->saveAsJpeg($middleFileName, 75);
-        	    $post->bmiddle_pic = fbu($path['url'] . $im->filename());
-        	    $post->bmiddle_width = $im->width();
-        	    $post->bmiddle_height = $im->height();
-        	    
-        	    $im->revert()->saveAsJpeg($bigFileName, 100);
-        	    $post->original_pic = fbu($path['url'] . $im->filename());
-        	    $post->original_width = $im->width();
-        	    $post->original_height = $im->height();
-        	}
-        	else
-        	    $post->thumbnail_pic = $post->bmiddle_pic = $post->original_pic = '';
-    	}
-        catch (CException $e) {
-            var_dump($e);
-        }
-    	
-    	try {
-    		return (int)$post->save();
+    		return (int)($post->save() && $post->saveImages($params['pic']));
     	}
     	catch (ApiException $e) {
     		throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
