@@ -76,8 +76,8 @@ class CDBase
         $file = self::makeUploadFileName($extension);
     
         $data = array(
-        'path' => $path['path'] . $file,
-        'url' => $path['url'] . $file,
+            'path' => $path['path'] . $file,
+            'url' => $path['url'] . $file,
         );
     
         return $data;

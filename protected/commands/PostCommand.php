@@ -36,35 +36,51 @@ class PostCommand extends CConsoleCommand
         printf("update %d rows\n", $nums);
     }
 
-    public function actionMakeThumbnail($count = 10)
+    public function actionMakeThumbnail($page = 1, $count = 10)
     {
         $criteria = new CDbCriteria();
         $criteria->limit = $count;
+        $criteria->offset = ($page - 1) * $count;
         $criteria->order = 'id desc';
         $criteria->addColumnCondition(array('channel_id'=>CHANNEL_GIRL));
         $models = Post::model()->findAll($criteria);
         
         foreach ($models as $model) {
             echo $model->id . "\n";
-            $originalPicPath = str_replace(fbu(), '', $model->original_pic);
-            $originalFilename = realpath(fbp($originalPicPath));
-            $thumbnailPicPath = str_replace(fbu(), '', $model->thumbnail_pic);
-            $thumbnailFileName = realpath(fbp($thumbnailPicPath));
+            $wdzUrl = stripos($model->original_pic, sbu()) == 0;
+            if ($wdzUrl) {
+                $originalPicPath = str_replace(fbu(), '', $model->original_pic);
+                $originalFilename = realpath(fbp($originalPicPath));
+                $thumbnailPicPath = str_replace(fbu(), '', $model->thumbnail_pic);
+                $thumbnailFileName = fbp($thumbnailPicPath);
+            }
             
             echo $originalFilename . "\n";
-            echo $thumbnailFileName . "\n";
-//             exit();
+            echo $thumbnailFileName . "\n------------\n";
+            exit();
             
-            $data = file_get_contents('http://f.waduanzi.com/pics/2012/10/23/bmiddle_20121023162341_5086540d52037.jpeg');
+            $data = file_get_contents($originalFilename);
+            if ($data === false) {
+                echo '$originalFilename read error.';
+                continue;
+            }
+            
             $im = new CDImage();
             $im->load($data);
             unset($data);
+            
+            $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
+            $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
+            if ($model->channel_id == CHANNEL_GIRL) {
+                $thumbWidth = GIRL_THUMBNAIL_WIDTH;
+                $thumbHeight = GIRL_THUMBNAIL_HEIGHT;
+            }
             
             if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
                 $im->resizeToHeight($thumbHeight);
             else
                 $im->resizeToWidth($thumbWidth);
-            $im->crop($thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft)
+            $im->crop($thumbWidth, $thumbHeight, $model->channel_id == CHANNEL_GIRL)
                 ->saveAsJpeg($thumbnailFileName);
             $model->thumbnail_width = $im->width();
             $model->thumbnail_height = $im->height();
