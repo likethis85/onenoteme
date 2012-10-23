@@ -331,7 +331,7 @@ class Api_Post extends ApiBase
         	        $im->resizeToHeight($thumbHeight);
         	    else
         	        $im->resizeToWidth($thumbWidth);
-        	    $im->crop($thumbWidth, $thumbHeight)
+        	    $im->crop($thumbWidth, $thumbHeight, true)
         	        ->saveAsJpeg($thumbnailFileName);
         	    $post->thumbnail_width = $im->width();
         	    $post->thumbnail_height = $im->height();
