@@ -51,10 +51,9 @@ class PostCommand extends CConsoleCommand
             if ($wdzUrl) {
                 $originalPicPath = str_replace(fbu(), '', $model->original_pic);
                 $originalFilename = realpath(fbp($originalPicPath));
-                if (stripos($model->thumbnail_pic, 'thumbnail_') === false)
-                    $thumbnailPicPath = substr_replace($model->thumbnail_pic, 'thumbnail_', 16, 0);
-                else
-                    $thumbnailPicPath = str_replace(fbu(), '', $model->thumbnail_pic);
+                $thumbnailPicPath = str_replace(fbu(), '', $model->thumbnail_pic);
+                if (stripos($thumbnailPicPath, 'thumbnail_') === false)
+                    $thumbnailPicPath = substr_replace($thumbnailPicPath, 'thumbnail_', 16, 0);
                 $thumbnailFileName = fbp($thumbnailPicPath);
                 $thumbnailUrl = fbu($thumbnailPicPath);
             }
