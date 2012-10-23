@@ -54,15 +54,10 @@ class PostCommand extends CConsoleCommand
                 $thumbnailPicPath = str_replace(fbu(), '', $model->thumbnail_pic);
                 if (stripos($thumbnailPicPath, 'thumbnail_') === false)
                     $thumbnailPicPath = substr_replace($thumbnailPicPath, 'thumbnail_', 16, 0);
-                $thumbnailFileName = fbp($thumbnailPicPath);
-                $thumbnailUrl = fbu($thumbnailPicPath);
+                
+                $extension = pathinfo($thumbnailPicPath, PATHINFO_EXTENSION);
+                $thumbnailPicPath = substr($thumbnailPicPath, 0, stripos($thumbnailPicPath, '.'));
             }
-            
-            echo $originalFilename . "\n";
-            echo $thumbnailUrl . "\n";
-            echo $thumbnailFileName . "\n------------\n";
-//             continue;
-//             exit();
             
             $data = file_get_contents($originalFilename);
             if ($data === false) {
@@ -73,6 +68,16 @@ class PostCommand extends CConsoleCommand
             $im = new CDImage();
             $im->load($data);
             unset($data);
+            
+            $thumbnailPicPath = $thumbnailPicPath . '.' . $im->getExtName();
+            $thumbnailFileName = fbp($thumbnailPicPath);
+            $thumbnailUrl = fbu($thumbnailPicPath);
+            
+            echo $originalFilename . "\n";
+            echo $thumbnailUrl . "\n";
+            echo $thumbnailFileName . "\n------------\n";
+            continue;
+//             exit();
             
             $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
             $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
@@ -92,6 +97,7 @@ class PostCommand extends CConsoleCommand
             $model->thumbnail_pic = $thumbnailUrl;
             $result = $model->save(true, array('thumbnail_width', 'thumbnail_height'));
             var_dump($result);
+            unset($im);
         }
     }
 }
