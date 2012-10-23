@@ -51,11 +51,16 @@ class PostCommand extends CConsoleCommand
             if ($wdzUrl) {
                 $originalPicPath = str_replace(fbu(), '', $model->original_pic);
                 $originalFilename = realpath(fbp($originalPicPath));
-                $thumbnailPicPath = str_replace(fbu(), '', $model->thumbnail_pic);
+                if (stripos($model->thumbnail_pic, 'thumbnail_') === false)
+                    $thumbnailPicPath = substr_replace($model->thumbnail_pic, 'thumbnail_', 16, 0);
+                else
+                    $thumbnailPicPath = str_replace(fbu(), '', $model->thumbnail_pic);
                 $thumbnailFileName = fbp($thumbnailPicPath);
+                $thumbnailUrl = fbu($thumbnailPicPath);
             }
             
             echo $originalFilename . "\n";
+            echo $thumbnailUrl . "\n";
             echo $thumbnailFileName . "\n------------\n";
             continue;
 //             exit();
@@ -85,6 +90,7 @@ class PostCommand extends CConsoleCommand
                 ->saveAsJpeg($thumbnailFileName);
             $model->thumbnail_width = $im->width();
             $model->thumbnail_height = $im->height();
+            $model->thumbnail_pic = $thumbnailUrl;
             $result = $model->save(true, array('thumbnail_width', 'thumbnail_height'));
             var_dump($result);
         }
