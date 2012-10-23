@@ -61,12 +61,17 @@ class CDBase
      * @param string $filename 软件名
      * @return string 转化之后的名称
      */
-    public static function makeUploadFileName($extension)
+    public static function makeUploadFileName($extension, $prefix = '')
     {
         $extension = strtolower($extension);
-        return date('YmdHis_', $_SERVER['REQUEST_TIME'])
+        $filename = date('YmdHis_', $_SERVER['REQUEST_TIME'])
             . uniqid()
             . ($extension ? '.' . $extension : '');
+        
+        if (strlen($prefix) > 0)
+            $filename = $prefix . '_' . $filename;
+        
+        return $filename;
     }
     
     
