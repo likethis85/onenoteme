@@ -35,4 +35,41 @@ class PostCommand extends CConsoleCommand
         }
         printf("update %d rows\n", $nums);
     }
+
+    public function actionMakeThumbnail($count = 10)
+    {
+        $criteria = new CDbCriteria();
+        $criteria->limit = $count;
+        $criteria->order = 'id desc';
+        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_GIRL));
+        $models = Post::model()->findAll($criteria);
+        
+        foreach ($models as $model) {
+            echo $model->id . "\n";
+            $originalPicPath = str_replace(fbu(), '', $model->original_pic);
+            $originalFilename = realpath(fbp($originalPicPath));
+            $thumbnailPicPath = str_replace(fbu(), '', $model->thumbnail_pic);
+            $thumbnailFileName = realpath(fbp($thumbnailPicPath));
+            
+            echo $originalFilename . "\n";
+            echo $thumbnailFileName . "\n";
+//             exit();
+            
+            $data = file_get_contents('http://f.waduanzi.com/pics/2012/10/23/bmiddle_20121023162341_5086540d52037.jpeg');
+            $im = new CDImage();
+            $im->load($data);
+            unset($data);
+            
+            if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
+                $im->resizeToHeight($thumbHeight);
+            else
+                $im->resizeToWidth($thumbWidth);
+            $im->crop($thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft)
+                ->saveAsJpeg($thumbnailFileName);
+            $model->thumbnail_width = $im->width();
+            $model->thumbnail_height = $im->height();
+            $result = $model->save(true, array('thumbnail_width', 'thumbnail_height'));
+            var_dump($result);
+        }
+    }
 }

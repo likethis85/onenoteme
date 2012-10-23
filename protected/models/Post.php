@@ -277,7 +277,7 @@ class Post extends CActiveRecord
     {
         $count = 0;
         if ($this->getImageIsLong()) {
-            $count = ($this->bmiddle_height - IMAGE_THUMBNAIL_HEIGHT) / IMAGE_THUMBNAIL_HEIGHT;
+            $count = ($this->bmiddle_height - IMAGE_MAX_HEIGHT_FOLDING) / IMAGE_MAX_HEIGHT_FOLDING;
         }
         return (int)$count;
     }

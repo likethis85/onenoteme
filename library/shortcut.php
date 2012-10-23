@@ -190,7 +190,7 @@ function fbp($file = null)
     if ($uploadBasePath === null)
         $uploadBasePath = rtrim(param('uploadBasePath'), DS) . DS;
 
-    return empty($url) ? $uploadBasePath : $uploadBasePath . ltrim($file, DS);
+    return empty($file) ? $uploadBasePath : $uploadBasePath . ltrim($file, DS);
 }
 
 /**
@@ -221,7 +221,7 @@ function sbp($file = null)
     if ($resourcePath === null)
         $resourcePath = rtrim(param('resourcePath'), DS) . DS;
 
-    return empty($url) ? $resourcePath : $resourcePath . ltrim($file, DS);
+    return empty($file) ? $resourcePath : $resourcePath . ltrim($file, DS);
 }
 
 /**
