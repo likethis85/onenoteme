@@ -42,7 +42,7 @@ class PostCommand extends CConsoleCommand
         $criteria->limit = $count;
         $criteria->offset = ($page - 1) * $count;
         $criteria->order = 'id asc';
-        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_GIRL));
+        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_GIRL, 'thumbnail_width'=>0));
         $models = Post::model()->findAll($criteria);
         
         foreach ($models as $model) {
