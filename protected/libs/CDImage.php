@@ -499,14 +499,7 @@ class CDImage
         $half_height = $adjusted_height / 2;
         $int_height = $half_height - $h_height;
         $dstY = $fromTop ? 0 : -$int_height;
-        if ($oscale >= $nscale) {
-            
-            imagecopyresampled($image, $this->_image, $dstX, $dstY, 0, 0, $adjusted_width, $height, $ow, $oh);
-        }
-        else {
-            
-            imagecopyresampled($image, $this->_image, $dstX, $dstY, 0, 0, $width, $adjusted_height, $ow, $oh);
-        }
+        imagecopyresampled($image, $this->_image, $dstX, $dstY, 0, 0, $adjusted_width, $adjusted_height, $ow, $oh);
         $this->_image = $image;
         return $this;
     }
