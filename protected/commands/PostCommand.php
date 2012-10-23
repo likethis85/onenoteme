@@ -112,7 +112,7 @@ class PostCommand extends CConsoleCommand
         }
     }
 
-    public function actionMakeBmiddle($page = 1, $count = 200)
+    public function actionMakeBmiddle($page = 1, $count = 500)
     {
         $criteria = new CDbCriteria();
         $criteria->limit = $count;
