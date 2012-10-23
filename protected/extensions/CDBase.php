@@ -38,24 +38,22 @@ class CDBase
      * -1 目录不存在并且无法创建
      * -2 目录不可写
      */
-    public static function makeUploadPath($additional = null)
+    public static function makeUploadPath($additional = null, $basePath = null)
     {
-        $relativeUrl = (($additional === null) ? '' : $additional . '/')
-            . date('Y/m/d/', $_SERVER['REQUEST_TIME']);
-        $relativePath = (($additional === null) ? '' : $additional . DS)
-            . date(addslashes(sprintf('Y%sm%sd%s', DS, DS, DS)), $_SERVER['REQUEST_TIME']);
+        $relativeUrl = (($additional === null) ? '' : $additional . '/') . date('Y/m/d/', $_SERVER['REQUEST_TIME']);
+        $relativePath = (($additional === null) ? '' : $additional . DS) . date(addslashes(sprintf('Y%sm%sd%s', DS, DS, DS)), $_SERVER['REQUEST_TIME']);
 
-        $path = param('uploadBasePath') . $relativePath;
+        if (empty($basePath))
+            $basePath = param('uploadBasePath');
+        $path = $basePath . $relativePath;
 
-        if (!file_exists($path) && !mkdir($path, 0755, true)) {
-            return self::FILE_NO_EXIST;
-        } else if (!is_writable($path)) {
-            return self::FILE_NO_WRITABLE;
-        } else
+        if ((file_exists($path) || mkdir($path, 0755, true)) && is_writable($path))
             return array(
             	'path' => realpath($path) . DS,
                 'url' => $relativeUrl,
             );
+        else
+            throw new Exception('path not exist or not writable', 0);
     }
 
     /**
@@ -69,6 +67,137 @@ class CDBase
         return date('YmdHis_', $_SERVER['REQUEST_TIME'])
             . uniqid()
             . ($extension ? '.' . $extension : '');
+    }
+    
+    
+    public static function makeUploadFilePath($extension, $additional = null, $basePath = null)
+    {
+        $path = self::makeUploadPath($additional, $basePath);
+        $file = self::makeUploadFileName($extension);
+    
+        $data = array(
+        'path' => $path['path'] . $file,
+        'url' => $path['url'] . $file,
+        );
+    
+        return $data;
+    }
+    
+
+    public static function uploadImage(CUploadedFile $upload, $additional = null, $compress = true, $deleteTempFile = true)
+    {
+        if (!$compress) {
+            $result = self::uploadFile($upload, $additional, $deleteTempFile);
+            return $result;
+        }
+    
+        $path = self::makeUploadPath($additional, $basePath = null);
+        $file = self::makeUploadFileName(null);
+        $filename = $path['path'] . $file;
+        $im = new CDImage();
+        $im->load($upload->tempName);
+        $result = $im->save($filename);
+        $newFilename = $im->filename();
+        unset($im);
+        if ($result === false)
+            return false;
+        else {
+            $filename = array(
+            'path' => $path['path'] . $newFilename,
+            'url' => $path['url'] . $newFilename
+            );
+            return $filename;
+        }
+    }
+    
+    public static function uploadFile(CUploadedFile $upload, $additional = null, $deleteTempFile = true)
+    {
+        $filename = self::makeUploadFilePath($upload->extensionName, $additional, $basePath = null);
+        $result = $upload->saveAs($filename['path'], $deleteTempFile);
+        if ($result)
+            return $filename;
+        else
+            return false;
+    }
+    
+    public static function filterText($text)
+    {
+        static $keywords = null;
+        if ($keywords === null) {
+            $filename = dp('filter_keywords.php');
+            if (file_exists($filename) && is_readable($filename)) {
+                $keywords = require($filename);
+            }
+            else
+                return $text;
+        }
+        //         var_dump($keywords);exit;
+        if (empty($keywords)) return $text;
+    
+        try {
+            $patterns = array_keys($keywords);
+            foreach ($patterns as $index => $pattern) {
+                $patterns[$index] = '/' . $pattern . '/is';
+            }
+    
+            $replacement = array_values($keywords);
+            foreach ($replacement as $index => $word)
+                $replacement[$index] = empty($word) ? param('filterKeywordReplacement') : $word;
+    
+            $result = preg_replace($patterns, $replacement, $text);
+            $newText = ($result === null) ? $text : $result;
+        }
+        catch (Exception $e) {
+            $newText = $text;
+        }
+    
+        return $newText;
+    }
+    
+    public static function mergeHttpUrl($baseurl, $relativeUrl)
+    {
+        $baseurl = trim($baseurl, ' \'\"');
+        $relativeUrl = trim($relativeUrl, ' \'\"');
+    
+        // $baseurl and $relativeUrl is null
+        if (empty($baseurl) || empty($relativeUrl))
+            return false;
+    
+        if (filter_var($relativeUrl, FILTER_VALIDATE_URL) !== false && stripos($relativeUrl, 'http://') === 0)
+            return $relativeUrl;
+    
+        // $baseurl is not a valid url
+        $result = filter_var($baseurl, FILTER_VALIDATE_URL);
+        if ($result === false) return false;
+    
+        // $baseurl is not a valid http protocol url
+        $pos = stripos($baseurl, 'http://');
+        if ($pos !== 0) return false;
+    
+        $parts = parse_url($baseurl);
+        unset($parts['query'], $parts['fragment']);
+        $pos = stripos($relativeUrl, '/');
+        if ($pos === 0)
+            $parts['path'] = $relativeUrl;
+        else
+            $parts['path'] = dirname($parts['path']) . '/' . ltrim($relativeUrl, './');
+    
+        $url = function_exists('http_build_url') ? http_build_url($url, $parts) : self::httpBuildUrl($parts);
+    
+        return $url;
+    }
+    
+
+    public static function userIsMobileBrower()
+    {
+        $browers = array('iPhone', 'Android', 'hpwOS', 'Windows Phone OS', 'BlackBerry');
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+        foreach ($browers as $brower) {
+            $pos = stripos($agent, $brower);
+            if ($pos !== false) return true;
+        }
+    
+        return false;
     }
     
     
@@ -142,4 +271,9 @@ class CDBase
         
         return $images;
     }
+
+
+
+
+
 }
