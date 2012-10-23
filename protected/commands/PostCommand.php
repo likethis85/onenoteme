@@ -124,7 +124,7 @@ class PostCommand extends CConsoleCommand
         
         foreach ($models as $model) {
             echo $model->id . "\n";
-            $wdzUrl = stripos($model->original_pic, sbu()) == 0;
+            $wdzUrl = stripos($model->original_pic, fbu()) === 0;
             if ($wdzUrl) {
                 $originalPicPath = str_replace(fbu(), '', $model->original_pic);
                 $originalFilename = realpath(fbp($originalPicPath));
