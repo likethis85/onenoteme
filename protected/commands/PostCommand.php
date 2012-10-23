@@ -41,7 +41,7 @@ class PostCommand extends CConsoleCommand
         $criteria = new CDbCriteria();
         $criteria->limit = $count;
         $criteria->offset = ($page - 1) * $count;
-        $criteria->order = 'id desc';
+        $criteria->order = 'id asc';
         $criteria->addColumnCondition(array('channel_id'=>CHANNEL_GIRL));
         $models = Post::model()->findAll($criteria);
         
@@ -57,7 +57,7 @@ class PostCommand extends CConsoleCommand
             
             echo $originalFilename . "\n";
             echo $thumbnailFileName . "\n------------\n";
-            continue;
+//             continue;
 //             exit();
             
             $data = file_get_contents($originalFilename);
