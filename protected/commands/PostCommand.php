@@ -63,6 +63,7 @@ class PostCommand extends CConsoleCommand
                 }
                 else {
                     $newPaths = CDBase::makeUploadFilePath('', 'pics');
+                    $thumbnailPicPath = $newPaths['url'];
                     $thumbnailFileName = $newPaths['path'];
                 }
                 
@@ -98,7 +99,7 @@ class PostCommand extends CConsoleCommand
                 ->saveAsJpeg($thumbnailFileName);
             $model->thumbnail_width = $im->width();
             $model->thumbnail_height = $im->height();
-            $thumbUrl = dirname($newPaths['url']) . '/' . $im->filename();
+            $thumbUrl = dirname($thumbnailPicPath) . '/' . $im->filename();
             
             $model->thumbnail_pic = fbu(ltrim($thumbUrl, './'));
             $result = $model->save(true, array('thumbnail_width', 'thumbnail_height', 'thumbnail_pic'));
