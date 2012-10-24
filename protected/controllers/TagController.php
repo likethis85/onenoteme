@@ -52,7 +52,7 @@ class TagController extends Controller
         $duration = 120;
         $limit = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('grid_post_count_page');
         
-        $name = urldecode($name);
+        $name = strip_tags(trim($name));
         
         $tagID = app()->getDb()->createCommand()
             ->select('id')

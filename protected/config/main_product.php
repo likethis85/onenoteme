@@ -85,7 +85,7 @@ return array(
                 'post-<id:\d+>' => 'post/show',
                 'originalpic/<id:\d+>' => 'post/originalpic',
                 'tags' => 'tag/list',
-                'tag-<name:[\w\s\%\-\+\.]+>' => 'tag/posts',
+                'tag-<name:.+>' => 'tag/posts',
                 'feed/<cid:\d+>' => 'feed/channel',
             
                 'http://m.waduanzi.com' => 'mobile/index',
