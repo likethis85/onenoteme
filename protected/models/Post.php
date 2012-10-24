@@ -267,7 +267,7 @@ class Post extends CActiveRecord
     public function getImageIsLong()
     {
         if (($this->channel_id == CHANNEL_GIRL || $this->channel_id == CHANNEL_LENGTU)
-            && ($this->bmiddle_height > IMAGE_THUMBNAIL_HEIGHT * 2) && $this->getBmiddlePic())
+            && ($this->bmiddle_height > IMAGE_THUMBNAIL_HEIGHT) && $this->getBmiddlePic())
             return true;
         
         return false;
