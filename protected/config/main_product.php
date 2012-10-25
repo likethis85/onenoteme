@@ -83,7 +83,7 @@ return array(
                 '<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',
                 '<_a:(duanzi|lengtu|girl|video)>' => 'channel/<_a>',
                 'post-<id:\d+>' => 'post/show',
-                'originalpic/<id:\d+>' => 'post/bigPic',
+                'originalpic/<id:\d+>' => 'post/bigpic',
                 'tags' => 'tag/list',
                 'tag-<name:.+>' => 'tag/posts',
                 'feed/<cid:\d+>' => 'feed/channel',
