@@ -35,7 +35,10 @@ return array(
         'admin' => array(
             'layout' => 'main',
         ),
-        'user' => array(
+        'member' => array(
+            'layout' => 'main',
+        ),
+        'mobile' => array(
             'layout' => 'main',
         ),
     ),
@@ -78,6 +81,12 @@ return array(
             'cacheID' => 'cache',
             'rules' => array(
                 'http://api.waduanzi.com/<_a>' => 'api/<_a>',
+                'http://wap.waduanzi.com' => 'wap/index',
+                'http://wap.waduanzi.com/<_a>' => 'wap/<_a>',
+                'http://m.waduanzi.com' => 'mobile/default/index',
+                'http://m.waduanzi.com/<_c>' => 'mobile/<_c>',
+                'http://m.waduanzi.com/<_c>/<_a>' => 'mobile/<_c>/<_a>',
+                    
                 '/' => 'site/index',
                 '<_a:(login|signup|logout)>' => 'site/<_a>',
                 '<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',
@@ -87,9 +96,6 @@ return array(
                 'tags' => 'tag/list',
                 'tag-<name:.+>' => 'tag/posts',
                 'feed/<cid:\d+>' => 'feed/channel',
-            
-                'http://m.waduanzi.com' => 'mobile/index',
-                'http://m.waduanzi.com/<_a>' => 'mobile/<_a>',
             ),
         ),
         'session' => array(

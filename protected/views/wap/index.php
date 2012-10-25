@@ -6,7 +6,7 @@
             <?php echo $model->content;?>
             <?php if ($model->bmiddlePic) echo '<br />' . CHtml::image($model->bmiddlePic, $model->title, array('class'=>'item-pic'));?>
         </div>
-        <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->getTagLinks('mobile/tag', '&nbsp;', '_self');?></div><?php endif;?>
+        <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->getTagLinks('wap/tag', '&nbsp;', '_self');?></div><?php endif;?>
     </div>
     <?php if ($index == 1):?>
     <div class="admob">

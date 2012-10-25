@@ -11,21 +11,21 @@
 <meta content="telephone=no" name="format-detection" />
 <link rel="shortcut icon" href="<?php echo sbu('images/favicon.ico');?>" type="image/vnd.microsoft.icon" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-basic.css');?>" />
-<link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-mobile.css?v=20120519.01');?>" />
+<link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-wap.css?v=20120519.01');?>" />
 <script type="text/javascript" src="<?php echo sbu('libs/jquery-1.7.2.min.js');?>"></script>
 </head>
 <body>
 <a name="top"></a>
 <div class="m-wrapper">
-	<h1 class="m-logo"><a href="<?php echo aurl('mobile/index');?>" title="返回挖段子首页">挖段子</a></h1>
+	<h1 class="m-logo"><a href="<?php echo aurl('wap/index');?>" title="返回挖段子首页">挖段子</a></h1>
 </div>
 <div class="m-wrapper m-nav">
-	<a href="<?php echo aurl('mobile/index');?>">首页</a>
-	<a href="<?php echo aurl('mobile/channel', array('id'=>CHANNEL_GIRL));?>">福利</a>
-	<a href="<?php echo aurl('mobile/channel', array('id'=>CHANNEL_DUANZI));?>">段子</a>
-	<a href="<?php echo aurl('mobile/channel', array('id'=>CHANNEL_LENGTU));?>">冷图</a>
+	<a href="<?php echo aurl('wap/index');?>">首页</a>
+	<a href="<?php echo aurl('wap/channel', array('id'=>CHANNEL_GIRL));?>">福利</a>
+	<a href="<?php echo aurl('wap/channel', array('id'=>CHANNEL_DUANZI));?>">段子</a>
+	<a href="<?php echo aurl('wap/channel', array('id'=>CHANNEL_LENGTU));?>">冷图</a>
 	&nbsp;|&nbsp;
-	<a href="<?php echo aurl('mobile/index');?>">最新</a>
+	<a href="<?php echo aurl('wap/index');?>">最新</a>
 </div>
 <div class="app-link">
     <a href="itms-apps://itunes.apple.com/cn/app//id486268988?mt=8" target="_blank">iPhone应用 v2.2.1</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -34,7 +34,7 @@
 <div class="m-wrapper"><?php echo $content;?></div>
 <div class="space10px"></div>
 <div class="m-wrapper m-footer">
-	<p class="fleft">版权所有 &copy;2011-2012&nbsp;<a href="<?php echo aurl('mobile');?>">waduanzi.com</a></p><p class="fright"><a href="#top">TOP</a></p>
+	<p class="fleft">版权所有 &copy;2011-2012&nbsp;<a href="<?php echo aurl('wap');?>">waduanzi.com</a></p><p class="fright"><a href="#top">TOP</a></p>
 	<div class="clear"></div>
 </div>
 <script type="text/javascript">

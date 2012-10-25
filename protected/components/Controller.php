@@ -8,7 +8,7 @@ class Controller extends CController
 	{
 		return array(
 			'captcha'=>array(
-				'class'=>'application.extensions.CdCaptcha.CdCaptchaAction',
+				'class'=>'application.extensions.CDCaptcha.CDCaptchaAction',
 				'backColor' => 0xFFFFFF,
 				'height' => 22,
 				'width' => 70,
@@ -19,7 +19,7 @@ class Controller extends CController
 		        'testLimit' => 3,
 			),
 			'bigCaptcha'=>array(
-				'class'=>'application.extensions.CdCaptcha.CdCaptchaAction',
+				'class'=>'application.extensions.CDCaptcha.CDCaptchaAction',
 				'backColor' => 0xFFFFFF,
 				'height' => 30,
 				'width' => 100,

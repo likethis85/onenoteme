@@ -1,11 +1,11 @@
 <?php
-class MobileController extends Controller
+class WapController extends Controller
 {
     const COUNT_OF_PAGE = 10;
     
     public function init()
     {
-        $this->layout = 'mobile';
+        $this->layout = 'wap';
     }
     
     public function filters()

@@ -38,10 +38,8 @@ return array(
         'member' => array(
             'layout' => 'main',
         ),
-        'gii'=>array(
-            'class'=>'system.gii.GiiModule',
-            'password'=>'123',
-            // 'ipFilters'=>array(...a list of IPs...),
+        'mobile' => array(
+            'layout' => 'main',
         ),
     ),
     'preload' => array('log'),
@@ -97,6 +95,12 @@ return array(
 		    'showScriptName' => false,
 //             'cacheID' => 'cache',
             'rules' => array(
+                'http://wap.waduanzi.cn' => 'wap/index',
+                'http://wap.waduanzi.cn/<_a>' => 'wap/<_a>',
+                'http://m.waduanzi.cn' => 'mobile/default/index',
+                'http://m.waduanzi.cn/<_c>' => 'mobile/<_c>',
+                'http://m.waduanzi.cn/<_c>/<_a>' => 'mobile/<_c>/<_a>',
+                    
                 '/' => 'site/index',
                 '<_a:(login|signup|logout)>' => 'site/<_a>',
                 '<_a:(duanzi|lengtu|girl|video|focus)>-<page:\d+>' => 'channel/<_a>',
@@ -106,9 +110,6 @@ return array(
                 'tags' => 'tag/list',
                 'tag-<name:.+>' => 'tag/posts',
                 'feed/<cid:\d+>' => 'feed/channel',
-                
-                'http://m.waduanzi.cn' => 'mobile/index',
-                'http://m.waduanzi.cn/<_a>' => 'mobile/<_a>',
             ),
         ),
         'session' => array(

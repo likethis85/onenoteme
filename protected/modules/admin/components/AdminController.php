@@ -11,7 +11,7 @@ class AdminController extends CController
 	{
 		return array(
 			'captcha'=>array(
-				'class'=>'application.extensions.BetaCaptchaAction.BetaCaptchaAction',
+				'class'=>'application.extensions.CDCaptchaAction.CDCaptchaAction',
 				'backColor' => 0xFFFFFF,
 				'height' => 22,
 				'width' => 70,

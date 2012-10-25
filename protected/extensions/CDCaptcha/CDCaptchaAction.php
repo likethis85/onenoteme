@@ -1,5 +1,5 @@
 <?php
-class CdCaptchaAction extends CCaptchaAction
+class CDCaptchaAction extends CCaptchaAction
 {
     protected function generateVerifyCode()
     {
