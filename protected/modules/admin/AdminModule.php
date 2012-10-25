@@ -27,7 +27,7 @@ class AdminModule extends CWebModule
 			}
 			elseif (user()->checkAccess('enter_admin_system'))
     			return true;
-			else {echo user()->id;
+			else {
 			    echo 'you are not allowed enter admin system.';
 			    exit(0);
 			}
