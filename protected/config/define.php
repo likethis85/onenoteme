@@ -6,7 +6,7 @@ define('CHANNEL_DUANZI', 0);
 define('CHANNEL_LENGTU', 20);
 define('CHANNEL_GIRL', 30);
 define('CHANNEL_VIDEO', 40);
-define('CHANNEL_HOTNEWS', 50);
+define('CHANNEL_FOCUS', 50);
 define('CHANNEL_MUSIC', 60);
 
 // 以下是表名

@@ -81,6 +81,22 @@ class ChannelController extends Controller
         $data = $this->fetchChannelPosts(CHANNEL_VIDEO, param('video_count_page'));
         $this->render('video_list', $data);
     }
+
+    public function actionFocus($s = POST_LIST_STYLE_GRID)
+    {
+        cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_FOCUS)), null, array('title'=>app()->name . ' » 挖热点 Feed'));
+        $this->pageTitle = '挖趣图 - 最搞笑的，最好玩的，最内涵的图片精选';
+        $this->setDescription($this->pageTitle);
+        $this->setKeywords('挖趣图,搞笑图片,内涵图,邪恶图片,色色图,暴走漫画,微漫画,4格漫画,8格漫画,搞笑漫画,内涵漫画,邪恶漫画,疯狂恶搞,爆笑童趣,雷人囧事,动画萌图,狗狗萌图,猫咪萌图,喵星人萌图,汪星人萌图');
+    
+        $this->channel = CHANNEL_FOCUS;
+        $data = $this->fetchChannelPosts(CHANNEL_FOCUS, param('focus_count_page'));
+        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'focus_list';
+        if (request()->getIsAjaxRequest())
+            $this->renderPartial($view, $data);
+        else
+            $this->render($view, $data);
+    }
     
     private function fetchChannelPosts($channelid, $limit = 0)
     {

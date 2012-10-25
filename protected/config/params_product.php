@@ -18,11 +18,11 @@ return array(
         
     'channels' => array(
         CHANNEL_DUANZI => '挖笑话',
-        CHANNEL_LENGTU => '挖冷图',
+        CHANNEL_LENGTU => '挖趣图',
         CHANNEL_GIRL => '挖福利',
         CHANNEL_VIDEO => '挖视频',
         CHANNEL_MUSIC => '挖音乐',
-        CHANNEL_HOTNEWS => '挖热点',
+        CHANNEL_FOCUS => '挖热点',
     ),
 
     // 默认评论是否需要审核, 1直接显示，0需要审核
