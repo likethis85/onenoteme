@@ -7,7 +7,7 @@
         <?php if ($post->videoHtml):?>
         <div class="content-block video-player"><?php echo $post->videoHtml;?></div>
         <?php elseif ($post->bmiddlePic):?>
-        <div class="content-block post-picture"><?php echo l(CHtml::image($post->bmiddlePic, $post->filterContent . ', ' . $post->getTagText(',')), aurl('post/originalpic', array('id'=>$post->id)), array('target'=>'_blank', 'title'=>$post->filterContent));?></div>
+        <div class="content-block post-picture"><?php echo l(CHtml::image($post->bmiddlePic, $post->filterContent . ', ' . $post->getTagText(',')), aurl('post/bigpic', array('id'=>$post->id)), array('target'=>'_blank', 'title'=>$post->filterContent));?></div>
         <?php endif;?>
         <!-- 详情内容下方广告位 -->
         <div class="toolbar radius3px">

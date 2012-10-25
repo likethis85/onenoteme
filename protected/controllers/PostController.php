@@ -12,7 +12,7 @@ class PostController extends Controller
                 'varyByParam' => array('id'),
             ),
             array(
-                'COutputCache + originalPic',
+                'COutputCache + bigPic',
                 'duration' => 24*60*60*7,
                 'varyByParam' => array('id'),
             ),
@@ -84,7 +84,7 @@ class PostController extends Controller
         ));
     }
     
-    public function actionOriginalPic($id)
+    public function actionBigPic($id)
     {
         $id = (int)$id;
         if ($id <= 0)

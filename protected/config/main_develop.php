@@ -99,10 +99,10 @@ return array(
             'rules' => array(
                 '/' => 'site/index',
                 '<_a:(login|signup|logout)>' => 'site/<_a>',
-                '<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',
-                '<_a:(duanzi|lengtu|girl|video)>' => 'channel/<_a>',
+                '<_a:(duanzi|lengtu|girl|video|focus)>-<page:\d+>' => 'channel/<_a>',
+                '<_a:(duanzi|lengtu|girl|video|focus)>' => 'channel/<_a>',
                 'post-<id:\d+>' => 'post/show',
-                'originalpic/<id:\d+>' => 'post/originalpic',
+                'originalpic/<id:\d+>' => 'post/bigPic',
                 'tags' => 'tag/list',
                 'tag-<name:.+>' => 'tag/posts',
                 'feed/<cid:\d+>' => 'feed/channel',
