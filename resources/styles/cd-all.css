@@ -236,9 +236,9 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 /* share box */
 .item-toolbar .sharebox {display:none; position:absolute; bottom:30px; right:0; z-index:2; backgro2und:white; width:190px; height:75px;}
 /* baidu share */
-#bdshare {height:55px; padding: 5px 5px 0 10px;box-shadow:0 1px 2px rgba(0, 0, 0, 0.2);border-radius:3px;background: #fff;border: 1px solid #a78b6f;}
-#bdshare.bds_tools a {width: 60px; text-indent: 4px;}
-#bdshare .arrow {width:9px; height:5px; display:block; position:absolute; background:url(../images/sitebg.png) no-repeat -479px -40px; margin:57px 0 0 130px; _margin:32px 0 0 -50px;}
+.sharebox #bdshare {height:55px; padding: 5px 5px 0 10px;box-shadow:0 1px 2px rgba(0, 0, 0, 0.2);border-radius:3px;background: #fff;border: 1px solid #a78b6f;}
+.sharebox #bdshare.bds_tools a {width: 60px; text-indent: 4px;}
+.sharebox #bdshare .arrow {width:9px; height:5px; display:block; position:absolute; background:url(../images/sitebg.png) no-repeat -479px -40px; margin:57px 0 0 130px; _margin:32px 0 0 -50px;}
 
 
 /* video list */
