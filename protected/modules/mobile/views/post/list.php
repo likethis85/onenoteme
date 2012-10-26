@@ -6,6 +6,7 @@
     </dt>
     <dd class="summary clearfix">
         <?php echo $model->filterSummary;?>
+        <?php if ($model->thumbnail) echo image($this->getThumbnail(), $this->title, array('class'=>'thumbnail'));?>
     </dd>
     <dd class="post-extra"><?php echo $model->authorName;?>&nbsp;|&nbsp;<?php echo $model->createTime;?></dd>
     <dd class="read-more clearfix">
