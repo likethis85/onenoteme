@@ -171,9 +171,9 @@ class Post extends CActiveRecord
 	    );
 	}
 	
-	public function getUrl()
+	public function getUrl($absolute = true)
 	{
-	    return aurl('post/show', array('id' => $this->id));
+	    return $absolute ? aurl('post/show', array('id' => $this->id)) : url('post/show', array('id' => $this->id));
 	}
 	
 	
@@ -259,7 +259,7 @@ class Post extends CActiveRecord
         return $this->user_name ? $this->user_name : user()->guestName;
     }
     
-    public function getTitleLink($target = '_blank')
+    public function getTitleLink($len = 0, $target = '_blank')
     {
         return l(h($this->title), $this->getUrl(), array('target'=>$target));
     }
