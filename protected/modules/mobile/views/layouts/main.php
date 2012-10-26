@@ -19,7 +19,7 @@
 </div>
 <footer class="clearfix">
     <a class="return-top" href="#top">返回顶部</a>
-    <a class="switch-version" href="<?php echo url('site/index', array('f'=>1));?>">切换到桌面版</a>
+    <a class="switch-version" href="<?php echo aurl('site/index', array('f'=>1));?>">切换到桌面版</a>
 </footer>
 </body>
 </html>

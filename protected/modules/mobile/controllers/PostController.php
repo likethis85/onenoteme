@@ -21,6 +21,4 @@ class PostController extends MobileController
         ));
     }
     
-    
-    
 }
