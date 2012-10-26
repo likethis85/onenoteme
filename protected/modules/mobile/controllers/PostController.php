@@ -11,11 +11,6 @@ class PostController extends MobileController
         $comments = MobileComment::model()->fetchList($id);
         $comment = new MobileCommentForm();
         $comment->post_id = $id;
-        
-        if ($post->getContainCode()) {
-            cs()->registerScriptFile(sbu('libs/prettify/prettify.js'), CClientScript::POS_END);
-            cs()->registerCssFile(sbu('libs/prettify/prettify.css'), 'screen');
-        }
 
         $this->setSiteTitle($post->title);
         cs()->registerMetaTag('all', 'robots');
