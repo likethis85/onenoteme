@@ -6,7 +6,7 @@ class PostController extends MobileController
         $id = (int)$id;
         $post = MobilePost::model()->findByPk($id);
         if ($post === null)
-            throw new CHttpException(403, t('post_is_not_found'));
+            throw new CHttpException(403, '内容不存在');
         
         $comments = MobileComment::model()->fetchList($id);
         $comment = new MobileCommentForm();
