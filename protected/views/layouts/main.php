@@ -9,10 +9,11 @@
 <link rel="shortcut icon" href="<?php echo sbu('images/favicon.ico');?>" type="image/vnd.microsoft.icon" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-basic.css');?>" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-all.css');?>" />
-<?php echo param('header_html');?>
 <script type="text/javascript">
+var _hmt = _hmt || [];
 _hmt && _hmt.push(['_setCustomVar', 1, 'login', <?php (int)!user()->isGuest;?>, 2]);
 </script>
+<?php echo param('header_html');?>
 </head>
 <body>
 <div class="cd-mini-nav">
