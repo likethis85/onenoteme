@@ -4,7 +4,10 @@
         <span class="comment-number"><?php echo l($post->comment_nums, $post->url, array('title'=>$post->title));?></span>
     </div>
     <p class="post-extra"><?php echo $post->authorName;?>&nbsp;|&nbsp;<?php echo $post->shortTime;?></p>
-    <div id="beta-post-content"><?php echo $post->filterContent;?></div>
+    <div id="beta-post-content">
+        <?php echo $post->filterContent;?>
+        <?php if ($model->bmiddlePic) echo image(image($model->bmiddlePic, $model->title, array('class'=>'bmiddle')));?>
+    </div>
     <div class="beta-create-form"><?php $this->renderPartial('/comment/_create_form', array('comment'=>$comment));?></div>
     <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'post'=>$post));?>
 </div>
