@@ -103,11 +103,27 @@ class Comment extends CActiveRecord
 	    
 	    return date($format, $this->create_time);
 	}
-	
 
 	public function getScore()
 	{
 	    return (int)($this->up_score - $this->down_score);
+	}
+	
+	public function fetchList($postid, $page = 1)
+	{
+	    $postid = (int)$postid;
+	    $criteria = new CDbCriteria();
+	    $criteria->order = 'create_time asc';
+	    $criteria->limit = param('commentCountOfPage');
+	    $offset = ($page - 1) * $criteria->limit;
+	    $criteria->offset = $offset;
+	    $criteria->addColumnCondition(array(
+            'post_id' => $postid,
+            'state' => COMMENT_STATE_ENABLED,
+	    ));
+	
+	    $comments = $this->findAll($criteria);
+	    return $comments;
 	}
 	
 	protected function beforeSave()
