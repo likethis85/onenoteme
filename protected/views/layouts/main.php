@@ -9,6 +9,10 @@
 <link rel="shortcut icon" href="<?php echo sbu('images/favicon.ico');?>" type="image/vnd.microsoft.icon" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-basic.css');?>" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-all.css');?>" />
+<?php echo param('header_html');?>
+<script type="text/javascript">
+_hmt && _hmt.push(['_setCustomVar', 1, 'login', <?php (int)!user()->isGuest;?>, 2]);
+</script>
 </head>
 <body>
 <div class="cd-mini-nav">
@@ -46,7 +50,7 @@
 <div class="cd-wrapper">
 	<?php echo $content;?>
 </div>
-
+<?php echo param('footer_before_html');?>
 <div class="cd-footer">
     <div class="cd-wrapper">
     	<p class="fleft">内容版权所有 ©2011-2012 <a href="<?php echo app()->homeUrl;?>">waduanzi.com</a>&nbsp;&nbsp;冀ICP备12006196号-5&nbsp;&nbsp;

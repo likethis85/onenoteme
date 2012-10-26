@@ -10,6 +10,8 @@ var Waduanzi = {
 	},
 	RatingPost: function(event){
 		event.preventDefault();
+		_hmt && _hmt.push(['_trackEvent', '文章评价按钮', '点击']);
+		
 		var tthis = $(this);
 		var pid = parseInt(tthis.attr('data-id'));
 		var score = parseInt(tthis.attr('data-value'));
@@ -59,6 +61,8 @@ var Waduanzi = {
 	},
 	RatingComment: function(event){
 		event.preventDefault();
+		_hmt && _hmt.push(['_trackEvent', '评论评价按钮', '点击']);
+		
 		var tthis = $(this);
 		var pid = parseInt(tthis.attr('data-id'));
 		var score = parseInt(tthis.attr('data-value'));
@@ -161,6 +165,8 @@ Waduanzi.initDialog = function(){
 
 Waduanzi.switchImageSize = function(event){
     event.preventDefault();
+    _hmt && _hmt.push(['_trackEvent', '图片', '缩略图与大图切换点击']);
+    
     var itemDiv = $(this).parents('.post-item');
     itemDiv.find('.post-image .thumbnail-more').toggle();
     itemDiv.find('.post-image .thumbnail a .thumb').toggle();
@@ -173,6 +179,8 @@ Waduanzi.switchImageSize = function(event){
 
 Waduanzi.postUpDownScore = function(event){
 	event.preventDefault();
+	_hmt && _hmt.push(['_trackEvent', '文章评价按钮', '点击']);
+	
 	//$('#quick-login').dialog('open');
 	var tthis = $(this);
 	var itemDiv = tthis.parents('.post-item');
@@ -230,6 +238,7 @@ Waduanzi.fixedAdBlock = function() {
 
 Waduanzi.showShareBox = function(event) {
 	event.preventDefault();
+	_hmt && _hmt.push(['_trackEvent', '分享列表', '显示']);
 	
 	var bdshare = $(this).parents('.item-toolbar').find('#bdshare');
 	if (bdshare.attr('data').length == 0) {
@@ -243,8 +252,11 @@ Waduanzi.showShareBox = function(event) {
 	}
 	$(this).parents('.item-toolbar').find('.sharebox:hidden').stop(true, true).delay(50).show();
 };
+
 Waduanzi.hideShareBox = function(event) {
 	event.preventDefault();
+	_hmt && _hmt.push(['_trackEvent', '分享列表', '隐藏']);
+	
 	$(this).parents('.item-toolbar').find('.sharebox:visible').stop(true, true).delay(50).hide();
 };
 
