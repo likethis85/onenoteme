@@ -10,7 +10,7 @@
     <dd class="post-extra"><?php echo $model->authorName;?>&nbsp;|&nbsp;<?php echo $model->createTime;?></dd>
     <dd class="read-more clearfix">
         <a href="<?php echo $model->url;?>">
-            <span><?php echo t('read_full_text', 'mobile');?></span>
+            <span>阅读全文</span>
             <span class="pull-right">&gt;</span>
         </a>
     </dd>

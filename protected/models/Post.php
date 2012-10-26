@@ -28,6 +28,10 @@
  * @property string $original_width
  * @property string $original_height
  * @property string $weibo_id
+ * @property integer $istop
+ * @property integer $homeshow
+ * @property integer $recommend
+ * @property integer $hottest
  * @property string $url
  * @property string $filterContent
  * @property integer $score
@@ -82,13 +86,13 @@ class Post extends CActiveRecord
 		// will receive user inputs.
 		return array(
 		    array('content', 'required', 'message'=>'段子内容必须填写'),
-			array('channel_id, view_nums, up_score, down_score, comment_nums, state, create_time, user_id, thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height', 'numerical', 'integerOnly'=>true),
+			array('channel_id, view_nums, up_score, down_score, comment_nums, state, create_time, user_id, thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height, istop, homeshow, recommend, hottest', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
 			array('weibo_id', 'length', 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
 			array('title, tags', 'length', 'max'=>250),
 			array('content, thumbnail_pic, bmiddle_pic, original_pic', 'safe'),
-		    array('thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height', 'filter', 'filter'=>'intval'),
+		    array('thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height, istop, homeshow, recommend, hottest', 'filter', 'filter'=>'intval'),
 		);
 	}
 
@@ -131,7 +135,37 @@ class Post extends CActiveRecord
     		'bmiddle_height' => '大图高度',
     		'original_width' => '原图宽度',
     		'original_height' => '原图调度',
+	        'istop' => '置顶',
+	        'homeshow' => '首页显示',
+	        'recommend' => '推荐',
+	        'hottest' => '热门',
 		);
+	}
+	
+
+	public function scopes()
+	{
+	    return array(
+            'homeshow' => array(
+                'condition' => 't.homeshow = ' . CD_YES,
+            ),
+            'published' => array(
+                'condition' => 't.state = ' . POST_STATE_ENABLED,
+            ),
+            'hottest' => array(
+                'condition' => 't.hottest = ' . CD_YES,
+                'order' => 't.create_time desc',
+            ),
+            'recommend' => array(
+                'condition' => 't.recommend = ' . CD_YES,
+                'order' => 't.create_time desc',
+            ),
+            'recently' => array(
+                'condition' => 't.state = ' . POST_STATE_ENABLED,
+                'order' => 't.create_time desc',
+                'limit' => 10,
+            ),
+	    );
 	}
 	
 	public function getUrl()

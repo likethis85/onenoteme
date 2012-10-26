@@ -18,8 +18,8 @@
 <?php echo $content;?>
 </div>
 <footer class="clearfix">
-    <a class="return-top" href="#top"><?php echo t('return_top', 'mobile');?></a>
-    <a class="switch-version" href="<?php echo url('site/index', array('f'=>1));?>"><?php echo t('switch_desktop_version', 'mobile');?></a>
+    <a class="return-top" href="#top">返回顶部</a>
+    <a class="switch-version" href="<?php echo url('site/index', array('f'=>1));?>">切换到桌面版</a>
 </footer>
 </body>
 </html>

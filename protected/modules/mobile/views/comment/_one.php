@@ -1,12 +1,14 @@
 <?php foreach ((array)$comments as $comment):?>
 <dl class="beta-comment-item">
-    <dt class="beta-post-extra"><span><?php echo t('comment_extra', 'main', array('{floor}'=>'x', '{author}'=>$comment->authorName, '{time}'=>$comment->createTime));?></span></dt>
+    <dt class="beta-post-extra"><strong><?php echo $comment->authorName;?></strong>&nbsp;发表于&nbsp;<?php echo $comment->createTime;?></dt>
     <dd class="beta-comment-content"><?php echo $comment->filterContent;?></dd>
     <dd class="beta-comment-toolbar">
-        <a class="beta-comment-reply" href="javascript:void(0);" data-url="<?php echo $comment->replyUrl;?>" rel="nofollow"><?php echo t('reply_comment');?></a>
-        <a class="beta-comment-rating" href="javascript:void(0);" data-url="<?php echo $comment->supportUrl;?>" rel="nofollow"><?php echo t('support_comment', 'main', array($comment->up_nums));?></a>
-        <a class="beta-comment-rating" href="javascript:void(0);" data-url="<?php echo $comment->againstUrl;?>" rel="nofollow"><?php echo t('against_comment', 'main', array($comment->down_nums));?></a>
-        <a class="beta-comment-rating" href="javascript:void(0);" data-url="<?php echo $comment->reportUrl;?>" rel="nofollow"><?php echo t('report_comment');?></a>
+        <?php if (!$post->disable_comment):?>
+        <a class="beta-comment-reply" href="javascript:void(0);" data-url="<?php echo $comment->replyUrl;?>" rel="nofollow">回复</a>
+        <?php endif;?>
+        <a class="beta-comment-rating" href="javascript:void(0);" data-url="<?php echo $comment->supportUrl;?>" rel="nofollow">支持(<span class="beta-comment-join-nums"><?php echo $comment->up_nums;?></span>)</a>
+        <a class="beta-comment-rating" href="javascript:void(0);" data-url="<?php echo $comment->againstUrl;?>" rel="nofollow">反对(<span class="beta-comment-join-nums"><?php echo $comment->down_nums;?></span></a>
+        <a class="beta-comment-rating" href="javascript:void(0);" data-url="<?php echo $comment->reportUrl;?>" rel="nofollow">举报</a>
     </dd>
 </dl>
 <?php endforeach;?>

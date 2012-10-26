@@ -24,7 +24,7 @@ class DefaultController extends MobileController
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->order = 't.istop desc, t.create_time desc';
-	    $criteria->limit = param('postCountOfPage');
+	    $criteria->limit = param('mobile_post_list_page_count');
 	    $criteria->scopes = array('homeshow', 'published');
 	
 	    $count = MobilePost::model()->count($criteria);

@@ -15,10 +15,10 @@
 </div>
 
 <div class="hide ajax-jsstr">
-    <span class="ajax-send"><?php echo t('ajax_send');?></span>
-    <span class="ajax-fail"><?php echo t('ajax_fail');?></span>
-    <span class="ajax-rules-invalid"><?php echo t('ajax_comment_rules_invalid');?></span>
-    <span class="ajax-has-joined"><?php echo t('you_have_joined');?></span>
+    <span class="ajax-send">发送数据中...</span>
+    <span class="ajax-fail">请求错误.</span>
+    <span class="ajax-rules-invalid">请输入评论内容和验证码后再发布</span>
+    <span class="ajax-has-joined">您已经参与过了，谢谢</span>
 </div>
 
 <script type="text/javascript">

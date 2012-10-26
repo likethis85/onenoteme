@@ -1,6 +1,6 @@
 <?php
 
-class CategoryController extends MobileController
+class ChannelController extends MobileController
 {
 	public function actionPosts($id)
 	{
@@ -17,9 +17,9 @@ class CategoryController extends MobileController
 	    $id = (int)$id;
 	    $criteria = new CDbCriteria();
 	    $criteria->order = 't.istop desc, t.create_time desc';
-	    $criteria->limit = param('postCountOfPage');
+	    $criteria->limit = param('mobile_post_list_page_count');
 	    $criteria->scopes = array('published');
-	    $criteria->addColumnCondition(array('category_id' => $id));
+	    $criteria->addColumnCondition(array('channel_id' => $id));
 	
 	    $count = MobilePost::model()->count($criteria);
 	    $pages = new CPagination($count);

@@ -1,28 +1,28 @@
 <div class="beta-comments">
     <div class="alert beta-alert beta-alert-message" id="beta-comment-message" data-dismiss="alert"><a class="close" href="javascript:void(0);">&times;</a><span class="text"></span></div>
-    <div class="beta-mini-title" id="beta-comment-list"><?php echo t('comment_list');?></div>
+    <div class="beta-mini-title" id="beta-comment-list">评论列表</div>
     <?php foreach ((array)$comments as $key => $comment):?>
     <dl class="beta-comment-item">
-        <dt class="beta-post-extra"><?php echo t('mobile_comment_extra', 'mobile', array('{author}'=>$comment->authorName, '{time}'=>$comment->createTime));?></dt>
+        <dt class="beta-post-extra"><strong><?php echo $comment->authorName;?></strong>&nbsp;发表于&nbsp;<?php echo $comment->createTime;?></dt>
         <dd class="beta-comment-content"><?php echo $comment->filterContent;?></dd>
         <dd class="beta-comment-toolbar">
             <?php if (!$post->disable_comment):?>
-            <a class="beta-comment-reply" href="javascript:void(0);" data-url="<?php echo $comment->replyUrl;?>" rel="nofollow"><?php echo t('reply_comment');?></a>
+            <a class="beta-comment-reply" href="javascript:void(0);" data-url="<?php echo $comment->replyUrl;?>" rel="nofollow">回复</a>
             <?php endif;?>
-            <a class="beta-comment-rating" href="javascript:void(0);" data-url="<?php echo $comment->supportUrl;?>" rel="nofollow"><?php echo t('support_comment', 'main', array($comment->up_nums));?></a>
-            <a class="beta-comment-rating" href="javascript:void(0);" data-url="<?php echo $comment->againstUrl;?>" rel="nofollow"><?php echo t('against_comment', 'main', array($comment->down_nums));?></a>
-            <a class="beta-comment-rating" href="javascript:void(0);" data-url="<?php echo $comment->reportUrl;?>" rel="nofollow"><?php echo t('report_comment');?></a>
+            <a class="beta-comment-rating" href="javascript:void(0);" data-url="<?php echo $comment->supportUrl;?>" rel="nofollow">支持(<span class="beta-comment-join-nums"><?php echo $comment->up_nums;?></span>)</a>
+            <a class="beta-comment-rating" href="javascript:void(0);" data-url="<?php echo $comment->againstUrl;?>" rel="nofollow">反对(<span class="beta-comment-join-nums"><?php echo $comment->down_nums;?></span></a>
+            <a class="beta-comment-rating" href="javascript:void(0);" data-url="<?php echo $comment->reportUrl;?>" rel="nofollow">举报</a>
         </dd>
     </dl>
     <?php endforeach;?>
     
     <?php if (count($comments) === 0):?>
-    <div class="beta-no-comments"><?php echo t('have_no_comments');?></div>
+    <div class="beta-no-comments">当前暂无评论</div>
     <?php endif;?>
 </div>
 
 <?php if ($post->comment_nums > count($comments)):?>
-<button data-page="1" id="load-more-comments" type="button" data-toggle="toggle" data-url="<?php echo $post->commentsUrl;?>" class="btn btn-block btn-inverse"><?php echo t('load_more_comments', 'mobile');?></button>
+<button data-page="1" id="load-more-comments" type="button" data-toggle="toggle" data-url="<?php echo $post->commentsUrl;?>" class="btn btn-block btn-inverse">载入更多评论</button>
 <?php endif;?>
 
 <script type="text/javascript">
