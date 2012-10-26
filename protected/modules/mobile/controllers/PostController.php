@@ -21,4 +21,11 @@ class PostController extends MobileController
         ));
     }
     
+    public function actionViews($callback)
+    {
+        $id = (int)$_POST['id'];
+        $counters = array('view_nums' => 1);
+        $result = Post::model()->updateCounters($counters, 'id = :postid', array(':postid' => $id));
+        CDBase::jsonp($callback, $result);
+    }
 }

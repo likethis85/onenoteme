@@ -15,14 +15,14 @@ class CommentController extends MobileController
         $model->content = h($model->content);
     
         if ($id > 0 && $quote = Comment::model()->findByPk($id)) {
-            $quoteTitle = sprintf(t('comment_quote_title'), $quote->authorName);
-            $html = '<fieldset class="beta-comment-quote"><legend>' . $quoteTitle . '</legend>' . $quote->content . '</fieldset>';
+            $quoteTitle = sprintf('', $quote->authorName);
+            $html = sprintf('<fieldset class="beta-comment-quote"><legend>引用%s的评论:</legend></fieldset>', $quoteTitle, $quote->content);
             $model->content = $html . $model->content;
         }
     
         if ($model->validate() && ($comment = $model->save())) {
             $data['errno'] = 0;
-            $data['text'] = t('ajax_comment_done');
+            $data['text'] = '评论成功';
             $data['html'] = $this->renderPartial('/comment/_one', array('comments'=>array($comment)), true); // @todo 反回此条评论的html代码
         }
         else {
@@ -31,7 +31,7 @@ class CommentController extends MobileController
             foreach ($attributes as $attribute)
                 $labels[] = $model->getAttributeLabel($attribute);
             $errstr = join(' ', $labels);
-            $data['text'] = sprintf(t('ajax_comment_error'), $errstr);
+            $data['text'] = sprintf('评论失败, %s不正确', $errstr);
         }
         echo $callback . '(' . json_encode($data) . ')';
         exit(0);
@@ -45,12 +45,12 @@ class CommentController extends MobileController
         
         $post = MobilePost::model()->findByPk($pid);
         if ($post === null)
-            throw new CHttpException(403, t('post_is_not_found'));
+            throw new CHttpException(403, '请求的内容不存在');
         
         $comments = MobileComment::model()->fetchList($pid, $page);
         
         $data['errno'] = 0;
-        $data['text'] = t('ajax_comment_done');
+        $data['text'] = '评论成功';
         $data['html'] = $this->renderPartial('/comment/_one', array('comments'=>$comments, 'post'=>$post), true);
         
         echo $callback . '(' . json_encode($data) . ')';
