@@ -87,7 +87,7 @@ return array(
                 'http://m.waduanzi.com/<_c>' => 'mobile/<_c>',
                 'http://m.waduanzi.com/<_c>/<_a>' => 'mobile/<_c>/<_a>',
                     
-                '/' => 'site/index',
+                'http://www.waduanzi.com/' => 'site/index',
                 '<_a:(login|signup|logout)>' => 'site/<_a>',
                 '<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',
                 '<_a:(duanzi|lengtu|girl|video)>' => 'channel/<_a>',
