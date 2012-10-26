@@ -21,7 +21,7 @@
 
 <script type="text/javascript">
 $(function(){
-	BetaPost.increaseVisitNums(<?php echo $post->id;?>, '<?php echo aurl('post/visit');?>');
+	BetaPost.increaseVisitNums(<?php echo $post->id;?>, '<?php echo aurl('mobile/post/views');?>');
 });
 </script>
 
