@@ -91,7 +91,7 @@ class Comment extends CActiveRecord
 	
 	public function getFilterContent()
 	{
-	    return strip_tags(trim($this->content));
+	    return strip_tags(trim($this->content), '<fieldset><legend>');
 	}
 	
 	public function getCreateTime($format = '')
