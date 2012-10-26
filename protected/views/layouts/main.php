@@ -11,7 +11,7 @@
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-all.css');?>" />
 <script type="text/javascript">
 var _hmt = _hmt || [];
-_hmt && _hmt.push(['_setCustomVar', 1, 'login', <?php (int)!user()->isGuest;?>, 2]);
+_hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;?>, 2]);
 </script>
 <?php echo param('header_html');?>
 </head>
