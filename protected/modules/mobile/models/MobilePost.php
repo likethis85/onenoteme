@@ -25,7 +25,7 @@ class MobilePost extends Post
     
     public function getFilterSummary()
     {
-        $tags = param('mobileSummaryHtmlTags');
+        $tags = param('mobile_summary_html_tags');
         $html = strip_tags($this->summary, $tags);
          
         return $html;

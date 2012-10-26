@@ -33,6 +33,7 @@
  * @property integer $recommend
  * @property integer $hottest
  * @property string $url
+ * @property string $filterSummary
  * @property string $filterContent
  * @property integer $score
  * @property string $downScore
@@ -171,6 +172,17 @@ class Post extends CActiveRecord
 	public function getUrl()
 	{
 	    return aurl('post/show', array('id' => $this->id));
+	}
+	
+	
+	public function getSummary()
+	{
+	    return $this->content;
+	}
+	
+	public function getFilterSummary()
+	{
+	    return nl2br(strip_tags($this->summary, param('summary_html_tags')));
 	}
 	
 	public function getFilterContent()

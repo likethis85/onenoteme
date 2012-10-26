@@ -27,6 +27,10 @@ return array(
 
     // 默认评论是否需要审核, 1直接显示，0需要审核
     'defaultNewCommentState' => 1,
+        
+    // 简述中可以使用的html标签
+    'summary_html_tags' => '<b><strong><img><p>',
+    'mobile_summary_html_tags' => '<img>',
     
     // default param and value
     'post_list_type' => 0,
