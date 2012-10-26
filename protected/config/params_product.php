@@ -25,6 +25,9 @@ return array(
         CHANNEL_FOCUS => '挖热点',
     ),
 
+    /*
+     * 前台相关参数
+    */
     // 默认评论是否需要审核, 1直接显示，0需要审核
     'defaultNewCommentState' => 1,
         
@@ -59,6 +62,7 @@ return array(
     'duanzi_count_page' => 20,
     'lengtu_count_page' => 15,
     'girl_count_page' => 10,
+    'focus_count_page' => 10,
     'commentCountOfPage' => 20,
 
     'user_required_email_verfiy' => 0,

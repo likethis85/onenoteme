@@ -41,6 +41,8 @@
  * @property string $tagText
  * @property string $tagLinks
  * @property string $createTime
+ * @property string $shortDate
+ * @property string $shortTime
  * @property string $authorName
  * @property string $titleLink
  * @property string $bmiddlePic
@@ -235,6 +237,22 @@ class Post extends CActiveRecord
         $format = $format ? $format : param('formatDateTime');
         return date($format, $this->create_time);
     }
+    
+
+    public function getShortDate()
+    {
+        $format = param('formatShortDate');
+         
+        return $this->getCreateTime($format);
+    }
+    
+    public function getShortTime()
+    {
+        $format = param('formatShortTime');
+         
+        return $this->getCreateTime($format);
+    }
+    
     
     public function getAuthorName()
     {
