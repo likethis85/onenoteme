@@ -132,7 +132,7 @@ class Comment extends CActiveRecord
 	        $this->create_time = $_SERVER['REQUEST_TIME'];
 	        $this->create_ip = CDBase::getClientIp();
 	    }
-	    $this->content = strip_tags(trim($this->content));
+	    $this->content = strip_tags(trim($this->content), '<fieldset><legend>');
 	    
 	    return true;
 	}
