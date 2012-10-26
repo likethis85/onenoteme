@@ -16,7 +16,7 @@ class CommentController extends MobileController
     
         if ($id > 0 && $quote = Comment::model()->findByPk($id)) {
             $quoteTitle = sprintf('', $quote->authorName);
-            $html = sprintf('<fieldset class="beta-comment-quote"><legend>引用%s的评论:</legend></fieldset>', $quoteTitle, $quote->content);
+            $html = sprintf('<fieldset class="beta-comment-quote"><legend>引用%s的评论:</legend>%s</fieldset>', $quoteTitle, $quote->content);
             $model->content = $html . $model->content;
         }
     
