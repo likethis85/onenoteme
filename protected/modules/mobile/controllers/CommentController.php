@@ -56,4 +56,39 @@ class CommentController extends MobileController
         echo $callback . '(' . json_encode($data) . ')';
         exit(0);
     }
+
+    public function actionSupport($id, $callback)
+    {
+        self::rating('up_score', $id, $callback);
+        exit(0);
+    }
+    
+    public function actionAgainst($id, $callback)
+    {
+        self::rating('down_score', $id, $callback);
+        exit(0);
+    }
+    
+
+    private static function rating($field, $id, $callback)
+    {
+//         sleep(2);
+        $id = (int)$id;
+        $callback = strip_tags(trim($callback));
+        $field = strip_tags(trim($field));
+        if (!request()->getIsAjaxRequest() || !request()->getIsPostRequest() || $id <= 0)
+            throw new CHttpException(500);
+    
+        $counters = array($field => 1);
+        try {
+            $nums = Comment::model()->updateCounters($counters, 'id = :commentid', array(':commentid'=>$id));
+            $data['errno'] = (int)($nums === 0);
+            $data['text'] = ($nums === 0) ? '评论出错' : '感谢您的参与';
+            echo $callback . '(' . json_encode($data) . ')';
+            exit(0);
+        }
+        catch (Exception $e) {
+            throw new CHttpException(500);
+        }
+    }
 }

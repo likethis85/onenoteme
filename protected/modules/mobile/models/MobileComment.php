@@ -14,4 +14,14 @@ class MobileComment extends Comment
     {
         return aurl('mobile/comment/create', array('id'=>$this->id));
     }
+    
+    public function getSupportUrl()
+    {
+        return aurl('mobile/comment/support', array('id'=>$this->id));
+    }
+    
+    public function getAgainstUrl()
+    {
+        return aurl('mobile/comment/against', array('id'=>$this->id));
+    }
 }
