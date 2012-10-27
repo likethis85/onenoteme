@@ -7,6 +7,7 @@ a:hover {color:#D14836; text-decoration:none;}
 .beta-alert {font-size:12px; margin:1px; padding:4px 35px 4px 10px;}
 .beta-alert .close {top:-1px; right:-25px;}
 .clear {display:block; clear:both; font-size:0px; width:100%; height:0px; line-height:0px;}
+.bottom10px {margin-bottom:10px!important;}
 
 header {background:black; overflow:hidden; margin-bottom:10px;}
 header h1 {margin:0;}
@@ -46,7 +47,8 @@ h1.post-title a:hover {color:#D14836;}
 
 /* post/show */
 #beta-post-content {font-size:14px; line-height:24px; margin:10px 0; word-wrap:break-word; overflow:hidden;}
-#beta-post-content img {margin-left:auto; margin-right:auto;}
+#beta-post-content img {margin:10px auto;}
+#beta-post-content .bmiddle {display:block;}
 #beta-post-content p, #beta-post-content {margin-bottom:18px;}
 #beta-post-content blockquote {padding: 10px; background:#EFEFEF; color:#555; font-size:14px; margin:15px 10px; border-radius:3px;}
 #beta-post-content blockquote p {font-size:14px;}
