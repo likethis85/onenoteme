@@ -303,7 +303,7 @@ class Api_Post extends ApiBase
     	$post->original_pic = $params['pic'];
     	var_dump($params);
     	try {
-    		$result = $post->save();var_dump($post->getErrors());
+    		$result = $post->save();var_dump($post->getErrors());var_dump($result);
     		$result = $result && $post->saveRemoteImages();
     		return (int)$result;
     	}
