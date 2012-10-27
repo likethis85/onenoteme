@@ -301,8 +301,8 @@ class Api_Post extends ApiBase
     	$post->view_nums = mt_rand(100, 300);
     	$post->thumbnail_pic = $post->bmiddle_pic = '';
     	$post->original_pic = $params['pic'];
-    	var_dump($params);
-    	try {
+    	
+    	try {var_dump($post);
     		$result = $post->save();var_dump($post->getErrors());var_dump($result);
     		$result = $result && $post->saveRemoteImages();
     		return (int)$result;
