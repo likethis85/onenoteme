@@ -301,12 +301,14 @@ class Api_Post extends ApiBase
     	$post->view_nums = mt_rand(100, 300);
     	$post->thumbnail_pic = $post->bmiddle_pic = '';
     	$post->original_pic = $params['pic'];
-    	
+    	var_dump($params);
     	try {
-    		$result = $post->save() && $post->saveRemoteImages();
+    		$result = $post->save();var_dump($post->getErrors());
+    		$result = $result && $post->saveRemoteImages();
     		return (int)$result;
     	}
     	catch (ApiException $e) {
+    	    echo $e->getMessage();
     		throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
     	}
     }
