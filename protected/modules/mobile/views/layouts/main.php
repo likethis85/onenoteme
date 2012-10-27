@@ -12,9 +12,10 @@
 <body>
 <noscript><div id="noscript"><h2>Notice</h2><p>JavaScript is currently off.</p><p>Turn it on in browser settings to view this mobile website.</p></div></noscript>
 <header>
-    <a href="<?php echo $this->homeUrl;?>"><?php echo app()->name;?></a>
+    <h1><a href="<?php echo $this->homeUrl;?>"><?php echo app()->name;?></a></h1>
 </header>
 <div class="beta-container">
+<p><a href="<?php echo aurl('wap/index');?>">喜欢旧版？好吧，这是入口。</a></p>
 <?php echo $content;?>
 </div>
 <footer class="clearfix">
