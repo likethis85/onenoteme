@@ -48,6 +48,6 @@ $(function(){
 	}
 });
 </script>
-<?php $this->renderPartial('/public/tongji');?>
+<?php echo param('tongji_code');?>
 </body>
 </html>
