@@ -289,7 +289,7 @@ class Api_Post extends ApiBase
 //        	$this->requireLogin();
     	$this->requiredParams(array('content', 'token', 'channel_id'));
     	$params = $this->filterParams(array('content', 'tags', 'channel_id', 'category_id', 'pic', 'token'));
-    	
+    	try {
     	$post = new Post();
     	$post->channel_id = (int)$params['channel_id'];
     	$post->content = $params['content'];
@@ -302,7 +302,7 @@ class Api_Post extends ApiBase
     	$post->thumbnail_pic = $post->bmiddle_pic = '';
     	$post->original_pic = $params['pic'];
     	
-    	try {
+    	
     		$result = $post->save() && $post->saveRemoteImages();
     		var_dump($post->getErrors());
     		return (int)$result;
