@@ -9,7 +9,8 @@ a:hover {color:#D14836; text-decoration:none;}
 .clear {display:block; clear:both; font-size:0px; width:100%; height:0px; line-height:0px;}
 
 header {background:black; overflow:hidden; margin-bottom:10px;}
-header a {height:60px; line-height:60px; font-size:30px; display:block; margin-left:10px;}
+header h1 {margin:0;}
+header a {height:50px; line-height:50px; font-size:30px; display:block; margin-left:10px; color:white; font-weight:bold;}
 footer {font-size:14px; margin:20px 0 0; position:relative; background:#AAAAAA;}
 footer a {display:block; padding:10px 15px;}
 footer a:link, footer a:hover, footer a:visited {color:white;}
@@ -83,6 +84,7 @@ h1.post-title a:hover {color:#D14836;}
 .help-block.success {color:#468847;}
 #load-more-comments {margin-top:10px;}
 
-
+/* old access link */
+.old-link {font-size:14px; text-align:center;}
 
 
