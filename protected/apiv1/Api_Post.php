@@ -302,13 +302,11 @@ class Api_Post extends ApiBase
     	$post->thumbnail_pic = $post->bmiddle_pic = '';
     	$post->original_pic = $params['pic'];
     	
-    	try {var_dump($post);
-    		$result = $post->save();var_dump($post->getErrors());var_dump($result);
-    		$result = $result && $post->saveRemoteImages();
+    	try {
+    		$result = $post->save() && $post->saveRemoteImages();
     		return (int)$result;
     	}
     	catch (ApiException $e) {
-    	    echo $e->getMessage();
     		throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
     	}
     }
