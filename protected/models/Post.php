@@ -259,9 +259,19 @@ class Post extends CActiveRecord
         return $this->user_name ? $this->user_name : user()->guestName;
     }
     
-    public function getTitleLink($len = 0, $target = '_blank')
+    public function getSubTitle($len = 35)
     {
-        return l(h($this->title), $this->getUrl(), array('target'=>$target));
+        $title = $this->title;
+        if ($len > 0)
+            $title = mb_strimwidth($title, 0, $len, '...', app()->charset);
+        
+        return $title;
+    }
+    
+    public function getTitleLink($len = 35, $target = '_blank')
+    {
+        $title = $this->getSubTitle($len);
+        return l(h($title), $this->getUrl(), array('target'=>$target));
     }
     
     public function getBmiddlePic()
