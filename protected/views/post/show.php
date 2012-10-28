@@ -29,7 +29,6 @@
                     <a class="bds_tqq"></a>
                     <a class="bds_renren"></a>
                     <a class="bds_douban"></a>
-                    <span class="bds_more"></span>
                 </div>
                 <!-- Baidu Button END -->
             </div>
