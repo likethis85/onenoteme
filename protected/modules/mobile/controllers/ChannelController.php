@@ -2,6 +2,17 @@
 
 class ChannelController extends MobileController
 {
+    public function filters()
+    {
+        return array(
+            array(
+                'COutputCache + posts',
+                'duration' => param('mobile_post_list_cache_expire'),
+                'varyByParam' => array('id', 'page'),
+            ),
+        );
+    }
+    
 	public function actionIndex($id, $page = 1)
 	{
 	    $this->redirect(url('mobile/channel/posts', array('id'=>$id, 'page'=>$page)));

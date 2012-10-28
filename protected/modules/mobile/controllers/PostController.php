@@ -1,6 +1,17 @@
 <?php
 class PostController extends MobileController
 {
+    public function filters()
+    {
+        return array(
+            array(
+                'COutputCache + show',
+                'duration' => param('mobile_post_show_cache_expire'),
+                'varyByParam' => array('id'),
+            ),
+        );
+    }
+    
     public function actionShow($id)
     {
         $id = (int)$id;

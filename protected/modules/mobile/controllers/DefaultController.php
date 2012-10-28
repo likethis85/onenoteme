@@ -2,6 +2,17 @@
 
 class DefaultController extends MobileController
 {
+    public function filters()
+    {
+        return array(
+            array(
+                'COutputCache + index',
+                'duration' => 120,
+                'varyByParam' => array('page'),
+            ),
+        );
+    }
+    
 	public function actionIndex()
 	{
 	    $data = self::fetchLatestPosts();
@@ -41,3 +52,5 @@ class DefaultController extends MobileController
 	    );
 	}
 }
+
+

@@ -1,6 +1,19 @@
 <?php
 class CommentController extends MobileController
 {
+    public function filters()
+    {
+        return array(
+            'ajaxOnly + create, supprt, against, rating',
+            'postOnly + create, supprt, against, rating',
+            array(
+                'COutputCache + list',
+                'duration' => param('mobile_comment_list_cache_expire'),
+                'varyByParam' => array('pid', 'page'),
+            ),
+        );
+    }
+    
     public function actionCreate($callback, $id = 0)
     {
         $id = (int)$id;

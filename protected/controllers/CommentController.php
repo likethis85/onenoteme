@@ -4,8 +4,8 @@ class CommentController extends Controller
     public function filters()
     {
         return array(
-            'ajaxOnly + create',
-            'postOnly + create',
+            'ajaxOnly + create, score',
+            'postOnly + create, score',
         );
     }
     

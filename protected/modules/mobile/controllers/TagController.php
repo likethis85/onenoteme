@@ -1,6 +1,17 @@
 <?php
 class TagController extends MobileController
 {
+    public function filters()
+    {
+        return array(
+            array(
+                'COutputCache + posts',
+                'duration' => param('mobile_post_list_cache_expire'),
+                'varyByParam' => array('name', 'page'),
+            ),
+        );
+    }
+    
     public function actionIndex($name, $page = 1)
     {
         $this->redirect(url('mobile/tag/posts', array('name'=>$name, 'page'=>$page)));
@@ -9,7 +20,6 @@ class TagController extends MobileController
     
     public function actionPosts($name, $page = 1)
     {
-        $duration = 60 * 60 *24;
         $limit = 10;
         $name = urldecode($name);
         
@@ -22,11 +32,11 @@ class TagController extends MobileController
         if ($tagID === false)
             throw new CHttpException(403, "当前还没有与{$name}标签有关的段子");
         
-        $count = app()->getDb()->cache($duration)->createCommand()
-        ->select('count(*)')
-        ->from(TABLE_POST_TAG)
-        ->where('tag_id = :tagid', array(':tagid' => $tagID))
-        ->queryScalar();
+        $count = app()->getDb()->createCommand()
+            ->select('count(*)')
+            ->from(TABLE_POST_TAG)
+            ->where('tag_id = :tagid', array(':tagid' => $tagID))
+            ->queryScalar();
         
         $pages = new CPagination($count);
         $pages->setPageSize($limit);
