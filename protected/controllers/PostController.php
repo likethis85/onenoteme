@@ -74,9 +74,9 @@ class PostController extends Controller
         $this->setKeywords($pageKeyword);
         $this->setDescription($post->content);
         
-        $shareData = sprintf('{"text":"%s"}', $post->title);
+        $shareData = sprintf("{'text':'%s'}", $post->title);
         if ($post->bmiddlePic)
-            $shareData = sprintf('{"text":"%s", "pic":"%s"}', $post->title, $post->bmiddlePic);
+            $shareData = sprintf("{'text':'%s', 'pic':'%s'}", $post->title, $post->bmiddlePic);
         $this->channel = (int)$post->channel_id;
         $this->render('show', array(
             'post' => $post,
