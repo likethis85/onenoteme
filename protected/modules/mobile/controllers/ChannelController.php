@@ -2,7 +2,7 @@
 
 class ChannelController extends MobileController
 {
-	public function actionPosts($id)
+	public function actionIndex($id)
 	{
 	    $id = (int)$id;
 	    $data = self::fetchLatestPosts($id);
