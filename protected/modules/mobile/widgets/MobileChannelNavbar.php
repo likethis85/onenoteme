@@ -1,10 +1,10 @@
 <?php
-class BetaCategoryNavbar extends CWidget
+class MobileChannelNavbar extends CWidget
 {
     public function run()
     {
         $channels = param('channels');
-        $this->render('category_navbar', array(
+        $this->render('channel_navbar', array(
             'channels' => $channels,
         ));
     }

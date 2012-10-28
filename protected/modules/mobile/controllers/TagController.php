@@ -1,7 +1,13 @@
 <?php
 class TagController extends MobileController
 {
-    public function actionIndex($name)
+    public function actionIndex($name, $page = 1)
+    {
+        $this->redirect(url('mobile/tag/posts', array('name'=>$name, 'page'=>$page)));
+    }
+    
+    
+    public function actionPosts($name, $page = 1)
     {
         $duration = 60 * 60 *24;
         $limit = 10;
@@ -51,3 +57,4 @@ class TagController extends MobileController
         ));
     }
 }
+

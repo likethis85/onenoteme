@@ -2,7 +2,12 @@
 
 class ChannelController extends MobileController
 {
-	public function actionIndex($id)
+	public function actionIndex($id, $page = 1)
+	{
+	    $this->redirect(url('mobile/channel/posts', array('id'=>$id, 'page'=>$page)));
+	}
+	
+	public function actionPosts($id)
 	{
 	    $id = (int)$id;
 	    $data = self::fetchLatestPosts($id);
