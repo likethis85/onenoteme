@@ -23,7 +23,7 @@
             </div>
             <div class="content-block social fright">
                 <!-- Baidu Button BEGIN -->
-                <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare">
+                <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare" data="<?php echo $shareData;?>">
                     <a class="bds_qzone"></a>
                     <a class="bds_tsina"></a>
                     <a class="bds_tqq"></a>
