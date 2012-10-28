@@ -76,8 +76,8 @@ return array(
 
     /* cache setting */
     'mobile_post_list_cache_expire' => 60 * 60,
-    'mobile_comment_list_cache_expire' => 5,
-    'mobile_post_show_cache_expire' => 60 * 60 * 24,
+    'mobile_comment_list_cache_expire' => 10,
+    'mobile_post_show_cache_expire' => 10,
 );
 
 
