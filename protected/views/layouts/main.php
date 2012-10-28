@@ -55,7 +55,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 <div class="cd-footer">
     <div class="cd-wrapper">
     	<p class="fleft">内容版权所有 ©2011-2012 <a href="<?php echo app()->homeUrl;?>">waduanzi.com</a>&nbsp;&nbsp;冀ICP备12006196号-5&nbsp;&nbsp;
-    	    <a href="<?php echo aurl('site/baidumap');?>" target="_blank">网站地图</a>&nbsp;&nbsp;
+    	    <a href="<?php echo aurl('site/bdmap');?>" target="_blank">网站地图</a>&nbsp;&nbsp;
     	    <a href="<?php echo aurl('site/links');?>" target="_blank">友情链接</a>&nbsp;&nbsp;
     	    <a href="<?php echo aurl('tag/list');?>" target="_blank">全部标签</a>
         </p>

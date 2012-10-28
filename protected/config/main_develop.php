@@ -102,7 +102,7 @@ return array(
                 'http://m.waduanzi.cn/<_c>/<_a>' => 'mobile/<_c>/<_a>',
                     
                 '/' => 'site/index',
-                '<_a:(login|signup|logout)>' => 'site/<_a>',
+                '<_a:(login|signup|logout|bdmap|links)>' => 'site/<_a>',
                 '<_a:(duanzi|lengtu|girl|video|focus)>-<page:\d+>' => 'channel/<_a>',
                 '<_a:(duanzi|lengtu|girl|video|focus)>' => 'channel/<_a>',
                 'post-<id:\d+>' => 'post/show',

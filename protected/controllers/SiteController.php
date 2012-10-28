@@ -5,8 +5,9 @@ class SiteController extends Controller
     {
         return array(
             array(
-                'COutputCache + baidumap, sitemap, links',
+                'COutputCache + bdmap, sitemap, links',
                 'duration' => 600,
+                'varyByParam' => array('page'),
             ),
             array(
                 'COutputCache + index',
@@ -151,7 +152,7 @@ class SiteController extends Controller
         $this->render('signup', array('form'=>$model));
     }
 
-    public function actionBaidumap()
+    public function actionBdmap()
     {
         $pageSize = 30;
         $duration = 3600 * 24;
