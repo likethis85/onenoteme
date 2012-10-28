@@ -29,6 +29,17 @@ class MobileController extends CController
         return aurl('mobile/default/index');
     }
     
+
+    public function setKeywords($content)
+    {
+        cs()->registerMetaTag($content, 'keywords');
+    }
+    
+    public function setDescription($content)
+    {
+        cs()->registerMetaTag($content, 'description');
+    }
+    
 	public function setSiteTitle($value)
 	{
         $titles = array(param('sitename'));
