@@ -14,10 +14,10 @@ class TagController extends MobileController
         $name = urldecode($name);
         
         $tagID = app()->getDb()->createCommand()
-        ->select('id')
-        ->from(TABLE_TAG)
-        ->where('name = :tagname', array(':tagname' => $name))
-        ->queryScalar();
+            ->select('id')
+            ->from(TABLE_TAG)
+            ->where('name = :tagname', array(':tagname' => $name))
+            ->queryScalar();
         
         if ($tagID === false)
             throw new CHttpException(403, "当前还没有与{$name}标签有关的段子");
@@ -43,7 +43,7 @@ class TagController extends MobileController
         $criteria = new CDbCriteria();
         $criteria->addInCondition('id', $postIDs);
         
-        $models = Post::model()->findAll($criteria);
+        $models = MobilePost::model()->findAll($criteria);
         
         $this->pageTitle = $name . '相关段子 - 挖段子';
         $this->setKeywords("{$name}相关段子,{$name}相关冷笑话,{$name}相关糗事,{$name}相关语录");
