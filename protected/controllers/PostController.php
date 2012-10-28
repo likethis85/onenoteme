@@ -7,7 +7,7 @@ class PostController extends Controller
             'ajaxOnly  + score, views',
             'postOnly + score, views',
             array(
-                'COutputCache + sh2ow',
+                'COutputCache + show',
                 'duration' => 600,
                 'varyByParam' => array('id'),
             ),
