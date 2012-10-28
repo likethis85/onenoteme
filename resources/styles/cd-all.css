@@ -130,7 +130,7 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 .post-detail .post-picture img {max-width:600px;}
 .post-detail .cdc-block {margin:25px auto 15px; list-style:none; text-align:left;}
 .post-detail .toolbar {background:#F4F4F6; margin-bottom:10px;}
-.post-detail .post-arrows {padding:0 3px; margin-top:5px; width:64px; margin-right:3px; font-size:0; text-indent:-9999px;}
+.post-detail .post-arrows {padding:0 3px; margin-top:4px; width:64px; margin-right:3px; font-size:0; text-indent:-9999px;}
 .post-detail .post-arrows a {display:block; float:left; width:30px; height:30px; margin:1px;}
 .post-detail .post-arrows a.arrow-up {background-position:-231px -68px;}
 .post-detail .post-arrows a.arrow-up:hover {background-position:-262px -68px;}
@@ -138,8 +138,10 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 .post-detail .post-arrows a.arrow-down {background-position:-324px -68px;}
 .post-detail .post-arrows a.arrow-down:hover {background-position:-355px -68px;}
 .post-detail .post-arrows a.arrow-down.pushed {background-position:-386px -68px;}
-.post-detail .info {width:250px; height:38px; line-height:38px; padding:0 10px; margin-right:3px;}
+.post-detail .info {width:250px; height:38px; line-height:38px; padding:0 5px; margin-right:3px;}
 .post-detail .social {padding:0 3px; margin-left:3px;}
+.post-detail .social a {margin:0!important;}
+.post-detail .social #bdshare {padding:0!important;}
 .post-detail .comment-form {backgroun2d-color:#F4F4F6; display:block; position:relative; overflow:hidden; background-color:#ECECEC; padding:8px; margin-bottom:10px;}
 .post-detail .comment-form textarea {width:485px; border:0; color:#888; margin:0; padding:7px 5px 6px; font-size:12px;}
 .post-detail .comment-form textarea.mini-content {height:20px; resize:none;}
