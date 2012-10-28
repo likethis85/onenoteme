@@ -169,7 +169,7 @@ class SiteController extends Controller
             ->select('id, title, content, tags')
             ->from(TABLE_POST)
             ->where('state = ' . POST_STATE_ENABLED)
-            ->order('id asc')
+            ->order('id desc')
             ->limit($pageSize)
             ->offset($offset);
         

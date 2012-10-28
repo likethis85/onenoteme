@@ -12,7 +12,7 @@
     </ul>
 </div>
 <?php if ($pages instanceof CPagination && $pages->pageCount > 1):?>
-<div class="pages">
-    <?php $this->widget('CLinkPager', array('pages'=>$pages));?>
+<div class="panel-rect panel-pages">
+    <div class="cd-pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
 </div>
 <?php endif;?>
