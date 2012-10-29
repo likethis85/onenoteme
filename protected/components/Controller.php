@@ -42,6 +42,11 @@ class Controller extends CController
         cs()->registerMetaTag($content, 'description');
     }
 
+    public function getSiteHomeUrl()
+    {
+        return aurl('site/index');
+    }
+    
     public function getMemberHomeUrl()
     {
         return aurl('member/default/index');

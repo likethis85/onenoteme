@@ -8,7 +8,12 @@ class MemberController extends CController
     public $channel;
     public $breadcrumbs = array();
     
-    public function getHomeUrl()
+    public function getSiteHomeUrl()
+    {
+        return aurl('site/index');
+    }
+    
+    public function getMemberHomeUrl()
     {
         return aurl('member/default/index');
     }

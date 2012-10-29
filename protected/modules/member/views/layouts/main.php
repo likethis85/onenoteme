@@ -7,15 +7,15 @@
     <meta name="author" content="waduanzi.com" />
     <meta name="copyright" content="Copyright (c) 2011-2912 waduanzi.com All Rights Reserved." />
     <meta name="copyright" content="Copyright (c) 2009-2012 24beta.com All Rights Reserved." />
-    <link rel="start" href="<?php echo $this->homeUrl;?>" title="Home" />
-    <link rel="home" href="<?php echo $this->homeUrl;?>" title="Home" />
+    <link rel="start" href="<?php echo $this->memberHomeUrl;?>" title="Home" />
+    <link rel="home" href="<?php echo $this->memberHomeUrl;?>" title="Home" />
     <link rel="stylesheet" type="text/css" href="<?php echo tbu('styles/cd-basic.css');?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo tbu('styles/cd-member.css');?>" />
 </head>
 <body>
 <div class="beta-container">
     <div class="beta-header">
-        <div class="beta-logo"><a href="<?php echo abu();?>"><?php echo app()->name;?></a></div>
+        <div class="beta-logo"><a href="<?php echo $this->siteHomeUrl;?>"><?php echo app()->name;?></a></div>
     </div>
     <div class="beta-entry"><?php echo $content;?></div>
 </div>
