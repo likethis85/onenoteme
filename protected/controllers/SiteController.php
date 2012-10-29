@@ -40,7 +40,7 @@ class SiteController extends Controller
     
     public function actionIndex($s = POST_LIST_STYLE_GRID)
     {
-        $this->autoSwitchMobile(url('mobile/default/index'));
+        $this->autoSwitchMobile($this->getMobileHomeUrl());
         
         $s = strip_tags(trim($s));
         $limit = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('grid_post_count_page');
