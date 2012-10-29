@@ -19,9 +19,10 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 <div class="cd-mini-nav">
     <div class="cd-wrapper">
         <ul class="fleft">
-    		<li><a href="http://m.waduanzi.com">手机版</a></li>
+    		<li><a href="<?php echo aurl('mobile/default/index');?>">手机版</a></li>
+    		<li><a href="<?php echo aurl('wap/index');?>">WAP版</a></li>
     		<li><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank">iPhone应用</a></li>
-    		<li><a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">安卓应用</a></li>
+    		<li><a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank">安卓应用</a></li>
 		</ul>
 		<ul class="fright">
 		    <?php echo $this->renderDynamic('userToolbar');?>
