@@ -287,11 +287,12 @@ class Api_Post extends ApiBase
     {
     	self::requirePost();
 //        	$this->requireLogin();
-    	$this->requiredParams(array('content', 'token', 'channel_id'));
-    	$params = $this->filterParams(array('content', 'tags', 'channel_id', 'category_id', 'pic', 'token'));
+    	$this->requiredParams(array('title', 'content', 'token', 'channel_id'));
+    	$params = $this->filterParams(array('title', 'content', 'tags', 'channel_id', 'category_id', 'pic', 'token'));
     	
     	$post = new Post();
     	$post->channel_id = (int)$params['channel_id'];
+    	$post->title = $params['title'];
     	$post->content = $params['content'];
     	$post->tags = $params['tags'];
     	$post->create_time = $_SERVER['REQUEST_TIME'];
