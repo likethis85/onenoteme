@@ -6,14 +6,14 @@ class ChannelController extends Controller
         $duration = 120;
         return array(
             array(
-                'COutputCache + duanzi, lengtu, girl, video',
+                'COutputCache + duanzi, lengtu, girl, video, focus, movie',
                 'duration' => $duration,
                 'varyBySession' => true,
                 'varyByParam' => array('page', 's'),
                 'requestTypes' => array('POST'),
             ),
             array(
-                'COutputCache + duanzi, lengtu, girl, video',
+                'COutputCache + duanzi, lengtu, girl, video, focus, movie',
                 'duration' => $duration,
                 'varyBySession' => true,
                 'varyByParam' => array('page', 's'),
@@ -96,6 +96,11 @@ class ChannelController extends Controller
             $this->renderPartial($view, $data);
         else
             $this->render($view, $data);
+    }
+    
+    public function actionMovie()
+    {
+        exit;
     }
     
     private function fetchChannelPosts($channelid, $limit = 0)
