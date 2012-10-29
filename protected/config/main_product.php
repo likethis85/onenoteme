@@ -81,8 +81,10 @@ return array(
             'cacheID' => 'cache',
             'rules' => array(
                 'http://api.waduanzi.com/<_a>' => 'api/<_a>',
+            
                 'http://wap.waduanzi.com/' => 'wap/index',
                 'http://wap.waduanzi.com/<_a>' => 'wap/<_a>',
+            
                 'http://m.waduanzi.com/' => 'mobile/default/index',
                 'http://m.waduanzi.com/<_a:(duanzi|girl|lengtu|video|focus|movie)>-<page:\d+>' => 'mobile/channel/<_a>',
                 'http://m.waduanzi.com/<_a:(duanzi|girl|lengtu|video|focus|movie)>' => 'mobile/channel/<_a>',
