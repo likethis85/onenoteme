@@ -41,6 +41,26 @@ class Controller extends CController
     {
         cs()->registerMetaTag($content, 'description');
     }
+
+    public function getMemberHomeUrl()
+    {
+        return aurl('member/default/index');
+    }
+
+    public function getAdminHomeUrl()
+    {
+        return aurl('admin/default/index');
+    }
+
+    public function getMobileHomeUrl()
+    {
+        return aurl('mobile/default/index');
+    }
+
+    public function getWapHomeUrl()
+    {
+        return aurl('wap/index');
+    }
     
     public function userToolbar()
     {
@@ -52,11 +72,11 @@ class Controller extends CController
         }
         elseif (app()->session['image_url']) {
             $html = sprintf('<li><img src="%s" alt="进入用户中心" align="top" />', app()->session['image_url']);
-            $html .= sprintf('<li class="user-name"><a href="%s">%s</a></li>', aurl('member/defaut/index'), user()->name);
+            $html .= sprintf('<li class="user-name"><a href="%s">%s</a></li>', $this->getMemberHomeUrl(), user()->name);
 			$html .= sprintf('<li><a href="%s">退出</a></li>', aurl('site/logout'));
         }
         else {
-            $html = sprintf('<li><a class="active">%s</a></li>', user()->name);
+            $html = sprintf('<li><a class="active" href="%s">%s</a></li>', $this->getMemberHomeUrl(), user()->name);
             $html .= sprintf('<li><a href="%s">退出</a></li>', aurl('site/logout'));
         }
         

@@ -14,7 +14,7 @@ class MemberModule extends CWebModule
 	{
 		if (parent::beforeControllerAction($controller, $action)) {
 			if (user()->getIsGuest()) {
-		        $url = url('site/login', array('url'=>request()->getUrl()));
+		        $url = url('site/login', array('url'=>abu(request()->getUrl())));
 		        request()->redirect($url);
 		        exit(0);
 		    }

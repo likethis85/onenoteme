@@ -148,7 +148,7 @@ class LoginForm extends CFormModel
         if (empty($returnUrl))
             $returnUrl = strip_tags(trim($_GET['url']));
         if (empty($returnUrl))
-                $returnUrl = aurl('user/default');
+                $returnUrl = aurl('member/default/index');
         
         request()->redirect($returnUrl);
         exit(0);

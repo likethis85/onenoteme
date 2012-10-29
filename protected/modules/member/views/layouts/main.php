@@ -4,13 +4,13 @@
     <meta http-equiv="content-type" content="text/html; charset=<?php echo app()->charset?>" />
     <title><?php echo $this->pageTitle;?></title>
     <meta name="MSSmartTagsPreventParsing" content="true" />
-    <meta name="author" content="24beta.com" />
-    <meta name="generator" content="<?php echo BetaBase::powered();?>" />
+    <meta name="author" content="waduanzi.com" />
+    <meta name="copyright" content="Copyright (c) 2011-2912 waduanzi.com All Rights Reserved." />
     <meta name="copyright" content="Copyright (c) 2009-2012 24beta.com All Rights Reserved." />
     <link rel="start" href="<?php echo $this->homeUrl;?>" title="Home" />
     <link rel="home" href="<?php echo $this->homeUrl;?>" title="Home" />
-    <link rel="stylesheet" type="text/css" href="<?php echo tbu('styles/beta-common.css');?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo tbu('styles/beta-member.css');?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo tbu('styles/cd-basic.css');?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo tbu('styles/cd-member.css');?>" />
 </head>
 <body>
 <div class="beta-container">
@@ -21,13 +21,11 @@
 </div>
 <div class="beta-footer clearfix">
     <div class="beta-container">
-        <p><?php echo t('site_announce');?></p>
-        <p><?php echo t('site_content_share_announce');?>&nbsp;&copy;2012&nbsp;<?php echo app()->name;?>&nbsp;<?php echo param('beian_code');?></p>
-        <p>Powered by <a href="http://www.24beta.com"><?php echo BetaBase::powered();?></a>&nbsp;&nbsp;<a href="http://www.24beta.com/" target="_blank">24beta.com</a></p>
+        <p>&copy;2012&nbsp;<?php echo app()->name;?>&nbsp;<?php echo param('beian_code');?></p>
     </div>
 </div>
 </body>
 </html>
 
 <?php cs()->registerCoreScript('jquery');?>
-<?php cs()->registerScriptFile(tbu('scripts/beta-member.js'), CClientScript::POS_END);?>
+<?php cs()->registerScriptFile(tbu('scripts/cd-member.js'), CClientScript::POS_END);?>
