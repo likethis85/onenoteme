@@ -292,7 +292,6 @@ class Api_Post extends ApiBase
     	
     	$post = new Post();
     	$post->channel_id = (int)$params['channel_id'];
-//     	$post->title = $params['title'];
     	$post->content = $params['content'];
     	$post->tags = $params['tags'];
     	$post->create_time = $_SERVER['REQUEST_TIME'];

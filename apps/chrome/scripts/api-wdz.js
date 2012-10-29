@@ -80,13 +80,12 @@ var Api_Waduanzi = {
 	},
 	createPost: function(data, tab){
 		console.log(tab);
-		var title = data[0].value;
-		var content = data[1].value;
-		var tags = data[2].value;
-		var pic = data[3].value;
-		var channel_id = data[4].value;
-		var category_id = data[5].value;
-		var params = [['method', Api_Waduanzi.config.apiCreatePost], ['title', title], ['content', content], ['tags', tags], ['pic', pic], ['channel_id', channel_id], ['category_id', category_id], ['debug',  Api_Waduanzi.debug]];
+		var content = data[0].value;
+		var tags = data[1].value;
+		var pic = data[2].value;
+		var channel_id = data[3].value;
+		var category_id = data[4].value;
+		var params = [['method', Api_Waduanzi.config.apiCreatePost], ['content', content], ['tags', tags], ['pic', pic], ['channel_id', channel_id], ['category_id', category_id], ['debug',  Api_Waduanzi.debug]];
 		var params = {
 			'method': Api_Waduanzi.config.apiCreatePost,
 			'content': content,
