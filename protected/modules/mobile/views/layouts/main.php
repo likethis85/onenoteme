@@ -16,6 +16,7 @@
 </header>
 <div class="beta-container">
 <p class="old-link"><a href="<?php echo aurl('wap/index');?>">喜欢旧版？好吧，这是入口。</a></p>
+<?php $this->widget('MobileChannelNavbar');?>
 <?php echo $content;?>
 </div>
 <footer class="clearfix">

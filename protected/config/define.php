@@ -8,6 +8,7 @@ define('CHANNEL_GIRL', 30);
 define('CHANNEL_VIDEO', 40);
 define('CHANNEL_FOCUS', 50);
 define('CHANNEL_MUSIC', 60);
+define('CHANNEL_MOVIE', 70);
 
 // 以下是表名
 define('TABLE_POST', '{{post}}');

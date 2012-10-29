@@ -28,6 +28,69 @@ class ChannelController extends MobileController
 	    $this->render('/post/list', $data);
 	}
 
+	public function actionDuanzi()
+	{
+	    $data = self::fetchLatestPosts(CHANNEL_DUANZI);
+	     
+	    $this->setSiteTitle('');
+	    cs()->registerMetaTag('all', 'robots');
+	    $this->render('/post/list', $data);
+	}
+	
+	public function actionLengtu()
+	{
+	    $data = self::fetchLatestPosts(CHANNEL_LENGTU);
+	     
+	    $this->setSiteTitle('');
+	    cs()->registerMetaTag('all', 'robots');
+	    $this->render('/post/list', $data);
+	}
+	
+	public function actionGirl()
+	{
+	    $data = self::fetchLatestPosts(CHANNEL_GIRL);
+	     
+	    $this->setSiteTitle('');
+	    cs()->registerMetaTag('all', 'robots');
+	    $this->render('/post/list', $data);
+	}
+	
+	public function actionVideo()
+	{
+	    $data = self::fetchLatestPosts(CHANNEL_VIDEO);
+	     
+	    $this->setSiteTitle('');
+	    cs()->registerMetaTag('all', 'robots');
+	    $this->render('/post/list', $data);
+	}
+	
+	public function actionFocus()
+	{
+	    $data = self::fetchLatestPosts(CHANNEL_FOCUS);
+	     
+	    $this->setSiteTitle('');
+	    cs()->registerMetaTag('all', 'robots');
+	    $this->render('/post/list', $data);
+	}
+	
+	public function actionMusic()
+	{
+	    $data = self::fetchLatestPosts(CHANNEL_MUSIC);
+	     
+	    $this->setSiteTitle('');
+	    cs()->registerMetaTag('all', 'robots');
+	    $this->render('/post/list', $data);
+	}
+	
+	public function actionMovie()
+	{
+	    $data = self::fetchLatestPosts(CHANNEL_MOVIE);
+	     
+	    $this->setSiteTitle('');
+	    cs()->registerMetaTag('all', 'robots');
+	    $this->render('/post/list', $data);
+	}
+	
 	private static function fetchLatestPosts($id)
 	{
 	    $id = (int)$id;

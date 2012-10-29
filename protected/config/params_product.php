@@ -23,6 +23,7 @@ return array(
         CHANNEL_VIDEO => '挖视频',
         CHANNEL_MUSIC => '挖音乐',
         CHANNEL_FOCUS => '挖热点',
+        CHANNEL_MOVIE => '挖电影',
     ),
 
     /*

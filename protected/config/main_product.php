@@ -84,6 +84,10 @@ return array(
                 'http://wap.waduanzi.com' => 'wap/index',
                 'http://wap.waduanzi.com/<_a>' => 'wap/<_a>',
                 'http://m.waduanzi.com' => 'mobile/default/index',
+                'http://m.waduanzi.com/<_a:(duanzi|girl|lengtu|video|focus|movie)>-<page:\d+>' => 'mobile/channel/<_a>',
+                'http://m.waduanzi.com/<_a:(duanzi|girl|lengtu|video|focus|movie)>' => 'mobile/channel/<_a>',
+                'http://m.waduanzi.com/post-<id:\d+>' => 'mobile/post/show',
+                'http://m.waduanzi.com/tag-<name:.+>' => 'mobile/tag/posts',
                 'http://m.waduanzi.com/<_c>' => 'mobile/<_c>',
                 'http://m.waduanzi.com/<_c>/<_a>' => 'mobile/<_c>/<_a>',
                     
