@@ -13,8 +13,8 @@ a:hover {color:#D14836; text-decoration:none;}
 .bottom10px {margin-bottom:10px!important;}
 
 header {background:black; overflow:hidden; margin-bottom:10px;}
-header a.site-name {height:50px; line-height:50px; font-size:30px; display:block; margin-left:10px; color:white; font-weight:bold; float:left;}
-header a.add-weixin {float:right; margin-top:5px;}
+header h1 {margin:0;}
+header h1 a {height:50px; line-height:50px; font-size:30px; display:block; margin-left:10px; color:white; font-weight:bold;}
 footer {font-size:14px; margin:20px 0 0; position:relative; background:#AAAAAA;}
 footer a {display:block; padding:10px 15px;}
 footer a:link, footer a:hover, footer a:visited {color:white;}
