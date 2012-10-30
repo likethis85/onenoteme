@@ -96,7 +96,9 @@ return array(
                 'http://my.waduanzi.com/' => '/member/default/index',
                 'http://my.waduanzi.com/<_c>' => 'member/<_c>',
                 'http://my.waduanzi.com/<_c>/<_a>' => 'member/<_c>/<_a>',
-                    
+
+                'http://<_a:(joke|lengtu|girl|video|focus|movie)>.waduanzi.com/' => 'channel/<_a>',
+            
                 'http://www.waduanzi.com/' => 'site/index',
                 'http://www.waduanzi.com/<_a:(login|signup|logout|bdmap|links)>' => 'site/<_a>',
                 'http://www.waduanzi.com/<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',
