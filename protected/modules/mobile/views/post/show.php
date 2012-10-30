@@ -10,7 +10,7 @@
         <?php if ($post->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $post->getTagLinks('mobile/tag/posts', '&nbsp;', '_self');?></div><?php endif;?>
     </div>
     <div class="group-btn">
-        <a class="btn btn-large" href="weixin://profile/waduanzi">添加微信号</a>
+        <a class="btn btn-large" href="weixin://profile/gh_9261dce78e9f">添加挖段子微信号</a>
         <button class="btn btn-large" id="share-friend" data-title="<?php echo $post->title;?>" data-image="<?php echo $post->bmiddlePic;?>" data-desc="<?php echo $post->getSummary(100);?>">分享到微信朋友圈</button>
     </div>
     <div class="beta-create-form"><?php $this->renderPartial('/comment/_create_form', array('comment'=>$comment));?></div>
