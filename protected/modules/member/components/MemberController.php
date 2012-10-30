@@ -8,25 +8,31 @@ class MemberController extends CController
     public $channel;
     public $breadcrumbs = array();
     
-    public function getSiteHomeUrl()
+    /**
+     * 当前登录用户
+     * @var User
+     */
+    public $user;
+    
+    /**
+     * 当前登录用户的资料
+     * @var UserProfile
+     */
+    public $profile;
+    
+    public function init()
     {
-        return aurl('site/index');
+        parent::init();
+        $user = User::model()->findByPk(user()->id);
+        if ($user === null)
+            throw new CHttpException(500, '未找到用户');
+        
+        $this->user = $user;
+        $this->profile = $user->profile;
     }
     
-    public function getMemberHomeUrl()
-    {
-        return aurl('member/default/index');
-    }
-    
-	public function setSiteTitle($value)
+	public function setSiteTitle($text)
 	{
-        $titles = array(param('sitename'));
-        if (param('shortdesc'))
-            array_push($titles, param('shortdesc'));
-        if (!empty($value))
-    	    array_unshift($titles, $value);
-
-        $text = strip_tags(trim(join(' - ', $titles)));
-	    $this->pageTitle = $text;
+	    $this->pageTitle = $text . '_' . app()->name;
 	}
 }

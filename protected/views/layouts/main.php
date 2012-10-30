@@ -19,8 +19,8 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 <div class="cd-mini-nav">
     <div class="cd-wrapper">
         <ul class="fleft">
-    		<li><a href="<?php echo $this->getMobileHomeUrl();?>">手机版</a></li>
-    		<li><a href="<?php echo $this->getWapHomeUrl();?>">WAP版</a></li>
+    		<li><a href="<?php echo CDBase::mobileHomeUrl();?>">手机版</a></li>
+    		<li><a href="<?php echo CDBase::wapHomeUrl();?>">WAP版</a></li>
     		<li><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank">iPhone应用</a></li>
     		<li><a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank">安卓应用</a></li>
 		</ul>
@@ -33,7 +33,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 <div class="cd-header">
     <div class="cd-wrapper">
     	<div id="site-logo" class="logo fleft">
-    	    <a href="<?php echo $this->getSiteHomeUrl();?>" title="点击返回首页"><img src="<?php echo sbu('images/logo.jpg');?>" alt="网站LOGO" title="返回首页" align="top" />&nbsp;挖段子</a>
+    	    <a href="<?php echo CDBase::siteHomeUrl();?>" title="点击返回首页"><img src="<?php echo sbu('images/logo.jpg');?>" alt="网站LOGO" title="返回首页" align="top" />&nbsp;挖段子</a>
 	    </div>
     	<ul class="channel-nav fleft">
     		<li<?php echo ($this->channel===CHANNEL_DUANZI) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/joke');?>">挖笑话</a></li>
@@ -47,13 +47,13 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     	<div class="clear"></div>
     </div>
 </div>
-<div class="cd-wrapper">
+<div class="cd-wrapper cd-main">
 	<?php echo $content;?>
 </div>
 <?php echo param('footer_before_html');?>
 <div class="cd-footer">
     <div class="cd-wrapper">
-    	<p class="fleft">内容版权所有 ©2011-2012 <a href="<?php echo $this->siteHomeUrl;?>">waduanzi.com</a>&nbsp;&nbsp;冀ICP备12006196号-5&nbsp;&nbsp;
+    	<p class="fleft">内容版权所有 ©2011-2012 <a href="<?php echo CDBase::siteHomeUrl();?>">waduanzi.com</a>&nbsp;&nbsp;冀ICP备12006196号-5&nbsp;&nbsp;
     	    <a href="<?php echo aurl('site/bdmap');?>" target="_blank">网站地图</a>&nbsp;&nbsp;
     	    <a href="<?php echo aurl('site/links');?>" target="_blank">友情链接</a>&nbsp;&nbsp;
     	    <a href="<?php echo aurl('tag/list');?>" target="_blank">全部标签</a>
