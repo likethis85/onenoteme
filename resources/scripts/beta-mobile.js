@@ -6,6 +6,28 @@ var Beta24 = {
 	emailValidate: function(email) {
 		var pattern = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/ig;
 		return pattern.test(email);
+	},
+	shareToWeixinFriend: function(event){
+		if (typeof WeixinJSBridge == undefined) {
+			return false;
+		}
+		else {
+			var imgurl = $(this).attr('data-image');
+			var title = $(this).attr('data-title');
+			WeixinJSBridge.invoke('shareTimeline', {
+				'img_url': imgurl || '',
+				'link': location.href,
+				'desc': location.href,
+				'title': title
+			}, function(res) {
+				// 返回res.err_msg,取值
+				// share_timeline:cancel 用户取消
+				// share_timeline:fail　发送失败
+				// share_timeline:ok 发送成功
+				WeixinJSBridge.log(res.err_msg);
+			});
+		}
+		return false;
 	}
 };
 
@@ -64,7 +86,7 @@ var BetaComment = {
 			form.find('input.beta-captcha').blur();
 
 		if (form.find('.help-block.error').length > 0) {
-			msgtext.html($('.ajax-jsstr .ajax-rules-invalid').text());
+			msgtext.html('请输入评论内容和验证码后再发布');
 			msg.removeClass('alert-success').addClass('alert-error').show();
 			return false;
 		}
@@ -74,7 +96,7 @@ var BetaComment = {
 			var minlen = parseInt(contentEl.attr('minlen'));
 			minlen = (isNaN(minlen) || minlen == 0) ? 5 : minlen;
 			if (content.length < minlen) {
-				msgtext.html($('.ajax-jsstr .ajax-rules-invalid').text());
+				msgtext.html('请输入评论内容和验证码后再发布');
 				msg.removeClass('alert-success').addClass('alert-error').show();
 				contentEl.focus();
 				return false;
@@ -82,7 +104,7 @@ var BetaComment = {
 			if (captchaEl.length > 0) {
 				var captcha = $.trim(captchaEl.val());
 				if (captcha.length != 4) {
-					msgtext.html($('.ajax-jsstr .ajax-rules-invalid').text());
+					msgtext.html('请输入评论内容和验证码后再发布');
 					msg.removeClass('alert-success').addClass('alert-error').show();
 					captchaEl.focus();
 					return false;
@@ -99,7 +121,7 @@ var BetaComment = {
 			cache: false,
 			beforeSend: function(jqXhr){
 				button.button('loading');
-				msgtext.html($('.ajax-jsstr .ajax-send').text());
+				msgtext.html('发送数据中...');
 				msg.removeClass('alert-error').addClass('alert-success').show();
 			}
 		});
@@ -126,7 +148,7 @@ var BetaComment = {
 		});
 		jqXhr.fail(function(event, jqXHR, ajaxSettings, thrownError){
 			jqXhr.abort();
-			msgtext.html($('.ajax-jsstr .ajax-fail').text());
+			msgtext.html('请求错误.');
 			msg.removeClass('alert-success').addClass('alert-error').show();
 		});
 		jqXhr.always(function(){
@@ -163,7 +185,7 @@ var BetaComment = {
 		var msgtext = msg.find('.text');
 
 		if (tthis.attr('data-clicked')) {
-			msgtext.html($('.ajax-jsstr .ajax-has-joined').text());
+			msgtext.html('您已经参与过了，谢谢');
 			if (msg.hasClass('alert-success')) msg.removeClass('alert-success');
 			if (!msg.hasClass('alert-error')) msg.addClass('alert-error');
 			commentItem.after(msg);
@@ -178,7 +200,7 @@ var BetaComment = {
 			type: 'post',
 			cache: false,
 			beforeSend: function(jqXhr) {
-				msgtext.html($('.ajax-jsstr .ajax-send').text());
+				msgtext.html('发送数据中...');
 				msg.removeClass('alert-error').addClass('alert-success');
 				commentItem.after(msg);
 				msg.show();
@@ -201,7 +223,7 @@ var BetaComment = {
 			msg.show();
 		});
 		jqXhr.fail(function(event, jqXHR, ajaxSettings, thrownError){
-			msgtext.html($('.ajax-jsstr .ajax-fail').text());
+			msgtext.html('请求错误.');
 			if (msg.hasClass('alert-success')) msg.removeClass('alert-success');
 			if (!msg.hasClass('alert-error')) msg.addClass('alert-error');
 			commentItem.after(msg);

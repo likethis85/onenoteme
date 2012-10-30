@@ -9,20 +9,15 @@
         <?php if ($post->bmiddlePic) echo image($post->bmiddlePic, $post->title, array('class'=>'bmiddle'));?>
         <?php if ($post->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $post->getTagLinks('mobile/tag/posts', '&nbsp;', '_self');?></div><?php endif;?>
     </div>
+    <div class="group-btn"><button class="btn btn-block btn-large btn-warning" id="share-friend" data-title="<?php echo $post->title;?>" data-image="<?php echo $post->bmiddlePic;?>">分享到微信朋友圈</button></div>
     <div class="beta-create-form"><?php $this->renderPartial('/comment/_create_form', array('comment'=>$comment));?></div>
     <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'post'=>$post));?>
-</div>
-
-<div class="hide ajax-jsstr">
-    <span class="ajax-send">发送数据中...</span>
-    <span class="ajax-fail">请求错误.</span>
-    <span class="ajax-rules-invalid">请输入评论内容和验证码后再发布</span>
-    <span class="ajax-has-joined">您已经参与过了，谢谢</span>
 </div>
 
 <script type="text/javascript">
 $(function(){
 	BetaPost.increaseVisitNums(<?php echo $post->id;?>, '<?php echo aurl('mobile/post/views');?>');
+	$('.beta-post-detail').on('click', '#share-friend', Beta24.shareToWeixinFriend);
 });
 </script>
 
