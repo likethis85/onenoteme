@@ -54,7 +54,7 @@ $(function(){
         },
         function(newElements) {
             var newElems = $(newElements).css({opacity:0});
-            newElems.imagesLoaded(function(){
+            //newElems.imagesLoaded(function(){
                 newElems.animate({opacity:1});
                 container.masonry('appended', newElems, true);
 
@@ -69,7 +69,7 @@ $(function(){
                 }
                 else
                     count++;
-            });
+            //});
         });
     });
     $(document).ajaxError(function(event, xhr, opt) {
