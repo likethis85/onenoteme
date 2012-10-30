@@ -61,9 +61,9 @@ return array(
     'grid_post_count_page' => 15,
     'video_count_page' => 10,
     'duanzi_count_page' => 20,
-    'lengtu_count_page' => 20,
-    'girl_count_page' => 20,
-    'focus_count_page' => 20,
+    'lengtu_count_page' => 15,
+    'girl_count_page' => 10,
+    'focus_count_page' => 15,
     'commentCountOfPage' => 20,
 
     'user_required_email_verfiy' => 0,

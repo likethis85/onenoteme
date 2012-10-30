@@ -35,7 +35,8 @@ class ChannelController extends Controller
         $this->setKeywords('挖笑话,糗事,内涵笑话,爆笑笑话,幽默笑话,笑话大全,爆笑短信,xiaohua,冷笑话,短信笑话,小笑话,笑话短信,经典笑话,冷笑话大全,短笑话,搞笑短信,笑话大全乐翻天,搞笑笑话,疯狂恶搞,爆笑童趣,雷人囧事');
         
         $this->channel = CHANNEL_DUANZI;
-        $data = $this->fetchChannelPosts(CHANNEL_DUANZI, param('duanzi_count_page'));
+        $count = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('duanzi_count_page');
+        $data = $this->fetchChannelPosts(CHANNEL_DUANZI, $count);
         $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'text_list';
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
@@ -51,7 +52,8 @@ class ChannelController extends Controller
         $this->setKeywords('挖趣图,搞笑图片,内涵图,邪恶图片,色色图,暴走漫画,微漫画,4格漫画,8格漫画,搞笑漫画,内涵漫画,邪恶漫画,疯狂恶搞,爆笑童趣,雷人囧事,动画萌图,狗狗萌图,猫咪萌图,喵星人萌图,汪星人萌图');
         
         $this->channel = CHANNEL_LENGTU;
-        $data = $this->fetchChannelPosts(CHANNEL_LENGTU, param('lengtu_count_page'));
+        $count = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('lengtu_count_page');
+        $data = $this->fetchChannelPosts(CHANNEL_LENGTU, $count);
         $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'lengtu_list';
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
@@ -67,7 +69,8 @@ class ChannelController extends Controller
         $this->setKeywords('阳光正妹,清纯学生,网友自拍,香港模特,台湾正妹,美女自拍,淘女郎,微女郎,美女写真,美女私房照,校花,气质美女,清纯美女,性感车模,比基尼,足球宝贝');
         
         $this->channel = CHANNEL_GIRL;
-        $data = $this->fetchChannelPosts(CHANNEL_GIRL, param('girl_count_page'));
+        $count = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('girl_count_page');
+        $data = $this->fetchChannelPosts(CHANNEL_GIRL, $count);
         $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'girl_list';
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
@@ -95,7 +98,8 @@ class ChannelController extends Controller
         $this->setKeywords('挖趣图,搞笑图片,内涵图,邪恶图片,色色图,暴走漫画,微漫画,4格漫画,8格漫画,搞笑漫画,内涵漫画,邪恶漫画,疯狂恶搞,爆笑童趣,雷人囧事,动画萌图,狗狗萌图,猫咪萌图,喵星人萌图,汪星人萌图');
     
         $this->channel = CHANNEL_FOCUS;
-        $data = $this->fetchChannelPosts(CHANNEL_FOCUS, param('focus_count_page'));
+        $count = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('focus_count_page');
+        $data = $this->fetchChannelPosts(CHANNEL_FOCUS, $count);
         $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'focus_list';
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
