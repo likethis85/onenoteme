@@ -5,7 +5,7 @@ class PostController extends MobileController
     {
         return array(
             array(
-                'COutputCache + sh2ow',
+                'COutputCache + show',
                 'duration' => param('mobile_post_show_cache_expire'),
                 'varyByParam' => array('id'),
             ),

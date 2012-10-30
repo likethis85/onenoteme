@@ -51,13 +51,6 @@ class DefaultController extends MobileController
 	        'pages' => $pages,
 	    );
 	}
-
-    public function actionInfo()
-    {
-        echo '<pre>';
-        echo request()->getUrl();
-        echo '</pre>';
-    }
 }
 
 
