@@ -6,14 +6,14 @@ class ChannelController extends Controller
         $duration = 120;
         return array(
             array(
-                'COutputCache + duanzi, lengtu, girl, video, focus, movie',
+                'COutputCache + joke, duanzi, lengtu, girl, video, focus, movie',
                 'duration' => $duration,
                 'varyBySession' => true,
                 'varyByParam' => array('page', 's'),
                 'requestTypes' => array('POST'),
             ),
             array(
-                'COutputCache + duanzi, lengtu, girl, video, focus, movie',
+                'COutputCache + joke, duanzi, lengtu, girl, video, focus, movie',
                 'duration' => $duration,
                 'varyBySession' => true,
                 'varyByParam' => array('page', 's'),
@@ -22,12 +22,12 @@ class ChannelController extends Controller
         );
     }
     
-    public function actionJoke($s = POST_LIST_STYLE_GRID)
+    public function actionJoke($page = 1, $s = POST_LIST_STYLE_GRID)
     {
         $this->forward('channel/duanzi');
     }
     
-    public function actionDuanzi($s = POST_LIST_STYLE_GRID)
+    public function actionDuanzi($page = 1, $s = POST_LIST_STYLE_GRID)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_DUANZI)), null, array('title'=>app()->name . ' » 挖笑话 Feed'));
         $this->pageTitle = '挖笑话 - 最冷笑话精选，每天分享笑话N枚，你的贴身开心果';
@@ -44,7 +44,7 @@ class ChannelController extends Controller
             $this->render($view, $data);
     }
     
-    public function actionLengtu($s = POST_LIST_STYLE_GRID)
+    public function actionLengtu($page = 1, $s = POST_LIST_STYLE_GRID)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_LENGTU)), null, array('title'=>app()->name . ' » 挖冷图 Feed'));
         $this->pageTitle = '挖趣图 - 最搞笑的，最好玩的，最内涵的图片精选';
@@ -61,7 +61,7 @@ class ChannelController extends Controller
             $this->render($view, $data);
     }
     
-    public function actionGirl($s = POST_LIST_STYLE_GRID)
+    public function actionGirl($page = 1, $s = POST_LIST_STYLE_GRID)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_GIRL)), null, array('title'=>app()->name . ' » 挖福利 Feed'));
         $this->pageTitle = '挖福利 - 最新最全的女明星写真、清纯校花、美女模特、正妹性感自拍';
@@ -90,7 +90,7 @@ class ChannelController extends Controller
         $this->render('video_list', $data);
     }
 
-    public function actionFocus($s = POST_LIST_STYLE_GRID)
+    public function actionFocus($page = 1, $s = POST_LIST_STYLE_GRID)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_FOCUS)), null, array('title'=>app()->name . ' » 挖热点 Feed'));
         $this->pageTitle = '挖趣图 - 最搞笑的，最好玩的，最内涵的图片精选';

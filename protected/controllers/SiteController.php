@@ -38,7 +38,7 @@ class SiteController extends Controller
         return false;
     }
     
-    public function actionIndex($s = POST_LIST_STYLE_GRID)
+    public function actionIndex($page = 1, $s = POST_LIST_STYLE_GRID)
     {
         $this->autoSwitchMobile($this->getMobileHomeUrl());
         
