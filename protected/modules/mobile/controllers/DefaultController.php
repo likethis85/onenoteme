@@ -26,8 +26,8 @@ class DefaultController extends MobileController
 	{
 	    $error = app()->errorHandler->error;
 	    if ($error) {
-// 	        if ($error['code'] == 404)
-// 	            $this->redirect($this->getHomeUrl());
+	        if ($error['code'] == 404)
+	            $this->redirect($this->getHomeUrl());
 	        $this->pageTitle = 'Error ' . $error['code'];
 	        $this->render('/system/error', $error);
 	    }

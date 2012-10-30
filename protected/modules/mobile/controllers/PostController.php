@@ -14,7 +14,7 @@ class PostController extends MobileController
     
     public function actionDetail($id)
     {
-        $this->forward('mobile/post/detail');
+        $this->forward('post/detail');
     }
     
     public function actionShow($id)

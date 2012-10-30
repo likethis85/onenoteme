@@ -19,7 +19,7 @@ class TagController extends MobileController
     
     public function actionArchives($name, $page = 1)
     {
-        $this->forward('mobile/tag/posts');
+        $this->forward('tag/posts');
     }
     
     public function actionPosts($name, $page = 1)
