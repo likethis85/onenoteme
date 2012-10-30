@@ -21,8 +21,7 @@ return array(
         CHANNEL_LENGTU => '挖趣图',
         CHANNEL_GIRL => '挖福利',
         CHANNEL_VIDEO => '挖视频',
-        CHANNEL_MUSIC => '挖音乐',
-        CHANNEL_FOCUS => '挖热点',
+        CHANNEL_MOVIE => '挖电影',
     ),
         
     /*
@@ -62,7 +61,6 @@ return array(
     'duanzi_count_page' => 20,
     'lengtu_count_page' => 15,
     'girl_count_page' => 10,
-    'focus_count_page' => 10,
     'commentCountOfPage' => 20,
 
     'user_required_email_verfiy' => 0,

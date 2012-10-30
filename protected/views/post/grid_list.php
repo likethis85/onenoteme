@@ -19,10 +19,10 @@
                 <h2><a href="<?php echo $model->url;?>" target="_blank" title="在新窗口中查看详细内容">∷</a></h2>
                 <span class="content"><?php echo $model->filterContent;?></span>
             </div>
-            <?php if (($model->channel_id == CHANNEL_LENGTU || $model->channel_id == CHANNEL_GIRL || $model->channel_id == CHANNEL_FOCUS) && $model->thumbnail):?>
+            <?php if (($model->channel_id == CHANNEL_LENGTU || $model->channel_id == CHANNEL_GIRL) && $model->thumbnail):?>
             <div class="post-image">
                 <div class="thumbnail">
-                <?php if ($model->channel_id == CHANNEL_LENGTU || $model->channel_id == CHANNEL_FOCUS): //只有冷图采用缩略图方式 ?>
+                <?php if ($model->channel_id == CHANNEL_LENGTU): //只有冷图采用缩略图方式 ?>
                     <?php if ($model->imageIsLong):?>
                     <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" target="_blank" title="点击查看大图">
                         <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>

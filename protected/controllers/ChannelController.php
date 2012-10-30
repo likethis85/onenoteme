@@ -6,14 +6,14 @@ class ChannelController extends Controller
         $duration = 120;
         return array(
             array(
-                'COutputCache + joke, duanzi, lengtu, girl, video, focus, movie',
+                'COutputCache + joke, duanzi, lengtu, girl, video',
                 'duration' => $duration,
                 'varyBySession' => true,
                 'varyByParam' => array('page', 's'),
                 'requestTypes' => array('POST'),
             ),
             array(
-                'COutputCache + joke, duanzi, lengtu, girl, video, focus, movie',
+                'COutputCache + joke, duanzi, lengtu, girl, video',
                 'duration' => $duration,
                 'varyBySession' => true,
                 'varyByParam' => array('page', 's'),
@@ -90,28 +90,6 @@ class ChannelController extends Controller
         $this->render('video_list', $data);
     }
 
-    public function actionFocus($page = 1, $s = POST_LIST_STYLE_GRID)
-    {
-        cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_FOCUS)), null, array('title'=>app()->name . ' » 挖热点 Feed'));
-        $this->pageTitle = '挖趣图 - 最搞笑的，最好玩的，最内涵的图片精选';
-        $this->setDescription($this->pageTitle);
-        $this->setKeywords('挖趣图,搞笑图片,内涵图,邪恶图片,色色图,暴走漫画,微漫画,4格漫画,8格漫画,搞笑漫画,内涵漫画,邪恶漫画,疯狂恶搞,爆笑童趣,雷人囧事,动画萌图,狗狗萌图,猫咪萌图,喵星人萌图,汪星人萌图');
-    
-        $this->channel = CHANNEL_FOCUS;
-        $count = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('focus_count_page');
-        $data = $this->fetchChannelPosts(CHANNEL_FOCUS, $count);
-        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'focus_list';
-        if (request()->getIsAjaxRequest())
-            $this->renderPartial($view, $data);
-        else
-            $this->render($view, $data);
-    }
-    
-    public function actionMovie()
-    {
-        exit;
-    }
-    
     private function fetchChannelPosts($channelid, $limit = 0)
     {
         $duration = 60 * 60 * 24;

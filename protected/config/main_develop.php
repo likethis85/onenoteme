@@ -99,8 +99,8 @@ return array(
                 'http://wap.waduanzi.cn/<_a>' => 'wap/<_a>',
             
                 'http://m.waduanzi.cn/' => 'mobile/default/index',
-                'http://m.waduanzi.cn/<_a:(duanzi|girl|lengtu|video|focus|movie)>-<page:\d+>' => 'mobile/channel/<_a>',
-                'http://m.waduanzi.cn/<_a:(duanzi|girl|lengtu|video|focus|movie)>' => 'mobile/channel/<_a>',
+                'http://m.waduanzi.cn/<_a:(duanzi|girl|lengtu|video)>-<page:\d+>' => 'mobile/channel/<_a>',
+                'http://m.waduanzi.cn/<_a:(duanzi|girl|lengtu|video)>' => 'mobile/channel/<_a>',
                 'http://m.waduanzi.cn/post-<id:\d+>' => 'mobile/post/show',
                 'http://m.waduanzi.cn/tag-<name:.+>' => 'mobile/tag/posts',
                 'http://m.waduanzi.cn/<_c>' => 'mobile/<_c>',
@@ -110,12 +110,12 @@ return array(
                 'http://my.waduanzi.cn/<_c>' => 'member/<_c>',
                 'http://my.waduanzi.cn/<_c>/<_a>' => 'member/<_c>/<_a>',
                     
-//                 'http://<_a:(joke|lengtu|girl|video|focus|movie)>.waduanzi.cn/' => 'channel/<_a>',
+//                 'http://<_a:(joke|lengtu|girl|video)>.waduanzi.cn/' => 'channel/<_a>',
             
                 'http://www.waduanzi.cn/' => 'site/index',
                 'http://www.waduanzi.cn/<_a:(login|signup|logout|bdmap|links)>' => 'site/<_a>',
-                'http://www.waduanzi.cn/<_a:(duanzi|lengtu|girl|video|focus|movie)>-<page:\d+>' => 'channel/<_a>',
-                'http://www.waduanzi.cn/<_a:(duanzi|lengtu|girl|video|focus|movie)>' => 'channel/<_a>',
+                'http://www.waduanzi.cn/<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',
+                'http://www.waduanzi.cn/<_a:(duanzi|lengtu|girl|video)>' => 'channel/<_a>',
                 'http://www.waduanzi.cn/post-<id:\d+>' => 'post/show',
                 'http://www.waduanzi.cn/originalpic/<id:\d+>' => 'post/bigpic',
                 'http://www.waduanzi.cn/tags' => 'tag/list',
