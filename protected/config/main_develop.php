@@ -110,6 +110,8 @@ return array(
                 'http://my.waduanzi.cn/<_c>' => 'member/<_c>',
                 'http://my.waduanzi.cn/<_c>/<_a>' => 'member/<_c>/<_a>',
                     
+//                 'http://<_a:(joke|lengtu|girl|video|focus|movie)>.waduanzi.cn/' => 'channel/<_a>',
+            
                 'http://www.waduanzi.cn/' => 'site/index',
                 'http://www.waduanzi.cn/<_a:(login|signup|logout|bdmap|links)>' => 'site/<_a>',
                 'http://www.waduanzi.cn/<_a:(duanzi|lengtu|girl|video|focus|movie)>-<page:\d+>' => 'channel/<_a>',
