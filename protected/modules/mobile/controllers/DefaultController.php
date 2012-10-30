@@ -56,7 +56,6 @@ class DefaultController extends MobileController
     {
         echo '<pre>';
         echo request()->getUrl();
-        print_r($_SERVER);
         echo '</pre>';
     }
 }

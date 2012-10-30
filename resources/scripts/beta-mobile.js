@@ -8,7 +8,7 @@ var Beta24 = {
 		return pattern.test(email);
 	},
 	shareToWeixinFriend: function(event){
-		if (typeof WeixinJSBridge == undefined) {
+		if (typeof WeixinJSBridge == 'undefined') {
 			return false;
 		}
 		else {

@@ -9,16 +9,19 @@
         <?php if ($post->bmiddlePic) echo image($post->bmiddlePic, $post->title, array('class'=>'bmiddle'));?>
         <?php if ($post->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $post->getTagLinks('mobile/tag/posts', '&nbsp;', '_self');?></div><?php endif;?>
     </div>
-    <div class="group-btn">
-        <a class="btn btn-large btn-inverse" href="weixin://profile/gh_9261dce78e9f">添加微信公号</a>
+    <div class="group-btn acenter weixin-btn">
+        <a class="btn btn-large btn-inverse" id="add-weixin" href="weixin://profile/gh_9261dce78e9f">添加微信公号</a>
         <button class="btn btn-large" id="share-friend" data-title="<?php echo $post->title;?>" data-image="<?php echo $post->bmiddlePic;?>" data-desc="<?php echo $post->getSummary(100);?>">分享到朋友圈</button>
     </div>
     <div class="beta-create-form"><?php $this->renderPartial('/comment/_create_form', array('comment'=>$comment));?></div>
     <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'post'=>$post));?>
 </div>
-<a href="<?php echo aurl('mobile/default/info');?>">info</a>
+
 <script type="text/javascript">
 $(function(){
+	if (typeof WeixinJSBridge == 'undefined') {
+		$('.weixin-btn').hide();
+	}
 	BetaPost.increaseVisitNums(<?php echo $post->id;?>, '<?php echo aurl('mobile/post/views');?>');
 	$('.beta-post-detail').on('click', '#share-friend', Beta24.shareToWeixinFriend);
 });
