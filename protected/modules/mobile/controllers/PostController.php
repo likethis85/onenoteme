@@ -5,11 +5,16 @@ class PostController extends MobileController
     {
         return array(
             array(
-                'COutputCache + show',
+                'COutputCache + show, detail',
                 'duration' => param('mobile_post_show_cache_expire'),
                 'varyByParam' => array('id'),
             ),
         );
+    }
+    
+    public function actionDetail($id)
+    {
+        $this->forward('mobile/post/detail');
     }
     
     public function actionShow($id)

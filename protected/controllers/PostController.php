@@ -31,6 +31,11 @@ class PostController extends Controller
         exit(0);
     }
     
+    public function actionDetail($id)
+    {
+        $this->forward('post/show');
+    }
+    
     public function actionShow($id)
     {
         $this->autoSwitchMobile();

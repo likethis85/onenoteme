@@ -6,27 +6,12 @@ class ChannelController extends MobileController
     {
         return array(
             array(
-                'COutputCache + posts',
+                'COutputCache + joke, lengtu, girl, video',
                 'duration' => param('mobile_post_list_cache_expire'),
                 'varyByParam' => array('id', 'page'),
             ),
         );
     }
-    
-	public function actionIndex($id, $page = 1)
-	{
-	    $this->redirect(url('mobile/channel/posts', array('id'=>$id, 'page'=>$page)));
-	}
-	
-	public function actionPosts($id)
-	{
-	    $id = (int)$id;
-	    $data = self::fetchLatestPosts($id);
-	    
-	    $this->setSiteTitle('');
-	    cs()->registerMetaTag('all', 'robots');
-	    $this->render('/post/list', $data);
-	}
 
 	public function actionJoke()
 	{

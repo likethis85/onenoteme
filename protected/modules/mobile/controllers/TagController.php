@@ -17,6 +17,10 @@ class TagController extends MobileController
         $this->redirect(url('mobile/tag/posts', array('name'=>$name, 'page'=>$page)));
     }
     
+    public function actionArchives($name, $page = 1)
+    {
+        $this->forward('mobile/tag/posts');
+    }
     
     public function actionPosts($name, $page = 1)
     {

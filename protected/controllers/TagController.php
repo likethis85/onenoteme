@@ -45,6 +45,11 @@ class TagController extends Controller
         ));
     }
     
+    public function actionArchives($name, $s = POST_LIST_STYLE_GRID)
+    {
+        $this->forward('tag/posts');
+    }
+    
     public function actionPosts($name, $s = POST_LIST_STYLE_GRID)
     {
         $s = strip_tags(trim($s));
