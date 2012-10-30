@@ -177,9 +177,9 @@ class Post extends CActiveRecord
 	}
 	
 	
-	public function getSummary()
+	public function getSummary($len = 300)
 	{
-	    return $this->content;
+	    return mb_strimwidth($this->content, 0, $len, '...', app()->charset);
 	}
 	
 	public function getFilterSummary()
