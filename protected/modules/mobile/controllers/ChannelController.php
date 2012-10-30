@@ -28,7 +28,7 @@ class ChannelController extends MobileController
 	    $this->render('/post/list', $data);
 	}
 
-	public function actionDuanzi()
+	public function actionJoke()
 	{
 	    $data = self::fetchLatestPosts(CHANNEL_DUANZI);
 	     
@@ -63,34 +63,7 @@ class ChannelController extends MobileController
 	    cs()->registerMetaTag('all', 'robots');
 	    $this->render('/post/list', $data);
 	}
-	
-	public function actionFocus()
-	{
-	    $data = self::fetchLatestPosts(CHANNEL_FOCUS);
-	     
-	    $this->setSiteTitle('');
-	    cs()->registerMetaTag('all', 'robots');
-	    $this->render('/post/list', $data);
-	}
-	
-	public function actionMusic()
-	{
-	    $data = self::fetchLatestPosts(CHANNEL_MUSIC);
-	     
-	    $this->setSiteTitle('');
-	    cs()->registerMetaTag('all', 'robots');
-	    $this->render('/post/list', $data);
-	}
-	
-	public function actionMovie()
-	{
-	    $data = self::fetchLatestPosts(CHANNEL_MOVIE);
-	     
-	    $this->setSiteTitle('');
-	    cs()->registerMetaTag('all', 'robots');
-	    $this->render('/post/list', $data);
-	}
-	
+
 	private static function fetchLatestPosts($id)
 	{
 	    $id = (int)$id;
