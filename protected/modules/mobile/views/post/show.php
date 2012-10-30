@@ -13,7 +13,7 @@
     <div class="beta-create-form"><?php $this->renderPartial('/comment/_create_form', array('comment'=>$comment));?></div>
     <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'post'=>$post));?>
 </div>
-
+<a href="<?php echo aurl('mobile/default/info');?>">info</a>
 <script type="text/javascript">
 $(function(){
 	BetaPost.increaseVisitNums(<?php echo $post->id;?>, '<?php echo aurl('mobile/post/views');?>');
