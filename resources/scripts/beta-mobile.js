@@ -14,10 +14,11 @@ var Beta24 = {
 		else {
 			var imgurl = $(this).attr('data-image');
 			var title = $(this).attr('data-title');
+			var desc = $(this).attr('data-desc');
 			WeixinJSBridge.invoke('shareTimeline', {
 				'img_url': imgurl || '',
 				'link': location.href,
-				'desc': location.href,
+				'desc': desc,
 				'title': title
 			}, function(res) {
 				// 返回res.err_msg,取值
