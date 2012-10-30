@@ -27,7 +27,7 @@ class ChannelController extends Controller
         $this->forward('channel/duanzi');
     }
     
-    public function actionDuanzi()
+    public function actionDuanzi($s = POST_LIST_STYLE_GRID)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_DUANZI)), null, array('title'=>app()->name . ' » 挖笑话 Feed'));
         $this->pageTitle = '挖笑话 - 最冷笑话精选，每天分享笑话N枚，你的贴身开心果';

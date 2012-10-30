@@ -57,7 +57,7 @@ return array(
     'shortdesc' => '笑死人不偿命 - 每日精品笑话连载',
     
     'autoLoginDuration' => 3600 * 24 * 7,
-    'waterfall_post_count_page' => 32,
+    'waterfall_post_count_page' => 20,
     'grid_post_count_page' => 15,
     'video_count_page' => 10,
     'duanzi_count_page' => 20,
