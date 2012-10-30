@@ -314,8 +314,12 @@ class Post extends CActiveRecord
     public function getThumbnailLink($target = '_blank')
     {
         $html = '';
-        if ($this->getThumbnail())
-            $html = l(image($this->getThumbnail(), $this->title, array('class'=>'thumbnail')), $this->getUrl(), array('target'=>$target));
+        if ($this->getThumbnail()) {
+            $htmlOptions = array('class'=>'thumbnail');
+            if ($this->thumbnail_width) $htmlOptions['width'] = $this->thumbnail_width;
+            if ($this->thumbnail_height > 0) $htmlOptions['height'] = $this->thumbnail_height;
+            $html = l(image($this->getThumbnail(), $this->title, $htmlOptions), $this->getUrl(), array('target'=>$target));
+        }
         
         return $html;
     }
