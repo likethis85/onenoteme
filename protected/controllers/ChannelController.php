@@ -24,11 +24,24 @@ class ChannelController extends Controller
     
     public function actionJoke($page = 1, $s = POST_LIST_STYLE_GRID)
     {
-        $this->forward('channel/duanzi');
+        cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_DUANZI)), null, array('title'=>app()->name . ' » 挖笑话 Feed'));
+        $this->pageTitle = '挖笑话 - 最冷笑话精选，每天分享笑话N枚，你的贴身开心果';
+        $this->setDescription($this->pageTitle);
+        $this->setKeywords('挖笑话,糗事,内涵笑话,爆笑笑话,幽默笑话,笑话大全,爆笑短信,xiaohua,冷笑话,短信笑话,小笑话,笑话短信,经典笑话,冷笑话大全,短笑话,搞笑短信,笑话大全乐翻天,搞笑笑话,疯狂恶搞,爆笑童趣,雷人囧事');
+        
+        $this->channel = CHANNEL_DUANZI;
+        $count = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('duanzi_count_page');
+        $data = $this->fetchChannelPosts(CHANNEL_DUANZI, $count);
+        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'text_list';
+        if (request()->getIsAjaxRequest())
+            $this->renderPartial($view, $data);
+        else
+            $this->render($view, $data);
     }
     
     public function actionDuanzi($page = 1, $s = POST_LIST_STYLE_GRID)
     {
+        // 以后会删除此action
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_DUANZI)), null, array('title'=>app()->name . ' » 挖笑话 Feed'));
         $this->pageTitle = '挖笑话 - 最冷笑话精选，每天分享笑话N枚，你的贴身开心果';
         $this->setDescription($this->pageTitle);
