@@ -36,6 +36,7 @@ h1.post-title a:hover {color:#D14836;}
 
 .post-item {margin:0 0 10px; border:1px solid #EEEEEE; border-radius:8px; box-shadow:1px 1px 1px #CCCCCC; padding:10px; display:block;}
 .beta-title {margin:0; padding:0 35px 0 0; position:relative;}
+.post-item dd.summary a {display:block;}
 .post-item dd.summary {margin:0 0 10px; line-height:22px; font-size:14px; word-wrap:break-word;}
 .post-item dd.summary img {margin:10px auto; display:block;}
 .post-item .post-extra {text-align:right;}
