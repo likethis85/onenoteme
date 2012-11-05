@@ -19,7 +19,7 @@ return array(
     'channels' => array(
         CHANNEL_DUANZI => '挖笑话',
         CHANNEL_LENGTU => '挖趣图',
-        CHANNEL_GIRL => '挖福利',
+        CHANNEL_GIRL => '挖女神',
         CHANNEL_VIDEO => '挖视频',
         CHANNEL_MOVIE => '挖电影',
     ),
