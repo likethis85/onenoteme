@@ -21,7 +21,7 @@
             </div>
             <?php if (($model->channel_id == CHANNEL_LENGTU || $model->channel_id == CHANNEL_GIRL) && $model->thumbnail):?>
             <div class="post-image">
-                <div class="thumbnail">
+                <div class="thumb">
                 <?php if ($model->channel_id == CHANNEL_LENGTU): //只有冷图采用缩略图方式 ?>
                     <?php if ($model->imageIsLong):?>
                     <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" target="_blank" title="点击查看大图">

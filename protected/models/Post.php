@@ -306,7 +306,7 @@ class Post extends CActiveRecord
     {
         $html = '';
         if ($this->getBmiddlePic())
-            $html = l(image($this->getBmiddlePic(), $this->title, array('class'=>'bmiddle')), $this->getUrl(), array('target'=>$target));
+            $html = l(image($this->getBmiddlePic(), $this->title, array('class'=>'cd-bmiddle')), $this->getUrl(), array('target'=>$target));
         
         return $html;
     }
@@ -315,7 +315,7 @@ class Post extends CActiveRecord
     {
         $html = '';
         if ($this->getThumbnail()) {
-            $htmlOptions = array('class'=>'thumbnail');
+            $htmlOptions = array('class'=>'cd-thumbnail');
             if ($this->thumbnail_width) $htmlOptions['width'] = $this->thumbnail_width;
             if ($this->thumbnail_height > 0) $htmlOptions['height'] = $this->thumbnail_height;
             $html = l(image($this->getThumbnail(), $this->title, $htmlOptions), $this->getUrl(), array('target'=>$target));

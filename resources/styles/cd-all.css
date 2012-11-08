@@ -136,7 +136,7 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 /* post list */
 .post-list .post-item {margin-bottom:0; position:relative; z-index:1;}
 .post-item .post-image {margin-top:10px;}
-.post-item .post-image .thumbnail {position:relative;  z-index:1;}
+.post-item .post-image .thumb {position:relative;  z-index:1;}
 .post-image img.thumb {width:150px; max-height:250px; margin:0 auto;}
 .post-image img.original {max-width:550px; min-width:150px; min-height:150px; background:url(../images/big_loading.gif) no-repeat; opacity:1;}
 .post-image img.original:hover {opacity:.9;}
