@@ -106,7 +106,7 @@ class SiteController extends Controller
             if (empty($returnUrl))
                 $returnUrl = request()->getUrlReferrer();
             if (empty($returnUrl))
-                $returnUrl = $this->getMemberHomeUrl();
+                $returnUrl = CDBase::memberHomeUrl();
             $model->returnUrl = urlencode($returnUrl);
         }
         
