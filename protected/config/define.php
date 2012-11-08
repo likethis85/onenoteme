@@ -59,6 +59,11 @@ define('IMAGE_MAX_HEIGHT_FOLDING', 220);
 define('GIRL_THUMBNAIL_WIDTH', 200);
 define('GIRL_THUMBNAIL_HEIGHT', 200);
 
+define('GENDER_UNKOWN', 0);
+define('GENDER_FEMALE', 1);
+define('GENDER_MALE', 2);
+
+
 define('WEIBO_APP_KEY', '2981913360');
 define('WEIBO_APP_SECRET', 'f06fd0b530f3d9daa56db67e5e8610e1');
 define('QQT_APP_KEY', '801080691');

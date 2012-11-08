@@ -86,9 +86,9 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 .post-detail .comment-form .save-caption-loader {background:url(../images/small-loader.gif) no-repeat; width:24px; height:24px; position:absolute; top:47px; right:10px;}
 .post-detail .comment-form .counter {font-size:22px; position:absolute; top:50px; right:50px; font-weight:bold; font-family:'Helvetica Neue','Helvetica','Arial',sans-serif;}
 .post-detail #caption-error {margin:5px 0; padding:6px; color:#E44; background-color:#F4F4F6;}
-.button {width:78px; height:33px; border:0; margin:0; padding:0; background-color:transparent; background-position:-231px 0; color:white; font-weight:bold; cursor:pointer;}
-.button:hover {background-position:-310px 0;}
-.button:active {background-position:-389px 0;}
+input.button {width:78px; height:33px; border:0; margin:0; padding:0; background-color:transparent; background-position:-231px 0; color:white; font-weight:bold; cursor:pointer;}
+input.button:hover {background-position:-310px 0;}
+input.button:active {background-position:-389px 0;}
 .post-detail .comment-item {margin:0 0 5px; background-color:#F8F8F8;}
 .post-detail .comment-item .comment-arrows {margin:0 3px 0 0; padding:4px 3px; width:22px;}
 .post-detail .comment-item dl {margin:0; margin-left:32px; padding:10px;}
@@ -118,8 +118,8 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 .login-form .form-actions {padding-left:100px;}
 .login-form .controls label, .login-form .controls span, .login-form .controls p {font-size:12px;}
 .login-form .suggestion {color:gray; clear:both; margin-top:2px;}
-.quick-login-signup {margin-top:100px;}
 input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
+.quick-login-signup {margin-top:100px;}
 
 
 /* tag/list */

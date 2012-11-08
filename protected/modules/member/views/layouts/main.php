@@ -45,16 +45,16 @@
     <div class="cd-sidebar fleft sidebar-nav">
         <div class="user-avatar">
             <a href="<?php echo aurl('member/profile/avatar');?>"><img src="<?php echo $this->profile->avatar_large;?>" /></a>
-            <h4><?php echo $this->username;?></h4>
+            <h5><?php echo $this->nickname;?></h5>
         </div>
         <ul class="member-nav">
             <li><a href="<?php echo aurl('member/post/index');?>" <?php if ($this->channel == 'post') echo 'class="active"';?>>我的段子</a></li>
             <li><a href="<?php echo aurl('member/post/favorite');?>" <?php if ($this->channel == 'favorite') echo 'class="active"';?>>我的收藏</a></li>
             <li><a href="<?php echo aurl('member/comment/index');?>" <?php if ($this->channel == 'comment') echo 'class="active"';?>>我的评论</a></li>
             <li><div class="space10px"></div></li>
-            <li><a href="<?php echo aurl('member/profile/index');?>" <?php if ($this->channel == 'home') echo 'class="active"';?>>基本资料</a></li>
+            <li><a href="<?php echo aurl('member/profile/index');?>" <?php if ($this->channel == 'profile') echo 'class="active"';?>>基本资料</a></li>
             <li><a href="<?php echo aurl('member/profile/avatar');?>" <?php if ($this->channel == 'avatar') echo 'class="active"';?>>修改头像</a></li>
-            <li><a href="<?php echo aurl('member/profile/email');?>" <?php if ($this->channel == 'email') echo 'class="active"';?>>修改邮箱</a></li>
+            <li><a href="<?php echo aurl('member/profile/nickname');?>" <?php if ($this->channel == 'nickname') echo 'class="active"';?>>修改昵称</a></li>
             <li><a href="<?php echo aurl('member/profile/passwd');?>" <?php if ($this->channel == 'passwd') echo 'class="active"';?>>修改密码</a></li>
             <li><a href="<?php echo CDBase::logoutUrl();?>">退出登录</a></li>
         </ul>
@@ -85,6 +85,7 @@
 <?php
 cs()->registerCoreScript('jquery');
 cs()->registerScriptFile(sbu('scripts/cd-member.js'), CClientScript::POS_END);
+cs()->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END);
 ?>
 
 

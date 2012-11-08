@@ -5,6 +5,7 @@
  *
  * @property integer $userID
  * @property string $username
+ * @property string $nickname
  * @property MemberUser $user
  * @property UserProfile $profile
  */
@@ -25,6 +26,11 @@ class MemberController extends CController
 	}
 	
 	public function getUsername()
+	{
+	    return $this->user->username;
+	}
+	
+	public function getNickname()
 	{
 	    return user()->name;
 	}

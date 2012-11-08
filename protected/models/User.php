@@ -84,7 +84,6 @@ class User extends CActiveRecord
 		    'token' => '标识'
 		);
 	}
-	
 
 	public function getDisplayName()
 	{

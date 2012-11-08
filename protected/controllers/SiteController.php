@@ -87,7 +87,7 @@ class SiteController extends Controller
     {
         if (!user()->getIsGuest()) {
             $returnUrl = strip_tags(trim($url));
-            if (empty($returnUrl)) $returnUrl = $this->getMemberHomeUrl();
+            if (empty($returnUrl)) $returnUrl = CDBase::memberHomeUrl();
             request()->redirect($returnUrl);
             exit(0);
         }
@@ -130,7 +130,7 @@ class SiteController extends Controller
     public function actionSignup()
     {
         if (!user()->getIsGuest()) {
-            $this->redirect($this->getMemberHomeUrl());
+            $this->redirect(CDBase::memberHomeUrl());
             exit(0);
         }
         

@@ -9,4 +9,14 @@ class MemberUser extends User
     {
         return parent::model($className);
     }
+
+    /**
+     * @return array relational rules.
+     */
+    public function relations()
+    {
+        return array_merge(parent::relations(), array(
+            'profile' => array(self::HAS_ONE, 'MemberUserProfile', 'user_id'),
+        ));
+    }
 }

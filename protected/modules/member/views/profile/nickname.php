@@ -12,11 +12,11 @@
         <?php echo CHtml::activeTextField($model, 'username', array('readonly'=>'readonly', 'class'=>'uneditable-input'));?>
     </div>
 </div>
-<div class="control-group <?php if($model->hasErrors('password')) echo 'error';?>">
-    <?php echo CHtml::activeLabel($model, 'password', array('class'=>'control-label'));?>
+<div class="control-group <?php if($model->hasErrors('screen_name')) echo 'error';?>">
+    <?php echo CHtml::activeLabel($model, 'screen_name', array('class'=>'control-label'));?>
     <div class="controls">
-        <?php echo CHtml::activePasswordField($model, 'password');?>
-        <?php if($model->hasErrors('password')):?><p class="help-block"><?php echo $model->getError('password');?></p><?php endif;?>
+        <?php echo CHtml::activeTextField($model, 'screen_name');?>
+        <?php if($model->hasErrors('screen_name')):?><p class="help-block"><?php echo $model->getError('screen_name');?></p><?php endif;?>
     </div>
 </div>
 <div class="form-actions">

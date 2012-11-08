@@ -1,6 +1,10 @@
 @CHARSET "UTF-8";
 
 body {background-color:#FFFFFF;}
+
+.member-form .control-label {width:100px;}
+.member-form .controls {margin-left:120px;}
+.member-form .form-actions {padding-left:120px;}
 .cd-sidebar {width:180px;}
 .cd-container {width:760px;}
 

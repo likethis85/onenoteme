@@ -15,9 +15,27 @@
  * @property string $avatar_large
  * @property integer $weibo_uid
  * @property integer $qqt_uid
+ *
+ * @property string $genderLabel
  */
 class UserProfile extends CActiveRecord
 {
+    public static function genders()
+    {
+        return array(GENDER_UNKOWN, GENDER_FEMALE, GENDER_MALE);
+    }
+    
+    public static function genderLabel($gender = null)
+    {
+        $labels = array(
+                GENDER_UNKOWN => '保密',
+                GENDER_FEMALE => '妹纸',
+                GENDER_MALE => '帅锅',
+        );
+    
+        return ($gender === null) ? $labels : $labels[$gender];
+    }
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return UserProfile the static model class
@@ -41,13 +59,14 @@ class UserProfile extends CActiveRecord
 	public function rules()
 	{
 		return array(
+    		array('user_id', 'unique'),
 			array('user_id', 'required'),
 			array('user_id, province, city', 'numerical', 'integerOnly'=>true),
 			array('location', 'length', 'max'=>100),
 			array('weibo_uid, qqt_uid', 'length', 'max'=>50),
 			array('description, website, image_url, avatar_large', 'length', 'max'=>250),
-			array('gender', 'safe'),
-    		array('user_id', 'unique'),
+	        array('gender', 'in', 'range'=>self::genders()),
+			array('description', 'safe'),
 		);
 	}
 
@@ -79,6 +98,11 @@ class UserProfile extends CActiveRecord
 		    'weibo_uid' => '新浪微博UID',
 		    'qqt_uid' => '腾讯微博UID',
 		);
+	}
+	
+	public function getGenderLabel()
+	{
+	    return self::genderLabel($this->gender);
 	}
 
 }
