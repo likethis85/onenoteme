@@ -40,9 +40,11 @@
     </div>
 </div>
 <div class="cd-wrapper cd-main">
+    <?php $this->widget('zii.widgets.CBreadcrumbs', array('links'=>$this->breadcrumbs, 'skin'=>'member'));?>
     <div class="cd-sidebar fleft sidebar-nav">
         <div class="user-avatar">
             <a href="<?php echo aurl('member/profile/avatar');?>"><img src="<?php echo $this->profile->avatar_large;?>" /></a>
+            <h4><a href="<?php echo aurl('member/profile/index');?>"><?php echo $this->username;?></a></h4>
         </div>
         <ul class="member-nav">
             <li><a href="<?php echo aurl('profile/index');?>" <?php if ($this->channel == 'home') echo 'class="active"';?>>我的基本资料</a></li>
@@ -57,6 +59,7 @@
         </ul>
     </div>
     <div class="cd-container fright">
+        <h2 class="channel-title"><?php echo $this->title;?></h2>
         <?php echo $content;?>
     </div>
     <div class="clear"></div>
