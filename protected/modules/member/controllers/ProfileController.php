@@ -3,33 +3,29 @@ class ProfileController extends MemberController
 {
     public function actionIndex()
     {
-        $this->breadcrumbs[] = '我的基本资料';
-        $this->channel = 'home';
-        $this->setSiteTitle('我的基本资料');
-        $this->render('index');
+        $this->breadcrumbs[] = $this->title = $this->siteTitle = '基本资料';
+        $this->channel = 'profile';
+        $this->render('profile');
     }
     
     public function actionEmail()
     {
-        $this->breadcrumbs[] = '修改邮箱';
+        $this->breadcrumbs[] = $this->title = $this->siteTitle = '修改邮箱';
         $this->channel = 'email';
-        $this->setSiteTitle('修改邮箱');
-        $this->render('index');
+        $this->render('email');
     }
     
     public function actionPasswd()
     {
-        $this->breadcrumbs[] = '修改密码';
+        $this->breadcrumbs[] = $this->title = $this->siteTitle = '修改密码';
         $this->channel = 'passwd';
-        $this->setSiteTitle('修改密码');
-        $this->render('index');
+        $this->render('passwd');
     }
     
     public function actionAvatar()
     {
-        $this->breadcrumbs[] = $this->title = '修改头像';
+        $this->breadcrumbs[] = $this->title = $this->siteTitle = '修改头像';
         $this->channel = 'avatar';
-        $this->setSiteTitle('修改头像');
-        $this->render('index');
+        $this->render('avatar');
     }
 }

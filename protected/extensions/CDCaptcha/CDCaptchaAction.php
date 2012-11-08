@@ -36,7 +36,7 @@ class CDCaptchaAction extends CCaptchaAction
             $foreColor = imagecolorallocate($image, mt_rand(0, 255), mt_rand(0, 255), mt_rand(0, 255));
             $angle = mt_rand(- 20, 20);
             $x = 5 + $fontSize * $i;
-            $y = $this->height;
+            $y = $this->height / 2 + $fontSize / 2;
             imagettftext($image, $fontSize, $angle, $x, $y, $foreColor, $this->fontFile, $code[$i]);
             imageline($image, mt_rand(0, $this->width), mt_rand(0, $this->height), mt_rand(0, $this->width), mt_rand(0, $this->height), $foreColor);
         }

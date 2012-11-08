@@ -13,7 +13,7 @@ body {background-color:#ECE5D8;}
 .panel.bottom15px {margin-bottom:15px;}
 
 /* hot-keyword */
-.hot-keyword {list-style:none; margin:0;}
+.hot-keyword {list-style:none; margin:0; padding:0;}
 .hot-keyword li {display:block; float:left; margin-right:10px; height:25px; line-height:25px;}
 .hot-keyword .announce {margin-left:10px;}
 
@@ -113,17 +113,11 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 /* site/signup, user signup */
 
 /* login form */
-.login-signup h2 {margin:0 auto 30px; line-heig2ht:0;}
-.login-form {padding-bottom:100px;}
-.login-form .cd-control-group {margin:18px 0;}
-.login-form .cd-control-group .cd-control-label {width:70px;}
-.login-form .cd-controls label {font-size:12px;}
-.login-form .cd-controls.agreement input, .login-form .cd-controls.rememberme input {margin-bottom:2px;}
-.login-form .cd-controls.agreement label, .login-form .cd-controls.rememberme label {margin-left:5px;}
-.login-form .suggestion {color:gray; font-size:12px; clear:both; margin-top:2px;}
-.login-form .action-buttons {padding-left:90px;}
-.login-form .action-buttons .cd-btn {padding:4px 18px;}
-.login-form .refresh-captcha {font-size:12px;}
+.login-form .control-label {width:80px;}
+.login-form .controls {margin-left:100px;}
+.login-form .form-actions {padding-left:100px;}
+.login-form .controls label, .login-form .controls span, .login-form .controls p {font-size:12px;}
+.login-form .suggestion {color:gray; clear:both; margin-top:2px;}
 .quick-login-signup {margin-top:100px;}
 input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 
@@ -158,7 +152,7 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .post-item .post-tags a:hover {color:#330000;}
 .post-list .item-shadow {height:15px; background-position:0 -275px;}
 .post-item .item-toolbar {margin:15px 0 0; position:relative; z-index:1;}
-.post-item .item-toolbar ul {list-style:none; margin:0;}
+.post-item .item-toolbar ul {list-style:none; margin:0; padding:0;}
 .item-toolbar ul a {display:block; height:28px; line-height:30px; text-indent:36px; width:80px; border-radius:3px; border:1px solid #DFD5CB; color:#9E8C7B;}
 .item-toolbar ul a:hover {box-shadow:0 1px 2px rgba(0, 0, 0, 0.2); border-color:#A78B6F;}
 .item-toolbar ul a:active, .item-toolbar ul a.voted {background-color:#F3EFE7; border-color:#cabdb0; box-shadow:0 1px 1px rgba(0, 0, 0, 0.2) inset;color:#BF4131;}

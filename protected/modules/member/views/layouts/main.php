@@ -7,6 +7,7 @@
 <meta name="copyright" content="Copyright (c) 2011-2912 waduanzi.com All Rights Reserved." />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <link rel="shortcut icon" href="<?php echo sbu('images/favicon.ico');?>" type="image/vnd.microsoft.icon" />
+<link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('libs/bootstrap/css/bootstrap.min.css');?>" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-basic.css');?>" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-member.css');?>" />
 </head>
@@ -40,26 +41,26 @@
     </div>
 </div>
 <div class="cd-wrapper cd-main">
-    <?php $this->widget('zii.widgets.CBreadcrumbs', array('links'=>$this->breadcrumbs, 'skin'=>'member'));?>
+    
     <div class="cd-sidebar fleft sidebar-nav">
         <div class="user-avatar">
             <a href="<?php echo aurl('member/profile/avatar');?>"><img src="<?php echo $this->profile->avatar_large;?>" /></a>
-            <h4><a href="<?php echo aurl('member/profile/index');?>"><?php echo $this->username;?></a></h4>
+            <h4><?php echo $this->username;?></h4>
         </div>
         <ul class="member-nav">
-            <li><a href="<?php echo aurl('profile/index');?>" <?php if ($this->channel == 'home') echo 'class="active"';?>>我的基本资料</a></li>
-            <li><a href="#">我发布的段子</a></li>
-            <li><a href="#">我的收藏</a></li>
-            <li><a href="#">我的评论</a></li>
+            <li><a href="<?php echo aurl('member/post/index');?>" <?php if ($this->channel == 'post') echo 'class="active"';?>>我的段子</a></li>
+            <li><a href="<?php echo aurl('member/post/favorite');?>" <?php if ($this->channel == 'favorite') echo 'class="active"';?>>我的收藏</a></li>
+            <li><a href="<?php echo aurl('member/comment/index');?>" <?php if ($this->channel == 'comment') echo 'class="active"';?>>我的评论</a></li>
             <li><div class="space10px"></div></li>
-            <li><a href="<?php echo aurl('profile/avatar');?>" <?php if ($this->channel == 'avatar') echo 'class="active"';?>>修改头像</a></li>
-            <li><a href="<?php echo aurl('profile/email');?>" <?php if ($this->channel == 'email') echo 'class="active"';?>>修改邮箱</a></li>
-            <li><a href="<?php echo aurl('profile/passwd');?>" <?php if ($this->channel == 'passwd') echo 'class="active"';?>>修改密码</a></li>
+            <li><a href="<?php echo aurl('member/profile/index');?>" <?php if ($this->channel == 'home') echo 'class="active"';?>>基本资料</a></li>
+            <li><a href="<?php echo aurl('member/profile/avatar');?>" <?php if ($this->channel == 'avatar') echo 'class="active"';?>>修改头像</a></li>
+            <li><a href="<?php echo aurl('member/profile/email');?>" <?php if ($this->channel == 'email') echo 'class="active"';?>>修改邮箱</a></li>
+            <li><a href="<?php echo aurl('member/profile/passwd');?>" <?php if ($this->channel == 'passwd') echo 'class="active"';?>>修改密码</a></li>
             <li><a href="<?php echo CDBase::logoutUrl();?>">退出登录</a></li>
         </ul>
     </div>
     <div class="cd-container fright">
-        <h2 class="channel-title"><?php echo $this->title;?></h2>
+        <?php $this->widget('zii.widgets.CBreadcrumbs', array('links'=>$this->breadcrumbs, 'skin'=>'member'));?>
         <?php echo $content;?>
     </div>
     <div class="clear"></div>
