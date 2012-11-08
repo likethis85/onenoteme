@@ -89,7 +89,7 @@
 <script type="text/javascript">
 $(function(){
 	Waduanzi.initDialog();
-	$('.post-image').on('click', '.thumbnail-more, .thumbnail a.size-switcher', Waduanzi.switchImageSize);
+	$('.post-image').on('click', '.thumbnail-more, .thumb a.size-switcher', Waduanzi.switchImageSize);
 	$('.item-toolbar').on('click', 'a.upscore, a.downscore', Waduanzi.postUpDownScore);
 	$('.item-toolbar').on('mouseenter', 'a.share, .sharebox', Waduanzi.showShareBox);
 	$('.item-toolbar').on('mouseleave', 'a.share, .sharebox', Waduanzi.hideShareBox);
