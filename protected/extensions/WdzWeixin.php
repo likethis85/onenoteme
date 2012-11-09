@@ -4,7 +4,8 @@ class WdzWeixin extends CDWeixin
     public function processRequest($data)
     {
         $text = 'hello wordl!!!!';
-        echo $this->outputText($data->ToUserName, $data->FromUserName, $text);
+        $xml = $this->outputText($data->ToUserName, $data->FromUserName, $text);
+        file_put_contents(app()->runtimePath . '/wx.txt', $xml);
     }
     
     public function errorHandler($errno, $error, $file = '', $line = 0)
