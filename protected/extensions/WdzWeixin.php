@@ -15,7 +15,7 @@ class WdzWeixin extends CDWeixin
         $xml = $this->outputNews($text, $posts);
         header('Content-Type: application/xml');
         echo $xml;
-        file_put_contents(app()->runtimePath . 'wx.txt', $xml;
+        file_put_contents(app()->runtimePath . 'wx.txt', $xml);
     }
     
     public function errorHandler($errno, $error, $file = '', $line = 0)
