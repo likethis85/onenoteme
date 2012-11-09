@@ -49,16 +49,17 @@ abstract class CDWeixin
         return $this->msgType == self::MSG_TYPE_LOCATION;
     }
 
+    
     public static function outputText($toUserName, $fromUserName, $content)
     {
         $text = '<xml>
-        <ToUserName><![CDATA[%s]]></ToUserName>
-        <FromUserName><![CDATA[%s]]></FromUserName>
-        <CreateTime>%s</CreateTime>
-        <MsgType><![CDATA[%s]]></MsgType>
-        <Content><![CDATA[%s]]></Content>
-        <FuncFlag>0</FuncFlag>
-        </xml>';
+                    <ToUserName><![CDATA[%s]]></ToUserName>
+                    <FromUserName><![CDATA[%s]]></FromUserName>
+                    <CreateTime>%s</CreateTime>
+                    <MsgType><![CDATA[%s]]></MsgType>
+                    <Content><![CDATA[%s]]></Content>
+                    <FuncFlag>0</FuncFlag>
+                </xml>';
     
         $text = sprintf($text, $toUserName, $fromUserName, time(), self::REPLY_TYPE_TEXT, $content);
         return $text;
