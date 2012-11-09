@@ -5,19 +5,22 @@ class WdzWeixin extends CDWeixin
     {
         $input = (int)$data->Content;
         $method = 'method' . $input;
-        $this->$method();
+        if (method_exists($this, $method))
+            $this->$method();
+        else
+            $this->other();
     }
     
     public function errorHandler($errno, $error, $file = '', $line = 0)
     {
-        $log = sprintf('%s - %s - %s - %s', $errno, $error, $file, $line);
-        file_put_contents(app()->runtimePath . '/wx1.txt', $log);
+//         $log = sprintf('%s - %s - %s - %s', $errno, $error, $file, $line);
+//         file_put_contents(app()->runtimePath . '/wx1.txt', $log);
     }
     
     public function errorException(Exception $e)
     {
-        $log = sprintf('%s - %s - %s - %s', $e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
-        file_put_contents(app()->runtimePath . '/wx2.txt', $log);
+//         $log = sprintf('%s - %s - %s - %s', $e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
+//         file_put_contents(app()->runtimePath . '/wx2.txt', $log);
     }
     
     private function method1()
@@ -34,10 +37,9 @@ class WdzWeixin extends CDWeixin
         $xml = $this->outputNews($text, $posts);
         header('Content-Type: application/xml');
         echo $xml;
-        file_put_contents(app()->runtimePath . '/wx.txt', $xml);
     }
     
-    public function method2()
+    private function method2()
     {
         $text = '挖趣图 - 最搞笑的，最好玩的，最内涵的图片精选';
         $posts = array(
@@ -85,7 +87,7 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
-    public function __call($name, $arguments)
+    public function other()
     {
         $text = "您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，与大家一起分享哟～\n\n回复 1 查看挖笑话；\n回复 2 查看挖趣图；\n回复 3 查看挖女神；\n回复 0 查看挖段子手机版；";
         $xml = $this->outputText($text);
