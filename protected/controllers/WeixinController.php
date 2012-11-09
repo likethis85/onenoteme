@@ -3,7 +3,7 @@ class WeixinController extends Controller
 {
     const TOKEN = 'waduanzi.com';
     
-    public function actionIndex($echostr)
+    public function actionIndex()
     {
         if (request()->getIsPostRequest()) {
             $data = $this->parsePostRequestData();
