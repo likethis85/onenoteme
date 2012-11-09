@@ -19,13 +19,11 @@ class WdzWeixin extends CDWeixin
     
     public function errorHandler($errno, $error, $file = '', $line = 0)
     {
-        $log = sprintf('%s - %s - %s - %s', $errno, $error, $file, $line);
-        file_put_contents(app()->runtimePath . '/wx1.txt', $log);
+        // 错误处理
     }
     
     public function errorException(Exception $exception)
     {
-        $log = sprintf('%s - %s - %s - %s', $exception->getCode(), $exception->getMessage(), $exception->getFile(), $exception->getLine());
-        file_put_contents(app()->runtimePath . '/wx2.txt', $log);
+        // 异常处理
     }
 }

@@ -1,5 +1,5 @@
 <?php
-abstract class CDWeixin
+class CDWeixin
 {
     const MSG_TYPE_TEXT = 'text';
     const MSG_TYPE_LOCATION = 'location';
@@ -7,9 +7,7 @@ abstract class CDWeixin
     const REPLY_TYPE_TEXT = 'text';
     const REPLY_TYPE_NEWS = 'news';
 
-    public $msgType;
-    private $_msgToUser;
-    private $_msgFromUser;
+    private $_postData;
     private $_token;
     
     public function __construct($token)
@@ -24,14 +22,17 @@ abstract class CDWeixin
             set_exception_handler(array($this, 'exceptionHandler'));
         
         $this->_token = $token;
+        $this->parsePostRequestData();
     }
     
     public function run()
     {
         if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
-            $data = $this->parsePostRequestData();
-            if ($data)
-                $this->processRequest($data);
+            if ($this->_data && call_user_func(array($this, 'beforeProcess') !== false)) {
+                $this->processRequest($this->_data);
+            }
+            else
+                throw new Exception('POST 数据不正确或者beforeProcess方法没有返回true');
         }
         else
             $this->sourceCheck();
@@ -39,16 +40,14 @@ abstract class CDWeixin
         exit(0);
     }
     
-    public abstract function processRequest($data);
-    
     public function isTextMsg()
     {
-        return $this->msgType == self::MSG_TYPE_TEXT;
+        return $this->_postData['MsgType'] == self::MSG_TYPE_TEXT;
     }
     
     public function isLocationMsg()
     {
-        return $this->msgType == self::MSG_TYPE_LOCATION;
+        return $this->_postData['MsgType'] == self::MSG_TYPE_LOCATION;
     }
 
     public function outputText($content)
@@ -62,7 +61,7 @@ abstract class CDWeixin
                 <FuncFlag>0</FuncFlag>
             </xml>';
     
-        $text = sprintf($textTpl, $this->_msgFromUser, $this->_msgToUser, time(), self::REPLY_TYPE_TEXT, $content);
+        $text = sprintf($textTpl, $this->_postData['FromUserNamer'], $this->_postData['ToUserNamer'], time(), self::REPLY_TYPE_TEXT, $content);
         return $text;
     }
     
@@ -94,25 +93,36 @@ abstract class CDWeixin
                 throw new Exception('$posts 数据结构错误');
         }
         
-        $text = sprintf($textTpl, $this->_msgFromUser, $this->_msgToUser, time(), self::REPLY_TYPE_NEWS, $content, count($posts), $items);
+        $text = sprintf($textTpl, $this->_postData['FromUserNamer'], $this->_postData['ToUserNamer'], time(), self::REPLY_TYPE_NEWS, $content, count($posts), $items);
         return $text;
     }
     
     
+    public function getPostData()
+    {
+        return $this->_postData;
+    }
     
+    protected function beforeProcess()
+    {
+        return true;
+    }
     
-    
-    
+    protected function afterProcess()
+    {
+    }
 
+    protected function processRequest($data)
+    {
+        throw new Exception('此方法必须被重写');
+    }
+    
     private function parsePostRequestData()
     {
         $rawData = $GLOBALS['HTTP_RAW_POST_DATA'];
         $data = simplexml_load_string($rawData, 'SimpleXMLElement', LIBXML_NOCDATA);
-        if ($data !== false) {
-            $this->msgType = $data->MsgType;
-            $this->_msgToUser = $data->ToUserName;
-            $this->_msgFromUser = $data->FromUserName;
-        }
+        if ($data !== false)
+            $this->_postData = $data;
     
         return $data;
     }
@@ -131,13 +141,16 @@ abstract class CDWeixin
         return $sig == $signature;
     }
     
-    public function sourceCheck()
+    private function sourceCheck()
     {
         if ($this->checkSignature()) {
             $echoStr = $_GET['echostr'];
             echo $echostr;
         }
+        else
+            throw new Exception('签名不正确');
     
         exit(0);
     }
 }
+
