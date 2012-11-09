@@ -9,7 +9,7 @@
     <tbody>
         <?php foreach ($comments as $model):?>
         <tr>
-            <td class="acenter"><?php echo $model->id;?></td>
+            <td class="acenter"><p><?php echo $model->id;?></p><?php echo $model->stateHtml;?></td>
             <td>
                 <p><?php echo $model->post->getTitleLink(0);?></p>
                 <?php echo $model->filterContent;?>

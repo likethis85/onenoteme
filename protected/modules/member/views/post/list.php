@@ -1,18 +1,19 @@
-<table class="table table-striped table-bordered member-table">
+<table class="table table-striped table-bordered member-table mypost-table">
     <thead>
         <tr>
             <th class="span1 acenter">ID</th>
             <th>标题</th>
-            <th class="span1 acenter">操作</th>
+            <th class="span2">操作</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach ($posts as $model):?>
         <tr>
             <td class="acenter"><?php echo $model->id;?></td>
-            <td><?php echo $model->getTitleLink(0);?></td>
-            <td class="acenter">
-                <a class="btn btn-mini" href="<?php echo $model->unlikeUrl;?>" target="_blank"><i class="icon-trash"></i></a>
+            <td><?php echo $model->stateHtml . $model->getTitleLink(0);?></td>
+            <td>
+                <?php echo $model->editLink;?>
+                <?php echo $model->deleteLink;?>
             </td>
         </tr>
         <?php endforeach;?>

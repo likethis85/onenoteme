@@ -2,7 +2,9 @@
 /**
  *
  * @author chendong
- * @property string $deleteUrl
+ * @property string $deleteLink
+ * @property string $editLink
+ * @property string $stateHtml
  */
 class MemberPost extends Post
 {
@@ -15,9 +17,38 @@ class MemberPost extends Post
         return parent::model($className);
     }
 
-    public function getDeleteUrl()
+    public function getDeleteLink()
     {
-        return aurl('member/post/delete', array('id'=>$this->id));
+        $html = '';
+        if ($this->state == POST_STATE_UNVERIFY) {
+            $url = aurl('member/post/delete', array('id'=>$this->id));
+            $html = l('<i class="icon-trash icon-white"></i>', $url, array('class'=>'btn btn-mini btn-danger'));
+        }
+        
+        return $html;
+    }
+
+    public function getEditLink()
+    {
+        $html = '';
+        if ($this->state == POST_STATE_UNVERIFY) {
+            $url = aurl('member/post/create', array('id'=>$this->id));
+            $html = l('<i class="icon-edit icon-white"></i>', $url, array('class'=>'btn btn-mini btn-primary'));
+        }
+        
+        return $html;
+    }
+    
+    public function getStateHtml()
+    {
+        $classes = array(
+            POST_STATE_ENABLED => 'label label-success',
+            POST_STATE_DISABLED => 'label',
+            POST_STATE_UNVERIFY => 'label label-important',
+        );
+        $class = $classes[$this->state];
+        
+        return sprintf('<span class="%s">%s</span>', $class, $this->getStateLabel());
     }
     
     public static function fetchFavoritePosts($userID, $page = 1, $count = 15)

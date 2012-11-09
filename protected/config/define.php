@@ -31,9 +31,9 @@ define('TABLE_WEIBO_ID', '{{weibo_id}}');
 
 define('POST_STATE_ENABLED', 1);
 define('POST_STATE_DISABLED', 0);
+define('POST_STATE_UNVERIFY', -1);
 define('COMMENT_STATE_ENABLED', 1);
 define('COMMENT_STATE_DISABLED', 0);
-define('COMMENT_STATE_NOT_VERIFY', -1);
 
 /* user state */
 define('USER_STATE_UNVERIFY', 0);

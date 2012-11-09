@@ -16,6 +16,17 @@ class MemberComment extends Comment
     }
 
 
+    public function getStateHtml()
+    {
+        $classes = array(
+            COMMENT_STATE_ENABLED => 'label label-success',
+            COMMENT_STATE_DISABLED => 'label',
+        );
+        $class = $classes[$this->state];
+    
+        return sprintf('<span class="%s">%s</span>', $class, $this->getStateLabel());
+    }
+    
     public function getDeleteUrl()
     {
         return aurl('member/post/delete', array('id'=>$this->id));

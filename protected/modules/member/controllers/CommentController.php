@@ -3,7 +3,7 @@ class CommentController extends MemberController
 {
     public function actionIndex($page = 1)
     {
-        $count = 15;
+        $count = 10;
         $pages = new CPagination($this->user->commentCount);
         $pages->setPageSize($count);
         $offset = ($pages->currentPage - 1) * $count;
@@ -17,7 +17,7 @@ class CommentController extends MemberController
         
         $this->breadcrumbs[] = $this->title = $this->siteTitle = '我的评论';
         $this->channel = 'comment';
-        $this->render('index', array(
+        $this->render('list', array(
             'comments' => $comments,
             'pages' => $pages,
         ));

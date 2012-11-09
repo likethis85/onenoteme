@@ -28,7 +28,9 @@ class MemberUser extends User
         return array_merge(parent::relations(), array(
             'profile' => array(self::HAS_ONE, 'MemberUserProfile', 'user_id'),
             'comments' => array(self::HAS_MANY, 'MemberComment', 'user_id'),
-            'commentCount' => array(self::STAT, 'Comment', 'post_id'),
+            'commentCount' => array(self::STAT, 'Comment', 'user_id'),
+            'posts' => array(self::HAS_MANY, 'MemberPost', 'user_id'),
+            'postCount' => array(self::STAT, 'Post', 'user_id'),
             'favoritePostsCount' => array(self::STAT, 'Post', '{{post_favorite}}(user_id, post_id)',
                 'condition' => 'state = ' . POST_STATE_ENABLED,
             ),

@@ -95,6 +95,17 @@ return array(
 		    'showScriptName' => false,
 //             'cacheID' => 'cache',
             'rules' => array(
+                'http://www.waduanzi.cn/' => 'site/index',
+                'http://www.waduanzi.cn/<_a:(login|signup|logout|bdmap|links)>' => 'site/<_a>',
+                'http://www.waduanzi.cn/<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',
+                'http://www.waduanzi.cn/<_a:(duanzi|lengtu|girl|video)>' => 'channel/<_a>',
+                'http://www.waduanzi.cn/post-<id:\d+>' => 'post/show',
+                'http://www.waduanzi.cn/post/<_a>' => 'post/<_a>',
+                'http://www.waduanzi.cn/originalpic/<id:\d+>' => 'post/bigpic',
+                'http://www.waduanzi.cn/tags' => 'tag/list',
+                'http://www.waduanzi.cn/tag-<name:.+>' => 'tag/posts',
+                'http://www.waduanzi.cn/feed/<cid:\d+>' => 'feed/channel',
+                    
                 'http://wap.waduanzi.cn/' => 'wap/index',
                 'http://wap.waduanzi.cn/<_a>' => 'wap/<_a>',
             
@@ -111,16 +122,6 @@ return array(
                 'http://my.waduanzi.cn/<_c>/<_a>' => 'member/<_c>/<_a>',
                     
 //                 'http://<_a:(joke|lengtu|girl|video)>.waduanzi.cn/' => 'channel/<_a>',
-            
-                'http://www.waduanzi.cn/' => 'site/index',
-                'http://www.waduanzi.cn/<_a:(login|signup|logout|bdmap|links)>' => 'site/<_a>',
-                'http://www.waduanzi.cn/<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',
-                'http://www.waduanzi.cn/<_a:(duanzi|lengtu|girl|video)>' => 'channel/<_a>',
-                'http://www.waduanzi.cn/post-<id:\d+>' => 'post/show',
-                'http://www.waduanzi.cn/originalpic/<id:\d+>' => 'post/bigpic',
-                'http://www.waduanzi.cn/tags' => 'tag/list',
-                'http://www.waduanzi.cn/tag-<name:.+>' => 'tag/posts',
-                'http://www.waduanzi.cn/feed/<cid:\d+>' => 'feed/channel',
             ),
         ),
         'session' => array(

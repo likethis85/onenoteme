@@ -32,6 +32,8 @@
  * @property integer $homeshow
  * @property integer $recommend
  * @property integer $hottest
+ *
+ * @property string $stateLabel;
  * @property string $url
  * @property string $filterSummary
  * @property string $filterContent
@@ -44,7 +46,10 @@
  * @property string $shortDate
  * @property string $shortTime
  * @property string $authorName
+ * @property string $subTitle
  * @property string $titleLink
+ * @property string $likeUrl
+ * @property string $unlikeUrl
  * @property string $bmiddlePic
  * @property string $originalPic
  * @property string $thumbnail
@@ -61,6 +66,22 @@ class Post extends CActiveRecord
     public static function channels()
     {
         return array(CHANNEL_DUANZI, CHANNEL_LENGTU, CHANNEL_GIRL, CHANNEL_VIDEO);
+    }
+    
+    public static function states()
+    {
+        return array(POST_STATE_ENABLED, POST_STATE_DISABLED, POST_STATE_UNVERIFY);
+    }
+    
+    public static function stateLabels($state = null)
+    {
+        $labels = array(
+            POST_STATE_ENABLED => '已上线',
+            POST_STATE_DISABLED => '未显示',
+            POST_STATE_UNVERIFY => '未审核',
+        );
+        
+        return $state === null ? $labels : $labels[$state];
     }
     
 	/**
@@ -144,7 +165,6 @@ class Post extends CActiveRecord
 	        'hottest' => '热门',
 		);
 	}
-	
 
 	public function scopes()
 	{
@@ -169,6 +189,11 @@ class Post extends CActiveRecord
                 'limit' => 10,
             ),
 	    );
+	}
+	
+	public function getStateLabel()
+	{
+	    return self::stateLabels($this->state);
 	}
 	
 	public function getUrl($absolute = true)
@@ -238,7 +263,6 @@ class Post extends CActiveRecord
         return date($format, $this->create_time);
     }
     
-
     public function getShortDate()
     {
         $format = param('formatShortDate');
@@ -252,7 +276,6 @@ class Post extends CActiveRecord
          
         return $this->getCreateTime($format);
     }
-    
     
     public function getAuthorName()
     {
@@ -272,6 +295,16 @@ class Post extends CActiveRecord
     {
         $title = $this->getSubTitle($len);
         return l(h($title), $this->getUrl(), array('target'=>$target));
+    }
+
+    public function getLikeUrl()
+    {
+        return aurl('post/like', array('id'=>$this->id));
+    }
+    
+    public function getUnlikeUrl()
+    {
+        return aurl('post/unlike', array('id'=>$this->id));
     }
     
     public function getBmiddlePic()

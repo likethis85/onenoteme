@@ -17,9 +17,25 @@
  *
  * @property string $authorName
  * @property string $filterContent
+ * @property string $stateLabel
  */
 class Comment extends CActiveRecord
 {
+    public static function states()
+    {
+        return array(COMMENT_STATE_ENABLED, COMMENT_STATE_DISABLED);
+    }
+    
+    public static function stateLabels($state = null)
+    {
+        $labels = array(
+            COMMENT_STATE_ENABLED => '已显示',
+            COMMENT_STATE_DISABLED => '未显示',
+        );
+    
+        return $state === null ? $labels : $labels[$state];
+    }
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Comment the static model class
@@ -124,6 +140,11 @@ class Comment extends CActiveRecord
 	
 	    $comments = $this->findAll($criteria);
 	    return $comments;
+	}
+	
+	public function getStateLabel()
+	{
+	    return self::stateLabels($this->state);
 	}
 	
 	protected function beforeSave()
