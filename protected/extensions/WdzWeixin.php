@@ -10,17 +10,17 @@ class WdzWeixin extends CDWeixin
     
     public function errorHandler($errno, $error, $file = '', $line = 0)
     {
-//         $log = sprintf('%s - %s - %s - %s', $errno, $error, $file, $line);
-//         file_put_contents(app()->runtimePath . '/wx1.txt', $log);
+        $log = sprintf('%s - %s - %s - %s', $errno, $error, $file, $line);
+        file_put_contents(app()->runtimePath . '/wx1.txt', $log);
     }
     
     public function errorException(Exception $e)
     {
-//         $log = sprintf('%s - %s - %s - %s', $e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
-//         file_put_contents(app()->runtimePath . '/wx2.txt', $log);
+        $log = sprintf('%s - %s - %s - %s', $e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
+        file_put_contents(app()->runtimePath . '/wx2.txt', $log);
     }
     
-    private static function method1()
+    private function method1()
     {
         $text = '最冷笑话精选，每天分享笑话N枚，你的贴身开心果';
         $posts = array(
