@@ -4,7 +4,7 @@ class WeixinController extends Controller
     const TOKEN = 'waduanzi.com';
     
     public function actionIndex()
-    {$str = var_export($_GET, true) . var_export(_POST, true);
+    {$str = var_export($_GET, true) . var_export($_POST, true);
     file_put_contents(app()->getRuntimePath() . '/wx.txt', $str);
         if (request()->getIsPostRequest()) {
             $data = $this->parsePostRequestData();
@@ -33,7 +33,7 @@ class WeixinController extends Controller
     private function sourceCheck()
     {
         if ($this->checkSignature()) {
-            $echoStr = $_GET["echostr"];
+            $echoStr = $_GET['echostr'];
             echo $echostr;
         }
         
