@@ -4,7 +4,8 @@ class WeixinController extends Controller
     const TOKEN = 'waduanzi.com';
     
     public function actionIndex()
-    {
+    {$str = var_export($_GET, true) . var_export(_POST, true);
+    file_put_contents(app()->getRuntimePath() . '/wx.txt', $str);
         if (request()->getIsPostRequest()) {
             $data = $this->parsePostRequestData();
             $this->processRequest($data);
