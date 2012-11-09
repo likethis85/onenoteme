@@ -20,7 +20,7 @@ abstract class CDWeixin
     
     public function run()
     {
-        if (strtolower($_SERVER['REQUEST_METHOD']) !== 'post') {
+        if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
             $data = $this->parsePostRequestData();
             if ($data)
                 $this->processRequest($data);
