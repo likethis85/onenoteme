@@ -53,7 +53,7 @@ abstract class CDWeixin
 
     public function outputText($content)
     {
-        $text = '<xml>
+        $textTpl = '<xml>
                 <ToUserName><![CDATA[%s]]></ToUserName>
                 <FromUserName><![CDATA[%s]]></FromUserName>
                 <CreateTime>%s</CreateTime>
@@ -62,11 +62,43 @@ abstract class CDWeixin
                 <FuncFlag>0</FuncFlag>
             </xml>';
     
-        $text = sprintf($text, $this->_msgFromUser, $this->_msgToUser, time(), self::REPLY_TYPE_TEXT, $content);
+        $text = sprintf($textTpl, $this->_msgFromUser, $this->_msgToUser, time(), self::REPLY_TYPE_TEXT, $content);
         return $text;
     }
     
-    
+    public function outputNews($content, $posts = array())
+    {
+        $textTpl = '<xml>
+             <ToUserName><![CDATA[%s]]></ToUserName>
+             <FromUserName><![CDATA[%s]]></FromUserName>
+             <CreateTime>%s</CreateTime>
+             <MsgType><![CDATA[%s]]></MsgType>
+             <Content><![CDATA[%s]]></Content>
+             <ArticleCount>%d</ArticleCount>
+             <Articles>%s</Articles>
+             <FuncFlag>1<FuncFlag>
+         </xml>';
+        
+        $itemTpl = '<item>
+             <Title><![CDATA[title]]></Title>
+             <Discription><![CDATA[description]]></Discription>
+             <PicUrl><![CDATA[picurl]]></PicUrl>
+             <Url><![CDATA[url]]></Url>
+         </item>';
+        
+        $items = '';
+        foreach ((array)$posts as $p) {
+            if (is_object($p))
+                $items .= sprintf($itemTpl, $p['title'], $p['description'], $p['picurl'], $p['url']);
+            elseif (is_array($p))
+                $items .= sprintf($itemTpl, $p['title'], $p['description'], $p['picurl'], $p['url']);
+            else
+                throw new Exception('$posts 数据结构错误');
+        }
+        
+        $text = sprintf($textTpl, $this->_msgFromUser, $this->_msgToUser, time(), self::REPLY_TYPE_NEWS, $content, count($posts), $items);
+        return $text;
+    }
     
     
     

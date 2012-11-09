@@ -4,10 +4,17 @@ class WdzWeixin extends CDWeixin
     public function processRequest($data)
     {
         $text = 'hello wordl!!!!';
-        $xml = $this->outputText($data->ToUserName, $data->FromUserName, $text);
+        $posts = array(
+            array(
+                'Title' => '测试标题',
+                'Discription' => '测试描述',
+                'PicUrl' => 'http://cdn.ifanr.cn/wp-content/uploads/2012/11/evernote.jpg',
+                'url' => 'http://www.weixin800.com/p/24',
+            )
+        );
+        $xml = $this->outputNews($text, $posts);
         header('Content-Type: application/xml');
         echo $xml;
-        file_put_contents(app()->runtimePath . '/wx.txt', $xml);
     }
     
     public function errorHandler($errno, $error, $file = '', $line = 0)

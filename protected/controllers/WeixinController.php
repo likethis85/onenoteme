@@ -6,6 +6,7 @@ class WeixinController extends Controller
         $token = 'waduanzi.com';
         $weixin = new WdzWeixin($token);
         $weixin->run();
+        exit(0);
     }
 }
 
