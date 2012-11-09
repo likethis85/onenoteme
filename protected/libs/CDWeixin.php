@@ -28,8 +28,8 @@ class CDWeixin
     public function run()
     {
         if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
-            if ($this->_data && call_user_func(array($this, 'beforeProcess') !== false)) {
-                $this->processRequest($this->_data);
+            if ($this->_postData && call_user_func(array($this, 'beforeProcess') !== false)) {
+                $this->processRequest($this->_postData);
             }
             else
                 throw new Exception('POST 数据不正确或者beforeProcess方法没有返回true');
@@ -98,6 +98,17 @@ class CDWeixin
     }
     
     
+    public function parsePostRequestData()
+    {
+        $rawData = $GLOBALS['HTTP_RAW_POST_DATA'];
+        $data = simplexml_load_string($rawData, 'SimpleXMLElement', LIBXML_NOCDATA);
+        if ($data !== false)
+            $this->_postData = $data;
+    
+        return $data;
+    }
+    
+    
     public function getPostData()
     {
         return $this->_postData;
@@ -116,17 +127,6 @@ class CDWeixin
     {
         throw new Exception('此方法必须被重写');
     }
-    
-    private function parsePostRequestData()
-    {
-        $rawData = $GLOBALS['HTTP_RAW_POST_DATA'];
-        $data = simplexml_load_string($rawData, 'SimpleXMLElement', LIBXML_NOCDATA);
-        if ($data !== false)
-            $this->_postData = $data;
-    
-        return $data;
-    }
-    
     
     private function checkSignature()
     {
