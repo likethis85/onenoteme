@@ -5,7 +5,7 @@ class WdzWeixin extends CDWeixin
     {
         $input = (int)$data->Content;
         $method = 'method' . $input;
-        $this->$method();
+        $this->method1();
     }
     
     public function errorHandler($errno, $error, $file = '', $line = 0)
@@ -34,6 +34,7 @@ class WdzWeixin extends CDWeixin
         $xml = $this->outputNews($text, $posts);
         header('Content-Type: application/xml');
         echo $xml;
+        file_put_contents(app()->runtimePath . '/wx.txt', $xml);
     }
     
     private function method2()
@@ -86,7 +87,10 @@ class WdzWeixin extends CDWeixin
     
     public function __call($name)
     {
-        $this->method0();
+        $text = "您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，与大家一起分享哟～\n\n回复 1 查看挖笑话；\n回复 2 查看挖趣图；\n回复 3 查看挖女神；\n回复 0 查看挖段子手机版；";
+        $xml = $this->outputText($text);
+        header('Content-Type: application/xml');
+        echo $xml;
     }
 }
 
