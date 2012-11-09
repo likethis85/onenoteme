@@ -61,7 +61,7 @@ class CDWeixin
                 <FuncFlag>0</FuncFlag>
             </xml>';
     
-        $text = sprintf($textTpl, $this->_postData['FromUserNamer'], $this->_postData['ToUserNamer'], time(), self::REPLY_TYPE_TEXT, $content);
+        $text = sprintf($textTpl, $this->_postData['FromUserName'], $this->_postData['ToUserName'], time(), self::REPLY_TYPE_TEXT, $content);
         return $text;
     }
     
@@ -93,7 +93,7 @@ class CDWeixin
                 throw new Exception('$posts 数据结构错误');
         }
         
-        $text = sprintf($textTpl, $this->_postData['FromUserNamer'], $this->_postData['ToUserNamer'], time(), self::REPLY_TYPE_NEWS, $content, count($posts), $items);
+        $text = sprintf($textTpl, $this->_postData['FromUserName'], $this->_postData['ToUserName'], time(), self::REPLY_TYPE_NEWS, $content, count($posts), $items);
         return $text;
     }
     
