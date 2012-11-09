@@ -7,6 +7,10 @@ class CDWeixin
     const REPLY_TYPE_TEXT = 'text';
     const REPLY_TYPE_NEWS = 'news';
 
+    /**
+     * 接收到的post数据
+     * @var object
+     */
     private $_postData;
     private $_token;
     
@@ -43,12 +47,12 @@ class CDWeixin
     
     public function isTextMsg()
     {
-        return $this->_postData['MsgType'] == self::MSG_TYPE_TEXT;
+        return $this->_postData->MsgType == self::MSG_TYPE_TEXT;
     }
     
     public function isLocationMsg()
     {
-        return $this->_postData['MsgType'] == self::MSG_TYPE_LOCATION;
+        return $this->_postData->MsgType == self::MSG_TYPE_LOCATION;
     }
 
     public function outputText($content)
@@ -62,7 +66,7 @@ class CDWeixin
                 <FuncFlag>0</FuncFlag>
             </xml>';
     
-        $text = sprintf($textTpl, $this->_postData['FromUserName'], $this->_postData['ToUserName'], time(), self::REPLY_TYPE_TEXT, $content);
+        $text = sprintf($textTpl, $this->_postData->FromUserName, $this->_postData->ToUserName, time(), self::REPLY_TYPE_TEXT, $content);
         return $text;
     }
     
@@ -94,7 +98,7 @@ class CDWeixin
                 throw new Exception('$posts 数据结构错误');
         }
         
-        $text = sprintf($textTpl, $this->_postData['FromUserName'], $this->_postData['ToUserName'], time(), self::REPLY_TYPE_NEWS, $content, count($posts), $items);
+        $text = sprintf($textTpl, $this->_postData->FromUserName, $this->_postData->ToUserName, time(), self::REPLY_TYPE_NEWS, $content, count($posts), $items);
         return $text;
     }
     
