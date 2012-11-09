@@ -4,8 +4,7 @@ class WeixinController extends Controller
     const TOKEN = 'waduanzi.com';
     
     public function actionIndex()
-    {$str = var_export($_GET, true) . var_export($_POST, true) . var_export($GLOBALS["HTTP_RAW_POST_DATA"], true) . var_export($HTTP_RAW_POST_DATA, true);
-    file_put_contents(app()->getRuntimePath() . '/wx.txt', $str);
+    {
         if (request()->getIsPostRequest()) {
             $data = $this->parsePostRequestData();
             $this->processRequest($data);
@@ -63,12 +62,13 @@ class WeixinController extends Controller
             <Content><![CDATA[%s]]></Content>
             <FuncFlag>0<FuncFlag>
             </xml>";
-        if (empty( $keyword ))
-            echo "Input something...";
+        if (empty($keyword))
+            echo 'Input something...';
         else {
             $msgType = "text";
             $contentStr = "Welcome to wechat world!";
             $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+            file_put_contents(app()->getRuntimePath() . '/wx.txt', $str);
             echo $resultStr;
         }
     }
