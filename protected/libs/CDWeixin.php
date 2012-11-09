@@ -80,17 +80,15 @@ abstract class CDWeixin
          </xml>';
         
         $itemTpl = '<item>
-             <Title><![CDATA[title]]></Title>
-             <Discription><![CDATA[description]]></Discription>
-             <PicUrl><![CDATA[picurl]]></PicUrl>
-             <Url><![CDATA[url]]></Url>
+             <Title><![CDATA[%s]]></Title>
+             <Discription><![CDATA[%s]]></Discription>
+             <PicUrl><![CDATA[%s]]></PicUrl>
+             <Url><![CDATA[%s]]></Url>
          </item>';
         
         $items = '';
         foreach ((array)$posts as $p) {
-            if (is_object($p))
-                $items .= sprintf($itemTpl, $p['title'], $p['description'], $p['picurl'], $p['url']);
-            elseif (is_array($p))
+            if (is_array($p))
                 $items .= sprintf($itemTpl, $p['title'], $p['description'], $p['picurl'], $p['url']);
             else
                 throw new Exception('$posts 数据结构错误');
