@@ -15,6 +15,12 @@ abstract class CDWeixin
         if (empty($token))
             throw new Exception('Token is required');
         
+        if (method_exists($this, 'errorHandler'))
+            set_error_handler(array($this, 'errorHandler'));
+        
+        if (method_exists($this, 'exceptionHandler'))
+            set_exception_handler(array($this, 'exceptionHandler'));
+        
         $this->_token = $token;
     }
     
