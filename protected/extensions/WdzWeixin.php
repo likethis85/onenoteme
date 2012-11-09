@@ -3,8 +3,8 @@ class WdzWeixin extends CDWeixin
 {
     public function processRequest($data)
     {
-        $input = (int)$data->Content;
-        $method = 'method' . $input;
+//         $input = (int)$data->Content;
+//         $method = 'method' . $input;
         $this->method1();
     }
     
