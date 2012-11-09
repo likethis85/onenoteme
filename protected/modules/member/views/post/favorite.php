@@ -16,6 +16,9 @@
             </td>
         </tr>
         <?php endforeach;?>
+        <?php if (count($posts) == 0):?>
+        <tr><td class="acenter" colspan="4">看了这么多了，还没有收藏一个段子？抓紧行动吧～～～</td></tr>
+        <?php endif;?>
     </tbody>
 </table>
 <?php if ($pages):?>

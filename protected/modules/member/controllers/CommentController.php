@@ -12,6 +12,7 @@ class CommentController extends MemberController
             'with' => 'post',
             'offset' => $offset,
             'limit' => $count,
+            'order' => 'comments.create_time desc',
         ));
         
         $this->breadcrumbs[] = $this->title = $this->siteTitle = '我的评论';

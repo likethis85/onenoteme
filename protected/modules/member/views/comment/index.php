@@ -19,6 +19,9 @@
             </td>
         </tr>
         <?php endforeach;?>
+        <?php if (count($comments) == 0):?>
+        <tr><td class="acenter" colspan="4">是男人就不要光看不顶啊，赶紧顶起来吧～～～</td></tr>
+        <?php endif;?>
     </tbody>
 </table>
 <?php if ($pages):?>
