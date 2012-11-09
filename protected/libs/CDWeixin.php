@@ -27,8 +27,8 @@ class CDWeixin
     
     public function run()
     {
-        if (strtolower($_SERVER['REQUEST_METHOD']) !== 'post') {
-            if ($this->_postData || $this->beforeProcess() === true) {
+        if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
+            if ($this->_postData && $this->beforeProcess() === true) {
                 $this->processRequest($this->_postData);
                 $this->afterProcess();
             }
