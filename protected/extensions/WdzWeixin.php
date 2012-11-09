@@ -5,6 +5,7 @@ class WdzWeixin extends CDWeixin
     {
         $text = 'hello wordl!!!!';
         $xml = $this->outputText($data->ToUserName, $data->FromUserName, $text);
+        echo $xml;
         file_put_contents(app()->runtimePath . '/wx.txt', $xml);
     }
     
