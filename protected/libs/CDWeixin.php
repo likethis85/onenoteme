@@ -52,26 +52,28 @@ abstract class CDWeixin
     public static function outputText($toUserName, $fromUserName, $text)
     {
         $dom = new DOMDocument('1.0', app()->charset);
-    
+        $xml = $dom->createElement('xml');
+        $dom->appendChild($xml);
+        
         $toUser = $dom->createElement('ToUserName');
         $toUser->appendChild($dom->createCDATASection($toUserName));
-        $dom->appendChild($toUser);
+        $xml->appendChild($toUser);
     
         $fromUser = $dom->createElement('FromUserName');
         $fromUser->appendChild($dom->createCDATASection($fromUserName));
-        $dom->appendChild($fromUser);
+        $xml->appendChild($fromUser);
     
-        $dom->appendChild(new DOMElement('CreateTime', time()));
+        $xml->appendChild(new DOMElement('CreateTime', time()));
     
         $msgType = $dom->createElement('MsgType');
         $msgType->appendChild($dom->createCDATASection(self::REPLY_TYPE_TEXT));
-        $dom->appendChild($msgType);
+        $xml->appendChild($msgType);
     
         $content = $dom->createElement('Content');
         $content->appendChild($dom->createCDATASection($text));
-        $dom->appendChild($content);
+        $xml->appendChild($content);
     
-        $dom->appendChild(new DOMElement('FuncFlag', 0));
+        $xml->appendChild(new DOMElement('FuncFlag', 0));
     
         return $dom->saveXML();
     }
