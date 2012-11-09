@@ -68,7 +68,7 @@ class WeixinController extends Controller
             $msgType = "text";
             $contentStr = "Welcome to wechat world!";
             $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
-            file_put_contents(app()->getRuntimePath() . '/wx.txt', $str);
+            file_put_contents(app()->getRuntimePath() . '/wx.txt', $resultStr);
             echo $resultStr;
         }
     }
