@@ -22,5 +22,5 @@
     </tbody>
 </table>
 <?php if ($pages):?>
-<div class="beta-pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'skin'=>'bootstrap', 'htmlOptions'=>array('class'=>'pagination')));?></div>
+<div class="pagination"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'skin'=>'bootstrap'));?></div>
 <?php endif;?>
