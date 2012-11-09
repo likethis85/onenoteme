@@ -27,9 +27,10 @@ class CDWeixin
     
     public function run()
     {
-        if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
-            if ($this->_postData && call_user_func(array($this, 'beforeProcess') !== false)) {
+        if (strtolower($_SERVER['REQUEST_METHOD']) !== 'post') {
+            if ($this->_postData || $this->beforeProcess() === true) {
                 $this->processRequest($this->_postData);
+                $this->afterProcess();
             }
             else
                 throw new Exception('POST 数据不正确或者beforeProcess方法没有返回true');
