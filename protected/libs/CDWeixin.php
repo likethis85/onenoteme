@@ -49,33 +49,19 @@ abstract class CDWeixin
         return $this->msgType == self::MSG_TYPE_LOCATION;
     }
 
-    public static function outputText($toUserName, $fromUserName, $text)
+    public static function outputText($toUserName, $fromUserName, $content)
     {
-        $dom = new DOMDocument('1.0', app()->charset);
-        $xml = $dom->createElement('xml');
-        $dom->appendChild($xml);
+        $text = '<xml>
+                    <ToUserName><![CDATA[%s]]></ToUserName>
+                    <FromUserName><![CDATA[%s]]></FromUserName>
+                    <CreateTime>%s</CreateTime>
+                    <MsgType><![CDATA[%s]]></MsgType>
+                    <Content><![CDATA[%s]]></Content>
+                    <FuncFlag>0</FuncFlag>
+                </xml>';
         
-        $toUser = $dom->createElement('ToUserName');
-        $toUser->appendChild($dom->createCDATASection($toUserName));
-        $xml->appendChild($toUser);
-    
-        $fromUser = $dom->createElement('FromUserName');
-        $fromUser->appendChild($dom->createCDATASection($fromUserName));
-        $xml->appendChild($fromUser);
-    
-        $xml->appendChild(new DOMElement('CreateTime', time()));
-    
-        $msgType = $dom->createElement('MsgType');
-        $msgType->appendChild($dom->createCDATASection(self::REPLY_TYPE_TEXT));
-        $xml->appendChild($msgType);
-    
-        $content = $dom->createElement('Content');
-        $content->appendChild($dom->createCDATASection($text));
-        $xml->appendChild($content);
-    
-        $xml->appendChild(new DOMElement('FuncFlag', 0));
-    
-        return $dom->saveXML();
+        $text = sprintf($text, $toUserName, $fromUserName, time(), self::REPLY_TYPE_TEXT, $content);
+        return $text;
     }
     
     
