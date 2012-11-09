@@ -61,7 +61,7 @@ abstract class CDWeixin
                     <FuncFlag>0</FuncFlag>
                 </xml>';
     
-        $text = sprintf($text, $toUserName, $fromUserName, time(), self::REPLY_TYPE_TEXT, $content);
+        $text = sprintf($text, $fromUserName, $toUserName, time(), self::REPLY_TYPE_TEXT, $content);
         return $text;
     }
     
