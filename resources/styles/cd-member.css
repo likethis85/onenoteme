@@ -1,6 +1,9 @@
 @CHARSET "UTF-8";
 
 body {background-color:#FFFFFF;}
+a:link {text-decoration:none; text-decoration:none; cursor:pointer;}
+a:visited {text-decoration:none;}
+a:hover {text-decoration:none;}
 
 .member-form .control-label {width:100px;}
 .member-form .controls {margin-left:120px;}
