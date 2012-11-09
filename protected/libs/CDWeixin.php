@@ -89,7 +89,7 @@ abstract class CDWeixin
         $items = '';
         foreach ((array)$posts as $p) {
             if (is_array($p))
-                $items .= sprintf($itemTpl, $p['title'], $p['description'], $p['picurl'], $p['url']);
+                $items .= sprintf($itemTpl, $p['Title'], $p['Description'], $p['Picurl'], $p['Url']);
             else
                 throw new Exception('$posts 数据结构错误');
         }

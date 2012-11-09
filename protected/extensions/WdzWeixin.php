@@ -9,7 +9,7 @@ class WdzWeixin extends CDWeixin
                 'Title' => '测试标题',
                 'Discription' => '测试描述',
                 'PicUrl' => 'http://cdn.ifanr.cn/wp-content/uploads/2012/11/evernote.jpg',
-                'url' => 'http://www.weixin800.com/p/24',
+                'Url' => 'http://www.weixin800.com/p/24',
             )
         );
         $xml = $this->outputNews($text, $posts);
