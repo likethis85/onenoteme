@@ -56,7 +56,7 @@ class WeixinController extends Controller
         
         $textTpl = "<xml>
             <ToUserName><![CDATA[%s]]></ToUserName>
-            <FromUserName><![CDATA[%s}]]></FromUserName>
+            <FromUserName><![CDATA[%s]]></FromUserName>
             <CreateTime>%s</CreateTime>
             <MsgType><![CDATA[%s]]></MsgType>
             <Content><![CDATA[%s]]></Content>
@@ -75,4 +75,6 @@ class WeixinController extends Controller
     }
     
 }
+
+
 
