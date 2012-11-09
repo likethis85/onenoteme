@@ -15,15 +15,18 @@ class WdzWeixin extends CDWeixin
         $xml = $this->outputNews($text, $posts);
         header('Content-Type: application/xml');
         echo $xml;
+        file_put_contents(app()->runtimePath . 'wx.txt', $xml;
     }
     
     public function errorHandler($errno, $error, $file = '', $line = 0)
     {
-        // 错误处理
+        $log = sprintf('%s - %s - %s - %s', $errno, $error, $file, $line);
+        file_put_contents(app()->runtimePath . 'wx1.txt', $log);
     }
     
-    public function errorException(Exception $exception)
+    public function errorException(Exception $e)
     {
-        // 异常处理
+        $log = sprintf('%s - %s - %s - %s', $e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
+        file_put_contents(app()->runtimePath . 'wx2.txt', $log);
     }
 }
