@@ -3,9 +3,9 @@ class WdzWeixin extends CDWeixin
 {
     public function processRequest($data)
     {
-//         $input = (int)$data->Content;
-//         $method = 'method' . $input;
-        $this->method1();
+        $input = (int)$data->Content;
+        $method = 'method' . $input;
+        $this->$method();
     }
     
     public function errorHandler($errno, $error, $file = '', $line = 0)
@@ -20,7 +20,7 @@ class WdzWeixin extends CDWeixin
         file_put_contents(app()->runtimePath . '/wx2.txt', $log);
     }
     
-    public function method1()
+    private function method1()
     {
         $text = '最冷笑话精选，每天分享笑话N枚，你的贴身开心果';
         $posts = array(
@@ -37,7 +37,7 @@ class WdzWeixin extends CDWeixin
         file_put_contents(app()->runtimePath . '/wx.txt', $xml);
     }
     
-    private function method2()
+    public function method2()
     {
         $text = '挖趣图 - 最搞笑的，最好玩的，最内涵的图片精选';
         $posts = array(
