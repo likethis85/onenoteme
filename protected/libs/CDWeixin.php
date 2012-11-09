@@ -45,16 +45,29 @@ class CDWeixin
         exit(0);
     }
     
+    /**
+     * 判断是否是文字信息
+     * @return boolean
+     */
     public function isTextMsg()
     {
         return $this->_postData->MsgType == self::MSG_TYPE_TEXT;
     }
     
+    /**
+     * 判断是否是位置信息
+     * @return boolean
+     */
     public function isLocationMsg()
     {
         return $this->_postData->MsgType == self::MSG_TYPE_LOCATION;
     }
 
+    /**
+     * 生成向用户发送的文字信息
+     * @param string $content
+     * @return string xml字符串
+     */
     public function outputText($content)
     {
         $textTpl = '<xml>
@@ -70,6 +83,12 @@ class CDWeixin
         return $text;
     }
     
+    /**
+     * 生成向用户发送的文字图片字符串
+     * @param string $content
+     * @param arrry $posts 文章数组，每一个元素是一个文章数组，索引跟微信官方接口说明一致
+     * @return string xml字符串
+     */
     public function outputNews($content, $posts = array())
     {
         $textTpl = '<xml>
@@ -102,7 +121,10 @@ class CDWeixin
         return $text;
     }
     
-    
+    /**
+     * 解析接收到的post数据
+     * @return SimpleXMLElement
+     */
     public function parsePostRequestData()
     {
         $rawData = $GLOBALS['HTTP_RAW_POST_DATA'];
@@ -113,7 +135,10 @@ class CDWeixin
         return $data;
     }
     
-    
+    /**
+     * 返回接收到的post数组
+     * @return object
+     */
     public function getPostData()
     {
         return $this->_postData;
@@ -133,6 +158,10 @@ class CDWeixin
         throw new Exception('此方法必须被重写');
     }
     
+    /**
+     * 验证url来源是否证确
+     * @return boolean
+     */
     private function checkSignature()
     {
         $signature = $_GET['signature'];
@@ -149,7 +178,7 @@ class CDWeixin
     private function sourceCheck()
     {
         if ($this->checkSignature()) {
-            $echoStr = $_GET['echostr'];
+            $echostr = $_GET['echostr'];
             echo $echostr;
         }
         else
