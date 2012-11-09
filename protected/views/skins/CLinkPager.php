@@ -8,6 +8,16 @@ return array(
         'prevPageLabel' => '上页',
         'cssFile' => false,
     ),
+    'bootstrap' => array(
+        'header' => '',
+        'footer' => '',
+        'maxButtonCount' => 8,
+        'nextPageLabel' => '下页',
+        'prevPageLabel' => '上页',
+        'cssFile' => false,
+        'hiddenPageCssClass' => 'disabled',
+        'selectedPageCssClass' => 'active',
+    ),
     'classic' => array(
         'header' => '',
         'footer' => '',

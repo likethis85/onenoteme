@@ -1,6 +1,9 @@
 @CHARSET "UTF-8";
 
 body {background-color:#ECE5D8;}
+a:link {text-decoration:none; color:#4E76C9; text-decoration:none; cursor:pointer;}
+a:visited {color:#4E76C9; text-decoration:none;}
+a:hover {text-decoration:none;}
 
 /* panel */
 .panel {background-color:#FFFFFF; margin:0 1px 3px; -webkit-box-shadow:#666 0 1px 3px; box-shadow:#666 0 1px 3px; -moz-box-shadow:#666 0 1px 3px; -webkit-border-radius:5px; border-radius:5px; -moz-border-radius:5px;}

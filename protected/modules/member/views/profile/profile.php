@@ -28,14 +28,14 @@
 <div class="control-group <?php if($model->hasErrors('website')) echo 'error';?>">
     <?php echo CHtml::activeLabel($model, 'website', array('class'=>'control-label'));?>
     <div class="controls">
-        <?php echo CHtml::activeTextField($model, 'website', array('class'=>'span6'));?>
+        <?php echo CHtml::activeTextField($model, 'website', array('class'=>'span5'));?>
         <?php if($model->hasErrors('website')):?><p class="help-block"><?php echo $model->getError('website');?></p><?php endif;?>
     </div>
 </div>
 <div class="control-group <?php if($model->hasErrors('description')) echo 'error';?>">
     <?php echo CHtml::activeLabel($model, 'description', array('class'=>'control-label'));?>
     <div class="controls">
-        <?php echo CHtml::activeTextArea($model, 'description', array('class'=>'span6', 'rows'=>5));?>
+        <?php echo CHtml::activeTextArea($model, 'description', array('class'=>'span5', 'rows'=>5));?>
         <?php if($model->hasErrors('description')):?><p class="help-block"><?php echo $model->getError('description');?></p><?php endif;?>
     </div>
 </div>

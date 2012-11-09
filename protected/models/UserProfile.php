@@ -66,6 +66,7 @@ class UserProfile extends CActiveRecord
 			array('weibo_uid, qqt_uid', 'length', 'max'=>50),
 			array('description, website, image_url, avatar_large', 'length', 'max'=>250),
 	        array('gender', 'in', 'range'=>self::genders()),
+			array('website', 'url'),
 			array('description', 'safe'),
 		);
 	}
