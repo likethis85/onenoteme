@@ -89,9 +89,9 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 .post-detail .comment-form .save-caption-loader {background:url(../images/small-loader.gif) no-repeat; width:24px; height:24px; position:absolute; top:47px; right:10px;}
 .post-detail .comment-form .counter {font-size:22px; position:absolute; top:50px; right:50px; font-weight:bold; font-family:'Helvetica Neue','Helvetica','Arial',sans-serif;}
 .post-detail #caption-error {margin:5px 0; padding:6px; color:#E44; background-color:#F4F4F6;}
-input.button {width:78px; height:33px; border:0; margin:0; padding:0; background-color:transparent; background-position:-231px 0; color:white; font-weight:bold; cursor:pointer;}
-input.button:hover {background-position:-310px 0;}
-input.button:active {background-position:-389px 0;}
+input.button, .button {width:78px; height:33px; border:0; margin:0; padding:0; background-color:transparent; background-position:-231px 0; color:white; font-weight:bold; cursor:pointer;}
+input.button:hover, .button:hover {background-position:-310px 0;}
+input.button:active, .button:active {background-position:-389px 0;}
 .post-detail .comment-item {margin:0 0 5px; background-color:#F8F8F8;}
 .post-detail .comment-item .comment-arrows {margin:0 3px 0 0; padding:4px 3px; width:22px;}
 .post-detail .comment-item dl {margin:0; margin-left:32px; padding:10px;}
