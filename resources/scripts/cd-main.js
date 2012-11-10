@@ -226,7 +226,7 @@ Waduanzi.postUpDownScore = function(event){
 Waduanzi.fixedAdBlock = function() {
 	var adblock = $('.cd-sidebar .ad-block').last();
 	if (adblock.length == 0) return false;
-	var adtop = adblock.position().top;
+	var adtop = adblock.position().top + 73; // 73为顶部fixed导航的高度
 	
 	$(window).scroll(function(event){
 		if ($('body').scrollTop() >= adtop)
