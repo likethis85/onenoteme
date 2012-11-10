@@ -225,10 +225,9 @@ Waduanzi.postUpDownScore = function(event){
 
 Waduanzi.fixedAdBlock = function() {
 	var adblock = $('.cd-sidebar .ad-block').last();
-	if (adblock.length == 0) return false;
-	var adtop = adblock.position().top + 73; // 73为顶部fixed导航的高度
 	var lastblock = $('.cd-sidebar > div').last();
-	var lastbottom = lastblock.position().top + lastblock.height() + 73;
+	// 侧边栏最后一个div的bottom
+	var lastbottom = lastblock.position().top + lastblock.height() - 73;
 	
 	$(window).scroll(function(event){
 		if ($('body').scrollTop() >= lastbottom)
