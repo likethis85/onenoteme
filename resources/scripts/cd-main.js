@@ -227,7 +227,7 @@ Waduanzi.fixedAdBlock = function() {
 	var adblock = $('.cd-sidebar .ad-block').last();
 	var lastblock = $('.cd-sidebar > div:not(.ad-block)').last();
 	// 侧边栏最后一个div的bottom
-	var lastbottom = lastblock.position().top + lastblock.height() - 73;
+	var lastbottom = lastblock.position().top + lastblock.height() - 50;
 	
 	$(window).scroll(function(event){
 		if ($('body').scrollTop() >= lastbottom)
