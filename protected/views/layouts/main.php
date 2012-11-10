@@ -58,6 +58,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     	    <a href="<?php echo aurl('site/bdmap');?>" target="_blank">网站地图</a>&nbsp;&nbsp;
     	    <a href="<?php echo aurl('site/links');?>" target="_blank">友情链接</a>&nbsp;&nbsp;
     	    <a href="<?php echo aurl('tag/list');?>" target="_blank">全部标签</a>
+    	    <a href="<?php echo CDBase::siteHomeUrl();?>" target="_blank">总共：<?php echo Post::allCount();?>篇</a>
         </p>
     	<p class="fright">笑死人不尝命&nbsp;<a href="#top">TOP</a></p>
     	<div class="clear"></div>

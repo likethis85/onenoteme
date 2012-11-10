@@ -1,7 +1,7 @@
 <?php if ($this->channel != CHANNEL_VIDEO):?>
 <div class="panel panel10 bottom10px">
     <ul class="fleft hot-keyword">
-        <li><span class="cred announce">24小时更新：<?php echo Post::todayUpdateCount();?>，总数：<?php echo Post::allCount();?>。QQ群：49401589</span></li>
+        <li><span class="cred announce">24小时更新：<?php echo Post::todayUpdateCount();?>篇。&nbsp;&nbsp;&nbsp;QQ群：49401589</span></li>
     </ul>
     <ul class="mode-switch fright">
         <li class="fall"><a href="<?php echo aurl($this->route, array('page'=>(int)$_GET['page'], 's'=>POST_LIST_STYLE_WATERFALL));?>">缩略图</a></li>
