@@ -53,7 +53,7 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 .cd-pages {font-size:14px; margin:15px 0;}
 .cd-pages a {font-size:14px;}
 .cd-pages ul.yiiPager {font-size:14px;border:0;margin:0;padding:0;}
-.cd-pages ul.yiiPager li{display:inline-block; line-height:34px;}
+.cd-pages ul.yiiPager li{display:inline-block; line-height:34px; visibility:visible;}
 .cd-pages ul.yiiPager a:link,.cd-pages  ul.yiiPager a:visited{border:solid 1px #9aafe5; color:#0e509e; padding:8px 12px; text-decoration:none;}
 .cd-pages ul.yiiPager a:hover{border:solid 1px #0e509e;}
 .cd-pages ul.yiiPager .selected a {background:#2e6ab1;color:#FFFFFF;font-weight:bold;}

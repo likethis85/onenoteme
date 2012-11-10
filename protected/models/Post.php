@@ -439,6 +439,30 @@ class Post extends CActiveRecord
         
     }
     
+    public static function todayUpdateCount()
+    {
+        $duration = 300;
+        $time = $_SERVER['REQUEST_TIME'] - 60*60*24;
+        $count = app()->getDb()->cache($duration)->createCommand()
+            ->select('count(*)')
+            ->from(TABLE_POST)
+            ->where('create_time > :today', array(':today'=>$time))
+            ->queryScalar();
+        
+        return (int)$count;
+    }
+    
+    public static function allCount()
+    {
+        $duration = 300;
+        $count = app()->getDb()->cache($duration)->createCommand()
+            ->select('count(*)')
+            ->from(TABLE_POST)
+            ->queryScalar();
+        
+        return (int)$count;
+    }
+    
     protected function beforeSave()
     {
         if ($this->getIsNewRecord()) {
