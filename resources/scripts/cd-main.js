@@ -227,9 +227,11 @@ Waduanzi.fixedAdBlock = function() {
 	var adblock = $('.cd-sidebar .ad-block').last();
 	if (adblock.length == 0) return false;
 	var adtop = adblock.position().top + 73; // 73为顶部fixed导航的高度
+	var lastblock = $('.cd-sidebar > div').last();
+	var lastbottom = lastblock.position().top + lastblock.height() + 73;
 	
 	$(window).scroll(function(event){
-		if ($('body').scrollTop() >= adtop)
+		if ($('body').scrollTop() >= lastbottom)
 			!adblock.hasClass('fixed') && adblock.addClass('fixed');
 		else
 			adblock.hasClass('fixed') && adblock.removeClass('fixed');
