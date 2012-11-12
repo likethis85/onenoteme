@@ -16,6 +16,10 @@
  * @property integer $weibo_uid
  * @property integer $qqt_uid
  *
+ * @property string $largeAvatarUrl
+ * @property string $smallAvatarUrl
+ * @property string $largeAvatar
+ * @property string $smallAvatar
  * @property string $genderLabel
  */
 class UserProfile extends CActiveRecord
@@ -106,4 +110,59 @@ class UserProfile extends CActiveRecord
 	    return self::genderLabel($this->gender);
 	}
 
+	public function getSmalltAvatarUrl()
+	{
+	    $url = '';
+	    if (empty($this->image_url))
+	        return $url;
+	    
+	    $pos = stripos($this->image_url, 'http://');
+	    if ($pos === 0)
+	        $url = $this->image_url;
+	    elseif ($pos === false)
+	        $url = fbu($this->image_url);
+	    
+	    return $url;
+	}
+
+	public function getLargetAvatarUrl()
+	{
+	    $url = '';
+	    if (empty($this->avatar_large))
+	        return $url;
+	    
+	    $pos = stripos($this->avatar_large, 'http://');
+	    if ($pos === 0)
+	        $url = $this->avatar_large;
+	    elseif ($pos === false)
+	        $url = fbu($this->avatar_large);
+	    
+	    return $url;
+	}
+
+	public function getLargeAvatar($htmlOptions = array())
+	{
+	    $html = '';
+	    $url = $this->getLargetAvatarUrl();
+	    if ($url) {
+	        $htmlOptions += array('class'=>'large-avatar');
+	        $html = image($url, '我的头像', $htmlOptions);
+	    }
+	
+	    return $html;
+	}
+	
+	public function getSmallAvatar($htmlOptions = array())
+	{
+	    $html = '';
+	    $url = $this->getSmalltAvatarUrl();
+	    if ($url) {
+	        $htmlOptions += array('class'=>'small-avatar');
+	        $html = image($url, '我的头像', $htmlOptions);
+	    }
+	
+	    return $html;
+	}
 }
+
+

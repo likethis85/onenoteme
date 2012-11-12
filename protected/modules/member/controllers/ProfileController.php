@@ -62,8 +62,24 @@ class ProfileController extends MemberController
     
     public function actionAvatar()
     {
+        $model = $this->profile;
+        if (request()->getIsPostRequest() && isset($_POST['MemberUserProfile'])) {
+            $upload = CUploadedFile::getInstance($model, 'avatar_large');
+            if ($upload === null)
+                $model->addError('avatar_large', '请选择头像图片');
+            else {
+                $model->avatar_large = $upload;
+                if ($model->uploadAvatar() && $model->save(true, array('avatar_large', 'image_url'))) {
+                    user()->setFlash('user_save_result', '头像修改成功');
+                    $this->redirect(request()->getUrl());
+                }
+            }
+        }
+        
         $this->breadcrumbs[] = $this->title = $this->siteTitle = '修改头像';
         $this->channel = 'avatar';
-        $this->render('avatar');
+        $this->render('avatar', array(
+            'model' => $model,
+        ));
     }
 }

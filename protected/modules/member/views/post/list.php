@@ -25,3 +25,10 @@
 <?php if ($pages):?>
 <div class="pagination"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'skin'=>'bootstrap'));?></div>
 <?php endif;?>
+
+<script type="text/javascript">
+$(function(){
+	$('table').on('click', '.btn-delete', function(event){
+	});
+});
+</script>

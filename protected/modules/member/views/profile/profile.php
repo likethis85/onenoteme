@@ -16,6 +16,7 @@
     <label class="control-label">昵称</label>
     <div class="controls">
         <?php echo CHtml::textField('screen_name', $this->nickname, array('readonly'=>'readonly', 'class'=>'uneditable-input'));?>
+        <span class="help-inline"><a href="<?php echo url('member/profile/nickname');?>">修改</a></span>
     </div>
 </div>
 <div class="control-group <?php if($model->hasErrors('gender')) echo 'error';?>">

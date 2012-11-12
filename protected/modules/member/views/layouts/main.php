@@ -44,7 +44,7 @@
     
     <div class="cd-sidebar fleft sidebar-nav">
         <div class="user-avatar">
-            <a href="<?php echo aurl('member/profile/avatar');?>"><img src="<?php echo $this->profile->avatar_large;?>" /></a>
+            <a href="<?php echo aurl('member/profile/avatar');?>"><?php echo $this->profile->largeAvatar;?></a>
             <h5><?php echo $this->nickname;?></h5>
         </div>
         <ul class="member-nav">

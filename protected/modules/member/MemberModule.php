@@ -10,6 +10,9 @@ class MemberModule extends CWebModule
 	        exit(0);
 	    }
 	    
+	    $params = require(dirname(__FILE__) . DS . 'config' . DS . 'params.php');
+	    Yii::app()->params->mergeWith($params);
+	    
 		$this->setImport(array(
 			'member.models.*',
 			'member.components.*',

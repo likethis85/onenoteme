@@ -22,7 +22,7 @@ class MemberPost extends Post
         $html = '';
         if ($this->state == POST_STATE_UNVERIFY) {
             $url = aurl('member/post/delete', array('id'=>$this->id));
-            $html = l('<i class="icon-trash icon-white"></i>', $url, array('class'=>'btn btn-mini btn-danger'));
+            $html = l('<i class="icon-trash icon-white"></i>', $url, array('class'=>'btn btn-mini btn-danger btn-delete'));
         }
         
         return $html;

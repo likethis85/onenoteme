@@ -13,7 +13,8 @@ a:hover {text-decoration:none;}
 
 .sidebar-nav {background:#EFF2F4; padding:20px 0; overflow-x:hidden; border-radius:5px 0 0 5px; -webkit-border-radius:5px 0 0 5px; -moz-border-radius:5px 0 0 5px; -o-border-radius:5px 0 0 5px; -ms-border-radius:5px 0 0 5px;}
 .user-avatar {margin-bottom:10px; text-align:center; overflow-x:hidden;}
-.user-avatar img {width:130px;}
+.large-avatar {width:130px;}
+.small-avatar {width:50px; height:50px; vertical-align:bottom;}
 .user-avatar h4 {margin:10px 0;}
 .user-avatar a {display:block;}
 .member-nav {list-style:none; margin:0;}

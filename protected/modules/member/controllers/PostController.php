@@ -38,4 +38,25 @@ class PostController extends MemberController
         ));
     }
     
+    public function actionDelete($id, $callback)
+    {
+        $id = (int)$id;
+        if ($id > 0) {
+            $model = MemberPost::model()->findByPk($id, array('user_id'=>$this->userID));
+            if ($model === null) {
+                $data['errno'] = CD_YES;
+                $data['error'] = '段子不存在';
+            }
+            else {
+                $data['errno'] = CD_NO;
+            }
+        }
+        else {
+            $data['errno'] = CD_YES;
+            $data['error'] = '非法请求';
+        }
+        
+        CDBase::jsonp($callback, $data);
+    }
+    
 }
