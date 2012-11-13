@@ -78,9 +78,9 @@ a:hover {color:#330000; text-decoration:none;}
 .cd-header .channel-nav li {list-style:none; float:left; color:#CFCFCF; height:45px; line-height:45px; margin:auto 3px;}
 .cd-header .channel-nav li a {display:block; color:#D0D0D0; padding:0 10px; font-size:18px; font-family:"微软雅黑";}
 .cd-header .channel-nav li a:hover, .cd-header .channel-nav li.active a {color:white; background:#121211; margin-top:5px; height:35px; line-height:35px; border-radius:8px; -webkite-border-radius:8px; -moz-border-radius:8px;}
-.cd-header .logo a {height:45px; line-height:45px; color:#DDDDD1; font-size:28px; font-family:微软雅黑; font-weight:bold;}
+.cd-header .logo a {line-height:45px; color:#DDDDD1; font-size:28px; font-family:微软雅黑; font-weight:bold; display:block;}
 .cd-header .logo a:hover {color:white; line-height:44px;}
-.cd-header .logo img {height:40px; margin-top:3px;}
+.cd-header .logo img {height:100%; vertical-align:top;}
 .cd-header .user-nav, .cd-header .user-nav li {list-style:none;}
 .cd-header .user-nav .diviler {display:block; width:1px; height:18px; font-size:0; background-color:gray; margin:10px 10px auto;}
 .cd-header li {list-style:none; float:left; color:#CFCFCF; height:45px; line-height:45px; margin:auto 3px;}

@@ -62,7 +62,7 @@ class UserIdentity extends CUserIdentity
         $s = app()->session;
         $s['state'] = $this->user->state;
         $s['username'] = $this->username;
-        $s['image_url'] = $this->user->profile->image_url;
+        $s['image_url'] = $this->user->profile->smallAvatarUrl;
     }
 }
 
