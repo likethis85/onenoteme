@@ -22,7 +22,7 @@ class MemberPost extends Post
         $html = '';
         if ($this->state == POST_STATE_UNVERIFY) {
             $url = aurl('member/post/delete', array('id'=>$this->id));
-            $html = l('<i class="icon-trash icon-white"></i>', $url, array('class'=>'btn btn-mini btn-danger btn-delete'));
+            $html = l('<i class="icon-trash icon-white"></i>', 'javascript:void(0);', array('class'=>'btn btn-mini btn-danger btn-delete', 'data-url'=>$url));
         }
         
         return $html;
@@ -51,7 +51,7 @@ class MemberPost extends Post
         return sprintf('<span class="%s">%s</span>', $class, $this->getStateLabel());
     }
     
-    public static function fetchFavoritePosts($userID, $page = 1, $count = 15)
+    public static function fetchFavoritePosts($userID, $pageSize = 1, $count = 15)
     {
         $userID = (int)$userID;
         $page = (int)$page;

@@ -22,4 +22,25 @@ class CommentController extends MemberController
             'pages' => $pages,
         ));
     }
+    
+    public function actionDelete($id, $callback)
+    {
+        $id = (int)$id;
+        if ($id > 0) {
+            $model = MemberComment::model()->findByPk($id, 'user_id = :userid', array(':userid'=>$this->userID));
+            if ($model === null) {
+                $data['errno'] = CD_YES;
+                $data['error'] = '段子不存在';
+            }
+            else {
+                $data['errno'] = $model->delete() ? CD_NO : CD_YES;
+            }
+        }
+        else {
+            $data['errno'] = CD_YES;
+            $data['error'] = '非法请求';
+        }
+    
+        CDBase::jsonp($callback, $data);
+    }
 }

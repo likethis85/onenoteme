@@ -42,13 +42,13 @@ class PostController extends MemberController
     {
         $id = (int)$id;
         if ($id > 0) {
-            $model = MemberPost::model()->findByPk($id, array('user_id'=>$this->userID));
+            $model = MemberPost::model()->findByPk($id, 'user_id = :userid', array(':userid'=>$this->userID));
             if ($model === null) {
                 $data['errno'] = CD_YES;
                 $data['error'] = '段子不存在';
             }
             else {
-                $data['errno'] = CD_NO;
+                $data['errno'] = $model->delete() ? CD_NO : CD_YES;
             }
         }
         else {

@@ -27,9 +27,15 @@ class MemberComment extends Comment
         return sprintf('<span class="%s">%s</span>', $class, $this->getStateLabel());
     }
     
-    public function getDeleteUrl()
+    public function getDeleteLink()
     {
-        return aurl('member/post/delete', array('id'=>$this->id));
+        $html = '';
+        if ($this->state == COMMENT_STATE_DISABLED) {
+            $url = aurl('member/comment/delete', array('id'=>$this->id));
+            $html = l('<i class="icon-trash icon-white"></i>', 'javascript:void(0);', array('class'=>'btn btn-mini btn-danger btn-delete', 'data-url'=>$url));
+        }
+        
+        return $html;
     }
 }
 

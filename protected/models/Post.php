@@ -33,6 +33,8 @@
  * @property integer $recommend
  * @property integer $hottest
  *
+ * @property User $user;
+ * @property array $comments;
  * @property string $stateLabel;
  * @property string $url
  * @property string $filterSummary
@@ -127,6 +129,7 @@ class Post extends CActiveRecord
 	{
 		return array(
 		    'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+		    'comments' => array(self::HAS_MANY, 'Comment', 'post_id'),
 		);
 	}
 
@@ -483,6 +486,15 @@ class Post extends CActiveRecord
     protected function afterSave()
     {
         Tag::savePostTags($this->id, $this->tags);
+    }
+
+    protected function afterDelete()
+    {
+        foreach ($this->comments as $model) $model->delete();
+        app()->getDb()->createCommand()
+            ->delete(TABLE_POST_FAVORITE, 'post_id = :postid', array(':postid' => $this->id));
+        app()->getDb()->createCommand()
+            ->delete(TABLE_POST_TAG, 'post_id = :postid', array(':postid' => $this->id));
     }
 }
 

@@ -15,7 +15,7 @@
                 <?php echo $model->filterContent;?>
             </td>
             <td class="acenter">
-                <a class="btn btn-mini" href="<?php echo $model->deleteUrl;?>" target="_blank"><i class="icon-trash"></i></a>
+                <?php echo $model->deleteLink;?>
             </td>
         </tr>
         <?php endforeach;?>
@@ -27,3 +27,12 @@
 <?php if ($pages):?>
 <div class="pagination"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'skin'=>'bootstrap'));?></div>
 <?php endif;?>
+
+<script type="text/javascript">
+$(function(){
+	$('table').on('click', '.btn-delete', function(event){
+		event.preventDefault();
+		CDMember.executeAjaxDelete(event);
+	});
+});
+</script>

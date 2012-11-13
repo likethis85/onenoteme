@@ -3,7 +3,7 @@
         <tr>
             <th class="span1 acenter">ID</th>
             <th>标题</th>
-            <th class="span2">操作</th>
+            <th class="span2"><span id="ajax-tip"></span></th>
         </tr>
     </thead>
     <tbody>
@@ -29,6 +29,8 @@
 <script type="text/javascript">
 $(function(){
 	$('table').on('click', '.btn-delete', function(event){
+		event.preventDefault();
+		CDMember.executeAjaxDelete(event);
 	});
 });
 </script>

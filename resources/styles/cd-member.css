@@ -5,6 +5,8 @@ a:link {text-decoration:none; text-decoration:none; cursor:pointer;}
 a:visited {text-decoration:none;}
 a:hover {text-decoration:none;}
 
+#ajax-tip {font-size:12px; font-weight:normal;}
+
 .member-form .control-label {width:100px;}
 .member-form .controls {margin-left:120px;}
 .member-form .form-actions {padding-left:120px;}
