@@ -110,7 +110,7 @@ class UserProfile extends CActiveRecord
 	    return self::genderLabel($this->gender);
 	}
 
-	public function getSmalltAvatarUrl()
+	public function getSmallAvatarUrl()
 	{
 	    $url = '';
 	    if (empty($this->image_url))
@@ -125,7 +125,7 @@ class UserProfile extends CActiveRecord
 	    return $url;
 	}
 
-	public function getLargetAvatarUrl()
+	public function getLargeAvatarUrl()
 	{
 	    $url = '';
 	    if (empty($this->avatar_large))
@@ -143,7 +143,7 @@ class UserProfile extends CActiveRecord
 	public function getLargeAvatar($htmlOptions = array())
 	{
 	    $html = '';
-	    $url = $this->getLargetAvatarUrl();
+	    $url = $this->getLargeAvatarUrl();
 	    if ($url) {
 	        $htmlOptions += array('class'=>'large-avatar');
 	        $html = image($url, '我的头像', $htmlOptions);
@@ -155,7 +155,7 @@ class UserProfile extends CActiveRecord
 	public function getSmallAvatar($htmlOptions = array())
 	{
 	    $html = '';
-	    $url = $this->getSmalltAvatarUrl();
+	    $url = $this->getSmallAvatarUrl();
 	    if ($url) {
 	        $htmlOptions += array('class'=>'small-avatar');
 	        $html = image($url, '我的头像', $htmlOptions);
