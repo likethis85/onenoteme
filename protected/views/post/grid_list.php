@@ -17,7 +17,7 @@
         <div class="item-detail">
             <div class="item-title">
                 <h2>
-                    <a href="<?php echo $model->url;?>" target="_blank" title="<?php echo $model->title;?>">∷
+                    <a href="<?php echo $model->url;?>" target="_blank" title="在新窗口中打开">∷
                     <?php echo ($model->channel_id == CHANNEL_DUANZI) ? $model->filterContent : $model->title;?>
                     </a>
                 </h2>

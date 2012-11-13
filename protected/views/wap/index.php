@@ -26,5 +26,5 @@
 </div>
 
 <?php if ($pages->pageCount > 1):?>
-<div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'header'=>'', 'maxButtonCount'=>6));?></div>
+<div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'skin'=>'wap'));?></div>
 <?php endif;?>

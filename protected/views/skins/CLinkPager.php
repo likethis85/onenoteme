@@ -18,7 +18,7 @@ return array(
         'hiddenPageCssClass' => 'disabled',
         'selectedPageCssClass' => 'active',
     ),
-    'classic' => array(
+    'wap' => array(
         'header' => '',
         'footer' => '',
         'maxButtonCount' => 5,
