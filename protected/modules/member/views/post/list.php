@@ -10,7 +10,7 @@
         <?php foreach ($posts as $model):?>
         <tr>
             <td class="acenter"><?php echo $model->id;?></td>
-            <td><?php echo $model->stateHtml . $model->getTitleLink(0);?></td>
+            <td><?php echo $model->stateHtml . $model->titleLink;?></td>
             <td>
                 <?php echo $model->editLink;?>
                 <?php echo $model->deleteLink;?>

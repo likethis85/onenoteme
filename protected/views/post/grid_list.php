@@ -15,9 +15,12 @@
     <div class="panel panel20 post-item" data-id="<?php echo $model->id;?>">
     	<div class="post-author"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
         <div class="item-detail">
-            <div class="item-content">
-                <h2><a href="<?php echo $model->url;?>" target="_blank" title="在新窗口中查看详细内容">∷</a></h2>
-                <span class="content"><?php echo $model->filterContent;?></span>
+            <div class="item-title">
+                <h2>
+                    <a href="<?php echo $model->url;?>" target="_blank" title="<?php echo $model->title;?>">∷
+                    <?php echo ($model->channel_id == CHANNEL_DUANZI) ? $model->filterContent : $model->title;?>
+                    </a>
+                </h2>
             </div>
             <?php if (($model->channel_id == CHANNEL_LENGTU || $model->channel_id == CHANNEL_GIRL) && $model->thumbnail):?>
             <div class="post-image">
@@ -55,6 +58,9 @@
             </div>
             <?php elseif ($model->channel_id == CHANNEL_VIDEO && $model->videoHtml):?>
             <div class="content-block video-player"><?php echo $model->videoHtml;?></div>
+            <?php endif;?>
+            <?php if ($model->channel_id != CHANNEL_DUANZI):?>
+            <div class="item-content"><?php echo $model->filterContent;?></div>
             <?php endif;?>
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->tagLinks;?></div><?php endif;?>

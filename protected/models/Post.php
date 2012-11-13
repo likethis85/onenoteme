@@ -291,7 +291,7 @@ class Post extends CActiveRecord
         return $title;
     }
     
-    public function getTitleLink($len = 35, $target = '_blank')
+    public function getTitleLink($len = 0, $target = '_blank')
     {
         $title = $this->getSubTitle($len);
         return l(h($title), $this->getUrl(), array('target'=>$target));
