@@ -17,7 +17,7 @@
         <div class="item-detail">
             <div class="item-title">
                 <a href="<?php echo $model->url;?>" target="_blank" title="在新窗口中打开">∷&nbsp;
-                <?php echo $model->filterContent;?>
+                <?php echo $model->title;?>
                 </a>
             </div>
             <?php if (($model->channel_id == CHANNEL_LENGTU || $model->channel_id == CHANNEL_GIRL) && $model->thumbnail):?>
