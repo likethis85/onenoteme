@@ -16,11 +16,9 @@
     	<div class="post-author"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
         <div class="item-detail">
             <div class="item-title">
-                <h2>
-                    <a href="<?php echo $model->url;?>" target="_blank" title="在新窗口中打开">∷
-                    <?php echo ($model->channel_id == CHANNEL_DUANZI) ? $model->filterContent : $model->title;?>
-                    </a>
-                </h2>
+                <a href="<?php echo $model->url;?>" target="_blank" title="在新窗口中打开">∷&nbsp;
+                <?php echo $model->title;?>
+                </a>
             </div>
             <?php if (($model->channel_id == CHANNEL_LENGTU || $model->channel_id == CHANNEL_GIRL) && $model->thumbnail):?>
             <div class="post-image">
