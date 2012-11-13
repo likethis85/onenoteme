@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <link rel="shortcut icon" href="<?php echo sbu('images/favicon.ico');?>" type="image/vnd.microsoft.icon" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('libs/bootstrap/css/bootstrap.min.css?t=20121109001');?>" />
-<link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-basic.css?t=20121109001');?>" />
+<link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-basic.css?t=20121114001');?>" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-all.css?t=20121109001');?>" />
 <script type="text/javascript">
 var _hmt = _hmt || [];
