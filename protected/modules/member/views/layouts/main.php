@@ -48,9 +48,9 @@
             <h5><?php echo $this->nickname;?></h5>
         </div>
         <ul class="member-nav">
+            <li><a href="<?php echo aurl('member/post/favorite');?>" <?php if ($this->menu == 'favorite') echo 'class="active"';?>>我的收藏</a></li>
             <li><a href="<?php echo aurl('member/post/index');?>" <?php if ($this->menu == 'post') echo 'class="active"';?>>我的段子</a></li>
             <li><a href="<?php echo aurl('member/comment/index');?>" <?php if ($this->menu == 'comment') echo 'class="active"';?>>我的评论</a></li>
-            <li><a href="<?php echo aurl('member/post/favorite');?>" <?php if ($this->menu == 'favorite') echo 'class="active"';?>>我的收藏</a></li>
             <li><div class="space10px"></div></li>
             <li><a href="<?php echo aurl('member/profile/index');?>" <?php if ($this->menu == 'profile') echo 'class="active"';?>>基本资料</a></li>
             <li><a href="<?php echo aurl('member/profile/avatar');?>" <?php if ($this->menu == 'avatar') echo 'class="active"';?>>修改头像</a></li>

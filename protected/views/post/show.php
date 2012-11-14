@@ -62,9 +62,9 @@
             </script>
             <script src="http://tjs.sjs.sinajs.cn/open/widget/js/widget/comment.js" type="text/javascript" charset="utf-8"></script>
             <script type="text/javascript">
-            window.WBComment.init({
-                "id": "WBCommentFrame"
-            });
+                window.WBComment.init({
+                    "id": "WBCommentFrame"
+                });
             </script>
         </div>
 	</div>
@@ -87,7 +87,6 @@
         <?php endforeach;?>
         <div class="clear"></div>
     </div>
-    <?php if ($post->bmiddlePic):?>
     <!-- 详情页侧边栏广告位开始 -->
     <div class="cdc-block cd-border ad-block">
         <script type="text/javascript">
@@ -97,12 +96,7 @@
         </script>
         <script src="http://a.alimama.cn/inf.js" type="text/javascript"></script>
     </div>
-    <?php else:?>
-    <div class="cdc-block cd-border ad-block">
-        <iframe scrolling="no" frameborder="0" width="300" height="250" src="http://static.5258.net/1616/1616_soso_kw_300_250_8374.htm"></iframe>
-    </div>
     <!-- 详情页侧边栏广告位结束 -->
-    <?php endif;?>
 	<div class="panel panel15"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
 </div>
 <div class="clear"></div>

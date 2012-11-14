@@ -1,5 +1,6 @@
 @CHARSET "UTF-8";
 
+body {background-color:white;}
 .cd-main {background-color:#FFFFFF;}
 #ajax-tip {font-size:12px; font-weight:normal;}
 

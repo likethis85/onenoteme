@@ -47,6 +47,7 @@ class SiteController extends Controller
         
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
+        $criteria->addCondition('channel_id != '. CHANNEL_GIRL);
         if ($s == POST_LIST_STYLE_WATERFALL)
             $criteria->addCondition('channel_id != '. CHANNEL_VIDEO);
         $criteria->order = 'create_time desc, id desc';
