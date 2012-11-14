@@ -284,7 +284,8 @@ Waduanzi.favoritePost = function(event){
 	jqXhr.done(function(data){
 		if (data.errno == 0) {
 			var count = parseInt(tthis.text()) + 1;
-			tthis.text(count).addClass('disabled').off('click');
+			tthis.text(count).addClass('disabled');
+			itemDiv.find('.item-toolbar').off('click', 'a.favorite');
 		}
 		else {
 			alert('收藏出错');
