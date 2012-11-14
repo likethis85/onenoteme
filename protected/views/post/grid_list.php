@@ -68,7 +68,7 @@
             	<li class="fleft"><a rel="nofollow" href="javascript:void(0);" class="downscore site-bg" data-score="-1" data-url="<?php echo aurl('post/score');?>"><?php echo $model->downScore;?></a></li>
             	<li class="fright"><a rel="nofollow" href="javascript:void(0);" class="share site-bg">分享</a></li>
             	<li class="fright"><a href="<?php echo aurl('post/show', array('id' => $model->id), '', 'comments');?>" class="comment site-bg" target="_blank"><?php echo $model->comment_nums ? $model->comment_nums : '评论';?></a></li>
-            	<li class="fright"><a rel="nofollow" href="javascript:void(0);" class="favorite site-bg" data-score="1" data-url="<?php echo $model->likeUrl;?>"><?php echo $model->favorite_count;?></a></li>
+            	<li class="fright"><a rel="nofollow" href="javascript:void(0);" class="favorite site-bg" data-score="1" data-url="<?php echo $model->likeUrl;?>"><?php echo 0;//$model->favorite_count;?></a></li>
             	<div class="clear"></div>
             </ul>
             <div class="sharebox">
