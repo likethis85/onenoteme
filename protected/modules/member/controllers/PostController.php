@@ -50,7 +50,7 @@ class PostController extends MemberController
     {
         $id = (int)$id;
         if ($id > 0) {
-            $model = MemberPost::model()->findByPk($id, 'user_id = :userid', array(':userid'=>$this->userID));
+            $model = MemberPost::model()->findByPk($id, 'user_id = :userid', array(':userid'=>$this->getUserID()));
             if ($model === null) {
                 $data['errno'] = CD_YES;
                 $data['error'] = '段子不存在';
@@ -71,10 +71,16 @@ class PostController extends MemberController
     {
         $id = (int)$id;
         $conditions = array('and', 'user_id = :userid', 'post_id = :postid');
-        $params = array(':userid'=>$this->getUserID(), ':postid'=>$pid);
+        $params = array(':userid'=>$this->getUserID(), ':postid'=>$id);
         $result = app()->getDb()->createCommand()
             ->delete(TABLE_POST_FAVORITE, $conditions, $params);
     
+        if ($result > 0) {
+            $counters = array('favorite_count' => 1);
+            $result = Post::model()->updateCounters($counters, 'id = :postid', array(':postid' => $id));
+            $data = array('errno' => CD_NO);
+        }
+        
         $data = array(
             'errno' => $result ? CD_NO : CD_YES,
         );
@@ -83,3 +89,5 @@ class PostController extends MemberController
     }
     
 }
+
+

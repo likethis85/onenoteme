@@ -6,7 +6,6 @@ CDMember.executeAjax = function(url, data, before, success, fail){
 		dataType: 'jsonp',
 		url: url,
 		cache: false,
-		crossDomain: true,
 		data: data || {},
 		before: (typeof(before) == 'funciton') && before()
 	});
