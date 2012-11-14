@@ -12,14 +12,13 @@ class SiteController extends Controller
             array(
                 'COutputCache + index',
                 'duration' => 120,
-                'varyBySession' => true,
                 'varyByParam' => array('page', 's'),
+                'varyByExpression' => 'user()->getIsGuest()',
                 'requestTypes' => array('GET'),
             ),
             array(
                 'COutputCache + index',
                 'duration' => 120,
-                'varyBySession' => true,
                 'varyByParam' => array('page', 's'),
                 'requestTypes' => array('POST'),
             ),
