@@ -261,6 +261,43 @@ Waduanzi.hideShareBox = function(event) {
 	$(this).parents('.item-toolbar').find('.sharebox:visible').stop(true, true).delay(50).hide();
 };
 
+Waduanzi.favoritePost = function(event){
+	event.preventDefault();
+	_hmt && _hmt.push(['_trackEvent', '收获按钮', '点击']);
+	
+	//$('#quick-login').dialog('open');
+	var tthis = $(this);
+	var itemDiv = tthis.parents('.post-item');
+	var pid = itemDiv.attr('data-id');
+	var url = tthis.attr('data-url');
+	
+	var jqXhr = $.ajax({
+		type: 'POST',
+		url: url,
+		data: {pid: pid},
+		dataType: 'jsonp',
+		beforeSend: function(){
+			tthis.toggleClass('voted');
+		}
+	});
+	
+	jqXhr.done(function(data){
+		if (data.errno == 0) {
+			var count = parseInt(tthis.text()) + 1;
+			tthis.text(count).addClass('disabled').off('click');
+		}
+		else {
+			alert('收藏出错');
+			tthis.toggleClass('voted');
+		}
+	});
+	
+	jqXhr.fail(function(){
+		alert('x');
+		tthis.toggleClass('voted');
+	});
+};
+
 $(function(){
 	Waduanzi.fixedAdBlock();
 });

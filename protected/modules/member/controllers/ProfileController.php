@@ -14,7 +14,7 @@ class ProfileController extends MemberController
         }
         
         $this->breadcrumbs[] = $this->title = $this->siteTitle = '基本资料';
-        $this->channel = 'profile';
+        $this->menu = 'profile';
         $this->render('profile', array(
             'model' => $model,
         ));
@@ -33,7 +33,7 @@ class ProfileController extends MemberController
         }
         
         $this->breadcrumbs[] = $this->title = $this->siteTitle = '修改昵称';
-        $this->channel = 'nickname';
+        $this->menu = 'nickname';
         $this->render('nickname', array(
             'model' => $model,
         ));
@@ -54,7 +54,7 @@ class ProfileController extends MemberController
         $model->password = '';
         
         $this->breadcrumbs[] = $this->title = $this->siteTitle = '修改密码';
-        $this->channel = 'passwd';
+        $this->menu = 'passwd';
         $this->render('passwd', array(
             'model' => $model,
         ));
@@ -77,7 +77,7 @@ class ProfileController extends MemberController
         }
         
         $this->breadcrumbs[] = $this->title = $this->siteTitle = '修改头像';
-        $this->channel = 'avatar';
+        $this->menu = 'avatar';
         $this->render('avatar', array(
             'model' => $model,
         ));

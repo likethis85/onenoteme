@@ -2,9 +2,11 @@ var CDMember = {};
 
 CDMember.executeAjax = function(url, data, before, success, fail){
 	var jqXhr = $.ajax({
-		type: 'post',
+		type: 'POST',
 		dataType: 'jsonp',
 		url: url,
+		cache: false,
+		crossDomain: true,
 		data: data || {},
 		before: (typeof(before) == 'funciton') && before()
 	});
@@ -27,8 +29,11 @@ CDMember.executeAjaxDelete = function(event, success, fail){
 	var tthis = $(event.currentTarget);
 	var url = tthis.attr('data-url');
 	CDMember.executeAjax(url, null, null, success || function(data){
-		tthis.parents('tr').fadeOut('slow');
+		if (data.errno == 0)
+			tthis.parents('tr').fadeOut('slow');
+		else
+			$('#ajax-tip').html('删除失败').addClass('cred').delay(5000).fadeOut('slow').html();
 	}, fail || function(jqXhr, textStatus){
-		$('#ajax-tip').html('删除段子失败').addClass('cred').delay(5000).fadeOut('slow').html();
+		$('#ajax-tip').html('删除失败').addClass('cred').delay(5000).fadeOut('slow').html();
 	});
 };

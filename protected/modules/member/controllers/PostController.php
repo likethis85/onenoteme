@@ -1,6 +1,14 @@
 <?php
 class PostController extends MemberController
 {
+    public function filters()
+    {
+        return array(
+            'ajaxOnly  + delete, unlike',
+            'postOnly + delete, unlike',
+        );
+    }
+    
     public function actionIndex()
     {
         $count = 15;
@@ -15,7 +23,7 @@ class PostController extends MemberController
         ));
         
         $this->breadcrumbs[] = $this->title = $this->siteTitle = '我的段子';
-        $this->channel = 'post';
+        $this->menu = 'post';
         $this->render('list', array(
             'posts' => $posts,
             'pages' => $pages,
@@ -31,7 +39,7 @@ class PostController extends MemberController
         $posts = $this->user->getFavoritePosts($pages->currentPage, $count);
         
         $this->breadcrumbs[] = $this->title = $this->siteTitle = '我的收藏';
-        $this->channel = 'favorite';
+        $this->menu = 'favorite';
         $this->render('favorite', array(
             'posts' => $posts,
             'pages' => $pages,
@@ -56,6 +64,21 @@ class PostController extends MemberController
             $data['error'] = '非法请求';
         }
         
+        CDBase::jsonp($callback, $data);
+    }
+
+    public function actionUnlike($id, $callback)
+    {
+        $id = (int)$id;
+        $conditions = array('and', 'user_id = :userid', 'post_id = :postid');
+        $params = array(':userid'=>$this->getUserID(), ':postid'=>$pid);
+        $result = app()->getDb()->createCommand()
+            ->delete(TABLE_POST_FAVORITE, $conditions, $params);
+    
+        $data = array(
+            'errno' => $result ? CD_NO : CD_YES,
+        );
+    
         CDBase::jsonp($callback, $data);
     }
     

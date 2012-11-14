@@ -16,7 +16,7 @@ class CommentController extends MemberController
         ));
         
         $this->breadcrumbs[] = $this->title = $this->siteTitle = '我的评论';
-        $this->channel = 'comment';
+        $this->menu = 'comment';
         $this->render('list', array(
             'comments' => $comments,
             'pages' => $pages,

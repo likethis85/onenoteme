@@ -29,13 +29,13 @@
     	    <a href="<?php echo CDBase::siteHomeUrl();?>" title="点击返回首页"><img src="<?php echo sbu('images/logo.jpg');?>" alt="网站LOGO" title="返回首页" align="top" />&nbsp;挖段子</a>
 	    </div>
     	<ul class="channel-nav fleft">
-    		<li<?php echo ($this->channel===CHANNEL_DUANZI) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/joke');?>">挖笑话</a></li>
+    		<li<?php echo ($this->menu===CHANNEL_DUANZI) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/joke');?>">挖笑话</a></li>
     		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_LENGTU) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/lengtu');?>">挖冷图</a></li>
+    		<li<?php echo ($this->menu===CHANNEL_LENGTU) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/lengtu');?>">挖冷图</a></li>
     		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_GIRL) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/girl');?>">挖福利</a></li>
+    		<li<?php echo ($this->menu===CHANNEL_GIRL) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/girl');?>">挖福利</a></li>
     		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_VIDEO) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/video');?>">挖视频</a></li>
+    		<li<?php echo ($this->menu===CHANNEL_VIDEO) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/video');?>">挖视频</a></li>
     	</ul>
     	<div class="clear"></div>
     </div>
@@ -48,14 +48,14 @@
             <h5><?php echo $this->nickname;?></h5>
         </div>
         <ul class="member-nav">
-            <li><a href="<?php echo aurl('member/post/index');?>" <?php if ($this->channel == 'post') echo 'class="active"';?>>我的段子</a></li>
-            <li><a href="<?php echo aurl('member/comment/index');?>" <?php if ($this->channel == 'comment') echo 'class="active"';?>>我的评论</a></li>
-            <li><a href="<?php echo aurl('member/post/favorite');?>" <?php if ($this->channel == 'favorite') echo 'class="active"';?>>我的收藏</a></li>
+            <li><a href="<?php echo aurl('member/post/index');?>" <?php if ($this->menu == 'post') echo 'class="active"';?>>我的段子</a></li>
+            <li><a href="<?php echo aurl('member/comment/index');?>" <?php if ($this->menu == 'comment') echo 'class="active"';?>>我的评论</a></li>
+            <li><a href="<?php echo aurl('member/post/favorite');?>" <?php if ($this->menu == 'favorite') echo 'class="active"';?>>我的收藏</a></li>
             <li><div class="space10px"></div></li>
-            <li><a href="<?php echo aurl('member/profile/index');?>" <?php if ($this->channel == 'profile') echo 'class="active"';?>>基本资料</a></li>
-            <li><a href="<?php echo aurl('member/profile/avatar');?>" <?php if ($this->channel == 'avatar') echo 'class="active"';?>>修改头像</a></li>
-            <li><a href="<?php echo aurl('member/profile/nickname');?>" <?php if ($this->channel == 'nickname') echo 'class="active"';?>>修改昵称</a></li>
-            <li><a href="<?php echo aurl('member/profile/passwd');?>" <?php if ($this->channel == 'passwd') echo 'class="active"';?>>修改密码</a></li>
+            <li><a href="<?php echo aurl('member/profile/index');?>" <?php if ($this->menu == 'profile') echo 'class="active"';?>>基本资料</a></li>
+            <li><a href="<?php echo aurl('member/profile/avatar');?>" <?php if ($this->menu == 'avatar') echo 'class="active"';?>>修改头像</a></li>
+            <li><a href="<?php echo aurl('member/profile/nickname');?>" <?php if ($this->menu == 'nickname') echo 'class="active"';?>>修改昵称</a></li>
+            <li><a href="<?php echo aurl('member/profile/passwd');?>" <?php if ($this->menu == 'passwd') echo 'class="active"';?>>修改密码</a></li>
             <li><a href="<?php echo CDBase::logoutUrl();?>">退出登录</a></li>
         </ul>
     </div>

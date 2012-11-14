@@ -13,6 +13,7 @@
  * @property integer $up_score
  * @property integer $down_score
  * @property integer $comment_nums
+ * @property integer $favorite_count
  * @property integer $user_id
  * @property string $user_name
  * @property string $tags
@@ -112,13 +113,13 @@ class Post extends CActiveRecord
 		// will receive user inputs.
 		return array(
 		    array('content', 'required', 'message'=>'段子内容必须填写'),
-			array('channel_id, view_nums, up_score, down_score, comment_nums, state, create_time, user_id, thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height, istop, homeshow, recommend, hottest', 'numerical', 'integerOnly'=>true),
+			array('channel_id, view_nums, up_score, down_score, comment_nums, state, favorite_count, create_time, user_id, thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height, istop, homeshow, recommend, hottest', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
 			array('weibo_id', 'length', 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
 			array('title, tags', 'length', 'max'=>250),
 			array('content, thumbnail_pic, bmiddle_pic, original_pic', 'safe'),
-		    array('thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height, istop, homeshow, recommend, hottest', 'filter', 'filter'=>'intval'),
+		    array('thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height, istop, homeshow, recommend, hottest, favorite_count', 'filter', 'filter'=>'intval'),
 		);
 	}
 
@@ -146,6 +147,7 @@ class Post extends CActiveRecord
 	        'up_score' => '顶数',
 		    'down_score' => '浏览',
 			'comment_nums' => '评论',
+			'favorite_count' => '收藏',
 		    'user_id' => '用户ID',
 		    'user_name' => '名字',
 			'state' => '状态',

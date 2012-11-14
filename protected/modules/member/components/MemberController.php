@@ -9,30 +9,14 @@
  * @property MemberUser $user
  * @property UserProfile $profile
  */
-class MemberController extends CController
+class MemberController extends Controller
 {
     public $title;
-    public $channel;
-    public $breadcrumbs = array();
+    public $menu;
     
 	public function setSiteTitle($text)
 	{
 	    $this->pageTitle = $text . '_' . app()->name;
-	}
-	
-	public function getUserID()
-	{
-	    return user()->id;
-	}
-	
-	public function getUsername()
-	{
-	    return $this->user->username;
-	}
-	
-	public function getNickname()
-	{
-	    return user()->name;
 	}
 
     public function getUser()
@@ -42,10 +26,5 @@ class MemberController extends CController
             throw new CHttpException(500, '未找到用户');
         
         return $user;
-    }
-    
-    public function getProfile()
-    {
-        return $this->user->profile;
     }
 }

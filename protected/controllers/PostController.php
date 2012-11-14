@@ -4,8 +4,8 @@ class PostController extends Controller
     public function filters()
     {
         return array(
-            'ajaxOnly  + score, views',
-            'postOnly + score, views',
+            'ajaxOnly  + score, views, like, unlike',
+            'postOnly + score, views, like, unlike',
             array(
                 'COutputCache + show',
                 'duration' => 600,
@@ -124,6 +124,60 @@ class PostController extends Controller
         $counters = array('view_nums' => 1);
         $result = Post::model()->updateCounters($counters, 'id = :postid', array(':postid' => $id));
         CDBase::jsonp($callback, $result);
+    }
+    
+    public function actionLike($callback)
+    {
+        $pid = (int)$_POST['pid'];
+        $row = app()->getDb()->createCommand()
+            ->from(TABLE_POST_FAVORITE)
+            ->select('id')
+            ->where(array('and', 'user_id = :userid', 'post_id = :postid'), array(':userid'=>$this->getUserID(), ':postid'=>$pid))
+            ->queryScalar();
+        
+        if ($row !== false) {
+            $data = array('errno' => CD_NO, 'id'=>$row);
+            CDBase::jsonp($callback, $data);
+        }
+        
+        $columns = array(
+            'user_id'=>(int)user()->id,
+            'post_id'=>$pid,
+            'create_time' => $_SERVER['REQUEST_TIME'],
+            'create_ip' => CDBase::getClientIp(),
+        );
+        try {
+            $result = app()->getDb()->createCommand()
+                ->insert(TABLE_POST_FAVORITE, $columns);
+            
+            if ($result > 0) {
+                $counters = array('favorite_count' => 1);
+                $result = Post::model()->updateCounters($counters, 'id = :postid', array(':postid' => $pid));
+                $data = array('errno' => CD_NO);
+            }
+            else
+                $data = array('errno' => CD_YES);
+        }
+        catch (Exception $e) {
+            $data = array('errno' => CD_YES, 'error'=>$e->getMessage());
+        }
+        
+        CDBase::jsonp($callback, $data);
+    }
+    
+    public function actionUnlike($id, $callback)
+    {
+        $id = (int)$id;
+        $conditions = array('and', 'user_id = :userid', 'post_id = :postid');
+        $params = array(':userid'=>$this->getUserID(), ':postid'=>$pid);
+        $result = app()->getDb()->createCommand()
+            ->delete(TABLE_POST_FAVORITE, $conditions, $params);
+        
+        $data = array(
+            'errno' => $result ? CD_NO : CD_YES,
+        );
+        
+        CDBase::jsonp($callback, $data);
     }
     
     private static function prevPostUrl(Post $post)

@@ -4,6 +4,7 @@
  * @author chendong
  * @property string $deleteLink
  * @property string $editLink
+ * @property string $unlikeLink
  * @property string $stateHtml
  */
 class MemberPost extends Post
@@ -49,6 +50,14 @@ class MemberPost extends Post
         $class = $classes[$this->state];
         
         return sprintf('<span class="%s">%s</span>', $class, $this->getStateLabel());
+    }
+    
+    public function getUnlikeLink()
+    {
+        $url = aurl('member/post/unlike', array('id'=>$this->id));
+        $html = l('<i class="icon-trash icon-white"></i>', 'javascript:void(0);', array('class'=>'btn btn-mini btn-danger btn-delete', 'data-url'=>$url));
+        
+        return $html;
     }
     
     public static function fetchFavoritePosts($userID, $pageSize = 1, $count = 15)

@@ -75,4 +75,34 @@ class Controller extends CController
             exit(0);
         }
     }
+
+
+    public function getUserID()
+    {
+        return (int)user()->id;
+    }
+    
+    public function getUsername()
+    {
+        return $this->user->username;
+    }
+    
+    public function getNickname()
+    {
+        return user()->name;
+    }
+    
+    public function getUser()
+    {
+        $user = User::model()->findByPk($this->getUserID());
+        if ($user === null)
+            throw new CHttpException(500, '未找到用户');
+    
+        return $user;
+    }
+    
+    public function getProfile()
+    {
+        return $this->user->profile;
+    }
 }
