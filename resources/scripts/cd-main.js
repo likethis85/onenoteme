@@ -184,7 +184,7 @@ Waduanzi.postUpDownScore = function(event){
 	//$('#quick-login').dialog('open');
 	var tthis = $(this);
 	var itemDiv = tthis.parents('.post-item');
-	var pid = itemDiv.attr('data-id');
+	var pid = tthis.attr('data-id');
 	var score = tthis.attr('data-score');
 	var url = tthis.attr('data-url');
 	
@@ -243,10 +243,10 @@ Waduanzi.showShareBox = function(event) {
 	
 	var bdshare = $(this).parents('.item-toolbar').find('#bdshare');
 	if (bdshare.attr('data').length == 0) {
-		var item = $(this).parents('.post-item');
+		var item = $(this).parents('.share-item');
 		var bddata = {
-			"url": item.find('.item-content h2 a').attr('href'),
-			"text": '转自@挖段子网：' + item.find('.item-content .content').text(),
+			"url": item.find('.item-title a').attr('href'),
+			"text": '转自@挖段子网：' + $.trim(item.find('.item-title').text()),
 			"pic": item.find('.post-image .thumb a').attr('href'),
 		};
 		bdshare.attr('data', JSON.stringify(bddata));
@@ -268,7 +268,7 @@ Waduanzi.favoritePost = function(event){
 	//$('#quick-login').dialog('open');
 	var tthis = $(this);
 	var itemDiv = tthis.parents('.post-item');
-	var pid = itemDiv.attr('data-id');
+	var pid = tthis.attr('data-id');
 	var url = tthis.attr('data-url');
 	
 	var jqXhr = $.ajax({

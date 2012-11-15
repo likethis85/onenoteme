@@ -1,7 +1,14 @@
 <div class="fleft cd-container">
-	<div class="panel panel20 post-detail">
+	<div class="panel panel20 post-detail share-item">
 		<div class="content-block post-content">
-		    <p><?php echo $post->filterContent;?></p>
+		    <div class="item-title">
+		        <?php if ($post->channel_id == CHANNEL_DUANZI):echo $post->filterContent;?>
+		        <?php else:?>
+                <a href="<?php echo $post->url;?>" target="_blank" title="在新窗口中打开">
+                    <?php echo $post->title;?>
+                </a>
+                <?php endif;?>
+            </div>
 		    <?php if ($post->tags):?><div class="post-tags">标签：<?php echo $post->tagLinks;?></div><?php endif;?>
         </div>
         <?php if ($post->videoHtml):?>
@@ -9,30 +16,27 @@
         <?php elseif ($post->bmiddlePic):?>
         <div class="content-block post-picture"><?php echo l(CHtml::image($post->bmiddlePic, $post->filterContent . ', ' . $post->getTagText(',')), aurl('post/bigpic', array('id'=>$post->id)), array('target'=>'_blank', 'title'=>$post->filterContent));?></div>
         <?php endif;?>
+        <?php if ($post->channel_id != CHANNEL_DUANZI):?>
+            <div class="item-content"><?php echo $post->filterContent;?></div>
+            <?php endif;?>
         <!-- 详情内容下方广告位 -->
-        <div class="toolbar radius3px">
-    		<div class="content-block post-arrows fleft">
-                <a class="site-bg arrow-up" data-id="<?php echo $post->id;?>" data-value="1" data-url="<?php echo aurl('post/score');?>" href="javascript:void(0);">喜欢</a>
-                <a class="site-bg arrow-down" data-id="<?php echo $post->id;?>" data-value="0" data-url="<?php echo aurl('post/score');?>" href="javascript:void(0);">讨厌</a>
-                <div class="clear"></div>
-            </div>
-            <div class="content-block info fleft">
-                评分:<span id="score-count"><?php echo $post->score;?></span>&nbsp;&nbsp;
-                浏览:<span id="view-count"><?php echo (int)$post->view_nums;?></span>&nbsp;&nbsp;
-                喜欢:<span id="like-count"><?php echo (int)$post->up_score;?></span>
-            </div>
-            <div class="content-block social fright">
-                <!-- Baidu Button BEGIN -->
-                <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare" data="<?php echo $shareData;?>">
-                    <a class="bds_qzone"></a>
-                    <a class="bds_tsina"></a>
-                    <a class="bds_tqq"></a>
-                    <a class="bds_renren"></a>
-                    <a class="bds_douban"></a>
+        <div class="item-toolbar">
+            <ul>
+            	<li class="fleft"><a rel="nofollow" href="javascript:void(0);" class="upscore site-bg" data-id="<?php echo $post->id;?>" data-score="1" data-url="<?php echo aurl('post/score');?>"><?php echo $post->up_score;?></a></li>
+            	<li class="fleft"><a rel="nofollow" href="javascript:void(0);" class="downscore site-bg" data-id="<?php echo $post->id;?>" data-score="-1" data-url="<?php echo aurl('post/score');?>"><?php echo $post->downScore;?></a></li>
+            	<li class="fright"><a rel="nofollow" href="javascript:void(0);" class="share site-bg">分享</a></li>
+            	<li class="fright"><a rel="nofollow" href="javascript:void(0);" class="favorite site-bg" data-id="<?php echo $post->id;?>" data-url="<?php echo $post->likeUrl;?>"><?php echo $post->favorite_count;?></a></li>
+            	<div class="clear"></div>
+            </ul>
+            <div class="sharebox">
+                <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" data="">
+                    <a class="bds_qzone">QQ空间</a>
+                    <a class="bds_tsina">新浪微博</a>
+                    <a class="bds_tqq">腾讯微博</a>
+                    <a class="bds_renren">人人网</a>
+                    <div class="arrow"></div>
                 </div>
-                <!-- Baidu Button END -->
             </div>
-            <div class="clear"></div>
         </div>
         <?php if ($post->bmiddlePic):?>
         <div class="content-block wumii-box">
@@ -133,7 +137,10 @@ $(function(){
         }
     });
     $('.post-detail').on('click', '#submit-comment', Waduanzi.PostComment);
-
+    $('.item-toolbar').on('click', 'a.upscore, a.downscore', Waduanzi.postUpDownScore);
+	$('.item-toolbar').on('mouseenter', 'a.share, .sharebox', Waduanzi.showShareBox);
+	$('.item-toolbar').on('mouseleave', 'a.share, .sharebox', Waduanzi.hideShareBox);
+	$('.item-toolbar').on('click', 'a.favorite', Waduanzi.favoritePost);
     
 	var container = $('#comments');
 	container.infinitescroll({

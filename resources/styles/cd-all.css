@@ -150,8 +150,8 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .post-item .post-tags a {color:#9b8878; word-wrap:break-word; word-break:break-all;}
 .post-item .post-tags a:hover {color:#330000;}
 .post-list .item-shadow {height:15px; background-position:0 -275px;}
-.post-item .item-toolbar {margin:15px 0 0; position:relative; z-index:1;}
-.post-item .item-toolbar ul {list-style:none; margin:0; padding:0;}
+.item-toolbar {margin:15px 0 0; position:relative; z-index:1;}
+.item-toolbar ul {list-style:none; margin:0; padding:0;}
 .item-toolbar ul a {display:block; height:28px; line-height:30px; text-indent:36px; width:80px; border-radius:3px; border:1px solid #DFD5CB; color:#9E8C7B;}
 .item-toolbar ul a:hover {box-shadow:0 1px 2px rgba(0, 0, 0, 0.2); border-color:#A78B6F;}
 .item-toolbar ul a:active, .item-toolbar ul a.voted {background-color:#F3EFE7; border-color:#cabdb0; box-shadow:0 1px 1px rgba(0, 0, 0, 0.2) inset;color:#BF4131;}
@@ -161,13 +161,13 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .item-toolbar ul a.downscore {background-position:-80px -716px;}
 .item-toolbar ul a.downscore:hover {background-position:-80px -746px;}
 .item-toolbar ul a.downscore:active, .item-toolbar ul a.downscore.voted {background-position:-80px -776px;}
-.item-toolbar ul a.comment {background-position:-160px -716px;}
+.item-toolbar ul a.comment {margin:0 0 0 10px; background-position:-160px -716px;}
 .item-toolbar ul a.comment:hover {background-position:-160px -746px;}
 .item-toolbar ul a.comment:active, .item-toolbar ul a.comment:voted {background-position:-160px -776px;}
 .item-toolbar ul a.share {margin:0 0 0 10px; background-position:0 -806px;}
 .item-toolbar ul a.share:hover {background-position:0 -836px;}
 .item-toolbar ul a.share:active {background-position:0 -866px;}
-.item-toolbar ul a.favorite {margin:0 10px 0 0; background-position:-160px -806px;}
+.item-toolbar ul a.favorite {background-position:-160px -806px;}
 .item-toolbar ul a.disabled {cursor:default; text-decoration:none;}
 /* share box */
 .item-toolbar .sharebox {display:none; position:absolute; bottom:30px; right:0; z-index:2; backgro2und:white; width:190px; height:75px;}

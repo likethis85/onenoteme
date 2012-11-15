@@ -141,8 +141,8 @@ class PostController extends Controller
         }
         
         $columns = array(
-            'user_id'=>(int)user()->id,
-            'post_id'=>$pid,
+            'user_id' => $this->getUserID(),
+            'post_id' => $pid,
             'create_time' => $_SERVER['REQUEST_TIME'],
             'create_ip' => CDBase::getClientIp(),
         );
