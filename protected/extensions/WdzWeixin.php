@@ -3,12 +3,19 @@ class WdzWeixin extends CDWeixin
 {
     public function processRequest($data)
     {
-        $input = (int)$data->Content;
-        $method = 'method' . $input;
-        if (method_exists($this, $method))
-            $this->$method();
-        else
-            $this->other();
+        $input = trim($data->Content);
+        if (is_numeric($input)) {
+            $input = (int)$input;
+            $method = 'method' . $input;
+            if (method_exists($this, $method))
+                $this->$method();
+            else
+                $this->method0();
+        }
+        else {
+            $this->method0();
+        }
+        
     }
     
     public function errorHandler($errno, $error, $file = '', $line = 0)
@@ -71,7 +78,7 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
-    public function method0()
+    public function method9()
     {
         $text = '最新发布的段子，每日精品笑话连载。网罗互联网各种精品段子，各种糗事，各种笑话，各种秘密，各种经典语录，各种有趣的图片，各种漂亮mm校花模特正妹，应有尽有。烦了、累了、无聊了，就来挖段子逛一逛。"';
         $posts = array(
@@ -87,25 +94,9 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
-    public function method9()
+    public function method0()
     {
-        $xml = <<<EOD
-        <xml>
-        <ToUserName><![CDATA[ojH6ijg2c69VqqMVltQYTW4arDDc]]></ToUserName>
-        <FromUserName><![CDATA[gh_9261dce78e9f]]></FromUserName>
-        <CreateTime>%s</CreateTime>
-        <MsgType><![CDATA[text]]></MsgType>
-        <Content><![CDATA[this is test]]></Content>
-        <FuncFlag>0</FuncFlag>
-        </xml>
-EOD;
-        echo sprintf($xml, time());
-        exit;
-    }
-    
-    public function other()
-    {
-        $text = "您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，与大家一起分享哟～\n\n回复 1 查看挖笑话；\n回复 2 查看挖趣图；\n回复 3 查看挖女神；\n回复 0 查看挖段子手机版；";
+        $text = "您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，与大家一起分享哟～\n\n回复 1 查看挖笑话；\n回复 2 查看挖趣图；\n回复 3 查看挖女神；\n回复 9 查看挖段子手机版；\n回复 0 查看使用帮助";
         $xml = $this->outputText($text);
         header('Content-Type: application/xml');
         echo $xml;
