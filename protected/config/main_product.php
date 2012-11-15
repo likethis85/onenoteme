@@ -98,7 +98,6 @@ return array(
                 'http://www.waduanzi.com/<_a:(duanzi|lengtu|girl|video)>' => 'channel/<_a>',
                 'http://www.waduanzi.com/archives/<id:\d+>' => 'post/show',
                 'http://www.waduanzi.com/post-<id:\d+>' => 'post/detail',
-                'http://www.waduanzi.com/post/<_a>' => 'post/<_a>',
                 'http://www.waduanzi.com/originalpic/<id:\d+>' => 'post/bigpic',
                 'http://www.waduanzi.com/tags' => 'tag/list',
                 'http://www.waduanzi.com/tag/<name:.+>' => 'tag/posts',
