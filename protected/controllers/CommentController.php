@@ -14,7 +14,7 @@ class CommentController extends Controller
         
     }
     
-    public function actionCreate()
+    public function actionCreate($callback)
     {
         $c = new Comment();
         $c->post_id = $_POST['postid'];
@@ -29,17 +29,16 @@ class CommentController extends Controller
         else
             $data['error'] = '发表评论出错';
         
-        echo CJSON::encode($data);
-        exit(0);
+        CDBase::jsonp($callback, $data);
     }
 
-    public function actionScore()
+    public function actionScore($callback)
     {
         $id = (int)$_POST['id'];
         $column = ((int)$_POST['score'] > 0) ? 'up_score' : 'down_score';
         $counters = array($column => 1);
         $result = Comment::model()->updateCounters($counters, 'id = :id', array(':id'=>$id));
-        echo (int)$result;
-        exit(0);
+        $data = array('errno' => (int)!$result);
+        CDBase::jsonp($callback, $data);
     }
 }

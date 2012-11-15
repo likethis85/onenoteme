@@ -97,12 +97,12 @@ var Waduanzi = {
 
 		var xhr = $.ajax({
 			url: url,
-			type: 'post',
-			dataType: 'text',
+			type: 'POST',
+			dataType: 'jsonp',
 			data: {id:pid, score:score}
 		});
 		xhr.done(function(data){
-			if (parseInt(data) > 0) {
+			if (parseInt(data.errno) == 0) {
 				// success
 			}
 		});
@@ -124,7 +124,7 @@ var Waduanzi = {
 		var xhr = $.ajax({
 			url: form.attr('action'),
 			type: 'post',
-			dataType: 'json',
+			dataType: 'jsonp',
 			data: $('#comment-form').serialize(),
 			beforeSend: function(){
 				$('#caption-error').empty().hide();
