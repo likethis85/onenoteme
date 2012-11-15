@@ -65,7 +65,6 @@
 	<ul class="links">
     	<li><a href="http://www.goulie.com/" target="_blank">购猎</a></li>
     	<li><a href="http://www.tao123.com" target="_blank">淘网址</a></li>
-		<li><a href="http://lengxiaohua.net/" target="_blank">冷笑话</a></li>
 		<li><a href="http://www.xiaohuayoumo.com/" target="_blank">幽默笑话百分百</a></li>
 		<li><a href="http://www.yiqixiaoxiao.com/" target="_blank">一起笑笑</a></li>
 		<li><a href="http://www.funnyba.com/" target="_blank">有趣吧</a></li>
