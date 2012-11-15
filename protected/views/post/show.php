@@ -1,5 +1,5 @@
 <div class="fleft cd-container">
-	<div class="panel panel20 post-detail share-item">
+	<div class="panel panel20 post-detail post-box">
 		<div class="content-block post-content">
 		    <div class="item-title">
 		        <?php if ($post->channel_id == CHANNEL_DUANZI):echo $post->filterContent;?>

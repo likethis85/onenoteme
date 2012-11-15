@@ -12,7 +12,7 @@
 <?php endif;?>
 <div class="post-list">
     <?php foreach ((array)$models as $key => $model):?>
-    <div class="panel panel20 post-item share-item">
+    <div class="panel panel20 post-item post-box">
     	<div class="post-author"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
         <div class="item-detail">
             <div class="item-title">

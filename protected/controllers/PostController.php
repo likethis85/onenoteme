@@ -4,8 +4,8 @@ class PostController extends Controller
     public function filters()
     {
         return array(
-            'ajaxOnly  + score, views, like, unlike',
-            'postOnly + score, views, like, unlike',
+            'ajaxOnly  + score, views',
+            'postOnly + score, views',
             array(
                 'COutputCache + show',
                 'duration' => 600,
