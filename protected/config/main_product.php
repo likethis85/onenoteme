@@ -91,6 +91,7 @@ return array(
                 'http://<_a:(joke|lengtu|girl|video)>.waduanzi.com/?page=<page:\d+>&s=<s:\w+>' => 'channel/<_a>',
                 'http://<_a:(joke|lengtu|girl|video)>.waduanzi.com/?page=<page:\d+>' => 'channel/<_a>',
                 'http://<_a:(joke|lengtu|girl|video)>.waduanzi.com/' => 'channel/<_a>',
+                'http://<_a:(joke|lengtu|girl|video)>.waduanzi.com/<_c>/<_a:(score|views|like|unlike)>' => 'post/<_a>',
                 
                 'http://www.waduanzi.com/' => 'site/index',
                 'http://www.waduanzi.com/<_a:(login|signup|logout|bdmap|links)>' => 'site/<_a>',
