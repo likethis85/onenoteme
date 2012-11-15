@@ -54,7 +54,7 @@ return array(
 //             'enableParamLogging' => true,
 //             'enableProfiling' => true,
 		    'schemaCacheID' => 'cache',
-		    'schemaCachingDuration' => 3600 * 24,    // metadata 缓存超时时间(s)
+		    'schemaCachingDuration' => 3600,    // metadata 缓存超时时间(s)
 		    'queryCacheID' => 'cache',
 		    'queryCachingDuration' => 60,
         ),
