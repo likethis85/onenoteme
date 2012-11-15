@@ -3,7 +3,7 @@ var Waduanzi = {
 	IncreasePostViewNums: function(postid, url){
 		var xhr = $.ajax({
 			url: url,
-			type: 'post',
+			type: 'POST',
 			dataType: 'jsonp',
 			data: {id:postid}
 		});
@@ -49,7 +49,7 @@ var Waduanzi = {
 
 		var xhr = $.ajax({
 			url: url,
-			type: 'post',
+			type: 'POST',
 			dataType: 'jsonp',
 			data: {id:pid, score:score}
 		});
@@ -123,7 +123,7 @@ var Waduanzi = {
 
 		var xhr = $.ajax({
 			url: form.attr('action'),
-			type: 'post',
+			type: 'POST',
 			dataType: 'jsonp',
 			data: $('#comment-form').serialize(),
 			beforeSend: function(){
