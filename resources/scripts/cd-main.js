@@ -50,7 +50,7 @@ var Waduanzi = {
 		var xhr = $.ajax({
 			url: url,
 			type: 'post',
-			dataType: 'text',
+			dataType: 'jsonp',
 			data: {id:pid, score:score}
 		});
 		xhr.done(function(data){
