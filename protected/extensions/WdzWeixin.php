@@ -96,8 +96,24 @@ class WdzWeixin extends CDWeixin
     
     public function method0()
     {
-        $text = "您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，与大家一起分享哟～\n\n回复 1 查看挖笑话；\n回复 2 查看挖趣图；\n回复 3 查看挖女神；\n回复 9 查看挖段子手机版；\n回复 0 查看使用帮助";
+        $text = "您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，与大家一起分享哟～\n\n回复 1 查看挖笑话；\n回复 2 查看挖趣图；\n回复 3 查看挖女神；\n回复 9 查看全部内容；\n回复 0 查看使用帮助";
         $xml = $this->outputText($text);
+        header('Content-Type: application/xml');
+        echo $xml;
+    }
+    
+    public function queryTag($tag)
+    {
+        $text = "在挖段子网中为您查询到的与{$tag}有关的内容，希望您能喜欢";
+        $posts = array(
+            array(
+                'Title' => '与{$tag}有关的内容',
+                'Discription' => $text,
+                'PicUrl' => 'http://s.waduanzi.com/images/wx.jpg',
+                'Url' => aurl('mobile/tag/posts', array('name'=>$tag)),
+            )
+        );
+        $xml = $this->outputNews($text, $posts);
         header('Content-Type: application/xml');
         echo $xml;
     }
