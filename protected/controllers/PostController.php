@@ -17,16 +17,16 @@ class PostController extends Controller
         );
     }
     
-    public function actionScore()
+    public function actionScore($callback)
     {
         $pid = (int)$_POST['pid'];
         if ($pid <= 0) throw new CHttpException(500);
         
         $column = ((int)$_POST['score'] > 0) ? 'up_score' : 'down_score';
         $counters = array($column => 1);
-        $result = Post::model()->updateCounters($counters, 'id = :id', array(':id'=>$pid));
-        echo (int)$result;
-        exit(0);
+        $result = Post::model()->updateCounters($counters, 'id = :pid', array(':pid'=>$pid));
+        $data = array('errno' => (int)!$result);
+        CDBase::jsonp($callback, $data);
     }
     
     public function actionDetail($id)
@@ -121,7 +121,8 @@ class PostController extends Controller
         $id = (int)$_POST['id'];
         $counters = array('view_nums' => 1);
         $result = Post::model()->updateCounters($counters, 'id = :postid', array(':postid' => $id));
-        CDBase::jsonp($callback, $result);
+        $data = array('errno' => (int)!$result);
+        CDBase::jsonp($callback, $data);
     }
     
     public function actionLike($callback)

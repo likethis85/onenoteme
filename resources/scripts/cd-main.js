@@ -192,14 +192,14 @@ Waduanzi.postUpDownScore = function(event){
 		type: 'POST',
 		url: url,
 		data: {pid: pid, score: score},
-		dataType: 'text',
+		dataType: 'jsonp',
 		beforeSend: function(){
 			tthis.toggleClass('voted');
 		}
 	});
 	
 	jqXhr.done(function(data){
-		if (data > 0) {
+		if (data.errno == 0) {
 			var old = parseInt(tthis.text());
 			var newScore = 0;
 			if (tthis.hasClass('upscore'))
@@ -212,7 +212,7 @@ Waduanzi.postUpDownScore = function(event){
 			itemDiv.find('.item-toolbar').off('click', 'a.upscore, a.downscore');
 		}
 		else {
-			alert('x');
+			alert('评价出错');
 			tthis.toggleClass('voted');
 		}
 	});

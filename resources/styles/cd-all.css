@@ -76,7 +76,7 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 .post-detail .social {padding:0 3px; margin-left:3px;}
 .post-detail .social a {margin:0!important;}
 .post-detail .social #bdshare {padding-bottom:5px!important;}
-.post-detail .comment-form {backgroun2d-color:#F4F4F6; display:block; position:relative; overflow:hidden; background-color:#ECECEC; padding:8px; margin-bottom:10px;}
+.post-detail .comment-form {backgroun2d-color:#F4F4F6; display:block; position:relative; overflow:hidden; background-color:#ECECEC; padding:8px; margin:10px 0;}
 .post-detail .comment-form textarea {width:485px; border:0; color:#888; margin:0; padding:7px 5px 6px; font-size:12px;}
 .post-detail .comment-form textarea.mini-content {height:20px; resize:none;}
 .post-detail .comment-form textarea.expand {height:50px;}
