@@ -412,7 +412,7 @@ class Post extends CActiveRecord
         return json_encode($data);
     }
     
-    public function saveRemoteImages()
+    public function fetchRemoteImagesBeforeSave()
     {
         $url = strip_tags(trim($this->original_pic));
         if (!empty($url) && stripos($url, fbu()) === false) {
@@ -434,14 +434,23 @@ class Post extends CActiveRecord
                 $this->original_pic = $images[2]['url'];
                 $this->original_width = $images[2]['width'];
                 $this->original_height = $images[2]['height'];
-                $attributes = array('thumbnail_pic', 'thumbnail_width', 'thumbnail_height', 'bmiddle_pic', 'bmiddle_width', 'bmiddle_height', 'original_pic', 'original_width', 'original_height');
-                return $this->save(true, $attributes);
+                return true;
             }
-            
-            return false;
+            else
+                return false;
         }
-        return true;
-        
+        else
+            return false;
+    }
+    
+    public function fetchRemoteImagesAfterSave()
+    {
+        if ($this->fetchRemoteImagesBeforeSave()) {
+            $attributes = array('thumbnail_pic', 'thumbnail_width', 'thumbnail_height', 'bmiddle_pic', 'bmiddle_width', 'bmiddle_height', 'original_pic', 'original_width', 'original_height');
+            return $this->save(true, $attributes);
+        }
+        else
+            return false;
     }
     
     public static function todayUpdateCount()
