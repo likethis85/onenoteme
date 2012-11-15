@@ -87,6 +87,22 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
+    public function method9()
+    {
+        $xml = <<<EOD
+        <xml>
+        <ToUserName><![CDATA[ojH6ijg2c69VqqMVltQYTW4arDDc]]></ToUserName>
+        <FromUserName><![CDATA[gh_9261dce78e9f]]></FromUserName>
+        <CreateTime>%s</CreateTime>
+        <MsgType><![CDATA[text]]></MsgType>
+        <Content><![CDATA[this is test]]></Content>
+        <FuncFlag>0</FuncFlag>
+        </xml>
+EOD;
+        echo sprintf($xml, time());
+        exit;
+    }
+    
     public function other()
     {
         $text = "您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，与大家一起分享哟～\n\n回复 1 查看挖笑话；\n回复 2 查看挖趣图；\n回复 3 查看挖女神；\n回复 0 查看挖段子手机版；";
