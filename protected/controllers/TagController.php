@@ -47,7 +47,7 @@ class TagController extends Controller
     
     public function actionArchives($name, $s = POST_LIST_STYLE_GRID)
     {
-        $this->forward('tag/posts');
+        $this->redirect(url('tag/posts', array('name'=>$name, 's'=>$s)));
     }
     
     public function actionPosts($name, $s = POST_LIST_STYLE_GRID)
