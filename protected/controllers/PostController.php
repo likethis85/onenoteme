@@ -31,7 +31,7 @@ class PostController extends Controller
     
     public function actionDetail($id)
     {
-        $this->forward('post/show');
+        $this->redirect('post/show', array('id' => $id));
     }
     
     public function actionShow($id)
