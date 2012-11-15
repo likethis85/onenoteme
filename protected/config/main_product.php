@@ -58,7 +58,7 @@ return array(
 		    'queryCacheID' => 'cache',
 		    'queryCachingDuration' => 60,
         ),
-        'cache' => array(
+        'cache' => YII_DEBUG ? null : array(
             'class' => 'CFileCache',
 		    'directoryLevel' => 2,
         ),
