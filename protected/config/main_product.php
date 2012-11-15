@@ -54,11 +54,17 @@ return array(
 //             'enableParamLogging' => true,
 //             'enableProfiling' => true,
 		    'schemaCacheID' => 'cache',
-		    'schemaCachingDuration' => 3600,    // metadata 缓存超时时间(s)
+		    'schemaCachingDuration' => 3600 * 24,    // metadata 缓存超时时间(s)
 		    'queryCacheID' => 'cache',
 		    'queryCachingDuration' => 60,
         ),
         'cache' => YII_DEBUG ? null : array(
+            'class'=>'CMemCache',
+            'servers'=>array(
+                array('host'=>'localhost', 'port'=>11211, 'weight'=>100),
+            ),
+        ),
+        'fcache' => YII_DEBUG ? null : array(
             'class' => 'CFileCache',
 		    'directoryLevel' => 2,
         ),
