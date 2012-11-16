@@ -93,4 +93,13 @@ h1.post-title a:hover {color:#D14836;}
 /* old access link */
 .old-link {font-size:14px; text-align:center;}
 
+/* weixin */
+.btn-focus {display:block; background:url(../images/focusbtn_bg.png) no-repeat center center; background-size:100% 100%; position:relative; height:64px; padding:0 15px; margin:10px 0 15px;}
+.btn-focus .avatar {top:5px; left:10px; position:absolute;}
+.btn-focus .wxname {top:10px; left:75px; position:absolute; margin:0; font-size:14px; font-weight:bold; color:#555;}
+.btn-focus .wxid {top:35px; left:75px; position:absolute; margin:0; font-size:12px; color:gray;}
+.btn-focus b {top:20px; right:10px; position:absolute; font-size:14px; color:gray;}
+.avatar img {width:100%; border-radius:23px; -webkit-border-radius:23px;}
+.avatar {display:inline-block; width:46px; margin:0; padding:3px; overflow:hidden; border-radius:26px; -webkit-border-radius:26px; border:1px solid #DFDFDF; box-shadow:1px 1px 1px #DFDFDF;}
+.avatar:active, .more-weixin li img:active {opacity:.5;}
 

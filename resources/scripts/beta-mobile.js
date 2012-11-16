@@ -1,46 +1,47 @@
-var Beta24 = {
-	urlValidate: function(url) {
-		var pattern = /http:\/\/[\w-]*(\.[\w-]*)+/ig;
-		return pattern.test(url);
-	},
-	emailValidate: function(email) {
-		var pattern = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/ig;
-		return pattern.test(email);
-	},
-	shareToWeixinFriend: function(event){
-		if (typeof WeixinJSBridge == 'undefined') {
-			return false;
-		}
-		else {
-			var imgurl = $(this).attr('data-image');
-			var title = $(this).attr('data-title');
-			var desc = $(this).attr('data-desc');
-			WeixinJSBridge.invoke('shareTimeline', {
-				'img_url': imgurl || '',
-				'link': location.href,
-				'desc': desc,
-				'title': title
-			}, function(res) {
-				// 返回res.err_msg,取值
-				// share_timeline:cancel 用户取消
-				// share_timeline:fail　发送失败
-				// share_timeline:ok 发送成功
-				WeixinJSBridge.log(res.err_msg);
-			});
-		}
+var CDMobile = {};
+
+CDMobile.urlValidate = function(url) {
+	var pattern = /http:\/\/[\w-]*(\.[\w-]*)+/ig;
+	return pattern.test(url);
+};
+CDMobile.emailValidate = function(email) {
+	var pattern = /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/ig;
+	return pattern.test(email);
+};
+CDMobile.shareToWeixinFriend = function(event){
+	if (typeof WeixinJSBridge == 'undefined') {
 		return false;
 	}
+	else {
+		var imgurl = $(this).attr('data-image');
+		var title = $(this).attr('data-title');
+		var desc = $(this).attr('data-desc');
+		WeixinJSBridge.invoke('shareTimeline', {
+			'img_url': imgurl || '',
+			'link': location.href,
+			'desc': desc,
+			'title': title
+		}, function(res) {
+			// 返回res.err_msg,取值
+			// share_timeline:cancel 用户取消
+			// share_timeline:fail　发送失败
+			// share_timeline:ok 发送成功
+			WeixinJSBridge.log(res.err_msg);
+		});
+	}
+	return false;
+};
+
+CDMobile.increaseVisitNums = function(id, url) {
+	if (id <= 0 || url.length == 0) return false;
+	var data = 'id=' + id;
+	var jqXhr = $.post(url, data, undefined, 'jsonp');
+	jqXhr.done(function(data){
+		$('.beta-post-detail .beta-visit-nums').text(data);
+	});
 };
 
 var BetaPost = {
-	increaseVisitNums: function(id, url) {
-		if (id <= 0 || url.length == 0) return false;
-		var data = 'id=' + id;
-		var jqXhr = $.post(url, data, undefined, 'jsonp');
-		jqXhr.done(function(data){
-			$('.beta-post-detail .beta-visit-nums').text(data);
-		});
-	},
 	digg: function(event) {
 		event.preventDefault();
 		var tthis = $(this);
@@ -326,5 +327,25 @@ var BetaComment = {
 		});
 	}
 };
+
+
+CDMobile.addContact = function(wxid, cb) { 
+	if (typeof WeixinJSBridge == 'undefined') return false;
+	WeixinJSBridge.invoke('addContact', {
+		webtype: '1',
+		username: wxid
+	}, function(d) {
+		// 返回d.err_msg取值，d还有一个属性是err_desc
+		// add_contact:cancel 用户取消
+		// add_contact:fail　关注失败
+		// add_contact:ok 关注成功
+		// add_contact:added 已经关注
+		WeixinJSBridge.log(d.err_msg);
+		cb && cb(d.err_msg);
+	});
+};
+
+
+
 
 

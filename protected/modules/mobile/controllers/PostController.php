@@ -1,7 +1,7 @@
 <?php
 class PostController extends MobileController
 {
-    public function filters()
+    public function fil2ters()
     {
         return array(
             array(
