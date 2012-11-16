@@ -102,3 +102,7 @@ h1.post-title a:hover {color:#D14836;}
 .avatar img {width:100%; border-radius:23px; -webkit-border-radius:23px;}
 .avatar {display:inline-block; width:46px; margin:0; padding:3px; overflow:hidden; border-radius:26px; -webkit-border-radius:26px; border:1px solid #DFDFDF; box-shadow:1px 1px 1px #DFDFDF;}
 .avatar:active, .more-weixin li img:active {opacity:.5;}
+.btn-focus.hide {display:none;}
+
+
+
