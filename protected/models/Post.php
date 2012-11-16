@@ -440,7 +440,7 @@ class Post extends CActiveRecord
                 return false;
         }
         else
-            return false;
+            return true;
     }
     
     public function fetchRemoteImagesAfterSave()
