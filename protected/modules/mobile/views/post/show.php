@@ -1,5 +1,5 @@
 <a class="btn-focus hide" href="javascript:void(0);" data-wxid="<?php echo param('wdz_weixin_account_id');?>">
-    <div class="avatar"><img class="wx-avatar" src="<?php echo sbu('images/wdz_wxlogo');?>" alt="微信LOGO" /></div>
+    <div class="avatar"><img class="wx-avatar" src="<?php echo sbu('images/wdz_wxlogo.png');?>" alt="微信LOGO" /></div>
     <div class="wxname"><?php echo param('wdz_weixin_account_name');?></div>
     <div class="wxid">微信号：<?php echo param('wdz_weixin_account_id');?></div>
     <b>&gt;</b>
@@ -25,9 +25,9 @@
 
 <script type="text/javascript">
 $(function(){
-	if (typeof WeixinJSBridge == 'object') {
+	if (typeof WeixinJSBridge == 'object')
 		$('.btn-focus, .weixin-btn').show();
-	}
+	
 	CDMobile.increaseVisitNums(<?php echo $post->id;?>, '<?php echo aurl('mobile/post/views');?>');
 	$('.beta-post-detail').on('click', '#share-friend', CDMobile.shareToWeixinFriend);
 
