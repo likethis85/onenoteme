@@ -127,6 +127,21 @@ class SiteController extends Controller
         }
     }
     
+    public function actionQuickLogin()
+    {
+        $model = new LoginForm('login');
+        if (request()->getIsPostRequest() && isset($_POST['LoginForm'])) {
+            $model->attributes = $_POST['LoginForm'];
+            if ($model->validate() && $model->login())
+                ;
+            else
+                $model->captcha = '';
+        }
+        
+        $this->renderPartial('quick_login', array('form'=>$model));
+        exit(0);
+    }
+    
     public function actionSignup()
     {
         if (!user()->getIsGuest()) {

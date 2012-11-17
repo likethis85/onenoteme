@@ -137,7 +137,7 @@ $(function(){
         }
     });
     $('.post-detail').on('click', '#submit-comment', Waduanzi.PostComment);
-    $('.item-toolbar').on('click', 'a.upscore, a.downscore', Waduanzi.postUpDownScore);
+    $('.item-toolbar').on('click', 'a.upscore, a.downscore', Waduanzi.ratingPost);
 	$('.item-toolbar').on('mouseenter', 'a.share, .sharebox', Waduanzi.showShareBox);
 	$('.item-toolbar').on('mouseleave', 'a.share, .sharebox', Waduanzi.hideShareBox);
 	$('.item-toolbar').on('click', 'a.favorite', Waduanzi.favoritePost);

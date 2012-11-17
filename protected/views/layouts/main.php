@@ -11,6 +11,8 @@
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-basic.css?t=20121114001');?>" />
 <link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-all.css?t=20121115001');?>" />
 <script type="text/javascript">
+var wdz_logined = <?php echo (int)!user()->isGuest;?>;
+var wdz_quick_login_url = '<?php echo aurl('site/quicklogin');?>';
 var _hmt = _hmt || [];
 _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;?>, 2]);
 </script>
@@ -64,11 +66,8 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     	<div class="clear"></div>
 	</div>
 </div>
-<?php if (user()->getIsGuest()):?>
-<div id="quick-login">
-    <h1>还未实现</h1>
-</div>
-<?php endif;?>
+
+<div id="quick-login-container"></div>
 
 <?php
 echo param('footer_after_html');
@@ -79,7 +78,7 @@ echo param('tongji_code');
 
 <?php
 cs()->registerCoreScript('jquery');
-cs()->registerScriptFile(sbu('scripts/cd-main.js?t=20121115001'), CClientScript::POS_END);
+cs()->registerScriptFile(sbu('scripts/cd-main.js?t=20121117004'), CClientScript::POS_END);
 cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed'), null, array('title'=>app()->name . ' » Feed'));
 ?>
 

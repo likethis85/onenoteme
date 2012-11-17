@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 
 /* panel */
-.panel {background-color:#FFFFFF; margin:0 1px 3px; -webkit-box-shadow:#666 0 1px 3px; box-shadow:#666 0 1px 3px; -moz-box-shadow:#666 0 1px 3px; -webkit-border-radius:5px; border-radius:5px; -moz-border-radius:5px;}
+.panel {background-color:#FFFFFF; margin:1px 1px 3px; -webkit-box-shadow:#666 0 1px 3px; box-shadow:#666 0 1px 3px; -moz-box-shadow:#666 0 1px 3px; -webkit-border-radius:5px; border-radius:5px; -moz-border-radius:5px;}
 .panel-rect {background-color:#FFFFFF; position:relative; margin:0 1px 3px; -webkit-box-shadow:#666 0 1px 3px; box-shadow:#666 0 1px 3px; -moz-box-shadow:#666 0 1px 3px;}
 .panel25 {padding:25px;}
 .panel20 {padding:20px;}
@@ -182,9 +182,21 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .video-player {text-align:center; margin-top:10px; margin-bottom:10px; background:#F4F4F6;}
 .video-detail .toolbar {background:#F4F4F6; padding:5px 10px; font-size:12px; color:#666; margin-top:10px;}
 
-#quick-login {display:none;}
-.quick-login {box-shadow:0 4px 16px rgba(0, 0, 0, .6); width:540px; height:285px; background:#F7F5F2; border-radius:0; -webkit-border-radius:0; -moz-border-radius:0;}
 .quick-login .ui-dialog-titlebar {display:none;}
+.quick-login {padding:0; box-shadow:0 4px 16px rgba(0, 0, 0, .6); width:540px; height:290px; background:#F7F5F2; border-radius:0; -webkit-border-radius:0; -moz-border-radius:0;}
+#quick-login {display:none; padding:0; color:#503E2C; position:relatvie;}
+#quick-login .column-login {position:relative; float:left; width:55%; height:100%; margin:0; padding:0; background-color:white;}
+#quick-login .column-signup {position:relative; float:left; width:45%; height:100%; margin:0; padding:0;}
+#quick-login .column-signup .signup-tip {margin:25px;}
+#quick-login form {margin:25px;}
+#quick-login h1 {margin:0 0 15px; font-size:18px; font-weight:700; line-height:18px;}
+#quick-login .input-quick {width:235px;}
+#quick-login #btn-quick-login {position:absolute; right:20px; bottom:25px;}
+#quick-login .column-signup a.btn-primary {position:absolute; color:white; bottom:25px;}
+#quick-login .column-signup p {font-size:14px;}
+#quick-login .column-signup p a {text-decoration:underline;}
+#quick-login label.checkbox {line-height:18px;}
+.quick-login-close {z-index:3; cursor:pointer; background-position:-233px -105px; width:10px; height:10px; display:block; position:absolute; top:10px; right:10px;}
 
 /* index friend links */
 .links-list {margin-top:20px;}
