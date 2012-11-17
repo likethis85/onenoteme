@@ -301,6 +301,7 @@ Waduanzi.favoritePost = function(event){
 
 $(function(){
 	Waduanzi.fixedAdBlock();
+	$('#quick-login').dialog('open');
 });
 
 
