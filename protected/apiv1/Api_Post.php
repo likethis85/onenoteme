@@ -305,7 +305,6 @@ class Api_Post extends ApiBase
     	
     	try {
     		$result = $post->fetchRemoteImagesBeforeSave() && $post->save();
-    		print_r($post->attributes);
     		return (int)$result;
     	}
     	catch (ApiException $e) {

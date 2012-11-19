@@ -240,7 +240,6 @@ class CDBase
             $bigFileName = $path['path'] . $bigFile;
         
             $curl = new CDCurl();
-            $curl->referer($url);
             $curl->get($url);
             $errno = $curl->errno();
             if ($errno != 0)
