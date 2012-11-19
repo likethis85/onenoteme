@@ -424,6 +424,7 @@ class Post extends CActiveRecord
             }
         
             $images = CDBase::saveRemoteImages($url, $thumbWidth, $thumbHeight, $this->channel_id == CHANNEL_GIRL);
+            
             if ($images) {
                 $this->thumbnail_pic = $images[0]['url'];
                 $this->thumbnail_width = $images[0]['width'];

@@ -232,7 +232,6 @@ class CDBase
             set_time_limit(0);
             $path = CDBase::makeUploadPath('pics');
             $info = parse_url($url);
-            $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);
             $file = CDBase::makeUploadFileName('');
             $thumbnailFile = 'thumbnail_' . $file;
             $thumbnailFileName = $path['path'] . $thumbnailFile;
@@ -243,6 +242,10 @@ class CDBase
             $curl = new CDCurl();
             $curl->referer($url);
             $curl->get($url);
+            $errno = $curl->errno();
+            if ($errno !== 0)
+                throw new Exception($curl->error(), $errno);
+            
             $data = $curl->rawdata();
             $curl->close();
             $im = new CDImage();
