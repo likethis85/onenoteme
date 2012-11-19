@@ -243,7 +243,7 @@ class CDBase
             $curl->referer($url);
             $curl->get($url);
             $errno = $curl->errno();
-            if ($errno !== 0)
+            if ($errno != 0)
                 throw new Exception($curl->error(), $errno);
             
             $data = $curl->rawdata();
