@@ -3,7 +3,7 @@ class ProfileController extends MemberController
 {
     public function actionIndex()
     {
-        $model = $this->profile;
+        $model = $this->getProfile;
         if (request()->getIsPostRequest() && isset($_POST['MemberUserProfile'])) {
             $model->attributes = $_POST['MemberUserProfile'];
         
@@ -62,7 +62,7 @@ class ProfileController extends MemberController
     
     public function actionAvatar()
     {
-        $model = $this->profile;
+        $model = $this->getProfile();
         if (request()->getIsPostRequest() && isset($_POST['MemberUserProfile'])) {
             $upload = CUploadedFile::getInstance($model, 'avatar_large');
             if ($upload === null)
@@ -83,3 +83,4 @@ class ProfileController extends MemberController
         ));
     }
 }
+
