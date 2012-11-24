@@ -22,7 +22,7 @@
 <div class="control-group <?php if($model->hasErrors('gender')) echo 'error';?>">
     <?php echo CHtml::activeLabel($model, 'gender', array('class'=>'control-label'));?>
     <div class="controls">
-        <?php echo CHtml::activeDropDownList($model, 'gender', MemberUserProfile::genderLabel(), array('separator'=>'', 'template'=>'{label}{input}'));?>
+        <?php echo CHtml::activeDropDownList($model, 'gender', MemberUserProfile::genderLabel());?>
         <?php if($model->hasErrors('gender')):?><span class="help-inline"><?php echo $model->getError('gender');?></span><?php endif;?>
     </div>
 </div>
