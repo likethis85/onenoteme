@@ -44,20 +44,19 @@ class Controller extends CController
     
     public function userToolbar()
     {
+        $html = '';
         if (user()->getIsGuest()) {
             $html = sprintf('<li><a href="%s">注册</a></li>', aurl('site/signup'));
 			$html .= sprintf('<li class="user-login"><a class="fleft" href="%s">登录</a></li>', aurl('site/login'));
 			$html .= sprintf('<li class="sns-icon"><a class="fright" href="%s"><img src="%s" alt="用新浪微博账号登录s" /></a>', aurl('weibo/sinat'), sbu('images/weibo24.png'));
 			$html .= sprintf('<a class="fright" href="%s"><img src="%s" alt="" /></a></li>', aurl('weibo/qqt'), sbu('images/qqt24.png'));
         }
-        elseif (app()->session['image_url']) {
-            $html = sprintf('<li><img src="%s" alt="进入用户中心" align="top" />', app()->session['image_url']);
-            $html .= sprintf('<li class="user-name"><a href="%s" title="进入用户中心">%s</a></li>', CDBase::memberHomeUrl(), user()->name);
-			$html .= sprintf('<li><a href="%s">退出</a></li>', aurl('site/logout'));
-        }
         else {
-            $html = sprintf('<li><a class="active" href="%s" title="进入用户中心" target="_blank">%s</a></li>', CDBase::memberHomeUrl(), user()->name);
-            $html .= sprintf('<li><a href="%s">退出</a></li>', aurl('site/logout'));
+            if (app()->session['image_url'])
+                $html = sprintf('<li><img src="%s" alt="进入用户中心" align="top" />', app()->session['image_url']);
+            $html .= sprintf('<li class="user-name"><a href="%s" title="进入用户中心">%s</a></li>', CDBase::memberHomeUrl(), user()->name);
+            $html .= sprintf('<li class="user-name"><a href="%s" title="查看我的收藏">我的收藏</a></li>', aurl('member/post/favorite'));
+			$html .= sprintf('<li><a href="%s">退出</a></li>', aurl('site/logout'));
         }
         
         return $html;
