@@ -3,7 +3,7 @@ class ProfileController extends MemberController
 {
     public function actionIndex()
     {
-        $model = $this->getProfile;
+        $model = $this->getProfile();
         if (request()->getIsPostRequest() && isset($_POST['MemberUserProfile'])) {
             $model->attributes = $_POST['MemberUserProfile'];
         
