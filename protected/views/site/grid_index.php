@@ -100,6 +100,7 @@
         <li><a href="http://www.lcxxg.com/" target="_blank">聊城信息港</a></li>
         <li><a href="http://fangcaoba.com/" target="_blank">美女吧</a></li>
         <li><a href="http://www.weiphp.com/" target="_blank">微屁网</a></li>
+        <li><a href="http://www.nani.cc/" target="_blank">纳尼网</a></li>
 		<div class="clear"></div>
 	</ul>
 </div>
