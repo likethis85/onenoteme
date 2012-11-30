@@ -112,7 +112,7 @@ class WdzWeixin extends CDWeixin
         
         if (empty($content)) return ;
         
-        $content .= "\n\n回复任意内容查看下一条；\n回复 0 查看使用帮助";
+        $content .= "\n\n回复 1 查看下一条\n回复 0 查看使用帮助";
         $xml = $this->outputText($content);
         header('Content-Type: application/xml');
         echo $xml;
