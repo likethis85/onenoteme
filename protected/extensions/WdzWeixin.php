@@ -4,7 +4,7 @@ class WdzWeixin extends CDWeixin
     public function processRequest($data)
     {
         $input = trim($data->Content);
-        file_put_contents(app()->getRuntimePath() . DS . 'wx.txt', input);
+        file_put_contents(app()->getRuntimePath() . DS . 'wx.txt', $input);
         if (empty($input))
             $this->method0();
         else
