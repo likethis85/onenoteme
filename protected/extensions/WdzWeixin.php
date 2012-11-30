@@ -4,17 +4,10 @@ class WdzWeixin extends CDWeixin
     public function processRequest($data)
     {
         $input = trim($data->Content);
-        if (is_numeric($input)) {
-            $input = (int)$input;
-            $method = 'method' . $input;
-            if (method_exists($this, $method))
-                $this->$method();
-            else
-                $this->method0();
-        }
-        else {
+        if (empty($input))
             $this->method0();
-        }
+        else
+            $this->random();
         
     }
     
@@ -78,7 +71,7 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
-    public function method9()
+    private function method9()
     {
         $text = '最新发布的段子，每日精品笑话连载。网罗互联网各种精品段子，各种糗事，各种笑话，各种秘密，各种经典语录，各种有趣的图片，各种漂亮mm校花模特正妹，应有尽有。烦了、累了、无聊了，就来挖段子逛一逛。"';
         $posts = array(
@@ -94,26 +87,33 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
-    public function method0()
+    private function method0()
     {
-        $text = "您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，与大家一起分享哟～\n\n回复 1 查看挖笑话；\n回复 2 查看挖趣图；\n回复 3 查看挖女神；\n回复 9 查看全部内容；\n回复 0 查看使用帮助";
+        $text = "您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，与大家一起分享哟～\n\n回复 1 查看最新笑话；\n回复 0 查看使用帮助";
         $xml = $this->outputText($text);
         header('Content-Type: application/xml');
         echo $xml;
     }
     
-    public function queryTag($tag)
+    private function random()
     {
-        $text = "在挖段子网中为您查询到的与{$tag}有关的内容，希望您能喜欢";
-        $posts = array(
-            array(
-                'Title' => '与{$tag}有关的内容',
-                'Discription' => $text,
-                'PicUrl' => 'http://s.waduanzi.com/images/wx.jpg',
-                'Url' => aurl('mobile/tag/posts', array('name'=>$tag)),
-            )
-        );
-        $xml = $this->outputNews($text, $posts);
+        $duration = 24 * 60 * 60;
+        $maxID = app()->getDb()->cache($duration)->createCommand()
+            ->select('max(id)')
+            ->from(TABLE_POST)
+            ->queryScalar();
+        
+        $randomID = mt_rand(0, $maxID);
+        $cmd = app()->getDb()->createCommand()
+            ->select('content')
+            ->from(TABLE_POST)
+            ->where(array('and', 'state = :enabled', 'channel_id = 0', 'id > :randomID'), array(':enabled' => POST_STATE_ENABLED, ':randomID' => $randomID));
+        $content = $cmd->queryScalar();
+        
+        if (empty($content)) return ;
+        
+        $content .= "\n\n回复 1 查看最新笑话；\n回复 0 查看使用帮助";
+        $xml = $this->outputText($content);
         header('Content-Type: application/xml');
         echo $xml;
     }
