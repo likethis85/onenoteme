@@ -2,6 +2,7 @@
     <div class="panel panel25">
         <h2 class="content-title">友情链接</h2>
 		<ul class="friend-links">
+        	<li><a href="http://www.shadantv.com//" target="_blank">傻蛋TV</a></li>
 			<li><a href="http://www.goulie.com/" target="_blank">购猎</a></li>
     	    <li><a href="http://www.tao123.com" target="_blank">淘网址</a></li>
     		<li><a href="http://www.xiaohuayoumo.com/" target="_blank">幽默笑话百分百</a></li>
