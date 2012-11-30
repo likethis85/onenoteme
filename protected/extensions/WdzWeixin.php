@@ -3,9 +3,9 @@ class WdzWeixin extends CDWeixin
 {
     public function processRequest($data)
     {
+        $hello = 'hello2bizuser';
         $input = trim($data->Content);
-        file_put_contents(app()->getRuntimePath() . DS . 'wx.txt', $input);
-        if (empty($input))
+        if (empty($input) || stripos($input, $hello) !== false)
             $this->method0();
         else
             $this->random();
