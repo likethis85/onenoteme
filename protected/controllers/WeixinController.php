@@ -9,7 +9,7 @@ class WeixinController extends Controller
         exit(0);
     }
     
-    private function actionRandom()
+    public function actionRandom()
     {
         $duration = 24 * 60 * 60;
         $maxID = app()->getDb()->cache($duration)->createCommand()
