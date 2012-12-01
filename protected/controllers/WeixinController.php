@@ -17,11 +17,13 @@ class WeixinController extends Controller
             ->select('id')
             ->from(TABLE_POST)
             ->where(array('and', 'state = :enabled', 'channel_id = 0', 'id > :lastID'), array(':enabled' => POST_STATE_ENABLED, ':lastID' => $lastID));
-        $id = $cmd->queryScalar();
+        $pid = $cmd->queryScalar();
     
-        if (empty($id))
+        if (empty($pid))
             echo 'null';
     
+        app()->getCache()->set($id, $pid);
+        
         echo $id;
     }
 }
