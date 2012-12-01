@@ -104,7 +104,7 @@ class WdzWeixin extends CDWeixin
             ->select(array('id', 'content'))
             ->from(TABLE_POST)
             ->where(array('and', 'state = :enabled', 'channel_id = 0', 'id > :lastID'), array(':enabled' => POST_STATE_ENABLED, ':lastID' => $lastID));
-        $row = $cmd->queryScalar();
+        $row = $cmd->queryRow();
         
         if (empty($row['content'])) return ;
         app()->getCache()->set($id, $row['id']);

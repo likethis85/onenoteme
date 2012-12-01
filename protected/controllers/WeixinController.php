@@ -11,6 +11,7 @@ class WeixinController extends Controller
     
     public function actionRandom()
     {
+        exit;
         $id = 'wxlastid_' . $data->FromUserName;
         $lastID = app()->getCache()->get($id);
         $cmd = app()->getDb()->createCommand()
