@@ -8,7 +8,7 @@ class WdzWeixin extends CDWeixin
         if (empty($input) || stripos($input, $hello) !== false)
             $this->method0();
         else
-            $this->random();
+            $this->random($data);
         
     }
     
@@ -96,25 +96,21 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
-    private function random()
+    private function random($data)
     {
-        $duration = 24 * 60 * 60;
-        $maxID = app()->getDb()->cache($duration)->createCommand()
-            ->select('max(id)')
-            ->from(TABLE_POST)
-            ->queryScalar();
-        
-        $randomID = mt_rand(0, $maxID);
+        $id = $data->FromUserName . '_wxlastid';
+        $lastID = app()->getCache()->get($id);
         $cmd = app()->getDb()->createCommand()
-            ->select('content')
+            ->select(array('id', 'content'))
             ->from(TABLE_POST)
-            ->where(array('and', 'state = :enabled', 'channel_id = 0', 'id > :randomID'), array(':enabled' => POST_STATE_ENABLED, ':randomID' => $randomID));
-        $content = $cmd->queryScalar();
+            ->where(array('and', 'state = :enabled', 'channel_id = 0', 'id > :lastID'), array(':enabled' => POST_STATE_ENABLED, ':lastID' => $lastID));
+        $row = $cmd->queryScalar();
         
-        if (empty($content)) return ;
+        if (empty($row['content'])) return ;
+        app()->getCache()->set($id, $row['id']);
         
-        $content .= "\n\n回复 1 查看下一条\n回复 0 查看使用帮助";
-        $xml = $this->outputText($content);
+        $row['content'] .= "\n\n回复 1 查看下一条\n回复 0 查看使用帮助";
+        $xml = $this->outputText($row['content']);
         header('Content-Type: application/xml');
         echo $xml;
     }
