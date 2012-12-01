@@ -17,6 +17,7 @@ class WeixinController extends Controller
             ->from(TABLE_POST)
             ->queryScalar();
     
+        mt_srand();
         $randomID = mt_rand(0, $maxID);
         $cmd = app()->getDb()->createCommand()
             ->select('id')
