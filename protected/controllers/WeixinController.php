@@ -24,7 +24,7 @@ class WeixinController extends Controller
     
         app()->getCache()->set($id, $pid);
         
-        echo $id;
+        echo $pid;
     }
 }
 
