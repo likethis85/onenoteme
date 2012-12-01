@@ -98,7 +98,7 @@ class WdzWeixin extends CDWeixin
     
     private function random($data)
     {
-        $id = $data->FromUserName . '_wxlastid';
+        $id = 'wxlastid_' . $data->FromUserName;
         $lastID = app()->getCache()->get($id);
         $cmd = app()->getDb()->createCommand()
             ->select(array('id', 'content'))

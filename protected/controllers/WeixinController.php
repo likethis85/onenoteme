@@ -8,6 +8,22 @@ class WeixinController extends Controller
         $weixin->run();
         exit(0);
     }
+    
+    public function actionRandom()
+    {
+        $id = 'wxlastid_' . $data->FromUserName;
+        $lastID = app()->getCache()->get($id);
+        $cmd = app()->getDb()->createCommand()
+            ->select('id')
+            ->from(TABLE_POST)
+            ->where(array('and', 'state = :enabled', 'channel_id = 0', 'id > :lastID'), array(':enabled' => POST_STATE_ENABLED, ':lastID' => $lastID));
+        $id = $cmd->queryScalar();
+    
+        if (empty($id))
+            echo 'null';
+    
+        echo $id;
+    }
 }
 
 
