@@ -17,16 +17,11 @@ class WeixinController extends Controller
             ->from(TABLE_POST)
             ->queryScalar();
     
-        mt_srand(microtime(true)*10000);
-        $min = mt_rand(0, intval($maxID/2));
-        mt_srand(microtime(true)*10000);
-        $max = mt_rand(intval($maxID/2), $maxID);
-        mt_srand(microtime(true)*10000);
-        $randomID = mt_rand($min, $max);
+        $random = mktime(mt_rand(0,23), mt_rand(0, 59), mt_rand(0, 59), mt_rand(0, 11), mt_rand(0, 30), mt_rand(2011, 2012));
         $cmd = app()->getDb()->createCommand()
             ->select('id')
             ->from(TABLE_POST)
-            ->where(array('and', 'state = :enabled', 'channel_id = 0', 'id > :randomID'), array(':enabled' => POST_STATE_ENABLED, ':randomID' => $randomID));
+            ->where(array('and', 'state = :enabled', 'channel_id = 0', 'create_time > :random'), array(':enabled' => POST_STATE_ENABLED, ':random' => $random));
         $id = $cmd->queryScalar();
     
         if (empty($id))
