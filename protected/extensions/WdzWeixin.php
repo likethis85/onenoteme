@@ -90,7 +90,7 @@ class WdzWeixin extends CDWeixin
     
     private function method0()
     {
-        $text = "您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，与大家一起分享哟～\n\n回复 1 查看最新笑话；\n回复 0 查看使用帮助";
+        $text = "您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，与大家一起分享哟～\n\n回复 1 查看最新笑话；\n回复 0 查看使用帮助\n\n喜欢我们就召唤好友添加'挖段子'或'waduanzi'为好友关注我们吧！";
         $xml = $this->outputText($text);
         header('Content-Type: application/xml');
         echo $xml;
@@ -109,7 +109,7 @@ class WdzWeixin extends CDWeixin
         if (empty($row['content'])) return ;
         app()->getCache()->set($id, $row['id']);
         
-        $row['content'] .= "\n\n回复 1 查看下一条\n回复 0 查看使用帮助";
+        $row['content'] .= "\n\n回复 1 查看下一条\n回复 0 查看使用帮助\n\n喜欢我们就召唤好友添加'挖段子'或'waduanzi'为好友关注我们吧！";
         $xml = $this->outputText($row['content']);
         header('Content-Type: application/xml');
         echo $xml;
