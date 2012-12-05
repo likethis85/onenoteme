@@ -3,6 +3,7 @@ class CDWeixin
 {
     const MSG_TYPE_TEXT = 'text';
     const MSG_TYPE_LOCATION = 'location';
+    const MSG_TYPE_IMAGE = 'image';
     
     const REPLY_TYPE_TEXT = 'text';
     const REPLY_TYPE_NEWS = 'news';
@@ -51,7 +52,7 @@ class CDWeixin
      */
     public function isTextMsg()
     {
-        return $this->_postData->MsgType == self::MSG_TYPE_TEXT;
+        return strtolower($this->_postData->MsgType) == self::MSG_TYPE_TEXT;
     }
     
     /**
@@ -60,7 +61,16 @@ class CDWeixin
      */
     public function isLocationMsg()
     {
-        return $this->_postData->MsgType == self::MSG_TYPE_LOCATION;
+        return strtolower($this->_postData->MsgType) == self::MSG_TYPE_LOCATION;
+    }
+    
+    /**
+     * 判断是否是图片信息
+     * @return boolean
+     */
+    public function isImageMsg()
+    {
+        return strtolower($this->_postData->MsgType) == self::MSG_TYPE_IMAGE;
     }
 
     /**
