@@ -114,6 +114,15 @@ class User extends CActiveRecord
 	    return true;
 	}
 	
+	protected function afterSave()
+	{
+	    if ($this->getIsNewRecord()) {
+	        $profile = new UserProfile();
+	        $profile->user_id = $this->id;
+	        $profile->save();
+	    }
+	}
+	
 	public function beforeDelete()
 	{
 	    throw new CException('用户不允许删除');
