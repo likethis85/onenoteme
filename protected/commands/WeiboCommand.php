@@ -336,7 +336,7 @@ class WeiboCommand extends CConsoleCommand
     
         $url = 'https://upload.api.weibo.com/2/statuses/update.json';
     
-        $postUrl = 'http://www.waduanzi.com/post-' . $model->id;
+        $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
         $tail = '...' . $sinatShortUrl . ' @挖段子网';
         $accounts = self::fetchRelativeAccounts(1);
@@ -381,7 +381,7 @@ class WeiboCommand extends CConsoleCommand
     
         $url = 'https://upload.api.weibo.com/2/statuses/upload.json';
     
-        $postUrl = 'http://www.waduanzi.com/post-' . $model->id;
+        $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
         $tail = '...' . $sinatShortUrl . ' @挖段子网';
         $accounts = self::fetchRelativeAccounts(1);
@@ -412,7 +412,7 @@ class WeiboCommand extends CConsoleCommand
     
         $url = 'https://open.t.qq.com/api/t/add';
     
-        $postUrl = 'http://www.waduanzi.com/post-' . $model->id;
+        $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
         $tail = '...' . $sinatShortUrl . ' @cdcchen';
         $accounts = self::fetchRelativeAccounts(1);
@@ -452,7 +452,7 @@ class WeiboCommand extends CConsoleCommand
     
         $url = 'https://open.t.qq.com/api/t/add_pic_url';
     
-        $postUrl = 'http://www.waduanzi.com/post-' . $model->id;
+        $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
         $tail = '...' . $sinatShortUrl . ' @cdcchen';
         $accounts = self::fetchRelativeAccounts(1);
