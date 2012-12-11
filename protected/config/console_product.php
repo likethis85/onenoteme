@@ -32,9 +32,11 @@ return array(
 	        'queryCacheID' => 'cache',
 	        'queryCachingDuration' => 60,
         ),
-        'cache' => array(
-            'class' => 'CFileCache',
-		    'directoryLevel' => 2,
+        'cache' => YII_DEBUG ? null : array(
+            'class'=>'CMemCache',
+            'servers'=>array(
+                array('host'=>'localhost', 'port'=>11211, 'weight'=>100),
+            ),
         ),
         'apn' => array(
             'class' => 'CDApnProvider',
