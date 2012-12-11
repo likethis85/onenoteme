@@ -48,14 +48,7 @@
     </div>
     <div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
     <!-- 首页侧边栏广告位1 开始 -->
-    <div class="cdc-block cd-border ad-block">
-        <script type="text/javascript">
-        alimama_pid="mm_12551250_2904829_10392377";
-        alimama_width=300;
-        alimama_height=250;
-        </script>
-        <script src="http://a.alimama.cn/inf.js" type="text/javascript"></script>
-    </div>
+    <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_first'));?>
     <!-- 首页侧边栏广告位1 结束 -->
 </div>
 <div class="clear"></div>

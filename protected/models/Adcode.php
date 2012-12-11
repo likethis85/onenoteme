@@ -76,7 +76,7 @@ class Adcode extends CActiveRecord
 	    $data = array();
 	    $cmd = app()->getDb()->createCommand()
 	        ->from(TABLE_ADCODE)
-	        ->where(array('and', 'ad_id = :adid', 'state = :enabled'), array(':adid'=>$adid, ':enabled'=>BETA_YES));
+	        ->where(array('and', 'ad_id = :adid', 'state = :enabled'), array(':adid'=>$adid, ':enabled'=>CD_YES));
 	     
 	    $data = $cmd->queryAll();
 	     

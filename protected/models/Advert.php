@@ -110,7 +110,7 @@ class Advert extends CActiveRecord
 	    $cmd = app()->getDb()->createCommand()
 	        ->select('id')
 	        ->from(TABLE_ADVERT)
-	        ->where(array('and', 'solt = :adsolt', 'state = :enabled'), array(':adsolt'=>$solt, ':enabled'=>BETA_YES));
+	        ->where(array('and', 'solt = :adsolt', 'state = :enabled'), array(':adsolt'=>$solt, ':enabled'=>CD_YES));
 	    
 	    $adid = $cmd->queryScalar();
 	    if ($adid !== false) {

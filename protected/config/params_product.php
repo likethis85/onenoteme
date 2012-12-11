@@ -79,6 +79,8 @@ return array(
         
     'wdz_weixin_account_name' => '挖段子搞笑',
     'wdz_weixin_account_id' => 'gh_9261dce78e9f',
+
+    'cache_adcodes_id' => 'cd_adcodes_id_%s',
 );
 
 
