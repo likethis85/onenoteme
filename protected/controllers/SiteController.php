@@ -1,7 +1,7 @@
 <?php
 class SiteController extends Controller
 {
-    public function filte2rs()
+    public function filters()
     {
         return array(
             array(
