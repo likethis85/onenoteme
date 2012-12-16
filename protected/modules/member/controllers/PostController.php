@@ -35,8 +35,7 @@ class PostController extends MemberController
         $count = 15;
         $pages = new CPagination($this->user->favoritePostsCount);
         $pages->setPageSize($count);
-        
-        $posts = $this->user->getFavoritePosts($pages->currentPage, $count);
+        $posts = $this->user->getFavoritePosts($pages->currentPage+1, $count);
         
         $this->breadcrumbs[] = $this->title = $this->siteTitle = '我的收藏';
         $this->menu = 'favorite';
