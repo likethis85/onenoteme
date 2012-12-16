@@ -85,6 +85,7 @@ class MemberPost extends Post
             $temp[$model->id] = $model;
         
         unset($models);
+        $ids = array_intersect($ids, array_keys($temp));
         foreach ($ids as $id)
             $models[$id] = $temp[$id];
             
