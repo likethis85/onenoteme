@@ -76,10 +76,18 @@ class MemberPost extends Post
             ->queryColumn();
     
         $criteria = new CDbCriteria();
+        $criteria->select = array('id', 'title', 'state');
         $criteria->addInCondition('id', $ids);
         $criteria->addColumnCondition(array('t.state' => POST_STATE_ENABLED));
     
         $models = MemberPost::model()->findAll($criteria);
+        foreach ($models as $model)
+            $temp[$model->id] = $model;
+        
+        unset($models);
+        foreach ($ids as $id)
+            $models[$id] = $temp[$id];
+            
         return $models;
     }
 }
