@@ -24,10 +24,10 @@ class LoginForm extends CFormModel
             array('screen_name', 'unique', 'className'=>'User', 'attributeName'=>'screen_name', 'on'=>'signup', 'message'=>'大名已经存在'),
             array('screen_name', 'checkReserveWords'),
             array('password', 'required', 'on'=>'signup', 'message'=>'请输入密码'),
-            array('password', 'authenticate', 'on'=>'login'),
+            array('password', 'authenticate', 'on'=>array('login', 'quicklogin')),
             array('captcha', 'captcha', 'allowEmpty'=>!$this->getEnableCaptcha(), 'on'=>'login'),
-            array('captcha', 'captcha', 'allowEmpty'=>false, 'on'=>'signup'),
-            array('rememberMe', 'boolean', 'on'=>'login'),
+            array('captcha', 'captcha', 'allowEmpty'=>false, 'on'=>array('signup')),
+            array('rememberMe', 'boolean', 'on'=>array('login', 'quicklogin')),
             array('screen_name, password', 'length', 'min'=>3, 'max'=>50),
             array('username, returnUrl', 'length', 'max'=>255),
             array('agreement', 'compare', 'compareValue'=>true, 'on'=>'signup', 'message'=>'请同意服务条款和协议'),
@@ -74,11 +74,11 @@ class LoginForm extends CFormModel
     /**
      * 用户登陆
      */
-    public function login()
+    public function login($afterLogin = true)
     {
         $duration = (user()->allowAutoLogin && $this->rememberMe) ? param('autoLoginDuration') : 0;
         if (user()->login($this->_identity, $duration)) {
-            $this->afterLogin();
+            $afterLogin && $this->afterLogin();
             return true;
         }
         else

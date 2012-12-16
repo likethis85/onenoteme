@@ -104,7 +104,6 @@ $(function(){
 <?php
 if (user()->getIsGuest()) {
     cs()->registerCoreScript('jquery.ui');
-    cs()->registerCssFile(cs()->getCoreScriptUrl().'/jui/css/base/jquery-ui.css');
 }
 cs()->registerScriptFile(sbu('libs/json.js'), CClientScript::POS_END);
 ?>

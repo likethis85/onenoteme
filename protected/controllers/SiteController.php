@@ -129,13 +129,20 @@ class SiteController extends Controller
     
     public function actionQuickLogin()
     {
-        $model = new LoginForm('login');
-        if (request()->getIsPostRequest() && isset($_POST['LoginForm'])) {
+        $model = new LoginForm('quicklogin');
+        if (request()->getIsPostRequest() && request()->getIsAjaxRequest() && isset($_POST['LoginForm'])) {
             $model->attributes = $_POST['LoginForm'];
-            if ($model->validate() && $model->login())
-                ;
-            else
-                $model->captcha = '';
+            if ($model->validate() && $model->login(false)) {
+                $data['errno'] = CD_NO;
+                $data['html'] = $this->userToolbar();
+            }
+            else {
+                $data['errno'] = CD_YES;
+                $data['error'] = $model->getErrors();
+            }
+            
+            echo CJSON::encode($data);
+            exit(0);
         }
         
         $this->renderPartial('quick_login', array('form'=>$model));

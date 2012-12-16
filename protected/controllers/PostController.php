@@ -125,7 +125,7 @@ class PostController extends Controller
         CDBase::jsonp($callback, $data);
     }
     
-    public function actionLike($callback)
+    public function actionLike()
     {
         $pid = (int)$_POST['pid'];
         $row = app()->getDb()->createCommand()
@@ -136,7 +136,8 @@ class PostController extends Controller
         
         if ($row !== false) {
             $data = array('errno' => CD_NO, 'id'=>$row);
-            CDBase::jsonp($callback, $data);
+            echo json_encode($data);
+            exit(0);
         }
         
         $columns = array(
@@ -161,10 +162,11 @@ class PostController extends Controller
             $data = array('errno' => CD_YES, 'error'=>$e->getMessage());
         }
         
-        CDBase::jsonp($callback, $data);
+        echo json_encode($data);
+        exit(0);
     }
     
-    public function actionUnlike($id, $callback)
+    public function actionUnlike($id)
     {
         $id = (int)$id;
         $conditions = array('and', 'user_id = :userid', 'post_id = :postid');
@@ -182,7 +184,8 @@ class PostController extends Controller
             'errno' => $result ? CD_NO : CD_YES,
         );
         
-        CDBase::jsonp($callback, $data);
+        echo json_encode($data);
+        exit(0);
     }
     
     private static function prevPostUrl(Post $post)

@@ -27,7 +27,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     		<li><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank">iPhone应用</a></li>
     		<li><a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank">安卓应用</a></li>
 		</ul>
-		<ul class="fright">
+		<ul class="fright" id="user-mini-nav">
 		    <?php echo $this->renderDynamic('userToolbar');?>
 		</ul>
 		<div class="clear"></div>
@@ -67,7 +67,9 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 	</div>
 </div>
 
-<div id="quick-login-container"></div>
+<div id="quick-login-modal" class="modal fade hide" role="dialog" aria-hidden="true">
+<div class="modal-body"></div>
+</div>
 
 <?php
 echo param('footer_after_html');
@@ -78,6 +80,7 @@ echo param('tongji_code');
 
 <?php
 cs()->registerCoreScript('jquery');
+cs()->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'));
 cs()->registerScriptFile(sbu('scripts/cd-main.js?t=20121117004'), CClientScript::POS_END);
 cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed'), null, array('title'=>app()->name . ' » Feed'));
 ?>

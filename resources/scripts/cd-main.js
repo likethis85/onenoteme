@@ -106,40 +106,6 @@ Waduanzi.PostComment = function(event) {
 	});
 };
 
-Waduanzi.showQuickLoginWindow = function(url, data, complete){
-	if ($('#quick-login').length > 0) {
-		Waduanzi.showQuickLoginDialog();
-		return;
-	}
-	
-	if (!this.urlValidate(url)) return;
-	
-	$('#quick-login-container').load(url, data || {}, function(responseText, textStatus, XMLHttpRequest){
-		complete && complete();
-		if ($('#quick-login').length > 0) {
-			Waduanzi.showQuickLoginDialog();
-		}
-	});
-};
-
-Waduanzi.showQuickLoginDialog = function(){
-	if ($('#quick-login').length > 0) {
-		$('#quick-login').dialog({
-			autoOpen: true,
-		    show: 'fade',
-		    modal: true,
-		    draggable: false,
-		    resizable: false,
-		    width: 540,
-		    height:280,
-		    dialogClass: 'quick-login'
-		});
-		$(document).on('click', '.quick-login-close', function(){
-			$('#quick-login').dialog('close');
-		});
-	}
-};
-
 Waduanzi.switchImageSize = function(event){
     event.preventDefault();
     _hmt && _hmt.push(['_trackEvent', '图片', '缩略图与大图切换点击']);
@@ -244,15 +210,27 @@ Waduanzi.hideShareBox = function(event) {
 	$(this).parents('.item-toolbar').find('.sharebox:visible').stop(true, true).delay(50).hide();
 };
 
+Waduanzi.showQuickLoginWindow = function(){
+	$('#quick-login-modal').modal({
+		remote: wdz_quick_login_url,
+		show: true,
+		keyboard: true
+	});
+	$('#quick-login-modal').modal('show');
+	$('#quick-login-modal').on('shown', function(){
+		$(this).find(':text').first().focus();
+	});
+};
+
 Waduanzi.favoritePost = function(event){
 	event.preventDefault();
 	
-//	if (!wdz_logined) {
-//		Waduanzi.showQuickLoginWindow(wdz_quick_login_url);
-//		return;
-//	}
+	if (!wdz_logined) {
+		Waduanzi.showQuickLoginWindow();
+		return;
+	}
 	
-	_hmt && _hmt.push(['_trackEvent', '收获按钮', '点击']);
+	_hmt && _hmt.push(['_trackEvent', '收藏按钮', '点击']);
 	
 	var tthis = $(this);
 	var itemDiv = tthis.parents('.post-box');
@@ -263,7 +241,7 @@ Waduanzi.favoritePost = function(event){
 		type: 'POST',
 		url: url,
 		data: {pid: pid},
-		dataType: 'jsonp',
+		dataType: 'json',
 		beforeSend: function(){
 			tthis.toggleClass('voted');
 		}
@@ -285,6 +263,17 @@ Waduanzi.favoritePost = function(event){
 		alert('x');
 		tthis.toggleClass('voted');
 	});
+};
+
+Waduanzi.quickLogin = function(url, data, success, fail){
+	var jqXhr = $.ajax({
+		url: url,
+		data: data,
+		dataType: 'json',
+		type: 'post'
+	});
+	success && jqXhr.done(function(data, textStatus, jqXHR){success(data, textStatus, jqXHR);});
+	fail && jqXhr.fail(function(jqXHR, textStatus, errorThrown){fail(jqXHR, textStatus, errorThrown);});
 };
 
 $(function(){
