@@ -60,12 +60,12 @@ class MemberPost extends Post
         return $html;
     }
     
-    public static function fetchFavoritePosts($userID, $pageSize = 1, $count = 15)
+    public static function fetchFavoritePosts($userID, $page = 1, $count = 15)
     {
         $userID = (int)$userID;
         $page = (int)$page;
         $count = (int)$count;
-        $offset = ($page - 1) * $pageSize;
+        $offset = ($page - 1) * $count;
         $ids = app()->getDb()->createCommand()
             ->select('post_id')
             ->from(TABLE_POST_FAVORITE)
