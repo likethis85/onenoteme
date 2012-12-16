@@ -13,7 +13,7 @@ class WeixinController extends Controller
     {
         exit;
         $id = 'wxlastid_' . $data->FromUserName;
-        $lastID = app()->getCache()->get($id);
+        $lastID = app()->fcache()->get($id);
         $cmd = app()->getDb()->createCommand()
             ->select('id')
             ->from(TABLE_POST)
@@ -23,7 +23,7 @@ class WeixinController extends Controller
         if (empty($pid))
             echo 'null';
     
-        app()->getCache()->set($id, $pid);
+        app()->fcache()->set($id, $pid);
         
         echo $pid;
     }
