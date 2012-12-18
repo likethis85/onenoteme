@@ -51,6 +51,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     </div>
 </div>
 <div class="cd-wrapper cd-main">
+    <div class="alert alert-info">由于正在备案，所以网站会不时的关闭进行审核，请各位段友谅解，备案后会迁移到阿里云，为大家提供更好的服务。</div>
 	<?php echo $content;?>
 </div>
 <?php echo param('footer_before_html');?>
