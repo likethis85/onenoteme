@@ -16,6 +16,7 @@
  * @property integer $weibo_uid
  * @property integer $qqt_uid
  *
+ * @property string $homeUrl
  * @property string $largeAvatarUrl
  * @property string $smallAvatarUrl
  * @property string $largeAvatar
@@ -110,9 +111,14 @@ class UserProfile extends CActiveRecord
 	    return self::genderLabel($this->gender);
 	}
 
+	public function getHomeUrl()
+	{
+	    return CDBase::userHomeUrl($this->user_id);
+	}
+	
 	public function getSmallAvatarUrl()
 	{
-	    $url = '';
+	    $url = sbu('images/default_avatar.png');
 	    if (empty($this->image_url))
 	        return $url;
 	    
@@ -140,25 +146,25 @@ class UserProfile extends CActiveRecord
 	    return $url;
 	}
 
-	public function getLargeAvatar($htmlOptions = array())
+	public function getLargeAvatar($alt = '', $htmlOptions = array())
 	{
 	    $html = '';
 	    $url = $this->getLargeAvatarUrl();
 	    if ($url) {
 	        $htmlOptions += array('class'=>'large-avatar');
-	        $html = image($url, '我的头像', $htmlOptions);
+	        $html = image($url, $alt, $htmlOptions);
 	    }
 	
 	    return $html;
 	}
 	
-	public function getSmallAvatar($htmlOptions = array())
+	public function getSmallAvatar($alt = '', $htmlOptions = array())
 	{
 	    $html = '';
 	    $url = $this->getSmallAvatarUrl();
 	    if ($url) {
 	        $htmlOptions += array('class'=>'small-avatar');
-	        $html = image($url, '我的头像', $htmlOptions);
+	        $html = image($url, $alt, $htmlOptions);
 	    }
 	
 	    return $html;

@@ -106,6 +106,7 @@ return array(
                 'http://www.waduanzi.cn/tags' => 'tag/list',
                 'http://www.waduanzi.cn/tag-<name:.+>' => 'tag/posts',
                 'http://www.waduanzi.cn/feed/<cid:\d+>' => 'feed/channel',
+                'http://www.waduanzi.cn/u/<id:\d+>' => 'user/index',
                     
                 'http://wap.waduanzi.cn/' => 'wap/index',
                 'http://wap.waduanzi.cn/<_a>' => 'wap/<_a>',

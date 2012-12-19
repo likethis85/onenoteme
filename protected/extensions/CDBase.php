@@ -321,6 +321,13 @@ class CDBase
     {
         return aurl('site/signup');
     }
+
+    public static function userHomeUrl($uid)
+    {
+        return aurl('user/index', array('id'=>(int)$uid));
+    }
 }
+
+
 
 

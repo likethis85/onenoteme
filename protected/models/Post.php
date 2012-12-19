@@ -34,9 +34,10 @@
  * @property integer $recommend
  * @property integer $hottest
  *
- * @property User $user;
- * @property array $comments;
- * @property string $stateLabel;
+ * @property User $user
+ * @property UserProfile $profile
+ * @property array $comments
+ * @property string $stateLabel
  * @property string $url
  * @property string $filterSummary
  * @property string $filterContent
@@ -130,6 +131,7 @@ class Post extends CActiveRecord
 	{
 		return array(
 		    'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+		    'profile' => array(self::BELONGS_TO, 'UserProfile', 'user_id'),
 		    'comments' => array(self::HAS_MANY, 'Comment', 'post_id'),
 		);
 	}
@@ -285,6 +287,28 @@ class Post extends CActiveRecord
     public function getAuthorName()
     {
         return $this->user_name ? $this->user_name : user()->guestName;
+    }
+    
+    public function getAuthorNameLink($htmlOptions = array('target'=>'_blank'))
+    {
+        $html = $this->getAuthorName();
+        if ($this->user_id && $this->user) {
+            $url = CDBase::userHomeUrl($this->user_id);
+            $html = l($this->getAuthorName(), $url, $htmlOptions);
+        }
+        
+        return $html;
+    }
+    
+    public function getAuthorAvatar($htmlOptions = array('target'=>'_blank'))
+    {
+        $imageUrl = sbu(USER_DEFAULT_AVATAR_URL);
+        if ($this->user_id && $this->profile)
+            $imageUrl = $this->profile->getSmallAvatarUrl();
+
+        $html = image($imageUrl, $this->getAuthorName(), $htmlOptions);
+        
+        return $html;
     }
     
     public function getSubTitle($len = 35)

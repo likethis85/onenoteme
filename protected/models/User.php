@@ -12,6 +12,9 @@
  * @property string $create_ip
  * @property integer $state
  * @property string $token
+ *
+ * @property string $homeUrl
+ * @property UserProfile $profile
  */
 class User extends CActiveRecord
 {
@@ -88,6 +91,16 @@ class User extends CActiveRecord
 	public function getDisplayName()
 	{
 	    return empty($this->screen_name) ? $this->username : $this->screen_name;
+	}
+	
+	public function getHomeUrl()
+	{
+	    return CDBase::userHomeUrl($this->id);
+	}
+	
+	public function getNameLink($htmlOptions = array('target'=>'_blank'))
+	{
+	    return l($this->getDisplayName(), $this->getHomeUrl(), $htmlOptions);
 	}
 	
 	public function getCreateTime($format = null)

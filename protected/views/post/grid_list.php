@@ -13,7 +13,10 @@
 <div class="post-list">
     <?php foreach ((array)$models as $key => $model):?>
     <div class="panel panel20 post-item post-box">
-    	<div class="post-author"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
+    	<div class="post-author">
+    	    <?php echo $model->getAuthorAvatar();?>
+        	<?php echo $model->getAuthorNameLink();?>
+    	</div>
         <div class="item-detail">
             <div class="item-title">
                 <a href="<?php echo $model->url;?>" target="_blank" title="在新窗口中打开">
