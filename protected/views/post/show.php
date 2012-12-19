@@ -1,6 +1,10 @@
 <div class="fleft cd-container">
 	<div class="panel panel20 post-detail post-box">
 		<div class="content-block post-content">
+		    <div class="post-author">
+        	    <?php echo $post->getAuthorAvatar();?>
+            	<?php echo $post->getAuthorNameLink();?>
+        	</div>
 		    <div class="item-title">
 		        <?php if ($post->channel_id == CHANNEL_DUANZI):echo $post->filterContent;?>
 		        <?php else:?>

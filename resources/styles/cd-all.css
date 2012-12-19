@@ -142,8 +142,8 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .post-image .line3 {height:3px; width:50px; margin:3px auto; background:#B2B2B2;}
 .post-image .thumb-pall {position:absolute; bottom:0px; height:39px; width:157px; background:transparent url(../images/thumb_more_tip.gif) no-repeat; z-index:100;}
 .post-image .lines .sjx {height:9px; width:71px; margin:3px auto; background:url(../images/thumb_more_sjx.gif) no-repeat;}
-.post-item .post-author {color:#9b8878; margin-bottom:10px; font-size:12px;}
-.post-item .post-author img {width:25px; height:25px; margin-right:10px;}
+.post-author {color:#9b8878; margin-bottom:10px; font-size:12px;}
+.post-author img {width:25px; height:25px; margin-right:10px;}
 .item-title {margin-bottom:15px; line-height:24px; font-weight:normal;}
 .item-title a {color:#503E2C; display:block;}
 .post-item .item-detail .item-content {line-height:24px; margin-top:10px;}
