@@ -71,7 +71,8 @@ a:hover {color:#330000; text-decoration:none;}
 .cd-mini-nav li .active, .cd-mini-nav li a:hover {color:white; background:#121211;}
 .cd-mini-nav .sns-icon a {padding:0;}
 .cd-mini-nav .sns-icon a:hover {background:none;}
-.cd-mini-nav img {margin:1px 3px 2px; width:20px; height:20px;}
+.cd-mini-nav img {margin:0px 3px 2px; width:20px; height:20px;}
+.cd-mini-nav .sns-icon img {margin-top:3px;}
 
 /* header */
 .cd-header {position:fixed; top:27px; z-index:999; margin-bottom:15px; height:45px; background-color:#545652; width:100%; overflow:hidden; border-bottom:1px solid black;}
