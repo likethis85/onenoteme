@@ -20,18 +20,16 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 </head>
 <body>
 <div class="cd-mini-nav">
-    <div class="cd-wrapper">
-        <ul class="fleft">
-    		<li><a href="<?php echo CDBase::mobileHomeUrl();?>">手机版</a></li>
-    		<li><a href="<?php echo CDBase::wapHomeUrl();?>">WAP版</a></li>
-    		<li><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank">iPhone应用</a></li>
-    		<li><a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank">安卓应用</a></li>
-		</ul>
-		<ul class="fright" id="user-mini-nav">
-		    <?php echo $this->renderDynamic('userToolbar');?>
-		</ul>
-		<div class="clear"></div>
-    </div>
+    <ul class="fleft">
+		<li><a href="<?php echo CDBase::mobileHomeUrl();?>">手机版</a></li>
+		<li><a href="<?php echo CDBase::wapHomeUrl();?>">WAP版</a></li>
+		<li><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank">iPhone应用</a></li>
+		<li><a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank">安卓应用</a></li>
+	</ul>
+	<ul class="fright" id="user-mini-nav">
+	    <?php echo $this->renderDynamic('userToolbar');?>
+	</ul>
+	<div class="clear"></div>
 </div>
 <div class="cd-header">
     <div class="cd-wrapper">

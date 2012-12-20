@@ -135,6 +135,7 @@ return array(
             ),
         ),
         'user' => array(
+            'class' => 'CDWebUser',
             'allowAutoLogin' => true,
             'loginUrl' => array('/site/login'),
             'guestName' => '匿名人士',
