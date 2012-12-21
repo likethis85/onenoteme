@@ -175,6 +175,7 @@ Waduanzi.ratingPost = function(event){
 Waduanzi.fixedAdBlock = function() {
 	var adblock = $('.cd-sidebar .ad-block').last();
 	var lastblock = $('.cd-sidebar > div:not(.ad-block)').last();
+	if (lastblock.position() == undefined) return;
 	// 侧边栏最后一个div的bottom
 	var lastbottom = lastblock.position().top + lastblock.height() - 50;
 	

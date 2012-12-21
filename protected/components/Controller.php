@@ -121,12 +121,12 @@ class Controller extends CController
             'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=2012122201'),
             'cd-basic.css' => sbu('styles/cd-all.min.css?t=2012122201'),
             'cd-main.css' => sbu('styles/cd-all.min.css?t=2012122201'),
-            'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=2012122201'),
-            'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=2012122201'),
-            'jquery.infinitescroll.min.js' => sbu('scripts/cd-all.min.js?t=2012122201'),
-            'jquery.masonry.min.js' => sbu('scripts/cd-all.min.js?t=2012122201'),
-            'cd-main.js' => sbu('scripts/cd-all.min.js?t=2012122201'),
-            'json.js' => sbu('scripts/cd-all.min.js?t=2012122201'),
+            'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=2012122202'),
+            'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=2012122202'),
+            'jquery.infinitescroll.min.js' => sbu('scripts/cd-all.min.js?t=2012122202'),
+            'jquery.masonry.min.js' => sbu('scripts/cd-all.min.js?t=2012122202'),
+            'cd-main.js' => sbu('scripts/cd-all.min.js?t=2012122202'),
+            'json.js' => sbu('scripts/cd-all.min.js?t=2012122202'),
         );
         return true;
     }
