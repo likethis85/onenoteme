@@ -4,8 +4,8 @@ defined('YII_PRODUCT') or define('YII_PRODUCT', false);
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 YII_DEBUG or error_reporting(0);
 
-$bootstrap = extension_loaded('apc') ? 'yiilite.php' : 'yii.php';
-$cdc = dirname(__FILE__) . '/../library/framework/yii.php';
+$yii = extension_loaded('apc') ? 'yiilite.php' : 'yii.php';
+$cdc = dirname(__FILE__) . '/../library/framework/' . $yii;
 $short = dirname(__FILE__) . '/../library/shortcut.php';
 $define = dirname(__FILE__) . '/../protected/config/define.php';
 require_once($define);
