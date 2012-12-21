@@ -7,9 +7,6 @@
 <meta name="copyright" content="Copyright (c) 2011-2912 waduanzi.com All Rights Reserved." />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <link rel="shortcut icon" href="<?php echo sbu('images/favicon.ico');?>" type="image/vnd.microsoft.icon" />
-<link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('libs/bootstrap/css/bootstrap.min.css?t=20121109001');?>" />
-<link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-basic.css?t=20121114001');?>" />
-<link media="screen" rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-all.css?t=20121115001');?>" />
 <script type="text/javascript">
 var wdz_logined = <?php echo (int)!user()->isGuest;?>;
 var wdz_quick_login_url = '<?php echo aurl('site/quicklogin');?>';
@@ -76,13 +73,5 @@ echo param('tongji_code');
 ?>
 </body>
 </html>
-
-<?php
-cs()->registerCoreScript('jquery');
-cs()->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'));
-cs()->registerScriptFile(sbu('scripts/cd-main.js?t=20121117004'), CClientScript::POS_END);
-cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed'), null, array('title'=>app()->name . ' » Feed'));
-?>
-
 
 

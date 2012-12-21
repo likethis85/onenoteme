@@ -106,4 +106,28 @@ class Controller extends CController
     {
         return $this->user->profile;
     }
+
+    public function beforeRender($view)
+    {
+        cs()->registerCssFile(sbu('libs/bootstrap/css/bootstrap.min.css'))
+            ->registerCssFile(sbu('styles/cd-basic.css'))
+            ->registerCssFile(sbu('styles/cd-main.css'))
+            ->registerCoreScript('jquery')
+            ->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END)
+            ->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END)
+            ->registerLinkTag('alternate', 'application/rss+xml', aurl('feed'), null, array('title'=>app()->name . ' » Feed'));
+        
+        YII_DEBUG || cs()->scriptMap = array(
+            'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=2012122201'),
+            'cd-basic.css' => sbu('styles/cd-all.min.css?t=2012122201'),
+            'cd-main.css' => sbu('styles/cd-all.min.css?t=2012122201'),
+            'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=2012122201'),
+            'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=2012122201'),
+            'jquery.infinitescroll.min.js' => sbu('scripts/cd-all.min.js?t=2012122201'),
+            'jquery.masonry.min.js' => sbu('scripts/cd-all.min.js?t=2012122201'),
+            'cd-main.js' => sbu('scripts/cd-all.min.js?t=2012122201'),
+            'json.js' => sbu('scripts/cd-all.min.js?t=2012122201'),
+        );
+        return true;
+    }
 }
