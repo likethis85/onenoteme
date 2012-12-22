@@ -105,9 +105,6 @@ $(function(){
 </script>
 
 <?php
-if (user()->getIsGuest()) {
-    cs()->registerCoreScript('jquery.ui');
-}
 cs()->registerScriptFile(sbu('libs/json.js'), CClientScript::POS_END);
 ?>
 
