@@ -2,11 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title><?php echo $this->pageTitle;?></title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="author" content="waduanzi.com" />
 <meta name="copyright" content="Copyright (c) 2011-2912 waduanzi.com All Rights Reserved." />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<link rel="shortcut icon" href="<?php echo sbu('images/favicon.ico');?>" type="image/vnd.microsoft.icon" />
 <script type="text/javascript">
 var wdz_logined = <?php echo (int)!user()->isGuest;?>;
 var wdz_quick_login_url = '<?php echo aurl('site/quicklogin');?>';
@@ -74,4 +72,26 @@ echo param('tongji_code');
 </body>
 </html>
 
+<?php
+cs()->registerMetaTag('text/html; charset=utf-8', null, 'content-type')
+    ->registerCssFile(sbu('libs/bootstrap/css/bootstrap.min.css'))
+    ->registerCssFile(sbu('styles/cd-basic.css'))
+    ->registerCssFile(sbu('styles/cd-main.css'))
+    ->registerCoreScript('jquery')
+    ->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END)
+    ->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END)
+    ->registerLinkTag('alternate', 'application/rss+xml', aurl('feed'), null, array('title'=>app()->name . ' » Feed'));
+
+YII_DEBUG || cs()->scriptMap = array(
+    'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=2012122201'),
+    'cd-basic.css' => sbu('styles/cd-all.min.css?t=2012122201'),
+    'cd-main.css' => sbu('styles/cd-all.min.css?t=2012122201'),
+    'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=2012122202'),
+    'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=2012122202'),
+    'jquery.infinitescroll.min.js' => sbu('scripts/cd-all.min.js?t=2012122202'),
+    'jquery.masonry.min.js' => sbu('scripts/cd-all.min.js?t=2012122202'),
+    'cd-main.js' => sbu('scripts/cd-all.min.js?t=2012122202'),
+    'json.js' => sbu('scripts/cd-all.min.js?t=2012122202'),
+);
+?>
 
