@@ -98,16 +98,39 @@ class WdzWeixin extends CDWeixin
     
     private function random($data)
     {
-        $id = 'wxlastid_' . $data->FromUserName;
-        $lastID = app()->getCache()->get($id);
+        $wxid = $data->FromUserName;
+        $lastID = app()->getDb()->createCommand()
+            ->select('last_pid')
+            ->from(TABLE_USER_WEIXIN)
+            ->where('wx_token = :wxid', array(':wxid'=>$wxid))
+            ->queryScalar();
+        
         $cmd = app()->getDb()->createCommand()
             ->select(array('id', 'content'))
             ->from(TABLE_POST)
-            ->where(array('and', 'state = :enabled', 'channel_id = 0', 'id > :lastID'), array(':enabled' => POST_STATE_ENABLED, ':lastID' => $lastID));
+            ->where(array('and', 'state = :enabled', 'channel_id = 0', 'id > :lastID'), array(':enabled' => POST_STATE_ENABLED, ':lastID' => (int)$lastID));
         $row = $cmd->queryRow();
         
         if (empty($row['content'])) return ;
-        app()->getCache()->set($id, $row['id']);
+        
+        if ($lastID === false) {
+            $columns = array(
+                'wx_token' => $wxid,
+                'create_time' => time(),
+                'last_time' => time(),
+                'last_pid' => 0,
+            );
+            app()->getDb()->createCommand()
+                ->insert(TABLE_USER_WEIXIN, $columns);
+        }
+        else {
+            $columns = array(
+                'last_time' => time(),
+                'last_pid' => (int)$row['id'],
+            );
+            app()->getDb()->createCommand()
+                ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
+        }
         
         $row['content'] .= "\n\n回复 1 查看下一条\n回复 0 查看使用帮助\n\n喜欢我们就召唤好友添加'挖段子'或'waduanzi'为好友关注我们吧！";
         $xml = $this->outputText($row['content']);
