@@ -224,7 +224,7 @@ class SiteController extends Controller
 
     public function actionTest()
     {
-        
+        exit;
         
         $filename = fbp('abc.png');
         $data = file_get_contents($filename);
@@ -235,7 +235,12 @@ class SiteController extends Controller
         $color = array(200, 200, 200);
         $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
         $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
-        $im->saveAsJpeg(app()->runtimePath . DS . 'aa.png');
+        $im->saveAsPng(app()->runtimePath . DS . 'aaaa');
+        $im->revert();
+        $im->text($text.'网', $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
+        $im->text('http://www.waduanzi1.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+        $im->saveAsPng(app()->runtimePath . DS . 'bbbb');
+        $im->output();
         
         
         

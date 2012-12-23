@@ -12,7 +12,7 @@ class CDImage
     private $_site = 'http://www.24beta.com/';
     
     private $_image;
-    private $_original;
+    private $_data;
     private $_imageType = IMAGETYPE_GIF;
     private $_lastSaveFile;
     
@@ -64,8 +64,8 @@ class CDImage
      */
     public function load($data)
     {
-        $image = self::loadImage($data);
-        $this->_image = $this->_original = $image;
+        $this->_data = $data;
+        $this->_image = self::loadImage($this->_data);
         if (file_exists($data)) {
             $info = getimagesize($data);
             $this->_imageType = $info[2];
@@ -139,7 +139,7 @@ class CDImage
      */
     public function revert()
     {
-        $this->_image = $this->_original;
+        $this->_image = $this->loadImage($this->_data);
         return $this;
     }
     
@@ -606,7 +606,7 @@ class CDImage
      * @param integer $color 颜色值
      * @return CDImage CDImage对象本身
      */
-    public function text($text, $font, $size, $position = self::MERGE_BOTTOM_RIGHT, $color = array(0, 0, 0), $opacity = 1.0, $padding = 5)
+    public function text($text, $font, $size, $position = self::MERGE_BOTTOM_RIGHT, $color = array(0, 0, 0), $opacity = 0, $padding = 5)
     {
         if (is_int($position))
             $pos = $this->textPosition($text, $font, $size, $position, $padding);
@@ -745,6 +745,6 @@ class CDImage
     public function __destruct()
     {
         is_resource($this->_image) && imagedestroy($this->_image);
-        is_resource($this->_original) && imagedestroy($this->_original);
     }
 }
+
