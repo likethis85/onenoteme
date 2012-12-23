@@ -235,7 +235,7 @@ class SiteController extends Controller
         $color = array(200, 200, 200);
         $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
         $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
-        $im->output();
+        $im->saveAsJpeg(app()->runtimePath . DS . 'aa.png');
         
         
         

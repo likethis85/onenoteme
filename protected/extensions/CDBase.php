@@ -276,9 +276,10 @@ class CDBase
             $middle['width'] = $im->width();
             $middle['height'] = $im->height();
              
-            $im->revert()->saveAsJpeg($bigFileName, 100);
+            $im->revert();
             $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
             $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+            $im->saveAsJpeg($bigFileName, 100);
             $original['url'] = fbu($path['url'] . $im->filename());
             $original['width'] = $im->width();
             $original['height'] = $im->height();
