@@ -108,8 +108,8 @@ class CDBase
             return false;
         else {
             $filename = array(
-            'path' => $path['path'] . $newFilename,
-            'url' => $path['url'] . $newFilename
+                'path' => $path['path'] . $newFilename,
+                'url' => $path['url'] . $newFilename
             );
             return $filename;
         }
@@ -264,12 +264,21 @@ class CDBase
             $im->revert();
             if ($im->width() > IMAGE_BMIDDLE_MAX_WIDTH)
                 $im->resizeToWidth(IMAGE_BMIDDLE_MAX_WIDTH);
+            
+            $text = '挖段子';
+            $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
+            $color = array(200, 200, 200);
+            $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
+            $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+            
             $im->saveAsJpeg($middleFileName, 75);
             $middle['url'] = fbu($path['url'] . $im->filename());
             $middle['width'] = $im->width();
             $middle['height'] = $im->height();
              
             $im->revert()->saveAsJpeg($bigFileName, 100);
+            $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
+            $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
             $original['url'] = fbu($path['url'] . $im->filename());
             $original['width'] = $im->width();
             $original['height'] = $im->height();

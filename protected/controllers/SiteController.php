@@ -224,6 +224,21 @@ class SiteController extends Controller
 
     public function actionTest()
     {
+        
+        
+        $filename = fbp('abc.png');
+        $data = file_get_contents($filename);
+        $im = new CDImage($data);
+        
+        $text = '挖段子';
+        $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
+        $color = array(200, 200, 200);
+        $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
+        $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+        $im->output();
+        
+        
+        
         exit;
         echo uniqid() . '<br />';
         echo md5('yaoyiyao phonebook') . '<br />';

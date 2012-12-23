@@ -74,7 +74,6 @@ class WeiboController extends Controller
         
         return ($profile === null) ? null : $profile->user;
     }
-    
 
     private static function saveWeiboUserProfile($profile)
     {
@@ -113,6 +112,8 @@ class WeiboController extends Controller
         else
             return true;
     }
+    
+    
     
     
     
@@ -202,8 +203,6 @@ class WeiboController extends Controller
         
         return ($profile === null) ? null : $profile->user;
     }
-    
-
 
     private static function saveQqtUserProfile($profile)
     {

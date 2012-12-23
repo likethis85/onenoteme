@@ -219,7 +219,7 @@ function sbp($file = null)
 {
     static $resourcePath = null;
     if ($resourcePath === null)
-        $resourcePath = rtrim(param('resourcePath'), DS) . DS;
+        $resourcePath = rtrim(param('resourceBasePath'), DS) . DS;
 
     return empty($file) ? $resourcePath : $resourcePath . ltrim($file, DS);
 }

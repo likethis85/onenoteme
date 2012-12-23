@@ -123,10 +123,12 @@ Waduanzi.switchImageSize = function(event){
 Waduanzi.ratingPost = function(event){
 	event.preventDefault();
 	
+	/*
 	if (!wdz_logined) {
 		Waduanzi.showQuickLoginWindow();
 		return;
 	}
+	*/
 	
 	_hmt && _hmt.push(['_trackEvent', '文章评价按钮', '点击']);
 	
