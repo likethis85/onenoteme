@@ -60,6 +60,8 @@ define('IMAGE_MAX_HEIGHT_FOLDING', 220);
 define('GIRL_THUMBNAIL_WIDTH', 200);
 define('GIRL_THUMBNAIL_HEIGHT', 200);
 
+define('IMAGE_WATER_SIZE', 500);
+
 define('GENDER_UNKOWN', 0);
 define('GENDER_FEMALE', 1);
 define('GENDER_MALE', 2);

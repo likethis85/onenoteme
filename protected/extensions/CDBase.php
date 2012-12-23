@@ -265,11 +265,13 @@ class CDBase
             if ($im->width() > IMAGE_BMIDDLE_MAX_WIDTH)
                 $im->resizeToWidth(IMAGE_BMIDDLE_MAX_WIDTH);
             
-            $text = '挖段子';
+            $text = '挖段子网';
             $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
             $color = array(200, 200, 200);
-            $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
-            $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+            if ($im->width() > IMAGE_WATER_SIZE) {
+                $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
+                $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+            }
             
             $im->saveAsJpeg($middleFileName, 75);
             $middle['url'] = fbu($path['url'] . $im->filename());
@@ -277,8 +279,10 @@ class CDBase
             $middle['height'] = $im->height();
              
             $im->revert();
-            $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
-            $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+            if ($im->width() > IMAGE_WATER_SIZE) {
+                $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
+                $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+            }
             $im->saveAsJpeg($bigFileName, 100);
             $original['url'] = fbu($path['url'] . $im->filename());
             $original['width'] = $im->width();
