@@ -5,6 +5,9 @@
 <meta name="author" content="waduanzi.com" />
 <meta name="copyright" content="Copyright (c) 2011-2912 waduanzi.com All Rights Reserved." />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta name="application-name" content="挖段子网"/>
+<meta name="msapplication-TileColor" content="#0c95f0"/>
+<meta name="msapplication-TileImage" content="35c7b7b9-f757-4e10-83a9-d18cc277e4da.png"/>
 <script type="text/javascript">
 var wdz_logined = <?php echo (int)!user()->isGuest;?>;
 var wdz_quick_login_url = '<?php echo aurl('site/quicklogin');?>';
