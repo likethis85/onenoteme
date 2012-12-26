@@ -18,7 +18,7 @@ catch (Exception $e) {
 return array(
     'basePath' => dirname(__FILE__) . DS . '..',
     'id' => 'waduanzi.com',
-    'name' => '挖段子',
+    'name' => '挖段子网',
     'language' => 'zh_cn',
     'charset' => 'utf-8',
     'timezone' => 'Asia/Shanghai',
