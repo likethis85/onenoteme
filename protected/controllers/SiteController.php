@@ -40,7 +40,8 @@ class SiteController extends Controller
     public function actionIndex($page = 1, $s = POST_LIST_STYLE_GRID)
     {
         $host = request()->getHostInfo();
-        if (stripos($host, 'www') !== false) {
+        $referer = request()->getUrlReferrer();
+        if (stripos($host, 'www') !== false && stripos($referer, 'baidu') === false && stripos($referer, 'google') === false){
             throw new CHttpException(404);
             exit;
         }
