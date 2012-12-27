@@ -39,6 +39,12 @@ class SiteController extends Controller
     
     public function actionIndex($page = 1, $s = POST_LIST_STYLE_GRID)
     {
+        $host = request()->getHostInfo();
+        if (stripos($host, 'www') !== false) {
+            throw new CHttpException(404);
+            exit;
+        }
+        
         $this->autoSwitchMobile(CDBase::mobileHomeUrl());
         
         $s = strip_tags(trim($s));
