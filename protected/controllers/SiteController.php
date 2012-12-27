@@ -42,7 +42,7 @@ class SiteController extends Controller
         $host = request()->getHostInfo();
         $referer = request()->getUrlReferrer();
         if (stripos($host, 'www') !== false && stripos($referer, 'baidu') === false && stripos($referer, 'google') === false){
-            throw new CHttpException(404);
+            throw new CHttpException(403, '备案中，当前网站无法显示');
             exit;
         }
         
