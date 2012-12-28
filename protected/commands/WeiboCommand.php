@@ -515,17 +515,18 @@ class WeiboCommand extends CConsoleCommand
     
     private static function fetchRelativeAccounts($count = 1)
     {
-        $accounts = array();
-        $subs = array();
-        for ($i=0; $i<$count; $i++) {
-            $index = mt_rand(0, count($accounts) - 1);
-            $subs[] = $accounts[$index];
-            unset($accounts[$index]);
-        }
-        
         $text = '';
-        if ($subs) {
-            $text = '@' . join('@', $subs);
+        $accounts = array();
+        if (count($accounts) > 0) {
+            $subs = array();
+            for ($i=0; $i<$count; $i++) {
+                $index = mt_rand(0, count($accounts) - 1);
+                $subs[] = $accounts[$index];
+                unset($accounts[$index]);
+            }
+            if ($subs) {
+                $text = '@' . join('@', $subs);
+            }
         }
         return $text;
     }
