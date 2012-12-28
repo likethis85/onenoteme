@@ -8,14 +8,14 @@ class ChannelController extends Controller
             array(
                 'COutputCache + joke, duanzi, lengtu, girl, video',
                 'duration' => $duration,
-                'varyBySession' => true,
+                'varyByExpression' => 'user()->getIsGuest()',
                 'varyByParam' => array('page', 's'),
                 'requestTypes' => array('POST'),
             ),
             array(
                 'COutputCache + joke, duanzi, lengtu, girl, video',
                 'duration' => $duration,
-                'varyBySession' => true,
+                'varyByExpression' => 'user()->getIsGuest()',
                 'varyByParam' => array('page', 's'),
                 'requestTypes' => array('GET'),
             ),

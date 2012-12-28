@@ -12,14 +12,12 @@ class TagController extends Controller
             array(
                 'COutputCache + posts',
                 'duration' => $duration,
-                'varyBySession' => true,
                 'varyByParam' => array('name', 'page', 's'),
                 'requestTypes' => array('GET'),
             ),
             array(
                 'COutputCache + posts',
                 'duration' => $duration,
-                'varyBySession' => true,
                 'varyByParam' => array('name', 'page', 's'),
                 'requestTypes' => array('POST'),
             ),
