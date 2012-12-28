@@ -354,8 +354,7 @@ class WeiboCommand extends CConsoleCommand
             'status' => $content,
         );
         foreach ($data as $key => $item)
-            $args[] = urlencode($key) . '=' . $item;
-    var_dump($args);
+            $args[] = urlencode($key) . '=' . urlencode($item);
         $curl = new CDCurl();
         $curl->post($url, join('&', $args));
                 var_dump($curl->rawdata());
