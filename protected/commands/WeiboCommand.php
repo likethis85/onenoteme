@@ -357,8 +357,8 @@ class WeiboCommand extends CConsoleCommand
             $args[] = urlencode($key) . '=' . urlencode($item);
         $curl = new CDCurl();
         $curl->post($url, join('&', $args));
-                var_dump($curl->rawdata());
-                var_dump($curl->errno());exit;
+//         var_dump($curl->rawdata());
+//         var_dump($curl->errno());exit;
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
             return $result['idstr'] ? $result['idstr'] : false;
@@ -443,7 +443,7 @@ class WeiboCommand extends CConsoleCommand
             'syncflag' => 1, // 不同步到空间
         );
         foreach ($data as $key => $item)
-            $args[] = urlencode($key) . '=' . $item;
+            $args[] = urlencode($key) . '=' . urlencode($item);;
     
         $curl = new CDCurl();
         $curl->post($url, join('&', $args));
@@ -488,7 +488,7 @@ class WeiboCommand extends CConsoleCommand
             'pic_url' => $model->getBmiddlePic(),
         );
         foreach ($data as $key => $item)
-            $args[] = urlencode($key) . '=' . $item;
+            $args[] = urlencode($key) . '=' . urlencode($item);;
     
         $curl = new CDCurl();
         $curl->post($url, join('&', $args));
