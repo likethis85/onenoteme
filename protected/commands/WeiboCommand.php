@@ -339,8 +339,12 @@ class WeiboCommand extends CConsoleCommand
         $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
         $tail = '...' . $sinatShortUrl . ' @挖段子网';
+        if ($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_LENGTU)
+            $tail = '#搞笑#' . $tail;
+        elseif ($model->channel_id == CHANNEL_GIRL)
+            $tail = '#美女#' . $tail;
         $accounts = self::fetchRelativeAccounts(1);
-        $tags = self::fetchPostTags($model, 1);
+        $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
         $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags . $accounts;
         $data = array(
@@ -384,8 +388,12 @@ class WeiboCommand extends CConsoleCommand
         $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
         $tail = '...' . $sinatShortUrl . ' @挖段子网';
+        if ($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_LENGTU)
+            $tail = '#搞笑#' . $tail;
+        elseif ($model->channel_id == CHANNEL_GIRL)
+            $tail = '#美女#' . $tail;
         $accounts = self::fetchRelativeAccounts(1);
-        $tags = self::fetchPostTags($model, 1);
+        $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
         $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags. $accounts;
         $data = array(
@@ -415,8 +423,12 @@ class WeiboCommand extends CConsoleCommand
         $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
         $tail = '...' . $sinatShortUrl . ' @cdcchen';
+        if ($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_LENGTU)
+            $tail = '#搞笑#' . $tail;
+        elseif ($model->channel_id == CHANNEL_GIRL)
+            $tail = '#美女#' . $tail;
         $accounts = self::fetchRelativeAccounts(1);
-        $tags = self::fetchPostTags($model, 1);
+        $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
         $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags . $accounts;
         $data = array(
@@ -455,8 +467,12 @@ class WeiboCommand extends CConsoleCommand
         $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
         $tail = '...' . $sinatShortUrl . ' @cdcchen';
+        if ($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_LENGTU)
+            $tail = '#搞笑#' . $tail;
+        elseif ($model->channel_id == CHANNEL_GIRL)
+            $tail = '#美女#' . $tail;
         $accounts = self::fetchRelativeAccounts(1);
-        $tags = self::fetchPostTags($model, 1);
+        $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
         $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags . $accounts;
         $data = array(
@@ -499,7 +515,7 @@ class WeiboCommand extends CConsoleCommand
     
     private static function fetchRelativeAccounts($count = 1)
     {
-        $accounts = array('冷笑话精选', '我们爱讲冷笑话', '当时我就震惊了');
+        $accounts = array();
         $subs = array();
         for ($i=0; $i<$count; $i++) {
             $index = mt_rand(0, count($accounts) - 1);
@@ -513,6 +529,7 @@ class WeiboCommand extends CConsoleCommand
         }
         return $text;
     }
+    
     
 }
 
