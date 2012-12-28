@@ -347,7 +347,7 @@ class WeiboCommand extends CConsoleCommand
         $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
         $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags . $accounts;
-        echo $content;
+        
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->cache->get('sina_weibo_access_token'),
@@ -355,9 +355,9 @@ class WeiboCommand extends CConsoleCommand
         );
         foreach ($data as $key => $item)
             $args[] = urlencode($key) . '=' . $item;
-    
+    var_dump($args);
         $curl = new CDCurl();
-        $curl->post($url, $data);
+        $curl->post($url, join('&', $args));
                 var_dump($curl->rawdata());
                 var_dump($curl->errno());exit;
         if ($curl->errno() == 0) {
