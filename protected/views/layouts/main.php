@@ -72,6 +72,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 echo param('footer_after_html');
 echo param('tongji_code');
 ?>
+<script src="http://a.tbcdn.cn/apps/top/x/sdk.js?appkey=21351161"></script>
 </body>
 </html>
 

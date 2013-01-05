@@ -24,6 +24,7 @@
     <a class="switch-version" href="<?php echo aurl('site/index', array('f'=>1));?>">切换到桌面版</a>
 </footer>
 <?php echo param('tongji_code');?>
+<script src="http://a.tbcdn.cn/apps/top/x/sdk.js?appkey=21351161"></script>
 </body>
 </html>
 
