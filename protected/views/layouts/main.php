@@ -47,7 +47,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     </div>
 </div>
 <div class="cd-wrapper cd-main">
-    <div class="alert alert-info">由于正在备案，所以网站会不时的关闭进行审核，请各位段友谅解，备案后会迁移到阿里云，为大家提供更好的服务。</div>
+    <div class="alert alert-block alert-success alert-sitetip">终于，终于，终于啊，我们终于备下案来了！！！<br />2013年我们将在手机应用、网站及微信等多方面提高挖段子网的使用体验，感谢所有段友的支持。</div>
 	<?php echo $content;?>
 </div>
 <?php echo param('footer_before_html');?>
