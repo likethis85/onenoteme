@@ -58,14 +58,14 @@ return array(
 		    'queryCacheID' => 'cache',
 		    'queryCachingDuration' => 60,
         ),
-        'cache' => YII_DEBUG ? null : array(
+        'cache' => array(
             'class'=>'CMemCache',
             'useMemcached' => true,
             'servers'=>array(
                 array('host'=>'localhost', 'port'=>22122, 'weight'=>100),
             ),
         ),
-        'fcache' => YII_DEBUG ? null : array(
+        'fcache' => array(
             'class' => 'CFileCache',
 		    'directoryLevel' => 2,
         ),
