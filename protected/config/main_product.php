@@ -89,11 +89,12 @@ return array(
             'rules' => array(
                 'http://api.waduanzi.com/<_a>' => 'api/<_a>',
             
-                'http://<_a:(joke|lengtu|girl|video)>.waduanzi.com/?page=<page:\d+>&s=<s:\w+>' => 'channel/<_a>',
-                'http://<_a:(joke|lengtu|girl|video)>.waduanzi.com/?page=<page:\d+>' => 'channel/<_a>',
+                'http://<_a:(joke|lengtu|girl|video)>.waduanzi.com/page/<page:\d+>&s=<s:\w+>' => 'channel/<_a>',
+                'http://<_a:(joke|lengtu|girl|video)>.waduanzi.com/page/<page:\d+>' => 'channel/<_a>',
                 'http://<_a:(joke|lengtu|girl|video)>.waduanzi.com/' => 'channel/<_a>',
                 
                 'http://www.waduanzi.com/' => 'site/index',
+                'http://www.waduanzi.com/page/<page:\d+>' => 'site/index',
                 'http://www.waduanzi.com/<_a:(login|signup|logout|bdmap|links)>' => 'site/<_a>',
                 'http://www.waduanzi.com/<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',
                 'http://www.waduanzi.com/<_a:(duanzi|lengtu|girl|video)>' => 'channel/<_a>',
