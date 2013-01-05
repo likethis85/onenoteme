@@ -94,6 +94,7 @@ YII_DEBUG || cs()->scriptMap = array(
     'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=2012010501'),
     'cd-basic.css' => sbu('styles/cd-all.min.css?t=2012010501'),
     'cd-main.css' => sbu('styles/cd-all.min.css?t=2012010501'),
+    'jquery.min.js' => sbu('scripts/cd-all.min.js?t=2012122202'),
     'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=2012122202'),
     'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=2012122202'),
     'jquery.infinitescroll.min.js' => sbu('scripts/cd-all.min.js?t=2012122202'),
