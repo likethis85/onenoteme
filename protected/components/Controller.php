@@ -109,7 +109,6 @@ class Controller extends CController
 
     protected function beforeRender($view)
     {
-        cs()->coreScriptPosition = CClientScript::POS_END;
         cs()->defaultScriptFilePosition = CClientScript::POS_END;
         return true;
     }

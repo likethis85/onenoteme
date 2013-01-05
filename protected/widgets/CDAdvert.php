@@ -38,7 +38,7 @@ class CDAdvert extends CWidget
         $adcode = $data[$index];
         if (empty($adcode)) return;
         
-        $html = '<div class="beta-block beta-radius3px">';
+        $html = '<div class="beta-block cdc-block beta-radius3px">';
         if ($this->title)
             $html .= '<h2>' . $this->title . '</h2>';
         
