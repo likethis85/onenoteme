@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-.alert-sitetip {line-height:30px; font-size:16px; padding:10px 20px;}
+.alert-sitetip {line-height:24px; font-size:14px; padding:10px 20px;}
 
 /* panel */
 .panel {background-color:#FFFFFF; margin:1px 1px 3px; -webkit-box-shadow:#666 0 1px 3px; box-shadow:#666 0 1px 3px; -moz-box-shadow:#666 0 1px 3px; -webkit-border-radius:5px; border-radius:5px; -moz-border-radius:5px;}
