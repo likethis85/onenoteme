@@ -96,7 +96,7 @@
         <div class="clear"></div>
     </div>
     <!-- 详情页侧边栏广告位开始 -->
-    <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_post_detail'));?>
+    <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_first'));?>
     <!-- 详情页侧边栏广告位结束 -->
 	<div class="panel panel15"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
 </div>
