@@ -60,8 +60,9 @@ return array(
         ),
         'cache' => YII_DEBUG ? null : array(
             'class'=>'CMemCache',
+            'useMemcached' => true,
             'servers'=>array(
-                array('host'=>'localhost', 'port'=>11211, 'weight'=>100),
+                array('host'=>'localhost', 'port'=>22122, 'weight'=>100),
             ),
         ),
         'fcache' => YII_DEBUG ? null : array(
