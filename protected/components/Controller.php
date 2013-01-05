@@ -106,4 +106,11 @@ class Controller extends CController
     {
         return $this->user->profile;
     }
+
+    protected function beforeRender($view)
+    {
+        cs()->coreScriptPosition = CClientScript::POS_END;
+        cs()->defaultScriptFilePosition = CClientScript::POS_END;
+        return true;
+    }
 }
