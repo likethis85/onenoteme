@@ -1,6 +1,6 @@
 <?php
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
-defined('YII_PRODUCT') or define('YII_PRODUCT', false);
+defined('CD_PRODUCT') or define('CD_PRODUCT', false);
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 YII_DEBUG or error_reporting(0);
 
@@ -12,7 +12,7 @@ require_once($define);
 require_once($cdc);
 require_once($short);
 
-$config = dirname(__FILE__) . '/../protected/config/' . (YII_PRODUCT ? 'main_product.php' : 'main_develop.php');
+$config = dirname(__FILE__) . '/../protected/config/' . (CD_PRODUCT ? 'main_product.php' : 'main_develop.php');
 
 $app = Yii::createWebApplication($config);
 $app->run();
