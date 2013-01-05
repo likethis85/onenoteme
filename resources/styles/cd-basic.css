@@ -41,7 +41,7 @@ a:hover {color:#330000; text-decoration:none;}
 .site-bg {background-image:url(../images/sitebg.png); background-repeat:no-repeat;}
 .cd-wrapper {width:950px; margin:0px auto; overflow:hidden;}
 .fluid-wrapper {margin:0px auto; overflow:hidden; padding:0 5px;}
-.cdc-block {margin:0px auto;}
+.cdc-block {margin:0px auto; background-color:white;}
 .cdc-block h4 {margin:0; background:#EFEFEF; line-height:36px; text-indent:10px; font-size:12px; font-weight:normal;}
 .ad-block {text-align:center;}
 .ad-block.fixed {position:fixed; top:73px; z-index:99;}
