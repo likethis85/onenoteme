@@ -24,8 +24,8 @@
 </div>
 
 <script type="text/javascript">
-$(function(){alert(typeof(WeixinJSBridge));
-	if (typeof(WeixinJSBridge) == 'object')
+$(function(){
+	//if (typeof(WeixinJSBridge) == 'object')
 		$('.btn-focus, .weixin-btn').removeClass('hide');
 	
 	CDMobile.increaseVisitNums(<?php echo $post->id;?>, '<?php echo aurl('mobile/post/views');?>');
