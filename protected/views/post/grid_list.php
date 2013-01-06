@@ -32,6 +32,7 @@
                         <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
                         <img class="original hide" alt="<?php echo $model->title;?>" />
                     </a>
+                    <?php if ($model->gif_animation):?><i class="site-bg icon-gif-sign"></i><?php endif;?>
                     <?php else:?>
                     <a href="<?php echo $model->originalPic;?>" target="_blank" title="点击查看大图">
                         <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
