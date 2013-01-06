@@ -12,7 +12,7 @@ class CDImage
     private $_site = 'http://www.24beta.com/';
     
     private $_image;
-    private $_data;
+    private $_original;
     private $_imageType = IMAGETYPE_GIF;
     private $_lastSaveFile;
     
@@ -64,8 +64,8 @@ class CDImage
      */
     public function load($data)
     {
-        $this->_data = $data;
-        $this->_image = self::loadImage($this->_data);
+        $image = self::loadImage($data);
+        $this->_image = $this->_original = $image;
         if (file_exists($data)) {
             $info = getimagesize($data);
             $this->_imageType = $info[2];
@@ -139,7 +139,7 @@ class CDImage
      */
     public function revert()
     {
-        $this->_image = $this->loadImage($this->_data);
+        $this->_image = $this->_original;
         return $this;
     }
     
@@ -161,7 +161,7 @@ class CDImage
     
     public function convertType($type)
     {
-        if (!array_key_exists($key, self::$_createFunctions))
+        if (!array_key_exists($type, self::$_createFunctions))
             throw new Exception('不支持此类型', 0);
         $this->_imageType = $type;
     }
@@ -600,60 +600,20 @@ class CDImage
      * 在图像上添加文字
      * @param string $text 添加的文字
      * @param integer $opacity 不透明度，值为0-1
-     * @param array $position 文字添加位置
+     * @param 文字添加位置 $position
      * @param string $font 字体文件路径
      * @param integer $size 文字大小
      * @param integer $color 颜色值
      * @return CDImage CDImage对象本身
+     * @todo 未完成, $x, $y 未计算出来
      */
-    public function text($text, $font, $size, $position = self::MERGE_BOTTOM_RIGHT, $color = array(0, 0, 0), $opacity = 0, $padding = 5)
+    public function text($text, $opacity = 0.5, $position = self::MERGE_BOTTOM_RIGHT, $font, $size, $color)
     {
-        if (is_int($position))
-            $pos = $this->textPosition($text, $font, $size, $position, $padding);
-        elseif (is_array($position))
-            $pos = $position;
-        else
-            throw new Exception('position error.');
-        
-        if (is_array($color))
-            $color = imagecolorallocatealpha($this->_image, $color[0], $color[1], $color[2], $opacity);
-        imagettftext($this->_image, $size, 0, $pos[0], $pos[1], $color, $font, $text);
-
-        return $this;
-    }
-    
-    public function textPosition($text, $font, $size, $position, $padding = 5, $angle = 0)
-    {
-        $points = imagettfbbox($size, $angle, $font, $text);
-        $width = $points[2] - $points[0];
-        $height = $points[1] - $points[7];
-        switch ($position) {
-            case self::MERGE_TOP_LEFT:
-                $x = $points[0] + $padding;
-                $y = $points[1] - $points[7] + $padding;
-                break;
-            case self::MERGE_TOP_RIGHT:
-                $x = $this->width() - ($points[2] - $points[0]) - $padding;
-                $y = $points[1] - $points[7] + $padding;
-                break;
-            case self::MERGE_BOTTOM_LEFT:
-                $x = $points[0] + $padding;
-                $y = $this->height() - $points[1] - $padding;
-                break;
-            case self::MERGE_CENTER:
-                $x = ($this->width() - $width) / 2;
-                $y = $this->height() / 2 + $height / 2;
-                break;
-            case self::MERGE_BOTTOM_RIGHT:
-            default:
-                $x = $this->width() - ($points[2] - $points[0]) - $padding;
-                $y = $this->height() - $points[1] - $padding;
-                break;
+        $positions = array(self::MERGE_TOP_LEFT, self::MERGE_BOTTOM_RIGHT, self::MERGE_BOTTOM_LEFT, self::MERGE_TOP_LEFT, self::MERGE_CENTER);
+        if (in_array($position, $positions)) {
+            imagettftext($this->_image, $size, 0, $x, $y, $color, $font, $text);
         }
-        
-        $position = array($x, $y);
-        
-        return $position;
+        return $this;
     }
     
     /**
@@ -662,25 +622,18 @@ class CDImage
      * @param constant $position 合并位置
      * @param integer $opacity 不透明度，取值为0-100
      */
-    public function merge($data, $position = self::MERGE_BOTTOM_RIGHT, $opacity = 100)
+    public function merge($data, $opacity = 100, $position = self::MERGE_BOTTOM_RIGHT)
     {
         $src = self::loadImage($data);
         if (!is_resource($src))
             throw new Exception('图像数据错误', 0);
 
-        if (is_int($position))
-            $pos = self::mergePosition($position, $this->_image, $src);
-        elseif (is_array($position))
-            $pos = $position;
-        else
-            throw new Exception('position error.');
-        
         $w = imagesx($src);
         $h = imagesy($src);
         $image = imagecreatetruecolor($w, $h);
         imagealphablending($this->_image, true);
         imagealphablending($image, true);
-        
+        $pos = self::getPosition($position, $this->_image, $src);
         imagecopyresampled($image, $this->_image, 0, 0, $pos[0], $pos[1], $w, $h, $w, $h);
         self::saveAlpha($src);
         imagecopy($image, $src, 0, 0, 0, 0, $w, $h);
@@ -689,7 +642,7 @@ class CDImage
         return $this;
     }
     
-    public static function mergePosition($position, $dst, $src)
+    public static function getPosition($position, $dst, $src)
     {
         $dstW = imagesx($dst);
         $dstH = imagesy($dst);
@@ -697,25 +650,26 @@ class CDImage
         $srcH = imagesy($src);
         switch ($position) {
             case self::MERGE_TOP_LEFT:
-                $position = array(0, 0);
+                return array(0, 0);
                 break;
             case self::MERGE_TOP_RIGHT:
-                $position = array($dstW-$srcW, 0);
+                return array($dstW-$srcW, 0);
+                break;
+            case self::MERGE_BOTTOM_RIGHT:
+                return array($dstW-$srcW, $dstH-$srcH);
                 break;
             case self::MERGE_BOTTOM_LEFT:
-                $position = array(0, $dstH-$srcH);
+                return array(0, $dstH-$srcH);
                 break;
             case self::MERGE_CENTER:
                 $x = ($dstW - $srcW) / 2;
                 $y = ($dstH - $srcH) / 2;
-                $position = array((int)$x, (int)$y);
+                return array((int)$x, (int)$y);
                 break;
-            case self::MERGE_BOTTOM_RIGHT:
             default:
-                $position = array($dstW-$srcW, $dstH-$srcH);
+                return false;
                 break;
         }
-        return $position;
     }
 
     public static function saveAlpha(&$im)
@@ -738,6 +692,19 @@ class CDImage
     {
         return $this->_author;
     }
+
+    public static function isGifAnimate($file, $isdata = false)
+    {
+        if ($isdata)
+            $data = $file;
+        else {
+            $fp = fopen($file, 'rb');
+            $data = fread($fp, 1024);
+            fclose($fp);
+        }
+        $p = chr(0x21).chr(0xff).chr(0x0b).chr(0x4e).chr(0x45).chr(0x54).chr(0x53).chr(0x43).chr(0x41).chr(0x50).chr(0x45).chr(0x32).chr(0x2e).chr(0x30);
+        return (bool)preg_match("~${p}~", $data);
+    }
     
     /**
      * 析构函数
@@ -745,6 +712,7 @@ class CDImage
     public function __destruct()
     {
         is_resource($this->_image) && imagedestroy($this->_image);
+        is_resource($this->_original) && imagedestroy($this->_original);
     }
 }
 

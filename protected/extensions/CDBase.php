@@ -60,7 +60,7 @@ class CDBase
      * @param string $filename 软件名
      * @return string 转化之后的名称
      */
-    public static function makeUploadFileName($extension, $prefix = '')
+    public static function makeUploadFileName($extension='', $prefix = '')
     {
         $extension = strtolower($extension);
         $filename = date('YmdHis_', $_SERVER['REQUEST_TIME'])
@@ -229,15 +229,7 @@ class CDBase
         $images = array();
         if (!empty($url)) {
             set_time_limit(0);
-            $path = CDBase::makeUploadPath('pics');
-            $info = parse_url($url);
-            $file = CDBase::makeUploadFileName('');
-            $thumbnailFile = 'thumbnail_' . $file;
-            $thumbnailFileName = $path['path'] . $thumbnailFile;
-            $middleFileName = $path['path'] . 'bmiddle_' . $file;
-            $bigFile = 'original_' . $file;
-            $bigFileName = $path['path'] . $bigFile;
-        
+            
             $curl = new CDCurl();
             $curl->get($url);
             $errno = $curl->errno();
@@ -246,6 +238,19 @@ class CDBase
             
             $data = $curl->rawdata();
             $curl->close();
+            
+            $isGifAnimate = CDImage::isGifAnimate($data, true);
+            
+            $path = CDBase::makeUploadPath('pics');
+            $info = parse_url($url);
+            $file = CDBase::makeUploadFileName();
+            $thumbnailFile = 'thumbnail_' . $file;
+            $thumbnailFileName = $path['path'] . $thumbnailFile;
+            if ($isGifAnimate) $file .= '.gif';
+            $middleFileName = $path['path'] . 'bmiddle_' . $file;
+            $bigFile = 'original_' . $file;
+            $bigFileName = $path['path'] . $bigFile;
+            
             $im = new CDImage();
             $im->load($data);
             unset($data, $curl);
@@ -259,33 +264,47 @@ class CDBase
             $thumbnail['width'] = $im->width();
             $thumbnail['height'] = $im->height();
             $thumbnail['url'] = fbu($path['url'] . $im->filename());
-             
-            $im->revert();
-            if ($im->width() > IMAGE_BMIDDLE_MAX_WIDTH)
-                $im->resizeToWidth(IMAGE_BMIDDLE_MAX_WIDTH);
-            
-            $text = '挖段子网';
-            $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
-            $color = array(200, 200, 200);
-            if ($im->width() > IMAGE_WATER_SIZE) {
-                $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
-                $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+
+            if ($isGifAnimate) {
+                $result = @file_put_contents($middleFileName, $data);
+                if ($result) {
+                    $im->revert();
+                    $width = $im->width();
+                    $height = $im->height();
+                    $url = fbu($path['url'] . $file);
+                    $middle['url'] = $original['url'] = $url;
+                    $middle['width'] = $original['width'] = $width;
+                    $middle['height'] = $original['height'] = $height;
+                }
             }
-            
-            $im->saveAsJpeg($middleFileName, 75);
-            $middle['url'] = fbu($path['url'] . $im->filename());
-            $middle['width'] = $im->width();
-            $middle['height'] = $im->height();
-             
-            $im->revert();
-            if ($im->width() > IMAGE_WATER_SIZE) {
-                $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
-                $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+            else {
+                $im->revert();
+                if ($im->width() > IMAGE_BMIDDLE_MAX_WIDTH)
+                    $im->resizeToWidth(IMAGE_BMIDDLE_MAX_WIDTH);
+                
+                $text = '挖段子网';
+                $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
+                $color = array(200, 200, 200);
+                if ($im->width() > IMAGE_WATER_SIZE) {
+                    $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
+                    $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+                }
+                
+                $im->saveAsJpeg($middleFileName, 75);
+                $middle['url'] = fbu($path['url'] . $im->filename());
+                $middle['width'] = $im->width();
+                $middle['height'] = $im->height();
+                 
+                $im->revert();
+                if ($im->width() > IMAGE_WATER_SIZE) {
+                    $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
+                    $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+                }
+                $im->saveAsJpeg($bigFileName, 100);
+                $original['url'] = fbu($path['url'] . $im->filename());
+                $original['width'] = $im->width();
+                $original['height'] = $im->height();
             }
-            $im->saveAsJpeg($bigFileName, 100);
-            $original['url'] = fbu($path['url'] . $im->filename());
-            $original['width'] = $im->width();
-            $original['height'] = $im->height();
             
             $images = array($thumbnail, $middle, $original);
         }
