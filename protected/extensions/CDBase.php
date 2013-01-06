@@ -266,7 +266,8 @@ class CDBase
             $thumbnail['url'] = fbu($path['url'] . $im->filename());
 
             if ($isGifAnimate) {
-                $result = @file_put_contents($middleFileName, $data);
+                $gifFileName = $path['path'] . 'gif_' . $file;
+                $result = @file_put_contents($gifFileName, $data);
                 if ($result) {
                     $im->revert();
                     $width = $im->width();
