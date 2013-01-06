@@ -21,16 +21,10 @@
 
 <script type="text/javascript">
 $(function(){
-	//if (typeof(WeixinJSBridge) == 'object')
+	if (typeof(WeixinJSBridge) == 'object')
 		$('.btn-focus').removeClass('hide');
 	
 	CDMobile.increaseVisitNums(<?php echo $post->id;?>, '<?php echo aurl('mobile/post/views');?>');
-
-	var s = '';
-	for (var i in window)
-		s += i + '=' + window.i + '<br />';
-
-	$('body').append(s);
 });
 </script>
 
