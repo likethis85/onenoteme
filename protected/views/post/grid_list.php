@@ -30,7 +30,7 @@
                     <?php if ($model->imageIsLong):?>
                     <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" target="_blank" title="点击查看大图">
                         <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
-                        <img class="original hide" />
+                        <img class="original hide" alt="<?php echo $model->title;?>" />
                     </a>
                     <?php else:?>
                     <a href="<?php echo $model->originalPic;?>" target="_blank" title="点击查看大图">

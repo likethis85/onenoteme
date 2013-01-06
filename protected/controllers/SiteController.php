@@ -39,15 +39,6 @@ class SiteController extends Controller
     
     public function actionIndex($page = 1, $s = POST_LIST_STYLE_GRID)
     {
-        /*
-        $host = request()->getHostInfo();
-        $referer = request()->getUrlReferrer();
-        if (stripos($host, 'www') !== false && stripos($referer, 'baidu') === false && stripos($referer, 'google') === false  && stripos($referer, 'waduanzi') === false){
-            throw new CHttpException(403, '备案中，当前网站无法显示');
-            exit;
-        }
-        */
-        
         $this->autoSwitchMobile(CDBase::mobileHomeUrl());
         
         $s = strip_tags(trim($s));
