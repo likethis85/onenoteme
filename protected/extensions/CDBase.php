@@ -266,16 +266,20 @@ class CDBase
             $thumbnail['url'] = fbu($path['url'] . $im->filename());
 
             if ($isGifAnimate) {
-                $gifFileName = $path['path'] . 'gif_' . $file;
+                $gifFile = 'gif_' . $file;
+                $gifFileName = $path['path'] . $gifFile;
                 $result = @file_put_contents($gifFileName, $data);
                 if ($result) {
                     $im->revert();
                     $width = $im->width();
                     $height = $im->height();
-                    $url = fbu($path['url'] . $file);
-                    $middle['url'] = $original['url'] = $url;
-                    $middle['width'] = $original['width'] = $width;
-                    $middle['height'] = $original['height'] = $height;
+                    $url = fbu($path['url'] . $gifFile);
+                    $middle['url'] = $url;
+                    $middle['width'] = $width;
+                    $middle['height'] = $height;
+                    $original['url'] = $url;
+                    $original['width'] = $width;
+                    $original['height'] = $height;
                 }
             }
             else {
