@@ -253,7 +253,6 @@ class CDBase
             
             $im = new CDImage();
             $im->load($data);
-            unset($data, $curl);
         
             if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
                 $im->resizeToHeight($thumbHeight);
@@ -312,7 +311,7 @@ class CDBase
                 $original['width'] = $im->width();
                 $original['height'] = $im->height();
             }
-            
+            unset($data, $curl);
             $images = array($thumbnail, $middle, $original);
         }
         
