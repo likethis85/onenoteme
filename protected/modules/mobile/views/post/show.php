@@ -28,7 +28,7 @@ $(function(){
 
 	var s = '';
 	for (var i in window)
-		s += i + '=' + window.i;
+		s += i + '=' + window.i + '<br />';
 
 	$('body').append(s);
 });
