@@ -280,8 +280,6 @@ class CDBase
                     $original['width'] = $width;
                     $original['height'] = $height;
                 }
-                file_put_contents(app()->runtimePath . DS . 'test1.txt', $gifFileName);
-                file_put_contents(app()->runtimePath . DS . 'test2.txt', $gifUrl);
             }
             else {
                 $im->revert();
@@ -312,7 +310,7 @@ class CDBase
                 $original['height'] = $im->height();
             }
             unset($data, $curl);
-            $images = array($thumbnail, $middle, $original);
+            $images = array($thumbnail, $middle, $original, (int)$isGifAnimate);
         }
         
         return $images;

@@ -22,12 +22,13 @@
  * @property string $thumbnail_pic
  * @property string $bmiddle_pic
  * @property string $original_pic
- * @property string $thumbnail_width
- * @property string $thumbnail_height
- * @property string $bmiddle_width
- * @property string $bmiddle_height
- * @property string $original_width
- * @property string $original_height
+ * @property integer $thumbnail_width
+ * @property integer $thumbnail_height
+ * @property integer $bmiddle_width
+ * @property integer $bmiddle_height
+ * @property integer $original_width
+ * @property integer $original_height
+ * @property string $gif_animation
  * @property string $weibo_id
  * @property integer $istop
  * @property integer $homeshow
@@ -114,7 +115,7 @@ class Post extends CActiveRecord
 		// will receive user inputs.
 		return array(
 		    array('content', 'required', 'message'=>'段子内容必须填写'),
-			array('channel_id, view_nums, up_score, down_score, comment_nums, state, favorite_count, create_time, user_id, thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height, istop, homeshow, recommend, hottest', 'numerical', 'integerOnly'=>true),
+			array('channel_id, view_nums, up_score, down_score, comment_nums, gif_animation, state, favorite_count, create_time, user_id, thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height, istop, homeshow, recommend, hottest', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
 			array('weibo_id', 'length', 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
@@ -166,6 +167,7 @@ class Post extends CActiveRecord
     		'bmiddle_height' => '大图高度',
     		'original_width' => '原图宽度',
     		'original_height' => '原图调度',
+	        'gif_animation' => 'GIF动画',
 	        'istop' => '置顶',
 	        'homeshow' => '首页显示',
 	        'recommend' => '推荐',
@@ -459,6 +461,7 @@ class Post extends CActiveRecord
                 $this->original_pic = $images[2]['url'];
                 $this->original_width = $images[2]['width'];
                 $this->original_height = $images[2]['height'];
+                $this->gif_animation = $images[3];
                 return true;
             }
             else
