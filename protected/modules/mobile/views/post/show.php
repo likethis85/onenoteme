@@ -31,7 +31,7 @@ $(function(){
 	CDMobile.increaseVisitNums(<?php echo $post->id;?>, '<?php echo aurl('mobile/post/views');?>');
 	$('.beta-post-detail').on('click', '#share-friend', CDMobile.shareToWeixinFriend);
 
-	$(document).on('click', 'li, dl, .btn-focus', function(event){
+	$(document).on('click', '.btn-focus', function(event){
 		event.preventDefault();
     	var originalWxid = $(this).attr('data-wxid');
     	if (typeof originalWxid != 'undefined' && originalWxid.length > 0)
