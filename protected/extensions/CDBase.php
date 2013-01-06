@@ -273,14 +273,16 @@ class CDBase
                     $im->revert();
                     $width = $im->width();
                     $height = $im->height();
-                    $url = fbu($path['url'] . $gifFile);
-                    $middle['url'] = $url;
+                    $gifUrl = fbu($path['url'] . $gifFile);
+                    $middle['url'] = $gifUrl;
                     $middle['width'] = $width;
                     $middle['height'] = $height;
-                    $original['url'] = $url;
+                    $original['url'] = $gifUrl;
                     $original['width'] = $width;
                     $original['height'] = $height;
                 }
+                file_put_contents(app()->runtimePath . DS . 'test1.txt', $gifFileName);
+                file_put_contents(app()->runtimePath . DS . 'test2.txt', $gifUrl);
             }
             else {
                 $im->revert();
