@@ -48,9 +48,9 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 </div>
 <div class="cd-wrapper cd-main">
     <div class="alert alert-block alert-success alert-sitetip">
-        终于，终于，终于啊，我们终于备下案来了！！！<br />
-        服务已经迁移到国内，使用自托管服务器+阿里云，同时保证速度和稳定性。<br />
-        2013年我们将在手机应用、网站及微信等多方面提高挖段子网的使用体验，感谢所有段友的支持。
+        访问挖段子微信公众账号全面升级，笑话、趣图、女神都可以查看啦！<br />
+        使用微信扫描侧边栏上的二维码或直接使用微信添加“挖段子”或“waduanzi”为好友即可使用，方便快捷。<br />
+        回复 1 查看笑话；回复 2 查看趣图；回复 3 查看女神；回复 0 查看使用帮助。
     </div>
 	<?php echo $content;?>
 </div>
