@@ -110,7 +110,7 @@ class WdzWeixin extends CDWeixin
         
         $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_LENGTU, ':lastID' => (int)$lastID);
         $cmd = app()->getDb()->createCommand()
-            ->select(array('id', 'title', 'content', 'thumbnail_pic'))
+            ->select(array('id', 'title', 'content', 'bmiddle_pic'))
             ->from(TABLE_POST)
             ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), $params)
             ->order('id asc');;
@@ -162,7 +162,7 @@ class WdzWeixin extends CDWeixin
         
         $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_GIRL, ':lastID' => (int)$lastID);
         $cmd = app()->getDb()->createCommand()
-            ->select(array('id', 'title', 'content', 'thumbnail_pic'))
+            ->select(array('id', 'title', 'content', 'bmiddle_pic'))
             ->from(TABLE_POST)
             ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), $params)
             ->order('id asc');
