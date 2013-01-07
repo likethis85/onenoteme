@@ -6,8 +6,13 @@
     </dt>
     <dd class="summary clearfix">
         <a href="<?php echo $model->url;?>">
-            <?php if ($model->thumbnail) echo image($model->getThumbnail(), $model->title, array('class'=>'thumbnail'));?>
-            <?php echo $model->filterSummary;?>
+            <?php
+            if ($model->channel_id != CHANNEL_VIDEO && $model->thumbnail)
+                echo image($model->getThumbnail(), $model->title, array('class'=>'thumbnail'));
+            elseif ($model->channel_id == CHANNEL_VIDEO && $model->videoHtml)
+                echo $model->videoHtml;
+            echo $model->filterSummary;
+            ?>
         </a>
     </dd>
     <dd class="post-extra"><?php echo $model->authorName;?>&nbsp;|&nbsp;<?php echo $model->createTime;?></dd>

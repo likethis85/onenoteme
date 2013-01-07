@@ -11,8 +11,13 @@
     </div>
     <p class="post-extra"><?php echo $post->authorName;?>&nbsp;|&nbsp;<?php echo $post->shortTime;?></p>
     <div id="beta-post-content">
-        <?php echo $post->filterContent;?>
-        <?php if ($post->bmiddlePic) echo image($post->bmiddlePic, $post->title, array('class'=>'bmiddle'));?>
+        <?php
+            echo $post->filterContent;
+            if ($post->channel_id != CHANNEL_VIDEO && $post->thumbnail)
+                echo image($post->thumbnail, $post->title, array('class'=>'thumbnail'));
+            elseif ($post->channel_id == CHANNEL_VIDEO && $post->videoHtml)
+                echo $post->videoHtml;
+        ?>
         <?php if ($post->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $post->getTagLinks('mobile/tag/posts', '&nbsp;', '_self');?></div><?php endif;?>
     </div>
     <div class="beta-create-form"><?php $this->renderPartial('/comment/_create_form', array('comment'=>$comment));?></div>

@@ -60,6 +60,7 @@ h1.post-title a:hover {color:#D14836;}
 #beta-post-content li {margin-bottom:5px; line-height:22px;}
 #beta-post-content table {border-spacing:0; border-collapse:collapse; border:0; margin:10px 0;}
 #beta-post-content table th, #beta-post-content table td {border:1px solid #CFCFCF; padding:5px;}
+#beta-post-content object, #beta-post-content embed {display:block;}
 
 
 /* comment/list */
