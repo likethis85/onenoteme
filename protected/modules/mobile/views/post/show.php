@@ -15,16 +15,28 @@
         <?php if ($post->bmiddlePic) echo image($post->bmiddlePic, $post->title, array('class'=>'bmiddle'));?>
         <?php if ($post->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $post->getTagLinks('mobile/tag/posts', '&nbsp;', '_self');?></div><?php endif;?>
     </div>
+    <div class="group-btn acenter weixin-btn hide">
+        <a class="btn btn-large btn-inverse" id="add-weixin" href="weixin://profile/<?php echo param('wdz_weixin_account_id');?>">添加微信公号</a>
+        <button class="btn btn-large" id="share-friend" data-title="<?php echo $post->title;?>" data-image="<?php echo $post->bmiddlePic;?>" data-desc="<?php echo $post->getSummary(100);?>">分享到朋友圈</button>
+    </div>
     <div class="beta-create-form"><?php $this->renderPartial('/comment/_create_form', array('comment'=>$comment));?></div>
     <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'post'=>$post));?>
 </div>
 
 <script type="text/javascript">
 $(function(){
-	if (typeof(WeixinJSBridge) == 'object')
-		$('.btn-focus').removeClass('hide');
+	if (typeof WeixinJSBridge == 'object')
+		$('.btn-focus, .weixin-btn').removeClass('hide');
 	
 	CDMobile.increaseVisitNums(<?php echo $post->id;?>, '<?php echo aurl('mobile/post/views');?>');
+	$('.beta-post-detail').on('click', '#share-friend', CDMobile.shareToWeixinFriend);
+
+	$(document).on('click', '.btn-focus', function(event){
+		event.preventDefault();
+    	var originalWxid = $(this).attr('data-wxid');
+    	if (typeof originalWxid != 'undefined' && originalWxid.length > 0)
+    		CDMobile.addContact(originalWxid);
+	});
 });
 </script>
 
