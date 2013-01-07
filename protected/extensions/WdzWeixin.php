@@ -100,7 +100,7 @@ class WdzWeixin extends CDWeixin
     {
         $wxid = $data->FromUserName;
         $lastID = app()->getDb()->createCommand()
-            ->select('last_pid')
+            ->select('last_joke_pid')
             ->from(TABLE_USER_WEIXIN)
             ->where('wx_token = :wxid', array(':wxid'=>$wxid))
             ->queryScalar();
@@ -118,7 +118,7 @@ class WdzWeixin extends CDWeixin
                 'wx_token' => $wxid,
                 'create_time' => time(),
                 'last_time' => time(),
-                'last_pid' => 0,
+                'last_joke_pid' => 0,
             );
             app()->getDb()->createCommand()
                 ->insert(TABLE_USER_WEIXIN, $columns);
@@ -126,7 +126,7 @@ class WdzWeixin extends CDWeixin
         else {
             $columns = array(
                 'last_time' => time(),
-                'last_pid' => (int)$row['id'],
+                'last_joke_pid' => (int)$row['id'],
             );
             app()->getDb()->createCommand()
                 ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
