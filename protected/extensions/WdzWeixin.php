@@ -205,7 +205,7 @@ class WdzWeixin extends CDWeixin
     
     private static function helpInfo()
     {
-        $text = "\n\n回复 1 查看笑话\n回复 2 查看趣图\n回复 3 查看女神\n回复 0 查看使用帮助\n\n喜欢我们就召唤好友添加'挖段子'或'waduanzi'为好友关注我们吧！";
+        $text = "\n\n回复 1 查看笑话\n回复 2 查看趣图\n回复 3 查看女神\n回复 0 查看帮助\n\n喜欢我们就召唤好友添加'挖段子'或'waduanzi'为好友关注我们吧！";
         return $text;
     }
     
