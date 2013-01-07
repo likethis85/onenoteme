@@ -68,7 +68,8 @@ class WdzWeixin extends CDWeixin
         $cmd = app()->getDb()->createCommand()
             ->select(array('id', 'content'))
             ->from(TABLE_POST)
-            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_DUANZI, ':lastID' => (int)$lastID));
+            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_DUANZI, ':lastID' => (int)$lastID))
+            ->order('id asc');;
         $row = $cmd->queryRow();
         
         if (empty($row['content'])) return ;
@@ -110,7 +111,8 @@ class WdzWeixin extends CDWeixin
         $cmd = app()->getDb()->createCommand()
             ->select(array('id', 'title', 'content', 'thumbnail_pic'))
             ->from(TABLE_POST)
-            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_LENGTU, ':lastID' => (int)$lastID));
+            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_LENGTU, ':lastID' => (int)$lastID))
+            ->order('id asc');;
         $row = $cmd->queryRow();
         
         if (empty($row['content'])) return ;
@@ -160,7 +162,8 @@ class WdzWeixin extends CDWeixin
         $cmd = app()->getDb()->createCommand()
             ->select(array('id', 'title', 'content', 'thumbnail_pic'))
             ->from(TABLE_POST)
-            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_GIRL, ':lastID' => (int)$lastID));
+            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_GIRL, ':lastID' => (int)$lastID))
+            ->order('id asc');
         $row = $cmd->queryRow();
         
         if (empty($row['content'])) return ;

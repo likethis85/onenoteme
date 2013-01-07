@@ -1,4 +1,4 @@
-<a class="btn-focus hide" href="<?php echo param('wdz_weixin_account_id');?>">
+<a class="btn-focus hide" href="weixin://profile/<?php echo param('wdz_weixin_account_id');?>">
     <div class="avatar"><img class="wx-avatar" src="<?php echo sbu('images/wdz_wxlogo.png');?>" alt="微信LOGO" /></div>
     <div class="wxname"><?php echo param('wdz_weixin_account_name');?></div>
     <div class="wxid">微信号：<?php echo param('wdz_weixin_account_id');?></div>
