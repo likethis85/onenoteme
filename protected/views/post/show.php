@@ -57,7 +57,7 @@
             <div class="save-caption-loader hide"></div>
         </form>
         <div id="caption-error" class="content-block hide"></div>
-        <div id="comments">
+        <div id="comments" class="bottom15px">
         <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'pages'=>$pages));?>
         </div>
         <div class="content-block cd-border">
