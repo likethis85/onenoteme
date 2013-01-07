@@ -48,6 +48,11 @@ class WdzWeixin extends CDWeixin
         $this->nextGirl($data);
     }
     
+    private function method4($data)
+    {
+        $this->nextVideo($data);
+    }
+    
     private function method0()
     {
         $text = '您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，与大家一起分享哟～' . self::helpInfo();
@@ -141,7 +146,7 @@ class WdzWeixin extends CDWeixin
         $posts = array(
             array(
                 'Title' => $text,
-                'Discription' => mb_strimwidth($row['content'], 0, 150),
+                'Discription' => mb_strimwidth($row['content'], 0, 150, '...', app()->charset),
                 'PicUrl' => $row['bmiddle_pic'],
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
             )
@@ -193,8 +198,60 @@ class WdzWeixin extends CDWeixin
         $posts = array(
             array(
                 'Title' => $text,
-                'Discription' => mb_strimwidth($row['content'], 0, 150),
+                'Discription' => mb_strimwidth($row['content'], 0, 150, '...', app()->charset),
                 'PicUrl' => $row['bmiddle_pic'],
+                'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
+            )
+        );
+        $xml = $this->outputNews($text, $posts);
+        header('Content-Type: application/xml');
+        echo $xml;
+    }
+    
+    private function nextVideo($data)
+    {
+        $wxid = $data->FromUserName;
+        $lastID = app()->getDb()->createCommand()
+            ->select('last_video_pid')
+            ->from(TABLE_USER_WEIXIN)
+            ->where('wx_token = :wxid', array(':wxid'=>$wxid))
+            ->queryScalar();
+        
+        $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_VIDEO, ':lastID' => (int)$lastID);
+        $cmd = app()->getDb()->createCommand()
+            ->select(array('id', 'title', 'content', 'bmiddle_pic'))
+            ->from(TABLE_POST)
+            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), $params)
+            ->order('id asc');
+        $row = $cmd->queryRow();
+        
+        if (empty($row['content'])) return ;
+        
+        if ($lastID === false) {
+            $columns = array(
+                'wx_token' => $wxid,
+                'create_time' => time(),
+                'last_time' => time(),
+                'last_video_pid' => 0,
+            );
+            app()->getDb()->createCommand()
+                ->insert(TABLE_USER_WEIXIN, $columns);
+        }
+        else {
+            $columns = array(
+                'last_time' => time(),
+                'last_video_pid' => (int)$row['id'],
+            );
+            app()->getDb()->createCommand()
+                ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
+        }
+        
+        $text = h($row['title']);
+        $posts = array(
+            array(
+                'Title' => $text,
+                'Discription' => mb_strimwidth($row['content'], 0, 150, '...', app()->charset),
+                'PicUrl' => '',
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
             )
         );
