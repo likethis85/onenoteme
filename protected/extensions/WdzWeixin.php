@@ -10,7 +10,7 @@ class WdzWeixin extends CDWeixin
             $method = 'method' . $input;
             $result = false;
             if (method_exists($this, $method)) {
-                $result = call_user_func(array($this, $method), $input);
+                $result = call_user_func(array($this, $method), $data);
                 if ($result === false)
                     self::error();
             }
@@ -33,19 +33,19 @@ class WdzWeixin extends CDWeixin
 //         file_put_contents(app()->runtimePath . '/wx2.txt', $log);
     }
     
-    private function method1($input)
+    private function method1($data)
     {
-        $this->nextJoke($input);
+        $this->nextJoke($data);
     }
     
-    private function method2($input)
+    private function method2($data)
     {
-        $this->nextLengtu($input);
+        $this->nextLengtu($data);
     }
     
-    private function method3($input)
+    private function method3($data)
     {
-        $this->nextGirl($input);
+        $this->nextGirl($data);
     }
     
     private function method0()
