@@ -39,6 +39,7 @@ class DefaultController extends MobileController
 	private static function fetchLatestPosts()
 	{
 	    $criteria = new CDbCriteria();
+	    $criteria->addCondition('t.channel_id != ' . CHANNEL_VIDEO);
 	    $criteria->order = 't.istop desc, t.create_time desc';
 	    $criteria->limit = param('mobile_post_list_page_count');
 	    $criteria->scopes = array('published');
