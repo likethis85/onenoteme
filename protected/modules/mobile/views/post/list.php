@@ -1,3 +1,4 @@
+<?php $this->widget('MobileChannelNavbar');?>
 <?php foreach ($models as $model):?>
 <dl class="post-item clearfix">
     <dt class="beta-title clearfix">
