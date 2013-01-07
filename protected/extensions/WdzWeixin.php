@@ -108,10 +108,11 @@ class WdzWeixin extends CDWeixin
             ->where('wx_token = :wxid', array(':wxid'=>$wxid))
             ->queryScalar();
         
+        $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_LENGTU, ':lastID' => (int)$lastID);
         $cmd = app()->getDb()->createCommand()
             ->select(array('id', 'title', 'content', 'thumbnail_pic'))
             ->from(TABLE_POST)
-            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_LENGTU, ':lastID' => (int)$lastID))
+            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), $params)
             ->order('id asc');;
         $row = $cmd->queryRow();
         
@@ -159,10 +160,11 @@ class WdzWeixin extends CDWeixin
             ->where('wx_token = :wxid', array(':wxid'=>$wxid))
             ->queryScalar();
         
+        $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_GIRL, ':lastID' => (int)$lastID);
         $cmd = app()->getDb()->createCommand()
             ->select(array('id', 'title', 'content', 'thumbnail_pic'))
             ->from(TABLE_POST)
-            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_GIRL, ':lastID' => (int)$lastID))
+            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), $params)
             ->order('id asc');
         $row = $cmd->queryRow();
         
