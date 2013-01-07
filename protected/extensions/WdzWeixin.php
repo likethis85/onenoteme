@@ -141,7 +141,7 @@ class WdzWeixin extends CDWeixin
         $posts = array(
             array(
                 'Title' => $text,
-                'Discription' => mb_strimwidth($row['content'], 0, 100),
+                'Discription' => mb_strimwidth($row['content'], 0, 150),
                 'PicUrl' => $row['bmiddle_pic'],
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
             )
@@ -193,7 +193,7 @@ class WdzWeixin extends CDWeixin
         $posts = array(
             array(
                 'Title' => $text,
-                'Discription' => mb_strimwidth($row['content'], 0, 100),
+                'Discription' => mb_strimwidth($row['content'], 0, 150),
                 'PicUrl' => $row['bmiddle_pic'],
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
             )
