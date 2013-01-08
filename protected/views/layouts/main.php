@@ -49,7 +49,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 <div class="cd-wrapper cd-main">
     <div class="alert alert-block alert-success alert-sitetip">
         挖段子微信公众账号全面升级，笑话、趣图、女神都可以查看啦！<br />
-        使用微信扫描首页侧边栏上的<a href="<?php echo aurl('images/qrcode_wx.jpg');?>" target="_blank">二维码或直接使用微信添加“挖段子”或“waduanzi”为好友即可使用，方便快捷。</a><br />
+        使用微信扫描首页侧边栏上的<a href="<?php echo sbu('images/qrcode_wx.jpg');?>" target="_blank">二维码</a>或直接使用微信添加“挖段子”或“waduanzi”为好友即可使用，方便快捷。<br />
         回复 1 查看笑话；回复 2 查看趣图；回复 3 查看女神；回复 0 查看使用帮助。
     </div>
 	<?php echo $content;?>
