@@ -151,6 +151,7 @@ class WdzWeixin extends CDWeixin
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
             )
         );
+        $posts = array_merge($posts, self::advert());
         $xml = $this->outputNews($text, $posts);
         header('Content-Type: application/xml');
         echo $xml;
@@ -272,6 +273,18 @@ class WdzWeixin extends CDWeixin
         $xml = $this->outputText($text);
         header('Content-Type: application/xml');
         echo $xml;
+    }
+
+    private static function advert()
+    {
+        return array(
+            array(
+                'Title' => '天猫年货大街',
+                'Discription' => '春节前，天猫年货最后一拨啦，干完这一票，风光过大年！',
+                'PicUrl' => 'http://img.club.alimama.cn/attachments/Day_130107/158_468629_4a7aee4323be8af.jpg?76',
+                'Url' => 'http://t.cn/zj37mMZ',
+            )
+        );
     }
 }
 
