@@ -59,6 +59,7 @@ return array(
 		    'queryCachingDuration' => 60,
         ),
         'cache' => array(
+            'serializer' => array('igbinary_serialize', 'igbinary_unserialize'),
             'class'=>'CMemCache',
             'useMemcached' => true,
             'servers'=>array(
@@ -66,6 +67,7 @@ return array(
             ),
         ),
         'fcache' => array(
+            'serializer' => array('igbinary_serialize', 'igbinary_unserialize'),
             'class' => 'CFileCache',
 		    'directoryLevel' => 2,
         ),
