@@ -204,6 +204,7 @@ class WdzWeixin extends CDWeixin
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
             )
         );
+        $posts = array_merge($posts, self::advert());
         $xml = $this->outputNews($text, $posts);
         header('Content-Type: application/xml');
         echo $xml;
@@ -279,7 +280,7 @@ class WdzWeixin extends CDWeixin
     {
         return array(
             array(
-                'Title' => '天猫年货大街！春节前，天猫年货最后一拨啦，干完这一票，风光过大年！',
+                'Title' => '天猫年货大街！春节前，天猫年货最后一拨啦！',
                 'Discription' => '春节前，天猫年货最后一拨啦，干完这一票，风光过大年！',
                 'PicUrl' => 'http://t2.qpic.cn/mblogpic/ef659973621af6747cf2/160',
                 'Url' => 'http://t.cn/zj37mMZ',
