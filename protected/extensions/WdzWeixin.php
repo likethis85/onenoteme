@@ -279,9 +279,9 @@ class WdzWeixin extends CDWeixin
     {
         return array(
             array(
-                'Title' => '天猫年货大街',
+                'Title' => '天猫年货大街！春节前，天猫年货最后一拨啦，干完这一票，风光过大年！',
                 'Discription' => '春节前，天猫年货最后一拨啦，干完这一票，风光过大年！',
-                'PicUrl' => 'http://img.club.alimama.cn/attachments/Day_130107/158_468629_4a7aee4323be8af.jpg?76',
+                'PicUrl' => 'http://t2.qpic.cn/mblogpic/ef659973621af6747cf2/160',
                 'Url' => 'http://t.cn/zj37mMZ',
             )
         );
