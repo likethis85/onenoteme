@@ -13,8 +13,8 @@
     <div id="beta-post-content">
         <?php
             echo $post->filterContent;
-            if ($post->channel_id != CHANNEL_VIDEO && $post->thumbnail)
-                echo image($post->thumbnail, $post->title, array('class'=>'thumbnail'));
+            if ($post->channel_id != CHANNEL_VIDEO && $post->bmiddlePic)
+                echo image($post->bmiddlePic, $post->title, array('class'=>'bmiddle'));
             elseif ($post->channel_id == CHANNEL_VIDEO && $post->videoHtml)
                 echo $post->videoHtml;
         ?>
