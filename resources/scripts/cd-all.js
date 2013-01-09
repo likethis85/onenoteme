@@ -343,7 +343,16 @@ Waduanzi.quickLogin = function(url, data, success, fail){
 $(function(){
 	Waduanzi.fixedAdBlock();
 	$('#small-wxqrcode').hover(function(){
-		$('.wx-help').toggle();
+		var tthis = $(this);
+		var pos = tthis.position();
+		var top = pos.top + tthis.height();
+		console.log(pos.top);
+		console.log(top);
+		console.log(tthis.height());
+		var left = pos.left + tthis.width() - $('#big-wxqrcode').width();
+		$('#big-wxqrcode').css('left', left).show();
+	}, function(){
+		$('#big-wxqrcode').hide();
 	});
 });
 

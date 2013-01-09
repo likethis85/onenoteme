@@ -68,8 +68,8 @@ class ChannelController extends Controller
         $count = ($s == POST_LIST_STYLE_GRID) ? param('grid_post_count_page') : param('lengtu_count_page');
         $data = $this->fetchChannelPosts(CHANNEL_LENGTU, $count);
         $data['list_view'] = (($s == POST_LIST_STYLE_LINE)) ? 'line_list' : 'grid_list';
-        $view = 'lengtu_list';
-//         $view = $view = (($s == POST_LIST_STYLE_LINE)) ? 'lengtu_list' : '/post/mixed_list';
+//         $view = 'lengtu_list';
+        $view = $view = (($s == POST_LIST_STYLE_LINE)) ? 'lengtu_list' : '/post/mixed_list';
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
         else
@@ -87,8 +87,8 @@ class ChannelController extends Controller
         $count = ($s == POST_LIST_STYLE_GRID) ? param('grid_post_count_page') : param('girl_count_page');
         $data = $this->fetchChannelPosts(CHANNEL_GIRL, $count);
         $data['list_view'] = (($s == POST_LIST_STYLE_LINE)) ? 'line_list' : 'grid_list';
-        $view = 'girl_list';
-//         $view = $view = (($s == POST_LIST_STYLE_LINE)) ? 'girl_list' : '/post/mixed_list';
+//         $view = 'girl_list';
+        $view = $view = (($s == POST_LIST_STYLE_LINE)) ? 'girl_list' : '/post/mixed_list';
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
         else

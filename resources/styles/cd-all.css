@@ -906,7 +906,7 @@ a:hover {color:#330000; text-decoration:none;}
 .ad-block {text-align:center;}
 .ad-block.fixed {position:fixed; top:73px; z-index:99;}
 .cd-border {border:1px solid #DFDFDF;}
-.cd-main {margin-top:73px; padding-top:15px; position:relative;}
+.cd-main {margin-top:88px;}
 
 /* container */
 .cd-container {width:640px; overflow:hidden;}
@@ -936,6 +936,7 @@ a:hover {color:#330000; text-decoration:none;}
 
 /* header */
 .cd-header {position:fixed; top:27px; z-index:999; margin-bottom:15px; height:45px; background-color:#545652; width:100%; overflow:hidden; border-bottom:1px solid black;}
+.cd-header ul {list-style:none;}
 .cd-header .channel-nav {margin:0 0 0 30px; padding:0; list-style:none; height:45px; overflow:hidden;}
 .cd-header .channel-nav li {list-style:none; float:left; color:#CFCFCF; height:45px; line-height:45px; margin:auto 3px;}
 .cd-header .channel-nav li a {display:block; color:#E0E0E0; padding:0 10px; font-size:18px; font-family:"微软雅黑";}
@@ -951,8 +952,8 @@ a:hover {color:#330000; text-decoration:none;}
 .cd-footer a:link, .cd-footer a:visited {color:#AFAFAF;}
 .cd-footer a:hover {color:#EFEFEF;}
 
-.alert-sitetip {line-height:24px; font-size:14px; padding:10px 20px; position:absolute; top:1px; z-index:999; width:100%;}
-
+.alert-sitetip {line-height:24px; font-size:14px; padding:10px 20px;}
+#big-wxqrcode {position:fixed; top:73px; width:300px; z-index:999; display:none;}
 
 @CHARSET "UTF-8";
 
@@ -1206,7 +1207,7 @@ a:hover .social-widget-content {color:#666666;}
 .quick-create .quick-kind .music {background-position:0 -100px;}
 
 /* post grid list */
-.post-grid-list .post-item {float:left; margin:4px; overflow:hidden; position:relative; z-index:1; width:144px; height:144px; background-color:#181817; line-height:0;}
+.post-grid-list .post-item {float:left; margin:4px; overflow:hidden; position:relative; z-index:1; width:144px; height:144px; background-color:#EFEFEF; line-height:0;}
 .post-grid-list .post-item img {width:138px; height:138px; border:3px solid #444442;}
 .post-grid-list .post-item a:hover img {border-color:#C29F37;}
 .post-grid-list .post-item a:visited img {border-color:#181817;}

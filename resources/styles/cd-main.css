@@ -250,7 +250,7 @@ a:hover .social-widget-content {color:#666666;}
 .quick-create .quick-kind .music {background-position:0 -100px;}
 
 /* post grid list */
-.post-grid-list .post-item {float:left; margin:4px; overflow:hidden; position:relative; z-index:1; width:144px; height:144px; background-color:#181817; line-height:0;}
+.post-grid-list .post-item {float:left; margin:4px; overflow:hidden; position:relative; z-index:1; width:144px; height:144px; background-color:#EFEFEF; line-height:0;}
 .post-grid-list .post-item img {width:138px; height:138px; border:3px solid #444442;}
 .post-grid-list .post-item a:hover img {border-color:#C29F37;}
 .post-grid-list .post-item a:visited img {border-color:#181817;}
