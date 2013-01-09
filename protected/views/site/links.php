@@ -41,6 +41,7 @@
             <li><a href="http://fangcaoba.com"/ target="_blank">美女吧</a></li>
             <li><a href="http://www.weiphp.com/" target="_blank">微屁网</a></li>
             <li><a href="http://www.nani.cc/" target="_blank">纳尼网</a></li>
+            <li><a href="http://www.chinaz/" target="_blank">站长之家</a></li>
 		</ul>
 	</div>
 </div>
