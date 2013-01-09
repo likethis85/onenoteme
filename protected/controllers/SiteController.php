@@ -37,12 +37,12 @@ class SiteController extends Controller
         return false;
     }
     
-    public function actionIndex($page = 1, $s = POST_LIST_STYLE_GRID)
+    public function actionIndex($page = 1, $s = POST_LIST_STYLE_LINE)
     {
         $this->autoSwitchMobile(CDBase::mobileHomeUrl());
         
         $s = strip_tags(trim($s));
-        $limit = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('grid_post_count_page');
+        $limit = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('line_post_count_page');
         
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
@@ -69,7 +69,7 @@ class SiteController extends Controller
         
         $this->channel = 'home';
         if (request()->getIsAjaxRequest()) {
-            $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : '/post/grid_list';
+            $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : '/post/line_list';
             $this->renderPartial($view, array(
                 'models' => $models,
                 'pages' => $pages,

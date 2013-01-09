@@ -22,7 +22,7 @@ class ChannelController extends Controller
         );
     }
     
-    public function actionJoke($page = 1, $s = POST_LIST_STYLE_GRID)
+    public function actionJoke($page = 1, $s = POST_LIST_STYLE_LINE)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_DUANZI)), null, array('title'=>app()->name . ' » 挖笑话 Feed'));
         $this->pageTitle = '挖笑话 - 最冷笑话精选，每天分享笑话N枚，你的贴身开心果';
@@ -39,7 +39,7 @@ class ChannelController extends Controller
             $this->render($view, $data);
     }
     
-    public function actionDuanzi($page = 1, $s = POST_LIST_STYLE_GRID)
+    public function actionDuanzi($page = 1, $s = POST_LIST_STYLE_LINE)
     {
         // 以后会删除此action
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_DUANZI)), null, array('title'=>app()->name . ' » 挖笑话 Feed'));
@@ -57,7 +57,7 @@ class ChannelController extends Controller
             $this->render($view, $data);
     }
     
-    public function actionLengtu($page = 1, $s = POST_LIST_STYLE_GRID)
+    public function actionLengtu($page = 1, $s = POST_LIST_STYLE_LINE)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_LENGTU)), null, array('title'=>app()->name . ' » 挖冷图 Feed'));
         $this->pageTitle = '挖趣图 - 最搞笑的，最好玩的，最内涵的图片精选';
@@ -65,16 +65,18 @@ class ChannelController extends Controller
         $this->setKeywords('挖趣图,搞笑图片,内涵图,邪恶图片,色色图,暴走漫画,微漫画,4格漫画,8格漫画,搞笑漫画,内涵漫画,邪恶漫画,疯狂恶搞,爆笑童趣,雷人囧事,动画萌图,狗狗萌图,猫咪萌图,喵星人萌图,汪星人萌图');
         
         $this->channel = CHANNEL_LENGTU;
-        $count = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('lengtu_count_page');
+        $count = ($s == POST_LIST_STYLE_GRID) ? param('grid_post_count_page') : param('lengtu_count_page');
         $data = $this->fetchChannelPosts(CHANNEL_LENGTU, $count);
-        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'lengtu_list';
+        $data['list_view'] = (($s == POST_LIST_STYLE_LINE)) ? 'line_list' : 'grid_list';
+//         $view = 'lengtu_list';
+        $view = $view = (($s == POST_LIST_STYLE_LINE)) ? 'lengtu_list' : '/post/mixed_list';
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
         else
             $this->render($view, $data);
     }
     
-    public function actionGirl($page = 1, $s = POST_LIST_STYLE_GRID)
+    public function actionGirl($page = 1, $s = POST_LIST_STYLE_LINE)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_GIRL)), null, array('title'=>app()->name . ' » 挖福利 Feed'));
         $this->pageTitle = '挖福利 - 最新最全的女明星写真、清纯校花、美女模特、正妹性感自拍';
@@ -82,9 +84,11 @@ class ChannelController extends Controller
         $this->setKeywords('阳光正妹,清纯学生,网友自拍,香港模特,台湾正妹,美女自拍,淘女郎,微女郎,美女写真,美女私房照,校花,气质美女,清纯美女,性感车模,比基尼,足球宝贝');
         
         $this->channel = CHANNEL_GIRL;
-        $count = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('girl_count_page');
+        $count = ($s == POST_LIST_STYLE_GRID) ? param('grid_post_count_page') : param('girl_count_page');
         $data = $this->fetchChannelPosts(CHANNEL_GIRL, $count);
-        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'girl_list';
+        $data['list_view'] = (($s == POST_LIST_STYLE_LINE)) ? 'line_list' : 'grid_list';
+//         $view = 'girl_list';
+        $view = $view = (($s == POST_LIST_STYLE_LINE)) ? 'girl_list' : '/post/mixed_list';
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
         else
@@ -109,7 +113,7 @@ class ChannelController extends Controller
         $channelid = (int)$channelid;
         $limit = (int)$limit;
         if ($limit === 0)
-            $limit = param('grid_post_count_page');
+            $limit = param('line_post_count_page');
         
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('channel_id'=>$channelid, 'state'=>POST_STATE_ENABLED));

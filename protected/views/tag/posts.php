@@ -1,6 +1,6 @@
 <div class="fleft cd-container">
     <h2 class="cd-caption">与标签“<?php echo $fallTitle;?>”相关的内容</h2>
-    <?php $this->renderPartial('/post/grid_list', array('models'=>$models, 'pages'=>$pages));?>
+    <?php $this->renderPartial('/post/line_list', array('models'=>$models, 'pages'=>$pages));?>
 </div>
 <div class="fright cd-sidebar">
     <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_first'));?>

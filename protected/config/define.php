@@ -49,6 +49,7 @@ define('ADCODE_STATE_ENABLED', 1);
 
 
 
+define('POST_LIST_STYLE_LINE', 'line');
 define('POST_LIST_STYLE_GRID', 'grid');
 define('POST_LIST_STYLE_WATERFALL', 'fall');
 

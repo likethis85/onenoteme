@@ -281,6 +281,9 @@ Waduanzi.quickLogin = function(url, data, success, fail){
 
 $(function(){
 	Waduanzi.fixedAdBlock();
+	$('#small-wxqrcode').hover(function(){
+		$('.wx-help').toggle();
+	});
 });
 
 

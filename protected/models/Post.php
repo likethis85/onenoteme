@@ -216,9 +216,9 @@ class Post extends CActiveRecord
 	    return mb_strimwidth($this->content, 0, $len, '...', app()->charset);
 	}
 	
-	public function getFilterSummary()
+	public function getFilterSummary($len = 300)
 	{
-	    return nl2br(strip_tags($this->summary, param('summary_html_tags')));
+	    return nl2br(strip_tags($this->getSummary($len), param('summary_html_tags')));
 	}
 	
 	public function getFilterContent()
@@ -364,6 +364,19 @@ class Post extends CActiveRecord
             return $this->bmiddle_pic;
         else
             return '';
+    }
+    
+    public function getThumbnailImage()
+    {
+        $html = '';
+        if ($this->getThumbnail()) {
+            $htmlOptions = array('class'=>'cd-thumbnail');
+            if ($this->thumbnail_width) $htmlOptions['width'] = $this->thumbnail_width;
+            if ($this->thumbnail_height > 0) $htmlOptions['height'] = $this->thumbnail_height;
+            $html = image($this->getThumbnail(), $this->title, $htmlOptions);
+        }
+    
+        return $html;
     }
     
     public function getBmiddleLink($target = '_blank')

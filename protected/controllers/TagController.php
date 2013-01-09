@@ -43,17 +43,17 @@ class TagController extends Controller
         ));
     }
     
-    public function actionArchives($name, $s = POST_LIST_STYLE_GRID)
+    public function actionArchives($name, $s = POST_LIST_STYLE_LINE)
     {
         $this->redirect(url('tag/posts', array('name'=>$name, 's'=>$s)));
     }
     
-    public function actionPosts($name, $s = POST_LIST_STYLE_GRID)
+    public function actionPosts($name, $s = POST_LIST_STYLE_LINE)
     {
         $s = strip_tags(trim($s));
         
         $duration = 120;
-        $limit = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('grid_post_count_page');
+        $limit = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('line_post_count_page');
         
         $name = urldecode($name);
         

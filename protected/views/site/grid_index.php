@@ -3,7 +3,7 @@
 <?php $this->renderPartial('/post/quick_create');?>
 <!-- 快速发表段子 end -->
 
-<?php $this->renderPartial('/post/grid_list', array('models' => $models, 'pages' => $pages));?>
+<?php $this->renderPartial('/post/line_list', array('models' => $models, 'pages' => $pages));?>
 </div>
 <div class="fright cd-sidebar">
     <div class="cdc-block cd-border app-list">

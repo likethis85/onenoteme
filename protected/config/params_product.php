@@ -56,7 +56,8 @@ return array(
     
     'autoLoginDuration' => 3600 * 24 * 7,
     'waterfall_post_count_page' => 20,
-    'grid_post_count_page' => 15,
+    'line_post_count_page' => 15,
+    'grid_post_count_page' => 20,
     'video_count_page' => 10,
     'duanzi_count_page' => 20,
     'lengtu_count_page' => 15,

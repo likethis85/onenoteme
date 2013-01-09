@@ -47,7 +47,7 @@ a:hover {color:#330000; text-decoration:none;}
 .ad-block {text-align:center;}
 .ad-block.fixed {position:fixed; top:73px; z-index:99;}
 .cd-border {border:1px solid #DFDFDF;}
-.cd-main {margin-top:88px;}
+.cd-main {margin-top:73px; padding-top:15px; position:relative;}
 
 /* container */
 .cd-container {width:640px; overflow:hidden;}
@@ -84,11 +84,14 @@ a:hover {color:#330000; text-decoration:none;}
 .cd-header .logo a {line-height:45px; color:#DDDDD1; font-size:28px; font-family:微软雅黑; font-weight:bold; display:block;}
 .cd-header .logo a:hover {color:white; line-height:44px;}
 .cd-header .logo img {height:100%; vertical-align:top;}
+#small-wxqrcode {height:100%; cursor:pointer;}
 
 /* footer */
 .cd-footer {margin-top:20px; font-size:12px; color:#AFAFAF; background:#2B2B2B; padding:7px 0;}
 .cd-footer p {margin:0; line-height:22px;}
 .cd-footer a:link, .cd-footer a:visited {color:#AFAFAF;}
 .cd-footer a:hover {color:#EFEFEF;}
+
+.alert-sitetip {line-height:24px; font-size:14px; padding:10px 20px; position:absolute; top:1px; z-index:999; width:100%;}
 
 
