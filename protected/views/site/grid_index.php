@@ -11,10 +11,12 @@
         <a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank" title="挖段子Andoird应用 最新版本 1.1.0"><img src="<?php echo sbu('images/app_android.png');?>" alt="挖段子Andoird应用" /></a>
         <a href="<?php echo CDBase::mobileHomeUrl();?>" target="_blank" title="挖段子手机版网站"><img src="<?php echo sbu('images/mobile_site.png');?>" alt="挖段子手机版网站" /></a>
     </div>
+    <!--
     <div class="cdc-block cd-border cd-qrcode">
         <h4>微信扫描下图订阅挖段子，每日精品段子推送</h4>
         <img src="<?php echo sbu('images/qrcode_wx.jpg');?>" class="weixin-qrcode" alt="挖段子微信二维码"  title="用微信扫描二维码添加挖段子公众号" />
     </div>
+    -->
     <div class="panel panel10 bottom15px">
         <ul class="social-widget-list">
             <li class="social-widget-item first">
