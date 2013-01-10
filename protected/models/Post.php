@@ -424,8 +424,8 @@ class Post extends CActiveRecord
         if (($this->channel_id == CHANNEL_GIRL || $this->channel_id == CHANNEL_LENGTU)
             && ($this->bmiddle_height > IMAGE_THUMBNAIL_HEIGHT) && ($this->bmiddle_height > IMAGE_MAX_HEIGHT_FOLDING) && $this->getBmiddlePic())
             return true;
-        
-        return false;
+        else
+            return false;
     }
     
     public function getLineCount()
