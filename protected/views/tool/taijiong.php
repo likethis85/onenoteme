@@ -61,6 +61,7 @@ var bdShare_config_imgshare = {
 	,"pos":"top"
 	,"color":"white"
 	,"list":["qzone","tsina","tqq","renren","t163"]
+	,"srcSet":{"tsina":"<?php echo WEIBO_APP_KEY;?>","tqq":"<?php echo QQT_APP_KEY;?>"}
 	,"uid":"541407"
 };
 document.getElementById("bdimgshare_shell").src="http://bdimg.share.baidu.com/static/js/imgshare_shell.js?cdnversion=" + Math.ceil(new Date()/3600000);
@@ -97,7 +98,7 @@ $(function(){
 				$('#user-pic').attr('src', data.url);
 				picurl = data.url;
 				$('#result-tip').html('超贱图片已经出生啦，赶紧分享给好友吧!');
-				document.title = '#王宝强超贱表情#' + text1 + '，' + text2 + '，' + text3;
+				document.title = '#王宝强超贱表情#' + text1 + '，' + text2 + '，' + text3 + '#王宝强超贱表情制作器#';
 			}
 			else
 				$('#result-tip').html(data.error);
