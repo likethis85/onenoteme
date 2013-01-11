@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:wb=“http://open.weibo.com/wb”>
 <head>
 <title>王宝强《泰囧》超贱表情制作器</title>
 <meta name="keywords" content="王宝强超贱表情制作器,超贱表情制作器,王宝强《泰囧》超贱表情,王宝强超贱表情,超贱表情,王宝强神ps,王宝强ps" />
@@ -23,6 +23,7 @@ form.taijiong textarea {height:50px; width:280px;}
 <script type="text/javascript">
 var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
 </script>
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 <div class="container-fluid cdc-container">
@@ -39,6 +40,9 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
                 <div class="clear"></div>
                 <input type="button" class="btn btn-primary btn-block btn-large btn-make" value="贱一把" />
                 <div class="alert alert-error" id="result-tip">请输入 3 段台词</div>
+                <div>
+                    <wb:follow-button uid="1639121454" type="red_3" width="100%" height="24" ></wb:follow-button>
+                </div>
             </fieldset>
         <?php echo CHtml::endForm();?>
     </div>
