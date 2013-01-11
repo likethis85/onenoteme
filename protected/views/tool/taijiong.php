@@ -2,6 +2,8 @@
 <html>
 <head>
 <title>王宝强《泰囧》超贱表情制作器</title>
+<meta name="keywords" content="王宝强超贱表情制作器,超贱表情制作器,王宝强《泰囧》超贱表情,王宝强超贱表情,超贱表情,王宝强神ps,王宝强ps" />
+<meta name="description" content="王宝强《泰囧》超贱表情制作器，轻轻松松制作王宝强超贱表情。" />
 <link rel="stylesheet" type="text/css" href="<?php echo sbu('libs/bootstrap/css/bootstrap.min.css');?>" />
 <script type="text/javascript" src="<?php echo sbu('libs/jquery.min.js');?>"></script>
 <style type="text/css">
