@@ -28,7 +28,7 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
         <?php echo CHtml::beginForm(aurl('tool/makepic'), 'post', array('class'=>'taijiong'));?>
             <fieldset>
                 <legend>王宝强《泰囧》超贱表情制作器</legend>
-                <label>第&nbsp;2&nbsp;段台词</label>
+                <label>第&nbsp;1&nbsp;段台词</label>
                 <textarea name="text1"></textarea>
                 <label>第&nbsp;2&nbsp;段台词</label>
                 <textarea class="span5" name="text2"></textarea>
