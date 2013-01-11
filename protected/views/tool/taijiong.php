@@ -19,6 +19,7 @@
 form.taijiong {margin:0 auto;}
 form.taijiong textarea {height:50px; width:280px;}
 #result-tip {color:red; margin-top:15px;}
+.btn-follow {margin-top:30px;}
 </style>
 <script type="text/javascript">
 var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
@@ -40,7 +41,7 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
                 <div class="clear"></div>
                 <input type="button" class="btn btn-primary btn-block btn-large btn-make" value="贱一把" />
                 <div class="alert alert-error" id="result-tip">请输入 3 段台词</div>
-                <div>
+                <div class="btn-follow">
                     <wb:follow-button uid="1639121454" type="red_3" width="100%" height="24" ></wb:follow-button>
                     <iframe src="http://follow.v.t.qq.com/index.php?c=follow&a=quick&name=cdcchen&style=4&t=1339123981202&f=1" frameborder="0" scrolling="auto" width="182" height="27" marginwidth="0" marginheight="0" allowtransparency="true"></iframe>
                 </div>
