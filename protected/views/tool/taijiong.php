@@ -42,6 +42,7 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
                 <div class="alert alert-error" id="result-tip">请输入 3 段台词</div>
                 <div>
                     <wb:follow-button uid="1639121454" type="red_3" width="100%" height="24" ></wb:follow-button>
+                    <iframe src="http://follow.v.t.qq.com/index.php?c=follow&a=quick&name=cdcchen&style=4&t=1339123981202&f=1" frameborder="0" scrolling="auto" width="182" height="27" marginwidth="0" marginheight="0" allowtransparency="true"></iframe>
                 </div>
             </fieldset>
         <?php echo CHtml::endForm();?>
