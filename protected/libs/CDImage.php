@@ -337,7 +337,7 @@ class CDImage
     public function outputPng($quality = 9, $filters = 0)
     {
         header('Content-Type: ' . image_type_to_mime_type(IMAGETYPE_PNG));
-        imagepng($this->_image, $quality, $filters);
+        imagepng($this->_image, null, $quality, $filters);
     }
     
     /**
@@ -346,7 +346,7 @@ class CDImage
     public function outputWbmp($foreground  = 0)
     {
         header('Content-Type: ' . image_type_to_mime_type(IMAGETYPE_WBMP));
-        imagewbmp($this->_image, $foreground);
+        imagewbmp($this->_image, null, $foreground);
     }
     
     /**
@@ -355,7 +355,7 @@ class CDImage
     public function outputXbm($foreground  = 0)
     {
         header('Content-Type: ' . image_type_to_mime_type(IMAGETYPE_XBM));
-        imagewxbm($this->_image, $foreground);
+        imagewxbm($this->_image, null, $foreground);
     }
     
     public function outputRaw()
