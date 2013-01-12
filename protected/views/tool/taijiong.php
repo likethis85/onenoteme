@@ -75,7 +75,7 @@ var bdShare_config_imgshare = {
 };
 document.getElementById("bdimgshare_shell").src="http://bdimg.share.baidu.com/static/js/imgshare_shell.js?cdnversion=" + Math.ceil(new Date()/3600000);
 </script>
-
+<?php echo param('tongji_code');?>
 </body>
 </html>
 
