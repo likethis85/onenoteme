@@ -738,6 +738,19 @@ class CDImage
     {
         return $this->_author;
     }
+
+    public static function isGifAnimate($file, $isdata = false)
+    {
+        if ($isdata)
+            $data = $file;
+        else {
+            $fp = fopen($file, 'rb');
+            $data = fread($fp, 1024);
+            fclose($fp);
+        }
+        $p = chr(0x21).chr(0xff).chr(0x0b).chr(0x4e).chr(0x45).chr(0x54).chr(0x53).chr(0x43).chr(0x41).chr(0x50).chr(0x45).chr(0x32).chr(0x2e).chr(0x30);
+        return (bool)preg_match("~${p}~", $data);
+    }
     
     /**
      * 析构函数
