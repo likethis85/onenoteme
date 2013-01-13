@@ -58,12 +58,13 @@ class Comment extends CActiveRecord
 	 */
 	public function rules()
 	{
+	    $commentMinLen = param('comment_min_length') ? param('comment_min_length') : 2;
 		return array(
 	        array('content', 'required'),
 			array('state, post_id, user_id, create_time, up_score, down_score', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
 			array('create_ip', 'length', 'max'=>15),
-			array('content', 'length', 'min'=>2, 'max'=>2000),
+			array('content', 'length', 'min'=>$commentMinLen, 'max'=>2000),
 			array('content', 'safe'),
 		);
 	}

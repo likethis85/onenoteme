@@ -63,6 +63,8 @@ return array(
     'lengtu_count_page' => 20,
     'girl_count_page' => 20,
     'commentCountOfPage' => 20,
+    // 评论最少字符
+    'comment_min_length' => 2,
 
     'user_required_email_verfiy' => 0,
     'user_required_admin_verfiy' => 0,
