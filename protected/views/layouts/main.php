@@ -96,7 +96,7 @@ cs()->registerMetaTag('text/html; charset=utf-8', null, 'content-type')
 YII_DEBUG || cs()->scriptMap = array(
     'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=2013014001'),
     'cd-basic.css' => sbu('styles/cd-all.min.css?t=2013014001'),
-    'cd-main.css' => sbu('styles/cd-all.min.css?t=2013011001'),
+    'cd-main.css' => sbu('styles/cd-all.min.css?t=2013014001'),
     'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=2013011001'),
     'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=2013011001'),
     'jquery.infinitescroll.min.js' => sbu('scripts/cd-all.min.js?t=2013011001'),
