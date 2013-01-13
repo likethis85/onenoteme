@@ -78,8 +78,8 @@ class ChannelController extends Controller
     
     public function actionGirl($page = 1, $s = POST_LIST_STYLE_LINE)
     {
-        cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_GIRL)), null, array('title'=>app()->name . ' » 挖福利 Feed'));
-        $this->pageTitle = '挖福利 - 最新最全的女明星写真、清纯校花、美女模特、正妹性感自拍';
+        cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_GIRL)), null, array('title'=>app()->name . ' » 挖女神 Feed'));
+        $this->pageTitle = '挖女神 - 最新最全的女明星写真、清纯校花、美女模特、正妹性感自拍';
         $this->setDescription($this->pageTitle);
         $this->setKeywords('阳光正妹,清纯学生,网友自拍,香港模特,台湾正妹,美女自拍,淘女郎,微女郎,美女写真,美女私房照,校花,气质美女,清纯美女,性感车模,比基尼,足球宝贝');
         
