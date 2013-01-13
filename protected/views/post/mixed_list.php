@@ -25,9 +25,14 @@
     <div class="clear"></div>
 </div>
 <div class="clear"></div>
+
+<div class="panel-rect panel-pages" id="page-nav">
 <?php if($pages->pageCount > 1):?>
 <div id="page-nav" class="cd-pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
 <?php endif;?>
+</div>
+
+<div id="loading-box"></div>
 <div id="manual-load" class="radius5px hide">查看更多</div>
 
 <script type="text/javascript">
@@ -36,41 +41,46 @@ $(function(){
 	
     var container = $('#waterfall-container');
     container.imagesLoaded(function(){
+    	var itemCount = $('.waterfall-item').length;
+    	var manual = $('#manual-load');
     	container.masonry({
             itemSelector: '.waterfall-item'
         });
-        var count = 1;
+        
         container.infinitescroll({
+            speed: 0,
         	navSelector: '#page-nav',
         	nextSelector: '#page-nav .next a',
         	itemSelector: '.waterfall-item',
         	animate: false,
         	dataType: 'html',
-        	infid: 0,
         	loading: {
-        		finishedMsg: '已经载入全部内容。',
-        		msgText: '正在载入更多内容。。。',
-        		img: '<?php echo sbu('images/loading.gif');?>'
+            	speed: 0,
+            	selector: $('#loading-box'),
+        		msg: $('<img src="<?php echo sbu('images/loading2.gif');?>" />')
         	}
         },
-        function(newElements) {
+        function(newElements, opts) {
+        	var tthis = $(this);
             var newElems = $(newElements).css({opacity:0});
             newElems.imagesLoaded(function(){
                 newElems.animate({opacity:1});
-                container.masonry('appended', newElems, true);
-
-                if (count >= 2) {
-                	$(window).unbind('.infscr');
+                tthis.masonry('appended', newElems, true);
+                var page = opts.state.currPage;
+                if (page == 3) {
+                	tthis.infinitescroll('pause');
                 	$(document).on('click', '#manual-load', function(event){
-                        container.infinitescroll('retrieve');
+                        tthis.infinitescroll('retrieve');
                         return false;
               	    });
                 	$('#manual-load').show();
-                    count = 1;
                 }
-                else
-                    count++;
             });
+            if (newElements.length < itemCount) {
+        		$(document).off('click', '#manual-load');
+    			tthis.infinitescroll('unbind');
+    			manual.html('没有更多内容啦！');
+    		}
         });
     });
     $(document).ajaxError(function(event, xhr, opt) {

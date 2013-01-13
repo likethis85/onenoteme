@@ -67,7 +67,7 @@ class ChannelController extends Controller
         $this->channel = CHANNEL_LENGTU;
         $count = ($s == POST_LIST_STYLE_GRID) ? param('grid_post_count_page') : param('lengtu_count_page');
         $data = $this->fetchChannelPosts(CHANNEL_LENGTU, $count);
-sleep(10);
+sleep(1);
         $data['list_view'] = 'line_list';
         if (($s == POST_LIST_STYLE_GRID))
             $data['list_view'] = 'grid_list';

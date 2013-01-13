@@ -43,40 +43,39 @@ $(function(){
 		$('#tip-block').css('top', '-9999px').empty();
 	});
 
-	$.getScript('<?php echo sbu('libs/jquery.infinitescroll.min.js');?>', function(){
-		var manual = $('#manual-load');
-		$('#grid-container').infinitescroll({debug:true,
-        	navSelector: '#page-nav',
-        	nextSelector: '#page-nav .next a',
-        	itemSelector: '.grid-item',
-        	animate: false,
-        	dataType: 'html',
-        	loading: {
-            	speed: 0,
-            	selector: $('#loading-box'),
-            	finishedMsg: '',
-        		msgText: '',
-        		msg: $('<img src="<?php echo sbu('images/loading2.gif');?>" />')
-        	}
-    	}, function(newElements, opts) {
-    		var tthis = $(this);
-    		var page = opts.state.currPage;
-    		if (opts.state.currPage == 2) {
-        		tthis.infinitescroll('pause');
-            	$(document).on('click', '#manual-load', function(event){
-            		tthis.infinitescroll('retrieve');
-                    return false;
-          	    });
-            	manual.show();
-    		}
-    		if (opts.state.isDone) {
-    			tthis.infinitescroll('unbind');
-    			manual.html('没有更多内容啦！');
-    		}
-    	});
+	var itemCount = $('.grid-item').length;
+	var manual = $('#manual-load');
+	$('#grid-container').infinitescroll({
+    	navSelector: '#page-nav',
+    	nextSelector: '#page-nav .next a',
+    	itemSelector: '.grid-item',
+    	animate: false,
+    	dataType: 'html',
+    	loading: {
+        	speed: 0,
+        	selector: $('#loading-box'),
+    		msg: $('<img src="<?php echo sbu('images/loading2.gif');?>" />')
+    	}
+	}, function(newElements, opts) {
+		var tthis = $(this);
+		var page = opts.state.currPage;
+		if (page == 3) {
+    		tthis.infinitescroll('pause');
+        	$(document).on('click', '#manual-load', function(event){
+        		tthis.infinitescroll('retrieve');
+                return false;
+      	    });
+        	manual.show();
+		}
+		if (newElements.length < itemCount) {
+    		console.log('done');
+    		$(document).off('click', '#manual-load');
+			tthis.infinitescroll('unbind');
+			manual.html('没有更多内容啦！');
+		}
 	});
 });
 </script>
 
-<?php //cs()->registerScriptFile(sbu('libs/jquery.infinitescroll.min.js'), CClientScript::POS_END);?>
+<?php cs()->registerScriptFile(sbu('libs/jquery.infinitescroll.min.js'), CClientScript::POS_END);?>
 
