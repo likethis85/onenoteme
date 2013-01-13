@@ -33,7 +33,7 @@
 </div>
 
 <div id="loading-box"></div>
-<div id="manual-load" class="radius5px hide">查看更多</div>
+<div id="manual-load" class="radius5px hide">载入更多内容</div>
 
 <script type="text/javascript">
 $(function(){
