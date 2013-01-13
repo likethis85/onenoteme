@@ -66,16 +66,18 @@ $(function(){
             newElems.imagesLoaded(function(){
                 newElems.animate({opacity:1});
                 tthis.masonry('appended', newElems, true);
-                var page = opts.state.currPage;
-                if (page == 3) {
-                	tthis.infinitescroll('pause');
-                	$(document).on('click', '#manual-load', function(event){
-                        tthis.infinitescroll('retrieve');
-                        return false;
-              	    });
-                	$('#manual-load').show();
-                }
             });
+
+            var page = opts.state.currPage;
+            if (page == 3) {
+            	tthis.infinitescroll('pause');
+            	$(document).on('click', '#manual-load', function(event){
+                    tthis.infinitescroll('retrieve');
+                    return false;
+          	    });
+            	$('#manual-load').show();
+            }
+            
             if (newElements.length < itemCount) {
         		$(document).off('click', '#manual-load');
     			tthis.infinitescroll('unbind');
