@@ -44,6 +44,7 @@ $(function(){
         	navSelector: '#page-nav',
         	nextSelector: '#page-nav .next a',
         	itemSelector: '.waterfall-item',
+        	animate: false,
         	dataType: 'html',
         	infid: 0,
         	loading: {

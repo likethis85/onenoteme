@@ -91,7 +91,7 @@ return array(
             'enableSkin' => true,
         ),
         'urlManager' => array(
-            'urlFormat' => 'path',
+            'urlFormat' => 'get',
 		    'showScriptName' => false,
 //             'cacheID' => 'cache',
             'rules' => array(

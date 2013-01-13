@@ -67,16 +67,20 @@ class ChannelController extends Controller
         $this->channel = CHANNEL_LENGTU;
         $count = ($s == POST_LIST_STYLE_GRID) ? param('grid_post_count_page') : param('lengtu_count_page');
         $data = $this->fetchChannelPosts(CHANNEL_LENGTU, $count);
-        $data['list_view'] = (($s == POST_LIST_STYLE_LINE)) ? 'line_list' : 'grid_list';
-//         $view = 'lengtu_list';
-        $view = $view = (($s == POST_LIST_STYLE_LINE)) ? 'lengtu_list' : '/post/mixed_list';
+sleep(10);
+        $data['list_view'] = 'line_list';
+        if (($s == POST_LIST_STYLE_GRID))
+            $data['list_view'] = 'grid_list';
+        
+        $view = (($s == POST_LIST_STYLE_WATERFALL)) ? '/post/mixed_list' : 'lengtu_list';
+        
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
         else
             $this->render($view, $data);
     }
     
-    public function actionGirl($page = 1, $s = POST_LIST_STYLE_LINE)
+    public function actionGirl($page = 1, $s = POST_LIST_STYLE_GRID)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_GIRL)), null, array('title'=>app()->name . ' » 挖女神 Feed'));
         $this->pageTitle = '挖女神 - 最新最全的女明星写真、清纯校花、美女模特、正妹性感自拍';
@@ -86,9 +90,13 @@ class ChannelController extends Controller
         $this->channel = CHANNEL_GIRL;
         $count = ($s == POST_LIST_STYLE_GRID) ? param('grid_post_count_page') : param('girl_count_page');
         $data = $this->fetchChannelPosts(CHANNEL_GIRL, $count);
-        $data['list_view'] = (($s == POST_LIST_STYLE_LINE)) ? 'line_list' : 'grid_list';
-//         $view = 'girl_list';
-        $view = $view = (($s == POST_LIST_STYLE_LINE)) ? 'girl_list' : '/post/mixed_list';
+        
+        $data['list_view'] = 'line_list';
+        if (($s == POST_LIST_STYLE_GRID))
+            $data['list_view'] = 'grid_list';
+        
+        $view = (($s == POST_LIST_STYLE_WATERFALL)) ? '/post/mixed_list' : 'girl_list';
+        
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
         else
