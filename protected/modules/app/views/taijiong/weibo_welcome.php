@@ -14,7 +14,7 @@ function pageloaded ()
 {
     App.AuthDialog.show({
     	client_id: '<?php echo TAIJIONG_WEIBO_APP_KEY;?>',
-    	redirect_uri: '<?php echo aurl('app/taijiong/weibowindow');?>',
+    	redirect_uri: '<?php echo aurl('app/taijiong/weibowelcome');?>',
     	height: 120
     });
 }
