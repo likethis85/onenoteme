@@ -83,7 +83,7 @@ $(function(){
 				picurl = data.url;
 				$('#result-tip').html('超贱图片已经出生啦，赶紧分享给好友吧!');
 				document.title = '#王宝强超贱表情#' + text1 + '，' + text2 + '，' + text3 + '#王宝强超贱表情制作器#';
-				$('#postweibo').show();
+				$('#postweibo').val('发布到微博').show();
 			}
 			else
 				$('#result-tip').html(data.error);
@@ -109,17 +109,17 @@ $(function(){
 			dataType: 'text',
 			data: {content:content, picurl:picurl},
 			beforeSend: function(){
-				tthis.html('正在发布...');
+				tthis.val('正在发布...');
 			}
 		});
 		jqXhr.done(function(data, textStatus, xhr){
 			if (data != '0')
-    			tthis.html('发布成功！');
+    			tthis.val('发布成功！');
 			else
-				tthis.html('发布出错...');
+				tthis.val('发布出错...');
 		});
 		jqXhr.fail(function(xhr, textStatus, errorThrown){
-			tthis.html('发布出错...');
+			tthis.val('发布出错...');
 		});
 	});
 });
