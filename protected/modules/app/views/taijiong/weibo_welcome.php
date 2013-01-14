@@ -8,21 +8,21 @@
 <style type="text/css">
 body {margin:0; padding:0;}
 </style>
+<script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+function pageloaded ()
+{
+    App.AuthDialog.show({
+    	client_id: '<?php echo TAIJIONG_WEIBO_APP_KEY;?>',
+    	redirect_uri: '<?php echo aurl('app/taijiong/weibowindow');?>',
+    	height: 120
+    });
+}
+</script>
 </head>
-<body>
+<body onload="pageloaded();">
 <div class="cdc-container clearfix">
     <!-- <img src="<?php echo sbu('images/jiong_pic.jpg');?>" id="user-pic" /> -->
 </div>
-<script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" type="text/javascript" charset="utf-8"></script>
-
-<script type="text/javascript">
-window.onload = function(){
-    App.AuthDialog.show({
-    	"client_id": '<?php echo TAIJIONG_WEIBO_APP_KEY;?>',
-    	"redirect_uri": '<?php echo aurl('app/taijiong/weibowindow');?>'
-    });
-};
-</script>
-
 </body>
 </html>
