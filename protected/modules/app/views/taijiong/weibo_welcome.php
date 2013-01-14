@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="utf-8">
-<title>王宝强《泰囧》超贱表情制作器</title>
-<meta name="keywords" content="王宝强超贱表情制作器,超贱表情制作器,王宝强《泰囧》超贱表情,王宝强超贱表情,超贱表情,王宝强神ps,王宝强ps" />
-<meta name="description" content="王宝强《泰囧》超贱表情制作器，轻轻松松制作王宝强超贱表情。" />
-<style type="text/css">
-body {margin:0; padding:0;}
-</style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>未授权时的页面</title>
 <script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 function pageloaded ()
