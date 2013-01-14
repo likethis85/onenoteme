@@ -21,12 +21,14 @@ class TaijiongController extends AppController
         if (!$this->authorized())
             $this->redirect(aurl('app/taijiong/weibowelcome'));
         
-        print_r($_SESSION);
         $this->renderPartial('weibo_window');
     }
 
     private function authorized()
     {
+        if (!empty($_SESSION['oauth2']['user_id']))
+            return true;
+        
         $sdk = Yii::getPathOfAlias('application.libs') . DS . 'saesdk.php';
         if(!empty($_REQUEST['signed_request'])){
             require($sdk);
@@ -36,7 +38,7 @@ class TaijiongController extends AppController
                 die('签名错误!');
             } else {
                 $_SESSION['oauth2'] = $data;
-                return empty($_SESSION['oauth2']['user_id']);
+                return !empty($_SESSION['oauth2']['user_id']);
             }
         }
         return false;
