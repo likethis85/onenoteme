@@ -12,7 +12,7 @@ body {margin:0; padding:0;}
 </head>
 <body>
 <div class="cdc-container clearfix">
-    <img src="<?php echo sbu('images/jiong_pic.jpg');?>" id="user-pic" />
+    <!-- <img src="<?php echo sbu('images/jiong_pic.jpg');?>" id="user-pic" /> -->
 </div>
 <script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" type="text/javascript" charset="utf-8"></script>
 
