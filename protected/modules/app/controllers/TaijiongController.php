@@ -45,6 +45,7 @@ class TaijiongController extends AppController
     
         $picurl = str_replace(param('uploadBaseUrl'), '', $picurl);
         $picfile = fbp($picurl);
+        echo $picfile;
         $url = 'https://upload.api.weibo.com/2/statuses/upload.json';
         $content = mb_substr($model->content, 0, 130, app()->charset) . '...' . ' @挖段子网';
         $data = array(
@@ -63,6 +64,8 @@ class TaijiongController extends AppController
             if ($result['idstr'])
                 $text = $result['idstr'];
         }
+        else
+            $text = $curl->error();
         
         echo $text;
         exit(0);
