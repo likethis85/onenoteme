@@ -81,7 +81,7 @@ $(function(){
 			if (data.errno == 0) {
 				$('#user-pic').attr('src', data.url);
 				picurl = data.url;
-				$('#result-tip').html('超贱图片已经出生啦，赶紧分享给好友吧!');
+				$('#result-tip').html('图片已经出生啦，赶紧分享给好友吧!');
 				document.title = '#王宝强超贱表情#' + text1 + '，' + text2 + '，' + text3 + '#王宝强超贱表情制作器#';
 				$('#postweibo').val('发布到微博').show();
 			}
@@ -114,7 +114,7 @@ $(function(){
 		});
 		jqXhr.done(function(data, textStatus, xhr){
 			if (data.errno == 0)
-    			tthis.val('发布成功！');
+    			tthis.val('发布成功！').fadeOut(2000);
 			else
 				tthis.val('发布出错...');
 		});

@@ -19,9 +19,6 @@ class TaijiongController extends AppController
 
     private function authorized()
     {
-        if (!empty(app()->session['oauth2']['user_id']))
-            return true;
-        
         $sdk = Yii::getPathOfAlias('application.libs') . DS . 'saesdk.php';
         if(!empty($_REQUEST['signed_request'])){
             require($sdk);
@@ -31,7 +28,7 @@ class TaijiongController extends AppController
                 die('签名错误!');
             } else {
                 app()->session['oauth2'] = $data;
-                return !empty(app()->session['oauth2']['user_id']);
+                return !empty($data['user_id']);
             }
         }
         return false;
@@ -68,13 +65,12 @@ class TaijiongController extends AppController
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
             if ($result['idstr'])
-                $data['msg'] = $result['idstr'] . var_export($result, true);
+                $data['msg'] = $result['idstr'];
         }
         else
-            $data['error'] = $curl->error() . $curl->errno();
+            $data['error'] = $curl->error();
         
         $data['errno'] = $curl->errno();
-        $data['debug'] = var_export($params, true);
         echo json_encode($data);
         exit(0);
     }
