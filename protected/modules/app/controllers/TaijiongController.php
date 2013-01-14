@@ -26,7 +26,7 @@ class TaijiongController extends AppController
 
     private function authorized()
     {
-        Yii::import('application.libs.saesdk');
+        Yii::import('application.libs') . DS . 'saesdk.php';
         if(!empty($_REQUEST["signed_request"])){
             $oauth = new SaeTOAuthV2(TAIJIONG_WEIBO_APP_KEY, TAIJIONG_WEIBO_APP_SECRET);
             $data = $oauth->parseSignedRequest($_REQUEST["signed_request"]);

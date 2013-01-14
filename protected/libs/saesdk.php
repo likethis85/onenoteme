@@ -489,7 +489,7 @@ class SaeTOAuthV2 {
 /**
  * 新浪微博操作类V2
  *
- * 使用前需要先手工调用saetsdk.php <br />
+ * 使用前需要先手工调用saesdk.php <br />
  *
  * @package sae
  * @author Easy Chen, Elmer Zhang,Lazypeople
