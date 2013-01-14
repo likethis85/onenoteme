@@ -41,6 +41,9 @@ return array(
         'mobile' => array(
             'layout' => 'main',
         ),
+        'app' => array(
+            'layout' => 'main',
+        ),
     ),
     'preload' => array('log'),
     'components' => array(

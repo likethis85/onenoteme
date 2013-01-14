@@ -4,21 +4,21 @@ defined('ACCESS_KEY') || define('ACCESS_KEY', 'kn215onkjl');
 defined('SECRET_KEY') || define('SECRET_KEY', '4zx0ki4kmjzmy2wlh1340zyy5533yxy30kly2k1y');
 
 
-class ToolController extends Controller
+class TaijiongController extends AppController
 {
-    public function actionTaijiong()
+    public function actionIndex()
     {
         $this->renderPartial('taijiong');
     }
     
-    public function actionWeiboAppWelcome()
+    public function actionWeiboWelcome()
     {
-        $this->renderPartial('app_welcome');
+        $this->renderPartial('weibo_welcome');
     }
     
-    public function actionWeiboApp()
+    public function actionWeiboWindow()
     {
-        $this->renderPartial('app_window');
+        $this->renderPartial('weibo_window');
     }
     
     public function actionMakepic()

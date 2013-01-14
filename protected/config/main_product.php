@@ -41,6 +41,9 @@ return array(
         'mobile' => array(
             'layout' => 'main',
         ),
+        'app' => array(
+            'layout' => 'main',
+        ),
     ),
     'components' => array(
         'db' => array(
