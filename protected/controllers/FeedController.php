@@ -37,11 +37,37 @@ class FeedController extends Controller
         exit(0);
     }
     
+    public function actionJoke()
+    {
+        self::channel(CHANNEL_DUANZI);
+    }
+    
+    public function actionLengtu()
+    {
+        self::channel(CHANNEL_LENGTU);
+    }
+    
+    public function actionGirl()
+    {
+        self::channel(CHANNEL_GIRL);
+    }
+    
+    public function actionVideo()
+    {
+        self::channel(CHANNEL_VIDEO);
+    }
+    
     public function actionChannel($cid)
     {
         $cid = (int)$cid;
+        self::channel($cid);
+    }
+    
+    private static function channel($cid)
+    {
+        $cid = (int)$cid;
         $channels = param('channels');
-        if (!in_array($cid, $channels))
+        if (!array_key_exists($cid, $channels))
             throw new CHttpException(503, '此频道暂时没有开通');
 
         $where = array('and', 'channel_id = :channelID', 'state = :enabled');
@@ -126,3 +152,4 @@ class FeedController extends Controller
         echo $dom->saveXML();
     }
 }
+
