@@ -14,7 +14,7 @@ class FeedController extends Controller
         $duration = 600;
         return array(
             array(
-                'COutputCache + index',
+                'COutputCache + index, joke, lengtu, girl, video',
                 'duration' => $duration,
             ),
             array(
