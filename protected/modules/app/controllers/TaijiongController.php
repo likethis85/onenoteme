@@ -6,12 +6,6 @@ define('TAIJIONG_WEIBO_APP_SECRET', '0db2f4928def2eaccf3447d576e8e8e7');
 
 class TaijiongController extends AppController
 {
-    public function init()
-    {
-        parent::init();
-        session_start();
-    }
-    
     public function actionIndex()
     {
         $this->renderPartial('index');
@@ -25,7 +19,7 @@ class TaijiongController extends AppController
 
     private function authorized()
     {
-        if (!empty($_SESSION['oauth2']['user_id']))
+        if (!empty(app()->session['oauth2']['user_id']))
             return true;
         
         $sdk = Yii::getPathOfAlias('application.libs') . DS . 'saesdk.php';
@@ -36,8 +30,8 @@ class TaijiongController extends AppController
             if ($data == '-2'){
                 die('签名错误!');
             } else {
-                $_SESSION['oauth2'] = $data;
-                return !empty($_SESSION['oauth2']['user_id']);
+                app()->session['oauth2'] = $data;
+                return !empty(app()->session['oauth2']['user_id']);
             }
         }
         return false;
@@ -62,7 +56,7 @@ class TaijiongController extends AppController
         $content = mb_substr($content, 0, 120, app()->charset) . '...' . ' @挖段子网#王宝强超贱表情#';
         $params = array(
             'source' => TAIJIONG_WEIBO_APP_KEY,
-            'access_token' => $_SESSION['oauth2']['oauth_token'],
+            'access_token' => app()->session['oauth2']['oauth_token'],
             'status' => $content,
             'pic' => '@' . $picfile,
         );
