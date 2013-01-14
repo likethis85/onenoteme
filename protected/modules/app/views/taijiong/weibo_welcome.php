@@ -18,8 +18,8 @@ body {margin:0; padding:0;}
 
 <script type="text/javascript">
 App.AuthDialog.show({
-	"client_id": '',
-	"redirect_uri": '<?php echo aurl('tool/app_window');?>'
+	"client_id": '<?php echo TAIJIONG_WEIBO_APP_KEY;?>',
+	"redirect_uri": '<?php echo aurl('app/taijiong/app_window');?>'
 });
 </script>
 

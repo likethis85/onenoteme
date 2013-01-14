@@ -1,7 +1,7 @@
 <?php
 
-defined('ACCESS_KEY') || define('ACCESS_KEY', 'kn215onkjl');
-defined('SECRET_KEY') || define('SECRET_KEY', '4zx0ki4kmjzmy2wlh1340zyy5533yxy30kly2k1y');
+define('TAIJIONG_WEIBO_APP_KEY', '553903864');
+define('TAIJIONG_WEIBO_APP_SECRET', '0db2f4928def2eaccf3447d576e8e8e7');
 
 
 class TaijiongController extends AppController
