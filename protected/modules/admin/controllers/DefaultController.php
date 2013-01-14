@@ -4,11 +4,6 @@ class DefaultController extends AdminController
 {
 	public function actionIndex()
 	{
-		$this->renderPartial('index');
-	}
-	
-	public function actionWelcome()
-	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_NOT_VERIFY));
 	    $postCount = Post::model()->count($criteria);
@@ -21,7 +16,7 @@ class DefaultController extends AdminController
 	    $criteria->addColumnCondition(array('t.state'=>COMMENT_STATE_NOT_VERIFY));
 	    $commentCount = Comment::model()->count($criteria);
 	    
-	    $this->render('welcome', array(
+	    $this->render('index', array(
 	        'postCount' => $postCount,
 	        'userCount' => $userCount,
 	        'commentCount' => $commentCount,

@@ -6,6 +6,7 @@
 class AdminController extends CController
 {
     public $adminTitle;
+    public $channel;
     
 	public function actions()
 	{
