@@ -11,9 +11,14 @@ class ToolController extends Controller
         $this->renderPartial('taijiong');
     }
     
+    public function actionWeiboAppWelcome()
+    {
+        $this->renderPartial('app_welcome');
+    }
+    
     public function actionWeiboApp()
     {
-        $this->renderPartial('weiboapp');
+        $this->renderPartial('app_window');
     }
     
     public function actionMakepic()

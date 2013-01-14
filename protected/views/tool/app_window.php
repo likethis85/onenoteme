@@ -25,7 +25,6 @@ form.taijiong textarea {height:50px; width:280px;}
 <script type="text/javascript">
 var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
 </script>
-<script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" language="JavaScript"></script>
 </head>
 <body>
 <div class="cdc-container clearfix">
@@ -49,6 +48,7 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
         <img src="<?php echo sbu('images/jiong_pic.jpg');?>" id="user-pic" />
     </div>
 </div>
+<script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" language="JavaScript"></script>
 </body>
 </html>
 
