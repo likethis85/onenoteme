@@ -1,20 +1,9 @@
-<div class="beta-block beta-radius3px beta-links">
-    <h2><?php echo $this->title;?></h2>
-    <ul class="beta-block-content unstyled">
-        <?php foreach($models as $model):?>
-        <?php if ($model->logoValid):?><li class="logo-link"><?php echo $model->getLogoLink();?></li><?php endif;?>
-        <?php $logo++; endforeach;?>
-    
-        <?php if ($logo > 0):?><div class="clear"></div><?php endif;?>
-        
-        <?php foreach($models as $model):?>
-        <?php if (!$model->logoValid):?><li class="text-link"><?php echo $model->getNameLink();?></li><?php endif;?>
-        <?php $text++; endforeach;?>
-        
-        <?php if ($text > 0):?><div class="clear"></div><?php endif;?>
-        
-        <?php if (empty($models)):?>
-        <li class="beta-no-content-tip"><?php echo t('no_friend_links')?></li>
-        <?php endif;?>
-    </ul>
+<div class="panel panel15 links-list">
+    <h3 class="link-title">友情链接&nbsp;&nbsp;[<a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=UjE2MTE6NzwSJDsifCMjfDE9Pw" target="_blank">申请友情链接</a>]</h3>
+	<ul class="links">
+	    <?php foreach($models as $model):?>
+	    <li><?php echo $model->getNameLink();?></li>
+	    <?php endforeach;?>
+		<div class="clear"></div>
+	</ul>
 </div>

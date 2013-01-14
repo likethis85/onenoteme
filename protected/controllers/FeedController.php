@@ -37,7 +37,46 @@ class FeedController extends Controller
         exit(0);
     }
     
+    public function actionJoke()
+    {
+        self::channel(CHANNEL_DUANZI);
+    }
+    
+    public function actionLengtu()
+    {
+        self::channel(CHANNEL_LENGTU);
+    }
+    
+    public function actionGirl()
+    {
+        self::channel(CHANNEL_GIRL);
+    }
+    
+    public function actionVideo()
+    {
+        self::channel(CHANNEL_VIDEO);
+    }
+    
     public function actionChannel($cid)
+    {
+        $cid = (int)$cid;
+        $channels = param('channels');
+        if (!in_array($cid, $channels))
+            throw new CHttpException(503, '此频道暂时没有开通');
+
+        $where = array('and', 'channel_id = :channelID', 'state = :enabled');
+        $params = array(':channelID'=>$cid, ':enabled'=>POST_STATE_ENABLED);
+        $cmd = app()->getDb()->createCommand()
+            ->where($where, $params);
+        
+        $rows = self::fetchPosts($cmd);
+        
+        $feedname = app()->name . ' » ' . $channels[$cid];
+        self::outputXml($feedname, $rows);
+        exit(0);
+    }
+    
+    private static function channel($cid)
     {
         $cid = (int)$cid;
         $channels = param('channels');
@@ -89,7 +128,7 @@ class FeedController extends Controller
     
         $channel = new DOMElement('channel');
         $rss->appendChild($channel);
-        $channel->appendChild(new DOMElement('copyright', 'Copyright (c) 2012 ' . app()->name . '. All rights reserved.'));
+        $channel->appendChild(new DOMElement('copyright', 'Copyright (c) 2011-2013 ' . app()->name . '. All rights reserved.'));
         $channel->appendChild(new DOMElement('title', $feedname));
         $channel->appendChild(new DOMElement('link', app()->homeUrl));
         $channel->appendChild(new DOMElement('description', param('shortdesc')));

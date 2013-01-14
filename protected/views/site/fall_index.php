@@ -1,48 +1,4 @@
 
 <?php $this->renderPartial('/post/mixed_list', array('models' => $models, 'pages' => $pages));?>
 
-<div class="panel panel15 links-list">
-    <h3 class="link-title">友情链接&nbsp;&nbsp;[<a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=UjE2MTE6NzwSJDsifCMjfDE9Pw" target="_blank">申请友情链接</a>]</h3>
-	<ul class="links">
-    	<li><a href="http://www.shadantv.com//" target="_blank">傻蛋TV</a></li>
-    	<li><a href="http://www.goulie.com/" target="_blank">购猎</a></li>
-    	<li><a href="http://www.tao123.com" target="_blank">淘网址</a></li>
-		<li><a href="http://www.xiaohuayoumo.com/" target="_blank">幽默笑话百分百</a></li>
-		<li><a href="http://www.yiqixiaoxiao.com/" target="_blank">一起笑笑</a></li>
-		<li><a href="http://www.funnyba.com/" target="_blank">有趣吧</a></li>
-		<li><a href="http://ipdaohang.com/" target="_blank">iPhone网址导航</a></li>
-		<li><a href="http://lian86.com/" target="_blank">☆中国图片链</a></li>
-		<li><a href="http://www.jiongnews.com/" target="_blank">囧闻联播</a></li>
-		<li><a href="http://bbs.xiaojiulou.com/" target="_blank">笑话视频</a></li>
-		<li><a href="http://www.17xla.com/" target="_blank">幽默大全</a></li>
-		<li><a href="http://www.jianjiande.com/" title="贱，是一种态度。" target="_blank">贱贱的</a></li>
-		<li><a href="http://www.92xiaohua.com/" target="_blank">经典笑话</a></li>
-		<li><a href="http://www.maoza.com/" target="_blank">奇闻趣事</a></li>
-		<li><a href="http://www.daomei.net.cn/" target="_blank">倒霉网</a></li>
-		<li><a href="http://www.lvse.com/site/waduanzi-com-6433.html" target="_blank">绿色网址大全</a></li>
-		<li><a href="http://www.benbenla.com" target="_blank">笔记本网址导航</a></li>
-		<li><a href="http://www.walxh.com" target="_blank">我爱冷笑话</a></li>
-		<li><a href="http://aiguipian.com/" target="_blank">爱鬼片电影网</a></li>
-		<li><a href="http://hao.360.cn/" target="_blank">360安全网址导航</a></li>
-		<li><a href="http://yasuo.360.cn" target="_blank">360压缩软件</a></li>
-		<li><a href="http://www.aifuns.com/" target="_blank">爱娱乐AiFuns</a></li>
-		<li><a href="http://www.wadongxi.com/" target="_blank">挖东西</a></li>
-		<li><a href="http://www.maoza.com/" target="_blank">奇闻网</a></li>
-		<li><a href="http://www.jianjiande.com/" target="_blank">贱贱的</a></li>
-		<li><a href="http://www.xcoodir.com/" target="_blank" title="爱酷目录，免费收录各类优秀网站">爱酷目录</a></li>
-		<li><a href="http://juetuzhi.net/" target="_blank">掘图志</a></li>
-        <li><a href="http://xiaohua.zol.com.cn/" target="_blank">ZOL笑话</a></li>
-        <li><a href="http://www.pengfu.com" target="_blank">捧腹网</a></li>
-        <li><a href="http://www.jokeji.cn/" target="_blank">笑话集</a></li>
-        <li><a href="http://www.kl688.com/" target="_blank">快乐麻花</a></li>
-        <li><a href="http://www.chinabug.net/" target="_blank">穿帮网</a></li>
-        <li><a href="http://www.laifu.org/" target="_blank">来福岛爆笑娱乐网</a></li>
-        <li><a href="http://www.fanjian.net/" target="_blank">犯贱志</a></li>
-        <li><a href="http://www.qiubaimi.com/" target="_blank">糗百邀请码</a></li>
-        <li><a href="http://www.lcxxg.com/" target="_blank">聊城信息港</a></li>
-        <li><a href="http://fangcaoba.com/" target="_blank">美女吧</a></li>
-        <li><a href="http://www.weiphp.com/" target="_blank">微屁网</a></li>
-        <li><a href="http://www.nani.cc/" target="_blank">纳尼网</a></li>
-		<div class="clear"></div>
-	</ul>
-</div>
+<?php $this->widget('CDLinks', array('count'=>40));?>
