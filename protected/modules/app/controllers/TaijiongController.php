@@ -18,7 +18,26 @@ class TaijiongController extends AppController
     
     public function actionWeiboWindow()
     {
+        if (!$this->authorized())
+            $this->redirect(aurl('app/taijiong/weibowelcome'));
+        
         $this->renderPartial('weibo_window');
+    }
+
+    private function authorized()
+    {
+        Yii::import('application.libs.saesdk');
+        if(!empty($_REQUEST["signed_request"])){
+            $oauth = new SaeTOAuthV2(TAIJIONG_WEIBO_APP_KEY, TAIJIONG_WEIBO_APP_SECRET);
+            $data = $oauth->parseSignedRequest($_REQUEST["signed_request"]);
+            if ($data == '-2'){
+                die('签名错误!');
+            } else {
+                $_SESSION['oauth2'] = $data;
+                return empty($_SESSION['oauth2']["user_id"]);
+            }
+        }
+        return false;
     }
     
     public function actionMakepic()
