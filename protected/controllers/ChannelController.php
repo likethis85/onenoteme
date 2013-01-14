@@ -63,40 +63,48 @@ class ChannelController extends Controller
         $this->pageTitle = '挖趣图 - 最搞笑的，最好玩的，最内涵的图片精选';
         $this->setDescription($this->pageTitle);
         $this->setKeywords('挖趣图,搞笑图片,内涵图,邪恶图片,色色图,暴走漫画,微漫画,4格漫画,8格漫画,搞笑漫画,内涵漫画,邪恶漫画,疯狂恶搞,爆笑童趣,雷人囧事,动画萌图,狗狗萌图,猫咪萌图,喵星人萌图,汪星人萌图');
-        
         $this->channel = CHANNEL_LENGTU;
-        $count = ($s == POST_LIST_STYLE_GRID) ? param('grid_post_count_page') : param('lengtu_count_page');
-        $data = $this->fetchChannelPosts(CHANNEL_LENGTU, $count);
-sleep(1);
+        
         $data['list_view'] = 'line_list';
-        if (($s == POST_LIST_STYLE_GRID))
+        if (($s == POST_LIST_STYLE_GRID)) {
             $data['list_view'] = 'grid_list';
+            $count = param('grid_post_count_page');
+        }
+        elseif ($s == POST_LIST_STYLE_WATERFALL)
+            $count = param('waterfall_post_count_page');
+        else
+            $count = param('lengtu_count_page');
+        
+        $data = $this->fetchChannelPosts(CHANNEL_LENGTU, $count);
         
         $view = (($s == POST_LIST_STYLE_WATERFALL)) ? '/post/mixed_list' : 'lengtu_list';
-        
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
         else
             $this->render($view, $data);
     }
     
-    public function actionGirl($page = 1, $s = POST_LIST_STYLE_GRID)
+    public function actionGirl($page = 1, $s = POST_LIST_STYLE_WATERFALL)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/channel', array('cid'=>CHANNEL_GIRL)), null, array('title'=>app()->name . ' » 挖女神 Feed'));
         $this->pageTitle = '挖女神 - 最新最全的女明星写真、清纯校花、美女模特、正妹性感自拍';
         $this->setDescription($this->pageTitle);
         $this->setKeywords('阳光正妹,清纯学生,网友自拍,香港模特,台湾正妹,美女自拍,淘女郎,微女郎,美女写真,美女私房照,校花,气质美女,清纯美女,性感车模,比基尼,足球宝贝');
-        
         $this->channel = CHANNEL_GIRL;
-        $count = ($s == POST_LIST_STYLE_GRID) ? param('grid_post_count_page') : param('girl_count_page');
-        $data = $this->fetchChannelPosts(CHANNEL_GIRL, $count);
         
         $data['list_view'] = 'line_list';
-        if (($s == POST_LIST_STYLE_GRID))
+        if (($s == POST_LIST_STYLE_GRID)) {
             $data['list_view'] = 'grid_list';
+            $count = param('grid_post_count_page');
+        }
+        elseif ($s == POST_LIST_STYLE_WATERFALL)
+            $count = param('waterfall_post_count_page');
+        else
+            $count = param('girl_count_page');
+        
+        $data = $this->fetchChannelPosts(CHANNEL_GIRL, $count);
         
         $view = (($s == POST_LIST_STYLE_WATERFALL)) ? '/post/mixed_list' : 'girl_list';
-        
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
         else
