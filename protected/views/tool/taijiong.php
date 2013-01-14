@@ -56,6 +56,7 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
         <script src="http://a.alimama.cn/inf.js" type="text/javascript"></script>
     </div>
     <div class="done-pic">
+        <h2><a href="/" target="_blank">访问挖段子网</a></h2>
         <img src="<?php echo sbu('images/jiong_pic.jpg');?>" id="user-pic" />
     </div>
 </div>
