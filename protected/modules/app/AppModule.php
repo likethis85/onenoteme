@@ -4,10 +4,9 @@ class AppModule extends CWebModule
 {
 	public function init()
 	{
-		// import the module-level models and components
 		$this->setImport(array(
-			'mobile.models.*',
-			'mobile.components.*',
+			'app.models.*',
+			'app.components.*',
 		));
 		
 		app()->errorHandler->errorAction = 'app/default/error';
@@ -15,8 +14,7 @@ class AppModule extends CWebModule
 
 	public function beforeControllerAction($controller, $action)
 	{
-		if(parent::beforeControllerAction($controller, $action))
-		{
+		if(parent::beforeControllerAction($controller, $action)) {
 			return true;
 		}
 		else
