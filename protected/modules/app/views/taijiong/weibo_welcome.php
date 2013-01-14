@@ -17,10 +17,12 @@ body {margin:0; padding:0;}
 <script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript">
-App.AuthDialog.show({
-	"client_id": '<?php echo TAIJIONG_WEIBO_APP_KEY;?>',
-	"redirect_uri": '<?php echo aurl('app/taijiong/weibowindow');?>'
-});
+window.onload = function(){
+    App.AuthDialog.show({
+    	"client_id": '<?php echo TAIJIONG_WEIBO_APP_KEY;?>',
+    	"redirect_uri": '<?php echo aurl('app/taijiong/weibowindow');?>'
+    });
+};
 </script>
 
 </body>
