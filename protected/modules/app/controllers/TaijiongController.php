@@ -6,6 +6,12 @@ define('TAIJIONG_WEIBO_APP_SECRET', '0db2f4928def2eaccf3447d576e8e8e7');
 
 class TaijiongController extends AppController
 {
+    public function init()
+    {
+        parent::init();
+        session_start();
+    }
+    
     public function actionIndex()
     {
         $this->renderPartial('index');
