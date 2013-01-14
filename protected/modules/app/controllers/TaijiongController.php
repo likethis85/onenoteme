@@ -54,7 +54,7 @@ class TaijiongController extends AppController
         
         $url = 'https://upload.api.weibo.com/2/statuses/upload.json';
         $content = mb_substr($content, 0, 120, app()->charset) . '...' . ' @挖段子网#王宝强超贱表情#';
-        $data = array(
+        $params = array(
             'source' => TAIJIONG_WEIBO_APP_KEY,
             'access_token' => $_SESSION['oauth2']['oauth_token'],
             'status' => $content,
@@ -62,9 +62,9 @@ class TaijiongController extends AppController
         );
     
         $curl = new CDCurl();
-        $curl->post($url, $data);
+        $curl->post($url, $params);
         @unlink($picfile);
-        $text = '0';
+        
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
             if ($result['idstr'])
@@ -74,6 +74,7 @@ class TaijiongController extends AppController
             $data['error'] = $curl->error() . $curl->errno();
         
         $data['errno'] = $curl->errno();
+        $data['debug'] = var_export($_SESSION, true);
         echo json_encode($data);
         exit(0);
     }
