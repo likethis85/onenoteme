@@ -20,7 +20,7 @@
 form.taijiong {margin:0 auto;}
 form.taijiong textarea {height:50px; width:280px;}
 #result-tip {color:red; margin-top:15px;}
-.btn-follow {margin-top:30px;}
+.btn-follow {margin-top:15px;}
 </style>
 <script type="text/javascript">
 var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
@@ -48,6 +48,12 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
                 </div>
             </fieldset>
         <?php echo CHtml::endForm();?>
+        <script type="text/javascript">
+        alimama_pid="mm_33101612_3452378_11213310";
+        alimama_width=300;
+        alimama_height=250;
+        </script>
+        <script src="http://a.alimama.cn/inf.js" type="text/javascript"></script>
     </div>
     <div class="done-pic">
         <img src="<?php echo sbu('images/jiong_pic.jpg');?>" id="user-pic" />
