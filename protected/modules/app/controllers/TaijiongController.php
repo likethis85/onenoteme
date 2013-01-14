@@ -18,7 +18,7 @@ class TaijiongController extends AppController
     
     public function actionWeiboWindow()
     {
-//         if (!$this->authorized())
+        if (!$this->authorized())
             $this->redirect(aurl('app/taijiong/weibowelcome'));
         
         $this->renderPartial('weibo_window');
@@ -27,15 +27,15 @@ class TaijiongController extends AppController
     private function authorized()
     {
         $sdk = Yii::getPathOfAlias('application.libs') . DS . 'saesdk.php';
-        if(!empty($_REQUEST["signed_request"])){
+        if(!empty($_REQUEST['signed_request'])){
             require($sdk);
             $oauth = new SaeTOAuthV2(TAIJIONG_WEIBO_APP_KEY, TAIJIONG_WEIBO_APP_SECRET);
-            $data = $oauth->parseSignedRequest($_REQUEST["signed_request"]);
+            $data = $oauth->parseSignedRequest($_REQUEST['signed_request']);
             if ($data == '-2'){
                 die('签名错误!');
             } else {
                 $_SESSION['oauth2'] = $data;
-                return empty($_SESSION['oauth2']["user_id"]);
+                return empty($_SESSION['oauth2']['user_id']);
             }
         }
         return false;
