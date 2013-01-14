@@ -11,17 +11,10 @@ class TaijiongController extends AppController
         $this->renderPartial('index');
     }
     
-    public function actionWeiboWelcome()
+    public function actionWeibo()
     {
-        if ($this->authorized())
-            $this->redirect(aurl('app/taijiong/weibowindow'));
-        
-        $this->renderPartial('weibo_welcome');
-    }
-    
-    public function actionWeiboWindow()
-    {
-        $this->renderPartial('weibo_window');
+        $view = $this->authorized() ? 'weibo_window' : 'weibo_welcome';
+        $this->renderPartial($view);
     }
 
     private function authorized()
