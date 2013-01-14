@@ -15,9 +15,9 @@ body {margin:0; padding:0;}
 .space20px {clear:both; height:20px; line-height:0; font-size:0;}
 
 .cdc-container {width:760px;}
-.cdc-container .pull-right {width:300px;}
+.cdc-container .pull-right {width:300px; margin-right:10px;}
 .cdc-container .done-pic {text-align:center;}
-.cdc-container .done-pic img {width:409px;}
+.cdc-container .done-pic img {width:410px;}
 form.taijiong {margin:0 auto;}
 form.taijiong textarea {height:50px; width:280px;}
 #result-tip {color:red; margin-top:15px;}
@@ -36,9 +36,9 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
                 <label>第&nbsp;1&nbsp;段台词</label>
                 <textarea name="text1"></textarea>
                 <label>第&nbsp;2&nbsp;段台词</label>
-                <textarea class="span5" name="text2"></textarea>
+                <textarea name="text2"></textarea>
                 <label>第&nbsp;3&nbsp;段台词</label>
-                <textarea class="span5" name="text3"></textarea>
+                <textarea name="text3"></textarea>
                 <div class="clear"></div>
                 <input type="button" class="btn btn-primary btn-block btn-large btn-make" value="贱一把" />
                 <div class="alert alert-error" id="result-tip">请输入 3 段台词</div>
