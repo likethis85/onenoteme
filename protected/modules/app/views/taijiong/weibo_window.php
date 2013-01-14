@@ -29,7 +29,7 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
 <body>
 <div class="cdc-container clearfix">
     <div class="pull-right">
-        <?php echo CHtml::beginForm(aurl('tool/makepic'), 'post', array('class'=>'taijiong'));?>
+        <?php echo CHtml::beginForm(aurl('app/taijiong/makepic'), 'post', array('class'=>'taijiong'));?>
             <fieldset>
                 <legend>王宝强《泰囧》超贱表情制作器</legend>
                 <label>第&nbsp;1&nbsp;段台词</label>
@@ -101,7 +101,8 @@ $(function(){
 	    var text2 = $.trim($('textarea[name=text2]').val());
 	    var text3 = $.trim($('textarea[name=text3]').val());
 		var content = text1 + '，' + text2 + '，' + text3;
-		var jqXhr = $.ajax({
+		var url = '<?php echo aurl('app/taijiong/post');?>';
+		var jqXhr = $.ajax(url, {
 			type: 'POST',
 			dataType: 'text',
 			data: {content:content, picurl:picurl},

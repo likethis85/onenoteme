@@ -30,7 +30,7 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
 <body>
 <div class="container-fluid cdc-container">
     <div class="pull-right">
-        <?php echo CHtml::beginForm(aurl('tool/makepic'), 'post', array('class'=>'taijiong'));?>
+        <?php echo CHtml::beginForm(aurl('app/taijiong/makepic'), 'post', array('class'=>'taijiong'));?>
             <fieldset>
                 <legend>王宝强《泰囧》超贱表情制作器</legend>
                 <label>第&nbsp;1&nbsp;段台词</label>
