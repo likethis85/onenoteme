@@ -8,12 +8,13 @@
 <link rel="stylesheet" type="text/css" href="<?php echo sbu('libs/bootstrap/css/bootstrap.min.css');?>" />
 <script type="text/javascript" src="<?php echo sbu('libs/jquery.min.js');?>"></script>
 <style type="text/css">
+body {margin:0; padding:0;}
 .clear {clear:both; height:0; line-height:0; font-size:0;}
 .space10px {clear:both; height:10px; line-height:0; font-size:0;}
 .space15px {clear:both; height:15px; line-height:0; font-size:0;}
 .space20px {clear:both; height:20px; line-height:0; font-size:0;}
 
-.cdc-container {margin:15px;}
+.cdc-container {width:760px;}
 .cdc-container .pull-right {width:300px;}
 .cdc-container .done-pic {text-align:center;}
 .cdc-container .done-pic img {width:409px;}
@@ -27,7 +28,7 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
 <script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" language="JavaScript"></script>
 </head>
 <body>
-<div class="container-fluid cdc-container">
+<div class="cdc-container clearfix">
     <div class="pull-right">
         <?php echo CHtml::beginForm(aurl('tool/makepic'), 'post', array('class'=>'taijiong'));?>
             <fieldset>
@@ -44,7 +45,7 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
             </fieldset>
         <?php echo CHtml::endForm();?>
     </div>
-    <div class="done-pic">
+    <div class="done-pic pull-left">
         <img src="<?php echo sbu('images/jiong_pic.jpg');?>" id="user-pic" />
     </div>
 </div>
