@@ -13,14 +13,14 @@ class TaijiongController extends AppController
     
     public function actionWeiboWelcome()
     {
+        if ($this->authorized())
+            $this->redirect(aurl('app/taijiong/weibowindow'));
+        
         $this->renderPartial('weibo_welcome');
     }
     
     public function actionWeiboWindow()
     {
-        if (!$this->authorized())
-            $this->redirect(aurl('app/taijiong/weibowelcome'));
-        
         $this->renderPartial('weibo_window');
     }
 
