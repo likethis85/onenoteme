@@ -7,7 +7,6 @@
 <meta name="description" content="王宝强《泰囧》超贱表情制作器，轻轻松松制作王宝强超贱表情。" />
 <style type="text/css">
 body {margin:0; padding:0;}
-.cdc-container {width:760px; height:600px;}
 </style>
 </head>
 <body>
