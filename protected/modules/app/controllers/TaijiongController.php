@@ -80,7 +80,7 @@ class TaijiongController extends AppController
             $data['error'] = $curl->error() . $curl->errno();
         
         $data['errno'] = $curl->errno();
-        $data['debug'] = var_export($_SESSION, true);
+        $data['debug'] = var_export($params, true);
         echo json_encode($data);
         exit(0);
     }
