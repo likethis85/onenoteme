@@ -8,7 +8,7 @@ class TaijiongController extends AppController
 {
     public function actionIndex()
     {
-        $this->renderPartial('taijiong');
+        $this->renderPartial('index');
     }
     
     public function actionWeiboWelcome()
