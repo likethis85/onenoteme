@@ -23,11 +23,9 @@ class MobilePost extends Post
         return $absolute ? aurl('mobile/post/show', array('id'=>$this->id)) : url('mobile/post/show', array('id'=>$this->id));
     }
     
-    public function getFilterSummary()
+    public function getFilterSummary($len = 300)
     {
-        $tags = param('mobile_summary_html_tags');
-        $html = strip_tags($this->summary, $tags);
-         
+        $html = nl2br(strip_tags($this->getSummary($len), param('mobile_summary_html_tags')));
         return $html;
     }
     
