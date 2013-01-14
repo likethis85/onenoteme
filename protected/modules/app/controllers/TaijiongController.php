@@ -37,6 +37,37 @@ class TaijiongController extends AppController
         return false;
     }
     
+    public function actionPost()
+    {
+        $content = $_POST['content'];
+        $picurl = $_POST['picurl'];
+        if (empty($picurl)) return false;
+    
+        $picurl = str_replace(param('uploadBaseUrl'), '', $picurl);
+        $picfile = fbp($picurl);
+        $url = 'https://upload.api.weibo.com/2/statuses/upload.json';
+        $content = mb_substr($model->content, 0, 130, app()->charset) . '...' . ' @挖段子网';
+        $data = array(
+            'source' => TAIJIONG_WEIBO_APP_KEY,
+            'access_token' => $_SESSION['oauth2']['oauth_token'],
+            'status' => $content,
+            'pic' => '@' . $picfile,
+        );
+    
+        $curl = new CDCurl();
+        $curl->post($url, $data);
+        @unlink($picfile);
+        $text = '0';
+        if ($curl->errno() == 0) {
+            $result = json_decode($curl->rawdata(), true);
+            if ($result['idstr'])
+                $text = $result['idstr'];
+        }
+        
+        echo $text;
+        exit(0);
+    }
+    
     public function actionMakepic()
     {
         $data = array();

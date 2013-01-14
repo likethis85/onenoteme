@@ -106,7 +106,7 @@ $(function(){
 			data: data,
 			beforeSend: function(){
 				$('#result-tip').html('正在生成超贱图片...');
-			},
+			}
 		});
 
 		jqXhr.done(function(data, textStatus, xhr){

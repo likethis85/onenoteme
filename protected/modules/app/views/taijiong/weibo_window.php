@@ -41,6 +41,7 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
                 <div class="clear"></div>
                 <input type="button" class="btn btn-primary btn-block btn-large btn-make" value="贱一把" />
                 <div class="alert alert-error" id="result-tip">请输入 3 段台词</div>
+                <input type="button" class="btn btn-reverse btn-block brn-large hide" value="发布到微博" id="postweibo" />
             </fieldset>
         <?php echo CHtml::endForm();?>
     </div>
@@ -71,8 +72,9 @@ $(function(){
 			dataType: 'json',
 			data: data,
 			beforeSend: function(){
+				$('#postweibo').hide();
 				$('#result-tip').html('正在生成超贱图片...');
-			},
+			}
 		});
 
 		jqXhr.done(function(data, textStatus, xhr){
@@ -81,6 +83,7 @@ $(function(){
 				picurl = data.url;
 				$('#result-tip').html('超贱图片已经出生啦，赶紧分享给好友吧!');
 				document.title = '#王宝强超贱表情#' + text1 + '，' + text2 + '，' + text3 + '#王宝强超贱表情制作器#';
+				$('#postweibo').show();
 			}
 			else
 				$('#result-tip').html(data.error);
@@ -90,6 +93,31 @@ $(function(){
 			$('#result-tip').html(errorThrown);
 		});
 
+	});
+
+	$('form.taijiong').on('click', '#postweibo', function(event){
+		var tthis = $('#postweibo');
+		var text1 = $.trim($('textarea[name=text1]').val());
+	    var text2 = $.trim($('textarea[name=text2]').val());
+	    var text3 = $.trim($('textarea[name=text3]').val());
+		var content = text1 + '，' + text2 + '，' + text3;
+		var jqXhr = $.ajax({
+			type: 'POST',
+			dataType: 'text',
+			data: {content:content, picurl:picurl},
+			beforeSend: function(){
+				tthis.html('正在发布...');
+			}
+		});
+		jqXhr.done(function(data, textStatus, xhr){
+			if (data != '0')
+    			tthis.html('发布成功！');
+			else
+				tthis.html('发布出错...');
+		});
+		jqXhr.fail(function(xhr, textStatus, errorThrown){
+			tthis.html('发布出错...');
+		});
 	});
 });
 </script>
