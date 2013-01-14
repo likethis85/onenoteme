@@ -96,12 +96,14 @@ $(function(){
 	});
 
 	$('form.taijiong').on('click', '#postweibo', function(event){
-		var tthis = $('#postweibo');
+		var tthis = $(this);
 		var text1 = $.trim($('textarea[name=text1]').val());
 	    var text2 = $.trim($('textarea[name=text2]').val());
 	    var text3 = $.trim($('textarea[name=text3]').val());
 		var content = text1 + '，' + text2 + '，' + text3;
 		var url = '<?php echo aurl('app/taijiong/post');?>';
+		console.log(url);
+		console.log(content);
 		var jqXhr = $.ajax(url, {
 			type: 'POST',
 			dataType: 'text',
