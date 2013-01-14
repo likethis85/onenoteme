@@ -21,6 +21,7 @@ class TaijiongController extends AppController
         if (!$this->authorized())
             $this->redirect(aurl('app/taijiong/weibowelcome'));
         
+        print_r($_SESSION);
         $this->renderPartial('weibo_window');
     }
 
