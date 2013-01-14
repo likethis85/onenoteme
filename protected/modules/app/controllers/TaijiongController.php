@@ -46,7 +46,9 @@ class TaijiongController extends AppController
         $picurl = str_replace(param('uploadBaseUrl'), '', $picurl);
         $picfile = realpath(fbp($picurl));
         if ($picfile === false) {
-            echo '0';
+            $data['errno'] = -1;
+            $data['error'] = '图片不存在';
+            echo json_encode($data);
             exit(0);
         }
         
@@ -65,14 +67,14 @@ class TaijiongController extends AppController
         $text = '0';
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
-            print_r($$result);
             if ($result['idstr'])
-                $text = $result['idstr'];
+                $data['msg'] = $result['idstr'] . var_export($result, true);
         }
         else
-            $text = $curl->error();
+            $data['error'] = $curl->error() . $curl->errno();
         
-        echo $text;
+        $data['errno'] = $curl->errno();
+        echo json_encode($data);
         exit(0);
     }
     

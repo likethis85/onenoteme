@@ -106,14 +106,14 @@ $(function(){
 		console.log(content);
 		var jqXhr = $.ajax(url, {
 			type: 'POST',
-			dataType: 'text',
+			dataType: 'json',
 			data: {content:content, picurl:picurl},
 			beforeSend: function(){
 				tthis.val('正在发布...');
 			}
 		});
 		jqXhr.done(function(data, textStatus, xhr){
-			if (data != '0')
+			if (data.errno == 0)
     			tthis.val('发布成功！');
 			else
 				tthis.val('发布出错...');
