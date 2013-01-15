@@ -49,7 +49,7 @@ class CDImage
     
     public function setFontPath($path)
     {
-        if (file_exists($path)) {
+        if (@file_exists($path)) {
             $this->fontpath = $path;
             return true;
         }
@@ -66,7 +66,7 @@ class CDImage
     {
         $this->_data = $data;
         $this->_image = self::loadImage($this->_data);
-        if (file_exists($data)) {
+        if (@file_exists($data)) {
             $info = getimagesize($data);
             $this->_imageType = $info[2];
         }
@@ -106,7 +106,7 @@ class CDImage
      */
     public static function loadImage($data)
     {
-        if (file_exists($data)) {
+        if (@file_exists($data)) {
             $image = self::loadFromFile($data);
         }
         else
