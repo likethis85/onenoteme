@@ -102,9 +102,11 @@ class TaijiongController extends AppController
             $im->load($picfile);
             
             $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyhb.ttf';
-            $im->text($text1, $font, 16, array(10, 218), array(255, 255, 255));
-            $im->text($text2, $font, 16, array(10, 450), array(255, 255, 255));
-            $im->text($text3, $font, 16, array(10, 690), array(255, 255, 255));
+            $color = array(255, 255, 255);
+            $im->text($text1, $font, 16, array(10, 218), $color);
+            $im->text($text2, $font, 16, array(10, 450), $color);
+            $im->text($text3, $font, 16, array(10, 690), $color);
+            $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_TOP_RIGHT, $color);
             
             $path = CDBase::makeUploadPath('taijiong');
             $file = CDBase::makeUploadFileName();
