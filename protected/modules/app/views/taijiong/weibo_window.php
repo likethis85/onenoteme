@@ -46,7 +46,6 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
                 <input type="button" class="btn btn-primary btn-block btn-large btn-make" value="贱一把" />
                 <div class="alert alert-error" id="result-tip">请输入 3 段台词</div>
                 <input type="button" class="btn btn-reverse btn-block brn-large hide" value="发布到微博" id="postweibo" />
-                </script>
             </fieldset>
         <?php echo CHtml::endForm();?>
     </div>
