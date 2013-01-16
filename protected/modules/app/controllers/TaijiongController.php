@@ -13,7 +13,7 @@ class TaijiongController extends AppController
     
     public function actionWeibo()
     {
-        $view = $this->authorized() ? 'test' : 'weibo_welcome';
+        $view = $this->authorized() ? 'weibo_window' : 'weibo_welcome';
         $this->renderPartial($view);
     }
 
