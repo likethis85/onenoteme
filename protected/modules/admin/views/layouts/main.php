@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo app()->charset;?>" />
 <title><?php echo app()->name . t('control_center', 'admin');?></title>
 <link rel="stylesheet" type="text/css" href="<?php echo sbu('libs/bootstrap/css/bootstrap.min.css');?>" />
-<link rel="stylesheet" type="text/css" href="<?php echo sbu('styles/beta-admin.css');?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-admin.css');?>" />
 <script type="text/javascript">
 /*<![CDATA[*/
 var CD_YES = <?php echo CD_YES;?>;
@@ -126,7 +126,7 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
     </div>
 </div>
 <div class="admin-sidebar">
-    <ul class="nav nav-list">
+    <ul class="nav nav-list quick-nav">
         <li class="nav-header">文章</li>
         <li><?php echo l('发表文章', url('admin/post/create'));?></li>
         <li><?php echo l('审核文章', url('admin/post/verify'));?></li>
