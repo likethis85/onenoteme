@@ -45,7 +45,7 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
                 <div class="clear"></div>
                 <input type="button" class="btn btn-primary btn-block btn-large btn-make" value="贱一把" />
                 <div class="alert alert-error" id="result-tip">请输入 3 段台词</div>
-                <a type="button" class="btn btn-reverse btn-block brn-large" href="###" id="postweibo">发布到微博</a>
+                <input type="button" class="btn btn-reverse btn-block brn-large" id="postweibo" value="发布到微博" />
             </fieldset>
         <?php echo CHtml::endForm();?>
     </div>
