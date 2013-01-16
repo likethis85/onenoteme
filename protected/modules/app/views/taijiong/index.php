@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:wb=“http://open.weibo.com/wb”>
+<html>
 <head>
 <meta charset="utf-8">
 <title>王宝强《泰囧》超贱表情制作器</title>

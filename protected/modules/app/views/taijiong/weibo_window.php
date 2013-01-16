@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:wb="http://open.weibo.com/wb">
 <head>
 <meta charset="utf-8">
 <title>王宝强《泰囧》超贱表情制作器</title>
@@ -27,7 +27,7 @@ form.taijiong textarea {height:50px; width:280px;}
 var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
 </script>
 </head>
-<body>
+<body><wb:publish toolbar="face,image,topic" button_type="red" button_size="middle" default_text="#手机微博意见反馈#" ></wb:publish>
 <div class="cdc-container clearfix">
     <div class="done-pic pull-left">
         <img src="<?php echo sbu('images/jiong_pic.jpg');?>" id="user-pic" />
@@ -50,8 +50,7 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
         <?php echo CHtml::endForm();?>
     </div>
 </div>
-</body>
-</html>
+
 
 <script type="text/javascript">
 $(function(){
@@ -146,3 +145,5 @@ $(function(){
 });
 </script>
 
+</body>
+</html>
