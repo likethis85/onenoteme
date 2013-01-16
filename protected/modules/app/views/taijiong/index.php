@@ -48,12 +48,7 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
                 </div>
             </fieldset>
         <?php echo CHtml::endForm();?>
-        <script type="text/javascript">
-        alimama_pid="mm_33101612_3452378_11213310";
-        alimama_width=300;
-        alimama_height=250;
-        </script>
-        <script src="http://a.alimama.cn/inf.js" type="text/javascript"></script>
+        <img width="300" src="http://s3.24url.net/images/qrcode_wx.jpg" alt="挖段子网公众账号二维码" title="微博扫描挖段子网公众账号二维码，快速关注挖段子网" />
     </div>
     <div class="done-pic">
         <h2><a href="/" target="_blank">访问挖段子网</a></h2>
