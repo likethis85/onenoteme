@@ -45,7 +45,7 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
                 <div class="clear"></div>
                 <input type="button" class="btn btn-primary btn-block btn-large btn-make" value="贱一把" />
                 <div class="alert alert-error" id="result-tip">请输入 3 段台词</div>
-                <input type="button" class="btn btn-reverse btn-block brn-large hide" value="发布到微博" id="postweibo" />
+                <a type="button" class="btn btn-reverse btn-block brn-large" href="###" id="postweibo">发布到微博</a>
                 <script type="text/javascript">
                     WB2.anyWhere(function(W){
                     	var text1 = $.trim($('textarea[name=text1]').val());
