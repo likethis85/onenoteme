@@ -73,7 +73,7 @@ class AdvertController extends AdminController
             $model->clearCache();
             $data = array(
                 'errno' => CD_NO,
-                'label' => t($model->state == ADVERT_STATE_ENABLED ? 'advert_enabled' : 'advert_disabled', 'admin')
+                'label' => $model->state == ADVERT_STATE_ENABLED ? '启用' : '禁用',
             );
             CDBase::jsonp($callback, $data);
         }

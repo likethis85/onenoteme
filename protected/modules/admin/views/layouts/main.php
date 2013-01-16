@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo app()->charset;?>" />
-<title><?php echo app()->name . t('control_center', 'admin');?></title>
+<title><?php echo app()->name;?>管理中心</title>
 <link rel="stylesheet" type="text/css" href="<?php echo sbu('libs/bootstrap/css/bootstrap.min.css');?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-admin.css');?>" />
 <script type="text/javascript">

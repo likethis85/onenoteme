@@ -71,7 +71,7 @@ class AdcodeController extends AdminController
             $model->advert->clearCache();
             $data = array(
                 'errno' => CD_NO,
-                'label' => t($model->state == ADCODE_STATE_ENABLED ? 'adcode_enabled' : 'adcode_disabled', 'admin')
+                'label' => $model->state == ADCODE_STATE_ENABLED ? '启用' : '禁用',
             );
             CDBase::jsonp($callback, $data);
         }
