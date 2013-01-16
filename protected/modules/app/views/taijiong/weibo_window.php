@@ -46,6 +46,24 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
                 <input type="button" class="btn btn-primary btn-block btn-large btn-make" value="贱一把" />
                 <div class="alert alert-error" id="result-tip">请输入 3 段台词</div>
                 <input type="button" class="btn btn-reverse btn-block brn-large hide" value="发布到微博" id="postweibo" />
+                <script type="text/javascript">
+                    WB2.anyWhere(function(W){
+                    	var text1 = $.trim($('textarea[name=text1]').val());
+                	    var text2 = $.trim($('textarea[name=text2]').val());
+                	    var text3 = $.trim($('textarea[name=text3]').val());
+                		var content = text1 + '，' + text2 + '，' + text3;
+                		var picurl = $('#user-pic').attr('src') || "http://s3.24url.net/images/jiong_pic.jpg";
+                        W.widget.publish({
+                            toolbar:"face,topic",
+                            button_type:"red",
+                            button_size:"big",
+                            default_text:"#王宝强超贱表情#" + content,
+                            button_text:"发布到微博",
+                            default_image:picurl,
+                            id: "postweibo"
+                        });
+                    });
+                </script>
             </fieldset>
         <?php echo CHtml::endForm();?>
     </div>
@@ -94,24 +112,7 @@ $(function(){
 		});
 
 	});
-	$('form.taijiong').on('click', '#postweibo', function(event){
-    	WB2.anyWhere(function(W){
-        	var text1 = $.trim($('textarea[name=text1]').val());
-    	    var text2 = $.trim($('textarea[name=text2]').val());
-    	    var text3 = $.trim($('textarea[name=text3]').val());
-    		var content = text1 + '，' + text2 + '，' + text3;
-    		var picurl = $('#user-pic').attr('src') || "http://s3.24url.net/images/jiong_pic.jpg";
-            W.widget.publish({
-                toolbar:"face,topic",
-                button_type:"red",
-                button_size:"big",
-                default_text:"#王宝强超贱表情#" + content,
-                button_text:"发布到微博",
-                default_image:picurl,
-                id: "wb_publisher"
-            });
-        });
-	});
+
 	/*
 	$('form.taijiong').on('click', '#postweibo', function(event){
 		var tthis = $(this);
