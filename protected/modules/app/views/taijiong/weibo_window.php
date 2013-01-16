@@ -7,6 +7,7 @@
 <meta name="description" content="王宝强《泰囧》超贱表情制作器，轻轻松松制作王宝强超贱表情。" />
 <link rel="stylesheet" type="text/css" href="<?php echo sbu('libs/bootstrap/css/bootstrap.min.css');?>" />
 <script type="text/javascript" src="<?php echo sbu('libs/jquery.min.js');?>"></script>
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=553903864" type="text/javascript" charset="utf-8"></script>
 <style type="text/css">
 body {margin:0; padding:0;}
 .clear {clear:both; height:0; line-height:0; font-size:0;}
@@ -28,6 +29,9 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
 </head>
 <body>
 <div class="cdc-container clearfix">
+    <div class="done-pic pull-left">
+        <img src="<?php echo sbu('images/jiong_pic.jpg');?>" id="user-pic" />
+    </div>
     <div class="pull-right">
         <?php echo CHtml::beginForm(aurl('app/taijiong/makepic'), 'post', array('class'=>'taijiong'));?>
             <fieldset>
@@ -41,15 +45,29 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
                 <div class="clear"></div>
                 <input type="button" class="btn btn-primary btn-block btn-large btn-make" value="贱一把" />
                 <div class="alert alert-error" id="result-tip">请输入 3 段台词</div>
-                <input type="button" class="btn btn-reverse btn-block brn-large hide" value="发布到微博" id="postweibo" />
+                <!-- <input type="button" class="btn btn-reverse btn-block brn-large hide" value="发布到微博" id="postweibo" /> -->
+                <script type="text/javascript">
+                    WB2.anyWhere(function(W){
+                    	var text1 = $.trim($('textarea[name=text1]').val());
+                	    var text2 = $.trim($('textarea[name=text2]').val());
+                	    var text3 = $.trim($('textarea[name=text3]').val());
+                		var content = text1 + '，' + text2 + '，' + text3;
+                		var picurl = $('#user-pic').attr('src') || "http://s3.24url.net/images/jiong_pic.jpg";
+                        W.widget.publish({
+                            toolbar:"face,topic",
+                            button_type:"red",
+                            button_size:"big",
+                            default_text:"#王宝强超贱表情#" + content,
+                            button_text:"发布到微博",
+                            default_image:picurl,
+                            id: "wb_publisher"
+                        });
+                    });
+                </script>
             </fieldset>
         <?php echo CHtml::endForm();?>
     </div>
-    <div class="done-pic pull-left">
-        <img src="<?php echo sbu('images/jiong_pic.jpg');?>" id="user-pic" />
-    </div>
 </div>
-<script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" language="JavaScript"></script>
 </body>
 </html>
 
@@ -95,6 +113,7 @@ $(function(){
 
 	});
 
+	/*
 	$('form.taijiong').on('click', '#postweibo', function(event){
 		var tthis = $(this);
 		var text1 = $.trim($('textarea[name=text1]').val());
@@ -122,6 +141,7 @@ $(function(){
 			tthis.val('发布出错...');
 		});
 	});
+	*/
 });
 </script>
 
