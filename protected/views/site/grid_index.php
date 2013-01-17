@@ -55,4 +55,6 @@
 </div>
 <div class="clear"></div>
 
-<?php $this->widget('CDLinks', array('count'=>40));?>
+<?php $this->widget('CDLinks', array('ishome'=>1, 'count'=>40));?>
+
+

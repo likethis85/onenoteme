@@ -42,6 +42,7 @@
             <li><a href="http://www.weiphp.com/" target="_blank">微屁网</a></li>
             <li><a href="http://www.nani.cc/" target="_blank">纳尼网</a></li>
             <li><a href="http://www.chinaz/" target="_blank">站长之家</a></li>
+            <li><a href="http://www.db9db.com/" target="_blank">屌丝的一天</a></li>
 		</ul>
 	</div>
 </div>

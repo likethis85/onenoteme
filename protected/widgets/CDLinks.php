@@ -1,7 +1,6 @@
 <?php
 class CDLinks extends CWidget
 {
-    const DEFAULT_LINK_COUNT = 10;
     const DEFAULT_NAME_LEN = 15;
     
     public $ishome = null;
@@ -10,7 +9,7 @@ class CDLinks extends CWidget
      * links count
      * @var integer
      */
-    public $count;
+    public $count = 0;
 
     /**
      * links list title
@@ -34,8 +33,6 @@ class CDLinks extends CWidget
     {
         $this->allowEmpty = (bool)$this->allowEmpty;
         $this->count = (int)$this->count;
-        if ($this->count === 0)
-            $this->count = self::DEFAULT_LINK_COUNT;
         
         $title = trim($this->title);
         if (empty($title))
