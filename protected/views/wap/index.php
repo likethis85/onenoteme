@@ -8,23 +8,22 @@
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->getTagLinks('wap/tag', '&nbsp;', '_self');?></div><?php endif;?>
     </div>
+    <!-- 首页侧边栏广告位1 开始 -->
     <?php if ($index == 1):?>
     <div class="admob">
-        <script type="text/javascript">
-            netease_union_user_id = 6156606;
-            netease_union_site_id = 25143;
-            netease_union_worktype = 15;
-            netease_union_promote_type = 3;
-            netease_union_width = 300;
-            netease_union_height = 120;
-            netease_union_link_id = 659;
-        </script>
-        <script type="text/javascript" src="http://union.netease.com/sys_js/display.js"></script>
+        <?php $this->widget('CDAdvert', array('solt'=>'mobile_banner'));?>
     </div>
     <?php endif;?>
+    <!-- 首页侧边栏广告位1 结束 -->
     <?php endforeach;?>
 </div>
 
 <?php if ($pages->pageCount > 1):?>
 <div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'skin'=>'wap'));?></div>
 <?php endif;?>
+
+<!-- 首页侧边栏广告位2 开始 -->
+<div class="admob">
+    <?php $this->widget('CDAdvert', array('solt'=>'mobile_banner'));?>
+</div>
+<!-- 首页侧边栏广告位2 结束 -->
