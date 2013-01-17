@@ -46,8 +46,10 @@ class CDLinks extends CWidget
     public function run()
     {
         $criteria = new CDbCriteria();
-        if ($this->ishome !== null)
-            $criteria->addColumnCondition(array('ishome' => CD_YES));
+        if ($this->ishome !== null) {
+            $ishome = (int)$this->ishome;
+            $criteria->addColumnCondition(array('ishome' => $ishome));
+        }
         
         if ($this->count > 0)
             $criteria->limit = $this->count;
