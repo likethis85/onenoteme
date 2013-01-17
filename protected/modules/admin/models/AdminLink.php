@@ -14,6 +14,15 @@ class AdminLink extends Link
         return parent::model($className);
     }
 
+    public function getIshomeLabel()
+    {
+        $html = '';
+        if ($this->ishome)
+            $html = '<span class="label label-success">首页</span>';
+        
+        return $html;
+    }
+    
     /**
      * 以后备用，现在友链的图全是url，以后可以直接上传图片
      */

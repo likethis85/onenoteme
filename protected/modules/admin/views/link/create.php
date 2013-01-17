@@ -52,9 +52,11 @@
         </div>
     </div>
     <div class="control-group <?php if($model->hasErrors('ishome')) echo 'error';?>">
-        <?php echo CHtml::activeLabel($model, 'ishome', array('class'=>'control-label'));?>
+        <label class="control-label">&nbsp;</label>
         <div class="controls">
+            <label class="checkbox">
             <?php echo CHtml::activeCheckBox($model, 'ishome');?>首页显示
+            </label>
             <?php if($model->hasErrors('ishome')):?><p class="help-block"><?php echo $model->getError('ishome');?></p><?php endif;?>
         </div>
     </div>

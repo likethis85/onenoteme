@@ -22,6 +22,7 @@
             <th class="span3 align-center"><?php echo $sort->link('url');?></th>
             <th class="span3 align-center"><?php echo $sort->link('desc');?></th>
             <th class="span2 align-center"><?php echo $sort->link('logo');?></th>
+            <th class="span1 align-center"><?php echo $sort->link('ishome');?></th>
             <th><a class="label label-important" href="<?php echo url('admin/link/create');?>">新建链接</a></th>
         </tr>
     </thead>
@@ -34,6 +35,7 @@
             <td><?php echo $model->url;?></td>
             <td><?php echo $model->desc;?></td>
             <td><?php echo $model->logoImage;?></td>
+            <td><?php echo $model->ishomeLabel;?></td>
             <td>
                 <?php echo l('编辑', url('admin/link/create', array('id'=>$model->id)));?>
             </td>
@@ -42,7 +44,7 @@
     </tbody>
 </table>
 <?php if ($pages):?>
-<div class="beta-pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'htmlOptions'=>array('class'=>'pagination')));?></div>
+<div class="pagination"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
 <?php endif;?>
 
 <?php if (count($models) > 0):?>
