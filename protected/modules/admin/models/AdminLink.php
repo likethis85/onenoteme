@@ -22,7 +22,7 @@ class AdminLink extends Link
         return ;
         if ($this->icon && $this->icon instanceof CUploadedFile) {
             $topicThumbnailDir = 'topic';
-            $filename = BetaBase::uploadImage($this->icon, 'topic');
+            $filename = CDBase::uploadImage($this->icon, 'topic');
             if ($filename === false)
                 return false;
             else {
