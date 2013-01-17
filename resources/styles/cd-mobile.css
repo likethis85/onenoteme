@@ -21,6 +21,8 @@ footer a:link, footer a:hover, footer a:visited {color:white;}
 footer a.return-top {float:left;}
 footer a.switch-version {float:right;}
 
+.cdc-block {text-align:center; padding:0; margin:10px 0;}
+
 /* category nav */
 .category-nav {margin:0 0 10px;}
 .category-nav .icon-chevron-right {float:right; color:white; opacity:.25;}

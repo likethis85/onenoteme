@@ -17,11 +17,13 @@
 <div class="beta-container">
 <?php echo $content;?>
 </div>
+
 <!-- 首页侧边栏广告位2 开始 -->
-<div class="admob">
+<div class="cdc-block">
     <?php $this->widget('CDAdvert', array('solt'=>'mobile_banner'));?>
 </div>
 <!-- 首页侧边栏广告位2 结束 -->
+
 <footer class="clearfix">
     <a class="return-top" href="#top">返回顶部</a>
     <a class="switch-version" href="<?php echo aurl('site/index', array('f'=>1));?>">切换到桌面版</a>
