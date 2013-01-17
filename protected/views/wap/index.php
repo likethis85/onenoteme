@@ -22,8 +22,3 @@
 <div class="pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'skin'=>'wap'));?></div>
 <?php endif;?>
 
-<!-- 首页侧边栏广告位2 开始 -->
-<div class="admob">
-    <?php $this->widget('CDAdvert', array('solt'=>'mobile_banner'));?>
-</div>
-<!-- 首页侧边栏广告位2 结束 -->
