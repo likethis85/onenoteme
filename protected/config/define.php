@@ -47,6 +47,9 @@ define('ADVERT_STATE_ENABLED', 1);
 define('ADCODE_STATE_DISABLED', 0);
 define('ADCODE_STATE_ENABLED', 1);
 
+/* link ishome */
+define('LINK_IN_HOME', 1);
+define('LINK_NOT_IN_HOME', 0);
 
 
 define('POST_LIST_STYLE_LINE', 'line');

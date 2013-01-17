@@ -4,6 +4,8 @@ class CDLinks extends CWidget
     const DEFAULT_LINK_COUNT = 10;
     const DEFAULT_NAME_LEN = 15;
     
+    public $ishome = null;
+    
     /**
      * links count
      * @var integer
@@ -31,14 +33,13 @@ class CDLinks extends CWidget
     public function init()
     {
         $this->allowEmpty = (bool)$this->allowEmpty;
-        
         $this->count = (int)$this->count;
         if ($this->count === 0)
             $this->count = self::DEFAULT_LINK_COUNT;
         
         $title = trim($this->title);
         if (empty($title))
-            $this->title = t('friend_links');
+            $this->title = '友情链接';
         
         $this->nameLen = (int)$this->nameLen;
         if ($this->nameLen === 0)
@@ -47,7 +48,14 @@ class CDLinks extends CWidget
         
     public function run()
     {
-        $models = Link::fetchLinks();
+        $criteria = new CDbCriteria();
+        if ($this->ishome !== null)
+            $criteria->addColumnCondition(array('ishome' => CD_YES));
+        
+        if ($this->count > 0)
+            $criteria->limit = $this->count;
+        
+        $models = Link::fetchLinks($criteria);
         
         if (empty($models) && !$this->allowEmpty) return ;
         $this->render('beta_friend_links', array('models'=>$models));

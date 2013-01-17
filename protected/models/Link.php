@@ -39,7 +39,7 @@ class Link extends CActiveRecord
 	public function rules()
 	{
 		return array(
-    		array('orderid', 'numerical', 'integerOnly'=>true),
+    		array('orderid, ishome', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>50),
 			array('url, logo, desc', 'length', 'max'=>250),
     		array('url, logo', 'url'),
@@ -60,6 +60,7 @@ class Link extends CActiveRecord
 			'logo' => 'LOGO',
 			'desc' => '描述',
 			'orderid' => '排序',
+	        'ishome' => '首页',
 		);
 	}
 	
@@ -103,12 +104,12 @@ class Link extends CActiveRecord
 	    return $pos === 0;
 	}
 
-	public static function fetchLinks()
+	public static function fetchLinks(CDbCriteria $criteria = null)
 	{
 	    if (app()->getCache()) {
 	        $models = app()->getCache()->get('cache_friend_links');
 	        if ($models === false) {
-	            $models = self::fetchModels();
+	            $models = self::fetchModels($criteria);
 	            if (count($models) > 0) {
 	                app()->getCache()->set('cache_friend_links', $models);
 	            }
@@ -121,9 +122,10 @@ class Link extends CActiveRecord
 	}
 	
 	
-	public static function fetchModels()
+	public static function fetchModels(CDbCriteria $criteria = null)
 	{
-	    $criteria = new CDbCriteria();
+	    if ($criteria == null)
+    	    $criteria = new CDbCriteria();
 	    $criteria->order = 'orderid asc, id asc';
 	
 	    $models = Link::model()->findAll($criteria);
