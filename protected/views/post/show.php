@@ -48,15 +48,7 @@
         </div>
         <?php endif;?>
         <a name="comments"></a>
-        <form action="<?php echo aurl('comment/create');?>" method="post" class="content-block comment-form" id="comment-form">
-            <input type="hidden" name="postid" value="<?php echo $post->id;?>" />
-            <textarea name="content" id="comment-content" class="mini-content fleft radius3px">请输入评论内容。。。</textarea>
-            <input type="button" id="submit-comment" value="发表" class="button site-bg fright" />
-            <div class="clear"></div>
-            <span class="counter">140</span>
-            <div class="save-caption-loader hide"></div>
-        </form>
-        <div id="caption-error" class="content-block hide"></div>
+        <?php $this->renderPartial('/comment/create', array('postid'=>(int)$post->id));?>
         <div id="comments" class="comment-list bottom15px">
         <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'pages'=>$pages));?>
         </div>
@@ -118,22 +110,9 @@
 $(function(){
 	var postid = <?php echo $post->id;?>;
 	Waduanzi.IncreasePostViewNums(postid, '<?php echo aurl('post/views');?>');
-	var commentInitVal = $('#comment-content').val();
-    $(document).on('click', '.comment-arrows a', Waduanzi.RatingComment);
+	$(document).on('click', '.comment-arrows a', Waduanzi.RatingComment);
     Waduanzi.AjustImgWidth($('.post-picture img'), 600);
     
-    $(document).on('focus', '#comment-content', function(event){
-        $(this).addClass('expand');
-        if ($.trim($(this).val()) == commentInitVal)
-            $(this).val('');
-    });
-    $(document).on('blur', '#comment-content', function(event){
-        if ($.trim($(this).val()).length == 0) {
-            $(this).val(commentInitVal);
-            $(this).removeClass('expand');
-        }
-    });
-    $(document).on('click', '#submit-comment', Waduanzi.PostComment);
     $('.item-toolbar').on('click', 'a.upscore, a.downscore', Waduanzi.ratingPost);
 	$('.item-toolbar').on('mouseenter', 'a.share, .sharebox', Waduanzi.showShareBox);
 	$('.item-toolbar').on('mouseleave', 'a.share, .sharebox', Waduanzi.hideShareBox);

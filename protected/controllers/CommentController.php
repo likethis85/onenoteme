@@ -14,7 +14,7 @@ class CommentController extends Controller
         $id = (int)$id;
         try {
             $comments = Comment::fetchListByPostID($id, 1, param('comment_count_page_home'));
-            $html = '';
+            $html = $this->renderPartial('comment/create', array('postid' => $id));
             if (!empty($comments))
                 $html = $this->renderPartial('/comment/list', array('comments'=>$comments), true);
             
