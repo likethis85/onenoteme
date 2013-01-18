@@ -23,7 +23,6 @@ $(function(){
         	tthis.removeClass('expand');
         }
     });
-    $(document).on('keyup', 'textarea.comment.content')
     $(document).on('click', 'input.submit-comment', Waduanzi.PostComment);
 });
 </script>
