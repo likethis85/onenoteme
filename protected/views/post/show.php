@@ -49,7 +49,7 @@
         <?php endif;?>
         <a name="comments"></a>
         <?php $this->renderPartial('/comment/create', array('postid'=>(int)$post->id));?>
-        <div id="comments" class="comment-list bottom15px">
+        <div class="comment-list bottom15px">
         <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'pages'=>$pages));?>
         </div>
         <div class="content-block cd-border">

@@ -88,7 +88,7 @@
         </div>
         <div class="comment-list comment-list-<?php echo $model->id;?> hide"></div>
     </div>
-        <div class="site-bg item-shadow"></div>
+    <div class="site-bg item-shadow"></div>
     <?php endforeach;?>
 </div>
 

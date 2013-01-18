@@ -78,10 +78,11 @@ Waduanzi.PostComment = function(event) {
 	var contentElement = form.find('.comment-content');
 	var errorElement = form.next('.caption-error');
 	var loadingElement = form.find('.save-caption-loader');
-	
+	var placeholder = contentElement.attr('data-placeholder');
 	var content = $.trim(contentElement.val());
+	
 	var postid = parseInt(form.find('input[name=postid]').val());
-	if (postid <= 0 || content.length <= 0)
+	if (postid <= 0 || content.length <= 0 || content == placeholder)
 		return false;
 
 	var xhr = $.ajax({
