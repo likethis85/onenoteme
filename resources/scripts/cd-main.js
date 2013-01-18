@@ -293,7 +293,7 @@ Waduanzi.fetchComments = function(event) {
 		return false;
 	}
 	
-	var cacheData = tthis.data('comments');
+	var cacheData = $.data(document.body, 'comments');
 	if (cacheData != undefined) {
 		commentBlock.html(cacheData).show();
 		return true;
