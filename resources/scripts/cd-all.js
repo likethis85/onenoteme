@@ -128,7 +128,7 @@ Waduanzi.PostComment = function(event) {
 	xhr.done(function(data){
 		loadingElement.hide();
 		if (data.errno == 0) {
-			form.closest('.comment-list').prepend(data.html);
+			errorElement.after(data.html);
 			contentElement.val('').removeClass('expand');
 		}
 		else
