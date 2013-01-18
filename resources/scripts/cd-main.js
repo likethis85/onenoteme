@@ -296,7 +296,7 @@ Waduanzi.fetchComments = function(event) {
 		
 	
 	var url = tthis.attr('data-url');
-	var commentCount = parseInt(tthis.text());
+	var commentCount = tthis.text();
 	var jqXhr = $.ajax({
 		url: url,
 		dataType: 'jsonp',
@@ -309,7 +309,8 @@ Waduanzi.fetchComments = function(event) {
 	
 	jqXhr.done(function(data, textStatus, jqXHR){
 		commentBlock.html(data.html).show();
-		tthis.data('comments', data.html);
+		if (data.html.length > 0)
+			tthis.data('comments', data.html);
 	});
 	
 	jqXhr.fail(function(jqXHR, textStatus, errorThrown){

@@ -14,7 +14,10 @@ class CommentController extends Controller
         $id = (int)$id;
         try {
             $comments = Comment::fetchListByPostID($id, 1, param('comment_count_page_home'));
-            $html = $this->renderPartial('/comment/list', array('comments'=>$comments), true);
+            $html = '';
+            if (!empty($comments))
+                $html = $this->renderPartial('/comment/list', array('comments'=>$comments), true);
+            
             $data = array('html' => $html);
             CDBase::jsonp($callback, $data);
         }
