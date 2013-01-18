@@ -339,8 +339,7 @@ Waduanzi.fetchComments = function(event) {
 	
 	jqXhr.done(function(data, textStatus, jqXHR){
 		commentBlock.html(data.html).show();
-		if (data.html.length > 0)
-			tthis.data('comments', data.html);
+		tthis.data('comments', data.html);
 	});
 	
 	jqXhr.fail(function(jqXHR, textStatus, errorThrown){
