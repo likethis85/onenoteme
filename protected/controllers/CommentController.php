@@ -3,9 +3,15 @@ class CommentController extends Controller
 {
     public function filters()
     {
+        $duration = 60;
         return array(
             'ajaxOnly + create, score',
             'postOnly + create, score',
+            array(
+                'COutputCache + list',
+                'duration' => $duration,
+                'varyByParam' => array('id'),
+            ),
         );
     }
     
