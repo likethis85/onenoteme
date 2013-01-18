@@ -14,9 +14,9 @@ class CommentController extends Controller
         $id = (int)$id;
         try {
             $comments = Comment::fetchListByPostID($id, 1, param('comment_count_page_home'));
-            $html = $this->renderPartial('comment/create', array('postid' => $id));
+            $html = $this->renderPartial('create', array('postid' => $id));
             if (!empty($comments))
-                $html = $this->renderPartial('/comment/list', array('comments'=>$comments), true);
+                $html = $this->renderPartial('list', array('comments'=>$comments), true);
             
             $data = array('html' => $html);
             CDBase::jsonp($callback, $data);
@@ -38,7 +38,7 @@ class CommentController extends Controller
         $result = (int)$c->save();
         $data['errno'] = (int)!$result;
         if ($result)
-            $data['html'] = $this->renderPartial('/comment/list', array('comments'=>array($c)), true);
+            $data['html'] = $this->renderPartial('list', array('comments'=>array($c)), true);
         else
             $data['error'] = '发表评论出错';
         
