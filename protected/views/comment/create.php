@@ -13,7 +13,7 @@ $(function(){
     $(document).on('focus', 'textarea.comment-content', function(event){
     	var tthis = $(this);
     	tthis.addClass('expand');
-        if ($.trim(tthis.val()) == tthis.attr('data-placeholder'));
+        if ($.trim(tthis.val()) == tthis.attr('data-placeholder'))
             tthis.val('');
     });
     $(document).on('blur', 'textarea.comment-content', function(event){

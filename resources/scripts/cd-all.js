@@ -130,6 +130,7 @@ Waduanzi.PostComment = function(event) {
 		if (data.errno == 0) {
 			errorElement.after(data.html);
 			contentElement.val('').removeClass('expand');
+			$.removeData(document.body, 'comments');
 		}
 		else
 			errorElement.html(data.error).show();
@@ -343,7 +344,7 @@ Waduanzi.fetchComments = function(event) {
 	
 	jqXhr.done(function(data, textStatus, jqXHR){
 		commentBlock.html(data.html).show();
-		tthis.data('comments', data.html);
+		$.data(document.body, 'comments', data.html);
 	});
 	
 	jqXhr.fail(function(jqXHR, textStatus, errorThrown){
