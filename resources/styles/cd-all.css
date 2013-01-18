@@ -1041,18 +1041,19 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 input.button, .button {width:78px; height:33px; border:0; margin:0; padding:0; background-color:transparent; background-position:-231px 0; color:white; font-weight:bold; cursor:pointer;}
 input.button:hover, .button:hover {background-position:-310px 0;}
 input.button:active, .button:active {background-position:-389px 0;}
-.post-detail .comment-item {margin:0 0 5px; background-color:#F8F8F8;}
-.post-detail .comment-item .comment-arrows {margin:0; padding:10px 5px 0; width:22px;}
-.post-detail .comment-item dl {margin:0; margin-left:30px; padding:10px;}
-.post-detail .comment-item dt {font-weight:normal; font-size:12px; color:#AAA; margin-bottom:5px;}
-.post-detail .comment-item dd {line-height:20px; font-size:12px; padding:0; margin:0;}
-.comment-item .comment-arrows a {display:block; width:20px; height:20px; margin:2px auto; text-indent:-9999px;}
-.comment-item .comment-arrows .arrow-up {background-position:-146px -78px;}
-.comment-item .comment-arrows .arrow-down {background-position:-146px -99px;}
-.comment-item .comment-arrows .arrow-up:hover {background-position:-167px -78px;}
-.comment-item .comment-arrows .arrow-down:hover {background-position:-167px -99px;}
-.comment-item .comment-arrows .arrow-up.pushed {background-position:-188px -78px;}
-.comment-item .comment-arrows .arrow-down.pushed {background-position:-188px -99px;}
+.comment-list .comment-item {margin:0 0 5px; background-color:#F8F8F8;}
+.comment-list .comment-item .comment-arrows {margin:0; padding:10px 5px 0; width:22px;}
+.comment-list .comment-item dl {margin:0; margin-left:30px; padding:10px;}
+.comment-list .comment-item dt {font-weight:normal; font-size:12px; color:#AAA; margin-bottom:5px;}
+.comment-list .comment-item dd {line-height:20px; font-size:12px; padding:0; margin:0;}
+.comment-list .comment-item .comment-arrows a {display:block; width:20px; height:20px; margin:2px auto; text-indent:-9999px;}
+.comment-list .comment-item .comment-arrows .arrow-up {background-position:-146px -78px;}
+.comment-list .comment-item .comment-arrows .arrow-down {background-position:-146px -99px;}
+.comment-list .comment-item .comment-arrows .arrow-up:hover {background-position:-167px -78px;}
+.comment-list .comment-item .comment-arrows .arrow-down:hover {background-position:-167px -99px;}
+.comment-list .comment-item .comment-arrows .arrow-up.pushed {background-position:-188px -78px;}
+.comment-list .comment-item .comment-arrows .arrow-down.pushed {background-position:-188px -99px;}
+.post-line-list .comment-list {margin-top:20px;}
 .next-posts {margin-bottom:15px;}
 .next-posts .post-nav {margin-bottom:10px;}
 .next-posts .post-nav a:link, .next-posts .post-nav a:visited {display:block; padding:0; text-align:center; line-height:33px; color:white; margin-right:5px;}
