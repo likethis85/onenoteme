@@ -320,6 +320,7 @@ Waduanzi.fetchComments = function(event) {
 	
 	jqXhr.done(function(data, textStatus, jqXHR){
 		commentBlock.html(data.html).show();
+		commentBlock.find('textarea').focus();
 		tthis.data('comments', data.html);
 	});
 	
