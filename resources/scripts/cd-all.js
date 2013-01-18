@@ -130,7 +130,12 @@ Waduanzi.PostComment = function(event) {
 		if (data.errno == 0) {
 			errorElement.after(data.html);
 			contentElement.val('').removeClass('expand');
-			$.removeData(document.body, 'comments');
+			
+			// post list valid
+			var commentBlock = form.parents('.comment-list');
+			if (commentBlock.length > 0) {
+				commentBlock.removeData('comments');
+			}
 		}
 		else
 			errorElement.html(data.error).show();
@@ -323,7 +328,7 @@ Waduanzi.fetchComments = function(event) {
 		return false;
 	}
 	
-	var cacheData = $.data(document.body, 'comments');
+	var cacheData = commentBlock.data('comments');
 	if (cacheData != undefined) {
 		commentBlock.html(cacheData).show();
 		return true;
@@ -344,7 +349,7 @@ Waduanzi.fetchComments = function(event) {
 	
 	jqXhr.done(function(data, textStatus, jqXHR){
 		commentBlock.html(data.html).show();
-		$.data(document.body, 'comments', data.html);
+		commentBlock.data('comments', data.html);
 	});
 	
 	jqXhr.fail(function(jqXHR, textStatus, errorThrown){
