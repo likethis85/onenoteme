@@ -1053,7 +1053,7 @@ input.button:active, .button:active {background-position:-389px 0;}
 .comment-list .comment-item .comment-arrows .arrow-down:hover {background-position:-167px -99px;}
 .comment-list .comment-item .comment-arrows .arrow-up.pushed {background-position:-188px -78px;}
 .comment-list .comment-item .comment-arrows .arrow-down.pushed {background-position:-188px -99px;}
-.post-line-list .comment-list {margin-top:20px;}
+.post-line-list .comment-list {margin-top:10px; padding-top:10px; border-top:3px solid #DFDFDF;}
 .next-posts {margin-bottom:15px;}
 .next-posts .post-nav {margin-bottom:10px;}
 .next-posts .post-nav a:link, .next-posts .post-nav a:visited {display:block; padding:0; text-align:center; line-height:33px; color:white; margin-right:5px;}
