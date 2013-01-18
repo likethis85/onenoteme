@@ -132,10 +132,10 @@ Waduanzi.PostComment = function(event) {
 			contentElement.val('').removeClass('expand');
 			
 			// post list valid
-			var commentBlock = form.parents('.comment-list');
-			if (commentBlock.length > 0) {
-				commentBlock.data('comments', commentBlock.html());
-			}
+//			var commentBlock = form.parents('.comment-list');
+//			if (commentBlock.length > 0) {
+//				commentBlock.data('comments', commentBlock.html());
+//			}
 		}
 		else
 			errorElement.html(data.error).show();
