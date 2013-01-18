@@ -10,19 +10,20 @@
 
 <script type="text/javascript">
 $(function(){
-    $(document).on('focus', 'textarea.comment-content', function(event){
+    $(document).on('focusin', 'textarea.comment-content', function(event){
     	var tthis = $(this);
     	tthis.addClass('expand');
         if ($.trim(tthis.val()) == tthis.attr('data-placeholder'))
             tthis.val('');
     });
-    $(document).on('blur', 'textarea.comment-content', function(event){
+    $(document).on('focusout', 'textarea.comment-content', function(event){
         var tthis = $(this);
         if ($.trim(tthis.val()).length == 0) {
         	tthis.val(tthis.attr('data-placeholder'));
         	tthis.removeClass('expand');
         }
     });
+    $(document).on('keyup', 'textarea.comment.content')
     $(document).on('click', 'input.submit-comment', Waduanzi.PostComment);
 });
 </script>
