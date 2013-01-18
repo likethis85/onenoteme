@@ -34,7 +34,7 @@ class PostController extends Controller
         $this->redirect(url('post/show', array('id' => $id)));
     }
     
-    public function actionShow($id)
+    public function actionShow($id, $callback='')
     {
         $this->autoSwitchMobile();
         
@@ -47,7 +47,8 @@ class PostController extends Controller
             try {
                 $comments = Comment::fetchListByPostID($id, 1, param('comment_count_page_home'));
                 $html = $this->renderPartial('/comment/list', array('comments'=>$comments), true);
-                echo $html;
+                $data = array('html' => $html);
+                CDBase::jsonp($callback, $data);
             }
             catch (Exception $e) {
                 throw new CHttpException(500, $e->getMessage());
