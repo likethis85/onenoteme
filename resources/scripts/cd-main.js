@@ -74,35 +74,38 @@ Waduanzi.AjustImgWidth = function(selector, max){
 };
 Waduanzi.PostComment = function(event) {
 	event.preventDefault();
-	var content = $.trim($('#comment-content').val());
-	var postid = parseInt($('input[name=postid]').val());
+	var form = $(this).parents('form');
+	var contentElement = form.find('.comment-content');
+	var errorElement = form.next('#caption-error');
+	var loadingElement = form.find('.save-caption-loader');
+	
+	var content = $.trim(contentElement.val());
+	var postid = parseInt(form.find('input[name=postid]').val());
 	if (postid <= 0 || content.length <= 0)
 		return false;
-	var form = $(this).parents('form');
 
 	var xhr = $.ajax({
 		url: form.attr('action'),
 		type: 'POST',
 		dataType: 'jsonp',
-		data: $('#comment-form').serialize(),
+		data: form.serialize(),
 		beforeSend: function(){
-			$('#caption-error').empty().hide();
-			form.find('.save-caption-loader').show();
+			errorElement.empty().hide();
+			loadingElement.show();
 		}
 	});
 	xhr.done(function(data){
-		form.find('.save-caption-loader').hide();
+		loadingElement.hide();
 		if (data.errno == 0) {
-			$('#comments').prepend(data.html);
-			$('#comment-content').val('');
-			$('#comment-content').removeClass('expand');
+			form.next('.comment-list').prepend(data.html);
+			contentElement.val('').removeClass('expand');
 		}
 		else
-			$('#caption-error').html(data.error).show();
+			errorElement.html(data.error).show();
 	});
 	xhr.fail(function(){
-		form.find('.save-caption-loader').hide();
-		$('#caption-error').html('发送请求错误！').show();
+		loadingElement.hide();
+		errorElement.html('发送请求错误！').show();
 	});
 };
 
