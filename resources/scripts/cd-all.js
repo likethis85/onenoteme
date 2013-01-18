@@ -106,7 +106,7 @@ Waduanzi.PostComment = function(event) {
 	event.preventDefault();
 	var form = $(this).parents('form');
 	var contentElement = form.find('.comment-content');
-	var errorElement = form.next('#caption-error');
+	var errorElement = form.next('.caption-error');
 	var loadingElement = form.find('.save-caption-loader');
 	
 	var content = $.trim(contentElement.val());
