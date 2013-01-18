@@ -127,12 +127,17 @@ class Comment extends CActiveRecord
 	    return (int)($this->up_score - $this->down_score);
 	}
 	
-	public function fetchList($postid, $page = 1)
+	public static function fetchListByPostID($postid, $page = 1, $count = null)
 	{
 	    $postid = (int)$postid;
+	    $page = (int)$page;
+	    $count = (int)$count;
+	    if ($count === 0)
+	        $count = param('commentCountOfPage');
+	    
 	    $criteria = new CDbCriteria();
 	    $criteria->order = 'create_time asc';
-	    $criteria->limit = param('commentCountOfPage');
+	    $criteria->limit = $count;
 	    $offset = ($page - 1) * $criteria->limit;
 	    $criteria->offset = $offset;
 	    $criteria->addColumnCondition(array(
@@ -140,7 +145,7 @@ class Comment extends CActiveRecord
             'state' => COMMENT_STATE_ENABLED,
 	    ));
 	
-	    $comments = $this->findAll($criteria);
+	    $comments = self::model()->findAll($criteria);
 	    return $comments;
 	}
 	

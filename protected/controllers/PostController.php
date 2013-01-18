@@ -44,9 +44,14 @@ class PostController extends Controller
             throw new CHttpException(500, '非法请求');
         
         if (request()->getIsAjaxRequest()) {
-            $commentsData = self::fetchComments($id);
-            $html = $this->renderPartial('/comment/list', $commentsData, true);
-            echo $html;
+            try {
+                $comments = Comment::fetchListByPostID($id, 1, param('comment_count_page_home'));
+                $html = $this->renderPartial('/comment/list', array('comments'=>$comments), true);
+                echo $html;
+            }
+            catch (Exception $e) {
+                throw new CHttpException(500, $e->getMessage());
+            }
             exit(0);
         }
         

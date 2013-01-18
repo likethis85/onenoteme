@@ -279,15 +279,57 @@ Waduanzi.quickLogin = function(url, data, success, fail){
 	fail && jqXhr.fail(function(jqXHR, textStatus, errorThrown){fail(jqXHR, textStatus, errorThrown);});
 };
 
+Waduanzi.fetchComments = function(event) {
+	event.preventDefault();
+	var tthis = $(this);
+	var commentBlock = tthis.parents('.item-toolbar').next('.comment-list');
+	if (commentBlock.filter(':visible').length > 0) {
+		commentBlock.hide();
+		return false;
+	}
+	
+	var cacheData = tthis.data('comments');
+	if (cacheData != undefined) {
+		commentBlock.html(cacheData).show();
+		return true;
+	}
+		
+	
+	var url = tthis.attr('data-url');
+	var commentCount = parseInt(tthis.text());
+	var jqXhr = $.ajax({
+		url: url,
+		dataType: 'html',
+		type: 'get',
+		cache: true,
+		beforeSend: function(jqXHR, settings){
+			tthis.text('...');
+		}
+	});
+	
+	jqXhr.done(function(data, textStatus, jqXHR){
+		commentBlock.html(data).show();
+		tthis.data('comments', data);
+	});
+	
+	jqXhr.fail(function(jqXHR, textStatus, errorThrown){
+		alert('fail');
+	});
+	
+	jqXhr.always(function(){
+		tthis.text(commentCount);
+	});
+};
+
 $(function(){
 	Waduanzi.fixedAdBlock();
 	$('#small-wxqrcode').hover(function(){
 		var tthis = $(this);
 		var pos = tthis.position();
 		var top = pos.top + tthis.height();
-		console.log(pos.top);
-		console.log(top);
-		console.log(tthis.height());
+//		console.log(pos.top);
+//		console.log(top);
+//		console.log(tthis.height());
 		var left = pos.left + tthis.width() - $('#big-wxqrcode').width();
 		$('#big-wxqrcode').css('left', left).show();
 	}, function(){
