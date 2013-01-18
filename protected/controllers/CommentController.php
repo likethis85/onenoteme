@@ -9,13 +9,14 @@ class CommentController extends Controller
         );
     }
     
-    public function actionList($id)
+    public function actionList($id, $callback = '')
     {
         $id = (int)$id;
         try {
             $comments = Comment::fetchListByPostID($id, 1, param('comment_count_page_home'));
             $html = $this->renderPartial('/comment/list', array('comments'=>$comments), true);
-            echo $html;
+            $data = array('html' => $html);
+            CDBase::jsonp($callback, $data);
         }
         catch (Exception $e) {
             throw new CHttpException(500, $e->getMessage());

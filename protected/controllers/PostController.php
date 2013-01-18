@@ -43,19 +43,6 @@ class PostController extends Controller
         if ($id <= 0)
             throw new CHttpException(500, '非法请求');
         
-        if (request()->getIsAjaxRequest()) {
-            try {
-                $comments = Comment::fetchListByPostID($id, 1, param('comment_count_page_home'));
-                $html = $this->renderPartial('/comment/list', array('comments'=>$comments), true);
-                $data = array('html' => $html);
-                CDBase::jsonp($callback, $data);
-            }
-            catch (Exception $e) {
-                throw new CHttpException(500, $e->getMessage());
-            }
-            exit(0);
-        }
-        
         if (user()->getFlash('allowUserView'))
             $post = Post::model()->findByPk($id);
         else {
