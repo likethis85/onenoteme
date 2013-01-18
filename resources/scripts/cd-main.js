@@ -302,6 +302,7 @@ Waduanzi.fetchComments = function(event) {
 	var cacheData = tthis.data('comments');
 	if (cacheData != undefined) {
 		commentBlock.html(cacheData).show();
+		commentBlock.find('textarea').focus();
 		return true;
 	}
 		
@@ -320,6 +321,7 @@ Waduanzi.fetchComments = function(event) {
 	
 	jqXhr.done(function(data, textStatus, jqXHR){
 		commentBlock.html(data.html).show();
+		commentBlock.find('textarea').focus();
 		tthis.data('comments', data.html);
 	});
 	
