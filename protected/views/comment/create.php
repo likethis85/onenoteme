@@ -8,21 +8,3 @@
 </form>
 <div class="caption-error content-block hide"></div>
 
-<script type="text/javascript">
-$(function(){
-    $(document).on('focusin', 'textarea.comment-content', function(event){
-    	var tthis = $(this);
-    	tthis.addClass('expand');
-        if ($.trim(tthis.val()) == tthis.attr('data-placeholder'))
-            tthis.val('');
-    });
-    $(document).on('focusout', 'textarea.comment-content', function(event){
-        var tthis = $(this);
-        if ($.trim(tthis.val()).length == 0) {
-        	tthis.val(tthis.attr('data-placeholder'));
-        	tthis.removeClass('expand');
-        }
-    });
-    $(document).on('click', 'input.submit-comment', Waduanzi.PostComment);
-});
-</script>
