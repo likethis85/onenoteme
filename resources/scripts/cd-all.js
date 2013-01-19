@@ -130,12 +130,6 @@ Waduanzi.PostComment = function(event) {
 		if (data.errno == 0) {
 			errorElement.after(data.html);
 			contentElement.val('').removeClass('expand');
-			
-			// post list valid
-//			var commentButton = form.parents('.post-box').find('a.comment');
-//			if (commentButton.length > 0) {
-//				commentButton.removeData('comments');
-//			}
 		}
 		else
 			errorElement.html(data.error).show();
@@ -332,14 +326,6 @@ Waduanzi.fetchComments = function(event) {
 		return true;
 	}
 	
-	/*
-	var cacheData = tthis.data('comments');
-	if (cacheData != undefined) {
-		commentBlock.html(cacheData).show();
-		return true;
-	}
-	*/
-	
 	var url = tthis.attr('data-url');
 	var commentCount = tthis.text();
 	var jqXhr = $.ajax({
@@ -355,7 +341,6 @@ Waduanzi.fetchComments = function(event) {
 	jqXhr.done(function(data, textStatus, jqXHR){
 		commentBlock.html(data.html).show();
 		commentBlock.find('textarea').focus();
-//		tthis.data('comments', data.html);
 	});
 	
 	jqXhr.fail(function(jqXHR, textStatus, errorThrown){
@@ -372,10 +357,7 @@ $(function(){
 	$('#small-wxqrcode').hover(function(){
 		var tthis = $(this);
 		var pos = tthis.position();
-		var top = pos.top + tthis.height();
-//		console.log(pos.top);
-//		console.log(top);
-//		console.log(tthis.height());
+//		var top = pos.top + tthis.height();
 		var left = pos.left + tthis.width() - $('#big-wxqrcode').width();
 		$('#big-wxqrcode').css('left', left).show();
 	}, function(){
