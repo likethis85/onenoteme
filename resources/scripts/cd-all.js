@@ -134,8 +134,7 @@ Waduanzi.PostComment = function(event) {
 			// post list valid
 			var commentButton = form.parents('.post-box').find('a.comment');
 			if (commentButton.length > 0) {
-				var commentBlock = form.parents('.comment-list');
-				commentButton.data('comments', commentBlock.html());
+				commentButton.removeData('comments');
 			}
 		}
 		else
