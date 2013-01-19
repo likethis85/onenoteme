@@ -102,10 +102,10 @@ Waduanzi.PostComment = function(event) {
 			contentElement.val('').removeClass('expand');
 			
 			// post list valid
-			var commentButton = form.parents('.post-box').find('a.comment');
-			if (commentButton.length > 0) {
-				commentButton.removeData('comments');
-			}
+//			var commentButton = form.parents('.post-box').find('a.comment');
+//			if (commentButton.length > 0) {
+//				commentButton.removeData('comments');
+//			}
 		}
 		else
 			errorElement.html(data.error).show();
@@ -295,15 +295,20 @@ Waduanzi.fetchComments = function(event) {
 	var commentBlock = tthis.parents('.item-toolbar').next('.comment-list');
 	if (commentBlock.filter(':visible').length > 0) {
 		commentBlock.hide();
-		return false;
+		return true;
+	}
+	else if (commentBlock.html().length > 0) {
+		commentBlock.show();
+		return true;
 	}
 	
+	/*
 	var cacheData = tthis.data('comments');
 	if (cacheData != undefined) {
 		commentBlock.html(cacheData).show();
 		return true;
 	}
-		
+	*/
 	
 	var url = tthis.attr('data-url');
 	var commentCount = tthis.text();
@@ -320,7 +325,7 @@ Waduanzi.fetchComments = function(event) {
 	jqXhr.done(function(data, textStatus, jqXHR){
 		commentBlock.html(data.html).show();
 		commentBlock.find('textarea').focus();
-		tthis.data('comments', data.html);
+//		tthis.data('comments', data.html);
 	});
 	
 	jqXhr.fail(function(jqXHR, textStatus, errorThrown){
