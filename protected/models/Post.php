@@ -524,6 +524,7 @@ class Post extends CActiveRecord
     {
         if ($this->getIsNewRecord()) {
             $this->create_time = $_SERVER['REQUEST_TIME'];
+	        $this->create_ip = CDBase::getClientIp();
             $this->comment_nums = 0;
         }
         
