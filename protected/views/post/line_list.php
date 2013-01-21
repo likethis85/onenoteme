@@ -104,8 +104,9 @@ $(function(){
 	$('.item-toolbar').on('mouseleave', 'a.share, .sharebox', Waduanzi.hideShareBox);
 	$('.item-toolbar').on('click', 'a.favorite', Waduanzi.favoritePost);
 	$('.item-toolbar').on('click', 'a.comment', Waduanzi.fetchComments);
+
 	$(document).on('click', '.comment-arrows a', Waduanzi.RatingComment);
-	
+	$(document).on('click', 'input.submit-comment', Waduanzi.PostComment);
     $(document).on('focusin', 'textarea.comment-content', function(event){
     	var tthis = $(this);
     	tthis.addClass('expand');
@@ -119,7 +120,7 @@ $(function(){
         	tthis.removeClass('expand');
         }
     });
-    $(document).on('click', 'input.submit-comment', Waduanzi.PostComment);
+    
 });
 </script>
 
