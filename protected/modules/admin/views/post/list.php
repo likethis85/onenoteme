@@ -1,20 +1,20 @@
 <h4><?php echo user()->getFlash('table_caption', $this->adminTitle);?></h4>
 <div class="btn-toolbar">
-    <button class="btn btn-small" id="select-all"><?php echo t('select_all', 'admin');?></button>
-    <button class="btn btn-small" id="reverse-select"><?php echo t('reverse_select', 'admin');?></button>
+    <button class="btn btn-small" id="select-all">全选</button>
+    <button class="btn btn-small" id="reverse-select">反选</button>
     <?php if (strtolower($this->action->id) == 'verify'):?>
-    <button class="btn btn-small btn-primary" id="batch-verify" data-src="<?php echo url('admin/post/multiVerify');?>"><?php echo t('set_batch_verify', 'admin');?></button>
-    <button class="btn btn-small btn-primary" id="batch-reject" data-src="<?php echo url('admin/post/multiReject');?>"><?php echo t('set_batch_reject', 'admin');?></button>
+    <button class="btn btn-small btn-primary" id="batch-verify" data-src="<?php echo url('admin/post/multiVerify');?>">通过</button>
+    <button class="btn btn-small btn-primary" id="batch-reject" data-src="<?php echo url('admin/post/multiReject');?>">拒绝</button>
     <?php else:?>
-    <button class="btn btn-small btn-primary" id="batch-recommend" data-src="<?php echo url('admin/post/multiRecommend');?>"><?php echo t('setrecommend', 'admin');?></button>
-    <button class="btn btn-small btn-primary" id="batch-hottest" data-src="<?php echo url('admin/post/multiHottest');?>"><?php echo t('sethottest', 'admin');?></button>
+    <button class="btn btn-small btn-primary" id="batch-recommend" data-src="<?php echo url('admin/post/multiRecommend');?>">推荐</button>
+    <button class="btn btn-small btn-primary" id="batch-hottest" data-src="<?php echo url('admin/post/multiHottest');?>">热门</button>
     <?php endif;?>
     <?php if (strtolower($this->action->id) == 'trash'):?>
-    <button class="btn btn-small btn-danger" id="batch-delete" data-src="<?php echo url('admin/post/multiDelete');?>"><?php echo t('forever_delete', 'admin');?></button>
+    <button class="btn btn-small btn-danger" id="batch-delete" data-src="<?php echo url('admin/post/multiDelete');?>">永久删除</button>
     <?php else:?>
-    <button class="btn btn-small btn-danger" id="batch-trash" data-src="<?php echo url('admin/post/multiTrash');?>"><?php echo t('trash_post', 'admin');?></button>
+    <button class="btn btn-small btn-danger" id="batch-trash" data-src="<?php echo url('admin/post/multiTrash');?>">放入回收站</button>
     <?php endif;?>
-    <a class="btn btn-small btn-success" href=""><?php echo t('reload_data', 'admin');?></a>
+    <a class="btn btn-small btn-success" href="">刷新</a>
 </div>
 <table class="table table-striped table-bordered beta-list-table table-post-list">
     <thead>
@@ -22,7 +22,6 @@
             <th class="item-checkbox align-center">#</th>
             <th class="span1 align-center"><?php echo $sort->link('id');?></th>
             <th class="span6"><?php echo $sort->link('title');?></th>
-            <th class="span2 align-center"><?php echo $sort->link('category_id');?>&nbsp;/&nbsp;<?php echo $sort->link('topic_id');?></th>
             <th class="span1 align-center"><?php echo $sort->link('comment_nums');?></th>
             <th class="span2 align-center"><?php echo $sort->link('create_time');?></th>
             <th class="span1 align-center">#</th>
@@ -41,35 +40,30 @@
                 <?php echo $model->getStateLabel() . $model->editLink . $model->getExtraStateLabels();?>
                 <form class="form-inline invisible state-update-block" method="post" action="<?php echo url('admin/post/quickUpdate', array('id'=>$model->id));?>">
                     <label class="checkbox">
-                        <?php echo CHtml::activeCheckBox($model, 'homeshow');?><?php echo t('home_show', 'admin');?>
+                        <?php echo CHtml::activeCheckBox($model, 'homeshow');?>首页显示
                     </label>
                     <label class="checkbox">
-                        <?php echo CHtml::activeCheckBox($model, 'hottest');?><?php echo t('hottest_show', 'admin');?>
+                        <?php echo CHtml::activeCheckBox($model, 'hottest');?>热门
                     </label>
                     <label class="checkbox">
-                        <?php echo CHtml::activeCheckBox($model, 'recommend');?><?php echo t('recommend_show', 'admin');?>
+                        <?php echo CHtml::activeCheckBox($model, 'recommend');?>推荐
                     </label>
                     <label class="checkbox">
-                        <?php echo CHtml::activeCheckBox($model, 'istop');?><?php echo t('settop', 'admin');?>
+                        <?php echo CHtml::activeCheckBox($model, 'istop');?>置顶
                     </label>
                     <label class="checkbox">
-                        <?php echo CHtml::activeCheckBox($model, 'disable_comment');?><?php echo t('disable_comment');?>
+                        <?php echo CHtml::activeCheckBox($model, 'disable_comment');?>禁止评论
                     </label>
                     <label class="checkbox">
                         <?php echo CHtml::activeDropDownList($model, 'state', AdminPost::stateLabels(), array('class'=>'select-mini'));?>
                     </label>
-                    <button data-toggle="button" data-loading-text="<?php echo t('updating', 'admin');?>" data-error-text="<?php echo t('update_error', 'admin')?>" data-complete-text="<?php echo t('update_complete', 'admin');?>" class="btn-update-state btn btn-mini"><?php echo t('update', 'admin');?></button>
+                    <button data-toggle="button" data-loading-text="更新中..." data-error-text="更新出错" data-complete-text="更新完成" class="btn-update-state btn btn-mini">更新</button>
                 </form>
             </td>
-            <td>
-                <?php echo $model->adminCategory->postListLink;?><br />
-                <?php echo $model->adminTopic->postListLink;?>
-            </td>
-            <td class="align-center"><?php echo $model->commentNumsBadgeHtml;?><br />
-            </td>
-            <td>
+            <td class="align-center"><?php echo $model->commentNumsBadgeHtml;?><br /></td>
+            <td class="cgray">
                 <?php echo $model->authorName;?><br />
-                <?php echo $model->createTime;?>
+                <span class="f12px"><?php echo $model->createTime;?></span>
             </td>
             <td class="align-center">
                 <?php if (strtolower($this->action->id) != 'trash'):?>
@@ -83,7 +77,7 @@
     </tbody>
 </table>
 <?php if ($pages):?>
-<div class="beta-pages"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'htmlOptions'=>array('class'=>'pagination')));?></div>
+<div class="pagination"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
 <?php endif;?>
 
 <script type="text/javascript">

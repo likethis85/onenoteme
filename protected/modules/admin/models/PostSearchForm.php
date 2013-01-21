@@ -18,9 +18,9 @@ class PostSearchForm extends CFormModel
     public function attributeLabels()
     {
         return array(
-            'postid' => t('postid', 'admin'),
-            'author' => t('author', 'admin'),
-            'keyword' => t('keyword', 'admin'),
+            'postid' => '段子ID',
+            'author' => '作者',
+            'keyword' => '关键词',
         );
     }
     

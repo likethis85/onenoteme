@@ -26,28 +26,17 @@ class AdminPost extends Post
         return parent::model($className);
     }
     
-    public static function stateLabels()
+    public static function stateLabels($state = null)
     {
-        return array(
-            POST_STATE_ENABLED => t('post_state_enabled', 'admin'),
-            POST_STATE_DISABLED => t('post_state_disabled', 'admin'),
-            POST_STATE_REJECTED => t('post_state_rejected', 'admin'),
-            POST_STATE_NOT_VERIFY => t('post_state_not_verify', 'admin'),
-            POST_STATE_TRASH => t('post_state_trash', 'admin'),
+        $labels = array(
+            POST_STATE_ENABLED => '已上线',
+            POST_STATE_DISABLED => '未显示',
+            POST_STATE_UNVERIFY => '未审核',
+            POST_STATE_REJECTED => '拒绝',
+            POST_STATE_TRASH => '回收站',
         );
-    }
-    
-    public function relations()
-    {
-        return parent::relations() + array(
-            'adminCategory' => array(self::BELONGS_TO, 'AdminCategory', 'category_id'),
-            'adminTopic' => array(self::BELONGS_TO, 'AdminTopic', 'topic_id'),
-        );
-    }
-    
-    public function getInfoLink()
-    {
-        return l(t('post_info_view', 'admin'), url('admin/post/info', array('id'=>$this->id)));
+        
+        return $state === null ? $labels : $labels[$state];
     }
     
     public static function fetchList($criteria = null, $sort = true, $pages = true)
@@ -61,6 +50,8 @@ class AdminPost extends Post
             $sort->defaultOrder = 't.id desc';
             $sort->applyOrder($criteria);
         }
+        else
+            $criteria->order = 't.id desc';
          
         if ($pages) {
             $count = self::model()->count($criteria);
@@ -69,7 +60,7 @@ class AdminPost extends Post
             $pages->applyLimit($criteria);
         }
 
-        $models = self::model()->with('adminCategory', 'adminTopic')->findAll($criteria);
+        $models = self::model()->findAll($criteria);
 
         $data = array(
             'models' => $models,
@@ -80,6 +71,11 @@ class AdminPost extends Post
         return $data;
     }
 
+    public function getInfoLink()
+    {
+        return l('详情', url('admin/post/info', array('id'=>$this->id)), array('target'=>'_blank'));
+    }
+    
     public function getEditUrl()
     {
         return url('admin/post/create', array('id'=>$this->id));
@@ -92,35 +88,35 @@ class AdminPost extends Post
 
     public function getTrashLink()
     {
-        return l(t('delete', 'admin'), url('admin/post/settrash', array('id'=>$this->id)), array('class'=>'set-trash'));
+        return l('删除', url('admin/post/settrash', array('id'=>$this->id)), array('class'=>'set-trash'));
     }
 
     public function getDeleteLink()
     {
-        return l(t('delete', 'admin'), url('admin/post/setdelete', array('id'=>$this->id)), array('class'=>'set-delete'));
+        return l('删除', url('admin/post/setdelete', array('id'=>$this->id)), array('class'=>'set-delete'));
     }
 
     public function getVerifyLink()
     {
-        $text = t(($this->state == AdminPost::STATE_DISABLED) ? 'setshow' : 'sethide', 'admin');
+        $text = ($this->state == POST_STATE_DISABLED) ? '显示' : '隐藏';
         return l($text, url('admin/post/setVerify', array('id'=>$this->id)), array('class'=>'set-verify'));
     }
 
     public function getHottestUrl()
     {
-        $text = t(($this->hottest == BETA_NO) ? 'set_hottest_post' : 'cancel_hottest_post', 'admin');
+        $text = ($this->hottest == CD_NO) ? '热门' : '取消热门';
         return l($text, url('admin/post/sethottest', array('id'=>$this->id)), array('class'=>'set-hottest'));
     }
 
     public function getRecommendUrl()
     {
-        $text = t(($this->recommend == BETA_NO) ? 'set_recommend_post' : 'cancel_recommend_post', 'admin');
+        $text = ($this->recommend == CD_NO) ? '推荐' : '取消推荐';
         return l($text, url('admin/post/setrecommend', array('id'=>$this->id)), array('class'=>'set-recommend'));
     }
     
     public function getHomeshowUrl()
     {
-        $text = t(($this->homeshow == BETA_YES) ? 'cannel_homeshow_post' : 'set_homeshow_post', 'admin');
+        $text = ($this->homeshow == CD_YES) ? '非首页' : '首页显示';
         return l($text, url('admin/post/sethomeshow', array('id'=>$this->id)), array('class'=>'set-recommend'));
     }
 
@@ -131,7 +127,7 @@ class AdminPost extends Post
 
     public function getTopLink()
     {
-        $text = t(($this->istop == BETA_NO) ? 'settop' : 'cancel_top', 'admin');
+        $text = ($this->istop == CD_NO) ? '置顶' : '取消置顶';
         return l($text, url('admin/post/settop', array('id'=>$this->id)), array('class'=>'set-top'));
     }
 
@@ -146,13 +142,13 @@ class AdminPost extends Post
             $class = 'badge-error';
         
         $html = sprintf('<span class="badge beta-badge %s">%s</span>', $class, $count);
-        $html = l($html, $this->commentUrl, array('title'=>'Click to view comment list'));
+        $html = l($html, $this->commentUrl, array('title'=>'点击查看评论列表'));
         return $html;
     }
 
     public function getPreviewLink()
     {
-        return l(t('post_preivew', 'admin'), $this->getUrl(), array('target'=>'_blank'));
+        return l('预览', $this->getUrl(), array('target'=>'_blank'));
     }
 
     public function getStateLabel()
@@ -163,8 +159,8 @@ class AdminPost extends Post
         );
         
         $labels = array(
-            POST_STATE_DISABLED => t('post_state_marker_disabled', 'admin'),
-            POST_STATE_REJECTED => t('post_state_marker_rejected', 'admin'),
+            POST_STATE_DISABLED => '隐藏',
+            POST_STATE_REJECTED => '推绝',
         );
         
         $html = '';
@@ -177,17 +173,17 @@ class AdminPost extends Post
     public function getExtraStateLabels()
     {
         $html = '';
-        if ($this->recommend == BETA_YES)
-            $html .= '<span class="label label-small label-success">' . t('post_marker_recommend', 'admin') . '</span>';
+        if ($this->recommend == CD_YES)
+            $html .= '<span class="label label-small label-success">推荐</span>';
         
         if ($this->hottest)
-            $html .= '<span class="label label-small label-important">' . t('post_marker_hottest', 'admin') . '</span>';
+            $html .= '<span class="label label-small label-important">热门</span>';
         
         if ($this->homeshow)
-            $html .= '<span class="label label-small label-info">' . t('post_marker_homeshow', 'admin') . '</span>';
+            $html .= '<span class="label label-small label-info">首页</span>';
         
         if ($this->istop)
-            $html .= '<span class="label label-small label-info">' . t('post_marker_top', 'admin') . '</span>';
+            $html .= '<span class="label label-small label-info">置顶</span>';
         
         return $html;
     }

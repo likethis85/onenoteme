@@ -97,32 +97,11 @@ class PostController extends AdminController
 	    return $post->save(true, array('summary', 'content'));
 	}
 	
-	public function actionLatest($cid = 0, $tid = 0)
+	public function actionLatest()
 	{
-	    $cid = (int)$cid;
-	    $tid = (int)$tid;
 	    $criteria = new CDbCriteria();
 	    
 	    $title = '最新文章列表';
-	    if ($cid > 0) {
-	        $category = AdminCategory::model()->findByPk($cid);
-	        if ($category === null)
-	            throw new CException('分类不存在');
-	        
-	        $title = $title . ' - ' . $category->postsLink;
-	        $criteria->addColumnCondition(array('category_id'=>$cid));
-	    }
-	    
-	    if ($tid > 0) {
-	        $topic = AdminTopic::model()->findByPk($tid);
-	        if ($topic === null)
-	            throw new CException('主题不存在');
-	         
-	        $title = $title . ' - ' . $topic->postsLink;
-	        $criteria->addColumnCondition(array('topic_id'=>$tid));
-	    }
-	    
-	    $criteria->addCondition('t.state != ' . POST_STATE_TRASH);
 	    $data = AdminPost::fetchList($criteria);
 	    
 	    $this->adminTitle = $title;
@@ -132,7 +111,7 @@ class PostController extends AdminController
 	public function actionVerify()
 	{
 	    $criteria = new CDbCriteria();
-	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_NOT_VERIFY));
+	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_UNVERIFY));
 	    $data = AdminPost::fetchList($criteria);
 	    
 	    $this->adminTitle = '未审核文章列表';

@@ -8,25 +8,27 @@ class CommentSearchForm extends CFormModel
     public $keyword;
     public $start_create_time;
     public $end_create_time;
+    public $create_ip;
     
     public function rules()
     {
         return array(
             array('comment_id, post_id, user_id, start_create_time, end_create_time', 'numerical', 'integerOnly'=>true),
-            array('user_name, keyword', 'filter', 'filter'=>'trim'),
+            array('user_name, keyword, create_ip', 'filter', 'filter'=>'trim'),
         );
     }
     
     public function attributeLabels()
     {
         return array(
-            'comment_id' => t('comment_id', 'admin'),
-            'post_id' => t('post_id', 'admin'),
-            'user_id' => t('comment_user_id', 'admin'),
-            'user_name' => t('comment_user_name', 'admin'),
-            'keyword' => t('keyword', 'admin'),
-            'start_create_time' => t('start_create_time', 'admin'),
-            'end_create_time' => t('end_create_time', 'admin'),
+            'comment_id' => '评论ID',
+            'post_id' => '段子ID',
+            'user_id' => '评论人ID',
+            'user_name' => '评论人',
+            'keyword' => '关键字',
+            'start_create_time' => '起始时间',
+            'end_create_time' => '结束时间',
+            'create_ip' => '用户IP',
         );
     }
     
@@ -45,6 +47,8 @@ class CommentSearchForm extends CFormModel
                 $criteria->addColumnCondition(array('t.user_name'=>$this->user_name));
             if ($this->keyword)
                 $criteria->addSearchCondition('t.content', $this->keyword);
+            if ($this->create_ip)
+                $criteria->addSearchCondition('t.create_ip', $this->create_ip);
             
             if ($this->start_create_time || $this->end_create_time) {
                 $criteria->addCondition(array('and', 't.create_time > :starttime', 't.create_time < :endtime'));

@@ -14,6 +14,7 @@
  * @property integer $up_score
  * @property integer $down_score
  * @property integer $state
+ * @property integer $recommend
  *
  * @property string $authorName
  * @property string $filterContent
@@ -61,7 +62,7 @@ class Comment extends CActiveRecord
 	    $commentMinLen = param('comment_min_length') ? param('comment_min_length') : 2;
 		return array(
 	        array('content', 'required'),
-			array('state, post_id, user_id, create_time, up_score, down_score', 'numerical', 'integerOnly'=>true),
+			array('state, post_id, user_id, create_time, up_score, down_score, recommend', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
 			array('create_ip', 'length', 'max'=>15),
 			array('content', 'length', 'min'=>$commentMinLen, 'max'=>2000),
@@ -80,6 +81,27 @@ class Comment extends CActiveRecord
 		);
 	}
 
+	public function scopes()
+	{
+	    return array(
+    	    'recently' => array(
+        	    'order' => 't.create_time desc',
+        	    'limit' => 10,
+    	    ),
+    	    'recommend' => array(
+        	    'condition' => 't.recommend = ' .  CD_YES,
+        	    'order' => 't.create_time desc',
+    	    ),
+    	    'noverify' => array(
+        	    'condition' => 't.state = ' .  COMMENT_STATE_DISABLED,
+    	    ),
+    	    'published' => array(
+        	    'condition' => 't.state = ' .  COMMENT_STATE_ENABLED,
+        	    'order' => 't.create_time desc',
+    	    ),
+	    );
+	}
+	
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -94,6 +116,7 @@ class Comment extends CActiveRecord
 			'create_time' => '创建时间',
 			'create_ip' => '创建IP',
 			'state' => '状态',
+		    'recommend' => '推荐',
 		);
 	}
 

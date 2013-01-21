@@ -22,7 +22,7 @@ class AdminComment extends Comment
     
     public function getAdminTitleLink($target = 'main')
     {
-	    if ($this->istop == BETA_YES)
+	    if ($this->istop == CD_YES)
 	        $title = '<strong>[置顶]' . $this->title . '</strong>';
 	    else
 	        $title = $this->title;
@@ -41,6 +41,8 @@ class AdminComment extends Comment
             $sort->defaultOrder = 't.id desc';
             $sort->applyOrder($criteria);
         }
+        else
+            $criteria->order = 't.id desc';
          
         if ($pages) {
             $count = self::model()->count($criteria);
@@ -72,14 +74,14 @@ class AdminComment extends Comment
 
     public function getVerifyUrl()
     {
-        $text = t(($this->state == COMMENT_STATE_DISABLED) ? 'hide_comment' : 'show_comment', 'admin');
+        $text = ($this->state == COMMENT_STATE_DISABLED) ? '隐藏' : '显示';
         $class = $this->state == COMMENT_STATE_DISABLED ? 'label label-important' : 'label label-success';
         return l($text, url('admin/comment/setVerify', array('id'=>$this->id)), array('class'=>'set-verify ' . $class));
     }
 
     public function getRecommendUrl()
     {
-        $text = t(($this->recommend == BETA_NO) ? 'not_recommend_comment' : 'set_recommend_comment', 'admin');
+        $text = ($this->recommend == CD_NO) ? '取消推荐' : '推荐';
 
         $class = $this->recommend == COMMENT_STATE_DISABLED ? 'label label-important' : 'label label-success';
         return l($text, url('admin/comment/setRecommend', array('id'=>$this->id)), array('class'=>'set-recommend ' . $class));

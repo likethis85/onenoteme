@@ -95,7 +95,7 @@ class CommentController extends AdminController
 	        throw new CHttpException(500);
 	    else {
 	        $data = array(
-	            'errno' => BETA_NO,
+	            'errno' => CD_NO,
 	            'label' => t($model->state == COMMENT_STATE_DISABLED ? 'sethide' : 'setshow', 'admin')
 	        );
 	        echo $callback . '(' . CJSON::encode($data) . ')';
@@ -111,14 +111,14 @@ class CommentController extends AdminController
 	        throw new CHttpException(500);
 	
 	    $model->state = COMMENT_STATE_ENABLED;
-	    $model->recommend = abs($model->recommend - BETA_YES);
+	    $model->recommend = abs($model->recommend - CD_YES);
 	    $model->save(true, array('recommend', 'create_time'));
 	    if ($model->hasErrors())
 	        throw new CHttpException(500);
 	    else {
 	        $data = array(
-	            'errno' => BETA_NO,
-	            'label' => t($model->recommend == BETA_NO ? 'not_recommend_comment' : 'set_recommend_comment', 'admin')
+	            'errno' => CD_NO,
+	            'label' => t($model->recommend == CD_NO ? 'not_recommend_comment' : 'set_recommend_comment', 'admin')
 	        );
 	        echo $callback . '(' . CJSON::encode($data) . ')';
 	        exit(0);
@@ -134,7 +134,7 @@ class CommentController extends AdminController
 	    
 	    $result = $model->delete();
 	    $data = array(
-	        'errno' => $result ? BETA_NO : BETA_YES,
+	        'errno' => $result ? CD_NO : CD_YES,
 	    );
 	    echo $callback . '(' . CJSON::encode($data) . ')';
 	    exit(0);
@@ -209,7 +209,7 @@ class CommentController extends AdminController
 	    $successIds = $failedIds = array();
 	    $attributes = array(
 	        'state' => COMMENT_STATE_ENABLED,
-	        'recommend' => BETA_YES,
+	        'recommend' => CD_YES,
 	    );
 	    foreach ($ids as $id) {
     	    $result =Comment::model()->updateByPk($id, $attributes);

@@ -34,6 +34,7 @@
  * @property integer $homeshow
  * @property integer $recommend
  * @property integer $hottest
+ * @property integer $disable_comment
  *
  * @property User $user
  * @property UserProfile $profile
@@ -115,7 +116,7 @@ class Post extends CActiveRecord
 		// will receive user inputs.
 		return array(
 		    array('content', 'required', 'message'=>'段子内容必须填写'),
-			array('channel_id, view_nums, up_score, down_score, comment_nums, gif_animation, state, favorite_count, create_time, user_id, thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height, istop, homeshow, recommend, hottest', 'numerical', 'integerOnly'=>true),
+			array('channel_id, view_nums, up_score, down_score, comment_nums, disable_comment, gif_animation, state, favorite_count, create_time, user_id, thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height, istop, homeshow, recommend, hottest', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
 			array('weibo_id', 'length', 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
@@ -172,6 +173,7 @@ class Post extends CActiveRecord
 	        'homeshow' => '首页显示',
 	        'recommend' => '推荐',
 	        'hottest' => '热门',
+		    'disable_comment' => '评论',
 		);
 	}
 
