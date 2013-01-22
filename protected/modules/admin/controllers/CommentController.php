@@ -118,7 +118,7 @@ class CommentController extends AdminController
 	    else {
 	        $data = array(
 	            'errno' => CD_NO,
-	            'label' => $model->recommend == CD_NO ? '取消推荐' : '推荐',
+	            'label' => $model->recommend == CD_NO ? '未推荐' : '推荐',
 	        );
 	        echo $callback . '(' . CJSON::encode($data) . ')';
 	        exit(0);

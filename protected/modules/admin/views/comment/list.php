@@ -14,7 +14,7 @@
             <th class="span1 align-center"><?php echo $sort->link('id');?></th>
             <th class="span8">内容</th>
             <th class="span2">评论人&nbsp;/&nbsp;<?php echo $sort->link('create_time');?></th>
-            <th class="span2 align-center"><?php echo $sort->link('recommend');?>/<?php echo $sort->link('state');?></th>
+            <th class="span2 align-center"><?php echo $sort->link('recommend');?>&nbsp;/&nbsp;<?php echo $sort->link('state');?></th>
             <th>#</th>
         </tr>
     </thead>
@@ -28,10 +28,11 @@
                 <?php echo $model->authorName;?><br />
                 <span class="f12px"><?php echo $model->createTime;?></span>
             </td>
-            <td class="align-center">
-                <?php echo $model->recommendUrl;?>
+            <td class="align-cent2er">
                 <?php echo $model->verifyUrl;?>
+                <?php echo $model->recommendUrl;?><br />
                 <?php echo $model->deleteUrl;?>
+                <a href="<?php echo $model->post->getUrl();?>" target="_blank">段子</a>
             </td>
             <td></td>
         </tr>
