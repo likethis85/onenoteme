@@ -13,9 +13,8 @@
             <th class="item-checkbox align-center">#</th>
             <th class="span1 align-center"><?php echo $sort->link('id');?></th>
             <th class="span8">内容</th>
-            <th class="span1 align-center">#</th>
-            <th class="span1 align-center">#</th>
             <th class="span2">评论人&nbsp;/&nbsp;<?php echo $sort->link('create_time');?></th>
+            <th class="span2 align-center"><?php echo $sort->link('recommend');?>/<?php echo $sort->link('state');?></th>
             <th>#</th>
         </tr>
     </thead>
@@ -23,20 +22,16 @@
         <?php foreach ($models as $model):?>
         <tr>
             <td class="item-checkbox"><input type="checkbox" name="itemids" value="<?php echo $model->id;?>" /></td>
-            <td class="align-center">
-                <div><?php echo $model->id;?></div>
-                <?php if($model->recommend == COMMENT_STATE_ENABLED):?><span class="label label-success">推荐</span><?php endif;?>
-            </td>
+            <td class="align-center"><?php echo $model->id;?></td>
             <td class="comment-content"><?php echo $model->content;?></td>
-            <td class="align-center">
-                <?php echo $model->verifyUrl;?>
-            </td>
-            <td class="align-center">
-                <?php echo $model->deleteUrl;?>
-            </td>
-            <td>
+            <td class="cgray">
                 <?php echo $model->authorName;?><br />
-                <?php echo $model->createTime;?>
+                <span class="f12px"><?php echo $model->createTime;?></span>
+            </td>
+            <td class="align-center">
+                <?php echo $model->recommendUrl;?>
+                <?php echo $model->verifyUrl;?>
+                <?php echo $model->deleteUrl;?>
             </td>
             <td></td>
         </tr>
@@ -54,7 +49,7 @@ $(function(){
 	
 	$(document).on('click', '#batch-delete', {confirmText:confirmAlertText}, BetaAdmin.deleteMultiRows);
 	$(document).on('click', '#batch-verify', BetaAdmin.verifyMultiRows);
-	$(document).on('click', '#batch-recommend, #batch-hottest', BetaAdmin.setMultiRowsMark);
+	$(document).on('click', '#batch-recommend', BetaAdmin.setMultiRowsMark);
 	
 	$(document).on('click', '#select-all', BetaAdmin.selectAll);
 	$(document).on('click', '#reverse-select', BetaAdmin.reverseSelect);

@@ -96,7 +96,7 @@ class CommentController extends AdminController
 	    else {
 	        $data = array(
 	            'errno' => CD_NO,
-	            'label' => t($model->state == COMMENT_STATE_DISABLED ? 'sethide' : 'setshow', 'admin')
+	            'label' => $model->state == COMMENT_STATE_DISABLED ? '隐藏' : '显示',
 	        );
 	        echo $callback . '(' . CJSON::encode($data) . ')';
 	        exit(0);
@@ -118,7 +118,7 @@ class CommentController extends AdminController
 	    else {
 	        $data = array(
 	            'errno' => CD_NO,
-	            'label' => t($model->recommend == CD_NO ? 'not_recommend_comment' : 'set_recommend_comment', 'admin')
+	            'label' => $model->recommend == CD_NO ? '取消推荐' : '推荐',
 	        );
 	        echo $callback . '(' . CJSON::encode($data) . ')';
 	        exit(0);

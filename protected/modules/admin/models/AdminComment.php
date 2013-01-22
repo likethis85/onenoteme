@@ -81,7 +81,7 @@ class AdminComment extends Comment
 
     public function getRecommendUrl()
     {
-        $text = ($this->recommend == CD_NO) ? '取消推荐' : '推荐';
+        $text = ($this->recommend == CD_NO) ? '未推荐' : '已推荐';
 
         $class = $this->recommend == COMMENT_STATE_DISABLED ? 'label label-important' : 'label label-success';
         return l($text, url('admin/comment/setRecommend', array('id'=>$this->id)), array('class'=>'set-recommend ' . $class));
