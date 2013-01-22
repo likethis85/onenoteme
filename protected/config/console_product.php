@@ -32,11 +32,18 @@ return array(
 	        'queryCacheID' => 'cache',
 	        'queryCachingDuration' => 60,
         ),
-        'cache' => YII_DEBUG ? null : array(
+        'cache' => array(
+            'serializer' => array('igbinary_serialize', 'igbinary_unserialize'),
             'class'=>'CMemCache',
+            'useMemcached' => true,
             'servers'=>array(
-                array('host'=>'localhost', 'port'=>11211, 'weight'=>100),
+                array('host'=>'localhost', 'port'=>22122, 'weight'=>100),
             ),
+        ),
+        'fcache' => array(
+            'serializer' => array('igbinary_serialize', 'igbinary_unserialize'),
+            'class' => 'CFileCache',
+		    'directoryLevel' => 2,
         ),
         'apn' => array(
             'class' => 'CDApnProvider',
