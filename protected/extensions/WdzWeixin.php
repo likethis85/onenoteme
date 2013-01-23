@@ -64,7 +64,7 @@ class WdzWeixin extends CDWeixin
     private function nextJoke($data)
     {
         $input = trim($data->Content);
-        $count = (int)$input[2];
+        $count = (int)$input[1];
         if ($count <= 0 || $count > 5)
             $count = 2;
         
@@ -86,7 +86,8 @@ class WdzWeixin extends CDWeixin
         if (empty($rows)) return ;
         
         foreach ($rows as $row)
-            $content .= "\n--------------------\n" . $row['content'];
+            $contents[] = $row['content'];
+        $content = join("\n--------------------\n\n", $contens);
         $lastRow = array_pop($rows);
         $lastID = (int)$lastRow['id'];
         
