@@ -112,7 +112,13 @@ class WdzWeixin extends CDWeixin
                 ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
         }
         
-        $content .= self::helpInfo();
+        $i = mt_rand(0, 2);
+        if ($i === 0)
+            $content .= self::helpInfo();
+        elseif ($i === 1) {
+            $tip = "\n\n-------------------------\n段友们，是时候回复一下13，14，1x 。。。了，或许更能满足您的需求哦！";
+            $content .= $tip;
+        }
         $xml = $this->outputText($content);
         header('Content-Type: application/xml');
         echo $xml;
