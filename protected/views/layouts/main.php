@@ -50,10 +50,9 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     </div>
 </div>
 <div class="cd-wrapper cd-main">
-    <div class="alert alert-block alert-success alert-sitetip wx-help hide">
-        挖段子微信公众账号全面升级，笑话、趣图、女神都可以查看啦！<br />
-        使用微信扫描首页侧边栏上的<a href="<?php echo sbu('images/qrcode_wx.jpg');?>" class="cred" target="_blank">二维码</a>或直接使用微信添加“<strong class="cred">挖段子</strong>”或“<strong class="cred">waduanzi</strong>”为好友即可使用，方便快捷。<br />
-        回复 1 查看笑话；回复 2 查看趣图；回复 3 查看女神；回复 0 查看使用帮助。
+    <div class="alert alert-block alert-success alert-sitetip wx-help">
+        微信公众账号添加新功能：回复 1 返回笑话内容，现在是时候回复 13，14，1x ...了，猜的没错，现在可以返回多条了，14表示，返回 4 条笑话内容<br />
+        此功能当前只对笑话有效，趣图和女神还是只返回一条，但请记住：我们一直在努力！
     </div>
 	<?php echo $content;?>
 </div>
