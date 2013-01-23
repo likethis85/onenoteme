@@ -132,8 +132,8 @@ class ChannelController extends Controller
             $limit = param('line_post_count_page');
         
         $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('channel_id'=>$channelid, 'state'=>POST_STATE_ENABLED));
-        $criteria->order = 'create_time desc, id desc';
+        $criteria->addColumnCondition(array('t.channel_id'=>$channelid, 't.state'=>POST_STATE_ENABLED));
+        $criteria->order = 't.istop desc, t.create_time desc, t.id desc';
         $criteria->limit = $limit;
         
         $count = Post::model()->cache($duration)->count($criteria);
