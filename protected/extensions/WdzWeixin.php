@@ -7,7 +7,7 @@ class WdzWeixin extends CDWeixin
         $input = trim($data->Content);
         
         if (is_numeric($input)) {
-            $method = 'method' . $input;
+            $method = 'method' . $input[0]; // 取第一个数字
             $result = false;
             if (method_exists($this, $method)) {
                 $result = call_user_func(array($this, $method), $data);
@@ -63,6 +63,11 @@ class WdzWeixin extends CDWeixin
     
     private function nextJoke($data)
     {
+        $input = trim($data->Content);
+        $count = (int)$input[2];
+        if ($count <= 0 || $count > 5)
+            $count = 2;
+        
         $wxid = $data->FromUserName;
         $lastID = app()->getDb()->createCommand()
             ->select('last_joke_pid')
@@ -74,10 +79,18 @@ class WdzWeixin extends CDWeixin
             ->select(array('id', 'content'))
             ->from(TABLE_POST)
             ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_DUANZI, ':lastID' => (int)$lastID))
-            ->order('id asc');;
-        $row = $cmd->queryRow();
+            ->order('id asc')
+            ->limit($count);
+
+        $rows = $cmd->queryAll();
+        if (empty($rows)) return ;
         
-        if (empty($row['content'])) return ;
+        foreach ($rows as $row)
+            $content .= "\n--------------------\n" . $row['content'];
+        $lastRow = array_pop($rows);
+        $lastID = (int)$lastRow['id'];
+        
+        if (empty($content)) return ;
         
         if ($lastID === false) {
             $columns = array(
@@ -92,14 +105,14 @@ class WdzWeixin extends CDWeixin
         else {
             $columns = array(
                 'last_time' => time(),
-                'last_joke_pid' => (int)$row['id'],
+                'last_joke_pid' => $lastID,
             );
             app()->getDb()->createCommand()
                 ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
         }
         
-        $row['content'] .= self::helpInfo();
-        $xml = $this->outputText($row['content']);
+        $content .= self::helpInfo();
+        $xml = $this->outputText($content);
         header('Content-Type: application/xml');
         echo $xml;
     }
@@ -118,7 +131,7 @@ class WdzWeixin extends CDWeixin
             ->select(array('id', 'title', 'content', 'bmiddle_pic'))
             ->from(TABLE_POST)
             ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), $params)
-            ->order('id asc');;
+            ->order('id asc');
         $row = $cmd->queryRow();
         
         if (empty($row['content'])) return ;
