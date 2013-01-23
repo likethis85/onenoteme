@@ -87,7 +87,7 @@ class WdzWeixin extends CDWeixin
         
         foreach ($rows as $row)
             $contents[] = $row['content'];
-        $content = join("\n--------------------\n\n", $contens);
+        $content = join("\n--------------------\n\n", $contents);
         $lastRow = array_pop($rows);
         $lastID = (int)$lastRow['id'];
         
