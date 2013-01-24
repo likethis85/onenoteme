@@ -18,6 +18,9 @@
     </div>
     -->
     <div class="panel panel10 bottom15px">
+        <!-- 首页侧边栏广告位1 开始 -->
+        <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_first'));?>
+        <!-- 首页侧边栏广告位1 结束 -->
         <ul class="social-widget-list">
             <li class="social-widget-item first">
                 <a class="clearfix" target="_blank" href="http://e.weibo.com/cdcchen" title="新浪微博">
@@ -49,9 +52,9 @@
         </ul>
     </div>
     <div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
-    <!-- 首页侧边栏广告位1 开始 -->
-    <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_first'));?>
-    <!-- 首页侧边栏广告位1 结束 -->
+    <!-- 首页侧边栏广告位2 开始 -->
+    <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_second'));?>
+    <!-- 首页侧边栏广告位2 结束 -->
 </div>
 <div class="clear"></div>
 
