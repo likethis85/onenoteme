@@ -12,12 +12,19 @@
   <priority>1.00</priority>
 </url>
 <url>
-  <loc><?php echo aurl('post/latest');?></loc>
+  <loc><?php echo aurl('channel/joke');?></loc>
   <changefreq>always</changefreq>
   <priority>0.80</priority>
 </url>
-<url>
-  <loc><?php echo aurl('post/day');?></loc>
+  <loc><?php echo aurl('channel/lengtu');?></loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+  <loc><?php echo aurl('channel/girl');?></loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+  <loc><?php echo aurl('channel/video');?></loc>
   <changefreq>always</changefreq>
   <priority>0.80</priority>
 </url>
