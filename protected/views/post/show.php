@@ -118,7 +118,6 @@ $(function(){
 	$('.item-toolbar').on('mouseleave', 'a.share, .sharebox', Waduanzi.hideShareBox);
 	$('.item-toolbar').on('click', 'a.favorite', Waduanzi.favoritePost);
 
-	$(document).on('click', '.comment-arrows a', Waduanzi.RatingComment);
 	$(document).on('click', 'input.submit-comment', Waduanzi.PostComment);
     $(document).on('focusin', 'textarea.comment-content', function(event){
     	var tthis = $(this);
