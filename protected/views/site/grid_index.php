@@ -6,6 +6,9 @@
 <?php $this->renderPartial('/post/line_list', array('models' => $models, 'pages' => $pages));?>
 </div>
 <div class="fright cd-sidebar">
+    <!-- 首页侧边栏广告位1 开始 -->
+    <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_first'));?>
+    <!-- 首页侧边栏广告位1 结束 -->
     <div class="cdc-block cd-border app-list">
         <a href="http://itunes.apple.com/cn/app//id486268988?mt=8" target="_blank" title="挖段子iPhone应用, 最新版本 2.2.2"><img src="<?php echo sbu('images/app_ios.png');?>" alt="挖段子iPhone应用" /></a>
         <a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank" title="挖段子Andoird应用 最新版本 1.1.0"><img src="<?php echo sbu('images/app_android.png');?>" alt="挖段子Andoird应用" /></a>
@@ -18,9 +21,6 @@
     </div>
     -->
     <div class="panel panel10 bottom15px">
-        <!-- 首页侧边栏广告位1 开始 -->
-        <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_first'));?>
-        <!-- 首页侧边栏广告位1 结束 -->
         <ul class="social-widget-list">
             <li class="social-widget-item first">
                 <a class="clearfix" target="_blank" href="http://e.weibo.com/cdcchen" title="新浪微博">
