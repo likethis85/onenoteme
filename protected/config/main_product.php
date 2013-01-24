@@ -111,6 +111,7 @@ return array(
                 'http://www.waduanzi.com/tag-<name:.+>' => 'tag/archives',
                 'http://www.waduanzi.com/feed/<cid:\d+>' => 'feed/channel',
                 'http://www.waduanzi.com/u/<id:\d+>' => 'user/index',
+                'http://www.waduanzi.com/sitemap' => 'site/sitemap',
                     
                 'http://wap.waduanzi.com/' => 'wap/index',
                 'http://wap.waduanzi.com/<_a>' => 'wap/<_a>',
