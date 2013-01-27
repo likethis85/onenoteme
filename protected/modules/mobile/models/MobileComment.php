@@ -24,4 +24,9 @@ class MobileComment extends Comment
     {
         return aurl('mobile/comment/against', array('id'=>$this->id));
     }
+
+    public static function fetchListByPostID($postid, $page = 1, $count = null)
+    {
+        return parent::fetchListByPostID($postid, $page, $count);
+    }
 }
