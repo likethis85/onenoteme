@@ -24,7 +24,7 @@ class PostController extends MobileController
         if ($post === null)
             throw new CHttpException(403, '内容不存在');
         
-        $comments = MobileComment::model()->fetchList($id);
+        $comments = MobileComment::model()->fetchListByPostID($id);
         $comment = new MobileCommentForm();
         $comment->post_id = $id;
 

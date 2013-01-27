@@ -33,6 +33,16 @@
 </body>
 </html>
 
-<?php cs()->registerCoreScript('jquery');?>
-<?php cs()->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END);?>
-<?php cs()->registerScriptFile(tbu('scripts/beta-mobile.js?t=20121116001'), CClientScript::POS_END);?>
+<?php
+cs()->registerCoreScript('jquery')
+    ->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js?t=20130127001'), CClientScript::POS_END)
+    ->registerScriptFile(tbu('scripts/cd-mobile.js?t=20130127001'), CClientScript::POS_END);
+
+YII_DEBUG || cs()->scriptMap = array(
+    'bootstrap.min.css' => sbu('styles/mobile-all.min.css?t=20130127001'),
+    'cd-mobile.css' => sbu('styles/mobile-all.min.css?t=20130127001'),
+    'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130127001'),
+    'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130127001'),
+    'json.js' => sbu('scripts/mobile-all.min.js?t=20130127001'),
+);
+?>
