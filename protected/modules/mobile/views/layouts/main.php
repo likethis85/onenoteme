@@ -7,7 +7,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <link rel="stylesheet" type="text/css" href="<?php echo sbu('libs/bootstrap/css/bootstrap.min.css');?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo tbu('styles/cd-mobile.css');?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-mobile.css');?>" />
 </head>
 <body>
 <noscript><div id="noscript"><h2>Notice</h2><p>JavaScript is currently off.</p><p>Turn it on in browser settings to view this mobile website.</p></div></noscript>
@@ -34,9 +34,12 @@
 </html>
 
 <?php
-cs()->registerCoreScript('jquery')
+cs()->registerMetaTag('utf-8', 'charset')
+    ->registerCssFile(sbu('libs/bootstrap/css/bootstrap.min.css'))
+    ->registerCssFile(sbu('styles/cd-mobile.css'))
+    ->registerCoreScript('jquery')
     ->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END)
-    ->registerScriptFile(tbu('scripts/cd-mobile.js'), CClientScript::POS_END);
+    ->registerScriptFile(sbu('scripts/cd-mobile.js'), CClientScript::POS_END);
 
 YII_DEBUG || cs()->scriptMap = array(
     'bootstrap.min.css' => sbu('styles/mobile-all.min.css?t=20130127001'),
