@@ -7,7 +7,7 @@ class WdzWeixin extends CDWeixin
         $input = trim($data->Content);
         
         if (is_numeric($input)) {
-            $method = 'method' . $input[0]; // 取第一个数字
+            $method = 'method' . (int)$input[0]; // 取第一个数字
             $result = false;
             if (method_exists($this, $method)) {
                 $result = call_user_func(array($this, $method), $data);
