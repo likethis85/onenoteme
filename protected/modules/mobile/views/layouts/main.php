@@ -35,8 +35,8 @@
 
 <?php
 cs()->registerCoreScript('jquery')
-    ->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js?t=20130127001'), CClientScript::POS_END)
-    ->registerScriptFile(tbu('scripts/cd-mobile.js?t=20130127001'), CClientScript::POS_END);
+    ->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END)
+    ->registerScriptFile(tbu('scripts/cd-mobile.js'), CClientScript::POS_END);
 
 YII_DEBUG || cs()->scriptMap = array(
     'bootstrap.min.css' => sbu('styles/mobile-all.min.css?t=20130127001'),
