@@ -51,4 +51,10 @@ class MobileController extends CController
         $text = strip_tags(trim(join(' - ', $titles)));
 	    $this->pageTitle = $text;
 	}
+
+	protected function beforeRender($view)
+	{
+	    cs()->defaultScriptFilePosition = CClientScript::POS_END;
+	    return true;
+	}
 }
