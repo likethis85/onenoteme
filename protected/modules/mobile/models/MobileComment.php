@@ -26,7 +26,24 @@ class MobileComment extends Comment
     }
 
     public static function fetchListByPostID($postid, $page = 1, $count = null)
-    {
-        return parent::fetchListByPostID($postid, $page, $count);
-    }
+	{
+	    $postid = (int)$postid;
+	    $page = (int)$page;
+	    $count = (int)$count;
+	    if ($count === 0)
+	        $count = param('commentCountOfPage');
+	    
+	    $criteria = new CDbCriteria();
+	    $criteria->order = 'create_time asc';
+	    $criteria->limit = $count;
+	    $offset = ($page - 1) * $criteria->limit;
+	    $criteria->offset = $offset;
+	    $criteria->addColumnCondition(array(
+            'post_id' => $postid,
+            'state' => COMMENT_STATE_ENABLED,
+	    ));
+	
+	    $comments = self::model()->findAll($criteria);
+	    return $comments;
+	}
 }
