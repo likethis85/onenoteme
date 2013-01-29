@@ -134,7 +134,7 @@ return array(
         ),
         'session' => array(
             'autoStart' => true,
-            'sessionID' => 'wdz_sid',
+            'sessionName' => 'wdz_sid',
             'cookieParams' => array(
                 'lifetime' => $params['autoLoginDuration'],
                 'domain' => GLOBAL_COOKIE_DOMAIN,
