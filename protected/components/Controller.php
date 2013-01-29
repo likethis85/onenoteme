@@ -37,7 +37,7 @@ class Controller extends CController
 	{
 	    parent::init();
 	    $this->clientID = CDBase::getClientID();
-	    if (empty($this->$clientID))
+	    if (empty($this->clientID))
 	        $this->clientID = CDBase::setClientID();
 	}
 	
