@@ -50,7 +50,7 @@ class CDBase
         $cookie = new CHttpCookie(CD_CLIENT_ID, $value);
         $cookie->path = GLOBAL_COOKIE_PATH;
         $cookie->domain = GLOBAL_COOKIE_DOMAIN;
-        $cookie->expire = 3600*24*30;
+        $cookie->expire = $_SERVER['REQUEST_TIME'] + 3600*24*30;
         $cookie->httpOnly = true;
         request()->cookies->add(CD_CLIENT_ID, $cookie);
         return $value;
