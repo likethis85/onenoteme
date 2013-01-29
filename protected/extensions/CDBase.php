@@ -4,7 +4,6 @@ class CDBase
     const FILE_NO_EXIST = -1; // '目录不存在并且无法创建';
     const FILE_NO_WRITABLE = -2; // '目录不可写';
     const VERSION = '1.5';
-    
 
     public static function encryptPassword($password)
     {
@@ -29,6 +28,78 @@ class CDBase
             $ip = $_SERVER['REMOTE_ADDR'];
 
         return $ip;
+    }
+    
+    /**
+     * 获取客户端唯一cookie
+     * @return Ambigous <NULL, CHttpCookie> 如果没有设置cookie返回null
+     */
+    public static function getClientID()
+    {
+        $id = null;
+        $cookie = request()->cookies->itemAt(CD_CLIENT_ID);
+        if ($cookie instanceof CHttpCookie)
+            $id = $cookie->value;
+        
+        return $id;
+    }
+    
+    public static function setClientID()
+    {
+        $value = md5(self::getClientIp() . uniqid());
+        $cookie = new CHttpCookie(CD_CLIENT_ID, $value);
+        $cookie->path = GLOBAL_COOKIE_PATH;
+        $cookie->domain = GLOBAL_COOKIE_DOMAIN;
+        $cookie->expire = 3600*24*30;
+        request()->cookies->add(CD_CLIENT_ID, $cookie);
+        return $value;
+    }
+    
+    /**
+     * 判断是否是搜索引擎索引请求
+     * @return boolean
+     */
+    public static function requestFromSearchEngine()
+    {
+        $agents = array('baiduspider', 'googlebot', 'slurp', 'iaskspider', 'yodaobot', 'msnbot', 'sogou web spider', 'sogou push spider', 'ia_archiver', 'spider');
+        $userAgent = $_SERVER['HTTP_USER_AGENT'];
+        foreach ($agents as $agent)
+            if (stripos($userAgent, $agent) !== null)
+                return true;
+        
+        return false;
+    }
+    
+    /**
+     * 判断是否是从搜索引擎索搜索结果点击过来的请求
+     * @return boolean
+     */
+    public static function referrerFromSearch()
+    {
+        if (empty($_SERVER['HTTP_REFERER'])) return false;
+        
+        $searchs = array('baidu', 'google.', 'soso.com', 'sogou.com', 'youdao.com', 'bing.com', 'so.com', 'so.360.com');
+        $referrer = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
+        foreach ($searchs as $search)
+            if (stripos($referrer, $search) !== null)
+                return true;
+        
+        return false;
+    }
+    
+    /**
+     * 判断请求是否来自站外链接
+     * @return boolean
+     */
+    public static function referrerFromOutLink()
+    {
+        if (empty($_SERVER['HTTP_REFERER'])) return false;
+        
+        $referrer = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
+        if (stripos($referrer, SITE_DOMAIN) === null)
+            return true;
+        
+        return false;
     }
     
     /**

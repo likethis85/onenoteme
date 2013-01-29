@@ -136,8 +136,8 @@ return array(
             'autoStart' => true,
             'cookieParams' => array(
                 'lifetime' => $params['autoLoginDuration'],
-                'domain' => '.waduanzi.com',
-                'path' => '/',
+                'domain' => GLOBAL_COOKIE_DOMAIN,
+                'path' => GLOBAL_COOKIE_PATH,
             ),
         ),
         'user' => array(

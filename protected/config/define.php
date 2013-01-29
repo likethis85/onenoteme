@@ -2,6 +2,11 @@
 define('CD_YES', 1);
 define('CD_NO', 0);
 
+define('SITE_DOMAIN', 'waduanzi.com');
+define('CD_CLIENT_ID', 'clientid');
+define('GLOBAL_COOKIE_DOMAIN', '.' . SITE_DOMAIN);
+define('GLOBAL_COOKIE_PATH', '/');
+
 define('CHANNEL_DUANZI', 0);
 define('CHANNEL_LENGTU', 20);
 define('CHANNEL_GIRL', 30);

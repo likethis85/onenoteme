@@ -3,6 +3,7 @@ class Controller extends CController
 {
     public $breadcrumbs;
     public $channel;
+    public $clientID = null;
 
     public function actions()
 	{
@@ -30,6 +31,14 @@ class Controller extends CController
 		        'testLimit' => 3,
 			),
 		);
+	}
+	
+	public function init()
+	{
+	    parent::init();
+	    $this->clientID = CDBase::getClientID();
+	    if (empty($this->$clientID))
+	        $this->clientID = CDBase::setClientID();
 	}
 	
     public function setKeywords($content)
