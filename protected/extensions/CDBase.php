@@ -71,7 +71,7 @@ class CDBase
         if ($cookie instanceof CHttpCookie && !empty($cookie->value)) {
             $value = $cookie->value;
         
-            $values = explode('|', $value);
+            $values = explode(',', $value);
             array_walk($values, 'intval');
             $values[1] = empty($values[1]) ? '' : (int)$values[1];
         }
@@ -82,13 +82,13 @@ class CDBase
     {
         $values[] = $_SERVER['REQUEST_TIME'];
         $values[] = ip2long(self::getClientIp());
-        $value = join('|', $values);
-        $cookie = new CHttpCookie(CD_CLIENT_ID, $value);
+        $value = join(',', $values);
+        $cookie = new CHttpCookie(CD_LAST_VISIT, $value);
         $cookie->path = GLOBAL_COOKIE_PATH;
         $cookie->domain = GLOBAL_COOKIE_DOMAIN;
         $cookie->expire = $_SERVER['REQUEST_TIME'] + 3600*24*30;
         $cookie->httpOnly = true;
-        request()->cookies->add(CD_CLIENT_ID, $cookie);
+        request()->cookies->add(CD_LAST_VISIT, $cookie);
         return $values;
     }
     
