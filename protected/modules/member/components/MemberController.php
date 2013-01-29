@@ -13,6 +13,8 @@ class MemberController extends Controller
 {
     public $title;
     public $menu;
+    public $clientID = null;
+    public $lastVisit = array();
     
 
     public function init()
