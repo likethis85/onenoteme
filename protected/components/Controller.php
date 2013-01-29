@@ -4,6 +4,7 @@ class Controller extends CController
     public $breadcrumbs;
     public $channel;
     public $clientID = null;
+    public $lastVisit = array();
 
     public function actions()
 	{
@@ -36,6 +37,11 @@ class Controller extends CController
 	public function init()
 	{
 	    parent::init();
+	    
+	    $this->lastVisit = CDBase::getClientLastVisit();
+	    if (empty($this->lastVisit))
+	        $this->lastVisit = CDBase::setClientLastVisit();
+	    
 	    $this->clientID = CDBase::getClientID();
 	    if (empty($this->clientID))
 	        $this->clientID = CDBase::setClientID();

@@ -3,7 +3,8 @@ define('CD_YES', 1);
 define('CD_NO', 0);
 
 define('SITE_DOMAIN', 'waduanzi.com');
-define('CD_CLIENT_ID', 'clientid');
+define('CD_LAST_VISIT', 'wdz_lastvisit');
+define('CD_CLIENT_ID', 'wdz_clientid');
 define('GLOBAL_COOKIE_DOMAIN', '.' . SITE_DOMAIN);
 define('GLOBAL_COOKIE_PATH', '/');
 

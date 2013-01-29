@@ -20,6 +20,9 @@ class CDBase
      */
     public static function getClientIp()
     {
+        static $ip = null;
+        if ($ip !== null) return $ip;
+        
         if ($_SERVER['HTTP_CLIENT_IP'])
             $ip = $_SERVER['HTTP_CLIENT_IP'];
 	 	elseif ($_SERVER['HTTP_X_FORWARDED_FOR'])
@@ -54,6 +57,39 @@ class CDBase
         $cookie->httpOnly = true;
         request()->cookies->add(CD_CLIENT_ID, $cookie);
         return $value;
+    }
+    
+    /**
+     * 获取最后一次访问的时间及IP地址
+     * @return array 第一个元素为时间，第二个元素为IP
+     */
+    public static function getClientLastVisit()
+    {
+        $value = '';
+        $values = array();
+        $cookie = request()->cookies->itemAt(CD_LAST_VISIT);
+        if ($cookie instanceof CHttpCookie && !empty($cookie->value)) {
+            $value = $cookie->value;
+        
+            $values = explode('|', $value);
+            array_walk($values, 'intval');
+            $values[1] = empty($values[1]) ? '' : (int)$values[1];
+        }
+        return $values;
+    }
+    
+    public static function setClientLastVisit()
+    {
+        $values[] = $_SERVER['REQUEST_TIME'];
+        $values[] = ip2long(self::getClientIp());
+        $value = join('|', $values);
+        $cookie = new CHttpCookie(CD_CLIENT_ID, $value);
+        $cookie->path = GLOBAL_COOKIE_PATH;
+        $cookie->domain = GLOBAL_COOKIE_DOMAIN;
+        $cookie->expire = $_SERVER['REQUEST_TIME'] + 3600*24*30;
+        $cookie->httpOnly = true;
+        request()->cookies->add(CD_CLIENT_ID, $cookie);
+        return $values;
     }
     
     /**

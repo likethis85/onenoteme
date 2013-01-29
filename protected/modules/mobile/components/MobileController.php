@@ -6,6 +6,22 @@
 class MobileController extends CController
 {
     public $channel;
+    public $clientID = null;
+    public $lastVisit = array();
+    
+
+    public function init()
+    {
+        parent::init();
+         
+        $this->lastVisit = CDBase::getClientLastVisit();
+        if (empty($this->lastVisit))
+            $this->lastVisit = CDBase::setClientLastVisit();
+         
+        $this->clientID = CDBase::getClientID();
+        if (empty($this->clientID))
+            $this->clientID = CDBase::setClientID();
+    }
     
     public function actions()
     {

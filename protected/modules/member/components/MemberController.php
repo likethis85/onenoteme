@@ -14,6 +14,20 @@ class MemberController extends Controller
     public $title;
     public $menu;
     
+
+    public function init()
+    {
+        parent::init();
+         
+        $this->lastVisit = CDBase::getClientLastVisit();
+        if (empty($this->lastVisit))
+            $this->lastVisit = CDBase::setClientLastVisit();
+         
+        $this->clientID = CDBase::getClientID();
+        if (empty($this->clientID))
+            $this->clientID = CDBase::setClientID();
+    }
+    
 	public function setSiteTitle($text)
 	{
 	    $this->pageTitle = $text . '_' . app()->name;
