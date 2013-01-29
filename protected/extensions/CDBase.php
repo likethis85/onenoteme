@@ -51,6 +51,7 @@ class CDBase
         $cookie->path = GLOBAL_COOKIE_PATH;
         $cookie->domain = GLOBAL_COOKIE_DOMAIN;
         $cookie->expire = 3600*24*30;
+        $cookie->httpOnly = true;
         request()->cookies->add(CD_CLIENT_ID, $cookie);
         return $value;
     }
