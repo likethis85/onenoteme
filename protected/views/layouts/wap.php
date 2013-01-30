@@ -4,7 +4,7 @@
 <title><?php echo $this->pageTitle;?></title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="author" content="waduanzi.com" />
-<meta name="copyright" content="Copyright (c) 2011-2012 waduanzi.com All Rights Reserved." />
+<meta name="copyright" content="Copyright (c) 2011-2013 waduanzi.com All Rights Reserved." />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <meta content="yes" name="apple-mobile-web-app-capable" />
 <meta content="black" name="apple-mobile-web-app-status-bar-style" />

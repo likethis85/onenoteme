@@ -3,7 +3,7 @@
 <head>
 <title><?php echo $this->pageTitle;?></title>
 <meta name="author" content="waduanzi.com" />
-<meta name="copyright" content="Copyright (c) 2011-2912 waduanzi.com All Rights Reserved." />
+<meta name="copyright" content="Copyright (c) 2011-2013 waduanzi.com All Rights Reserved." />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <meta name="application-name" content="挖段子网"/>
 <meta name="msapplication-TileColor" content="#0c95f0"/>
