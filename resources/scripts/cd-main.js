@@ -138,7 +138,7 @@ Waduanzi.ratingPost = function(event){
 	}
 	*/
 	
-	_hmt && _hmt.push(['_trackEvent', '文章评价按钮', '点击']);
+	_hmt && _hmt.push(['_trackEvent', '文章评价', '点击按钮']);
 	
 	//$('#quick-login').dialog('open');
 	var tthis = $(this);

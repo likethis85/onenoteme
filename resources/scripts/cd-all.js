@@ -130,13 +130,17 @@ Waduanzi.PostComment = function(event) {
 		if (data.errno == 0) {
 			errorElement.after(data.html);
 			contentElement.val('').removeClass('expand');
+			_hmt && _hmt.push(['_trackEvent', '评论', '评论成功']);
 		}
-		else
+		else {
 			errorElement.html(data.error).show();
+			_hmt && _hmt.push(['_trackEvent', '评论', '评论失败']);
+		}
 	});
 	xhr.fail(function(){
 		loadingElement.hide();
 		errorElement.html('发送请求错误！').show();
+		_hmt && _hmt.push(['_trackEvent', '评论', '评论失败']);
 	});
 };
 
@@ -164,7 +168,7 @@ Waduanzi.ratingPost = function(event){
 	}
 	*/
 	
-	_hmt && _hmt.push(['_trackEvent', '文章评价按钮', '点击']);
+	_hmt && _hmt.push(['_trackEvent', '文章评价', '点击按钮']);
 	
 	//$('#quick-login').dialog('open');
 	var tthis = $(this);
@@ -319,10 +323,12 @@ Waduanzi.fetchComments = function(event) {
 	var commentBlock = tthis.parents('.item-toolbar').next('.comment-list');
 	if (commentBlock.filter(':visible').length > 0) {
 		commentBlock.hide();
+		_hmt && _hmt.push(['_trackEvent', '评论', '隐藏评论列表']);
 		return true;
 	}
 	else if (commentBlock.html().length > 0) {
 		commentBlock.show();
+		_hmt && _hmt.push(['_trackEvent', '评论', '查看评论列表']);
 		return true;
 	}
 	
