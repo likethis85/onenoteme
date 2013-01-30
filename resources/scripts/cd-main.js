@@ -301,6 +301,7 @@ Waduanzi.fetchComments = function(event) {
 		_hmt && _hmt.push(['_trackEvent', '评论', '查看评论列表']);
 		return true;
 	}
+	_hmt && _hmt.push(['_trackEvent', '评论', '查看评论列表']);
 	
 	var url = tthis.attr('data-url');
 	var commentCount = tthis.text();
