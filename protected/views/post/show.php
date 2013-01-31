@@ -173,4 +173,7 @@ $(function(){
 
 <?php cs()->registerScriptFile(sbu('libs/jquery.infinitescroll.min.js'), CClientScript::POS_END);?>
 
+<!--cnzz tui-->
+<script  type="text/javascript" charset="utf-8"  src="http://tui.cnzz.net/cs.php?id=1000021159"></script>
+<!--cnzz tui-->
 
