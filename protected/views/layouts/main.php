@@ -50,7 +50,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     </div>
 </div>
 <div class="cd-wrapper cd-main">
-    <div class="alert alert-block alert-success alert-sitetip wx-help">
+    <div class="alert alert-block alert-success alert-sitetip wx-help hide">
         微信公众账号添加新功能：<br />
         回复 1 返回笑话内容，现在是时候回复 13，14，1x ...了，猜的没错，现在可以返回多条了，14表示，返回 4 条笑话内容<br />
         此功能当前只对笑话有效，趣图和女神还是只返回一条，但请记住：我们一直在努力！
