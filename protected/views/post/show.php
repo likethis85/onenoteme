@@ -94,11 +94,13 @@
     <!-- 详情页侧边栏广告位开始 -->
     <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_first'));?>
     <!-- 详情页侧边栏广告位结束 -->
+     <?php if (empty($post->bmiddlePic)):?>
     <div class="cdc-block">
         <!--cnzz tui-->
         <script  type="text/javascript" charset="utf-8"  src="http://tui.cnzz.net/cs.php?id=1000021168"></script>
         <!--cnzz tui-->
     </div>
+    <?php endif;?>
 	<div class="panel panel15"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
 </div>
 <div class="clear"></div>
