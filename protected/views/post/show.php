@@ -46,6 +46,10 @@
         <div class="content-block wumii-box">
             <script type="text/javascript" id="wumiiRelatedItems"></script>
         </div>
+        <?php else:?>
+        <div class="content-block">
+            <script  type="text/javascript" charset="utf-8"  src="http://tui.cnzz.net/cs.php?id=1000021164"></script>
+        </div>
         <?php endif;?>
         <a name="comments"></a>
         <div class="comment-list bottom15px">
@@ -94,6 +98,7 @@
 </div>
 <div class="clear"></div>
 
+<!-- wumii start -->
 <script type="text/javascript">
     var wumiiPermaLink = '<?php echo $post->url;?>';
     var wumiiTitle = '<?php echo json_encode($post->filterContent);?>';
@@ -105,6 +110,7 @@
 <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
     <img src="http://static.wumii.com/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
 </a>
+<!-- wumii end -->
 
 <script type="text/javascript">
 $(function(){
@@ -174,6 +180,8 @@ $(function(){
 <?php cs()->registerScriptFile(sbu('libs/jquery.infinitescroll.min.js'), CClientScript::POS_END);?>
 
 <!--cnzz tui-->
+<?php if ($post->channel_id != CHANNEL_DUANZI):?>
 <script  type="text/javascript" charset="utf-8"  src="http://tui.cnzz.net/cs.php?id=1000021159"></script>
+<?php endif;?>
 <!--cnzz tui-->
 
