@@ -47,7 +47,7 @@
             <script type="text/javascript" id="wumiiRelatedItems"></script>
         </div>
         <?php else:?>
-        <div class="content-block">
+        <div class="content-block cnzz-box">
             <script  type="text/javascript" charset="utf-8"  src="http://tui.cnzz.net/cs.php?id=1000021164"></script>
         </div>
         <?php endif;?>
