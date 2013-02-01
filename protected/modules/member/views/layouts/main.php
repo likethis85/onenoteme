@@ -27,7 +27,10 @@
 <div class="cd-header">
     <div class="cd-wrapper">
     	<div id="site-logo" class="logo fleft">
-    	    <a href="<?php echo CDBase::siteHomeUrl();?>" title="点击返回首页"><img src="<?php echo sbu('images/logo.jpg');?>" alt="网站LOGO" title="返回首页" align="top" />&nbsp;挖段子</a>
+    	    <a href="<?php echo CDBase::siteHomeUrl();?>" title="点击返回首页">
+    	        <img src="<?php echo sbu('images/logo.jpg');?>" alt="网站LOGO" title="返回首页" align="top" /><h1>挖段子</h1>
+    	        <h2>挖段子网永久唯一域名：http://www.waduanzi.com</h2>
+	        </a>
 	    </div>
     	<ul class="channel-nav fleft">
     		<li<?php echo ($this->menu===CHANNEL_DUANZI) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/joke');?>">挖笑话</a></li>
