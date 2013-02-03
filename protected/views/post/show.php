@@ -99,7 +99,7 @@
         <!--cnzz tui-->
     </div>
     <?php endif;?>
-	<div class="panel panel15"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
+	<div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
 </div>
 <div class="clear"></div>
 
