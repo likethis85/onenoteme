@@ -37,6 +37,7 @@ a:hover {color:#D14836; text-decoration:none;}
 .space10px {display:block; clear:both; height:10px; line-height:10px; font-size:1px; overflow:hidden;}
 .space20px {display:block; clear:both; height:20px; line-height:20px; font-size:1px; overflow:hidden;}
 .line1px {display:block; clear:both; height:1px; line-height:1px; font-size:1px; overflow:hidden; background-color:#DFDFDF; margin:5px 0px;}
+.line3px {display:block; clear:both; height:3px; line-height:3px; font-size:1px; overflow:hidden; background-color:#DFDFDF; margin:5px 0px;}
 
 ::selection {background-color:#C3E99E; text-shadow:none;}
 .site-bg {background-image:url(../images/sitebg.png); background-repeat:no-repeat;}

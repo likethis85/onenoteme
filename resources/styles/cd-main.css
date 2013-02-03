@@ -151,7 +151,7 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .post-line-list .post-item .post-tags a {color:#9b8878; word-wrap:break-word; word-break:break-all;}
 .post-line-list .post-item .post-tags a:hover {color:#330000;}
 .post-line-list .item-shadow {height:15px; background-position:0 -275px;}
-.item-toolbar {margin:15px 0 0; position:relative; z-index:1;}
+.item-toolbar {margin:15px 0; position:relative; z-index:1;}
 .item-toolbar ul {list-style:none; margin:0; padding:0;}
 .item-toolbar ul a {display:block; height:28px; line-height:30px; text-indent:36px; width:80px; border-radius:3px; border:1px solid #DFD5CB; color:#9E8C7B;}
 .item-toolbar ul a:hover {box-shadow:0 1px 2px rgba(0, 0, 0, 0.2); border-color:#A78B6F;}

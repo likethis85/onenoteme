@@ -42,6 +42,7 @@
                 </div>
             </div>
         </div>
+        <div class="line3px"></div>
         <?php if ($post->bmiddlePic):?>
         <div class="content-block wumii-box">
             <script type="text/javascript" id="wumiiRelatedItems"></script>
