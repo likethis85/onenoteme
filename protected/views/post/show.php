@@ -186,10 +186,10 @@ $(function(){
 
 <?php cs()->registerScriptFile(sbu('libs/jquery.infinitescroll.min.js'), CClientScript::POS_END);?>
 
-<!-- UJian Button BEGIN -->
-<script type="text/javascript">var ujian_config = {textColor:'#9B8878',hoverTextColor:'#D14836'};</script>
-<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&btn=2&uid=1622045"></script>
-<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
-<!-- UJian Button END -->
+<?php if ($post->channel_id != CHANNEL_DUANZI):?>
+<!--cnzz tui-->
+<script  type="text/javascript" charset="utf-8"  src="http://tui.cnzz.net/cs.php?id=1000021159"></script>
+<!--cnzz tui-->
+<?php endif;?>
 
 

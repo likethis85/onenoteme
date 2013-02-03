@@ -2,7 +2,7 @@
 
 body {background-color:#ECE5D8; color:#503E2C;}
 a {color:#9b8878; text-decoration:none; cursor:pointer;}
-a:hover {color:#330000; text-decoration:none;}
+a:hover {color:#D14836; text-decoration:none;}
 
 .clear {clear:both; font-size:0px; height:0px; line-height:0px; content:""; display:block;}
 .radius3px {-moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;}
