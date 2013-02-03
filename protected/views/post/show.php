@@ -43,15 +43,12 @@
             </div>
         </div>
         <div class="line3px"></div>
-        <?php if (1||$post->bmiddlePic):?>
         <div class="content-block wumii-box">
             <script type="text/javascript" id="wumiiRelatedItems"></script>
         </div>
-        <?php else:?>
         <div class="content-block cnzz-box">
             <script  type="text/javascript" charset="utf-8"  src="http://tui.cnzz.net/cs.php?id=1000021164"></script>
         </div>
-        <?php endif;?>
         <a name="comments"></a>
         <div class="comment-list bottom15px">
         <?php $this->renderPartial('/comment/create', array('postid'=>(int)$post->id));?>
