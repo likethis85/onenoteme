@@ -109,7 +109,7 @@ return array(
                 'http://www.waduanzi.com/tags' => 'tag/list',
                 'http://www.waduanzi.com/tag/<name:.+>' => 'tag/posts',
                 'http://www.waduanzi.com/tag-<name:.+>' => 'tag/archives',
-                'http://www.waduanzi.com/feed/<cid:\d+>' => 'feed/channel',
+                'http://www.waduanzi.com/feed/<_a:(joke|lengtu|girl|video)>' => 'feed/<_a>',
                 'http://www.waduanzi.com/u/<id:\d+>' => 'user/index',
                 'http://www.waduanzi.com/sitemap' => 'site/sitemap',
                     
