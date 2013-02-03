@@ -92,14 +92,13 @@
         <?php endforeach;?>
         <div class="clear"></div>
     </div>
-     <?php if (empty($post->bmiddlePic)):?>
-    <div class="cdc-block">
-        <!--cnzz tui-->
-        <script  type="text/javascript" charset="utf-8"  src="http://tui.cnzz.net/cs.php?id=1000021168"></script>
-        <!--cnzz tui-->
-    </div>
-    <?php endif;?>
+    <!-- 详情页侧边栏广告位开始 -->
+    <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_first'));?>
+    <!-- 详情页侧边栏广告位结束 -->
 	<div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
+    <!-- 详情页侧边栏广告位开始 -->
+    <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_second'));?>
+    <!-- 详情页侧边栏广告位结束 -->
 </div>
 <div class="clear"></div>
 
