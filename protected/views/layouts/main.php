@@ -94,7 +94,7 @@ cs()->registerMetaTag('text/html; charset=utf-8', null, 'content-type')
     ->registerCoreScript('jquery')
     ->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END)
     ->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END)
-    ->registerLinkTag('alternate', 'application/rss+xml', aurl('feed'), null, array('title'=>app()->name . ' » Feed'));
+    ->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/index'), null, array('title'=>app()->name . ' » Feed'));
 
 YII_DEBUG || cs()->scriptMap = array(
     'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=20130201001'),
