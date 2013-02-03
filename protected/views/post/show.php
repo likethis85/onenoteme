@@ -92,9 +92,6 @@
         <?php endforeach;?>
         <div class="clear"></div>
     </div>
-    <!-- 详情页侧边栏广告位开始 -->
-    <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_first'));?>
-    <!-- 详情页侧边栏广告位结束 -->
      <?php if (empty($post->bmiddlePic)):?>
     <div class="cdc-block">
         <!--cnzz tui-->
