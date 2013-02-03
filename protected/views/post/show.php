@@ -44,11 +44,11 @@
         </div>
         <div class="line3px"></div>
         <!-- 个性化推荐 start -->
-        <div class="content-block cnzz-box">
-            <script  type="text/javascript" charset="utf-8"  src="http://tui.cnzz.net/cs.php?id=1000021164"></script>
-        </div>
         <div class="content-block wumii-box">
             <script type="text/javascript" id="wumiiRelatedItems"></script>
+        </div>
+        <div class="content-block cnzz-box">
+            <script  type="text/javascript" charset="utf-8"  src="http://tui.cnzz.net/cs.php?id=1000021164"></script>
         </div>
         <!-- 个性化推荐 start -->
         <a name="comments"></a>
