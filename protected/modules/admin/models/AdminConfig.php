@@ -20,6 +20,9 @@ class AdminConfig extends Config
     const CATEGORY_SNS_STATS = 32;
     const CATEGORY_SNS_TEMPLATE = 33;
     
+    const CATEGORY_SEO = 40;
+    const CATEGORY_SEO_KEYWORD_DESC = 41;
+    
     
     /**
      * Returns the static model of the specified AR class.

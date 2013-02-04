@@ -64,8 +64,8 @@ class SiteController extends Controller
             $models = Post::model()->findAll($criteria);
         
         $this->pageTitle = param('sitename') . ' - ' . param('shortdesc');
-        $this->setKeywords('挖段子,挖笑话,挖冷图,挖女神,挖视频,挖电影,精品笑话，内涵段子,内涵图,邪恶漫画,黄色笑话,幽默笑话,成人笑话,夫妻笑话,笑话集锦,荤段子,黄段子');
-        $this->setDescription('最新发布的段子，每日精品笑话连载。网罗互联网各种精品段子，各种糗事，各种笑话，各种秘密，各种经典语录，各种有趣的图片，各种漂亮mm校花模特正妹，应有尽有。烦了、累了、无聊了，就来挖段子逛一逛。');
+        $this->setKeywords(param('home_index_keywords'));
+        $this->setDescription(param('home_index_description'));
         
         $this->channel = 'home';
         if (request()->getIsAjaxRequest()) {
