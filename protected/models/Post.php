@@ -215,12 +215,15 @@ class Post extends CActiveRecord
 	
 	public function getSummary($len = 300)
 	{
-	    return mb_strimwidth($this->content, 0, $len, '...', app()->charset);
+	    return mb_strimwidth($this->content, 0, $len, '......', app()->charset);
 	}
 	
 	public function getFilterSummary($len = 300)
 	{
-	    return nl2br(strip_tags($this->getSummary($len), param('summary_html_tags')));
+	    $html = nl2br(strip_tags($this->getSummary($len), param('summary_html_tags')));
+	    $html .= sprintf('<span class="cred">(剩余&nbsp;%d&nbsp;字未显示)</span>');
+	    $html .= l('<br /><br />继续阅读全文&gt;&gt;&gt;', $this->getUrl(), array('target'=>'_blank'));
+	    return $html;
 	}
 	
 	public function getFilterContent()
