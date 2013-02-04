@@ -67,10 +67,12 @@ Waduanzi.RatingComment = function(event){
 	});
 };
 Waduanzi.AjustImgWidth = function(selector, max){
+	/*
 	if ($.browser.msie && parseInt($.browser.version) < 7) {
 		if (selector.width() > max)
 			selector.css('width', max);
 	}
+	*/
 };
 Waduanzi.PostComment = function(event) {
 	event.preventDefault();

@@ -7,7 +7,8 @@
         <span>QQ群：49401589</span>
     </div>
     <ul class="mode-switch fright">
-        <li class="fall on"><a href="<?php echo aurl($this->route, array('page'=>(int)$_GET['page'], 's'=>POST_LIST_STYLE_WATERFALL));?>">缩略图</a></li>
+        <li class="fall on"><a href="<?php echo aurl($this->route, array('page'=>(int)$_GET['page'], 's'=>POST_LIST_STYLE_WATERFALL));?>">瀑布流</a></li>
+        <li class="grid"><a href="<?php echo aurl($this->route, array('page'=>(int)$_GET['page'], 's'=>POST_LIST_STYLE_GRID));?>">表格</a></li>
         <li class="list"><a href="<?php echo aurl($this->route, array('page'=>(int)$_GET['page'], 's'=>POST_LIST_STYLE_LINE));?>">列表</a></li>
     </ul>
     <div class="clear"></div>
