@@ -92,6 +92,7 @@ cs()->registerMetaTag('text/html; charset=utf-8', null, 'content-type')
     ->registerCssFile(sbu('styles/cd-basic.css'))
     ->registerCssFile(sbu('styles/cd-main.css'))
     ->registerCoreScript('jquery')
+    ->registerScriptFile(sbu('libs/bootstrap/js/modernizr.min.js'), CClientScript::POS_END)
     ->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END)
     ->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END)
     ->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/index'), null, array('title'=>app()->name . ' » Feed'));
@@ -100,12 +101,13 @@ YII_DEBUG || cs()->scriptMap = array(
     'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=20130201001'),
     'cd-basic.css' => sbu('styles/cd-all.min.css?t=20130201001'),
     'cd-main.css' => sbu('styles/cd-all.min.css?t=20130201001'),
-    'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=2013011001'),
-    'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=2013011001'),
-    'jquery.infinitescroll.min.js' => sbu('scripts/cd-all.min.js?t=2013011001'),
-    'jquery.masonry.min.js' => sbu('scripts/cd-all.min.js?t=2013011001'),
-    'cd-main.js' => sbu('scripts/cd-all.min.js?t=2013011001'),
-    'json.js' => sbu('scripts/cd-all.min.js?t=2013011001'),
+    'modernizr.min.js' => sbu('scripts/cd-all.min.js?t=20130204001'),
+    'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=20130204001'),
+    'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=20130204001'),
+    'jquery.infinitescroll.min.js' => sbu('scripts/cd-all.min.js?t=20130204001'),
+    'jquery.masonry.min.js' => sbu('scripts/cd-all.min.js?t=20130204001'),
+    'cd-main.js' => sbu('scripts/cd-all.min.js?t=20130204001'),
+    'json2.js' => sbu('scripts/cd-all.min.js?t=20130204001'),
 );
 ?>
 

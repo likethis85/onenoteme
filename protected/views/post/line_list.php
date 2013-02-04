@@ -125,7 +125,7 @@ $(function(){
 </script>
 
 <?php
-cs()->registerScriptFile(sbu('libs/json.js'), CClientScript::POS_END);
+cs()->registerScriptFile(sbu('libs/json2.js'), CClientScript::POS_END);
 ?>
 
 
