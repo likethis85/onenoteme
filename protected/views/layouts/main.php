@@ -92,7 +92,7 @@ cs()->registerMetaTag('text/html; charset=utf-8', null, 'content-type')
     ->registerCssFile(sbu('styles/cd-basic.css'))
     ->registerCssFile(sbu('styles/cd-main.css'))
     ->registerCoreScript('jquery')
-    ->registerScriptFile(sbu('libs/bootstrap/js/modernizr.min.js'), CClientScript::POS_END)
+    ->registerScriptFile(sbu('libs/modernizr.min.js'), CClientScript::POS_END)
     ->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END)
     ->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END)
     ->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/index'), null, array('title'=>app()->name . ' » Feed'));

@@ -66,6 +66,7 @@ Waduanzi.RatingComment = function(event){
 		}
 	});
 };
+
 Waduanzi.AjustImgWidth = function(selector, max){
 	/*
 	if ($.browser.msie && parseInt($.browser.version) < 7) {
