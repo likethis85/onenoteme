@@ -57,12 +57,16 @@ return array(
     'autoLoginDuration' => 3600 * 24 * 7,
     'waterfall_post_count_page' => 40,
     'line_post_count_page' => 20,
-    'grid_post_count_page' => 40,
+    'grid_post_count_page' => 60,
+    'grid_post_count_page_column_four' => 60,
+    'grid_post_count_page_column_three' => 45,
+
     'video_count_page' => 15,
     'duanzi_count_page' => 30,
     'lengtu_count_page' => 20,
     'girl_count_page' => 20,
     'commentCountOfPage' => 20,
+
     'comment_count_page_home' => 20,
     // 评论最少字符
     'comment_min_length' => 2,
