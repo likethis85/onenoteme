@@ -10,7 +10,7 @@
     <div class="clear"></div>
 </div>
 
-<div class="panel panel15 bottom10px post-grid-list clearfix <?php if ($models && $models[0]->channel_id == CHANNEL_GIRL) echo 'column-three';?>">
+<div class="panel panel15 bottom10px post-grid-list clearfix <?php if ($channel == CHANNEL_GIRL) echo 'column-three';?>">
     <div id="grid-container">
         <?php foreach ((array)$models as $index => $model):?>
         <div class="grid-item">

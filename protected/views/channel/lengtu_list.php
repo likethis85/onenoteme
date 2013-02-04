@@ -1,5 +1,5 @@
 <div class="fleft cd-container">
-    <?php $this->renderPartial($list_view, array('models'=>$models, 'pages'=>$pages));?>
+    <?php $this->renderPartial($list_view, array('models'=>$models, 'pages'=>$pages, 'channel'=>$this->channel));?>
 </div>
 <div class="fright cd-sidebar">
     <?php $this->widget('CDAdvert', array('solt'=>'channel_home_sidebar_01'));?>

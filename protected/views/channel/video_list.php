@@ -1,5 +1,5 @@
 <div class="fleft cd-container">
-    <?php $this->renderPartial('/post/line_list', array('models'=>$models, 'pages'=>$pages));?>
+    <?php $this->renderPartial('/post/line_list', array('models'=>$models, 'pages'=>$pages, 'channel'=>$this->channel));?>
 </div>
 
 <div class="fright cd-sidebar">
