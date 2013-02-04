@@ -32,7 +32,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$('#grid-container').on('mouseenter', '.grid-item.' , function(){
+	$('#grid-container').on('mouseenter', '.grid-item' , function(){
 		var tthis = $(this);
 		var pos = tthis.position();
 		var top = pos.top + tthis.height() + 5;
@@ -40,7 +40,7 @@ $(function(){
 		var left = pos.left - ($('#tip-block').width() - tthis.width()) / 2;
 		$('#tip-block').css('top', top).css('left', left);
 	});
-	$('#grid-container').on('mouseleave', '.grid-item.', function(){
+	$('#grid-container').on('mouseleave', '.grid-item', function(){
 		$('#tip-block').css('top', '-9999px').empty();
 	});
 
