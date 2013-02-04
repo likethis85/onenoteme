@@ -1,11 +1,8 @@
-<div class="panel panel15 bottom10px">
-    <div class="fleft apps-list">
-        <a href="http://itunes.apple.com/cn/app//id486268988?mt=8" target="_blank">下载iPhone应用2.2.1版</a>
-        <a href="http://s.waduanzi.com/android/waduanzi.apk" target="_blank">下载Android应用1.1.0版</a>
-        <a href="http://www.weibo.com/cdcchen" target="_blank">@新浪微博</a>
-        <a href="http://t.qq.com/cdcchen" target="_blank">@腾讯微博</a>
-        <span>QQ群：49401589</span>
-    </div>
+<div class="panel panel10 bottom10px">
+    <ul class="fleft hot-keyword">
+        <li><span class="cred announce">24小时更新：<?php echo Post::todayUpdateCount();?>篇。&nbsp;&nbsp;&nbsp;QQ群：49401589</span></li>
+        <li><a href="<?php echo aurl('app/taijiong');?>" target="_blank">王宝强超贱表情制作器</a></li>
+    </ul>
     <ul class="mode-switch fright">
         <li class="fall on"><a href="<?php echo aurl($this->route, array('page'=>(int)$_GET['page'], 's'=>POST_LIST_STYLE_WATERFALL));?>">瀑布流</a></li>
         <li class="grid"><a href="<?php echo aurl($this->route, array('page'=>(int)$_GET['page'], 's'=>POST_LIST_STYLE_GRID));?>">表格</a></li>
