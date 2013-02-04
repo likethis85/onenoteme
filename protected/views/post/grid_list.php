@@ -32,7 +32,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$('#grid-container .grid-item').hover(function(){
+	$('#grid-container').on('hover', '.grid-item.' ,function(){
 		var tthis = $(this);
 		var pos = tthis.position();
 		var top = pos.top + tthis.height() + 5;
