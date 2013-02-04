@@ -32,14 +32,15 @@
 
 <script type="text/javascript">
 $(function(){
-	$('#grid-container').on('hover', '.grid-item.' ,function(){
+	$('#grid-container').on('mouseenter', '.grid-item.' , function(){
 		var tthis = $(this);
 		var pos = tthis.position();
 		var top = pos.top + tthis.height() + 5;
 		$('#tip-block').html($(this).children('.post-tip').html());
 		var left = pos.left - ($('#tip-block').width() - tthis.width()) / 2;
 		$('#tip-block').css('top', top).css('left', left);
-	}, function(){
+	});
+	$('#grid-container').on('mouseleave', '.grid-item.', function(){
 		$('#tip-block').css('top', '-9999px').empty();
 	});
 
