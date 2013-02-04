@@ -222,8 +222,10 @@ class Post extends CActiveRecord
 	{
 	    $html = nl2br(strip_tags($this->getSummary($len), param('summary_html_tags')));
 	    $moreCount = mb_strlen($this->content, app()->charset) - mb_strlen($html, app()->charset);
-	    $html .= sprintf('<span class="cred">(剩余&nbsp;%d&nbsp;字未显示)</span>', (int)$moreCount);
-	    $html .= l('<br /><br />继续阅读全文&gt;&gt;&gt;', $this->getUrl(), array('target'=>'_blank'));
+	    if ($moreCount > 0) {
+    	    $text .= sprintf('<i class="cgray">(剩余&nbsp;%d&nbsp;字未显示)</i><span class="cred">继续阅读全文&gt;&gt;&gt;</span>', (int)$moreCount);
+    	    $html .= '<br />' . l($text, $this->getUrl(), array('target'=>'_blank'));
+	    }
 	    return $html;
 	}
 	
