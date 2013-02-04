@@ -1213,6 +1213,7 @@ a:hover .social-widget-content {color:#666666;}
 /* post grid list */
 .post-grid-list .grid-item {float:left; margin:4px; overflow:hidden; position:relative; z-index:1;  background-color:#EFEFEF; line-height:0;}
 .post-grid-list .grid-item a {display:block; overflow:hidden; width:138px; height:138px; border:3px solid #EFEFEF;}
+.post-grid-list.column-three .grid-item a {width:188px; height:188px;}
 .post-grid-list .grid-item img {width:100%;}
 .post-grid-list .grid-item a:hover {border-color:#BFBFBF; opacity:0.65;}
 #tip-block {max-width:250px; border:2px solid #444442; padding:5px; color:#FFF; position:absolute; top:-9999px; left:0; z-index:888; background-color:#000; font-size:12px; line-height:22px; opacity:0.9;}
