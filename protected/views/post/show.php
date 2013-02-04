@@ -9,7 +9,7 @@
 		        <?php if ($post->channel_id == CHANNEL_DUANZI):echo $post->filterContent;?>
 		        <?php else:?>
                 <a href="<?php echo $post->url;?>" target="_blank" title="在新窗口中打开">
-                    <?php echo $post->title;?>
+                    <h1><?php echo h($post->title);?></h1>
                 </a>
                 <?php endif;?>
             </div>
