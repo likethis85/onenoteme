@@ -980,8 +980,8 @@ ul.mode-switch {display:inline-block; height:25px; overflow:hidden; margin:0; li
 ul.mode-switch li {width:35px; height:25px; display:block; float:left; overflow:hidden; margin:0;}
 ul.mode-switch a {display:block; width:25px; height:25px; background:#EFEFEF url(../images/sitebg.png) no-repeat; text-indent:-9999px;}
 ul.mode-switch .on a {background-color:#C3E7A1;}
-ul.mode-switch .fall a {background-position:-908px -70px; padding-left:10px;}
-ul.mode-switch .fall.on a {background-position:-908px -45px;}
+ul.mode-switch .fall a {background-position:-908px -121px; padding-left:10px;}
+ul.mode-switch .fall.on a {background-position:-908px -96px;}
 ul.mode-switch .grid a {background-position:-908px -70px; padding-left:10px;}
 ul.mode-switch .grid.on a {background-position:-908px -45px;}
 ul.mode-switch .list a {background-position:-913px -20px; padding-right:10px;}
