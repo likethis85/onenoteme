@@ -101,13 +101,13 @@ YII_DEBUG || cs()->scriptMap = array(
     'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=20130201001'),
     'cd-basic.css' => sbu('styles/cd-all.min.css?t=20130201001'),
     'cd-main.css' => sbu('styles/cd-all.min.css?t=20130201001'),
-    'modernizr.min.js' => sbu('scripts/cd-all.min.js?t=20130204001'),
-    'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=20130204001'),
-    'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=20130204001'),
-    'jquery.infinitescroll.min.js' => sbu('scripts/cd-all.min.js?t=20130204001'),
-    'jquery.masonry.min.js' => sbu('scripts/cd-all.min.js?t=20130204001'),
-    'cd-main.js' => sbu('scripts/cd-all.min.js?t=20130204001'),
-    'json2.js' => sbu('scripts/cd-all.min.js?t=20130204001'),
+    'modernizr.min.js' => sbu('scripts/cd-all.min.js?t=20130207001'),
+    'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=20130207001'),
+    'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=20130207001'),
+    'jquery.infinitescroll.min.js' => sbu('scripts/cd-all.min.js?t=20130207001'),
+    'jquery.masonry.min.js' => sbu('scripts/cd-all.min.js?t=20130207001'),
+    'cd-main.js' => sbu('scripts/cd-all.min.js?t=20130207001'),
+    'json2.js' => sbu('scripts/cd-all.min.js?t=20130207001'),
 );
 ?>
 
