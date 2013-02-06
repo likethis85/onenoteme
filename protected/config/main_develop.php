@@ -61,6 +61,9 @@ return array(
                 ), */
             ),
         ),
+        'errorHandler' => array(
+            'errorAction' => 'site/error',
+        ),
         'db' => array(
             'class' => 'CDbConnection',
 			'connectionString' => 'mysql:host=127.0.0.1; port=3306; dbname=cd_waduanzi',

@@ -46,6 +46,9 @@ return array(
         ),
     ),
     'components' => array(
+        'errorHandler' => array(
+            'errorAction' => 'site/error',
+        ),
         'db' => array(
             'class' => 'CDbConnection',
 			'connectionString' => 'mysql:host=localhost; port=3306; dbname=cd_waduanzi',
