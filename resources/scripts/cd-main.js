@@ -126,7 +126,7 @@ Waduanzi.switchImageSize = function(event){
     var originalUrl = itemDiv.find('.post-image .thumb a').attr('href');
     itemDiv.find('.post-image .thumb a .original').attr('src', originalUrl).toggle();
     var itemPos = itemDiv.position();
-    $('body').scrollTop(itemPos.top);
+    $('body').scrollTop(parseInt(itemPos.top) + 72);
 };
 
 Waduanzi.ratingPost = function(event){
