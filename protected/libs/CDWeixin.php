@@ -4,9 +4,13 @@ class CDWeixin
     const MSG_TYPE_TEXT = 'text';
     const MSG_TYPE_LOCATION = 'location';
     const MSG_TYPE_IMAGE = 'image';
+    const MSG_TYPE_EVENT = 'event';
+    const MSG_EVENT_ENTER = 'enter';
+    const MSG_EVENT_LOCATION = 'location';
     
     const REPLY_TYPE_TEXT = 'text';
     const REPLY_TYPE_NEWS = 'news';
+    const REPLY_TYPE_MUSIC = 'music';
 
     /**
      * 接收到的post数据
@@ -72,13 +76,40 @@ class CDWeixin
     {
         return strtolower($this->_postData->MsgType) == self::MSG_TYPE_IMAGE;
     }
+    
+    /**
+     * 判断是否是事件信息
+     * @return boolean
+     */
+    public function isEventMsg()
+    {
+        return strtolower($this->_postData->MsgType) == self::MSG_TYPE_EVENT;
+    }
+    
+    /**
+     * 判断是否是事件消息中的进入enter事件
+     * @return boolean
+     */
+    public function isEnterEvent()
+    {
+        return $this->isEventMsg() && strtolower($this->_postData->Event) == self::MSG_EVENT_ENTER;
+    }
+    
+    /**
+     * 判断是否是事件消息中的进入location事件
+     * @return boolean
+     */
+    public function isLocationEvent()
+    {
+        return $this->isEventMsg() && strtolower($this->_postData->Event) == self::MSG_EVENT_LOCATION;
+    }
 
     /**
      * 生成向用户发送的文字信息
      * @param string $content
      * @return string xml字符串
      */
-    public function outputText($content)
+    public function outputText($content, $funcflag = 0)
     {
         $textTpl = '<xml>
                 <ToUserName><![CDATA[%s]]></ToUserName>
@@ -86,10 +117,10 @@ class CDWeixin
                 <CreateTime>%s</CreateTime>
                 <MsgType><![CDATA[%s]]></MsgType>
                 <Content><![CDATA[%s]]></Content>
-                <FuncFlag>0</FuncFlag>
+                <FuncFlag>%s</FuncFlag>
             </xml>';
     
-        $text = sprintf($textTpl, $this->_postData->FromUserName, $this->_postData->ToUserName, time(), self::REPLY_TYPE_TEXT, $content);
+        $text = sprintf($textTpl, $this->_postData->FromUserName, $this->_postData->ToUserName, time(), self::REPLY_TYPE_TEXT, $content, $funcflag);
         return $text;
     }
     
@@ -99,7 +130,7 @@ class CDWeixin
      * @param arrry $posts 文章数组，每一个元素是一个文章数组，索引跟微信官方接口说明一致
      * @return string xml字符串
      */
-    public function outputNews($content, $posts = array())
+    public function outputNews($content, $posts = array(), $funcflag = 0)
     {
         $textTpl = '<xml>
              <ToUserName><![CDATA[%s]]></ToUserName>
@@ -109,7 +140,7 @@ class CDWeixin
              <Content><![CDATA[%s]]></Content>
              <ArticleCount>%d</ArticleCount>
              <Articles>%s</Articles>
-             <FuncFlag>1<FuncFlag>
+             <FuncFlag>%s<FuncFlag>
          </xml>';
         
         $itemTpl = '<item>
@@ -127,7 +158,27 @@ class CDWeixin
                 throw new Exception('$posts 数据结构错误');
         }
         
-        $text = sprintf($textTpl, $this->_postData->FromUserName, $this->_postData->ToUserName, time(), self::REPLY_TYPE_NEWS, $content, count($posts), $items);
+        $text = sprintf($textTpl, $this->_postData->FromUserName, $this->_postData->ToUserName, time(), self::REPLY_TYPE_NEWS, $content, count($posts), $items, $funcflag);
+        return $text;
+    }
+    
+    public function outputMusic($title, $desc, $music_url, $hq_music_url, $funcflag = 0)
+    {
+        $textTpl = '<xml>
+             <ToUserName><![CDATA[%s]]></ToUserName>
+             <FromUserName><![CDATA[%s]]></FromUserName>
+             <CreateTime>%s</CreateTime>
+             <MsgType><![CDATA[%s]]></MsgType>
+             <Music>
+                 <Title><![CDATA[%s]]></Title>
+                 <Description><![CDATA[%s]]></Description>
+                 <MusicUrl><![CDATA[%s]]></MusicUrl>
+                 <HQMusicUrl><![CDATA[%s]]></HQMusicUrl>
+             </Music>
+             <FuncFlag>%s<FuncFlag>
+         </xml>';
+        
+        $text = sprintf($textTpl, $this->_postData->FromUserName, $this->_postData->ToUserName, time(), self::REPLY_TYPE_MUSIC, $title, $desc, $music_url, $hq_music_url, $funcflag);
         return $text;
     }
     

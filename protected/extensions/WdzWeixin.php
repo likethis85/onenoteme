@@ -6,19 +6,27 @@ class WdzWeixin extends CDWeixin
         $hello = 'hello2bizuser';
         $input = trim($data->Content);
         
-        if (is_numeric($input)) {
+        if (strtolower($input) == $hello) {
+            $this->welcome();
+            exit(0);
+        }
+        
+        if ($this->isTextMsg() && is_numeric($input)) {
             $method = 'method' . $input[0]; // 取第一个数字
             $result = false;
             if (method_exists($this, $method)) {
-                $result = call_user_func(array($this, $method), $data);
-                if ($result === false)
+                if (false === call_user_func(array($this, $method), $data))
                     self::error();
             }
+            else
+                $this->method0();
+            
+            exit(0);
         }
-
-        $this->method0();
-        exit(0);
+        else
+            $this->unSupportMsgType();
         
+        exit(0);
     }
     
     public function errorHandler($errno, $error, $file = '', $line = 0)
@@ -31,6 +39,22 @@ class WdzWeixin extends CDWeixin
     {
 //         $log = sprintf('%s - %s - %s - %s', $e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine());
 //         file_put_contents(app()->runtimePath . '/wx2.txt', $log);
+    }
+    
+    private function welcome()
+    {
+        $text = "没错！这里就是要啥有啥，想啥有啥的挖段子微信大本营！\n\n您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，也可以发送给我们与大家一起分享哟～" . self::helpInfo();
+        $xml = $this->outputText($text);
+        header('Content-Type: application/xml');
+        echo $xml;
+    }
+    
+    private function unSupportMsgType()
+    {
+        $text = "Sorry，我们现在还不支持关键字搜索、图片上传和地理位置消息查询。" . self::helpInfo();
+        $xml = $this->outputText($text);
+        header('Content-Type: application/xml');
+        echo $xml;
     }
     
     private function method1($data)
