@@ -297,9 +297,9 @@ class Api_Post extends ApiBase
     	$post->tags = $params['tags'];
     	$post->create_time = $_SERVER['REQUEST_TIME'];
     	$post->state = POST_STATE_DISABLED;
-    	$post->up_score = mt_rand(20, 100);
+    	$post->up_score = mt_rand(50, 200);
     	$post->down_score = mt_rand(0, 15);
-    	$post->view_nums = mt_rand(100, 300);
+    	$post->view_nums = mt_rand(300, 800);
     	$post->thumbnail_pic = $post->bmiddle_pic = '';
     	$post->original_pic = $params['pic'];
     	
