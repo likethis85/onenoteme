@@ -98,9 +98,9 @@ cs()->registerMetaTag('text/html; charset=utf-8', null, 'content-type')
     ->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/index'), null, array('title'=>app()->name . ' » Feed'));
 
 YII_DEBUG || cs()->scriptMap = array(
-    'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=20130201001'),
-    'cd-basic.css' => sbu('styles/cd-all.min.css?t=20130201001'),
-    'cd-main.css' => sbu('styles/cd-all.min.css?t=20130201001'),
+    'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=20130223001'),
+    'cd-basic.css' => sbu('styles/cd-all.min.css?t=20130223001'),
+    'cd-main.css' => sbu('styles/cd-all.min.css?t=20130223001'),
     'modernizr.min.js' => sbu('scripts/cd-all.min.js?t=20130207001'),
     'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=20130207001'),
     'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=20130207001'),
