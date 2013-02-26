@@ -343,7 +343,7 @@ class WeiboCommand extends CConsoleCommand
             $tail = '#搞笑#' . $tail;
         elseif ($model->channel_id == CHANNEL_GIRL)
             $tail = '#美女#' . $tail;
-        $accounts = self::fetchRelativeAccounts(1);
+        $accounts = self::fetchSinatRelativeAccounts(3);
         $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
         $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags . $accounts;
@@ -393,7 +393,7 @@ class WeiboCommand extends CConsoleCommand
             $tail = '#搞笑#' . $tail;
         elseif ($model->channel_id == CHANNEL_GIRL)
             $tail = '#美女#' . $tail;
-        $accounts = self::fetchRelativeAccounts(1);
+        $accounts = self::fetchSinatRelativeAccounts(3);
         $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
         $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags. $accounts;
@@ -428,7 +428,7 @@ class WeiboCommand extends CConsoleCommand
             $tail = '#搞笑#' . $tail;
         elseif ($model->channel_id == CHANNEL_GIRL)
             $tail = '#美女#' . $tail;
-        $accounts = self::fetchRelativeAccounts(1);
+        $accounts = self::fetchQQtRelativeAccounts(3);
         $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
         $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags . $accounts;
@@ -472,7 +472,7 @@ class WeiboCommand extends CConsoleCommand
             $tail = '#搞笑#' . $tail;
         elseif ($model->channel_id == CHANNEL_GIRL)
             $tail = '#美女#' . $tail;
-        $accounts = self::fetchRelativeAccounts(1);
+        $accounts = self::fetchQQtRelativeAccounts(3);
         $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
         $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags . $accounts;
@@ -514,7 +514,38 @@ class WeiboCommand extends CConsoleCommand
         return $tags;
     }
     
-    private static function fetchRelativeAccounts($count = 1)
+    private static function fetchSinatRelativeAccounts($count = 5)
+    {
+        $url = 'https://upload.api.weibo.com/2/statuses/public_timeline.json';
+        
+        $data = array(
+            'source' => WEIBO_APP_KEY,
+            'access_token' => app()->cache->get('sina_weibo_access_token'),
+            'count' => $count,
+        );
+        
+        $curl = new CDCurl();
+        $curl->get($url, $data);
+//         var_dump($curl->rawdata());
+//         var_dump($curl->errno());exit;
+        $statuses = array();
+        if ($curl->errno() == 0) {
+            $result = json_decode($curl->rawdata(), true);
+            $statuses = $result['statuses'];
+        }
+        else
+            return false;
+        
+        $text = '';
+        $accounts = array();
+        foreach ($statuses as $status)
+            $accounts[] = '@' . $status['user']['screen_name'];
+        $text = join(' ', $accounts);
+        
+        return $text;
+    }
+    
+    private static function fetchQQtRelativeAccounts($count = 1)
     {
         $text = '';
         $accounts = array();
