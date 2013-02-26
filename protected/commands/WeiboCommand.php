@@ -518,14 +518,14 @@ class WeiboCommand extends CConsoleCommand
     {
         $url = 'https://upload.api.weibo.com/2/statuses/public_timeline.json';
         
-        $data = array(
+        $args = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->cache->get('sina_weibo_access_token'),
             'count' => $count,
         );
         
         $curl = new CDCurl();
-        $curl->get($url, $data);
+        $curl->get($url, $args);
 //         var_dump($curl->rawdata());
 //         var_dump($curl->errno());exit;
         $statuses = array();
@@ -569,7 +569,7 @@ class WeiboCommand extends CConsoleCommand
         if ($curl->errno() == 0) {
             $data = json_decode($curl->rawdata(), true);
             if ($data['ret'] == 0)
-                $users = array_keys($data['user']);
+                $users = array_keys($data['data']['user']);
             else
                 return false;
         }
