@@ -514,7 +514,7 @@ class WeiboCommand extends CConsoleCommand
         return $tags;
     }
     
-    private static function fetchSinatRelativeAccounts($count = 5)
+    private static function fetchSinatRelativeAccounts($count = 3)
     {
         $url = 'https://upload.api.weibo.com/2/statuses/public_timeline.json';
         
@@ -545,21 +545,42 @@ class WeiboCommand extends CConsoleCommand
         return $text;
     }
     
-    private static function fetchQQtRelativeAccounts($count = 1)
+    private static function fetchQQtRelativeAccounts($count = 3)
     {
+        $url = 'https://open.t.qq.com/api/statuses/public_timeline';
+        
+        $args = array(
+            'oauth_consumer_key' => QQT_APP_KEY,
+            'access_token' => app()->cache->get('qq_weibo_access_token'),
+            'openid' => app()->cache->get('qq_weibo_user_id'),
+            'clientip' => request()->getUserHostAddress(),
+            'oauth_version' => '2.a',
+            'scope' => 'all',
+            'pos' => 0,
+            'format' => 'json',
+            'reqnum' => $count,
+        );
+        
+        $curl = new CDCurl();
+        $curl->get($url, $args);
+//         var_dump($curl->rawdata());
+//         var_dump($curl->errno());exit;
+        $users = array();
+        if ($curl->errno() == 0) {
+            $data = json_decode($curl->rawdata(), true);
+            if ($data['ret'] == 0)
+                $users = array_keys($data['user']);
+            else
+                return false;
+        }
+        else
+            return false;
+        
         $text = '';
         $accounts = array();
-        if (count($accounts) > 0) {
-            $subs = array();
-            for ($i=0; $i<$count; $i++) {
-                $index = mt_rand(0, count($accounts) - 1);
-                $subs[] = $accounts[$index];
-                unset($accounts[$index]);
-            }
-            if ($subs) {
-                $text = '@' . join('@', $subs);
-            }
-        }
+        foreach ($users as $user)
+            $accounts[] = '@' . $user;
+        $text = join(' ', $accounts);
         return $text;
     }
     
