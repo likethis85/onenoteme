@@ -65,7 +65,7 @@ class WdzWeixin extends CDWeixin
             $result = false;
         }
         
-        $text = "感谢您的分享，偶代表火星的段友感谢您！\n" . self::helpInfo();
+        $text = "感谢您的分享，偶代表火星的段友感谢您！\n";
         // 此处添加'非常'只是为了通过此查看是否保存成功
         if ($result)
             $text = '非常' . $text;
