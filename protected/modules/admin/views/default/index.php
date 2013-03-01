@@ -7,7 +7,7 @@
     </p>
     <p>
         有&nbsp;<b><?php echo $hidePostCount;?></b>&nbsp;个段子待显示。
-        <a class="btn btn-primary btn-small" href="<?php echo url('admin/post/latest');?>">查看投稿</a>
+        <a class="btn btn-primary btn-small" href="<?php echo url('admin/post/latest');?>">查看列表</a>
     </p>
     <p>
         有&nbsp;<b><?php echo $userCount;?></b>&nbsp;个评论未审核。
