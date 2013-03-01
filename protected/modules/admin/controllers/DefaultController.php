@@ -5,19 +5,24 @@ class DefaultController extends AdminController
 	public function actionIndex()
 	{
 	    $criteria = new CDbCriteria();
-	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_NOT_VERIFY));
-	    $postCount = Post::model()->count($criteria);
+	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_UNVERIFY));
+	    $unverifyPostCount = Post::model()->count($criteria);
+
+	    $criteria = new CDbCriteria();
+	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_DISABLED));
+	    $hidePostCount = Post::model()->count($criteria);
 	    
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('t.state'=>USER_STATE_UNVERIFY));
 	    $userCount = User::model()->count($criteria);
 	    
 	    $criteria = new CDbCriteria();
-	    $criteria->addColumnCondition(array('t.state'=>COMMENT_STATE_NOT_VERIFY));
+	    $criteria->addColumnCondition(array('t.state'=>COMMENT_STATE_DISABLED));
 	    $commentCount = Comment::model()->count($criteria);
 	    
 	    $this->render('index', array(
-	        'postCount' => $postCount,
+	        'unverifyPostCount' => $unverifyPostCount,
+	        'hidePostCount' => $hidePostCount,
 	        'userCount' => $userCount,
 	        'commentCount' => $commentCount,
 	    ));
