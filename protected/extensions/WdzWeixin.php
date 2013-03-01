@@ -42,9 +42,37 @@ class WdzWeixin extends CDWeixin
                 $this->error();
         }
         elseif (mb_strlen($input, app()->charset) > self::POST_JOKE_CONTENT_MIN_LEN)
-            ;
+            $this->postJoke();
         else
             $this->method_0();
+    }
+    
+    private function postJoke()
+    {
+        $post = new Post();
+        $post->channel_id = CHANNEL_DUANZI;
+        $post->content = strip_tags($this->_data->Content);
+        $post->create_time = $_SERVER['REQUEST_TIME'];
+        $post->state = POST_STATE_UNVERIFY;
+        $post->up_score = mt_rand(50, 200);
+        $post->down_score = mt_rand(0, 15);
+        $post->view_nums = mt_rand(300, 800);
+        $post->thumbnail_pic = $post->bmiddle_pic = $post->original_pic = '';
+        try {
+            $result = $post->save();
+        }
+        catch (Exception $e) {
+            $result = false;
+        }
+        
+        $text = "感谢您的分享，偶代表火星的段友感谢您！\n" . self::helpInfo();
+        // 此处添加'非常'只是为了通过此查看是否保存成功
+        if ($result)
+            $text = '非常' . $text;
+        $xml = $this->outputText($text);
+        header('Content-Type: application/xml');
+        echo $xml;
+        exit(0);
     }
     
     public function errorHandler($errno, $error, $file = '', $line = 0)
@@ -326,7 +354,13 @@ class WdzWeixin extends CDWeixin
     
     private static function helpInfo()
     {
-        $text = "\n\n-------------------------\n回复 1 查看笑话\n回复 2 查看趣图\n回复 3 查看女神\n回复 0 查看帮助\n\n喜欢我们就召唤好友添加'挖段子'或'waduanzi'为好友关注我们吧！";
+        $text = "\n\n-------------------------\n";
+        $text .= "①回复 1 查看笑话\n";
+        $text .= "②回复 2 查看趣图\n";
+        $text .= "③回复 3 查看女神\n";
+        $text .= "④回复 0 查看帮助\n";
+        $text .= '⑤投递笑话，请直接发送笑话内容，笑话必须要大于' . self::POST_JOKE_CONTENT_MIN_LEN . "字\n";
+        $text .= "\n喜欢我们就召唤好友添加'挖段子'或'waduanzi'为好友关注我们吧！";
         return $text;
     }
     
