@@ -16,7 +16,7 @@ class CDWeixin
      * 接收到的post数据
      * @var object
      */
-    private $_postData;
+    protected  $_data;
     private $_token;
     
     public function __construct($token)
@@ -37,8 +37,8 @@ class CDWeixin
     public function run()
     {
         if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
-            if ($this->_postData && $this->beforeProcess() === true) {
-                $this->processRequest($this->_postData);
+            if ($this->_data && $this->beforeProcess() === true) {
+                $this->processRequest();
                 $this->afterProcess();
             }
             else
@@ -56,7 +56,7 @@ class CDWeixin
      */
     public function isTextMsg()
     {
-        return strtolower($this->_postData->MsgType) == self::MSG_TYPE_TEXT;
+        return strtolower($this->_data->MsgType) == self::MSG_TYPE_TEXT;
     }
     
     /**
@@ -65,7 +65,7 @@ class CDWeixin
      */
     public function isLocationMsg()
     {
-        return strtolower($this->_postData->MsgType) == self::MSG_TYPE_LOCATION;
+        return strtolower($this->_data->MsgType) == self::MSG_TYPE_LOCATION;
     }
     
     /**
@@ -74,7 +74,7 @@ class CDWeixin
      */
     public function isImageMsg()
     {
-        return strtolower($this->_postData->MsgType) == self::MSG_TYPE_IMAGE;
+        return strtolower($this->_data->MsgType) == self::MSG_TYPE_IMAGE;
     }
     
     /**
@@ -83,7 +83,7 @@ class CDWeixin
      */
     public function isEventMsg()
     {
-        return strtolower($this->_postData->MsgType) == self::MSG_TYPE_EVENT;
+        return strtolower($this->_data->MsgType) == self::MSG_TYPE_EVENT;
     }
     
     /**
@@ -92,7 +92,7 @@ class CDWeixin
      */
     public function isEnterEvent()
     {
-        return $this->isEventMsg() && strtolower($this->_postData->Event) == self::MSG_EVENT_ENTER;
+        return $this->isEventMsg() && strtolower($this->_data->Event) == self::MSG_EVENT_ENTER;
     }
     
     /**
@@ -101,7 +101,7 @@ class CDWeixin
      */
     public function isLocationEvent()
     {
-        return $this->isEventMsg() && strtolower($this->_postData->Event) == self::MSG_EVENT_LOCATION;
+        return $this->isEventMsg() && strtolower($this->_data->Event) == self::MSG_EVENT_LOCATION;
     }
 
     /**
@@ -120,7 +120,7 @@ class CDWeixin
                 <FuncFlag>%s</FuncFlag>
             </xml>';
     
-        $text = sprintf($textTpl, $this->_postData->FromUserName, $this->_postData->ToUserName, time(), self::REPLY_TYPE_TEXT, $content, $funcflag);
+        $text = sprintf($textTpl, $this->_data->FromUserName, $this->_data->ToUserName, time(), self::REPLY_TYPE_TEXT, $content, $funcflag);
         return $text;
     }
     
@@ -158,7 +158,7 @@ class CDWeixin
                 throw new Exception('$posts 数据结构错误');
         }
         
-        $text = sprintf($textTpl, $this->_postData->FromUserName, $this->_postData->ToUserName, time(), self::REPLY_TYPE_NEWS, $content, count($posts), $items, $funcflag);
+        $text = sprintf($textTpl, $this->_data->FromUserName, $this->_data->ToUserName, time(), self::REPLY_TYPE_NEWS, $content, count($posts), $items, $funcflag);
         return $text;
     }
     
@@ -178,7 +178,7 @@ class CDWeixin
              <FuncFlag>%s<FuncFlag>
          </xml>';
         
-        $text = sprintf($textTpl, $this->_postData->FromUserName, $this->_postData->ToUserName, time(), self::REPLY_TYPE_MUSIC, $title, $desc, $music_url, $hq_music_url, $funcflag);
+        $text = sprintf($textTpl, $this->_data->FromUserName, $this->_data->ToUserName, time(), self::REPLY_TYPE_MUSIC, $title, $desc, $music_url, $hq_music_url, $funcflag);
         return $text;
     }
     
@@ -191,7 +191,7 @@ class CDWeixin
         $rawData = $GLOBALS['HTTP_RAW_POST_DATA'];
         $data = simplexml_load_string($rawData, 'SimpleXMLElement', LIBXML_NOCDATA);
         if ($data !== false)
-            $this->_postData = $data;
+            $this->_data = $data;
     
         return $data;
     }
@@ -202,7 +202,7 @@ class CDWeixin
      */
     public function getPostData()
     {
-        return $this->_postData;
+        return $this->_data;
     }
     
     protected function beforeProcess()
@@ -214,7 +214,7 @@ class CDWeixin
     {
     }
 
-    protected function processRequest($data)
+    protected function processRequest()
     {
         throw new Exception('此方法必须被重写');
     }

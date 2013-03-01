@@ -1,10 +1,10 @@
 <?php
 class WdzWeixin extends CDWeixin
 {
-    public function processRequest($data)
+    public function processRequest()
     {
         $hello = 'hello2bizuser';
-        $input = trim($data->Content);
+        $input = trim($this->_data->Content);
         
         if (strtolower($input) == $hello) {
             $this->welcome();
@@ -15,7 +15,7 @@ class WdzWeixin extends CDWeixin
             $method = 'method' . $input[0]; // 取第一个数字
             $result = false;
             if (method_exists($this, $method)) {
-                if (false === call_user_func(array($this, $method), $data))
+                if (false === call_user_func(array($this, $method)))
                     self::error();
             }
             else
@@ -57,24 +57,24 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
-    private function method1($data)
+    private function method1()
     {
-        $this->nextJoke($data);
+        $this->nextJoke();
     }
     
-    private function method2($data)
+    private function method2()
     {
-        $this->nextLengtu($data);
+        $this->nextLengtu();
     }
     
-    private function method3($data)
+    private function method3()
     {
-        $this->nextGirl($data);
+        $this->nextGirl();
     }
     
-    private function method4($data)
+    private function method4()
     {
-        $this->nextVideo($data);
+        $this->nextVideo();
     }
     
     private function method0()
@@ -85,14 +85,14 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
-    private function nextJoke($data)
+    private function nextJoke()
     {
-        $input = trim($data->Content);
+        $input = trim($this->_data->Content);
         $count = (int)$input[1];
         if ($count <= 0 || $count > 5)
             $count = 2;
         
-        $wxid = $data->FromUserName;
+        $wxid = $this->_data->FromUserName;
         $lastID = app()->getDb()->createCommand()
             ->select('last_joke_pid')
             ->from(TABLE_USER_WEIXIN)
@@ -148,9 +148,9 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
-    private function nextLengtu($data)
+    private function nextLengtu()
     {
-        $wxid = $data->FromUserName;
+        $wxid = $this->_data->FromUserName;
         $lastID = app()->getDb()->createCommand()
             ->select('last_lengtu_pid')
             ->from(TABLE_USER_WEIXIN)
@@ -201,9 +201,9 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
-    private function nextGirl($data)
+    private function nextGirl()
     {
-        $wxid = $data->FromUserName;
+        $wxid = $this->_data->FromUserName;
         $lastID = app()->getDb()->createCommand()
             ->select('last_girl_pid')
             ->from(TABLE_USER_WEIXIN)
@@ -254,9 +254,9 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
-    private function nextVideo($data)
+    private function nextVideo()
     {
-        $wxid = $data->FromUserName;
+        $wxid = $this->_data->FromUserName;
         $lastID = app()->getDb()->createCommand()
             ->select('last_video_pid')
             ->from(TABLE_USER_WEIXIN)
