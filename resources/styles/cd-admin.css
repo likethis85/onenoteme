@@ -90,6 +90,7 @@ td.column-label {width:150px; text-align:right;}
 .post-info tr td {padding-right:15px; padding-left:15px;}
 .post-info tr td:first-child {width:150px; text-align:right; color:gray;}
 .post-info tr td:first-child label {color:gray;}
+.post-quick-edit select.select-mini {font-size:12px;}
 
 /* filter keyword */
 #kwcontent {width:500px; height:200px;}
