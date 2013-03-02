@@ -901,7 +901,7 @@ a:hover {color:#D14836; text-decoration:none;}
 .line3px {display:block; clear:both; height:3px; line-height:3px; font-size:1px; overflow:hidden; background-color:#DFDFDF; margin:5px 0px;}
 
 /* container */
-.cd-wrapper {margin:0px auto; overflow:hidden;}
+.cd-wrapper {margin:0px 5px; overflow:hidden;}
 .cd-container {overflow:hidden;}
 .cd-entry {background:#FFFFFF; margin:0 auto;}
 .cd-content {width:600px;}
@@ -968,7 +968,7 @@ footer a.switch-version {float:right;}
 .post-line-list .post-item .post-image .thumb {position:relative;  z-index:1;}
 .post-image img.thumb {width:150px; max-height:250px; margin:0 auto;}
 .post-image .thumb .icon-gif-sign {width:42px; height:42px; position:absolute; left:0; top:0; background-position:-103px -160px; z-index:2;}
-.post-image img.original {max-width:550px; min-width:150px; min-height:150px; background:url(../images/big_loading.gif) no-repeat; opacity:1;}
+.post-image img.original {max-width:100%; min-width:150px; min-height:150px; background:url(../images/big_loading.gif) no-repeat; opacity:1;}
 .post-image img.original:hover {opacity:.9;}
 .post-image .thumbnail-more {cursor:pointer;}
 .post-image .lines {width:155px; margin-top:3px;}
