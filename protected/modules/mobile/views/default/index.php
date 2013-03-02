@@ -1,1 +1,1 @@
-<?php $this->renderPartial('/post/line_list', array('models'=>$models, 'pages'=>$pages));?>
+<?php $this->renderPartial('/post/list', array('models'=>$models, 'pages'=>$pages));?>

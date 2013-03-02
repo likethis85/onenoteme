@@ -32,7 +32,7 @@ class DefaultController extends MobileController
 	    $this->pageTitle = param('sitename') . ' - ' . param('shortdesc');
         
 	    cs()->registerMetaTag('all', 'robots');
-	    $this->render('index1', $data);
+	    $this->render('index', $data);
 	}
 
 	public function actionError()
