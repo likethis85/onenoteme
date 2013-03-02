@@ -145,7 +145,7 @@ footer a.switch-version {float:right;}
 .item-toolbar ul a.share:hover {background-position:0 -836px;}
 .item-toolbar ul a.share:active {background-position:0 -866px;}
 .item-toolbar ul a.disabled {cursor:default; text-decoration:none;}
-
+.item-toolbar ul a.view-detail {text-indent:0; text-align:center;}
 
 /* video list */
 .video-detail {margin-bottom:15px;}
