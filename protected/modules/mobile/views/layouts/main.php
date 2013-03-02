@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title><?php echo $this->pageTitle;?></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+<meta charset="utf-8">
+<title><?php echo $this->pageTitle;?></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<script type="text/javascript">
+var wdz_logined = <?php echo (int)!user()->isGuest;?>;
+var wdz_quick_login_url = '<?php echo aurl('site/quicklogin');?>';
+var _hmt = _hmt || [];
+_hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;?>, 2]);
+</script>
 </head>
 <body>
-<noscript><div id="noscript"><h2>Notice</h2><p>JavaScript is currently off.</p><p>Turn it on in browser settings to view this mobile website.</p></div></noscript>
-<header>
-    <h1><a href="<?php echo $this->homeUrl;?>"><?php echo app()->name;?></a></h1>
-</header>
-<div class="beta-container">
-<?php echo $content;?>
+<div class="cd-header">
+    <div class="cd-wrapper">
+    	<div id="site-logo" class="logo fleft">
+    	    <a href="<?php echo CDBase::siteHomeUrl();?>" title="点击返回首页">
+    	        <img src="<?php echo sbu('images/logo.jpg');?>" alt="网站LOGO" title="返回首页" align="top" /><h1>挖段子</h1>
+    	        <h2>挖段子网永久唯一域名：http://www.waduanzi.com</h2>
+	        </a>
+	    </div>
+    	<ul class="channel-nav">
+    		<li<?php echo ($this->channel===CHANNEL_DUANZI) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/joke');?>">挖笑话</a></li>
+    		<li>|</li>
+    		<li<?php echo ($this->channel===CHANNEL_LENGTU) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/lengtu');?>">挖趣图</a></li>
+    		<li>|</li>
+    		<li<?php echo ($this->channel===CHANNEL_GIRL) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/girl');?>">挖女神</a></li>
+    		<li>|</li>
+    		<li<?php echo ($this->channel===CHANNEL_VIDEO) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/video');?>">挖视频</a></li>
+    	</ul>
+    </div>
+</div>
+
+<div class="cd-wrapper cd-main">
+	<?php echo $content;?>
 </div>
 
 <!-- 广告位 开始 -->

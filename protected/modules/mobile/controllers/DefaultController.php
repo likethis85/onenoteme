@@ -24,6 +24,16 @@ class DefaultController extends MobileController
 	    cs()->registerMetaTag('all', 'robots');
 	    $this->render('index', $data);
 	}
+	
+	public function actionIndex1()
+	{
+	    $data = self::fetchLatestPosts();
+	    
+	    $this->pageTitle = param('sitename') . ' - ' . param('shortdesc');
+        
+	    cs()->registerMetaTag('all', 'robots');
+	    $this->render('index1', $data);
+	}
 
 	public function actionError()
 	{
