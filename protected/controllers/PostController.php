@@ -8,7 +8,7 @@ class PostController extends Controller
                 'COutputCache + show',
                 'duration' => 600,
                 'varyByParam' => array('id', 'f'),
-                'varyByExpression' => array('CDBase', 'userIsMobileBrower')
+                'varyByExpression' => array('CDBase', 'userIsMobileBrower'),
             ),
             array(
                 'COutputCache + bigPic',
