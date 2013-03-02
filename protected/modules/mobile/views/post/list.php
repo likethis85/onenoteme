@@ -7,7 +7,7 @@
     	</div>
         <div class="item-detail">
             <div class="item-title">
-                <a href="<?php echo $model->url;?>" target="_blank" title="在新窗口中打开">
+                <a href="<?php echo $model->url;?>" title="阅读全文内容">
                 <?php echo ($model->channel_id == CHANNEL_DUANZI) ? $model->filterSummary : $model->title;?>
                 </a>
             </div>
@@ -58,7 +58,7 @@
             <ul>
             	<li class="fleft"><a rel="nofollow" href="javascript:void(0);" class="upscore site-bg" data-id="<?php echo $model->id;?>" data-score="1" data-url="<?php echo aurl('post/score');?>"><?php echo $model->up_score;?></a></li>
             	<li class="fleft"><a rel="nofollow" href="javascript:void(0);" class="downscore site-bg" data-id="<?php echo $model->id;?>" data-score="-1" data-url="<?php echo aurl('post/score');?>"><?php echo $model->downScore;?></a></li>
-            	<li class="fleft"><a rel="nofollow" href="<?php echo $model->url;?>" class="view-detail">阅读全文</a></li>
+            	<li class="fright"><a href="<?php echo $model->url;?>" class="view-detail" title="阅读全文内容">阅读全文</a></li>
             	<!--
             	<li class="fleft"><a href="<?php echo aurl('post/show', array('id' => $model->id));?>" data-url="<?php echo aurl('comment/list', array('id' => $model->id));?>" class="comment site-bg"><?php echo $model->comment_nums ? $model->comment_nums : '评论';?></a></li>
             	 -->
