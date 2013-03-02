@@ -1004,7 +1004,7 @@ footer a.switch-version {float:right;}
 .item-toolbar ul a.share:hover {background-position:0 -836px;}
 .item-toolbar ul a.share:active {background-position:0 -866px;}
 .item-toolbar ul a.disabled {cursor:default; text-decoration:none;}
-.item-toolbar ul a.view-detail {text-indent:0; text-align:center;}
+.item-toolbar ul a.view-detail {text-indent:0; text-align:center; margin:0 0 0 10px;}
 
 /* video list */
 .video-detail {margin-bottom:15px;}
