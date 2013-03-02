@@ -3,7 +3,7 @@
     <?php echo CHtml::activeHiddenField($comment, 'post_id');?>
     <span class="help-block <?php if ($comment->hasErrors()) echo 'error';?>">评论内容不能少于<?php echo param('comment_min_length');?>个字哦～～～</span>
     <?php echo CHtml::activeTextArea($comment, 'content', array('class'=>'comment-content', 'minlen'=>param('comment_min_length')));?>
-    <button type="submit" class="btn btn-block btn-large btn-primary" data-toggle="toggle" data-loading-text="发布中...">提交</button>
+    <button type="submit" class="btn btn-block btn-primary" data-toggle="toggle" data-loading-text="发布中...">提交</button>
 <?php echo CHtml::endForm();?>
 
 <script type="text/javascript">
