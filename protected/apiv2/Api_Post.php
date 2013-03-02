@@ -65,8 +65,9 @@ class Api_Post extends ApiBase
     public function timeline()
     {
         self::requiredParams(array('channelid'));
-        $params = $this->filterParams(array('channelid', 'count', 'fields', 'lastid', 'token'));
+        $params = $this->filterParams(array('channelid', 'count', 'fields', 'lastid', 'token', 'platform'));
         $channelID = (int)$params['channelid'];
+        $platform = strtolower(strip_tags(trim($params['platform'])));
         
         // @todo test data
         $version = $this->_params['version'];
@@ -80,8 +81,10 @@ class Api_Post extends ApiBase
             if ($count <= 0 || $count > self::DEFAULT_TIMELINE_MAX_COUNT)
                 $count = self::DEFAULT_TIMELINE_MAX_COUNT;
             
+            $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'id > :lastid');
             // @todo ios客户端现在不支持gif动画，所以先屏蔽
-            $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'id > :lastid', 'gif_animation = 0');
+            if ($platform != 'android')
+                $condition[] = 'gif_animation = 0';
             $param = array(':enabled'=>POST_STATE_ENABLED, ':channelid' => $channelID, ':lastid'=>$lastid);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
@@ -95,7 +98,7 @@ class Api_Post extends ApiBase
             foreach ($rows as $index => $row)
                 $rows[$index] = self::formatRow($row);
             
-            self::updateLastRequestTime($token);
+            self::updateLastRequestTime($params['token']);
             
             return $rows;
         }
@@ -107,10 +110,11 @@ class Api_Post extends ApiBase
     public function history()
     {
         self::requiredParams(array('channelid', 'beforetime'));
-        $params = $this->filterParams(array('channelid', 'count', 'fields', 'beforetime'));
+        $params = $this->filterParams(array('channelid', 'count', 'fields', 'beforetime', 'platform'));
         
         $channelID = (int)$params['channelid'];
         $beforeTime = (int)$params['beforetime'];
+        $platform = strtolower(strip_tags(trim($params['platform'])));
         
         // @todo test data
         $version = $this->_params['version'];
@@ -123,9 +127,10 @@ class Api_Post extends ApiBase
             if ($count <= 0 || $count > self::DEFAULT_HISTORY_MAX_COUNT)
                 $count = self::DEFAULT_HISTORY_MAX_COUNT;
         
+            $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'create_time < :beforetime');
             // @todo ios客户端现在不支持gif动画，所以先屏蔽
-            $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'create_time < :beforetime', 'gif_animation = 0');
-            $param = array(':enabled'=>POST_STATE_ENABLED, ':channelid' => $channelID, ':beforetime'=>$beforeTime);
+            if ($platform != 'android')
+                $condition[] = 'gif_animation = 0';$param = array(':enabled'=>POST_STATE_ENABLED, ':channelid' => $channelID, ':beforetime'=>$beforeTime);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
                 ->from(TABLE_POST . ' t')
@@ -148,8 +153,9 @@ class Api_Post extends ApiBase
     public function latest()
     {
         self::requiredParams(array('channelid'));
-        $params = $this->filterParams(array('channelid', 'count', 'fields', 'lasttime', 'token'));
+        $params = $this->filterParams(array('channelid', 'count', 'fields', 'lasttime', 'token', 'platform'));
         $channelID = (int)$params['channelid'];
+        $platform = strtolower(strip_tags(trim($params['platform'])));
         
         // @todo test data
         $version = $this->_params['version'];
@@ -163,9 +169,10 @@ class Api_Post extends ApiBase
             if ($count <= 0 || $count > self::DEFAULT_TIMELINE_MAX_COUNT)
                 $count = self::DEFAULT_TIMELINE_MAX_COUNT;
             
+            $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'create_time > :lasttime');
             // @todo ios客户端现在不支持gif动画，所以先屏蔽
-            $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'create_time > :lasttime', 'gif_animation = 0');
-            $param = array(':enabled'=>POST_STATE_ENABLED, ':channelid' => $channelID, ':lasttime'=>$lasttime);
+            if ($platform != 'android')
+                $condition[] = 'gif_animation = 0';$param = array(':enabled'=>POST_STATE_ENABLED, ':channelid' => $channelID, ':lasttime'=>$lasttime);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
                 ->from(TABLE_POST . ' t')
@@ -178,7 +185,7 @@ class Api_Post extends ApiBase
             foreach ($rows as $index => $row)
                 $rows[$index] = self::formatRow($row);
             
-            self::updateLastRequestTime($token);
+            self::updateLastRequestTime($params['token']);
             
             return $rows;
         }
@@ -190,8 +197,9 @@ class Api_Post extends ApiBase
     public function random()
     {
         self::requiredParams(array('channelid'));
-        $params = $this->filterParams(array('channelid', 'count', 'fields'));
+        $params = $this->filterParams(array('channelid', 'count', 'fields', 'platform'));
         $channelID = (int)$params['channelid'];
+        $platform = strtolower(strip_tags(trim($params['platform'])));
         
         // @todo test data
         $version = $this->_params['version'];
@@ -201,8 +209,10 @@ class Api_Post extends ApiBase
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
             
+            $conditions = array('and', 't.state = :enalbed',  'channel_id = :channelid');
             // @todo ios客户端现在不支持gif动画，所以先屏蔽
-            $conditions = array('and', 't.state = :enalbed',  'channel_id = :channelid', 'gif_animation = 0');
+            if ($platform != 'android')
+                $condition[] = 'gif_animation = 0';
             $maxIdMinId = app()->getDb()->createCommand()
                 ->select(array('max(id) maxid', 'min(id) minid'))
                 ->from(TABLE_POST . ' t')
@@ -212,12 +222,14 @@ class Api_Post extends ApiBase
             $count = (int)$params['count'];
             if ($count <= 0 || $count > self::DEFAULT_RANDOM_MAX_COUNT)
                 $count = self::DEFAULT_TIMELINE_MAX_COUNT;
-            
+
             $minid = (int)$maxIdMinId['minid'];
             $maxid = (int)$maxIdMinId['maxid'];
             
+            $conditoins = array('and', 't.state = :enalbed',  'channel_id = :channelid', 'id = :randid');
             // @todo ios客户端现在不支持gif动画，所以先屏蔽
-            $conditoins = array('and', 't.state = :enalbed',  'channel_id = :channelid', 'id = :randid', 'gif_animation = 0');
+            if ($platform != 'android')
+                $condition[] = 'gif_animation = 0';
             $param = array(':enalbed' => POST_STATE_ENABLED, ':channelid'=>$channelID, ':randid'=>0);
             $rows = array();
             for ($i=0; $i<$maxid; $i++) {
