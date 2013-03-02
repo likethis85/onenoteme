@@ -50,4 +50,16 @@ class PostController extends MobileController
         $result = Post::model()->updateCounters($counters, 'id = :postid', array(':postid' => $id));
         CDBase::jsonp($callback, $result);
     }
+
+    public function actionScore($callback)
+    {
+        $pid = (int)$_POST['pid'];
+        if ($pid <= 0) throw new CHttpException(500);
+    
+        $column = ((int)$_POST['score'] > 0) ? 'up_score' : 'down_score';
+        $counters = array($column => 1);
+        $result = Post::model()->updateCounters($counters, 'id = :pid', array(':pid'=>$pid));
+        $data = array('errno' => (int)!$result);
+        CDBase::jsonp($callback, $data);
+    }
 }
