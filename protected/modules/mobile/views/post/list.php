@@ -1,6 +1,6 @@
 <div class="post-line-list">
     <?php foreach ((array)$models as $key => $model):?>
-    <div class="panel panel20 post-item post-box">
+    <div class="panel panel10 post-item post-box">
     	<div class="post-author">
     	    <?php echo $model->getAuthorAvatar();?>
         	<?php echo $model->getAuthorNameLink();?>
