@@ -61,10 +61,10 @@ cs()->registerCssFile(sbu('libs/bootstrap/css/bootstrap.min.css'))
     ->registerScriptFile(sbu('scripts/cd-mobile.js'), CClientScript::POS_END);
 
 YII_DEBUG || cs()->scriptMap = array(
-    'bootstrap.min.css' => sbu('styles/mobile-all.min.css?t=20130127001'),
-    'cd-mobile.css' => sbu('styles/mobile-all.min.css?t=20130127001'),
-    'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130127001'),
-    'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130127001'),
-    'json.js' => sbu('scripts/mobile-all.min.js?t=20130127001'),
+    'bootstrap.min.css' => sbu('styles/mobile-all.min.css?t=20130302001'),
+    'cd-mobile.css' => sbu('styles/mobile-all.min.css?t=20130302001'),
+    'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130302001'),
+    'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130302001'),
+    'json2.js' => sbu('scripts/mobile-all.min.js?t=20130302001'),
 );
 ?>
