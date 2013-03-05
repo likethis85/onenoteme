@@ -63,7 +63,6 @@ cs()->registerCssFile(sbu('libs/bootstrap/css/bootstrap.min.css'))
 CD_PRODUCT && cs()->scriptMap = array(
     'bootstrap.min.css' => sbu('styles/mobile-all.min.css?t=20130302002'),
     'cd-mobile.css' => sbu('styles/mobile-all.min.css?t=20130302002'),
-    'jquery.min.js' => sbu('scripts/mobile-all.min.js?t=20130305002'),
     'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130305002'),
     'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130305002'),
     'json2.js' => sbu('scripts/mobile-all.min.js?t=20130305002'),
