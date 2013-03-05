@@ -64,8 +64,8 @@ CD_PRODUCT && cs()->scriptMap = array(
     'bootstrap.min.css' => sbu('styles/mobile-all.min.css?t=20130302002'),
     'cd-mobile.css' => sbu('styles/mobile-all.min.css?t=20130302002'),
     'jquery.min.js' => false,
-    'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130302002'),
-    'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130302002'),
-    'json2.js' => sbu('scripts/mobile-all.min.js?t=20130302002'),
+    'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130305001'),
+    'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130305001'),
+    'json2.js' => sbu('scripts/mobile-all.min.js?t=20130305001'),
 );
 ?>
