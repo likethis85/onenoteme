@@ -313,8 +313,9 @@ class Api_Post extends ApiBase
     	$post->tags = $params['tags'];
     	$post->create_time = $_SERVER['REQUEST_TIME'];
     	$post->state = POST_STATE_DISABLED;
-    	$post->up_score = mt_rand(3, 15);
-    	$post->down_score = mt_rand(0, 2);
+        $post->up_score = mt_rand(150, 500);
+        $post->down_score = mt_rand(10, 50);
+        $post->view_nums = mt_rand(500, 100);
     	
     	try {
     	    $url = trim($params['pic']);

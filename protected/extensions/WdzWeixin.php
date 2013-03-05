@@ -54,9 +54,9 @@ class WdzWeixin extends CDWeixin
         $post->content = strip_tags($this->_data->Content);
         $post->create_time = $_SERVER['REQUEST_TIME'];
         $post->state = POST_STATE_UNVERIFY;
-        $post->up_score = mt_rand(50, 200);
-        $post->down_score = mt_rand(0, 15);
-        $post->view_nums = mt_rand(300, 800);
+        $post->up_score = mt_rand(150, 500);
+        $post->down_score = mt_rand(10, 50);
+        $post->view_nums = mt_rand(500, 100);
         $post->thumbnail_pic = $post->bmiddle_pic = $post->original_pic = '';
         try {
             $result = $post->save();
