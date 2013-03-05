@@ -1223,4 +1223,13 @@ a:hover .social-widget-content {color:#666666;}
 #tip-block {max-width:250px; border:2px solid #444442; padding:5px; color:#FFF; position:absolute; top:-9999px; left:0; z-index:888; background-color:#000; font-size:12px; line-height:22px; opacity:0.9;}
 #loading-box {text-align:center; margin:15px 0;}
 
+/* sponsor */
+.sponsor-tip {font-size:16px; line-height:24px; color:red;}
+.sponsor-alipay {height:210px; margin-top:10px;}
+.sponsor-alipay h3, .sponsor-taobaoke h3 {font-size:22px;}
+.sponsor-alipay p, .sponsor-taobaoke p {font-size:16px; line-height:24px; margin-bottom:20px;}
+.sponsor-taobaoke {margin-top:10px; height:210px; color:#DFDFDF!important;}
+
+
+
 
