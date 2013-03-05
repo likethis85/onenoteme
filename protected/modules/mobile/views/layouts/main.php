@@ -56,7 +56,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 <?php
 cs()->registerCssFile(sbu('libs/bootstrap/css/bootstrap.min.css'))
     ->registerCssFile(sbu('styles/cd-mobile.css'))
-    ->registerCoreScript('jquery')
+    ->registerScriptFile(sbu('libs/zepto.min.js'), CClientScript::POS_END)
     ->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END)
     ->registerScriptFile(sbu('scripts/cd-mobile.js'), CClientScript::POS_END);
 
