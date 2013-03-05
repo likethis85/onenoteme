@@ -154,7 +154,7 @@ footer a.switch-version {float:right;}
 
 
 @media (max-width:320px) {
-.cd-header .channel-nav li {margin:auto 1x;}
+.cd-header .channel-nav li {margin:auto 0x;}
 .cd-header .logo a h1 {display:none;}
 .cd-header .channel-nav li a {padding:0 5px; font-size:16px;}
 }
