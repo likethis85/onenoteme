@@ -21,6 +21,7 @@
             ?>
             <?php if ($post->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $post->getTagLinks('mobile/tag/posts', '&nbsp;', '_self');?></div><?php endif;?>
         </div>
+        <div class="line1px"></div>
         <!-- 广告位 开始 -->
         <div class="cdc-block">
             <?php $this->widget('CDAdvert', array('solt'=>'mobile_post_content_bottom'));?>

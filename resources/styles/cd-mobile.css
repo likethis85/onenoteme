@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-body {background-color:#ECE5D8; color:#503E2C;}
+body {background-color:#ECE5D8; color:#503E2C; margin:0; padding:0; font-family:auto; font-size:16px;}
 a {color:#9b8878; text-decoration:none; cursor:pointer;}
 a:hover {color:#D14836; text-decoration:none;}
 
@@ -49,7 +49,7 @@ a:hover {color:#D14836; text-decoration:none;}
 .cd-main {margin-top:62px;}
 
 .cdc-block {margin:0px auto; background-color:white;}
-.cdc-block h4 {margin:0; background:#EFEFEF; line-height:36px; text-indent:10px; font-size:12px; font-weight:normal;}
+.cdc-block h4 {margin:0; background:#EFEFEF; line-height:36px; text-indent:10px; font-size:14px; font-weight:normal;}
 .ad-block {text-align:center;}
 .ad-block.fixed {position:fixed; top:73px; z-index:99;}
 .cd-border {border:1px solid #DFDFDF;}
@@ -69,14 +69,7 @@ a:hover {color:#D14836; text-decoration:none;}
 .cd-header .logo img {height:100%; vertical-align:top;}
 
 
-body {margin:0; padding:0; font-family:auto; font-size:14px; color:black;}
-a {color:#1F3B7B; text-decoration:none;}
-a:hover {color:#D14836; text-decoration:none;}
-.aright {text-align:right;}
-.aleft {text-align:left;}
-.acenter {text-align:center;}
-
-.beta-alert {font-size:12px; margin:1px; padding:4px 35px 4px 10px;}
+.beta-alert {font-size:14px; margin:1px; padding:4px 35px 4px 10px;}
 .beta-alert .close {top:-1px; right:-25px;}
 .clear {display:block; clear:both; font-size:0px; width:100%; height:0px; line-height:0px;}
 .bottom10px {margin-bottom:10px!important;}
@@ -116,7 +109,7 @@ footer a.switch-version {float:right;}
 .post-image .line3 {height:3px; width:50px; margin:3px auto; background:#B2B2B2;}
 .post-image .thumb-pall {position:absolute; bottom:0px; height:39px; width:150px; background:transparent url(../images/thumb_more_tip.gif) no-repeat; z-index:2;}
 .post-image .lines .sjx {height:9px; width:71px; margin:3px auto; background:url(../images/thumb_more_sjx.gif) no-repeat;}
-.post-author {color:#9b8878; margin-bottom:10px; font-size:12px;}
+.post-author {color:#9b8878; margin-bottom:10px; font-size:14px;}
 .post-author img {width:25px; height:25px; margin-right:10px;}
 .item-title {margin-bottom:15px; line-height:24px; font-weight:normal;}
 .item-title a {color:#503E2C; display:block;}
@@ -150,7 +143,7 @@ footer a.switch-version {float:right;}
 /* video list */
 .video-detail {margin-bottom:15px;}
 .video-player {text-align:center; margin-top:10px; margin-bottom:10px; background:#F4F4F6;}
-.video-detail .toolbar {background:#F4F4F6; padding:5px 10px; font-size:12px; color:#666; margin-top:10px;}
+.video-detail .toolbar {background:#F4F4F6; padding:5px 10px; font-size:14px; color:#666; margin-top:10px;}
 
 
 @media (max-width:320px) {
@@ -174,15 +167,8 @@ footer a.switch-version {float:right;}
 
 
 
-/* category nav */
-.category-nav {margin:0 0 10px;}
-.category-nav .icon-chevron-right {float:right; color:white; opacity:.25;}
-.show-category-nav {margin-bottom:5px;}
-
-.beta-container {padding:0 10px;}
-
-h1.post-title {margin:0; line-height:18px; padding:0;}
-h1.post-title a {font-size:18px; display:block; padding:5px 0 10px; line-height:22px;}
+h1.post-title {margin:0; line-height:20px; padding:0;}
+h1.post-title a {font-size:20px; display:block; padding:5px 0 10px; line-height:24px;}
 h1.post-title a:link, h1.post-title a:visited {color:black;}
 h1.post-title a:hover {color:#D14836;}
 .post-extra {font-size:12px; color:#AAAAAA; font-weight:normal; margin:0 0 10px;}
@@ -190,7 +176,7 @@ h1.post-title a:hover {color:#D14836;}
 .post-item {margin:0 0 10px; border:1px solid #EEEEEE; border-radius:8px; box-shadow:1px 1px 1px #CCCCCC; padding:10px; display:block;}
 .beta-title {margin:0; padding:0 35px 0 0; position:relative;}
 .post-item dd.summary a {display:block; color:black!important;}
-.post-item dd.summary {margin:0 0 10px; line-height:22px; font-size:14px; word-wrap:break-word;}
+.post-item dd.summary {margin:0 0 10px; line-height:24px; font-size:16px; word-wrap:break-word;}
 .post-item dd.summary img {margin:10px auto; display:block;}
 .post-item .post-extra {text-align:right;}
 .post-item dd.read-more {border-top:1px solid #EEEEEE; margin:0; position:relative;}
@@ -203,7 +189,7 @@ h1.post-title a:hover {color:#D14836;}
 .comment-number a:hover {background:black;}
 
 /* post/show */
-#beta-post-content {font-size:14px; line-height:24px; margin:10px 0; word-wrap:break-word; overflow:hidden;}
+#beta-post-content {font-size:16px; line-height:24px; margin:10px 0; word-wrap:break-word; overflow:hidden;}
 #beta-post-content img {margin:10px auto;}
 #beta-post-content .bmiddle {display:block;}
 #beta-post-content p, #beta-post-content {margin-bottom:18px;}
@@ -217,21 +203,21 @@ h1.post-title a:hover {color:#D14836;}
 
 
 /* comment/list */
-.beta-post-extra {font-size:12px; margin-bottom:5px; padding:0 0 3px; color:#555555;}
+.beta-post-extra {font-size:14px; margin-bottom:5px; padding:0 0 4px; color:#555555;}
 .beta-comments {border:1px solid #BFBFBF;}
-.beta-mini-title {font-size:12px; background:#CFCFCF; text-indent:10px; height:24px; line-height:24px; font-weight:bold;}
-.beta-comment-item {font-size:12px; border-bottom:1px solid #CFCFCF; margin:0;}
+.beta-mini-title {font-size:14px; background:#CFCFCF; text-indent:10px; height:26px; line-height:26px; font-weight:bold;}
+.beta-comment-item {font-size:14px; border-bottom:1px solid #CFCFCF; margin:0;}
 .beta-comment-item dt, .beta-comment-item dd {padding:0px 10px; margin:0;}
 .beta-comment-item dt {padding-top:10px; font-weight:normal;}
 .beta-comment-item .beta-comment-content {padding:10px; line-height:20px;}
-.beta-comment-item .beta-comment-toolbar {height:22px; line-height:24px; background:#DFDFDF;}
+.beta-comment-item .beta-comment-toolbar {height:24px; line-height:26px; background:#DFDFDF;}
 .beta-comment-item .beta-comment-toolbar a {margin-right:10px;}
 .beta-comment-item .beta-comment-toolbar a:last-child {margin-right:0;}
 .beta-comment-quote {border:1px solid #CFCFCF; padding:8px; margin:0 0 10px; line-height:20px;}
 .beta-comment-quote legend {text-align:left; text-indent:18px; font-size:12px; font-weight:bold; margin:0; padding:0 5px; width:auto; height:20px; line-height:20px; background:white url(../images/quotetip.gif) no-repeat left center; border:1px solid #CFCFCF;}
 .beta-hot-comment {border:1px solid #FC0; background:#FFE57F;}
 .beta-no-comments, .beta-no-hot-comments {font-size:12px; text-align:center; color:gray; padding:5px;}
-.disable_comment {font-size:12px; text-align:center; color:red; padding:5px;}
+.disable_comment {font-size:14px; text-align:center; color:red; padding:5px;}
 
 
 /* comment create form */
