@@ -91,13 +91,13 @@ cs()->registerMetaTag('text/html; charset=utf-8', null, 'content-type')
     ->registerCssFile(sbu('libs/bootstrap/css/bootstrap.min.css'))
     ->registerCssFile(sbu('styles/cd-basic.css'))
     ->registerCssFile(sbu('styles/cd-main.css'))
-    ->registerCoreScript('jquery')
+    ->registerScriptFile(sbu('libs/zepto.min.js'), CClientScript::POS_END)
     ->registerScriptFile(sbu('libs/modernizr.min.js'), CClientScript::POS_END)
     ->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END)
     ->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END)
     ->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/index'), null, array('title'=>app()->name . ' » Feed'));
 
-YII_DEBUG || cs()->scriptMap = array(
+CD_PRODUCT && cs()->scriptMap = array(
     'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=20130223001'),
     'cd-basic.css' => sbu('styles/cd-all.min.css?t=20130223001'),
     'cd-main.css' => sbu('styles/cd-all.min.css?t=20130223001'),
