@@ -46,7 +46,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     		<li>|</li>
     		<li<?php echo ($this->channel===CHANNEL_VIDEO) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/video');?>">挖视频</a></li>
     		<li>|</li>
-    		<li<?php echo ($this->channel===NAV_SUPPORT) ? ' class="active"' : '';?>><a href="<?php echo aurl('sponsor');?>">赞助我们</a></li>
+    		<li<?php echo ($this->channel===NAV_SUPPORT) ? ' class="active"' : '';?>><a href="<?php echo aurl('sponsor/index');?>">赞助我们</a></li>
     	</ul>
     	<ul class="fright">
     	    <li><img id="small-wxqrcode" src="<?php echo sbu('images/qrcode_wx.jpg');?>" alt="挖段子公众账号二维码" /></li>
