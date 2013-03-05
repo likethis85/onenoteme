@@ -1,3 +1,6 @@
+<div class="panel panel20 sponsor-tip">
+    挖段子网的发展离不开各位段友的支持，目前我们的广告收入无法支持我们的日常开支和基础设施开支，所以在此借助广大段友的帮助，不限金额，不限形式。我们将一如即往的为大家带来精彩的内容。
+</div>
 <div class="fleft cd-container">
     <div class="panel panel20 sponsor-alipay">
         <h3>方法一：支付宝赞助挖段子网</h3>
