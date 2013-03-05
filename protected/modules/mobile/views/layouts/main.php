@@ -56,16 +56,16 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 <?php
 cs()->registerCssFile(sbu('libs/bootstrap/css/bootstrap.min.css'))
     ->registerCssFile(sbu('styles/cd-mobile.css'))
-    ->registerScriptFile(sbu('libs/zepto.min.js'), CClientScript::POS_END)
+    ->registerCoreScript('jquery')
     ->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END)
     ->registerScriptFile(sbu('scripts/cd-mobile.js'), CClientScript::POS_END);
 
 CD_PRODUCT && cs()->scriptMap = array(
     'bootstrap.min.css' => sbu('styles/mobile-all.min.css?t=20130302002'),
     'cd-mobile.css' => sbu('styles/mobile-all.min.css?t=20130302002'),
-    'jquery.min.js' => false,
-    'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130305001'),
-    'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130305001'),
-    'json2.js' => sbu('scripts/mobile-all.min.js?t=20130305001'),
+    'jquery.min.js' => sbu('scripts/mobile-all.min.js?t=20130305002'),
+    'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130305002'),
+    'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130305002'),
+    'json2.js' => sbu('scripts/mobile-all.min.js?t=20130305002'),
 );
 ?>
