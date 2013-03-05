@@ -89,3 +89,10 @@ define('QQT_APP_SECRET', '4e0c4ac86b36120efac4c44a9ac9e895');
 define('USER_DEFAULT_AVATAR_URL', 'images/default_avatar.png');
 
 
+define('NAV_SUPPORT', 'navsponsor');
+
+
+
+
+
+
