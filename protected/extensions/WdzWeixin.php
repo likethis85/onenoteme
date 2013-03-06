@@ -56,7 +56,7 @@ class WdzWeixin extends CDWeixin
         $post->state = POST_STATE_UNVERIFY;
         $post->up_score = mt_rand(150, 500);
         $post->down_score = mt_rand(10, 50);
-        $post->view_nums = mt_rand(500, 100);
+        $post->view_nums = mt_rand(500, 1000);
         $post->thumbnail_pic = $post->bmiddle_pic = $post->original_pic = '';
         try {
             $result = $post->save();
