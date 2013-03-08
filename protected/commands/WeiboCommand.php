@@ -377,6 +377,41 @@ class WeiboCommand extends CConsoleCommand
     {
         if (empty($model->content)) return false;
     
+        $url = 'https://upload.api.weibo.com/2/statuses/upload_url_text.json';
+    
+        $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
+        $sinatShortUrl = self::sinatShortUrl($postUrl);
+        $tail = '...' . $sinatShortUrl . ' @挖段子网';
+        if ($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_LENGTU)
+            $tail = '#搞笑#' . $tail;
+        elseif ($model->channel_id == CHANNEL_GIRL)
+            $tail = '#美女#' . $tail;
+        $accounts = self::fetchSinatRelativeAccounts(3);
+        $tags = self::fetchPostTags($model, 2);
+        $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
+        $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags. $accounts;
+        $data = array(
+            'source' => WEIBO_APP_KEY,
+            'access_token' => app()->cache->get('sina_weibo_access_token'),
+            'status' => $content,
+            'url' => $model->getBmiddlePic(),
+        );
+    
+        $curl = new CDCurl();
+        $curl->post($url, $data);
+        if ($curl->errno() == 0) {
+            $result = json_decode($curl->rawdata(), true);
+            return $result['idstr'] ? $result['idstr'] : false;
+        }
+        else
+            return false;
+    }
+    
+    /*
+    private static function sinatUpload(Post $model)
+    {
+        if (empty($model->content)) return false;
+    
         $curl = new CDCurl();
         $curl->get($model->getBmiddlePic());
         if ($curl->errno() == 0) {
@@ -419,6 +454,7 @@ class WeiboCommand extends CConsoleCommand
         else
             return false;
     }
+    */
     
     private static function qqtUpdate(Post $model)
     {
