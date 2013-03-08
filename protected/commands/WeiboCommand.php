@@ -277,7 +277,7 @@ class WeiboCommand extends CConsoleCommand
             $picUrl = $model->getBmiddlePic();
             
             if (empty($picUrl)) {
-                $result = self::SinatUpdate($model);
+                $result = self::sinatUpdate($model);
                 $result2 = self::qqtUpdate($model);
             }
             else {
@@ -335,7 +335,7 @@ class WeiboCommand extends CConsoleCommand
         
     }
     
-    private static function SinatUpdate(Post $model)
+    private static function sinatUpdate(Post $model)
     {
         if (empty($model->content)) return false;
     
