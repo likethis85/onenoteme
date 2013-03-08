@@ -373,6 +373,7 @@ class WeiboCommand extends CConsoleCommand
             return false;
     }
     
+    /*
     private static function sinatUpload(Post $model)
     {
         if (empty($model->content)) return false;
@@ -406,8 +407,8 @@ class WeiboCommand extends CConsoleCommand
         else
             return false;
     }
+    */
     
-    /*
     private static function sinatUpload(Post $model)
     {
         if (empty($model->content)) return false;
@@ -454,7 +455,7 @@ class WeiboCommand extends CConsoleCommand
         else
             return false;
     }
-    */
+    
     
     private static function qqtUpdate(Post $model)
     {
