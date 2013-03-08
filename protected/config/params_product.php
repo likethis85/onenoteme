@@ -3,9 +3,9 @@ return array(
     // 缓存数据目录
     'dataPath' => CD_CONFIG_ROOT . DS . '..' . DS . 'data' . DS,
     'uploadBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'uploads' . DS,
-    'uploadBaseUrl' => 'http://f3.24url.net/',
+    'uploadBaseUrl' => 'http://f.waduanzi.com/',
     'resourceBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'resources' . DS,
-    'resourceBaseUrl' => 'http://s3.24url.net/',
+    'resourceBaseUrl' => 'http://s.waduanzi.com/',
 
     /*
      * datetime format
