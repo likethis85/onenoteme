@@ -16,7 +16,6 @@ define('CHANNEL_MOVIE', 70);
 
 // 以下是表名
 define('TABLE_POST', '{{post}}');
-define('TABLE_USER', '{{user}}');
 define('TABLE_CONFIG', '{{config}}');
 define('TABLE_COMMENT', '{{comment}}');
 define('TABLE_TAG', '{{tag}}');
