@@ -339,7 +339,7 @@ class WeiboCommand extends CConsoleCommand
     {
         if (empty($model->content)) return false;
     
-        $url = 'https://upload.api.weibo.com/2/statuses/update.json';
+        $url = 'https://api.weibo.com/2/statuses/update.json';
     
         $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
@@ -377,7 +377,7 @@ class WeiboCommand extends CConsoleCommand
     {
         if (empty($model->content)) return false;
     
-        $url = 'https://upload.api.weibo.com/2/statuses/upload_url_text.json';
+        $url = 'https://api.weibo.com/2/statuses/upload_url_text.json';
     
         $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
