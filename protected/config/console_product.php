@@ -35,7 +35,7 @@ return array(
         'cache' => array(
             'serializer' => array('igbinary_serialize', 'igbinary_unserialize'),
             'class'=>'CMemCache',
-            'useMemcached' => true,
+            'useMemcached' => extension_loaded('memcached'),
             'servers'=>array(
                 array('host'=>'localhost', 'port'=>22122, 'weight'=>100),
             ),
