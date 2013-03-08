@@ -16,13 +16,13 @@
                 <div class="thumb">
                 <?php if ($model->channel_id == CHANNEL_LENGTU): //只有冷图采用缩略图方式 ?>
                     <?php if ($model->imageIsLong):?>
-                    <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" target="_blank" title="点击查看大图">
+                    <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" target="_blank" title="点击查看详细内容">
                         <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
                         <img class="original hide" alt="<?php echo $model->title;?>" />
                     </a>
                     <?php if ($model->gif_animation):?><i class="site-bg icon-gif-sign"></i><?php endif;?>
                     <?php else:?>
-                    <a href="<?php echo $model->originalPic;?>" target="_blank" title="点击查看大图">
+                    <a href="<?php echo $model->url;?>" title="点击查看大图">
                         <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
                     </a>
                     <?php endif;?>
@@ -30,7 +30,7 @@
                     <div class="thumb-pall"></div>
                     <?php endif;?>
                 <?php elseif ($model->channel_id == CHANNEL_GIRL): //福利图直接显示 ?>
-                    <a href="<?php echo $model->originalPic;?>" target="_blank" title="点击查看大图">
+                    <a href="<?php echo $model->url;?>" title="点击查看详细内容">
                         <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
                     </a>
                 <?php endif;?>
