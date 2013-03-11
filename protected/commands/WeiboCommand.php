@@ -403,8 +403,10 @@ class WeiboCommand extends CConsoleCommand
             $result = json_decode($curl->rawdata(), true);
             return $result['idstr'] ? $result['idstr'] : false;
         }
-        else
+        else {
+            echo $curl->error();
             return false;
+        }
     }
     
     /*
