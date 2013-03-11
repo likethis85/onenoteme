@@ -396,7 +396,7 @@ class WeiboCommand extends CConsoleCommand
             'status' => urlencode($content),
             'url' => $model->getBmiddlePic(),
         );
-    
+        var_dump($data);
         $curl = new CDCurl();
         $curl->post($url, $data);
          var_dump($curl->rawdata());
