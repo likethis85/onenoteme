@@ -394,7 +394,7 @@ class WeiboCommand extends CConsoleCommand
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->cache->get('sina_weibo_access_token'),
             'status' => urlencode($content),
-            'url' => $model->getBmiddlePic(),
+            'url' => $model->getOriginalPic(),
         );
         foreach ($data as $key => $item)
             $args[] = urlencode($key) . '=' . $item;
