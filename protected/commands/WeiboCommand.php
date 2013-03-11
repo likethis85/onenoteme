@@ -271,7 +271,7 @@ class WeiboCommand extends CConsoleCommand
         
         foreach ($models as $model) {
             if (empty($model->bmiddle_pic)) {
-                if (mt_rand(0, 1) == 0)
+                if (mt_rand(0, 2) > 0)
                     $model->bmiddle_pic = 'http://ww4.sinaimg.cn/bmiddle/61b3022etw1e2hlgcttk8j.jpg';
             }
             $picUrl = $model->getBmiddlePic();
