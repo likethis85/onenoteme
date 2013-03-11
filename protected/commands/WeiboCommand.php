@@ -396,11 +396,13 @@ class WeiboCommand extends CConsoleCommand
             'status' => urlencode($content),
             'url' => $model->getBmiddlePic(),
         );
-        var_dump($data);
+        foreach ($data as $key => $item)
+            $args[] = urlencode($key) . '=' . $item;
+            
         $curl = new CDCurl();
-        $curl->post($url, $data);
-         var_dump($curl->rawdata());
-         var_dump($curl->errno());exit;
+        $curl->post($url, join('&', $args));
+//         var_dump($curl->rawdata());
+//         var_dump($curl->errno());exit;
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
             return $result['idstr'] ? $result['idstr'] : false;
