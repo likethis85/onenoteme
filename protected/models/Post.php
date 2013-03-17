@@ -229,7 +229,7 @@ class Post extends CActiveRecord
     	    $text .= '<i class="cgray">(剩余&nbsp;' . (int)$moreCount . '&nbsp;)</i>&nbsp;&nbsp;<span class="cgreen">继续阅读全文&gt;&gt;&gt;</span>';
     	    $html .= '<br />' . l($text, $this->getUrl(), array('target'=>'_blank', 'class'=>'aright'));
 	    }
-	    return nl2br($html);
+	    return nl2br($summary);
 	}
 	
 	public function getFilterContent()
