@@ -222,7 +222,7 @@ class Post extends CActiveRecord
 	public function getFilterSummary($len = 500)
 	{
 	    $html = $this->getSummary($len);
-	    $moreCount = mb_strlen(strip_tags($this->content), app()->charset) - mb_strlen(strip_tags($this->getSummary($len), app()->charset));
+	    $moreCount = mb_strlen(strip_tags($this->content), app()->charset) - $len;
 	    // 这里的6是 "......"的长度
 	    if ($moreCount > -6) {
     	    $text .= '<i class="cgray">(剩余&nbsp;' . (int)$moreCount . '&nbsp;)</i>&nbsp;&nbsp;<span class="cgreen">继续阅读全文&gt;&gt;&gt;</span>';
