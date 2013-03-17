@@ -219,7 +219,7 @@ class Post extends CActiveRecord
 	    return mb_strimwidth($content, 0, $len, '......', app()->charset);
 	}
 	
-	public function getFilterSummary($len = 500)
+	public function getFilterSummary($len = 300)
 	{
 	    $summary = mb_substr($this->content, 0, $len, app()->charset);
 	    $moreCount = mb_strlen($this->content, app()->charset) - mb_strlen($summary, app()->charset);
