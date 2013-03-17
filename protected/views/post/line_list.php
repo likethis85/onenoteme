@@ -63,7 +63,7 @@
             <?php elseif ($model->channel_id == CHANNEL_VIDEO && $model->videoHtml):?>
             <div class="content-block video-player"><?php echo $model->videoHtml;?></div>
             <?php endif;?>
-            <?php if ($model->channel_id != CHANNEL_DUANZI):?>
+            <?php if ($model->channel_id != CHANNEL_DUANZI && $model->channel_id != CHANNEL_GHOSTSTORY):?>
             <div class="item-content"><?php echo $model->filterContent;?></div>
             <?php endif;?>
         </div>
