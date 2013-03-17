@@ -227,11 +227,10 @@ class Post extends CActiveRecord
 	    
 	    if ($moreCount > 0) {
 	        $summary = mb_strimwidth($content, 0, $len, '......', app()->charset);
-	        $summary = nl2br($summary);
-    	    $text .= '<i class="cgray">(剩余&nbsp;' . (int)$moreCount . '&nbsp;)</i>&nbsp;&nbsp;<span class="cgreen">继续阅读全文&gt;&gt;&gt;</span>';
+    	    $text .= '<i class="cgray">(剩余&nbsp;' . (int)$moreCount . '&nbsp;字)</i>&nbsp;&nbsp;<span class="cgreen">继续阅读全文&gt;&gt;&gt;</span>';
     	    $summary .= '<br />' . l($text, $this->getUrl(), array('target'=>'_blank', 'class'=>'aright'));
 	    }
-	    
+	    $summary = nl2br($summary);
 	    return $summary;
 	}
 	

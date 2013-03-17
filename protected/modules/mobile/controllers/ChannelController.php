@@ -8,7 +8,7 @@ class ChannelController extends MobileController
             array(
                 'COutputCache + joke, lengtu, girl, video, ghost',
                 'duration' => param('mobile_post_list_cache_expire'),
-                'varyByParam' => array('id', 'page'),
+                'varyByParam' => array('page'),
             ),
         );
     }
