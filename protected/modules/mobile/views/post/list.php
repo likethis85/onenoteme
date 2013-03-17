@@ -8,7 +8,7 @@
         <div class="item-detail">
             <div class="item-title">
                 <a href="<?php echo $model->url;?>" title="阅读全文内容">
-                <?php echo ($model->channel_id == CHANNEL_DUANZI) ? $model->filterSummary : $model->title;?>
+                <?php echo ($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_GHOSTSTORY) ? $model->filterSummary : $model->title;?>
                 </a>
             </div>
             <?php if (($model->channel_id == CHANNEL_LENGTU || $model->channel_id == CHANNEL_GIRL) && $model->thumbnail):?>
@@ -49,7 +49,7 @@
             <?php elseif ($model->channel_id == CHANNEL_VIDEO && $model->videoHtml):?>
             <div class="content-block video-player"><?php echo $model->videoHtml;?></div>
             <?php endif;?>
-            <?php if ($model->channel_id != CHANNEL_DUANZI):?>
+            <?php if ($model->channel_id != CHANNEL_DUANZI && $model->channel_id != CHANNEL_GHOSTSTORY):?>
             <div class="item-content"><?php echo $model->filterContent;?></div>
             <?php endif;?>
         </div>
