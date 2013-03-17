@@ -223,10 +223,10 @@ class Post extends CActiveRecord
 	{
 	    $summary = $this->getSummary($len);
 	    $summaryLen = mb_strlen($summary, app()->charset);
+	    $content = strip_tags($this->content, param('summary_html_tags'));
+	    $moreCount = mb_strlen($content, app()->charset) - $summaryLen;
 	    
-	    if ($len > $summaryLen) {
-	        $content = strip_tags($this->content, param('summary_html_tags'));
-	        $moreCount = mb_strlen($content, app()->charset) - $summaryLen;
+	    if ($moreCount > 0) {
     	    $text .= '<i class="cgray">(剩余&nbsp;' . (int)$moreCount . '&nbsp;)</i>&nbsp;&nbsp;<span class="cgreen">继续阅读全文&gt;&gt;&gt;</span>';
     	    $summary .= '<br />' . l($text, $this->getUrl(), array('target'=>'_blank', 'class'=>'aright'));
 	    }
