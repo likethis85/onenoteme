@@ -22,7 +22,7 @@
         <div class="item-detail">
             <div class="item-title">
                 <a href="<?php echo $model->url;?>" target="_blank" title="在新窗口中打开">
-                <?php echo ($model->channel_id == CHANNEL_DUANZI) ? $model->filterSummary : $model->title;?>
+                <?php echo ($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_GHOSTSTORY) ? $model->filterSummary : $model->title;?>
                 </a>
             </div>
             <?php if (($model->channel_id == CHANNEL_LENGTU || $model->channel_id == CHANNEL_GIRL) && $model->thumbnail):?>
