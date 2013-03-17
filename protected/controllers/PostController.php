@@ -64,7 +64,10 @@ class PostController extends Controller
         
         $commentsData = self::fetchComments($id);
         
-        $this->pageTitle = trim(strip_tags($post->title)) . ', ' . $post->getTagText(',') . ' - 挖段子';
+        $tagsText = $post->getTagText(',');
+        if ($tagsText)
+            $tagsText = ', ' . $tagsText;
+        $this->pageTitle = trim(strip_tags($post->title)) . $tagsText . ' - 挖段子';
         $pageKeyword = '精品笑话，内涵段子,内涵图,邪恶漫画,黄色笑话,幽默笑话,成人笑话,夫妻笑话,笑话集锦,荤段子,黄段子,大学校花,美女写真';
         if ($post->tags)
             $pageKeyword = $post->getTagText(',') . ',' . $pageKeyword;
