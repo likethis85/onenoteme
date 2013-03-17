@@ -6,7 +6,7 @@ class ChannelController extends MobileController
     {
         return array(
             array(
-                'COutputCache + joke, lengtu, girl, video',
+                'COutputCache + joke, lengtu, girl, video, ghost',
                 'duration' => param('mobile_post_list_cache_expire'),
                 'varyByParam' => array('id', 'page'),
             ),
@@ -20,6 +20,18 @@ class ChannelController extends MobileController
 	    $this->pageTitle = '挖笑话 - 最冷笑话精选，每天分享笑话N枚，你的贴身开心果';
         $this->setDescription($this->pageTitle);
         $this->setKeywords('挖笑话,糗事,内涵笑话,爆笑笑话,幽默笑话,笑话大全,爆笑短信,xiaohua,冷笑话,短信笑话,小笑话,笑话短信,经典笑话,冷笑话大全,短笑话,搞笑短信,笑话大全乐翻天,搞笑笑话,疯狂恶搞,爆笑童趣,雷人囧事');
+        
+	    cs()->registerMetaTag('all', 'robots');
+	    $this->render('posts', $data);
+	}
+
+	public function actionGhost()
+	{
+	    $data = self::fetchLatestPosts(CHANNEL_GHOSTSTORY);
+	     
+	    $this->pageTitle = '挖鬼故事 - 让鬼友们在生活中找点恐怖的小刺激';
+        $this->setDescription($this->pageTitle);
+        $this->setKeywords('鬼故事,短篇鬼故事,恐怖鬼故事,校园鬼故事,鬼故事大全');
         
 	    cs()->registerMetaTag('all', 'robots');
 	    $this->render('posts', $data);
