@@ -29,10 +29,11 @@ class MobilePost extends Post
         $summary = mb_substr($content, 0, $len, app()->charset);
         $moreCount = mb_strlen($content, app()->charset) - mb_strlen($summary, app()->charset);
          
-        if ($moreCount > 0)
+//         if ($moreCount > 0)
+            $summary = mb_strimwidth($content, 0, $len, '......', app()->charset);
+            $summary = nl2br($summary);
             $summary .= '<i class="cgreen">(剩余&nbsp;' . (int)$moreCount . '&nbsp;)</i>';
         
-        $summary = nl2br($summary);
         return $summary;
     }
     
