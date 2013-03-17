@@ -25,18 +25,6 @@ class SiteController extends Controller
         );
     }
     
-    private function checkUserAgentIsMobile()
-    {
-        $agents = array('android', 'iphone', 'blackberry', 'webos', 'windows phone');
-        $agent = strtolower($_SERVER['HTTP_USER_AGENT']);
-        
-        foreach ($agents as $v)
-            if (strpos($agent, $v))
-                return true;
-        
-        return false;
-    }
-    
     public function actionIndex($page = 1, $s = POST_LIST_STYLE_LINE)
     {
         $this->autoSwitchMobile(CDBase::mobileHomeUrl());

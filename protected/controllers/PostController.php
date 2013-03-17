@@ -30,11 +30,6 @@ class PostController extends Controller
         CDBase::jsonp($callback, $data);
     }
     
-    public function actionDetail($id)
-    {
-        $this->redirect(url('post/show', array('id' => $id)));
-    }
-    
     public function actionShow($id, $callback='')
     {
         $this->autoSwitchMobile();

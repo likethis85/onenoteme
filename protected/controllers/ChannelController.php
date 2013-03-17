@@ -1,6 +1,12 @@
 <?php
 class ChannelController extends Controller
 {
+    public function init()
+    {
+        parent::init();
+        $this->autoSwitchMobile();
+    }
+    
     public function filters()
     {
         $duration = 120;
