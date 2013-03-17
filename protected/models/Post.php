@@ -215,38 +215,27 @@ class Post extends CActiveRecord
 	
 	public function getSummary($len = 300)
 	{
-	    static $summary = null;
-	    if ($summary === null) {
-    	    $content = strip_tags($this->content, param('summary_html_tags'));
-    	    $summary = mb_strimwidth($content, 0, $len, '......', app()->charset);
-	    }
-	    return $summary;
+	    $content = strip_tags($this->content, param('summary_html_tags'));
+	    return mb_strimwidth($content, 0, $len, '......', app()->charset);
 	}
 	
 	public function getFilterSummary($len = 500)
 	{
-	    static $summary = null;
-	    if ($summary === null) {
-    	    $summary = $this->getSummary($len);
-    	    $content = strip_tags($this->content, param('summary_html_tags'));
-    	    $moreCount = mb_strlen($content, app()->charset) - mb_strlen($summary, app()->charset) + 6; // 这里的6是 "......"的长度
-    	    
-    	    if ($moreCount > 0) {
-        	    $text .= '<i class="cgray">(剩余&nbsp;' . (int)$moreCount . '&nbsp;)</i>&nbsp;&nbsp;<span class="cgreen">继续阅读全文&gt;&gt;&gt;</span>';
-        	    $summary .= '<br />' . l($text, $this->getUrl(), array('target'=>'_blank', 'class'=>'aright'));
-    	    }
-    	    $summary = nl2br($summary);
+	    $summary = $this->getSummary($len);
+	    $content = strip_tags($this->content, param('summary_html_tags'));
+	    $moreCount = mb_strlen($content, app()->charset) - mb_strlen($summary, app()->charset) + 6; // 这里的6是 "......"的长度
+	    
+	    if ($moreCount > 0) {
+    	    $text .= '<i class="cgray">(剩余&nbsp;' . (int)$moreCount . '&nbsp;)</i>&nbsp;&nbsp;<span class="cgreen">继续阅读全文&gt;&gt;&gt;</span>';
+    	    $summary .= '<br />' . l($text, $this->getUrl(), array('target'=>'_blank', 'class'=>'aright'));
 	    }
+	    $summary = nl2br($summary);
 	    return $summary;
 	}
 	
 	public function getFilterContent()
 	{
-	    static $content = null;
-	    if ($content === null)
-    	    $content = nl2br(strip_tags($this->content));
-	    
-	    return $content;
+	    return nl2br(strip_tags($this->content));
 	}
 	
 	public function getScore()
@@ -265,11 +254,7 @@ class Post extends CActiveRecord
 	 */
 	public function getTagArray()
 	{
-	    static $tags = null;
-	    if ($tags === null)
-    	    $tags = Tag::filterTagsArray($this->tags);
-	    
-	    return $tags;
+	    return Tag::filterTagsArray($this->tags);
 	}
 	
 	public function getTagText($operator = '&nbsp;')
