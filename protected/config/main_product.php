@@ -97,16 +97,16 @@ return array(
             'rules' => array(
                 'http://api.waduanzi.com/<_a>' => 'api/<_a>',
             
-                'http://<_a:(joke|lengtu|girl|video)>.waduanzi.com/page/<page:\d+>&s=<s:\w+>' => 'channel/<_a>',
-                'http://<_a:(joke|lengtu|girl|video)>.waduanzi.com/page/<page:\d+>' => 'channel/<_a>',
-                'http://<_a:(joke|lengtu|girl|video)>.waduanzi.com/' => 'channel/<_a>',
+                'http://<_a:(joke|lengtu|girl|video|ghost)>.waduanzi.com/page/<page:\d+>&s=<s:\w+>' => 'channel/<_a>',
+                'http://<_a:(joke|lengtu|girl|video|ghost)>.waduanzi.com/page/<page:\d+>' => 'channel/<_a>',
+                'http://<_a:(joke|lengtu|girl|video|ghost)>.waduanzi.com/' => 'channel/<_a>',
                 
                 'http://www.waduanzi.com/page/<page:\d+>/<s:(fall|grid|line)>' => 'site/index',
                 'http://www.waduanzi.com/page/<page:\d+>' => 'site/index',
                 'http://www.waduanzi.com/' => 'site/index',
                 'http://www.waduanzi.com/<_a:(login|signup|logout|bdmap|links)>' => 'site/<_a>',
-                'http://www.waduanzi.com/<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',
-                'http://www.waduanzi.com/<_a:(duanzi|lengtu|girl|video)>' => 'channel/<_a>',
+                'http://www.waduanzi.com/<_a:(duanzi|lengtu|girl|video|ghost)>-<page:\d+>' => 'channel/<_a>',
+                'http://www.waduanzi.com/<_a:(duanzi|lengtu|girl|video|ghost)>' => 'channel/<_a>',
                 'http://www.waduanzi.com/archives/<id:\d+>' => 'post/show',
                 'http://www.waduanzi.com/post-<id:\d+>' => 'post/detail', // 暂时
                 'http://www.waduanzi.com/originalpic/<id:\d+>' => 'post/bigpic',
@@ -116,7 +116,7 @@ return array(
                 'http://www.waduanzi.com/sponsor/' => 'sponsor/index',
                 'http://www.waduanzi.com/sponsor/<_a>' => 'sponsor/<_a>',
                 'http://www.waduanzi.com/feed' => 'feed/index',
-                'http://www.waduanzi.com/feed/<_a:(joke|lengtu|girl|video)>' => 'feed/<_a>',
+                'http://www.waduanzi.com/feed/<_a:(joke|lengtu|girl|video|ghost)>' => 'feed/<_a>',
                 'http://www.waduanzi.com/u/<id:\d+>' => 'user/index',
                 'http://www.waduanzi.com/sitemap' => 'site/sitemap',
                     
@@ -125,8 +125,8 @@ return array(
             
                 'http://m.waduanzi.com/page/<page:\d+>' => 'mobile/default/index',
                 'http://m.waduanzi.com/' => 'mobile/default/index',
-                'http://m.waduanzi.com/<_a:(joke|girl|lengtu|video)>/page/<page:\d+>' => 'mobile/channel/<_a>',
-                'http://m.waduanzi.com/<_a:(joke|girl|lengtu|video)>' => 'mobile/channel/<_a>',
+                'http://m.waduanzi.com/<_a:(joke|girl|lengtu|video|ghost)>/page/<page:\d+>' => 'mobile/channel/<_a>',
+                'http://m.waduanzi.com/<_a:(joke|girl|lengtu|video|ghost)>' => 'mobile/channel/<_a>',
                 'http://m.waduanzi.com/archives/<id:\d+>' => 'mobile/post/show',
                 'http://m.waduanzi.com/post-<id:\d+>' => 'mobile/post/detail',
                 'http://m.waduanzi.com/tag/<name:.+>' => 'mobile/tag/posts',

@@ -42,6 +42,11 @@ class FeedController extends Controller
         self::channel(CHANNEL_DUANZI);
     }
     
+    public function actionGhost()
+    {
+        self::channel(CHANNEL_GHOSTSTORY);
+    }
+    
     public function actionLengtu()
     {
         self::channel(CHANNEL_LENGTU);
