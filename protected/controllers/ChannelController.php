@@ -12,14 +12,14 @@ class ChannelController extends Controller
         $duration = 120;
         return array(
             array(
-                'COutputCache + joke, duanzi, lengtu, girl, video',
+                'COutputCache + joke, lengtu, girl, video, ghost',
                 'duration' => $duration,
                 'varyByExpression' => 'user()->getIsGuest()',
                 'varyByParam' => array('page', 's'),
                 'requestTypes' => array('POST'),
             ),
             array(
-                'COutputCache + joke, duanzi, lengtu, girl, video',
+                'COutputCache + joke, lengtu, girl, video, ghost',
                 'duration' => $duration,
                 'varyByExpression' => 'user()->getIsGuest()',
                 'varyByParam' => array('page', 's'),
@@ -44,12 +44,6 @@ class ChannelController extends Controller
         else
             $this->render($view, $data);
     }
-    
-    public function actionDuanzi($page = 1, $s = POST_LIST_STYLE_LINE)
-    {
-        $this->redirect(url('channel/joke', array('page'=>$page, 's'=>$s)), true, 301);
-    }
-    
 
     public function actionGhost($page = 1, $s = POST_LIST_STYLE_LINE)
     {
