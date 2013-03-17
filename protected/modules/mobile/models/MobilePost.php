@@ -25,8 +25,15 @@ class MobilePost extends Post
     
     public function getFilterSummary($len = 300)
     {
-        $html = nl2br(strip_tags($this->getSummary($len), param('mobile_summary_html_tags')));
-        return $html;
+        $content = strip_tags($this->content, param('mobile_summary_html_tags'));
+        $summary = mb_substr($content, 0, $len, app()->charset);
+        $moreCount = mb_strlen($content, app()->charset) - mb_strlen($summary, app()->charset);
+         
+        if ($moreCount > 0)
+            $summary .= '<i class="cgreen">(剩余&nbsp;' . (int)$moreCount . '&nbsp;)</i>';
+        
+        $summary = nl2br($summary);
+        return $summary;
     }
     
     public function getTitleLink($len = 50, $target = '_self')
