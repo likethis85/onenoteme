@@ -156,11 +156,17 @@ class AdminPost extends Post
         $classes = array(
             POST_STATE_DISABLED => 'label-inverse',
             POST_STATE_REJECTED => 'label-important',
+            POST_STATE_ENABLED => 'label-success',
+            POST_STATE_UNVERIFY => 'label-warning',
+            POST_STATE_TRASH => '',
         );
         
         $labels = array(
             POST_STATE_DISABLED => '隐藏',
             POST_STATE_REJECTED => '推绝',
+            POST_STATE_ENABLED => '上线',
+            POST_STATE_UNVERIFY => '待审',
+            POST_STATE_TRASH => '删除',
         );
         
         $html = '';

@@ -100,6 +100,8 @@ class PostController extends AdminController
 	public function actionLatest()
 	{
 	    $criteria = new CDbCriteria();
+	    // 不显示回收站的内容
+	    $criteria->addCondition('t.state != ' . POST_STATE_TRASH);
 	    
 	    $title = '最新文章列表';
 	    $data = AdminPost::fetchList($criteria);

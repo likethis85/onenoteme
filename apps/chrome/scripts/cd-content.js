@@ -45,7 +45,7 @@ var postPages = {
 		+ 			'<input type="hidden" name="onpic" value="" />'
         +       '<label for="onchannel">频道</label>'
         +       '<div>'
-        +           '<select name="onchannel" id="onchannel"><option value="0">挖段子</option><option value="50">挖热点</option></select>'
+        +           '<select name="onchannel" id="onchannel"><option value="0">挖段子</option><option value="25">挖鬼故事</option></select>'
         +       '</div>'
 		+ 			'<input type="hidden" name="oncategory" value="20" />'
 		+ 	'</div>'
