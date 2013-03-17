@@ -25,6 +25,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 		<li><a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank">安卓应用</a></li>
 	</ul>
 	<ul class="fright" id="user-mini-nav">
+	    <li><a href="<?php echo aurl('sponsor/index');?>" target="_blank">赞助我们</a></li>
 	    <?php echo $this->renderDynamic('userToolbar');?>
 	</ul>
 	<div class="clear"></div>
@@ -42,11 +43,11 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     		<li>|</li>
     		<li<?php echo ($this->channel===CHANNEL_LENGTU) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/lengtu');?>">挖趣图</a></li>
     		<li>|</li>
+    		<li<?php echo ($this->channel===CHANNEL_GHOSTSTORY) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/ghost');?>">挖鬼故事</a></li>
+    		<li>|</li>
     		<li<?php echo ($this->channel===CHANNEL_GIRL) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/girl');?>">挖女神</a></li>
     		<li>|</li>
     		<li<?php echo ($this->channel===CHANNEL_VIDEO) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/video');?>">挖视频</a></li>
-    		<li>|</li>
-    		<li<?php echo ($this->channel===NAV_SUPPORT) ? ' class="active"' : '';?>><a href="<?php echo aurl('sponsor/index');?>">赞助我们</a></li>
     	</ul>
     	<ul class="fright">
     	    <li><img id="small-wxqrcode" src="<?php echo sbu('images/qrcode_wx.jpg');?>" alt="挖段子公众账号二维码" /></li>

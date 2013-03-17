@@ -63,6 +63,7 @@ return array(
 
     'video_count_page' => 15,
     'duanzi_count_page' => 30,
+    'ghost_story_count_page' => 30,
     'lengtu_count_page' => 20,
     'girl_count_page' => 20,
     'commentCountOfPage' => 20,

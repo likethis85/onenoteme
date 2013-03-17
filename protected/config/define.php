@@ -10,6 +10,7 @@ define('GLOBAL_COOKIE_PATH', '/');
 
 define('CHANNEL_DUANZI', 0);
 define('CHANNEL_LENGTU', 20);
+define('CHANNEL_GHOSTSTORY', 25);
 define('CHANNEL_GIRL', 30);
 define('CHANNEL_VIDEO', 40);
 define('CHANNEL_MOVIE', 70);
@@ -88,7 +89,6 @@ define('QQT_APP_SECRET', '4e0c4ac86b36120efac4c44a9ac9e895');
 define('USER_DEFAULT_AVATAR_URL', 'images/default_avatar.png');
 
 
-define('NAV_SUPPORT', 'navsponsor');
 
 
 

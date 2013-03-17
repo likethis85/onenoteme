@@ -44,6 +44,24 @@ class ChannelController extends Controller
         $this->redirect(url('channel/joke', array('page'=>$page, 's'=>$s)), true, 301);
     }
     
+
+    public function actionGhost($page = 1, $s = POST_LIST_STYLE_LINE)
+    {
+        cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/joke'), null, array('title'=>app()->name . ' » 挖鬼故事 Feed'));
+        $this->pageTitle = param('channel_ghost_title');
+        $this->setDescription(param('channel_ghost_description'));
+        $this->setKeywords(param('channel_ghost_keywords'));
+    
+        $this->channel = CHANNEL_GHOSTSTORY;
+        $count = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('ghost_story_count_page');
+        $data = $this->fetchChannelPosts(CHANNEL_GHOSTSTORY, $count);
+        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'text_list';
+        if (request()->getIsAjaxRequest())
+            $this->renderPartial($view, $data);
+        else
+            $this->render($view, $data);
+    }
+    
     public function actionLengtu($page = 1, $s = POST_LIST_STYLE_LINE)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/lengtu'), null, array('title'=>app()->name . ' » 挖趣图 Feed'));
