@@ -28,6 +28,8 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     		<li<?php echo ($this->channel===CHANNEL_LENGTU) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/lengtu');?>">挖趣图</a></li>
     		<li>|</li>
     		<li<?php echo ($this->channel===CHANNEL_GIRL) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/girl');?>">挖女神</a></li>
+    		<li>|</li>
+    		<li<?php echo ($this->channel===CHANNEL_GHOSTSTORY) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/ghost');?>">鬼故事</a></li>
     		<!--
     		<li>|</li>
     		<li<?php echo ($this->channel===CHANNEL_VIDEO) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/video');?>">挖视频</a></li>

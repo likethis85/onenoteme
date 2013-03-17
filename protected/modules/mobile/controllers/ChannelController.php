@@ -88,6 +88,7 @@ class ChannelController extends MobileController
 	    $pages->applyLimit($criteria);
 	    $posts = MobilePost::model()->findAll($criteria);
 	
+	    $this->channel = $id;
 	    return array(
 	        'models' => $posts,
 	        'pages' => $pages,
