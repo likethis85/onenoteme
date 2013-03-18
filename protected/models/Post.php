@@ -71,7 +71,7 @@ class Post extends CActiveRecord
 {
     public static function channels()
     {
-        return array(CHANNEL_DUANZI, CHANNEL_LENGTU, CHANNEL_GIRL, CHANNEL_VIDEO);
+        return array(CHANNEL_DUANZI, CHANNEL_LENGTU, CHANNEL_GIRL, CHANNEL_VIDEO, CHANNEL_GHOSTSTORY);
     }
     
     public static function states()
