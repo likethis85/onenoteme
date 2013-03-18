@@ -25,7 +25,7 @@ class TagController extends MobileController
     public function actionPosts($name, $page = 1)
     {
         $limit = 10;
-        $name = urldecode($name);
+        $name = trim(strip_tags(urldecode($name)));
         
         $tagID = app()->getDb()->createCommand()
             ->select('id')
