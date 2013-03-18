@@ -404,17 +404,17 @@ class WdzWeixin extends CDWeixin
     private static function helpInfo($classic = false)
     {
         $text = "\n\n-------------------------\n";
-        if ($classic)
-            $text .= "⑤回复 0 查看帮助\n";
-        else {
-            $text .= "①回复 1 查看笑话\n";
-            $text .= "②回复 2 查看趣图\n";
-            $text .= "③回复 3 查看女神\n";
-            $text .= "④回复 4 查看鬼故事\n";
-            $text .= "⑤回复 0 查看帮助\n";
-            $text .= '⑥投递笑话，请直接发送笑话内容，笑话必须要大于' . self::POST_JOKE_CONTENT_MIN_LEN . "字\n";
-            $text .= "\n喜欢我们就召唤好友添加'挖段子'或'waduanzi'为好友关注我们吧！";
-        }
+//         if ($classic)
+            $text .= "回复 0 查看帮助\n";
+//         else {
+//             $text .= "①回复 1 查看笑话\n";
+//             $text .= "②回复 2 查看趣图\n";
+//             $text .= "③回复 3 查看女神\n";
+//             $text .= "④回复 4 查看鬼故事\n";
+//             $text .= "⑤回复 0 查看帮助\n";
+//             $text .= '⑥投递笑话，请直接发送笑话内容，笑话必须要大于' . self::POST_JOKE_CONTENT_MIN_LEN . "字\n";
+//             $text .= "\n喜欢我们就召唤好友添加'挖段子'或'waduanzi'为好友关注我们吧！";
+//         }
         
         return $text;
     }
