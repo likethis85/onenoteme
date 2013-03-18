@@ -343,7 +343,7 @@ class WdzWeixin extends CDWeixin
                 ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
         }
         
-        $content = $row['content'] . self::helpInfo(true);
+        $content = $row['content'];// . self::helpInfo(true);
         $xml = $this->outputText($content);
         header('Content-Type: application/xml');
         echo $xml;
