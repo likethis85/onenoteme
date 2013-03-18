@@ -67,7 +67,7 @@ class TagController extends MobileController
         $this->render('/post/list', array(
             'models' => $models,
             'pages' => $pages,
-            'listTitle' => "与{$name}相关的笑话、冷图、视频。。。",
+            'listTitle' => '与' . h($name) . '相关的笑话、冷图、视频。。。',
         ));
     }
 }
