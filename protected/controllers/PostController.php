@@ -224,13 +224,19 @@ class PostController extends Controller
         
         switch ($channelID) {
             case CHANNEL_DUANZI:
-                $url = aurl('channel/duanzi');
+                $url = aurl('channel/joke');
                 break;
             case CHANNEL_LENGTU:
                 $url = aurl('channel/lengtu');
                 break;
             case CHANNEL_GIRL:
                 $url = aurl('channel/girl');
+                break;
+            case CHANNEL_VIDEO:
+                $url = aurl('channel/video');
+                break;
+            case CHANNEL_GHOSTSTORY:
+                $url = aurl('channel/ghost');
                 break;
             default:
                 $url = app()->homeUrl;
