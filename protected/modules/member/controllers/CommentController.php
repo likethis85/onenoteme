@@ -1,6 +1,13 @@
 <?php
 class CommentController extends MemberController
 {
+    public function filters()
+    {
+        return array(
+            'ajaxOnly + delete',
+            'postOnly + delete',
+        );
+    }
     public function actionIndex($page = 1)
     {
         $count = 10;
@@ -23,7 +30,7 @@ class CommentController extends MemberController
         ));
     }
     
-    public function actionDelete($id, $callback)
+    public function actionDelete($id)
     {
         $id = (int)$id;
         if ($id > 0) {
@@ -41,6 +48,7 @@ class CommentController extends MemberController
             $data['error'] = '非法请求';
         }
     
-        CDBase::jsonp($callback, $data);
+        CJSON::encode($data);
+        exit(0);
     }
 }
