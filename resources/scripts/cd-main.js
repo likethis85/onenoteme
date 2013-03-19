@@ -151,7 +151,7 @@ Waduanzi.ratingPost = function(event){
 		type: 'POST',
 		url: url,
 		data: {pid: pid, score: score},
-		dataType: 'jsonp',
+		dataType: 'json',
 		beforeSend: function(){
 			tthis.toggleClass('voted');
 		}
