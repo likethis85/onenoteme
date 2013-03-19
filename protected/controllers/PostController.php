@@ -4,6 +4,8 @@ class PostController extends Controller
     public function filters()
     {
         return array(
+            'ajaxOnly + score, like, unlike, views',
+            'postOnly + score, like, unlike, views',
             array(
                 'COutputCache + show',
                 'duration' => 600,
@@ -30,7 +32,7 @@ class PostController extends Controller
         CDBase::jsonp($callback, $data);
     }
     
-    public function actionShow($id, $callback='')
+    public function actionShow($id)
     {
         $this->autoSwitchMobile();
         
@@ -108,13 +110,14 @@ class PostController extends Controller
         $this->render('/post/original_pic', array('model'=>$model));
     }
     
-    public function actionViews($callback)
+    public function actionViews()
     {
         $id = (int)$_POST['id'];
         $counters = array('view_nums' => 1);
         $result = Post::model()->updateCounters($counters, 'id = :postid', array(':postid' => $id));
         $data = array('errno' => (int)!$result);
-        CDBase::jsonp($callback, $data);
+        CJSON::encode($data);
+        exit(0);
     }
     
     public function actionLike()
@@ -128,7 +131,7 @@ class PostController extends Controller
         
         if ($row !== false) {
             $data = array('errno' => CD_NO, 'id'=>$row);
-            echo json_encode($data);
+            CJSON::encode($data);
             exit(0);
         }
         
@@ -154,7 +157,7 @@ class PostController extends Controller
             $data = array('errno' => CD_YES, 'error'=>$e->getMessage());
         }
         
-        echo json_encode($data);
+        CJSON::encode($data);
         exit(0);
     }
     
@@ -176,7 +179,7 @@ class PostController extends Controller
             'errno' => $result ? CD_NO : CD_YES,
         );
         
-        echo json_encode($data);
+        CJSON::encode($data);
         exit(0);
     }
     
