@@ -45,7 +45,7 @@ class PostController extends MemberController
         ));
     }
     
-    public function actionDelete($id, $callback)
+    public function actionDelete($id)
     {
         $id = (int)$id;
         if ($id > 0) {
@@ -63,10 +63,11 @@ class PostController extends MemberController
             $data['error'] = '非法请求';
         }
         
-        CDBase::jsonp($callback, $data);
+        CJSON::encode($data);
+        exit(0);
     }
 
-    public function actionUnlike($id, $callback)
+    public function actionUnlike($id)
     {
         $id = (int)$id;
         $conditions = array('and', 'user_id = :userid', 'post_id = :postid');
@@ -84,7 +85,8 @@ class PostController extends MemberController
             'errno' => $result ? CD_NO : CD_YES,
         );
     
-        CDBase::jsonp($callback, $data);
+        CJSON::encode($data);
+        exit(0);
     }
     
 }
