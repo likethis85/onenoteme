@@ -20,7 +20,7 @@ class PostController extends Controller
         );
     }
     
-    public function actionScore($callback)
+    public function actionScore()
     {
         $pid = (int)$_POST['pid'];
         if ($pid <= 0) throw new CHttpException(500);
@@ -29,7 +29,8 @@ class PostController extends Controller
         $counters = array($column => 1);
         $result = Post::model()->updateCounters($counters, 'id = :pid', array(':pid'=>$pid));
         $data = array('errno' => (int)!$result);
-        CDBase::jsonp($callback, $data);
+        CJSON::encode($data);
+        exit(0);
     }
     
     public function actionShow($id)
