@@ -3,7 +3,7 @@ var CDMember = {};
 CDMember.executeAjax = function(url, data, before, success, fail){
 	var jqXhr = $.ajax({
 		type: 'POST',
-		dataType: 'jsonp',
+		dataType: 'json',
 		url: url,
 		cache: false,
 		data: data || {},
