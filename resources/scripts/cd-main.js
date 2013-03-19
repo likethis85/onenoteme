@@ -1,4 +1,3 @@
-
 var Waduanzi = {};
 
 Waduanzi.urlValidate = function(url) {
@@ -57,7 +56,7 @@ Waduanzi.RatingComment = function(event){
 	var xhr = $.ajax({
 		url: url,
 		type: 'POST',
-		dataType: 'jsonp',
+		dataType: 'json',
 		data: {id:pid, score:score}
 	});
 	xhr.done(function(data){
@@ -89,7 +88,7 @@ Waduanzi.PostComment = function(event) {
 	var xhr = $.ajax({
 		url: form.attr('action'),
 		type: 'POST',
-		dataType: 'jsonp',
+		dataType: 'json',
 		data: form.serialize(),
 		beforeSend: function(){
 			errorElement.empty().hide();
@@ -308,7 +307,7 @@ Waduanzi.fetchComments = function(event) {
 	var commentCount = tthis.text();
 	var jqXhr = $.ajax({
 		url: url,
-		dataType: 'jsonp',
+		dataType: 'json',
 		type: 'get',
 		cache: true,
 		beforeSend: function(jqXHR, settings){
