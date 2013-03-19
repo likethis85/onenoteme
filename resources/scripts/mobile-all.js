@@ -527,7 +527,7 @@ CDMobile.shareToWeixinFriend = function(event){
 CDMobile.increaseVisitNums = function(id, url) {
 	if (id <= 0 || url.length == 0) return false;
 	var data = 'id=' + id;
-	var jqXhr = $.post(url, data, undefined, 'jsonp');
+	var jqXhr = $.post(url, data, undefined, 'json');
 	jqXhr.done(function(data){
 		$('.beta-post-detail .beta-visit-nums').text(data);
 	});
@@ -561,7 +561,7 @@ CDMobile.ratingPost = function(event){
 		type: 'POST',
 		url: url,
 		data: {pid: pid, score: score},
-		dataType: 'jsonp',
+		dataType: 'json',
 		beforeSend: function(){
 			tthis.toggleClass('voted');
 		}
@@ -636,7 +636,7 @@ CDMobile.fetchComments = function(event) {
 	var commentCount = tthis.text();
 	var jqXhr = $.ajax({
 		url: url,
-		dataType: 'jsonp',
+		dataType: 'json',
 		type: 'get',
 		cache: true,
 		beforeSend: function(jqXHR, settings){
@@ -697,7 +697,7 @@ CDMobile.RatingComment = function(event){
 	var xhr = $.ajax({
 		url: url,
 		type: 'POST',
-		dataType: 'jsonp',
+		dataType: 'json',
 		data: {id:pid, score:score}
 	});
 	xhr.done(function(data){
@@ -723,7 +723,7 @@ CDMobile.PostComment = function(event) {
 	var xhr = $.ajax({
 		url: form.attr('action'),
 		type: 'POST',
-		dataType: 'jsonp',
+		dataType: 'json',
 		data: form.serialize(),
 		beforeSend: function(){
 			errorElement.empty().hide();
@@ -771,7 +771,7 @@ var BetaPost = {
 			type: 'post',
 			url: url,
 			data: {pid: postid},
-			dataType: 'jsonp',
+			dataType: 'json',
 		});
 		
 		jqXhr.done(function(data){
@@ -833,7 +833,7 @@ var BetaComment = {
 			type: 'post',
 			url: form.attr('action'),
 			data: form.serialize(),
-			dataType: 'jsonp',
+			dataType: 'json',
 			cache: false,
 			beforeSend: function(jqXhr){
 				button.button('loading');
@@ -912,7 +912,7 @@ var BetaComment = {
 		var url = tthis.attr('data-url');
 		var jqXhr = $.ajax({
 			url: url,
-			dataType: 'jsonp',
+			dataType: 'json',
 			type: 'post',
 			cache: false,
 			beforeSend: function(jqXhr) {
@@ -1013,7 +1013,7 @@ var BetaComment = {
 		
 		var jqXhr = $.ajax({
 			url: url,
-			dataType: 'jsonp',
+			dataType: 'json',
 			type: 'get',
 			data: data,
 			cache: false,

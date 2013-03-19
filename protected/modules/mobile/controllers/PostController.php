@@ -4,6 +4,8 @@ class PostController extends MobileController
     public function filters()
     {
         return array(
+            'ajaxOnly + views, score',
+            'postOnly + views, score',
             array(
                 'COutputCache + show, detail',
                 'duration' => param('mobile_post_show_cache_expire'),
@@ -43,15 +45,16 @@ class PostController extends MobileController
         ));
     }
     
-    public function actionViews($callback)
+    public function actionViews()
     {
         $id = (int)$_POST['id'];
         $counters = array('view_nums' => 1);
         $result = Post::model()->updateCounters($counters, 'id = :postid', array(':postid' => $id));
-        CDBase::jsonp($callback, $result);
+        echo CJSON::encode($result);
+        exit(0);
     }
 
-    public function actionScore($callback)
+    public function actionScore()
     {
         $pid = (int)$_POST['pid'];
         if ($pid <= 0) throw new CHttpException(500);
@@ -60,6 +63,7 @@ class PostController extends MobileController
         $counters = array($column => 1);
         $result = Post::model()->updateCounters($counters, 'id = :pid', array(':pid'=>$pid));
         $data = array('errno' => (int)!$result);
-        CDBase::jsonp($callback, $data);
+        echo CJSON::encode($data);
+        exit(0);
     }
 }

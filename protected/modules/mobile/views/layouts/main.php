@@ -70,8 +70,8 @@ CD_PRODUCT && cs()->scriptMap = array(
     
     'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js',
     
-    'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130305002'),
-    'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130305002'),
-    'json2.js' => sbu('scripts/mobile-all.min.js?t=20130305002'),
+    'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130319001'),
+    'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130319001'),
+    'json2.js' => sbu('scripts/mobile-all.min.js?t=20130319001'),
 );
 ?>

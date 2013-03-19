@@ -14,7 +14,7 @@ class CommentController extends MobileController
         );
     }
     
-    public function actionCreate($callback, $id = 0)
+    public function actionCreate($id = 0)
     {
         $id = (int)$id;
         $callback = strip_tags(trim($callback));
@@ -46,11 +46,11 @@ class CommentController extends MobileController
             $errstr = join(' ', $labels);
             $data['text'] = sprintf('评论失败, %s不正确', $errstr);
         }
-        echo $callback . '(' . json_encode($data) . ')';
+        echo CJSON::encode($data);
         exit(0);
     }
     
-    public function actionList($pid, $callback, $page = 1)
+    public function actionList($pid, $page = 1)
     {
         $pid = (int)$pid;
         $page = (int)$page;
@@ -66,24 +66,24 @@ class CommentController extends MobileController
         $data['text'] = '评论成功';
         $data['html'] = $this->renderPartial('/comment/_one', array('comments'=>$comments, 'post'=>$post), true);
         
-        echo $callback . '(' . json_encode($data) . ')';
+        echo CJSON::encode($data);
         exit(0);
     }
 
     public function actionSupport($id, $callback)
     {
-        self::rating('up_score', $id, $callback);
+        self::rating('up_score', $id);
         exit(0);
     }
     
-    public function actionAgainst($id, $callback)
+    public function actionAgainst($id)
     {
-        self::rating('down_score', $id, $callback);
+        self::rating('down_score', $id);
         exit(0);
     }
     
 
-    private static function rating($field, $id, $callback)
+    private static function rating($field, $id)
     {
 //         sleep(2);
         $id = (int)$id;
@@ -97,7 +97,7 @@ class CommentController extends MobileController
             $nums = Comment::model()->updateCounters($counters, 'id = :commentid', array(':commentid'=>$id));
             $data['errno'] = (int)($nums === 0);
             $data['text'] = ($nums === 0) ? '评论出错' : '感谢您的参与';
-            echo $callback . '(' . json_encode($data) . ')';
+            echo CJSON::encode($data);
             exit(0);
         }
         catch (Exception $e) {
