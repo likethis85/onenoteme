@@ -13,7 +13,7 @@ Waduanzi.IncreasePostViewNums = function(postid, url){
 	var xhr = $.ajax({
 		url: url,
 		type: 'POST',
-		dataType: 'jsonp',
+		dataType: 'json',
 		data: {id:postid}
 	});
 };
