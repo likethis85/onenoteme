@@ -17,10 +17,6 @@ class CommentController extends MobileController
     public function actionCreate($id = 0)
     {
         $id = (int)$id;
-        $callback = strip_tags(trim($callback));
-    
-        if (!request()->getIsAjaxRequest() || !request()->getIsPostRequest() || empty($callback))
-            throw new CHttpException(500);
     
         $data = array();
         $model = new MobileCommentForm();
@@ -89,7 +85,7 @@ class CommentController extends MobileController
         $id = (int)$id;
         $callback = strip_tags(trim($callback));
         $field = strip_tags(trim($field));
-        if (!request()->getIsAjaxRequest() || !request()->getIsPostRequest() || $id <= 0)
+        if ($id <= 0)
             throw new CHttpException(500);
     
         $counters = array($field => 1);
