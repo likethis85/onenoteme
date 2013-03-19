@@ -5,7 +5,7 @@ class CommentController extends Controller
     {
         $duration = 60;
         return array(
-            'ajaxOnly + create, score',
+            'ajaxOnly + create, score, list, score',
             'postOnly + create, score',
             array(
                 'COutputCache + list',
@@ -15,7 +15,7 @@ class CommentController extends Controller
         );
     }
     
-    public function actionList($id, $callback = '')
+    public function actionList($id)
     {
         $id = (int)$id;
         try {
@@ -25,7 +25,7 @@ class CommentController extends Controller
                 $html .= $this->renderPartial('list', array('comments'=>$comments), true);
             
             $data = array('html' => $html);
-            CDBase::jsonp($callback, $data);
+            CJSON::encode($data);
         }
         catch (Exception $e) {
             throw new CHttpException(500, $e->getMessage());
@@ -33,7 +33,7 @@ class CommentController extends Controller
         exit(0);
     }
     
-    public function actionCreate($callback)
+    public function actionCreate()
     {
         $c = new Comment();
         $c->post_id = $_POST['postid'];
@@ -48,16 +48,18 @@ class CommentController extends Controller
         else
             $data['error'] = '发表评论出错';
         
-        CDBase::jsonp($callback, $data);
+        CJSON::encode($data);
+        exit(0);
     }
 
-    public function actionScore($callback)
+    public function actionScore()
     {
         $id = (int)$_POST['id'];
         $column = ((int)$_POST['score'] > 0) ? 'up_score' : 'down_score';
         $counters = array($column => 1);
         $result = Comment::model()->updateCounters($counters, 'id = :id', array(':id'=>$id));
         $data = array('errno' => (int)!$result);
-        CDBase::jsonp($callback, $data);
+        CJSON::encode($data);
+        exit(0);
     }
 }
