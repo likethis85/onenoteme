@@ -63,7 +63,7 @@ class PostController extends MemberController
             $data['error'] = '非法请求';
         }
         
-        CJSON::encode($data);
+        echo CJSON::encode($data);
         exit(0);
     }
 
@@ -85,7 +85,7 @@ class PostController extends MemberController
             'errno' => $result ? CD_NO : CD_YES,
         );
     
-        CJSON::encode($data);
+        echo CJSON::encode($data);
         exit(0);
     }
     

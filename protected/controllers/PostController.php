@@ -29,7 +29,7 @@ class PostController extends Controller
         $counters = array($column => 1);
         $result = Post::model()->updateCounters($counters, 'id = :pid', array(':pid'=>$pid));
         $data = array('errno' => (int)!$result);
-        CJSON::encode($data);
+        echo CJSON::encode($data);
         exit(0);
     }
     
@@ -117,7 +117,7 @@ class PostController extends Controller
         $counters = array('view_nums' => 1);
         $result = Post::model()->updateCounters($counters, 'id = :postid', array(':postid' => $id));
         $data = array('errno' => (int)!$result);
-        CJSON::encode($data);
+        echo CJSON::encode($data);
         exit(0);
     }
     
@@ -132,7 +132,7 @@ class PostController extends Controller
         
         if ($row !== false) {
             $data = array('errno' => CD_NO, 'id'=>$row);
-            CJSON::encode($data);
+            echo CJSON::encode($data);
             exit(0);
         }
         
@@ -158,7 +158,7 @@ class PostController extends Controller
             $data = array('errno' => CD_YES, 'error'=>$e->getMessage());
         }
         
-        CJSON::encode($data);
+        echo CJSON::encode($data);
         exit(0);
     }
     
@@ -180,7 +180,7 @@ class PostController extends Controller
             'errno' => $result ? CD_NO : CD_YES,
         );
         
-        CJSON::encode($data);
+        echo CJSON::encode($data);
         exit(0);
     }
     

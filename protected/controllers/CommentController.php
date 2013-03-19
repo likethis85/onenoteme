@@ -25,7 +25,7 @@ class CommentController extends Controller
                 $html .= $this->renderPartial('list', array('comments'=>$comments), true);
             
             $data = array('html' => $html);
-            CJSON::encode($data);
+            echo CJSON::encode($data);
         }
         catch (Exception $e) {
             throw new CHttpException(500, $e->getMessage());
@@ -48,7 +48,7 @@ class CommentController extends Controller
         else
             $data['error'] = '发表评论出错';
         
-        CJSON::encode($data);
+        echo CJSON::encode($data);
         exit(0);
     }
 
@@ -59,7 +59,7 @@ class CommentController extends Controller
         $counters = array($column => 1);
         $result = Comment::model()->updateCounters($counters, 'id = :id', array(':id'=>$id));
         $data = array('errno' => (int)!$result);
-        CJSON::encode($data);
+        echo CJSON::encode($data);
         exit(0);
     }
 }

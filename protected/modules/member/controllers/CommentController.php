@@ -48,7 +48,7 @@ class CommentController extends MemberController
             $data['error'] = '非法请求';
         }
     
-        CJSON::encode($data);
+        echo CJSON::encode($data);
         exit(0);
     }
 }
