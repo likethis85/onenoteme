@@ -33,7 +33,7 @@ class PostController extends Controller
         exit(0);
     }
     
-    public function actionShow($id)
+    public function actionShow1($id)
     {
         $this->redicret(aurl('post/show1', array('id'=>$id)));
         exit(0);
