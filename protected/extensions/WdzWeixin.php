@@ -7,6 +7,16 @@ class WdzWeixin extends CDWeixin
     {
         if ($this->isTextMsg())
             $this->textMsgRequest();
+        elseif ($this->isEventMsg()) {
+            if ($this->isSubscribeEvent())
+                $this->subscribe();
+            elseif ($this->isUnsubscribeEvent())
+                $this->unsubscribe();
+            elseif ($this->isMenuClickEvent())
+                $this->menuClick();
+            else
+                $this->unSupportEvent();
+        }
         else
             $this->unSupportMsgType();
     
@@ -15,10 +25,10 @@ class WdzWeixin extends CDWeixin
     
     private function textMsgRequest()
     {
-        $hello = 'hello2bizuser';
+        $subscribeMessages = array('hello2bizuser', 'subscribe');
         $input = strtolower(trim($this->_data->Content));
     
-        if ($input == $hello) {
+        if (in_array($input, $subscribeMessages)) {
             $this->welcome();
             exit(0);
         }
@@ -95,9 +105,33 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
+    private function subscribe()
+    {
+        $text = "没错！这里就是要啥有啥，想啥有啥的挖段子微信大本营！\n\n您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，也可以发送给我们与大家一起分享哟～" . self::helpInfo();
+        $xml = $this->outputText($text);
+        header('Content-Type: application/xml');
+        echo $xml;
+    }
+    
+    private function unsubscribe()
+    {
+        $text = "Sorry，我们的服务留住了您的过去，却没能留住您的将来，请给我们提些建议吧，让我们做的更好！\n";
+        $xml = $this->outputText($text);
+        header('Content-Type: application/xml');
+        echo $xml;
+    }
+    
     private function unSupportMsgType()
     {
         $text = "Sorry，我们现在还不支持关键字搜索、图片上传和地理位置消息查询。" . self::helpInfo();
+        $xml = $this->outputText($text);
+        header('Content-Type: application/xml');
+        echo $xml;
+    }
+    
+    private function unSupportEvent()
+    {
+        $text = "Sorry，我们收到了一个无法识别的事件请求，请您关闭微信进程，重新启动微信试试。" . self::helpInfo();
         $xml = $this->outputText($text);
         header('Content-Type: application/xml');
         echo $xml;

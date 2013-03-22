@@ -4,9 +4,11 @@ class CDWeixin
     const MSG_TYPE_TEXT = 'text';
     const MSG_TYPE_LOCATION = 'location';
     const MSG_TYPE_IMAGE = 'image';
+    const MSG_TYPE_LINK = 'link';
     const MSG_TYPE_EVENT = 'event';
-    const MSG_EVENT_ENTER = 'enter';
-    const MSG_EVENT_LOCATION = 'location';
+    const MSG_EVENT_SUBSCRIBE = 'subscribe';
+    const MSG_EVENT_UNSUBSCRIBE = 'unsubscribe';
+    const MSG_EVENT_MENUCLICK = 'click';
     
     const REPLY_TYPE_TEXT = 'text';
     const REPLY_TYPE_NEWS = 'news';
@@ -51,7 +53,7 @@ class CDWeixin
     }
     
     /**
-     * 判断是否是文字信息
+     * 判断是否是文字消息
      * @return boolean
      */
     public function isTextMsg()
@@ -60,7 +62,7 @@ class CDWeixin
     }
     
     /**
-     * 判断是否是位置信息
+     * 判断是否是位置消息
      * @return boolean
      */
     public function isLocationMsg()
@@ -69,7 +71,7 @@ class CDWeixin
     }
     
     /**
-     * 判断是否是图片信息
+     * 判断是否是图片消息
      * @return boolean
      */
     public function isImageMsg()
@@ -78,7 +80,16 @@ class CDWeixin
     }
     
     /**
-     * 判断是否是事件信息
+     * 判断是否是链接消息
+     * @return boolean
+     */
+    public function isLinkMsg()
+    {
+        return strtolower($this->_data->MsgType) == self::MSG_TYPE_IMAGE;
+    }
+    
+    /**
+     * 判断是否是事件消息
      * @return boolean
      */
     public function isEventMsg()
@@ -87,21 +98,30 @@ class CDWeixin
     }
     
     /**
-     * 判断是否是事件消息中的进入enter事件
+     * 判断是否是事件消息中的进入subscribe事件
      * @return boolean
      */
-    public function isEnterEvent()
+    public function isSubscribeEvent()
     {
-        return $this->isEventMsg() && strtolower($this->_data->Event) == self::MSG_EVENT_ENTER;
+        return $this->isEventMsg() && strtolower($this->_data->Event) == self::MSG_EVENT_SUBSCRIBE;
     }
     
     /**
-     * 判断是否是事件消息中的进入location事件
+     * 判断是否是事件消息中的进入unsubscribe事件
      * @return boolean
      */
-    public function isLocationEvent()
+    public function isUnsubscribeEvent()
     {
-        return $this->isEventMsg() && strtolower($this->_data->Event) == self::MSG_EVENT_LOCATION;
+        return $this->isEventMsg() && strtolower($this->_data->Event) == self::MSG_EVENT_UNSUBSCRIBE;
+    }
+    
+    /**
+     * 判断是否是事件消息中的进入menu click事件
+     * @return boolean
+     */
+    public function isMenuClickEvent()
+    {
+        return $this->isEventMsg() && strtolower($this->_data->Event) == self::MSG_EVENT_MENUCLICK;
     }
 
     /**
