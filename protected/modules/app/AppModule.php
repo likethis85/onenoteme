@@ -8,8 +8,6 @@ class AppModule extends CWebModule
 			'app.models.*',
 			'app.components.*',
 		));
-		
-		app()->errorHandler->errorAction = 'app/default/error';
 	}
 
 	public function beforeControllerAction($controller, $action)

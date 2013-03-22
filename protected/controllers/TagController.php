@@ -98,7 +98,7 @@ class TagController extends Controller
         $this->render($view, array(
         	'models' => $models,
             'pages' => $pages,
-            'fallTitle' => $name,
+            'fallTitle' => h($name),
         ));
     }
 }
