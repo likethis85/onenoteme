@@ -35,6 +35,12 @@ class PostController extends Controller
     
     public function actionShow($id)
     {
+        $this->redicret(aurl('post/show1', array('id'=>$id)));
+        exit(0);
+    }
+    
+    public function actionShow($id)
+    {
         $this->autoSwitchMobile();
         
         $duration = 60*60;
