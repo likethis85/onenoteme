@@ -37,9 +37,7 @@ class CDUpyunUploader extends CDUploader
         $path = empty($prefixPath) ? '' : ('/' . trim($prefixPath, '/'));
         $path .= date('/Y/m/d/');
         
-        $filename = date('YmdHis_')
-            . uniqid()
-            . ($extension ? '.' . $extension : '');
+        $filename = date('YmdHis_') . uniqid() . $extension;
         
         if ($prefix)
             $filename = $prefix . '_' . $filename;
