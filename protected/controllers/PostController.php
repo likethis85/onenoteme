@@ -25,6 +25,12 @@ class PostController extends Controller
         exit(0);
     }
     
+    public function actionShow1($id)
+    {
+        $this->redirect(aurl('post/show', 'id'=>$id));
+        exit(0);
+    }
+    
     public function actionShow($id)
     {
         $duration = 60*60;
