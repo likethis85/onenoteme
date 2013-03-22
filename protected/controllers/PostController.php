@@ -35,7 +35,7 @@ class PostController extends Controller
     
     public function actionShow1($id)
     {
-        $this->redirect(aurl('post/show1', array('id'=>$id)));
+        $this->redirect(aurl('post/show', array('id'=>$id)));
         exit(0);
     }
     
