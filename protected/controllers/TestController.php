@@ -4,7 +4,7 @@ class TestController extends Controller
     public function actionIndex()
     {
         $uploader = app()->getComponent('upyunimg');
-        $file = 'http://f0.wabao.me/pics/2013/03/22/bmiddle_20130322195153_514c45d999e23.jpeg';
+        $file = 'http://pic.pp3.cn/uploads/allimg/111125/16030T308-2.jpg';
         $data = file_get_contents($file);
         $extension = CDImage::getImageExtName($data);
         $uploader->autoFilename('pics', $extension, 'bmiddle');
