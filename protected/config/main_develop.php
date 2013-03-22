@@ -146,6 +146,14 @@ return array(
             'loginUrl' => array('/site/login'),
             'guestName' => '匿名人士',
         ),
+        'upyunimg' => array(
+            'class' => 'application.extensions.CDUpyunUploader',
+            'imageBucket' => true,
+            'endpoint' => 'v2.api.upyun.com',
+            'bucket' => 'waduanzi',
+            'username' => 'cdcchen',
+            'password' => 'cdc790406',
+        ),
     ),
     
     'params' => $params,

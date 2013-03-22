@@ -97,6 +97,9 @@ class WdzWeixin extends CDWeixin
 //         file_put_contents(app()->runtimePath . '/wx2.txt', $log);
     }
     
+    /**
+     * 用户关注时消息处理
+     */
     private function welcome()
     {
         $text = "没错！这里就是要啥有啥，想啥有啥的挖段子微信大本营！\n\n您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，也可以发送给我们与大家一起分享哟～" . self::helpInfo();
@@ -105,6 +108,9 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
+    /**
+     * 用户订阅时消息处理，目前官方未启用
+     */
     private function subscribe()
     {
         $text = "没错！这里就是要啥有啥，想啥有啥的挖段子微信大本营！\n\n您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，也可以发送给我们与大家一起分享哟～" . self::helpInfo();
@@ -113,6 +119,9 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
+    /**
+     * 用户取消订阅时消息处理，目前官方未启用
+     */
     private function unsubscribe()
     {
         $text = "Sorry，我们的服务留住了您的过去，却没能留住您的将来，请给我们提些建议吧，让我们做的更好！\n";
@@ -121,6 +130,9 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
+    /**
+     * 接收到业务程序不能处理的消息时的事件处理
+     */
     private function unSupportMsgType()
     {
         $text = "Sorry，我们现在还不支持关键字搜索、图片上传和地理位置消息查询。" . self::helpInfo();
@@ -129,6 +141,9 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
+    /**
+     * 接收到业务程序不能处理的事件时事件处理
+     */
     private function unSupportEvent()
     {
         $text = "Sorry，我们收到了一个无法识别的事件请求，请您关闭微信进程，重新启动微信试试。" . self::helpInfo();

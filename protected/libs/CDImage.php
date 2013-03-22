@@ -66,10 +66,14 @@ class CDImage
     {
         $this->_data = $data;
         $this->_image = self::loadImage($this->_data);
-        if (@file_exists($data)) {
+        if (@file_exists($data))
             $info = getimagesize($data);
+        elseif (PHP_VERSION > '5.4.0')
+            $info = getimagesizefromstring($data);
+        
+        if ($info)
             $this->_imageType = $info[2];
-        }
+        
         return $this;
     }
     
@@ -97,7 +101,8 @@ class CDImage
      */
     public static function loadFromStream($data)
     {
-        return imagecreatefromstring($data);
+        $im = imagecreatefromstring($data);
+        return $im;
     }
     
     /**
@@ -752,6 +757,38 @@ class CDImage
         return (bool)preg_match("~${p}~", $data);
     }
     
+    public static function getImageInfo($file)
+    {
+        $info = null;
+        if (@file_exists($file))
+            $info = getimagesize($file);
+        elseif (PHP_VERSION > '5.4.0')
+            $info = getimagesizefromstring($file);
+        
+        return $info;
+    }
+    
+    public static function getImageType($file)
+    {
+        $info = self::getImageInfo($file);
+        $imagetype = IMAGETYPE_UNKNOWN;
+        if ($info)
+            $imagetype = $info[2];
+        
+        return $imagetype;
+    }
+    
+    public static function getImageExtName($file)
+    {
+        $imagetype = self::getImageType($file);
+        
+        $extension = '';
+        if ($imagetype != IMAGETYPE_UNKNOWN)
+            $extension = image_type_to_extension($imagetype);
+        
+        return $extension;
+    }
+    
     /**
      * 析构函数
      */
@@ -760,4 +797,7 @@ class CDImage
         is_resource($this->_image) && imagedestroy($this->_image);
     }
 }
+
+
+
 
