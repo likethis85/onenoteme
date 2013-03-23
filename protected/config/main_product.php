@@ -97,12 +97,12 @@ return array(
             'rules' => array(
                 'http://api.waduanzi.com/<_a>' => 'api/<_a>',
                     
-                'http://m.waduanzi.com/page/<page:\d+>' => 'mobile/default/index',
-                'http://m.waduanzi.com' => 'mobile/default/index',
-                'http://m.waduanzi.com/<_a:(joke|girl|lengtu|video|ghost)>/page/<page:\d+>' => 'mobile/channel/<_a>',
-                'http://m.waduanzi.com/<_a:(joke|girl|lengtu|video|ghost)>' => 'mobile/channel/<_a>',
-                'http://m.waduanzi.com/archives/<id:\d+>' => 'mobile/post/show',
-                'http://m.waduanzi.com/tag/<name:.+>' => 'mobile/tag/posts',
+                'mobile/page/<page:\d+>' => 'mobile/default/index',
+                'mobile' => 'mobile/default/index',
+                'mobile/<_a:(joke|girl|lengtu|video|ghost)>/page/<page:\d+>' => 'mobile/channel/<_a>',
+                'mobile/<_a:(joke|girl|lengtu|video|ghost)>' => 'mobile/channel/<_a>',
+                'mobile/archives/<id:\d+>' => 'mobile/post/show',
+                'mobile/tag/<name:.+>' => 'mobile/tag/posts',
             
                 'page/<page:\d+>/<s:(fall|grid|line)>' => 'site/index',
                 'page/<page:\d+>' => 'site/index',
