@@ -207,6 +207,7 @@ class WeiboController extends Controller
 
     private static function saveQqtUserProfile($profile)
     {
+        var_dump($profile);
         if (empty($profile)) return false;
         
         $user = User::model()->findByAttributes(array('username'=>$profile['email']));
