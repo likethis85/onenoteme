@@ -87,10 +87,8 @@ class WeiboController extends Controller
             $user->encryptPassword();
             $user->state = USER_STATE_ENABLED;
         
-            if (!$user->save()) {
-                var_dump($user->getErrors());
+            if (!$user->save())
                 return false;
-            }
         }
     
         $userProfile = UserProfile::model()->findByAttributes(array('user_id' => $user->id));
@@ -109,10 +107,8 @@ class WeiboController extends Controller
         
             if ($userProfile->save())
                 return $user;
-            else {
-                var_dump($userProfile->getErrors());
+            else
                 return false;
-            }
         }
         else
             return true;
