@@ -4,7 +4,7 @@
 </div>
 <div class="fright cd-sidebar">
     <?php $this->widget('CDAdvert', array('solt'=>'posts_list_sidebar_01'));?>
-	<div class="panel panel15"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
+	<div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
 	<?php $this->widget('CDAdvert', array('solt'=>'posts_list_sidebar_02'));?>
 </div>
 <div class="clear"></div>
