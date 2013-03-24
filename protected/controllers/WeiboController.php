@@ -212,7 +212,7 @@ class WeiboController extends Controller
         if ($user === null) {
             $user = new User();
             $user->username = $username;
-            $user->screen_name = $profile['nick'] ? $profile['nick'] : $username;
+            $user->screen_name = $profile['nick'] . $username;
             $user->password = self::DEFAULT_PASSWORD;
             $user->encryptPassword();
             $user->state = USER_STATE_ENABLED;
