@@ -105,13 +105,11 @@ class WeiboController extends Controller
         $userProfile->image_url = $profile['profile_image_url'];
         $userProfile->avatar_large = $profile['avatar_large'];
         
-            if ($userProfile->save())
-                return $user;
-            else
-                return false;
-        }
+        if ($userProfile->save())
+            return $user;
         else
-            return true;
+            return false;
+        
     }
     
     
@@ -235,13 +233,10 @@ class WeiboController extends Controller
         $userProfile->image_url = $profile['head'] . '/50';
         $userProfile->avatar_large = $profile['head'] . '/160';
         
-            if ($userProfile->save())
-                return $user;
-            else
-                return false;
-        }
+        if ($userProfile->save())
+            return $user;
         else
-            return true;
+            return false;
     }
 }
 
