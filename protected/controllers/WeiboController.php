@@ -96,7 +96,7 @@ class WeiboController extends Controller
         if ($userProfile === null) {
             $userProfile = new UserProfile();
             $userProfile->user_id = $user->id;
-            $userProfile->weibo_uid = $profile['id'];
+            $userProfile->weibo_uid = $profile['uid'];
             $userProfile->province = $profile['province'];
             $userProfile->city = $profile['city'];
             $userProfile->location = $profile['location'];
@@ -149,6 +149,7 @@ class WeiboController extends Controller
             
             self::$_accessToken = $access_token;
             $profile = self::fetchQqtUserInfo(self::$_userID);
+            var_dump($profile);
             $user = self::checkQqtUserExist(self::$_userID);
             if ($user === null)
                 $user = self::saveQqtUserProfile($profile);
