@@ -92,7 +92,7 @@ class WeiboController extends Controller
         }
     
         $userProfile = UserProfile::model()->findByAttributes(array('user_id' => $user->id));
-        
+        var_dump($profile);
         if ($userProfile === null) {
             $userProfile = new UserProfile();
             $userProfile->user_id = $user->id;
