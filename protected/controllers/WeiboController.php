@@ -85,9 +85,12 @@ class WeiboController extends Controller
             $user->username = $user->screen_name = $profile['screen_name'];
             $user->password = self::DEFAULT_PASSWORD;
             $user->encryptPassword();
-            $user->state = User_STATE_ENABLED;
+            $user->state = USER_STATE_ENABLED;
         
-            if (!$user->save()) return false;
+            if (!$user->save()) {
+                var_dump($user->getErrors());
+                return false;
+            }
         }
     
         $userProfile = UserProfile::model()->findByAttributes(array('user_id' => $user->id));
@@ -106,8 +109,10 @@ class WeiboController extends Controller
         
             if ($userProfile->save())
                 return $user;
-            else
+            else {
+                var_dump($userProfile->getErrors());
                 return false;
+            }
         }
         else
             return true;
