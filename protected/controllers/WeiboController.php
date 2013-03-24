@@ -92,7 +92,7 @@ class WeiboController extends Controller
     
         $userProfile = $user->profile;
         if ($userProfile === null) {
-             $userProfile = new UserProfile()
+             $userProfile = new UserProfile();
              $userProfile->user_id = $user->id;
         }
         $userProfile->weibo_uid = $profile['id'];
@@ -222,7 +222,7 @@ class WeiboController extends Controller
         
         $userProfile = $user->profile;
         if ($userProfile === null) {
-             $userProfile = new UserProfile()
+             $userProfile = new UserProfile();
              $userProfile->user_id = $user->id;
         }
         $userProfile->qqt_uid = $profile['openid'];
