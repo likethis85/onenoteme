@@ -79,10 +79,12 @@ class WeiboController extends Controller
     {
         if (empty($profile)) return false;
         
-        $user = User::model()->findByAttributes(array('username'=>$profile['screen_name']));
+        $username = $profile['id'];
+        $user = User::model()->findByAttributes(array('username'=>$username));
         if ($user === null) {
             $user = new User();
-            $user->username = $user->screen_name = $profile['screen_name'];
+            $user->username = $username;
+            $user->screen_name = $profile['screen_name'];
             $user->password = self::DEFAULT_PASSWORD;
             $user->encryptPassword();
             $user->state = USER_STATE_ENABLED;
@@ -205,12 +207,12 @@ class WeiboController extends Controller
     {
         if (empty($profile)) return false;
         
-        $username = $profile['email'] ? $profile['email'] : $profile['name'];
-        $user = User::model()->findByAttributes(array('username'=>$profile['email']));
+        $username = $profile['name'];
+        $user = User::model()->findByAttributes(array('username'=>$username));
         if ($user === null) {
             $user = new User();
             $user->username = $username;
-            $user->screen_name = $profile['name'];
+            $user->screen_name = $profile['nick'] ? $profile['nick'] : $username;
             $user->password = self::DEFAULT_PASSWORD;
             $user->encryptPassword();
             $user->state = USER_STATE_ENABLED;
