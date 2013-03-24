@@ -218,8 +218,10 @@ class WeiboController extends Controller
             $user->encryptPassword();
             $user->state = User_STATE_ENABLED;
         
-            if (!$user->save())
+            if (!$user->save()) {
+                echo CHtml::errorSummary($user);
                 return false;
+            }
             
         }
         
@@ -240,6 +242,7 @@ class WeiboController extends Controller
             if ($userProfile->save())
                 return $user;
             else {
+                echo CHtml::errorSummary($userProfile);
                 return false;
             }
         }
