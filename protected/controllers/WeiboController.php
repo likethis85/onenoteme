@@ -27,7 +27,7 @@ class WeiboController extends Controller
             $data = json_decode($curl->rawdata(), true);
             if (empty($data))
                 throw new CException('获取access_token错误');
-            
+            var_dump($data);
             self::$_accessToken = $access_token = $data['access_token'];
             self::$_userID = $data['uid'];
             $profile = self::fetchWeiboUserInfo(self::$_userID);
