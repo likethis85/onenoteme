@@ -248,6 +248,8 @@ class WeiboController extends Controller
         }
         else
             return true;
+            
+            exit;
     }
 }
 
