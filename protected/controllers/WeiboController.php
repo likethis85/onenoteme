@@ -87,11 +87,11 @@ class WeiboController extends Controller
             $user->encryptPassword();
             $user->state = USER_STATE_ENABLED;
         
-            if (!$user->save())
-                return false;
+            if (!$user->save()) return false;
         }
     
         $userProfile = UserProfile::model()->findByAttributes(array('user_id' => $user->id));
+        print_r($userProfile);exit(0);
         if ($userProfile === null) {
             $userProfile = new UserProfile();
             $userProfile->user_id = $user->id;
