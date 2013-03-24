@@ -84,7 +84,7 @@ class WeiboController extends Controller
         if ($user === null) {
             $user = new User();
             $user->username = $username;
-            $user->screen_name = $profile['screen_name'];
+            $user->screen_name = $profile['screen_name'] . $username;
             $user->password = self::DEFAULT_PASSWORD;
             $user->encryptPassword();
             $user->state = USER_STATE_ENABLED;
@@ -233,7 +233,7 @@ class WeiboController extends Controller
         $userProfile->description = $profile['introduction'];
         $userProfile->website = $profile['homepage'];
         $userProfile->image_url = $profile['head'] . '/50';
-        $userProfile->avatar_large = $profile['head'] . '/160';
+        $userProfile->avatar_large = $profile['head'] . '/200';
         
         if ($userProfile->save())
             return $user;
