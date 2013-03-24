@@ -31,7 +31,7 @@ class WeiboController extends Controller
             self::$_accessToken = $access_token = $data['access_token'];
             self::$_userID = $data['uid'];
             $profile = self::fetchWeiboUserInfo(self::$_userID);
-            
+            var_dump($profile);exit;
             $user = self::checkWeiboUserExist(self::$_userID);
             if ($user === null)
                 $user = self::saveWeiboUserProfile($profile);
@@ -104,8 +104,7 @@ class WeiboController extends Controller
             $userProfile->website = $profile['url'];
             $userProfile->image_url = $profile['profile_image_url'];
             $userProfile->avatar_large = $profile['avatar_large'];
-        $userProfile->validate();
-        echo CHtml::errorSummary($userProfile);exit(0);
+        
             if ($userProfile->save())
                 return $user;
             else
@@ -114,8 +113,6 @@ class WeiboController extends Controller
         else
             return true;
     }
-    
-    
     
     
     
