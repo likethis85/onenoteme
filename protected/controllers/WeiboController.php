@@ -91,7 +91,7 @@ class WeiboController extends Controller
         }
     
         $userProfile = UserProfile::model()->findByAttributes(array('user_id' => $user->id));
-        print_r($userProfile);exit(0);
+        
         if ($userProfile === null) {
             $userProfile = new UserProfile();
             $userProfile->user_id = $user->id;
@@ -104,7 +104,8 @@ class WeiboController extends Controller
             $userProfile->website = $profile['url'];
             $userProfile->image_url = $profile['profile_image_url'];
             $userProfile->avatar_large = $profile['avatar_large'];
-        
+        $userProfile->validate();
+        echo CHtml::errorSummary($userProfile);exit(0);
             if ($userProfile->save())
                 return $user;
             else
