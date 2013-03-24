@@ -207,23 +207,19 @@ class WeiboController extends Controller
 
     private static function saveQqtUserProfile($profile)
     {
-        var_dump($profile);
         if (empty($profile)) return false;
         
+        $username = $profile['email'] ? $profile['email'] : $profile['name'];
         $user = User::model()->findByAttributes(array('username'=>$profile['email']));
         if ($user === null) {
             $user = new User();
-            $user->username = $profile['email'];
+            $user->username = $username;
             $user->screen_name = $profile['name'];
             $user->password = self::DEFAULT_PASSWORD;
             $user->encryptPassword();
-            $user->state = User_STATE_ENABLED;
+            $user->state = USER_STATE_ENABLED;
         
-            if (!$user->save()) {
-                echo CHtml::errorSummary($user);
-                return false;
-            }
-            
+            if (!$user->save()) return false;
         }
         
         $userProfile = UserProfile::model()->findByAttributes(array('user_id' => $user->id));
@@ -242,15 +238,11 @@ class WeiboController extends Controller
         
             if ($userProfile->save())
                 return $user;
-            else {
-                echo CHtml::errorSummary($userProfile);
+            else
                 return false;
-            }
         }
         else
             return true;
-            
-            exit;
     }
 }
 
