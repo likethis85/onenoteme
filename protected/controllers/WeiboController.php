@@ -90,7 +90,7 @@ class WeiboController extends Controller
             if (!$user->save())
                 return false;
         }
-    
+    echo time();
         $userProfile = UserProfile::model()->findByAttributes(array('user_id' => $user->id));
         if ($userProfile === null) {
             $userProfile = new UserProfile();
