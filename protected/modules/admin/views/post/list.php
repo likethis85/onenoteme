@@ -23,6 +23,16 @@
     <?php else:?>
     <button class="btn btn-small btn-danger" id="batch-trash" data-src="<?php echo url('admin/post/multiTrash');?>">放入回收站</button>
     <?php endif;?>
+    <div class="btn-group">
+        <a class="btn btn-small btn-warning dropdown-toggle" data-toggle="dropdown" href="#">
+            频道过滤&nbsp;<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <?php foreach (CDBase::channelLabels() as $channelID => $label):?>
+            <li><a href="<?php $this->channelUrl($channelID);?>"><?php echo $label;?></a></li>
+            <?php endforeach;?>
+        </ul>
+    </div>
     <a class="btn btn-small btn-success" href="">刷新</a>
     
 </div>
