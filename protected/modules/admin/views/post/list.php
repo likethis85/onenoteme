@@ -15,7 +15,16 @@
     <button class="btn btn-small btn-danger" id="batch-trash" data-src="<?php echo url('admin/post/multiTrash');?>">放入回收站</button>
     <?php endif;?>
     <a class="btn btn-small btn-success" href="">刷新</a>
-    <?php echo CHtml::dropDownList('poststate', null, Post::stateLabels());?>
+    <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            状态<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <?php foreach (Post::stateLabels() as $state => $label):?>
+            <li><a href="#"><?php echo $label;?></a></li>
+            <?php endforeach;?>
+        </ul>
+    </div>
     
 </div>
 <table class="table table-striped table-bordered beta-list-table table-post-list">
