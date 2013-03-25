@@ -4,7 +4,6 @@
     <button class="btn btn-small" id="reverse-select">反选</button>
     <?php if (strtolower($this->action->id) == 'verify'):?>
     <button class="btn btn-small btn-primary" id="batch-verify" data-src="<?php echo url('admin/post/multiVerify');?>">通过</button>
-    <button class="btn btn-small btn-primary" id="batch-reject" data-src="<?php echo url('admin/post/multiReject');?>">拒绝</button>
     <?php elseif (strtolower($this->action->id) != 'trash'):?>
     <button class="btn btn-small btn-primary" id="batch-recommend" data-src="<?php echo url('admin/post/multiRecommend');?>">推荐</button>
     <button class="btn btn-small btn-primary" id="batch-hottest" data-src="<?php echo url('admin/post/multiHottest');?>">热门</button>
