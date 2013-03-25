@@ -25,10 +25,10 @@ class WdzWeixin extends CDWeixin
     
     private function textMsgRequest()
     {
-        $subscribeMessages = array('hello2bizuser', 'subscribe');
+        $subscribeMessage = 'subscribe';
         $input = strtolower(trim($this->_data->Content));
     
-        if (in_array($input, $subscribeMessages)) {
+        if ($input == $subscribeMessage) {
             $this->welcome();
             exit(0);
         }
