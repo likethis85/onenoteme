@@ -17,7 +17,10 @@ class PostController extends AdminController
     
     protected function channelUrl($channelID)
     {
-        return url($this->route, array('channel'=>$channelID));
+        $params = $this->actionParams;
+        unset($params['page']);
+        $params['channel'] = $channelID;
+        return url($this->route, $params);
     }
     
     public function actionInfo($id)
