@@ -107,15 +107,15 @@ class PostController extends AdminController
 	    return $post->save(true, array('summary', 'content'));
 	}
 	
-	public function actionLatest($channelID = null)
+	public function actionLatest($channel = null)
 	{
 	    $criteria = new CDbCriteria();
 	    // 不显示未审核、被拒绝和回收站的内容
 	    $criteria->addInCondition('t.state', array(POST_STATE_ENABLED, POST_STATE_DISABLED));
-	    if ($channelID !== null) {
+	    if ($channel !== null) {
 	        $channel = (int)$channel;
-	        $criteria->addColumnCondition(array('channel_id' => $channelID));
-	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channelID);
+	        $criteria->addColumnCondition(array('channel_id' => $channel));
+	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
@@ -124,14 +124,14 @@ class PostController extends AdminController
 	    $this->render('list', $data);
 	}
 	
-	public function actionVerify($channelID = null)
+	public function actionVerify($channel = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_UNVERIFY));
-    	if ($channelID !== null) {
+    	if ($channel !== null) {
 	        $channel = (int)$channel;
-	        $criteria->addColumnCondition(array('channel_id' => $channelID));
-	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channelID);
+	        $criteria->addColumnCondition(array('channel_id' => $channel));
+	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
@@ -140,14 +140,14 @@ class PostController extends AdminController
 	    $this->render('list', $data);
 	}
 	
-	public function actionTrash($channelID = null)
+	public function actionTrash($channel = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_TRASH));
-    	if ($channelID !== null) {
+    	if ($channel !== null) {
 	        $channel = (int)$channel;
-	        $criteria->addColumnCondition(array('channel_id' => $channelID));
-	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channelID);
+	        $criteria->addColumnCondition(array('channel_id' => $channel));
+	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
@@ -170,14 +170,14 @@ class PostController extends AdminController
         $this->render('search', array('form'=>$form, 'data'=>$data));
 	}
 	
-	public function actionHottest($channelID = null)
+	public function actionHottest($channel = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('hottest'=>CD_YES));
-    	if ($channelID !== null) {
+    	if ($channel !== null) {
 	        $channel = (int)$channel;
-	        $criteria->addColumnCondition(array('channel_id' => $channelID));
-	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channelID);
+	        $criteria->addColumnCondition(array('channel_id' => $channel));
+	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
@@ -186,14 +186,14 @@ class PostController extends AdminController
 	    $this->render('list', $data);
 	}
 	
-	public function actionRecommend($channelID = null)
+	public function actionRecommend($channel = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('recommend'=>CD_YES));
-    	if ($channelID !== null) {
+    	if ($channel !== null) {
 	        $channel = (int)$channel;
-	        $criteria->addColumnCondition(array('channel_id' => $channelID));
-	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channelID);
+	        $criteria->addColumnCondition(array('channel_id' => $channel));
+	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
@@ -202,14 +202,14 @@ class PostController extends AdminController
 	    $this->render('list', $data);
 	}
 	
-	public function actionHomeshow($channelID = null)
+	public function actionHomeshow($channel = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('homeshow'=>CD_YES));
-    	if ($channelID !== null) {
+    	if ($channel !== null) {
 	        $channel = (int)$channel;
-	        $criteria->addColumnCondition(array('channel_id' => $channelID));
-	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channelID);
+	        $criteria->addColumnCondition(array('channel_id' => $channel));
+	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
@@ -218,14 +218,14 @@ class PostController extends AdminController
 	    $this->render('list', $data);
 	}
 	
-	public function actionIstop($channelID = null)
+	public function actionIstop($channel = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('istop'=>CD_YES));
-    	if ($channelID !== null) {
+    	if ($channel !== null) {
 	        $channel = (int)$channel;
-	        $criteria->addColumnCondition(array('channel_id' => $channelID));
-	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channelID);
+	        $criteria->addColumnCondition(array('channel_id' => $channel));
+	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
