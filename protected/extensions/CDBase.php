@@ -470,6 +470,24 @@ class CDBase
     {
         return aurl('user/index', array('id'=>(int)$uid));
     }
+
+    public static function channels()
+    {
+        return array(CHANNEL_DUANZI, CHANNEL_LENGTU, CHANNEL_GIRL, CHANNEL_VIDEO, CHANNEL_GHOSTSTORY);
+    }
+    
+    public static function channelLabels($channelID = null)
+    {
+        $labels = array(
+            CHANNEL_DUANZI => '挖笑话',
+            CHANNEL_LENGTU => '挖趣图',
+            CHANNEL_GIRL => '挖女神',
+            CHANNEL_VIDEO => '挖短片',
+            CHANNEL_GHOSTSTORY => '挖鬼故事',
+        );
+        
+        return $channelID === null ? $labels : $labels[$channelID];
+    }
 }
 
 

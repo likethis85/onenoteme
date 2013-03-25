@@ -10,12 +10,8 @@
             <td><?php echo $model->titleLink;?></td>
         </tr>
         <tr>
-            <td><?php echo CHtml::activeLabel($model, 'category_id');?></td>
-            <td><?php echo $model->category->name;?></td>
-        </tr>
-        <tr>
-            <td><?php echo CHtml::activeLabel($model, 'topic_id');?></td>
-            <td><?php echo $model->topic->name;?></td>
+            <td><?php echo CHtml::activeLabel($model, 'channel_id');?></td>
+            <td><?php echo $model->channel_id . ' - ' . CDBase::channelLabels($model->channel_id);?></td>
         </tr>
         <tr>
             <td><?php echo CHtml::activeLabel($model, 'source');?></td>
@@ -34,8 +30,8 @@
             <td><?php echo $model->create_ip;?></td>
         </tr>
         <tr>
-            <td><?php echo CHtml::activeLabel($model, 'thumbnail');?></td>
-            <td><?php echo $model->thumbnail;?></td>
+            <td><?php echo CHtml::activeLabel($model, 'thumbnail_pic');?></td>
+            <td><?php echo $model->getThumbnailImage();?></td>
         </tr>
     </tbody>
 </table>
@@ -92,35 +88,6 @@
         <tr>
             <td><?php echo CHtml::activeLabel($model, 'homeshow');?></td>
             <td><?php echo $model->homeshow;?></td>
-        </tr>
-    </tbody>
-</table>
-
-<table class="table table-striped table-bordered post-info">
-    <tbody>
-        <tr>
-            <td><?php echo CHtml::activeLabel($model, 'user_id');?></td>
-            <td><?php echo $model->user_id;?></td>
-        </tr>
-        <tr>
-            <td><?php echo CHtml::activeLabel($model, 'user_name');?></td>
-            <td><?php echo $model->authorName;?></td>
-        </tr>
-        <tr>
-            <td><?php echo CHtml::activeLabel($model, 'contributor_id');?></td>
-            <td><?php echo $model->contributor_id;?></td>
-        </tr>
-        <tr>
-            <td><?php echo CHtml::activeLabel($model, 'contributor');?></td>
-            <td><?php echo $model->contributorLink;?></td>
-        </tr>
-        <tr>
-            <td><?php echo CHtml::activeLabel($model, 'contributor_site');?></td>
-            <td><?php echo $model->contributor_site;?></td>
-        </tr>
-        <tr>
-            <td><?php echo CHtml::activeLabel($model, 'contributor_email');?></td>
-            <td><?php echo $model->contributor_email;?></td>
         </tr>
     </tbody>
 </table>
