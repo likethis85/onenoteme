@@ -54,6 +54,10 @@
             <td><span class="badge "><?php echo $model->down_score;?></span></td>
         </tr>
         <tr>
+            <td><?php echo CHtml::activeLabel($model, 'favorite_count');?></td>
+            <td><span class="badge "><?php echo $model->favorite_count;?></span></td>
+        </tr>
+        <tr>
             <td><?php echo CHtml::activeLabel($model, 'state');?></td>
             <td><?php echo AdminPost::stateLabels($model->state);?></td>
         </tr>
