@@ -100,8 +100,8 @@ class PostController extends AdminController
 	public function actionLatest()
 	{
 	    $criteria = new CDbCriteria();
-	    // 不显示回收站的内容
-	    $criteria->addCondition('t.state != ' . POST_STATE_TRASH);
+	    // 不显示未审核、被拒绝和回收站的内容
+	    $criteria->addInCondition('t.state', array(POST_STATE_ENABLED, POST_STATE_DISABLED));
 	    
 	    $title = '最新文章列表';
 	    $data = AdminPost::fetchList($criteria);
@@ -117,6 +117,24 @@ class PostController extends AdminController
 	    $data = AdminPost::fetchList($criteria);
 	    
 	    $this->adminTitle = '未审核文章列表';
+	    $this->render('list', $data);
+	}
+
+	public function actionReject()
+	{
+	    $criteria = new CDbCriteria();
+	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_REJECTED));
+	    $data = AdminPost::fetchList($criteria);
+	
+	    $this->render('list', $data);
+	}
+	
+	public function actionTrash()
+	{
+	    $criteria = new CDbCriteria();
+	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_TRASH));
+	    $data = AdminPost::fetchList($criteria);
+	
 	    $this->render('list', $data);
 	}
 	
@@ -165,16 +183,6 @@ class PostController extends AdminController
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('istop'=>CD_YES));
-	    $data = AdminPost::fetchList($criteria);
-	     
-	    $this->render('list', $data);
-	}
-	
-	// @todo 回收站，暂时不用
-	public function actionTrash()
-	{
-	    $criteria = new CDbCriteria();
-	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_TRASH));
 	    $data = AdminPost::fetchList($criteria);
 	     
 	    $this->render('list', $data);
