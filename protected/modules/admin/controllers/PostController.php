@@ -15,7 +15,7 @@ class PostController extends AdminController
         );
     }
     
-    protected function channelUrl($channelID)
+    protected function channelUrl($channelIDID)
     {
         return url($this->route, array('channel'=>$channelID));
     }
@@ -107,35 +107,52 @@ class PostController extends AdminController
 	    return $post->save(true, array('summary', 'content'));
 	}
 	
-	public function actionLatest()
+	public function actionLatest($channelID = null)
 	{
 	    $criteria = new CDbCriteria();
 	    // 不显示未审核、被拒绝和回收站的内容
 	    $criteria->addInCondition('t.state', array(POST_STATE_ENABLED, POST_STATE_DISABLED));
+	    if ($channelID !== null) {
+	        $channel = (int)$channel;
+	        $criteria->addColumnCondition(array('channel_id' => $channelID));
+	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channelID);
+	    }
 	    
-	    $title = '最新文章列表';
 	    $data = AdminPost::fetchList($criteria);
 	    
-	    $this->adminTitle = $title;
+	    $this->adminTitle = '最新文章列表' . $channelLabel;
 	    $this->render('list', $data);
 	}
 	
-	public function actionVerify()
+	public function actionVerify($channelID = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_UNVERIFY));
+    	if ($channelID !== null) {
+	        $channel = (int)$channel;
+	        $criteria->addColumnCondition(array('channel_id' => $channelID));
+	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channelID);
+	    }
+	    
 	    $data = AdminPost::fetchList($criteria);
 	    
-	    $this->adminTitle = '未审核文章列表';
+	    $this->adminTitle = '未审核文章列表' . $channelLabel;
 	    $this->render('list', $data);
 	}
 	
-	public function actionTrash()
+	public function actionTrash($channelID = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_TRASH));
+    	if ($channelID !== null) {
+	        $channel = (int)$channel;
+	        $criteria->addColumnCondition(array('channel_id' => $channelID));
+	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channelID);
+	    }
+	    
 	    $data = AdminPost::fetchList($criteria);
 	
+	    $this->adminTitle = '回收站文章列表' . $channelLabel;
 	    $this->render('list', $data);
 	}
 	
@@ -153,39 +170,67 @@ class PostController extends AdminController
         $this->render('search', array('form'=>$form, 'data'=>$data));
 	}
 	
-	public function actionHottest()
+	public function actionHottest($channelID = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('hottest'=>CD_YES));
+    	if ($channelID !== null) {
+	        $channel = (int)$channel;
+	        $criteria->addColumnCondition(array('channel_id' => $channelID));
+	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channelID);
+	    }
+	    
 	    $data = AdminPost::fetchList($criteria);
-	     
+
+	    $this->adminTitle = '热门文章列表' . $channelLabel;
 	    $this->render('list', $data);
 	}
 	
-	public function actionRecommend()
+	public function actionRecommend($channelID = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('recommend'=>CD_YES));
+    	if ($channelID !== null) {
+	        $channel = (int)$channel;
+	        $criteria->addColumnCondition(array('channel_id' => $channelID));
+	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channelID);
+	    }
+	    
 	    $data = AdminPost::fetchList($criteria);
-	     
+
+	    $this->adminTitle = '编辑推荐文章列表' . $channelLabel;
 	    $this->render('list', $data);
 	}
 	
-	public function actionHomeshow()
+	public function actionHomeshow($channelID = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('homeshow'=>CD_YES));
+    	if ($channelID !== null) {
+	        $channel = (int)$channel;
+	        $criteria->addColumnCondition(array('channel_id' => $channelID));
+	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channelID);
+	    }
+	    
 	    $data = AdminPost::fetchList($criteria);
-	     
+
+	    $this->adminTitle = '首页显示文章列表' . $channelLabel;
 	    $this->render('list', $data);
 	}
 	
-	public function actionIstop()
+	public function actionIstop($channelID = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('istop'=>CD_YES));
+    	if ($channelID !== null) {
+	        $channel = (int)$channel;
+	        $criteria->addColumnCondition(array('channel_id' => $channelID));
+	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channelID);
+	    }
+	    
 	    $data = AdminPost::fetchList($criteria);
-	     
+
+	    $this->adminTitle = '置顶文章列表' . $channelLabel;
 	    $this->render('list', $data);
 	}
 	

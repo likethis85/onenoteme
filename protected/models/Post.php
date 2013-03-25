@@ -66,6 +66,8 @@
  * @property string $imageIsLong
  * @property string $lineCount
  * @property string $baiduShareData
+ * @property string $channelLabel
+ * @property string $channelLabel
  */
 class Post extends CActiveRecord
 {
@@ -463,6 +465,11 @@ class Post extends CActiveRecord
             $data['pic'] = $pic;
         
         return json_encode($data);
+    }
+    
+    public function getChannelLabel()
+    {
+        return CDBase::channelLabels((int)$this->channel_id);
     }
     
     public function fetchRemoteImagesBeforeSave()

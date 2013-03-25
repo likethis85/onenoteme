@@ -11,7 +11,7 @@
         </tr>
         <tr>
             <td><?php echo CHtml::activeLabel($model, 'channel_id');?></td>
-            <td><?php echo $model->channel_id . ' - ' . CDBase::channelLabels($model->channel_id);?></td>
+            <td><?php echo $model->channel_id . ' - ' . $model->getChannelLabel();?></td>
         </tr>
         <tr>
             <td><?php echo CHtml::activeLabel($model, 'tags');?></td>

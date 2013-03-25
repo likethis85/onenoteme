@@ -71,7 +71,7 @@
                     <button data-toggle="button" data-loading-text="更新中..." data-error-text="更新出错" data-complete-text="更新完成" class="btn-update-state btn btn-mini">更新</button>
                 </form>
             </td>
-            <td><?php echo l(CDBase::channelLabels($model->channel_id), $this->channelUrl($model->channel_id));?></td>
+            <td><?php echo l($model->getChannelLabel(), $this->channelUrl($model->channel_id));?></td>
             <td class="align-center"><?php echo $model->commentNumsBadgeHtml;?><br /></td>
             <td class="cgray">
                 <?php echo $model->authorName;?><br />
