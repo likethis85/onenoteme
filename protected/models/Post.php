@@ -531,6 +531,17 @@ class Post extends CActiveRecord
         return (int)$count;
     }
     
+    public function trash()
+    {
+        if ($this->getIsNewRecord())
+            throw new CException('this is a new record');
+        else {
+            $this->state = POST_STATE_TRASH;
+            $result = $this->save(true, array('state'));
+            return $result;
+        }
+    }
+    
     protected function beforeSave()
     {
         if ($this->getIsNewRecord()) {

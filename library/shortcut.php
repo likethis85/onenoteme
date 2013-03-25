@@ -138,7 +138,7 @@ function param($name)
  
 /**
  * This is the shortcut to Yii::app()->user.
- * @return CWebUser
+ * @return CDWebUser
  */
 function user()
 {

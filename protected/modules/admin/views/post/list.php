@@ -15,6 +15,8 @@
     <button class="btn btn-small btn-danger" id="batch-trash" data-src="<?php echo url('admin/post/multiTrash');?>">放入回收站</button>
     <?php endif;?>
     <a class="btn btn-small btn-success" href="">刷新</a>
+    <?php echo CHtml::dropDownList('poststate', null, Post::stateLabels());?>
+    
 </div>
 <table class="table table-striped table-bordered beta-list-table table-post-list">
     <thead>

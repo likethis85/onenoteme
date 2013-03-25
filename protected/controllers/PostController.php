@@ -52,7 +52,9 @@ class PostController extends Controller
             $post = Post::model()->findByPk($id);
         else {
             $criteria = new CDbCriteria();
-            $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
+            // 管理员可以查看所有内容
+            if (!user()->getIsAdmin())
+                $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
             $post = Post::model()->cache($duration)->findByPk($id, $criteria);
         }
         if (null === $post)

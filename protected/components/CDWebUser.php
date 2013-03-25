@@ -9,4 +9,9 @@ class CDWebUser extends CWebUser
         
         return $url;
     }
+    
+    public function getIsAdmin()
+    {
+        return $this->checkAccess('enter_admin_system');
+    }
 }
