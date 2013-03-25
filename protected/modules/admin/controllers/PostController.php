@@ -15,11 +15,12 @@ class PostController extends AdminController
         );
     }
     
-    protected function channelUrl($channelID)
+    protected function channelUrl($channelID = null)
     {
         $params = $this->actionParams;
         unset($params['page']);
-        $params['channel'] = $channelID;
+        if ($channelID !== null)
+            $params['channel'] = $channelID;
         return url($this->route, $params);
     }
     

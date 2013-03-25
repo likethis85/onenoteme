@@ -28,6 +28,7 @@
             频道过滤&nbsp;<span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
+            <li><a href="<?php echo $this->channelUrl();?>">所有频道</a>
             <?php foreach (CDBase::channelLabels() as $channelID => $label):?>
             <li><a href="<?php echo $this->channelUrl($channelID);?>"><?php echo $label;?></a></li>
             <?php endforeach;?>
