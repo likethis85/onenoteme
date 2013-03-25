@@ -29,7 +29,7 @@
         </a>
         <ul class="dropdown-menu">
             <?php foreach (CDBase::channelLabels() as $channelID => $label):?>
-            <li><a href="<?php $this->channelUrl($channelID);?>"><?php echo $label;?></a></li>
+            <li><a href="<?php echo $this->channelUrl($channelID);?>"><?php echo $label;?></a></li>
             <?php endforeach;?>
         </ul>
     </div>
