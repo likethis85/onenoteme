@@ -129,6 +129,16 @@ var BetaAdmin = {
 			});
 		});
 	},
+	setMultiRowsState: function(success) {
+		var confirm = window.confirm('您确定要执行此操作？');
+		if (!confirm) return ;
+
+		var jqXhr = BetaAdmin.handleMultiRows(event);
+		jqXhr.done(function(data){
+			if (typeof(success) == 'function')
+				success(data);
+		});
+	},
 	ajaxSetBooleanColumn: function(event) {
 		event.preventDefault();
 		var tthis = $(event.currentTarget);

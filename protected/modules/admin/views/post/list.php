@@ -14,17 +14,17 @@
     <?php else:?>
     <button class="btn btn-small btn-danger" id="batch-trash" data-src="<?php echo url('admin/post/multiTrash');?>">放入回收站</button>
     <?php endif;?>
-    <a class="btn btn-small btn-success" href="">刷新</a>
     <div class="btn-group">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-            状态<span class="caret"></span>
+        <a class="btn btn-small btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
+            更改状态&nbsp;<span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-            <?php foreach (Post::stateLabels() as $state => $label):?>
-            <li><a href="#"><?php echo $label;?></a></li>
+            <?php foreach (AdminPost::stateLabels() as $state => $label):?>
+            <li><a href="javascript:void(0);" class="batch-state" data-src="<?php echo url('admin/post/multiState', array('state'=>$state));?>"><?php echo $label;?></a></li>
             <?php endforeach;?>
         </ul>
     </div>
+    <a class="btn btn-small btn-success" href="">刷新</a>
     
 </div>
 <table class="table table-striped table-bordered beta-list-table table-post-list">
@@ -95,6 +95,12 @@
 $(function(){
 	$(document).on('click', '.set-trash, .set-delete', {confirmText:confirmAlertText}, BetaAdmin.deleteRow);
 	$(document).on('click', '#batch-delete, #batch-trash', {confirmText:confirmAlertText}, BetaAdmin.deleteMultiRows);
+	$(document).on('click', '.batch-state', {confirmText:confirmAlertText}, function(event){
+		event.preventDefault();
+		BetaAdmin.setMultiRowsState(function(data){
+			window.location.reload();
+		});
+	});
 	$(document).on('click', '#batch-recommend, #batch-hottest', BetaAdmin.setMultiRowsMark);
 	$(document).on('click', '#batch-verify', BetaAdmin.verifyMultiRows);
 	$(document).on('click', '#batch-reject', {confirmText:confirmAlertText}, BetaAdmin.rejectMultiPosts);

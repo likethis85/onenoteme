@@ -319,6 +319,36 @@ class PostController extends AdminController
 	
 
 	/**
+	 * 批量设置文章状态
+	 * @param array $ids 文章ID数组
+	 * @param string $callback jsonp回调函数，自动赋值
+	 */
+	public function actionMultiState($state, $callback)
+	{
+	    $state = (int)$state;
+	    $ids = (array)request()->getPost('ids');
+	     
+	    $successIds = $failedIds = array();
+	    $attributes = array('user_id', 'user_name', 'state', 'create_time');
+	    foreach ($ids as $id) {
+	        $model = AdminPost::model()->findByPk($id);
+	        if ($model === null) continue;
+	        
+	        $model->state = $state;
+	        $result = $model->save(true, $attributes);
+	        if ($result)
+	            $successIds[] = $id;
+	        else
+	            $failedIds[] = $id;
+	    }
+	    $data = array(
+    	    'success' => $successIds,
+    	    'failed' => $failedIds,
+	    );
+	    CDBase::jsonp($callback, $data);
+	}
+	
+	/**
 	 * 批量审核文章
 	 * @param array $ids 文章ID数组
 	 * @param string $callback jsonp回调函数，自动赋值
@@ -434,6 +464,7 @@ class PostController extends AdminController
 	    );
 	    CDBase::jsonp($callback, $data);
 	}
+
 
 	private static function updatePostEditor(AdminPost $model)
 	{

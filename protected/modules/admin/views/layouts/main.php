@@ -153,7 +153,7 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
 <?php
 cs()->registerCoreScript('jquery');
 cs()->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END);
-cs()->registerScriptFile(sbu('scripts/beta-admin.js'), CClientScript::POS_END);
+cs()->registerScriptFile(sbu('scripts/cd-admin.js'), CClientScript::POS_END);
 ?>
 
 
