@@ -2,11 +2,16 @@
 
 class PostController extends AdminController
 {
+    public function init()
+    {
+        parent::init();
+    }
+    
     public function filters()
     {
         return array(
-            'ajaxOnly + setVerify, quickUpdate, setDelete, setTrash, multiTrash, multiDelete, multiVerify, multiReject, multiRecommend, multiHottest',
-            'postOnly + setVerify, quickUpdate, setDelete, setTrash, multiTrash,, multiDelete, multiVerify, multiReject, multiRecommend, multiHottest',
+            'ajaxOnly + setVerify, quickUpdate, setDelete, setTrash, multiTrash, multiDelete, multiVerify, multiRecommend, multiHottest',
+            'postOnly + setVerify, quickUpdate, setDelete, setTrash, multiTrash,, multiDelete, multiVerify, multiRecommend, multiHottest',
         );
     }
     
@@ -119,15 +124,6 @@ class PostController extends AdminController
 	    $this->adminTitle = '未审核文章列表';
 	    $this->render('list', $data);
 	}
-
-	public function actionReject()
-	{
-	    $criteria = new CDbCriteria();
-	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_REJECTED));
-	    $data = AdminPost::fetchList($criteria);
-	
-	    $this->render('list', $data);
-	}
 	
 	public function actionTrash()
 	{
@@ -214,13 +210,9 @@ class PostController extends AdminController
 	    if ($model === null)
 	        throw new CHttpException(500);
 	    
-	    $model->state = ($model->state == POST_STATE_NOT_VERIFY) ? POST_STATE_ENABLED : POST_STATE_NOT_VERIFY;
-	    if ($model->state == POST_STATE_ENABLED) {
-	        $model->create_time = $_SERVER['REQUEST_TIME'];
-	        $attributes = array('user_id', 'user_name', 'state', 'create_time');
-	    }
-	    else
-	        $attributes = array('state');
+	    $model->state = POST_STATE_DISABLED;
+        $model->create_time = $_SERVER['REQUEST_TIME'];
+        $attributes = array('user_id', 'user_name', 'state', 'create_time');
 	    
 	    $model = self::updatePostEditor($model);
         $model->save(true, $attributes);
@@ -371,7 +363,7 @@ class PostController extends AdminController
 	        $model = AdminPost::model()->findByPk($id);
 	        if ($model === null) continue;
 	        
-	        $model->state = POST_STATE_ENABLED;
+	        $model->state = POST_STATE_DISABLED;
 	        $model->create_time = $_SERVER['REQUEST_TIME'];
 	        $model = self::updatePostEditor($model);
 	        $result = $model->save(true, $attributes);
@@ -387,33 +379,8 @@ class PostController extends AdminController
 	    CDBase::jsonp($callback, $data);
 	}
 
-	/**
-	 * 批量拒绝文章
-	 * @param array $ids 文章ID数组
-	 * @param string $callback jsonp回调函数，自动赋值
-	 */
-	public function actionMultiReject($callback)
-	{
-	    $ids = (array)request()->getPost('ids');
-	     
-	    $successIds = $failedIds = array();
-	    $attributes = array(
-	        'state' => POST_STATE_REJECTED,
-	    );
-	    foreach ($ids as $id) {
-	        $result = AdminPost::model()->updateByPk($id, $attributes);
-	        if ($result)
-	            $successIds[] = $id;
-	        else
-	            $failedIds[] = $id;
-	    }
-	    $data = array(
-    	    'success' => $successIds,
-    	    'failed' => $failedIds,
-	    );
-	    CDBase::jsonp($callback, $data);
-	}
 	
+
 	/**
 	 * 批量推荐文章
 	 * @param array $ids 文章ID数组

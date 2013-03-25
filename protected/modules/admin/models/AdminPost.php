@@ -32,11 +32,21 @@ class AdminPost extends Post
             POST_STATE_ENABLED => '已上线',
             POST_STATE_DISABLED => '未显示',
             POST_STATE_UNVERIFY => '未审核',
-            POST_STATE_REJECTED => '拒绝',
             POST_STATE_TRASH => '回收站',
         );
         
         return $state === null ? $labels : $labels[$state];
+    }
+    
+    public static function updateStateLabels()
+    {
+        $labels = array(
+            POST_STATE_ENABLED => '上线',
+            POST_STATE_DISABLED => '隐藏',
+            POST_STATE_TRASH => '回收站',
+        );
+        
+        return $labels;
     }
     
     public static function fetchList($criteria = null, $sort = true, $pages = true)
@@ -155,7 +165,6 @@ class AdminPost extends Post
     {
         $classes = array(
             POST_STATE_DISABLED => 'label-inverse',
-            POST_STATE_REJECTED => 'label-important',
             POST_STATE_ENABLED => 'label-success',
             POST_STATE_UNVERIFY => 'label-warning',
             POST_STATE_TRASH => '',
@@ -163,7 +172,6 @@ class AdminPost extends Post
         
         $labels = array(
             POST_STATE_DISABLED => '隐藏',
-            POST_STATE_REJECTED => '推绝',
             POST_STATE_ENABLED => '上线',
             POST_STATE_UNVERIFY => '待审',
             POST_STATE_TRASH => '删除',

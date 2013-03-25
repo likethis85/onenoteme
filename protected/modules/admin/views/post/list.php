@@ -13,7 +13,7 @@
             更改状态&nbsp;<span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-            <?php foreach (AdminPost::stateLabels() as $state => $label):?>
+            <?php foreach (AdminPost::updateStateLabels() as $state => $label):?>
             <li><a href="javascript:void(0);" class="batch-state" data-src="<?php echo url('admin/post/multiState', array('state'=>$state));?>"><?php echo $label;?></a></li>
             <?php endforeach;?>
         </ul>
@@ -66,7 +66,7 @@
                         <?php echo CHtml::activeCheckBox($model, 'disable_comment');?>禁止评论
                     </label>
                     <label class="checkbox">
-                        <?php echo CHtml::activeDropDownList($model, 'state', AdminPost::stateLabels(), array('class'=>'select-mini'));?>
+                        <?php echo CHtml::activeDropDownList($model, 'state', AdminPost::updateStateLabels(), array('class'=>'select-mini'));?>
                     </label>
                     <button data-toggle="button" data-loading-text="更新中..." data-error-text="更新出错" data-complete-text="更新完成" class="btn-update-state btn btn-mini">更新</button>
                 </form>

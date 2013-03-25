@@ -37,7 +37,6 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
                         <li><?php echo l('附件列表', url('admin/upload/list'));?></li>
                         <li class="divider"></li>
                         <li><?php echo l('回收站', url('admin/post/trash'));?></li>
-                        <li><?php echo l('被拒绝', url('admin/post/reject'));?></li>
                     </ul>
                 </li>
                 <li class="dropdown">
