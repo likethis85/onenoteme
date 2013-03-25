@@ -5,15 +5,9 @@
     <?php if (strtolower($this->action->id) == 'verify'):?>
     <button class="btn btn-small btn-primary" id="batch-verify" data-src="<?php echo url('admin/post/multiVerify');?>">通过</button>
     <button class="btn btn-small btn-primary" id="batch-reject" data-src="<?php echo url('admin/post/multiReject');?>">拒绝</button>
-    <?php else:?>
+    <?php elseif (strtolower($this->action->id) != 'trash'):?>
     <button class="btn btn-small btn-primary" id="batch-recommend" data-src="<?php echo url('admin/post/multiRecommend');?>">推荐</button>
     <button class="btn btn-small btn-primary" id="batch-hottest" data-src="<?php echo url('admin/post/multiHottest');?>">热门</button>
-    <?php endif;?>
-    <?php if (strtolower($this->action->id) == 'trash'):?>
-    <button class="btn btn-small btn-danger" id="batch-delete" data-src="<?php echo url('admin/post/multiDelete');?>">永久删除</button>
-    <?php else:?>
-    <button class="btn btn-small btn-danger" id="batch-trash" data-src="<?php echo url('admin/post/multiTrash');?>">放入回收站</button>
-    <?php endif;?>
     <div class="btn-group">
         <a class="btn btn-small btn-danger dropdown-toggle" data-toggle="dropdown" href="#">
             更改状态&nbsp;<span class="caret"></span>
@@ -24,6 +18,12 @@
             <?php endforeach;?>
         </ul>
     </div>
+    <?php endif;?>
+    <?php if (strtolower($this->action->id) == 'trash'):?>
+    <button class="btn btn-small btn-danger" id="batch-delete" data-src="<?php echo url('admin/post/multiDelete');?>">永久删除</button>
+    <?php else:?>
+    <button class="btn btn-small btn-danger" id="batch-trash" data-src="<?php echo url('admin/post/multiTrash');?>">放入回收站</button>
+    <?php endif;?>
     <a class="btn btn-small btn-success" href="">刷新</a>
     
 </div>
