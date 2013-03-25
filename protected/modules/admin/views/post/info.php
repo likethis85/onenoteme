@@ -14,10 +14,6 @@
             <td><?php echo $model->channel_id . ' - ' . CDBase::channelLabels($model->channel_id);?></td>
         </tr>
         <tr>
-            <td><?php echo CHtml::activeLabel($model, 'source');?></td>
-            <td><?php echo $model->sourceLink;?></td>
-        </tr>
-        <tr>
             <td><?php echo CHtml::activeLabel($model, 'tags');?></td>
             <td><?php echo $model->tagText;?></td>
         </tr>
@@ -39,18 +35,6 @@
 <table class="table table-striped table-bordered post-info">
     <tbody>
         <tr>
-            <td><?php echo CHtml::activeLabel($model, 'score');?></td>
-            <td><span class="badge "><?php echo $model->score;?></span></td>
-        </tr>
-        <tr>
-            <td><?php echo CHtml::activeLabel($model, 'score_nums');?></td>
-            <td><span class="badge "><?php echo $model->score_nums;?></span></td>
-        </tr>
-        <tr>
-            <td><?php echo t('avg_score', 'admin');?></td>
-            <td><span class="badge "><?php echo $model->rating;?></span></td>
-        </tr>
-        <tr>
             <td><?php echo CHtml::activeLabel($model, 'comment_nums');?></td>
             <td>
                 <span class="badge "><?php echo $model->comment_nums;?></span>&nbsp;&nbsp;
@@ -58,12 +42,12 @@
             </td>
         </tr>
         <tr>
-            <td><?php echo CHtml::activeLabel($model, 'visit_nums');?></td>
-            <td><span class="badge "><?php echo $model->visit_nums;?></span></td>
+            <td><?php echo CHtml::activeLabel($model, 'view_nums');?></td>
+            <td><span class="badge "><?php echo $model->view_nums;?></span></td>
         </tr>
         <tr>
-            <td><?php echo CHtml::activeLabel($model, 'digg_nums');?></td>
-            <td><span class="badge "><?php echo $model->digg_nums;?></span></td>
+            <td><?php echo CHtml::activeLabel($model, 'up_score');?>/<?php echo CHtml::activeLabel($model, 'down_score');?></td>
+            <td><span class="badge "><?php echo $model->up_score;?>/<?php echo $model->down_score;?></span></td>
         </tr>
         <tr>
             <td><?php echo CHtml::activeLabel($model, 'state');?></td>
