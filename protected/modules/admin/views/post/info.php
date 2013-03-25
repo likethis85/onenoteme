@@ -27,7 +27,7 @@
         </tr>
         <tr>
             <td><?php echo CHtml::activeLabel($model, 'thumbnail_pic');?></td>
-            <td><?php echo $model->getThumbnailImage();?></td>
+            <td><?php echo l($model->getThumbnailImage(), $model->getBmiddlePic(), array('target'=>'_blank'));?></td>
         </tr>
     </tbody>
 </table>
@@ -38,7 +38,7 @@
             <td><?php echo CHtml::activeLabel($model, 'comment_nums');?></td>
             <td>
                 <span class="badge "><?php echo $model->comment_nums;?></span>&nbsp;&nbsp;
-                <?php echo l(t('post_info_view', 'admin'), $model->commentUrl);?>
+                <?php echo l('查看评论', $model->commentUrl);?>
             </td>
         </tr>
         <tr>
@@ -46,12 +46,16 @@
             <td><span class="badge "><?php echo $model->view_nums;?></span></td>
         </tr>
         <tr>
-            <td><?php echo CHtml::activeLabel($model, 'up_score');?>/<?php echo CHtml::activeLabel($model, 'down_score');?></td>
-            <td><span class="badge "><?php echo $model->up_score;?>/<?php echo $model->down_score;?></span></td>
+            <td><?php echo CHtml::activeLabel($model, 'up_score');?></td>
+            <td><span class="badge "><?php echo $model->up_score;?></span></td>
+        </tr>
+        <tr>
+            <td><?php echo CHtml::activeLabel($model, 'down_score');?></td>
+            <td><span class="badge "><?php echo $model->down_score;?></span></td>
         </tr>
         <tr>
             <td><?php echo CHtml::activeLabel($model, 'state');?></td>
-            <td><?php echo $model->state;?></td>
+            <td><?php echo $model->stateLables($model->state);?></td>
         </tr>
         <tr>
             <td><?php echo CHtml::activeLabel($model, 'istop');?></td>
