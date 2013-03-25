@@ -32,6 +32,7 @@
             <th class="item-checkbox align-center">#</th>
             <th class="span1 align-center"><?php echo $sort->link('id');?></th>
             <th class="span6"><?php echo $sort->link('title');?></th>
+            <th class="span1">频道</th>
             <th class="span1 align-center"><?php echo $sort->link('comment_nums');?></th>
             <th class="span2 align-center"><?php echo $sort->link('create_time');?></th>
             <th class="span1 align-center">#</th>
@@ -70,6 +71,7 @@
                     <button data-toggle="button" data-loading-text="更新中..." data-error-text="更新出错" data-complete-text="更新完成" class="btn-update-state btn btn-mini">更新</button>
                 </form>
             </td>
+            <td><?php echo l(CDBase::channelLabels($model->channel_id), $this->channelUrl($model->channel_id));?></td>
             <td class="align-center"><?php echo $model->commentNumsBadgeHtml;?><br /></td>
             <td class="cgray">
                 <?php echo $model->authorName;?><br />

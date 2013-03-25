@@ -15,6 +15,11 @@ class PostController extends AdminController
         );
     }
     
+    protected function channelUrl($channelID)
+    {
+        return url($this->route, array('channel'=>$channelID));
+    }
+    
     public function actionInfo($id)
     {
         $id = (int)$id;
