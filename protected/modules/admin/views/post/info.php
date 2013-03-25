@@ -55,7 +55,7 @@
         </tr>
         <tr>
             <td><?php echo CHtml::activeLabel($model, 'state');?></td>
-            <td><?php echo $model->stateLables($model->state);?></td>
+            <td><?php echo AdminPost::stateLabels($model->state);?></td>
         </tr>
         <tr>
             <td><?php echo CHtml::activeLabel($model, 'istop');?></td>
