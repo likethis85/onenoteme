@@ -97,7 +97,7 @@ $(function(){
 	$(document).on('click', '#batch-delete, #batch-trash', {confirmText:confirmAlertText}, BetaAdmin.deleteMultiRows);
 	$(document).on('click', '.batch-state', {confirmText:confirmAlertText}, function(event){
 		event.preventDefault();
-		BetaAdmin.setMultiRowsState(function(data){
+		BetaAdmin.setMultiRowsState(event, function(data){
 			window.location.reload();
 		});
 	});

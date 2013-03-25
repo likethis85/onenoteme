@@ -129,7 +129,7 @@ var BetaAdmin = {
 			});
 		});
 	},
-	setMultiRowsState: function(success) {
+	setMultiRowsState: function(event, success) {
 		var confirm = window.confirm('您确定要执行此操作？');
 		if (!confirm) return ;
 
