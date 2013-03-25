@@ -19,8 +19,11 @@ class PostController extends AdminController
     {
         $params = $this->actionParams;
         unset($params['page']);
-        if ($channelID !== null)
+        if ($channelID === null)
+            unset($params['channel']);
+        else
             $params['channel'] = $channelID;
+        
         return url($this->route, $params);
     }
     
