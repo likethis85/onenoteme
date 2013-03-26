@@ -21,11 +21,11 @@
     	</div>
         <div class="item-detail">
             <?php if (($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_GHOSTSTORY) && $model->hasTitle):?>
-            <div class="item-title">
-                <?php echo $model->titleLink;?>
-            </div>
+            <div class="item-title"><?php echo $model->titleLink;?></div>
             <?php endif;?>
+            
             <?php if (($model->channel_id == CHANNEL_LENGTU || $model->channel_id == CHANNEL_GIRL) && $model->thumbnail):?>
+            <div class="item-title"><?php echo $model->titleLink;?></div>
             <div class="post-image">
                 <div class="thumb">
                 <?php if ($model->channel_id == CHANNEL_LENGTU): //只有冷图采用缩略图方式 ?>
@@ -60,9 +60,11 @@
                 </div>
                 <?php endif;?>
             </div>
+            
             <?php elseif ($model->channel_id == CHANNEL_VIDEO && $model->videoHtml):?>
             <div class="content-block video-player"><?php echo $model->videoHtml;?></div>
             <?php endif;?>
+            
             <div class="item-content"><?php echo $model->filterSummary;?></div>
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->tagLinks;?></div><?php endif;?>
