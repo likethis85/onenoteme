@@ -7,9 +7,7 @@
         	</div>
 		    <div class="item-title">
 		        <?php if (($post->channel_id == CHANNEL_DUANZI || $post->channel_id == CHANNEL_GHOSTSTORY) && $post->hasTitle):?>
-                <a href="<?php echo $post->url;?>" target="_blank" title="在新窗口中打开">
                     <h1><?php echo h($post->title);?></h1>
-                </a>
                 <?php endif;?>
             </div>
 		    <?php if ($post->tags):?><div class="post-tags">标签：<?php echo $post->tagLinks;?></div><?php endif;?>
