@@ -6,8 +6,7 @@
             	<?php echo $post->getAuthorNameLink();?>
         	</div>
 		    <div class="item-title">
-		        <?php if ($post->channel_id == CHANNEL_DUANZI):echo $post->filterContent;?>
-		        <?php else:?>
+		        <?php if (($post->channel_id == CHANNEL_DUANZI || $post->channel_id == CHANNEL_GHOSTSTORY) && $post->hasTitle):?>
                 <a href="<?php echo $post->url;?>" target="_blank" title="在新窗口中打开">
                     <h1><?php echo h($post->title);?></h1>
                 </a>
@@ -20,9 +19,8 @@
         <?php elseif ($post->bmiddlePic):?>
         <div class="content-block post-picture"><?php echo l(CHtml::image($post->bmiddlePic, $post->filterContent . ', ' . $post->getTagText(',')), aurl('post/bigpic', array('id'=>$post->id)), array('target'=>'_blank', 'title'=>$post->filterContent));?></div>
         <?php endif;?>
-        <?php if ($post->channel_id != CHANNEL_DUANZI):?>
-            <div class="item-content"><?php echo $post->filterContent;?></div>
-            <?php endif;?>
+        <div class="item-content"><?php echo $post->filterContent;?></div>
+        
         <!-- 详情内容下方广告位 -->
         <div class="item-toolbar">
             <ul>
