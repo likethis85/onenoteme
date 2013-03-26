@@ -6,7 +6,7 @@
         	<?php echo $model->getAuthorNameLink();?>
     	</div>
         <div class="item-detail">
-            <?php if (($model->channel_id != CHANNEL_DUANZI && $model->channel_id != CHANNEL_GHOSTSTORY) || $model->hasTitle): // 不是笑话或不是鬼故事或是有单独标题的?>
+            <?php if (($model->channel_id != CHANNEL_DUANZI && $model->channel_id != CHANNEL_GHOSTSTORY) || $model->hasTitle): // 不是笑话并且不是鬼故事或是有单独标题的?>
             <div class="item-title"><?php echo $model->getTitleLink(0, '_self');?></div>
             <?php endif;?>
             
