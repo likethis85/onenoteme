@@ -475,7 +475,7 @@ class Post extends CActiveRecord
 
     public function getHasTitle()
     {
-        return (mb_stripos($this->content, $this->title, app()->charset) === false);
+        return (mb_stripos($this->content, $this->title, 0, app()->charset) === false);
     }
     
     public function fetchRemoteImagesBeforeSave()
