@@ -20,9 +20,11 @@
         	<?php echo $model->getAuthorNameLink();?>
     	</div>
         <div class="item-detail">
+            <?php if (($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_GHOSTSTORY) && $model->hasTitle):?>
             <div class="item-title">
                 <?php echo $model->titleLink;?>
             </div>
+            <?php endif;?>
             <?php if (($model->channel_id == CHANNEL_LENGTU || $model->channel_id == CHANNEL_GIRL) && $model->thumbnail):?>
             <div class="post-image">
                 <div class="thumb">
