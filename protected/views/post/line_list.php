@@ -20,13 +20,12 @@
         	<?php echo $model->getAuthorNameLink();?>
     	</div>
         <div class="item-detail">
-            <?php if (($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_GHOSTSTORY)): // 笑话或鬼故事?>
+            <?php if (($model->channel_id != CHANNEL_DUANZI && $model->channel_id != CHANNEL_GHOSTSTORY) || $model->hasTitle): // 不是笑话或不是鬼故事或是有单独标题的?>
             <?php if ($model->hasTitle):?>
             <div class="item-title"><?php echo $model->titleLink;?></div>
             <?php endif;?>
-            
-            <?php elseif ($model->channel_id == CHANNEL_LENGTU && $model->thumbnail): // 趣图?>
-            <div class="item-title"><?php echo $model->titleLink;?></div>
+            <?php endif;?>
+            <?php if ($model->channel_id == CHANNEL_LENGTU && $model->thumbnail): // 趣图?>
             <div class="post-image">
                 <div class="thumb">
                     <?php if ($model->imageIsLong):?>
@@ -54,7 +53,6 @@
                 </div>
             </div>
             <?php elseif ($model->channel_id == CHANNEL_GIRL && $model->thumbnail): // 女神?>
-            <div class="item-title"><?php echo $model->titleLink;?></div>
             <div class="post-image">
                 <div class="thumb">
                     <a href="<?php echo $model->originalPic;?>" target="_blank" title="点击查看大图">
