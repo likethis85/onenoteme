@@ -1,7 +1,6 @@
 <h1>HTTP <?php echo $code;?></h1>
 <p><strong>服务暂时不可用，请稍候刷新页面！</strong></p>
 <p><span>不想等？可以去：</span></p>
-<p><?php echo $message;?>
 <div class="divider"></div>
 <ul id="error-suggestions">
     <li><a href="http://t.sina.com.cn/ifanr" target="_blank">新浪微博</a></li>
