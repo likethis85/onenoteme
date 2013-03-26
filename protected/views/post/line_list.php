@@ -21,9 +21,7 @@
     	</div>
         <div class="item-detail">
             <div class="item-title">
-                <a href="<?php echo $model->url;?>" target="_blank" title="在新窗口中打开">
-                <?php echo ($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_GHOSTSTORY) ? $model->filterSummary : $model->title;?>
-                </a>
+                <?php echo $model->titleLink;?>
             </div>
             <?php if (($model->channel_id == CHANNEL_LENGTU || $model->channel_id == CHANNEL_GIRL) && $model->thumbnail):?>
             <div class="post-image">
@@ -63,9 +61,7 @@
             <?php elseif ($model->channel_id == CHANNEL_VIDEO && $model->videoHtml):?>
             <div class="content-block video-player"><?php echo $model->videoHtml;?></div>
             <?php endif;?>
-            <?php if ($model->channel_id != CHANNEL_DUANZI && $model->channel_id != CHANNEL_GHOSTSTORY):?>
-            <div class="item-content"><?php echo $model->filterContent;?></div>
-            <?php endif;?>
+            <div class="item-content"><?php echo $model->filterSummary;?></div>
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->tagLinks;?></div><?php endif;?>
         <div class="item-toolbar">

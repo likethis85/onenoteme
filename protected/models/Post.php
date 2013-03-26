@@ -68,6 +68,7 @@
  * @property string $baiduShareData
  * @property string $channelLabel
  * @property string $channelLabel
+ * @property bool $hasTitle
  */
 class Post extends CActiveRecord
 {
@@ -470,6 +471,11 @@ class Post extends CActiveRecord
     public function getChannelLabel()
     {
         return CDBase::channelLabels((int)$this->channel_id);
+    }
+
+    public function getHasTitle()
+    {
+        return (mb_stripos($this->content, $this->title, app()->charset) !== false);
     }
     
     public function fetchRemoteImagesBeforeSave()
