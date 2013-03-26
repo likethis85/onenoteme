@@ -49,7 +49,7 @@ return array(
     'user_required_email_verfiy' => 0,
     'user_required_admin_verfiy' => 0,
     'auto_remote_image_local' => 0,
-    'mobile_post_list_page_count' => 8,
+    'mobile_post_list_page_count' => 12,
 
     'sitename' => '挖段子网',
     'shortdesc' => '每日精品笑话、搞笑趣图、微博漫画、校花女神、搞笑视频',

@@ -6,15 +6,13 @@
         	<?php echo $model->getAuthorNameLink();?>
     	</div>
         <div class="item-detail">
-            <div class="item-title">
-                <a href="<?php echo $model->url;?>" title="阅读全文内容">
-                <?php echo ($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_GHOSTSTORY) ? $model->filterSummary : $model->title;?>
-                </a>
-            </div>
-            <?php if (($model->channel_id == CHANNEL_LENGTU || $model->channel_id == CHANNEL_GIRL) && $model->thumbnail):?>
+            <?php if (($model->channel_id != CHANNEL_DUANZI && $model->channel_id != CHANNEL_GHOSTSTORY) || $model->hasTitle): // 不是笑话或不是鬼故事或是有单独标题的?>
+            <div class="item-title"><?php echo $model->getTitleLink(0, '_self');?></div>
+            <?php endif;?>
+            
+            <?php if ($model->channel_id == CHANNEL_LENGTU && $model->thumbnail): // 趣图?>
             <div class="post-image">
                 <div class="thumb">
-                <?php if ($model->channel_id == CHANNEL_LENGTU): //只有冷图采用缩略图方式 ?>
                     <?php if ($model->imageIsLong):?>
                     <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" target="_blank" title="点击查看详细内容">
                         <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
@@ -29,13 +27,8 @@
                     <?php if ($model->imageIsLong):?>
                     <div class="thumb-pall"></div>
                     <?php endif;?>
-                <?php elseif ($model->channel_id == CHANNEL_GIRL): //福利图直接显示 ?>
-                    <a href="<?php echo $model->url;?>" title="点击查看详细内容">
-                        <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
-                    </a>
-                <?php endif;?>
                 </div>
-                <?php if ($model->channel_id == CHANNEL_LENGTU && $model->imageIsLong):?>
+                <?php if ($model->imageIsLong):?>
                 <div class="thumbnail-more">
                     <div class="lines">
                         <?php for ($i=0; $i<$model->lineCount; $i++):?>
@@ -46,12 +39,22 @@
                 </div>
                 <?php endif;?>
             </div>
+            <?php elseif ($model->channel_id == CHANNEL_GIRL && $model->thumbnail): // 女神?>
+            <div class="post-image">
+                <div class="thumb">
+                    <a href="<?php echo $model->url;?>" title="点击查看详细内容">
+                        <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
+                    </a>
+                </div>
+            </div>
             <?php elseif ($model->channel_id == CHANNEL_VIDEO && $model->videoHtml):?>
             <div class="content-block video-player"><?php echo $model->videoHtml;?></div>
             <?php endif;?>
-            <?php if ($model->channel_id != CHANNEL_DUANZI && $model->channel_id != CHANNEL_GHOSTSTORY):?>
-            <div class="item-content"><?php echo $model->filterContent;?></div>
-            <?php endif;?>
+            
+            <a href="<?php echo $model->url;?>">
+                <div class="item-content"><?php echo $model->filterContent;?></div>
+            </a>
+            
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->tagLinks;?></div><?php endif;?>
         <div class="item-toolbar">

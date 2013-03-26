@@ -21,9 +21,7 @@
     	</div>
         <div class="item-detail">
             <?php if (($model->channel_id != CHANNEL_DUANZI && $model->channel_id != CHANNEL_GHOSTSTORY) || $model->hasTitle): // 不是笑话或不是鬼故事或是有单独标题的?>
-            <?php if ($model->hasTitle):?>
             <div class="item-title"><?php echo $model->titleLink;?></div>
-            <?php endif;?>
             <?php endif;?>
             <?php if ($model->channel_id == CHANNEL_LENGTU && $model->thumbnail): // 趣图?>
             <div class="post-image">
@@ -43,6 +41,7 @@
                     <div class="thumb-pall"></div>
                     <?php endif;?>
                 </div>
+                <?php if ($model->imageIsLong):?>
                 <div class="thumbnail-more">
                     <div class="lines">
                         <?php for ($i=0; $i<$model->lineCount; $i++):?>
@@ -51,6 +50,7 @@
                         <div class="sjx"></div>
                     </div>
                 </div>
+                <?php endif;?>
             </div>
             <?php elseif ($model->channel_id == CHANNEL_GIRL && $model->thumbnail): // 女神?>
             <div class="post-image">
