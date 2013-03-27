@@ -1,8 +1,10 @@
 <div class="panel panel10">
     <div class="beta-post-detail">
+    	<?php if (($model->channel_id != CHANNEL_DUANZI && $model->channel_id != CHANNEL_GHOSTSTORY) || $model->hasTitle):?>
         <div class="beta-title">
-            <h1 class="post-title"><?php echo $post->titleLink;?></h1>
+            <h1 class="post-title"><?php echo h($post->title);?></h1>
         </div>
+        <?php endif;?>
         <p class="post-extra"><?php echo $post->authorName;?>&nbsp;|&nbsp;<?php echo $post->shortTime;?></p>
         <div id="beta-post-content">
             <?php
