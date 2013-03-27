@@ -70,7 +70,7 @@ return array(
 
     'comment_count_page_home' => 20,
     // 评论最少字符
-    'comment_min_length' => 2,
+    'comment_min_length' => 1,
 
     'user_required_email_verfiy' => 0,
     'user_required_admin_verfiy' => 0,
