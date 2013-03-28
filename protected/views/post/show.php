@@ -1,5 +1,5 @@
 <div class="fleft cd-container">
-	<div class="panel panel20 post-detail post-box">
+	<div class="panel panel15 post-detail post-box">
 		<div class="content-block post-content">
 		    <div class="post-author">
         	    <?php echo $post->getAuthorAvatar();?>
