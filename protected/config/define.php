@@ -85,8 +85,8 @@ define('UPYUN_IMAGE_CUSTOM_SEPARATOR', '!');
 define('UPYUN_IMAGE_CUSTOM_SMALL', 'small');
 define('UPYUN_IMAGE_CUSTOM_MIDDLE', 'middle');
 define('UPYUN_IMAGE_CUSTOM_LARGE', 'large');
-define('UPYUN_AVATAR_CUSTOM_LARGE', 'largeavatar');
-define('UPYUN_AVATAR_CUSTOM_SMALL', 'smallavatar');
+define('UPYUN_AVATAR_CUSTOM_LARGE', 'lavatar');
+define('UPYUN_AVATAR_CUSTOM_SMALL', 'savatar');
 
 
 define('WEIBO_APP_KEY', '2981913360');

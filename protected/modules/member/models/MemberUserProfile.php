@@ -27,9 +27,7 @@ class MemberUserProfile extends UserProfile
     
     public function uploadAvatarToUpyun()
     {
-        $upload = $this->avatar_large;
-        
-        $tempName = $upload->avatar_large->getTempName();
+        $tempName = $this->avatar_large->getTempName();
         $extension = CDImage::getImageExtName($tempName);
         $path = CDBase::makeUploadPath('avatars');
         $urlpath = '/' . trim($path['url'], '/') . '/';
