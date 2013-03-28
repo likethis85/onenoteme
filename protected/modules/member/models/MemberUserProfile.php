@@ -13,7 +13,8 @@ class MemberUserProfile extends UserProfile
     public function uploadAvatar()
     {
         $upload = $this->avatar_large;
-        if ($upload === null || $upload->error != UPLOAD_ERR_OK)
+        $tempName = $upload->getTempName();
+        if ($upload === null || $upload->error != UPLOAD_ERR_OK || !file_exists($tempName) || !is_readable($tempName))
             return false;
         
         $upyunEnabled = (bool)param('upyun_enabled');
@@ -37,7 +38,8 @@ class MemberUserProfile extends UserProfile
         try {
             $uploader = app()->getComponent('upyunimg');
             $uploader->setFilename($filename);
-            $uploader->upload($tempName);
+            $fileData = file_get_contents($tempName);
+            $uploader->upload($fileData);
             $this->original_avatar = $uploader->getFileUrl();
             $this->avatar_large = $this->getLargeAvatarUrl();
             $this->image_url = $this->getSmallAvatarUrl();
