@@ -12,7 +12,7 @@ class MemberUserProfile extends UserProfile
 
     public function uploadAvatar()
     {
-        $upload = $this->avatar_large;
+        $upload = $this->original_avatar;
         $tempName = $upload->getTempName();
         if ($upload === null || $upload->error != UPLOAD_ERR_OK || !file_exists($tempName) || !is_readable($tempName))
             return false;
@@ -28,7 +28,7 @@ class MemberUserProfile extends UserProfile
     
     public function uploadAvatarToUpyun()
     {
-        $tempName = $this->avatar_large->getTempName();
+        $tempName = $this->original_avatar->getTempName();
         $extension = CDImage::getImageExtName($tempName);
         $path = CDBase::makeUploadPath('avatars');
         $urlpath = '/' . trim($path['url'], '/') . '/';
@@ -54,9 +54,9 @@ class MemberUserProfile extends UserProfile
     
     public function uploadAvatarToLocal()
     {
-        $upload = $this->avatar_large;
+        $upload = $this->original_avatar;
     
-        $tempName = $upload->avatar_large->getTempName();
+        $tempName = $upload->getTempName();
         $extension = CDImage::getImageExtName($tempName);
         $path = CDBase::makeUploadPath('avatars');
         $file = CDBase::makeUploadFileName($extension);

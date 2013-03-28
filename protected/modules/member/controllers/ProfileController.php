@@ -64,11 +64,11 @@ class ProfileController extends MemberController
     {
         $model = $this->getProfile();
         if (request()->getIsPostRequest() && isset($_POST['MemberUserProfile'])) {
-            $upload = CUploadedFile::getInstance($model, 'avatar_large');
+            $upload = CUploadedFile::getInstance($model, 'original_avatar');
             if ($upload === null)
-                $model->addError('avatar_large', '请选择头像图片');
+                $model->addError('original_avatar', '请选择头像图片');
             else {
-                $model->avatar_large = $upload;
+                $model->original_avatar = $upload;
                 if ($model->uploadAvatar() && $model->save(true, array('original_url', 'avatar_large', 'image_url'))) {
                     user()->setFlash('user_save_result', '头像修改成功');
                     $this->redirect(request()->getUrl());
