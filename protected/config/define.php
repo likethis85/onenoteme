@@ -81,10 +81,10 @@ define('GENDER_UNKOWN', 0);
 define('GENDER_FEMALE', 1);
 define('GENDER_MALE', 2);
 
-define('UPYUN_THUMBNAIL_SEPARATOR', '!');
-define('UPYUN_IMAGE_THUMBNAIL_SMALL', 'small');
-define('UPYUN_IMAGE_THUMBNAIL_MIDDLE', 'middle');
-define('UPYUN_IMAGE_THUMBNAIL_LARGE', 'large');
+define('UPYUN_IMAGE_CUSTOM_SEPARATOR', '!');
+define('UPYUN_IMAGE_CUSTOM_SMALL', 'small');
+define('UPYUN_IMAGE_CUSTOM_MIDDLE', 'middle');
+define('UPYUN_IMAGE_CUSTOM_LARGE', 'large');
 
 
 define('WEIBO_APP_KEY', '2981913360');

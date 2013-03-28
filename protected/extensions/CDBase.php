@@ -360,16 +360,6 @@ class CDBase
         $data = $curl->rawdata();
         $curl->close();
         
-        $isGifAnimate = CDImage::isGifAnimate($data, true);
-        
-        $extension = CDImage::getImageExtName($data);
-        $path = CDBase::makeUploadPath('pics');
-        $file = CDBase::makeUploadFileName($extension);
-        $thumbnailFile = 'thumbnail_' . $file;
-        $thumbnailFileName = $path['path'] . $thumbnailFile;
-        $bigFile = 'original_' . $file;
-        $bigFileName = $path['path'] . $bigFile;
-        
         $im = new CDImage();
         $im->load($data);
     
@@ -378,33 +368,26 @@ class CDBase
         else
             $im->resizeToWidth($thumbWidth);
         $im->crop($thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
-//             ->saveAsJpeg($thumbnailFileName);
-        $thumbnailData = $im->outputRaw();
-        $thumbnail['width'] = $im->width();
-        $thumbnail['height'] = $im->height();
-        $thumbnail['url'] = fbu($path['url'] . $im->filename());
 
-        if ($isGifAnimate) {
-            $gifFile = 'gif_' . $file;
-            $gifFileName = $path['path'] . $gifFile;
-            $result = @file_put_contents($gifFileName, $data);
-            if ($result) {
-                $im->revert();
-                $width = $im->width();
-                $height = $im->height();
-                $gifUrl = fbu($path['url'] . $gifFile);
-                $middle['url'] = $gifUrl;
-                $middle['width'] = $width;
-                $middle['height'] = $height;
-                $original['url'] = $gifUrl;
-                $original['width'] = $width;
-                $original['height'] = $height;
-            }
+        $extension = CDImage::getImageExtName($data);
+        $uploader = app()->getComponent('upyunimg');
+        try {
+            $result = array();
+            $thumbnailData = $im->outputRaw();
+            $uploader->autoFilename('pics', $extension, 'thumbnail');
+            $result = $uploader->upload($thumbnailData);
+            $thumbnail['width'] = (int)$result['x-upyun-width'];
+            $thumbnail['height'] = (int)$result['x-upyun-height'];
+            $thumbnailPath = $uploader->filename;
+            $thumbnail['url'] = fbu($thumbnailPath);
         }
-        else {
+        catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+        
+        try {
+            $result = array();
             $im->revert();
-            if ($im->width() > IMAGE_MIDDLE_WIDTH)
-                $im->resizeToWidth(IMAGE_MIDDLE_WIDTH);
             
             $text = '挖段子网';
             $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
@@ -414,22 +397,28 @@ class CDBase
                 $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
             }
             
-            $middle['url'] = fbu($path['url'] . $im->filename());
-            $middle['width'] = $im->width();
-            $middle['height'] = $im->height();
-             
-            $im->revert();
-            if ($im->width() > IMAGE_WATER_SIZE) {
-                $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
-                $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
-            }
-            $im->saveAsJpeg($bigFileName, 100);
-            $original['url'] = fbu($path['url'] . $im->filename());
-            $original['width'] = $im->width();
-            $original['height'] = $im->height();
+            $originalData = $im->outputRaw();
+            $uploader->autoFilename('pics', $extension, 'original');
+            $result = $uploader->upload($originalData);
+            $original['width'] = (int)$result['x-upyun-width'];
+            $original['height'] = (int)$result['x-upyun-height'];
+            $original['url'] = fbu($uploader->filename);
         }
-        unset($data, $curl);
-        $images = array($thumbnail, $middle, $original, (int)$isGifAnimate);
+        catch (Exception $e) {
+            $uploader->delete($thumbnailPath);
+            throw new Exception($e->getMessage());
+        }
+        
+        $im->revert();
+        if ($im->width() > IMAGE_MIDDLE_WIDTH)
+            $im->resizeToWidth(IMAGE_MIDDLE_WIDTH);
+        
+        $middle['url'] = $original['url'] . UPYUN_IMAGE_CUSTOM_SEPARATOR . UPYUN_IMAGE_CUSTOM_MIDDLE;
+        $middle['width'] = $im->width();
+        $middle['height'] = $im->height();
+        
+        unset($data, $curl, $im);
+        $images = array($thumbnail, $middle, $original, $uploader->animatedGifImage());
         
         return $images;
     }
@@ -529,7 +518,7 @@ class CDBase
             $original['height'] = $im->height();
         }
         unset($data, $curl);
-        $images = array($thumbnail, $middle, $original, (int)$isGifAnimate);
+        $images = array($thumbnail, $middle, $original, $isGifAnimate);
         
         return $images;
     }

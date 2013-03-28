@@ -34,6 +34,7 @@ class CDUpyunUploader extends CDUploader
     
     public function autoFilename($prefixPath = '', $extension = '', $prefix = '')
     {
+        $this->setFilename(null);
         $path = empty($prefixPath) ? '' : ('/' . trim($prefixPath, '/'));
         $path .= date('/Y/m/d/');
         
@@ -42,7 +43,7 @@ class CDUpyunUploader extends CDUploader
         if ($prefix)
             $filename = $prefix . '_' . $filename;
         
-        $this->_filename = $path . $filename;
+        $this->setFilename($path . $filename);
         return $this;
     }
     
@@ -54,7 +55,7 @@ class CDUpyunUploader extends CDUploader
     
     public function setFilename($filename)
     {
-        $this->_filename = $filename;
+        $this->setFilename($filename);
         return $this;
     }
     
@@ -65,8 +66,22 @@ class CDUpyunUploader extends CDUploader
     
     public function upload($file, $opts = null)
     {
+        if (empty($file))
+            throw new Exception('file path is requried.');
+        
         $filename = '/' . ltrim($this->_filename, '/');
         return $this->_client->writeFile($filename, $file, $this->autoMkdir, $opts);
+    }
+    
+    public function delete($path)
+    {
+        return $this->_client->delete($path);
+    }
+    
+    public function revert()
+    {
+        $this->setFilename(null);
+        return $this;
     }
     
     public function imageInfo($key)
