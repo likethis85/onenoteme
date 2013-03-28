@@ -152,6 +152,7 @@ return array(
             'bucket' => 'wdzimage',
             'username' => 'cdcchen',
             'password' => 'cdc790406',
+            'domain' => $params['upyunUploadBaseUrl'],
         ),
     ),
     

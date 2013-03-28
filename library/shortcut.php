@@ -273,7 +273,22 @@ function dp($path = null)
     return $path ?  $dp . $path : $dp;
 }
 
+/**
+ * 此函数返回附件地址的BaseUrl
+ * @param string $url 附件文件相对url地址
+ * @return string
+ */
+function upyunFbu($url = null)
+{
+    static $uploadBaseUrl = null;
+    if ($uploadBaseUrl === null)
+        $uploadBaseUrl = rtrim(param('uploadBaseUrl'), '/') . '/';
 
+    if (empty($url))
+        return $uploadBaseUrl;
+    else
+        return (stripos($url, 'http://') === 0) ? $url : $uploadBaseUrl . ltrim($url, '/');
+}
 
 
 

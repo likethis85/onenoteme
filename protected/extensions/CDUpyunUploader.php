@@ -5,6 +5,7 @@ class CDUpyunUploader extends CDUploader
     public $username;
     public $password;
     public $bucket;
+    public $domain;
     public $autoMkdir = true;
     public $imageBucket = true;
     public $timeout = 30;
@@ -62,6 +63,11 @@ class CDUpyunUploader extends CDUploader
     public function getFilename()
     {
         return $this->_filename;
+    }
+    
+    public function getFileUrl()
+    {
+        return rtrim($this->domain, '/') . '/' . ltrim($this->_filename, '/');
     }
     
     public function upload($file, $opts = null)

@@ -384,7 +384,7 @@ class CDBase
             $thumbnail['width'] = (int)$result['x-upyun-width'];
             $thumbnail['height'] = (int)$result['x-upyun-height'];
             $thumbnailPath = $uploader->filename;
-            $thumbnail['url'] = fbu($thumbnailPath);
+            $thumbnail['url'] = $uploader->getFileUrl();
         }
         catch (Exception $e) {
             throw new Exception($e->getMessage());
@@ -407,7 +407,7 @@ class CDBase
             $result = $uploader->upload($originalData);
             $original['width'] = (int)$result['x-upyun-width'];
             $original['height'] = (int)$result['x-upyun-height'];
-            $original['url'] = fbu($uploader->filename);
+            $original['url'] = $uploader->getFileUrl();
         }
         catch (Exception $e) {
             $uploader->delete($thumbnailPath);
