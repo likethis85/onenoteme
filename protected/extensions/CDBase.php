@@ -370,11 +370,16 @@ class CDBase
         $im->crop($thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
 
         $extension = CDImage::getImageExtName($data);
+        $path = CDBase::makeUploadPath('pics');
+        $urlpath = '/' . trim($path['path'], '/') . '/';
+        $file = CDBase::makeUploadFileName($extension);
+        $thumbnailFilename = $urlpath . 'thumbnail_' . $file;
+        $originalFilename = $urlpath . 'original_' . $file;
         $uploader = app()->getComponent('upyunimg');
         try {
             $result = array();
             $thumbnailData = $im->outputRaw();
-            $uploader->autoFilename('pics', $extension, 'thumbnail');
+            $uploader->setFilename($thumbnailFilename);
             $result = $uploader->upload($thumbnailData);
             $thumbnail['width'] = (int)$result['x-upyun-width'];
             $thumbnail['height'] = (int)$result['x-upyun-height'];
@@ -398,7 +403,7 @@ class CDBase
             }
             
             $originalData = $im->outputRaw();
-            $uploader->autoFilename('pics', $extension, 'original');
+            $uploader->setFilename($originalFilename);
             $result = $uploader->upload($originalData);
             $original['width'] = (int)$result['x-upyun-width'];
             $original['height'] = (int)$result['x-upyun-height'];
