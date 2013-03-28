@@ -15,11 +15,11 @@
         </div>
     </div>
 </div>
-<div class="control-group <?php if($model->hasErrors('avatar_large')) echo 'error';?>">
+<div class="control-group <?php if($model->hasErrors('original_avatar')) echo 'error';?>">
     <label class="control-label">上传新头像</label>
     <div class="controls">
-        <?php echo CHtml::activeFileField($model, 'avatar_large');?>
-        <?php if($model->hasErrors('avatar_large')):?><p class="help-block"><?php echo $model->getError('avatar_large');?></p><?php endif;?>
+        <?php echo CHtml::activeFileField($model, 'original_avatar');?>
+        <?php if($model->hasErrors('original_avatar')):?><p class="help-block"><?php echo $model->getError('original_avatar');?></p><?php endif;?>
     </div>
 </div>
 <div class="form-actions">
