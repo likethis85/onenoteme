@@ -384,7 +384,7 @@ class CDBase
         catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
-        return $thumbnail;
+        
         try {
             $result = array();
             $im->revert();

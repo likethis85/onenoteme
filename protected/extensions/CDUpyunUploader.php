@@ -55,7 +55,7 @@ class CDUpyunUploader extends CDUploader
     
     public function setFilename($filename)
     {
-        $this->setFilename($filename);
+        $this->_filename = $filename;
         return $this;
     }
     
