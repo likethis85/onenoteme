@@ -13,6 +13,7 @@
  * @property string $website
  * @property string $image_url
  * @property string $avatar_large
+ * @property string $original_avatar
  * @property integer $weibo_uid
  * @property integer $qqt_uid
  *
@@ -69,7 +70,7 @@ class UserProfile extends CActiveRecord
 			array('user_id, province, city', 'numerical', 'integerOnly'=>true),
 			array('location', 'length', 'max'=>100),
 			array('weibo_uid, qqt_uid', 'length', 'max'=>50),
-			array('description, website, image_url, avatar_large', 'length', 'max'=>250),
+			array('description, website, image_url, avatar_large, original_avatar', 'length', 'max'=>250),
 	        array('gender', 'in', 'range'=>self::genders()),
 			array('website', 'url'),
 			array('description', 'safe'),
@@ -103,6 +104,7 @@ class UserProfile extends CActiveRecord
 			'avatar_large' => '头像大图',
 		    'weibo_uid' => '新浪微博UID',
 		    'qqt_uid' => '腾讯微博UID',
+	        'original_avatar' => '原始头像',
 		);
 	}
 	
@@ -119,30 +121,21 @@ class UserProfile extends CActiveRecord
 	public function getSmallAvatarUrl()
 	{
 	    $url = sbu('images/default_avatar.png');
-	    if (empty($this->image_url))
+	    if (empty($this->original_avatar) || stripos($this->original_avatar, 'http://') !== 0)
 	        return $url;
 	    
-	    $pos = stripos($this->image_url, 'http://');
-	    if ($pos === 0)
-	        $url = $this->image_url;
-	    elseif ($pos === false)
-	        $url = fbu($this->image_url);
-	    
+	    $url = $this->original_avatar . UPYUN_IMAGE_CUSTOM_SEPARATOR . UPYUN_AVATAR_CUSTOM_SMALL;
 	    return $url;
 	}
 
 	public function getLargeAvatarUrl()
 	{
-	    $url = '';
-	    if (empty($this->avatar_large))
+	    $url = ''; // @todo 此处少一个默认图片
+	    $url = sbu('images/default_avatar.png');
+	    if (empty($this->original_avatar) || stripos($this->original_avatar, 'http://') !== 0)
 	        return $url;
 	    
-	    $pos = stripos($this->avatar_large, 'http://');
-	    if ($pos === 0)
-	        $url = $this->avatar_large;
-	    elseif ($pos === false)
-	        $url = fbu($this->avatar_large);
-	    
+	    $url = $this->original_avatar . UPYUN_IMAGE_CUSTOM_SEPARATOR . UPYUN_AVATAR_CUSTOM_LARGE;
 	    return $url;
 	}
 

@@ -92,6 +92,12 @@ return array(
     'wdz_weixin_account_id' => 'gh_9261dce78e9f',
 
     'cache_adcodes_id' => 'cd_adcodes_id_%s',
+        
+    /*
+     * 用户中心相关配置
+    */
+    'large_avatar_size' => 180,
+    'small_avatar_size' => 50,
 );
 
 
