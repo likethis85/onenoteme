@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-body {background-color:#ECE5D8; color:#503E2C;}
+body {background-color:#ECE5D8; color:#503E2C; font-family:12px/1.8 "Hiragino Sans GB","Microsoft Yahei","Helvetica Neue",Helvetica,Arial,Sans-serif;}
 a {color:#9b8878; text-decoration:none; cursor:pointer;}
 a:hover {color:#D14836; text-decoration:none;}
 
