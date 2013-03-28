@@ -60,6 +60,7 @@ class MemberUserProfile extends UserProfile
         $extension = CDImage::getImageExtName($tempName);
         $path = CDBase::makeUploadPath('avatars');
         $file = CDBase::makeUploadFileName($extension);
+        $originalFile = $path['path'] . 'original_' . $file;
         $largeFile = $path['path'] . 'large_' . $file;
         $smallFile = $path['path'] . 'small_' . $file;
     
@@ -67,6 +68,9 @@ class MemberUserProfile extends UserProfile
         $im = new CDImage($data);
         unset($data);
     
+        $im->saveAsJpeg($originalFile);
+        $this->original_avatar = $path['url'] . $im->filename();
+        
         $largeSize = param('large_avatar_size');
         $im->resize($largeSize, $largeSize);
         $im->saveAsJpeg($largeFile);
@@ -80,3 +84,5 @@ class MemberUserProfile extends UserProfile
         return true;
     }
 }
+
+

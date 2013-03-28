@@ -69,7 +69,7 @@ class ProfileController extends MemberController
                 $model->addError('avatar_large', '请选择头像图片');
             else {
                 $model->avatar_large = $upload;
-                if ($model->uploadAvatar() && $model->save(true, array('avatar_large', 'image_url'))) {
+                if ($model->uploadAvatar() && $model->save(true, array('original_url', 'avatar_large', 'image_url'))) {
                     user()->setFlash('user_save_result', '头像修改成功');
                     $this->redirect(request()->getUrl());
                 }
