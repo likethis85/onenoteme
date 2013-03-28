@@ -501,7 +501,7 @@ class Post extends CActiveRecord
                 $this->original_pic = $images[2]['url'];
                 $this->original_width = $images[2]['width'];
                 $this->original_height = $images[2]['height'];
-                $this->gif_animation = $images[3];
+                $this->gif_animation = (int)$images[3];
                 return true;
             }
             else

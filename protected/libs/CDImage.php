@@ -778,13 +778,13 @@ class CDImage
         return $imagetype;
     }
     
-    public static function getImageExtName($file)
+    public static function getImageExtName($file, $include_dot = true)
     {
         $imagetype = self::getImageType($file);
         
         $extension = '';
         if ($imagetype != IMAGETYPE_UNKNOWN)
-            $extension = image_type_to_extension($imagetype);
+            $extension = image_type_to_extension($imagetype, $include_dot);
         
         return $extension;
     }

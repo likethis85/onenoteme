@@ -173,7 +173,7 @@ class CDBase
         $extension = strtolower($extension);
         $filename = date('YmdHis_', $_SERVER['REQUEST_TIME'])
             . uniqid()
-            . ($extension ? '.' . $extension : '');
+            . ($extension ? $extension : '');
         
         if (strlen($prefix) > 0)
             $filename = $prefix . '_' . $filename;
@@ -371,7 +371,7 @@ class CDBase
 
         $extension = CDImage::getImageExtName($data);
         $path = CDBase::makeUploadPath('pics');
-        $urlpath = '/' . trim($path['path'], '/') . '/';
+        $urlpath = '/' . trim($path['url'], '/') . '/';
         $file = CDBase::makeUploadFileName($extension);
         $thumbnailFilename = $urlpath . 'thumbnail_' . $file;
         $originalFilename = $urlpath . 'original_' . $file;
