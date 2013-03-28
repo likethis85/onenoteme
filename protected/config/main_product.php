@@ -149,7 +149,7 @@ return array(
             'class' => 'application.extensions.CDUpyunUploader',
             'imageBucket' => true,
             'endpoint' => 'v2.api.upyun.com',
-            'bucket' => 'waduanzi',
+            'bucket' => 'wdzimage',
             'username' => 'cdcchen',
             'password' => 'cdc790406',
         ),

@@ -333,93 +333,203 @@ class CDBase
     public static function saveRemoteImages($url, $thumbWidth, $thumbHeight, $cropFromTop = false, $cropFromLeft = false)
     {
         $url = strip_tags(trim($url));
-        
         $images = array();
-        if (!empty($url)) {
-            set_time_limit(0);
-            
-            $curl = new CDCurl();
-            $curl->get($url);
-            $errno = $curl->errno();
-            if ($errno != 0)
-                throw new Exception($curl->error(), $errno);
-            
-            $data = $curl->rawdata();
-            $curl->close();
-            
-            $isGifAnimate = CDImage::isGifAnimate($data, true);
-            
-            $path = CDBase::makeUploadPath('pics');
-            $info = parse_url($url);
-            $file = CDBase::makeUploadFileName();
-            $thumbnailFile = 'thumbnail_' . $file;
-            $thumbnailFileName = $path['path'] . $thumbnailFile;
-            if ($isGifAnimate) $file .= '.gif';
-            $middleFileName = $path['path'] . 'bmiddle_' . $file;
-            $bigFile = 'original_' . $file;
-            $bigFileName = $path['path'] . $bigFile;
-            
-            $im = new CDImage();
-            $im->load($data);
+        if (empty($url) || filter_var($url, FILTER_VALIDATE_URL) === false)
+            return $images;
         
-            if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
-                $im->resizeToHeight($thumbHeight);
-            else
-                $im->resizeToWidth($thumbWidth);
-            $im->crop($thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft)
-                ->saveAsJpeg($thumbnailFileName);
-            $thumbnail['width'] = $im->width();
-            $thumbnail['height'] = $im->height();
-            $thumbnail['url'] = fbu($path['url'] . $im->filename());
+        $upyunEnabled = (bool)param('upyun_enabled');
+        if ($upyunEnabled)
+            $images = self::saveRemoteImagesToUpyun($url, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
+        else
+            $images = self::saveRemoteImagesToLocal($url, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
+        
+        return $images;
+    }
+    
+    public static function saveRemoteImagesToUpyun($url, $thumbWidth, $thumbHeight, $cropFromTop = false, $cropFromLeft = false)
+    {
+        $images = array();
+        set_time_limit(0);
+        
+        $curl = new CDCurl();
+        $curl->get($url);
+        $errno = $curl->errno();
+        if ($errno != 0)
+            throw new Exception($curl->error(), $errno);
+        
+        $data = $curl->rawdata();
+        $curl->close();
+        
+        $isGifAnimate = CDImage::isGifAnimate($data, true);
+        
+        $extension = CDImage::getImageExtName($data);
+        $path = CDBase::makeUploadPath('pics');
+        $file = CDBase::makeUploadFileName($extension);
+        $thumbnailFile = 'thumbnail_' . $file;
+        $thumbnailFileName = $path['path'] . $thumbnailFile;
+        $bigFile = 'original_' . $file;
+        $bigFileName = $path['path'] . $bigFile;
+        
+        $im = new CDImage();
+        $im->load($data);
+    
+        if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
+            $im->resizeToHeight($thumbHeight);
+        else
+            $im->resizeToWidth($thumbWidth);
+        $im->crop($thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
+//             ->saveAsJpeg($thumbnailFileName);
+        $thumbnailData = $im->outputRaw();
+        $thumbnail['width'] = $im->width();
+        $thumbnail['height'] = $im->height();
+        $thumbnail['url'] = fbu($path['url'] . $im->filename());
 
-            if ($isGifAnimate) {
-                $gifFile = 'gif_' . $file;
-                $gifFileName = $path['path'] . $gifFile;
-                $result = @file_put_contents($gifFileName, $data);
-                if ($result) {
-                    $im->revert();
-                    $width = $im->width();
-                    $height = $im->height();
-                    $gifUrl = fbu($path['url'] . $gifFile);
-                    $middle['url'] = $gifUrl;
-                    $middle['width'] = $width;
-                    $middle['height'] = $height;
-                    $original['url'] = $gifUrl;
-                    $original['width'] = $width;
-                    $original['height'] = $height;
-                }
-            }
-            else {
+        if ($isGifAnimate) {
+            $gifFile = 'gif_' . $file;
+            $gifFileName = $path['path'] . $gifFile;
+            $result = @file_put_contents($gifFileName, $data);
+            if ($result) {
                 $im->revert();
-                if ($im->width() > IMAGE_MIDDLE_WIDTH)
-                    $im->resizeToWidth(IMAGE_MIDDLE_WIDTH);
-                
-                $text = '挖段子网';
-                $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
-                $color = array(200, 200, 200);
-                if ($im->width() > IMAGE_WATER_SIZE) {
-                    $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
-                    $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
-                }
-                
-                $im->saveAsJpeg($middleFileName, 75);
-                $middle['url'] = fbu($path['url'] . $im->filename());
-                $middle['width'] = $im->width();
-                $middle['height'] = $im->height();
-                 
-                $im->revert();
-                if ($im->width() > IMAGE_WATER_SIZE) {
-                    $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
-                    $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
-                }
-                $im->saveAsJpeg($bigFileName, 100);
-                $original['url'] = fbu($path['url'] . $im->filename());
-                $original['width'] = $im->width();
-                $original['height'] = $im->height();
+                $width = $im->width();
+                $height = $im->height();
+                $gifUrl = fbu($path['url'] . $gifFile);
+                $middle['url'] = $gifUrl;
+                $middle['width'] = $width;
+                $middle['height'] = $height;
+                $original['url'] = $gifUrl;
+                $original['width'] = $width;
+                $original['height'] = $height;
             }
-            unset($data, $curl);
-            $images = array($thumbnail, $middle, $original, (int)$isGifAnimate);
         }
+        else {
+            $im->revert();
+            if ($im->width() > IMAGE_MIDDLE_WIDTH)
+                $im->resizeToWidth(IMAGE_MIDDLE_WIDTH);
+            
+            $text = '挖段子网';
+            $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
+            $color = array(200, 200, 200);
+            if ($im->width() > IMAGE_WATER_SIZE) {
+                $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
+                $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+            }
+            
+            $middle['url'] = fbu($path['url'] . $im->filename());
+            $middle['width'] = $im->width();
+            $middle['height'] = $im->height();
+             
+            $im->revert();
+            if ($im->width() > IMAGE_WATER_SIZE) {
+                $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
+                $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+            }
+            $im->saveAsJpeg($bigFileName, 100);
+            $original['url'] = fbu($path['url'] . $im->filename());
+            $original['width'] = $im->width();
+            $original['height'] = $im->height();
+        }
+        unset($data, $curl);
+        $images = array($thumbnail, $middle, $original, (int)$isGifAnimate);
+        
+        return $images;
+    }
+
+    /**
+     * 将远程图片保存在本地服务器
+     * @param string $url
+     * @param integer $thumbWidth
+     * @param integer $thumbHeight
+     * @param boolean $cropFromTop
+     * @param boolean $cropFromLeft
+     * @throws Exception
+     * @return multitype:array boolean Ambigous <array, boolean>
+     */
+    public static function saveRemoteImagesToLocal($url, $thumbWidth, $thumbHeight, $cropFromTop = false, $cropFromLeft = false)
+    {
+        $images = array();
+        set_time_limit(0);
+        
+        $curl = new CDCurl();
+        $curl->get($url);
+        $errno = $curl->errno();
+        if ($errno != 0)
+            throw new Exception($curl->error(), $errno);
+        
+        $data = $curl->rawdata();
+        $curl->close();
+        
+        $isGifAnimate = CDImage::isGifAnimate($data, true);
+        
+        $path = CDBase::makeUploadPath('pics');
+        $info = parse_url($url);
+        $file = CDBase::makeUploadFileName();
+        $thumbnailFile = 'thumbnail_' . $file;
+        $thumbnailFileName = $path['path'] . $thumbnailFile;
+        if ($isGifAnimate) $file .= '.gif';
+        $middleFileName = $path['path'] . 'bmiddle_' . $file;
+        $bigFile = 'original_' . $file;
+        $bigFileName = $path['path'] . $bigFile;
+        
+        $im = new CDImage();
+        $im->load($data);
+    
+        if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
+            $im->resizeToHeight($thumbHeight);
+        else
+            $im->resizeToWidth($thumbWidth);
+        $im->crop($thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft)
+            ->saveAsJpeg($thumbnailFileName);
+        $thumbnail['width'] = $im->width();
+        $thumbnail['height'] = $im->height();
+        $thumbnail['url'] = fbu($path['url'] . $im->filename());
+
+        if ($isGifAnimate) {
+            $gifFile = 'gif_' . $file;
+            $gifFileName = $path['path'] . $gifFile;
+            $result = @file_put_contents($gifFileName, $data);
+            if ($result) {
+                $im->revert();
+                $width = $im->width();
+                $height = $im->height();
+                $gifUrl = fbu($path['url'] . $gifFile);
+                $middle['url'] = $gifUrl;
+                $middle['width'] = $width;
+                $middle['height'] = $height;
+                $original['url'] = $gifUrl;
+                $original['width'] = $width;
+                $original['height'] = $height;
+            }
+        }
+        else {
+            $im->revert();
+            if ($im->width() > IMAGE_MIDDLE_WIDTH)
+                $im->resizeToWidth(IMAGE_MIDDLE_WIDTH);
+            
+            $text = '挖段子网';
+            $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
+            $color = array(200, 200, 200);
+            if ($im->width() > IMAGE_WATER_SIZE) {
+                $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
+                $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+            }
+            
+            $im->saveAsJpeg($middleFileName, 75);
+            $middle['url'] = fbu($path['url'] . $im->filename());
+            $middle['width'] = $im->width();
+            $middle['height'] = $im->height();
+             
+            $im->revert();
+            if ($im->width() > IMAGE_WATER_SIZE) {
+                $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
+                $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+            }
+            $im->saveAsJpeg($bigFileName, 100);
+            $original['url'] = fbu($path['url'] . $im->filename());
+            $original['width'] = $im->width();
+            $original['height'] = $im->height();
+        }
+        unset($data, $curl);
+        $images = array($thumbnail, $middle, $original, (int)$isGifAnimate);
         
         return $images;
     }
