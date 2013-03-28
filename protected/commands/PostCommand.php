@@ -173,8 +173,8 @@ class PostCommand extends CConsoleCommand
             $im->load($data);
             unset($data);
             
-            if ($im->width() > IMAGE_BMIDDLE_MAX_WIDTH)
-                $im->resizeToWidth(IMAGE_BMIDDLE_MAX_WIDTH);
+            if ($im->width() > IMAGE_MIDDLE_WIDTH)
+                $im->resizeToWidth(IMAGE_MIDDLE_WIDTH);
             $im->saveAsJpeg($thumbnailFileName, 75);
             $model->bmiddle_width = $im->width();
             $model->bmiddle_height = $im->height();

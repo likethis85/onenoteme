@@ -391,8 +391,8 @@ class CDBase
             }
             else {
                 $im->revert();
-                if ($im->width() > IMAGE_BMIDDLE_MAX_WIDTH)
-                    $im->resizeToWidth(IMAGE_BMIDDLE_MAX_WIDTH);
+                if ($im->width() > IMAGE_MIDDLE_WIDTH)
+                    $im->resizeToWidth(IMAGE_MIDDLE_WIDTH);
                 
                 $text = '挖段子网';
                 $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
