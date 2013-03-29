@@ -81,7 +81,7 @@ var postPages = {
         +       '</div>'
         +       '<label for="onchannel">频道</label>'
         +       '<div>'
-        +           '<select name="onchannel" id="onchannel"><option value="20" selected="selected">挖冷图</option><option value="30">挖福利</option><option value="50">挖热点</option></select>'
+        +           '<select name="onchannel" id="onchannel"><option value="20" selected="selected">挖冷图</option><option value="30">挖福利</option>'
         +       '</div>'
         +           '<input type="hidden" name="oncategory" value="20" />'
         +   '</div>'
