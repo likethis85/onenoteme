@@ -1,4 +1,4 @@
-if (window.top)
+if (window.top.location.href != window.location.href)
 	window.top.location.href = window.location.href;
 
 var CDMobile = {};
