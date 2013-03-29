@@ -54,10 +54,6 @@ class SiteController extends Controller
         else
             $models = Post::model()->findAll($criteria);
         
-        $this->pageTitle = param('sitename') . ' - ' . param('shortdesc');
-        $this->setKeywords(param('home_index_keywords'));
-        $this->setDescription(param('home_index_description'));
-        
         $this->channel = 'home';
         if (request()->getIsAjaxRequest()) {
             $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : '/post/line_list';
@@ -66,6 +62,16 @@ class SiteController extends Controller
                 'pages' => $pages,
             ));
         } else {
+            $this->pageTitle = param('sitename') . ' - ' . param('shortdesc');
+            $this->setKeywords(param('home_index_keywords'));
+            $this->setDescription(param('home_index_description'));
+            
+            if ($page > 1)
+                $mobileUrl = aurl('mobile/default/index');
+            else
+                $mobileUrl = aurl('mobile/default/index', array('page'=>$page));
+            cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
+            
             $view = ($s == POST_LIST_STYLE_WATERFALL) ? 'fall_index' : 'grid_index';
             $this->render($view, array(
                 'models' => $models,
