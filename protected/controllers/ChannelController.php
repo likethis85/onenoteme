@@ -146,11 +146,18 @@ class ChannelController extends Controller
         $pages->setPageSize($limit);
         $pages->applyLimit($criteria);
         
-        if ($pages->getCurrentPage() < $_GET[$pages->pageVar]-1)
+        $page = $pages->getCUrrentPage();
+        if ($page < $_GET[$pages->pageVar]-1)
             return array();
     
         $models = Post::model()->findAll($criteria);
     
+        if ($page > 1)
+            $mobileUrl = aurl('mobile/'. $this->id . '/' . $this->action->id, array('page'=>$page));
+        else
+            $mobileUrl = aurl('mobile/'. $this->id . '/' . $this->action->id);
+        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
+            
         $data  = array(
             'models' => $models,
             'pages' => $pages,
