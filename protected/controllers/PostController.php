@@ -79,6 +79,8 @@ class PostController extends Controller
             $pageKeyword = $post->getTagText(',') . ',' . $pageKeyword;
         $this->setKeywords($pageKeyword);
         $this->setDescription($post->content);
+        $mobileUrl = aurl('mobile/post/show', array('id'=>$id));
+        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
         
         $shareData = sprintf("{'text':'%s'}", $post->content);
         if ($post->bmiddlePic)
