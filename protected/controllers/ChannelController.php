@@ -116,7 +116,7 @@ class ChannelController extends Controller
             $this->render($view, $data);
     }
     
-    public function actionVideo()
+    public function actionVideo($page = 1)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/video'), null, array('title'=>app()->name . ' » 挖视频 Feed'));
         $this->pageTitle = param('channel_video_title');
