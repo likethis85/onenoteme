@@ -490,7 +490,7 @@ if (typeof JSON !== 'object') {
         };
     }
 }());
-if (self != window.top) window.top.location = self.location;
+if (window.top && self != window.top) window.top.location = self.location;
 
 var CDMobile = {};
 
