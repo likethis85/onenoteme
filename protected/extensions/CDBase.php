@@ -363,6 +363,8 @@ class CDBase
         $im = new CDImage();
         $im->load($data);
     
+    	$isGifAnimate = CDImage::isGifAnimate($data, true);
+    	
         if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
             $im->resizeToHeight($thumbHeight);
         else
@@ -394,12 +396,14 @@ class CDBase
             $result = array();
             $im->revert();
             
-            $text = '挖段子网';
-            $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
-            $color = array(200, 200, 200);
-            if ($im->width() > IMAGE_WATER_SIZE) {
-                $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
-                $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+            if (!$isGifAnimate) {
+	            $text = '挖段子网';
+	            $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
+	            $color = array(200, 200, 200);
+	            if ($im->width() > IMAGE_WATER_SIZE) {
+	                $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
+	                $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+	            }
             }
             
             $originalData = $im->outputRaw();
