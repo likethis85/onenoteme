@@ -391,6 +391,8 @@ class PostController extends AdminController
 	        $model = AdminPost::model()->findByPk($id);
 	        if ($model === null) continue;
 	        
+	        if (in_array($state, array(POST_STATE_ENABLED, POST_STATE_DISABLED)))
+	            $model->create_time = time();
 	        $model->state = $state;
 	        $result = $model->save(true, $attributes);
 	        if ($result)

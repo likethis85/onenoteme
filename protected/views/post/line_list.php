@@ -34,7 +34,7 @@
                     </a>
                     <?php if ($model->gif_animation):?><i class="site-bg icon-gif-sign"></i><?php endif;?>
                     <?php else:?>
-                    <a href="<?php echo $model->originalPic;?>" target="_blank" title="点击查看大图">
+                    <a href="<?php echo $model->getUrl();?>" target="_blank" title="点击查看大图">
                         <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
                     </a>
                     <?php endif;?>
@@ -56,7 +56,7 @@
             <?php elseif ($model->channel_id == CHANNEL_GIRL && $model->thumbnail): // 女神?>
             <div class="post-image">
                 <div class="thumb">
-                    <a href="<?php echo $model->originalPic;?>" target="_blank" title="点击查看大图">
+                    <a href="<?php echo $model->getUrl();?>" target="_blank" title="点击查看大图">
                         <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
                     </a>
                 </div>

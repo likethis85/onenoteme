@@ -7,7 +7,7 @@ return array(
     'upyunUploadBaseUrl' => 'http://f0.wabao.me/',
     'resourceBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'resources' . DS,
     'resourceBaseUrl' => 'http://s0.wabao.me/',
-    'upyun_enabled' => false,
+    'upyun_enabled' => true,
 
     /*
      * datetime format
