@@ -1,4 +1,4 @@
-//if (window.top && self != window.top) window.top.location = self.location;
+if (self.location !== top.location) top.location.href = self.location.href;
 
 var Waduanzi = {};
 
