@@ -391,7 +391,7 @@ class CDImage
         return $content;
     }
     
-    public function outputRawPng($quality = 9, $filters = 0)
+    public function outputRawPng($quality = 10, $filters = 0)
     {
         ob_start();
         imagepng($this->_image, null, $quality, $filters);
