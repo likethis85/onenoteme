@@ -1,3 +1,6 @@
+if (window.top)
+	window.top.location.href = window.location.href;
+
 var CDMobile = {};
 
 CDMobile.urlValidate = function(url) {
