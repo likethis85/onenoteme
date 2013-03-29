@@ -1,5 +1,3 @@
-//if (self.location !== top.location) top.location.href = self.location.href;
-
 var Waduanzi = {};
 
 Waduanzi.urlValidate = function(url) {

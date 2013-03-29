@@ -1,5 +1,3 @@
-//if (window.top && self != window.top) window.top.location = self.location;
-
 var CDMobile = {};
 
 CDMobile.urlValidate = function(url) {
