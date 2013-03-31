@@ -82,7 +82,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$('.post-image').on('click', '.thumbnail-more, .thumb a.size-switcher', CDMobile.switchImageSize);
+	$('.post-image').on('click', '.thumbnail-more, .size-switcher', CDMobile.switchImageSize);
 	$('.item-toolbar').on('click', 'a.upscore, a.downscore', CDMobile.ratingPost);
 	$('.item-toolbar').on('mouseenter', 'a.share, .sharebox', CDMobile.showShareBox);
 	$('.item-toolbar').on('mouseleave', 'a.share, .sharebox', CDMobile.hideShareBox);

@@ -45,14 +45,14 @@ CDMobile.switchImageSize = function(event){
     event.preventDefault();
     _hmt && _hmt.push(['_trackEvent', '图片', '缩略图与大图切换点击']);
     
-    var itemDiv = $(this).parents('.post-item');
-    itemDiv.find('.post-image .thumbnail-more').toggle();
-    itemDiv.find('.post-image .thumb a .thumb').toggle();
-    itemDiv.find('.post-image .thumb-pall').toggle();
-    var originalUrl = itemDiv.find('.post-image .thumb a').attr('href');
-    itemDiv.find('.post-image .thumb a .original').attr('src', originalUrl).toggle();
+    var tthis = $(this);
+    var itemDiv = tthis.parents('.post-item');
+    itemDiv.find('.thumbnail-more').toggle();
+    itemDiv.find('.thumb-pall').toggle();
+    tthis.find('.thumb').toggle();
+    tthis.find('.bmiddle').attr('src', tthis.attr('data-bmiddle-url')).toggle();
     var itemPos = itemDiv.position();
-    $('body').scrollTop(parseInt(itemPos.top) - 55);
+    $('body').scrollTop(parseInt(itemPos.top) - 60);
 };
 
 CDMobile.ratingPost = function(event){
@@ -110,7 +110,7 @@ CDMobile.showShareBox = function(event) {
 		var bddata = {
 			"url": item.find('.item-title a').attr('href'),
 			"text": '转自@挖段子网：' + $.trim(item.find('.item-title').text()),
-			"pic": item.find('.post-image .thumb a').attr('href'),
+			"pic": item.find('.thumbbox a').attr('data-bmiddle-url'),
 		};
 		bdshare.attr('data', JSON.stringify(bddata));
 	}
