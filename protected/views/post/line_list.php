@@ -99,7 +99,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$(document).on('click', '.thumbnail-more, .size-switcher', Waduanzi.switchImageSize);
+	$('.post-image').on('click', '.thumbnail-more, .size-switcher', Waduanzi.switchImageSize);
 	$('.item-toolbar').on('click', 'a.upscore, a.downscore', Waduanzi.ratingPost);
 	$('.item-toolbar').on('mouseenter', 'a.share, .sharebox', Waduanzi.showShareBox);
 	$('.item-toolbar').on('mouseleave', 'a.share, .sharebox', Waduanzi.hideShareBox);
