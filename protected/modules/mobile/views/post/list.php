@@ -12,10 +12,10 @@
             
             <?php if ($model->channel_id == CHANNEL_LENGTU && $model->thumbnail): // 趣图?>
             <div class="post-image">
-                <div class="thumb">
+                <div class="thumbbox">
                     <?php if ($model->imageIsLong):?>
                     <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" target="_blank" title="点击查看详细内容">
-                        <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumbnail'));?>
+                        <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
                         <img class="original hide" alt="<?php echo $model->title;?>" />
                     </a>
                     <?php if ($model->gif_animation):?><i class="site-bg icon-gif-sign"></i><?php endif;?>
