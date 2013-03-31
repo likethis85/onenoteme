@@ -119,11 +119,11 @@ Waduanzi.switchImageSize = function(event){
     _hmt && _hmt.push(['_trackEvent', '图片', '缩略图与大图切换点击']);
     
     var itemDiv = $(this).parents('.post-item');
-    itemDiv.find('.thumbnail-more').toggle();
-    itemDiv.find('.size-switcher img.thumb').toggle();
-    itemDiv.find('.thumb-pall').toggle();
-    var originalUrl = itemDiv.find('.size-switcher').attr('href');
-    itemDiv.find('.size-switcher img.original').attr('src', originalUrl).toggle();
+    itemDiv.find('.post-image .thumbnail-more').toggle();
+    itemDiv.find('.post-image .thumbbox a .thumb').toggle();
+    itemDiv.find('.post-image .thumb-pall').toggle();
+    var originalUrl = itemDiv.find('.post-image .thumbbox a').attr('href');
+    itemDiv.find('.post-image .thumbbox a .original').attr('src', originalUrl).toggle();
     var itemPos = itemDiv.position();
     $('body').scrollTop(parseInt(itemPos.top) - 75);
 };
