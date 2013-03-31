@@ -55,8 +55,8 @@
             </div>
             <?php elseif ($model->channel_id == CHANNEL_GIRL && $model->thumbnail): // 女神?>
             <div class="post-image">
-                <div class="thumb">
-                    <a href="<?php echo $model->getUrl();?>" target="_blank" title="点击查看大图">
+                <div class="thumbbox">
+                    <a href="<?php echo $model->getUrl();?>" target="_blank" title="<?php echo $model->title;?>">
                         <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
                     </a>
                 </div>
