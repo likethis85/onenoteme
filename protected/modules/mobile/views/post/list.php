@@ -14,13 +14,13 @@
             <div class="post-image">
                 <div class="thumbbox">
                     <?php if ($model->imageIsLong):?>
-                    <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" target="_blank" title="点击查看详细内容">
+                    <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" title="点击查看详细内容" data-bmiddle-url="<?php echo $model->bmiddlePic;?>">
                         <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
                         <img class="bmiddle hide" alt="<?php echo $model->title;?>" />
                     </a>
                     <?php if ($model->gif_animation):?><i class="site-bg icon-gif-sign"></i><?php endif;?>
                     <?php else:?>
-                    <a href="<?php echo $model->url;?>" title="点击查看大图">
+                    <a href="<?php echo $model->url;?>" title="点击查看大图" data-bmiddle-url="<?php echo $model->bmiddlePic;?>">
                         <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'bmiddle'));?>
                     </a>
                     <?php endif;?>
@@ -42,7 +42,7 @@
             <?php elseif ($model->channel_id == CHANNEL_GIRL && $model->thumbnail): // 女神?>
             <div class="post-image">
                 <div class="thumb">
-                    <a href="<?php echo $model->url;?>" title="点击查看详细内容">
+                    <a href="<?php echo $model->url;?>" title="点击查看详细内容" data-bmiddle-url="<?php echo $model->bmiddlePic;?>">
                         <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'bmiddle'));?>
                     </a>
                 </div>

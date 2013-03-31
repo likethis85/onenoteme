@@ -28,7 +28,7 @@
             <div class="post-image">
                 <div class="thumbbox">
                     <?php if ($model->imageIsLong):?>
-                    <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" target="_blank">
+                    <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" target="_blank" data-bmiddle-url="<?php echo $model->bmiddlePic;?>">
                         <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb', 'title'=>'点击析大图'));?>
                         <img class="bmiddle hide" alt="<?php echo $model->title;?>" title="点击查看缩略图" />
                     </a>
