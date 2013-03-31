@@ -123,7 +123,7 @@ Waduanzi.switchImageSize = function(event){
     itemDiv.find('.thumbnail-more').toggle();
     itemDiv.find('.thumb-pall').toggle();
     tthis.find('.thumb').toggle();
-    tthis.find('.original').attr('src', tthis.attr('href')).toggle();
+    tthis.find('.bmiddle').attr('src', tthis.attr('data-bmiddle-url')).toggle();
     var itemPos = itemDiv.position();
     $('body').scrollTop(parseInt(itemPos.top) - 80);
 };
@@ -207,7 +207,7 @@ Waduanzi.showShareBox = function(event) {
 		var bddata = {
 			"url": item.find('.item-title a').attr('href'),
 			"text": '转自@挖段子网：' + $.trim(item.find('.item-title').text()),
-			"pic": item.find('.post-image .thumbbox a').attr('href'),
+			"pic": item.find('.thumbbox a').attr('data-bmiddle-url'),
 		};
 		bdshare.attr('data', JSON.stringify(bddata));
 	}

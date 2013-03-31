@@ -16,12 +16,12 @@
                     <?php if ($model->imageIsLong):?>
                     <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" target="_blank" title="点击查看详细内容">
                         <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
-                        <img class="original hide" alt="<?php echo $model->title;?>" />
+                        <img class="bmiddle hide" alt="<?php echo $model->title;?>" />
                     </a>
                     <?php if ($model->gif_animation):?><i class="site-bg icon-gif-sign"></i><?php endif;?>
                     <?php else:?>
                     <a href="<?php echo $model->url;?>" title="点击查看大图">
-                        <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
+                        <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'bmiddle'));?>
                     </a>
                     <?php endif;?>
                     <?php if ($model->imageIsLong):?>
@@ -43,7 +43,7 @@
             <div class="post-image">
                 <div class="thumb">
                     <a href="<?php echo $model->url;?>" title="点击查看详细内容">
-                        <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'original'));?>
+                        <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'bmiddle'));?>
                     </a>
                 </div>
             </div>
