@@ -638,9 +638,10 @@ Waduanzi.switchImageSize = function(event){
     _hmt && _hmt.push(['_trackEvent', '图片', '缩略图与大图切换点击']);
     
     var tthis = $(this);
+    console.log(tthis.attr('href'));
     var itemDiv = tthis.parents('.post-item');
-    itemDiv.find('.post-image .thumbnail-more').toggle();
-    itemDiv.find('.post-image .thumb-pall').toggle();
+    itemDiv.find('.thumbnail-more').toggle();
+    itemDiv.find('.thumb-pall').toggle();
     tthis.find('.thumb').toggle();
     tthis.find('.original').attr('src', tthis.attr('href')).toggle();
     var itemPos = itemDiv.position();

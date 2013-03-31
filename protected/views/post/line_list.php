@@ -28,9 +28,9 @@
             <div class="post-image">
                 <div class="thumbbox">
                     <?php if ($model->imageIsLong):?>
-                    <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" target="_blank" title="点击查看大图">
-                        <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb'));?>
-                        <img class="original hide" alt="<?php echo $model->title;?>" />
+                    <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" target="_blank">
+                        <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb', 'title'=>'点击析大图'));?>
+                        <img class="original hide" alt="<?php echo $model->title;?>" title="点击查看缩略图" />
                     </a>
                     <?php if ($model->gif_animation):?><i class="site-bg icon-gif-sign"></i><?php endif;?>
                     <?php else:?>
@@ -99,7 +99,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$('.post-image').on('click', '.thumbnail-more, .thumbbox a.size-switcher', Waduanzi.switchImageSize);
+	$('.post-image').on('click', '.thumbnail-more, .size-switcher', Waduanzi.switchImageSize);
 	$('.item-toolbar').on('click', 'a.upscore, a.downscore', Waduanzi.ratingPost);
 	$('.item-toolbar').on('mouseenter', 'a.share, .sharebox', Waduanzi.showShareBox);
 	$('.item-toolbar').on('mouseleave', 'a.share, .sharebox', Waduanzi.hideShareBox);
