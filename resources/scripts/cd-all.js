@@ -640,11 +640,9 @@ Waduanzi.switchImageSize = function(event){
     var tthis = $(this);
     var itemDiv = tthis.parents('.post-item');
     itemDiv.find('.post-image .thumbnail-more').toggle();
-    originalUrl.find('.thumb').toggle();
     itemDiv.find('.post-image .thumb-pall').toggle();
-    var originalUrl = tthis.find('.post-image .thumbbox a').attr('href');
-    console.log(originalUrl);
-    originalUrl.find('.original').attr('src', originalUrl).toggle();
+    tthis.find('.thumb').toggle();
+    tthis.find('.original').attr('src', tthis.attr('href')).toggle();
     var itemPos = itemDiv.position();
     $('body').scrollTop(parseInt(itemPos.top) - 75);
 };
