@@ -726,7 +726,7 @@ Waduanzi.showShareBox = function(event) {
 		var bddata = {
 			"url": item.find('.item-title a').attr('href'),
 			"text": '转自@挖段子网：' + $.trim(item.find('.item-title').text()),
-			"pic": item.find('.post-image .thumb a').attr('href'),
+			"pic": item.find('.post-image .thumbbox a').attr('href'),
 		};
 		bdshare.attr('data', JSON.stringify(bddata));
 	}
