@@ -120,10 +120,10 @@ Waduanzi.switchImageSize = function(event){
     
     var itemDiv = $(this).parents('.post-item');
     itemDiv.find('.post-image .thumbnail-more').toggle();
-    itemDiv.find('.post-image .thumb a .thumb').toggle();
+    itemDiv.find('.post-image .thumbbox img.thumb').toggle();
     itemDiv.find('.post-image .thumb-pall').toggle();
-    var originalUrl = itemDiv.find('.post-image .thumb a').attr('href');
-    itemDiv.find('.post-image .thumb a .original').attr('src', originalUrl).toggle();
+    var originalUrl = itemDiv.find('.post-image .thumbbox a').attr('href');
+    itemDiv.find('.post-image .thumbbox img.original').attr('src', originalUrl).toggle();
     var itemPos = itemDiv.position();
     $('body').scrollTop(parseInt(itemPos.top) - 75);
 };
