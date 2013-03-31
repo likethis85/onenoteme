@@ -637,12 +637,14 @@ Waduanzi.switchImageSize = function(event){
     event.preventDefault();
     _hmt && _hmt.push(['_trackEvent', '图片', '缩略图与大图切换点击']);
     
-    var itemDiv = $(this).parents('.post-item');
+    var tthis = $(this);
+    var itemDiv = tthis.parents('.post-item');
     itemDiv.find('.post-image .thumbnail-more').toggle();
-    itemDiv.find('.post-image .thumbbox a .thumb').toggle();
+    originalUrl.find('.thumb').toggle();
     itemDiv.find('.post-image .thumb-pall').toggle();
-    var originalUrl = itemDiv.find('.post-image .thumbbox a').attr('href');
-    itemDiv.find('.post-image .thumbbox a .original').attr('src', originalUrl).toggle();
+    var originalUrl = tthis.find('.post-image .thumbbox a').attr('href');
+    console.log(originalUrl);
+    originalUrl.find('.original').attr('src', originalUrl).toggle();
     var itemPos = itemDiv.position();
     $('body').scrollTop(parseInt(itemPos.top) - 75);
 };
