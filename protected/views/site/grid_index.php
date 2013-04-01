@@ -55,6 +55,9 @@
     <!-- 首页侧边栏广告位2 开始 -->
     <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_second'));?>
     <!-- 首页侧边栏广告位2 结束 -->
+    <!-- 最新女神图 开始 -->
+    <?php $this->widget('CDPostSearch', array('title'=>'最新女神', 'channel'=>CHANNEL_GIRL));?>
+    <!-- 最新女神图 结束 -->
 </div>
 <div class="clear"></div>
 

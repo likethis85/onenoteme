@@ -1,0 +1,11 @@
+<div class="panel panel10 thumb-posts">
+<?php if ($this->title):?>
+    <h3><?php echo $this->title;?></h3>
+<?php endif;?>
+<?php foreach ((array)$models as $model):?>
+    <div class="thumb">
+        <?php echo $model->getThumbnailLink('_self');?>
+    </div>
+    <?php endforeach;?>
+    <div class="clear"></div>
+</div>

@@ -57,7 +57,7 @@ class CDLinks extends CWidget
         $models = Link::fetchLinks($criteria);
         
         if (empty($models) && !$this->allowEmpty) return ;
-        $this->render('beta_friend_links', array('models'=>$models));
+        $this->render('cd_friend_links', array('models'=>$models));
     }
     
 }
