@@ -139,6 +139,9 @@ footer a.switch-version {float:right;}
 .video-player {text-align:center; margin-top:10px; margin-bottom:10px; background:#F4F4F6;}
 .video-detail .toolbar {background:#F4F4F6; padding:5px 10px; font-size:14px; color:#666; margin-top:10px;}
 
+.post-detail .post-content {line-height:24px; color:inherit; margin:10px auto 15px;}
+.post-detail .post-picture {text-align:center; overflow:hidden; margin-bottom:10px; background-color:#F4F4F6;}
+.post-detail .cdc-block {margin:25px auto 15px; list-style:none; text-align:center;}
 
 
 
@@ -150,22 +153,6 @@ footer a.switch-version {float:right;}
 
 
 
-
-
-
-
-/* post/show */
-#beta-post-content {font-size:16px; line-height:24px; margin:10px 0; word-wrap:break-word; overflow:hidden;}
-#beta-post-content img {margin:10px auto;}
-#beta-post-content .bmiddle {display:block;}
-#beta-post-content p, #beta-post-content {margin-bottom:18px;}
-#beta-post-content blockquote {padding: 10px; background:#EFEFEF; color:#555; font-size:14px; margin:15px 10px; border-radius:3px;}
-#beta-post-content blockquote p {font-size:14px;}
-#beta-post-content ul {margin:1px 0 15px 30px;}
-#beta-post-content li {margin-bottom:5px; line-height:22px;}
-#beta-post-content table {border-spacing:0; border-collapse:collapse; border:0; margin:10px 0;}
-#beta-post-content table th, #beta-post-content table td {border:1px solid #CFCFCF; padding:5px;}
-#beta-post-content object, #beta-post-content embed {display:block;}
 
 
 /* comment/list */
