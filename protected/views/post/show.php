@@ -23,7 +23,6 @@
         <?php endif;?>
         <div class="item-content"><?php echo $post->filterContent;?></div>
         
-        <!-- 详情内容下方广告位 -->
         <div class="item-toolbar">
             <ul>
             	<li class="fleft"><a rel="nofollow" href="javascript:void(0);" class="upscore site-bg" data-id="<?php echo $post->id;?>" data-score="1" data-url="<?php echo aurl('post/score');?>"><?php echo $post->up_score;?></a></li>

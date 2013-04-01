@@ -1,21 +1,27 @@
 <div class="panel panel10">
     <div class="beta-post-detail">
-    	<?php if (($model->channel_id != CHANNEL_DUANZI && $model->channel_id != CHANNEL_GHOSTSTORY) || $model->hasTitle):?>
-        <div class="beta-title">
-            <h1 class="post-title"><?php echo h($post->title);?></h1>
+    	<div class="content-block post-content">
+		    <div class="post-author">
+        	    <?php echo $post->getAuthorAvatar();?>
+            	<?php echo $post->getAuthorNameLink();?>
+        	</div>
+		    <div class="item-title">
+		        <?php if (($post->channel_id != CHANNEL_DUANZI && $post->channel_id != CHANNEL_GHOSTSTORY) || $post->hasTitle):?>
+                    <h1><?php echo h($post->title);?></h1>
+                <?php endif;?>
+            </div>
+		    <?php if ($post->tags):?><div class="post-tags">标签：<?php echo $post->tagLinks;?></div><?php endif;?>
+        </div>
+        <?php if ($post->videoHtml):?>
+        <div class="content-block video-player"><?php echo $post->videoHtml;?></div>
+        <?php elseif ($post->bmiddlePic):?>
+        <div class="content-block post-picture thumbbox">
+            <a href="<?php echo aurl('post/bigpic', array('id'=>$post->id));?>" data-bmiddle-url="<?php echo $post->bmiddlePic;?>" target="_blank" title="<?php echo $post->title;?>">
+                <?php echo CHtml::image($post->bmiddlePic, $post->filterContent . ', ' . $post->getTagText(','));?>
+            </a>
         </div>
         <?php endif;?>
-        <p class="post-extra"><?php echo $post->authorName;?>&nbsp;|&nbsp;<?php echo $post->shortTime;?></p>
-        <div id="beta-post-content">
-            <?php
-                echo $post->filterContent;
-                if ($post->channel_id != CHANNEL_VIDEO && $post->bmiddlePic)
-                    echo image($post->bmiddlePic, $post->title, array('class'=>'bmiddle'));
-                elseif ($post->channel_id == CHANNEL_VIDEO && $post->videoHtml)
-                    echo $post->videoHtml;
-            ?>
-            <?php if ($post->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $post->getTagLinks('mobile/tag/posts', '&nbsp;', '_self');?></div><?php endif;?>
-        </div>
+        <div class="item-content"><?php echo $post->filterContent;?></div>
         <div class="line1px"></div>
         <!-- 广告位 开始 -->
         <div class="cdc-block">
