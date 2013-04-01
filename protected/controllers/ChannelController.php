@@ -1,7 +1,7 @@
 <?php
 class ChannelController extends Controller
 {
-public function filters()
+    public function filters()
     {
         $duration = 120;
         return array(
@@ -15,7 +15,7 @@ public function filters()
                 'COutputCache + joke, lengtu, girl, video, ghost',
                 'duration' => $duration,
                 'varyByParam' => array('page', 's'),
-                'varyByExpression' => array($this, 'getIsGuest'),
+                'varyByExpression' => array(user(), 'getIsGuest'),
                 'requestTypes' => array('GET'),
             ),
         );

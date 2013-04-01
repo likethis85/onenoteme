@@ -13,7 +13,7 @@ class SiteController extends Controller
                 'COutputCache + index',
                 'duration' => 120,
                 'varyByParam' => array('page', 's', 'f'),
-                'varyByExpression' => array($this, 'getIsGuest'),
+                'varyByExpression' => array(user(), 'getIsGuest'),
                 'requestTypes' => array('GET'),
             ),
             array(

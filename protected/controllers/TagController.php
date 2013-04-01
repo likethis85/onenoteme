@@ -12,9 +12,9 @@ class TagController extends Controller
             array(
                 'COutputCache + posts',
                 'duration' => $duration,
-                'varyByParam' => array('name', 'page', 's', 'f'),
+                'varyByParam' => array('name', 'page', 's'),
                 'requestTypes' => array('GET'),
-                'varyByExpression' => function(){return user()->getIsGuest() && CDBase::isMobileDevice();},
+                'varyByExpression' => array(user(), 'getIsGuest'),
             ),
             array(
                 'COutputCache + posts',
@@ -23,6 +23,15 @@ class TagController extends Controller
                 'requestTypes' => array('POST'),
             ),
         );
+    }
+    
+    public function beforeAction($action)
+    {
+        $actions = array('posts');
+        if (in_array($action->id, $actions))
+            $this->autoSwitchMobile();
+        
+        return true;
     }
     
     public function actionList()
@@ -49,7 +58,7 @@ class TagController extends Controller
         $this->redirect(url('tag/posts', array('name'=>$name, 's'=>$s)));
     }
     
-    public function actionPosts($name, $s = POST_LIST_STYLE_LINE, $f = 0)
+    public function actionPosts($name, $s = POST_LIST_STYLE_LINE)
     {
         $s = strip_tags(trim($s));
         
