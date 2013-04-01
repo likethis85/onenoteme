@@ -6,12 +6,12 @@ class PostController extends Controller
         return array(
             'ajaxOnly + score, like, unlike, views',
             'postOnly + score, like, unlike, views',
-//             array(
-//                 'COutputCache + show',
-//                 'duration' => 600,
-//                 'varyByParam' => array('id'),
-//                 'varyByExpression' => array(user(), 'getIsGuest'),
-//             ),
+            array(
+                'COutputCache + show',
+                'duration' => 600,
+                'varyByParam' => array('id'),
+                'varyByExpression' => array(user(), 'getIsGuest'),
+            ),
             array(
                 'COutputCache + bigPic',
                 'duration' => 24*60*60*7,
