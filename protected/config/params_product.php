@@ -84,7 +84,7 @@ return array(
     'relative_qqt_accounts' => '',
 
     /* cache setting */
-    'mobile_post_list_cache_expire' => 60,
+    'mobile_post_list_cache_expire' => 120,
     'mobile_comment_list_cache_expire' => 30,
     'mobile_post_show_cache_expire' => 30,
         
