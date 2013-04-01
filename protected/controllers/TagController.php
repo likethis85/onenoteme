@@ -14,7 +14,7 @@ class TagController extends Controller
                 'duration' => $duration,
                 'varyByParam' => array('name', 'page', 's'),
                 'requestTypes' => array('GET'),
-                'varyByExpression' => 'user()->getIsGuest() && $this->mobileDevice',
+                'varyByExpression' => 'user()->getIsGuest() && CDBase::isMobileDevice()',
             ),
             array(
                 'COutputCache + posts',

@@ -5,7 +5,6 @@ class Controller extends CController
     public $channel;
     public $clientID = null;
     public $lastVisit = array();
-    public $mobileDevice = false;
 
     public function actions()
 	{
@@ -38,7 +37,6 @@ class Controller extends CController
 	public function init()
 	{
 	    parent::init();
-	    $this->mobileDevice = CDBase::isMobileDevice();
 	    $this->lastVisit = CDBase::setClientLastVisit();
 	    
 	    $this->clientID = CDBase::getClientID();
@@ -81,7 +79,7 @@ class Controller extends CController
     protected function autoSwitchMobile($url = null)
     {
         $mark = strip_tags(trim($_GET['f']));
-        if (empty($mark) && $this->mobileDevice) {
+        if (empty($mark) && CDBase::isMobileDevice()) {
             if (empty($url)) {
                 $route = 'mobile/' . $this->id . '/' . $this->action->id;
                 $url = aurl($route, $this->actionParams);
@@ -90,7 +88,6 @@ class Controller extends CController
             exit(0);
         }
     }
-
 
     public function getUserID()
     {
