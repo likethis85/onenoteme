@@ -84,9 +84,9 @@ return array(
     'relative_qqt_accounts' => '',
 
     /* cache setting */
-    'mobile_post_list_cache_expire' => 60 * 60,
-    'mobile_comment_list_cache_expire' => 10,
-    'mobile_post_show_cache_expire' => 10,
+    'mobile_post_list_cache_expire' => 60,
+    'mobile_comment_list_cache_expire' => 30,
+    'mobile_post_show_cache_expire' => 30,
         
     'wdz_weixin_account_name' => '挖段子搞笑',
     'wdz_weixin_account_id' => 'gh_9261dce78e9f',
