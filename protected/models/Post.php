@@ -333,7 +333,7 @@ class Post extends CActiveRecord
     
     public function getFilterTitle()
     {
-        return strip_tags(trim($this->tilte));
+        return strip_tags(trim($this->title));
     }
     
     public function getSubTitle($len = 35)
