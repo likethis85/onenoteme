@@ -1,10 +1,10 @@
 <?php
 class ChannelController extends Controller
 {
-    public function init()
+    public function beforeAction($action)
     {
-        parent::init();
         $this->autoSwitchMobile();
+        return true;
     }
     
     public function filters()
