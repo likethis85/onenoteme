@@ -10,7 +10,7 @@ class PostController extends Controller
                 'COutputCache + show',
                 'duration' => 600,
                 'varyByParam' => array('id', 'f'),
-                'varyByExpression' => 'user()->getIsGuest() && CDBase::isMobileDevice()',
+                'varyByExpression' => function(){return user()->getIsGuest() && CDBase::isMobileDevice();},
             ),
             array(
                 'COutputCache + bigPic',
@@ -39,7 +39,7 @@ class PostController extends Controller
         exit(0);
     }
     
-    public function actionShow($id)
+    public function actionShow($id, $f = 0)
     {
         $this->autoSwitchMobile();
         

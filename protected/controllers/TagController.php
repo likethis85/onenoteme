@@ -12,9 +12,9 @@ class TagController extends Controller
             array(
                 'COutputCache + posts',
                 'duration' => $duration,
-                'varyByParam' => array('name', 'page', 's'),
+                'varyByParam' => array('name', 'page', 's', 'f'),
                 'requestTypes' => array('GET'),
-                'varyByExpression' => 'user()->getIsGuest() && CDBase::isMobileDevice()',
+                'varyByExpression' => function(){return user()->getIsGuest() && CDBase::isMobileDevice();},
             ),
             array(
                 'COutputCache + posts',
@@ -49,7 +49,7 @@ class TagController extends Controller
         $this->redirect(url('tag/posts', array('name'=>$name, 's'=>$s)));
     }
     
-    public function actionPosts($name, $s = POST_LIST_STYLE_LINE)
+    public function actionPosts($name, $s = POST_LIST_STYLE_LINE, $f = 0)
     {
         $s = strip_tags(trim($s));
         
@@ -103,3 +103,5 @@ class TagController extends Controller
         ));
     }
 }
+
+

@@ -14,21 +14,20 @@ class ChannelController extends Controller
             array(
                 'COutputCache + joke, lengtu, girl, video, ghost',
                 'duration' => $duration,
-                'varyByExpression' => 'user()->getIsGuest() && CDBase::isMobileDevice()',
                 'varyByParam' => array('page', 's'),
                 'requestTypes' => array('POST'),
             ),
             array(
                 'COutputCache + joke, lengtu, girl, video, ghost',
                 'duration' => $duration,
-                'varyByExpression' => 'user()->getIsGuest()',
-                'varyByParam' => array('page', 's'),
+                'varyByParam' => array('page', 's', 'f'),
+                'varyByExpression' => function(){return user()->getIsGuest() && CDBase::isMobileDevice();},
                 'requestTypes' => array('GET'),
             ),
         );
     }
     
-    public function actionJoke($page = 1, $s = POST_LIST_STYLE_LINE)
+    public function actionJoke($page = 1, $s = POST_LIST_STYLE_LINE, $f = 0)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/joke'), null, array('title'=>app()->name . ' » 挖笑话 Feed'));
         $this->pageTitle = param('channel_joke_title');
@@ -45,7 +44,7 @@ class ChannelController extends Controller
             $this->render($view, $data);
     }
 
-    public function actionGhost($page = 1, $s = POST_LIST_STYLE_LINE)
+    public function actionGhost($page = 1, $s = POST_LIST_STYLE_LINE, $f = 0)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/joke'), null, array('title'=>app()->name . ' » 挖鬼故事 Feed'));
         $this->pageTitle = param('channel_ghost_title');
@@ -62,7 +61,7 @@ class ChannelController extends Controller
             $this->render($view, $data);
     }
     
-    public function actionLengtu($page = 1, $s = POST_LIST_STYLE_LINE)
+    public function actionLengtu($page = 1, $s = POST_LIST_STYLE_LINE, $f = 0)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/lengtu'), null, array('title'=>app()->name . ' » 挖趣图 Feed'));
         $this->pageTitle = param('channel_lengtu_title');
@@ -89,7 +88,7 @@ class ChannelController extends Controller
             $this->render($view, $data);
     }
     
-    public function actionGirl($page = 1, $s = POST_LIST_STYLE_GRID)
+    public function actionGirl($page = 1, $s = POST_LIST_STYLE_GRID, $f = 0)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/girl'), null, array('title'=>app()->name . ' » 挖女神 Feed'));
         $this->pageTitle = param('channel_girl_title');
@@ -116,7 +115,7 @@ class ChannelController extends Controller
             $this->render($view, $data);
     }
     
-    public function actionVideo($page = 1)
+    public function actionVideo($page = 1, $f = 0)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/video'), null, array('title'=>app()->name . ' » 挖视频 Feed'));
         $this->pageTitle = param('channel_video_title');
