@@ -13,7 +13,7 @@ class ChannelController extends MobileController
         );
     }
 
-	public function actionJoke()
+	public function actionJoke($page = 1)
 	{
 	    $data = self::fetchLatestPosts(CHANNEL_DUANZI);
 	     
@@ -26,7 +26,7 @@ class ChannelController extends MobileController
 	    $this->render('posts', $data);
 	}
 
-	public function actionGhost()
+	public function actionGhost($page = 1)
 	{
 	    $data = self::fetchLatestPosts(CHANNEL_GHOSTSTORY);
 	     
@@ -39,7 +39,7 @@ class ChannelController extends MobileController
 	    $this->render('posts', $data);
 	}
 	
-	public function actionLengtu()
+	public function actionLengtu($page = 1)
 	{
 	    $data = self::fetchLatestPosts(CHANNEL_LENGTU);
 	     
@@ -52,7 +52,7 @@ class ChannelController extends MobileController
 	    $this->render('posts', $data);
 	}
 	
-	public function actionGirl()
+	public function actionGirl($page = 1)
 	{
 	    $data = self::fetchLatestPosts(CHANNEL_GIRL);
 	     
@@ -65,7 +65,7 @@ class ChannelController extends MobileController
 	    $this->render('posts', $data);
 	}
 	
-	public function actionVideo()
+	public function actionVideo($page = 1)
 	{
 	    $data = self::fetchLatestPosts(CHANNEL_VIDEO);
 	     
