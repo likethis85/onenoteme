@@ -16,7 +16,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 </script>
 <?php echo param('header_html');?>
 </head>
-<body style="-webkit-transform:rotate(-3deg);-moz-transform:rotate(-3deg);-o-transform:rotate(-3deg);transform:rotate(-3deg);">
+<body>
 <div class="cd-mini-nav">
     <ul class="fleft">
 		<li><a href="<?php echo CDBase::mobileHomeUrl();?>">手机版</a></li>
