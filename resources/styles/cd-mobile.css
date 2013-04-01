@@ -104,7 +104,7 @@ footer a.switch-version {float:right;}
 .post-image .lines .sjx {height:9px; width:71px; margin:3px auto; background:url(../images/thumb_more_sjx.gif) no-repeat;}
 .post-author {color:#9b8878; margin-bottom:10px; font-size:14px;}
 .post-author img {width:25px; height:25px; margin-right:10px;}
-.item-title, .item-content {margin-bottom:10px; line-height:24px; font-weight:normal;}
+.item-title,.item-content {margin-bottom:10px; line-height:24px; font-weight:normal;}
 .item-title a, .item-content a {color:#503E2C; display:block;}
 .item-title a:hover {color:#D14836; text-decoration:underline;}
 .item-title h1 {font-size:inherit; color:inherit; font-weight:normal; line-height:inherit; margin:0; padding:0;}
