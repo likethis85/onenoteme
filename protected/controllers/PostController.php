@@ -20,13 +20,13 @@ class PostController extends Controller
         );
     }
     
-    public function beforeAction($action)
+    public function beginCache($id, $properties=array())
     {
         $actions = array('show');
         if (in_array($action->id, $actions))
             $this->autoSwitchMobile();
         
-        return true;
+        return parent::beginCache($id, $properties);
     }
     
     public function actionScore()

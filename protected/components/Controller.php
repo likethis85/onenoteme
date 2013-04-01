@@ -76,7 +76,7 @@ class Controller extends CController
         return $html;
     }
 
-    public function autoSwitchMobile($url = null)
+    protected function autoSwitchMobile($url = null)
     {
         $mark = strip_tags(trim($_GET['f']));
         if (empty($mark) && CDBase::isMobileDevice()) {
