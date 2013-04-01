@@ -9,8 +9,8 @@ class PostController extends Controller
             array(
                 'COutputCache + show',
                 'duration' => 600,
-                'varyByParam' => array('id', 'f'),
-                'varyByExpression' => function(){return user()->getIsGuest() && CDBase::isMobileDevice();},
+                'varyByParam' => array('id'),
+                'varyByExpression' => array($this, 'getIsGuest'),
             ),
             array(
                 'COutputCache + bigPic',
@@ -18,6 +18,15 @@ class PostController extends Controller
                 'varyByParam' => array('id'),
             ),
         );
+    }
+    
+    public function beforeAction($action)
+    {
+        $actions = array('show');
+        if (in_array($action->id, $actions))
+            $this->autoSwitchMobile();
+        
+        return true;
     }
     
     public function actionScore()
@@ -39,7 +48,7 @@ class PostController extends Controller
         exit(0);
     }
     
-    public function actionShow($id, $f = 0)
+    public function actionShow($id)
     {
         $this->autoSwitchMobile();
         

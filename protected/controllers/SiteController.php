@@ -13,7 +13,7 @@ class SiteController extends Controller
                 'COutputCache + index',
                 'duration' => 120,
                 'varyByParam' => array('page', 's', 'f'),
-                'varyByExpression' => function(){return user()->getIsGuest() && CDBase::isMobileDevice();},
+                'varyByExpression' => array($this, 'getIsGuest'),
                 'requestTypes' => array('GET'),
             ),
             array(
@@ -25,11 +25,18 @@ class SiteController extends Controller
         );
     }
     
+    public function beforeAction($action)
+    {
+        $actions = array('site');
+        if (in_array($action->id, $actions)) {
+            $mobileUrl = aurl('mobile/default/index', $this->actionParams);
+            $this->autoSwitchMobile($mobileUrl);
+        }
+        return true;
+    }
+    
     public function actionIndex($page = 1, $s = POST_LIST_STYLE_LINE, $f = 0)
     {
-        $mobileUrl = aurl('mobile/default/index', array('page'=>$page));
-        $this->autoSwitchMobile($mobileUrl);
-        
         $s = strip_tags(trim($s));
         $limit = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('line_post_count_page');
         
