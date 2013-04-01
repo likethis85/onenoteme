@@ -24,6 +24,7 @@ class PostController extends Controller
     {
         $actions = array('show');
         if (in_array($actionID, $actions)) {
+            $mobileUrl = aurl('mobile/post/' . $actionID, $this->actionParams);
             $this->autoSwitchMobile();
             exit(0);
         }
