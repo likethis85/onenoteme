@@ -50,8 +50,6 @@ class PostController extends Controller
     
     public function actionShow($id)
     {
-        $this->autoSwitchMobile();
-        
         $duration = 60*60;
         $id = (int)$id;
         if ($id <= 0)
