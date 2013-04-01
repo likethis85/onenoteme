@@ -4,7 +4,7 @@ class PostController extends Controller
     public function filters()
     {
         return array(
-            'CDSwitchMobileFilter + show',
+            'switchMobile + show',
             'ajaxOnly + score, like, unlike, views',
             'postOnly + score, like, unlike, views',
             array(
@@ -19,6 +19,16 @@ class PostController extends Controller
                 'varyByParam' => array('id'),
             ),
         );
+    }
+    
+    public function filterSwitchMobile($filterChain)
+    {
+        if (in_array($filterChain->action->id, $actions)) {
+            $this->autoSwitchMobile();
+            exit(0);
+        }
+        
+        $filterChain->run();
     }
     
     public function actionScore()
