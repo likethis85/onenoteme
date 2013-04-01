@@ -1,6 +1,6 @@
 <div class="panel panel10 thumb-posts">
 <?php if ($this->title):?>
-    <h3><?php echo $this->title;?></h3>
+    <h3 class="content-title"><?php echo $this->title;?></h3>
 <?php endif;?>
 <?php foreach ((array)$models as $model):?>
     <div class="thumb">

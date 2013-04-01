@@ -2,7 +2,7 @@
 class CDPostSearch extends CWidget
 {
     public $channel = null;
-    public $count = 10;
+    public $count = 9;
     public $page = 1;
     public $order = 'create_time desc, id desc';
     public $title;
