@@ -10,7 +10,7 @@ class PostController extends Controller
                 'COutputCache + show',
                 'duration' => 600,
                 'varyByParam' => array('id', 'f'),
-                'varyByExpression' => array('CDBase', 'userIsMobileBrower'),
+                'varyByExpression' => 'user()->getIsGuest() && $this->mobileDevice',
             ),
             array(
                 'COutputCache + bigPic',

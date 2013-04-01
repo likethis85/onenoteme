@@ -14,7 +14,7 @@ class ChannelController extends Controller
             array(
                 'COutputCache + joke, lengtu, girl, video, ghost',
                 'duration' => $duration,
-                'varyByExpression' => 'user()->getIsGuest()',
+                'varyByExpression' => 'user()->getIsGuest() && $this->mobileDevice',
                 'varyByParam' => array('page', 's'),
                 'requestTypes' => array('POST'),
             ),

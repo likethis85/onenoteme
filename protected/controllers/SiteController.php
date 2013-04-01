@@ -13,7 +13,7 @@ class SiteController extends Controller
                 'COutputCache + index',
                 'duration' => 120,
                 'varyByParam' => array('page', 's', 'f'),
-                'varyByExpression' => 'user()->getIsGuest() && CDBase::userIsMobileBrower()',
+                'varyByExpression' => 'user()->getIsGuest() && $this->mobileDevice',
                 'requestTypes' => array('GET'),
             ),
             array(
