@@ -16,9 +16,7 @@
         <div class="content-block video-player"><?php echo $post->videoHtml;?></div>
         <?php elseif ($post->bmiddlePic):?>
         <div class="content-block post-picture thumbbox">
-            <a href="<?php echo aurl('post/bigpic', array('id'=>$post->id));?>" data-bmiddle-url="<?php echo $post->bmiddlePic;?>" target="_blank" title="<?php echo $post->title;?>">
-                <?php echo CHtml::image($post->bmiddlePic, $post->filterContent . ', ' . $post->getTagText(','));?>
-            </a>
+            <?php echo CHtml::image($post->bmiddlePic, $post->filterTitle . ', ' . $post->getTagText(','));?>
         </div>
         <?php endif;?>
         <div class="item-content"><?php echo $post->filterContent;?></div>

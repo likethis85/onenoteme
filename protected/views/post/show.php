@@ -17,7 +17,7 @@
         <?php elseif ($post->bmiddlePic):?>
         <div class="content-block post-picture thumbbox">
             <a href="<?php echo aurl('post/bigpic', array('id'=>$post->id));?>" data-bmiddle-url="<?php echo $post->bmiddlePic;?>" target="_blank" title="<?php echo $post->title;?>">
-                <?php echo CHtml::image($post->bmiddlePic, $post->filterContent . ', ' . $post->getTagText(','));?>
+                <?php echo CHtml::image($post->bmiddlePic, $post->filterTitle . ', ' . $post->getTagText(','));?>
             </a>
         </div>
         <?php endif;?>

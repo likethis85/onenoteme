@@ -41,6 +41,7 @@
  * @property array $comments
  * @property string $stateLabel
  * @property string $url
+ * @property string $filterTitle
  * @property string $filterSummary
  * @property string $filterContent
  * @property integer $score
@@ -328,6 +329,11 @@ class Post extends CActiveRecord
         $html = image($imageUrl, $this->getAuthorName(), $htmlOptions);
         
         return $html;
+    }
+    
+    public function getFilterTitle()
+    {
+        return strip_tags(trim($this->tilte));
     }
     
     public function getSubTitle($len = 35)
