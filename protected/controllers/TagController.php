@@ -5,6 +5,7 @@ class TagController extends Controller
     {
         $duration = 24*60*60;
         return array(
+            'switchMobile + posts',
             array(
                 'COutputCache + list',
                 'duration' => $duration,
@@ -23,15 +24,6 @@ class TagController extends Controller
                 'requestTypes' => array('POST'),
             ),
         );
-    }
-    
-    public function beforeAction($action)
-    {
-        $actions = array('posts');
-        if (in_array($action->id, $actions))
-            $this->autoSwitchMobile();
-        
-        return true;
     }
     
     public function actionList()

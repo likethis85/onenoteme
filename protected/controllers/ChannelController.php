@@ -5,6 +5,7 @@ class ChannelController extends Controller
     {
         $duration = 120;
         return array(
+            'switchMobile + joke, lengtu, girl, video, ghost',
             array(
                 'COutputCache + joke, lengtu, girl, video, ghost',
                 'duration' => $duration,
@@ -19,12 +20,6 @@ class ChannelController extends Controller
                 'requestTypes' => array('GET'),
             ),
         );
-    }
-    
-    public function beforeAction($action)
-    {
-        $this->autoSwitchMobile();
-        return true;
     }
     
     public function actionJoke($page = 1, $s = POST_LIST_STYLE_LINE)

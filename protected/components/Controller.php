@@ -118,6 +118,16 @@ class Controller extends CController
         return $this->user->profile;
     }
 
+
+
+    public function filterSwitchMobile($filterChain)
+    {
+        $url = url('mobile/' . $filterChain->controller->id . '/' . $filterChain->action->id, $filterChain->controller->getActionParams());
+        $this->autoSwitchMobile($url);
+    
+        $filterChain->run();
+    }
+    
     protected function beforeRender($view)
     {
         cs()->defaultScriptFilePosition = CClientScript::POS_END;

@@ -21,14 +21,6 @@ class PostController extends Controller
         );
     }
     
-    public function filterSwitchMobile($filterChain)
-    {
-        $url = url('mobile/' . $filterChain->controller->id . '/' . $filterChain->action->id, $filterChain->controller->getActionParams());
-        $this->autoSwitchMobile($url);
-        
-        $filterChain->run();
-    }
-    
     public function actionScore()
     {
         $pid = (int)$_POST['pid'];

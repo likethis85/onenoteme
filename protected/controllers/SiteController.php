@@ -4,6 +4,7 @@ class SiteController extends Controller
     public function filters()
     {
         return array(
+            'switchMobile + show',
             array(
                 'COutputCache + bdmap, sitemap, links',
                 'duration' => 600,
@@ -23,16 +24,6 @@ class SiteController extends Controller
                 'requestTypes' => array('POST'),
             ),
         );
-    }
-    
-    public function beforeAction($action)
-    {
-        $actions = array('index');
-        if (in_array($action->id, $actions)) {
-            $mobileUrl = aurl('mobile/default/index', $this->actionParams);
-            $this->autoSwitchMobile($mobileUrl);
-        }
-        return true;
     }
     
     public function actionIndex($page = 1, $s = POST_LIST_STYLE_LINE, $f = 0)
