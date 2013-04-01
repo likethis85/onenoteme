@@ -4,7 +4,7 @@ class PostController extends Controller
     public function filters()
     {
         $actions = array('show');
-        if (in_array($action->id, $actions)) {
+        if (in_array($this->action->id, $actions)) {
             $this->autoSwitchMobile();
             exit(0);
         }
