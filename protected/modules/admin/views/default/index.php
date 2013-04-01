@@ -10,11 +10,11 @@
         <a class="btn btn-primary btn-small" href="<?php echo url('admin/post/latest');?>">查看列表</a>
     </p>
     <p>
-        有&nbsp;<b><?php echo $userCount;?></b>&nbsp;个评论未审核。
-        <a class="btn btn-primary btn-small" href="<?php echo url('admin/user/verify');?>">审核评论</a>
+        有&nbsp;<b><?php echo $commentCount;?></b>&nbsp;个评论未审核。
+        <a class="btn btn-primary btn-small" href="<?php echo url('admin/comment/verify');?>">审核评论</a>
     </p>
     <p>
-        有&nbsp;<b><?php echo $commentCount;?></b>&nbsp;个用户注册请求未处理。
-        <a class="btn btn-primary btn-small" href="<?php echo url('admin/comment/verify');?>">审核用户</a>
+        有&nbsp;<b><?php echo $userCount;?></b>&nbsp;个用户注册请求未处理。
+        <a class="btn btn-primary btn-small" href="<?php echo url('admin/user/verify');?>">审核用户</a>
     </p>
 </div>

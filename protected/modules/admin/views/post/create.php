@@ -8,146 +8,82 @@
 <?php echo CHtml::form('',  'post', array('class'=>'form-horizontal post-form'));?>
 <input type="hidden" name="returnurl" value="<?php echo request()->getUrlReferrer();?>" />
 <fieldset>
-    <legend><?php echo t('create_posts', 'admin');?></legend>
+    <legend><?php echo $this->adminTitle;?></legend>
     <div class="control-group bottom10px <?php if ($model->hasErrors('title')) echo 'error';?>">
-        <label class="control-label"><?php echo t('post_title');?></label>
+        <?php echo CHtml::activeLabel($model, 'title', array('class'=>'control-label'));?>
         <div class="controls">
             <?php echo CHtml::activeTextField($model, 'title', array('class'=>'span6', 'id'=>'post-title'));?>
             <?php if ($model->hasErrors('title')):?><p class="help-block"><?php echo $model->getError('title');?></p><?php endif;?>
         </div>
     </div>
-    <div class="control-group bottom10px <?php if ($model->hasErrors('source')) echo 'error';?>">
-        <label class="control-label"><?php echo t('post_source');?></label>
-        <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'source', array('class'=>'span6'));?>
-            <?php if ($model->hasErrors('source')):?><p class="help-block"><?php echo $model->getError('source');?></p><?php endif;?>
-        </div>
-    </div>
     <div class="control-group bottom10px <?php if ($model->hasErrors('tags')) echo 'error';?>">
-        <label class="control-label"><?php echo t('tags');?></label>
+        <?php echo CHtml::activeLabel($model, 'tags', array('class'=>'control-label'));?>
         <div class="controls">
             <?php echo CHtml::activeTextField($model, 'tags', array('class'=>'span5'));?>
-            <span class="help-inline"><?php echo t('tags_rules', 'admin');?></span>
+            <span class="help-inline">标签之间用逗号(,)分隔</span>
             <?php if ($model->hasErrors('tags')):?><p class="help-block"><?php echo $model->getError('tags');?></p><?php endif;?>
         </div>
     </div>
     <div class="control-group bottom10px">
-        <label class="control-label"><?php echo t('options', 'admin');?></label>
+        <label class="control-label">选项</label>
         <div class="controls">
             <label class="checkbox inline">
-                <?php echo CHtml::activeCheckBox($model, 'homeshow');?><?php echo t('home_show', 'admin');?>
-            </label>
-            <label class="checkbox inline" rel="tooltip" title="<?php echo t('set_hot_post_tip', 'admin');?>">
-                <?php echo CHtml::activeCheckBox($model, 'hottest');?><?php echo t('hottest_show', 'admin');?>
+                <?php echo CHtml::activeCheckBox($model, 'homeshow');?><?php echo CHtml::activeLabel($model, 'homeshow');?>
             </label>
             <label class="checkbox inline">
-                <?php echo CHtml::activeCheckBox($model, 'recommend');?><?php echo t('recommend_show', 'admin');?>
+                <?php echo CHtml::activeCheckBox($model, 'hottest');?><?php echo CHtml::activeLabel($model, 'hottest');?>
             </label>
             <label class="checkbox inline">
-                <?php echo CHtml::activeCheckBox($model, 'istop');?><?php echo t('settop', 'admin');?>
+                <?php echo CHtml::activeCheckBox($model, 'recommend');?><?php echo CHtml::activeLabel($model, 'recommend');?>
             </label>
             <label class="checkbox inline">
-                <?php echo CHtml::activeCheckBox($model, 'disable_comment');?><?php echo t('disable_comment');?>
+                <?php echo CHtml::activeCheckBox($model, 'istop');?><?php echo CHtml::activeLabel($model, 'istop');?>
+            </label>
+            <label class="checkbox inline">
+                <?php echo CHtml::activeCheckBox($model, 'disable_comment');?><?php echo CHtml::activeLabel($model, 'disable_comment');?>
             </label>
         </div>
     </div>
     <div class="control-group bottom10px <?php if ($model->hasErrors('thumbnail')) echo 'error';?>">
-        <label class="control-label"><?php echo t('thumbnail');?></label>
+        <?php echo CHtml::activeLabel($model, 'thumbnail_pic', array('class'=>'control-label'));?>
         <div class="controls">
             <?php echo CHtml::activeTextField($model, 'thumbnail', array('class'=>'span6'));?>
             <?php if ($model->hasErrors('thumbnail')):?><p class="help-block"><?php echo $model->getError('thumbnail');?></p><?php endif;?>
         </div>
     </div>
-    <div class="control-group bottom10px <?php if ($model->hasErrors('category_id') || $model->hasErrors('topic_id')) echo 'error';?>">
-        <label class="control-label"><?php echo t('post_category', 'admin') . '/' . t('post_topic', 'admin');?></label>
-        <div class="controls">
-            <?php echo CHtml::activeDropDownList($model, 'category_id', AdminCategory::listData(), array('empty'=>t('please_select_category', 'admin')));?>
-            <?php echo CHtml::activeDropDownList($model, 'topic_id', AdminTopic::listData(), array('empty'=>t('please_select_topic', 'admin')));?>
-            <?php echo CHtml::submitButton(t('submit_post', 'admin'), array('class'=>'btn btn-primary'));?>
-            <?php if (!$model->hasErrors('category_id')):?><span class="help-block"><?php echo $model->getError('category_id');?></span><?php endif;?>
-            <?php if ($model->hasErrors('topic_id')):?><span class="help-block"><?php echo $model->getError('topic_id');?></span><?php endif;?>
-        </div>
-    </div>
-    <div class="control-group bottom10px <?php if ($model->hasErrors('summary')) echo 'error';?>">
-        <label class="control-label"><?php echo t('summary');?></label>
-        <div class="controls">
-            <?php echo CHtml::activeTextArea($model, 'summary', array('id'=>'summary'));?>
-            <?php if ($model->hasErrors('summary')):?><p class="help-block"><?php echo $model->getError('summary');?></p><?php endif;?>
-        </div>
-    </div>
     <div class="control-group bottom10px <?php if ($model->hasErrors('content')) echo 'error';?>">
-        <label class="control-label"><?php echo t('content');?></label>
+        <?php echo CHtml::activeLabel($model, 'content', array('class'=>'control-label'));?>
         <div class="controls">
             <?php echo CHtml::activeTextArea($model, 'content', array('id'=>'content'));?>
             <?php if ($model->hasErrors('content')):?><p class="help-block"><?php echo $model->getError('content');?></p><?php endif;?>
         </div>
     </div>
-    <?php if (count($tempPictures) > 0):?>
-    <div class="control-group bottom10px">
-        <label class="control-label"><?php echo t('post_upload_temp_pictures', 'admin');?></label>
-        <div class="controls">
-            <ul class="unstyled post-pictures">
-                <?php foreach ((array)$tempPictures as $picture):?>
-                <li><img src="<?php echo $picture->fileUrl;?>" /></li>
-                <?php endforeach;?>
-            </ul>
-        </div>
-    </div>
-    <?php endif;?>
-    <!-- 此处是文章图片，以后代替为弹出层的相册界面
-    <?php if (count($model->picture) > 0):?>
-    <div class="control-group bottom10px">
-        <label class="control-label"><?php echo t('post_upload_pictures', 'admin');?></label>
-        <div class="controls">
-            <ul class="unstyled post-pictures">
-                <?php foreach ((array)$model->picture as $pic):?>
-                <li><img src="<?php echo $pic->fileUrl;?>" /></li>
-                <?php endforeach;?>
-            </ul>
-        </div>
-    </div>
-    <?php endif;?>
-     -->
     <div class="form-actions">
-        <?php echo CHtml::submitButton(t('submit_post', 'admin'), array('class'=>'btn btn-primary'));?>
+        <?php echo CHtml::submitButton('保存段子', array('class'=>'btn btn-primary'));?>
     </div>
-    <div class="control-group bottom10px <?php if ($model->hasErrors('contributor')) echo 'error';?>">
-        <label class="control-label"><?php echo t('post_contributor');?></label>
+    <div class="control-group bottom10px <?php if ($model->hasErrors('view_nums')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'view_nums', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'contributor', array('class'=>'text'));?>
-            <?php if ($model->hasErrors('contributor')):?><p class="help-block"><?php echo $model->getError('contributor');?></p><?php endif;?>
+            <?php echo CHtml::activeTextField($model, 'view_nums', array('class'=>'span6'));?>
+            <?php if ($model->hasErrors('view_nums')):?><p class="help-block"><?php echo $model->getError('view_nums');?></p><?php endif;?>
         </div>
     </div>
-    <div class="control-group bottom10px <?php if ($model->hasErrors('contributor_site')) echo 'error';?>">
-        <label class="control-label"><?php echo t('post_contributor_site');?></label>
+    <div class="control-group bottom10px <?php if ($model->hasErrors('up_score')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'up_score', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'contributor_site', array('class'=>'span6'));?>
-            <?php if ($model->hasErrors('contributor_site')):?><p class="help-block"><?php echo $model->getError('contributor_site');?></p><?php endif;?>
+            <?php echo CHtml::activeTextField($model, 'up_score', array('class'=>'span6'));?>
+            <?php if ($model->hasErrors('up_score')):?><p class="help-block"><?php echo $model->getError('up_score');?></p><?php endif;?>
         </div>
     </div>
-    <div class="control-group bottom10px <?php if ($model->hasErrors('contributor_email')) echo 'error';?>">
-        <label class="control-label"><?php echo t('post_contributor_email');?></label>
+    <div class="control-group bottom10px <?php if ($model->hasErrors('down_score')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'down_score', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'contributor_email', array('class'=>'span6'));?>
-            <?php if ($model->hasErrors('contributor_email')):?><p class="help-block"><?php echo $model->getError('contributor_email');?></p><?php endif;?>
-        </div>
-    </div>
-    <div class="control-group bottom10px <?php if ($model->hasErrors('visit_nums')) echo 'error';?>">
-        <label class="control-label"><?php echo t('visit_nums');?></label>
-        <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'visit_nums', array('class'=>'span6'));?>
-            <?php if ($model->hasErrors('visit_nums')):?><p class="help-block"><?php echo $model->getError('visit_nums');?></p><?php endif;?>
-        </div>
-    </div>
-    <div class="control-group bottom10px <?php if ($model->hasErrors('digg_nums')) echo 'error';?>">
-        <label class="control-label"><?php echo t('digg_nums');?></label>
-        <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'digg_nums', array('class'=>'span6'));?>
-            <?php if ($model->hasErrors('digg_nums')):?><p class="help-block"><?php echo $model->getError('digg_nums');?></p><?php endif;?>
+            <?php echo CHtml::activeTextField($model, 'down_score', array('class'=>'span6'));?>
+            <?php if ($model->hasErrors('down_score')):?><p class="help-block"><?php echo $model->getError('down_score');?></p><?php endif;?>
         </div>
     </div>
     <div class="form-actions">
-        <?php echo CHtml::submitButton(t('submit_post', 'admin'), array('class'=>'btn btn-primary'));?>
+        <?php echo CHtml::submitButton('保存段子', array('class'=>'btn btn-primary'));?>
     </div>
 </fieldset>
 <?php echo CHtml::endForm();?>
@@ -160,17 +96,14 @@ $(function(){
 	$(':text:first').focus();
 	
     KindEditor.ready(function(K) {
-    	var cssPath = ['<?php echo tbu('styles/beta-common.css');?>', '<?php echo tbu('styles/beta-all.css');?>'];
+    	var cssPath = ['<?php echo sbu('libs/bootstrap/css/bootstrap.min.css');?>', '<?php echo sbu('styles/cd-basic.css');?>', '<?php echo sbu('styles/cd-main.css');?>'];
     	var imageUploadUrl = '<?php echo aurl('upload/image');?>';
-        KEConfig.adminmini.cssPath = cssPath;
-    	KEConfig.adminmini.uploadJson = imageUploadUrl;
         KEConfig.adminfull.cssPath = cssPath;
     	KEConfig.adminfull.uploadJson = imageUploadUrl;
-    	var betaContent = K.create('#content', KEConfig.adminfull);
-    	var betaSummary = K.create('#summary', KEConfig.adminmini);
+    	var cdContent = K.create('#content', KEConfig.adminfull);
     	$(document).on('click', '.post-pictures li', function(event){
             var html = $(this).html();
-            betaContent.insertHtml(html);
+            cdContent.insertHtml(html);
         });
     });
 });

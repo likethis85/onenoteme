@@ -42,64 +42,38 @@ class PostController extends AdminController
 	    $id = (int)$id;
 	    if ($id === 0) {
 	        $model = new AdminPost();
+
+	        $model->up_score = mt_rand(150, 500);
+	        $model->down_score = mt_rand(10, 50);
+	        $model->view_nums = mt_rand(500, 1000);
+	        
 	        $model->homeshow = user()->checkAccess('create_post_in_home') ? CD_YES : CD_NO;
-	        $model->state = user()->checkAccess('editor') ? POST_STATE_ENABLED : POST_STATE_NOT_VERIFY;
-	        $this->adminTitle = '添加文章';
+	        $model->state = user()->checkAccess('editor') ? POST_STATE_ENABLED : POST_STATE_UNVERIFY;
+	        $this->adminTitle = '发布段子';
 	    }
 	    elseif ($id > 0) {
 	        $model = AdminPost::model()->findByPk($id);
-	        $this->adminTitle = '编辑文章';
+	        $this->adminTitle = '编辑段子';
 	    }
 	    else
 	        throw new CHttpException(500);
 	    
 	    if (request()->getIsPostRequest() && isset($_POST['AdminPost'])) {
 	        $model->attributes = $_POST['AdminPost'];
-	        // 此处如果以后有多种文章模型了，这一句可以去掉。
 	        if ($model->getIsNewRecord()) {
 	            $model->user_id = user()->id;
 	            $model->user_name = user()->name;
-    	        $model->post_type = POST_TYPE_POST;
 	        }
 	        if ($model->save()) {
-	            $this->afterPostSave($model);
 	            $resultHtml = sprintf('{%s}&nbsp;发表成功，<a href="{%s}" target="_blank">点击查看</a>', $model->title, $model->url);
 	            user()->setFlash('save_post_result', $resultHtml);
                 $this->redirect(request()->getUrl());
 	        }
 	    }
-	    else {
-	        $key = param('sess_post_create_token');
-            if (!app()->session->contains($key) || empty(app()->session[$key])) {
-                $token = $model->getIsNewRecord() ? uniqid('beta', true) : $model->id;
-                app()->session->add($key, $token);
-    	    }
-            else {
-                $token = app()->session[$key];
-                $tempPictures = Upload::model()->findAllByAttributes(array('token'=>$token));
-            }
-	    }
 	    
 		$this->render('create', array(
 		    'model'=>$model,
-	        'tempPictures' => $tempPictures,
 		));
-	}
-	
-	private function afterPostSave(AdminPost $post)
-	{
-	    $key = param('sess_post_create_token');
-        if (app()->session->contains($key) && $token = app()->session[$key] && !is_numeric($token)) {
-            if (!$post->hasErrors()) {
-                $attributes = array('post_id'=>$post->id, 'token'=>'');
-                AdminUpload::model()->updateAll($attributes, 'token = :token', array(':token'=>$token));
-                app()->session->remove($key);
-            }
-        }
-        
-        // save remote images to local
-        if (param('auto_remote_image_local'))
-            $this->imagesLocal($post);
 	}
 	
 	private function imagesLocal(AdminPost $post)

@@ -47,7 +47,7 @@ var KEConfig = {
 		allowFlashUpload: false,
 		allowMediaUpload: false,
 		htmlTags: summaryHtmlTags,
-		bodyClass: 'beta-ke-content beta-post-content',
+		bodyClass: 'beta-ke-content item-content',
 		items: ['undo', 'redo', '|', 'plainpaste', 'wordpaste', 'fontname', 'fontsize', 'forecolor', 'hilitecolor', 'insertorderedlist',
 	        'insertunorderedlist', 'bold', 'italic', 'underline', 'strikethrough', '|', 'image', 'flash', 'media',
 	        'link', 'unlink', 'selectall', 'clearhtml', 'removeformat']
@@ -62,7 +62,7 @@ var KEConfig = {
 		allowFlashUpload: false,
 		allowMediaUpload: false,
 		htmlTags: contentHtmlTags,
-		bodyClass: 'beta-ke-content beta-post-content',
+		bodyClass: 'beta-ke-content item-content',
 		items: ['undo', 'redo', '|', 'cut', 'copy', 'paste', 'plainpaste', 'wordpaste',
 	        '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript', 'superscript', '|', 'link', 'unlink', 'selectall', 'clearhtml', 'removeformat', 'quickformat',
 	        '/', 'fontname', 'fontsize', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'strikethrough',
@@ -78,7 +78,7 @@ var KEConfig = {
 		allowFlashUpload: true,
 		allowMediaUpload: true,
 		htmlTags: summaryHtmlTags,
-		bodyClass: 'beta-ke-content beta-post-content',
+		bodyClass: 'beta-ke-content item-content',
 		items: ['source', '|', 'undo', 'redo', '|', 'plainpaste', 'wordpaste', 'fontname', 'fontsize', 'forecolor', 'hilitecolor', 'insertorderedlist',
 	        'insertunorderedlist', 'bold', 'italic', 'underline', 'strikethrough',
 	        '|', 'image', 'flash', 'media', 'link', 'unlink',
@@ -94,7 +94,7 @@ var KEConfig = {
 		allowFlashUpload: true,
 		allowMediaUpload: true,
 		htmlTags: contentHtmlTags,
-		bodyClass: 'beta-ke-content beta-post-content',
+		bodyClass: 'beta-ke-content item-content',
 		items: ['source', '|', 'undo', 'redo', '|', 'cut', 'copy', 'paste', 'plainpaste', 'wordpaste',
 	        '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript', 'superscript', '|', 'link', 'unlink', 'selectall', 'clearhtml', 'removeformat', 'quickformat',
 	        '/', 'fontname', 'fontsize', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'strikethrough',
@@ -104,3 +104,4 @@ var KEConfig = {
 
 	}
 };
+

@@ -83,7 +83,7 @@ class AdminPost extends Post
 
     public function getInfoLink()
     {
-        return l('详情', url('admin/post/info', array('id'=>$this->id)), array('target'=>'_blank'));
+        return l('详情', url('admin/post/info', array('id'=>$this->id)));
     }
     
     public function getEditUrl()
