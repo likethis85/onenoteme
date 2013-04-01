@@ -6,7 +6,7 @@ class PostCommand extends CConsoleCommand
         $cmd = app()->getDb()->createCommand()
             ->select('id')
             ->from(TABLE_POST)
-            ->order('create_time asc, id asc')
+            ->order('create_time desc, id desc')
             ->limit($count);
         
         $conditions = array('and', 'channel_id = :channelID', 'state = :disable_state');
