@@ -84,7 +84,7 @@ class Controller extends CController
         if (empty($mark) && $this->mobileDevice) {
             if (empty($url)) {
                 $route = 'mobile/' . $this->id . '/' . $this->action->id;
-                $url = url($route, $this->actionParams);
+                $url = aurl($route, $this->actionParams);
             }
             $this->redirect($url);
             exit(0);
