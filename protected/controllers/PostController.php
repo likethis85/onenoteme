@@ -20,15 +20,15 @@ class PostController extends Controller
         );
     }
     
-    public function beforeAction($action)
+    public function run($actionID)
     {
         $actions = array('show');
-        if (in_array($action->id, $actions)) {
+        if (in_array($actionID, $actions)) {
             $this->autoSwitchMobile();
             exit(0);
         }
         
-        return true;
+        parent::run($actionID);
     }
     
     public function actionScore()
