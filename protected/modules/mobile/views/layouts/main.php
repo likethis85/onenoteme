@@ -18,7 +18,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     <div class="cd-wrapper">
     	<div id="site-logo" class="logo fleft">
     	    <a href="<?php echo CDBase::mobileHomeUrl();?>" title="点击返回首页">
-    	        <img src="<?php echo sbu('images/logo.jpg');?>" alt="网站LOGO" title="返回首页" align="top" /><h1>挖段子</h1>
+    	        <img src="<?php echo sbu('images/logo.jpg');?>" alt="网站LOGO" title="返回首页" align="top" />
     	        <h2>挖段子网永久唯一域名：http://www.waduanzi.com</h2>
 	        </a>
 	    </div>

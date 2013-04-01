@@ -913,16 +913,15 @@ a:hover {color:#D14836; text-decoration:none;}
 .ad-block.fixed {position:fixed; top:73px; z-index:99;}
 .cd-border {border:1px solid #DFDFDF;}
 
-
 /* header */
 .cd-header {position:fixed; top:0px; z-index:999; margin-bottom:15px; height:45px; background-color:#545652; width:100%; overflow:hidden; border-bottom:1px solid black;}
 .cd-header ul {list-style:none;}
 .cd-header .channel-nav {margin:0 0 0 30px; padding:0; list-style:none; height:45px; overflow:hidden;}
-.cd-header .channel-nav li {list-style:none; float:left; color:#CFCFCF; height:45px; line-height:45px; margin:auto 3px;}
+.cd-header .channel-nav li {list-style:none; float:left; color:#CFCFCF; height:45px; line-height:45px; margin:auto 1px;}
 .cd-header .channel-nav li a {display:block; color:#E0E0E0; padding:0 10px; font-size:18px; font-family:"微软雅黑";}
 .cd-header .channel-nav li a:hover, .cd-header .channel-nav li.active a {color:white; background:#454544; margin-top:5px; height:35px; line-height:35px; border-radius:8px; -webkite-border-radius:8px; -moz-border-radius:8px;}
 .cd-header .logo a {display:block;}
-.cd-header .logo a h1 {line-height:47px; color:#DDDDD1; font-size:28px; font-family:微软雅黑; font-weight:bold; display:inline-block; padding:0; margin:0 0 0 10px;}
+.cd-header .logo a h1 {line-height:47px; color:#DDDDD1; font-size:16px; font-family:微软雅黑; font-weight:bold; display:inline-block; padding:0 5px; margin:0 0 0 10px;}
 .cd-header .logo a:hover h1 {color:white; line-height:45px;}
 .cd-header .logo a h2 {display:none;}
 .cd-header .logo img {height:100%; vertical-align:top;}
@@ -1006,11 +1005,6 @@ footer a.switch-version {float:right;}
 .video-detail .toolbar {background:#F4F4F6; padding:5px 10px; font-size:14px; color:#666; margin-top:10px;}
 
 
-@media (max-width:320px) {
-.cd-header .channel-nav li {margin:auto 1px;}
-.cd-header .logo a h1 {display:none;}
-.cd-header .channel-nav li a {padding:0 5px; font-size:16px;}
-}
 
 
 
@@ -1024,29 +1018,6 @@ footer a.switch-version {float:right;}
 
 
 
-
-
-
-h1.post-title {margin:0; line-height:20px; padding:0;}
-h1.post-title a {font-size:20px; display:block; padding:5px 0 10px; line-height:24px;}
-h1.post-title a:link, h1.post-title a:visited {color:black;}
-h1.post-title a:hover {color:#D14836;}
-.post-extra {font-size:12px; color:#AAAAAA; font-weight:normal; margin:0 0 10px;}
-
-.post-item {margin:0 0 10px; border:1px solid #EEEEEE; border-radius:8px; box-shadow:1px 1px 1px #CCCCCC; padding:10px; display:block;}
-.beta-title {margin:0; padding:0 35px 0 0; position:relative;}
-.post-item dd.summary a {display:block; color:black!important;}
-.post-item dd.summary {margin:0 0 10px; line-height:24px; font-size:16px; word-wrap:break-word;}
-.post-item dd.summary img {margin:10px auto; display:block;}
-.post-item .post-extra {text-align:right;}
-.post-item dd.read-more {border-top:1px solid #EEEEEE; margin:0; position:relative;}
-.post-item dd.read-more a {display:block; padding:10px 0 0; margin:0; color:gray;}
-.post-item dd.read-more span {right:0;}
-
-/* 首页评论按钮 */
-.comment-number {position:absolute; color:white; top:5px; right:0;}
-.comment-number a {text-align:center; height:20px; display:block; background:#D14836; font-size:14px; font-weight:normal; line-height:20px; color:white; margin:0px; padding:0px 10px; z-index:2;}
-.comment-number a:hover {background:black;}
 
 /* post/show */
 #beta-post-content {font-size:16px; line-height:24px; margin:10px 0; word-wrap:break-word; overflow:hidden;}
@@ -1089,20 +1060,6 @@ h1.post-title a:hover {color:#D14836;}
 .help-block.error {color:#b94a48;}
 .help-block.success {color:#468847;}
 #load-more-comments {margin-top:10px;}
-
-/* old access link */
-.old-link {font-size:14px; text-align:center;}
-
-/* weixin */
-.btn-focus {display:block; background:url(../images/focusbtn_bg.png) no-repeat center center; background-size:100% 100%; position:relative; height:64px; padding:0 15px; margin:10px 0 15px;}
-.btn-focus .avatar {top:5px; left:10px; position:absolute;}
-.btn-focus .wxname {top:10px; left:75px; position:absolute; margin:0; font-size:14px; font-weight:bold; color:#555;}
-.btn-focus .wxid {top:35px; left:75px; position:absolute; margin:0; font-size:12px; color:gray;}
-.btn-focus b {top:20px; right:10px; position:absolute; font-size:14px; color:gray;}
-.avatar img {width:100%; border-radius:23px; -webkit-border-radius:23px;}
-.avatar {display:inline-block; width:46px; margin:0; padding:3px; overflow:hidden; border-radius:26px; -webkit-border-radius:26px; border:1px solid #DFDFDF; box-shadow:1px 1px 1px #DFDFDF;}
-.avatar:active, .more-weixin li img:active {opacity:.5;}
-.btn-focus.hide {display:none;}
 
 
 
