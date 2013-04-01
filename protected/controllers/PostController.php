@@ -23,10 +23,8 @@ class PostController extends Controller
     
     public function filterSwitchMobile($filterChain)
     {
-        if (in_array($filterChain->action->id, $actions)) {
-            $this->autoSwitchMobile();
-            exit(0);
-        }
+        $url = url('mobile/' . $filterChain->controller->id . '/' . $filterChain->action->id, $filterChain->controller->getActionParams());
+        $this->autoSwitchMobile($url);
         
         $filterChain->run();
     }
