@@ -300,9 +300,9 @@ class CDBase
     }
     
 
-    public static function userIsMobileBrower()
+    public static function isMobileDevice()
     {
-        $browers = array('iPhone', 'Android', 'hpwOS', 'Windows Phone OS', 'BlackBerry');
+        $browers = array('iPhone', 'iPod', 'Android', 'hpwOS', 'Windows Phone OS', 'BlackBerry');
         $agent = $_SERVER['HTTP_USER_AGENT'];
         foreach ($browers as $brower) {
             $pos = stripos($agent, $brower);

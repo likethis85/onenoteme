@@ -25,7 +25,7 @@ class SiteController extends Controller
         );
     }
     
-    public function actionIndex($page = 1, $s = POST_LIST_STYLE_LINE)
+    public function actionIndex($page = 1, $s = POST_LIST_STYLE_LINE, $f = 0)
     {
         $this->autoSwitchMobile(CDBase::mobileHomeUrl());
         
