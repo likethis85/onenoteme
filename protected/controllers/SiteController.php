@@ -27,7 +27,7 @@ class SiteController extends Controller
     
     public function beforeAction($action)
     {
-        $actions = array('site');
+        $actions = array('index');
         if (in_array($action->id, $actions)) {
             $mobileUrl = aurl('mobile/default/index', $this->actionParams);
             $this->autoSwitchMobile($mobileUrl);
