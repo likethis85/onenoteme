@@ -2,6 +2,7 @@
 class UserIdentity extends CUserIdentity
 {
     const ERROR_USER_FORBIDDEN = 4;
+    const ERROR_USER_UNVERIFY = 5;
     
     private $_id;
     private $_name;
@@ -29,6 +30,8 @@ class UserIdentity extends CUserIdentity
                 $this->errorCode = self::ERROR_USERNAME_INVALID;
             elseif ($this->user->state == USER_STATE_FORBIDDEN)
                 $this->errorCode = self::ERROR_USER_FORBIDDEN;
+            elseif ($this->user->state == USER_STATE_UNVERIFY)
+                $this->errorCode = self::ERROR_USER_UNVERIFY;
             elseif ($this->user->password != $password) {
                 $this->errorCode = self::ERROR_PASSWORD_INVALID;
             }
