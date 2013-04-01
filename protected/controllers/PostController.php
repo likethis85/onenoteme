@@ -20,16 +20,15 @@ class PostController extends Controller
         );
     }
     
-    public function run($actionID)
+    public function beforeAction($action)
     {
         $actions = array('show');
-        if (in_array($actionID, $actions)) {
-            $mobileUrl = aurl('mobile/post/' . $actionID, $this->actionParams);
+        if (in_array($action->id, $actions)) {
             $this->autoSwitchMobile();
             exit(0);
         }
         
-        parent::run($actionID);
+        return true;
     }
     
     public function actionScore()
