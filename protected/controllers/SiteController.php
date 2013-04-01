@@ -4,7 +4,7 @@ class SiteController extends Controller
     public function filters()
     {
         return array(
-            'switchMobile + show',
+            'switchMobile + index',
             array(
                 'COutputCache + bdmap, sitemap, links',
                 'duration' => 600,
