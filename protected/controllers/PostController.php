@@ -3,6 +3,12 @@ class PostController extends Controller
 {
     public function filters()
     {
+        $actions = array('show');
+        if (in_array($action->id, $actions)) {
+            $this->autoSwitchMobile();
+            exit(0);
+        }
+        
         return array(
             'ajaxOnly + score, like, unlike, views',
             'postOnly + score, like, unlike, views',
@@ -18,17 +24,6 @@ class PostController extends Controller
                 'varyByParam' => array('id'),
             ),
         );
-    }
-    
-    public function beforeAction($action)
-    {
-        $actions = array('show');
-        if (in_array($action->id, $actions)) {
-            $this->autoSwitchMobile();
-            exit(0);
-        }
-        
-        return true;
     }
     
     public function actionScore()
