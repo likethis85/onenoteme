@@ -43,7 +43,7 @@ class CDPostSearch extends CWidget
         }
         
         $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('t.state' => POST_STATE_DISABLED));
+        $criteria->addColumnCondition(array('t.state' => POST_STATE_ENABLED));
         if ($this->channel !== null)
             $criteria->addColumnCondition(array('t.channel_id' => $this->channel));
         
