@@ -592,6 +592,24 @@ class Post extends CActiveRecord
             ->delete(TABLE_POST_FAVORITE, 'post_id = :postid', array(':postid' => $this->id));
         app()->getDb()->createCommand()
             ->delete(TABLE_POST_TAG, 'post_id = :postid', array(':postid' => $this->id));
+            
+        if ($this->thumbnail_pic) {
+        	$picPath = str_replace($this->thumbnail_pic, sbu());
+        	$picPath = '/' . ltrim($picPath, '/');
+        	app()->upyunimg->delete($picPath);
+        }
+        
+        if ($this->bmiddle_pic) {
+        	$picPath = str_replace($this->bmiddle_pic, sbu());
+        	$picPath = '/' . ltrim($picPath, '/');
+        	app()->upyunimg->delete($picPath);
+        }
+        
+        if ($this->original_pic) {
+        	$picPath = str_replace($this->original_pic, sbu());
+        	$picPath = '/' . ltrim($picPath, '/');
+        	app()->upyunimg->delete($picPath);
+        }
     }
 }
 
