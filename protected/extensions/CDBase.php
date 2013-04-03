@@ -396,7 +396,9 @@ class CDBase
             $result = array();
             $im->revert();
             
-            if (!$isGifAnimate) {
+            if ($isGifAnimate)
+            	$originalData = $data;
+            else {
 	            $text = '挖段子网';
 	            $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
 	            $color = array(200, 200, 200);
@@ -404,9 +406,9 @@ class CDBase
 	                $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
 	                $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
 	            }
+	            $originalData = $im->outputRaw();
             }
             
-            $originalData = $im->outputRaw();
             $uploader->setFilename($originalFilename);
             $result = $uploader->upload($originalData);
             $original['width'] = (int)$result['x-upyun-width'];
