@@ -282,7 +282,7 @@ function upyunFbu($url = null)
 {
     static $uploadBaseUrl = null;
     if ($uploadBaseUrl === null)
-        $uploadBaseUrl = rtrim(param('uploadBaseUrl'), '/') . '/';
+        $uploadBaseUrl = rtrim(param('upyunUploadBaseUrl'), '/') . '/';
 
     if (empty($url))
         return $uploadBaseUrl;
