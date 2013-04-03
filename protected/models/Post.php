@@ -593,22 +593,23 @@ class Post extends CActiveRecord
         app()->getDb()->createCommand()
             ->delete(TABLE_POST_TAG, 'post_id = :postid', array(':postid' => $this->id));
             
+        $uploader = app()->getComponent('upyunimg');
         if ($this->thumbnail_pic) {
-        	$picPath = str_replace(upyunFbu(), '', $this->thumbnail_pic);
+        	$picPath = str_replace($uploader->domain, '', $this->thumbnail_pic);
         	$picPath = '/' . ltrim($picPath, '/');
-        	app()->upyunimg->delete($picPath);
+        	$uploader->delete($picPath);
         }
         
         if ($this->bmiddle_pic) {
-        	$picPath = str_replace(upyunFbu(), '', $this->bmiddle_pic);
+        	$picPath = str_replace($uploader->domain, '', $this->bmiddle_pic);
         	$picPath = '/' . ltrim($picPath, '/');
-        	app()->upyunimg->delete($picPath);
+        	$uploader->delete($picPath);
         }
         
         if ($this->original_pic) {
-        	$picPath = str_replace(upyunFbu(), '', $this->original_pic);
+        	$picPath = str_replace($uploader->domain, '', $this->original_pic);
         	$picPath = '/' . ltrim($picPath, '/');
-        	app()->upyunimg->delete($picPath);
+        	$uploader->delete($picPath);
         }
     }
 }
