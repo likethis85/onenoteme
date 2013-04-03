@@ -596,15 +596,21 @@ class Post extends CActiveRecord
         try {
 	        $uploader = app()->getComponent('upyunimg');
 	        if ($this->thumbnail_pic) {
-	        	$uploader->delete($this->thumbnail_pic);
+	        	$imgPath = str_replace($uploader->domain, '', $this->thumbnail_pic);
+	        	$imgPath = '/' . ltrim($imgPath, '/');
+	        	$uploader->delete($imgPath);
 	        }
 	        
 	        if ($this->bmiddle_pic) {
-	        	$uploader->delete($this->thumbnail_pic);
+	        	$imgPath = str_replace($uploader->domain, '', $this->bmiddle_pic);
+	        	$imgPath = '/' . ltrim($imgPath, '/');
+	        	$uploader->delete($imgPath);
 	        }
 	        
 	        if ($this->original_pic) {
-	        	$uploader->delete($this->thumbnail_pic);
+	        	$imgPath = str_replace($uploader->domain, '', $this->original_pic);
+	        	$imgPath = '/' . ltrim($imgPath, '/');
+	        	$uploader->delete($imgPath);
 	        }
         }
         catch (Exception $e) {}
