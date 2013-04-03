@@ -600,19 +600,25 @@ class Post extends CActiveRecord
 	        	$imgPath = '/' . ltrim($imgPath, '/');
 	        	$uploader->delete($imgPath);
 	        }
-	        
-	        if ($this->bmiddle_pic) {
-	        	$imgPath = str_replace($uploader->domain, '', $this->bmiddle_pic);
-	        	$imgPath = '/' . ltrim($imgPath, '/');
-	        	$uploader->delete($imgPath);
-	        }
-	        
+        }
+        catch (Exception $e) {}
+	    
+	    try {
 	        if ($this->original_pic) {
 	        	$imgPath = str_replace($uploader->domain, '', $this->original_pic);
 	        	$imgPath = '/' . ltrim($imgPath, '/');
 	        	$uploader->delete($imgPath);
 	        }
         }
+        catch (Exception $e) {}
+	        
+	    try {
+	        if ($this->bmiddle_pic) {
+	        	$imgPath = str_replace($uploader->domain, '', $this->bmiddle_pic);
+	        	$imgPath = '/' . ltrim($imgPath, '/');
+	        	$uploader->delete($imgPath);
+	        }
+	    }
         catch (Exception $e) {}
     }
 }
