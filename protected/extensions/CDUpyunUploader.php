@@ -81,7 +81,7 @@ class CDUpyunUploader extends CDUploader
     
     public function delete($path)
     {
-        return $this->_client->delete($path);
+        return $this->_client->deleteFile($path);
     }
     
     public function revert()
