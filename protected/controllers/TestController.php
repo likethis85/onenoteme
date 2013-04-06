@@ -3,6 +3,7 @@ class TestController extends Controller
 {
     public function actionIndex()
     {
+        exit;
         $this->redirect('/');
         
         $url = 'http://pic.pp3.cn/uploads/allimg/111125/16030T308-2.jpg';

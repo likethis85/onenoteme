@@ -66,7 +66,7 @@ class CommentController extends MobileController
         exit(0);
     }
 
-    public function actionSupport($id, $callback)
+    public function actionSupport($id)
     {
         self::rating('up_score', $id);
         exit(0);
@@ -77,7 +77,6 @@ class CommentController extends MobileController
         self::rating('down_score', $id);
         exit(0);
     }
-    
 
     private static function rating($field, $id)
     {
