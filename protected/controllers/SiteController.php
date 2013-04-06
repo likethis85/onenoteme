@@ -13,7 +13,7 @@ class SiteController extends Controller
             array(
                 'COutputCache + index',
                 'duration' => 120,
-                'varyByParam' => array('page', 's', 'f'),
+                'varyByParam' => array('page', 's'),
                 'varyByExpression' => array(user(), 'getIsGuest'),
                 'requestTypes' => array('GET'),
             ),
@@ -26,7 +26,7 @@ class SiteController extends Controller
         );
     }
     
-    public function actionIndex($page = 1, $s = POST_LIST_STYLE_LINE, $f = 0)
+    public function actionIndex($page = 1, $s = POST_LIST_STYLE_LINE)
     {
         $s = strip_tags(trim($s));
         $limit = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('line_post_count_page');
