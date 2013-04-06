@@ -77,7 +77,7 @@ class PostController extends Controller
         if ($post->tags)
             $pageKeyword = $post->getTagText(',') . ',' . $pageKeyword;
         $this->setKeywords($pageKeyword);
-        $this->setDescription($post->content);
+        $this->setDescription($post->getfilterSummary());
         $mobileUrl = aurl('mobile/post/show', array('id'=>$id));
         cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
         
