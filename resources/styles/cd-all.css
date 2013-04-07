@@ -1046,8 +1046,8 @@ input.button:active, .button:active {background-position:-389px 0;}
 .comment-list .comment-item .comment-arrows .arrow-down:hover {background-position:-167px -99px;}
 .comment-list .comment-item .comment-arrows .arrow-up.pushed {background-position:-188px -78px;}
 .comment-list .comment-item .comment-arrows .arrow-down.pushed {background-position:-188px -99px;}
-.next-posts .post-nav {margin-bottom:10px;}
-.next-posts .post-nav a:link, .next-posts .post-nav a:visited {display:block; padding:0; text-align:center; line-height:33px; color:white; margin-right:5px;}
+.next-posts {margin-bottom:10px;}
+.next-posts a:link, .next-posts a:visited {display:block; padding:0; text-align:center; line-height:33px; color:white; margin-right:5px;}
 .thumb-posts {margin-bottom:15px;}
 .thumb-posts .thumb {float:left; text-align:center;}
 .thumb-posts .thumb a:link, .next-posts .thumb a:visited {display:block; background-color:#E9E9E9; border:1px solid #E6E6E6;  width:90px; height:90px; overflow:hidden;}
