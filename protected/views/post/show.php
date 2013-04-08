@@ -147,20 +147,7 @@ $(function(){
         	tthis.removeClass('expand');
         }
     });
-    $(document).on('mouseenter', '.post-picture', function(event){
-        $(this).find('.btn-prev-next').css('opacity', 0.85);
-    });
-    $(document).on('mouseleave', '.post-picture', function(event){
-        $(this).find('.btn-prev-next').css('opacity', 0);
-    });
-    $(document).on('scroll', function(event){
-        var button = $('.post-picture .btn-prev-next span');
-        if (button.length == 0) return false;
-        var img = $('.post-picture.thumbbox img');
-        var boxtop = $('.post-picture').position().top;
-        var buttontop = (img.height() > 150) ? 75 : img.height() / 2;
-        button.css('top', boxtop + buttontop);
-    });
+    $(document).on('scroll', Waduanzi.setPrevNextButtonPosition);
     
 	var container = $('#comments');
 	container.infinitescroll({

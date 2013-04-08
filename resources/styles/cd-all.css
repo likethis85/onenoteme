@@ -900,7 +900,7 @@ a:hover {color:#D14836; text-decoration:none;}
 
 ::selection {background-color:#C3E99E; text-shadow:none;}
 .site-bg {background-image:url(../images/sitebg.png); background-repeat:no-repeat;}
-.cd-wrapper {width:955px; margin:0px auto; overflow:hidden;}
+.cd-wrapper {width:1055px; margin:0px auto; overflow:hidden;}
 .fluid-wrapper {margin:0px auto; overflow:hidden; padding:0 5px;}
 .cdc-block {margin:0px auto; background-color:white;}
 .cdc-block h4 {margin:0; background:#EFEFEF; line-height:36px; text-indent:10px; font-size:12px; font-weight:normal;}
@@ -910,9 +910,9 @@ a:hover {color:#D14836; text-decoration:none;}
 .cd-main {margin-top:88px;}
 
 /* container */
-.cd-container {width:640px; overflow:hidden;}
+.cd-container {width:740px; overflow:hidden;}
 .cd-entry {background:#FFFFFF; margin:0 auto;}
-.cd-content {width:600px;}
+.cd-content {width:700px;}
 
 /* sidebar */
 .cd-sidebar {width:300px; overflow:hidden;}
@@ -1022,7 +1022,7 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 .post-detail .post-picture {text-align:center; overflow:hidden; margin-bottom:10px; position:relative; background:#FFFFFFF;}
 .post-detail .post-picture img {max-width:600px;}
 .post-detail .cdc-block {margin:25px auto 15px; list-style:none; text-align:left;}
-.btn-prev-next {position:absolute; top:0; display:block; width:50px; background:#FFFFFF; height:100%; opacity:0;}
+.btn-prev-next {position:absolute; top:0; display:block; width:50px; background:#FFFFFF; height:100%;}
 .btn-prev-next:hover {display:block; width:50px; background:#F5F5F5;}
 .btn-prev-next#btn-prev-post {left:0;}
 .btn-prev-next#btn-next-post {right:0;}

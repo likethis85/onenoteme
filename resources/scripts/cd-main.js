@@ -17,6 +17,16 @@ Waduanzi.IncreasePostViewNums = function(postid, url){
 		data: {id:postid}
 	});
 };
+
+Waduanzi.setPrevNextButtonPosition = function(event){
+	var button = $('.post-picture .btn-prev-next span');
+    if (button.length == 0) return false;
+    var img = $('.post-picture.thumbbox img');
+    var boxtop = $('.post-picture').position().top;
+    var buttontop = (img.height() > 150) ? 100 : img.height() / 2;
+    button.css('top', boxtop + buttontop);
+};
+
 Waduanzi.RatingComment = function(event){
 	event.preventDefault();
 	_hmt && _hmt.push(['_trackEvent', '评论评价按钮', '点击']);
