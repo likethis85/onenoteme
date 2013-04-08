@@ -153,7 +153,7 @@ $(function(){
     $(document).on('mouseleave', '.post-picture', function(event){
         $(this).find('.btn-prev-next').css('opacity', 0);
     });
-    $('document').on('scroll', function(event){
+    $(document).on('scroll', function(event){
         var button = $('.post-picture .btn-prev-next');
         if (button.length == 0) return false;
         var img = $('.post-picture.thumbbox img');

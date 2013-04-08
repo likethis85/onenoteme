@@ -1026,7 +1026,7 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 .btn-prev-next:hover {display:block; width:50px; background:#F5F5F5;}
 .btn-prev-next#btn-prev-post {left:0;}
 .btn-prev-next#btn-next-post {right:0;}
-.btn-prev-next .btn-prev-icon, .btn-prev-next .btn-next-icon {display:block; width:50px; height:47px; position:fixed; top:100px;}
+.btn-prev-next .btn-prev-icon, .btn-prev-next .btn-next-icon {display:block; width:50px; height:47px; position:fixed;}
 .btn-prev-next .btn-prev-icon {background-position:-744px -7px;}
 .btn-prev-next:hover .btn-prev-icon {background-position:-744px -54px;}
 .btn-prev-next .btn-next-icon {background-position:-813px -7px;}
