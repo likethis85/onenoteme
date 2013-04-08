@@ -26,13 +26,13 @@ Waduanzi.setPrevNextButtonPosition = function() {
     var boxtop = $('.post-picture').position().top;
     var buttontop = (img.height() > 150) ? 100 : img.height() / 2;
     var scrollMax = img.height() + boxtop - buttontop - 100; // 100是离图片底部的距离
-    if ($(document).scrollTop() < imgbottom) {
+    if ($(document).scrollTop() < scrollMax) {
 	    button.css('position', 'fixed');
 	    button.css('top', boxtop + buttontop);
     }
     else {
     	button.css('position', 'absolute');
-	    button.css('top', imgbottom);
+	    button.css('top', scrollMax);
     }
 };
 
