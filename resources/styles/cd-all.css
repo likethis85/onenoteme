@@ -1019,9 +1019,18 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 
 /* post/show */
 .post-detail .post-content {line-height:24px; color:inherit; margin:10px auto 15px;}
-.post-detail .post-picture {text-align:center; overflow:hidden; margin-bottom:10px; background-color:#F4F4F6;}
+.post-detail .post-picture {text-align:center; overflow:hidden; margin-bottom:10px; position:relative; background:#FFFFFFF;}
 .post-detail .post-picture img {max-width:600px;}
 .post-detail .cdc-block {margin:25px auto 15px; list-style:none; text-align:left;}
+.btn-prev-next {position:absolute; top:0; display:block; width:50px; background:#FFFFFF; height:100%;}
+.btn-prev-next:hover {display:block; width:50px; background:#F5F5F5;}
+.btn-prev-next#btn-prev-post {left:0;}
+.btn-prev-next#btn-next-post {right:0;}
+.btn-prev-next .btn-prev-icon, .btn-prev-next .btn-next-icon {display:block; width:50px; height:47px; positi2on:fixed; top:100px;}
+.btn-prev-next .btn-prev-icon {background-position:-744px -7px;}
+.btn-prev-next:hover .btn-prev-icon {background-position:-744px -54px;}
+.btn-prev-next .btn-next-icon {background-position:-813px -7px;}
+.btn-prev-next:hover .btn-next-icon {background-position:-813px -54px;}
 
 .comment-form {backgroun2d-color:#F4F4F6; display:block; position:relative; overflow:hidden; background-color:#ECECEC; padding:8px; margin:10px 0;}
 .comment-form textarea {width:485px; border:0; color:#888; margin:0; padding:7px 5px 6px; font-size:12px;}
@@ -1046,11 +1055,9 @@ input.button:active, .button:active {background-position:-389px 0;}
 .comment-list .comment-item .comment-arrows .arrow-down:hover {background-position:-167px -99px;}
 .comment-list .comment-item .comment-arrows .arrow-up.pushed {background-position:-188px -78px;}
 .comment-list .comment-item .comment-arrows .arrow-down.pushed {background-position:-188px -99px;}
-.next-posts {margin-bottom:10px;}
-.next-posts a:link, .next-posts a:visited {display:block; padding:0; text-align:center; line-height:33px; color:white; margin-right:5px;}
 .thumb-posts {margin-bottom:15px;}
 .thumb-posts .thumb {float:left; text-align:center;}
-.thumb-posts .thumb a:link, .next-posts .thumb a:visited {display:block; background-color:#E9E9E9; border:1px solid #E6E6E6;  width:90px; height:90px; overflow:hidden;}
+.thumb-posts .thumb a:link {display:block; background-color:#E9E9E9; border:1px solid #E6E6E6;  width:90px; height:90px; overflow:hidden;}
 .thumb-posts .thumb a:hover {border-color:#888; opacity:0.6;}
 .thumb-posts .thumb img {border:0; width:90px;}
 
