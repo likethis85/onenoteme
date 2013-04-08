@@ -32,7 +32,7 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 .waterfall-item {width:227px; margin:5px; padding:10px 0; float:left; color:#292A2B; background:#FBFBFB; font-size:14px; text-align:center; cursor:pointer;}
 .waterfall-item {-webkit-box-shadow:#666 0 1px 3px; -moz-box-shadow:#666 0 1px 3px; box-shadow:#666 0 1px 3px; -webkit-border-radius:5px; border-radius:5px; -moz-border-radius:5px;}
 .waterfall-item.item-bg {background-color:#C3E99E; color:#333;}
-.waterfall-item .pic-block {max-height:300px; overflow:hidden; margin-bottom:10px;}
+.waterfall-item .pic-block {overflow:hidden; margin-bottom:10px;}
 .waterfall-item .pic-block img {max-width:205px; min-width:150px; vertical-align:top; background:url(../images/loading2.gif) no-repeat center center;}
 .waterfall-item p {line-height:24px; text-align:left; padding:0 10px 5px; margin:0;}
 .waterfall-item p a {display:block;}
