@@ -21,10 +21,19 @@ Waduanzi.IncreasePostViewNums = function(postid, url){
 Waduanzi.setPrevNextButtonPosition = function() {
 	var button = $('.post-picture .btn-prev-next span');
     if (button.length == 0) return false;
+    
     var img = $('.post-picture.thumbbox img');
     var boxtop = $('.post-picture').position().top;
     var buttontop = (img.height() > 150) ? 100 : img.height() / 2;
-    button.css('top', boxtop + buttontop);
+    var imgbutton = img.height() + boxtop - 100; // 100是离图片底部的距离
+    if ($(document).scrollTop < imgbutton) {
+	    button.css('position', 'fixed');
+	    button.css('top', boxtop + buttontop);
+    }
+    else {
+    	button.css('position', 'absolute');
+	    button.css('top', imgbutton);
+    }
 };
 
 Waduanzi.RatingComment = function(event){
