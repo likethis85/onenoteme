@@ -80,8 +80,15 @@
 </div>
 
 <div class="fright cd-sidebar">
-    <?php if ($nextPosts):?>
     <div class="panel panel10 thumb-posts">
+        <?php if (!$post->getIsLengtu() && !$post->getIsGirl()):?>
+        <div class="next-posts">
+            <?php if ($prevUrl):?><a href="<?php echo $prevUrl;?>" class="fleft site-bg button">上一个</a><?php endif;?>
+            <?php if ($nextUrl):?><a href="<?php echo $nextUrl;?>" class="fleft site-bg button">下一个</a><?php endif;?>
+            <a href="<?php echo $returnUrl;?>" class="fright site-bg button">返回列表</a>
+            <div class="clear"></div>
+        </div>
+        <?php endif;?>
         <?php foreach ($nextPosts as $next):?>
         <div class="thumb">
             <?php echo $next->getThumbnailLink('_self');?>
@@ -89,7 +96,6 @@
         <?php endforeach;?>
         <div class="clear"></div>
     </div>
-    <?php endif;?>
     
     <!-- 详情页侧边栏广告位开始 -->
     <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_first'));?>
