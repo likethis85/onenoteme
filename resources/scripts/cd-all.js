@@ -545,7 +545,7 @@ Waduanzi.setPrevNextButtonPosition = function() {
     var boxtop = $('.post-picture').position().top;
     var buttontop = (img.height() > 150) ? 100 : img.height() / 2;
     var imgbutton = img.height() + boxtop - 100; // 100是离图片底部的距离
-    if ($(document).scrollTop < imgbutton) {
+    if ($(document).scrollTop() < imgbutton) {
 	    button.css('position', 'fixed');
 	    button.css('top', boxtop + buttontop);
     }
