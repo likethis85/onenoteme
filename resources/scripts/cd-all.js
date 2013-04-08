@@ -543,11 +543,11 @@ Waduanzi.setPrevNextButtonPosition = function() {
     
     var img = $('.post-picture.thumbbox img');
     var boxtop = $('.post-picture').position().top;
-    var buttontop = (img.height() > 150) ? 100 : img.height() / 2;
-    var scrollMax = img.height() - 100; // 100是离图片底部的距离
+    var buttontop = boxtop + ((img.height() > 150) ? 100 : img.height() / 2);
+    var scrollMax = boxtop + img.height() - buttontop - 100 - 47; // 100是离图片底部的距离，47是图标的高度
     if ($(document).scrollTop() < scrollMax) {
 	    button.css('position', 'fixed');
-	    button.css('top', boxtop + buttontop);
+	    button.css('top', buttontop);
     }
     else {
     	button.css('position', 'absolute');
