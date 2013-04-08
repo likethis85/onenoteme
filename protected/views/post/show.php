@@ -147,6 +147,12 @@ $(function(){
         	tthis.removeClass('expand');
         }
     });
+    $(document).on('mouseenter', '.post-picture', function(event){
+        $(this).find('.btn-prev-next').css('opacity', 1);
+    });
+    $(document).on('mouseleave', '.post-picture', function(event){
+        $(this).find('.btn-prev-next').css('opacity', 0);
+    });
     
 	var container = $('#comments');
 	container.infinitescroll({
