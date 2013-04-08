@@ -60,7 +60,7 @@ class PostController extends Controller
             throw new CHttpException(403, '该段子不存在或未被审核');
         
         // 获取后几个Post
-        if ($post->getIsLengtu() && $post->getIsGirl())
+        if ($post->getIsLengtu() || $post->getIsGirl())
             $nextPosts = self::fetchNextPosts($post, 9);
         
         // 获取评论
