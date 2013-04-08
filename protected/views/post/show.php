@@ -154,7 +154,7 @@ $(function(){
         $(this).find('.btn-prev-next').css('opacity', 0);
     });
     $(document).on('scroll', function(event){
-        var button = $('.post-picture .btn-prev-next');
+        var button = $('.post-picture .btn-prev-next span');
         if (button.length == 0) return false;
         var img = $('.post-picture.thumbbox img');
         var boxtop = $('.post-picture').position().top;
