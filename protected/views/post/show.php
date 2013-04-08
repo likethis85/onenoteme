@@ -127,6 +127,7 @@ $(function(){
 	Waduanzi.IncreasePostViewNums(postid, '<?php echo aurl('post/views');?>');
 	$(document).on('click', '.comment-arrows a', Waduanzi.RatingComment);
     Waduanzi.AjustImgWidth($('.post-picture img'), 600);
+    Waduanzi.setPrevNextButtonPosition();
     
     $('.item-toolbar').on('click', 'a.upscore, a.downscore', Waduanzi.ratingPost);
 	$('.item-toolbar').on('mouseenter', 'a.share, .sharebox', Waduanzi.showShareBox);
@@ -147,7 +148,9 @@ $(function(){
         	tthis.removeClass('expand');
         }
     });
-    $(document).on('scroll', Waduanzi.setPrevNextButtonPosition);
+    $(document).on('scroll', function(event) {
+    	Waduanzi.setPrevNextButtonPosition();
+    });
     
 	var container = $('#comments');
 	container.infinitescroll({

@@ -18,7 +18,7 @@ Waduanzi.IncreasePostViewNums = function(postid, url){
 	});
 };
 
-Waduanzi.setPrevNextButtonPosition = function(event){
+Waduanzi.setPrevNextButtonPosition = function() {
 	var button = $('.post-picture .btn-prev-next span');
     if (button.length == 0) return false;
     var img = $('.post-picture.thumbbox img');
