@@ -67,6 +67,7 @@ define('POST_LIST_STYLE_WATERFALL', 'fall');
 
 define('IMAGE_THUMBNAIL_WIDTH', 200);
 define('IMAGE_THUMBNAIL_HEIGHT', 280);
+define('IMAGE_THUMB_WIDTH', 200);
 define('IMAGE_SMALL_WIDTH', 320);
 define('IMAGE_MIDDLE_WIDTH', 640);
 define('IMAGE_LARGE_WIDTH', 1280);
@@ -82,6 +83,7 @@ define('GENDER_FEMALE', 1);
 define('GENDER_MALE', 2);
 
 define('UPYUN_IMAGE_CUSTOM_SEPARATOR', '!');
+define('UPYUN_IMAGE_CUSTOM_THUMB', 'thumb');
 define('UPYUN_IMAGE_CUSTOM_SMALL', 'small');
 define('UPYUN_IMAGE_CUSTOM_MIDDLE', 'middle');
 define('UPYUN_IMAGE_CUSTOM_LARGE', 'large');

@@ -11,7 +11,7 @@
     <div class="clear"></div>
 </div>
 
-<div class="panel panel15 bottom10px post-grid-list clearfix <?php if ($channel == CHANNEL_GIRL) echo 'column-three';?>">
+<div class="panel panel15 bottom10px post-grid-list clearfix">
     <div id="grid-container">
         <?php foreach ((array)$models as $index => $model):?>
         <div class="grid-item">
