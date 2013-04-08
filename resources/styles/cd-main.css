@@ -73,7 +73,7 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 .btn-prev-next:hover .btn-next-icon {background-position:-813px -54px;}
 
 .comment-form {backgroun2d-color:#F4F4F6; display:block; position:relative; overflow:hidden; background-color:#ECECEC; padding:8px; margin:10px 0;}
-.comment-form textarea {width:485px; border:0; color:#888; margin:0; padding:7px 5px 6px; font-size:12px;}
+.comment-form textarea {width:585px; border:0; color:#888; margin:0; padding:7px 5px 6px; font-size:12px;}
 .comment-form textarea.mini-content {height:20px; resize:none;}
 .comment-form textarea.expand {height:50px;}
 .comment-form .save-caption-loader {background:url(../images/small-loader.gif) no-repeat; width:24px; height:24px; position:absolute; top:47px; right:10px;}
