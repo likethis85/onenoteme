@@ -394,6 +394,48 @@ class Post extends CActiveRecord
             return '';
     }
     
+    public function getUpyunThumb()
+    {
+        $url = '';
+        if ($this->original_pic)
+            $url = $this->original_pic . UPYUN_IMAGE_CUSTOM_SEPARATOR . UPYUN_IMAGE_CUSTOM_THUMB;
+        
+        return $url;
+    }
+    
+    public function getUpyunThumbHeight($width = IMAGE_THUMB_WIDTH)
+    {
+        $height = 0;
+        if ($this->original_width && $this->original_height)
+            $height = $width * $this->original_height / $this->original_width;
+        
+        return $height;
+    }
+    
+    public function getUpyunThumbImage($width = IMAGE_THUMB_WIDTH)
+    {
+        $html = '';
+        if ($this->getUpyunThumb()) {
+            $htmlOptions = array('class'=>'cd-thumbnail');
+            if ($width > 0) $htmlOptions['width'] = $width;
+            $height = $this->getUpyunThumbHeight($width);
+            if ($height > 0) $htmlOptions['height'] = $height;
+            $html = image($this->getUpyunThumb(), $this->title, $htmlOptions);
+        }
+    
+        return $html;
+    }
+    
+
+    public function getUpyunThumbLink($width = IMAGE_THUMB_WIDTH, $target = '_blank')
+    {
+        $html = '';
+        if ($this->getUpyunThumb())
+            $html = l($this->getUpyunThumbImage($width), $this->getUrl(), array('target'=>$target, 'title'=>$this->getFilterTitle()));
+        
+        return $html;
+    }
+    
     public function getThumbnailImage()
     {
         $html = '';
@@ -419,12 +461,8 @@ class Post extends CActiveRecord
     public function getThumbnailLink($target = '_blank')
     {
         $html = '';
-        if ($this->getThumbnail()) {
-            $htmlOptions = array('class'=>'cd-thumbnail');
-            if ($this->thumbnail_width) $htmlOptions['width'] = $this->thumbnail_width;
-            if ($this->thumbnail_height > 0) $htmlOptions['height'] = $this->thumbnail_height;
-            $html = l(image($this->getThumbnail(), $this->title, $htmlOptions), $this->getUrl(), array('target'=>$target, 'title'=>$this->getFilterTitle()));
-        }
+        if ($this->getThumbnail())
+            $html = l($this->getThumbnailImage(), $this->getUrl(), array('target'=>$target, 'title'=>$this->getFilterTitle()));
         
         return $html;
     }

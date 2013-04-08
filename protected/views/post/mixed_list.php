@@ -16,7 +16,7 @@
     <?php foreach ((array)$models as $index => $model):?>
     <div class="waterfall-item">
         <div class="post-time"><?php echo $model->createTime;?></div>
-        <?php if ($model->thumbnail):?><div class="pic-block"><?php echo $model->thumbnailLink;?></div><?php endif;?>
+        <?php if ($model->getUpyunThumb()):?><div class="pic-block"><?php echo $model->getUpyunThumbLink(200);?></div><?php endif;?>
         <p><?php echo l($model->content, $model->url, array('target'=>'_blank'));?></p>
     </div>
     <?php endforeach;?>
