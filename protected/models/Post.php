@@ -70,6 +70,11 @@
  * @property string $channelLabel
  * @property string $channelLabel
  * @property bool $hasTitle
+ * @property bool $isJoke
+ * @property bool $isLengtu
+ * @property bool $isGirl
+ * @property bool $isVideo
+ * @property bool $isGhost
  */
 class Post extends CActiveRecord
 {
@@ -483,6 +488,32 @@ class Post extends CActiveRecord
     {
         return (mb_stripos($this->content, $this->title, 0, app()->charset) !== 0);
     }
+    
+    public function getIsJoke()
+    {
+        return $this->channel_id == CHANNEL_DUANZI;
+    }
+    
+    public function getIsLengtu()
+    {
+        return $this->channel_id == CHANNEL_LENGTU;
+    }
+    
+    public function getIsGirl()
+    {
+        return $this->channel_id == CHANNEL_GIRL;
+    }
+    
+    public function getIsVideo()
+    {
+        return $this->channel_id == CHANNEL_VIDEO;
+    }
+    
+    public function getIsGhost()
+    {
+        return $this->channel_id == CHANNEL_GHOSTSTORY;
+    }
+    
     
     public function fetchRemoteImagesBeforeSave()
     {

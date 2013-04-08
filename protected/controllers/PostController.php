@@ -60,7 +60,8 @@ class PostController extends Controller
             throw new CHttpException(403, '该段子不存在或未被审核');
         
         // 获取后几个Post
-        $nextPosts = self::fetchNextPosts($post, 7);
+        if ($post->getIsLengtu() && $post->getIsGirl())
+            $nextPosts = self::fetchNextPosts($post, 9);
         
         // 获取评论
         $limit = param('commentCountOfPage');
@@ -259,7 +260,7 @@ class PostController extends Controller
         return $url;
     }
     
-    private static function fetchNextPosts(Post $post, $count = 6, $column = 3)
+    private static function fetchNextPosts(Post $post, $count = 9, $column = 3)
     {
         $duration = 60*60;
         

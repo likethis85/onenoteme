@@ -80,16 +80,17 @@
 </div>
 
 <div class="fright cd-sidebar">
+    <?php if ($nextPosts):?>
     <div class="panel panel10 thumb-posts">
-        <?php foreach ((array)$nextPosts as $next):?>
-        <?php if ($next->channel_id != CHANNEL_DUANZI && $next->channel_id != CHANNEL_VIDEO):?>
+        <?php foreach ($nextPosts as $next):?>
         <div class="thumb">
             <?php echo $next->getThumbnailLink('_self');?>
         </div>
-        <?php endif;?>
         <?php endforeach;?>
         <div class="clear"></div>
     </div>
+    <?php endif;?>
+    
     <!-- 详情页侧边栏广告位开始 -->
     <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_first'));?>
     <!-- 详情页侧边栏广告位结束 -->
