@@ -63,10 +63,10 @@ $(function(){
         function(newElements, opts) {
         	var tthis = $(this);
             var newElems = $(newElements).css({opacity:0});
-            newElems.imagesLoaded(function(){
+//             newElems.imagesLoaded(function(){
                 newElems.animate({opacity:1});
                 tthis.masonry('appended', newElems, true);
-            });
+//             });
 
             var page = opts.state.currPage;
             if (page == 3) {
