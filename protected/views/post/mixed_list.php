@@ -16,7 +16,7 @@
     <?php foreach ((array)$models as $index => $model):?>
     <div class="waterfall-item">
         <div class="post-time"><?php echo $model->createTime;?></div>
-        <?php if ($model->getUpyunThumb()):?><div class="pic-block"><?php echo $model->getUpyunThumbLink(200);?></div><?php endif;?>
+        <?php if ($model->getUpyunThumb()):?><div class="pic-block"><?php echo $model->getUpyunThumbLink(IMAGE_THUMB_WIDTH);?></div><?php endif;?>
         <p><?php echo l($model->content, $model->url, array('target'=>'_blank'));?></p>
     </div>
     <?php endforeach;?>
@@ -35,7 +35,8 @@
 
 <script type="text/javascript">
 $(function(){
-	Waduanzi.AjustImgWidth($('.pic-block img'), 197);
+	var thumbWidth = <?php echo IMAGE_THUMB_WIDTH;?>;
+	Waduanzi.AjustImgWidth($('.pic-block img'), thumbWidth);
 	
     var container = $('#waterfall-container');
     container.imagesLoaded(function(){
