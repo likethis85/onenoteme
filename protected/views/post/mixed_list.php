@@ -40,7 +40,7 @@ $(function(){
     	var itemCount = $('.waterfall-item').length;
     	var manual = $('#manual-load');
     	container.masonry({
-    		gutterWidth: 10,
+    		gutterWidth: 15,
             itemSelector: '.waterfall-item'
         });
         
