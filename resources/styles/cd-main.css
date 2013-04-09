@@ -99,7 +99,7 @@ input.button:active, .button:active {background-position:-389px 0;}
 .next-posts a:link, .next-posts a:visited {display:block; padding:0; text-align:center; line-height:33px; color:white; margin-right:5px;}
 .thumb-posts {margin-bottom:15px;}
 .thumb-posts .thumb {float:left; text-align:center;}
-.thumb-posts .thumb a:link, .next-posts .thumb a:visited {display:block; background-color:#FFFFFF; border:3px solid #FFFFFF;  width:90px; height:90px; overflow:hidden;}
+.thumb-posts .thumb a:link, .next-posts .thumb a:visited {display:block; background-color:#FFFFFF; border:3px solid #FFFFFF;  width:86px; height:86px; overflow:hidden;}
 .thumb-posts .thumb a:hover {border-color:#F45E5E; opacity:0.85;}
 .thumb-posts .thumb img {border:0; width:90px;}
 
