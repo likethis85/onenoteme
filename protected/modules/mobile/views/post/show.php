@@ -31,7 +31,8 @@
 
 <script type="text/javascript">
 $(function(){
-	CDMobile.increaseVisitNums(<?php echo $post->id;?>, '<?php echo aurl('mobile/post/views');?>');
+	var postid = <?php echo $post->id;?>;
+	CDMobile.increaseVisitNums(postid, '<?php echo aurl('post/views');?>');
 });
 </script>
 
