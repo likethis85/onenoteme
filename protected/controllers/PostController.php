@@ -21,6 +21,11 @@ class PostController extends Controller
         );
     }
     
+    public function actionPublish()
+    {
+        
+    }
+    
     public function actionScore()
     {
         $pid = (int)$_POST['pid'];
