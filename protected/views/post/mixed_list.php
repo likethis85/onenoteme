@@ -1,4 +1,4 @@
-<div class="panel panel10 bottom10px">
+<div class="panel panel10 bottom15px">
     <ul class="fleft hot-keyword">
         <li><span class="cred announce">24小时更新：<?php echo Post::todayUpdateCount();?>篇。&nbsp;&nbsp;&nbsp;QQ群：49401589</span></li>
         <li><a href="<?php echo aurl('app/taijiong');?>" target="_blank">王宝强超贱表情制作器</a></li>
@@ -43,6 +43,7 @@ $(function(){
     	var itemCount = $('.waterfall-item').length;
     	var manual = $('#manual-load');
     	container.masonry({
+    		gutterWidth: 15,
             itemSelector: '.waterfall-item'
         });
         
