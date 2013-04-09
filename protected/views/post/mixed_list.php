@@ -34,6 +34,7 @@
 <div id="loading-box"></div>
 
 <script type="text/javascript">
+$(function(){
     var container = $('#waterfall-container');
     container.imagesLoaded(function(){
     	var itemCount = $('.waterfall-item').length;
@@ -88,6 +89,7 @@
     $('#waterfall-container').on('hover', '.waterfall-item', function(event){
         $(this).toggleClass('item-bg');
     });
+});
 </script>
 
 <?php cs()->registerScriptFile(sbu('libs/jquery.masonry.min.js'), CClientScript::POS_END);?>
