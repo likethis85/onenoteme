@@ -30,14 +30,10 @@
 <?php endif;?>
 </div>
 
-<div id="loading-box"></div>
 <div id="manual-load" class="radius5px hide">载入更多内容</div>
+<div id="loading-box"></div>
 
 <script type="text/javascript">
-$(function(){
-	var thumbWidth = <?php echo IMAGE_THUMB_WIDTH;?>;
-	Waduanzi.AjustImgWidth($('.pic-block img'), thumbWidth);
-	
     var container = $('#waterfall-container');
     container.imagesLoaded(function(){
     	var itemCount = $('.waterfall-item').length;
@@ -92,7 +88,6 @@ $(function(){
     $('#waterfall-container').on('hover', '.waterfall-item', function(event){
         $(this).toggleClass('item-bg');
     });
-});
 </script>
 
 <?php cs()->registerScriptFile(sbu('libs/jquery.masonry.min.js'), CClientScript::POS_END);?>
