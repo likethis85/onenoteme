@@ -6,6 +6,9 @@
 <?php $this->renderPartial('/post/line_list', array('models' => $models, 'pages' => $pages));?>
 </div>
 <div class="fright cd-sidebar">
+    <div class="panel panel10 bottom15px">
+        <iframe width="270" height="250" frameborder="0" scrolling="no" src="http://app.wumii.com/ext/widget/hot?prefix=http%3A%2F%2Fwww.waduanzi.com%2F&num=10&t=1"></iframe>
+    </div>
     <!-- 首页侧边栏广告位1 开始 -->
     <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_first'));?>
     <!-- 首页侧边栏广告位1 结束 -->
