@@ -107,6 +107,8 @@ input.button:active, .button:active {background-position:-389px 0;}
 /* site/signup, user signup */
 
 /* login form */
+.login-form {margin-top:20px;}
+.login-signup h2 {font-size:20px;}
 .login-form .control-label {width:80px;}
 .login-form .controls {margin-left:100px;}
 .login-form .form-actions {padding-left:100px;}
