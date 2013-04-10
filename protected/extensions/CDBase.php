@@ -352,7 +352,7 @@ class CDBase
         set_time_limit(0);
         
         $curl = new CDCurl();
-        $curl->get($url);
+        $curl->referer($url)->get($url);
         $errno = $curl->errno();
         if ($errno != 0)
             throw new Exception($curl->error(), $errno);
@@ -450,7 +450,7 @@ class CDBase
         set_time_limit(0);
         
         $curl = new CDCurl();
-        $curl->get($url);
+        $curl->referer($url)->get($url);
         $errno = $curl->errno();
         if ($errno != 0)
             throw new Exception($curl->error(), $errno);
