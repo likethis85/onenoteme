@@ -40,7 +40,10 @@
     		<li<?php echo ($this->menu===CHANNEL_GIRL) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/girl');?>">挖福利</a></li>
     		<li>|</li>
     		<li<?php echo ($this->menu===CHANNEL_VIDEO) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/video');?>">挖视频</a></li>
+    		<li>|</li>
+    		<li<?php echo ($this->menu===CHANNEL_GHOSTSTORY) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/ghost');?>">挖鬼故事</a></li>
     	</ul>
+    	<a href="javascript:void(0);" title="微信公众账号二维码" id="wxqrcode"><img src="<?php echo sbu('images/qrcode_wx.jpg');?>" alt="挖段子公众账号二维码" /></a>
     	<div class="clear"></div>
     </div>
 </div>
