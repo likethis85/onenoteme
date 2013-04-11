@@ -25,7 +25,7 @@
 	<div class="clear"></div>
 </div>
 <div class="cd-header">
-    <div class="cd-wrapper">
+    <div class="cd-wrapper cd-header-inner"">
     	<div id="site-logo" class="logo fleft">
     	    <a href="<?php echo CDBase::siteHomeUrl();?>" title="点击返回首页">
     	        <img src="<?php echo sbu('images/logo.jpg');?>" alt="网站LOGO" title="返回首页" align="top" /><h1>挖段子</h1>
