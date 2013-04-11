@@ -936,7 +936,7 @@ a:hover {color:#D14836; text-decoration:none;}
 .cd-mini-nav .sns-icon img {margin-top:3px;}
 
 /* header */
-.cd-header {position:fixed; top:27px; z-index:999; margin-bottom:15px; height:45px; background-color:#545652; width:100%; overflow-x:hidden; border-bottom:1px solid black;}
+.cd-header {position:fixed; top:27px; z-index:999; margin-bottom:15px; height:45px; background-color:#545652; width:100%; border-bottom:1px solid black;}
 .cd-header ul {list-style:none;}
 .cd-header .channel-nav {margin:0 0 0 30px; padding:0; list-style:none; height:45px; overflow-x:hidden;}
 .cd-header .channel-nav li {list-style:none; float:left; color:#CFCFCF; height:45px; line-height:45px; margin:auto 3px;}
@@ -948,7 +948,8 @@ a:hover {color:#D14836; text-decoration:none;}
 .cd-header .logo a h2 {display:none;}
 .cd-header .logo img {height:100%; vertical-align:top;}
 .cd-header ul.frgith {margin:0; padding:0;}
-#small-wxqrcode {height:100%; cursor:pointer;}
+#wxqrcode img {height:100%; cursor:pointer;}
+#wxqrcode:hover img {width:300px; height:300px;}
 
 /* footer */
 .cd-footer {margin-top:20px; font-size:12px; color:#AFAFAF; background:#2B2B2B; padding:7px 0;}

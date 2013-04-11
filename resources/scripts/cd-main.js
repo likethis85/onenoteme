@@ -350,15 +350,6 @@ Waduanzi.fetchComments = function(event) {
 
 $(function(){
 	Waduanzi.fixedAdBlock();
-	$('#small-wxqrcode').hover(function(){
-		var tthis = $(this);
-		var pos = tthis.position();
-//		var top = pos.top + tthis.height();
-		var left = pos.left + tthis.width() - $('#big-wxqrcode').width();
-		$('#big-wxqrcode').css('left', left).show();
-	}, function(){
-		$('#big-wxqrcode').hide();
-	});
 });
 
 
