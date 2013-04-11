@@ -31,7 +31,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 	<div class="clear"></div>
 </div>
 <div class="cd-header">
-    <div class="cd-wrapper">
+    <div class="cd-wrapper cd-header-inner">
     	<div id="site-logo" class="logo fleft">
     	    <a href="<?php echo CDBase::siteHomeUrl();?>" title="点击返回首页">
     	        <img src="<?php echo sbu('images/logo.jpg');?>" alt="网站LOGO" title="返回首页" align="top" /><h1>挖段子</h1>
@@ -50,8 +50,9 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     		<li<?php echo ($this->channel===CHANNEL_GHOSTSTORY) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/ghost');?>">挖鬼故事</a></li>
     	</ul>
     	<ul class="fright">
-    	    <li><a href="javascript:void(0);" title="微信公众账号二维码" id="wxqrcode"><img src="<?php echo sbu('images/qrcode_wx.jpg');?>" alt="挖段子公众账号二维码" /></a></li>
+    	    <li></li>
     	</ul>
+    	<a href="javascript:void(0);" title="微信公众账号二维码" id="wxqrcode"><img src="<?php echo sbu('images/qrcode_wx.jpg');?>" alt="挖段子公众账号二维码" /></a>
     	<div class="clear"></div>
     </div>
 </div>
