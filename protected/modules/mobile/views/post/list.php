@@ -7,7 +7,7 @@
     	</div>
         <div class="item-detail">
             <?php if (($model->channel_id != CHANNEL_DUANZI && $model->channel_id != CHANNEL_GHOSTSTORY) || $model->hasTitle): // 不是笑话并且不是鬼故事或是有单独标题的?>
-            <div class="item-title"><?php echo $model->getTitleLink(0, '_self');?></div>
+            <h2 class="item-title"><?php echo $model->getTitleLink(0, '_self');?></h2>
             <?php endif;?>
             
             <?php if ($model->channel_id == CHANNEL_LENGTU && $model->thumbnail): // 趣图?>
