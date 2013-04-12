@@ -52,7 +52,7 @@ $(function(){
     	nextSelector: '#page-nav .next a',
     	itemSelector: '.grid-item',
     	animate: false,
-    	extraScrollPx: 300,
+    	extraScrollPx: 500,
     	dataType: 'html',
     	loading: {
         	speed: 0,
