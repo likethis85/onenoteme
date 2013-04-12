@@ -24,7 +24,7 @@
 </div>
 
 <?php if($pages->pageCount > 1):?>
-<div class="panel-rect panel-pages" id="page-nav">
+<div class="panel panel-pages" id="page-nav">
     <div class="cd-pages"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
 </div>
 <?php endif;?>
