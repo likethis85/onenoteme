@@ -52,7 +52,6 @@ $(function(){
     	nextSelector: '#page-nav .next a',
     	itemSelector: '.grid-item',
     	animate: false,
-    	extraScrollPx: 500,
     	dataType: 'html',
     	loading: {
         	speed: 0,

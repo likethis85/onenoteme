@@ -126,7 +126,6 @@ $(function(){
 	var postid = <?php echo $post->id;?>;
 	Waduanzi.IncreasePostViewNums(postid, '<?php echo aurl('post/views');?>');
 	$(document).on('click', '.comment-arrows a', Waduanzi.RatingComment);
-    Waduanzi.AjustImgWidth($('.post-picture img'), 600);
     Waduanzi.setPrevNextButtonPosition();
     
     $('.item-toolbar').on('click', 'a.upscore, a.downscore', Waduanzi.ratingPost);

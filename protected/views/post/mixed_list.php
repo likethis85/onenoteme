@@ -51,7 +51,6 @@ $(function(){
         	nextSelector: '#page-nav .next a',
         	itemSelector: '.waterfall-item',
         	animate: false,
-        	extraScrollPx: 500,
         	dataType: 'html',
         	loading: {
             	speed: 0,
