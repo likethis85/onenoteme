@@ -41,7 +41,8 @@ $(function(){
     	var itemCount = $('.waterfall-item').length;
     	var manual = $('#manual-load');
     	container.masonry({
-    		gutterWidth: 13,
+    		columnWidth: 184,
+    		gutterWidth: 15,
             itemSelector: '.waterfall-item'
         });
         
