@@ -42,7 +42,7 @@ $(function(){
     	var manual = $('#manual-load');
     	container.masonry({
     		columnWidth: function(containerWidth) {
-    		    return containerWidth / 5;
+    		    return (container.width() - 60) / 5;
 		    },
     		gutterWidth: 15,
             itemSelector: '.waterfall-item'
