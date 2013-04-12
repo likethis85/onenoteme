@@ -52,6 +52,7 @@ $(function(){
     	nextSelector: '#page-nav .next a',
     	itemSelector: '.grid-item',
     	animate: false,
+    	extraScrollPx: 300,
     	dataType: 'html',
     	loading: {
         	speed: 0,
@@ -70,7 +71,6 @@ $(function(){
         	manual.show();
 		}
 		if (newElements.length < itemCount) {
-    		console.log('done');
     		$(document).off('click', '#manual-load');
 			tthis.infinitescroll('unbind');
 			manual.html('没有更多内容啦！');

@@ -105,7 +105,7 @@ CD_PRODUCT && cs()->scriptMap = array(
     'cd-basic.css' => sbu('styles/cd-all.min.css?t=20130409001'),
     'cd-main.css' => sbu('styles/cd-all.min.css?t=20130409001'),
     
-    'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js',
+    'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js',
     
     'modernizr.min.js' => sbu('scripts/cd-all.min.js?t=20130409001'),
     'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=20130409001'),

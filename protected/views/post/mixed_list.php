@@ -47,11 +47,11 @@ $(function(){
         });
         
         container.infinitescroll({
-            speed: 0,
         	navSelector: '#page-nav',
         	nextSelector: '#page-nav .next a',
         	itemSelector: '.waterfall-item',
         	animate: false,
+        	extraScrollPx: 300,
         	dataType: 'html',
         	loading: {
             	speed: 0,
