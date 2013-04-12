@@ -30,7 +30,7 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 #waterfall-container {margin:0 auto;}
 .waterfall-item {width:184px; overflow-x:hidden; margin:0 15px 15px 0; padding:10px 0; float:left; color:#292A2B; background:#FBFBFB; font-size:14px; text-align:center; cursor:pointer;}
 .waterfall-item {border-top:1px solid #EEE; -webkit-box-shadow:0 1px 2px 0 rgba(180,180,180,0.5); -moz-box-shadow:0 1px 2px 0 rgba(180,180,180,0.5); box-shadow:0 1px 2px 0 rgba(180,180,180,0.5);}
-.waterfall-item.last {margin-left:0;}
+.waterfall-item.last {margin-right:0;}
 .waterfall-item.item-bg {background-color:#C3E99E; color:#333;}
 .waterfall-item .pic-block {overflow:hidden; margin-bottom:10px;}
 .waterfall-item .pic-block img {max-width:164px; vertical-align:top; background:url(../images/loading2.gif) no-repeat center center;}
