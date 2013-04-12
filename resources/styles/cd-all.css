@@ -992,8 +992,8 @@ ul.mode-switch .list a {background-position:-913px -20px; padding-right:10px;}
 ul.mode-switch .list.on a {background-position:-913px 5px;}
 
 /* waterfall */
-#waterfall-container {margin:0 auto;}
-.waterfall-item {width:184px; overflow-x:hidden; margin:0 0 15px; padding:10px 0; float:left; color:#292A2B; background:#FBFBFB; font-size:14px; text-align:center; cursor:pointer;}
+#waterfall-container {margin:0 auto; width:980px;}
+.waterfall-item {overflow-x:hidden; margin:0 0 15px; padding:10px 0; float:left; color:#292A2B; background:#FBFBFB; font-size:14px; text-align:center; cursor:pointer;}
 .waterfall-item {border-top:1px solid #EEE; -webkit-box-shadow:0 1px 2px 0 rgba(180,180,180,0.5); -moz-box-shadow:0 1px 2px 0 rgba(180,180,180,0.5); box-shadow:0 1px 2px 0 rgba(180,180,180,0.5);}
 .waterfall-item.item-bg {background-color:#C3E99E; color:#333;}
 .waterfall-item .pic-block {overflow:hidden; margin-bottom:10px;}
