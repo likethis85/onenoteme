@@ -41,7 +41,7 @@ $(function(){
     	var itemCount = $('.waterfall-item').length;
     	var manual = $('#manual-load');
     	container.masonry({
-    		gutterWidth: 9, // 加上margin的一边3px一共是15px
+    		gutterWidth: 7, // 加上margin的一边3px一共是15px
             itemSelector: '.waterfall-item'
         });
         
