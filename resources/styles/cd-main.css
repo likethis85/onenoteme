@@ -29,17 +29,17 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 
 /* waterfall */
 #waterfall-container {margin:0 auto;}
-.waterfall-item {width:183px; margin:0 3px 15px; padding:10px 0; float:left; color:#292A2B; background:#FBFBFB; font-size:14px; text-align:center; cursor:pointer;}
+.waterfall-item {width:184px; margin:0 3px 15px; padding:10px 0; float:left; color:#292A2B; background:#FBFBFB; font-size:14px; text-align:center; cursor:pointer;}
 .waterfall-item {-webkit-box-shadow:#666 0 1px 3px; -moz-box-shadow:#666 0 1px 3px; box-shadow:#666 0 1px 3px; -webkit-border-radius:5px; border-radius:5px; -moz-border-radius:5px;}
 .waterfall-item.item-bg {background-color:#C3E99E; color:#333;}
 .waterfall-item .pic-block {overflow:hidden; margin-bottom:10px;}
-.waterfall-item .pic-block img {max-width:163px; vertical-align:top; background:url(../images/loading2.gif) no-repeat center center;}
+.waterfall-item .pic-block img {max-width:164px; vertical-align:top; background:url(../images/loading2.gif) no-repeat center center;}
 .waterfall-item p {line-height:24px; text-align:left; padding:0 10px 5px; margin:0;}
 .waterfall-item p a {display:block;}
 .waterfall-item p a:link, .waterfall-item p a:visited {color:#292A2B;}
 .waterfall-item.item-bg p a:link, .waterfall-item.item-bg p a:visited, .waterfall-item.item-bg p a:hover {color:#666666;}
 .waterfall-item .post-time {font-size:12px; color:#999; padding:0px 10px 10px; text-align:left;}
-.waterfall-item iframe {width:197px; overflow:hidden;}
+.waterfall-item iframe {width:163px; overflow:hidden;}
 #manual-load {background:#666664; height:40px; line-height:40px; font-size:16px; font-weight:bold; color:#DDDDD1; text-align:center; margin:20px auto; cursor:pointer;}
 #manual-load:hover {background:#444442;}
 
