@@ -657,7 +657,7 @@ Waduanzi.switchImageSize = function(event){
     tthis.find('.thumb').toggle();
     tthis.find('.bmiddle').attr('src', tthis.attr('data-bmiddle-url')).toggle();
     var itemPos = itemDiv.position();
-    $('body').scrollTop(parseInt(itemPos.top) - 80);
+    $(document).scrollTop(parseInt(itemPos.top) - 80);
 };
 
 Waduanzi.ratingPost = function(event){
@@ -722,7 +722,7 @@ Waduanzi.fixedAdBlock = function() {
 	var lastbottom = lastblock.position().top + lastblock.height() - 50;
 	
 	$(window).scroll(function(event){
-		if ($('body').scrollTop() >= lastbottom)
+		if ($(document).scrollTop() >= lastbottom)
 			!adblock.hasClass('fixed') && adblock.addClass('fixed');
 		else
 			adblock.hasClass('fixed') && adblock.removeClass('fixed');
