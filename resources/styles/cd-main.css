@@ -28,11 +28,11 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 
 /* waterfall */
 #waterfall-container {margin:0 auto;}
-.waterfall-item {width:188px; margin:0 0 15px; padding:10px 0; float:left; color:#292A2B; background:#FBFBFB; font-size:14px; text-align:center; cursor:pointer;}
+.waterfall-item {width:186px; margin:0 0 15px; padding:10px 0; float:left; color:#292A2B; background:#FBFBFB; font-size:14px; text-align:center; cursor:pointer;}
 .waterfall-item {-webkit-box-shadow:#AAAAAA 0 1px 3px; -moz-box-shadow:#AAAAAA 0 1px 3px; box-shadow:#AAAAAA 0 1px 3px;}
 .waterfall-item.item-bg {background-color:#C3E99E; color:#333;}
 .waterfall-item .pic-block {overflow:hidden; margin-bottom:10px;}
-.waterfall-item .pic-block img {max-width:164px; vertical-align:top; background:url(../images/loading2.gif) no-repeat center center;}
+.waterfall-item .pic-block img {max-width:166px; vertical-align:top; background:url(../images/loading2.gif) no-repeat center center;}
 .waterfall-item p {line-height:24px; text-align:left; padding:0 10px 5px; margin:0;}
 .waterfall-item p a {display:block;}
 .waterfall-item p a:link, .waterfall-item p a:visited {color:#292A2B;}

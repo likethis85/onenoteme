@@ -16,7 +16,7 @@
     <?php foreach ((array)$models as $index => $model):?>
     <div class="waterfall-item">
         <div class="waterfall-item-box">
-            <?php if ($model->getUpyunThumb()):?><div class="pic-block"><?php echo $model->getUpyunThumbLink(164);?></div><?php endif;?>
+            <?php if ($model->getUpyunThumb()):?><div class="pic-block"><?php echo $model->getUpyunThumbLink(166);?></div><?php endif;?>
             <p><?php echo l($model->content, $model->url, array('target'=>'_blank'));?></p>
         </div>
     </div>
@@ -41,7 +41,7 @@ $(function(){
     	var itemCount = $('.waterfall-item').length;
     	var manual = $('#manual-load');
     	container.masonry({
-    		gutterWidth: 5, // 加上margin的一边3px一共是15px
+    		gutterWidth: 15, // 加上margin的一边3px一共是15px
             itemSelector: '.waterfall-item'
         });
         
