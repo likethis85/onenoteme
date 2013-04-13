@@ -52,7 +52,7 @@
             <?php endif;?>
             
             <a href="<?php echo $model->url;?>">
-                <div class="item-content"><?php echo $model->filterContent;?></div>
+                <div class="item-content"><?php echo $model->filterSummary;?></div>
             </a>
             
         </div>
