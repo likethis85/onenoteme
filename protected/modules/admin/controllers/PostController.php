@@ -27,6 +27,18 @@ class PostController extends AdminController
         return url($this->route, $params);
     }
     
+    protected function stateUrl($state = null)
+    {
+        $params = $this->actionParams;
+        unset($params['page']);
+        if ($state === null)
+            unset($params['state']);
+        else
+            $params['state'] = $state;
+    
+        return url($this->route, $params);
+    }
+    
     public function actionInfo($id)
     {
         $id = (int)$id;

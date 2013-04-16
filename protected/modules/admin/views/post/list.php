@@ -34,9 +34,21 @@
             <?php endforeach;?>
         </ul>
     </div>
+    <div class="btn-group">
+        <a class="btn btn-small btn-warning dropdown-toggle" data-toggle="dropdown" href="#">
+            状态过滤&nbsp;<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="<?php echo $this->stateUrl();?>">所有状态</a>
+            <?php foreach (AdminPost::updateStateLabels() as $state => $label):?>
+            <li><a href="<?php echo $this->stateUrl($state);?>"><?php echo $label;?></a></li>
+            <?php endforeach;?>
+        </ul>
+    </div>
     <a class="btn btn-small btn-success" href="">刷新</a>
     
 </div>
+
 <table class="table table-striped table-bordered beta-list-table table-post-list">
     <thead>
         <tr>
