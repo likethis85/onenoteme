@@ -508,7 +508,7 @@ class PostController extends AdminController
 
 	private static function updatePostEditor(AdminPost $model)
 	{
-	    if (empty($model->user_id) && $model->state == POST_STATE_ENABLED) {
+	    if (empty($model->user_id)) {
 	        $model->user_id = user()->id;
 	        $model->user_name = user()->name;
 	    }
