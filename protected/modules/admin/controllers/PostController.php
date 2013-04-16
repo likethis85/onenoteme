@@ -81,9 +81,10 @@ class PostController extends AdminController
 	            $model->user_name = user()->name;
 	        }
 	        if ($model->save()) {
-	            $resultHtml = sprintf('{%s}&nbsp;发表成功，<a href="{%s}" target="_blank">点击查看</a>', $model->title, $model->url);
+	            $resultHtml = sprintf('{%s}&nbsp;发表成功，<a href="%s" target="_blank">点击查看</a>', $model->title, $model->url);
 	            user()->setFlash('save_post_result', $resultHtml);
-                $this->redirect(request()->getUrl());
+	            echo $model->url;
+//                 $this->redirect(request()->getUrl());
 	        }
 	    }
 	    
