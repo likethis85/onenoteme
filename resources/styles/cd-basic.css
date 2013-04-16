@@ -64,7 +64,7 @@ a:hover {color:#D14836; text-decoration:none;}
 
 
 /* mini nav */
-.cd-mini-nav {position:fixed; top:0; z-index:999; height:26px; background-color:#EDEDED; width:100%; overflow:hidden; border-bottom:1px solid #CCCCCC;}
+.cd-mini-nav {position:fixed; top:0; left:0; z-index:999; height:26px; background-color:#EDEDED; width:100%; overflow:hidden; border-bottom:1px solid #CCCCCC;}
 .cd-mini-nav ul {list-style:none; margin:0 10px;}
 .cd-mini-nav .diviler {display:block; width:1px; height:10px; font-size:0; background-color:gray; margin:10px 5px auto;}
 .cd-mini-nav li {float:left; display:block; color:#000000; height:100%;}
