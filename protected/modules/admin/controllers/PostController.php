@@ -100,7 +100,7 @@ class PostController extends AdminController
 	    return $post->save(true, array('summary', 'content'));
 	}
 	
-	public function actionLatest($channel = null)
+	public function actionLatest($channel = null, $state = null)
 	{
 	    $criteria = new CDbCriteria();
 	    // 不显示未审核、被拒绝和回收站的内容
@@ -108,12 +108,18 @@ class PostController extends AdminController
 	    if ($channel !== null) {
 	        $channel = (int)$channel;
 	        $criteria->addColumnCondition(array('channel_id' => $channel));
-	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
+	        $titleLabel = ' - 频道：' . CDBase::channelLabels($channel);
+	    }
+	    
+	    if ($state !== null) {
+	        $state = (int)$state;
+	        $criteria->addColumnCondition(array('t.state' => $state));
+	        $titleLabel = ' - 状态：' . AdminPost::stateLabels($state);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
 	    
-	    $this->adminTitle = '最新文章列表' . $channelLabel;
+	    $this->adminTitle = '最新文章列表' . $titleLabel;
 	    $this->render('list', $data);
 	}
 	
