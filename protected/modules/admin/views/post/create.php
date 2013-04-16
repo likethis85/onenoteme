@@ -84,7 +84,7 @@
     </div>
     <div class="form-actions">
         <?php echo CHtml::submitButton('保存段子', array('class'=>'btn btn-primary'));?>
-    </div>
+    </div><input type="button" id="ddd" value="xxx" />
 </fieldset>
 <?php echo CHtml::endForm();?>
 
@@ -100,10 +100,17 @@ $(function(){
     	var imageUploadUrl = '<?php echo aurl('upload/image');?>';
         KEConfig.adminfull.cssPath = cssPath;
     	KEConfig.adminfull.uploadJson = imageUploadUrl;
-    	var cdContent = K.create('#content', KEConfig.adminfull);
+    	var contentEditor = K.create('#content', KEConfig.adminfull);
+
+        $(document).on('click', '#ddd', function(event){
+            console.log(contentEditor);
+        	contentEditor.remove();
+        });
+    	
     	$(document).on('click', '.post-pictures li', function(event){
             var html = $(this).html();
-            cdContent.insertHtml(html);
+            contentEditor.insertHtml(html);
+            
         });
     });
 });

@@ -35,6 +35,10 @@
  * @property integer $recommend
  * @property integer $hottest
  * @property integer $disable_comment
+ * @property string $extra01
+ * @property string $extra02
+ * @property string $extra03
+ * @property string $extra04
  *
  * @property User $user
  * @property UserProfile $profile
@@ -130,7 +134,7 @@ class Post extends CActiveRecord
 			array('weibo_id', 'length', 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
 			array('title, tags', 'length', 'max'=>250),
-			array('content, thumbnail_pic, bmiddle_pic, original_pic', 'safe'),
+			array('content, thumbnail_pic, bmiddle_pic, original_pic, extra01, extra02, extra03, extra04', 'safe'),
 		    array('thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height, istop, homeshow, recommend, hottest, favorite_count', 'filter', 'filter'=>'intval'),
 		);
 	}
@@ -184,6 +188,10 @@ class Post extends CActiveRecord
 	        'recommend' => '推荐',
 	        'hottest' => '热门',
 		    'disable_comment' => '评论',
+		    'extra01' => '备用01',
+		    'extra02' => '备用02',
+		    'extra03' => '备用03',
+		    'extra04' => '备用04',
 		);
 	}
 
@@ -467,11 +475,20 @@ class Post extends CActiveRecord
         return $html;
     }
 
+    public function getVideoHtml5Url()
+    {
+        $url = '';
+        if ($this->channel_id == CHANNEL_VIDEO && $this->extra01)
+            $url = $this->extra02;
+        
+        return $url;
+    }
+    
     public function getVideoHtml()
     {
         $html = '';
-        if ($this->channel_id == CHANNEL_VIDEO && $this->bmiddle_pic)
-            $html = $this->bmiddle_pic;
+        if ($this->channel_id == CHANNEL_VIDEO && $this->extra02)
+            $html = $this->extra02;
         
         return $html;
     }
@@ -479,8 +496,8 @@ class Post extends CActiveRecord
     public function getVideoSourceUrl()
     {
         $url = '';
-        if ($this->channel_id == CHANNEL_VIDEO && $this->original_pic)
-            $url = $this->original_pic;
+        if ($this->channel_id == CHANNEL_VIDEO && $this->extra03)
+            $url = $this->extra03;
         
         return $url;
     }

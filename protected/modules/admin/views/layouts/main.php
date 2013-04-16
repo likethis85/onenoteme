@@ -22,7 +22,11 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">文章管理<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><?php echo l('发表文章', url('admin/post/create'));?></li>
+                        <li class="nav-header">发布</li>
+                        <li><?php echo l('发布段子', url('admin/post/create'));?></li>
+                        <li><?php echo l('发布图文', url('admin/post/create'));?></li>
+                        <li><?php echo l('发布视频', url('admin/post/create'));?></li>
+                        <li class="divider"></li>
                         <li><?php echo l('审核文章', url('admin/post/verify'));?></li>
                         <li><?php echo l('搜索文章', url('admin/post/search'));?></li>
                         <li class="divider"></li>
@@ -129,8 +133,13 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
 </div>
 <div class="admin-sidebar">
     <ul class="nav nav-list quick-nav">
+        <li class="nav-header">发布</li>
+        <li><?php echo l('发布笑话', url('admin/post/create', array('channel_id'=>CHANNEL_DUANZI)));?></li>
+        <li><?php echo l('发布趣图', url('admin/post/create', array('channel_id'=>CHANNEL_LENGTU)));?></li>
+        <li><?php echo l('发布女神', url('admin/post/create', array('channel_id'=>CHANNEL_GHOSTSTORY)));?></li>
+        <li><?php echo l('发布视频', url('admin/post/create', array('channel_id'=>CHANNEL_VIDEO)));?></li>
+        <li><?php echo l('发鬼故事', url('admin/post/create', array('channel_id'=>CHANNEL_GHOSTSTORY)));?></li>
         <li class="nav-header">文章</li>
-        <li><?php echo l('发表文章', url('admin/post/create'));?></li>
         <li><?php echo l('审核文章', url('admin/post/verify'));?></li>
         <li><?php echo l('最新文章', url('admin/post/latest'));?></li>
         <li><?php echo l('搜索文章', url('admin/post/search'));?></li>

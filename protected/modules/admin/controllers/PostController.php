@@ -49,7 +49,7 @@ class PostController extends AdminController
         $this->render('info', array('model'=>$model));
     }
     
-	public function actionCreate($id = 0)
+	public function actionCreate($id = 0, $channel_id = null)
 	{
 	    $id = (int)$id;
 	    if ($id === 0) {
@@ -60,7 +60,7 @@ class PostController extends AdminController
 	        $model->view_nums = mt_rand(500, 1000);
 	        
 	        $model->homeshow = user()->checkAccess('create_post_in_home') ? CD_YES : CD_NO;
-	        $model->state = user()->checkAccess('editor') ? POST_STATE_ENABLED : POST_STATE_UNVERIFY;
+	        $model->state = user()->checkAccess('editor') ? POST_STATE_DISABLED : POST_STATE_UNVERIFY;
 	        $this->adminTitle = '发布段子';
 	    }
 	    elseif ($id > 0) {
@@ -85,6 +85,7 @@ class PostController extends AdminController
 	    
 		$this->render('create', array(
 		    'model'=>$model,
+		    'channel_id' => $channel_id,
 		));
 	}
 	
