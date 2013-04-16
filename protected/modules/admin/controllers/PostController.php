@@ -55,12 +55,16 @@ class PostController extends AdminController
 	    if ($id === 0) {
 	        $model = new AdminPost();
 
-	        $model->up_score = mt_rand(150, 500);
-	        $model->down_score = mt_rand(10, 50);
-	        $model->view_nums = mt_rand(500, 1000);
+	        $model->up_score = mt_rand(param('init_up_score_min'), param('init_up_score_max'));
+	        $model->down_score = mt_rand(param('init_down_score_min'), param('init_down_score_max'));
+	        $model->view_nums = mt_rand(param('init_view_nums_min'), param('init_view_nums_max'));
 	        
 	        $model->homeshow = user()->checkAccess('create_post_in_home') ? CD_YES : CD_NO;
 	        $model->state = user()->checkAccess('editor') ? POST_STATE_DISABLED : POST_STATE_UNVERIFY;
+	        
+	        if ($channel_id !== null)
+	            $model->channel_id = (int)$channel_id;
+	        
 	        $this->adminTitle = '发布段子';
 	    }
 	    elseif ($id > 0) {
@@ -83,9 +87,9 @@ class PostController extends AdminController
 	        }
 	    }
 	    
+	    $this->channel = 'create_post_' . $model->channel_id;
 		$this->render('create', array(
 		    'model'=>$model,
-		    'channel_id' => $channel_id,
 		));
 	}
 	
@@ -120,6 +124,7 @@ class PostController extends AdminController
 	    
 	    $data = AdminPost::fetchList($criteria);
 	    
+	    $this->channel = 'post_latest';
 	    $this->adminTitle = '最新文章列表' . $titleLabel;
 	    $this->render('list', $data);
 	}
@@ -136,6 +141,7 @@ class PostController extends AdminController
 	    
 	    $data = AdminPost::fetchList($criteria);
 	    
+	    $this->channel = 'verify_post';
 	    $this->adminTitle = '未审核文章列表' . $channelLabel;
 	    $this->render('list', $data);
 	}
@@ -152,6 +158,7 @@ class PostController extends AdminController
 	    
 	    $data = AdminPost::fetchList($criteria);
 	
+	    $this->channel = 'post_list_trash';
 	    $this->adminTitle = '回收站文章列表' . $channelLabel;
 	    $this->render('list', $data);
 	}
@@ -167,6 +174,7 @@ class PostController extends AdminController
 	        user()->setFlash('table_caption', '文章搜索结果');
 	    }
 	    
+	    $this->channel = 'search_post';
         $this->render('search', array('form'=>$form, 'data'=>$data));
 	}
 	
@@ -182,6 +190,7 @@ class PostController extends AdminController
 	    
 	    $data = AdminPost::fetchList($criteria);
 
+	    $this->channel = 'post_list_hottest';
 	    $this->adminTitle = '热门文章列表' . $channelLabel;
 	    $this->render('list', $data);
 	}
@@ -198,6 +207,7 @@ class PostController extends AdminController
 	    
 	    $data = AdminPost::fetchList($criteria);
 
+	    $this->channel = 'post_list_recommend';
 	    $this->adminTitle = '编辑推荐文章列表' . $channelLabel;
 	    $this->render('list', $data);
 	}
@@ -214,6 +224,7 @@ class PostController extends AdminController
 	    
 	    $data = AdminPost::fetchList($criteria);
 
+	    $this->channel = 'post_list_homeshow';
 	    $this->adminTitle = '首页显示文章列表' . $channelLabel;
 	    $this->render('list', $data);
 	}
@@ -230,6 +241,7 @@ class PostController extends AdminController
 	    
 	    $data = AdminPost::fetchList($criteria);
 
+	    $this->channel = 'post_list_istop';
 	    $this->adminTitle = '置顶文章列表' . $channelLabel;
 	    $this->render('list', $data);
 	}

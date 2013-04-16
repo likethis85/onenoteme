@@ -85,7 +85,7 @@ var KEConfig = {
 	        '|', 'selectall', 'clearhtml', 'removeformat']
 	},
 	adminfull: {
-		height:450,
+		height:350,
         resizeType: 1,
 		allowFileManager: true,
 		allowUpload: true,

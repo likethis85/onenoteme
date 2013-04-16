@@ -79,6 +79,9 @@
  * @property bool $isGirl
  * @property bool $isVideo
  * @property bool $isGhost
+ * @property bool $isTextType
+ * @property bool $isImageType
+ * @property bool $isVideoType
  */
 class Post extends CActiveRecord
 {
@@ -127,8 +130,8 @@ class Post extends CActiveRecord
 	{
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
-		return array(
-		    array('content', 'required', 'message'=>'段子内容必须填写'),
+		$rules = array(
+		    array('title, content', 'required', 'message'=>'段子内容必须填写'),
 			array('channel_id, view_nums, up_score, down_score, comment_nums, disable_comment, gif_animation, state, favorite_count, create_time, user_id, thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height, istop, homeshow, recommend, hottest', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
 			array('weibo_id', 'length', 'max'=>30),
@@ -137,6 +140,11 @@ class Post extends CActiveRecord
 			array('content, thumbnail_pic, bmiddle_pic, original_pic, extra01, extra02, extra03, extra04', 'safe'),
 		    array('thumbnail_width, thumbnail_height, bmiddle_width, bmiddle_height, original_width, original_height, istop, homeshow, recommend, hottest, favorite_count', 'filter', 'filter'=>'intval'),
 		);
+		
+		if ($this->getIsVideoType())
+		    $rules[] = array('extra02, extra03', 'required');
+		
+		return $rules;
 	}
 
 	/**
@@ -156,6 +164,21 @@ class Post extends CActiveRecord
 	 */
 	public function attributeLabels()
 	{
+	    $extra01 = '备用01';
+	    $extra02 = '备用02';
+	    $extra03 = '备用03';
+	    $extra04 = '备用04';
+	    switch ($this->channel_id)
+	    {
+	        case CHANNEL_VIDEO:
+	            $extra01 = '视频HTML5';
+	            $extra02 = 'Flash代码';
+	            $extra03 = '视频来源';
+	            break;
+	        default:
+	            break;
+	    }
+	    
 		return array(
 			'id' => 'ID',
 		    'channel_id' => '频道',
@@ -188,10 +211,10 @@ class Post extends CActiveRecord
 	        'recommend' => '推荐',
 	        'hottest' => '热门',
 		    'disable_comment' => '评论',
-		    'extra01' => '备用01',
-		    'extra02' => '备用02',
-		    'extra03' => '备用03',
-		    'extra04' => '备用04',
+		    'extra01' => $extra01,
+		    'extra02' => $extra02,
+		    'extra03' => $extra03,
+		    'extra04' => $extra04,
 		);
 	}
 
@@ -569,6 +592,21 @@ class Post extends CActiveRecord
         return $this->channel_id == CHANNEL_GHOSTSTORY;
     }
     
+    public function getIsTextType()
+    {
+        return $this->channel_id == CHANNEL_DUANZI || $this->channel_id == CHANNEL_GHOSTSTORY;
+    }
+    
+    public function getIsImageType()
+    {
+        return $this->channel_id == CHANNEL_LENGTU || $this->channel_id == CHANNEL_GIRL;
+    }
+    
+    public function getIsVideoType()
+    {
+        return $this->channel_id == CHANNEL_VIDEO;
+    }
+    
     
     public function fetchRemoteImagesBeforeSave()
     {
@@ -646,6 +684,14 @@ class Post extends CActiveRecord
             $result = $this->save(true, array('state'));
             return $result;
         }
+    }
+    
+    protected function beforeValidate()
+    {
+        if (empty($this->title))
+            $this->title = mb_substr($this->content, 0, 30, app()->charset);
+        
+        return true;
     }
     
     protected function beforeSave()

@@ -41,10 +41,10 @@ select.select-mini {width:auto;height:auto;line-height:auto; padding:0;}
 
 .control-group.bottom10px {margin-bottom:10px;}
 
-#summary, #content, #special-desc {width:620px;}
+#summary, #content {width:650px;}
 #summary {height:180px;}
 #content {height:450px;}
-#special-desc {height:200px;}
+textarea#extra01, textarea#extra02, textarea#extra03, textarea#extra04 {height:150px;}
 
 .topic-icon {max-width:100px; max-height:100px;}
 

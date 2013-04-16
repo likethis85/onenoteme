@@ -9,6 +9,13 @@
 <input type="hidden" name="returnurl" value="<?php echo request()->getUrlReferrer();?>" />
 <fieldset>
     <legend><?php echo $this->adminTitle;?></legend>
+    <div class="control-group bottom10px">
+        <?php echo CHtml::activeLabel($model, 'channel_id', array('class'=>'control-label'));?>
+        <div class="controls">
+            <?php echo CHtml::activeDropDownList($model, 'channel_id', CDBase::channelLabels());?>
+            <?php if ($model->hasErrors('channel_id')):?><p class="help-block"><?php echo $model->getError('channel_id');?></p><?php endif;?>
+        </div>
+    </div>
     <div class="control-group bottom10px <?php if ($model->hasErrors('title')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'title', array('class'=>'control-label'));?>
         <div class="controls">
@@ -44,6 +51,9 @@
             </label>
         </div>
     </div>
+    
+    <!-- 缩略图 start -->
+    <?php if (!$model->getIsTextType()):?>
     <div class="control-group bottom10px <?php if ($model->hasErrors('thumbnail')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'thumbnail_pic', array('class'=>'control-label'));?>
         <div class="controls">
@@ -51,6 +61,9 @@
             <?php if ($model->hasErrors('thumbnail')):?><p class="help-block"><?php echo $model->getError('thumbnail');?></p><?php endif;?>
         </div>
     </div>
+    <?php endif;?>
+    <!-- 缩略图 end -->
+    
     <div class="control-group bottom10px <?php if ($model->hasErrors('content')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'content', array('class'=>'control-label'));?>
         <div class="controls">
@@ -61,6 +74,32 @@
     <div class="form-actions">
         <?php echo CHtml::submitButton('保存段子', array('class'=>'btn btn-primary'));?>
     </div>
+    
+    
+    
+    <!-- extra column start -->
+    <?php if ($model->getIsVideoType()):?>
+    <div class="control-group bottom10px <?php if ($model->hasErrors('extra02')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'extra02', array('class'=>'control-label'));?>
+        <div class="controls">
+            <?php echo CHtml::activeTextArea($model, 'extra02', array('id'=>'extra02', 'class'=>'span6'));?>
+            <?php if ($model->hasErrors('extra02')):?><p class="help-block"><?php echo $model->getError('extra02');?></p><?php endif;?>
+        </div>
+    </div>
+    <div class="control-group bottom10px <?php if ($model->hasErrors('extra03')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'extra03', array('class'=>'control-label'));?>
+        <div class="controls">
+            <?php echo CHtml::activeTextField($model, 'extra03', array('id'=>'extra03', 'class'=>'span6'));?>
+            <?php if ($model->hasErrors('extra03')):?><p class="help-block"><?php echo $model->getError('extra03');?></p><?php endif;?>
+        </div>
+    </div>
+    <?php endif;?>
+    <!-- extra column end -->
+    <div class="form-actions">
+        <?php echo CHtml::submitButton('保存段子', array('class'=>'btn btn-primary'));?>
+    </div>
+    
+    
     <div class="control-group bottom10px <?php if ($model->hasErrors('view_nums')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'view_nums', array('class'=>'control-label'));?>
         <div class="controls">
@@ -84,7 +123,7 @@
     </div>
     <div class="form-actions">
         <?php echo CHtml::submitButton('保存段子', array('class'=>'btn btn-primary'));?>
-    </div><input type="button" id="ddd" value="xxx" />
+    </div>
 </fieldset>
 <?php echo CHtml::endForm();?>
 
@@ -100,13 +139,16 @@ $(function(){
     	var imageUploadUrl = '<?php echo aurl('upload/image');?>';
         KEConfig.adminfull.cssPath = cssPath;
     	KEConfig.adminfull.uploadJson = imageUploadUrl;
-    	var contentEditor = K.create('#content', KEConfig.adminfull);
-
-        $(document).on('click', '#ddd', function(event){
-            console.log(contentEditor);
-        	contentEditor.remove();
-        });
     	
+    	<?php if ($model->getIsTextType()):?>
+    	KEConfig.adminfull.designMode = false;
+    	<?php elseif ($model->getIsVideoType()):?>
+    	KEConfig.adminfull.designMode = false;
+    	KEConfig.adminfull.height = 200;
+    	<?php endif;?>
+    	
+    	var contentEditor = K.create('#content', KEConfig.adminfull);
+        
     	$(document).on('click', '.post-pictures li', function(event){
             var html = $(this).html();
             contentEditor.insertHtml(html);
