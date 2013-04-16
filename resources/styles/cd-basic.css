@@ -73,14 +73,14 @@ a:hover {color:#D14836; text-decoration:none;}
 .cd-mini-nav li .active, .cd-mini-nav li a:hover {color:white; background:#121211;}
 .cd-mini-nav .sns-icon a {padding:0;}
 .cd-mini-nav .sns-icon a:hover {background:none;}
-.cd-mini-nav img {margin:0px 3px 2px; width:20px; height:20px;}
+.cd-mini-nav img {margin:0px 3px 2px; width:20px; height:20px; min-width:20px;}
 .cd-mini-nav .sns-icon img {margin-top:3px;}
 
 /* header */
 .cd-header {position:fixed; top:27px; z-index:999; margin-bottom:15px; height:45px; background-color:#545652; width:100%; border-bottom:1px solid black; overflow:visible;}
 .cd-header .cd-header-inner {position:relative; overflow:visible;}
 .cd-header ul {list-style:none; margin:0; padding:0;}
-.cd-header .channel-nav {margin:0 0 0 30px; padding:0; list-style:none; height:45px; overflow-x:hidden;}
+.cd-header .channel-nav {margin:0 0 0 20px; padding:0; list-style:none; height:45px; overflow-x:hidden;}
 .cd-header .channel-nav li {list-style:none; float:left; color:#CFCFCF; height:45px; line-height:45px; margin:auto 3px;}
 .cd-header .channel-nav li a {display:block; color:#E0E0E0; padding:0 10px; font-size:18px; font-family:"微软雅黑";}
 .cd-header .channel-nav li a:hover, .cd-header .channel-nav li.active a {color:white; background:#454544; margin-top:5px; height:35px; line-height:35px; border-radius:8px; -webkite-border-radius:8px; -moz-border-radius:8px;}
@@ -88,7 +88,7 @@ a:hover {color:#D14836; text-decoration:none;}
 .cd-header .logo a h1 {height:45px; line-height:45px; color:#DDDDD1; font-size:28px; font-family:微软雅黑; font-weight:bold; display:inline-block; padding:0; margin:0 0 0 10px;}
 .cd-header .logo a:hover h1 {color:white; line-height:45px;}
 .cd-header .logo a h2 {display:none;}
-.cd-header .logo img {height:100%; vertical-align:top;}
+.cd-header .logo img {height:100%; vertical-align:top; max-width:45px; width:45px;}
 .cd-header ul.frgith {margin:0; padding:0;}
 #wxqrcode {display:block; width:45px; height:45px; position:absolute; top:0; right:0;}
 #wxqrcode:hover {width:300px; height:300px;}
