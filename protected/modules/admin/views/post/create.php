@@ -44,10 +44,6 @@
             <?php if ($model->hasErrors('content')):?><p class="help-block"><?php echo $model->getError('content');?></p><?php endif;?>
         </div>
     </div>
-    <div class="form-actions">
-        <?php echo CHtml::submitButton('保存段子', array('class'=>'btn btn-primary'));?>
-    </div>
-    
     
     
     <!-- extra column start -->
