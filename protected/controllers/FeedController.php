@@ -90,7 +90,7 @@ class FeedController extends Controller
     private static function fetchPosts(CDbCommand $cmd)
     {
         $cmd->from(TABLE_POST)
-            ->select(array('id', 'title', 'thumbnail_pic', 'bmiddle_pic', 'content', 'create_time'))
+            ->select(array('id', 'title', 'thumbnail_pic', 'bmiddle_pic', 'content', 'create_time', 'gif_animation'))
             ->order(array('create_time desc', 'id desc'))
             ->limit(self::POST_COUNT);
             
@@ -133,7 +133,9 @@ class FeedController extends Controller
         foreach ((array)$rows as $row) {
             $item = $dom->createElement('item');
             $channel->appendChild($item);
-            $item->appendChild(new DOMElement('title', $row['title']));
+            $title = $row['title'];
+            if ($row['gif_animation']) $title = '【动画】' . $title;
+            $item->appendChild(new DOMElement('title', $title));
             $item->appendChild(new DOMElement('link', aurl('post/show', array('id'=>$row['id']))));
             $item->appendChild(new DOMElement('comments', aurl('comment/list', array('pid'=>$row['id']))));
             $item->appendChild(new DOMElement('pubDate', date('D, d M Y H:i:s O', $row['create_time'])));
