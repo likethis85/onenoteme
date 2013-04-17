@@ -48,18 +48,18 @@
     
     <!-- extra column start -->
     <?php if ($model->getIsVideoType()):?>
-    <div class="control-group bottom10px <?php if ($model->hasErrors('extra02')) echo 'error';?>">
-        <?php echo CHtml::activeLabel($model, 'extra02', array('class'=>'control-label'));?>
-        <div class="controls">
-            <?php echo CHtml::activeTextArea($model, 'extra02', array('id'=>'extra02', 'class'=>'span6'));?>
-            <?php if ($model->hasErrors('extra02')):?><p class="help-block"><?php echo $model->getError('extra02');?></p><?php endif;?>
-        </div>
-    </div>
     <div class="control-group bottom10px <?php if ($model->hasErrors('extra03')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'extra03', array('class'=>'control-label'));?>
         <div class="controls">
             <?php echo CHtml::activeTextField($model, 'extra03', array('id'=>'extra03', 'class'=>'span6'));?>
             <?php if ($model->hasErrors('extra03')):?><p class="help-block"><?php echo $model->getError('extra03');?></p><?php endif;?>
+        </div>
+    </div>
+    <div class="control-group bottom10px <?php if ($model->hasErrors('extra02')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'extra02', array('class'=>'control-label'));?>
+        <div class="controls">
+            <?php echo CHtml::activeTextArea($model, 'extra02', array('id'=>'extra02', 'class'=>'span6'));?>
+            <?php if ($model->hasErrors('extra02')):?><p class="help-block"><?php echo $model->getError('extra02');?></p><?php endif;?>
         </div>
     </div>
     <?php endif;?>
