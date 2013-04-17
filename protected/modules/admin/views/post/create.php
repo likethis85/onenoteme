@@ -23,34 +23,7 @@
             <?php if ($model->hasErrors('title')):?><p class="help-block"><?php echo $model->getError('title');?></p><?php endif;?>
         </div>
     </div>
-    <div class="control-group bottom10px <?php if ($model->hasErrors('tags')) echo 'error';?>">
-        <?php echo CHtml::activeLabel($model, 'tags', array('class'=>'control-label'));?>
-        <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'tags', array('class'=>'span5'));?>
-            <span class="help-inline">标签之间用逗号(,)分隔</span>
-            <?php if ($model->hasErrors('tags')):?><p class="help-block"><?php echo $model->getError('tags');?></p><?php endif;?>
-        </div>
-    </div>
-    <div class="control-group bottom10px">
-        <label class="control-label">选项</label>
-        <div class="controls">
-            <label class="checkbox inline">
-                <?php echo CHtml::activeCheckBox($model, 'homeshow');?><?php echo CHtml::activeLabel($model, 'homeshow');?>
-            </label>
-            <label class="checkbox inline">
-                <?php echo CHtml::activeCheckBox($model, 'hottest');?><?php echo CHtml::activeLabel($model, 'hottest');?>
-            </label>
-            <label class="checkbox inline">
-                <?php echo CHtml::activeCheckBox($model, 'recommend');?><?php echo CHtml::activeLabel($model, 'recommend');?>
-            </label>
-            <label class="checkbox inline">
-                <?php echo CHtml::activeCheckBox($model, 'istop');?><?php echo CHtml::activeLabel($model, 'istop');?>
-            </label>
-            <label class="checkbox inline">
-                <?php echo CHtml::activeCheckBox($model, 'disable_comment');?><?php echo CHtml::activeLabel($model, 'disable_comment');?>
-            </label>
-        </div>
-    </div>
+    
     
     <!-- 缩略图 start -->
     <?php if (!$model->getIsTextType()):?>
@@ -99,7 +72,34 @@
         <?php echo CHtml::submitButton('保存段子', array('class'=>'btn btn-primary'));?>
     </div>
     
-    
+    <div class="control-group bottom10px <?php if ($model->hasErrors('tags')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'tags', array('class'=>'control-label'));?>
+        <div class="controls">
+            <?php echo CHtml::activeTextField($model, 'tags', array('class'=>'span5'));?>
+            <span class="help-inline">标签之间用逗号(,)分隔</span>
+            <?php if ($model->hasErrors('tags')):?><p class="help-block"><?php echo $model->getError('tags');?></p><?php endif;?>
+        </div>
+    </div>
+    <div class="control-group bottom10px">
+        <label class="control-label">选项</label>
+        <div class="controls">
+            <label class="checkbox inline">
+                <?php echo CHtml::activeCheckBox($model, 'homeshow');?><?php echo CHtml::activeLabel($model, 'homeshow');?>
+            </label>
+            <label class="checkbox inline">
+                <?php echo CHtml::activeCheckBox($model, 'hottest');?><?php echo CHtml::activeLabel($model, 'hottest');?>
+            </label>
+            <label class="checkbox inline">
+                <?php echo CHtml::activeCheckBox($model, 'recommend');?><?php echo CHtml::activeLabel($model, 'recommend');?>
+            </label>
+            <label class="checkbox inline">
+                <?php echo CHtml::activeCheckBox($model, 'istop');?><?php echo CHtml::activeLabel($model, 'istop');?>
+            </label>
+            <label class="checkbox inline">
+                <?php echo CHtml::activeCheckBox($model, 'disable_comment');?><?php echo CHtml::activeLabel($model, 'disable_comment');?>
+            </label>
+        </div>
+    </div>
     <div class="control-group bottom10px <?php if ($model->hasErrors('view_nums')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'view_nums', array('class'=>'control-label'));?>
         <div class="controls">
