@@ -6,7 +6,9 @@ class Api_Movie extends ApiBase
     public function latestsets()
     {
         $cmd = app()->getDb()->createCommand()
-            ->from(TABLE_MOVIE_SETS)
+            ->select(array('title', 'content', 'extra02', 'extra03', 'create_time'))
+            ->from(TABLE_POST)
+            ->where('channel_id = :videoChannelID', array(':videoChannelID'=>CHANNEL_VIDEO)
             ->order('id desc')
             ->limit(self::PAGE_SIZE);
         
@@ -18,12 +20,12 @@ class Api_Movie extends ApiBase
     private static function processSetsRows($rows)
     {
         foreach ((array)$rows as $index => $row) {
-            $icon = trim($row['url']);
-            if (empty($icon)) {
-                $rows[$index]['icon'] = '';
-            }
+            $rows[$index]['icon'] = '';
             
-            $story = trim($row['story']);
+            $rows[$index]['name'] = $row['title'];
+            $rows[$index]['url'] = $row['extra03'];
+            
+            $story = trim($row['content']);
             if (empty($story)) {
                 $rows[$index]['story'] = '';
             }
