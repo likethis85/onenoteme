@@ -599,21 +599,21 @@ class CDBase
         return $channelID === null ? $labels : $labels[$channelID];
     }
     
-    public static function fallStyleUrl($controller)
+    public static function fallStyleUrl(CController $controller)
     {
-    	return aurl($controller->route, array_merge($controller->actionParams, array('s'=>POST_LIST_STYLE_WATERFALL));
+    	return aurl($controller->route, array_merge($controller->actionParams, array('s'=>POST_LIST_STYLE_WATERFALL)));
     }
     
     
     public static function gridStyleUrl($controller)
     {
-    	return aurl($controller->route, array_merge($controller->actionParams, array('s'=>POST_LIST_STYLE_GRID));
+    	return aurl($controller->route, array_merge($controller->actionParams, array('s'=>POST_LIST_STYLE_GRID)));
     }
 
     
     public static function lineStyleUrl($controller)
     {
-    	return aurl($controller->route, array_merge($controller->actionParams, array('s'=>POST_LIST_STYLE_LINE));
+    	return aurl($controller->route, array_merge($controller->actionParams, array('s'=>POST_LIST_STYLE_LINE)));
     }
 }
 
