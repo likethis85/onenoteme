@@ -6,8 +6,8 @@
     </ul>
     <ul class="mode-switch fright">
         <li class="fall"><a href="<?php echo aurl($this->route, array_merge($this->actionParams, array('s'=>POST_LIST_STYLE_WATERFALL));?>">瀑布流</a></li>
-        <li class="grid"><a href="<?php echo aurl($this->route,array_merge($this->actionParams, 's'=>POST_LIST_STYLE_GRID));?>">表格</a></li>
-        <li class="list on"><a href="<?php echo aurl($this->route, array_merge($this->actionParams, 's'=>POST_LIST_STYLE_LINE));?>">列表</a></li>
+        <li class="grid"><a href="<?php echo aurl($this->route,array_merge($this->actionParams, array('s'=>POST_LIST_STYLE_GRID));?>">表格</a></li>
+        <li class="list on"><a href="<?php echo aurl($this->route, array_merge($this->actionParams, array('s'=>POST_LIST_STYLE_LINE));?>">列表</a></li>
     </ul>
     <div class="clear"></div>
 </div>
