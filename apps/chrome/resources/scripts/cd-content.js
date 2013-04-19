@@ -18,75 +18,83 @@ var requestMethods = {
 	closePostPage: function(request, sender, sendResponse){
 		console.log(request);
 		if (request.result == 1)
-            $('#chrome-close').click();
+            $('#cd-close').click();
 	}
 };
 
 
 var postPages = {
 	selection: function(request){
-		var html = '<div class="chrome-container" id="chrome-container">'
-		+ '<form action="" class="form-stacked" id="chrome-post-form">'
+		var html = '<div class="cd-container" id="cd-container">'
+		+ '<form action="" class="form-stacked" id="cd-post-form">'
 		+ 	'<div class="clearfix">'
         +       '<label for="ontags">标题</label>'
-        +       '<div class="input">'
-        +           '<input type="text" class="chrome-txt" name="ontitle" id="ontitle" />'
+        +       '<div class="cd-input">'
+        +           '<input type="text" class="cd-txt" name="ontitle" id="ontitle" />'
         +       '</div>'
 		+ 		'<label for="content">内容</label>'
-		+ 		'<div class="input">'
-		+ 			'<textarea class="chrome-content" name="oncontent" id="oncontent" rows="7">' + request.info.selectionText + '</textarea>'
+		+ 		'<div class="cd-input">'
+		+ 			'<textarea class="cd-content" name="oncontent" id="oncontent" rows="7">' + request.info.selectionText + '</textarea>'
 		+ 			'<span class="help-block">内容中不允许出现html代码和广告链接</span>'
 		+ 		'</div>'
 		+ 		'<label for="ontags">标签</label>'
-		+ 		'<div class="input">'
-		+ 			'<input type="text" class="chrome-txt" name="ontags" id="ontags" />'
+		+ 		'<div class="cd-input">'
+		+ 			'<input type="text" class="cd-txt" name="ontags" id="ontags" />'
 		+ 			'<span class="help-block">多个用逗号或空格分隔</span>'
 		+ 		'</div>'
-		+ 			'<input type="hidden" name="onpic" value="" />'
+		+ 		'<input type="hidden" name="onpic" value="" />'
         +       '<label for="onchannel">频道</label>'
         +       '<div>'
         +           '<select name="onchannel" id="onchannel"><option value="0">挖段子</option><option value="25">挖鬼故事</option></select>'
         +       '</div>'
-		+ 			'<input type="hidden" name="oncategory" value="20" />'
+		+ 		'<input type="hidden" name="oncategory" value="20" />'
+		+ 		'<label for="ontags">来源</label>'
+		+ 		'<div class="cd-input">'
+		+ 			'<input type="text" class="cd-txt" name="onreferer" id="onreferer" value="' + request.info.pageUrl + '" />'
+		+ 		'</div>'
 		+ 	'</div>'
 		+	'<div class="actions">'
-		+		'<input type="button" class="btn primary" id="chrome-post" value="发布" />&nbsp;<input type="button" class="btn" id="chrome-close" value="关闭" />'
+		+		'<input type="button" class="btn primary" id="cd-post" value="发布" />&nbsp;<input type="button" class="btn" id="cd-close" value="关闭" />'
 		+ 	'</div>'
 		+ '</form></div>';
 		
 		$('body').append(html);
 	},
 	image: function(request){
-		var html = '<div class="chrome-container" id="chrome-container">'
-        + '<form action="" class="form-stacked" id="chrome-post-form">'
+		var html = '<div class="cd-container" id="cd-container">'
+        + '<form action="" class="form-stacked" id="cd-post-form">'
         +   '<div class="clearfix">'
         +       '<label for="ontags">标题</label>'
-        +       '<div class="input">'
-        +           '<input type="text" class="chrome-txt" name="ontitle" id="ontitle" />'
+        +       '<div class="cd-input">'
+        +           '<input type="text" class="cd-txt" name="ontitle" id="ontitle" />'
         +       '</div>'
         +       '<label for="content">内容</label>'
-        +       '<div class="input">'
-        +           '<textarea class="chrome-content" name="oncontent" id="oncontent" rows="7"></textarea>'
+        +       '<div class="cd-input">'
+        +           '<textarea class="cd-content" name="oncontent" id="oncontent" rows="7"></textarea>'
         +           '<span class="help-block">内容中不允许出现html代码和广告链接</span>'
         +       '</div>'
         +       '<label for="ontags">标签</label>'
-        +       '<div class="input">'
-        +           '<input type="text" class="chrome-txt" name="ontags" id="ontags" />'
+        +       '<div class="cd-input">'
+        +           '<input type="text" class="cd-txt" name="ontags" id="ontags" />'
         +           '<span class="help-block">多个用逗号或空格分隔</span>'
         +       '</div>'
         +       '<label for="ontags">图片</label>'
-        +       '<div class="input">'
-        +           '<input type="text" class="chrome-txt" name="onpic" id="ontags" value="' + request.info.srcUrl + '" />'
+        +       '<div class="cd-input">'
+        +           '<input type="text" class="cd-txt" name="onpic" id="ontags" value="' + request.info.srcUrl + '" />'
         +           '<span class="help-block">多个用逗号或空格分隔</span>'
         +       '</div>'
         +       '<label for="onchannel">频道</label>'
         +       '<div>'
-        +           '<select name="onchannel" id="onchannel"><option value="20" selected="selected">挖冷图</option><option value="30">挖福利</option>'
+        +           '<select name="onchannel" id="onchannel"><option value="20" selected="selected">挖冷图</option><option value="30">挖福利</option></select>'
         +       '</div>'
-        +           '<input type="hidden" name="oncategory" value="20" />'
+        +       '<input type="hidden" name="oncategory" value="20" />'
+		+ 		'<label for="ontags">来源</label>'
+		+ 		'<div class="cd-input">'
+		+ 			'<input type="text" class="cd-txt" name="onreferer" id="onreferer" value="' + request.info.pageUrl + '" />'
+		+ 		'</div>'
         +   '</div>'
         +   '<div class="actions">'
-        +       '<input type="button" class="btn primary" id="chrome-post" value="发布" />&nbsp;<input type="button" class="btn" id="chrome-close" value="关闭" />'
+        +       '<input type="button" class="btn primary" id="cd-post" value="发布" />&nbsp;<input type="button" class="btn" id="cd-close" value="关闭" />'
         +   '</div>'
         + '</form></div>';
         
@@ -101,14 +109,14 @@ var postPages = {
 };
 
 $(function(){
-	$('#chrome-close').live('click', function(e){
-		$('#chrome-container').fadeOut('slow', function(){
+	$(document).on('click', '#cd-close', function(e){
+		$('#cd-container').fadeOut('slow', function(){
 			$(this).remove();
 		});
 	});
 	
-	$('#chrome-post').live('click', function(e){
-		var data = $('#chrome-post-form').serializeArray();
+	$(document).on('click', '#cd-post', function(e){
+		var data = $('#cd-post-form').serializeArray();
 		console.log(data);
 		var request = {
 			method: 'shareText',
