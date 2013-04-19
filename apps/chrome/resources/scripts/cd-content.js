@@ -18,28 +18,28 @@ var requestMethods = {
 	closePostPage: function(request, sender, sendResponse){
 		console.log(request);
 		if (request.result == 1)
-            $('#cd-close').click();
+            $('#cdext-close').click();
 	}
 };
 
 
 var postPages = {
 	selection: function(request){
-		var html = '<div class="cd-container" id="cd-container">'
-		+ '<form action="" class="form-stacked" id="cd-post-form">'
+		var html = '<div class="cdext-container" id="cdext-container">'
+		+ '<form action="" class="form-stacked" id="cdext-post-form">'
 		+ 	'<div class="clearfix">'
         +       '<label for="ontags">标题</label>'
-        +       '<div class="cd-input">'
-        +           '<input type="text" class="cd-txt" name="ontitle" id="ontitle" />'
+        +       '<div class="cdext-input">'
+        +           '<input type="text" class="cdext-txt" name="ontitle" id="ontitle" />'
         +       '</div>'
 		+ 		'<label for="content">内容</label>'
-		+ 		'<div class="cd-input">'
-		+ 			'<textarea class="cd-content" name="oncontent" id="oncontent" rows="7">' + request.info.selectionText + '</textarea>'
+		+ 		'<div class="cdext-input">'
+		+ 			'<textarea class="cdext-content" name="oncontent" id="oncontent" rows="7">' + request.info.selectionText + '</textarea>'
 		+ 			'<span class="help-block">内容中不允许出现html代码和广告链接</span>'
 		+ 		'</div>'
 		+ 		'<label for="ontags">标签</label>'
-		+ 		'<div class="cd-input">'
-		+ 			'<input type="text" class="cd-txt" name="ontags" id="ontags" />'
+		+ 		'<div class="cdext-input">'
+		+ 			'<input type="text" class="cdext-txt" name="ontags" id="ontags" />'
 		+ 			'<span class="help-block">多个用逗号或空格分隔</span>'
 		+ 		'</div>'
 		+ 		'<input type="hidden" name="onpic" value="" />'
@@ -49,38 +49,38 @@ var postPages = {
         +       '</div>'
 		+ 		'<input type="hidden" name="oncategory" value="20" />'
 		+ 		'<label for="ontags">来源</label>'
-		+ 		'<div class="cd-input">'
-		+ 			'<input type="text" class="cd-txt" name="onreferer" id="onreferer" value="' + request.info.pageUrl + '" />'
+		+ 		'<div class="cdext-input">'
+		+ 			'<input type="text" class="cdext-txt" name="onreferer" id="onreferer" value="' + request.info.pageUrl + '" />'
 		+ 		'</div>'
 		+ 	'</div>'
 		+	'<div class="actions">'
-		+		'<input type="button" class="btn primary" id="cd-post" value="发布" />&nbsp;<input type="button" class="btn" id="cd-close" value="关闭" />'
+		+		'<input type="button" class="btn primary" id="cdext-post" value="发布" />&nbsp;<input type="button" class="btn" id="cdext-close" value="关闭" />'
 		+ 	'</div>'
 		+ '</form></div>';
 		
 		$('body').append(html);
 	},
 	image: function(request){
-		var html = '<div class="cd-container" id="cd-container">'
-        + '<form action="" class="form-stacked" id="cd-post-form">'
+		var html = '<div class="cdext-container" id="cdext-container">'
+        + '<form action="" class="form-stacked" id="cdext-post-form">'
         +   '<div class="clearfix">'
         +       '<label for="ontags">标题</label>'
-        +       '<div class="cd-input">'
-        +           '<input type="text" class="cd-txt" name="ontitle" id="ontitle" />'
+        +       '<div class="cdext-input">'
+        +           '<input type="text" class="cdext-txt" name="ontitle" id="ontitle" />'
         +       '</div>'
         +       '<label for="content">内容</label>'
-        +       '<div class="cd-input">'
-        +           '<textarea class="cd-content" name="oncontent" id="oncontent" rows="7"></textarea>'
+        +       '<div class="cdext-input">'
+        +           '<textarea class="cdext-content" name="oncontent" id="oncontent" rows="7"></textarea>'
         +           '<span class="help-block">内容中不允许出现html代码和广告链接</span>'
         +       '</div>'
         +       '<label for="ontags">标签</label>'
-        +       '<div class="cd-input">'
-        +           '<input type="text" class="cd-txt" name="ontags" id="ontags" />'
+        +       '<div class="cdext-input">'
+        +           '<input type="text" class="cdext-txt" name="ontags" id="ontags" />'
         +           '<span class="help-block">多个用逗号或空格分隔</span>'
         +       '</div>'
         +       '<label for="ontags">图片</label>'
-        +       '<div class="cd-input">'
-        +           '<input type="text" class="cd-txt" name="onpic" id="ontags" value="' + request.info.srcUrl + '" />'
+        +       '<div class="cdext-input">'
+        +           '<input type="text" class="cdext-txt" name="onpic" id="ontags" value="' + request.info.srcUrl + '" />'
         +           '<span class="help-block">多个用逗号或空格分隔</span>'
         +       '</div>'
         +       '<label for="onchannel">频道</label>'
@@ -89,12 +89,12 @@ var postPages = {
         +       '</div>'
         +       '<input type="hidden" name="oncategory" value="20" />'
 		+ 		'<label for="ontags">来源</label>'
-		+ 		'<div class="cd-input">'
-		+ 			'<input type="text" class="cd-txt" name="onreferer" id="onreferer" value="' + request.info.pageUrl + '" />'
+		+ 		'<div class="cdext-input">'
+		+ 			'<input type="text" class="cdext-txt" name="onreferer" id="onreferer" value="' + request.info.pageUrl + '" />'
 		+ 		'</div>'
         +   '</div>'
         +   '<div class="actions">'
-        +       '<input type="button" class="btn primary" id="cd-post" value="发布" />&nbsp;<input type="button" class="btn" id="cd-close" value="关闭" />'
+        +       '<input type="button" class="btn primary" id="cdext-post" value="发布" />&nbsp;<input type="button" class="btn" id="cdext-close" value="关闭" />'
         +   '</div>'
         + '</form></div>';
         
@@ -109,14 +109,14 @@ var postPages = {
 };
 
 $(function(){
-	$(document).on('click', '#cd-close', function(e){
-		$('#cd-container').fadeOut('slow', function(){
+	$(document).on('click', '#cdext-close', function(e){
+		$('#cdext-container').fadeOut('slow', function(){
 			$(this).remove();
 		});
 	});
 	
-	$(document).on('click', '#cd-post', function(e){
-		var data = $('#cd-post-form').serializeArray();
+	$(document).on('click', '#cdext-post', function(e){
+		var data = $('#cdext-post-form').serializeArray();
 		console.log(data);
 		var request = {
 			method: 'shareText',
