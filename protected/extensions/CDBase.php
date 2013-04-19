@@ -330,7 +330,7 @@ class CDBase
     }
 
 
-    public static function saveRemoteImages($url, $thumbWidth, $thumbHeight, $cropFromTop = false, $cropFromLeft = false)
+    public static function saveRemoteImages($url, $thumbWidth, $thumbHeight, $cropFromTop = false, $cropFromLeft = false, $referer = '')
     {
         $url = strip_tags(trim($url));
         $images = array();
@@ -339,20 +339,20 @@ class CDBase
         
         $upyunEnabled = (bool)param('upyun_enabled');
         if ($upyunEnabled)
-            $images = self::saveRemoteImagesToUpyun($url, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
+            $images = self::saveRemoteImagesToUpyun($url, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft, $referer = '');
         else
-            $images = self::saveRemoteImagesToLocal($url, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
+            $images = self::saveRemoteImagesToLocal($url, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft, $referer = '');
         
         return $images;
     }
     
-    public static function saveRemoteImagesToUpyun($url, $thumbWidth, $thumbHeight, $cropFromTop = false, $cropFromLeft = false)
+    public static function saveRemoteImagesToUpyun($url, $thumbWidth, $thumbHeight, $cropFromTop = false, $cropFromLeft = false, $referer = '')
     {
         $images = array();
         set_time_limit(0);
         
         $curl = new CDCurl();
-        $curl->referer($url)->get($url);
+        $curl->referer($referer)->get($url);
         $errno = $curl->errno();
         if ($errno != 0)
             throw new Exception($curl->error(), $errno);
@@ -450,7 +450,7 @@ class CDBase
         set_time_limit(0);
         
         $curl = new CDCurl();
-        $curl->referer($url)->get($url);
+        $curl->referer($referer)->get($url);
         $errno = $curl->errno();
         if ($errno != 0)
             throw new Exception($curl->error(), $errno);

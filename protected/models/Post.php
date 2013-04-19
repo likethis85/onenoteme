@@ -608,7 +608,7 @@ class Post extends CActiveRecord
     }
     
     
-    public function fetchRemoteImagesBeforeSave()
+    public function fetchRemoteImagesBeforeSave($referer = '')
     {
         $url = strip_tags(trim($this->original_pic));
         if (!empty($url) && stripos($url, fbu()) === false) {
@@ -619,7 +619,7 @@ class Post extends CActiveRecord
                 $thumbHeight = GIRL_THUMBNAIL_HEIGHT;
             }
         
-            $images = CDBase::saveRemoteImages($url, $thumbWidth, $thumbHeight, $this->channel_id == CHANNEL_GIRL);
+            $images = CDBase::saveRemoteImages($url, $thumbWidth, $thumbHeight, $this->channel_id == CHANNEL_GIRL, $referer);
             
             if ($images) {
                 $this->thumbnail_pic = $images[0]['url'];
@@ -641,9 +641,9 @@ class Post extends CActiveRecord
             return true;
     }
     
-    public function fetchRemoteImagesAfterSave()
+    public function fetchRemoteImagesAfterSave($referer = '')
     {
-        if ($this->fetchRemoteImagesBeforeSave()) {
+        if ($this->fetchRemoteImagesBeforeSave($referer)) {
             $attributes = array('thumbnail_pic', 'thumbnail_width', 'thumbnail_height', 'bmiddle_pic', 'bmiddle_width', 'bmiddle_height', 'original_pic', 'original_width', 'original_height');
             return $this->save(true, $attributes);
         }

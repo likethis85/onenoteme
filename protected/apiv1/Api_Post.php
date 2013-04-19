@@ -288,7 +288,7 @@ class Api_Post extends ApiBase
     	self::requirePost();
 //        	$this->requireLogin();
     	$this->requiredParams(array('title', 'content', 'token', 'channel_id'));
-    	$params = $this->filterParams(array('title', 'content', 'tags', 'channel_id', 'category_id', 'pic', 'token'));
+    	$params = $this->filterParams(array('title', 'content', 'tags', 'channel_id', 'category_id', 'pic', 'token', 'onreferer'));
     	
     	$post = new Post();
     	$post->channel_id = (int)$params['channel_id'];
@@ -304,7 +304,10 @@ class Api_Post extends ApiBase
     	$post->original_pic = $params['pic'];
     	
     	try {
-    		$result = $post->fetchRemoteImagesBeforeSave() && $post->save();
+    	    $referer = strip_tags(trim($params['onreferer']));
+    	    if (empty($referer))
+    	        $referer = $params['pic'];
+    		$result = $post->fetchRemoteImagesBeforeSave($referer) && $post->save();
     		return (int)$result;
     	}
     	catch (ApiException $e) {
