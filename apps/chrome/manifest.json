@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "挖段子网页收藏工具",
-	"version": "1.7.5",
+	"version": "1.7.6",
 	"description": "挖段子网页收藏工具，随时随地挖段子",
 	"background": {
 		"page": "background.html"

@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-.cd-container {width:340px; height:450px; position:fixed; font-size:12px; top:20px; right:3px; background:white; border:1px solid rgba(0, 0, 0, .2); -webkit-box-shadow:0 1px 2px rgba(0, 0, 0, .1); -webkit-border-radius:3px; z-index:99999;}
+.cd-container {width:340px; position:fixed; font-size:12px; top:20px; right:3px; background:white; border:1px solid rgba(0, 0, 0, .2); -webkit-box-shadow:0 1px 2px rgba(0, 0, 0, .1); -webkit-border-radius:3px; z-index:99999;}
 .cd-container textarea, .cd-container input[type=text] {border:1px solid rgba(0, 0, 0, .2); -webkit-box-shadow:0 1px 2px rgba(0, 0, 0, .1); -webkit-border-radius:3px;}
 .cd-container .form-stacked {margin-left:10px; margin-top:10px;}
 .cd-container .form-stacked label {font-weight:bold;}
