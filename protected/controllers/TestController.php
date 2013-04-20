@@ -1,10 +1,14 @@
 <?php
 class TestController extends Controller
 {
-    public function actionIndex()
+    public function init()
     {
         $this->redirect('/');
-        
+        exit(0);
+    }
+    
+    public function actionIndex()
+    {
         exit;
         echo fbu() . '<br />';
         echo fbu('a/b/c.jpg') . '<br />';
