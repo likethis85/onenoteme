@@ -25,7 +25,7 @@ class CDLocalUploader extends CDBaseUploader
         return $this;
     }
     
-    public function save($file, $opts = null)
+    public function save($file, $filename = '', $opts = null)
     {
         
     }

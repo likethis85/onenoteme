@@ -69,10 +69,15 @@ class CDUpyunUploader extends CDBaseUploader
         return rtrim($this->baseUrl, '/') . '/' . ltrim($this->_filename, '/');
     }
     
-    public function save($file, $opts = null)
+    public function save($file, $filename = '', $opts = null)
     {
         if (empty($file))
-            throw new Exception('file path is requried.');
+            throw new Exception('file data is requried.');
+        
+        if (!empty($filename))
+            $this->_filename = $filename;
+        if (empty($this->_filename))
+            throw new CException('filename is not set.');
         
         $filename = '/' . ltrim($this->_filename, '/');
         return $this->_client->writeFile($filename, $file, $this->autoMkdir, $opts);
@@ -103,6 +108,8 @@ class CDUpyunUploader extends CDBaseUploader
         $frames = $this->imageInfo('x-upyun-frames');
         return intval($frames) > 1;
     }
+
+    
 }
 
 

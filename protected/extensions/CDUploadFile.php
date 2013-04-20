@@ -1,9 +1,31 @@
 <?php
 class CDUploadFile extends CUploadedFile
 {
-    const FILE_NO_EXIST = -1; // '目录不存在并且无法创建';
-    const FILE_NO_WRITABLE = -2; // '目录不可写';
+    private $_upyunEnabled = false;
     
+    public function saveFileAs($file, $isImageFile = false, $deleteTempFile = true, $opts = null)
+    {
+        if ($this->_error == UPLOAD_ERR_OK) {
+            $uploader = $this->_upyunEnabled ? upyunUploader($isImageFile) : app()->getComponent('localUploader', false);
+            $uploader->save($this->_tempName, $file, $opts);
+            if ($deleteTempFile)
+                @unlink($this->_tempName);
+            
+            return $uploader->getFileUrl();
+        }
+        else
+            return false;
+    }
+    
+    public function saveImageAs($file, $deleteTempFile = true, $opts = null)
+    {
+        return $this->saveFileAs($file, true, $deleteTempFile, $opts);
+    }
+    
+    public function setUpyunEnabled($enabled = true)
+    {
+        $this->_upyunEnabled = $enabled;
+    }
     
     /**
      * 返回上传后的文件路径
@@ -17,7 +39,7 @@ class CDUploadFile extends CUploadedFile
 
         if ($upyun) {
             return array(
-                'path' => $relativeUrl,
+                'path' => '/' . $relativeUrl,
                 'url' => $relativeUrl,
             );
         }
@@ -55,9 +77,9 @@ class CDUploadFile extends CUploadedFile
     }
     
     
-    public static function makeUploadFilePath($extension, $additional = null, $basePath = null)
+    public static function makeUploadFilePath($extension, $additional = null, $basePath = null, $upyun = false)
     {
-        $path = self::makeUploadPath($additional, $basePath);
+        $path = self::makeUploadPath($additional, $basePath, $upyun);
         $file = self::makeUploadFileName($extension);
     
         $data = array(
@@ -95,10 +117,10 @@ class CDUploadFile extends CUploadedFile
         }
     }
     
-    public static function uploadFile(CUploadedFile $upload, $additional = null, $deleteTempFile = true)
+    public static function saveFile($additional = null, $deleteTempFile = true)
     {
         $filename = self::makeUploadFilePath($upload->extensionName, $additional, $basePath = null);
-        $result = $upload->saveAs($filename['path'], $deleteTempFile);
+        $result = $this->saveAs($filename['path'], $deleteTempFile);
         if ($result)
             return $filename;
         else
@@ -106,71 +128,78 @@ class CDUploadFile extends CUploadedFile
     }
     
 
-    public static function saveRemoteImages($url, $thumbWidth, $thumbHeight, $cropFromTop = false, $cropFromLeft = false, $referer = '')
+    public static function saveImage($file, $referer = '', $thumbWidth = 0, $thumbHeight = 0, $cropFromTop = false, $cropFromLeft = false)
     {
-        $url = strip_tags(trim($url));
+        $file = strip_tags(trim($file));
         $images = array();
-        if (empty($url) || filter_var($url, FILTER_VALIDATE_URL) === false)
+        if (empty($file) || (!file_exists($file) && filter_var($file, FILTER_VALIDATE_URL) === false))
             return $images;
     
         $upyunEnabled = (bool)param('upyun_enabled');
         if ($upyunEnabled)
-            $images = self::saveRemoteImagesToUpyun($url, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft, $referer = '');
+            $images = self::saveRemoteImagesToUpyun($file, $referer, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
         else
-            $images = self::saveRemoteImagesToLocal($url, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft, $referer = '');
+            $images = self::saveRemoteImagesToLocal($file, $referer, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
     
         return $images;
     }
     
-    public static function saveRemoteImagesToUpyun($url, $thumbWidth, $thumbHeight, $cropFromTop = false, $cropFromLeft = false, $referer = '')
+    public static function saveImageToUpyun($file, $referer = '', $thumbWidth = 0, $thumbHeight = 0, $cropFromTop = false, $cropFromLeft = false)
     {
-        $images = array();
+        $images = $thumbnail = $middle = $original = array();
         set_time_limit(0);
     
-        $curl = new CDCurl();
-        $curl->referer($referer)->get($url);
-        $errno = $curl->errno();
-        if ($errno != 0)
-            throw new Exception($curl->error(), $errno);
-    
-        $data = $curl->rawdata();
-        $curl->close();
+        if (file_exists($file) && is_readable($file)) {
+            $data = file_get_contents($file);
+        }
+        else {
+            $curl = new CDCurl();
+            $curl->referer($referer)->get($file);
+            $errno = $curl->errno();
+            if ($errno != 0)
+                throw new Exception($curl->error(), $errno);
+        
+            $data = $curl->rawdata();
+            $curl->close();
+        }
     
         $im = new CDImage();
         $im->load($data);
-    
+
         $isGifAnimate = CDImage::isGifAnimate($data, true);
-         
-        if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
-            $im->resizeToHeight($thumbHeight);
-        else
-            $im->resizeToWidth($thumbWidth);
-        $im->crop($thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
+
+        // 生成缩略图并且保存到云存储中
+        if ($thumbWidth > 0 && $thumbHeight > 0) {
+            if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
+                $im->resizeToHeight($thumbHeight);
+            else
+                $im->resizeToWidth($thumbWidth);
+            $im->crop($thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
+        
+            $extension = CDImage::getImageExtName($data);
+            $path = self::makeUploadPath('pics', null, true);
+            $urlpath = '/' . trim($path['url'], '/') . '/';
+            $file = self::makeUploadFileName($extension);
+            $thumbnailFilename = $urlpath . 'thumbnail_' . $file;
+            $originalFilename = $urlpath . 'original_' . $file;
+            $uploader = upyunUploader(true);
+            try {
+                $result = array();
+                $thumbnailData = $im->outputRaw();
+                $result = $uploader->save($thumbnailData, $thumbnailFilename);
+                $thumbnail['width'] = (int)$result['x-upyun-width'];
+                $thumbnail['height'] = (int)$result['x-upyun-height'];
+                $thumbnailPath = $uploader->filename;
+                $thumbnail['url'] = $uploader->getFileUrl();
+                $im->revert();
+            }
+            catch (Exception $e) {
+                throw new Exception($e->getMessage());
+            }
+        }
     
-        $extension = CDImage::getImageExtName($data);
-        $path = self::makeUploadPath('pics',null, true);
-        $urlpath = '/' . trim($path['url'], '/') . '/';
-        $file = self::makeUploadFileName($extension);
-        $thumbnailFilename = $urlpath . 'thumbnail_' . $file;
-        $originalFilename = $urlpath . 'original_' . $file;
-        $uploader = upyunUploader(true);
         try {
             $result = array();
-            $thumbnailData = $im->outputRaw();
-            $uploader->setFilename($thumbnailFilename);
-            $result = $uploader->save($thumbnailData);
-            $thumbnail['width'] = (int)$result['x-upyun-width'];
-            $thumbnail['height'] = (int)$result['x-upyun-height'];
-            $thumbnailPath = $uploader->filename;
-            $thumbnail['url'] = $uploader->getFileUrl();
-        }
-        catch (Exception $e) {
-            throw new Exception($e->getMessage());
-        }
-    
-        try {
-            $result = array();
-            $im->revert();
     
             if ($isGifAnimate)
                 $originalData = $data;
@@ -185,8 +214,7 @@ class CDUploadFile extends CUploadedFile
                 $originalData = $im->outputRaw();
             }
     
-            $uploader->setFilename($originalFilename);
-            $result = $uploader->save($originalData);
+            $result = $uploader->save($originalData, $originalFilename);
             $original['width'] = (int)$result['x-upyun-width'];
             $original['height'] = (int)$result['x-upyun-height'];
             $original['url'] = $uploader->getFileUrl();
@@ -220,51 +248,58 @@ class CDUploadFile extends CUploadedFile
      * @throws Exception
      * @return multitype:array boolean Ambigous <array, boolean>
      */
-    public static function saveRemoteImagesToLocal($url, $thumbWidth, $thumbHeight, $cropFromTop = false, $cropFromLeft = false, $referer = '')
+    public static function saveImageToLocal($file, $referer = '', $thumbWidth = 0, $thumbHeight = 0, $cropFromTop = false, $cropFromLeft = false)
     {
-        $images = array();
+        $images = $thumbnail = $middle = $original = array();
         set_time_limit(0);
     
-        $curl = new CDCurl();
-        $curl->referer($referer)->get($url);
-        $errno = $curl->errno();
-        if ($errno != 0)
-            throw new Exception($curl->error(), $errno);
-    
-        $data = $curl->rawdata();
-        $curl->close();
+        if (file_exists($file) && is_readable($file)) {
+            $data = file_get_contents($file);
+        }
+        else {
+            $curl = new CDCurl();
+            $curl->referer($referer)->get($file);
+            $errno = $curl->errno();
+            if ($errno != 0)
+                throw new Exception($curl->error(), $errno);
+        
+            $data = $curl->rawdata();
+            $curl->close();
+        }
     
         $isGifAnimate = CDImage::isGifAnimate($data, true);
     
-        $path = self::makeUploadPath('pics');
-        $info = parse_url($url);
-        $file = self::makeUploadFileName();
-        $thumbnailFile = 'thumbnail_' . $file;
-        $thumbnailFileName = $path['path'] . $thumbnailFile;
-        if ($isGifAnimate) $file .= '.gif';
-        $middleFileName = $path['path'] . 'bmiddle_' . $file;
-        $bigFile = 'original_' . $file;
-        $bigFileName = $path['path'] . $bigFile;
-    
-        $im = new CDImage();
-        $im->load($data);
-    
-        if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
-            $im->resizeToHeight($thumbHeight);
-        else
-            $im->resizeToWidth($thumbWidth);
-        $im->crop($thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft)
-        ->saveAsJpeg($thumbnailFileName);
-        $thumbnail['width'] = $im->width();
-        $thumbnail['height'] = $im->height();
-        $thumbnail['url'] = fbu($path['url'] . $im->filename());
+        if ($thumbWidth > 0 && $thumbHeight > 0) {
+            $path = self::makeUploadPath('pics');
+            $file = self::makeUploadFileName();
+            $thumbnailFile = 'thumbnail_' . $file;
+            $thumbnailFileName = $path['path'] . $thumbnailFile;
+            if ($isGifAnimate) $file .= '.gif';
+            $middleFileName = $path['path'] . 'bmiddle_' . $file;
+            $bigFile = 'original_' . $file;
+            $bigFileName = $path['path'] . $bigFile;
+        
+            $im = new CDImage();
+            $im->load($data);
+        
+            if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
+                $im->resizeToHeight($thumbHeight);
+            else
+                $im->resizeToWidth($thumbWidth);
+            $im->crop($thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft)
+                ->saveAsJpeg($thumbnailFileName);
+            $thumbnail['width'] = $im->width();
+            $thumbnail['height'] = $im->height();
+            $thumbnail['url'] = fbu($path['url'] . $im->filename());
+            
+            $im->revert();
+        }
     
         if ($isGifAnimate) {
             $gifFile = 'gif_' . $file;
             $gifFileName = $path['path'] . $gifFile;
             $result = @file_put_contents($gifFileName, $data);
             if ($result) {
-                $im->revert();
                 $width = $im->width();
                 $height = $im->height();
                 $gifUrl = fbu($path['url'] . $gifFile);
@@ -277,7 +312,6 @@ class CDUploadFile extends CUploadedFile
             }
         }
         else {
-            $im->revert();
             if ($im->width() > IMAGE_MIDDLE_WIDTH)
                 $im->resizeToWidth(IMAGE_MIDDLE_WIDTH);
     

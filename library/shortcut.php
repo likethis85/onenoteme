@@ -318,7 +318,7 @@ function upyunbu($url = null, $imageFile = true)
 
 /**
  * 返回当前使用的uploader
- * @return multitype:CDUpyunUploader CDLocalUploader Ambigous <CDUpyunUploader, CDLocalUploader>
+ * @return Ambigous <CDUpyunUploader, CDLocalUploader>
  */
 function uploader($image = true)
 {
