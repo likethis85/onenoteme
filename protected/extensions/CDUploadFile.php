@@ -7,7 +7,8 @@ class CDUploadFile extends CUploadedFile
     {
         if ($this->_error == UPLOAD_ERR_OK) {
             $uploader = $this->_upyunEnabled ? upyunUploader($isImageFile) : app()->getComponent('localUploader', false);
-            $uploader->save($this->_tempName, $file, $opts);
+            $content = file_get_contents($this->_tempName);
+            $uploader->save($content, $file, $opts);
             if ($deleteTempFile)
                 @unlink($this->_tempName);
             
@@ -91,6 +92,7 @@ class CDUploadFile extends CUploadedFile
     }
     
     
+    /********************************************/
     public static function uploadImage(CUploadedFile $upload, $additional = null, $compress = true, $deleteTempFile = true)
     {
         if (!$compress) {
@@ -127,27 +129,17 @@ class CDUploadFile extends CUploadedFile
             return false;
     }
     
+    /********************************************/
+    
 
-    public static function saveImage($file, $referer = '', $thumbWidth = 0, $thumbHeight = 0, $cropFromTop = false, $cropFromLeft = false)
+    public static function saveImage($file, $referer = '', $thumbWidth = 0, $thumbHeight = 0, $cropFromTop = false, $cropFromLeft = false, $opts = array())
     {
         $file = strip_tags(trim($file));
         $images = array();
         if (empty($file) || (!file_exists($file) && filter_var($file, FILTER_VALIDATE_URL) === false))
             return $images;
-    
-        if (upyunEnabled())
-            $images = self::saveImageToUpyun($file, $referer, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
-        else
-            $images = self::saveImageToLocal($file, $referer, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
-    
-        return $images;
-    }
-    
-    public static function saveImageToUpyun($file, $referer = '', $thumbWidth = 0, $thumbHeight = 0, $cropFromTop = false, $cropFromLeft = false)
-    {
-        $images = $thumbnail = $middle = $original = array();
-        set_time_limit(0);
-    
+        
+        // 获取文件内容
         if (file_exists($file) && is_readable($file)) {
             $data = file_get_contents($file);
         }
@@ -161,11 +153,53 @@ class CDUploadFile extends CUploadedFile
             $data = $curl->rawdata();
             $curl->close();
         }
-    
+        
         $im = new CDImage();
         $im->load($data);
+        
+        /* 检查是否有额外的参数选项，主要是去除头尾的版本水印及LOGO
+         * 如果是动画，不作相关处理
+         */
+        if (!$im->isAnimateGif()) {
+            $defaultOptions = array(
+                'padding_top' => 0,
+                'padding_bottom' => 0,
+            );
+            if (is_array($opts)) {
+                foreach ($opts as $key => $value) {
+                    if (!array_key_exists($key, $defaultOptions))
+                        throw new CDException($key . ' is invalid.');
+                }
+            }
+            else
+                throw new CDException('$opts must be an array.');
+            
+            if ((array_key_exists('padding_top', $opts) && $top = (int)$opts['padding_top'] > 0) ||
+                (array_key_exists('padding_bottom', $opts) && $bottom = (int)$opts['padding_bottom'] > 0)) {
+                $width = $im->width();
+                $height = $im->height() -> $top - $bottom;
+                $im->cropByFrame($width, $height, 0, $top);
+                $im->setCurrentRawData();
+            }
+        
+        }
+    
+        
+        if (upyunEnabled())
+            $images = self::saveImageToUpyun($im, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft, $opts);
+        else
+            $images = self::saveImageToLocal($im, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft, $opts);
+    
+        return $images;
+    }
+    
+    public static function saveImageToUpyun(CDImage $im, $thumbWidth = 0, $thumbHeight = 0, $cropFromTop = false, $cropFromLeft = false)
+    {
+        $images = $thumbnail = $middle = $original = array();
+        set_time_limit(0);
 
-        $isGifAnimate = CDImage::isGifAnimate($data, true);
+        $isGifAnimate = $im->isAnimateGif();
+        $extension = $im->getExtName();
 
         // 生成缩略图并且保存到云存储中
         if ($thumbWidth > 0 && $thumbHeight > 0) {
@@ -175,7 +209,6 @@ class CDUploadFile extends CUploadedFile
                 $im->resizeToWidth($thumbWidth);
             $im->crop($thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
         
-            $extension = CDImage::getImageExtName($data);
             $path = self::makeUploadPath('pics', null, true);
             $urlpath = '/' . trim($path['url'], '/') . '/';
             $file = self::makeUploadFileName($extension);
@@ -201,7 +234,7 @@ class CDUploadFile extends CUploadedFile
             $result = array();
     
             if ($isGifAnimate)
-                $originalData = $data;
+                $originalData = $im->rawData();
             else {
                 $text = '挖段子网';
                 $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
@@ -247,26 +280,13 @@ class CDUploadFile extends CUploadedFile
      * @throws Exception
      * @return multitype:array boolean Ambigous <array, boolean>
      */
-    public static function saveImageToLocal($file, $referer = '', $thumbWidth = 0, $thumbHeight = 0, $cropFromTop = false, $cropFromLeft = false)
+    public static function saveImageToLocal(CDImage $im, $thumbWidth = 0, $thumbHeight = 0, $cropFromTop = false, $cropFromLeft = false)
     {
         $images = $thumbnail = $middle = $original = array();
         set_time_limit(0);
     
-        if (file_exists($file) && is_readable($file)) {
-            $data = file_get_contents($file);
-        }
-        else {
-            $curl = new CDCurl();
-            $curl->referer($referer)->get($file);
-            $errno = $curl->errno();
-            if ($errno != 0)
-                throw new Exception($curl->error(), $errno);
-        
-            $data = $curl->rawdata();
-            $curl->close();
-        }
-    
-        $isGifAnimate = CDImage::isGifAnimate($data, true);
+        $isGifAnimate = $im->isAnimateGif();
+        $extension = $im->getExtName();
     
         if ($thumbWidth > 0 && $thumbHeight > 0) {
             $path = self::makeUploadPath('pics');
@@ -277,9 +297,6 @@ class CDUploadFile extends CUploadedFile
             $middleFileName = $path['path'] . 'bmiddle_' . $file;
             $bigFile = 'original_' . $file;
             $bigFileName = $path['path'] . $bigFile;
-        
-            $im = new CDImage();
-            $im->load($data);
         
             if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
                 $im->resizeToHeight($thumbHeight);
@@ -297,7 +314,7 @@ class CDUploadFile extends CUploadedFile
         if ($isGifAnimate) {
             $gifFile = 'gif_' . $file;
             $gifFileName = $path['path'] . $gifFile;
-            $result = @file_put_contents($gifFileName, $data);
+            $result = @file_put_contents($gifFileName, $im->outputRaw());
             if ($result) {
                 $width = $im->width();
                 $height = $im->height();

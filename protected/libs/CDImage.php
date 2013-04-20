@@ -121,6 +121,36 @@ class CDImage
     }
     
     /**
+     * 返回最原始的文件内容
+     * @return string
+     */
+    public function rawData()
+    {
+        return $this->_data;
+    }
+    
+    /**
+     * 设置原始数据，主要用于处理图片后作为原始数据，以用于后续所有操作
+     * @param string 原始文件数据
+     * @return CDImage
+     */
+    public function setRawData($data)
+    {
+        $this->_data = $data;
+        return $this;
+    }
+    
+    /**
+     * 将当前处理进度的数据作为原始数据
+     * @return CDImage
+     */
+    public function setCurrentRawData()
+    {
+        $this->setRawData($this->outputRaw());
+        return $this;
+    }
+    
+    /**
      * 返回图像宽度
      * @return integer 图像的宽度
      */
@@ -166,7 +196,7 @@ class CDImage
     
     public function convertType($type)
     {
-        if (!array_key_exists($key, self::$_createFunctions))
+        if (!array_key_exists($type, self::$_createFunctions))
             throw new Exception('不支持此类型', 0);
         $this->_imageType = $type;
     }
@@ -512,6 +542,20 @@ class CDImage
         $this->_image = $image;
         return $this;
     }
+    
+    public function cropByFrame($width, $height, $x = 0, $y = 0)
+    {
+        if (($x + $width) > $this->width())
+            $width = $this->width() - $x;
+        if (($y + $height) > $this->height())
+            $height = $this->height() - $y;
+        
+        $image = imagecreatetruecolor($width, $height);
+        imagecopyresampled($image, $this->_image, 0, 0, $x, $y, $width, $height, $width, $height);
+        
+        $this->_image = $image;
+        return $this;
+    }
 
     /**
      * 顺时针旋转图片
@@ -744,6 +788,11 @@ class CDImage
         return $this->_author;
     }
 
+    public function isAnimateGif()
+    {
+        return self::isGifAnimate($this->_data, true);
+    }
+    
     public static function isGifAnimate($file, $isdata = false)
     {
         if ($isdata)

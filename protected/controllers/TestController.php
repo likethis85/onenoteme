@@ -3,7 +3,9 @@ class TestController extends Controller
 {
     public function actionIndex()
     {
+        $this->redirect('/');
         
+        exit;
         echo fbu() . '<br />';
         echo fbu('a/b/c.jpg') . '<br />';
         echo fbp('a/c/b.png') . '<hr />';
@@ -35,5 +37,41 @@ class TestController extends Controller
         echo 'http://ff.waduanzi.com' . $uploader->filename;
         exit;
         
+    }
+    
+    public function actionImage()
+    {
+        $url = 'http://wanzao2.b0.upaiyun.com/system/pictures/2888702/original/005.jpg';
+        $referer = 'http://xiaoliaobaike.com/';
+        
+        $curl = new CDCurl();
+        $curl->referer($referer)->get($url);
+        $errno = $curl->errno();
+        if ($errno != 0)
+            throw new Exception($curl->error(), $errno);
+    
+        $data = $curl->rawdata();
+        $curl->close();
+        
+        $im = new CDImage();
+        $im->load($data);
+        
+        $top = 300;
+        $bottom = 100;
+        $width = $im->width();
+        $height = $im->height() - $top - $bottom;
+//         var_dump($width);
+//         var_dump($height);
+//         exit;
+        
+        $im->cropByFrame($width, $height, 0, $top);
+        $im->setCurrentRawData();
+        
+        $im->revert();
+        $im->resizeToWidth(200);
+        
+        $im->output();
+
+        exit(0);
     }
 }
