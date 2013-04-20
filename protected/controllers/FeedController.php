@@ -134,7 +134,7 @@ class FeedController extends Controller
             $item = $dom->createElement('item');
             $channel->appendChild($item);
             $title = $row['title'];
-            if ($row['gif_animation']) $title = '【动画】' . $title;
+            if ($row['gif_animation']) $title .= '【动画】';
             $item->appendChild(new DOMElement('title', $title));
             $item->appendChild(new DOMElement('link', aurl('post/show', array('id'=>$row['id']))));
             $item->appendChild(new DOMElement('comments', aurl('comment/list', array('pid'=>$row['id']))));
