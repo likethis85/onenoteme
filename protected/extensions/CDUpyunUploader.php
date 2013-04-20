@@ -22,7 +22,6 @@ class CDUpyunUploader extends CDBaseUploader
      */
     private $_filename;
     
-    
     public function init()
     {
         if (empty($this->bucket))
@@ -70,7 +69,7 @@ class CDUpyunUploader extends CDBaseUploader
         return rtrim($this->baseUrl, '/') . '/' . ltrim($this->_filename, '/');
     }
     
-    public function upload($file, $opts = null)
+    public function save($file, $opts = null)
     {
         if (empty($file))
             throw new Exception('file path is requried.');

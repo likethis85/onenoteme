@@ -61,8 +61,8 @@ class CDUploadFile extends CUploadedFile
         $file = self::makeUploadFileName($extension);
     
         $data = array(
-                'path' => $path['path'] . $file,
-                'url' => $path['url'] . $file,
+            'path' => $path['path'] . $file,
+            'url' => $path['url'] . $file,
         );
     
         return $data;
@@ -158,7 +158,7 @@ class CDUploadFile extends CUploadedFile
             $result = array();
             $thumbnailData = $im->outputRaw();
             $uploader->setFilename($thumbnailFilename);
-            $result = $uploader->upload($thumbnailData);
+            $result = $uploader->save($thumbnailData);
             $thumbnail['width'] = (int)$result['x-upyun-width'];
             $thumbnail['height'] = (int)$result['x-upyun-height'];
             $thumbnailPath = $uploader->filename;
@@ -186,7 +186,7 @@ class CDUploadFile extends CUploadedFile
             }
     
             $uploader->setFilename($originalFilename);
-            $result = $uploader->upload($originalData);
+            $result = $uploader->save($originalData);
             $original['width'] = (int)$result['x-upyun-width'];
             $original['height'] = (int)$result['x-upyun-height'];
             $original['url'] = $uploader->getFileUrl();
