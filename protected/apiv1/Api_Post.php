@@ -35,16 +35,9 @@ class Api_Post extends ApiBase
             if (empty($pic))
                 $pic = $row['bmiddle_pic'];
             
-            if (empty($pic))
-                $thumbnail = '';
-            else {
-                if (filter_var($pic, FILTER_VALIDATE_URL) === false){
-                    $pic = fbu($pic);
-                    $thumbnail = (filter_var($pic, FILTER_VALIDATE_URL) === false) ? $pic : '';
-                }
-                else
-                    $thumbnail = $pic;
-            }
+            $thumbnail = $pic;
+            if (empty($pic)) $thumbnail = '';
+            
             $row['thumbnail'] = $thumbnail;
             unset($row['bmiddle_pic']);
         }

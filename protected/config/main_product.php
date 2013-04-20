@@ -147,28 +147,28 @@ return array(
             'loginUrl' => array('/site/login'),
             'guestName' => '匿名段友',
         ),
-        'localuploader' => array(
+        'localUploader' => array(
             'class' => 'application.extensions.CDLocalUploader',
             'basePath' => $params['localUploadBasePath'],
             'baseUrl' => $params['localUuploadBaseUrl'],
         ),
-        'upyunimguploaer' => array(
+        'upyunImageUploader' => array(
             'class' => 'application.extensions.CDUpyunUploader',
-            'imageBucket' => true,
+            'isImageBucket' => true,
             'endpoint' => 'v2.api.upyun.com',
             'bucket' => 'wdzimage',
             'username' => 'cdcchen',
             'password' => 'cdc790406',
-            'domain' => $params['upyunImageUploadBaseUrl'],
+            'baseUrl' => $params['upyunImageBaseUrl'],
         ),
-        'upyunfileuploaer' => array(
+        'upyunFileUploader' => array(
             'class' => 'application.extensions.CDUpyunUploader',
-            'imageBucket' => false,
+            'isImageBucket' => false,
             'endpoint' => 'v2.api.upyun.com',
             'bucket' => 'wdzfile',
             'username' => 'cdcchen',
             'password' => 'cdc790406',
-            'domain' => $params['upyunFileUploadBaseUrl'],
+            'baseUrl' => $params['upyunFileBaseUrl'],
         ),
     ),
     

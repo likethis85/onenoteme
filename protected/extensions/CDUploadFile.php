@@ -146,7 +146,7 @@ class CDUploadFile extends CUploadedFile
         $file = self::makeUploadFileName($extension);
         $thumbnailFilename = $urlpath . 'thumbnail_' . $file;
         $originalFilename = $urlpath . 'original_' . $file;
-        $uploader = app()->getComponent('upyunimguploaer');
+        $uploader = upyunUploader(true);
         try {
             $result = array();
             $thumbnailData = $im->outputRaw();
@@ -213,7 +213,7 @@ class CDUploadFile extends CUploadedFile
      * @throws Exception
      * @return multitype:array boolean Ambigous <array, boolean>
      */
-    public static function saveRemoteImagesToLocal($url, $thumbWidth, $thumbHeight, $cropFromTop = false, $cropFromLeft = false)
+    public static function saveRemoteImagesToLocal($url, $thumbWidth, $thumbHeight, $cropFromTop = false, $cropFromLeft = false, $referer = '')
     {
         $images = array();
         set_time_limit(0);

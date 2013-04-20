@@ -5,9 +5,9 @@ class CDUpyunUploader extends CDBaseUploader
     public $username;
     public $password;
     public $bucket;
-    public $domain;
+    public $baseUrl;
     public $autoMkdir = true;
-    public $imageBucket = true;
+    public $isImageBucket = true;
     public $timeout = 30;
     
     /**
@@ -67,7 +67,7 @@ class CDUpyunUploader extends CDBaseUploader
     
     public function getFileUrl()
     {
-        return rtrim($this->domain, '/') . '/' . ltrim($this->_filename, '/');
+        return rtrim($this->baseUrl, '/') . '/' . ltrim($this->_filename, '/');
     }
     
     public function upload($file, $opts = null)
@@ -93,7 +93,7 @@ class CDUpyunUploader extends CDBaseUploader
     public function imageInfo($key)
     {
         $value = null;
-        if ($this->imageBucket)
+        if ($this->isImageBucket)
             $value = $this->_client->getWritedFileInfo($key);
         
         return $value;
