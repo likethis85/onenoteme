@@ -27,8 +27,10 @@ class CDUpyunUploader extends CDBaseUploader
         if (empty($this->bucket))
             throw new CException('bucket is required');
         
-        $upyunClassFile = Yii::getPathOfAlias('application.libs') . DS . 'upyun.class.php';
-        require($upyunClassFile);
+        if (!class_exists('UpYun', false)) {
+            $upyunClassFile = Yii::getPathOfAlias('application.libs') . DS . 'upyun.class.php';
+            require($upyunClassFile);
+        }
         $this->_client = new UpYun($this->bucket, $this->username, $this->password, $this->endpoint, $this->timeout);
     }
     

@@ -184,40 +184,6 @@ function auth()
  * @param string $file 附件文件相对path地址
  * @return string
  */
-function fbp($file = null)
-{
-    static $uploadBasePath = null;
-    if ($uploadBasePath === null) {
-        $uploader = app()->getComponent('localUploader');
-        if ($uploader === null)
-            throw new CDException('没有配置localuploader');
-        $uploadBasePath = rtrim($uploader->basePath, DS) . DS;
-    }
-
-    return empty($file) ? $uploadBasePath : $uploadBasePath . ltrim($file, DS);
-}
-
-/**
- * 此函数返回附件地址的BaseUrl
- * @param string $url 附件文件相对url地址
- * @return string
- */
-function fbu($url = null, $imageFile = true)
-{
-    $url = '';
-    if (upyunEnabled())
-        $url = upyunbu($url, $imageFile);
-    else
-        $url = localbu($url);
-    
-    return $url;
-}
-
-/**
- * 此函数返回附件地址相对于BasePath的物理路径
- * @param string $file 附件文件相对path地址
- * @return string
- */
 function sbp($file = null)
 {
     static $resourcePath = null;
@@ -277,11 +243,45 @@ function dp($path = null)
 }
 
 /**
- * 此函数返回附件保存在本地服务器时地址的BaseUrl
- * @param string $url 附件文件相对url地址
+ * 此函数返回附件地址相对于BasePath的物理路径
+ * @param string $file 附件文件相对path地址
  * @return string
  */
-function localbu($url = null)
+function fbp($file = null)
+{
+    static $uploadBasePath = null;
+    if ($uploadBasePath === null) {
+        $uploader = app()->getComponent('localUploader');
+        if ($uploader === null)
+            throw new CDException('没有配置localuploader');
+        $uploadBasePath = rtrim($uploader->basePath, DS) . DS;
+    }
+
+    return empty($file) ? $uploadBasePath : $uploadBasePath . ltrim($file, DS);
+}
+
+/**
+ * 此函数返回附件地址的BaseUrl
+ * @param string $file 附件文件相对url地址
+ * @return string
+ */
+function fbu($file = null, $imageFile = true)
+{
+    $url = '';
+    if (upyunEnabled())
+        $url = upyunbu($file, $imageFile);
+    else
+        $url = localbu($file);
+
+    return $url;
+}
+
+/**
+ * 此函数返回附件保存在本地服务器时地址的BaseUrl
+ * @param string $file 附件文件相对url地址
+ * @return string
+ */
+function localbu($file = null)
 {
     static $uploadBaseUrl = null;
     if ($uploadBaseUrl === null) {
@@ -292,32 +292,33 @@ function localbu($url = null)
         $uploadBaseUrl = rtrim($uploader->baseUrl, '/') . '/';
     }
 
-    if (empty($url))
+    if (empty($file))
         return $uploadBaseUrl;
     else
-        return (stripos($url, 'http://') === 0) ? $url : $uploadBaseUrl . ltrim($url, '/');
+        return (stripos($file, 'http://') === 0) ? $file : $uploadBaseUrl . ltrim($file, '/');
 }
 
 /**
  * 此函数返回使用又拍云时附件地址的BaseUrl
- * @param string $url 附件文件相对url地址
+ * @param string $file 附件文件相对url地址
  * @return string
  */
-function upyunbu($url = null, $imageFile = true)
+function upyunbu($file = null, $imageFile = true)
 {
     static $uploadBaseUrl = null;
-    if ($uploadBaseUrl === null) {
+    $isImage = (int)$imageFile;
+    if ($uploadBaseUrl[$isImage] === null) {
         $uploader = upyunUploader($imageFile);
         if ($uploader === null)
             throw new CDException('没有配置upyun uploader');
 
-        $uploadBaseUrl = rtrim($uploader->baseUrl, '/') . '/';
+        $uploadBaseUrl[$isImage] = rtrim($uploader->baseUrl, '/') . '/';
     }
 
-    if (empty($url))
-        return $uploadBaseUrl;
+    if (empty($file))
+        return $uploadBaseUrl[$isImage];
     else
-        return (stripos($url, 'http://') === 0) ? $url : $uploadBaseUrl . ltrim($url, '/');
+        return (stripos($file, 'http://') === 0) ? $file : $uploadBaseUrl[$isImage] . ltrim($file, '/');
 }
 
 /**

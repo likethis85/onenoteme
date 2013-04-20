@@ -3,6 +3,7 @@ class TestController extends Controller
 {
     public function actionIndex()
     {
+        
         echo fbu() . '<br />';
         echo fbu('a/b/c.jpg') . '<br />';
         echo fbp('a/c/b.png') . '<hr />';

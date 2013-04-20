@@ -7,7 +7,7 @@ class CDLocalUploader extends CDBaseUploader
     public function init()
     {
         if (empty($this->basePath) || empty($this->baseUrl))
-            throw new CDException('basePath and baseUrl is required.');
+            ;//throw new CDException('basePath and baseUrl is required.');
     }
     
     public function autoFilename($prefixPath = '', $extension = '', $prefix = '')
