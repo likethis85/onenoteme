@@ -304,7 +304,7 @@ class Api_Post extends ApiBase
     	    $opts = array();
     	    $top = (int)$params['padding_top'];
     	    $bottom = (int)$params['padding_bottom'];
-    	    if ($top > 0 && $bottom > 0) {
+    	    if ($top > 0 || $bottom > 0) {
     	        $opts['padding_top'] = $top;
     	        $opts['padding_bottom'] = $bottom;
     	    }
