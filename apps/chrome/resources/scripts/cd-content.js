@@ -52,6 +52,8 @@ var postPages = {
 		+ 		'<div class="cdext-input">'
 		+ 			'<input type="text" class="cdext-txt" name="onreferer" id="onreferer" value="' + request.info.pageUrl + '" />'
 		+ 		'</div>'
+		+ 		'<input type="hidden" name="croptop" id="croptop" value="0" />&nbsp;-&nbsp;'
+		+ 		'<input type="hidden" name="cropbottom" id="cropbottom" value="0" />'
 		+ 	'</div>'
 		+	'<div class="actions">'
 		+		'<input type="button" class="btn primary" id="cdext-post" value="发布" />&nbsp;<input type="button" class="btn" id="cdext-close" value="关闭" />'
