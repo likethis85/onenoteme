@@ -1,8 +1,6 @@
 <?php
 class CDBaseUrl
 {
-
-
     public static function siteHomeUrl()
     {
         return aurl('site/index');

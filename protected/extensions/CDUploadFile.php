@@ -11,13 +11,20 @@ class CDUploadFile extends CUploadedFile
      * -1 目录不存在并且无法创建
      * -2 目录不可写
      */
-    public static function makeUploadPath($additional = null, $basePath = null)
+    public static function makeUploadPath($additional = null, $basePath = null, $upyun = false)
     {
         $relativeUrl = (($additional === null) ? '' : $additional . '/') . date('Y/m/d/', $_SERVER['REQUEST_TIME']);
+
+        if ($upyun) {
+            return array(
+                'path' => $relativeUrl,
+                'url' => $relativeUrl,
+            );
+        }
+        
         $relativePath = (($additional === null) ? '' : $additional . DS) . date(addslashes(sprintf('Y%sm%sd%s', DS, DS, DS)), $_SERVER['REQUEST_TIME']);
-    
         if (empty($basePath))
-            $basePath = param('uploadBasePath');
+            $basePath = app()->getComponent('localUploader')->basePath;
         $path = $basePath . $relativePath;
     
         if ((file_exists($path) || mkdir($path, 0755, true)) && is_writable($path))
@@ -141,7 +148,7 @@ class CDUploadFile extends CUploadedFile
         $im->crop($thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
     
         $extension = CDImage::getImageExtName($data);
-        $path = self::makeUploadPath('pics');
+        $path = self::makeUploadPath('pics',null, true);
         $urlpath = '/' . trim($path['url'], '/') . '/';
         $file = self::makeUploadFileName($extension);
         $thumbnailFilename = $urlpath . 'thumbnail_' . $file;
