@@ -186,9 +186,9 @@ class CDUploadFile extends CUploadedFile
     
         
         if (upyunEnabled())
-            $images = self::saveImageToUpyun($im, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft, $opts);
+            $images = self::saveImageToUpyun($im, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
         else
-            $images = self::saveImageToLocal($im, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft, $opts);
+            $images = self::saveImageToLocal($im, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
     
         return $images;
     }
