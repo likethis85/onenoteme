@@ -204,7 +204,12 @@ function fbp($file = null)
  */
 function fbu($url = null, $imageFile = true)
 {
-    $url = upyunEnabled() ? upyunbu($url, $imageFile) : localbu($url, $imageFile);
+    $url = '';
+    if (upyunEnabled())
+        $url = upyunbu($url, $imageFile);
+    else
+        $url = localbu($url);
+    
     return $url;
 }
 
@@ -276,7 +281,7 @@ function dp($path = null)
  * @param string $url 附件文件相对url地址
  * @return string
  */
-function localbu($url = null, $imageFile = true)
+function localbu($url = null)
 {
     static $uploadBaseUrl = null;
     if ($uploadBaseUrl === null) {

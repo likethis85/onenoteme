@@ -3,6 +3,17 @@ class TestController extends Controller
 {
     public function actionIndex()
     {
+        echo fbu() . '<br />';
+        echo fbu('a/b/c.jpg') . '<br />';
+        echo fbp('a/c/b.png') . '<hr />';
+        
+        echo upyunbu() . '<br />';
+        echo upyunbu('a/b/c.jpg') . '<br />';
+        echo upyunbu(null, false) . '<br />';
+        echo upyunbu('a/b/c.jpg', false) . '<hr />';
+        
+        echo localbu() . '<br />';
+        echo localbu('a/b/c.jpg') . '<hr />';
         exit;
         $this->redirect('/');
         
