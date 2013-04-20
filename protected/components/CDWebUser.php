@@ -5,7 +5,7 @@ class CDWebUser extends CWebUser
     {
         $url = '';
         if (!$this->getIsGuest())
-            $url = CDbaseUrl::userHomeUrl($this->id);
+            $url = CDBaseUrl::userHomeUrl($this->id);
         
         return $url;
     }
