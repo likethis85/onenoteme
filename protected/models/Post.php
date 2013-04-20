@@ -619,7 +619,7 @@ class Post extends CActiveRecord
                 $thumbHeight = GIRL_THUMBNAIL_HEIGHT;
             }
         
-            $images = CDUploadFile::saveRemoteImages($url, $thumbWidth, $thumbHeight, $this->channel_id == CHANNEL_GIRL, $referer);
+            $images = CDUploadFile::saveImage($url, $referer, $thumbWidth, $thumbHeight, $this->channel_id == CHANNEL_GIRL);
             
             if ($images) {
                 $this->thumbnail_pic = $images[0]['url'];
