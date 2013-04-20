@@ -204,8 +204,7 @@ function fbp($file = null)
  */
 function fbu($url = null, $imageFile = true)
 {
-    $yun = (bool)param('upyun_enabled');
-    $url = $yun ? upyunbu($url, $imageFile) : localbu($url, $imageFile);
+    $url = upyunEnabled() ? upyunbu($url, $imageFile) : localbu($url, $imageFile);
     return $url;
 }
 
@@ -318,15 +317,19 @@ function upyunbu($url = null, $imageFile = true)
 
 /**
  * 返回当前使用的uploader
- * @return Ambigous <CDUpyunUploader, CDLocalUploader>
+ * @return Ambigous <CDUpyunUploader, CDLocalUploader> 如果使用又拍云存储，则返回CDUpyunUploader，存储在硬盘，返回CDLocalUploader
  */
 function uploader($image = true)
 {
-    $yun = (bool)param('upyun_enabled');
-    $uploader = $yun ? upyunUploader($image) : app()->getComponent('localUploader', false);
+    $uploader = upyunEnabled() ? upyunUploader($image) : app()->getComponent('localUploader', false);
     return $uploader;
 }
 
+/**
+ * 获取又拍云uploader component
+ * @param string $image 如果为true, 则返回upyunImageUploader，否则返回upyunFileUploader
+ * @return CDUpyunUploader 如果找不到组件，则返回null
+ */
 function upyunUploader($image = true)
 {
     $component = (bool)$image ? 'upyunImageUploader' : 'upyunFileUploader';
@@ -334,5 +337,12 @@ function upyunUploader($image = true)
     return $uploader;
 }
 
-
+/**
+ * 当前环境是否使用又拍云
+ * @return boolean
+ */
+function upyunEnabled()
+{
+    return (bool)param('upyun_enabled');
+}
 

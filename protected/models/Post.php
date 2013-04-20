@@ -427,6 +427,9 @@ class Post extends CActiveRecord
     
     public function getUpyunThumb()
     {
+        if (!upyunEnabled())
+            return $this->thumbnail;
+        
         $url = '';
         if ($this->original_pic)
             $url = $this->original_pic . UPYUN_IMAGE_CUSTOM_SEPARATOR . UPYUN_IMAGE_CUSTOM_THUMB;
@@ -437,8 +440,14 @@ class Post extends CActiveRecord
     public function getUpyunThumbHeight($width = IMAGE_THUMB_WIDTH)
     {
         $height = 0;
-        if ($this->original_width && $this->original_height)
-            $height = $width * $this->original_height / $this->original_width;
+        if (upyunEnabled()) {
+            if ($this->original_width && $this->original_height)
+                $height = $width * $this->original_height / $this->original_width;
+        }
+        else {
+            if ($this->thumbnail_pic && $this->thumbnail_pic)
+                $height = $width * $this->thumbnail_pic / $this->thumbnail_pic;
+        }
         
         return $height;
     }
@@ -608,7 +617,7 @@ class Post extends CActiveRecord
     }
     
     
-    public function fetchRemoteImagesBeforeSave($referer = '')
+    public function fetchRemoteImagesBeforeSave($referer = '', $opts = array())
     {
         $url = strip_tags(trim($this->original_pic));
         if (!empty($url) && stripos($url, fbu()) === false) {

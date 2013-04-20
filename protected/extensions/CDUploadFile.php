@@ -135,8 +135,7 @@ class CDUploadFile extends CUploadedFile
         if (empty($file) || (!file_exists($file) && filter_var($file, FILTER_VALIDATE_URL) === false))
             return $images;
     
-        $upyunEnabled = (bool)param('upyun_enabled');
-        if ($upyunEnabled)
+        if (upyunEnabled())
             $images = self::saveRemoteImagesToUpyun($file, $referer, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);
         else
             $images = self::saveRemoteImagesToLocal($file, $referer, $thumbWidth, $thumbHeight, $cropFromTop, $cropFromLeft);

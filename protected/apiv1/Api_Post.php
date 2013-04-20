@@ -300,7 +300,7 @@ class Api_Post extends ApiBase
     	    $referer = strip_tags(trim($params['onreferer']));
     	    if (empty($referer))
     	        $referer = $params['pic'];
-    		$result = $post->fetchRemoteImagesBeforeSave($referer) && $post->save();
+    		$result = $post->fetchRemoteImagesBeforeSave($referer, $opts) && $post->save();
     		return (int)$result;
     	}
     	catch (ApiException $e) {
