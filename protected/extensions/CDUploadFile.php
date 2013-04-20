@@ -160,7 +160,7 @@ class CDUploadFile extends CUploadedFile
         /* 检查是否有额外的参数选项，主要是去除头尾的版本水印及LOGO
          * 如果是动画，不作相关处理
          */
-        if (!$im->isAnimateGif()) {
+        if (!$im->isAnimateGif() && !empty($opts)) {
             $defaultOptions = array(
                 'padding_top' => 0,
                 'padding_bottom' => 0,
@@ -174,10 +174,12 @@ class CDUploadFile extends CUploadedFile
             else
                 throw new CDException('$opts must be an array.');
             
-            if ((array_key_exists('padding_top', $opts) && $top = (int)$opts['padding_top'] > 0) ||
-                (array_key_exists('padding_bottom', $opts) && $bottom = (int)$opts['padding_bottom'] > 0)) {
+            $top = (int)$opts['padding_top'];
+            $bottom = (int)$opts['padding_bottom'];
+            if ((array_key_exists('padding_top', $opts) && $top > 0) ||
+                (array_key_exists('padding_bottom', $opts) && $bottom > 0)) {
                 $width = $im->width();
-                $height = $im->height() -> $top - $bottom;
+                $height = $im->height() - $top - $bottom;
                 $im->cropByFrame($width, $height, 0, $top);
                 $im->setCurrentRawData();
             }
