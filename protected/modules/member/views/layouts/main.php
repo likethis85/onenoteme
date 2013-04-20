@@ -14,8 +14,8 @@
 <body>
 <div class="cd-mini-nav">
     <ul class="fleft">
-		<li><a href="<?php echo CDBase::mobileHomeUrl();?>">手机版</a></li>
-		<li><a href="<?php echo CDBase::wapHomeUrl();?>">WAP版</a></li>
+		<li><a href="<?php echo CDBaseUrl::mobileHomeUrl();?>">手机版</a></li>
+		<li><a href="<?php echo CDBaseUrl::wapHomeUrl();?>">WAP版</a></li>
 		<li><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank">iPhone应用</a></li>
 		<li><a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank">安卓应用</a></li>
 	</ul>
@@ -27,7 +27,7 @@
 <div class="cd-header">
     <div class="cd-wrapper cd-header-inner"">
     	<div id="site-logo" class="logo fleft">
-    	    <a href="<?php echo CDBase::siteHomeUrl();?>" title="点击返回首页">
+    	    <a href="<?php echo CDBaseUrl::siteHomeUrl();?>" title="点击返回首页">
     	        <img src="<?php echo sbu('images/logo.jpg');?>" alt="网站LOGO" title="返回首页" align="top" width="45" height="45" /><h1>挖段子</h1>
     	        <h2>挖段子网永久唯一域名：http://www.waduanzi.com</h2>
 	        </a>
@@ -63,7 +63,7 @@
             <li><a href="<?php echo aurl('member/profile/avatar');?>" <?php if ($this->menu == 'avatar') echo 'class="active"';?>>修改头像</a></li>
             <li><a href="<?php echo aurl('member/profile/nickname');?>" <?php if ($this->menu == 'nickname') echo 'class="active"';?>>修改昵称</a></li>
             <li><a href="<?php echo aurl('member/profile/passwd');?>" <?php if ($this->menu == 'passwd') echo 'class="active"';?>>修改密码</a></li>
-            <li><a href="<?php echo CDBase::logoutUrl();?>">退出登录</a></li>
+            <li><a href="<?php echo CDBaseUrl::logoutUrl();?>">退出登录</a></li>
         </ul>
     </div>
     <div class="cd-container fright">
@@ -75,7 +75,7 @@
 <?php echo param('footer_before_html');?>
 <div class="cd-footer">
     <div class="cd-wrapper">
-    	<p class="fleft">内容版权所有 ©2011-2012 <a href="<?php echo CDBase::siteHomeUrl();?>">waduanzi.com</a>&nbsp;&nbsp;冀ICP备12006196号-5&nbsp;&nbsp;
+    	<p class="fleft">内容版权所有 ©2011-2012 <a href="<?php echo CDBaseUrl::siteHomeUrl();?>">waduanzi.com</a>&nbsp;&nbsp;冀ICP备12006196号-5&nbsp;&nbsp;
     	    <a href="<?php echo aurl('site/bdmap');?>" target="_blank">网站地图</a>&nbsp;&nbsp;
     	    <a href="<?php echo aurl('site/links');?>" target="_blank">友情链接</a>&nbsp;&nbsp;
     	    <a href="<?php echo aurl('tag/list');?>" target="_blank">全部标签</a>

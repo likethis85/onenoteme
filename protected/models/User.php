@@ -95,7 +95,7 @@ class User extends CActiveRecord
 	
 	public function getHomeUrl()
 	{
-	    return CDBase::userHomeUrl($this->id);
+	    return CDBaseUrl::userHomeUrl($this->id);
 	}
 	
 	public function getNameLink($htmlOptions = array('target'=>'_blank'))

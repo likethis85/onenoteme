@@ -69,7 +69,7 @@ class Controller extends CController
             	
             if (app()->session['image_url'])
                 $avatar = sprintf('<img src="%s" alt="进入用户中心" align="top" />', app()->session['image_url']);
-            $html .= sprintf('<li class="user-name"><a href="%s" title="进入用户中心">%s%s</a></li>', CDBase::memberHomeUrl(), $avatar, user()->name);
+            $html .= sprintf('<li class="user-name"><a href="%s" title="进入用户中心">%s%s</a></li>', CDBaseUrl::memberHomeUrl(), $avatar, user()->name);
             $html .= sprintf('<li><a href="%s">退出</a></li>', aurl('site/logout'));
         }
         

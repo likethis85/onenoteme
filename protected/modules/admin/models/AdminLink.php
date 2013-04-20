@@ -31,7 +31,7 @@ class AdminLink extends Link
         return ;
         if ($this->icon && $this->icon instanceof CUploadedFile) {
             $topicThumbnailDir = 'topic';
-            $filename = CDBase::uploadImage($this->icon, 'topic');
+            $filename = CDUploadFile::uploadImage($this->icon, 'topic');
             if ($filename === false)
                 return false;
             else {

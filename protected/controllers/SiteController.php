@@ -83,7 +83,7 @@ class SiteController extends Controller
     {
         if (!user()->getIsGuest()) {
             $returnUrl = strip_tags(trim($url));
-            if (empty($returnUrl)) $returnUrl = CDBase::memberHomeUrl();
+            if (empty($returnUrl)) $returnUrl = CDBaseUrl::memberHomeUrl();
             request()->redirect($returnUrl);
             exit(0);
         }
@@ -102,7 +102,7 @@ class SiteController extends Controller
             if (empty($returnUrl))
                 $returnUrl = request()->getUrlReferrer();
             if (empty($returnUrl))
-                $returnUrl = CDBase::memberHomeUrl();
+                $returnUrl = CDBaseUrl::memberHomeUrl();
             $model->returnUrl = urlencode($returnUrl);
         }
         
@@ -148,7 +148,7 @@ class SiteController extends Controller
     public function actionSignup()
     {
         if (!user()->getIsGuest()) {
-            $this->redirect(CDBase::memberHomeUrl());
+            $this->redirect(CDBaseUrl::memberHomeUrl());
             exit(0);
         }
         
@@ -266,7 +266,7 @@ class SiteController extends Controller
         $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
         
         $url = 'http://www.fanjian.net/upload/201210231243255284.jpg';
-        $images = CDBase::saveRemoteImages($url, $thumbWidth, $thumbHeight, true);
+        $images = CDUploadFile::saveRemoteImages($url, $thumbWidth, $thumbHeight, true);
         var_dump($images);
     }
 }

@@ -349,7 +349,7 @@ class Post extends CActiveRecord
     {
         $html = $this->getAuthorName();
         if ($this->user_id && $this->user) {
-            $url = CDBase::userHomeUrl($this->user_id);
+            $url = CDBaseUrl::userHomeUrl($this->user_id);
             $html = l($this->getAuthorName(), $url, $htmlOptions);
         }
         
@@ -619,7 +619,7 @@ class Post extends CActiveRecord
                 $thumbHeight = GIRL_THUMBNAIL_HEIGHT;
             }
         
-            $images = CDBase::saveRemoteImages($url, $thumbWidth, $thumbHeight, $this->channel_id == CHANNEL_GIRL, $referer);
+            $images = CDUploadFile::saveRemoteImages($url, $thumbWidth, $thumbHeight, $this->channel_id == CHANNEL_GIRL, $referer);
             
             if ($images) {
                 $this->thumbnail_pic = $images[0]['url'];

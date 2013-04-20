@@ -2,9 +2,9 @@
 return array(
     // 缓存数据目录
     'dataPath' => CD_CONFIG_ROOT . DS . '..' . DS . 'data' . DS,
-    'uploadBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'uploads' . DS,
-    'uploadBaseUrl' => 'http://f1.wabao.me/',
-    'upyunUploadBaseUrl' => 'http://f0.wabao.me/',
+    'localUploadBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'uploads' . DS,
+    'localUuploadBaseUrl' => 'http://f1.wabao.me/',
+    'upyunImageUploadBaseUrl' => 'http://f0.wabao.me/',
     'resourceBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'resources' . DS,
     'resourceBaseUrl' => 'http://s0.wabao.me/',
     'upyun_enabled' => true,

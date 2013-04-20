@@ -17,7 +17,7 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container admin-nav-container">
-            <a class="brand" href="<?php echo CDBase::adminHomeUrl();?>">管理中心</a>
+            <a class="brand" href="<?php echo CDBaseUrl::adminHomeUrl();?>">管理中心</a>
             <ul class="nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">文章管理<b class="caret"></b></a>

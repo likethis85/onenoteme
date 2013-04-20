@@ -1,7 +1,7 @@
 <?php
 return array(
     'default' => array(
-        'homeLink' => '<li>' . l('首页', CDBase::siteHomeUrl()) . '<span class="divider">/</span></li>',
+        'homeLink' => '<li>' . l('首页', CDBaseUrl::siteHomeUrl()) . '<span class="divider">/</span></li>',
         'separator' => '&nbsp;',
         'tagName' => 'ul',
         'htmlOptions' => array('class'=>'breadcrumb'),
@@ -9,7 +9,7 @@ return array(
         'inactiveLinkTemplate' => '<li>{label}</li>',
     ),
     'member' => array(
-        'homeLink' => '<li>' . l('会员中心', CDBase::memberHomeUrl()) . '<span class="divider">/</span></li>',
+        'homeLink' => '<li>' . l('会员中心', CDBaseUrl::memberHomeUrl()) . '<span class="divider">/</span></li>',
         'separator' => '&nbsp;',
         'tagName' => 'ul',
         'htmlOptions' => array('class'=>'breadcrumb'),

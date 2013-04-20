@@ -115,7 +115,7 @@ class UserProfile extends CActiveRecord
 
 	public function getHomeUrl()
 	{
-	    return CDBase::userHomeUrl($this->user_id);
+	    return CDBaseUrl::userHomeUrl($this->user_id);
 	}
 	
 	public function getSmallAvatarUrl()

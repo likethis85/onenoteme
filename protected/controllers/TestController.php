@@ -7,7 +7,7 @@ class TestController extends Controller
         $this->redirect('/');
         
         $url = 'http://pic.pp3.cn/uploads/allimg/111125/16030T308-2.jpg';
-        $images = CDBase::saveRemoteImages($url, IMAGE_THUMBNAIL_WIDTH, IMAGE_THUMBNAIL_HEIGHT);
+        $images = CDUploadFile::saveRemoteImages($url, IMAGE_THUMBNAIL_WIDTH, IMAGE_THUMBNAIL_HEIGHT);
         
         var_dump($images);
         

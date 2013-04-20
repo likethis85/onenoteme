@@ -70,7 +70,7 @@ class PostCommand extends CConsoleCommand
                     $thumbnailFileName = fbp($thumbnailPicPath);
                 }
                 else {
-                    $newPaths = CDBase::makeUploadFilePath('', 'pics');
+                    $newPaths = CDUploadFile::makeUploadFilePath('', 'pics');
                     $thumbnailPicPath = $newPaths['url'];
                     $thumbnailFileName = $newPaths['path'];
                 }
@@ -149,7 +149,7 @@ class PostCommand extends CConsoleCommand
                     $thumbnailFileName = fbp($thumbnailPicPath);
                 }
                 else {
-                    $newPaths = CDBase::makeUploadFilePath('', 'pics');
+                    $newPaths = CDUploadFile::makeUploadFilePath('', 'pics');
                     $thumbnailPicPath = $newPaths['url'];
                     $thumbnailFileName = $newPaths['path'];
                 }

@@ -1,5 +1,5 @@
 <?php
-class CDUpyunUploader extends CDUploader
+class CDUpyunUploader extends CDBaseUploader
 {
     public $endpoint = null;
     public $username;

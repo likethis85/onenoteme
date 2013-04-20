@@ -187,8 +187,12 @@ function auth()
 function fbp($file = null)
 {
     static $uploadBasePath = null;
-    if ($uploadBasePath === null)
-        $uploadBasePath = rtrim(param('uploadBasePath'), DS) . DS;
+    if ($uploadBasePath === null) {
+        $uploader = app()->getComponent('localuploader');
+        if ($uploader === null)
+            throw new CDException('没有配置localuploader');
+        $uploadBasePath = rtrim($uploader->basePath, DS) . DS;
+    }
 
     return empty($file) ? $uploadBasePath : $uploadBasePath . ltrim($file, DS);
 }
@@ -201,8 +205,12 @@ function fbp($file = null)
 function fbu($url = null)
 {
     static $uploadBaseUrl = null;
-    if ($uploadBaseUrl === null)
-        $uploadBaseUrl = rtrim(param('uploadBaseUrl'), '/') . '/';
+    if ($uploadBaseUrl === null) {
+        $uploader = app()->getComponent('localuploader');
+        if ($uploader === null)
+            throw new CDException('没有配置localuploader');
+        $uploadBaseUrl = rtrim($uploader->baseUrl, '/') . '/';
+    }
     
     if (empty($url))
         return $uploadBaseUrl;
@@ -278,11 +286,15 @@ function dp($path = null)
  * @param string $url 附件文件相对url地址
  * @return string
  */
-function upyunFbu($url = null)
+function upyunbu($url = null, $imageBacket = true)
 {
     static $uploadBaseUrl = null;
-    if ($uploadBaseUrl === null)
-        $uploadBaseUrl = rtrim(param('upyunUploadBaseUrl'), '/') . '/';
+    if ($uploadBaseUrl === null) {
+        $uploader = app()->getComponent($imageBacket ? 'upyunimguploaer' : 'upyunfileuploaer');
+        if ($uploader === null)
+            throw new CDException('没有配置upyun uploader');
+        $uploadBaseUrl = rtrim($uploader->domain, '/') . '/';
+    }
 
     if (empty($url))
         return $uploadBaseUrl;

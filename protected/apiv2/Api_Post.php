@@ -327,10 +327,10 @@ class Api_Post extends ApiBase
         	        $thumbHeight = GIRL_THUMBNAIL_HEIGHT;
         	    }
         	    
-        	    $path = CDBase::makeUploadPath('pics');
+        	    $path = CDUploadFile::makeUploadPath('pics');
         	    $info = parse_url($url);
                 $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);
-                $file = CDBase::makeUploadFileName('');
+                $file = CDUploadFile::makeUploadFileName('');
                 $thumbnailFile = 'thumbnail_' . $file;
                 $thumbnailFileName = $path['path'] . $thumbnailFile;
                 $middleFileName = $path['path'] . 'bmiddle_' . $file;

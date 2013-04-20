@@ -18,7 +18,7 @@
             <h1>创建账号</h1>
             <p>请珍惜自己的账号，一旦作恶，账号将被永久删除。</p>
             <p>使用<?php echo app()->name;?> <a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank">iPhone</a>或<a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank">Android</a> 应用可以快速注册，尽享移动欢乐！</p>
-            <a href="<?php echo CDBase::singupUrl();?>" target="_blank" class="btn btn-danger">注册</a>
+            <a href="<?php echo CDBaseUrl::singupUrl();?>" target="_blank" class="btn btn-danger">注册</a>
         </div>
     </div>
     <div class="clear"></div>

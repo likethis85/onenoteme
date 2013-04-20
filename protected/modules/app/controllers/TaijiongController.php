@@ -108,8 +108,8 @@ class TaijiongController extends AppController
             $im->text($text3, $font, 16, array(10, 690), $color);
             $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_TOP_RIGHT, $color);
             
-            $path = CDBase::makeUploadPath('taijiong');
-            $file = CDBase::makeUploadFileName();
+            $path = CDUploadFile::makeUploadPath('taijiong');
+            $file = CDUploadFile::makeUploadFileName();
             $filename = $path['path'] . $file;
             $im->saveAsJpeg($filename);
             

@@ -1,5 +1,5 @@
 <?php
-abstract class CDUploader extends CApplicationComponent
+abstract class CDBaseUploader extends CApplicationComponent
 {
     abstract public function autoFilename($prefixPath = '', $extension = '', $prefix = '');
     

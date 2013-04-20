@@ -30,9 +30,9 @@ class MemberUserProfile extends UserProfile
     {
         $tempName = $this->original_avatar->getTempName();
         $extension = CDImage::getImageExtName($tempName);
-        $path = CDBase::makeUploadPath('avatars');
+        $path = CDUploadFile::makeUploadPath('avatars');
         $urlpath = '/' . trim($path['url'], '/') . '/';
-        $file = CDBase::makeUploadFileName($extension);
+        $file = CDUploadFile::makeUploadFileName($extension);
         $filename = $urlpath . $this->user_id . '_' . $file;
     
         try {
@@ -58,8 +58,8 @@ class MemberUserProfile extends UserProfile
     
         $tempName = $upload->getTempName();
         $extension = CDImage::getImageExtName($tempName);
-        $path = CDBase::makeUploadPath('avatars');
-        $file = CDBase::makeUploadFileName($extension);
+        $path = CDUploadFile::makeUploadPath('avatars');
+        $file = CDUploadFile::makeUploadFileName($extension);
         $originalFile = $path['path'] . 'original_' . $file;
         $largeFile = $path['path'] . 'large_' . $file;
         $smallFile = $path['path'] . 'small_' . $file;
