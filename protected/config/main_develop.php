@@ -169,6 +169,15 @@ return array(
             'password' => 'cdc790406',
             'baseUrl' => $params['upyunFileBaseUrl'],
         ),
+        'upyuntest' => array(
+            'class' => 'application.extensions.CDUpyunUploader',
+            'isImageBucket' => true,
+            'endpoint' => 'v2.api.upyun.com',
+            'bucket' => 'wdztest',
+            'username' => 'cdcchen',
+            'password' => 'cdc790406',
+            'baseUrl' => 'http://wdztest.b0.upaiyun.com/',
+        ),
     ),
     
     'params' => $params,

@@ -253,6 +253,18 @@ class CDBase
         return $channelID === null ? $labels : $labels[$channelID];
     }
 
+    public static function externalUrl($url)
+    {
+        $domains = array(
+            'wabao.me',
+            'waduanzi.com',
+        );
+        foreach ($domains as $domain) {
+            if (stripos($url, $domain) === false)
+                return true;
+        }
+        return false;
+    }
 }
 
 

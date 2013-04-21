@@ -32,7 +32,7 @@
                         <?php echo CHtml::image($model->getFixThumb(), $model->title, array('class'=>'thumb', 'title'=>'点击析大图'));?>
                         <img class="bmiddle hide" alt="<?php echo $model->title;?>" title="点击查看缩略图" />
                     </a>
-                    <?php if ($model->gif_animation):?><i class="site-bg icon-gif-sign"></i><?php endif;?>
+                    <?php if ($model->getImageIsAnimation()):?><i class="site-bg icon-gif-sign"></i><?php endif;?>
                     <?php else:?>
                     <a href="<?php echo $model->getUrl();?>" target="_blank" title="点击查看大图" data-bmiddle-url="<?php echo $model->getMiddlePic();?>">
                         <?php echo $model->getMiddleImage();?>

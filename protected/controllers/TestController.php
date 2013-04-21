@@ -45,36 +45,19 @@ class TestController extends Controller
     
     public function actionImage()
     {
-        $url = 'http://wanzao2.b0.upaiyun.com/system/pictures/2888702/original/005.jpg';
-        $referer = 'http://xiaoliaobaike.com/';
+        $uploader = app()->getComponent('upyuntest');
+        $file = '/data/web/waduanzi.com/uploads/01.jpg';
+        $data = file_get_contents($file);
+        $filename = '/test/{random}{.suffix}';
         
-        $curl = new CDCurl();
-        $curl->referer($referer)->get($url);
-        $errno = $curl->errno();
-        if ($errno != 0)
-            throw new Exception($curl->error(), $errno);
-    
-        $data = $curl->rawdata();
-        $curl->close();
+        $opts = array(
+            UpYun::X_GMKERL_TYPE => 'square',
+            UpYun::X_GMKERL_VALUE => 200,
+            'save­key' => '/test/{random}{.suffix}',
+        );
         
-        $im = new CDImage();
-        $im->load($data);
-        
-        $top = 300;
-        $bottom = 100;
-        $width = $im->width();
-        $height = $im->height() - $top - $bottom;
-//         var_dump($width);
-//         var_dump($height);
-//         exit;
-        
-        $im->cropByFrame($width, $height, 0, $top);
-        $im->setCurrentRawData();
-        
-        $im->revert();
-        $im->resizeToWidth(200);
-        
-        $im->output();
+        $infos = $uploader->save($data, $filename, $opts);
+        var_dump($infos);
 
         exit(0);
     }

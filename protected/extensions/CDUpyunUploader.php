@@ -104,14 +104,6 @@ class CDUpyunUploader extends CDBaseUploader
         
         return $value;
     }
-    
-    public function animatedGifImage()
-    {
-        $frames = $this->imageInfo('x-upyun-frames');
-        return intval($frames) > 1;
-    }
-
-    
 }
 
 

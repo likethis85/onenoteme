@@ -22,7 +22,7 @@
  * @property string $original_pic
  * @property integer $original_width
  * @property integer $original_height
- * @property string $gif_animation
+ * @property integer $original_frames
  * @property string $weibo_id
  * @property integer $istop
  * @property integer $homeshow
@@ -72,6 +72,7 @@
  * @property string $largeImage
  * @property string $largeImageLink
  * @property string $originalPic
+ * @property bool $imageIsAnimation
  *
  * @property string $videoHtml
  * @property string $videoSourceUrl
@@ -475,6 +476,11 @@ class Post extends CActiveRecord
         return $this->original_pic;
     }
     
+    public function getImageIsAnimation()
+    {
+        return $this->original_frames > 1;
+    }
+    
     public function getThumbHeightByWidth($width = IMAGE_THUMB_WIDTH)
     {
         $height = 0;
@@ -494,60 +500,6 @@ class Post extends CActiveRecord
     
         return $width;
     }
-    
-    /*
-    public function getUpyunThumb()
-    {
-        if (!upyunEnabled())
-            return $this->thumbnail;
-        
-        $url = '';
-        if ($this->original_pic)
-            $url = $this->original_pic . UPYUN_IMAGE_CUSTOM_SEPARATOR . UPYUN_IMAGE_CUSTOM_THUMB;
-        
-        return $url;
-    }
-    
-    public function getUpyunThumbHeight($width = IMAGE_THUMB_WIDTH)
-    {
-        $height = 0;
-        if (upyunEnabled()) {
-            if ($this->original_width && $this->original_height)
-                $height = $width * $this->original_height / $this->original_width;
-        }
-        else {
-            if ($this->thumbnail_pic && $this->thumbnail_pic)
-                $height = $width * $this->thumbnail_pic / $this->thumbnail_pic;
-        }
-        
-        return $height;
-    }
-    
-    
-    public function getUpyunThumbImage($width = IMAGE_THUMB_WIDTH)
-    {
-        $html = '';
-        if ($this->getUpyunThumb()) {
-            $htmlOptions = array('class'=>'cd-thumbnail');
-            if ($width > 0) $htmlOptions['width'] = $width;
-            $height = $this->getUpyunThumbHeight($width);
-            if ($height > 0) $htmlOptions['height'] = $height;
-            $html = image($this->getUpyunThumb(), $this->title, $htmlOptions);
-        }
-    
-        return $html;
-    }
-    
-
-    public function getUpyunThumbLink($width = IMAGE_THUMB_WIDTH, $target = '_blank')
-    {
-        $html = '';
-        if ($this->getUpyunThumb())
-            $html = l($this->getUpyunThumbImage($width), $this->getUrl(), array('target'=>$target, 'title'=>$this->getFilterTitle()));
-        
-        return $html;
-    }
-    */
     
     public function getThumbnailImage($width = 0)
     {
@@ -778,25 +730,13 @@ class Post extends CActiveRecord
     public function fetchRemoteImagesBeforeSave($referer = '', $opts = array())
     {
         $url = strip_tags(trim($this->original_pic));
-        if (!empty($url) && stripos($url, fbu()) === false) {
-            $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
-            $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
-            if ($this->channel_id == CHANNEL_GIRL)
-                $thumbWidth = $thumbHeight = IMAGE_THUMBNAIL_SQUARE_SIZE;
-        
-            $images = CDUploadFile::saveImage($url, $referer, $thumbWidth, $thumbHeight, $this->channel_id == CHANNEL_GIRL, false, $opts);
-            
-            if ($images) {
-                $this->thumbnail_pic = $images[0]['url'];
-                $this->thumbnail_width = $images[0]['width'];
-                $this->thumbnail_height = $images[0]['height'];
-                $this->bmiddle_pic = $images[1]['url'];
-                $this->bmiddle_width = $images[1]['width'];
-                $this->bmiddle_height = $images[1]['height'];
-                $this->original_pic = $images[2]['url'];
-                $this->original_width = $images[2]['width'];
-                $this->original_height = $images[2]['height'];
-                $this->gif_animation = (int)$images[3];
+        if (!empty($url) && CDBase::externalUrl($url)) {
+            $image = CDUploadFile::saveImage(upyunEnabled(), $url, $referer, $opts);
+            if ($image) {
+                $this->original_pic = $image['url'];
+                $this->original_width = $image['width'];
+                $this->original_height = $image['height'];
+                $this->gif_animation = (int)$image['frames'];
                 return true;
             }
             else
