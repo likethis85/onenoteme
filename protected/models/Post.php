@@ -397,13 +397,13 @@ class Post extends CActiveRecord
      */
     public function getImageThumb()
     {
-        static $thumb = null;
-        if ($thumb === null){
+//         static $thumb = null;
+//         if ($thumb === null){
             if ($this->original_pic)
                 $thumb = new CDImageThumb($this->original_pic, $this->original_width, $this->original_height);
             else
                 $thumb = '';
-        }
+//         }
         
         return $thumb;
     }
