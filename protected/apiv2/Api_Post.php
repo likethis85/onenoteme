@@ -29,19 +29,24 @@ class Api_Post extends ApiBase
         if (isset($row['create_time']) && $row['create_time'])
             $row['create_time_text'] = date(param('formatShortDateTime'), $row['create_time']);
         
-        $thumb = new CDImageThumb($row['original_pic'], $row['original_width'], $row['original_height']);
-        
-        $smallPic = $thumb->fixThumbImageUrl();
-        $smallPic =  (filter_var($smallPic, FILTER_VALIDATE_URL) === false) ? '' : $smallPic;
-        $row['pic_thumbnail'] = $smallPic;
-        
-        $middlePic = $thumb->middleImageUrl();
-        $middlePic =  (filter_var($middlePic, FILTER_VALIDATE_URL) === false) ? '' : $middlePic;
-        $row['pic_middle'] = $middlePic;
-        
-        $originalPic = $thumb->largeImageUrl();
-        $originalPic =  (filter_var($originalPic, FILTER_VALIDATE_URL) === false) ? '' : $originalPic;
-        $row['pic_original'] = $originalPic;
+        try {
+            $thumb = new CDImageThumb($row['original_pic'], $row['original_width'], $row['original_height']);
+            
+            $smallPic = $thumb->fixThumbImageUrl();
+            $smallPic =  (filter_var($smallPic, FILTER_VALIDATE_URL) === false) ? '' : $smallPic;
+            $row['pic_thumbnail'] = $smallPic;
+            
+            $middlePic = $thumb->middleImageUrl();
+            $middlePic =  (filter_var($middlePic, FILTER_VALIDATE_URL) === false) ? '' : $middlePic;
+            $row['pic_middle'] = $middlePic;
+            
+            $originalPic = $thumb->largeImageUrl();
+            $originalPic =  (filter_var($originalPic, FILTER_VALIDATE_URL) === false) ? '' : $originalPic;
+            $row['pic_original'] = $originalPic;
+        }
+        catch (Exception $e) {
+            $row['pic_thumbnail'] = $row['pic_middle'] = $row['pic_original'] = '';
+        }
         
         unset($row['thumbnail_pic'], $row['bmiddle_pic'], $row['original_pic']);
         return $row;
