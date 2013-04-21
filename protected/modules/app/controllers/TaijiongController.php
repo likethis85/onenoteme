@@ -105,7 +105,7 @@ class TaijiongController extends AppController
             $color = array(255, 255, 255);
             $im->text($text1, $font, 16, array(10, 218), $color);
             $im->text($text2, $font, 16, array(10, 450), $color);
-            $im->text($text3, $font, 16, array(10, 690), $color);
+            $im->text($text3, $font, 16, array(10, 650), $color);
             $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_TOP_RIGHT, $color);
             
             $infos = CDUploadedFile::saveImage(upyunEnabled(), $im->outputRaw(), '', array(), 'taijiong');
