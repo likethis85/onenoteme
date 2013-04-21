@@ -202,8 +202,15 @@ class CDUploadFile extends CUploadedFile
 
         $isGifAnimate = $im->isAnimateGif();
         $extension = $im->getExtName();
-
+        $uploader = upyunUploader(true);
+        $path = self::makeUploadPath('pics', null, true);
+        $urlpath = '/' . trim($path['url'], '/') . '/';
+        $file = self::makeUploadFileName($extension);
+        $thumbnailFilename = $urlpath . 'thumbnail_' . $file;
+        $originalFilename = $urlpath . 'original_' . $file;
+        
         // 生成缩略图并且保存到云存储中
+        /*
         if ($thumbWidth > 0 && $thumbHeight > 0) {
             if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
                 $im->resizeToHeight($thumbHeight);
@@ -231,6 +238,7 @@ class CDUploadFile extends CUploadedFile
                 throw new Exception($e->getMessage());
             }
         }
+        */
     
         try {
             $result = array();
@@ -254,10 +262,11 @@ class CDUploadFile extends CUploadedFile
             $original['url'] = $uploader->getFileUrl();
         }
         catch (Exception $e) {
-            $uploader->delete($thumbnailPath);
+//             $uploader->delete($thumbnailPath);
             throw new Exception($e->getMessage());
         }
     
+        /*
         $im->revert();
         if ($im->width() > IMAGE_MIDDLE_WIDTH)
             $im->resizeToWidth(IMAGE_MIDDLE_WIDTH);
@@ -265,6 +274,7 @@ class CDUploadFile extends CUploadedFile
         $middle['url'] = $original['url'] . UPYUN_IMAGE_CUSTOM_SEPARATOR . UPYUN_IMAGE_CUSTOM_MIDDLE;
         $middle['width'] = $im->width();
         $middle['height'] = $im->height();
+        */
     
         unset($data, $curl, $im);
         $images = array($thumbnail, $middle, $original, $uploader->animatedGifImage());
