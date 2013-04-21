@@ -89,8 +89,8 @@ class PostController extends Controller
         cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
         
         $shareData = sprintf("{'text':'%s'}", $post->content);
-        if ($post->bmiddlePic)
-            $shareData = sprintf("{'text':'%s', 'pic':'%s'}", $post->content, $post->bmiddlePic);
+        if ($post->getMiddlePic())
+            $shareData = sprintf("{'text':'%s', 'pic':'%s'}", $post->content, $post->getMiddlePic());
         $this->channel = (int)$post->channel_id;
         $this->render('show', array(
             'post' => $post,
