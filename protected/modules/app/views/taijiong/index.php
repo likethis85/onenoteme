@@ -48,7 +48,7 @@ var picurl = '<?php echo sbu('images/originalpic.jpg');?>';
                 </div>
             </fieldset>
         <?php echo CHtml::endForm();?>
-        <img width="300" src="http://s3.24url.net/images/qrcode_wx.jpg" alt="挖段子网公众账号二维码" title="微博扫描挖段子网公众账号二维码，快速关注挖段子网" />
+        <img width="300" src="http://s0.wabao.me/images/qrcode_wx.jpg" alt="挖段子网公众账号二维码" title="微博扫描挖段子网公众账号二维码，快速关注挖段子网" />
     </div>
     <div class="done-pic">
         <h2><a href="/" target="_blank">访问挖段子网</a></h2>
