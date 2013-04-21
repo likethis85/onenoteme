@@ -328,10 +328,10 @@ class Api_Post extends ApiBase
         	    if ($post->channel_id == CHANNEL_GIRL)
         	        $thumbWidth = $thumbHeight = IMAGE_THUMBNAIL_SQUARE_SIZE;
         	    
-        	    $path = CDUploadFile::makeUploadPath('pics');
+        	    $path = CDUploadedFile::makeUploadPath('pics');
         	    $info = parse_url($url);
                 $extensionName = pathinfo($info['path'], PATHINFO_EXTENSION);
-                $file = CDUploadFile::makeUploadFileName('');
+                $file = CDUploadedFile::makeUploadFileName('');
                 $thumbnailFile = 'thumbnail_' . $file;
                 $thumbnailFileName = $path['path'] . $thumbnailFile;
                 $middleFileName = $path['path'] . 'bmiddle_' . $file;

@@ -725,7 +725,7 @@ class Post extends CActiveRecord
     {
         $url = strip_tags(trim($this->original_pic));
         if (!empty($url) && CDBase::externalUrl($url)) {
-            $image = CDUploadFile::saveImage(upyunEnabled(), $url, $referer, $opts);
+            $image = CDUploadedFile::saveImage(upyunEnabled(), $url, $referer, $opts, 'pics');
             if ($image) {
                 $this->original_pic = $image['url'];
                 $this->original_width = $image['width'];

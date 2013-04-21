@@ -67,8 +67,8 @@ class Controller extends CController
             $html = sprintf('<li class="user-name"><a href="%s" title="我的主页">我的主页</a></li>', user()->getHomeUrl());
             $html .= sprintf('<li class="user-name"><a href="%s" title="查看我的收藏">我的收藏</a></li>', aurl('member/post/favorite'));
             	
-            if (app()->session['image_url'])
-                $avatar = sprintf('<img src="%s" alt="进入用户中心" align="top" />', app()->session['image_url']);
+            if ($this->getProfile()->getMiniAvatarUrl())
+                $avatar = sprintf('<img src="%s" alt="进入用户中心" align="top" />', $this->getProfile()->getMiniAvatarUrl());
             $html .= sprintf('<li class="user-name"><a href="%s" title="进入用户中心">%s%s</a></li>', CDBaseUrl::memberHomeUrl(), $avatar, user()->name);
             $html .= sprintf('<li><a href="%s">退出</a></li>', aurl('site/logout'));
         }
@@ -113,6 +113,10 @@ class Controller extends CController
         return $user;
     }
     
+    /**
+     * 获取当前登录用户的资料
+     * @return UserProfile
+     */
     public function getProfile()
     {
         return $this->user->profile;

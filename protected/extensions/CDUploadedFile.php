@@ -1,5 +1,5 @@
 <?php
-class CDUploadFile extends CUploadedFile
+class CDUploadedFile extends CUploadedFile
 {
     private $_upyunEnabled = false;
     
@@ -8,11 +8,12 @@ class CDUploadFile extends CUploadedFile
         if ($this->_error == UPLOAD_ERR_OK) {
             $uploader = $this->_upyunEnabled ? upyunUploader($isImageFile) : app()->getComponent('localUploader', false);
             $content = file_get_contents($this->_tempName);
-            $uploader->save($content, $file, $opts);
+            $infos = $uploader->save($content, $file, $opts);
             if ($deleteTempFile)
                 @unlink($this->_tempName);
             
-            return $uploader->getFileUrl();
+            $infos['url'] = $uploader->getFileUrl();
+            return $infos;
         }
         else
             return false;
@@ -132,18 +133,17 @@ class CDUploadFile extends CUploadedFile
     /********************************************/
     
 
-    public static function saveImage($upyunEnabled, $file, $referer = '', $opts = array())
+    public static function saveImage($upyunEnabled, $file, $referer = '', $opts = array(), $additional = null)
     {
-        $file = strip_tags(trim($file));
         $image = array();
-        if (empty($file) || (!file_exists($file) && filter_var($file, FILTER_VALIDATE_URL) === false))
+        if (empty($file))
             return $image;
         
         // 获取文件内容
         if (file_exists($file) && is_readable($file)) {
             $data = file_get_contents($file);
         }
-        else {
+        elseif (filter_var($file, FILTER_VALIDATE_URL)) {
             $curl = new CDCurl();
             $curl->referer($referer)->get($file);
             $errno = $curl->errno();
@@ -153,6 +153,8 @@ class CDUploadFile extends CUploadedFile
             $data = $curl->rawdata();
             $curl->close();
         }
+        else
+            $data = $file;
         
         $im = new CDImage();
         $im->load($data);
@@ -187,23 +189,23 @@ class CDUploadFile extends CUploadedFile
         }
         
         if ($upyunEnabled)
-            $image = self::saveImageToUpyun($im);
+            $image = self::saveImageToUpyun($im, $additional);
         else
-            $image = self::saveImageToLocal($im);
+            $image = self::saveImageToLocal($im, $additional);
     
         unset($im, $data);
         
         return $image;
     }
     
-    public static function saveImageToUpyun(CDImage $im)
+    public static function saveImageToUpyun(CDImage $im, $additional = null)
     {
         $original = array();
         set_time_limit(0);
 
         $isGifAnimate = $im->isAnimateGif();
         $uploader = upyunUploader(true);
-        $path = self::makeUploadPath('pics', null, true);
+        $path = self::makeUploadPath($additional, null, true);
         $urlpath = rtrim($path['path'], '/') . '/';
         $file = self::makeUploadFileName($im->getExtName());
         $filename = $urlpath . 'original_' . $file;
@@ -250,13 +252,13 @@ class CDUploadFile extends CUploadedFile
      * @throws Exception
      * @return multitype:array boolean Ambigous <array, boolean>
      */
-    public static function saveImageToLocal(CDImage $im)
+    public static function saveImageToLocal(CDImage $im, $additional = null)
     {
         $original = array();
         set_time_limit(0);
     
         $isGifAnimate = $im->isAnimateGif();
-        $savepath = self::makeUploadPath('pics');
+        $savepath = self::makeUploadPath($additional);
         $filename = self::makeUploadFileName($im->getExtName());
         $originalFilename = 'original_' . $filename;
         $originalFilepath = $savepath['path'] . $originalFilename;

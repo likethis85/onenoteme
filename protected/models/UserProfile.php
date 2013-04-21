@@ -11,8 +11,6 @@
  * @property integer $gender
  * @property string $description
  * @property string $website
- * @property string $image_url
- * @property string $avatar_large
  * @property string $original_avatar
  * @property integer $weibo_uid
  * @property integer $qqt_uid
@@ -20,8 +18,10 @@
  * @property string $homeUrl
  * @property string $largeAvatarUrl
  * @property string $smallAvatarUrl
+ * @property string $miniAvatarUrl
  * @property string $largeAvatar
  * @property string $smallAvatar
+ * @property string $miniAvatar
  * @property string $genderLabel
  */
 class UserProfile extends CActiveRecord
@@ -70,7 +70,7 @@ class UserProfile extends CActiveRecord
 			array('user_id, province, city', 'numerical', 'integerOnly'=>true),
 			array('location', 'length', 'max'=>100),
 			array('weibo_uid, qqt_uid', 'length', 'max'=>50),
-			array('description, website, image_url, avatar_large, original_avatar', 'length', 'max'=>250),
+			array('description, website, original_avatar', 'length', 'max'=>250),
 	        array('gender', 'in', 'range'=>self::genders()),
 			array('website', 'url'),
 			array('description', 'safe'),
@@ -100,8 +100,6 @@ class UserProfile extends CActiveRecord
 			'gender' => '性别',
 			'description' => '简介',
 			'website' => '网址',
-			'image_url' => '头像',
-			'avatar_large' => '头像大图',
 		    'weibo_uid' => '新浪微博UID',
 		    'qqt_uid' => '腾讯微博UID',
 	        'original_avatar' => '原始头像',
@@ -118,24 +116,50 @@ class UserProfile extends CActiveRecord
 	    return CDBaseUrl::userHomeUrl($this->user_id);
 	}
 	
+	/**
+	 * 获取自定义缩略图对象
+	 * @return Ambigous <NULL, string, CDImageThumb>
+	 */
+	public function getAvatarThumb()
+	{
+	    static $thumbs = array();
+	    if (!array_key_exists($this->user_id, $thumbs)){
+	        if ($this->original_avatar)
+	            $thumbs[$this->user_id] = new CDImageThumb($this->original_avatar);
+	        else
+	            $thumbs[$this->user_id] = '';
+	    }
+	    
+	    return $thumbs[$this->user_id];
+	}
+	
+	public function getMiniAvatarUrl()
+	{
+	    $url = sbu('images/default_avatar.png');
+	    $thumb = $this->getAvatarThumb();
+	    if ($thumb)
+	        $url = $thumb->miniAvatarUrl();
+	    
+	    return $url;
+	}
+	
 	public function getSmallAvatarUrl()
 	{
 	    $url = sbu('images/default_avatar.png');
-	    if (empty($this->original_avatar) || stripos($this->original_avatar, 'http://') !== 0)
-	        return $url;
+	    $thumb = $this->getAvatarThumb();
+	    if ($thumb)
+	        $url = $thumb->smallAvatarUrl();
 	    
-	    $url = $this->original_avatar . UPYUN_IMAGE_CUSTOM_SEPARATOR . UPYUN_AVATAR_CUSTOM_SMALL;
 	    return $url;
 	}
 
 	public function getLargeAvatarUrl()
 	{
-	    $url = ''; // @todo 此处少一个默认图片
 	    $url = sbu('images/default_avatar.png');
-	    if (empty($this->original_avatar) || stripos($this->original_avatar, 'http://') !== 0)
-	        return $url;
+	    $thumb = $this->getAvatarThumb();
+	    if ($thumb)
+	        $url = $thumb->largeAvatarUrl();
 	    
-	    $url = $this->original_avatar . UPYUN_IMAGE_CUSTOM_SEPARATOR . UPYUN_AVATAR_CUSTOM_LARGE;
 	    return $url;
 	}
 
@@ -157,6 +181,18 @@ class UserProfile extends CActiveRecord
 	    $url = $this->getSmallAvatarUrl();
 	    if ($url) {
 	        $htmlOptions += array('class'=>'small-avatar');
+	        $html = image($url, $alt, $htmlOptions);
+	    }
+	
+	    return $html;
+	}
+	
+	public function getMiniAvatar($alt = '', $htmlOptions = array())
+	{
+	    $html = '';
+	    $url = $this->getMiniAvatarUrl();
+	    if ($url) {
+	        $htmlOptions += array('class'=>'mini-avatar');
 	        $html = image($url, $alt, $htmlOptions);
 	    }
 	
