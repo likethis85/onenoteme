@@ -136,7 +136,7 @@ class FeedController extends Controller
             $title = $row['title'];
             if ($row['gif_animation']) $title .= '【动画】';
             $item->appendChild(new DOMElement('title', $title));
-            $item->appendChild(new DOMElement('link', aurl('post/show', array('id'=>$row['id']))));
+            $item->appendChild(new DOMElement('link', aurl('post/show', array('id'=>$row['id'], 'source'=>'feed'))));
             $item->appendChild(new DOMElement('comments', aurl('comment/list', array('pid'=>$row['id']))));
             $item->appendChild(new DOMElement('pubDate', date('D, d M Y H:i:s O', $row['create_time'])));
             $item->appendChild(new DOMElement('comments', (int)$row['comment_nums'], $ns_slash));

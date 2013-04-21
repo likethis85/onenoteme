@@ -28,16 +28,20 @@ class TagController extends Controller
     
     public function actionList()
     {
-        $cacheKey = 'all_tags';
-        $tags = cache()->get($cacheKey);
-        if ($tags === false) {
-            $tags = Tag::model()->findAll();
-            cache()->set($cacheKey, $tags, 24*60*60);
+        if (cache()) {
+            $cacheKey = 'all_tags';
+            $tags = cache()->get($cacheKey);
+            if ($tags === false) {
+                $tags = Tag::model()->findAll();
+                cache()->set($cacheKey, $tags, 24*60*60);
+            }
         }
+        else
+            $tags = Tag::model()->findAll();
         
-        $this->pageTitle = '各种段子标签 - 挖段子';
+        $this->pageTitle = '标签列表 - 挖段子';
         $this->setKeywords('各种段子标签');
-        $this->setDescription('各种段子标签');
+        $this->setDescription('挖段子网所有标签列表');
         
         $this->channel = 'tag';
         $this->render('list', array(
