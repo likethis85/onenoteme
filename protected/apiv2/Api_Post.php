@@ -85,7 +85,7 @@ class Api_Post extends ApiBase
             $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'id > :lastid');
             // @todo ios客户端现在不支持gif动画，所以先屏蔽
             if ($platform != 'android')
-                $condition[] = 'gif_animation = 0';
+                $condition[] = 'original_frames <= 1';
             $param = array(':enabled'=>POST_STATE_ENABLED, ':channelid' => $channelID, ':lastid'=>$lastid);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
@@ -131,7 +131,8 @@ class Api_Post extends ApiBase
             $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'create_time < :beforetime');
             // @todo ios客户端现在不支持gif动画，所以先屏蔽
             if ($platform != 'android')
-                $condition[] = 'gif_animation = 0';$param = array(':enabled'=>POST_STATE_ENABLED, ':channelid' => $channelID, ':beforetime'=>$beforeTime);
+                $condition[] = 'original_frames = 0';
+            $param = array(':enabled'=>POST_STATE_ENABLED, ':channelid' => $channelID, ':beforetime'=>$beforeTime);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
                 ->from(TABLE_POST . ' t')
@@ -173,7 +174,8 @@ class Api_Post extends ApiBase
             $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'create_time > :lasttime');
             // @todo ios客户端现在不支持gif动画，所以先屏蔽
             if ($platform != 'android')
-                $condition[] = 'gif_animation = 0';$param = array(':enabled'=>POST_STATE_ENABLED, ':channelid' => $channelID, ':lasttime'=>$lasttime);
+                $condition[] = 'original_frames <= 1';
+            $param = array(':enabled'=>POST_STATE_ENABLED, ':channelid' => $channelID, ':lasttime'=>$lasttime);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
                 ->from(TABLE_POST . ' t')
@@ -213,7 +215,7 @@ class Api_Post extends ApiBase
             $conditions = array('and', 't.state = :enalbed',  'channel_id = :channelid');
             // @todo ios客户端现在不支持gif动画，所以先屏蔽
             if ($platform != 'android')
-                $condition[] = 'gif_animation = 0';
+                $condition[] = 'original_frames <= 1';
             $maxIdMinId = app()->getDb()->createCommand()
                 ->select(array('max(id) maxid', 'min(id) minid'))
                 ->from(TABLE_POST . ' t')
@@ -230,7 +232,7 @@ class Api_Post extends ApiBase
             $conditoins = array('and', 't.state = :enalbed',  'channel_id = :channelid', 'id = :randid');
             // @todo ios客户端现在不支持gif动画，所以先屏蔽
             if ($platform != 'android')
-                $condition[] = 'gif_animation = 0';
+                $condition[] = 'original_frames <= 1';
             $param = array(':enalbed' => POST_STATE_ENABLED, ':channelid'=>$channelID, ':randid'=>0);
             $rows = array();
             for ($i=0; $i<$maxid; $i++) {
