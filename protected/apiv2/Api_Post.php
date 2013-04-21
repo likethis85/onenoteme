@@ -29,21 +29,17 @@ class Api_Post extends ApiBase
         if (isset($row['create_time']) && $row['create_time'])
             $row['create_time_text'] = date(param('formatShortDateTime'), $row['create_time']);
         
-        $smallPic = $row['thumbnail_pic'];
-        if (empty($smallPic))
-            $smallPic = $row['bmiddle_pic'];
+        $thumb = new CDImageThumb($row['original_pic'], $row['original_width'], $row['original_height']);
+        
+        $smallPic = $thumb->fixThumbImageUrl();
         $smallPic =  (filter_var($smallPic, FILTER_VALIDATE_URL) === false) ? '' : $smallPic;
         $row['pic_thumbnail'] = $smallPic;
         
-        $middlePic = $row['bmiddle_pic'];
-        if (empty($middlePic))
-            $middlePic = $row['original_pic'];
+        $middlePic = $thumb->middleImageUrl();
         $middlePic =  (filter_var($middlePic, FILTER_VALIDATE_URL) === false) ? '' : $middlePic;
         $row['pic_middle'] = $middlePic;
         
-        $originalPic = $row['original_pic'];
-        if (empty($originalPic))
-            $originalPic = $row['bmiddle_pic'];
+        $originalPic = $thumb->largeImageUrl();
         $originalPic =  (filter_var($originalPic, FILTER_VALIDATE_URL) === false) ? '' : $originalPic;
         $row['pic_original'] = $originalPic;
         
@@ -323,7 +319,7 @@ class Api_Post extends ApiBase
         	    $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
         	    $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
         	    if ($post->channel_id == CHANNEL_GIRL)
-        	        $thumbWidth = thumbHeight = IMAGE_THUMBNAIL_SQUARE_SIZE;
+        	        $thumbWidth = $thumbHeight = IMAGE_THUMBNAIL_SQUARE_SIZE;
         	    
         	    $path = CDUploadFile::makeUploadPath('pics');
         	    $info = parse_url($url);

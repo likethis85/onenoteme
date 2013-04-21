@@ -55,11 +55,24 @@
  * @property string $titleLink
  * @property string $likeUrl
  * @property string $unlikeUrl
- * @property string $bmiddlePic
- * @property string $originalPic
+ *
  * @property string $thumbnail
- * @property string $bmiddleLink
+ * @property string $thumbnailImage
  * @property string $thumbnailLink
+ * @property string $fixThumb
+ * @property string $fixThumbImage
+ * @property string $fixThumbLink
+ * @property string $squareThumb
+ * @property string $squareThumbImage
+ * @property string $squareThumbLink
+ * @property string $middlePic
+ * @property string $middleImage
+ * @property string $middleImageLink
+ * @property string $largePic
+ * @property string $largeImage
+ * @property string $largeImageLink
+ * @property string $originalPic
+ *
  * @property string $videoHtml
  * @property string $videoSourceUrl
  * @property string $imageIsLong
@@ -247,7 +260,6 @@ class Post extends CActiveRecord
 	    return $absolute ? aurl('post/show', array('id' => $this->id)) : url('post/show', array('id' => $this->id));
 	}
 	
-	
 	public function getSummary($len = 300)
 	{
 	    $content = strip_tags($this->content, param('summary_html_tags'));
@@ -397,15 +409,15 @@ class Post extends CActiveRecord
      */
     public function getImageThumb()
     {
-//         static $thumb = null;
-//         if ($thumb === null){
+        static $thumbs = array();
+        if (!array_key_exists($this->id, $thumbs)){
             if ($this->original_pic)
-                $thumb = new CDImageThumb($this->original_pic, $this->original_width, $this->original_height);
+                $thumbs[$this->id] = new CDImageThumb($this->original_pic, $this->original_width, $this->original_height);
             else
-                $thumb = '';
-//         }
+                $thumbs[$this->id] = '';
+        }
         
-        return $thumb;
+        return $thumbs[$this->id];
     }
     
     public function getThumbnail()
