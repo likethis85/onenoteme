@@ -90,7 +90,7 @@ class FeedController extends Controller
     private static function fetchPosts(CDbCommand $cmd)
     {
         $cmd->from(TABLE_POST)
-            ->select(array('id', 'title', 'thumbnail_pic', 'bmiddle_pic', 'content', 'create_time', 'gif_animation'))
+            ->select(array('id', 'title', 'original_pic', 'content', 'create_time', 'original_frames'))
             ->order(array('create_time desc', 'id desc'))
             ->limit(self::POST_COUNT);
             
@@ -134,7 +134,7 @@ class FeedController extends Controller
             $item = $dom->createElement('item');
             $channel->appendChild($item);
             $title = $row['title'];
-            if ($row['gif_animation']) $title .= '【动画】';
+            if ($row['original_frames'] > 1) $title .= '【动画】';
             $item->appendChild(new DOMElement('title', $title));
             $item->appendChild(new DOMElement('link', aurl('post/show', array('id'=>$row['id'], 'source'=>'feed'))));
             $item->appendChild(new DOMElement('comments', aurl('comment/list', array('pid'=>$row['id']))));
@@ -150,8 +150,11 @@ class FeedController extends Controller
     
             $content = $dom->createElement('content:encoded');
             $contentText = $row['content'];
-            if ($row['bmiddle_pic'])
-                $contentText .= sprintf('<p><img src="%s" title="%s" alt="%s" border="0"></p>', $row['bmiddle_pic'], $row['title'], $row['title']);
+            if ($row['original_pic']) {
+                $thumb = new CDImageThumb($row['original_pic']);
+                $contentText .= sprintf('<p><img src="%s" title="%s" alt="%s" border="0"></p>', $thumb->middleImageUrl(), $row['title'], $row['title']);
+                unset($thumb);
+            }
             $content->appendChild($dom->createCDATASection($contentText));
             $item->appendChild($content);
         }
