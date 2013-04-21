@@ -27,25 +27,25 @@
             <?php if ($model->channel_id == CHANNEL_LENGTU && $model->thumbnail): // 趣图?>
             <div class="post-image">
                 <div class="thumbbox">
-                    <?php if ($model->imageIsLong):?>
-                    <a href="<?php echo $model->bmiddlePic;?>" class="size-switcher" target="_blank" data-bmiddle-url="<?php echo $model->bmiddlePic;?>">
-                        <?php echo CHtml::image($model->thumbnail, $model->title, array('class'=>'thumb', 'title'=>'点击析大图'));?>
+                    <?php if ($model->getImageIsLong(150)):?>
+                    <a href="<?php echo $model->getMiddlePic();?>" class="size-switcher" target="_blank" data-bmiddle-url="<?php echo $model->getMiddlePic();?>">
+                        <?php echo CHtml::image($model->getFixThumb(), $model->title, array('class'=>'thumb', 'title'=>'点击析大图'));?>
                         <img class="bmiddle hide" alt="<?php echo $model->title;?>" title="点击查看缩略图" />
                     </a>
                     <?php if ($model->gif_animation):?><i class="site-bg icon-gif-sign"></i><?php endif;?>
                     <?php else:?>
-                    <a href="<?php echo $model->getUrl();?>" target="_blank" title="点击查看大图" data-bmiddle-url="<?php echo $model->bmiddlePic;?>">
-                        <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'bmiddle'));?>
+                    <a href="<?php echo $model->getUrl();?>" target="_blank" title="点击查看大图" data-bmiddle-url="<?php echo $model->getMiddlePic();?>">
+                        <?php echo $model->getMiddleImage();?>
                     </a>
                     <?php endif;?>
-                    <?php if ($model->imageIsLong):?>
+                    <?php if ($model->getImageIsLong(150)):?>
                     <div class="thumb-pall"></div>
                     <?php endif;?>
                 </div>
-                <?php if ($model->imageIsLong):?>
+                <?php if ($model->getImageIsLong(150)):?>
                 <div class="thumbnail-more">
                     <div class="lines">
-                        <?php for ($i=0; $i<$model->lineCount; $i++):?>
+                        <?php for ($i=0; $i<$model->getLineCount(150); $i++):?>
                         <div class="line3"></div>
                         <?php endfor;?>
                         <div class="sjx"></div>
@@ -53,11 +53,11 @@
                 </div>
                 <?php endif;?>
             </div>
-            <?php elseif ($model->channel_id == CHANNEL_GIRL && $model->thumbnail): // 女神?>
+            <?php elseif ($model->channel_id == CHANNEL_GIRL && $model->getMiddlePic()): // 女神?>
             <div class="post-image">
                 <div class="thumbbox acenter">
-                    <a href="<?php echo $model->getUrl();?>" target="_blank" title="<?php echo $model->title;?>" data-bmiddle-url="<?php echo $model->bmiddlePic;?>">
-                        <?php echo CHtml::image($model->bmiddlePic, $model->title, array('class'=>'bmiddle'));?>
+                    <a href="<?php echo $model->getUrl();?>" target="_blank" title="<?php echo $model->title;?>" data-bmiddle-url="<?php echo $model->getMiddlePic();?>">
+                        <?php echo $model->getMiddleImage();?>
                     </a>
                 </div>
             </div>

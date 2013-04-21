@@ -65,31 +65,39 @@ define('POST_LIST_STYLE_LINE', 'line');
 define('POST_LIST_STYLE_GRID', 'grid');
 define('POST_LIST_STYLE_WATERFALL', 'fall');
 
+/*
+ * 这些尺寸与又拍云里的自定义版本相对应
+ */
 define('IMAGE_THUMBNAIL_WIDTH', 200);
-define('IMAGE_THUMBNAIL_HEIGHT', 280);
+define('IMAGE_THUMBNAIL_HEIGHT', 260);
+define('IMAGE_THUMBNAIL_SQUARE_SIZE', 200);
+
 define('IMAGE_THUMB_WIDTH', 200);
 define('IMAGE_SMALL_WIDTH', 320);
 define('IMAGE_MIDDLE_WIDTH', 640);
 define('IMAGE_LARGE_WIDTH', 1280);
-define('IMAGE_MAX_HEIGHT_FOLDING', 700);
 
-define('GIRL_THUMBNAIL_WIDTH', 200);
-define('GIRL_THUMBNAIL_HEIGHT', 200);
-
-define('IMAGE_WATER_SIZE', 350);
-
-define('GENDER_UNKOWN', 0);
-define('GENDER_FEMALE', 1);
-define('GENDER_MALE', 2);
+define('AVATAR_MINI_SIZE', 24);
+define('AVATAR_SMALL_SIZE', 48);
+define('AVATAR_LARGE_SIZE', 144);
 
 define('UPYUN_IMAGE_CUSTOM_SEPARATOR', '!');
 define('UPYUN_IMAGE_CUSTOM_THUMB', 'thumb');
 define('UPYUN_IMAGE_CUSTOM_SMALL', 'small');
 define('UPYUN_IMAGE_CUSTOM_MIDDLE', 'middle');
 define('UPYUN_IMAGE_CUSTOM_LARGE', 'large');
+define('UPYUN_IMAGE_CUSTOM_FIXTHUBM', 'fixthumb');
+define('UPYUN_IMAGE_CUSTOM_SQUARETHUBM', 'squarethumb');
 define('UPYUN_AVATAR_CUSTOM_LARGE', 'lavatar');
 define('UPYUN_AVATAR_CUSTOM_SMALL', 'savatar');
+define('UPYUN_AVATAR_CUSTOM_MINI', 'mavatar');
 
+define('IMAGE_MAX_HEIGHT_FOLDING', 700);
+define('IMAGE_WATER_SIZE', 350);
+
+define('GENDER_UNKOWN', 0);
+define('GENDER_FEMALE', 1);
+define('GENDER_MALE', 2);
 
 define('WEIBO_APP_KEY', '2981913360');
 define('WEIBO_APP_SECRET', 'f06fd0b530f3d9daa56db67e5e8610e1');

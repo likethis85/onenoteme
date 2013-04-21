@@ -19,13 +19,7 @@
  * @property string $tags
  * @property integer $state
  * @property string $content
- * @property string $thumbnail_pic
- * @property string $bmiddle_pic
  * @property string $original_pic
- * @property integer $thumbnail_width
- * @property integer $thumbnail_height
- * @property integer $bmiddle_width
- * @property integer $bmiddle_height
  * @property integer $original_width
  * @property integer $original_height
  * @property string $gif_animation
@@ -397,34 +391,99 @@ class Post extends CActiveRecord
         return aurl('post/unlike', array('id'=>$this->id));
     }
     
-    public function getBmiddlePic()
+    /**
+     * 获取自定义缩略图对象
+     * @return Ambigous <NULL, string, CDImageThumb>
+     */
+    public function getImageThumb()
     {
-        if ($this->bmiddle_pic)
-            return $this->bmiddle_pic;
-        else
-            return '';
-    }
-    
-    public function getOriginalPic()
-    {
-        if ($this->original_pic)
-            return $this->original_pic;
-        elseif ($this->bmiddle_pic)
-            return $this->bmiddle_pic;
-        else
-            return '';
+        static $thumb = null;
+        if ($thumb === null){
+            if ($this->original_pic)
+                $thumb = new CDImageThumb($this->original_pic, $this->original_width, $this->original_height);
+            else
+                $thumb = '';
+        }
+        
+        return $thumb;
     }
     
     public function getThumbnail()
     {
-        if ($this->thumbnail_pic)
-            return $this->thumbnail_pic;
-        elseif ($this->bmiddle_pic)
-            return $this->bmiddle_pic;
-        else
-            return '';
+        $url = '';
+        $thumb = $this->getImageThumb();
+        if ($thumb)
+            $url = $thumb->thumbImageUrl();
+        
+        return $url;
     }
     
+    public function getFixThumb()
+    {
+        $url = '';
+        $thumb = $this->getImageThumb();
+        if ($thumb)
+            $url = $thumb->fixThumbImageUrl();
+        
+        return $url;
+    }
+    
+    public function getSquareThumb()
+    {
+        $url = '';
+        $thumb = $this->getImageThumb();
+        if ($thumb)
+            $url = $thumb->squareThumbImageUrl();
+        
+        return $url;
+    }
+    
+    public function getMiddlePic()
+    {
+        $url = '';
+        $thumb = $this->getImageThumb();
+        if ($thumb)
+            $url = $thumb->middleImageUrl();
+        
+        return $url;
+    }
+    
+    public function getLargePic()
+    {
+        $url = '';
+        $thumb = $this->getImageThumb();
+        if ($thumb)
+            $url = $thumb->largeImageUrl();
+        
+        return $url;
+    }
+    
+    public function getOriginalPic()
+    {
+        return $this->original_pic;
+    }
+    
+    public function getThumbHeightByWidth($width = IMAGE_THUMB_WIDTH)
+    {
+        $height = 0;
+        $thumb = $this->getImageThumb();
+        if ($thumb)
+            $height = $thumb->heightByWidth($width);
+    
+        return $height;
+    }
+    
+    public function getThumbWidthByHeight($heigth)
+    {
+        $width = 0;
+        $thumb = $this->getImageThumb();
+        if ($thumb)
+            $width = $thumb->heightByWidth($heigth);
+    
+        return $width;
+    }
+    
+    /*
     public function getUpyunThumb()
     {
         if (!upyunEnabled())
@@ -452,6 +511,7 @@ class Post extends CActiveRecord
         return $height;
     }
     
+    
     public function getUpyunThumbImage($width = IMAGE_THUMB_WIDTH)
     {
         $html = '';
@@ -475,34 +535,119 @@ class Post extends CActiveRecord
         
         return $html;
     }
+    */
     
-    public function getThumbnailImage()
+    public function getThumbnailImage($width = 0)
     {
         $html = '';
         if ($this->getThumbnail()) {
             $htmlOptions = array('class'=>'cd-thumbnail');
-            if ($this->thumbnail_width) $htmlOptions['width'] = $this->thumbnail_width;
-            if ($this->thumbnail_height > 0) $htmlOptions['height'] = $this->thumbnail_height;
+            $width = (int)$width;
+            if ($width > 0) {
+                $htmlOptions['width'] = $width;
+                $htmlOptions['height'] = $this->getThumbHeightByWidth($width);
+            }
             $html = image($this->getThumbnail(), $this->title, $htmlOptions);
         }
     
         return $html;
     }
     
-    public function getBmiddleLink($target = '_blank')
+    public function getThumbnailLink($target = '_blank', $width = 0)
     {
         $html = '';
-        if ($this->getBmiddlePic())
-            $html = l(image($this->getBmiddlePic(), $this->title, array('class'=>'cd-bmiddle')), $this->getUrl(), array('target'=>$target));
+        if ($this->getThumbnail())
+            $html = l($this->getThumbnailImage($width), $this->getUrl(), array('target'=>$target, 'title'=>$this->getFilterTitle()));
         
         return $html;
     }
     
-    public function getThumbnailLink($target = '_blank')
+    public function getFixThumbImage($width = 0)
     {
         $html = '';
-        if ($this->getThumbnail())
-            $html = l($this->getThumbnailImage(), $this->getUrl(), array('target'=>$target, 'title'=>$this->getFilterTitle()));
+        if ($this->getFixThumb()) {
+            $htmlOptions = array('class'=>'cd-fixthumb');
+            $width = (int)$width;
+            if ($width > 0) {
+                $htmlOptions['width'] = $width;
+                $htmlOptions['height'] = $this->getThumbHeightByWidth($width);
+            }
+            $html = image($this->getFixThumb(), $this->title, $htmlOptions);
+        }
+    
+        return $html;
+    }
+    
+    public function getFixThumbLink($target = '_blank', $width = 0)
+    {
+        $html = '';
+        if ($this->getFixThumb())
+            $html = l($this->getFixThumbImage($width), $this->getUrl(), array('target'=>$target, 'title'=>$this->getFilterTitle()));
+        
+        return $html;
+    }
+    
+    public function getSquareThumbImage($width = 0)
+    {
+        $html = '';
+        if ($this->getSquareThumb()) {
+            $htmlOptions = array('class'=>'cd-fixthumb');
+            $width = (int)$width;
+            if ($width > 0) {
+                $htmlOptions['width'] = $width;
+                $htmlOptions['height'] = $this->getThumbHeightByWidth($width);
+            }
+            $html = image($this->getSquareThumb(), $this->title, $htmlOptions);
+        }
+    
+        return $html;
+    }
+    
+    public function getSquareThumbLink($target = '_blank', $width = 0)
+    {
+        $html = '';
+        if ($this->getSquareThumb())
+            $html = l($this->getSquareThumbImage($width), $this->getUrl(), array('target'=>$target, 'title'=>$this->getFilterTitle()));
+        
+        return $html;
+    }
+    
+    public function getMiddleImage()
+    {
+        $html = '';
+        if ($this->getMiddlePic()) {
+            $htmlOptions = array('class'=>'cd-middle-image');
+            $html = image($this->getMiddlePic(), $this->title, $htmlOptions);
+        }
+    
+        return $html;
+    }
+    
+    public function getMiddleImageLink($target = '_blank')
+    {
+        $html = '';
+        if ($this->getMiddlePic())
+            $html = l($this->getMiddleImage(), $this->getUrl(), array('target'=>$target));
+        
+        return $html;
+    }
+    
+    public function getLargeImage()
+    {
+        $html = '';
+        if ($this->getLargePic()) {
+            $htmlOptions = array('class'=>'cd-large-image');
+            $html = image($this->getLargePic(), $this->title, $htmlOptions);
+        }
+    
+        return $html;
+    }
+    
+    public function getLargeImageLink($target = '_blank')
+    {
+        $html = '';
+        if ($this->getLargePic())
+            $html = l($this->getLargeImage(), $this->getUrl(), array('target'=>$target));
         
         return $html;
     }
@@ -534,20 +679,21 @@ class Post extends CActiveRecord
         return $url;
     }
     
-    public function getImageIsLong()
+    public function getImageIsLong($width = IMAGE_MIDDLE_WIDTH)
     {
+        $middleHeight = (int)$this->getThumbHeightByWidth($width);
         if (($this->channel_id == CHANNEL_GIRL || $this->channel_id == CHANNEL_LENGTU)
-            && ($this->bmiddle_height > IMAGE_THUMBNAIL_HEIGHT) && ($this->bmiddle_height > IMAGE_MAX_HEIGHT_FOLDING) && $this->getBmiddlePic())
+            && ($middleHeight > IMAGE_THUMBNAIL_HEIGHT) && ($middleHeight > IMAGE_MAX_HEIGHT_FOLDING) && $this->getMiddlePic())
             return true;
         else
             return false;
     }
     
-    public function getLineCount()
+    public function getLineCount($width = IMAGE_MIDDLE_WIDTH)
     {
         $count = 0;
-        if ($this->getImageIsLong()) {
-            $count = ($this->bmiddle_height - IMAGE_MAX_HEIGHT_FOLDING) / IMAGE_MAX_HEIGHT_FOLDING;
+        if ($this->getImageIsLong($width)) {
+            $count = ($this->getThumbHeightByWidth($width) - IMAGE_MAX_HEIGHT_FOLDING) / IMAGE_MAX_HEIGHT_FOLDING;
         }
         return (int)$count;
     }
@@ -559,7 +705,7 @@ class Post extends CActiveRecord
             'text' => '转自@挖段子网：' . strip_tags(trim($this->content)),
         );
         
-        $pic = $this->getBmiddlePic();
+        $pic = $this->getMiddlePic();
         if (CDBase::isHttpUrl($pic))
             $data['pic'] = $pic;
         
@@ -623,10 +769,8 @@ class Post extends CActiveRecord
         if (!empty($url) && stripos($url, fbu()) === false) {
             $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
             $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
-            if ($this->channel_id == CHANNEL_GIRL) {
-                $thumbWidth = GIRL_THUMBNAIL_WIDTH;
-                $thumbHeight = GIRL_THUMBNAIL_HEIGHT;
-            }
+            if ($this->channel_id == CHANNEL_GIRL)
+                $thumbWidth = $thumbHeight = IMAGE_THUMBNAIL_SQUARE_SIZE;
         
             $images = CDUploadFile::saveImage($url, $referer, $thumbWidth, $thumbHeight, $this->channel_id == CHANNEL_GIRL, false, $opts);
             

@@ -352,3 +352,15 @@ function upyunEnabled()
     return (bool)param('upyun_enabled');
 }
 
+/**
+ * 获取缓存组件
+ * @param string $component
+ * @return Ambigous <CCache, NULL>
+ */
+function cache($component = 'cache')
+{
+    return app()->getComponent($component);
+}
+
+
+

@@ -303,10 +303,8 @@ class Api_Post extends ApiBase
         	if (!empty($url)) {
         	    $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
         	    $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
-        	    if ($post->channel_id == CHANNEL_GIRL) {
-        	        $thumbWidth = GIRL_THUMBNAIL_WIDTH;
-        	        $thumbHeight = GIRL_THUMBNAIL_HEIGHT;
-        	    }
+        	    if ($post->channel_id == CHANNEL_GIRL)
+        	        $thumbWidth = $thumbHeight = IMAGE_THUMBNAIL_SQUARE_SIZE;
         	    
         	    $path = CDUploadFile::makeUploadPath('pics');
         	    $info = parse_url($url);

@@ -1,1 +1,1 @@
-<div class="post-detail"><?php echo $model->content;?></div>
+<div class="post-detail"><?php echo $model->filterContent;?></div>

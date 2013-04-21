@@ -15,7 +15,7 @@
     <div id="grid-container">
         <?php foreach ((array)$models as $index => $model):?>
         <div class="grid-item">
-            <?php echo $model->thumbnailLink;?>
+            <?php echo $model->getSquareThumbLink();?>
             <div class="post-tip" style="display:none;"><?php echo $model->getFilterSummary();?></div>
         </div>
         <?php endforeach;?>

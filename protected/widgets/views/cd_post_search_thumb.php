@@ -4,7 +4,7 @@
 <?php endif;?>
 <?php foreach ((array)$models as $model):?>
     <div class="thumb">
-        <?php echo $model->getThumbnailLink('_self');?>
+        <?php echo $model->getFixThumbLink('_self');?>
     </div>
     <?php endforeach;?>
     <div class="clear"></div>

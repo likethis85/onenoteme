@@ -3,8 +3,8 @@
     <div class="post-item">
     	<div class="post-user"><?php echo $model->authorName . '&nbsp;' . $model->createTime;?></div>
         <div class="post-content">
-            <?php echo $model->content;?>
-            <?php if ($model->bmiddlePic) echo '<br />' . CHtml::image($model->bmiddlePic, $model->title, array('class'=>'item-pic'));?>
+            <?php echo $model->filterContent;?>
+            <?php if ($model->getMiddlePic()) echo '<br />' . CHtml::image($model->getMiddlePic(), $model->title, array('class'=>'item-pic'));?>
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->getTagLinks('wap/tag', '&nbsp;', '_self');?></div><?php endif;?>
     </div>

@@ -29,10 +29,10 @@ class TagController extends Controller
     public function actionList()
     {
         $cacheKey = 'all_tags';
-        $tags = app()->getCache()->get($cacheKey);
+        $tags = cache()->get($cacheKey);
         if ($tags === false) {
             $tags = Tag::model()->findAll();
-            app()->getCache()->set($cacheKey, $tags, 24*60*60);
+            cache()->set($cacheKey, $tags, 24*60*60);
         }
         
         $this->pageTitle = '各种段子标签 - 挖段子';

@@ -99,10 +99,8 @@ class PostCommand extends CConsoleCommand
             
             $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
             $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
-            if ($model->channel_id == CHANNEL_GIRL) {
-                $thumbWidth = GIRL_THUMBNAIL_WIDTH;
-                $thumbHeight = GIRL_THUMBNAIL_HEIGHT;
-            }
+            if ($model->channel_id == CHANNEL_GIRL)
+                $thumbWidth = $thumbHeight = IMAGE_THUMBNAIL_SQUARE_SIZE;
             
             if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
                 $im->resizeToHeight($thumbHeight);

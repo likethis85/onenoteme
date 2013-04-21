@@ -13,9 +13,9 @@
     </div>
     <?php if ($post->videoHtml):?>
     <div class="content-block video-player"><?php echo $post->videoHtml;?></div>
-    <?php elseif ($post->bmiddlePic):?>
+    <?php elseif ($post->getMiddlePic()):?>
     <div class="content-block post-picture thumbbox">
-        <?php echo CHtml::image($post->bmiddlePic, $post->filterTitle . ', ' . $post->getTagText(','));?>
+        <?php echo CHtml::image($post->getMiddlePic(), $post->filterTitle . ', ' . $post->getTagText(','));?>
     </div>
     <?php endif;?>
     <div class="item-content"><?php echo $post->filterContent;?></div>
