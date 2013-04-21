@@ -8,7 +8,7 @@ return array(
     'upyunFileBaseUrl' => 'http://f2.wabao.me/',
     'resourceBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'resources' . DS,
     'resourceBaseUrl' => 'http://s.waduanzi.cn/',
-    'upyun_enabled' => true,
+    'upyun_enabled' => false,
 
     /*
      * datetime format
@@ -88,6 +88,11 @@ return array(
     'wdz_weixin_account_id' => 'gh_9261dce78e9f',
 
     'cache_adcodes_id' => 'cd_adcodes_id_%s',
+        
+
+    'default_mini_avatar' => 'images/mini_avatar.png',
+    'default_small_avatar' => 'images/small_avatar.png',
+    'default_large_avatar' => 'images/large_avatar.png',
 );
 
 

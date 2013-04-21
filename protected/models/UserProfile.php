@@ -135,7 +135,7 @@ class UserProfile extends CActiveRecord
 	
 	public function getMiniAvatarUrl()
 	{
-	    $url = sbu('images/default_avatar.png');
+	    $url = sbu(param('default_mini_avatar'));
 	    $thumb = $this->getAvatarThumb();
 	    if ($thumb)
 	        $url = $thumb->miniAvatarUrl();
@@ -145,7 +145,7 @@ class UserProfile extends CActiveRecord
 	
 	public function getSmallAvatarUrl()
 	{
-	    $url = sbu('images/default_avatar.png');
+	    $url = sbu(param('default_small_avatar'));
 	    $thumb = $this->getAvatarThumb();
 	    if ($thumb)
 	        $url = $thumb->smallAvatarUrl();
@@ -155,7 +155,7 @@ class UserProfile extends CActiveRecord
 
 	public function getLargeAvatarUrl()
 	{
-	    $url = sbu('images/default_avatar.png');
+	    $url = sbu(param('default_large_avatar'));
 	    $thumb = $this->getAvatarThumb();
 	    if ($thumb)
 	        $url = $thumb->largeAvatarUrl();

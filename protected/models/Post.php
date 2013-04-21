@@ -359,7 +359,7 @@ class Post extends CActiveRecord
     
     public function getAuthorAvatar($htmlOptions = array('target'=>'_blank'))
     {
-        $imageUrl = sbu(USER_DEFAULT_AVATAR_URL);
+        $imageUrl = sbu(param('default_mini_avatar'));
         if ($this->user_id && $this->profile)
             $imageUrl = $this->profile->getSmallAvatarUrl();
 
