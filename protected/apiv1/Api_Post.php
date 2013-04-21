@@ -293,7 +293,6 @@ class Api_Post extends ApiBase
         $post->up_score = mt_rand(param('init_up_score_min'), param('init_up_score_max'));
         $post->down_score = mt_rand(param('init_down_score_min'), param('init_down_score_max'));
         $post->view_nums = mt_rand(param('init_view_nums_min'), param('init_view_nums_max'));
-    	$post->thumbnail_pic = $post->bmiddle_pic = '';
     	$post->original_pic = $params['pic'];
     	
     	try {

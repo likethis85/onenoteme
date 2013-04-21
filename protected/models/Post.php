@@ -743,7 +743,7 @@ class Post extends CActiveRecord
     public function fetchRemoteImagesAfterSave($referer = '')
     {
         if ($this->fetchRemoteImagesBeforeSave($referer)) {
-            $attributes = array('thumbnail_pic', 'thumbnail_width', 'thumbnail_height', 'bmiddle_pic', 'bmiddle_width', 'bmiddle_height', 'original_pic', 'original_width', 'original_height');
+            $attributes = array('original_pic', 'original_width', 'original_height', 'original_frames');
             return $this->save(true, $attributes);
         }
         else
@@ -824,32 +824,14 @@ class Post extends CActiveRecord
         app()->getDb()->createCommand()
             ->delete(TABLE_POST_TAG, 'post_id = :postid', array(':postid' => $this->id));
             
-        try {
-	        $uploader = app()->getComponent('upyunimg');
-	        if ($this->thumbnail_pic) {
-	        	$imgPath = str_replace($uploader->domain, '', $this->thumbnail_pic);
-	        	$imgPath = '/' . ltrim($imgPath, '/');
-	        	$uploader->delete($imgPath);
-	        }
-        }
-        catch (Exception $e) {}
-	    
 	    try {
+	        $uploader = uploader(true);
 	        if ($this->original_pic) {
 	        	$imgPath = str_replace($uploader->domain, '', $this->original_pic);
 	        	$imgPath = '/' . ltrim($imgPath, '/');
 	        	$uploader->delete($imgPath);
 	        }
         }
-        catch (Exception $e) {}
-	        
-	    try {
-	        if ($this->bmiddle_pic) {
-	        	$imgPath = str_replace($uploader->domain, '', $this->bmiddle_pic);
-	        	$imgPath = '/' . ltrim($imgPath, '/');
-	        	$uploader->delete($imgPath);
-	        }
-	    }
         catch (Exception $e) {}
     }
 }
