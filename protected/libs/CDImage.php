@@ -13,8 +13,7 @@ class CDImage
     
     private $_image;
     private $_data;
-    private $_imageType = IMAGETYPE_GIF;
-    private $_lastSaveFile;
+    private $_imageType = IMAGETYPE_JPEG;
     
     private static $_createFunctions = array(
         IMAGETYPE_GIF => 'imagecreatefromgif',
@@ -49,7 +48,7 @@ class CDImage
     
     public function setFontPath($path)
     {
-        if (@file_exists($path)) {
+        if (@is_dir($path)) {
             $this->fontpath = $path;
             return true;
         }
@@ -66,7 +65,7 @@ class CDImage
     {
         $this->_data = $data;
         $this->_image = self::loadImage($this->_data);
-        if (@file_exists($data))
+        if (@is_file($data))
             $info = getimagesize($data);
         elseif (PHP_VERSION > '5.4.0')
             $info = getimagesizefromstring($data);
@@ -111,7 +110,7 @@ class CDImage
      */
     public static function loadImage($data)
     {
-        if (@file_exists($data)) {
+        if (@is_file($data)) {
             $image = self::loadFromFile($data);
         }
         else
@@ -188,9 +187,9 @@ class CDImage
         return image_type_to_mime_type($this->_imageType);
     }
     
-    public function getExtName()
+    public function getExtName($include_dot = true)
     {
-        return image_type_to_extension($this->_imageType);
+        return image_type_to_extension($this->_imageType, $include_dot);
     }
     
     
@@ -209,13 +208,12 @@ class CDImage
      */
     public function save($filename, $mode = null)
     {
-        $filename .= $this->getExtName();
+//         $filename .= $this->getExtName();
         $func = self::$_outputFuntions[$this->_imageType];
         self::saveAlpha($this->_image);
         if (!$func($this->_image, $filename))
             return false;
         
-        $this->_lastSaveFile = $filename;
         if ($mode !== null) {
             chmod($filename, $mode);
         }
@@ -230,11 +228,10 @@ class CDImage
      */
     public function saveAsGif($filename, $mode = null)
     {
-        $filename .= image_type_to_extension(IMAGETYPE_GIF);
+//         $filename .= image_type_to_extension(IMAGETYPE_GIF);
         if (!imagegif($this->_image, $filename))
             return false;
         
-        $this->_lastSaveFile = $filename;
         if ($mode !== null) {
             chmod($filename, $mode);
         }
@@ -250,11 +247,10 @@ class CDImage
      */
     public function saveAsJpeg($filename, $quality = 75, $mode = null)
     {
-        $filename .= image_type_to_extension(IMAGETYPE_JPEG);
+//         $filename .= image_type_to_extension(IMAGETYPE_JPEG);
         if (!imagejpeg($this->_image, $filename, $quality))
             return false;
         
-        $this->_lastSaveFile = $filename;
         if ($mode !== null) {
             chmod($filename, $mode);
         }
@@ -271,12 +267,11 @@ class CDImage
      */
     public function saveAsPng($filename, $quality = 9, $filters = 0, $mode = null)
     {
-        $filename .= image_type_to_extension(IMAGETYPE_PNG);
+//         $filename .= image_type_to_extension(IMAGETYPE_PNG);
         self::saveAlpha($this->_image);
         if (!imagepng($this->_image, $filename, $quality, $filters))
             return false;
         
-        $this->_lastSaveFile = $filename;
         if ($mode !== null) {
             chmod($filename, $mode);
         }
@@ -292,11 +287,10 @@ class CDImage
      */
     public function saveAsWbmp($filename, $foreground  = 0, $mode = null)
     {
-        $filename .= image_type_to_extension(IMAGETYPE_WBMP);
+//         $filename .= image_type_to_extension(IMAGETYPE_WBMP);
         if (!imagewbmp($this->_image, $filename, $foreground))
             return false;
         
-        $this->_lastSaveFile = $filename;
         if ($mode !== null) {
             chmod($filename, $mode);
         }
@@ -312,27 +306,14 @@ class CDImage
      */
     public function saveAsXbm($filename, $foreground  = 0, $mode = null)
     {
-        $filename .= image_type_to_extension(IMAGETYPE_XBM);
+//         $filename .= image_type_to_extension(IMAGETYPE_XBM);
         if (!imagexbm($this->_image, $filename, $foreground))
             return false;
         
-        $this->_lastSaveFile = $filename;
         if ($mode !== null) {
             chmod($filename, $mode);
         }
         return $this;
-    }
-    
-    public function filename($onlyName = true)
-    {
-        if (empty($this->_lastSaveFile))
-            $file = '';
-        elseif ($onlyName)
-            $file = basename($this->_lastSaveFile);
-        else
-            $file = $this->_lastSaveFile;
-        
-        return $file;
     }
 
     /**
@@ -809,7 +790,7 @@ class CDImage
     public static function getImageInfo($file)
     {
         $info = null;
-        if (@file_exists($file))
+        if (@is_file($file))
             $info = getimagesize($file);
         elseif (PHP_VERSION > '5.4.0')
             $info = getimagesizefromstring($file);
@@ -836,6 +817,17 @@ class CDImage
             $extension = image_type_to_extension($imagetype, $include_dot);
         
         return $extension;
+    }
+    
+    public static function frameCount($data)
+    {
+        if (is_file($data))
+            $data = file_get_contents($data);
+        
+        $images = explode("\x00\x21\xF9\x04", $data);
+        $count = count($images);
+        unset($images);
+        return $count;
     }
     
     /**

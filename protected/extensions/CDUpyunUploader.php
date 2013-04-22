@@ -15,18 +15,6 @@ class CDUpyunUploader extends CDBaseUploader  implements ICDUploader
      */
     private $_client;
     
-    public function __construct($bucket, $username, $password, $baseUrl, $isImageBucket = true, $endpoint = null, $timeout = 30)
-    {
-        $this->bucket  = $bucket;
-        $this->username = $username;
-        $this->password = $password;
-        $this->baseUrl = $baseUrl;
-        $this->isImageBucket = (bool)$isImageBucket;
-        $this->endpoint = $endpoint;
-        $this->timeout = $timeout;
-        $this->basePath = '/';
-    }
-    
     public function init()
     {
         parent::init();
@@ -61,7 +49,7 @@ class CDUpyunUploader extends CDBaseUploader  implements ICDUploader
     /**
      * 将文件保存到阿里去中
      * @see ICDUploader::save()
-     * @return multitype:array | null 如果是图片bucket，则返回图片的信息，如果是文件bucket，则不返回内容
+     * @return array | null 如果是图片bucket，则返回图片的信息，如果是文件bucket，则不返回内容
      */
     public function save($file, $filename = '', $opts = null)
     {
@@ -72,6 +60,9 @@ class CDUpyunUploader extends CDBaseUploader  implements ICDUploader
             $this->_filename = $filename;
         if (empty($this->_filename))
             throw new CDUploaderException('write filename is not set.');
+        
+        if (is_file($file))
+            $file = fopen($file, 'rb');
         
         return $this->_client->writeFile($this->_filename, $file, $this->autoMkdir, $opts);
     }

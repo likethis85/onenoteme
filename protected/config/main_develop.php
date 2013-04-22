@@ -167,6 +167,7 @@ return array(
             'bucket' => 'wdzfile',
             'username' => 'cdcchen',
             'password' => 'cdc790406',
+            'basePath' => '/',
             'baseUrl' => $params['upyunFileBaseUrl'],
         ),
         'upyuntest' => array(
@@ -176,6 +177,7 @@ return array(
             'bucket' => 'wdztest',
             'username' => 'cdcchen',
             'password' => 'cdc790406',
+            'basePath' => '/',
             'baseUrl' => 'http://wdztest.b0.upaiyun.com/',
         ),
     ),

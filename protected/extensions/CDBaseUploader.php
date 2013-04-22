@@ -12,8 +12,6 @@ interface ICDUploader
     public function save($file, $filename);
 }
 
-class CApplicationComponent {};
-
 class CDBaseUploader extends CApplicationComponent
 {
     /**
@@ -60,20 +58,14 @@ class CDBaseUploader extends CApplicationComponent
         }
     }
     
-    public function __construct($basePath, $baseUrl)
-    {
-        $this->basePath = $basePath;
-        $this->baseUrl = $baseUrl;
-    }
-    
     public function init()
     {
-        if ($this->basePath) {
-            $this->basePath = str_replace('/', DS, $this->basePath);
-            $this->basePath = rtrim($this->basePath, DS) . DS;
-        }
-        if ($this->baseUrl)
-            $this->baseUrl = rtrim($this->baseUrl, '/') . '/';
+        if (empty($this->basePath) || empty($this->baseUrl))
+            throw new CDUploaderException('basePath and baseUrl is required.');
+        
+        $this->basePath = str_replace('/', DS, $this->basePath);
+        $this->basePath = rtrim($this->basePath, DS) . DS;
+        $this->baseUrl = rtrim($this->baseUrl, '/') . '/';
     }
     
     public function setFilename($filename)
@@ -118,7 +110,8 @@ class CDBaseUploader extends CApplicationComponent
         
         $relativePath = $prefixPath .$pathFormat;
         $relativeUrl = $prefixUrl . $urlFormat;
-        $absolutePath = $this->basePath . $relativePath;
+        $absolutePath = realpath($this->basePath . $relativePath);
+        $absolutePath = rtrim($absolutePath, DS) . DS;
         
         $data = array(
             'relative_path' => $relativePath,
@@ -127,10 +120,10 @@ class CDBaseUploader extends CApplicationComponent
             'absolute_url' => $this->baseUrl . $relativeUrl,
         );
         
-        if (!$autoMkDir || ($autoMkDir && (file_exists($absolutePath) || mkdir($absolutePath, 0755, true))))
+        if (!$autoMkDir || ($autoMkDir && (is_dir($absolutePath) || mkdir($absolutePath, 0755, true))))
             return $data;
         else
-               return false;
+            return false;
     }
     
     /**

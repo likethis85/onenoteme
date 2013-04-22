@@ -327,7 +327,7 @@ function upyunbu($file = null, $imageFile = true)
  */
 function uploader($image = true)
 {
-    $uploader = upyunEnabled() ? upyunUploader($image) : app()->getComponent('localUploader', false);
+    $uploader = upyunEnabled() ? upyunUploader($image) : localuploader();
     return $uploader;
 }
 
@@ -344,6 +344,15 @@ function upyunUploader($image = true)
 }
 
 /**
+ * 获取本地存储uploader component
+ * @return CDLocalUploader 如果找不到组件，则返回null
+ */
+function localuploader()
+{
+    return app()->getComponent('localUploader');
+}
+
+/**
  * 当前环境是否使用又拍云
  * @return boolean
  */
@@ -355,12 +364,21 @@ function upyunEnabled()
 /**
  * 获取缓存组件
  * @param string $component
- * @return Ambigous <CCache, NULL>
+ * @return CCache | null
  */
 function cache($component = 'cache')
 {
     return app()->getComponent($component);
 }
 
+/**
+ * 获取数据库组件
+ * @param string $component
+ * @return CDbConnection | null
+ */
+function db($component = 'db')
+{
+    return app()->getComponent($component);
+}
 
 
