@@ -1,7 +1,7 @@
 <?php
 class TestController extends Controller
 {
-    public function init1()
+    public function init()
     {
         $this->redirect('/');
         exit(0);
@@ -45,17 +45,13 @@ class TestController extends Controller
     
     public function actionImage()
     {
-//         $uploader = app()->getComponent('upyuntest');
-        $uploader = localuploader();
+        $uploader = app()->getComponent('upyuntest');
+//         $uploader = upyunUploader(true);
         $file = '/data/web/waduanzi.com/uploads/01.jpg';
-        $file = '/data/web/waduanzi.com/uploads/bbb.gif';
-        $file = '/data/web/waduanzi.com/uploads/test.js';
 
-        $filename = '/data/web/waduanzi.com/uploads/test/123123.js';
-        
         $urls = $uploader->autoFilename('.jpg');
         $file = file_get_contents($file);
-        $infos = $uploader->save($file, $filename);
+        $infos = $uploader->save($file);
         var_dump($urls);
         var_dump($infos);
 
