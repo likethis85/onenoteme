@@ -259,7 +259,7 @@ class WdzWeixin extends CDWeixin
         
         $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_LENGTU, ':lastID' => (int)$lastID);
         $cmd = app()->getDb()->createCommand()
-            ->select(array('id', 'title', 'content', 'bmiddle_pic'))
+            ->select(array('id', 'title', 'content', 'original_pic'))
             ->from(TABLE_POST)
             ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), $params)
             ->order('id asc');
@@ -287,11 +287,12 @@ class WdzWeixin extends CDWeixin
         }
         
         $text = h($row['title']);
+        $thumb = new CDImageThumb($row['original_pic']);
         $posts = array(
             array(
                 'Title' => $text,
                 'Discription' => mb_strimwidth($row['content'], 0, 150, '...', app()->charset),
-                'PicUrl' => $row['bmiddle_pic'],
+                'PicUrl' => $thumb->middleImageUrl(),
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
             )
         );
@@ -312,7 +313,7 @@ class WdzWeixin extends CDWeixin
         
         $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_GIRL, ':lastID' => (int)$lastID);
         $cmd = app()->getDb()->createCommand()
-            ->select(array('id', 'title', 'content', 'bmiddle_pic'))
+            ->select(array('id', 'title', 'content', 'original_pic'))
             ->from(TABLE_POST)
             ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), $params)
             ->order('id asc');
@@ -340,11 +341,12 @@ class WdzWeixin extends CDWeixin
         }
         
         $text = h($row['title']);
+        $thumb = new CDImageThumb($row['original_pic']);
         $posts = array(
             array(
                 'Title' => $text,
                 'Discription' => mb_strimwidth($row['content'], 0, 150, '...', app()->charset),
-                'PicUrl' => $row['bmiddle_pic'],
+                'PicUrl' => $thumb->middleImageUrl(),
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
             )
         );
@@ -409,7 +411,7 @@ class WdzWeixin extends CDWeixin
         
         $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_VIDEO, ':lastID' => (int)$lastID);
         $cmd = app()->getDb()->createCommand()
-            ->select(array('id', 'title', 'content', 'bmiddle_pic'))
+            ->select(array('id', 'title', 'content', 'original_pic'))
             ->from(TABLE_POST)
             ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), $params)
             ->order('id asc');
@@ -437,11 +439,12 @@ class WdzWeixin extends CDWeixin
         }
         
         $text = h($row['title']);
+//         $thumb = new CDImageThumb($row['original_pic']);
         $posts = array(
             array(
                 'Title' => $text,
                 'Discription' => mb_strimwidth($row['content'], 0, 150, '...', app()->charset),
-                'PicUrl' => '',
+                'PicUrl' => $thumb->middleImageUrl(),
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
             )
         );
