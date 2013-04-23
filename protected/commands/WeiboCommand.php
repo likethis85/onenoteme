@@ -270,11 +270,11 @@ class WeiboCommand extends CConsoleCommand
         }
         
         foreach ($models as $model) {
-            if (empty($model->bmiddle_pic)) {
+            if (empty($model->getMiddlePic())) {
                 if (mt_rand(0, 2) > 0)
-                    $model->bmiddle_pic = 'http://ww4.sinaimg.cn/bmiddle/61b3022etw1e2hlgcttk8j.jpg';
+                    $model->original_pic = 'http://ww4.sinaimg.cn/bmiddle/61b3022etw1e2hlgcttk8j.jpg';
             }
-            $picUrl = $model->getBmiddlePic();
+            $picUrl = $model->getMiddlePic();
             
             if (empty($picUrl)) {
                 $result = self::sinatUpdate($model);
@@ -419,7 +419,7 @@ class WeiboCommand extends CConsoleCommand
         if (empty($model->content)) return false;
     
         $curl = new CDCurl();
-        $curl->get($model->getBmiddlePic());
+        $curl->get($model->getMiddlePic());
         if ($curl->errno() == 0) {
             $picData = $curl->rawdata();
             $picfile = app()->getRuntimePath() . DS . uniqid();
@@ -533,7 +533,7 @@ class WeiboCommand extends CConsoleCommand
             'format' => 'json',
             'content' => $content,
             'syncflag' => 1, // 不同步到空间
-            'pic_url' => $model->getBmiddlePic(),
+            'pic_url' => $model->getMiddlePic(),
         );
         foreach ($data as $key => $item)
             $args[] = urlencode($key) . '=' . $item;
