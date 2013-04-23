@@ -8,6 +8,7 @@ class CDUpyunUploader extends CDBaseUploader  implements ICDUploader
     public $autoMkdir = true;
     public $isImageBucket = true;
     public $timeout = 30;
+    public $basePath = '/';
     
     /**
      * 又拍云api接口地址
@@ -69,13 +70,19 @@ class CDUpyunUploader extends CDBaseUploader  implements ICDUploader
     
     public function delete($path)
     {
+        
+        
         return $this->_client->deleteFile($path);
     }
     
-    public function revert()
+    public function getPathByUrl($url)
     {
-        $this->setFilename(null);
-        return $this;
+        if (filter_var($url, FILTER_VALIDATE_URL))
+            $path = str_replace($this->baseUrl, '', $url);
+    
+        $path = str_replace(array('/', '\\'), '/', $path);
+        $path = $this->basePath . ltrim($path, '/');
+        return $path;
     }
 }
 

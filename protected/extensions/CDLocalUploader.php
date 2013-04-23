@@ -101,4 +101,21 @@ class CDLocalUploader extends CDBaseUploader
         
         return $infos;
     }
+
+    public function delete($path)
+    {
+        $path = $this->getPathByUrl($path);
+        return $this->_client->deleteFile($path);
+    }
+    
+
+    public function getPathByUrl($url)
+    {
+        if (filter_var($url, FILTER_VALIDATE_URL))
+            $path = str_replace($this->baseUrl, '', $url);
+
+        $path = str_replace(array('/', '\\'), DS, $path);
+        $path = $this->basePath . ltrim($path, DS);
+        return $path;
+    }
 }

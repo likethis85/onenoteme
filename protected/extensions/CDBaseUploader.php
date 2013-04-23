@@ -10,6 +10,7 @@ interface ICDUploader
     public function init();
     public function autoFilename($extension = '', $pathPrefix = '', $filePrefix = '', $autoMkDir = false);
     public function save($file, $filename);
+    public function getPathByUrl($url);
 }
 
 class CDBaseUploader extends CApplicationComponent
@@ -63,9 +64,15 @@ class CDBaseUploader extends CApplicationComponent
         if (empty($this->basePath) || empty($this->baseUrl))
             throw new CDUploaderException('basePath and baseUrl is required.');
         
-        $this->basePath = str_replace('/', DS, $this->basePath);
+        $this->basePath = str_replace(array('/', '\\'), DS, $this->basePath);
         $this->basePath = rtrim($this->basePath, DS) . DS;
         $this->baseUrl = rtrim($this->baseUrl, '/') . '/';
+    }
+    
+    public function revert()
+    {
+        $this->setFilename(null);
+        return $this;
     }
     
     public function setFilename($filename)
@@ -91,8 +98,8 @@ class CDBaseUploader extends CApplicationComponent
     public function makePath($pathFormat = '', $pathPrefix = '', $autoMkDir = false)
     {
         if ($pathPrefix) {
-            $prefixPath = str_replace('/', DS, $pathPrefix);
-            $prefixUrl = str_replace(DS, '/', $pathPrefix);
+            $prefixPath = str_replace(array('/', '\\'), DS, $pathPrefix);
+            $prefixUrl = str_replace(array('/', '\\'), '/', $pathPrefix);
             
             $prefixPath = trim($prefixPath, DS) . DS;
             $prefixUrl = trim($prefixUrl, '/') . '/';
@@ -101,12 +108,12 @@ class CDBaseUploader extends CApplicationComponent
                $prefixPath = $prefixUrl = '';
         
         if ($pathFormat) {
-            $pathFormat = str_replace('/', DS, $pathFormat);
+            $pathFormat = str_replace(array('/', '\\'), DS, $pathFormat);
             $pathFormat = trim($pathFormat, DS) . DS;
             $placeholders = self::datePlaceholders();
             $pathFormat = str_replace(array_keys($placeholders), array_values($placeholders), $pathFormat);
         }
-        $urlFormat = str_replace(DS, '/', $pathFormat);
+        $urlFormat = str_replace(array('/', '\\'), '/', $pathFormat);
         
         $relativePath = $prefixPath .$pathFormat;
         $relativeUrl = $prefixUrl . $urlFormat;
