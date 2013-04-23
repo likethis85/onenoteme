@@ -270,19 +270,19 @@ class WeiboCommand extends CConsoleCommand
         }
         
         foreach ($models as $model) {
-            if (empty($model->getMiddlePic())) {
-                if (mt_rand(0, 2) > 0)
-                    $model->original_pic = 'http://ww4.sinaimg.cn/bmiddle/61b3022etw1e2hlgcttk8j.jpg';
-            }
             $picUrl = $model->getMiddlePic();
+            if (empty($picUrl)) {
+                if (mt_rand(0, 2) > 0)
+                    $picUrl = 'http://ww4.sinaimg.cn/bmiddle/61b3022etw1e2hlgcttk8j.jpg';
+            }
             
             if (empty($picUrl)) {
                 $result = self::sinatUpdate($model);
                 $result2 = self::qqtUpdate($model);
             }
             else {
-                $result = self::sinatUpload($model);
-                $result2 = self::qqtUpload($model);
+                $result = self::sinatUpload($model, $picUrl);
+                $result2 = self::qqtUpload($model, $picUrl);
             }
             
             if ($result !== false) {
@@ -414,12 +414,12 @@ class WeiboCommand extends CConsoleCommand
     */
     
     
-    private static function sinatUpload(Post $model)
+    private static function sinatUpload(Post $model, $picUrl = '')
     {
         if (empty($model->content)) return false;
     
         $curl = new CDCurl();
-        $curl->get($model->getMiddlePic());
+        $curl->get($picUrl);
         if ($curl->errno() == 0) {
             $picData = $curl->rawdata();
             $picfile = app()->getRuntimePath() . DS . uniqid();
@@ -506,7 +506,7 @@ class WeiboCommand extends CConsoleCommand
     
     }
     
-    private static function qqtUpload(Post $model)
+    private static function qqtUpload(Post $model, $picUrl = '')
     {
         if (empty($model->content)) return false;
     
@@ -533,7 +533,7 @@ class WeiboCommand extends CConsoleCommand
             'format' => 'json',
             'content' => $content,
             'syncflag' => 1, // 不同步到空间
-            'pic_url' => $model->getMiddlePic(),
+            'pic_url' => $picUrl,
         );
         foreach ($data as $key => $item)
             $args[] = urlencode($key) . '=' . $item;
