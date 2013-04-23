@@ -140,9 +140,9 @@ footer a.switch-version {float:right;}
 .video-player {text-align:center; margin-top:10px; margin-bottom:10px; background:#F4F4F6;}
 .video-detail .toolbar {background:#F4F4F6; padding:5px 10px; font-size:14px; color:#666; margin-top:10px;}
 
-.post-detail .post-content {line-height:24px; color:inherit; margin:10px auto 15px;}
+.post-detail .post-content {line-height:24px; color:inherit; margin:0 0 15px;}
 .post-detail .post-picture {text-align:center; overflow:hidden; margin-bottom:10px; background-color:#F4F4F6;}
-.post-detail .cdc-block {margin:25px auto 15px; list-style:none; text-align:center;}
+.post-detail .cdc-block {margin:15px auto 15px; list-style:none; text-align:center;}
 
 
 
