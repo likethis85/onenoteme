@@ -27,11 +27,11 @@
     
     <!-- 缩略图 start -->
     <?php if (!$model->getIsTextType()):?>
-    <div class="control-group bottom10px <?php if ($model->hasErrors('thumbnail')) echo 'error';?>">
-        <?php echo CHtml::activeLabel($model, 'thumbnail_pic', array('class'=>'control-label'));?>
+    <div class="control-group bottom10px <?php if ($model->hasErrors('original_pic')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'original_pic', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'thumbnail', array('class'=>'span6'));?>
-            <?php if ($model->hasErrors('thumbnail')):?><p class="help-block"><?php echo $model->getError('thumbnail');?></p><?php endif;?>
+            <?php echo CHtml::activeTextField($model, 'original_pic', array('class'=>'span6'));?>
+            <?php if ($model->hasErrors('original_pic')):?><p class="help-block"><?php echo $model->getError('original_pic');?></p><?php endif;?>
         </div>
     </div>
     <?php endif;?>
