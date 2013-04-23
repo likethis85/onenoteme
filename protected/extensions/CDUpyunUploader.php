@@ -70,8 +70,7 @@ class CDUpyunUploader extends CDBaseUploader  implements ICDUploader
     
     public function delete($path)
     {
-        
-        
+        $path = $this->getPathByUrl($path);
         return $this->_client->deleteFile($path);
     }
     
