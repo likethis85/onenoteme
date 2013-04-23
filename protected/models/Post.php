@@ -827,9 +827,7 @@ class Post extends CActiveRecord
 	    try {
 	        $uploader = uploader(true);
 	        if ($this->original_pic) {
-	        	$imgPath = str_replace($uploader->domain, '', $this->original_pic);
-	        	$imgPath = '/' . ltrim($imgPath, '/');
-	        	$uploader->delete($imgPath);
+	        	$uploader->delete($this->original_pic);
 	        }
         }
         catch (Exception $e) {}
