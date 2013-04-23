@@ -574,7 +574,7 @@ class Post extends CActiveRecord
     {
         $html = '';
         if ($this->getMiddlePic()) {
-            $htmlOptions = array('class'=>'cd-middle-image');
+            $htmlOptions = array('class'=>'bmiddle');
             $html = image($this->getMiddlePic(), $this->title, $htmlOptions);
         }
     
