@@ -40,7 +40,7 @@ class FeedController extends Controller
     
     public function actionFunny()
     {
-        self::channel(array(CHANNEL_DUANZI, CHANNEL_LENGTU);
+        self::channel(array(CHANNEL_DUANZI, CHANNEL_LENGTU));
     }
     
     public function actionJoke()
@@ -77,7 +77,7 @@ class FeedController extends Controller
     private static function channel($cid)
     {
         $channels = param('channels');
-        if (is_numeric($cid) {
+        if (is_numeric($cid)) {
             $cid = (int)$cid;
             if (!array_key_exists($cid, $channels))
                 throw new CHttpException(503, '此频道暂时没有开通');
@@ -85,7 +85,7 @@ class FeedController extends Controller
             $where = array('and', 'channel_id = :channelID', 'state = :enabled');
             $params = array(':channelID'=>$cid, ':enabled'=>POST_STATE_ENABLED);
         }
-        elseif (is_array($cid) {
+        elseif (is_array($cid)) {
             $cid = array_map('intval', $cid);
             foreach ($cid as $id) {
                 if (!array_key_exists($id, $channels))
