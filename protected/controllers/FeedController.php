@@ -14,7 +14,7 @@ class FeedController extends Controller
         $duration = 600;
         return array(
             array(
-                'COutputCache + index, joke, lengtu, girl, video',
+                'COutputCache + index, joke, lengtu, girl, video, ghost, funny',
                 'duration' => $duration,
             ),
             array(
@@ -35,6 +35,12 @@ class FeedController extends Controller
         $rows = self::fetchPosts($cmd);
         self::outputXml(app()->name, $rows);
         exit(0);
+    }
+    
+    
+    public function actionFunny()
+    {
+        self::channel(array(CHANNEL_DUANZI, CHANNEL_LENGTU);
     }
     
     public function actionJoke()
@@ -70,13 +76,25 @@ class FeedController extends Controller
     
     private static function channel($cid)
     {
-        $cid = (int)$cid;
         $channels = param('channels');
-        if (!array_key_exists($cid, $channels))
-            throw new CHttpException(503, '此频道暂时没有开通');
+        if (is_numeric($cid) {
+            $cid = (int)$cid;
+            if (!array_key_exists($cid, $channels))
+                throw new CHttpException(503, '此频道暂时没有开通');
 
-        $where = array('and', 'channel_id = :channelID', 'state = :enabled');
-        $params = array(':channelID'=>$cid, ':enabled'=>POST_STATE_ENABLED);
+            $where = array('and', 'channel_id = :channelID', 'state = :enabled');
+            $params = array(':channelID'=>$cid, ':enabled'=>POST_STATE_ENABLED);
+        }
+        elseif (is_array($cid) {
+            $cid = array_map('intval', $cid);
+            foreach ($cid as $id) {
+                if (!array_key_exists($id, $channels))
+                    throw new CHttpException(503, $id . ' 此频道暂时没有开通');
+            }
+            $where = array('and', array('in', 'channel_id', $cid), 'state = :enabled');
+            $params = array(':enabled'=>POST_STATE_ENABLED);
+        }
+        
         $cmd = app()->getDb()->createCommand()
             ->where($where, $params);
         
