@@ -12,7 +12,6 @@
             </div>
 		    <?php if ($post->tags):?><div class="post-tags">标签：<?php echo $post->tagLinks;?></div><?php endif;?>
         </div>
-        <div class="item-content"><?php echo $post->filterContent;?></div>
         <?php if ($post->videoHtml):?>
         <div class="content-block video-player"><?php echo $post->videoHtml;?></div>
         <?php elseif ($post->getMiddlePic()):?>
@@ -22,6 +21,7 @@
             </a>
         </div>
         <?php endif;?>
+        <div class="item-content"><?php echo $post->filterContent;?></div>
         
         <div class="item-toolbar">
             <ul>
