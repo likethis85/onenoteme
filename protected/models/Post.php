@@ -777,12 +777,13 @@ class Post extends CActiveRecord
     public function fetchContentRemoteImages($referer = '')
     {
         $urls = $this->getContentImages();
-        $data = array();
         if (count($urls) > 0) {
             $fetch = new CDFileLocal(uploader(true), 'pics');
             $fetch->referer($referer)->setLocalDomains(CDBase::localDomains());
             $data = $fetch->fetchReplacedHtml($this->content);
         }
+        else
+            $data = false;
         return $data;
     }
     
@@ -790,16 +791,14 @@ class Post extends CActiveRecord
     {
         try {
             $data = $this->fetchContentRemoteImages($referer);
-            $this->content = $data[0];
-            $result = $this->saveAttributes(array('content'));
-            
-            if ($result) {
-                if ($data[1])
+            if ($data) {
+                $this->content = $data[0];
+                $result = $this->saveAttributes(array('content'));
+                if ($result && $data[1])
                     $this->saveUploadFile($data[1]);
-                else
-                    return true;
             }
-            return true;
+            else
+                return false;
         }
         catch (Exception $e) {
             return false;
