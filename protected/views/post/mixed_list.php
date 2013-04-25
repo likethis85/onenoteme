@@ -17,7 +17,7 @@
     <div class="waterfall-item">
         <div class="waterfall-item-box">
             <?php if ($model->getThumbnail()):?><div class="pic-block"><?php echo $model->getThumbnailLink('_blank' ,164);?></div><?php endif;?>
-            <p><?php echo l($model->getFilterContent(), $model->getUrl(), array('target'=>'_blank'));?></p>
+            <p><?php echo l($model->getFilterTitle(), $model->getUrl(), array('target'=>'_blank'));?></p>
         </div>
     </div>
     <?php endforeach;?>
