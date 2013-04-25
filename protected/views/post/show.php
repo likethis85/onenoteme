@@ -1,5 +1,5 @@
 <div class="fleft cd-container">
-	<div class="panel panel15 post-detail post-box">
+	<div class="panel panel20 post-detail post-box">
 		<div class="content-block post-content">
 		    <div class="post-author">
         	    <?php echo $post->getAuthorAvatar();?>
@@ -16,15 +16,9 @@
         <div class="content-block video-player"><?php echo $post->videoHtml;?></div>
         <?php elseif ($post->getMiddlePic()):?>
         <div class="content-block post-picture thumbbox">
-            <?php if ($prevUrl):?>
-            <a href="<?php echo $prevUrl;?>" class="btn-prev-next" id="btn-prev-post"><span class="site-bg btn-prev-icon"></span></a>
-            <?php endif;?>
             <a href="<?php echo aurl('post/bigpic', array('id'=>$post->id));?>" data-bmiddle-url="<?php echo $post->getMiddlePic();?>" target="_blank" title="<?php echo $post->title;?>">
                 <?php echo CHtml::image($post->getMiddlePic(), $post->filterTitle . ', ' . $post->getTagText(','));?>
             </a>
-            <?php if ($nextUrl):?>
-            <a href="<?php echo $nextUrl;?>" class="btn-prev-next" id="btn-next-post"><span class="site-bg btn-next-icon"></span></a>
-            <?php endif;?>
         </div>
         <?php endif;?>
         <div class="item-content"><?php echo $post->filterContent;?></div>
@@ -81,14 +75,12 @@
 
 <div class="fright cd-sidebar">
     <div class="panel panel10 thumb-posts">
-        <?php if (!$post->getIsLengtu() && !$post->getIsGirl()):?>
         <div class="next-posts">
             <?php if ($prevUrl):?><a href="<?php echo $prevUrl;?>" class="fleft site-bg button">上一个</a><?php endif;?>
             <?php if ($nextUrl):?><a href="<?php echo $nextUrl;?>" class="fleft site-bg button">下一个</a><?php endif;?>
             <a href="<?php echo $returnUrl;?>" class="fright site-bg button">返回列表</a>
             <div class="clear"></div>
         </div>
-        <?php endif;?>
         <?php foreach ($nextPosts as $next):?>
         <div class="thumb">
             <?php echo $next->getThumbnailLink('_self');?>
