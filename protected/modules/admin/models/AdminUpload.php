@@ -53,8 +53,8 @@ class AdminUpload extends Upload
     
     public function getPreviewLink()
     {
-        if ($this->file_type == UPLOAD_TYPE_PICTURE)
-            $html = l(t('view_picture', 'admin'), $this->getFileUrl(), array('target'=>'_blank', 'class'=>'preview-picture'));
+        if ($this->file_type == self::TYPE_IMAGE)
+            $html = l('查看', $this->getFileUrl(), array('target'=>'_blank', 'class'=>'preview-picture'));
         else
             $html = '';
         

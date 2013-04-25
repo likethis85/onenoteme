@@ -8,7 +8,7 @@ return array(
     'upyunFileBaseUrl' => 'http://f2.wabao.me/',
     'resourceBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'resources' . DS,
     'resourceBaseUrl' => 'http://s.waduanzi.cn/',
-    'upyun_enabled' => true,
+    'upyun_enabled' => false,
 
     /*
      * datetime format

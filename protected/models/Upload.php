@@ -19,14 +19,20 @@
  */
 class Upload extends CActiveRecord
 {
+    const TYPE_IMAGE = 1;
+    const TYPE_AUDIO = 2;
+    const TYPE_VIDEO = 3;
+    const TYPE_FILE = 9;
+    const TYPE_UNKNOWN = 127;
+    
     public static function typeLabels()
     {
         return array(
-            UPLOAD_TYPE_PICTURE => t('file_type_picture'),
-            UPLOAD_TYPE_FILE => t('file_type_file'),
-            UPLOAD_TYPE_AUDIO => t('file_type_audio'),
-            UPLOAD_TYPE_VIDEO => t('file_type_video'),
-            UPLOAD_TYPE_UNKNOWN => t('file_type_unknown'),
+            self::TYPE_IMAGE => '图片',
+            self::TYPE_FILE => '文件',
+            self::TYPE_AUDIO => '音频',
+            self::TYPE_VIDEO => '视频',
+            self::TYPE_UNKNOWN => '未知',
         );
     }
     
@@ -83,26 +89,22 @@ class Upload extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'post_id' => t('post_id'),
-			'file_type' => t('file_type'),
-			'url' => 'Url',
-			'create_time' => t('create_time'),
-			'create_ip' => t('create_ip'),
-			'user_id' => t('user_id'),
-			'desc' => t('file_description'),
-			'token' => 'Token',
+			'post_id' => '文章ID',
+			'file_type' => '类型',
+			'url' => 'URL',
+			'create_time' => '上传时间',
+			'create_ip' => 'IP',
+			'user_id' => '用户',
+			'desc' => '描述',
+			'token' => 'TOKEN',
 		);
 	}
 
 	public function getFileUrl()
 	{
 	    $pos = stripos($this->url, 'http://');
-	    if ($pos === 0)
-    	    return $this->url;
-	    elseif ($pos === false)
-	        return fbu($this->url);
-	    else
-	        return '';
+	    $thumb = new CDImageThumb($this->url);
+        return $thumb->middleImageUrl();
 	}
 	
 	public function getFileTypeText()
@@ -129,7 +131,7 @@ class Upload extends CActiveRecord
 	{
 	    if ($this->getIsNewRecord()) {
 	        $this->create_time = $_SERVER['REQUEST_TIME'];
-	        $this->create_ip = BetaBase::getClientIp();
+	        $this->create_ip = CDBase::getClientIp();
 	    }
 	    
 	    return true;

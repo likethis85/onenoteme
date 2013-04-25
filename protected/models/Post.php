@@ -42,6 +42,7 @@
  * @property string $filterTitle
  * @property string $filterSummary
  * @property string $filterContent
+ * @property string $contentImages
  * @property integer $score
  * @property string $downScore
  * @property string $tagArray
@@ -278,7 +279,30 @@ class Post extends CActiveRecord
 	
 	public function getFilterContent()
 	{
-	    return nl2br(strip_tags($this->content));
+	    $tags = param('content_html_tags');
+	    if (empty($tags))
+	        $allowTags = null;
+	        
+	    return nl2br(strip_tags($this->content, $tags));
+	}
+	
+	public function getContentImages()
+	{
+	    static $data = array();
+	    if (array_key_exists($this->id, $data))
+    	    $urls = $data[$this->id];
+	    else {
+    	    $matches = array();
+    	    $pattern = '/<img.*?src="?(.+?)["\s]{1}?.*?>/is';
+    	    $result = preg_match_all($pattern, $this->content, $matches);
+    	    if ($result === false)
+    	        return false;
+    	    elseif ($result > 0) {
+        	    array_shift($matches);
+        	    $urls = $data[$this->id] = (array)array_unique($matches[0]);
+    	    }
+	    }
+	    return $urls;
 	}
 	
 	public function getScore()
@@ -724,7 +748,7 @@ class Post extends CActiveRecord
     public function fetchRemoteImagesBeforeSave($referer = '', $opts = array())
     {
         $url = strip_tags(trim($this->original_pic));
-        if (!empty($url) && CDBase::externalUrl($url)) {
+        if (!empty($url) && CDBase::externalUrl($url, CDBase::localDomains())) {
             $image = CDUploadedFile::saveImage(upyunEnabled(), $url, 'pics', $referer, $opts, true);
             if ($image) {
                 $this->original_pic = $image['url'];
@@ -748,6 +772,58 @@ class Post extends CActiveRecord
         }
         else
             return false;
+    }
+    
+    public function fetchContentRemoteImages($referer = '')
+    {
+        $urls = $this->getContentImages();
+        $data = array();
+        if (count($urls) > 0) {
+            $fetch = new CDFileLocal(uploader(true), 'pics');
+            $fetch->referer($referer)->setLocalDomains(CDBase::localDomains());
+            $data = $fetch->fetchReplacedHtml($this->content);
+        }
+        return $data;
+    }
+    
+    public function fetchContentRemoteImagesAfterSave($referer = '')
+    {
+        try {
+            $data = $this->fetchContentRemoteImages($referer);
+            $this->content = $data[0];
+            $result = $this->saveAttributes(array('content'));
+            
+            if ($result) {
+                if ($data[1])
+                    $this->saveUploadFile($data[1]);
+                else
+                    return true;
+            }
+            return true;
+        }
+        catch (Exception $e) {
+            return false;
+        }
+    }
+    
+    private function saveUploadFile($files)
+    {
+        if (empty($files)) return;
+        
+        foreach ($files as $file) {
+            try {
+                $model = new Upload();
+                $model->post_id = $this->id;
+                $model->file_type  = Upload::TYPE_IMAGE;
+                $model->url = $file['url'];
+                $model->user_id = user()->id;
+                $model->desc = $this->filterTitle;
+                $model->save();
+            }
+            catch (Exception $e) {
+                continue;
+            }
+        }
     }
     
     public static function todayUpdateCount()

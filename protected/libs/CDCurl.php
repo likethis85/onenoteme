@@ -7,7 +7,7 @@ class CDCurl
     private $_http_info;
     private $_options;
     private $_data;
-    private $_timeout = 30;
+    private $_timeout = 60;
     private $_connection_timeout = 60;
     private $user_agent = 'Mozilla/5.0 (Windows NT 6.1; rv:2.0) Gecko/20100101 Firefox/4.0';
 

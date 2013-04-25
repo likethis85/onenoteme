@@ -68,6 +68,13 @@
         <?php echo CHtml::submitButton('保存段子', array('class'=>'btn btn-primary'));?>
     </div>
     
+    <div class="control-group bottom10px">
+        <?php echo CHtml::activeLabel($model, 'state', array('class'=>'control-label'));?>
+        <div class="controls">
+            <?php echo CHtml::activeDropDownList($model, 'state', AdminPost::stateLabels());?>
+            <?php if ($model->hasErrors('state')):?><p class="help-block"><?php echo $model->getError('state');?></p><?php endif;?>
+        </div>
+    </div>
     <div class="control-group bottom10px <?php if ($model->hasErrors('tags')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'tags', array('class'=>'control-label'));?>
         <div class="controls">

@@ -1,17 +1,51 @@
 <?php
 class CDFileLocal extends CComponent
 {
-    public static function fetchAndReplaceMultiWithHtml($html)
+    public $uploader;
+    public $pathPrefix;
+    public $localDomains;
+    
+    /**
+     * 抓取超时时间(秒)
+     * @var integer
+     */
+    public $timeout = 60;
+    
+    private $_referer;
+    
+    public function __construct(CDBaseUploader $uploader = null, $pathPrefix = '')
     {
-        $rows = self::fetchMultiWithHtml($html);
-        if ($rows === false) return false;
+        $this->uploader = $uploader;
+        $this->pathPrefix = $pathPrefix;
+    }
+    
+    public function fetchReplacedHtml($html)
+    {
+        $rows = $this->fetchBatchByHtml($html);
+        if (empty($rows)) return false;
         
-        foreach ($rows as $row) {
-            if ($row === false) continue;
-            $html = str_replace($row['oldurl'], $row['url'], $html);
+        foreach ($rows as $index => $row) {
+            if (empty($row))
+                unset($rows[$index]);
+            else
+                $html = str_replace($row['oldurl'], $row['url'], $html);
         }
         
-        return $html;
+        return array($html, $rows);
+    }
+    
+    public function referer($url)
+    {
+        if (filter_var($url, FILTER_VALIDATE_URL) !== false)
+            $this->_referer = $url;
+        return $this;
+    }
+    
+    public function setLocalDomains(array $domains = array())
+    {
+        $domains[] = $_SERVER['HTTP_HOST'];
+        $this->localDomains = array_unique($domains);
+        return $this;
     }
     
     /**
@@ -19,8 +53,10 @@ class CDFileLocal extends CComponent
      * @param string $html
      * @return mixed boolean|array data array(path, url), false if error occured
      */
-    public static function fetchMultiWithHtml($html)
+    public function fetchBatchByHtml($html)
     {
+        if (empty($html)) return array();
+        
         $matches = array();
         $pattern = '/<img.*?src="?(.+?)["\s]{1}?.*?>/is';
         $result = preg_match_all($pattern, $html, $matches);
@@ -30,20 +66,17 @@ class CDFileLocal extends CComponent
         $urls = array_unique((array)$matches[0]);
         if (count($urls) == 0) return false;
         
-        foreach ($urls as $index => $url) {
-            if (stripos($url, param('uploadBaseUrl')) === 0)
-                unset($urls[$index]);
-        }
-        
-        $data = self::fetchMulti($urls);
+        $data = self::fetchBatch($urls);
         return $data;
     }
     
-    public static function fetchMulti(array $urls)
+    public function fetchBatch(array $urls)
     {
         $data = array();
-        foreach ($urls as $index => $url)
-            $data[] = self::fetchOne($url);
+        foreach ($urls as $url) {
+            if ($url !== false)
+                $data[] = self::fetchOne($url);
+        }
         
         return $data;
     }
@@ -54,33 +87,38 @@ class CDFileLocal extends CComponent
      * @return array|boolean local file data array(path, url), false if error occured
      * @throws Exception if $url is empty
      */
-    public static function fetchOne($url)
+    public function fetchOne($url)
     {
-        if (empty($url) || filter_var($url, FILTER_VALIDATE_URL) === false || stripos($url, 'http://') !== 0)
+        if (empty($url) || filter_var($url, FILTER_VALIDATE_URL) === false || !CDBase::externalUrl($url, $this->localDomains))
             return false;
     
-        $fetch = new CDCurl();
-        $fetch->get($url);
-        if ($fetch->errno() !== 0) return false;
-        
-        $file = BetaBase::makeUploadFilePath($extension, $additional = 'images');
-        $extension = pathinfo($url, PATHINFO_EXTENSION);
-        $extension = $extension ? '.' . $extension : '';
-        $filename = $file['path'] . $extension;
-        $fileurl = $file['url'] . $extension;
-        
-        $rawdata = $fetch->rawdata();
-        $result = file_put_contents($filename, $rawdata);
-        if ($result === false)
-            return false;
-        else {
-            $data = array(
-                'oldurl' => $url,
-                'path' => $filename,
-                'url' => fbu($fileurl),
-            );
-            return $data;
+        try {
+            set_time_limit($this->timeout);
+            
+            $fetch = new CDCurl();
+            $fetch->get($url);
+            if ($fetch->errno() !== 0) return false;
+            
+            $rawdata = $fetch->rawdata();
+            $extension = CDImage::getImageExtName($rawdata);
+            $file = $this->uploader->autoFilename('.jpg', $this->pathPrefix, 'original', true);
+            
+            $result = $this->uploader->save($rawdata);
+            if ($result === false)
+                return false;
+            else {
+                $data = array(
+                    'oldurl' => $url,
+                    'path' => $this->uploader->getFilename(),
+                    'url' => $file['absolute_url'],
+                );
+                return $data;
+            }
         }
+        catch (Exception $e) {
+            return false;
+        }
+        
     }
     
     

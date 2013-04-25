@@ -65,6 +65,10 @@ class CDBaseUploader extends CApplicationComponent
             throw new CDUploaderException('basePath and baseUrl is required.');
         
         $this->basePath = str_replace(array('/', '\\'), DS, $this->basePath);
+        $this->basePath = realpath($this->basePath);
+        if (empty($this->basePath))
+            throw new CDUploaderException('basePath is ivalid.');
+        
         $this->basePath = rtrim($this->basePath, DS) . DS;
         $this->baseUrl = rtrim($this->baseUrl, '/') . '/';
     }
@@ -117,7 +121,13 @@ class CDBaseUploader extends CApplicationComponent
         
         $relativePath = $prefixPath .$pathFormat;
         $relativeUrl = $prefixUrl . $urlFormat;
+        $absolutePath = $this->basePath . $relativePath;
+        if (!file_exists($absolutePath) && $autoMkDir && !mkdir($absolutePath, 0755, true) ||
+            file_exists($absolutePath) && !is_dir($absolutePath))
+            return false;
+
         $absolutePath = realpath($this->basePath . $relativePath);
+        
         $absolutePath = rtrim($absolutePath, DS) . DS;
         
         $data = array(
@@ -127,10 +137,7 @@ class CDBaseUploader extends CApplicationComponent
             'absolute_url' => $this->baseUrl . $relativeUrl,
         );
         
-        if (!$autoMkDir || ($autoMkDir && (is_dir($absolutePath) || mkdir($absolutePath, 0755, true))))
-            return $data;
-        else
-            return false;
+        return $data;
     }
     
     /**
@@ -152,9 +159,9 @@ class CDBaseUploader extends CApplicationComponent
     
     public function makeFilePath($pathFormat = '', $extension = '', $pathPrefix = '', $filePrefix = '', $autoMkDir = false)
     {
-        $paths = self::makePath($pathFormat, $pathPrefix, $autoMkDir);
-        $filename = self::makeFileName($extension, $filePrefix);
-    
+        $paths = $this->makePath($pathFormat, $pathPrefix, $autoMkDir);
+        $filename = $this->makeFileName($extension, $filePrefix);
+        
         foreach ($paths as $key => $value)
             $paths[$key] = $paths[$key] . $filename;
         
@@ -164,7 +171,7 @@ class CDBaseUploader extends CApplicationComponent
     public function autoFilePath($extension = '', $pathPrefix = '', $filePrefix = '', $autoMkDir = false)
     {
         $pathFormat = '{year}/{month}/{day}';
-        $filepath = $this->makeFilePath($pathFormat, $extension, $pathPrefix,$filePrefix, $autoMkDir);
+        $filepath = $this->makeFilePath($pathFormat, $extension, $pathPrefix, $filePrefix, $autoMkDir);
         return $filepath;
     }
 }

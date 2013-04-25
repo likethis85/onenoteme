@@ -21,13 +21,13 @@ class UploadSearchForm extends CFormModel
     public function attributeLabels()
     {
         return array(
-            'userid' => t('userid', 'admin'),
-            'fileType' => t('file_type'),
-            'postid' => t('post_id'),
-            'createTime' => t('create_time'),
-            'createIp' => t('create_ip'),
-            'fileUrl' => t('file_url', 'admin'),
-            'keyword' => t('keyword', 'admin'),
+            'userid' => '用户ID',
+            'fileType' => '类型',
+            'postid' => '文章ID',
+            'createTime' => '时间',
+            'createIp' => 'IP',
+            'fileUrl' => 'URL',
+            'keyword' => '关键字',
         );
     }
     

@@ -6,7 +6,7 @@ class UploadController extends AdminController
         $criteria = new CDbCriteria();
         $data = AdminUpload::fetchList($criteria, true, true);
         
-        $this->adminTitle = t('upload_file_list', 'admin');
+        $this->adminTitle = '上传文件列表';
         $this->render('list', $data);
     }
     
@@ -19,10 +19,10 @@ class UploadController extends AdminController
             $form->attributes = $_GET['UploadSearchForm'];
             if ($form->validate())
                 $data = $form->search();
-            user()->setFlash('table_caption', t('user_search_result', 'admin'));
+            user()->setFlash('table_caption', '文件搜索结果');
         }
         
-        $this->adminTitle = t('search_result', 'admin');
+        $this->adminTitle = '搜索结果';
         $fileTypes = AdminUpload::typeLabels();
         $this->render('search', array(
             'form' => $form,

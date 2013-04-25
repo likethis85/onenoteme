@@ -323,7 +323,7 @@ function upyunbu($file = null, $imageFile = true)
 
 /**
  * 返回当前使用的uploader
- * @return Ambigous <CDUpyunUploader, CDLocalUploader> 如果使用又拍云存储，则返回CDUpyunUploader，存储在硬盘，返回CDLocalUploader
+ * @return CDUpyunUploader | CDLocalUploader 如果使用又拍云存储，则返回CDUpyunUploader，存储在硬盘，返回CDLocalUploader
  */
 function uploader($image = true)
 {

@@ -150,7 +150,7 @@ return array(
         'localUploader' => array(
             'class' => 'application.extensions.CDLocalUploader',
             'basePath' => $params['localUploadBasePath'],
-            'baseUrl' => $params['localUuploadBaseUrl'],
+            'baseUrl' => $params['localUploadBaseUrl'],
         ),
         'upyunImageUploader' => array(
             'class' => 'application.extensions.CDUpyunUploader',

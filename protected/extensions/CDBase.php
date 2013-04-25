@@ -253,17 +253,24 @@ class CDBase
         return $channelID === null ? $labels : $labels[$channelID];
     }
 
-    public static function externalUrl($url)
+    public static function localDomains()
     {
-        $domains = array(
+        return array(
             'wabao.me',
             'waduanzi.com',
+            'waduanzi.cn',
         );
+    }
+    
+    public static function externalUrl($url, $domains = array())
+    {
+        $domains[] = $_SERVER['HTTP_HOST'];
+        $domains = array_unique($domains);
         foreach ($domains as $domain) {
-            if (stripos($url, $domain) === false)
-                return true;
+            if (stripos($url, $domain) !== false)
+                return false;
         }
-        return false;
+        return true;
     }
 }
 
