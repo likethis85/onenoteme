@@ -25,6 +25,9 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 		<li><a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank">安卓应用</a></li>
 	</ul>
 	<ul class="fright" id="user-mini-nav">
+	    <?php if (user()->getIsAdmin()):?>
+	    <li><a href="<?php echo CDBaseUrl::adminHomeUrl()?>" target="_blank">管理中心</a></li>
+	    <?php endif;?>
 	    <li><a href="<?php echo aurl('sponsor/index');?>" target="_blank">赞助我们</a></li>
 	    <?php echo $this->renderDynamic('userToolbar');?>
 	</ul>
