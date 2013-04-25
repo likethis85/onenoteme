@@ -273,7 +273,7 @@ class Post extends CActiveRecord
     	    $text .= '<i class="cgray">(剩余&nbsp;' . (int)$moreCount . '&nbsp;字)</i>&nbsp;&nbsp;<span class="cgreen">继续阅读全文&gt;&gt;&gt;</span>';
     	    $summary .= '<br />' . l($text, $this->getUrl(), array('target'=>'_blank', 'class'=>'aright'));
 	    }
-	    $summary = nl2br($summary);
+	    $summary = $this->isGirl ? $summary : nl2br($summary);
 	    return $summary;
 	}
 	
@@ -281,7 +281,7 @@ class Post extends CActiveRecord
 	{
 	    $tags = param('content_html_tags');
 	    if (empty($tags))
-	        $allowTags = null;
+	        $tags = null;
 	        
 	    return nl2br(strip_tags($this->content, $tags));
 	}
