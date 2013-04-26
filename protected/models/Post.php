@@ -265,7 +265,7 @@ class Post extends CActiveRecord
 	public function getFilterSummary($len = 300)
 	{
 	    $content = strip_tags($this->content);
-	    $summary = mb_substr($content), 0, $len, app()->charset);
+	    $summary = mb_substr($content, 0, $len, app()->charset);
 	    $moreCount = mb_strlen($content, app()->charset) - mb_strlen($summary, app()->charset);
 	    
 	    if ($moreCount > 0) {
