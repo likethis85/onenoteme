@@ -162,12 +162,12 @@ class FeedController extends Controller
                 $item->appendChild(new DOMElement('dc:creator', $row['user_name']));
     
             $summary = $dom->createElement('summary');
-            $summaryText = mb_substr(strip_tags($row['content']), 0, 100, app()->charset);
+            $summaryText = mb_substr(strip_tags($row['content'], param('summary_html_tags')), 0, 100, app()->charset);
             $summary->appendChild($dom->createCDATASection($summaryText));
             $item->appendChild($summary);
     
             $content = $dom->createElement('content:encoded');
-            $contentText = $row['content'];
+            $contentText = strip_tags($row['content'], param('content_html_tags'));
             if ($row['original_pic']) {
                 $thumb = new CDImageThumb($row['original_pic']);
                 $contentText .= sprintf('<p><img src="%s" title="%s" alt="%s" border="0"></p>', $thumb->middleImageUrl(), $row['title'], $row['title']);
