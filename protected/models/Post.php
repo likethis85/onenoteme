@@ -182,8 +182,8 @@ class Post extends CActiveRecord
 		    'profile' => array(self::BELONGS_TO, 'UserProfile', 'user_id'),
 		    'comments' => array(self::HAS_MANY, 'Comment', 'post_id'),
 		    'uploadImages' => array(self::HAS_MANY, 'Upload', 'post_id',
-                'condition' => 'post_id = :postid',
-	            'params' => array(':postid' => Upload::TYPE_IMAGE),
+                'condition' => 'file_type = :filetype',
+	            'params' => array(':filetype' => Upload::TYPE_IMAGE),
 		    ),
 		);
 	}
