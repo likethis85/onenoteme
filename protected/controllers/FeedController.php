@@ -128,7 +128,7 @@ class FeedController extends Controller
         $rss = $dom->createElement('rss');
         $dom->appendChild($rss);
         $rss->setAttribute('version', '2.0');
-        $rss->setAttributeNS($namespaceURI ,'xmlns:itunes', 'http://www.itunes.com/dtds/podcast-1.0.dtd');
+        //$rss->setAttributeNS($namespaceURI ,'xmlns:itunes', 'http://www.itunes.com/dtds/podcast-1.0.dtd');
         $rss->setAttributeNS($namespaceURI ,'xmlns:content', 'http://purl.org/rss/1.0/modules/content/');
         $rss->setAttributeNS($namespaceURI ,'xmlns:wfw', 'http://wellformedweb.org/CommentAPI/');
         $rss->setAttributeNS($namespaceURI ,'xmlns:dc', $ns_dc);
