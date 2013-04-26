@@ -1,7 +1,7 @@
 <?php
 class TestController extends Controller
 {
-    public function init1()
+    public function init()
     {
         $this->redirect('/');
         exit(0);
