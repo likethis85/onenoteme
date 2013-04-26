@@ -264,26 +264,23 @@ class Post extends CActiveRecord
 	
 	public function getFilterSummary($len = 300)
 	{
-	    $content = strip_tags($this->content, param('summary_html_tags'));
-	    $summary = mb_substr($content, 0, $len, app()->charset);
+	    $content = strip_tags($this->content);
+	    $summary = mb_substr($content), 0, $len, app()->charset);
 	    $moreCount = mb_strlen($content, app()->charset) - mb_strlen($summary, app()->charset);
 	    
 	    if ($moreCount > 0) {
+	    	$content = strip_tags($this->content, '<br>');
 	        $summary = mb_strimwidth($content, 0, $len, '......', app()->charset);
     	    $text .= '<i class="cgray">(剩余&nbsp;' . (int)$moreCount . '&nbsp;字)</i>&nbsp;&nbsp;<span class="cgreen">继续阅读全文&gt;&gt;&gt;</span>';
     	    $summary .= '<br />' . l($text, $this->getUrl(), array('target'=>'_blank', 'class'=>'aright'));
 	    }
-	    $summary = $this->isGirl ? $summary : nl2br($summary);
 	    return $summary;
 	}
 	
 	public function getFilterContent()
 	{
 	    $tags = param('content_html_tags');
-	    if (empty($tags))
-	        $tags = null;
-	        
-	    return nl2br(strip_tags($this->content, $tags));
+	    return strip_tags($this->content, $tags);
 	}
 	
 	public function getContentImages()
