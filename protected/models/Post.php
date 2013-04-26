@@ -1187,7 +1187,7 @@ class Post extends CActiveRecord
      * 获取段子所属的图片列表
      * @return array()
      */
-    public function getUploadImageSquareThumbs($columns = 4, $rows = 2, $imgOptions = array(), $includeLink = true, $linkOptions = array())
+    public function getUploadImageSquareThumbs($columns = 4, $rows = 2, $imgOptions = array(), $includeLink = true, $linkOptions = array('target'=>'_blank'))
     {
         $urls = $this->getUploadImageSquareThumbUrls();
         $images = array();
