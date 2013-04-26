@@ -107,7 +107,7 @@ EOD;
         $post = Post::model()->findByPk($id);
         $images = $post->getUploadImageSquareThumbs();
         
-        echo $images;
+        var_dump($images);
         exit;
     }
 }
