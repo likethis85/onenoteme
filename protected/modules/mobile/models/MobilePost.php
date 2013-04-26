@@ -25,15 +25,18 @@ class MobilePost extends Post
     
     public function getFilterSummary($len = 300)
     {
-        $content = strip_tags($this->content, param('mobile_summary_html_tags'));
+        $content = strip_tags($this->content);
         $summary = mb_substr($content, 0, $len, app()->charset);
-        $moreCount = mb_strlen($content, app()->charset) - mb_strlen($summary, app()->charset);
+	    $moreCount = mb_strlen($content, app()->charset) - mb_strlen($summary, app()->charset);
          
+        $tags = param('summary_html_tags');
         if ($moreCount > 0) {
+            $content = strip_tags($this->content, $tags);
             $summary = mb_strimwidth($content, 0, $len, '......', app()->charset);
             $summary .= '<i class="cgreen">(剩余&nbsp;' . (int)$moreCount . '&nbsp;字)</i>';
         }
-        $summary = nl2br($summary);
+        else
+            $summary = strip_tags($this->content, $tags);
         return $summary;
     }
     
