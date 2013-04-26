@@ -27,8 +27,10 @@ class CDFileLocal extends CComponent
         foreach ($rows as $index => $row) {
             if (empty($row))
                 unset($rows[$index]);
-            else
-                $html = str_replace($row['oldurl'], $row['url'], $html);
+            else {
+                $thumb = new CDImageThumb($row['url']);
+                $html = str_replace($row['oldurl'], $thumb->middleImageUrl(), $html);
+            }
         }
         
         return array($html, $rows);

@@ -101,4 +101,13 @@ EOD;
         echo $rows;
         exit;
     }
+
+    public function actionThumb($id)
+    {
+        $post = Post::model()->findByPk($id);
+        $images = $post->getUploadImageSquareThumbs();
+        
+        echo $images;
+        exit;
+    }
 }

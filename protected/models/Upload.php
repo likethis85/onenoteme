@@ -102,9 +102,11 @@ class Upload extends CActiveRecord
 
 	public function getFileUrl()
 	{
-	    $pos = stripos($this->url, 'http://');
-	    $thumb = new CDImageThumb($this->url);
-        return $thumb->middleImageUrl();
+	    $url = $this->url;
+	    if ($this->file_type == self::TYPE_IMAGE)
+    	    $url = $this->getMiddlePic();
+	    
+	    return $url;
 	}
 	
 	public function getFileTypeText()
@@ -118,7 +120,6 @@ class Upload extends CActiveRecord
 	    return $text;
 	}
 	
-	
 	public function getCreateTimeText($format = null)
 	{
 	    if  (null === $format)
@@ -126,6 +127,227 @@ class Upload extends CActiveRecord
 	
 	    return date($format, $this->create_time);
 	}
+
+	/**
+	 * 获取自定义缩略图对象
+	 * @return Ambigous <NULL, string, CDImageThumb>
+	 */
+	public function getImageThumb()
+	{
+	    static $thumbs = array();
+	    if (!array_key_exists($this->id, $thumbs)){
+	        if ($this->original_pic)
+	            $thumbs[$this->id] = new CDImageThumb($this->original_pic, $this->original_width, $this->original_height);
+	        else
+	            $thumbs[$this->id] = '';
+	    }
+	
+	    return $thumbs[$this->id];
+	}
+	
+	/**
+	 * 获取缩略图地址，限定宽度，高度自适应
+	 * @return string
+	 */
+	public function getThumbnail()
+	{
+	    $url = '';
+	    $thumb = $this->getImageThumb();
+	    if ($thumb)
+	        $url = $thumb->thumbImageUrl();
+	
+	    return $url;
+	}
+	
+	/**
+	 * 获取缩略图，固定长宽，自动放大剪切
+	 * @return string
+	 */
+	public function getFixThumb()
+	{
+	    $url = '';
+	    $thumb = $this->getImageThumb();
+	    if ($thumb)
+	        $url = $thumb->fixThumbImageUrl();
+	
+	    return $url;
+	}
+	
+	/**
+	 * 获取正方形缩略图
+	 * @return string
+	 */
+	public function getSquareThumb()
+	{
+	    $url = '';
+	    $thumb = $this->getImageThumb();
+	    if ($thumb)
+	        $url = $thumb->squareThumbImageUrl();
+	
+	    return $url;
+	}
+	
+	/**
+	 * 获取中等大小图片
+	 * @return string
+	 */
+	public function getMiddlePic()
+	{
+	    $url = '';
+	    $thumb = $this->getImageThumb();
+	    if ($thumb)
+	        $url = $thumb->middleImageUrl();
+	
+	    return $url;
+	}
+	
+	/**
+	 * 获取大图片url
+	 * @return string
+	 */
+	public function getLargePic()
+	{
+	    $url = '';
+	    $thumb = $this->getImageThumb();
+	    if ($thumb)
+	        $url = $thumb->largeImageUrl();
+	
+	    return $url;
+	}
+	
+	/**
+	 * 获取原始图片url
+	 * @return string
+	 */
+	public function getOriginalPic()
+	{
+	    return $this->url;
+	}
+	
+	/**
+	 * 根据宽度计算缩略图的高度
+	 * @param integer $width 图片宽度
+	 * @return integer 图片高度
+	 */
+	public function getThumbHeightByWidth($width = IMAGE_THUMB_WIDTH)
+	{
+	    $height = 0;
+	    $thumb = $this->getImageThumb();
+	    if ($thumb)
+	        $height = $thumb->heightByWidth($width);
+	
+	    return $height;
+	}
+	
+	/**
+	 * 根据高度计算宽度
+	 * @param integer $heigth 图片高度
+	 * @return integer 图片宽度
+	 */
+	public function getThumbWidthByHeight($heigth)
+	{
+	    $width = 0;
+	    $thumb = $this->getImageThumb();
+	    if ($thumb)
+	        $width = $thumb->heightByWidth($heigth);
+	
+	    return $width;
+	}
+	
+	/**
+	 * 获取图片缩略图<img>代码
+	 * @param integer $width 图片宽度，如果不为，img标签中不添加width,height属性
+	 * @return string
+	 */
+	public function getThumbnailImage($width = 0)
+	{
+	    $html = '';
+	    if ($this->getThumbnail()) {
+	        $htmlOptions = array('class'=>'cd-thumbnail');
+	        $width = (int)$width;
+	        if ($width > 0) {
+	            $htmlOptions['width'] = $width;
+	            $htmlOptions['height'] = $this->getThumbHeightByWidth($width);
+	        }
+	        $html = image($this->getThumbnail(), $this->desc, $htmlOptions);
+	    }
+	
+	    return $html;
+	}
+	
+	/**
+	 * 获取固定宽高的缩略图<img>代码
+	 * @param integer $width 图片宽度
+	 * @return string
+	 */
+	public function getFixThumbImage($width = 0)
+	{
+	    $html = '';
+	    if ($this->getFixThumb()) {
+	        $htmlOptions = array('class'=>'cd-fixthumb');
+	        $width = (int)$width;
+	        if ($width > 0) {
+	            $htmlOptions['width'] = $width;
+	            $htmlOptions['height'] = $this->getThumbHeightByWidth($width);
+	        }
+	        $html = image($this->getFixThumb(), $this->desc, $htmlOptions);
+	    }
+	
+	    return $html;
+	}
+	
+
+	/**
+	 * 获取正方形缩略图<img>代码
+	 * @param integer $width 图片宽度
+	 * @return string
+	 */
+	public function getSquareThumbImage($width = 0)
+	{
+	    $html = '';
+	    if ($this->getSquareThumb()) {
+	        $htmlOptions = array('class'=>'cd-fixthumb');
+	        $width = (int)$width;
+	        if ($width > 0) {
+	            $htmlOptions['width'] = $width;
+	            $htmlOptions['height'] = $this->getThumbHeightByWidth($width);
+	        }
+	        $html = image($this->getSquareThumb(), $this->desc, $htmlOptions);
+	    }
+	
+	    return $html;
+	}
+
+
+	/**
+	 * 获取中等大小图片<img>代码
+	 * @return string
+	 */
+	public function getMiddleImage()
+	{
+	    $html = '';
+	    if ($this->getMiddlePic()) {
+	        $htmlOptions = array('class'=>'cd-middle-image');
+	        $html = image($this->getMiddlePic(), $this->desc, $htmlOptions);
+	    }
+	
+	    return $html;
+	}
+    
+    /**
+     * 获取大图片<img>代码
+     * @return string
+     */
+    public function getLargeImage()
+    {
+        $html = '';
+        if ($this->getLargePic()) {
+            $htmlOptions = array('class'=>'cd-large-image');
+            $html = image($this->getLargePic(), $this->desc, $htmlOptions);
+        }
+    
+        return $html;
+    }
 	
 	protected function beforeSave()
 	{
