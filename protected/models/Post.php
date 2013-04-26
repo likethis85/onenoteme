@@ -783,7 +783,7 @@ class Post extends CActiveRecord
             $data = $fetch->fetchReplacedHtml($this->content);
         }
         else
-            $data = false;
+            $data = 0;
         return $data;
     }
     
@@ -798,7 +798,7 @@ class Post extends CActiveRecord
                     $this->saveUploadFile($data[1]);
             }
             else
-                return false;
+                return 0;
         }
         catch (Exception $e) {
             return false;
