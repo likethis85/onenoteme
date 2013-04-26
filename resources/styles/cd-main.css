@@ -97,7 +97,7 @@ input.button:active, .button:active {background-position:-389px 0;}
 .next-posts a:link, .next-posts a:visited {display:block; padding:0; text-align:center; line-height:33px; color:white; margin-right:5px;}
 .thumb-posts {margin-bottom:15px;}
 .thumb-posts .thumb {float:left; text-align:center;}
-.thumb-posts .thumb a:link, .next-posts .thumb a:visited {display:block; background-color:#FFFFFF; border:3px solid #FFFFFF;  width:86px; height:86px; overflow:hidden;}
+.thumb-posts .thumb a:link, .thumb-posts .thumb a:visited {display:block; background-color:#FFFFFF; border:3px solid #FFFFFF;  width:86px; height:86px; overflow:hidden;}
 .thumb-posts .thumb a:hover {border-color:#F45E5E; opacity:0.85;}
 .thumb-posts .thumb img {border:0; width:90px;}
 
@@ -142,6 +142,10 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .post-image .line3 {height:3px; width:50px; margin:3px auto; background:#B2B2B2;}
 .post-image .thumb-pall {position:absolute; bottom:0px; height:39px; width:150px; background:transparent url(../images/thumb_more_tip.gif) no-repeat; z-index:2;}
 .post-image .lines .sjx {height:9px; width:71px; margin:3px auto; background:url(../images/thumb_more_sjx.gif) no-repeat;}
+.post-image .thumb-list {list-style:none; margin:0; padding:0;}
+.post-image .thumb-list li {float:left; display:block; width:154px; height:154px; overflow:hidden; text-align:center;}
+.post-image .thumb-list li img {width:150px;}
+.post-image .thumb-list li a:hover img {opacity:.8; filter:alpha(opacity=90);}
 .post-author {color:#9b8878; margin-bottom:10px; font-size:12px;}
 .post-author img {width:25px; height:25px; margin-right:10px;}
 .item-title, .item-content {margin-bottom:15px; line-height:24px;}

@@ -13,6 +13,9 @@
  * @property integer $user_id
  * @property string $desc
  * @property string $token
+ * @property integer $width
+ * @property integer $height
+ * @property integer $frames
  * @property string $fileUrl
  * @property string $fileTypeText
  * @property string $createTimeText
@@ -62,7 +65,7 @@ class Upload extends CActiveRecord
 		// will receive user inputs.
 		return array(
 		    array('post_id, url', 'required'),
-			array('post_id, file_type, create_time, user_id', 'numerical', 'integerOnly'=>true),
+			array('post_id, file_type, create_time, user_id, width, height, frames', 'numerical', 'integerOnly'=>true),
 			array('url, desc', 'length', 'max'=>250),
 			array('create_ip', 'length', 'max'=>15),
 			array('token', 'length', 'max'=>32),
@@ -136,8 +139,8 @@ class Upload extends CActiveRecord
 	{
 	    static $thumbs = array();
 	    if (!array_key_exists($this->id, $thumbs)){
-	        if ($this->original_pic)
-	            $thumbs[$this->id] = new CDImageThumb($this->original_pic, $this->original_width, $this->original_height);
+	        if ($this->url)
+	            $thumbs[$this->id] = new CDImageThumb($this->url, $this->width, $this->height);
 	        else
 	            $thumbs[$this->id] = '';
 	    }

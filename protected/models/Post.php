@@ -1169,7 +1169,7 @@ class Post extends CActiveRecord
         $uploads = $this->uploadImages;
         $urls = array();
         foreach ((array)$uploads as $image) {
-            $urls[$image->id] = $image->squareThumbImageUrl();
+            $urls[$image->id] = $image->getSquareThumb();
         }
         return $urls;
     }
@@ -1178,10 +1178,15 @@ class Post extends CActiveRecord
      * 获取段子所属的图片列表
      * @return array()
      */
-    public function getUploadImageSquareThumbs($imgOptions = array(), $includeLink = true, $linkOptions = array())
+    public function getUploadImageSquareThumbs($columns = 4, $imgOptions = array(), $includeLink = true, $linkOptions = array())
     {
         $urls = $this->getUploadImageSquareThumbUrls();
         $images = array();
+        $count = count($urls);
+        if ($count > $columns) {
+            $count = $count - $count % $columns;
+            $urls = array_slice($urls, 0, $count);
+        }
         foreach ($urls as $index => $url) {
             if ($imgOptions)
                 $imgOptions['class'] = 'cd-thumb-list';

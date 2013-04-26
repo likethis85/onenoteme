@@ -55,11 +55,20 @@
             </div>
             <?php elseif ($model->channel_id == CHANNEL_GIRL && $model->getMiddlePic()): // 女神?>
             <div class="post-image">
+                <?php if ($model->uploadImages):?>
+                <ul class="thumb-list">
+                    <?php foreach ($model->getUploadImageSquareThumbs() as $image):?>
+                    <li><?php echo $image;?></li>
+                    <?php endforeach;?>
+                    <div class="clear"></div>
+                </ul>
+                <?php else:?>
                 <div class="thumbbox acenter">
                     <a href="<?php echo $model->getUrl();?>" target="_blank" title="<?php echo $model->title;?>" data-bmiddle-url="<?php echo $model->getMiddlePic();?>">
                         <?php echo $model->getMiddleImage();?>
                     </a>
                 </div>
+                <?php endif;?>
             </div>
             <?php elseif ($model->channel_id == CHANNEL_VIDEO && $model->videoHtml): // 视频?>
             <div class="content-block video-player"><?php echo $model->videoHtml;?></div>
