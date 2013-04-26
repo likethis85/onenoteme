@@ -185,6 +185,10 @@ class Post extends CActiveRecord
                 'condition' => 'file_type = :filetype',
 	            'params' => array(':filetype' => Upload::TYPE_IMAGE),
 		    ),
+	        'uploadImagesCount' => array(self::STAT, 'Upload', 'post_id',
+                'condition' => 'file_type = :filetype',
+	            'params' => array(':filetype' => Upload::TYPE_IMAGE),
+		    ),
 		);
 	}
 
@@ -498,7 +502,9 @@ class Post extends CActiveRecord
      */
     public function getFilterTitle()
     {
-        return strip_tags(trim($this->title));
+        $title = strip_tags(trim($this->title));
+        if ($this->getIsImageType() && $this->uploadImagesCount > 0)
+            $title .= '(' . $this->uploadImagesCount . 'P)';
     }
     
     /**
@@ -511,6 +517,9 @@ class Post extends CActiveRecord
         $title = $this->title;
         if ($len > 0)
             $title = mb_strimwidth($title, 0, $len, '...', app()->charset);
+        
+        if ($this->getIsImageType() && $this->uploadImagesCount > 0)
+            $title .= '(' . $this->uploadImagesCount . 'P)';
         
         return $title;
     }
@@ -1178,7 +1187,7 @@ class Post extends CActiveRecord
      * 获取段子所属的图片列表
      * @return array()
      */
-    public function getUploadImageSquareThumbs($columns = 4, $imgOptions = array(), $includeLink = true, $linkOptions = array())
+    public function getUploadImageSquareThumbs($columns = 4, $rows = 2, $imgOptions = array(), $includeLink = true, $linkOptions = array())
     {
         $urls = $this->getUploadImageSquareThumbUrls();
         $images = array();
