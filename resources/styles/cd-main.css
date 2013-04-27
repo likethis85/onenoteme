@@ -58,7 +58,7 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 /* post/show */
 .post-detail .post-content {line-height:24px; color:inherit; margin:10px auto 15px;}
 .post-detail .post-picture {text-align:center; overflow:hidden; margin-bottom:10px; position:relative; background:#FFFFFFF;}
-.post-detail .post-picture img, .item-content img {max-width:590px;}
+.post-detail .post-picture img, .item-content img {max-width:600px;}
 .post-detail .cdc-block {margin:25px auto 15px; list-style:none; text-align:left;}
 .btn-prev-next {position:absolute; top:0; display:block; width:40px; background:#FFFFFF; height:100%;}
 .btn-prev-next:hover {display:block; width:40px; background:#F5F5F5;}
@@ -133,7 +133,7 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .post-line-list .post-item .post-image .thumbbox {position:relative;  z-index:1;}
 .post-image img.thumb {width:150px; max-height:250px; margin:0 auto;}
 .post-image .thumbbox .icon-gif-sign {width:42px; height:42px; position:absolute; left:0; top:0; background-position:-103px -160px; z-index:2;}
-.post-image img.bmiddle {max-width:590px; min-width:150px; min-height:150px; background:url(../images/big_loading.gif) no-repeat; opacity:1;}
+.post-image img.bmiddle {max-width:600px; min-width:150px; min-height:150px; background:url(../images/big_loading.gif) no-repeat; opacity:1;}
 .post-image img.bmiddle:hover {opacity:.9;}
 .size-switcher img.thumb {cursor:url(../images/cursor_zoom.cur),pointer;}
 .size-switcher img.bmiddle {cursor:url(../images/cursor_minify.cur),pointer;}
@@ -142,7 +142,7 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .post-image .line3 {height:3px; width:50px; margin:3px auto; background:#B2B2B2;}
 .post-image .thumb-pall {position:absolute; bottom:0px; height:39px; width:150px; background:transparent url(../images/thumb_more_tip.gif) no-repeat; z-index:2;}
 .post-image .lines .sjx {height:9px; width:71px; margin:3px auto; background:url(../images/thumb_more_sjx.gif) no-repeat;}
-.post-image .thumb-list {list-style:none; margin:0; padding:0;}
+.post-image .thumb-list {list-style:none; padding:0; width:600px; overflow:hidden; margin:15px auto;}
 .post-image .thumb-list li {float:left; display:block; width:120px; height:120px; overflow:hidden; text-align:center;}
 .post-image .thumb-list li img {width:116px;}
 .post-image .thumb-list li a:hover img {opacity:.8; filter:alpha(opacity=90);}
