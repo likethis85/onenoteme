@@ -143,8 +143,8 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .post-image .thumb-pall {position:absolute; bottom:0px; height:39px; width:150px; background:transparent url(../images/thumb_more_tip.gif) no-repeat; z-index:2;}
 .post-image .lines .sjx {height:9px; width:71px; margin:3px auto; background:url(../images/thumb_more_sjx.gif) no-repeat;}
 .post-image .thumb-list {list-style:none; margin:0; padding:0;}
-.post-image .thumb-list li {float:left; display:block; width:124px; height:124px; overflow:hidden; text-align:center;}
-.post-image .thumb-list li img {width:120px;}
+.post-image .thumb-list li {float:left; display:block; width:120px; height:120px; overflow:hidden; text-align:center;}
+.post-image .thumb-list li img {width:116px;}
 .post-image .thumb-list li a:hover img {opacity:.8; filter:alpha(opacity=90);}
 .post-author {color:#9b8878; margin-bottom:10px; font-size:12px;}
 .post-author img {width:25px; height:25px; margin-right:10px;}
