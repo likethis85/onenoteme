@@ -147,7 +147,7 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .post-image .thumb-list li img {width:116px;}
 .post-image .thumb-list li a:hover img {opacity:.8; filter:alpha(opacity=90);}
 .post-author {color:#9b8878; margin-bottom:10px; font-size:12px;}
-.post-author img {width:25px; height:25px; margin-right:10px;}
+.post-author img {width:24px; height:24px; margin-right:10px;}
 .item-title, .item-content {margin-bottom:15px; line-height:24px;}
 .item-title a, .item-content a {color:#503E2C; display:block;}
 .item-title a {font-size:14px;}
