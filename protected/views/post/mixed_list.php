@@ -16,7 +16,7 @@
     <?php foreach ((array)$models as $index => $model):?>
     <div class="waterfall-item">
         <div class="waterfall-item-box">
-            <?php if ($model->getThumbnail()):?><div class="pic-block"><?php echo $model->getThumbnailLink('_blank' ,164);?></div><?php endif;?>
+            <?php if ($model->getThumbnail()):?><div class="pic-block"><?php echo $model->getThumbnailLink('_blank' ,159);?></div><?php endif;?>
             <p><?php echo l($model->getFilterTitle(), $model->getUrl(), array('target'=>'_blank'));?></p>
         </div>
     </div>
@@ -41,7 +41,7 @@ $(function(){
     	var itemCount = $('.waterfall-item').length;
     	var manual = $('#manual-load');
     	container.masonry({
-    		columnWidth: 184,
+    		columnWidth: 179,
     		gutterWidth: 15,
             itemSelector: '.waterfall-item'
         });
