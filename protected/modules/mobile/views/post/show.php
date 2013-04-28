@@ -6,17 +6,13 @@
     	</div>
 	    <div class="item-title">
 	        <?php if (($post->channel_id != CHANNEL_DUANZI && $post->channel_id != CHANNEL_GHOSTSTORY) || $post->hasTitle):?>
-                <h1><?php echo h($post->title);?></h1>
+                <h1><?php echo $post->filterTitle;?></h1>
             <?php endif;?>
         </div>
 	    <?php if ($post->tags):?><div class="post-tags">标签：<?php echo $post->tagLinks;?></div><?php endif;?>
     </div>
     <?php if ($post->videoHtml):?>
     <div class="content-block video-player"><?php echo $post->videoHtml;?></div>
-    <?php elseif ($post->getMiddlePic()):?>
-    <div class="content-block post-picture thumbbox">
-        <?php echo CHtml::image($post->getMiddlePic(), $post->filterTitle . ', ' . $post->getTagText(','));?>
-    </div>
     <?php endif;?>
     <div class="item-content"><?php echo $post->filterContent;?></div>
     <div class="line1px"></div>

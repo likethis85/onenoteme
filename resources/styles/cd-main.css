@@ -57,18 +57,7 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 
 /* post/show */
 .post-detail .post-content {line-height:24px; color:inherit; margin:10px auto 15px;}
-.post-detail .post-picture {text-align:center; overflow:hidden; margin-bottom:10px; position:relative; background:#FFFFFFF;}
-.post-detail .post-picture img, .item-content img {max-width:580px;}
 .post-detail .cdc-block {margin:25px auto 15px; list-style:none; text-align:left;}
-.btn-prev-next {position:absolute; top:0; display:block; width:40px; background:#FFFFFF; height:100%;}
-.btn-prev-next:hover {display:block; width:40px; background:#F5F5F5;}
-.btn-prev-next#btn-prev-post {left:0;}
-.btn-prev-next#btn-next-post {right:0;}
-.btn-prev-next .btn-prev-icon, .btn-prev-next .btn-next-icon {display:block; width:40px; height:47px; position:fixed;}
-.btn-prev-next .btn-prev-icon {background-position:-749px -7px;}
-.btn-prev-next:hover .btn-prev-icon {background-position:-749px -54px;}
-.btn-prev-next .btn-next-icon {background-position:-818px -7px;}
-.btn-prev-next:hover .btn-next-icon {background-position:-818px -54px;}
 
 .comment-form {display:block; position:relative; overflow:hidden; background-color:#ECECEC; padding:8px; margin:10px 0;}
 .comment-form textarea {width:490px; border:0; color:#888; margin:0; padding:7px 5px 6px; font-size:12px;}
@@ -154,6 +143,7 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .item-title a:hover {color:#D14836; text-decoration:underline;}
 .item-title h1 {font-size:16px; color:inherit; line-height:inherit; margin:0; padding:0;}
 .item-content {line-height:24px; margin-top:10px;}
+.item-content img {max-width:580px;}
 .post-line-list .post-item .post-tags {margin:10px 0 0;}
 .post-line-list .post-item .post-tags a {color:#9b8878; word-wrap:break-word; word-break:break-all;}
 .post-line-list .post-item .post-tags a:hover {color:#330000;}
@@ -273,6 +263,22 @@ a:hover .social-widget-content {color:#666666;}
 .sponsor-alipay p, .sponsor-taobaoke p {font-size:16px; line-height:24px; margin-bottom:20px;}
 .sponsor-taobaoke {margin-top:10px; height:210px; color:#DFDFDF!important;}
 
+
+/***** 以下暂时抛弃 *****/
+/*
+.post-detail .post-picture {text-align:center; overflow:hidden; margin-bottom:10px; position:relative; background:#FFFFFFF;}
+.post-detail .post-picture img {max-width:580px;}
+
+.btn-prev-next {position:absolute; top:0; display:block; width:40px; background:#FFFFFF; height:100%;}
+.btn-prev-next:hover {display:block; width:40px; background:#F5F5F5;}
+.btn-prev-next#btn-prev-post {left:0;}
+.btn-prev-next#btn-next-post {right:0;}
+.btn-prev-next .btn-prev-icon, .btn-prev-next .btn-next-icon {display:block; width:40px; height:47px; position:fixed;}
+.btn-prev-next .btn-prev-icon {background-position:-749px -7px;}
+.btn-prev-next:hover .btn-prev-icon {background-position:-749px -54px;}
+.btn-prev-next .btn-next-icon {background-position:-818px -7px;}
+.btn-prev-next:hover .btn-next-icon {background-position:-818px -54px;}
+*/
 
 
 
