@@ -264,6 +264,9 @@ class CDBase
     
     public static function externalUrl($url, $domains = array())
     {
+        if (empty($domains))
+            $domains = self::localDomains();
+        
         $domains[] = $_SERVER['HTTP_HOST'];
         $domains = array_unique($domains);
         foreach ($domains as $domain) {

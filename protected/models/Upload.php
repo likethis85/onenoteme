@@ -19,6 +19,7 @@
  * @property string $fileUrl
  * @property string $fileTypeText
  * @property string $createTimeText
+ * @property boolean $isImageFile
  */
 class Upload extends CActiveRecord
 {
@@ -351,7 +352,12 @@ class Upload extends CActiveRecord
     
         return $html;
     }
-	
+
+    public function getIsImageFile()
+    {
+        return $this->file_type == self::TYPE_IMAGE;
+    }
+    
 	protected function beforeSave()
 	{
 	    if ($this->getIsNewRecord()) {
@@ -364,8 +370,14 @@ class Upload extends CActiveRecord
 	
 	protected function afterDelete()
 	{
-	    $filename = fbp($this->url);
-	    if (is_file($filename) && file_exists($filename) && is_writable($filename))
-    	    unlink($filename);
+	    try {
+            $uploader = uploader($this->getIsImageFile());
+            if ($file->url) {
+                $uploader->delete($file->url);
+            }
+        }
+        catch (Exception $e) {}
 	}
 }
+
+

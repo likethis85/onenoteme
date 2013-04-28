@@ -1050,6 +1050,7 @@ class Post extends CActiveRecord
                 $this->original_width = $image['width'];
                 $this->original_height = $image['height'];
                 $this->original_frames = (int)$image['frames'];
+                $this->content = '<p>' . $this->getMiddleImage() . '</p>' . $this->content;
                 return true;
             }
             else
@@ -1255,6 +1256,21 @@ class Post extends CActiveRecord
     
     protected function afterSave()
     {
+        if ($this->getIsNewRecord()) {
+            if ($this->original_pic && !CDBase::externalUrl($this->original_pic)) {
+                $upload = new Upload();
+                $upload->post_id = $this->id;
+                $upload->file_type = Upload::TYPE_IMAGE;
+                $upload->url = $this->original_pic;
+                $upload->width = $this->original_width;
+                $upload->height = $this->original_height;
+                $upload->frames = $this->original_frames;
+                $upload->desc = strip_tags(trim($this->title));
+                $upload->user_id = $this->user_id;
+                $upload->save();
+            }
+        }
+        
         Tag::savePostTags($this->id, $this->tags);
     }
 
@@ -1263,16 +1279,13 @@ class Post extends CActiveRecord
         foreach ($this->comments as $model) $model->delete();
         app()->getDb()->createCommand()
             ->delete(TABLE_POST_FAVORITE, 'post_id = :postid', array(':postid' => $this->id));
-        app()->getDb()->createCommand()
-            ->delete(TABLE_POST_TAG, 'post_id = :postid', array(':postid' => $this->id));
+        
+        Tag::deletePostTags($this->id);
             
-	    try {
-	        $uploader = uploader(true);
-	        if ($this->original_pic) {
-	        	$uploader->delete($this->original_pic);
-	        }
-        }
-        catch (Exception $e) {}
+	    foreach ((array)$this->uploadImages as $file) {
+	        if ($file instanceof Upload)
+    	        $file->delete();
+	    }
     }
 }
 

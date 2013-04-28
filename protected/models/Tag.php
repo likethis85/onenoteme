@@ -114,7 +114,35 @@ class Tag extends CActiveRecord
 	        }
 	        unset($model);
 	    }
-	    return $count;
+	    return (int)$count;
+	}
+	
+	public static function deletePostTags($postid)
+	{
+	    $postid = (int)$postid;
+	    $tags = db()->createCommand()
+	        ->from(TABLE_POST_TAG)
+	        ->select('tag_id')
+	        ->where('post_id = :postid', array(':postid' => $postid))
+	        ->queryColumn();
+	    
+	    if (empty($tags)) return true;
+	    
+	    $count = app()->getDb()->createCommand()
+    	    ->delete(TABLE_POST_TAG, 'post_id = :postid', array(':postid'=>$postid));
+	    
+	    $count = 0;
+	    foreach ((array)$tags as $tagid) {
+	        $model = self::model()->findByPk($tagid);
+	        if ($model !== null) {
+	            $model->post_nums = $model->post_nums - 1;
+	            $model->post_nums = $model->post_nums < 0 ? 0 : $model->post_nums;
+	            if ($model->save(true, array('post_nums')))
+	                $count++;
+	            unset($model);
+	        }
+	    }
+	    return (int)$count;
 	}
 
 	
