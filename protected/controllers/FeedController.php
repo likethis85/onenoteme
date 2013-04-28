@@ -73,6 +73,7 @@ class FeedController extends Controller
         $cacheData = self::cacheData($cid);
         if ($cacheData !== false) return $cacheData;
         
+        $channels = CDBase::channelLabels();
         $criteria = new CDbCriteria();
         if (is_numeric($cid)) {
             $cid = (int)$cid;
