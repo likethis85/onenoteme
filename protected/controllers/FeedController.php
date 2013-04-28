@@ -27,49 +27,53 @@ class FeedController extends Controller
     
     public function actionIndex()
     {
-        $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('t.state' => POST_STATE_ENABLED));
-        
-        $models = self::fetchPosts($criteria);
-        self::outputXml(app()->name, $models);
-        exit(0);
+        $channels = array(CHANNEL_DUANZI, CHANNEL_LENGTU, CHANNEL_GIRL, CHANNEL_GHOSTSTORY);
+        self::channel($channels, app()->name, 600);
     }
     
     
     public function actionFunny()
     {
-        self::channel(array(CHANNEL_DUANZI, CHANNEL_LENGTU));
+        $feedname = '挖冷笑话'
+        self::channel(array(CHANNEL_DUANZI, CHANNEL_LENGTU), $feedname, 600);
     }
     
     public function actionJoke()
     {
-        self::channel(CHANNEL_DUANZI);
+        $feedname = app()->name . ' » ' . $channels[CHANNEL_DUANZI];
+        self::channel(CHANNEL_DUANZI, $feedname, 600);
     }
     
     public function actionGhost()
     {
-        self::channel(CHANNEL_GHOSTSTORY);
+        $feedname = app()->name . ' » ' . $channels[CHANNEL_GHOSTSTORY];
+        self::channel(CHANNEL_GHOSTSTORY, $feedname, 600);
     }
     
     public function actionLengtu()
     {
-        self::channel(CHANNEL_LENGTU);
+        $feedname = app()->name . ' » ' . $channels[CHANNEL_LENGTU];
+        self::channel(CHANNEL_LENGTU, $feedname, 600);
     }
     
     public function actionGirl()
     {
-        self::channel(CHANNEL_GIRL);
+        $feedname = app()->name . ' » ' . $channels[CHANNEL_GIRL];
+        self::channel(CHANNEL_GIRL, $feedname, 600);
     }
     
     public function actionVideo()
     {
-        self::channel(CHANNEL_VIDEO);
+        $feedname = app()->name . ' » ' . $channels[CHANNEL_VIDEO];
+        self::channel(CHANNEL_VIDEO, $feedname, 600);
     }
     
-    private static function channel($cid)
+    private static function channel($cid, $feedname, $expire = 600)
     {
-        $channels = param('channels');
+        $cacheData = self::cacheData($cid);
+        if ($cacheData !== false) return $cacheData;
         
+        $channels = param('channels');
         $criteria = new CDbCriteria();
         if (is_numeric($cid)) {
             $cid = (int)$cid;
@@ -90,11 +94,31 @@ class FeedController extends Controller
         $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
         $models = self::fetchPosts($criteria);
         
-        $feedname = app()->name . ' » ' . $channels[$cid];
-        self::outputXml($feedname, $models);
+        $xml = self::outputXml($feedname, $models);
+        self::cacheData($cid, $xml, $expire);
         exit(0);
     }
     
+    private static function cacheData($cid, $data = false, $expire = 600)
+    {
+        if (cache() === null) return false;
+        
+        if (is_array($cid) {
+            $cid = sort($cid, SORT_NUMERIC);
+            $cid = join('_', $cid);
+        }
+        else
+            $cid = (int)$cid;
+            
+        $cacheID = 'feed_cache_' . $cid;
+        
+        if ($data === false)
+            $result = cache()->get($cacheID);
+        else
+            $result = cache()->set($cacheID, $data, $expire);
+            
+        return $result;
+    }
     
     
     private static function fetchPosts(CDbCriteria $criteria)
@@ -167,7 +191,7 @@ class FeedController extends Controller
             $item->appendChild($content);
         }
     
-        echo $dom->saveXML();
+        return $dom->saveXML();
     }
     
     /*
