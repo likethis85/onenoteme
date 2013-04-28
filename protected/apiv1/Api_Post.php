@@ -285,7 +285,6 @@ class Api_Post extends ApiBase
     	
     	$post = new Post();
     	$post->channel_id = (int)$params['channel_id'];
-    	$post->title = $params['title'];
     	$post->content = nl2br($params['content']);
     	$post->tags = $params['tags'];
     	$post->create_time = $_SERVER['REQUEST_TIME'];
@@ -294,6 +293,9 @@ class Api_Post extends ApiBase
         $post->down_score = mt_rand(param('init_down_score_min'), param('init_down_score_max'));
         $post->view_nums = mt_rand(param('init_view_nums_min'), param('init_view_nums_max'));
     	$post->original_pic = $params['pic'];
+    	$post->title = $params['title'];
+    	if (empty($post->title))
+    	    $post->title = mb_substr(strip_tags($post->content), 0, 30, app()->charset);
     	
     	try {
     	    $referer = strip_tags(trim($params['onreferer']));
