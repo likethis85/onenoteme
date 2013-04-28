@@ -16,7 +16,7 @@ class TestController extends Controller
         $cmd = app()->getDb()->createCommand()
             ->from(TABLE_POST)
             ->select(array('id', 'original_pic', 'create_time', 'user_id', 'create_ip', 'title', 'original_width', 'original_height', 'original_frames'))
-            ->where('channel_id = :channelID', array(':channelID'=>CHANNEL_LENGTU))
+            ->where(array('and', 'channel_id = :channelID', 'id <= 41487'), array(':channelID'=>CHANNEL_GIRL))
             ->order(array('id asc'))
             ->limit($count)
             ->offset($offset);
