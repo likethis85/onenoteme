@@ -516,7 +516,7 @@ class Post extends CActiveRecord
      */
     public function getSubTitle($len = 35)
     {
-        $title = $this->title;
+        $title = $this->getFilterTitle();
         if ($len > 0)
             $title = mb_strimwidth($title, 0, $len, '...', app()->charset);
         

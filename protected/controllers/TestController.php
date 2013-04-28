@@ -1,46 +1,51 @@
 <?php
 class TestController extends Controller
 {
-    public function init()
+    public function init1()
     {
         $this->redirect('/');
         exit(0);
     }
     
-    public function actionIndex()
+    public function actionIndex($page = 1)
     {
+        $count = 2000;
+        $page = (int)$page;
+        $page = ($page < 1) ? 1 : $page;
+        $offset = ($page - 1) * $count;
+        $cmd = app()->getDb()->createCommand()
+            ->from(TABLE_POST)
+            ->select(array('id', 'original_pic', 'create_time', 'user_id', 'create_ip', 'title', 'original_width', 'original_height', 'original_frames'))
+            ->where('channel_id = :channelID', array(':channelID'=>CHANNEL_LENGTU))
+            ->order(array('id asc'))
+            ->limit($count)
+            ->offset($offset);
+        
+        $rows = $cmd->queryAll();
+        
+        foreach ($rows as $row) {
+            $upload = new Upload();
+            $upload->post_id = $row['id'];
+            $upload->file_type = Upload::TYPE_IMAGE;
+            $upload->url = $row['original_pic'];
+            $upload->create_time = $row['create_time'];
+            $upload->create_ip = $row['create_ip'];
+            $upload->width = $row['original_width'];
+            $upload->height = $row['original_height'];
+            $upload->frames = $row['original_frames'];
+            $upload->desc = $row['title'];
+            $upload->user_id = $row['user_id'];
+            
+            $result = $upload->save();
+            if ($result)
+                echo $row['id'] . ' OK<br />';
+            else {
+                echo $row['id'] . ' ERROR<br />';
+                break;
+            }
+        }
+        echo count($rows);
         exit;
-        echo fbu() . '<br />';
-        echo fbu('a/b/c.jpg') . '<br />';
-        echo fbp('a/c/b.png') . '<hr />';
-        
-        echo upyunbu() . '<br />';
-        echo upyunbu('a/b/c.jpg') . '<br />';
-        echo upyunbu(null, false) . '<br />';
-        echo upyunbu('a/b/c.jpg', false) . '<hr />';
-        
-        echo localbu() . '<br />';
-        echo localbu('a/b/c.jpg') . '<hr />';
-        exit;
-        $this->redirect('/');
-        
-        $url = 'http://pic.pp3.cn/uploads/allimg/111125/16030T308-2.jpg';
-        $images = CDUploadFile::saveRemoteImages($url, IMAGE_THUMBNAIL_WIDTH, IMAGE_THUMBNAIL_HEIGHT);
-        
-        var_dump($images);
-        
-        exit;
-        $uploader = app()->getComponent('upyunimg');
-        $file = 'http://pic.pp3.cn/uploads/allimg/111125/16030T308-2.jpg';
-        $data = file_get_contents($file);
-        $extension = CDImage::getImageExtName($data);
-        $uploader->autoFilename('pics', $extension, 'bmiddle');
-        $result = $uploader->upload($data);
-        
-        print_r($result);
-        echo 'http://ff.waduanzi.com' . $uploader->filename;
-        exit;
-        
     }
     
     public function actionImage()
