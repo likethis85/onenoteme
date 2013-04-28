@@ -1140,6 +1140,10 @@ class Post extends CActiveRecord
                 $model->url = $file['url'];
                 $model->user_id = user()->id;
                 $model->desc = $this->filterTitle;
+                $model->user_id = $this->user_id;
+                $model->width = $file['width'];
+                $model->height = $file['height'];
+                $model->frames = $file['frames'];
                 $model->save();
             }
             catch (Exception $e) {
@@ -1238,7 +1242,7 @@ class Post extends CActiveRecord
     protected function beforeValidate()
     {
         if (empty($this->title))
-            $this->title = mb_substr($this->content, 0, 30, app()->charset);
+            $this->title = mb_substr(strip_tags($this->content), 0, 30, app()->charset);
         
         return true;
     }

@@ -93,7 +93,7 @@ class AdminPost extends Post
     
     public function getEditLink()
     {
-        return l($this->title, $this->getEditUrl());
+        return l(h($this->title), $this->getEditUrl());
     }
 
     public function getTrashLink()
