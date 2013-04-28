@@ -325,7 +325,7 @@ class Post extends CActiveRecord
 	    }
 	    else
 	    	$summary = strip_tags($this->content, $tags);
-	    return $summary;
+	    return trim($summary);
 	}
 	
 	/**
@@ -335,7 +335,8 @@ class Post extends CActiveRecord
 	public function getFilterContent()
 	{
 	    $tags = param('content_html_tags');
-	    return strip_tags($this->content, $tags);
+	    $content = strip_tags($this->content, $tags);
+	    return trim($content);
 	}
 	
 	/**
