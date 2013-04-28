@@ -60,7 +60,7 @@
                         <?php echo $model->getMiddleImage();?>
                     </a>
                 </div>
-                <?php if ($model->uploadImagesCount > 1) && $model->uploadImages:?>
+                <?php if (($model->uploadImagesCount > 1) && $model->uploadImages):?>
                 <ul class="thumb-list">
                     <?php foreach ($model->getUploadImageSquareThumbs() as $image):?>
                     <li><?php echo $image;?></li>
