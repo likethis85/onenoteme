@@ -40,31 +40,31 @@ class FeedController extends Controller
     
     public function actionJoke()
     {
-        $feedname = app()->name . ' » ' . $channels[CHANNEL_DUANZI];
+        $feedname = app()->name . ' » ' . CDBase::channelLabels(CHANNEL_DUANZI);
         self::channel(CHANNEL_DUANZI, $feedname, 600);
     }
     
     public function actionGhost()
     {
-        $feedname = app()->name . ' » ' . $channels[CHANNEL_GHOSTSTORY];
+        $feedname = app()->name . ' » ' . CDBase::channelLabels(CHANNEL_GHOSTSTORY);
         self::channel(CHANNEL_GHOSTSTORY, $feedname, 600);
     }
     
     public function actionLengtu()
     {
-        $feedname = app()->name . ' » ' . $channels[CHANNEL_LENGTU];
+        $feedname = app()->name . ' » ' . CDBase::channelLabels(CHANNEL_LENGTU);
         self::channel(CHANNEL_LENGTU, $feedname, 600);
     }
     
     public function actionGirl()
     {
-        $feedname = app()->name . ' » ' . $channels[CHANNEL_GIRL];
+        $feedname = app()->name . ' » ' . CDBase::channelLabels(CHANNEL_GIRL);
         self::channel(CHANNEL_GIRL, $feedname, 600);
     }
     
     public function actionVideo()
     {
-        $feedname = app()->name . ' » ' . $channels[CHANNEL_VIDEO];
+        $feedname = app()->name . ' » ' . CDBase::channelLabels(CHANNEL_VIDEO);
         self::channel(CHANNEL_VIDEO, $feedname, 600);
     }
     
@@ -73,7 +73,6 @@ class FeedController extends Controller
         $cacheData = self::cacheData($cid);
         if ($cacheData !== false) return $cacheData;
         
-        $channels = param('channels');
         $criteria = new CDbCriteria();
         if (is_numeric($cid)) {
             $cid = (int)$cid;
@@ -96,6 +95,7 @@ class FeedController extends Controller
         
         $xml = self::outputXml($feedname, $models);
         self::cacheData($cid, $xml, $expire);
+        echo $xml;
         exit(0);
     }
     
