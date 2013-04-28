@@ -104,7 +104,7 @@ class FeedController extends Controller
         if (cache() === null) return false;
         
         if (is_array($cid)) {
-            $cid = sort($cid, SORT_NUMERIC);
+            sort($cid, SORT_NUMERIC);
             $cid = join('_', $cid);
         }
         else
