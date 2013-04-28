@@ -504,7 +504,7 @@ class Post extends CActiveRecord
     public function getFilterTitle()
     {
         $title = strip_tags(trim($this->title));
-        if ($this->getIsImageType() && $this->uploadImagesCount > 0)
+        if ($this->getIsImageType() && $this->uploadImagesCount > 1)
             $title .= '(' . $this->uploadImagesCount . 'P)';
         return $title;
     }
@@ -520,7 +520,7 @@ class Post extends CActiveRecord
         if ($len > 0)
             $title = mb_strimwidth($title, 0, $len, '...', app()->charset);
         
-        if ($this->getIsImageType() && $this->uploadImagesCount > 0)
+        if ($this->getIsImageType() && $this->uploadImagesCount > 1)
             $title .= '(' . $this->uploadImagesCount . 'P)';
         
         return $title;
