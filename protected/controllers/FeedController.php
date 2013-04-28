@@ -34,7 +34,7 @@ class FeedController extends Controller
     
     public function actionFunny()
     {
-        $feedname = '挖冷笑话'
+        $feedname = '挖冷笑话';
         self::channel(array(CHANNEL_DUANZI, CHANNEL_LENGTU), $feedname, 600);
     }
     
