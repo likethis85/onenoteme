@@ -118,10 +118,10 @@ class CDUploadedFile extends CUploadedFile
             
             $infos = $uploader->save($im->rawData());
             
-            $original['width'] = (int)$infos['x-upyun-width'];
-            $original['height'] = (int)$infos['x-upyun-height'];
-            $original['url'] = $paths['absolute_url'];
-            $original['frames'] = $infos['x-upyun-frames'];
+            if (is_array($infos)) {
+                $original = $infos;
+                $original['url'] = $paths['absolute_url'];
+            }
         }
         catch (Exception $e) {
             throw new Exception($e->getMessage());
@@ -166,6 +166,7 @@ class CDUploadedFile extends CUploadedFile
             $original['url'] = $saveFileUrl;
             $original['frames'] = 1;
         }
+        $original['mime'] = $im->getMimeType();
         $original['width'] = $im->width();
         $original['height'] = $im->height();
         

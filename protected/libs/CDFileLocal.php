@@ -113,6 +113,9 @@ class CDFileLocal extends CComponent
                     'oldurl' => $url,
                     'path' => $this->uploader->getFilename(),
                     'url' => $file['absolute_url'],
+                    'width' => $result['width'],
+                    'height' => $result['height'],
+                    'frames' => $result['frames'],
                 );
                 return $data;
             }

@@ -1104,9 +1104,17 @@ class Post extends CActiveRecord
             $data = $this->fetchContentRemoteImages($referer);
             if ($data) {
                 $this->content = $data[0];
-                $result = $this->save(true, array('content'));
-                if ($result && $data[1])
+                $first = $data[1][0];
+                if ($first) {
+                    $this->original_pic = $first['url'];
+                    $this->original_width = $first['width'];
+                    $this->original_height = $first['height'];
+                    $this->original_frames = (int)$first['frames'];
+                }
+                $result = $this->save(true, array('content', 'original_pic', 'original_width', 'original_height', 'original_frames'));
+                if ($result && $data[1]) {
                     $this->saveUploadFile($data[1]);
+                }
             }
             else
                 return 0;
