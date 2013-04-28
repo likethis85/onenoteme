@@ -15,13 +15,13 @@
         <?php if ($post->getIsVideoType() && $post->videoHtml):?>
         <div class="content-block video-player"><?php echo $post->videoHtml;?></div>
         <?php elseif ($post->getIsImageType() && $post->getMiddlePic()):?>
-        	<?php if($post->uploadImagesCount == 0):?>
+        	<?php //if($post->uploadImagesCount == 0):?>
 	        <div class="content-block post-picture thumbbox">
 	            <a href="<?php echo aurl('post/bigpic', array('id'=>$post->id));?>" data-bmiddle-url="<?php echo $post->getMiddlePic();?>" target="_blank" title="<?php echo $post->title;?>">
 	                <?php echo CHtml::image($post->getMiddlePic(), $post->filterTitle . ', ' . $post->getTagText(','));?>
 	            </a>
 	        </div>
-	        <?php endif;?>
+	        <?php //endif;?>
         <?php endif;?>
         <div class="item-content"><?php echo $post->filterContent;?></div>
         
