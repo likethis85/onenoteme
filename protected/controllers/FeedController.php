@@ -184,9 +184,7 @@ class FeedController extends Controller
     
             $content = $dom->createElement('content:encoded');
             $contentText = $model->getFilterContent();
-            if ($model->getMiddlePic() && $model->uploadImagesCount == 0)
-                $contentText = '<p>' . $model->getMiddleImage() . '</p>' . $contentText;
-            elseif ($model->getIsVideoType())
+            if ($model->getIsVideoType())
                 $contentText = '<p>' . $model->getVideoHtml() . '</p>' . $contentText;
             $content->appendChild($dom->createCDATASection($contentText));
             $item->appendChild($content);
