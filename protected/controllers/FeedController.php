@@ -27,13 +27,11 @@ class FeedController extends Controller
     
     public function actionIndex()
     {
-        $where = 'state = :enabled';
-        $params = array(':enabled'=>POST_STATE_ENABLED);
-        $cmd = app()->getDb()->createCommand()
-            ->where($where, $params);
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array('t.state' => POST_STATE_ENABLED));
         
-        $rows = self::fetchPosts1($cmd);
-        self::outputXml(app()->name, $rows);
+        $models = self::fetchPosts($criteria);
+        self::outputXml(app()->name, $models);
         exit(0);
     }
     
@@ -66,12 +64,6 @@ class FeedController extends Controller
     public function actionVideo()
     {
         self::channel(CHANNEL_VIDEO);
-    }
-    
-    public function actionChannel($cid)
-    {
-        $cid = (int)$cid;
-        self::channel($cid);
     }
     
     private static function channel($cid)
@@ -177,7 +169,7 @@ class FeedController extends Controller
         echo $dom->saveXML();
     }
     
-    
+    /*
     private static function channel1($cid)
     {
         $channels = param('channels');
@@ -283,5 +275,6 @@ class FeedController extends Controller
     
         echo $dom->saveXML();
     }
+    */
 }
 
