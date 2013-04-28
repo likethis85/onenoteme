@@ -28,44 +28,44 @@ class FeedController extends Controller
     public function actionIndex()
     {
         $channels = array(CHANNEL_DUANZI, CHANNEL_LENGTU, CHANNEL_GIRL, CHANNEL_GHOSTSTORY);
-        self::channel($channels, app()->name, 600);
+        echo self::channel($channels, app()->name, 600);
     }
     
     
     public function actionFunny()
     {
         $feedname = '挖冷笑话';
-        self::channel(array(CHANNEL_DUANZI, CHANNEL_LENGTU), $feedname, 600);
+        echo self::channel(array(CHANNEL_DUANZI, CHANNEL_LENGTU), $feedname, 600);
     }
     
     public function actionJoke()
     {
         $feedname = app()->name . ' » ' . CDBase::channelLabels(CHANNEL_DUANZI);
-        self::channel(CHANNEL_DUANZI, $feedname, 600);
+        echo self::channel(CHANNEL_DUANZI, $feedname, 600);
     }
     
     public function actionGhost()
     {
         $feedname = app()->name . ' » ' . CDBase::channelLabels(CHANNEL_GHOSTSTORY);
-        self::channel(CHANNEL_GHOSTSTORY, $feedname, 600);
+        echo self::channel(CHANNEL_GHOSTSTORY, $feedname, 600);
     }
     
     public function actionLengtu()
     {
         $feedname = app()->name . ' » ' . CDBase::channelLabels(CHANNEL_LENGTU);
-        self::channel(CHANNEL_LENGTU, $feedname, 600);
+        echo self::channel(CHANNEL_LENGTU, $feedname, 600);
     }
     
     public function actionGirl()
     {
         $feedname = app()->name . ' » ' . CDBase::channelLabels(CHANNEL_GIRL);
-        self::channel(CHANNEL_GIRL, $feedname, 600);
+        echo self::channel(CHANNEL_GIRL, $feedname, 600);
     }
     
     public function actionVideo()
     {
         $feedname = app()->name . ' » ' . CDBase::channelLabels(CHANNEL_VIDEO);
-        self::channel(CHANNEL_VIDEO, $feedname, 600);
+        echo self::channel(CHANNEL_VIDEO, $feedname, 600);
     }
     
     private static function channel($cid, $feedname, $expire = 600)
@@ -96,7 +96,7 @@ class FeedController extends Controller
         
         $xml = self::outputXml($feedname, $models);
         self::cacheData($cid, $xml, $expire);
-        echo $xml;
+        return $xml;
         exit(0);
     }
     
