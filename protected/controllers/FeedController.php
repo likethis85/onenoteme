@@ -32,7 +32,7 @@ class FeedController extends Controller
         $cmd = app()->getDb()->createCommand()
             ->where($where, $params);
         
-        $rows = self::fetchPosts($cmd);
+        $rows = self::fetchPosts1($cmd);
         self::outputXml(app()->name, $rows);
         exit(0);
     }
@@ -77,6 +77,110 @@ class FeedController extends Controller
     private static function channel($cid)
     {
         $channels = param('channels');
+        
+        $criteria = new CDbCriteria();
+        if (is_numeric($cid)) {
+            $cid = (int)$cid;
+            if (!array_key_exists($cid, $channels))
+                throw new CHttpException(503, '此频道暂时没有开通');
+                
+            $criteria->addColumnCondition(array('channel_id'=>$cid));
+        }
+        elseif (is_array($cid)) {
+            $cid = array_map('intval', $cid);
+            foreach ($cid as $id) {
+                if (!array_key_exists($id, $channels))
+                    throw new CHttpException(503, $id . ' 此频道暂时没有开通');
+            }
+            $criteria->addInCondition('channel_id', $cid);
+        }
+        
+        $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
+        $models = self::fetchPosts($criteria);
+        
+        $feedname = app()->name . ' » ' . $channels[$cid];
+        self::outputXml($feedname, $models);
+        exit(0);
+    }
+    
+    
+    
+    private static function fetchPosts(CDbCriteria $criteria)
+    {
+        $criteria->select = array('t.id', 't.title', 't.original_pic', 't.content', 't.create_time', 't.original_frames');
+        $criteria->order = array('t.create_time desc', 't.id desc');
+        $criteria->limit = self::POST_COUNT;
+            
+        $models = Post::model()->findAll($criteria);
+        return $models;
+    }
+
+    private static function outputXml($feedname, array $models)
+    {
+        $namespaceURI = 'http://www.w3.org/2000/xmlns/';
+        $ns_rdf = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
+        $ns_sy = 'http://purl.org/rss/1.0/modules/syndication/';
+        $ns_dc = 'http://purl.org/dc/elements/1.1/';
+        $ns_slash = 'http://purl.org/rss/1.0/modules/slash/';
+    
+        $dom = new DOMDocument('1.0', app()->charset);
+        $rss = $dom->createElement('rss');
+        $dom->appendChild($rss);
+        $rss->setAttribute('version', '2.0');
+        //$rss->setAttributeNS($namespaceURI ,'xmlns:itunes', 'http://www.itunes.com/dtds/podcast-1.0.dtd');
+        $rss->setAttributeNS($namespaceURI ,'xmlns:content', 'http://purl.org/rss/1.0/modules/content/');
+        $rss->setAttributeNS($namespaceURI ,'xmlns:wfw', 'http://wellformedweb.org/CommentAPI/');
+        $rss->setAttributeNS($namespaceURI ,'xmlns:dc', $ns_dc);
+        $rss->setAttributeNS($namespaceURI ,'xmlns:atom', 'http://www.w3.org/2005/Atom');
+        $rss->setAttributeNS($namespaceURI ,'xmlns:sy', $ns_sy);
+        $rss->setAttributeNS($namespaceURI ,'xmlns:slash', $ns_slash);
+    
+        $channel = new DOMElement('channel');
+        $rss->appendChild($channel);
+        $channel->appendChild(new DOMElement('copyright', 'Copyright (c) 2011-2013 ' . app()->name . '. All rights reserved.'));
+        $channel->appendChild(new DOMElement('title', $feedname));
+        $channel->appendChild(new DOMElement('link', app()->homeUrl));
+        $channel->appendChild(new DOMElement('description', param('shortdesc')));
+        $channel->appendChild(new DOMElement('lastBuildDate', date('D, d M Y H:i:s O', $_SERVER['REQUEST_TIME'])));
+        $channel->appendChild(new DOMElement('language', app()->language));
+        $channel->appendChild(new DOMElement('sy:updatePeriod', 'hourly', $ns_sy));
+        $channel->appendChild(new DOMElement('sy:updateFrequency', '1', $ns_sy));
+        $channel->appendChild(new DOMElement('generator', 'http://www.waduanzi.com/?v=' . CDBase::VERSION));
+    
+        foreach ((array)$models as $model) {
+            $item = $dom->createElement('item');
+            $channel->appendChild($item);
+            $title = $model->getFilterTitle;
+            if ($model->getImageIsAnimation()) $title .= '【动画】';
+            $item->appendChild(new DOMElement('title', $title));
+            $item->appendChild(new DOMElement('link', aurl('post/show', array('id'=>$model->id, 'source'=>'feed'))));
+            $item->appendChild(new DOMElement('comments', aurl('comment/list', array('pid'=>$model->id))));
+            $item->appendChild(new DOMElement('pubDate', date('D, d M Y H:i:s O', $model->create_time)));
+            $item->appendChild(new DOMElement('comments', (int)$model->comment_nums, $ns_slash));
+            if ($model->user_name)
+                $item->appendChild(new DOMElement('dc:creator', $model->user_name));
+    
+            $summary = $dom->createElement('summary');
+            $summaryText = $model->getFilterSummary(100);
+            $summary->appendChild($dom->createCDATASection($summaryText));
+            $item->appendChild($summary);
+    
+            $content = $dom->createElement('content:encoded');
+            $contentText = $model->getFilterContent();
+            if ($model->getMiddlePic()) {
+                $contentText = '<p>' . $model->getMiddleImage() . '</p>' . $contentText;
+            }
+            $content->appendChild($dom->createCDATASection($contentText));
+            $item->appendChild($content);
+        }
+    
+        echo $dom->saveXML();
+    }
+    
+    
+    private static function channel1($cid)
+    {
+        $channels = param('channels');
         if (is_numeric($cid)) {
             $cid = (int)$cid;
             if (!array_key_exists($cid, $channels))
@@ -105,7 +209,7 @@ class FeedController extends Controller
         exit(0);
     }
     
-    private static function fetchPosts(CDbCommand $cmd)
+    private static function fetchPosts1(CDbCommand $cmd)
     {
         $cmd->from(TABLE_POST)
             ->select(array('id', 'title', 'original_pic', 'content', 'create_time', 'original_frames'))
@@ -116,7 +220,7 @@ class FeedController extends Controller
         return $rows;
     }
 
-    private static function outputXml($feedname, array $rows)
+    private static function outputXml1($feedname, array $rows)
     {
         $namespaceURI = 'http://www.w3.org/2000/xmlns/';
         $ns_rdf = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
