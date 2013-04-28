@@ -150,7 +150,7 @@ class FeedController extends Controller
         foreach ((array)$models as $model) {
             $item = $dom->createElement('item');
             $channel->appendChild($item);
-            $title = $model->getFilterTitle;
+            $title = $model->getFilterTitle();
             if ($model->getImageIsAnimation()) $title .= '【动画】';
             $item->appendChild(new DOMElement('title', $title));
             $item->appendChild(new DOMElement('link', aurl('post/show', array('id'=>$model->id, 'source'=>'feed'))));
