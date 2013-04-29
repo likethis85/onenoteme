@@ -210,7 +210,7 @@ class WdzWeixin extends CDWeixin
         if (empty($rows)) return ;
         
         foreach ($rows as $row)
-            $contents[] = $row['content'];
+            $contents[] = strip_tags($row['content']);
         $content = join("\n--------------------\n\n", $contents);
         $lastRow = array_pop($rows);
         $lastID = (int)$lastRow['id'];
@@ -286,12 +286,12 @@ class WdzWeixin extends CDWeixin
                 ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
         }
         
-        $text = h($row['title']);
+        $text = strip_tags($row['title']);
         $thumb = new CDImageThumb($row['original_pic']);
         $posts = array(
             array(
                 'Title' => $text,
-                'Discription' => mb_strimwidth($row['content'], 0, 150, '...', app()->charset),
+                'Discription' => mb_strimwidth(strip_tags($row['content']), 0, 150, '...', app()->charset),
                 'PicUrl' => $thumb->middleImageUrl(),
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
             )
@@ -340,12 +340,12 @@ class WdzWeixin extends CDWeixin
                 ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
         }
         
-        $text = h($row['title']);
+        $text = strip_tags($row['title']);
         $thumb = new CDImageThumb($row['original_pic']);
         $posts = array(
             array(
                 'Title' => $text,
-                'Discription' => mb_strimwidth($row['content'], 0, 150, '...', app()->charset),
+                'Discription' => mb_strimwidth(strip_tags($row['content']), 0, 150, '...', app()->charset),
                 'PicUrl' => $thumb->middleImageUrl(),
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
             )
@@ -438,13 +438,14 @@ class WdzWeixin extends CDWeixin
                 ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
         }
         
-        $text = h($row['title']);
+        $text = strip_tags($row['title']);
+        // @todo 此处视频还没有缩略图
 //         $thumb = new CDImageThumb($row['original_pic']);
         $posts = array(
             array(
                 'Title' => $text,
-                'Discription' => mb_strimwidth($row['content'], 0, 150, '...', app()->charset),
-                'PicUrl' => $thumb->middleImageUrl(),
+                'Discription' => mb_strimwidth(strip_tags($row['content']), 0, 150, '...', app()->charset),
+                'PicUrl' => '', //$thumb->middleImageUrl(),
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
             )
         );
