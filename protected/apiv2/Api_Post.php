@@ -26,8 +26,8 @@ class Api_Post extends ApiBase
         if (isset($row['down_score']))
             $row['oppose_count_text'] = '踩:' . $row['down_score'];
 
-        $row['content'] = strip_tags($row['content']);
-        $row['title'] = strip_tags($row['title']);
+        $row['content'] = trim(strip_tags($row['content']));
+        $row['title'] = trim(strip_tags($row['title']));
         if (isset($row['create_time']) && $row['create_time'])
             $row['create_time_text'] = date(param('formatShortDateTime'), $row['create_time']);
         
