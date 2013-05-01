@@ -49,4 +49,18 @@ class MobilePost extends Post
     {
         return aurl('mobile/comment/list', array('pid'=>$this->id));
     }
+
+    	
+	/**
+	 * 获取标签链接列表
+	 * @param string $route 标签段子列表的route，主要同时给手机版使用此方法
+	 * @param string $operator 标签分隔符，默认&nbsp;
+	 * @param string $target 链接打开页面，默认_blank
+	 * @param string $class html标签 class name
+	 * @return string
+	 */
+	public function getTagLinks($route = 'tag/posts', $operator = '&nbsp;', $target = '_self', $class='beta-tag')
+	{
+	    return parent::getTagLinks('mobile/post/tags', $operator, $target, $class);
+	}
 }
