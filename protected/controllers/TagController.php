@@ -54,7 +54,7 @@ class TagController extends Controller
         $this->redirect(url('tag/posts', array('name'=>$name, 's'=>$s)));
     }
     
-    public function actionPosts($name, $s = POST_LIST_STYLE_LINE)
+    public function actionPosts($name, $s = POST_LIST_STYLE_LINE, $page = 1)
     {
         $s = strip_tags(trim($s));
         
@@ -94,6 +94,12 @@ class TagController extends Controller
         $criteria->addInCondition('id', $postIDs);
 
         $models = Post::model()->findAll($criteria);
+        
+        if ($pages->currentPage > 1)
+            $mobileUrl = aurl('mobile/'. $this->id . '/' . $this->action->id, array('page'=>$pages->currentPage));
+        else
+            $mobileUrl = aurl('mobile/'. $this->id . '/' . $this->action->id);
+        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
         
         $this->pageTitle = "与{$name}相关的笑话、冷图、视频 - 挖段子";
         $this->setKeywords("{$name}段子,{$name}笑话,{$name}糗事,{$name}语录,{$name}漫画,{$name}视频");
