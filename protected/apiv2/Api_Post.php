@@ -28,8 +28,9 @@ class Api_Post extends ApiBase
 
         $row['content'] = trim(strip_tags($row['content']));
         $row['title'] = trim(strip_tags($row['title']));
-        if ($row['channel_id'] == CHANNEL_GIRL)
+        if ($row['channel_id'] == CHANNEL_GIRL || $row['channel_id'] == CHANNEL_LENGTU)
             $row['content'] = $row['title'];
+        
         if (isset($row['create_time']) && $row['create_time'])
             $row['create_time_text'] = date(param('formatShortDateTime'), $row['create_time']);
         
