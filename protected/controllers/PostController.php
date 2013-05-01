@@ -4,7 +4,7 @@ class PostController extends Controller
     public function filters()
     {
         return array(
-            'switchMobile + show',
+//             'switchMobile + show',
             'ajaxOnly + score, like, unlike, views',
             'postOnly + score, like, unlike, views',
             array(

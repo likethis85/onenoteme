@@ -123,6 +123,10 @@ class Controller extends CController
     }
 
 
+    /**
+     * 判断是否是手机用户，自动跳转到手机版，此方法目前没有用上，直接使用nginx的rewrite进行了跳转，效率更高
+     * @param CFilterChain $filterChain
+     */
     public function filterSwitchMobile($filterChain)
     {
         $url = url('mobile/' . $filterChain->controller->id . '/' . $filterChain->action->id, $filterChain->controller->getActionParams());
