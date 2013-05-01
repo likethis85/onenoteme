@@ -123,7 +123,6 @@ class Controller extends CController
     }
 
 
-
     public function filterSwitchMobile($filterChain)
     {
         $url = url('mobile/' . $filterChain->controller->id . '/' . $filterChain->action->id, $filterChain->controller->getActionParams());
@@ -138,3 +137,5 @@ class Controller extends CController
         return true;
     }
 }
+
+

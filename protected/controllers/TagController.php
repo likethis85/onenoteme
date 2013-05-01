@@ -5,7 +5,7 @@ class TagController extends Controller
     {
         $duration = 24*60*60;
         return array(
-//             'switchMobile + posts',
+            'switchMobile + posts',
             array(
                 'COutputCache + list',
                 'duration' => $duration,

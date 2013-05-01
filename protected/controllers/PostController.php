@@ -4,7 +4,7 @@ class PostController extends Controller
     public function filters()
     {
         return array(
-//             'switchMobile + show',
+            'switchMobile + show',
             'ajaxOnly + score, like, unlike, views',
             'postOnly + score, like, unlike, views',
             array(
@@ -85,6 +85,7 @@ class PostController extends Controller
             $pageKeyword = $post->getTagText(',') . ',' . $pageKeyword;
         $this->setKeywords($pageKeyword);
         $this->setDescription($post->getfilterSummary());
+        
         $mobileUrl = aurl('mobile/post/show', array('id'=>$id));
         cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
         

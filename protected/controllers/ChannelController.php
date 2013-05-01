@@ -5,7 +5,7 @@ class ChannelController extends Controller
     {
         $duration = 120;
         return array(
-//             'switchMobile + joke, lengtu, girl, video, ghost',
+            'switchMobile + joke, lengtu, girl, video, ghost',
             array(
                 'COutputCache + joke, lengtu, girl, video, ghost',
                 'duration' => $duration,
