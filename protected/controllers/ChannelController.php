@@ -83,7 +83,7 @@ class ChannelController extends Controller
             $this->render($view, $data);
     }
     
-    public function actionGirl($page = 1, $s = POST_LIST_STYLE_GRID)
+    public function actionGirl($page = 1, $s = POST_LIST_STYLE_LINE)
     {
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/girl'), null, array('title'=>app()->name . ' » 挖女神 Feed'));
         $this->pageTitle = param('channel_girl_title');
