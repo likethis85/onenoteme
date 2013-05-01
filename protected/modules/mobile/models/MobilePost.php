@@ -61,6 +61,6 @@ class MobilePost extends Post
 	 */
 	public function getTagLinks($route = 'tag/posts', $operator = '&nbsp;', $target = '_self', $class='beta-tag')
 	{
-	    return parent::getTagLinks('mobile/post/tags', $operator, $target, $class);
+	    return parent::getTagLinks('mobile/tag/posts', $operator, $target, $class);
 	}
 }
