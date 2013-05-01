@@ -66,7 +66,6 @@ class SiteController extends Controller
             $this->setDescription(param('home_index_description'));
             
             $mobileUrl = ($page > 1) ? aurl('mobile/default/index', array('page'=>$page)) : $mobileUrl = aurl('mobile/default/index');;
-                
             cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
             
             $view = ($s == POST_LIST_STYLE_WATERFALL) ? 'fall_index' : 'grid_index';
@@ -232,39 +231,5 @@ class SiteController extends Controller
                 $this->render('/system/error', $error);
             }
         }
-    }
-    
-    public function actionTest()
-    {
-        exit;
-        
-        $filename = fbp('abc.png');
-        $data = file_get_contents($filename);
-        $im = new CDImage($data);
-        
-        $text = '挖段子';
-        $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
-        $color = array(200, 200, 200);
-        $im->text($text, $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
-        $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
-        $im->saveAsPng(app()->runtimePath . DS . 'aaaa');
-        $im->revert();
-        $im->text($text.'网', $font, 24, CDImage::MERGE_BOTTOM_LEFT, $color);
-        $im->text('http://www.waduanzi1.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
-        $im->saveAsPng(app()->runtimePath . DS . 'bbbb');
-        $im->output();
-        
-        
-        
-        exit;
-        echo uniqid() . '<br />';
-        echo md5('yaoyiyao phonebook') . '<br />';
-        
-        $thumbWidth = IMAGE_THUMBNAIL_WIDTH;
-        $thumbHeight = IMAGE_THUMBNAIL_HEIGHT;
-        
-        $url = 'http://www.fanjian.net/upload/201210231243255284.jpg';
-        $images = CDUploadFile::saveRemoteImages($url, $thumbWidth, $thumbHeight, true);
-        var_dump($images);
     }
 }
