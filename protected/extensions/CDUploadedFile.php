@@ -84,7 +84,7 @@ class CDUploadedFile extends CUploadedFile
                 }
             }
             
-            if ($watermark) {
+            if ($watermark && $im->width() >= IMAGE_WATER_SIZE) {
                 $text = '挖段子网';
                 $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
                 $color = array(200, 200, 200);
