@@ -178,7 +178,7 @@ class FeedController extends Controller
                 $item->appendChild(new DOMElement('dc:creator', $model->user_name));
     
             $summary = $dom->createElement('summary');
-            $summaryText = $model->getFilterSummary(100);
+            $summaryText = $model->getFilterSummary(300);
             $summary->appendChild($dom->createCDATASection($summaryText));
             $item->appendChild($summary);
     
