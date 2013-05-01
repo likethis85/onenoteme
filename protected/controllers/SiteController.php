@@ -65,10 +65,8 @@ class SiteController extends Controller
             $this->setKeywords(param('home_index_keywords'));
             $this->setDescription(param('home_index_description'));
             
-            if ($page > 1)
-                $mobileUrl = aurl('mobile/default/index');
-            else
-                $mobileUrl = aurl('mobile/default/index', array('page'=>$page));
+            $mobileUrl = ($page > 1) ? aurl('mobile/default/index', array('page'=>$page)) : $mobileUrl = aurl('mobile/default/index');;
+                
             cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
             
             $view = ($s == POST_LIST_STYLE_WATERFALL) ? 'fall_index' : 'grid_index';
