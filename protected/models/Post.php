@@ -506,7 +506,7 @@ class Post extends CActiveRecord
         $title = strip_tags(trim($this->title));
         if ($this->getIsImageType() && $this->uploadImagesCount > 1)
             $title .= '(' . $this->uploadImagesCount . 'P)';
-        return $title;
+        return trim($title);
     }
     
     /**
