@@ -10,5 +10,21 @@ class CDWaterMark
     const POS_BOTTOM_LEFT = 7;
     const POS_LEFT_MIDDLE = 8;
     
-    public $position;
+    public $position = self::POS_BOTTOM_LEFT;
+    public $image;
+    public $opacity = 1;
+    public $text;
+    public $textColor;
+    public $textSize;
+    public $textFont;
+    
+    public function __construct()
+    {
+        
+    }
+    
+    public function apply($im)
+    {
+        
+    }
 }
