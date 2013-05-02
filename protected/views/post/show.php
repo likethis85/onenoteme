@@ -93,9 +93,9 @@
 
 <!-- wumii start -->
 <script type="text/javascript">
-    var wumiiPermaLink = '<?php echo $post->url;?>';
-    var wumiiTitle = '<?php echo json_encode($post->getFilterTitle());?>';
-    var wumiiTags = '<?php echo json_encode($post->getTagText(','));?>';
+    var wumiiPermaLink = "<?php echo $post->url;?>";
+    var wumiiTitle = <?php echo json_encode($post->getFilterTitle());?>;
+    var wumiiTags = <?php echo json_encode($post->getTagText(','));?>;
     var wumiiSitePrefix = "http://www.waduanzi.com/";
     var wumiiParams = "&num=5&mode=2&pf=JAVASCRIPT";
 </script>
