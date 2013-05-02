@@ -37,9 +37,7 @@
         </div>
         <div class="line3px"></div>
         <!-- 个性化推荐 start -->
-        <div class="content-block wumii-box">
-            <script type="text/javascript" id="wumiiRelatedItems"></script>
-        </div>
+        <script type="text/javascript" id="wumiiRelatedItems"></script>
         <div class="content-block cnzz-box">
             <script  type="text/javascript" charset="utf-8"  src="http://tui.cnzz.net/cs.php?id=1000021164"></script>
         </div>
@@ -96,7 +94,7 @@
 <!-- wumii start -->
 <script type="text/javascript">
     var wumiiPermaLink = '<?php echo $post->url;?>';
-    var wumiiTitle = '<?php echo json_encode($post->filterContent);?>';
+    var wumiiTitle = '<?php echo json_encode($post->getFilterTitle());?>';
     var wumiiTags = '<?php echo json_encode($post->getTagText(','));?>';
     var wumiiSitePrefix = "http://www.waduanzi.com/";
     var wumiiParams = "&num=5&mode=2&pf=JAVASCRIPT";
