@@ -1,7 +1,7 @@
 <?php
 class TestController extends Controller
 {
-    public function init()
+    public function init1()
     {
         $this->redirect('/');
         exit(0);
@@ -78,5 +78,61 @@ EOD;
         
         var_dump($images);
         exit;
+    }
+    
+    public function actionWater()
+    {
+        $file = '/data/web/waduanzi.com/uploads/01.jpg';
+        $im = new CDImage();
+        $im1 = $im->loadFromFile($file);
+        
+        $font = '/data/web/waduanzi.com/protected/fonts/msyh.ttf';
+        $color = array(255, 255, 255);
+        $red = array(255, 0, 0);
+        $water = new CDWaterMark(CDWaterMark::TYPE_TEXT);
+        $water->color($color)
+            ->setText('陈东是个傻逼')
+            ->position(CDWaterMark::POS_BOTTOM_LEFT)
+            ->font($font)
+            ->fontsize(50)
+            ->apply($im1, 10)
+            ->color($red)
+            ->setText('傻逼22')
+            ->position(CDWaterMark::POS_TOP_RIGHT)
+            ->apply($im1, 10);
+        
+//         $im->output();
+        header('content-type:image/jpeg');
+        imagejpeg($im1);
+    }
+    
+    public function actionWater1()
+    {
+        $file = '/data/web/waduanzi.com/uploads/01.jpg';
+        $mark = '/data/web/waduanzi.com/uploads/rect.jpg';
+        $im = new CDImage();
+        $im->load($file);
+//         $im1 = $im->loadFromFile($file);
+        
+        $font = '/data/web/waduanzi.com/protected/fonts/msyh.ttf';
+        $color = array(255, 255, 255);
+        $red = array(255, 0, 0);
+        $water = new CDWaterMark(CDWaterMark::TYPE_IMAGE);
+        $water->position(CDWaterMark::POS_CENTER_MIDDLE)
+            ->setImage($mark)
+            ->apply($im, 10, 50)
+            ->position(array(50, 50))
+            ->apply($im, 10, 50)
+            ->type(CDWaterMark::TYPE_TEXT)
+            ->color($color)
+            ->setText('陈东是个傻逼')
+            ->position(CDWaterMark::POS_BOTTOM_LEFT)
+            ->font($font)
+            ->fontsize(50)
+            ->apply($im, 10, 50);
+
+        $im->output();
+//         header('content-type:image/jpeg');
+//         imagejpeg($im1);
     }
 }

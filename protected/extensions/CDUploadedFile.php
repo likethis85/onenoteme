@@ -84,7 +84,9 @@ class CDUploadedFile extends CUploadedFile
                 }
             }
             
-            if ($opts['watermark'] && $im->width() >= IMAGE_WATER_SIZE) {
+            // @todo 此处添加水印方法需要更新为使用CDWaterMark类库
+//             if ($opts['watermark'] && $im->width() >= IMAGE_WATER_SIZE) {
+            if ($im->width() >= IMAGE_WATER_SIZE) {
                 $text = '挖段子网';
                 $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
                 $color = array(200, 200, 200);

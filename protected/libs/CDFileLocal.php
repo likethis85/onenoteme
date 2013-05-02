@@ -12,6 +12,7 @@ class CDFileLocal extends CComponent
     public $timeout = 60;
     
     private $_referer;
+    private $_watermarks = array();
     
     public function __construct(CDBaseUploader $uploader = null, $pathPrefix = '')
     {
@@ -105,6 +106,9 @@ class CDFileLocal extends CComponent
             $extension = CDImage::getImageExtName($rawdata);
             $file = $this->uploader->autoFilename('.jpg', $this->pathPrefix, 'original', true);
             
+            if ($this->_watermarks)
+                $rawdata = $this->applyWaterMark($rawdata);
+            
             $result = $this->uploader->save($rawdata);
             if ($result === false)
                 return false;
@@ -126,9 +130,41 @@ class CDFileLocal extends CComponent
         
     }
     
-    public function setWaterMark($image, $position, $data, $color = array(255, 255, 255), $alpha = null, $font = '')
+    public function applyWaterMark($data)
     {
+        if ($this->_watermarks) {
+            $im = new CDImage();
+            $im->load($data);
+            foreach ($this->_watermarks as $water)
+                $water->apply($im, 10);
+            
+            $data = $im->outputRaw();
+            $im = null;
+        }
+        return $data;
+    }
+    
+    public function addWaterMark($type, $position, $data, $font = '', $size = 18, $color = array(255, 255, 255))
+    {
+        $water = new CDWaterMark($type);
+        if ($water->isImage()) {
+            $water->position(CDWaterMark::POS_BOTTOM_LEFT)
+                ->setImage($data);
+        }
+        elseif ($water->isText()) {
+            $water->position(CDWaterMark::POS_BOTTOM_LEFT)
+            ->setText($data)
+            ->color($color)
+            ->font($font)
+            ->fontsize($size);
+        }
         
+        $this->_watermarks[] = $water;
+    }
+    
+    public function clearWaterMark()
+    {
+        $this->_watermarks = array();
     }
     
 }

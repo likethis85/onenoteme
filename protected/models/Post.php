@@ -1086,6 +1086,9 @@ class Post extends CActiveRecord
         if (count($urls) > 0) {
             $fetch = new CDFileLocal(uploader(true), 'pics');
             $fetch->referer($referer)->setLocalDomains(CDBase::localDomains());
+            $font = yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
+            $color = array(200, 200, 200);
+            $fetch->addWaterMark(CDWaterMark::TYPE_TEXT, CDWaterMark::POS_BOTTOM_LEFT, '挖段子网', $font, 22, $color);
             $data = $fetch->fetchReplacedHtml($this->content);
         }
         else

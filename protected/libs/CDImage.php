@@ -1,11 +1,15 @@
 <?php
 class CDImage
 {
-    const MERGE_TOP_RIGHT = 1;
-    const MERGE_TOP_LEFT = 2;
-    const MERGE_BOTTOM_LEFT = 3;
-    const MERGE_BOTTOM_RIGHT = 4;
-    const MERGE_CENTER = 5;
+    const MERGE_TOP_LEFT = 1;
+    const MERGE_TOP_CENTER = 2;
+    const MERGE_TOP_RIGHT = 3;
+    const MERGE_RIGHT_MIDDLE = 4;
+    const MERGE_BOTTOM_RIGHT = 5;
+    const MERGE_BOTTOM_CENTER = 6;
+    const MERGE_BOTTOM_LEFT = 7;
+    const MERGE_LEFT_MIDDLE = 8;
+    const MERGE_CENTER_MIDDLE = 9;
     
     private $_version = '1.0';
     private $_author = 'Chris Chen(cdcchen@gmail.com)';
@@ -636,7 +640,7 @@ class CDImage
      * @param array|integer $color 颜色值
      * @return CDImage CDImage对象本身
      */
-    public function text($text, $font, $size, $position = self::MERGE_BOTTOM_RIGHT, $color = array(0, 0, 0), $opacity = 0, $padding = 5)
+    public function text($text, $font, $size, $position = self::MERGE_BOTTOM_RIGHT, $color = array(0, 0, 0), $opacity = 0, $padding = 5, $angle = 0)
     {
         if (is_int($position))
             $pos = $this->textPosition($text, $font, $size, $position, $padding);
@@ -647,41 +651,63 @@ class CDImage
         
         if (is_array($color))
             $color = imagecolorallocatealpha($this->_image, $color[0], $color[1], $color[2], $opacity);
-        imagettftext($this->_image, $size, 0, $pos[0], $pos[1], $color, $font, $text);
+        imagettftext($this->_image, $size, $angle, $pos[0], $pos[1], $color, $font, $text);
 
         return $this;
     }
     
     public function textPosition($text, $font, $size, $position, $padding = 5, $angle = 0)
     {
+        if (is_array($position))
+            return $position;
+        
         $points = imagettfbbox($size, $angle, $font, $text);
-        $width = $points[2] - $points[0];
-        $height = $points[1] - $points[7];
+        $imWidth = $this->width();
+        $imHeight = $this->height();
+        $textWidth = $points[2] - $points[0];
+        $textHeight = $points[1] - $points[7];
         switch ($position) {
             case self::MERGE_TOP_LEFT:
                 $x = $points[0] + $padding;
-                $y = $points[1] - $points[7] + $padding;
+                $y = $textHeight + $padding;
+                break;
+            case self::MERGE_TOP_CENTER:
+                $x = ($imWidth - $textWidth) / 2;
+                $y = $textHeight + $padding;
                 break;
             case self::MERGE_TOP_RIGHT:
-                $x = $this->width() - ($points[2] - $points[0]) - $padding;
-                $y = $points[1] - $points[7] + $padding;
+                $x = $imWidth - $textWidth - $padding;
+                $y = $textHeight + $padding;
                 break;
             case self::MERGE_BOTTOM_LEFT:
                 $x = $points[0] + $padding;
-                $y = $this->height() - $points[1] - $padding;
+                $y = $imHeight - $points[1] - $padding;
                 break;
-            case self::MERGE_CENTER:
-                $x = ($this->width() - $width) / 2;
-                $y = $this->height() / 2 + $height / 2;
+            case self::MERGE_BOTTOM_CENTER:
+                $x = ($imWidth - $textWidth) / 2;
+                $y = $imHeight - $points[1] - $padding;
                 break;
             case self::MERGE_BOTTOM_RIGHT:
+                $x = $imWidth - $textWidth - $padding;
+                $y = $imHeight - $points[1] - $padding;
+                break;
+            case self::MERGE_RIGHT_MIDDLE:
+                $x = $imWidth - $textWidth - $padding;
+                $y = $imHeight/2 + $textHeight/2;
+                break;
+            case self::MERGE_LEFT_MIDDLE:
+                $x = $points[0] + $padding;
+                $y = $imHeight/2 + $textHeight/2;
+                break;
+            case self::MERGE_CENTER_MIDDLE:
+                $x = ($imWidth - $textWidth) / 2;
+                $y = $imHeight/2 + $textHeight/2;
+                break;
             default:
-                $x = $this->width() - ($points[2] - $points[0]) - $padding;
-                $y = $this->height() - $points[1] - $padding;
                 break;
         }
-        
-        $position = array($x, $y);
+    
+        $position = array(intval($x), intval($y));
         
         return $position;
     }
@@ -719,36 +745,78 @@ class CDImage
         return $this;
     }
     
-    public static function mergePosition($position, $dst, $src)
+    public static function mergePosition($position, $dst, $src, $padding = 0)
     {
-        $dstW = imagesx($dst);
-        $dstH = imagesy($dst);
-        $srcW = imagesx($src);
-        $srcH = imagesy($src);
+        if (is_array($position))
+            return $position;
+        
+        if (is_resource($src)) {
+            $srcW = imagesx($src);
+            $srcH = imagesy($src);
+        }
+        elseif ($src instanceof CDImage) {
+            $srcW = $src->width();
+            $srcH = $src->height();
+        }
+        else
+            return false;
+        
+        if (is_resource($dst)) {
+            $dstW = imagesx($dst);
+            $dstH = imagesy($dst);
+        }
+        elseif ($dst instanceof CDImage) {
+            $dstW = $dst->width();
+            $dstH = $dst->height();
+        }
+        else
+            return false;
+        
         switch ($position) {
             case self::MERGE_TOP_LEFT:
-                $position = array(0, 0);
+                $x = $y = $padding;
+                break;
+            case self::MERGE_TOP_CENTER:
+                $x = ($dstW - $srcW) / 2;
+                $y =  $padding;
                 break;
             case self::MERGE_TOP_RIGHT:
-                $position = array($dstW-$srcW, 0);
+                $x = $dstW - $srcW - $padding;
+                $y = $padding;
                 break;
             case self::MERGE_BOTTOM_LEFT:
-                $position = array(0, $dstH-$srcH);
+                $x = $padding;
+                $y = $dstH - $srcH - $padding;
                 break;
-            case self::MERGE_CENTER:
+            case self::MERGE_BOTTOM_CENTER:
                 $x = ($dstW - $srcW) / 2;
-                $y = ($dstH - $srcH) / 2;
-                $position = array((int)$x, (int)$y);
+                $y = $dstH - $srcH - $padding;
                 break;
             case self::MERGE_BOTTOM_RIGHT:
+                $position = array(0, $dstH-$srcH);
+                $x = $dstW - $srcW - $padding;
+                $y = $dstH - $srcH - $padding;
+                break;
+            case self::MERGE_CENTER_MIDDLE:
+                $x = ($dstW - $srcW) / 2;
+                $y = ($dstH - $srcH) / 2;
+                break;
+            case self::MERGE_LEFT_MIDDLE:
+                $x = $padding;
+                $y = ($dstH - $srcH) / 2;
+                break;
+            case self::MERGE_RIGHT_MIDDLE:
+                $x = $dstW - $srcW - $padding;
+                $y = ($dstH - $srcH) / 2;
+                break;
             default:
-                $position = array($dstW-$srcW, $dstH-$srcH);
                 break;
         }
-        return $position;
+        
+        return array(intval($x), intval($y));
     }
 
-    public static function saveAlpha(&$im)
+    public static function saveAlpha($im)
     {
         imagealphablending($im, false);
         imagesavealpha($im, true);
