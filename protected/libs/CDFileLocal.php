@@ -126,6 +126,10 @@ class CDFileLocal extends CComponent
         
     }
     
+    public function setWaterMark($image, $position, $data, $color = array(255, 255, 255), $alpha = null, $font = '')
+    {
+        
+    }
     
 }
 

@@ -29,7 +29,7 @@ class CDUploadedFile extends CUploadedFile
         $this->_upyunEnabled = $enabled;
     }
     
-    public static function saveImage($upyunEnabled, $file, $pathPrefix = '', $referer = '', $opts = array(), $watermark = false)
+    public static function saveImage($upyunEnabled, $file, $pathPrefix = '', $referer = '', $opts = array())
     {
         $image = array();
         if (empty($file))
@@ -84,7 +84,7 @@ class CDUploadedFile extends CUploadedFile
                 }
             }
             
-            if ($watermark && $im->width() >= IMAGE_WATER_SIZE) {
+            if ($opts['watermark'] && $im->width() >= IMAGE_WATER_SIZE) {
                 $text = '挖段子网';
                 $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
                 $color = array(200, 200, 200);
