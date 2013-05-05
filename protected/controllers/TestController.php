@@ -247,6 +247,7 @@ EOD;
             $shape->getAlignment()->setHorizontal(PHPPowerPoint_Style_Alignment::HORIZONTAL_LEFT);
             $shape->getAlignment()->setVertical(PHPPowerPoint_Style_Alignment::VERTICAL_CENTER);
             $content = strip_tags($model->content);
+            $content = str_replace(array("\n\n", "\r\r", "\r\n\r\n"), "\r\n", $content);
             $textRun = $shape->createTextRun($content);
             $textRun->getFont()->setBold(true);
             $textRun->getFont()->setSize(24);
