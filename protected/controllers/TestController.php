@@ -207,7 +207,7 @@ EOD;
             $shape = $newSide->createDrawingShape();
             $shape->setName('挖段子网LOGO');
             $shape->setDescription('挖段子网LOGO');
-            $shape->setPath('/data/web/waduanzi.com/uploads/rect.jpg');
+            $shape->setPath(sbp('images/logo_132.jpg'));
             $shape->setHeight(48);
             $shape->setOffsetX(10);
             $shape->setOffsetY(10);
