@@ -196,7 +196,7 @@ EOD;
         $criteria->addColumnCondition(array('t.channel_id' => CHANNEL_DUANZI, 't.state' => POST_STATE_ENABLED));
         $start = mktime(0, 0, 0, 5, 5, 2013);
         $end = mktime(0, 0, 0, 5, 6, 2013);
-//         $criteria->addBetweenCondition('create_time', $start, $end);
+        $criteria->addBetweenCondition('create_time', $start, $end);
         $models = Post::model()->findAll($criteria);
         echo '<hr />' . count($models) . '<br />';
 //         exit;
