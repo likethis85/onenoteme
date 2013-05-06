@@ -22,6 +22,8 @@ class CDWaterMark
     private $_font;
     private $_fontsize;
     private $_angle = 0;
+    private $_borderWidth = 0;
+    private $_borderColor = array(0, 0, 0);
 
     public function __construct($type)
     {
@@ -44,21 +46,23 @@ class CDWaterMark
         return $this;
     }
     
-    public function applyText($image, $padding = 0, $alpha = 0, $borderWidth = 0, $borderColor = array(0, 0, 0))
+    public function applyText($image, $padding = 0, $alpha = 0)
     {
         if ($this->isText()) {
             $pos = $this->textPosition($image, $padding);
+            $borderWidth = (int)$this->_borderWidth;
+            if ($borderWidth > 0) {
+                $pos1 = array($pos[0] + $borderWidth * 2, $pos[1] + $borderWidth * 2);
+                $pos2 = array($pos[0] + $borderWidth * 2, $pos[1]);
+                $pos3 = array($pos[0], $pos[1] + $borderWidth * 2);
+                $pos = array($pos[0] + $borderWidth, $pos[1] + $borderWidth);
+            }
             if ($image instanceof CDImage) {
-                $borderWidth = (int)$borderWidth;
                 if ($borderWidth > 0) {
-                    $pos1 = array($pos[0] + $borderWidth * 2, $pos[1] + $borderWidth * 2);
-                    $pos2 = array($pos[0] + $borderWidth * 2, $pos[1]);
-                    $pos3 = array($pos[0], $pos[1] + $borderWidth * 2);
-                    $image->text($this->_data, $this->_font, $this->_fontsize, $pos, $borderColor, $alpha, $padding, $this->_angle);
-                    $image->text($this->_data, $this->_font, $this->_fontsize, $pos1, $borderColor, $alpha, $padding, $this->_angle);
-                    $image->text($this->_data, $this->_font, $this->_fontsize, $pos2, $borderColor, $alpha, $padding, $this->_angle);
-                    $image->text($this->_data, $this->_font, $this->_fontsize, $pos3, $borderColor, $alpha, $padding, $this->_angle);
-                    $pos = array($pos[0] + $borderWidth, $pos[1] + $borderWidth);
+                    $image->text($this->_data, $this->_font, $this->_fontsize, $pos, $this->_borderColor, $alpha, $padding, $this->_angle);
+                    $image->text($this->_data, $this->_font, $this->_fontsize, $pos1, $this->_borderColor, $alpha, $padding, $this->_angle);
+                    $image->text($this->_data, $this->_font, $this->_fontsize, $pos2, $this->_borderColor, $alpha, $padding, $this->_angle);
+                    $image->text($this->_data, $this->_font, $this->_fontsize, $pos3, $this->_borderColor, $alpha, $padding, $this->_angle);
                 }
                 $image->text($this->_data, $this->_font, $this->_fontsize, $pos, $this->_color, $alpha, $padding, $this->_angle);
                 
@@ -70,6 +74,13 @@ class CDWaterMark
                     $color = $this->_color;
                 else
                     throw new CDWaterMarkException('color value is invalid');
+                
+                if ($borderWidth > 0) {
+                    imagettftext($image, $this->_fontsize, $this->_angle, $pos[0], $pos[1], $this->_borderColor, $this->_font, $this->_data);
+                    imagettftext($image, $this->_fontsize, $this->_angle, $pos1[0], $pos1[1], $this->_borderColor, $this->_font, $this->_data);
+                    imagettftext($image, $this->_fontsize, $this->_angle, $pos2[0], $pos2[1], $this->_borderColor, $this->_font, $this->_data);
+                    imagettftext($image, $this->_fontsize, $this->_angle, $pos3[0], $pos3[1], $this->_borderColor, $this->_font, $this->_data);
+                }
                 imagettftext($image, $this->_fontsize, $this->_angle, $pos[0], $pos[1], $color, $this->_font, $this->_data);
             }
             return $this;
@@ -339,6 +350,26 @@ class CDWaterMark
         }
     }
     
+    public function borderWidth($width = null)
+    {
+        if ($width === null)
+            return $this->_borderWidth;
+        else {
+            $this->_borderWidth = (int)$width;
+            return $this;
+        }
+    }
+    
+    public function borderColor($color = null)
+    {
+        if ($color === null)
+            return $this->_borderColor;
+        else {
+            $this->_borderColor = (int)$color;
+            return $this;
+        }
+    }
+    
     
     public function isImage()
     {
@@ -359,6 +390,8 @@ class CDWaterMark
         $this->_font = null;
         $this->_fontsize = null;
         $this->_angle = 0;
+        $this->_borderWidth = 0;
+        $this->_borderColor = array(0, 0, 0);
         
         return $this;
     }
