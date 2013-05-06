@@ -679,7 +679,7 @@ class CDImage
 	    $y = (int)$pos[1];
 	    
 	    $ttf = false;
-	    if (is_file($fontfile)) {
+	    if (@is_file($fontfile)) {
 	        $ttf = true;
 	        $area = imagettfbbox($size, $angle, $fontfile, $text);
 	        $width = $area[2] - $area[0] + 2;
@@ -962,7 +962,7 @@ class CDImage
     
     public static function frameCount($data)
     {
-        if (is_file($data))
+        if (@is_file($data))
             $data = file_get_contents($data);
         
         $images = explode("\x00\x21\xF9\x04", $data);
