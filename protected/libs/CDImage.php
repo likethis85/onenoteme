@@ -660,7 +660,7 @@ class CDImage
         else
             throw new Exception('position error.');
         
-        $color = self::colorAllocateAlpha($this->_image, $outer, $alpha);
+        $color = self::colorAllocateAlpha($this->_image, $color, $alpha);
         imagettftext($this->_image, $size, $angle, $pos[0], $pos[1], $color, $font, $text);
 
         return $this;
