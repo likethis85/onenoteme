@@ -630,6 +630,17 @@ class CDImage
         return $this;
     }
     
+    function mosaic($x1, $y1, $x2, $y2, $deep)
+     {
+         for ($x=$x1; $x < $x2; $x+=$deep) {
+             for ($y=$y1; $y<$y2; $y+=$deep) {
+                 $color = imagecolorat($this->_image, $x + round($deep / 2), $y + round($deep / 2));
+                 imagefilledrectangle($this->_image, $x, $y, $x + $deep, $y + $deep, $color);
+             }
+         }
+         return $this;
+     }
+    
     /**
      * 在图像上添加文字
      * @param string $text 添加的文字
