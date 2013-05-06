@@ -690,7 +690,7 @@ class CDImage
 	        $height = 16;
 	    }
 	    
-	    $im_tmp = imagecreatetruecolor ($width, $height);
+	    $im_tmp = imagecreate($width, $height);
 	    $white = imagecolorallocatealpha($im_tmp, 255, 255, 255, $alpha);
 	    $black = imagecolorallocatealpha($im_tmp, 0, 0, 0, $alpha);
 	    
