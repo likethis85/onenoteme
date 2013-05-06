@@ -669,7 +669,7 @@ class CDImage
     function textouter ($text, $fontfile, $size, $position = self::MERGE_BOTTOM_RIGHT, $color = array(0, 0, 0), $outer = array(255, 255, 255), $alpha = 0, $padding = 5, $angle = 0)
 	{
 		if (is_int($position))
-            $pos = $this->textPosition($text, $font, $size, $position, $padding);
+            $pos = $this->textPosition($text, $fontfile, $size, $position, $padding);
         elseif (is_array($position))
             $pos = $position;
         else
