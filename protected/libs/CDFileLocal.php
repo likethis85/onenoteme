@@ -148,11 +148,11 @@ class CDFileLocal extends CComponent
     {
         $water = new CDWaterMark($type);
         if ($water->isImage()) {
-            $water->position(position)
+            $water->position($position)
                 ->setImage($data);
         }
         elseif ($water->isText()) {
-            $water->position(position)
+            $water->position($position)
             ->setText($data)
             ->color($color)
             ->font($font)
