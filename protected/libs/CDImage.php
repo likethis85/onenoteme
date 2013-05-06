@@ -651,7 +651,7 @@ class CDImage
      * @param array|integer $color 颜色值
      * @return CDImage CDImage对象本身
      */
-    public function text($text, $font, $size, $position = self::MERGE_BOTTOM_RIGHT, $color = array(0, 0, 0), $opacity = 0, $padding = 5, $angle = 0)
+    public function text($text, $font, $size, $position = self::MERGE_BOTTOM_RIGHT, $color = array(0, 0, 0), $alpha = 0, $padding = 5, $angle = 0)
     {
         if (is_int($position))
             $pos = $this->textPosition($text, $font, $size, $position, $padding);
@@ -660,12 +660,74 @@ class CDImage
         else
             throw new Exception('position error.');
         
-        if (is_array($color))
-            $color = imagecolorallocatealpha($this->_image, $color[0], $color[1], $color[2], $opacity);
+        $color = self::colorAllocateAlpha($this->_image, $outer, $alpha);
         imagettftext($this->_image, $size, $angle, $pos[0], $pos[1], $color, $font, $text);
 
         return $this;
     }
+    
+    function textouter ($text, $fontfile, $size, $position = self::MERGE_BOTTOM_RIGHT, $color = array(0, 0, 0), $outer = array(255, 255, 255), $alpha = 0, $padding = 5, $angle = 0)
+	{
+		if (is_int($position))
+            $pos = $this->textPosition($text, $font, $size, $position, $padding);
+        elseif (is_array($position))
+            $pos = $position;
+        else
+            throw new Exception('position error.');
+	    
+	    $x = (int)$pos[0];
+	    $y = (int)$pos[1];
+	    
+	    $ttf = false;
+	    if (is_file($fontfile)) {
+	        $ttf = true;
+	        $area = imagettfbbox($size, $angle, $fontfile, $text);
+	        $width = $area[2] - $area[0] + 2;
+	        $height = $area[1] - $area[5] + 2;
+	    }
+	    else {
+	        $width = strlen($text) * 10;
+	        $height = 16;
+	    }
+	    
+	    $im_tmp = imagecreatetruecolor ($width, $height);
+	    $white = imagecolorallocatealpha($im_tmp, 255, 255, 255, $alpha);
+	    $black = imagecolorallocatealpha($im_tmp, 0, 0, 0, $alpha);
+	    
+	    $color = self::colorAllocateAlpha($im, $color, $alpha);
+	    $outer = self::colorAllocateAlpha($im, $outer, $alpha);
+	    
+	    if ($ttf) {
+	        imagettftext($im_tmp, $size, 0, 0, $height - 2, $black, $fontfile, $text);
+	        imagettftext($im, $size, 0, $x, $y, $color, $fontfile, $text);
+	        $y = $y - $height + 2;
+	    }
+	    else {
+	        imagestring($im_tmp, $size, 0, 0, $text, $black);
+	        imagestring($im, $size, $x, $y, $text, $color);
+	    }
+	    
+	    for ($i = 0; $i < $width; $i ++) {
+	        for ($j = 0; $j < $height; $j ++) {
+	            $c = imagecolorat($im_tmp, $i, $j);
+	            if ($c !== $white) {
+	                imagecolorat($im_tmp, $i, $j - 1) != $white || imagesetpixel($im, $x + $i, $y + $j - 1, $outer);
+	                imagecolorat($im_tmp, $i, $j + 1) != $white || imagesetpixel($im, $x + $i, $y + $j + 1, $outer);
+	                imagecolorat($im_tmp, $i - 1, $j) != $white || imagesetpixel($im, $x + $i - 1, $y + $j, $outer);
+	                imagecolorat($im_tmp, $i + 1, $j) != $white || imagesetpixel($im, $x + $i + 1, $y + $j, $outer);
+	                
+	                // 取消注释，与Fireworks的发光效果相同
+	                imagecolorat($im_tmp, $i - 1, $j - 1) != $white || imagesetpixel($im, $x + $i - 1, $y + $j - 1, $outer);
+	                imagecolorat($im_tmp, $i + 1, $j - 1) != $white || imagesetpixel($im, $x + $i + 1, $y + $j - 1, $outer);
+	                imagecolorat($im_tmp, $i - 1, $j + 1) != $white || imagesetpixel($im, $x + $i - 1, $y + $j + 1, $outer);
+	                imagecolorat($im_tmp, $i + 1, $j + 1) != $white || imagesetpixel($im, $x + $i + 1, $y + $j + 1, $outer);
+	            }
+	        }
+	    }
+	    
+	    imagedestroy($im_tmp);
+	    return $this;
+	}
     
     public function textPosition($text, $font, $size, $position, $padding = 5, $angle = 0)
     {
@@ -908,6 +970,23 @@ class CDImage
         unset($images);
         return $count;
     }
+    
+    function static colorAllocateAlpha ($im, $color, $alpha = 0)
+	{
+		if (is_array($color))
+			return imagecolorallocatealpha($im, $color[0], $color[1], $color[2], $alpha);
+		elseif ($color{0} == '#') {
+			$color = substr($color, 1);
+			$bg_dec = hexdec($color);
+	    	return imagecolorallocatealpha($im,
+		    	($bg_dec & 0xFF0000) >> 16,
+		    	($bg_dec & 0x00FF00) >> 8,
+		    	($bg_dec & 0x0000FF),
+		    	$alpha);
+		}
+		else
+			throw new Exception('color value is invalid.');
+	}
     
     /**
      * 析构函数
