@@ -52,6 +52,7 @@ class CDWaterMark
             $pos = $this->textPosition($image, $padding);
             $borderWidth = (int)$this->_borderWidth;
             if ($borderWidth > 0) {
+                $pos0 = $pos;
                 $pos1 = array($pos[0] + $borderWidth * 2, $pos[1] + $borderWidth * 2);
                 $pos2 = array($pos[0] + $borderWidth * 2, $pos[1]);
                 $pos3 = array($pos[0], $pos[1] + $borderWidth * 2);
@@ -59,7 +60,7 @@ class CDWaterMark
             }
             if ($image instanceof CDImage) {
                 if ($borderWidth > 0) {
-                    $image->text($this->_data, $this->_font, $this->_fontsize, $pos, $this->_borderColor, $alpha, $padding, $this->_angle);
+                    $image->text($this->_data, $this->_font, $this->_fontsize, $pos0, $this->_borderColor, $alpha, $padding, $this->_angle);
                     $image->text($this->_data, $this->_font, $this->_fontsize, $pos1, $this->_borderColor, $alpha, $padding, $this->_angle);
                     $image->text($this->_data, $this->_font, $this->_fontsize, $pos2, $this->_borderColor, $alpha, $padding, $this->_angle);
                     $image->text($this->_data, $this->_font, $this->_fontsize, $pos3, $this->_borderColor, $alpha, $padding, $this->_angle);
@@ -76,7 +77,7 @@ class CDWaterMark
                     throw new CDWaterMarkException('color value is invalid');
                 
                 if ($borderWidth > 0) {
-                    imagettftext($image, $this->_fontsize, $this->_angle, $pos[0], $pos[1], $this->_borderColor, $this->_font, $this->_data);
+                    imagettftext($image, $this->_fontsize, $this->_angle, $pos0[0], $pos0[1], $this->_borderColor, $this->_font, $this->_data);
                     imagettftext($image, $this->_fontsize, $this->_angle, $pos1[0], $pos1[1], $this->_borderColor, $this->_font, $this->_data);
                     imagettftext($image, $this->_fontsize, $this->_angle, $pos2[0], $pos2[1], $this->_borderColor, $this->_font, $this->_data);
                     imagettftext($image, $this->_fontsize, $this->_angle, $pos3[0], $pos3[1], $this->_borderColor, $this->_font, $this->_data);
