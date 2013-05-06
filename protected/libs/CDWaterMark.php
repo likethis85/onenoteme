@@ -335,7 +335,7 @@ class CDWaterMark
         if ($color === null)
             return $this->_borderColor;
         elseif (is_array($color) || (is_string($color) && stripos($color, '#') === 0) || is_int($color)) {
-            $this->_borderColor = (int)$color;
+            $this->_borderColor = $color;
             return $this;
         }else
             throw new CDWaterMarkException('border color value is required array');

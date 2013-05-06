@@ -99,7 +99,7 @@ class CDUploadedFile extends CUploadedFile
                     ->setText('waduanzi.com')
                     ->position(CDWaterMark::POS_BOTTOM_RIGHT)
                     ->fontsize(12)
-                    ->applyText($im);
+                    ->applyText($im, 5);
                 
                 $im->setCurrentRawData();
             }

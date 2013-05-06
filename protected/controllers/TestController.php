@@ -153,6 +153,29 @@ EOD;
 //         $im->textouter('waduanzi.com', $fontfile1, 14, CDImage::MERGE_BOTTOM_RIGHT ,'#FFFFFF', '#333333', 10, 10, 0);
         $im->output();
     }
+    
+    public function actionText2()
+    {
+        $file = '/data/web/waduanzi.com/uploads/01.jpg';
+        $im = new CDImage();
+        $im->load($file);
+        $fontfile = '/data/web/waduanzi.com/protected/fonts/Hiragino_Sans_GB_W6.otf';;
+        
+        $water = new CDWaterMark(CDWaterMark::TYPE_TEXT);
+        $water->position(CDWaterMark::POS_BOTTOM_LEFT)
+            ->setText('挖段子网')
+            ->color('#F0F0F0')
+            ->font($fontfile)
+            ->fontsize(22)
+            ->borderColor('#333333')
+            ->applyText($im, 5)
+            ->setText('waduanzi.com')
+            ->position(CDWaterMark::POS_BOTTOM_RIGHT)
+            ->fontsize(12)
+            ->applyText($im, 5);
+        
+        $im->output();
+    }
 }
 
 
