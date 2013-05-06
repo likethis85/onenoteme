@@ -94,7 +94,7 @@ class CDUploadedFile extends CUploadedFile
                  
                 if ($im->width() > IMAGE_WATER_SIZE) {
                     //$im->text($text, $font, 22, CDImage::MERGE_BOTTOM_LEFT, $color);
-                    $im->textout('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color, $outer);
+                    $im->textouter('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color, $outer);
                     $im->setCurrentRawData();
                 }
             }
