@@ -136,7 +136,7 @@ class CDFileLocal extends CComponent
             $im = new CDImage();
             $im->load($data);
             foreach ($this->_watermarks as $water)
-                $water->apply($im, 10);
+                $water->apply($im, 5);
             
             $data = $im->outputRaw();
             $im = null;
