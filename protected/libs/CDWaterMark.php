@@ -44,14 +44,21 @@ class CDWaterMark
         return $this;
     }
     
-    public function applyText($image, $padding = 0, $alpha = 0)
+    public function applyText($image, $padding = 0, $alpha = 0, $borderWidth = 0, $borderColor = array(0, 0, 0))
     {
         if ($this->isText()) {
             $pos = $this->textPosition($image, $padding);
             if ($image instanceof CDImage) {
-                $c = array($this->_color[0]-50, $this->_color[1]-50, $this->_color[2]-50);
-                $pos1 = array($pos[0] + 2, $pos[1] + 2);
-//                 $image->text($this->_data, $this->_font, $this->_fontsize, $pos1, $c, 0, $padding, $this->_angle);
+                $borderWidth = (int)$borderWidth;
+                if ($borderWidth > 1) {
+                    $pos1 = array($pos[0] + $borderWidth * 2, $pos[1] + $borderWidth * 2);
+                    $pos2 = array($pos[0] + $borderWidth * 2, $pos[1]);
+                    $pos3 = array($pos[0], $pos[1] + $borderWidth * 2);
+                    $image->text($this->_data, $this->_font, $this->_fontsize, $pos, $borderColor, $alpha, $padding, $this->_angle);
+                    $image->text($this->_data, $this->_font, $this->_fontsize, $pos1, $borderColor, $alpha, $padding, $this->_angle);
+                    $image->text($this->_data, $this->_font, $this->_fontsize, $pos2, $borderColor, $alpha, $padding, $this->_angle);
+                    $image->text($this->_data, $this->_font, $this->_fontsize, $pos3, $borderColor, $alpha, $padding, $this->_angle);
+                }
                 $image->text($this->_data, $this->_font, $this->_fontsize, $pos, $this->_color, $alpha, $padding, $this->_angle);
                 
             }
