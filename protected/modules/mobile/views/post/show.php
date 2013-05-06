@@ -1,3 +1,8 @@
+<<script type="text/javascript">
+<!--
+_hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$post->channel_id;?>, 3]);
+//-->
+</script>
 <div class="panel panel10 post-detail">
 	<div class="content-block post-content">
 	    <div class="post-author">
