@@ -58,6 +58,7 @@ class CDWaterMark
                     $image->text($this->_data, $this->_font, $this->_fontsize, $pos1, $borderColor, $alpha, $padding, $this->_angle);
                     $image->text($this->_data, $this->_font, $this->_fontsize, $pos2, $borderColor, $alpha, $padding, $this->_angle);
                     $image->text($this->_data, $this->_font, $this->_fontsize, $pos3, $borderColor, $alpha, $padding, $this->_angle);
+                    $pos = array($pos[0] + $borderWidth, $pos[1] + $borderWidth);
                 }
                 $image->text($this->_data, $this->_font, $this->_fontsize, $pos, $this->_color, $alpha, $padding, $this->_angle);
                 
