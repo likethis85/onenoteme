@@ -62,7 +62,7 @@ class CDUpyunUploader extends CDBaseUploader  implements ICDUploader
         if (empty($this->_filename))
             throw new CDUploaderException('write filename is not set.');
         
-        if (is_file($file))
+        if (@is_file($file))
             $file = fopen($file, 'rb');
         
         $result =  $this->_client->writeFile($this->_filename, $file, $this->autoMkdir, $opts);
