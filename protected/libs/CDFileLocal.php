@@ -144,7 +144,7 @@ class CDFileLocal extends CComponent
         return $data;
     }
     
-    public function addWaterMark($type, $position, $data, $font = '', $size = 18, $color = array(255, 255, 255), $borderWidth = 0, $borderColor = array(0, 0, 0))
+    public function addWaterMark($type, $position, $data, $font = '', $size = 18, $color = array(255, 255, 255), $borderColor = array(0, 0, 0))
     {
         $water = new CDWaterMark($type);
         if ($water->isImage()) {
@@ -157,7 +157,6 @@ class CDFileLocal extends CComponent
             ->color($color)
             ->font($font)
             ->fontsize($size)
-            ->borderWidth($borderWidth)
             ->borderColor($borderColor);
         }
         

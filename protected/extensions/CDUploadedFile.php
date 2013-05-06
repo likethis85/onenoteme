@@ -87,16 +87,21 @@ class CDUploadedFile extends CUploadedFile
             // @todo 此处添加水印方法需要更新为使用CDWaterMark类库
 //             if ($opts['watermark'] && $im->width() >= IMAGE_WATER_SIZE) {
             if ($im->width() >= IMAGE_WATER_SIZE) {
-                $text = '挖段子网';
-                $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
-                $color = array(250, 250, 250);
-                $out = array(80, 80, 80);
-                 
-                if ($im->width() > IMAGE_WATER_SIZE) {
-                    $im->text($text, $font, 22, CDImage::MERGE_BOTTOM_LEFT, $color);
-                    $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
-                    $im->setCurrentRawData();
-                }
+                $fontfile = Yii::getPathOfAlias('application.fonts') . DS . 'Hiragino_Sans_GB_W6.otf';
+                $water = new CDWaterMark(CDWaterMark::TYPE_TEXT);
+                $water->position(CDWaterMark::POS_BOTTOM_LEFT)
+                    ->setText('挖段子网')
+                    ->color('#F0F0F0')
+                    ->font($fontfile)
+                    ->fontsize(22)
+                    ->borderColor('#333333')
+                    ->applyText($im, 5)
+                    ->setText('waduanzi.com')
+                    ->position(CDWaterMark::POS_BOTTOM_RIGHT)
+                    ->fontsize(12)
+                    ->applyText($im);
+                
+                $im->setCurrentRawData();
             }
         }
         

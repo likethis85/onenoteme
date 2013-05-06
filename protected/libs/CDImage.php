@@ -666,7 +666,7 @@ class CDImage
         return $this;
     }
     
-    function textouter ($text, $fontfile, $size, $position = self::MERGE_BOTTOM_RIGHT, $color = array(0, 0, 0), $outer = array(255, 255, 255), $alpha = 0, $padding = 5, $angle = 0)
+    function textborder ($text, $fontfile, $size, $position = self::MERGE_BOTTOM_RIGHT, $color = array(0, 0, 0), $outer = array(255, 255, 255), $alpha = 0, $padding = 5, $angle = 0)
 	{
 		if (is_int($position))
             $pos = $this->textPosition($text, $fontfile, $size, $position, $padding);
@@ -675,57 +675,9 @@ class CDImage
         else
             throw new Exception('position error.');
 	    
-	    $x = (int)$pos[0];
-	    $y = (int)$pos[1];
-	    
-	    $ttf = false;
-	    if (@is_file($fontfile)) {
-	        $ttf = true;
-	        $area = imagettfbbox($size, $angle, $fontfile, $text);
-	        $width = $area[2] - $area[0] + 2;
-	        $height = $area[1] - $area[5] + 2;
-	    }
-	    else {
-	        $width = strlen($text) * 10;
-	        $height = 16;
-	    }
-	    
-	    $im_tmp = imagecreate($width, $height);
-	    $white = imagecolorallocatealpha($im_tmp, 255, 255, 255, $alpha);
-	    $black = imagecolorallocatealpha($im_tmp, 0, 0, 0, $alpha);
-	    
-	    $color = self::colorAllocateAlpha($this->_image, $color, $alpha);
-	    $outer = self::colorAllocateAlpha($this->_image, $outer, $alpha);
-	    
-	    if ($ttf) {
-	        imagettftext($im_tmp, $size, 0, 0, $height - 2, $black, $fontfile, $text);
-	        imagettftext($this->_image, $size, 0, $x, $y, $color, $fontfile, $text);
-	        $y = $y - $height + 2;
-	    }
-	    else {
-	        imagestring($im_tmp, $size, 0, 0, $text, $black);
-	        imagestring($this->_image, $size, $x, $y, $text, $color);
-	    }
-	    
-	    for ($i = 0; $i < $width; $i ++) {
-	        for ($j = 0; $j < $height; $j ++) {
-	            $c = imagecolorat($im_tmp, $i, $j);
-	            if ($c !== $white) {
-	                imagecolorat($im_tmp, $i, $j - 1) != $white || imagesetpixel($this->_image, $x + $i, $y + $j - 1, $outer);
-	                imagecolorat($im_tmp, $i, $j + 1) != $white || imagesetpixel($this->_image, $x + $i, $y + $j + 1, $outer);
-	                imagecolorat($im_tmp, $i - 1, $j) != $white || imagesetpixel($this->_image, $x + $i - 1, $y + $j, $outer);
-	                imagecolorat($im_tmp, $i + 1, $j) != $white || imagesetpixel($this->_image, $x + $i + 1, $y + $j, $outer);
-	                
-	                // 取消注释，与Fireworks的发光效果相同
-	                imagecolorat($im_tmp, $i - 1, $j - 1) != $white || imagesetpixel($this->_image, $x + $i - 1, $y + $j - 1, $outer);
-	                imagecolorat($im_tmp, $i + 1, $j - 1) != $white || imagesetpixel($this->_image, $x + $i + 1, $y + $j - 1, $outer);
-	                imagecolorat($im_tmp, $i - 1, $j + 1) != $white || imagesetpixel($this->_image, $x + $i - 1, $y + $j + 1, $outer);
-	                imagecolorat($im_tmp, $i + 1, $j + 1) != $white || imagesetpixel($this->_image, $x + $i + 1, $y + $j + 1, $outer);
-	            }
-	        }
-	    }
-	    
-	    imagedestroy($im_tmp);
+        $x = (int)$pos[0];
+        $y = (int)$pos[1];
+	    self::textouter($this->_image, $text, $fontfile, $size, $x, $y, $color, $outer, $alpha, $padding, $angle);
 	    return $this;
 	}
     
@@ -734,7 +686,15 @@ class CDImage
         if (is_array($position))
             return $position;
         
-        $points = imagettfbbox($size, $angle, $font, $text);
+        if (@is_file($font))
+            $points = imagettfbbox($size, $angle, $font, $text);
+        else {
+            $width = strlen($text) * 9;
+            $height = 16;
+            // 引处需要注意imagestring跟imagettftext的起始坐标意义是不一样的
+            $points = array(0, $height, $width, 0, $width, -$size, 0, -$size);
+        }
+//         print_r($points);exit;
         $imWidth = $this->width();
         $imHeight = $this->height();
         $textWidth = $points[2] - $points[0];
@@ -780,9 +740,7 @@ class CDImage
                 break;
         }
     
-        $position = array(intval($x), intval($y));
-        
-        return $position;
+        return array(intval($x), intval($y));
     }
     
     /**
@@ -973,7 +931,9 @@ class CDImage
     
     public static function colorAllocateAlpha ($im, $color, $alpha = 0)
 	{
-		if (is_array($color))
+	    if (is_int($color))
+	        return $color;
+		elseif (is_array($color))
 			return imagecolorallocatealpha($im, $color[0], $color[1], $color[2], $alpha);
 		elseif ($color{0} == '#') {
 			$color = substr($color, 1);
@@ -986,6 +946,62 @@ class CDImage
 		}
 		else
 			throw new Exception('color value is invalid.');
+	}
+	
+	public static function textouter ($im, $text, $fontfile, $size, $x, $y, $color = array(0, 0, 0), $outer = array(255, 255, 255), $alpha = 0, $padding = 5, $angle = 0)
+	{
+	    $x = (int)$x;
+	    $y = (int)$y;
+	     
+	    $ttf = false;
+	    if (@is_file($fontfile)) {
+	        $ttf = true;
+	        $area = imagettfbbox($size, $angle, $fontfile, $text);
+	        $width = $area[2] - $area[0] + 2;
+	        $height = $area[1] - $area[5] + 2;
+	    }
+	    else {
+	        $width = strlen($text) * 10;
+	        $height = 16;
+	    }
+	     
+	    $im_tmp = imagecreate($width, $height);
+	    $white = imagecolorallocatealpha($im_tmp, 255, 255, 255, $alpha);
+	    $black = imagecolorallocatealpha($im_tmp, 0, 0, 0, $alpha);
+	     
+	    $color = self::colorAllocateAlpha($im, $color, $alpha);
+	    $outer = self::colorAllocateAlpha($im, $outer, $alpha);
+	     
+	    if ($ttf) {
+	        imagettftext($im_tmp, $size, 0, 0, $height - 2, $black, $fontfile, $text);
+	        imagettftext($im, $size, 0, $x, $y, $color, $fontfile, $text);
+	        $y = $y - $height + 2;
+	    }
+	    else {
+	        imagestring($im_tmp, $size, 0, 0, $text, $black);
+	        imagestring($im, $size, $x, $y, $text, $color);
+	    }
+	     
+	    for ($i = 0; $i < $width; $i ++) {
+	        for ($j = 0; $j < $height; $j ++) {
+	            $c = imagecolorat($im_tmp, $i, $j);
+	            if ($c !== $white) {
+	                imagecolorat($im_tmp, $i, $j - 1) != $white || imagesetpixel($im, $x + $i, $y + $j - 1, $outer);
+	                imagecolorat($im_tmp, $i, $j + 1) != $white || imagesetpixel($im, $x + $i, $y + $j + 1, $outer);
+	                imagecolorat($im_tmp, $i - 1, $j) != $white || imagesetpixel($im, $x + $i - 1, $y + $j, $outer);
+	                imagecolorat($im_tmp, $i + 1, $j) != $white || imagesetpixel($im, $x + $i + 1, $y + $j, $outer);
+	                 
+	                // 取消注释，与Fireworks的发光效果相同
+	                imagecolorat($im_tmp, $i - 1, $j - 1) != $white || imagesetpixel($im, $x + $i - 1, $y + $j - 1, $outer);
+	                imagecolorat($im_tmp, $i + 1, $j - 1) != $white || imagesetpixel($im, $x + $i + 1, $y + $j - 1, $outer);
+	                imagecolorat($im_tmp, $i - 1, $j + 1) != $white || imagesetpixel($im, $x + $i - 1, $y + $j + 1, $outer);
+	                imagecolorat($im_tmp, $i + 1, $j + 1) != $white || imagesetpixel($im, $x + $i + 1, $y + $j + 1, $outer);
+	            }
+	        }
+	    }
+	     
+	    imagedestroy($im_tmp);
+	    return $this;
 	}
     
     /**
