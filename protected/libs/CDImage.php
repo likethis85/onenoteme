@@ -971,7 +971,7 @@ class CDImage
         return $count;
     }
     
-    function static colorAllocateAlpha ($im, $color, $alpha = 0)
+    public static function colorAllocateAlpha ($im, $color, $alpha = 0)
 	{
 		if (is_array($color))
 			return imagecolorallocatealpha($im, $color[0], $color[1], $color[2], $alpha);
