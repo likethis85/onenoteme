@@ -50,7 +50,7 @@ class CDWaterMark
             $pos = $this->textPosition($image, $padding);
             if ($image instanceof CDImage) {
                 $borderWidth = (int)$borderWidth;
-                if ($borderWidth > 1) {
+                if ($borderWidth > 0) {
                     $pos1 = array($pos[0] + $borderWidth * 2, $pos[1] + $borderWidth * 2);
                     $pos2 = array($pos[0] + $borderWidth * 2, $pos[1]);
                     $pos3 = array($pos[0], $pos[1] + $borderWidth * 2);
