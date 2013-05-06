@@ -89,11 +89,12 @@ class CDUploadedFile extends CUploadedFile
             if ($im->width() >= IMAGE_WATER_SIZE) {
                 $text = '挖段子网';
                 $font = Yii::getPathOfAlias('application.fonts') . DS . 'msyh.ttf';
-                $color = array(200, 200, 200);
+                $color = array(250, 250, 250);
+                $out = array(80, 80, 80);
                  
                 if ($im->width() > IMAGE_WATER_SIZE) {
-                    $im->text($text, $font, 22, CDImage::MERGE_BOTTOM_LEFT, $color);
-                    $im->text('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color);
+                    //$im->text($text, $font, 22, CDImage::MERGE_BOTTOM_LEFT, $color);
+                    $im->textout('http://www.waduanzi.com', $font, 12, CDImage::MERGE_BOTTOM_RIGHT, $color, $outer);
                     $im->setCurrentRawData();
                 }
             }
