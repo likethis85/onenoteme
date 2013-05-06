@@ -694,33 +694,33 @@ class CDImage
 	    $white = imagecolorallocatealpha($im_tmp, 255, 255, 255, $alpha);
 	    $black = imagecolorallocatealpha($im_tmp, 0, 0, 0, $alpha);
 	    
-	    $color = self::colorAllocateAlpha($im, $color, $alpha);
-	    $outer = self::colorAllocateAlpha($im, $outer, $alpha);
+	    $color = self::colorAllocateAlpha($this->_image, $color, $alpha);
+	    $outer = self::colorAllocateAlpha($this->_image, $outer, $alpha);
 	    
 	    if ($ttf) {
 	        imagettftext($im_tmp, $size, 0, 0, $height - 2, $black, $fontfile, $text);
-	        imagettftext($im, $size, 0, $x, $y, $color, $fontfile, $text);
+	        imagettftext($this->_image, $size, 0, $x, $y, $color, $fontfile, $text);
 	        $y = $y - $height + 2;
 	    }
 	    else {
 	        imagestring($im_tmp, $size, 0, 0, $text, $black);
-	        imagestring($im, $size, $x, $y, $text, $color);
+	        imagestring($this->_image, $size, $x, $y, $text, $color);
 	    }
 	    
 	    for ($i = 0; $i < $width; $i ++) {
 	        for ($j = 0; $j < $height; $j ++) {
 	            $c = imagecolorat($im_tmp, $i, $j);
 	            if ($c !== $white) {
-	                imagecolorat($im_tmp, $i, $j - 1) != $white || imagesetpixel($im, $x + $i, $y + $j - 1, $outer);
-	                imagecolorat($im_tmp, $i, $j + 1) != $white || imagesetpixel($im, $x + $i, $y + $j + 1, $outer);
-	                imagecolorat($im_tmp, $i - 1, $j) != $white || imagesetpixel($im, $x + $i - 1, $y + $j, $outer);
-	                imagecolorat($im_tmp, $i + 1, $j) != $white || imagesetpixel($im, $x + $i + 1, $y + $j, $outer);
+	                imagecolorat($im_tmp, $i, $j - 1) != $white || imagesetpixel($this->_image, $x + $i, $y + $j - 1, $outer);
+	                imagecolorat($im_tmp, $i, $j + 1) != $white || imagesetpixel($this->_image, $x + $i, $y + $j + 1, $outer);
+	                imagecolorat($im_tmp, $i - 1, $j) != $white || imagesetpixel($this->_image, $x + $i - 1, $y + $j, $outer);
+	                imagecolorat($im_tmp, $i + 1, $j) != $white || imagesetpixel($this->_image, $x + $i + 1, $y + $j, $outer);
 	                
 	                // 取消注释，与Fireworks的发光效果相同
-	                imagecolorat($im_tmp, $i - 1, $j - 1) != $white || imagesetpixel($im, $x + $i - 1, $y + $j - 1, $outer);
-	                imagecolorat($im_tmp, $i + 1, $j - 1) != $white || imagesetpixel($im, $x + $i + 1, $y + $j - 1, $outer);
-	                imagecolorat($im_tmp, $i - 1, $j + 1) != $white || imagesetpixel($im, $x + $i - 1, $y + $j + 1, $outer);
-	                imagecolorat($im_tmp, $i + 1, $j + 1) != $white || imagesetpixel($im, $x + $i + 1, $y + $j + 1, $outer);
+	                imagecolorat($im_tmp, $i - 1, $j - 1) != $white || imagesetpixel($this->_image, $x + $i - 1, $y + $j - 1, $outer);
+	                imagecolorat($im_tmp, $i + 1, $j - 1) != $white || imagesetpixel($this->_image, $x + $i + 1, $y + $j - 1, $outer);
+	                imagecolorat($im_tmp, $i - 1, $j + 1) != $white || imagesetpixel($this->_image, $x + $i - 1, $y + $j + 1, $outer);
+	                imagecolorat($im_tmp, $i + 1, $j + 1) != $white || imagesetpixel($this->_image, $x + $i + 1, $y + $j + 1, $outer);
 	            }
 	        }
 	    }
