@@ -94,12 +94,12 @@ class CDUploadedFile extends CUploadedFile
                     ->color('#F0F0F0')
                     ->font($fontfile)
                     ->fontsize(22)
-                    ->borderColor('#555555')
+                    ->borderColor('#666666')
                     ->applyText($im, 5, 20)
                     ->setText('waduanzi.com')
                     ->position(CDWaterMark::POS_BOTTOM_RIGHT)
                     ->fontsize(12)
-                    ->applyText($im, 5, 50);
+                    ->applyText($im, 5, 20);
                 
                 $im->setCurrentRawData();
             }
