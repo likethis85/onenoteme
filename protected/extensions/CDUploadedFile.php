@@ -90,14 +90,10 @@ class CDUploadedFile extends CUploadedFile
                 $fontfile = Yii::getPathOfAlias('application.fonts') . DS . 'Hiragino_Sans_GB_W6.otf';
                 $water = new CDWaterMark(CDWaterMark::TYPE_TEXT);
                 $water->position(CDWaterMark::POS_BOTTOM_LEFT)
-                    ->setText('挖段子网')
                     ->color('#F0F0F0')
                     ->font($fontfile)
-                    ->fontsize(22)
                     ->borderColor('#333333')
-                    ->applyText($im, 5, 10)
                     ->setText('waduanzi.com')
-                    ->position(CDWaterMark::POS_BOTTOM_RIGHT)
                     ->fontsize(12)
                     ->applyText($im, 5, 10);
                 
