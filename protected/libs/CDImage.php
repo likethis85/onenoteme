@@ -11,15 +11,22 @@ class CDImage
     const MERGE_LEFT_MIDDLE = 8;
     const MERGE_CENTER_MIDDLE = 9;
     
-    private $_version = '1.0';
-    private $_author = 'Chris Chen(cdcchen@gmail.com)';
-    private $_site = 'http://www.24beta.com/';
+    const CANVAS_VERTICAL_TOP = 1;
+    const CANVAS_VERTICAL_MIDDLE = 2;
+    const CANVAS_VERTICAL_BOTTOM = 3;
+    const CANVAS_HORIZONTAL_LEFT = 4;
+    const CANVAS_HORIZONTAL_CENTER = 5;
+    const CANVAS_HORIZONTAL_RIGHT = 6;
     
-    private $_image;
-    private $_data;
-    private $_imageType = IMAGETYPE_JPEG;
+    protected $_version = '1.0';
+    protected $_author = 'Chris Chen(cdcchen@gmail.com)';
+    protected $_site = 'http://www.24beta.com/';
     
-    private static $_createFunctions = array(
+    protected  $_image;
+    protected $_data;
+    protected $_imageType = IMAGETYPE_JPEG;
+    
+    protected static $_createFunctions = array(
         IMAGETYPE_GIF => 'imagecreatefromgif',
         IMAGETYPE_JPEG => 'imagecreatefromjpeg',
         IMAGETYPE_PNG => 'imagecreatefrompng',
@@ -27,7 +34,7 @@ class CDImage
         IMAGETYPE_XBM => 'imagecreatefromxmb',
     );
     
-    private static $_outputFuntions = array(
+    protected static $_outputFuntions = array(
         IMAGETYPE_GIF => 'imagegif',
         IMAGETYPE_JPEG => 'imagejpeg',
         IMAGETYPE_PNG => 'imagepng',
@@ -60,6 +67,18 @@ class CDImage
             return false;
     }
     
+    public function newImage($width, $height, $bgcolor = '#FFFFFF', $alpha = 0, $type = IMAGETYPE_PNG)
+    {
+        $this->_image = imagecreatetruecolor($width, $height);
+        $this->_imageType = $type;
+        imagealphablending($this->_image, false);
+        imagesavealpha($this->_image, true);
+        $color = self::colorAllocateAlpha($this->_image, $bgcolor, $alpha);
+        imagefill($this->_image, 0, 0, $color);
+        
+        return $this;
+    }
+    
     /**
      * 从文件地址载入图像
      * @param string $data 图像路径或图像数据
@@ -70,9 +89,9 @@ class CDImage
         $this->_data = $data;
         $this->_image = self::loadImage($this->_data);
         if (@is_file($data))
-            $info = getimagesize($data);
+            $info = @getimagesize($data);
         elseif (PHP_VERSION > '5.4.0')
-            $info = getimagesizefromstring($data);
+            $info = @getimagesizefromstring($data);
         
         if ($info)
             $this->_imageType = $info[2];
@@ -90,7 +109,7 @@ class CDImage
         $info = getimagesize($file);
         $type = $info[2];
         if (!array_key_exists($type, self::$_createFunctions))
-            throw new Exception('不支持' . $type . '图像格式', 0);
+            throw new CDImageException('不支持' . $type . '图像格式', 0);
         $func = self::$_createFunctions[$type];
         $image = $func($file);
         
@@ -200,7 +219,7 @@ class CDImage
     public function convertType($type)
     {
         if (!array_key_exists($type, self::$_createFunctions))
-            throw new Exception('不支持此类型', 0);
+            throw new CDImageException('不支持此类型', 0);
         $this->_imageType = $type;
     }
     
@@ -658,7 +677,7 @@ class CDImage
         elseif (is_array($position))
             $pos = $position;
         else
-            throw new Exception('position error.');
+            throw new CDImageException('position error.');
         
         $color = self::colorAllocateAlpha($this->_image, $color, $alpha);
         imagettftext($this->_image, $size, $angle, $pos[0], $pos[1], $color, $font, $text);
@@ -673,7 +692,7 @@ class CDImage
         elseif (is_array($position))
             $pos = $position;
         else
-            throw new Exception('position error.');
+            throw new CDImageException('position error.');
 	    
         $x = (int)$pos[0];
         $y = (int)$pos[1];
@@ -751,16 +770,22 @@ class CDImage
      */
     public function merge($data, $position = self::MERGE_BOTTOM_RIGHT, $opacity = 100)
     {
-        $src = self::loadImage($data);
+        if (is_resource($data))
+            $src = $data;
+        elseif ($data instanceof CDImage)
+            $src = $data->getImageInstance();
+        else
+              $src = self::loadImage($data);
+        
         if (!is_resource($src))
-            throw new Exception('图像数据错误', 0);
+            throw new CDImageException('图像数据错误', 0);
 
         if (is_int($position))
             $pos = self::mergePosition($position, $this->_image, $src);
         elseif (is_array($position))
             $pos = $position;
         else
-            throw new Exception('position error.');
+            throw new CDImageException('position error.');
         
         $w = imagesx($src);
         $h = imagesy($src);
@@ -774,6 +799,11 @@ class CDImage
         imagecopymerge($this->_image, $image, $pos[0], $pos[1], 0, 0, $w, $h, $opacity);
         
         return $this;
+    }
+    
+    public function getImageInstance()
+    {
+        return $this->_image;
     }
     
     public static function mergePosition($position, $dst, $src, $padding = 0)
@@ -945,7 +975,7 @@ class CDImage
 		    	$alpha);
 		}
 		else
-			throw new Exception('color value is invalid.');
+			throw new CDImageException('color value is invalid.');
 	}
 	
 	public static function textouter ($im, $text, $fontfile, $size, $x, $y, $color = array(0, 0, 0), $outer = array(255, 255, 255), $alpha = 0, $padding = 5, $angle = 0)
@@ -1003,6 +1033,63 @@ class CDImage
 	    imagedestroy($im_tmp);
 	    return $this;
 	}
+	
+	public function resizeCanvas($append, $width = 0, $height = 0, $horizontal = self::CANVAS_HORIZONTAL_LEFT, $vertical = self::CANVAS_VERTICAL_TOP, $color = '#FFFFFF', $alpha = 0)
+	{
+	    $append = (bool)$append;
+	    $width = (int)$width;
+	    $height = (int)$height;
+	    if (($width === 0 && $height === 0) || !$append && ($width === 0 || $height === 0))
+	        throw new CDImageException('width or height value is invalid.');
+	
+	    $imWidth = $this->width();
+	    $imHeight = $this->height();
+	    if (!$append && ($width < $imWidth || $height < $imHeight))
+	        throw new CDImageException('please call crop method first');
+	
+	    if ($append) {
+	        $width += $imWidth;
+	        $height += $imHeight;
+	    }
+	
+	    switch ($horizontal)
+	    {
+	        case self::CANVAS_HORIZONTAL_CENTER:
+	            $dstX = ($width - $imWidth) / 2;
+	            break;
+	        case self::CANVAS_HORIZONTAL_RIGHT:
+	            $dstX = $width - $imWidth;
+	            break;
+	        case self::CANVAS_HORIZONTAL_LEFT:
+	        default:
+	            $dstX = 0;
+	            break;
+	    }
+	
+	    switch ($vertical)
+	    {
+	        case self::CANVAS_VERTICAL_MIDDLE:
+	            $dstY = ($height - $imHeight) / 2;
+	            break;
+	        case self::CANVAS_VERTICAL_BOTTOM:
+	            $dstY = $height - $imHeight;
+	            break;
+	        case self::CANVAS_VERTICAL_TOP:
+	        default:
+	            $dstY = 0;
+	            break;
+	    }
+	
+	    $im = imagecreatetruecolor($width, $height);
+	    $white = imagecolorallocate($im, 255, 255, 255);
+	    imagefill($im, 0, 0, $white);
+	    imagealphablending($im, true);
+	    $color = self::colorAllocateAlpha($im, $color, $alpha);
+	    imagefill($im, 0, 0, $color);
+	    imagecopymerge($im, $this->_image, $dstX, $dstY, 0, 0, $imWidth, $imHeight, 100);
+	    $this->_image = $im;
+	    unset($im);
+	}
     
     /**
      * 析构函数
@@ -1013,6 +1100,8 @@ class CDImage
     }
 }
 
-
+class CDImageException extends Exception
+{
+}
 
 
