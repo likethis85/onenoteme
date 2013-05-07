@@ -23,7 +23,7 @@ class ExportController extends AdminController
                 if (count($models) > 0) {
                     $content = "\n挖段子网 - http://www.waduanzi.com\n\n\n";
                     foreach ($models as $index => $model) {
-                        $content .= ($index + 1) . ' ' . $model->getFilterContent . "\n\n";
+                        $content .= ($index + 1) . ' ' . $model->getFilterContent() . "\n\n";
                     }
                     $content .= "\n\n\n挖段子网 - http://www.waduanzi.com\n\n";
                     
