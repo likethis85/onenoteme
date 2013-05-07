@@ -32,6 +32,7 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
                         <li class="nav-header">操作</li>
                         <li><?php echo l('审核文章', url('admin/post/verify'));?></li>
                         <li><?php echo l('搜索文章', url('admin/post/search'));?></li>
+                        <li><?php echo l('导出文章', url('admin/export/joke'));?></li>
                         <li class="divider"></li>
                         <li class="nav-header">列表</li>
                         <li><?php echo l('最新文章', url('admin/post/latest'));?></li>
