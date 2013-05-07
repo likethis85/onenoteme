@@ -87,7 +87,7 @@ class CDUploadedFile extends CUploadedFile
             // @todo 此处添加水印方法需要更新为使用CDWaterMark类库
 //             if ($opts['watermark'] && $im->width() >= IMAGE_WATER_SIZE) {
             if ($im->width() >= IMAGE_WATER_SIZE) {
-                $fontfile = Yii::getPathOfAlias('application.fonts') . DS . 'Hiragino_Sans_GB_W6.otf';
+                $fontfile = Yii::getPathOfAlias('application.fonts') . DS . 'arial.ttf';
                 $water = new CDWaterMark(CDWaterMark::TYPE_TEXT);
                 $water->position(CDWaterMark::POS_BOTTOM_LEFT)
                     ->color('#F0F0F0')
