@@ -1,6 +1,6 @@
 <?php echo CHtml::form(url('admin/post/search'), 'get', array('class'=>'form-horizontal'));?>
 <fieldset>
-    <legend><?php echo t('post_search', 'admin')?></legend>
+    <legend>搜索段子</legend>
     <div class="control-group">
         <?php echo CHtml::activeLabel($form, 'postid', array('class'=>'control-label'));?>
         <div class="controls">
@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="form-actions">
-        <input type="submit" value="<?php echo t('search', 'admin');?>" class="btn btn-primary" />
+        <input type="submit" value="搜索" class="btn btn-primary" />
     </div>
 </fieldset>
 <?php echo CHtml::endForm();?>
