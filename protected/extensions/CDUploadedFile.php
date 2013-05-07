@@ -86,7 +86,7 @@ class CDUploadedFile extends CUploadedFile
             
             $imWidth = $im->width();
             if ($imWidth >= IMAGE_WATER_SITENAME_SIZE) {
-                $cnfont = Yii::getPathOfAlias('application.fonts') . DS . 'Hiragino_Sans_GB_W6.otf.otf';
+                $cnfont = Yii::getPathOfAlias('application.fonts') . DS . 'Hiragino_Sans_GB_W6.otf';
                 $water = new CDWaterMark(CDWaterMark::TYPE_TEXT);
                 $water->position(CDWaterMark::POS_BOTTOM_LEFT)
                     ->color('#F0F0F0')
