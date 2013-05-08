@@ -372,8 +372,8 @@ class Upload extends CActiveRecord
 	{
 	    try {
             $uploader = uploader($this->getIsImageFile());
-            if ($file->url) {
-                $uploader->delete($file->url);
+            if ($this->url) {
+                $uploader->delete($this->url);
             }
         }
         catch (Exception $e) {}
