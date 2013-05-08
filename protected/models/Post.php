@@ -1086,9 +1086,10 @@ class Post extends CActiveRecord
         if (count($urls) > 0) {
             $fetch = new CDFileLocal(uploader(true), 'pics');
             $fetch->referer($referer)->setLocalDomains(CDBase::localDomains());
-            $font = yii::getPathOfAlias('application.fonts') . DS . 'Hiragino_Sans_GB_W6.otf';
-            $fetch->addWaterMark(CDWaterMark::TYPE_TEXT, CDWaterMark::POS_BOTTOM_LEFT, '挖段子网', $font, 22, '#F0F0F0', '#333333');
-            $fetch->addWaterMark(CDWaterMark::TYPE_TEXT, CDWaterMark::POS_BOTTOM_RIGHT, 'waduanzi.com', $font, 12, '#F0F0F0', '#333333');
+            $cnfont = yii::getPathOfAlias('application.fonts') . DS . 'Hiragino_Sans_GB_W6.otf';
+            $enfont = yii::getPathOfAlias('application.fonts') . DS . 'HelveticaNeueLTPro-Hv.otf';
+            $fetch->addWaterMark(CDWaterMark::TYPE_TEXT, CDWaterMark::POS_BOTTOM_LEFT, '挖段子网', $cnfont, 22, '#F0F0F0', '#333333');
+            $fetch->addWaterMark(CDWaterMark::TYPE_TEXT, CDWaterMark::POS_BOTTOM_RIGHT, 'waduanzi.com', $enfont, 12, '#F0F0F0', '#333333');
             $data = $fetch->fetchReplacedHtml($this->content);
         }
         else
