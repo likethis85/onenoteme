@@ -40,6 +40,7 @@
  * @property string $stateLabel
  * @property string $url
  * @property string $filterTitle
+ * @property string $plainSummary
  * @property string $filterSummary
  * @property string $filterContent
  * @property string $contentImages
@@ -295,14 +296,15 @@ class Post extends CActiveRecord
 	}
 	
 	/**
-	 * 返回过滤之后的概述
+	 * 返回纯文字概述
 	 * @param integer $len 内容截取长度
 	 * @return string
 	 */
-	public function getSummary($len = 300)
+	public function getPlainSummary($len = 300)
 	{
-	    $content = strip_tags($this->content, param('summary_html_tags'));
-	    return mb_strimwidth($content, 0, $len, '......', app()->charset);
+	    $content = trim(strip_tags($this->content));
+	    $content = mb_strimwidth($content, 0, $len, '......', app()->charset);
+	    return trim($content);
 	}
 	
 	/**
