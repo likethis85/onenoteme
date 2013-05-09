@@ -167,8 +167,8 @@ class SiteController extends Controller
 
     public function actionBdmap()
     {
-        $pageSize = 30;
-        $duration = 3600 * 24;
+        $pageSize = 100;
+        $duration = 3600;
         $count = app()->getDb()->cache($duration)->createCommand()
             ->select('count(*)')
             ->from(TABLE_POST)
@@ -189,6 +189,7 @@ class SiteController extends Controller
         
         $posts = $cmd->queryAll();
         
+        $this->pageTitle = '百度地图 - ' . app()->name;
         $this->render('baidumap', array(
             'posts' => $posts,
             'pages' => $pages,
