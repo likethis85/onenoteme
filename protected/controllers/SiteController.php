@@ -168,7 +168,7 @@ class SiteController extends Controller
     public function actionBdmap()
     {
         $pageSize = 100;
-        $duration = 3600;
+        $duration = 600;
         $count = app()->getDb()->cache($duration)->createCommand()
             ->select('count(*)')
             ->from(TABLE_POST)
