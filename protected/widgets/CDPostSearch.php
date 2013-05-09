@@ -8,6 +8,7 @@ class CDPostSearch extends CWidget
     public $title;
     public $duration = 0;
     public $models = array();
+    public $linkTarget = '_blank';
     
     public function init()
     {
