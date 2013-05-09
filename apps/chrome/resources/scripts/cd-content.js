@@ -96,7 +96,7 @@ var postPages = {
 		+ 		'</div>'
 		+ 		'<label for="onwaterpos">水印位置(Top - Bottom)</label>'
 		+ 		'<div>'
-		+ 			'<select name="onwaterpos" id="onwaterpos"><option value="0">不加水印</option><option value="7" selected="selected">左下角</option><option value="5">右下角</option><option value="1">左上角</option><option value="2">右上角</option></select>'
+		+ 			'<select name="onwaterpos" id="onwaterpos"><option value="0">不加水印</option><option value="7" selected="selected">左下角</option><option value="5">右下角</option><option value="1">左上角</option><option value="3">右上角</option></select>'
 		+ 		'</div>'
         +   '</div>'
         +   '<div class="actions">'
