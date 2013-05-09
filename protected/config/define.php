@@ -93,7 +93,7 @@ define('UPYUN_AVATAR_CUSTOM_SMALL', 'savatar');
 define('UPYUN_AVATAR_CUSTOM_MINI', 'mavatar');
 
 define('IMAGE_MAX_HEIGHT_FOLDING', 700);
-define('IMAGE_WATER_URL_SIZE', 250);
+define('IMAGE_WATER_URL_SIZE', 200);
 define('IMAGE_WATER_SITENAME_SIZE', 350);
 
 define('GENDER_UNKOWN', 0);
