@@ -1,3 +1,8 @@
+<script type="text/javascript">
+<!--
+_hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo $this->channel;?>, 3]);
+//-->
+</script>
 <div class="fleft cd-container">
     <?php $this->renderPartial($list_view, array('models'=>$models, 'pages'=>$pages, 'channel'=>$this->channel));?>
 </div>
