@@ -1,4 +1,4 @@
-<<script type="text/javascript">
+<script type="text/javascript">
 <!--
 _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$post->channel_id;?>, 3]);
 //-->
