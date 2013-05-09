@@ -52,6 +52,7 @@ var postPages = {
 		+ 		'</div>'
 		+ 		'<input type="hidden" name="croptop" id="croptop" value="0" />&nbsp;-&nbsp;'
 		+ 		'<input type="hidden" name="cropbottom" id="cropbottom" value="0" />'
+		+ 		'<input type="hidden" name="onwaterpos" id="onwaterpos" value="0" />'
 		+ 	'</div>'
 		+	'<div class="actions">'
 		+		'<input type="button" class="btn primary" id="cdext-post" value="发布" />&nbsp;<input type="button" class="btn" id="cdext-close" value="关闭" />'
