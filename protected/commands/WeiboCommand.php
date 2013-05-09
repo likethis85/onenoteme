@@ -472,7 +472,7 @@ class WeiboCommand extends CConsoleCommand
     
         $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
-        $tail = '...' . $sinatShortUrl . ' @cdcchen';
+        $tail = '...' . $sinatShortUrl . ' @waduanzi';
         if ($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_LENGTU)
             $tail = '#搞笑#' . $tail;
         elseif ($model->channel_id == CHANNEL_GIRL)
@@ -516,7 +516,7 @@ class WeiboCommand extends CConsoleCommand
     
         $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
-        $tail = '...' . $sinatShortUrl . ' @cdcchen';
+        $tail = '...' . $sinatShortUrl . ' @waduanzi';
         if ($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_LENGTU)
             $tail = '#搞笑#' . $tail;
         elseif ($model->channel_id == CHANNEL_GIRL)
