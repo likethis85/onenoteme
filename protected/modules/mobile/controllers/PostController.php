@@ -38,7 +38,7 @@ class PostController extends MobileController
         if ($post->tags)
             $pageKeyword = $post->getTagText(',') . ',' . $pageKeyword;
         $this->setKeywords($pageKeyword);
-        $this->setDescription($post->getfilterSummary());
+        $this->setDescription($post->getPlainSummary());
         
         $this->channel = (int)$post->channel_id;
         cs()->registerMetaTag('all', 'robots');
