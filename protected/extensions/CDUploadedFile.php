@@ -63,6 +63,7 @@ class CDUploadedFile extends CUploadedFile
                 $defaultOptions = array(
                     'padding_top' => 0,
                     'padding_bottom' => 0,
+                    'water_position' => 0,
                 );
                 if (is_array($opts)) {
                     foreach ($opts as $key => $value) {
@@ -73,6 +74,7 @@ class CDUploadedFile extends CUploadedFile
                 else
                     throw new CDException('$opts must be an array.');
                 
+                // 裁剪图片
                 $top = (int)$opts['padding_top'];
                 $bottom = (int)$opts['padding_bottom'];
                 if ((array_key_exists('padding_top', $opts) && $top > 0) ||
@@ -82,34 +84,38 @@ class CDUploadedFile extends CUploadedFile
                     $im->cropByFrame($width, $height, 0, $top);
                     $im->setCurrentRawData();
                 }
-            }
-            
-            $imWidth = $im->width();
-            if ($imWidth > IMAGE_WATER_SITENAME_SIZE) {
-                $cnfont = Yii::getPathOfAlias('application.fonts') . DS . 'Hiragino_Sans_GB_W6.otf';
-                $water = new CDWaterMark(CDWaterMark::TYPE_TEXT);
-                $water->position(CDWaterMark::POS_BOTTOM_LEFT)
-                    ->color('#F0F0F0')
-                    ->borderColor('#333333')
-                    ->font($cnfont)
-                    ->fontsize(22)
-                    ->setText('挖段子网')
-                    ->applyText($im, 5, 10);
                 
-                $im->setCurrentRawData();
-            }
-            elseif ($imWidth > IMAGE_WATER_URL_SIZE) {
-                $enfont = Yii::getPathOfAlias('application.fonts') . DS . 'HelveticaNeueLTPro-Hv.otf';
-                $water = new CDWaterMark(CDWaterMark::TYPE_TEXT);
-                $water->position(CDWaterMark::POS_BOTTOM_RIGHT)
-                    ->color('#F0F0F0')
-                    ->borderColor('#333333')
-                    ->font($enfont)
-                    ->fontsize(12)
-                    ->setText('waduanzi.com')
-                    ->applyText($im, 5, 10);
-                
-                $im->setCurrentRawData();
+                // 添加水印
+                $waterPosition = (int)$opts['water_position'];
+                if (array_key_exists('water_position', $opts) && $waterPosition > 0) {
+                    $imWidth = $im->width();
+                    if ($imWidth > IMAGE_WATER_SITENAME_SIZE) {
+                        $cnfont = Yii::getPathOfAlias('application.fonts') . DS . 'Hiragino_Sans_GB_W6.otf';
+                        $water = new CDWaterMark(CDWaterMark::TYPE_TEXT);
+                        $water->position($waterPosition)
+                            ->color('#F0F0F0')
+                            ->borderColor('#333333')
+                            ->font($cnfont)
+                            ->fontsize(22)
+                            ->setText('挖段子网')
+                            ->applyText($im, 5, 10);
+                    
+                        $im->setCurrentRawData();
+                    }
+                    elseif ($imWidth > IMAGE_WATER_URL_SIZE) {
+                        $enfont = Yii::getPathOfAlias('application.fonts') . DS . 'HelveticaNeueLTPro-Hv.otf';
+                        $water = new CDWaterMark(CDWaterMark::TYPE_TEXT);
+                        $water->position($waterPosition)
+                        ->color('#F0F0F0')
+                        ->borderColor('#333333')
+                        ->font($enfont)
+                        ->fontsize(12)
+                        ->setText('waduanzi.com')
+                        ->applyText($im, 5, 10);
+                    
+                        $im->setCurrentRawData();
+                    }
+                }
             }
         }
         

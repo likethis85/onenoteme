@@ -281,7 +281,7 @@ class Api_Post extends ApiBase
     	self::requirePost();
 //        	$this->requireLogin();
     	$this->requiredParams(array('title', 'content', 'token', 'channel_id'));
-    	$params = $this->filterParams(array('title', 'content', 'tags', 'channel_id', 'category_id', 'pic', 'token', 'onreferer', 'padding_top', 'padding_bottom'));
+    	$params = $this->filterParams(array('title', 'content', 'tags', 'channel_id', 'category_id', 'pic', 'token', 'onreferer', 'padding_top', 'padding_bottom', 'water_position'));
     	
     	$post = new Post();
     	$post->channel_id = (int)$params['channel_id'];
@@ -303,12 +303,14 @@ class Api_Post extends ApiBase
     	        $referer = $params['pic'];
     	    
     	    $opts = array();
+    	    $opts['water_position'] = (int)$params['water_position'];
     	    $top = (int)$params['padding_top'];
     	    $bottom = (int)$params['padding_bottom'];
     	    if ($top > 0 || $bottom > 0) {
     	        $opts['padding_top'] = $top;
     	        $opts['padding_bottom'] = $bottom;
     	    }
+    	    
     		$result = $post->fetchRemoteImagesBeforeSave($referer, $opts) && $post->save();
     		return (int)$result;
     	}

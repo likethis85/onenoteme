@@ -89,6 +89,7 @@ var Api_Waduanzi = {
 		var pageurl = data[6].value;
 		var croptop = data[7].value;
 		var cropbottom = data[8].value;
+		var waterpos = data[9].value;
 		var params = {
 			'method': Api_Waduanzi.config.apiCreatePost,
 			'title': title,
@@ -100,6 +101,7 @@ var Api_Waduanzi = {
 			'pageurl': pageurl,
 			'padding_top': croptop,
 			'padding_bottom': cropbottom,
+			'water_position': waterpos,
 			'debug': Api_Waduanzi.debug
 		};
         var jqXhr = Api_Waduanzi.sendRequest('POST', params, true);
