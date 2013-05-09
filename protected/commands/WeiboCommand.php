@@ -326,10 +326,12 @@ class WeiboCommand extends CConsoleCommand
         $criteria->order = 't.id desc';
         $models[] = Post::model()->find($criteria);
     
+        /*
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('channel_id'=>CHANNEL_GIRL, 'state'=>POST_STATE_ENABLED, 'weibo_id' => ''));
         $criteria->order = 't.id desc';
         $models[] = Post::model()->find($criteria);
+        */
     
         return $models;
         
