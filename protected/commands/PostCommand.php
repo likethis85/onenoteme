@@ -17,7 +17,6 @@ class PostCommand extends CConsoleCommand
         $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_LENGTU);
         $lengtuIDs = $cmd->where($conditions, $params)->queryColumn();
         
-        /*
         $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_GIRL);
         $fuliIDs = $cmd->where($conditions, $params)->queryColumn();
 
@@ -26,9 +25,8 @@ class PostCommand extends CConsoleCommand
 
         $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_VIDEO);
         $videoIDs = $cmd->where($conditions, $params)->queryColumn();
-        */
-        //$ids = array_merge($duanziIDs, $lengtuIDs, $fuliIDs, $ghostIDs, $videoIDs);
-        $ids = array_merge($duanziIDs, $lengtuIDs);
+        
+        $ids = array_merge($duanziIDs, $lengtuIDs, $fuliIDs, $ghostIDs, $videoIDs);
         
         $nums = 0;
         foreach ($ids as $id) {
