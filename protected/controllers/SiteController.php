@@ -198,6 +198,8 @@ class SiteController extends Controller
     
     public function actionSitemap()
     {
+        header('Content-Type:application/xml; charset=' . app()->charset);
+        
         $duration = 600;
         $cmd = app()->getDb()->cache($duration)->createCommand()
             ->select('id')
