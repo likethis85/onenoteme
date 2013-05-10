@@ -126,7 +126,7 @@ return array(
                 
                 'feed' => 'feed/index',
                 'u/<id:\d+>' => 'user/index',
-                'sitemap' => 'site/sitemap',
+                //'sitemap' => 'site/sitemap',
                     
                 'wap' => 'wap/index',
                 'member' => '/member/default/index',
