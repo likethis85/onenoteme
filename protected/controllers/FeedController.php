@@ -25,51 +25,54 @@ class FeedController extends Controller
         );
     }
     
-    public function actionIndex()
+    public function actionIndex($source = 'feed')
     {
         $channels = array(CHANNEL_DUANZI, CHANNEL_LENGTU, CHANNEL_GIRL, CHANNEL_GHOSTSTORY);
-        echo self::channel($channels, app()->name, 600);
+        echo self::channel($channels, app()->name, $source, 600);
     }
     
     
-    public function actionFunny()
+    public function actionFunny($source = 'feed')
     {
         $feedname = '挖冷笑话';
-        echo self::channel(array(CHANNEL_DUANZI, CHANNEL_LENGTU), $feedname, 600);
+        echo self::channel(array(CHANNEL_DUANZI, CHANNEL_LENGTU), $feedname, $source, 600);
     }
     
-    public function actionJoke()
+    public function actionJoke($source = 'feed')
     {
         $feedname = app()->name . ' » ' . CDBase::channelLabels(CHANNEL_DUANZI);
-        echo self::channel(CHANNEL_DUANZI, $feedname, 600);
+        echo self::channel(CHANNEL_DUANZI, $feedname, $source, 600);
     }
     
-    public function actionGhost()
+    public function actionGhost($source = 'feed')
     {
         $feedname = app()->name . ' » ' . CDBase::channelLabels(CHANNEL_GHOSTSTORY);
-        echo self::channel(CHANNEL_GHOSTSTORY, $feedname, 600);
+        echo self::channel(CHANNEL_GHOSTSTORY, $feedname, $source, $source, 600);
     }
     
-    public function actionLengtu()
+    public function actionLengtu($source = 'feed')
     {
         $feedname = app()->name . ' » ' . CDBase::channelLabels(CHANNEL_LENGTU);
-        echo self::channel(CHANNEL_LENGTU, $feedname, 600);
+        echo self::channel(CHANNEL_LENGTU, $feedname, $source, 600);
     }
     
-    public function actionGirl()
+    public function actionGirl($source = 'feed')
     {
         $feedname = app()->name . ' » ' . CDBase::channelLabels(CHANNEL_GIRL);
-        echo self::channel(CHANNEL_GIRL, $feedname, 600);
+        echo self::channel(CHANNEL_GIRL, $feedname, $source, 600);
     }
     
-    public function actionVideo()
+    public function actionVideo($source = 'feed')
     {
         $feedname = app()->name . ' » ' . CDBase::channelLabels(CHANNEL_VIDEO);
-        echo self::channel(CHANNEL_VIDEO, $feedname, 600);
+        echo self::channel(CHANNEL_VIDEO, $feedname, $source, 600);
     }
     
-    private static function channel($cid, $feedname, $expire = 600)
+    private static function channel($cid, $feedname, $source, $expire = 600)
     {
+        $source = trim(strip_tags(strtolower($source)));
+        if (!self::checkSource($source)) $source = 'feed';
+        
         $cacheData = self::cacheData($cid);
         if ($cacheData !== false) return $cacheData;
         
@@ -94,13 +97,13 @@ class FeedController extends Controller
         $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
         $models = self::fetchPosts($criteria);
         
-        $xml = self::outputXml($feedname, $models);
-        self::cacheData($cid, $xml, $expire);
+        $xml = self::outputXml($feedname, $models, $source);
+        self::cacheData($cid, $source, $xml, $expire);
         return $xml;
         exit(0);
     }
     
-    private static function cacheData($cid, $data = false, $expire = 600)
+    private static function cacheData($cid, $source, $data = false, $expire = 600)
     {
         if (cache() === null) return false;
         
@@ -111,7 +114,7 @@ class FeedController extends Controller
         else
             $cid = (int)$cid;
             
-        $cacheID = 'feed_cache_' . $cid;
+        $cacheID = 'feed_cache_' . $cid . '_' . $source;
         
         if ($data === false)
             $result = cache()->get($cacheID);
@@ -132,12 +135,8 @@ class FeedController extends Controller
         return $models;
     }
 
-    private static function outputXml($feedname, array $models, $source = 'feed')
+    private static function outputXml($feedname, array $models, $source)
     {
-        $sources = self::sources();
-        $source = trim(strip_tags(strtolower($source)));
-        if (!in_array($source, $sources)) $source = 'feed';
-        
         $namespaceURI = 'http://www.w3.org/2000/xmlns/';
         $ns_rdf = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
         $ns_sy = 'http://purl.org/rss/1.0/modules/syndication/';
@@ -204,6 +203,11 @@ class FeedController extends Controller
             'zaker',
             'yuedu163',
         );
+    }
+    
+    private static function checkSource($source)
+    {
+        return in_array($source, self::sources());
     }
     
     /*
