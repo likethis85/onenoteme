@@ -322,7 +322,7 @@ class Post extends CActiveRecord
 	    if ($moreCount > 0) {
 	    	$content = strip_tags($this->content, $tags);
 	        $summary = mb_strimwidth($content, 0, $len, '......', app()->charset);
-    	    $text .= '<i class="cgray">(剩余&nbsp;' . (int)$moreCount . '&nbsp;字)</i>&nbsp;&nbsp;<span class="cgreen">继续阅读全文&gt;&gt;&gt;</span>';
+    	    $text .= '<i class="cgray">(剩余' . (int)$moreCount . '字)</i>&nbsp;&nbsp;<span class="cgreen">继续阅读全文&gt;&gt;&gt;</span>';
     	    $summary .= '<br />' . l($text, $this->getUrl(), array('target'=>'_blank', 'class'=>'aright'));
 	    }
 	    else
@@ -1208,15 +1208,18 @@ class Post extends CActiveRecord
      * 获取段子所属的图片列表
      * @return array()
      */
-    public function getUploadImageSquareThumbs($columns = 5, $rows = 2, $imgOptions = array(), $includeLink = true, $linkOptions = array('target'=>'_blank'))
+    public function getUploadImageSquareThumbs($columns = 5, $rows = 1, $imgOptions = array(), $includeLink = true, $linkOptions = array('target'=>'_blank'))
     {
         $urls = $this->getUploadImageSquareThumbUrls();
         $images = array();
         $count = count($urls);
-        if ($count > $columns) {
+        $maxCount = $columns * $rows;
+        if ($count < $maxCount)
             $count = $count - $count % $columns;
-            $urls = array_slice($urls, 0, $count);
-        }
+        else
+            $count = $maxCount;
+        
+        $urls = array_slice($urls, 0, $count);
         foreach ($urls as $index => $url) {
             if ($imgOptions)
                 $imgOptions['class'] = 'cd-thumb-list';
