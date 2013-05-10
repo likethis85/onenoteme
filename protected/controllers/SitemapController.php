@@ -14,30 +14,30 @@ class SitemapController extends Controller
     
     public function actionJoke()
     {
-        self::fetchPosts(CHANNEL_DUANZI);
+        $this->fetchPosts(CHANNEL_DUANZI);
     }
     
     public function actionLengtu()
     {
-        self::fetchPosts(CHANNEL_LENGTU);
+        $this->fetchPosts(CHANNEL_LENGTU);
     }
     
     public function actionGirl()
     {
-        self::fetchPosts(CHANNEL_GIRL);
+        $this->fetchPosts(CHANNEL_GIRL);
     }
     
     public function actionVideo()
     {
-        self::fetchPosts(CHANNEL_VIDEO);
+        $this->fetchPosts(CHANNEL_VIDEO);
     }
     
     public function actionGhost()
     {
-        self::fetchPosts(CHANNEL_GHOSTSTORY);
+        $this->fetchPosts(CHANNEL_GHOSTSTORY);
     }
     
-    private static function fetchPosts($channel = null, $duration = 600)
+    private function fetchPosts($channel = null, $duration = 600)
     {
         $conditions = 'state = :enabled';
         $params = array(':enabled' => POST_STATE_ENABLED);
