@@ -47,7 +47,7 @@ class FeedController extends Controller
     public function actionGhost($source = 'feed')
     {
         $feedname = app()->name . ' » ' . CDBase::channelLabels(CHANNEL_GHOSTSTORY);
-        echo self::channel(CHANNEL_GHOSTSTORY, $feedname, $source, $source, 600);
+        echo self::channel(CHANNEL_GHOSTSTORY, $feedname, $source, 600);
     }
     
     public function actionLengtu($source = 'feed')
@@ -73,7 +73,7 @@ class FeedController extends Controller
         $source = trim(strip_tags(strtolower($source)));
         if (!self::checkSource($source)) $source = 'feed';
         
-        $cacheData = self::cacheData($cid);
+        $cacheData = self::cacheData($cid, $source);
         if ($cacheData !== false) return $cacheData;
         
         $channels = CDBase::channelLabels();
