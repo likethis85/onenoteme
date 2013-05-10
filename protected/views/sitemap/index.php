@@ -41,4 +41,4 @@
 </url>
 </sitemap>
 
-<sitemapindex>
+</sitemapindex>
