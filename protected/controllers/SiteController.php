@@ -6,7 +6,7 @@ class SiteController extends Controller
         return array(
             'switchMobile + index',
             array(
-                'COutputCache + bdmap, sitemap, links',
+                'COutputCache + bdmap, links',
                 'duration' => 600,
                 'varyByParam' => array('page'),
             ),
@@ -198,7 +198,8 @@ class SiteController extends Controller
     
     public function actionSitemap()
     {
-        $cmd = app()->getDb()->createCommand()
+        $duration = 600;
+        $cmd = app()->getDb()->cache($duration)->createCommand()
             ->select('id')
             ->from(TABLE_POST)
             ->where('state = ' . POST_STATE_ENABLED)
