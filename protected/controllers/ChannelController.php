@@ -74,7 +74,7 @@ class ChannelController extends Controller
         else
             $count = param('lengtu_count_page');
         
-        $data = $this->fetchChannelPosts(CHANNEL_LENGTU, $count);
+        $data = $this->fetchChannelPosts(CHANNEL_LENGTU, $count, 'uploadImagesCount');
         $data['list_view'] = '/post/' . $list_view;
         $view = (($s == POST_LIST_STYLE_WATERFALL)) ? '/post/mixed_list' : 'lengtu_list';
         if (request()->getIsAjaxRequest())
@@ -101,7 +101,7 @@ class ChannelController extends Controller
         else
             $count = param('girl_count_page');
         
-        $data = $this->fetchChannelPosts(CHANNEL_GIRL, $count);
+        $data = $this->fetchChannelPosts(CHANNEL_GIRL, $count, array('uploadImages', 'uploadImagesCount'));
         $data['list_view'] = '/post/' . $list_view;
         $view = (($s == POST_LIST_STYLE_WATERFALL)) ? '/post/mixed_list' : 'girl_list';
         if (request()->getIsAjaxRequest())
@@ -122,7 +122,7 @@ class ChannelController extends Controller
         $this->render('video_list', $data);
     }
 
-    private function fetchChannelPosts($channelid, $limit = 0)
+    private function fetchChannelPosts($channelid, $limit = 0, $with = '')
     {
         $duration = 60 * 60 * 24;
         $channelid = (int)$channelid;
@@ -144,7 +144,10 @@ class ChannelController extends Controller
         if ($page < $_GET[$pages->pageVar]-1)
             return array();
     
-        $models = Post::model()->findAll($criteria);
+        if ($with)
+            $models = Post::model()->with($with)->findAll($criteria);
+        else
+            $models = Post::model()->findAll($criteria);
     
         if ($page > 1)
             $mobileUrl = aurl('mobile/'. $this->id . '/' . $this->action->id, array('page'=>$page));

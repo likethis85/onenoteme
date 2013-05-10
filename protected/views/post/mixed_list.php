@@ -16,8 +16,12 @@
     <?php foreach ((array)$models as $index => $model):?>
     <div class="waterfall-item">
         <div class="waterfall-item-box">
+            <?php if ($model->isImageType):?>
             <?php if ($model->getThumbnail()):?><div class="pic-block"><?php echo $model->getThumbnailLink('_blank' ,159);?></div><?php endif;?>
             <p><?php echo l($model->getFilterTitle(), $model->getUrl(), array('target'=>'_blank'));?></p>
+            <?php elseif ($model->isTextType):?>
+            <p><?php echo l($model->getFilterSummary(), $model->getUrl(), array('target'=>'_blank'));?></p>
+            <?php endif;?>
         </div>
     </div>
     <?php endforeach;?>

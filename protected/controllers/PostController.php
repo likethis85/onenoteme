@@ -70,7 +70,7 @@ class PostController extends Controller
             $nextPosts = self::fetchNextPosts($post, 9);
         
         // 获取评论
-        $limit = param('commentCountOfPage');
+        $limit = param('comment_count_page');
         $conditions = array('and', 'post_id = :pid', 'state = :state');
         $params = array(':pid' => $id, ':state' => COMMENT_STATE_ENABLED);
         
@@ -309,7 +309,7 @@ class PostController extends Controller
             'state' => COMMENT_STATE_ENABLED,
         );
         $criteria->addColumnCondition($columns);
-        $criteria->limit = param('commentCountOfPage');
+        $criteria->limit = param('comment_count_page');
         $criteria->order = 'create_time asc';
         
         $pages = new CPagination(Comment::model()->count($criteria));

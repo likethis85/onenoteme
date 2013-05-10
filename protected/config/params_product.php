@@ -68,7 +68,7 @@ return array(
     'ghost_story_count_page' => 30,
     'lengtu_count_page' => 20,
     'girl_count_page' => 20,
-    'commentCountOfPage' => 20,
+    'comment_count_page' => 20,
 
     'comment_count_page_home' => 20,
     // 评论最少字符
