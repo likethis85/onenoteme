@@ -67,7 +67,7 @@ class ChannelController extends Controller
         $list_view = 'line_list';
         if (($s == POST_LIST_STYLE_GRID)) {
             $list_view = 'grid_list';
-            $count = param('grid_post_count_page_column');
+            $count = param('grid_post_count_page');
         }
         elseif ($s == POST_LIST_STYLE_WATERFALL)
             $count = param('waterfall_post_count_page');
@@ -94,7 +94,7 @@ class ChannelController extends Controller
         $list_view = 'line_list';
         if (($s == POST_LIST_STYLE_GRID)) {
             $list_view = 'grid_list';
-            $count = param('grid_post_count_page_column');
+            $count = param('grid_post_count_page');
         }
         elseif ($s == POST_LIST_STYLE_WATERFALL)
             $count = param('waterfall_post_count_page');

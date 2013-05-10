@@ -61,7 +61,6 @@ return array(
     'waterfall_post_count_page' => 40,
     'line_post_count_page' => 20,
     'grid_post_count_page' => 60,
-    'grid_post_count_page_column' => 60,
     'tag_posts_count_page' => 15,
 
     'video_count_page' => 15,
