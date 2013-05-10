@@ -50,9 +50,9 @@ class SitemapController extends Controller
             ->from(TABLE_POST)
             ->where($conditions, $params)
             ->order('id desc')
-            ->limit(2000);
+            ->limit(10000);
         $posts = $cmd->queryAll();
-        $this->renderPartial('sitemap', array(
+        $this->renderPartial('posts', array(
             'posts' => $posts
         ));
         app()->end();
