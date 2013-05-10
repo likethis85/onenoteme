@@ -4,7 +4,6 @@ class SiteController extends Controller
     public function filters()
     {
         return array(
-            'switchMobile + index',
             array(
                 'COutputCache + bdmap, links',
                 'duration' => 600,
@@ -212,6 +211,7 @@ class SiteController extends Controller
             'posts' => $posts
         ));
         app()->end();
+        exit(0);
     }
 
     public function actionLinks()
