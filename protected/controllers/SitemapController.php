@@ -60,7 +60,7 @@ class SitemapController extends Controller
             ->from(TABLE_POST)
             ->where($conditions, $params)
             ->order('id desc')
-            ->limit(10000);
+            ->limit(5000);
         $posts = $cmd->queryAll();
         $this->renderPartial('posts', array(
             'posts' => $posts
@@ -82,7 +82,7 @@ class SitemapController extends Controller
             ->from(TABLE_POST)
             ->where($conditions, $params)
             ->order('id desc')
-            ->limit(10000);
+            ->limit(5000);
         $posts = $cmd->queryAll();
         $this->renderPartial('posts', array(
             'posts' => $posts
