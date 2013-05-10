@@ -126,7 +126,7 @@ return array(
                 
                 'feed' => 'feed/index',
                 'u/<id:\d+>' => 'user/index',
-                //'sitemap' => 'site/sitemap',
+                'sitemap/<_a>' => array('site/sitemap', 'urlSuffix'=>'.xml', 'caseSensitive'=>false),
                     
                 'wap' => 'wap/index',
                 'member' => '/member/default/index',
