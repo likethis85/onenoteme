@@ -132,8 +132,12 @@ class FeedController extends Controller
         return $models;
     }
 
-    private static function outputXml($feedname, array $models)
+    private static function outputXml($feedname, array $models, $source = 'feed')
     {
+        $sources = self::sources();
+        $source = trim(strip_tags(strtolower($source)));
+        if (!in_array($source, $sources)) $source = 'feed';
+        
         $namespaceURI = 'http://www.w3.org/2000/xmlns/';
         $ns_rdf = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
         $ns_sy = 'http://purl.org/rss/1.0/modules/syndication/';
@@ -170,7 +174,7 @@ class FeedController extends Controller
             $title = $model->getFilterTitle();
             if ($model->getImageIsAnimation()) $title .= '【动画】';
             $item->appendChild(new DOMElement('title', $title));
-            $item->appendChild(new DOMElement('link', aurl('post/show', array('id'=>$model->id, 'source'=>'feed'))));
+            $item->appendChild(new DOMElement('link', aurl('post/show', array('id'=>$model->id, 'source'=>$source))));
             $item->appendChild(new DOMElement('comments', aurl('comment/list', array('pid'=>$model->id))));
             $item->appendChild(new DOMElement('pubDate', date('D, d M Y H:i:s O', $model->create_time)));
             $item->appendChild(new DOMElement('comments', (int)$model->comment_nums, $ns_slash));
@@ -191,6 +195,15 @@ class FeedController extends Controller
         }
     
         return $dom->saveXML();
+    }
+    
+    private static function sources()
+    {
+        return array(
+            'sohunews',
+            'zaker',
+            'yuedu163',
+        );
     }
     
     /*
