@@ -22,6 +22,20 @@ class SitemapController extends Controller
         $this->renderPartial('channels');
     }
     
+    public function actionTags()
+    {
+        $duration = 3600 * 24;
+        $cmd = db()->cache($duration)->createCommand()
+            ->where('post_nums > 0')
+            ->order('id asc');
+            
+        $tags = $cmd->queryAll();
+        
+        $this->renderPartial('tags', array('tags'=>$tags));
+        app()->end();
+        exit(0);
+    }
+    
     public function actionJoke()
     {
         $this->fetchChannelPosts(CHANNEL_DUANZI);
@@ -55,7 +69,7 @@ class SitemapController extends Controller
             $conditions = array('and', 'channel_id = :channelID', $conditions);
             $params[':channelID'] = (int)$channel;
         }
-        $cmd = app()->getDb()->cache($duration)->createCommand()
+        $cmd = db()->cache($duration)->createCommand()
             ->select('id')
             ->from(TABLE_POST)
             ->where($conditions, $params)
