@@ -31,7 +31,7 @@ class MobileComment extends Comment
 	    $page = (int)$page;
 	    $count = (int)$count;
 	    if ($count === 0)
-	        $count = param('commentCountOfPage');
+	        $count = param('comment_count_page');
 	    
 	    $criteria = new CDbCriteria();
 	    $criteria->order = 'create_time asc';
