@@ -22,7 +22,8 @@ class PostController extends MobileController
     public function actionShow($id)
     {
         $id = (int)$id;
-        $post = MobilePost::model()->findByPk($id);
+        // @todo 暂时屏幕
+        $post = MobilePost::model()->findByPk($id, 't.channel_id != ' . CHANNEL_GIRL);
         if ($post === null)
             throw new CHttpException(403, '内容不存在');
         

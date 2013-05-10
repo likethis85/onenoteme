@@ -54,6 +54,9 @@ class ChannelController extends MobileController
 	
 	public function actionGirl($page = 1)
 	{
+	    // @todo 暂时屏蔽
+	    $this->redirect('/mobile');
+	    
 	    $data = self::fetchLatestPosts(CHANNEL_GIRL);
 	     
 	    $this->pageTitle = '挖福利 - 最新最全的女明星写真、清纯校花、美女模特、正妹性感自拍';

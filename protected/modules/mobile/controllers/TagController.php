@@ -56,6 +56,8 @@ class TagController extends MobileController
         
         $criteria = new CDbCriteria();
         $criteria->addInCondition('id', $postIDs);
+        // @todo 暂时屏蔽
+        $criteria->addCondition('t.channel_id != ' . CHANNEL_GIRL);
         
         $models = MobilePost::model()->findAll($criteria);
         
