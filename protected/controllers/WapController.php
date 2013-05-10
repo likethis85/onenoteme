@@ -5,7 +5,7 @@ class WapController extends Controller
     
     public function init()
     {
-        $this->layout = 'wap';
+        $this->redirect(CDBaseUrl::mobileHomeUrl(), true, 301);
     }
     
     public function filters()
