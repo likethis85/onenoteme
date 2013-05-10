@@ -1,15 +1,54 @@
 <?php
 class SitemapController extends Controller
 {
-    public function actionSitemap()
+    public function init()
     {
+        parent::init();
         header('Content-Type:application/xml; charset=' . app()->charset);
-        
-        $duration = 600;
+    }
+    
+    public function actionIndex()
+    {
+        $this->renderPartial('index');
+    }
+    
+    public function actionJoke()
+    {
+        self::fetchPosts(CHANNEL_DUANZI);
+    }
+    
+    public function actionLengtu()
+    {
+        self::fetchPosts(CHANNEL_LENGTU);
+    }
+    
+    public function actionGirl()
+    {
+        self::fetchPosts(CHANNEL_GIRL);
+    }
+    
+    public function actionVideo()
+    {
+        self::fetchPosts(CHANNEL_VIDEO);
+    }
+    
+    public function actionGhost()
+    {
+        self::fetchPosts(CHANNEL_GHOSTSTORY);
+    }
+    
+    private static function fetchPosts($channel = null, $duration = 600)
+    {
+        $conditions = 'state = :enabled';
+        $params = array(':enabled' => POST_STATE_ENABLED);
+        if ($channel !== null) {
+            $conditions = array('and', 'channel_id = :channelID', $conditions);
+            $params[':channelID'] = (int)$channel;
+        }
         $cmd = app()->getDb()->cache($duration)->createCommand()
             ->select('id')
             ->from(TABLE_POST)
-            ->where('state = ' . POST_STATE_ENABLED)
+            ->where($conditions, $params)
             ->order('id desc')
             ->limit(2000);
         $posts = $cmd->queryAll();
