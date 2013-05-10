@@ -1,7 +1,7 @@
 <?php
 class FeedController extends Controller
 {
-    const POST_COUNT = 200;
+    const POST_COUNT = 500;
     
     public function init()
     {
