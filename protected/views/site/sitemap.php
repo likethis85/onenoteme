@@ -10,15 +10,23 @@
   <changefreq>always</changefreq>
   <priority>0.80</priority>
 </url>
+<url>
   <loc><?php echo aurl('channel/lengtu');?></loc>
   <changefreq>always</changefreq>
   <priority>0.80</priority>
 </url>
+<url>
   <loc><?php echo aurl('channel/girl');?></loc>
   <changefreq>always</changefreq>
   <priority>0.80</priority>
 </url>
+<url>
   <loc><?php echo aurl('channel/video');?></loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc><?php echo aurl('channel/ghost');?></loc>
   <changefreq>always</changefreq>
   <priority>0.80</priority>
 </url>
