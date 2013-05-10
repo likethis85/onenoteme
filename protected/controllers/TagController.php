@@ -59,7 +59,7 @@ class TagController extends Controller
         $s = strip_tags(trim($s));
         
         $duration = 120;
-        $limit = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('line_post_count_page');
+        $limit = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('tag_posts_count_page');
         
         $name = urldecode($name);
         
