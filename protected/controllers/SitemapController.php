@@ -26,6 +26,7 @@ class SitemapController extends Controller
     {
         $duration = 3600 * 24;
         $cmd = db()->cache($duration)->createCommand()
+            ->from(TABLE_TAG)
             ->where('post_nums > 0')
             ->order('id asc');
             
