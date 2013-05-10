@@ -7,6 +7,22 @@ class SitemapController extends Controller
         header('Content-Type:application/xml; charset=' . app()->charset);
     }
     
+    
+    public function filters()
+    {
+        return array(
+            array(
+                'COutputCache + index, channels, tags',
+                'duration' => 600,
+            ),
+            array(
+                'COutputCache + archives',
+                'duration' => 3600,
+                'varyByParam' => array('date'),
+            ),
+        );
+    }
+    
     public function actionIndex()
     {
         $this->renderPartial('index');
@@ -24,7 +40,7 @@ class SitemapController extends Controller
     
     public function actionTags()
     {
-        $duration = 3600 * 24;
+        $duration = 3600;
         $cmd = db()->cache($duration)->createCommand()
             ->from(TABLE_TAG)
             ->where('post_nums > 0')
