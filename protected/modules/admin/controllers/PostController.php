@@ -151,7 +151,7 @@ class PostController extends AdminController
 	    $this->render('list', $data);
 	}
 	
-	public function actionVerify($channel = null)
+	public function actionVerify($channel = null, $mediatype = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_UNVERIFY));
@@ -174,7 +174,7 @@ class PostController extends AdminController
 	    $this->render('list', $data);
 	}
 	
-	public function actionTrash($channel = null)
+	public function actionTrash($channel = null, $mediatype = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_TRASH));
@@ -212,7 +212,7 @@ class PostController extends AdminController
         $this->render('search', array('form'=>$form, 'data'=>$data));
 	}
 	
-	public function actionHottest($channel = null)
+	public function actionHottest($channel = null, $mediatype = null, $state = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('hottest'=>CD_YES));
@@ -241,7 +241,7 @@ class PostController extends AdminController
 	    $this->render('list', $data);
 	}
 	
-	public function actionRecommend($channel = null)
+	public function actionRecommend($channel = null, $mediatype = null, $state = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('recommend'=>CD_YES));
@@ -270,7 +270,7 @@ class PostController extends AdminController
 	    $this->render('list', $data);
 	}
 	
-	public function actionHomeshow($channel = null)
+	public function actionHomeshow($channel = null, $mediatype = null, $state = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('homeshow'=>CD_YES));
@@ -299,7 +299,7 @@ class PostController extends AdminController
 	    $this->render('list', $data);
 	}
 	
-	public function actionIstop($channel = null)
+	public function actionIstop($channel = null, $mediatype = null, $state = null)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('istop'=>CD_YES));
@@ -474,12 +474,12 @@ class PostController extends AdminController
 	     
 	    $successIds = $failedIds = array();
 	    $attributes = array('user_id', 'user_name', 'state', 'create_time');
-	    foreach ($ids as $id) {
+	    foreach ($ids as $index => $id) {
 	        $model = AdminPost::model()->findByPk($id);
 	        if ($model === null) continue;
 	        
 	        if (in_array($state, array(POST_STATE_ENABLED, POST_STATE_DISABLED)))
-	            $model->create_time = time();
+	            $model->create_time = time() + $index;
 	        $model->state = $state;
 	        $result = $model->save(true, $attributes);
 	        if ($result)
