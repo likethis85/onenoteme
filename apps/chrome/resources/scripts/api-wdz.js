@@ -90,6 +90,7 @@ var Api_Waduanzi = {
 		var croptop = data[7].value;
 		var cropbottom = data[8].value;
 		var waterpos = data[9].value;
+		var mediatype = data[10].value;
 		var params = {
 			'method': Api_Waduanzi.config.apiCreatePost,
 			'title': title,
@@ -102,6 +103,7 @@ var Api_Waduanzi = {
 			'padding_top': croptop,
 			'padding_bottom': cropbottom,
 			'water_position': waterpos,
+			'media_type': mediatype,
 			'debug': Api_Waduanzi.debug
 		};
         var jqXhr = Api_Waduanzi.sendRequest('POST', params, true);
