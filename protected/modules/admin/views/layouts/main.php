@@ -30,10 +30,10 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
                             <?php echo l('发布图文', url('admin/post/create', array('media_type'=>MEDIA_TYPE_IMAGE, 'channel_id'=>CHANNEL_FUNNY)));?>
                         </li>
                         <li <?php if ($this->channel == 'create_post_'.MEDIA_TYPE_VIDEO) echo 'class="active"';?>>
-                            <?php echo l('发布视频', url('admin/post/create', array('media_type'=>MEDIA_TYPE_AUDIO)));?>
+                            <?php echo l('发布视频', url('admin/post/create', array('media_type'=>MEDIA_TYPE_VIDEO)));?>
                         </li>
                         <li <?php if ($this->channel == 'create_post_'.MEDIA_TYPE_AUDIO) echo 'class="active"';?>>
-                            <?php echo l('发布音频', url('admin/post/create', array('media_type'=>MEDIA_TYPE_VIDEO, 'channel_id'=>CHANNEL_FUNNY)));?>
+                            <?php echo l('发布音频', url('admin/post/create', array('media_type'=>MEDIA_TYPE_AUDIO, 'channel_id'=>CHANNEL_FUNNY)));?>
                         </li>
                         <li class="divider"></li>
                         <li class="nav-header">操作</li>
@@ -146,11 +146,18 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
 <div class="admin-sidebar">
     <ul class="nav nav-list quick-nav">
         <li class="nav-header">发布</li>
-        <li <?php if ($this->channel == 'create_post_'.CHANNEL_DUANZI) echo 'class="active"';?>><?php echo l('发布笑话', url('admin/post/create', array('channel_id'=>CHANNEL_DUANZI)));?></li>
-        <li <?php if ($this->channel == 'create_post_'.CHANNEL_LENGTU) echo 'class="active"';?>><?php echo l('发布趣图', url('admin/post/create', array('channel_id'=>CHANNEL_LENGTU)));?></li>
-        <li <?php if ($this->channel == 'create_post_'.CHANNEL_GIRL) echo 'class="active"';?>><?php echo l('发布女神', url('admin/post/create', array('channel_id'=>CHANNEL_GIRL)));?></li>
-        <li <?php if ($this->channel == 'create_post_'.CHANNEL_VIDEO) echo 'class="active"';?>><?php echo l('发布视频', url('admin/post/create', array('channel_id'=>CHANNEL_VIDEO)));?></li>
-        <li <?php if ($this->channel == 'create_post_'.CHANNEL_GHOSTSTORY) echo 'class="active"';?>><?php echo l('发鬼故事', url('admin/post/create', array('channel_id'=>CHANNEL_GHOSTSTORY)));?></li>
+        <li <?php if ($this->channel == 'create_post_'.MEDIA_TYPE_TEXT) echo 'class="active"';?>>
+            <?php echo l('发布文字', url('admin/post/create', array('media_type'=>MEDIA_TYPE_TEXT, 'channel_id'=>CHANNEL_FUNNY)));?>
+        </li>
+        <li <?php if ($this->channel == 'create_post_'.MEDIA_TYPE_IMAGE) echo 'class="active"';?>>
+            <?php echo l('发布图文', url('admin/post/create', array('media_type'=>MEDIA_TYPE_IMAGE, 'channel_id'=>CHANNEL_FUNNY)));?>
+        </li>
+        <li <?php if ($this->channel == 'create_post_'.MEDIA_TYPE_VIDEO) echo 'class="active"';?>>
+            <?php echo l('发布视频', url('admin/post/create', array('media_type'=>MEDIA_TYPE_VIDEO)));?>
+        </li>
+        <li <?php if ($this->channel == 'create_post_'.MEDIA_TYPE_AUDIO) echo 'class="active"';?>>
+            <?php echo l('发布音频', url('admin/post/create', array('media_type'=>MEDIA_TYPE_AUDIO, 'channel_id'=>CHANNEL_FUNNY)));?>
+        </li><li <?php if ($this->channel == 'create_post_'.CHANNEL_DUANZI) echo 'class="active"';?>><?php echo l('发布笑话', url('admin/post/create', array('channel_id'=>CHANNEL_DUANZI)));?></li>
         <li class="nav-header">文章</li>
         <li <?php if ($this->channel == 'verify_post') echo 'class="active"';?>><?php echo l('审核文章', url('admin/post/verify'));?></li>
         <li <?php if ($this->channel == 'post_latest') echo 'class="active"';?>><?php echo l('最新文章', url('admin/post/latest'));?></li>
