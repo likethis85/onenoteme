@@ -157,7 +157,6 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
         </li>
         <li <?php if ($this->channel == 'create_post_'.MEDIA_TYPE_AUDIO) echo 'class="active"';?>>
             <?php echo l('发布音频', url('admin/post/create', array('media_type'=>MEDIA_TYPE_AUDIO, 'channel_id'=>CHANNEL_FUNNY)));?>
-        </li><li <?php if ($this->channel == 'create_post_'.CHANNEL_DUANZI) echo 'class="active"';?>><?php echo l('发布笑话', url('admin/post/create', array('channel_id'=>CHANNEL_DUANZI)));?></li>
         <li class="nav-header">文章</li>
         <li <?php if ($this->channel == 'verify_post') echo 'class="active"';?>><?php echo l('审核文章', url('admin/post/verify'));?></li>
         <li <?php if ($this->channel == 'post_latest') echo 'class="active"';?>><?php echo l('最新文章', url('admin/post/latest'));?></li>
