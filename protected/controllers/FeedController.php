@@ -168,7 +168,7 @@ class FeedController extends Controller
         $channel = new DOMElement('channel');
         $rss->appendChild($channel);
         $channel->appendChild(new DOMElement('copyright', 'Copyright (c) 2011-2013 ' . app()->name . '. All rights reserved.'));
-        $channel->appendChild(new DOMElement('title', $feedname));
+        $channel->appendChild(new DOMElement('title', utf8ForXml($feedname)));
         $channel->appendChild(new DOMElement('link', app()->homeUrl));
         $channel->appendChild(new DOMElement('description', param('shortdesc')));
         $channel->appendChild(new DOMElement('lastBuildDate', date('D, d M Y H:i:s O', $_SERVER['REQUEST_TIME'])));
@@ -182,7 +182,7 @@ class FeedController extends Controller
             $channel->appendChild($item);
             $title = $model->getFilterTitle();
             if ($model->getImageIsAnimation()) $title .= '【动画】';
-            $item->appendChild(new DOMElement('title', $title));
+            $item->appendChild(new DOMElement('title', utf8ForXml($title)));
             $posturl = aurl('post/show', array('id'=>$model->id, 'source'=>$source));
             $commentUrl = aurl('comment/list', array('pid'=>$model->id, 'source'=>$source));
             $item->appendChild(new DOMElement('link', htmlentities($posturl)));
@@ -190,7 +190,7 @@ class FeedController extends Controller
             $item->appendChild(new DOMElement('pubDate', date('D, d M Y H:i:s O', $model->create_time)));
             $item->appendChild(new DOMElement('comments', (int)$model->comment_nums, $ns_slash));
             if ($model->user_name)
-                $item->appendChild(new DOMElement('dc:creator', $model->user_name));
+                $item->appendChild(new DOMElement('dc:creator', utf8ForXml($model->user_name)));
     
             $summary = $dom->createElement('summary');
             $summaryText = $model->getFilterSummary(300);
