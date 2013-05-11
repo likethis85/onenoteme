@@ -7,6 +7,7 @@ class FeedController extends Controller
     {
         parent::init();
         header('Content-Type:application/xml; charset=' . app()->charset);
+        exit;
     }
     
     public function filters()
@@ -70,23 +71,23 @@ class FeedController extends Controller
         echo self::channelPosts(CHANNEL_FUNNY, MEDIA_TYPE_VIDEO, $feedname, $source, 600);
     }
     
-    private static function channelPosts($cid, $mediatype, $feedname, $source, $expire = 600)
+    private static function channelPosts($channelID, $mediatype, $feedname, $source, $expire = 600)
     {
         $source = trim(strip_tags(strtolower($source)));
         if (!self::checkSource($source)) $source = 'feed';
         
-        $cacheData = self::cacheData($cid, $mediatype, $source);
+        $cacheData = self::cacheData($channelID, $mediatype, $source);
         if ($cacheData !== false) return $cacheData;
         
         $criteria = new CDbCriteria();
         
-        if (is_numeric($cid)) {
-            $cid = (int)$cid;
-            $criteria->addColumnCondition(array('channel_id'=>$cid));
+        if (is_numeric($channelID)) {
+            $channelID = (int)$channelID;
+            $criteria->addColumnCondition(array('channel_id'=>$channelID));
         }
-        elseif (is_array($cid)) {
-            $cid = array_map('intval', $cid);
-            $criteria->addInCondition('channel_id', $cid);
+        elseif (is_array($channelID)) {
+            $channelID = array_map('intval', $channelID);
+            $criteria->addInCondition('channel_id', $channelID);
         }
         
         if (is_numeric($mediatype)) {
@@ -102,21 +103,21 @@ class FeedController extends Controller
         $models = self::fetchPosts($criteria);
         
         $xml = self::outputXml($feedname, $models, $source);
-        self::cacheData($cid, $mediatype, $source, $xml, $expire);
+        self::cacheData($channelID, $mediatype, $source, $xml, $expire);
         return $xml;
         exit(0);
     }
     
-    private static function cacheData($cid, $mediaType, $source, $data = false, $expire = 600)
+    private static function cacheData($channelID, $mediaType, $source, $data = false, $expire = 600)
     {
         if (cache() === null) return false;
         
-        if (is_array($cid)) {
-            sort($cid, SORT_NUMERIC);
-            $cid = join('_', $cid);
+        if (is_array($channelID)) {
+            sort($channelID, SORT_NUMERIC);
+            $channelID = join('_', $channelID);
         }
         else
-            $cid = (int)$cid;
+            $channelID = (int)$channelID;
         
         if (is_array($mediaType)) {
             sort($mediaType, SORT_NUMERIC);
@@ -125,7 +126,7 @@ class FeedController extends Controller
         else
             $mediaType = (int)$mediaType;
             
-        $cacheID = sprintf('feed_cache_%d_%d_%s', $cid, $mediaType, $source);
+        $cacheID = sprintf('feed_cache_%d_%d_%s', $channelID, $mediaType, $source);
         
         if ($data === false)
             $result = cache()->get($cacheID);
