@@ -235,6 +235,24 @@ class CDBase
         return $pos === 0;
     }
     
+    public static function mediatypes()
+    {
+        return array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE, MEDIA_TYPE_AUDIO, MEDIA_TYPE_VIDEO, MEDIA_TYPE_UNKOWN);
+    }
+    
+    public static function mediaTypeLabels($typeID = null)
+    {
+        $labels = array(
+            MEDIA_TYPE_TEXT => '挖笑话',
+            MEDIA_TYPE_IMAGE => '挖趣图',
+            MEDIA_TYPE_AUDIO => '挖女神',
+            MEDIA_TYPE_VIDEO => '挖短片',
+            MEDIA_TYPE_UNKOWN => '挖鬼故事',
+        );
+    
+        return $typeID === null ? $labels : $labels[$typeID];
+    }
+    
     public static function channels()
     {
         return array(CHANNEL_DUANZI, CHANNEL_LENGTU, CHANNEL_GIRL, CHANNEL_VIDEO, CHANNEL_GHOSTSTORY);

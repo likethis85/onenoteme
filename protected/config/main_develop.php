@@ -79,10 +79,10 @@ return array(
 //		    'queryCacheID' => 'cache',
 //		    'queryCachingDuration' => 3600,
         ),
-//         'cache' => array(
-//             'class' => 'CFileCache',
-// 		    'directoryLevel' => 2,
-//         ),
+        'cache' => array(
+            'class' => 'CFileCache',
+		    'directoryLevel' => 2,
+        ),
         'assetManager' => array(
             'basePath' => $params['resourceBasePath'] . 'assets',
             'baseUrl' => $params['resourceBaseUrl'] . 'assets',

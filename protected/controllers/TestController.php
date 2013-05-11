@@ -2,7 +2,7 @@
 
 class TestController extends Controller
 {
-    public function init()
+    public function init1()
     {
         $this->redirect('/');
         exit(0);
@@ -176,6 +176,27 @@ EOD;
         
         $im->output();
     }
+
+    public function actionChannel()
+    {
+        $channels = Channel::fetchChannels(null, false);
+        foreach ($channels as $c)
+            echo '<li>' . $c->getUrl() . '</li>';
+        
+        $list = CHtml::listData($channels, 'id', 'token');
+        echo '<pre>';
+        print_r($list);
+        
+        
+        $channels = Channel::fetchSubChannels(Channel::ROOT_PARENT_ID, null, 'orderid desc, id asc', false);
+        foreach ($channels as $c)
+            echo '<li>' . $c->getUrl() . '</li>';
+        
+        $list = CHtml::listData($channels, 'id', 'token');
+        echo '<pre>';
+        print_r($list);
+    }
+    
 }
 
 

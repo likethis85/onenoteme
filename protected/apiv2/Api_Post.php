@@ -349,7 +349,7 @@ class Api_Post extends ApiBase
         	    $curl->close();
         	    $im = new CDImage();
         	    $im->load($data);
-        	    unset($data, $curl);
+        	    $data = $curl = null;
         	    if ($im->width()/$im->height() > $thumbWidth/$thumbHeight)
         	        $im->resizeToHeight($thumbHeight);
         	    else

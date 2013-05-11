@@ -76,7 +76,7 @@ class Tag extends CActiveRecord
 	            $tagsArray[] = strip_tags(trim($tag));
 	    }
 	
-	    unset($tags, $tag);
+	    $tags = $tag = null;
 	    return $tagsArray;
 	}
 	
@@ -112,7 +112,7 @@ class Tag extends CActiveRecord
 	                $model->save(true, array('post_nums'));
 	            }
 	        }
-	        unset($model);
+	        $model = null;
 	    }
 	    return (int)$count;
 	}
@@ -139,7 +139,7 @@ class Tag extends CActiveRecord
 	            $model->post_nums = $model->post_nums < 0 ? 0 : $model->post_nums;
 	            if ($model->save(true, array('post_nums')))
 	                $count++;
-	            unset($model);
+	            $model = null;
 	        }
 	    }
 	    return (int)$count;

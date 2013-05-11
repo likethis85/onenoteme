@@ -92,7 +92,7 @@ class PostCommand extends CConsoleCommand
             
             $im = new CDImage();
             $im->load($data);
-            unset($data);
+            $data = null;
             
             $model->original_width = $im->width();
             $model->original_height = $im->height();
@@ -169,7 +169,7 @@ class PostCommand extends CConsoleCommand
             
             $im = new CDImage();
             $im->load($data);
-            unset($data);
+            $data = null;
             
             if ($im->width() > IMAGE_MIDDLE_WIDTH)
                 $im->resizeToWidth(IMAGE_MIDDLE_WIDTH);

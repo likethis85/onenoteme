@@ -31,7 +31,7 @@ class Api_User extends ApiBase
         	$user->save(true, array('token'));
         	$this->afterLogin($user, $params);
         	$data = $user->attributes;
-        	unset($user);
+        	$user = null;
         	unset($data['password'], $data['create_ip']);
         	return array('error'=>'OK', 'userinfo'=>$data);
         }
@@ -84,7 +84,7 @@ class Api_User extends ApiBase
         	if ($user->save()) {
         	    $this->afterLogin($user, $params);
         	    $data = $user->attributes;
-            	unset($user);
+            	$user = null;
             	unset($data['password'], $data['create_ip']);
             	return array('error'=>'OK', 'userinfo'=>$data);
         	}

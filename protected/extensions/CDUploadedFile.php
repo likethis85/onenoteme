@@ -124,7 +124,7 @@ class CDUploadedFile extends CUploadedFile
         else
             $image = self::saveImageToLocal($im, $pathPrefix);
     
-        unset($im, $data);
+        $im = $data = null;
         
         return $image;
     }
@@ -149,7 +149,7 @@ class CDUploadedFile extends CUploadedFile
             throw new Exception($e->getMessage());
         }
     
-        unset($im);
+        $im = null;
     
         return $original;
     }
@@ -192,7 +192,7 @@ class CDUploadedFile extends CUploadedFile
         $original['width'] = $im->width();
         $original['height'] = $im->height();
         
-        unset($im);
+        $im = null;
     
         return $original;
     }

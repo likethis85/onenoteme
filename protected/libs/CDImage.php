@@ -955,7 +955,7 @@ class CDImage
         
         $images = explode("\x00\x21\xF9\x04", $data);
         $count = count($images);
-        unset($images);
+        $images = null;
         return $count;
     }
     
@@ -1088,7 +1088,7 @@ class CDImage
 	    imagefill($im, 0, 0, $color);
 	    imagecopymerge($im, $this->_image, $dstX, $dstY, 0, 0, $imWidth, $imHeight, 100);
 	    $this->_image = $im;
-	    unset($im);
+	    $im = null;
 	}
     
     /**

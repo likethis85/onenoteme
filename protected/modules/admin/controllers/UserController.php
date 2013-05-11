@@ -78,8 +78,10 @@ class UserController extends AdminController
 	        if ($model->getIsNewRecord()) {
     	        $model->encryptPassword();
 	        }
-	        else
+	        else {
+                $attributes['password'] = null;
 	            unset($attributes['password']);
+            }
 	        
 	        if ($model->save()) {
 	            user()->setFlash('user_create_result', $model->username . '&nbsp;保存成功');

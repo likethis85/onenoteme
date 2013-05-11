@@ -31,7 +31,7 @@ class ChannelController extends Controller
         
         $this->channel = CHANNEL_DUANZI;
         $count = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('duanzi_count_page');
-        $data = $this->fetchChannelPosts(CHANNEL_DUANZI, $count);
+        $data = $this->fetchPosts(CHANNEL_DUANZI, MEDIA_TYPE_TEXT, $count);
         $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'text_list';
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
@@ -48,7 +48,7 @@ class ChannelController extends Controller
     
         $this->channel = CHANNEL_GHOSTSTORY;
         $count = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('ghost_story_count_page');
-        $data = $this->fetchChannelPosts(CHANNEL_GHOSTSTORY, $count);
+        $data = $this->fetchPosts(CHANNEL_GHOSTSTORY, MEDIA_TYPE_TEXT, $count);
         $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'text_list';
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
@@ -74,7 +74,7 @@ class ChannelController extends Controller
         else
             $count = param('lengtu_count_page');
         
-        $data = $this->fetchChannelPosts(CHANNEL_LENGTU, $count, 'uploadImagesCount');
+        $data = $this->fetchPosts(CHANNEL_LENGTU, MEDIA_TYPE_IMAGE, $count, 'uploadImagesCount');
         $data['list_view'] = '/post/' . $list_view;
         $view = (($s == POST_LIST_STYLE_WATERFALL)) ? '/post/mixed_list' : 'lengtu_list';
         if (request()->getIsAjaxRequest())
@@ -104,7 +104,7 @@ class ChannelController extends Controller
         else
             $count = param('girl_count_page');
         
-        $data = $this->fetchChannelPosts(CHANNEL_GIRL, $count, array('uploadImages', 'uploadImagesCount'));
+        $data = $this->fetchPosts(CHANNEL_GIRL, MEDIA_TYPE_IMAGE, $count, array('uploadImages', 'uploadImagesCount'));
         $data['list_view'] = '/post/' . $list_view;
         $view = (($s == POST_LIST_STYLE_WATERFALL)) ? '/post/mixed_list' : 'girl_list';
         if (request()->getIsAjaxRequest())
@@ -121,22 +121,30 @@ class ChannelController extends Controller
         $this->setKeywords(param('channel_video_keywords'));
         
         $this->channel = CHANNEL_VIDEO;
-        $data = $this->fetchChannelPosts(CHANNEL_VIDEO, param('video_count_page'));
+        $data = $this->fetchPosts(CHANNEL_VIDEO, MEDIA_TYPE_VIDEO, param('video_count_page'));
         $this->render('video_list', $data);
     }
 
-    private function fetchChannelPosts($channelid, $limit = 0, $with = '')
+    private function fetchPosts($channelid = null, $typeid = null, $limit = 0, $with = '')
     {
         $duration = 60 * 60 * 24;
-        $channelid = (int)$channelid;
         $limit = (int)$limit;
         if ($limit === 0)
             $limit = param('line_post_count_page');
         
         $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('t.channel_id'=>$channelid, 't.state'=>POST_STATE_ENABLED));
         $criteria->order = 't.istop desc, t.create_time desc, t.id desc';
         $criteria->limit = $limit;
+        if ($channelid !== null) {
+            $channelid = (int)$channelid;
+            $criteria->addColumnCondition(array('t.channel_id'=>$channelid));
+        }
+        if ($typeid !== null) {
+            $typeid = (int)$typeid;
+            $criteria->addColumnCondition(array('t.media_type'=>$typeid));
+        }
+        
+        $criteria->addColumnCondition(array('t.state'=>POST_STATE_ENABLED));
         
         $count = Post::model()->cache($duration)->count($criteria);
         $pages = new CPagination($count);

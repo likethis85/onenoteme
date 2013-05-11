@@ -78,7 +78,7 @@ class KeywordController extends AdminController
                         $error['message'] = $e->getMessage();
                         $errors[] = $kw;
                     }
-                    unset($model);
+                    $model = null;
                 }
                 FilterKeyword::updateCacheFile();
             }

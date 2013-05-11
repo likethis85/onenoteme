@@ -6,6 +6,7 @@
  * The followings are the available columns in table '{{post}}':
  * @property integer $id
  * @property integer $channel_id
+ * @property integer $media_type
  * @property string $title
  * @property integer $create_time
  * @property integer $create_ip
@@ -158,7 +159,7 @@ class Post extends CActiveRecord
 		// will receive user inputs.
 		$rules = array(
 		    array('title, content', 'required', 'message'=>'段子内容必须填写'),
-			array('channel_id, view_nums, up_score, down_score, comment_nums, disable_comment, state, favorite_count, create_time, user_id, original_width, original_height, original_frames, istop, homeshow, recommend, hottest', 'numerical', 'integerOnly'=>true),
+			array('channel_id, media_type, view_nums, up_score, down_score, comment_nums, disable_comment, state, favorite_count, create_time, user_id, original_width, original_height, original_frames, istop, homeshow, recommend, hottest', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
 			array('weibo_id', 'length', 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
@@ -202,9 +203,9 @@ class Post extends CActiveRecord
 	    $extra02 = '备用02';
 	    $extra03 = '备用03';
 	    $extra04 = '备用04';
-	    switch ($this->channel_id)
+	    switch ($this->media_type)
 	    {
-	        case CHANNEL_VIDEO:
+	        case MEDIA_TYPE_VIDEO:
 	            $extra01 = '视频HTML5';
 	            $extra02 = 'Flash代码';
 	            $extra03 = '视频来源';
@@ -216,6 +217,7 @@ class Post extends CActiveRecord
 		return array(
 			'id' => 'ID',
 		    'channel_id' => '频道',
+		    'media_type' => '类型',
 			'title' => '标题',
 	        'view_nums' => '浏览',
 	        'up_score' => '顶数',
@@ -867,7 +869,7 @@ class Post extends CActiveRecord
     public function getVideoHtml5Url()
     {
         $url = '';
-        if ($this->channel_id == CHANNEL_VIDEO && $this->extra01)
+        if ($this->media_type == MEDIA_TYPE_VIDEO && $this->extra01)
             $url = $this->extra02;
         
         return $url;
@@ -880,7 +882,7 @@ class Post extends CActiveRecord
     public function getVideoHtml()
     {
         $html = '';
-        if ($this->channel_id == CHANNEL_VIDEO && $this->extra02)
+        if ($this->media_type == MEDIA_TYPE_VIDEO && $this->extra02)
             $html = $this->extra02;
         
         return $html;
@@ -893,7 +895,7 @@ class Post extends CActiveRecord
     public function getVideoSourceUrl()
     {
         $url = '';
-        if ($this->channel_id == CHANNEL_VIDEO && $this->extra03)
+        if ($this->media_type == MEDIA_TYPE_VIDEO && $this->extra03)
             $url = $this->extra03;
         
         return $url;
@@ -907,7 +909,7 @@ class Post extends CActiveRecord
     public function getImageIsLong($width = IMAGE_MIDDLE_WIDTH)
     {
         $middleHeight = (int)$this->getThumbHeightByWidth($width);
-        if (($this->channel_id == CHANNEL_GIRL || $this->channel_id == CHANNEL_LENGTU)
+        if (($this->getIsImageType())
             && ($middleHeight > IMAGE_THUMBNAIL_HEIGHT) && ($middleHeight > IMAGE_MAX_HEIGHT_FOLDING) && $this->getMiddlePic())
             return true;
         else
@@ -953,6 +955,15 @@ class Post extends CActiveRecord
     public function getChannelLabel()
     {
         return CDBase::channelLabels((int)$this->channel_id);
+    }
+    
+    /**
+     * 获取段子类型名字
+     * @return string
+     */
+    public function getMediaTypeLabel()
+    {
+        return CDBase::mediaTypeLabels((int)$this->media_type);
     }
 
     /**
@@ -1015,7 +1026,7 @@ class Post extends CActiveRecord
      */
     public function getIsTextType()
     {
-        return $this->channel_id == CHANNEL_DUANZI || $this->channel_id == CHANNEL_GHOSTSTORY;
+        return $this->media_type == MEDIA_TYPE_TEXT;
     }
     
     /**
@@ -1024,7 +1035,7 @@ class Post extends CActiveRecord
      */
     public function getIsImageType()
     {
-        return $this->channel_id == CHANNEL_LENGTU || $this->channel_id == CHANNEL_GIRL;
+        return $this->media_type == MEDIA_TYPE_IMAGE;
     }
     
     /**
@@ -1033,7 +1044,7 @@ class Post extends CActiveRecord
      */
     public function getIsVideoType()
     {
-        return $this->channel_id == CHANNEL_VIDEO;
+        return $this->media_type == MEDIA_TYPE_VIDEO;
     }
     
     /**

@@ -309,7 +309,7 @@ class FeedController extends Controller
             if ($row['original_pic']) {
                 $thumb = new CDImageThumb($row['original_pic']);
                 $contentText .= sprintf('<p><img src="%s" title="%s" alt="%s" border="0"></p>', $thumb->middleImageUrl(), $row['title'], $row['title']);
-                unset($thumb);
+                $thumb = null;
             }
             $content->appendChild($dom->createCDATASection($contentText));
             $item->appendChild($content);

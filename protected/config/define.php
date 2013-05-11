@@ -8,6 +8,12 @@ define('CD_CLIENT_ID', 'wdz_clientid');
 define('GLOBAL_COOKIE_DOMAIN', '.' . SITE_DOMAIN);
 define('GLOBAL_COOKIE_PATH', '/');
 
+define('MEDIA_TYPE_UNKOWN', 0);
+define('MEDIA_TYPE_TEXT', 10);
+define('MEDIA_TYPE_IMAGE', 20);
+define('MEDIA_TYPE_AUDIO', 30);
+define('MEDIA_TYPE_VIDEO', 40);
+
 define('CHANNEL_DUANZI', 0);
 define('CHANNEL_LENGTU', 20);
 define('CHANNEL_GHOSTSTORY', 25);
@@ -16,6 +22,7 @@ define('CHANNEL_VIDEO', 40);
 define('CHANNEL_MOVIE', 70);
 
 // 以下是表名
+define('TABLE_CHANNEL', '{{channel}}');
 define('TABLE_POST', '{{post}}');
 define('TABLE_CONFIG', '{{config}}');
 define('TABLE_COMMENT', '{{comment}}');

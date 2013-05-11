@@ -30,14 +30,14 @@ class SiteController extends Controller
         $s = strip_tags(trim($s));
         $limit = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('line_post_count_page');
         
-        $channels = array(CHANNEL_DUANZI, CHANNEL_LENGTU);
+        $mediaTypes = array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE);
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('t.state'=>POST_STATE_ENABLED));
         
         if ($s != POST_LIST_STYLE_WATERFALL)
             $channels[] = CHANNEL_VIDEO;
         
-        $criteria->addInCondition('channel_id', $channels);
+        $criteria->addInCondition('media_type', $mediaTypes);
         $criteria->order = 't.istop desc, t.create_time desc, t.id desc';
         $criteria->limit = $limit;
         
