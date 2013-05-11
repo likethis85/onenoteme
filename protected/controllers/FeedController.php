@@ -7,7 +7,6 @@ class FeedController extends Controller
     {
         parent::init();
         header('Content-Type:application/xml; charset=' . app()->charset);
-        exit;
     }
     
     public function filters()
@@ -126,7 +125,7 @@ class FeedController extends Controller
         else
             $mediaType = (int)$mediaType;
             
-        $cacheID = sprintf('feed_cache_%d_%d_%s', $channelID, $mediaType, $source);
+        $cacheID = sprintf('feed_cache_%s_%s_%s', $channelID, $mediaType, $source);
         
         if ($data === false)
             $result = cache()->get($cacheID);
