@@ -52,21 +52,6 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$post->chan
         <?php $this->renderPartial('/comment/create', array('postid'=>(int)$post->id));?>
         <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'pages'=>$pages));?>
         </div>
-        <div class="content-block cd-border">
-            <script type="text/javascript">
-                (function(){
-                var url = "http://widget.weibo.com/distribution/comments.php?width=0&url=auto&ralateuid=1639121454&appkey=2981913360&dpc=1";
-                url = url.replace("url=auto", "url=" + document.URL);
-                document.write('<iframe id="WBCommentFrame" src="' + url + '" scrolling="no" frameborder="0" style="width:100%"></iframe>');
-                })();
-            </script>
-            <script src="http://tjs.sjs.sinajs.cn/open/widget/js/widget/comment.js" type="text/javascript" charset="utf-8"></script>
-            <script type="text/javascript">
-                window.WBComment.init({
-                    "id": "WBCommentFrame"
-                });
-            </script>
-        </div>
 	</div>
 </div>
 
