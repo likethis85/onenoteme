@@ -8,7 +8,7 @@ class Api_Movie extends ApiBase
         $cmd = app()->getDb()->createCommand()
             ->select(array('title', 'content', 'extra02', 'extra03', 'create_time'))
             ->from(TABLE_POST)
-            ->where('channel_id = :videoChannelID', array(':videoChannelID'=>CHANNEL_VIDEO))
+            ->where('channel_id = :videoChannelID and media_type = :videotype', array(':videoChannelID'=>CHANNEL_FUNNY, ':videotype'=>MEDIA_TYPE_VIDEO))
             ->order(array('create_time desc', 'id desc'))
             ->limit(self::PAGE_SIZE);
         
