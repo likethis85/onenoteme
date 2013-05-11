@@ -44,13 +44,13 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 	        </a>
 	    </div>
     	<ul class="channel-nav fleft">
-    		<li<?php echo ($this->channel===CHANNEL_DUANZI) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/joke');?>">挖笑话</a></li>
+    		<li<?php echo ($this->channel===CHANNEL_FUNNY . MEDIA_TYPE_TEXT) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/joke');?>">挖笑话</a></li>
     		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_LENGTU) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/lengtu');?>">挖趣图</a></li>
+    		<li<?php echo ($this->channel===CHANNEL_FUNNY . MEDIA_TYPE_IMAGE) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/lengtu');?>">挖趣图</a></li>
     		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_VIDEO) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/video');?>">挖视频</a></li>
+    		<li<?php echo ($this->channel===CHANNEL_FUNNY . MEDIA_TYPE_VIDEO) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/video');?>">挖视频</a></li>
     		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_GHOSTSTORY) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/ghost');?>">挖鬼故事</a></li>
+    		<li<?php echo ($this->channel===CHANNEL_GHOSTSTORY . MEDIA_TYPE_TEXT) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/ghost');?>">挖鬼故事</a></li>
     	</ul>
     	<ul class="fright">
     	</ul>

@@ -27,8 +27,8 @@ class ChannelController extends Controller
         $this->pageTitle = param('channel_joke_title');
         $this->setDescription(param('channel_joke_description'));
         $this->setKeywords(param('channel_joke_keywords'));
+        $this->channel = CHANNEL_FUNNY . MEDIA_TYPE_TEXT;
         
-        $this->channel = CHANNEL_DUANZI;
         $count = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('duanzi_count_page');
         $data = $this->fetchPosts(CHANNEL_FUNNY, MEDIA_TYPE_TEXT, null, $count);
         $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'text_list';
@@ -44,8 +44,8 @@ class ChannelController extends Controller
         $this->pageTitle = param('channel_ghost_title');
         $this->setDescription(param('channel_ghost_description'));
         $this->setKeywords(param('channel_ghost_keywords'));
-    
-        $this->channel = CHANNEL_GHOSTSTORY;
+        $this->channel = CHANNEL_GHOSTSTORY . MEDIA_TYPE_TEXT;
+        
         $count = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('ghost_story_count_page');
         $data = $this->fetchPosts(CHANNEL_GHOSTSTORY, MEDIA_TYPE_TEXT, null, $count);
         $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'text_list';
@@ -61,7 +61,7 @@ class ChannelController extends Controller
         $this->pageTitle = param('channel_lengtu_title');
         $this->setDescription(param('channel_lengtu_description'));
         $this->setKeywords(param('channel_lengtu_keywords'));
-        $this->channel = CHANNEL_LENGTU;
+        $this->channel = CHANNEL_FUNNY . MEDIA_TYPE_IMAGE;
         
         $list_view = 'line_list';
         if (($s == POST_LIST_STYLE_GRID)) {
@@ -91,7 +91,7 @@ class ChannelController extends Controller
         $this->pageTitle = param('channel_girl_title');
         $this->setDescription(param('channel_girl_description'));
         $this->setKeywords(param('channel_girl_keywords'));
-        $this->channel = CHANNEL_GIRL;
+        $this->channel = CHANNEL_GIRL . MEDIA_TYPE_IMAGE;
         
         $list_view = 'line_list';
         if (($s == POST_LIST_STYLE_GRID)) {
@@ -118,8 +118,8 @@ class ChannelController extends Controller
         $this->pageTitle = param('channel_video_title');
         $this->setDescription(param('channel_video_description'));
         $this->setKeywords(param('channel_video_keywords'));
+        $this->channel = CHANNEL_FUNNY . MEDIA_TYPE_VIDEO;
         
-        $this->channel = CHANNEL_VIDEO;
         $data = $this->fetchPosts(CHANNEL_FUNNY, MEDIA_TYPE_VIDEO, null, param('video_count_page'));
         $this->render('video_list', $data);
     }

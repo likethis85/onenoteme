@@ -23,11 +23,11 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 	        </a>
 	    </div>
     	<ul class="channel-nav">
-    		<li<?php echo ($this->channel===CHANNEL_DUANZI) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/joke');?>">挖笑话</a></li>
+    		<li<?php echo ($this->channel==CHANNEL_FUNNY . MEDIA_TYPE_TEXT) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/joke');?>">挖笑话</a></li>
     		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_LENGTU) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/lengtu');?>">挖趣图</a></li>
+    		<li<?php echo ($this->channel==CHANNEL_FUNNY . MEDIA_TYPE_IMAGE) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/lengtu');?>">挖趣图</a></li>
     		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_GHOSTSTORY) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/ghost');?>">挖鬼故事</a></li>
+    		<li<?php echo ($this->channel==CHANNEL_GHOSTSTORY . MEDIA_TYPE_TEXT) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/ghost');?>">挖鬼故事</a></li>
     	</ul>
     </div>
 </div>

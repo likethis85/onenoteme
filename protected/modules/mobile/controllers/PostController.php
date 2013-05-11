@@ -41,7 +41,7 @@ class PostController extends MobileController
         $this->setKeywords($pageKeyword);
         $this->setDescription($post->getPlainSummary());
         
-        $this->channel = (int)$post->channel_id;
+        $this->channel = $post->channel_id . $post->media_type;
         cs()->registerMetaTag('all', 'robots');
         $this->render('show', array(
             'post' => $post,
