@@ -10,19 +10,11 @@
 </sitemap>
 
 <sitemap>
-<loc><?php echo aurl('sitemap/joke');?></loc>
-</sitemap>
-
-<sitemap>
-<loc><?php echo aurl('sitemap/lengtu');?></loc>
+<loc><?php echo aurl('sitemap/funny');?></loc>
 </sitemap>
 
 <sitemap>
 <loc><?php echo aurl('sitemap/girl');?></loc>
-</sitemap>
-
-<sitemap>
-<loc><?php echo aurl('sitemap/video');?></loc>
 </sitemap>
 
 <sitemap>
