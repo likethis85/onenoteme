@@ -36,6 +36,17 @@
     </div>
     <div class="btn-group">
         <a class="btn btn-small btn-warning dropdown-toggle" data-toggle="dropdown" href="#">
+            类型过滤&nbsp;<span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="<?php echo $this->mediatypeUrl();?>">所有频道</a>
+            <?php foreach (CDBase::mediaTypeLabels() as $mediatype => $label):?>
+            <li><a href="<?php echo $this->mediatypeUrl($mediatype);?>"><?php echo $label;?></a></li>
+            <?php endforeach;?>
+        </ul>
+    </div>
+    <div class="btn-group">
+        <a class="btn btn-small btn-warning dropdown-toggle" data-toggle="dropdown" href="#">
             状态过滤&nbsp;<span class="caret"></span>
         </a>
         <ul class="dropdown-menu">

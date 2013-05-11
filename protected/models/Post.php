@@ -219,7 +219,7 @@ class Post extends CActiveRecord
 		return array(
 			'id' => 'ID',
 		    'channel_id' => '频道',
-		    'channel_id' => '分类',
+		    'category_id' => '分类',
 		    'media_type' => '类型',
 			'title' => '标题',
 	        'view_nums' => '浏览',

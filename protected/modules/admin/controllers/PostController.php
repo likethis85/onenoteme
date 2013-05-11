@@ -27,6 +27,18 @@ class PostController extends AdminController
         return url($this->route, $params);
     }
     
+    protected function mediatypeUrl($mediatype = null)
+    {
+        $params = $this->actionParams;
+        unset($params['page']);
+        if ($mediatype === null)
+            unset($params['mediatype']);
+        else
+            $params['mediatype'] = $mediatype;
+        
+        return url($this->route, $params);
+    }
+    
     protected function stateUrl($state = null)
     {
         $params = $this->actionParams;
@@ -107,7 +119,7 @@ class PostController extends AdminController
 	    return $post->save(true, array('summary', 'content'));
 	}
 	
-	public function actionLatest($channel = null, $state = null)
+	public function actionLatest($channel = null, $mediatype = null, $state = null)
 	{
 	    $criteria = new CDbCriteria();
 	    // 不显示未审核、被拒绝和回收站的内容
@@ -116,6 +128,12 @@ class PostController extends AdminController
 	        $channel = (int)$channel;
 	        $criteria->addColumnCondition(array('channel_id' => $channel));
 	        $titleLabel = ' - 频道：' . CDBase::channelLabels($channel);
+	    }
+	    
+	    if ($mediatype !== null) {
+	        $mediatype = (int)$mediatype;
+	        $criteria->addColumnCondition(array('media_type' => $mediatype));
+	        $titleLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
 	    }
 	    
 	    if ($state !== null) {
@@ -140,6 +158,12 @@ class PostController extends AdminController
 	        $criteria->addColumnCondition(array('channel_id' => $channel));
 	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
 	    }
+
+	    if ($mediatype !== null) {
+	        $mediatype = (int)$mediatype;
+	        $criteria->addColumnCondition(array('media_type' => $mediatype));
+	        $titleLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
+	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
 	    
@@ -156,6 +180,12 @@ class PostController extends AdminController
 	        $channel = (int)$channel;
 	        $criteria->addColumnCondition(array('channel_id' => $channel));
 	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
+	    }
+
+	    if ($mediatype !== null) {
+	        $mediatype = (int)$mediatype;
+	        $criteria->addColumnCondition(array('media_type' => $mediatype));
+	        $titleLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
@@ -189,6 +219,18 @@ class PostController extends AdminController
 	        $criteria->addColumnCondition(array('channel_id' => $channel));
 	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
 	    }
+
+	    if ($mediatype !== null) {
+	        $mediatype = (int)$mediatype;
+	        $criteria->addColumnCondition(array('media_type' => $mediatype));
+	        $titleLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
+	    }
+	     
+	    if ($state !== null) {
+	        $state = (int)$state;
+	        $criteria->addColumnCondition(array('t.state' => $state));
+	        $titleLabel = ' - 状态：' . AdminPost::stateLabels($state);
+	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
 
@@ -205,6 +247,18 @@ class PostController extends AdminController
 	        $channel = (int)$channel;
 	        $criteria->addColumnCondition(array('channel_id' => $channel));
 	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
+	    }
+
+	    if ($mediatype !== null) {
+	        $mediatype = (int)$mediatype;
+	        $criteria->addColumnCondition(array('media_type' => $mediatype));
+	        $titleLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
+	    }
+	     
+	    if ($state !== null) {
+	        $state = (int)$state;
+	        $criteria->addColumnCondition(array('t.state' => $state));
+	        $titleLabel = ' - 状态：' . AdminPost::stateLabels($state);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
@@ -223,6 +277,18 @@ class PostController extends AdminController
 	        $criteria->addColumnCondition(array('channel_id' => $channel));
 	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
 	    }
+
+	    if ($mediatype !== null) {
+	        $mediatype = (int)$mediatype;
+	        $criteria->addColumnCondition(array('media_type' => $mediatype));
+	        $titleLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
+	    }
+	     
+	    if ($state !== null) {
+	        $state = (int)$state;
+	        $criteria->addColumnCondition(array('t.state' => $state));
+	        $titleLabel = ' - 状态：' . AdminPost::stateLabels($state);
+	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
 
@@ -239,6 +305,18 @@ class PostController extends AdminController
 	        $channel = (int)$channel;
 	        $criteria->addColumnCondition(array('channel_id' => $channel));
 	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
+	    }
+
+	    if ($mediatype !== null) {
+	        $mediatype = (int)$mediatype;
+	        $criteria->addColumnCondition(array('media_type' => $mediatype));
+	        $titleLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
+	    }
+	     
+	    if ($state !== null) {
+	        $state = (int)$state;
+	        $criteria->addColumnCondition(array('t.state' => $state));
+	        $titleLabel = ' - 状态：' . AdminPost::stateLabels($state);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
