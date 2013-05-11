@@ -2,6 +2,7 @@
 class CDPostSearch extends CWidget
 {
     public $channel = null;
+    public $mediaType = null;
     public $count = 9;
     public $page = 1;
     public $order = 'create_time desc, id desc';
@@ -16,6 +17,8 @@ class CDPostSearch extends CWidget
         $this->page = (int)$this->page;
         if ($this->channel !== null)
             $this->channel = (int)$this->channel;
+        if ($this->mediaType !== null)
+            $this->mediaType = (int)$this->mediaType;
         if ($this->duration > 0)
             $this->duration = (int)$this->duration;
     }
@@ -47,6 +50,8 @@ class CDPostSearch extends CWidget
         $criteria->addColumnCondition(array('t.state' => POST_STATE_ENABLED));
         if ($this->channel !== null)
             $criteria->addColumnCondition(array('t.channel_id' => $this->channel));
+        if ($this->mediaType !== null)
+            $criteria->addColumnCondition(array('t.media_type' => $this->mediaType));
         
         $criteria->order = $this->order;
         $criteria->limit = $this->count;

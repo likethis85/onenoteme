@@ -15,7 +15,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo $this->channel;?
 	<div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
     <?php $this->widget('CDAdvert', array('solt'=>'channel_home_sidebar_02'));?>
     <!-- 最新趣图 开始 -->
-    <?php $this->widget('CDPostSearch', array('title'=>'最新趣图', 'channel'=>CHANNEL_LENGTU));?>
+    <?php $this->widget('CDPostSearch', array('title'=>'最新趣图', 'channel'=>CHANNEL_FUNNY, 'mediaType'=>MEDIA_TYPE_IMAGE));?>
     <!-- 最新趣图 结束 -->
 </div>
 <div class="clear"></div>
