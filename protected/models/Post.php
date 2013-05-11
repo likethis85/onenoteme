@@ -159,7 +159,7 @@ class Post extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		$rules = array(
-		    array('title, content', 'required', 'message'=>'段子内容必须填写'),
+		    array('channel_id, media_type, title, content', 'required', 'message'=>'段子内容必须填写'),
 			array('channel_id, category_id, media_type, view_nums, up_score, down_score, comment_nums, disable_comment, state, favorite_count, create_time, user_id, original_width, original_height, original_frames, istop, homeshow, recommend, hottest', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
 			array('weibo_id', 'length', 'max'=>30),

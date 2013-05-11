@@ -61,7 +61,7 @@ class PostController extends AdminController
         $this->render('info', array('model'=>$model));
     }
     
-	public function actionCreate($id = 0, $channel_id = null)
+	public function actionCreate($id = 0, $channel_id = null, $media_type = null)
 	{
 	    $id = (int)$id;
 	    if ($id === 0) {
@@ -76,6 +76,8 @@ class PostController extends AdminController
 	        
 	        if ($channel_id !== null)
 	            $model->channel_id = (int)$channel_id;
+	        if ($media_type !== null)
+	            $model->media_type = (int)$media_type;
 	        
 	        $this->adminTitle = '发布段子';
 	    }
@@ -101,7 +103,7 @@ class PostController extends AdminController
 	        }
 	    }
 	    
-	    $this->channel = 'create_post_' . $model->channel_id;
+	    $this->channel = 'create_post_' . $model->media_type;
 		$this->render('create', array(
 		    'model'=>$model,
 		));

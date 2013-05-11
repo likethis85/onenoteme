@@ -10,6 +10,13 @@
 <fieldset>
     <legend><?php echo $this->adminTitle;?></legend>
     <div class="control-group bottom10px">
+        <?php echo CHtml::activeLabel($model, 'media_type', array('class'=>'control-label'));?>
+        <div class="controls">
+            <?php echo CHtml::activeDropDownList($model, 'media_type', CDBase::mediaTypeLabels());?>
+            <?php if ($model->hasErrors('media_type')):?><p class="help-block"><?php echo $model->getError('media_type');?></p><?php endif;?>
+        </div>
+    </div>
+    <div class="control-group bottom10px">
         <?php echo CHtml::activeLabel($model, 'channel_id', array('class'=>'control-label'));?>
         <div class="controls">
             <?php echo CHtml::activeDropDownList($model, 'channel_id', CDBase::channelLabels());?>
