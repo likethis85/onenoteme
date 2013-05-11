@@ -38,21 +38,26 @@ class DefaultController extends MobileController
 	
 	private static function fetchLatestPosts()
 	{
-	    $channels = array(CHANNEL_DUANZI, CHANNEL_LENGTU);
+	    $channels = array(CHANNEL_FUNNY);
+	    $mediaTypes = array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE);
 	    $criteria = new CDbCriteria();
-	    $criteria->addInCondition('t.channel_id', $channels);
+	    if ($channels)
+    	    $criteria->addInCondition('t.channel_id', $channels);
+	    if ($mediaTypes)
+    	    $criteria->addInCondition('t.media_type', $mediaTypes);
 	    $criteria->order = 't.istop desc, t.create_time desc';
 	    $criteria->limit = param('mobile_post_list_page_count');
 	    $criteria->scopes = array('published');
 	
-	    $count = MobilePost::model()->count($criteria);
+	    $duration = 60 * 60 * 24;
+	    $count = MobilePost::model()->cache($duration)->count($criteria);
 	    $pages = new CPagination($count);
 	    $pages->setPageSize(param('mobile_post_list_page_count'));
 	    $pages->applyLimit($criteria);
-	    $posts = MobilePost::model()->findAll($criteria);
+	    $models = MobilePost::model()->findAll($criteria);
 	
 	    return array(
-	        'models' => $posts,
+	        'models' => $models,
 	        'pages' => $pages,
 	    );
 	}

@@ -243,11 +243,11 @@ class CDBase
     public static function mediaTypeLabels($typeID = null)
     {
         $labels = array(
-            MEDIA_TYPE_TEXT => '挖笑话',
-            MEDIA_TYPE_IMAGE => '挖趣图',
-            MEDIA_TYPE_AUDIO => '挖女神',
-            MEDIA_TYPE_VIDEO => '挖短片',
-            MEDIA_TYPE_UNKOWN => '挖鬼故事',
+            MEDIA_TYPE_TEXT => '文字',
+            MEDIA_TYPE_IMAGE => '图文',
+            MEDIA_TYPE_AUDIO => '音频',
+            MEDIA_TYPE_VIDEO => '视频',
+            MEDIA_TYPE_UNKOWN => '未知',
         );
     
         return $typeID === null ? $labels : $labels[$typeID];

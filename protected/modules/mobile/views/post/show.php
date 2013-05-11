@@ -10,7 +10,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$post->chan
         	<?php echo $post->getAuthorNameLink();?>
     	</div>
 	    <div class="item-title">
-	        <?php if (($post->channel_id != CHANNEL_DUANZI && $post->channel_id != CHANNEL_GHOSTSTORY) || $post->hasTitle):?>
+	        <?php if (!$post->isTextType || $post->hasTitle):?>
                 <h1><?php echo $post->filterTitle;?></h1>
             <?php endif;?>
         </div>

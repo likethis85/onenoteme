@@ -6,11 +6,11 @@
         	<?php echo $model->getAuthorNameLink();?>
     	</div>
         <div class="item-detail">
-            <?php if (($model->channel_id != CHANNEL_DUANZI && $model->channel_id != CHANNEL_GHOSTSTORY) || $model->hasTitle): // 不是笑话并且不是鬼故事或是有单独标题的?>
+            <?php if (!$model->isTextType || $model->hasTitle): // 不是笑话并且不是鬼故事或是有单独标题的?>
             <h2 class="item-title"><?php echo $model->getTitleLink(0, '_self');?></h2>
             <?php endif;?>
             
-            <?php if ($model->channel_id == CHANNEL_LENGTU && $model->getFixThumb()): // 趣图?>
+            <?php if ($model->channel_id == CHANNEL_FUNNY && $model->getOriginalPic()): // 趣图?>
             <div class="post-image">
                 <div class="thumbbox">
                     <?php if ($model->getImageIsLong(150)):?>
@@ -20,7 +20,7 @@
                     </a>
                     <?php if ($model->getImageIsAnimation()):?><i class="site-bg icon-gif-sign"></i><?php endif;?>
                     <?php else:?>
-                    <a href="<?php echo $model->url;?>" title="点击查看大图" data-bmiddle-url="<?php echo $model->getMiddlePic();?>">
+                    <a href="<?php echo $model->getUrl();?>" title="点击查看大图" data-bmiddle-url="<?php echo $model->getMiddlePic();?>">
                         <?php echo CHtml::image($model->getMiddlePic(), $model->title, array('class'=>'bmiddle'));?>
                     </a>
                     <?php endif;?>
@@ -47,7 +47,7 @@
                     </a>
                 </div>
             </div>
-            <?php elseif ($model->channel_id == CHANNEL_VIDEO && $model->videoHtml):?>
+            <?php elseif ($model->channel_id == CHANNEL_FUNNY && $model->isVideoType && $model->videoHtml):?>
             <div class="content-block video-player"><?php echo $model->videoHtml;?></div>
             <?php endif;?>
             

@@ -6,6 +6,7 @@
  * The followings are the available columns in table '{{post}}':
  * @property integer $id
  * @property integer $channel_id
+ * @property integer $category_id
  * @property integer $media_type
  * @property string $title
  * @property integer $create_time
@@ -159,7 +160,7 @@ class Post extends CActiveRecord
 		// will receive user inputs.
 		$rules = array(
 		    array('title, content', 'required', 'message'=>'段子内容必须填写'),
-			array('channel_id, media_type, view_nums, up_score, down_score, comment_nums, disable_comment, state, favorite_count, create_time, user_id, original_width, original_height, original_frames, istop, homeshow, recommend, hottest', 'numerical', 'integerOnly'=>true),
+			array('channel_id, category_id, media_type, view_nums, up_score, down_score, comment_nums, disable_comment, state, favorite_count, create_time, user_id, original_width, original_height, original_frames, istop, homeshow, recommend, hottest', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
 			array('weibo_id', 'length', 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
@@ -180,6 +181,7 @@ class Post extends CActiveRecord
 	public function relations()
 	{
 		return array(
+		    'category' => array(self::BELONGS_TO, 'Category', 'category_id'),
 		    'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		    'profile' => array(self::BELONGS_TO, 'UserProfile', 'user_id'),
 		    'comments' => array(self::HAS_MANY, 'Comment', 'post_id'),
@@ -217,6 +219,7 @@ class Post extends CActiveRecord
 		return array(
 			'id' => 'ID',
 		    'channel_id' => '频道',
+		    'channel_id' => '分类',
 		    'media_type' => '类型',
 			'title' => '标题',
 	        'view_nums' => '浏览',

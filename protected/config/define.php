@@ -14,15 +14,16 @@ define('MEDIA_TYPE_IMAGE', 20);
 define('MEDIA_TYPE_AUDIO', 30);
 define('MEDIA_TYPE_VIDEO', 40);
 
+
+define('CHANNEL_FUNNY', 1);
 define('CHANNEL_DUANZI', 0);
 define('CHANNEL_LENGTU', 20);
-define('CHANNEL_GHOSTSTORY', 25);
-define('CHANNEL_GIRL', 30);
 define('CHANNEL_VIDEO', 40);
-define('CHANNEL_MOVIE', 70);
+define('CHANNEL_GIRL', 30);
+define('CHANNEL_GHOSTSTORY', 25);
 
 // 以下是表名
-define('TABLE_CHANNEL', '{{channel}}');
+define('TABLE_CATEGORY', '{{category}}');
 define('TABLE_POST', '{{post}}');
 define('TABLE_CONFIG', '{{config}}');
 define('TABLE_COMMENT', '{{comment}}');

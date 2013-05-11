@@ -113,6 +113,7 @@ return array(
                 '<_a:(joke|lengtu|girl|video|ghost)>/page/<page:\d+>' => 'channel/<_a>',
                 '<_a:(joke|lengtu|girl|video|ghost)>/<s:(fall|grid|line)>' => 'channel/<_a>',
                 '<_a:(joke|lengtu|girl|video|ghost)>' => 'channel/<_a>',
+                'c/<token:\w+>' => 'channe/index',
                 
                 '<_a:(login|signup|logout|bdmap|links)>' => 'site/<_a>',
                 'archives/<id:\d+>' => 'post/show',

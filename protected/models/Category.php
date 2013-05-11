@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "{{channel}}".
+ * This is the model class for table "{{category}}".
  *
- * The followings are the available columns in table '{{channel}}':
+ * The followings are the available columns in table '{{category}}':
  * @property integer $id
  * @property integer $parent_id
  * @property string $name
@@ -15,14 +15,14 @@
  * @property string $url
  *
  */
-class Channel extends CActiveRecord
+class Category extends CActiveRecord
 {
     const ROOT_PARENT_ID = 0;
-    const CACHEN_ID_PREFIX = 'channels_cache_';
+    const CACHEN_ID_PREFIX = 'categorys_cache_';
     
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Channel the static model class
+	 * @return Category the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -34,7 +34,7 @@ class Channel extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return TABLE_CHANNEL;
+		return TABLE_CATEGORY;
 	}
 
 	/**
@@ -58,7 +58,7 @@ class Channel extends CActiveRecord
 	public function relations()
 	{
 		return array(
-	        'postCount' => array(self::STAT, 'Post', 'channel_id'),
+	        'postCount' => array(self::STAT, 'Post', 'category_id'),
 		);
 	}
 	
@@ -80,15 +80,10 @@ class Channel extends CActiveRecord
 	
 	public function getUrl()
 	{
-	    return aurl('channel/' . $this->token);
+	    return aurl('category/' . $this->token);
 	}
 	
-	public function getSubChannels($navshow = null, $order = 'orderid desc, id asc', $cache = true)
-	{
-	    return self::fetchSubChannels($this->parent_id, $navshow, $order, $cache);
-	}
-	
-	public static function fetchChannels(CDbCriteria $criteria = null, $cache = true)
+	public static function fetchCategories(CDbCriteria $criteria = null, $cache = true)
 	{
 	    static $data = array();
 	    
@@ -101,7 +96,7 @@ class Channel extends CActiveRecord
             $criteria = new CDbCriteria();
 	    
 	    if ($cache) {
-	        $models = self::fetchCacheChannels($criteria);
+	        $models = self::fetchCacheCategories($criteria);
 	        if ($models !== false) {
 	            $data[$key] = $models;
 	            return $models;
@@ -115,7 +110,7 @@ class Channel extends CActiveRecord
 	    return $models;
 	}
 	
-	public static function fetchSubChannels($parentID = null, $navshow = null, $order = 't.orderid desc, t.id asc', $cache = true)
+	public static function fetchSubCategories($parentID = null, $navshow = null, $order = 't.orderid desc, t.id asc', $cache = true)
 	{
 	    $criteria = new CDbCriteria();
 	    $criteria->order = $order;
@@ -124,7 +119,7 @@ class Channel extends CActiveRecord
 	    if ($navshow !== null)
     	    $criteria->addColumnCondition(array('t.navshow' => (int)$navshow));
 	    
-	    $models = self::fetchChannels($criteria, $cache);
+	    $models = self::fetchCategories($criteria, $cache);
 	    return $models;
 	}
 	
@@ -134,7 +129,7 @@ class Channel extends CActiveRecord
 	    return $id;
 	}
 	
-	public static function fetchCacheChannels(CDbCriteria $criteria = null)
+	public static function fetchCacheCategories(CDbCriteria $criteria = null)
 	{
 	    if (cache()) {
 	        $cacheID = self::generateCacheID($criteria);
@@ -144,21 +139,10 @@ class Channel extends CActiveRecord
 	        return false;
 	}
 	
-	public static function fetchLevelChannels()
-	{
-	    $models = self::fetchChannels();
-	    $data = array();
-	    foreach ($models as $model)
-	        $data[$model->parent_id] = $model;
-	    
-	    $models = null;
-	    return $data;
-	}
-	
 	public static function refreshCache(CDbCriteria $criteria = null, $expire = 0)
 	{
 	    if (cache()) {
-            $value = self::fetchChannels($criteria, false);
+            $value = self::fetchCategories($criteria, false);
             $cacheID = self::generateCacheID($criteria);
 	        return cache()->set($cacheID, $value, $expire);
 	    }
@@ -174,6 +158,11 @@ class Channel extends CActiveRecord
 	    }
 	    else
 	        throw new Exception('cache component is not set');
+	}
+	
+	public static function findByToken($token)
+	{
+	    return self::model()->findByAttributes(array('token'=>$token));
 	}
 
 	protected function beforeSave()

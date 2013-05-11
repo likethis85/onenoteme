@@ -15,7 +15,7 @@ class ChannelController extends MobileController
 
 	public function actionJoke($page = 1)
 	{
-	    $data = self::fetchLatestPosts(CHANNEL_DUANZI);
+	    $data = self::fetchPosts(CHANNEL_FUNNY, MEDIA_TYPE_TEXT);
 	     
 	    $this->pageTitle = '挖笑话 - 最冷笑话精选，每天分享笑话N枚，你的贴身开心果';
         $this->setDescription($this->pageTitle);
@@ -28,7 +28,7 @@ class ChannelController extends MobileController
 
 	public function actionGhost($page = 1)
 	{
-	    $data = self::fetchLatestPosts(CHANNEL_GHOSTSTORY);
+	    $data = self::fetchPosts(CHANNEL_GHOSTSTORY, MEDIA_TYPE_TEXT);
 	     
 	    $this->pageTitle = '挖鬼故事 - 让鬼友们在生活中找点恐怖的小刺激';
         $this->setDescription($this->pageTitle);
@@ -41,7 +41,7 @@ class ChannelController extends MobileController
 	
 	public function actionLengtu($page = 1)
 	{
-	    $data = self::fetchLatestPosts(CHANNEL_LENGTU);
+	    $data = self::fetchPosts(CHANNEL_FUNNY, MEDIA_TYPE_IMAGE);
 	     
 	    $this->pageTitle = '挖趣图 - 最搞笑的，最好玩的，最内涵的图片精选';
         $this->setDescription($this->pageTitle);
@@ -57,7 +57,7 @@ class ChannelController extends MobileController
 	    // @todo 暂时屏蔽
 	    $this->redirect('/mobile');
 	    
-	    $data = self::fetchLatestPosts(CHANNEL_GIRL);
+	    $data = self::fetchPosts(CHANNEL_GIRL, MEDIA_TYPE_IMAGE);
 	     
 	    $this->pageTitle = '挖福利 - 最新最全的女明星写真、清纯校花、美女模特、正妹性感自拍';
         $this->setDescription($this->pageTitle);
@@ -70,7 +70,7 @@ class ChannelController extends MobileController
 	
 	public function actionVideo($page = 1)
 	{
-	    $data = self::fetchLatestPosts(CHANNEL_VIDEO);
+	    $data = self::fetchPosts(CHANNEL_FUNNY, MEDIA_TYPE_VIDEO);
 	     
 	    $this->pageTitle = '挖短片 - 各种有趣的，新奇的，经典的，有意思的精品视频短片';
         $this->setDescription($this->pageTitle);
@@ -81,23 +81,41 @@ class ChannelController extends MobileController
 	    $this->render('posts', $data);
 	}
 
-	private static function fetchLatestPosts($id)
+	private static function fetchPosts($channelid = null, $typeid = null, $categoryid = null, $with = '')
 	{
-	    $id = (int)$id;
+	    $duration = 60 * 60 * 24;
+	    $limit = (int)$limit;
+	    
 	    $criteria = new CDbCriteria();
 	    $criteria->order = 't.istop desc, t.create_time desc';
 	    $criteria->limit = param('mobile_post_list_page_count');
 	    $criteria->scopes = array('published');
-	    $criteria->addColumnCondition(array('channel_id' => $id));
+	    
+	    if ($categoryid !== null) {
+	        $categoryid = (int)$categoryid;
+	        $criteria->addColumnCondition(array('t.category_id'=>$categoryid));
+	    }
+	    if ($channelid !== null) {
+	        $channelid = (int)$channelid;
+	        $criteria->addColumnCondition(array('t.channel_id'=>$channelid));
+	    }
+	    if ($typeid !== null) {
+	        $typeid = (int)$typeid;
+	        $criteria->addColumnCondition(array('t.media_type'=>$typeid));
+	    }
 	
-	    $count = MobilePost::model()->count($criteria);
+	    $count = MobilePost::model()->cache($duration)->count($criteria);
 	    $pages = new CPagination($count);
 	    $pages->setPageSize(param('mobile_post_list_page_count'));
 	    $pages->applyLimit($criteria);
-	    $posts = MobilePost::model()->findAll($criteria);
-	
+	    
+	    if ($with)
+	        $models = MobilePost::model()->with($with)->findAll($criteria);
+	    else
+	        $models = MobilePost::model()->findAll($criteria);
+	    
 	    return array(
-	        'models' => $posts,
+	        'models' => $models,
 	        'pages' => $pages,
 	    );
 	}

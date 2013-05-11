@@ -20,11 +20,11 @@
         	<?php echo $model->getAuthorNameLink();?>
     	</div>
         <div class="item-detail">
-            <?php if (($model->channel_id != CHANNEL_DUANZI && $model->channel_id != CHANNEL_GHOSTSTORY) || $model->hasTitle): // 不是笑话并且不是鬼故事或是有单独标题的?>
+            <?php if (!$model->isTextType || $model->hasTitle): // 不是笑话并且不是鬼故事或是有单独标题的?>
             <h2 class="item-title"><?php echo $model->titleLink;?></h2>
             <?php endif;?>
             
-            <?php if ($model->channel_id == CHANNEL_LENGTU && $model->thumbnail): // 趣图?>
+            <?php if ($model->channel_id == CHANNEL_FUNNY && $model->getOriginalPic()): // 趣图?>
             <div class="post-image">
                 <div class="thumbbox">
                     <?php if ($model->getImageIsLong(150)):?>
@@ -69,7 +69,7 @@
                 </ul>
                 <?php endif;?>
             </div>
-            <?php elseif ($model->channel_id == CHANNEL_VIDEO && $model->videoHtml): // 视频?>
+            <?php elseif ($model->channel_id == CHANNEL_FUNNY && $model->isVideoType && $model->videoHtml): // 视频?>
             <div class="content-block video-player"><?php echo $model->videoHtml;?></div>
             <?php endif;?>
             

@@ -179,12 +179,13 @@ EOD;
 
     public function actionChannel()
     {
+        echo '<pre>';
+        
         $channels = Channel::fetchChannels(null, false);
         foreach ($channels as $c)
             echo '<li>' . $c->getUrl() . '</li>';
         
         $list = CHtml::listData($channels, 'id', 'token');
-        echo '<pre>';
         print_r($list);
         
         
@@ -193,8 +194,8 @@ EOD;
             echo '<li>' . $c->getUrl() . '</li>';
         
         $list = CHtml::listData($channels, 'id', 'token');
-        echo '<pre>';
         print_r($list);
+        
     }
     
 }
