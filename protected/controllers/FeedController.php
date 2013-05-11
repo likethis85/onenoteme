@@ -194,14 +194,14 @@ class FeedController extends Controller
     
             $summary = $dom->createElement('summary');
             $summaryText = $model->getFilterSummary(300);
-            $summary->appendChild($dom->createCDATASection($summaryText));
+            $summary->appendChild($dom->createCDATASection(utf8ForXml($summaryText)));
             $item->appendChild($summary);
     
             $content = $dom->createElement('content:encoded');
             $contentText = $model->getFilterContent();
             if ($model->getIsVideoType())
                 $contentText = '<p>' . $model->getVideoHtml() . '</p>' . $contentText;
-            $content->appendChild($dom->createCDATASection($contentText));
+            $content->appendChild($dom->createCDATASection(utf8ForXml($contentText)));
             $item->appendChild($content);
         }
     
@@ -224,3 +224,7 @@ class FeedController extends Controller
     
 }
 
+function utf8ForXml($string)
+{
+    return preg_replace ('/[^\x{0009}\x{000a}\x{000d}\x{0020}-\x{D7FF}\x{E000}-\x{FFFD}]+/u', ' ', $string);
+}
