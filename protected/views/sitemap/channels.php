@@ -24,4 +24,13 @@
     <loc><?php echo aurl('channel/ghost');?></loc>
     <priority>1.0</priority>
 </url>
+
+<url>
+    <loc><?php echo aurl('site/bdmap');?></loc>
+    <priority>1.0</priority>
+</url>
+<url>
+    <loc><?php echo aurl('site/links');?></loc>
+    <priority>1.0</priority>
+</url>
 </urlset>

@@ -3,22 +3,37 @@
 
 <sitemap>
 <loc><?php echo aurl('sitemap/channels');?></loc>
+<lastmod><?php echo date('Y-m-d');?></lastmod>
 </sitemap>
 
 <sitemap>
 <loc><?php echo aurl('sitemap/tags');?></loc>
+<lastmod><?php echo date('Y-m-d');?></lastmod>
 </sitemap>
 
 <sitemap>
-<loc><?php echo aurl('sitemap/funny');?></loc>
+<loc><?php echo aurl('sitemap/joke');?></loc>
+<lastmod><?php echo date('Y-m-d');?></lastmod>
+</sitemap>
+
+<sitemap>
+<loc><?php echo aurl('sitemap/lengtu');?></loc
+<lastmod><?php echo date('Y-m-d');?></lastmod>>
 </sitemap>
 
 <sitemap>
 <loc><?php echo aurl('sitemap/girl');?></loc>
+<lastmod><?php echo date('Y-m-d');?></lastmod>
+</sitemap>
+
+<sitemap>
+<loc><?php echo aurl('sitemap/video');?></loc>
+<lastmod><?php echo date('Y-m-d');?></lastmod>
 </sitemap>
 
 <sitemap>
 <loc><?php echo aurl('sitemap/ghost');?></loc>
+<lastmod><?php echo date('Y-m-d');?></lastmod>
 </sitemap>
 
 </sitemapindex>

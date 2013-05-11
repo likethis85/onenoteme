@@ -15,11 +15,6 @@ class SitemapController extends Controller
                 'COutputCache + index, channels, tags',
                 'duration' => 600,
             ),
-            array(
-                'COutputCache + archives',
-                'duration' => 3600,
-                'varyByParam' => array('date'),
-            ),
         );
     }
     
@@ -48,9 +43,19 @@ class SitemapController extends Controller
         exit(0);
     }
     
-    public function actionFunny()
+    public function actionJoke()
     {
-        $this->fetchChannelPosts(CHANNEL_FUNNY);
+        $this->fetchChannelPosts(CHANNEL_FUNNY, MEDIA_TYPE_TEXT);
+    }
+    
+    public function actionLengtu()
+    {
+        $this->fetchChannelPosts(CHANNEL_FUNNY, MEDIA_TYPE_IMAGE);
+    }
+    
+    public function actionVideo()
+    {
+        $this->fetchChannelPosts(CHANNEL_FUNNY, MEDIA_TYPE_VIDEO);
     }
     
     public function actionGirl()
@@ -63,7 +68,7 @@ class SitemapController extends Controller
         $this->fetchChannelPosts(CHANNEL_GHOSTSTORY);
     }
     
-    private function fetchChannelPosts($channel = null, $duration = 600)
+    private function fetchChannelPosts($channel = null, $mediatype = null, $duration = 3600)
     {
         $conditions = 'state = :enabled';
         $params = array(':enabled' => POST_STATE_ENABLED);
@@ -71,12 +76,16 @@ class SitemapController extends Controller
             $conditions = array('and', 'channel_id = :channelID', $conditions);
             $params[':channelID'] = (int)$channel;
         }
+        if ($mediatype !== null) {
+            $conditions = array('and', 'media_type = :mediatype', $conditions);
+            $params[':mediatype'] = (int)$mediatype;
+        }
         $cmd = db()->cache($duration)->createCommand()
             ->select('id')
             ->from(TABLE_POST)
             ->where($conditions, $params)
             ->order('id desc')
-            ->limit(5000);
+            ->limit(20000);
         $posts = $cmd->queryAll();
         $this->renderPartial('posts', array(
             'posts' => $posts
