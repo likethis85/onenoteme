@@ -146,6 +146,11 @@ return array(
             'loginUrl' => array('/site/login'),
             'guestName' => '匿名人士',
         ),
+        'mailer' => array(
+            'class' => 'application.extensions.CDSendCloudMailer',
+            'username' => 'postmaster@wdztrigger.sendcloud.org',
+            'password' => 'voQh3RP5'
+        ),
         'localUploader' => array(
             'class' => 'application.extensions.CDLocalUploader',
             'basePath' => $params['localUploadBasePath'],

@@ -2,7 +2,7 @@
 
 class TestController extends Controller
 {
-    public function init1()
+    public function init()
     {
         $this->redirect('/');
         exit(0);
@@ -176,28 +176,21 @@ EOD;
         
         $im->output();
     }
-
-    public function actionChannel()
-    {
-        echo '<pre>';
-        
-        $channels = Channel::fetchChannels(null, false);
-        foreach ($channels as $c)
-            echo '<li>' . $c->getUrl() . '</li>';
-        
-        $list = CHtml::listData($channels, 'id', 'token');
-        print_r($list);
-        
-        
-        $channels = Channel::fetchSubChannels(Channel::ROOT_PARENT_ID, null, 'orderid desc, id asc', false);
-        foreach ($channels as $c)
-            echo '<li>' . $c->getUrl() . '</li>';
-        
-        $list = CHtml::listData($channels, 'id', 'token');
-        print_r($list);
-        
-    }
     
+    public function actionMailer()
+    {
+        $mailer = app()->getComponent('mailer');
+        $mailer->message()
+            ->addRecipient('80171597@qq.com')
+            ->setReplyTo('89753425@163.com')
+            ->setFromName('挖段子网')
+            ->setFromAddress('cdcchen@163.com')
+            ->setSubject('挖段子网注册确认111444444')
+            ->setBody("<strong>SendCloud PHP SDK 测试正4444文111，请参考</strong> <a href='http://sendcloud.sohu.com'>SendCloud</a>");
+        var_dump($mailer);
+        $mailer->send();
+//         var_dump($mailer);
+    }
 }
 
 
