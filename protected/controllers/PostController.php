@@ -72,10 +72,6 @@ class PostController extends Controller
             $nextPosts = self::fetchNextPosts($post, 9);
         
         // 获取评论
-        $limit = param('comment_count_page');
-        $conditions = array('and', 'post_id = :pid', 'state = :state');
-        $params = array(':pid' => $id, ':state' => COMMENT_STATE_ENABLED);
-        
         $commentsData = self::fetchComments($id);
         
         $tagsText = $post->getTagText(',');
