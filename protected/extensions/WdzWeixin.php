@@ -60,7 +60,8 @@ class WdzWeixin extends CDWeixin
     private function postJoke()
     {
         $post = new Post();
-        $post->channel_id = CHANNEL_DUANZI;
+        $post->channel_id = CHANNEL_FUNNY;
+        $post->media_type = MEDIA_TYPE_TEXT;
         $post->content = strip_tags($this->_data->Content);
         $post->create_time = $_SERVER['REQUEST_TIME'];
         $post->state = POST_STATE_UNVERIFY;
@@ -199,10 +200,11 @@ class WdzWeixin extends CDWeixin
             ->where('wx_token = :wxid', array(':wxid'=>$wxid))
             ->queryScalar();
         
+        $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_FUNNY, ':mediatype'=>MEDIA_TYPE_TEXT, ':lastID' => (int)$lastID);
         $cmd = app()->getDb()->createCommand()
             ->select(array('id', 'content'))
             ->from(TABLE_POST)
-            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_DUANZI, ':lastID' => (int)$lastID))
+            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'media_type'=>':mediatype', 'id > :lastID'), $params)
             ->order('id asc')
             ->limit($count);
 
@@ -257,11 +259,11 @@ class WdzWeixin extends CDWeixin
             ->where('wx_token = :wxid', array(':wxid'=>$wxid))
             ->queryScalar();
         
-        $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_LENGTU, ':lastID' => (int)$lastID);
+        $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_FUNNY, ':mediatype'=>MEDIA_TYPE_IMAGE, ':lastID' => (int)$lastID);
         $cmd = app()->getDb()->createCommand()
             ->select(array('id', 'title', 'content', 'original_pic'))
             ->from(TABLE_POST)
-            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), $params)
+            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'media_type = :mediatype', 'id > :lastID'), $params)
             ->order('id asc');
         $row = $cmd->queryRow();
         
@@ -409,11 +411,11 @@ class WdzWeixin extends CDWeixin
             ->where('wx_token = :wxid', array(':wxid'=>$wxid))
             ->queryScalar();
         
-        $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_VIDEO, ':lastID' => (int)$lastID);
+        $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_FUNNY, ':mediatype'=>MEDIA_TYPE_VIDEO, ':lastID' => (int)$lastID);
         $cmd = app()->getDb()->createCommand()
             ->select(array('id', 'title', 'content', 'original_pic'))
             ->from(TABLE_POST)
-            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), $params)
+            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'media_type = :meidatype', 'id > :lastID'), $params)
             ->order('id asc');
         $row = $cmd->queryRow();
         
