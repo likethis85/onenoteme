@@ -9,21 +9,21 @@ class PostCommand extends CConsoleCommand
             ->order('create_time desc, id desc')
             ->limit($count);
         
-        $conditions = array('and', 'channel_id = :channelID', 'state = :disable_state');
+        $conditions = array('and', 'channel_id = :channelID', 'media_type = :mediatype', 'state = :disable_state');
         
-        $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_DUANZI);
+        $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_FUNNY, ':mediatype'=>MEDIA_TYPE_TEXT);
         $duanziIDs = $cmd->where($conditions, $params)->queryColumn();
         
-        $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_LENGTU);
+        $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_FUNNY, ':mediatype'=>MEDIA_TYPE_IMAGE);
         $lengtuIDs = $cmd->where($conditions, $params)->queryColumn();
         
-        $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_GIRL);
+        $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_GIRL, ':mediatype'=>MEDIA_TYPE_IMAGE);
         $fuliIDs = $cmd->where($conditions, $params)->queryColumn();
 
-        $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_GHOSTSTORY);
+        $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_GHOSTSTORY, ':mediatype'=>MEDIA_TYPE_TEXT);
         $ghostIDs = $cmd->where($conditions, $params)->queryColumn();
 
-        $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_VIDEO);
+        $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_FUNNY, ':mediatype'=>MEDIA_TYPE_VIDEO);
         $videoIDs = $cmd->where($conditions, $params)->queryColumn();
         
         $ids = array_merge($duanziIDs, $lengtuIDs, $fuliIDs, $ghostIDs, $videoIDs);

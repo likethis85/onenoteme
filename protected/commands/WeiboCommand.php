@@ -317,18 +317,18 @@ class WeiboCommand extends CConsoleCommand
     private static function fetchWeiboPosts()
     {
         $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_DUANZI, 'state'=>POST_STATE_ENABLED, 'weibo_id' => ''));
+        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_FUNNY, 'media_type'=>MEDIA_TYPE_TEXT, 'state'=>POST_STATE_ENABLED, 'weibo_id' => ''));
         $criteria->order = 't.id desc';
         $models[] = Post::model()->find($criteria);
     
         $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_LENGTU, 'state'=>POST_STATE_ENABLED, 'weibo_id' => ''));
+        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_FUNNY, 'media_type'=>MEDIA_TYPE_IMAGE, 'state'=>POST_STATE_ENABLED, 'weibo_id' => ''));
         $criteria->order = 't.id desc';
         $models[] = Post::model()->find($criteria);
     
         /*
         $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_GIRL, 'state'=>POST_STATE_ENABLED, 'weibo_id' => ''));
+        $criteria->addColumnCondition(array('channel_id'=>CHANNEL_GIRL, 'media_type'=>MEDIA_TYPE_IMAGE, 'state'=>POST_STATE_ENABLED, 'weibo_id' => ''));
         $criteria->order = 't.id desc';
         $models[] = Post::model()->find($criteria);
         */
