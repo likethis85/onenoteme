@@ -204,7 +204,7 @@ class WdzWeixin extends CDWeixin
         $cmd = app()->getDb()->createCommand()
             ->select(array('id', 'content'))
             ->from(TABLE_POST)
-            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'media_type'=>':mediatype', 'id > :lastID'), $params)
+            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'media_type = :mediatype', 'id > :lastID'), $params)
             ->order('id asc')
             ->limit($count);
 
@@ -212,7 +212,7 @@ class WdzWeixin extends CDWeixin
         if (empty($rows)) return ;
         
         foreach ($rows as $row)
-            $contents[] = strip_tags($row['content']);
+            $contents[] = trim(strip_tags($row['content']));
         $content = join("\n--------------------\n\n", $contents);
         $lastRow = array_pop($rows);
         $lastID = (int)$lastRow['id'];
@@ -396,7 +396,7 @@ class WdzWeixin extends CDWeixin
                 ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
         }
         
-        $content = $row['content'] . self::helpInfo(true);
+        $content = trim(strip_tags($row['content'])) . self::helpInfo(true);
         $xml = $this->outputText($content);
         header('Content-Type: application/xml');
         echo $xml;
