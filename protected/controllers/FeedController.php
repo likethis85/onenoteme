@@ -214,6 +214,7 @@ class FeedController extends Controller
             'sohunews',
             'zaker',
             'yuedu163',
+            'qqmb',
         );
     }
     
