@@ -81,7 +81,8 @@ class Api_User extends ApiBase
         $user->password = $params['password'];
         $user->username = $params['username'];
         $user->screen_name = substr($params['username'], 0, strpos($params['username'], '@'));
-        $user->state = User::STATE_ENABLED;
+        $user->state = USER_STATE_ENABLED;
+        $user->source = User::SOURCE_IPHONE;
         $user->token = self::makeToken($user->username);
         try {
         	if ($user->save()) {

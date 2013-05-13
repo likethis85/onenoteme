@@ -2,7 +2,7 @@
 
 class TestController extends Controller
 {
-    public function init()
+    public function init1()
     {
         $this->redirect('/');
         exit(0);
@@ -175,6 +175,13 @@ EOD;
             ->applyText($im, 5);
         
         $im->output();
+    }
+    
+    public function actionVerify()
+    {
+        $user = User::model()->findByPk(1);
+        $result = $user->sendVerifyEmail();
+        var_dump($result);
     }
     
     public function actionMailer()

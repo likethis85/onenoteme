@@ -34,6 +34,12 @@ class CDSendCloudMailer extends CApplicationComponent
     public function message()
     {
         $this->_message = new SendCloud\Message();
+        if ($this->replyTo)
+            $this->_message->setReplyTo($this->replyTo);
+        if ($this->fromName)
+            $this->_message->setFromName($this->fromName);
+        if ($this->fromAddress)
+            $this->_message->setFromAddress($this->fromAddress);
         return $this->_message;
     }
     
@@ -45,6 +51,15 @@ class CDSendCloudMailer extends CApplicationComponent
             return $this->_sender->send($this->_message);
         else
             throw new Exception('message is invalid');
+    }
+    
+    public function sendSimple($email, $subject, $body)
+    {
+        $this->message()
+            ->addRecipient($email)
+            ->setSubject($subject)
+            ->setBody($body);
+        return $this->send();
     }
     
     private function setClassMap()

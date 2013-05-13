@@ -148,6 +148,14 @@ return array(
             'loginUrl' => array('/site/login'),
             'guestName' => '匿名段友',
         ),
+        'mailer' => array(
+            'class' => 'application.extensions.CDSendCloudMailer',
+            'username' => 'postmaster@wdztrigger.sendcloud.org',
+            'password' => 'voQh3RP5',
+            'fromName' => '挖段子网',
+            'fromAddress' => '80171597@qq.com',
+            'replyTo' => '80171597@qq.com',
+        ),
         'localUploader' => array(
             'class' => 'application.extensions.CDLocalUploader',
             'basePath' => $params['localUploadBasePath'],

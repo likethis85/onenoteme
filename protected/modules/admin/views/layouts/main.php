@@ -114,6 +114,7 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
                         <li><?php echo l('网站设置', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SYSTEM_SITE)));?></li>
                         <li><?php echo l('缓存设置', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SYSTEM_CACHE)));?></li>
                         <li><?php echo l('附件设置', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SYSTEM_ATTACHMENTS)));?></li>
+                        <li><?php echo l('邮件设置', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SYSTEM_EMAIL)));?></li>
                         <li class="divider"></li>
                         <li class="nav-header">网站显示</li>
                         <li><?php echo l('模板配置', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_DISPLAY_TEMPLATE)));?></li>

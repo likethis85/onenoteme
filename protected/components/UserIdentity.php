@@ -10,7 +10,7 @@ class UserIdentity extends CUserIdentity
      * 用户model
      * @var User
      */
-    private $user;
+    private $_user;
     
     public function authenticate($md5 = false)
     {
@@ -23,27 +23,36 @@ class UserIdentity extends CUserIdentity
             $criteria = new CDbCriteria();
             $criteria->select = array('t.id', 't.username', 't.screen_name', 't.password', 't.state');
             $criteria->addColumnCondition(array('username'=>$this->username));
-            $this->user = User::model()->find($criteria);
+            $this->_user = User::model()->find($criteria);
             
             $password = $md5 ? $this->password : md5($this->password);
-            if ($this->user === null)
+            if ($this->_user === null) {
+                $this->errorMessage = '账号不存在';
                 $this->errorCode = self::ERROR_USERNAME_INVALID;
-            elseif ($this->user->state == USER_STATE_FORBIDDEN)
+            }
+            elseif ($this->_user->state == USER_STATE_FORBIDDEN) {
+                $this->errorMessage = '账号被禁用';
                 $this->errorCode = self::ERROR_USER_FORBIDDEN;
-            elseif ($this->user->state == USER_STATE_UNVERIFY)
-                $this->errorCode = self::ERROR_USER_UNVERIFY;
-            elseif ($this->user->password != $password) {
+            }
+            // @todo 此处暂时验证是否通过审核的账号状态，都允许登录，但登录后有相应的限制
+//             elseif ($this->_user->state == USER_STATE_UNVERIFY) {
+//                 $this->errorMessage = '账号还未通过邮箱确认，如果您没有收到邮件，请点此“<a href="#">重新发送</a>”确认邮件';
+//                 $this->errorCode = self::ERROR_USER_UNVERIFY;
+//             }
+            elseif ($this->_user->password != $password) {
+                $this->errorMessage = '密码不正确';
                 $this->errorCode = self::ERROR_PASSWORD_INVALID;
             }
             else {
-                $this->_id = $this->user->id;
-                $this->_name = $this->user->getDisplayName();
+                $this->_id = $this->_user->id;
+                $this->_name = $this->_user->getDisplayName();
                 $this->errorCode = self::ERROR_NONE;
                 $this->afterAuthSuccess();
             }
         }
         catch (Exception $e) {
             $this->errorCode = self::ERROR_UNKNOWN_IDENTITY;
+            $this->errorMessage = '未知错误';
 //             echo $e->getMessage();
         }
         
@@ -63,9 +72,9 @@ class UserIdentity extends CUserIdentity
     private function afterAuthSuccess()
     {
         $s = app()->session;
-        $s['state'] = $this->user->state;
+        $s['state'] = $this->_user->state;
         $s['username'] = $this->username;
-        $s['image_url'] = $this->user->profile->smallAvatarUrl;
+        $s['image_url'] = $this->_user->profile->smallAvatarUrl;
     }
 }
 

@@ -38,10 +38,11 @@ class LoginForm extends CFormModel
     public function checkReserveWords($attribute, $params)
     {
         if ($this->hasErrors('screen_name')) return false;
-        foreach ((array)param('reservedWords') as $v) {
+        $words = (array)param('reservedWords');
+        foreach ($words as $v) {
             $pos = stripos($this->$attribute, $v);
             if (false !== $pos) {
-                $this->addError($attribute, t('nickname_is_exist'));
+                $this->addError($attribute, '此大名已经存在');
                 break;
             }
         }
@@ -54,7 +55,11 @@ class LoginForm extends CFormModel
         $this->_identity = new UserIdentity($this->username, $this->password);
 
         if (!$this->_identity->authenticate()) {
-            $this->addError($attribute, '用户名或密码错误');
+//             if ($this->_identity->errorCode == UserIdentity::ERROR_USER_UNVERIFY || $this->_identity->errorCode == UserIdentity::ERROR_USER_FORBIDDEN)
+            if ($this->_identity->errorCode == UserIdentity::ERROR_USER_FORBIDDEN)
+                $this->addError('state', $this->_identity->errorMessage);
+            else
+                $this->addError($attribute, '用户名密码错误');
         }
     }
 
@@ -96,6 +101,7 @@ class LoginForm extends CFormModel
 	    $user->password = $this->password;
 	    $user->state = (param('user_required_admin_verfiy') || param('user_required_email_verfiy')) ? USER_STATE_UNVERIFY : USER_STATE_ENABLED;
 	    $user->encryptPassword();
+	    $user->source = User::SOURCE_PC_WEB;
 	    $result = $user->save();
 
 	    if ($result) {
@@ -154,8 +160,9 @@ class LoginForm extends CFormModel
         exit(0);
     }
     
-    public function afterSignup($user)
+    public function afterSignup(User $user)
     {
+        $user->sendVerifyEmail();
         user()->loginRequired();
         exit(0);
     }

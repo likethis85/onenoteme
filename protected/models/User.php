@@ -12,16 +12,20 @@
  * @property string $create_ip
  * @property integer $state
  * @property string $token
+ * @property integer $token_time
+ * @property integer $source
  *
  * @property string $homeUrl
  * @property UserProfile $profile
  */
 class User extends CActiveRecord
 {
-    const STATE_DISABLED = 0;
-    const STATE_ENABLED = 1;
-    const STATE_EDITOR = 95;
-    const STATE_ADMIN = 100;
+    const SOURCE_UNKNOWN = 0;
+    const SOURCE_PC_WEB = 1;
+    const SOURCE_MOBILE_WEB = 2;
+    const SOURCE_IPHONE = 3;
+    const SOURCE_IPAD = 4;
+    const SOURCE_ANDROID = 5;
     
 	/**
 	 * Returns the static model of the specified AR class.
@@ -52,7 +56,7 @@ class User extends CActiveRecord
 		    array('screen_name', 'required', 'message'=>'大名 必须要填写'),
 		    array('password', 'required', 'message'=>'密码 必须要填写'),
 		    array('username', 'unique'),
-			array('create_time, state', 'numerical', 'integerOnly'=>true),
+			array('create_time, state, token_time, source', 'numerical', 'integerOnly'=>true),
 			array('username, screen_name', 'length', 'min'=>2, 'max'=>50),
 			array('password', 'length', 'min'=>3, 'max'=>32),
 			array('create_ip', 'length', 'max'=>15),
@@ -84,7 +88,9 @@ class User extends CActiveRecord
 			'create_ip' => '注册IP',
 			'state' => '状态',
 		    'captcha' => '验证码',
-		    'token' => '标识'
+		    'token' => '标识',
+		    'token_time' => '标识时间',
+		    'source' => '来源',
 		);
 	}
 
@@ -112,9 +118,72 @@ class User extends CActiveRecord
 	    return date($format, $this->create_time);
 	}
 
+	public function getVerified()
+	{
+	    return $this->state == USER_STATE_ENABLED;
+	}
+	
+	public function getUnVerified()
+	{
+	    return $this->state == USER_STATE_UNVERIFY;
+	}
+	
+	public function getForbidden()
+	{
+	    return $this->state == USER_STATE_FORBIDDEN;
+	}
+	
 	public function encryptPassword()
 	{
 	    $this->password = CDBase::encryptPassword($this->password);
+	}
+
+	public function getUsernameIsEmail()
+	{
+	    return (bool)filter_var($this->username, FILTER_VALIDATE_EMAIL);
+	}
+	
+	public function sendVerifyEmail()
+	{
+	    $emailVerify = (bool)param('user_required_email_verfiy');
+	    $adminVerify = (bool)param('user_required_admin_verfiy');
+	    if (!$adminVerify && $emailVerify && $this->getUsernameIsEmail() && $this->state == USER_STATE_UNVERIFY) {
+	        $this->generateToken();
+	        if ($this->save(true, array('token', 'token_time'))) {
+    	        $search = array(
+                    '{useremail}' => $this->username,
+                    '{userid}' => $this->id,
+                    '{username}' => $this->screen_name ? $this->screen_name : $this->username,
+                );
+                $keys = array_keys($search);
+                $values = array_values($search);
+                
+                $subjectTpl = param('email_user_verify_subject_tpl');
+                $bodyTpl = param('email_user_verify_content_tpl');
+                
+                $subject = str_replace($keys, $values, $subjectTpl);
+                $body = str_replace($keys, $values, $bodyTpl);
+                
+                $mailer = app()->getComponent('mailer');
+                return $mailer->sendSimple($this->username, $subject, $body);
+	        }
+	        else
+	            throw new Exception('generate or save token error.');
+	    }
+	    return null;
+	}
+	
+	public function generateToken()
+	{
+	    $token = self::generateUserToken($this->id, $this->username);
+	    $this->token = $token;
+	    $this->token_time = time();
+	    return $token;
+	}
+	
+	public static function generateUserToken($userid, $username)
+	{
+	    return md5($username . $userid . time());
 	}
 	
 	protected function beforeSave()

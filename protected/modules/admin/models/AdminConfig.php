@@ -10,6 +10,7 @@ class AdminConfig extends Config
     const CATEGORY_SYSTEM_SITE = 11;
     const CATEGORY_SYSTEM_CACHE = 13;
     const CATEGORY_SYSTEM_ATTACHMENTS = 14;
+    const CATEGORY_SYSTEM_EMAIL = 15;
     
     const CATEGORY_DISPLAY = 20;
     const CATEGORY_DISPLAY_TEMPLATE = 21;
@@ -42,6 +43,7 @@ class AdminConfig extends Config
             self::CATEGORY_SYSTEM_SITE => '网站设置',
             self::CATEGORY_SYSTEM_CACHE => '缓存设置',
             self::CATEGORY_SYSTEM_ATTACHMENTS => '附件设置',
+            self::CATEGORY_SYSTEM_EMAIL => '邮件设置',
         
             self::CATEGORY_DISPLAY_TEMPLATE => '模板配置',
             self::CATEGORY_DISPLAY_UI => '界面元素',
