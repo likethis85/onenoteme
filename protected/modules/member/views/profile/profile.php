@@ -46,7 +46,7 @@
         <div class="alert alert-error">
         <?php if (param('user_required_admin_verfiy')):?>
         账号还未通过管理员审核，请耐心等待。
-        <?php elseif (param('user_required_email_verfiy')):?>
+        <?php else:?>
         账号还未通过邮箱确认，如果您没有收到邮件，请点此“<a href="<?php echo aurl('member/profile/sendmail');?>">重新发送</a>”确认邮件
         <?php endif;?>
         </div>
