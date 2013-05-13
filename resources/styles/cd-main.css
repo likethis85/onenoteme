@@ -263,6 +263,9 @@ a:hover .social-widget-content {color:#666666;}
 .sponsor-alipay p, .sponsor-taobaoke p {font-size:16px; line-height:24px; margin-bottom:20px;}
 .sponsor-taobaoke {margin-top:10px; height:210px; color:#DFDFDF!important;}
 
+/* user activate */
+.cd-activate {margin:40px 50px 100px;}
+.cd-activate h4 {margin-bottom:30px;}
 
 /***** 以下暂时抛弃 *****/
 /*

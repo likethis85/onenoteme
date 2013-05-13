@@ -82,5 +82,27 @@ class ProfileController extends MemberController
             'model' => $model,
         ));
     }
+
+    public function actionSendMail()
+    {
+        if ($this->user->getVerified()) {
+            $data['errno'] = 1;
+            $data['message'] = '您的账号已经激活，不需要再重新发送激活邮件。';
+        }
+        else {
+            $result = $this->user->sendVerifyEmail();
+            if ($result) {
+                $data['errno'] = 0;
+                $data['message'] = '确认邮件已经发送到您的注册邮箱中，请进入邮箱点击链接激活账号。';
+            }
+            else {
+                $data['errno'] = 1;
+                $data['message'] = '邮件发送失败，请重试或<a href="' . aurl('help/contact') . '" target="_blank">联系客服人员</a>';
+            }
+        }
+
+        $this->breadcrumbs[] = $this->title = $this->siteTitle = '发送账号确认邮件';
+        $this->render('sendmail', $data);
+    }
 }
 

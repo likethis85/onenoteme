@@ -143,7 +143,7 @@ class SiteController extends Controller
         exit(0);
     }
     
-    public function actionSignup()
+    public function actionSignup($url = '')
     {
         if (!user()->getIsGuest()) {
             $this->redirect(CDBaseUrl::memberHomeUrl());
@@ -159,6 +159,14 @@ class SiteController extends Controller
             else
                 $model->captcha = '';
         }
+        else {
+            $returnUrl = strip_tags(trim($url));
+            if (empty($returnUrl))
+                $returnUrl = request()->getUrlReferrer();
+            if (empty($returnUrl))
+                $returnUrl = CDBaseUrl::memberHomeUrl();
+            $model->returnUrl = urlencode($returnUrl);
+        }
         
         cs()->registerMetaTag('noindex, follow', 'robots');
         $this->pageTitle = '注册成为' . app()->name . '会员';
@@ -166,6 +174,34 @@ class SiteController extends Controller
         $this->render('signup', array('form'=>$model));
     }
 
+    public function actionActivate($code)
+    {
+        $code = trim(strip_tags($code));
+        $user = User::emailActivate($code);
+        if ($user === false) {
+            $data['errno'] = 1;
+            $data['message'] = '激活链接已经失效。';
+        }
+        elseif (user()->getIsGuest()) {
+            $identity = new UserIdentity($user->username, $user->password);
+            if ($identity->authenticate(true)) {
+                user()->login($identity);
+                $data['errno'] = 0;
+                $data['user'] = $user;
+            }
+            else {
+                $data['errno'] = 1;
+                $data['message'] = '激活成功，但您的账号状态不可用，请<a href="'. aurl('help/contact').'" target="_blank">联系客服人员</a>';
+            }
+        }
+        else {
+            $data['errno'] = 0;
+            $data['user'] = $user;
+        }
+        $this->setPageTitle('邮箱确认激活');
+        $this->render('activate', $data);
+    }
+    
     public function actionBdmap()
     {
         $pageSize = 100;

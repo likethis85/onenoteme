@@ -150,10 +150,14 @@ class User extends CActiveRecord
 	    if (!$adminVerify && $emailVerify && $this->getUsernameIsEmail() && $this->state == USER_STATE_UNVERIFY) {
 	        $this->generateToken();
 	        if ($this->save(true, array('token', 'token_time'))) {
+	            $code = md5($this->id) . $this->token;
     	        $search = array(
+	                '{sitename}' => app()->name,
+	                '{siteurl}' => CDBaseUrl::siteHomeUrl(),
                     '{useremail}' => $this->username,
                     '{userid}' => $this->id,
                     '{username}' => $this->screen_name ? $this->screen_name : $this->username,
+	                '{verify_url}' => aurl('site/activate', array('code'=>$code)),
                 );
                 $keys = array_keys($search);
                 $values = array_values($search);
@@ -171,6 +175,21 @@ class User extends CActiveRecord
 	            throw new Exception('generate or save token error.');
 	    }
 	    return null;
+	}
+	
+	public static function emailActivate($code)
+	{
+	    if (strlen($code) !== 64) return false;
+	    
+	    $id = substr($code, 0, 32);
+	    $token = substr($code, 32);
+	    $user = self::model()->findByAttributes(array('token'=>$token));
+	    if ($user->getUnVerified() && $id == md5($user->id) && ($user->token_time + 72*3600) > $_SERVER['REQUEST_TIME']) {
+	        $user->state = USER_STATE_ENABLED;
+	        if ($user->save(true, array('state')))
+	            return $user;
+	    }
+        return false;
 	}
 	
 	public function generateToken()

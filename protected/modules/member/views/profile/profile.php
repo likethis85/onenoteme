@@ -43,7 +43,7 @@
 <?php if ($this->user->getUnVerified()):?>
 <div class="control-group">
     <div class="controls">
-        <div class="alert alert-error">账号还未通过邮箱确认，如果您没有收到邮件，请点此“<a href="#">重新发送</a>”确认邮件</div>
+        <div class="alert alert-error">账号还未通过邮箱确认，如果您没有收到邮件，请点此“<a href="<?php echo aurl('member/profile/sendmail');?>">重新发送</a>”确认邮件</div>
     </div>
 </div>
 <?php endif;?>

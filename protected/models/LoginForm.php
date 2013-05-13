@@ -55,7 +55,6 @@ class LoginForm extends CFormModel
         $this->_identity = new UserIdentity($this->username, $this->password);
 
         if (!$this->_identity->authenticate()) {
-//             if ($this->_identity->errorCode == UserIdentity::ERROR_USER_UNVERIFY || $this->_identity->errorCode == UserIdentity::ERROR_USER_FORBIDDEN)
             if ($this->_identity->errorCode == UserIdentity::ERROR_USER_FORBIDDEN)
                 $this->addError('state', $this->_identity->errorMessage);
             else
@@ -163,8 +162,12 @@ class LoginForm extends CFormModel
     public function afterSignup(User $user)
     {
         $user->sendVerifyEmail();
-        user()->loginRequired();
-        exit(0);
+        $identity = new UserIdentity($user->username, $user->password);
+        if ($identity->authenticate(true)) {
+            $result = user()->login($identity);
+            if ($result)
+                $this->afterLogin();
+        }
     }
 }
 

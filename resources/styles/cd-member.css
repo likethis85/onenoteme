@@ -20,3 +20,4 @@ body {background-color:white;}
 .member-nav li a {display:block; height:30px; line-height:30px; margin-left:10px; text-indent:15px;}
 .member-nav li a:hover, .member-nav li a.active {background:#FFFFFF;}
 table.mypost-table .label {margin-right:5px;}
+.sendmail-msg {margin-top:50px; margin-left:100px;}

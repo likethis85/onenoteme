@@ -115,7 +115,7 @@ return array(
                 '<_a:(joke|lengtu|girl|video|ghost)>' => 'channel/<_a>',
                 'c/<token:\w+>' => 'channe/index',
                 
-                '<_a:(login|signup|logout|bdmap|links)>' => 'site/<_a>',
+                '<_a:(login|signup|logout|bdmap|links|activate)>' => 'site/<_a>',
                 'archives/<id:\d+>' => 'post/show',
                 'post-<id:\d+>' => 'post/show1',
                 'originalpic/<id:\d+>' => 'post/bigpic',

@@ -34,11 +34,6 @@ class UserIdentity extends CUserIdentity
                 $this->errorMessage = '账号被禁用';
                 $this->errorCode = self::ERROR_USER_FORBIDDEN;
             }
-            // @todo 此处暂时验证是否通过审核的账号状态，都允许登录，但登录后有相应的限制
-//             elseif ($this->_user->state == USER_STATE_UNVERIFY) {
-//                 $this->errorMessage = '账号还未通过邮箱确认，如果您没有收到邮件，请点此“<a href="#">重新发送</a>”确认邮件';
-//                 $this->errorCode = self::ERROR_USER_UNVERIFY;
-//             }
             elseif ($this->_user->password != $password) {
                 $this->errorMessage = '密码不正确';
                 $this->errorCode = self::ERROR_PASSWORD_INVALID;
