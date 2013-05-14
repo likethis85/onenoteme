@@ -22,7 +22,7 @@ class LoginForm extends CFormModel
             array('username', 'checkUserName', 'on'=>'signup'),
             array('screen_name', 'required', 'message'=>'请输入您的大名', 'on'=>'signup'),
             array('screen_name', 'unique', 'className'=>'User', 'attributeName'=>'screen_name', 'on'=>'signup', 'message'=>'大名已经存在'),
-            array('screen_name', 'checkReserveWords'),
+            array('screen_name', 'checkReserveWords', 'on'=>'signup'),
             array('password', 'required', 'on'=>'signup', 'message'=>'请输入密码'),
             array('password', 'authenticate', 'on'=>array('login', 'quicklogin')),
             array('captcha', 'captcha', 'allowEmpty'=>!$this->getEnableCaptcha(), 'on'=>'login'),
@@ -31,7 +31,7 @@ class LoginForm extends CFormModel
             array('screen_name, password', 'length', 'min'=>3, 'max'=>50),
             array('username, returnUrl', 'length', 'max'=>255),
             array('agreement', 'compare', 'compareValue'=>true, 'on'=>'signup', 'message'=>'请同意服务条款和协议'),
-            array('rememberMe', 'in', 'range'=>array(0, 1)),
+            array('rememberMe', 'in', 'range'=>array(0, 1), 'on'=>'login'),
         );
     }
     
