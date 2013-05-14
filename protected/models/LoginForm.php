@@ -41,7 +41,7 @@ class LoginForm extends CFormModel
         $emailPattern = '/^[a-zA-Z0-9!#$%&\'*+\\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&\'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/';
         $mobilePattern = '/^1[3458]\d{9}$/';
         
-        if (preg_match($emailPattern, $value) && preg_match($mobilePattern, $value))
+        if (preg_match($emailPattern, $value) || preg_match($mobilePattern, $value))
             return true;
         else
             $this->addError($attribute, '用户名必须为邮箱或手机号');
