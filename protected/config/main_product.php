@@ -117,7 +117,6 @@ return array(
                 
                 '<_a:(login|signup|logout|bdmap|links|activate)>' => 'site/<_a>',
                 'archives/<id:\d+>' => 'post/show',
-                'post-<id:\d+>' => 'post/show1',
                 'originalpic/<id:\d+>' => 'post/bigpic',
 
                 'tags' => 'tag/list',

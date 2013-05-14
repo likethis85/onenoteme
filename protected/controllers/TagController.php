@@ -49,11 +49,6 @@ class TagController extends Controller
         ));
     }
     
-    public function actionArchives($name, $s = POST_LIST_STYLE_LINE)
-    {
-        $this->redirect(url('tag/posts', array('name'=>$name, 's'=>$s)));
-    }
-    
     public function actionPosts($name, $s = POST_LIST_STYLE_LINE, $page = 1)
     {
         $s = strip_tags(trim($s));
@@ -92,9 +87,6 @@ class TagController extends Controller
         
         $criteria = new CDbCriteria();
         $criteria->addInCondition('id', $postIDs);
-        // @todo 暂时屏蔽
-        $criteria->addCondition('t.channel_id != ' . CHANNEL_GIRL);
-
         $models = Post::model()->findAll($criteria);
         
         if ($pages->currentPage > 1)
