@@ -8,7 +8,7 @@ class LoginForm extends CFormModel
     public $password;
     public $captcha;
     public $rememberMe = 1;
-    public $agreement;
+    public $agreement = 1;
     public $returnUrl;
 
     private $_identity;
