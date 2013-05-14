@@ -138,16 +138,21 @@ class User extends CActiveRecord
 	    $this->password = CDBase::encryptPassword($this->password);
 	}
 
-	public function getUsernameIsEmail()
+	public function getUserNameIsEmail()
 	{
-	    return (bool)filter_var($this->username, FILTER_VALIDATE_EMAIL);
+	    return CDBase::checkEmail($this->username);
+	}
+	
+	public function getUserNameIsMobile()
+	{
+	    return CDBase::checkMobilePhone($this->username);
 	}
 	
 	public function sendVerifyEmail()
 	{
 	    $emailVerify = (bool)param('user_required_email_verfiy');
 	    $adminVerify = (bool)param('user_required_admin_verfiy');
-	    if (!$adminVerify && $emailVerify && $this->getUsernameIsEmail() && $this->state == USER_STATE_UNVERIFY) {
+	    if (!$adminVerify && $emailVerify && $this->getUserNameIsEmail() && $this->state == USER_STATE_UNVERIFY) {
 	        $this->generateToken();
 	        if ($this->save(true, array('token', 'token_time'))) {
 	            $code = md5($this->id) . $this->token;

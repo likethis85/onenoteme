@@ -207,8 +207,7 @@ class CDBase
 
     public static function checkEmail($value)
     {
-        $pattern = '/^[a-zA-Z0-9!#$%&\'*+\\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&\'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/';
-        return preg_match($pattern, $value);
+        return filter_var($value, FILTER_VALIDATE_EMAIL);
     }
 
     public static function checkMobilePhone($value)
