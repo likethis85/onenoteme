@@ -21,12 +21,12 @@ class ExportController extends AdminController
                 $models = Post::model()->findAll($criteria);
                 
                 if (count($models) > 0) {
-                    $content = "\n挖段子网 - http://www.waduanzi.com\n\n\n";
+                    $content = "\n所有内容来自 挖段子网 - http://www.waduanzi.com\n\n\n";
                     foreach ($models as $index => $model) {
                         $text = trim(strip_tags($model->content));
                         $content .= ($index + 1) . ' ' . $text . "\n\n";
                     }
-                    $content .= "\n\n\n挖段子网 - http://www.waduanzi.com\n挖笑话,冷笑话,内涵段子,内涵笑话,精品笑话,冷笑话精选\n\n";
+                    $content .= "\n\n\n所有内容来自 挖段子网 - http://www.waduanzi.com\n挖笑话,冷笑话,内涵段子,内涵笑话,精品笑话,冷笑话精选\n\n";
                     
                     $filename = sprintf('挖段子网冷笑话精选 - 第%s期', $date);
                     request()->sendFile($filename, $content);
