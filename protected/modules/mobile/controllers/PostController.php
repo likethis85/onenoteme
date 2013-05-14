@@ -14,16 +14,10 @@ class PostController extends MobileController
         );
     }
     
-    public function actionDetail($id)
-    {
-        $this->redirect(aurl('post/show', array('id'=>$id)));
-    }
-    
     public function actionShow($id)
     {
         $id = (int)$id;
-        // @todo 暂时屏幕
-        $post = MobilePost::model()->findByPk($id, 't.channel_id != ' . CHANNEL_GIRL);
+        $post = MobilePost::model()->findByPk($id);
         if ($post === null)
             throw new CHttpException(403, '内容不存在');
         
@@ -34,7 +28,7 @@ class PostController extends MobileController
         $tagsText = $post->getTagText(',');
         if ($tagsText)
             $tagsText = ', ' . $tagsText;
-        $this->pageTitle = trim(strip_tags($post->title)) . $tagsText . ' - 挖段子';
+        $this->pageTitle = trim(strip_tags($post->title)) . $tagsText . ' - ' . app()->name;
         $pageKeyword = '精品笑话，内涵段子,内涵图,邪恶漫画,黄色笑话,幽默笑话,成人笑话,夫妻笑话,笑话集锦,荤段子,黄段子,大学校花,美女写真';
         if ($post->tags)
             $pageKeyword = $post->getTagText(',') . ',' . $pageKeyword;

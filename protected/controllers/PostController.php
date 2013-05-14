@@ -39,12 +39,6 @@ class PostController extends Controller
         exit(0);
     }
     
-    public function actionShow1($id)
-    {
-        $this->redirect(aurl('post/show', array('id'=>$id)));
-        exit(0);
-    }
-    
     public function actionShow($id)
     {
         $duration = 60*60;
@@ -56,8 +50,6 @@ class PostController extends Controller
             $post = Post::model()->findByPk($id);
         else {
             $criteria = new CDbCriteria();
-            // @todo 暂时屏蔽
-            $criteria->addCondition('t.channel_id != ' . CHANNEL_GIRL);
             // 管理员可以查看所有内容
             if (!user()->getIsAdmin())
                 $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));

@@ -84,9 +84,6 @@ class ChannelController extends Controller
     
     public function actionGirl($page = 1, $s = POST_LIST_STYLE_LINE)
     {
-        //@todo 因为adsense审核暂时跳转
-        $this->redirect('/');
-        
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/girl'), null, array('title'=>app()->name . ' » 挖女神 Feed'));
         $this->pageTitle = param('channel_girl_title');
         $this->setDescription(param('channel_girl_description'));
