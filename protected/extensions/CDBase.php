@@ -204,7 +204,18 @@ class CDBase
     
         return $url;
     }
-    
+
+    public static function checkEmail($value)
+    {
+        $pattern = '/^[a-zA-Z0-9!#$%&\'*+\\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&\'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/';
+        return preg_match($pattern, $value);
+    }
+
+    public static function checkMobilePhone($value)
+    {
+        $pattern = '/^1[3458]\d{9}$/';
+        return preg_match($pattern, $value);
+    }
 
     public static function isMobileDevice()
     {

@@ -28,7 +28,7 @@ class LoginForm extends CFormModel
             array('captcha', 'captcha', 'allowEmpty'=>!$this->getEnableCaptcha(), 'on'=>'login'),
             array('captcha', 'captcha', 'allowEmpty'=>false, 'on'=>array('signup')),
             array('rememberMe', 'boolean', 'on'=>array('login', 'quicklogin')),
-            array('screen_name, password', 'length', 'min'=>3, 'max'=>50),
+            array('screen_name, password', 'length', 'min'=>3, 'max'=>50, 'message'=>'大名最少3个字符'),
             array('username, returnUrl', 'length', 'max'=>255),
             array('agreement', 'compare', 'compareValue'=>true, 'on'=>'signup', 'message'=>'请同意服务条款和协议'),
             array('rememberMe', 'in', 'range'=>array(0, 1), 'on'=>'login'),
@@ -38,10 +38,7 @@ class LoginForm extends CFormModel
     public function checkUserName($attribute, $params)
     {
         $value = $this->$attribute;
-        $emailPattern = '/^[a-zA-Z0-9!#$%&\'*+\\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&\'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/';
-        $mobilePattern = '/^1[3458]\d{9}$/';
-        
-        if (preg_match($emailPattern, $value) || preg_match($mobilePattern, $value))
+        if (CDBase::checkEmail($value) || CDBase::checkMobilePhone($value))
             return true;
         else
             $this->addError($attribute, '用户名必须为邮箱或手机号');
