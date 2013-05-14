@@ -19,7 +19,7 @@ class LoginForm extends CFormModel
         return array(
             array('username', 'required', 'message'=>'请输入您的邮箱'),
             array('username', 'unique', 'className'=>'User', 'attributeName'=>'username', 'on'=>'signup', 'message'=>'用户名已经存在'),
-            array('username', 'email'),
+            array('username', 'checkUserName'),
             array('screen_name', 'required', 'message'=>'请输入您的大名', 'on'=>'signup'),
             array('screen_name', 'unique', 'className'=>'User', 'attributeName'=>'screen_name', 'on'=>'signup', 'message'=>'大名已经存在'),
             array('screen_name', 'checkReserveWords'),
@@ -33,6 +33,18 @@ class LoginForm extends CFormModel
             array('agreement', 'compare', 'compareValue'=>true, 'on'=>'signup', 'message'=>'请同意服务条款和协议'),
             array('rememberMe', 'in', 'range'=>array(0, 1)),
         );
+    }
+    
+    public function checkUserName($attribute, $params)
+    {
+        $value = $this->attributes;
+        $emailPattern = '/^[a-zA-Z0-9!#$%&\'*+\\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&\'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/';
+        $mobilePattern = '/^1[3458]\d{9}$/';
+        
+        if (preg_match($emailPattern, $value) && preg_match($mobilePattern, $value))
+            return true;
+        else
+            $this->addError($attribute, '用户名必须为邮箱或手机号');
     }
     
     public function checkReserveWords($attribute, $params)
@@ -65,7 +77,7 @@ class LoginForm extends CFormModel
     public function attributeLabels()
     {
         return array(
-            'username' => '邮箱',
+            'username' => '邮箱/手机',
             'password' => '密码',
             'captcha' => '验证码',
             'rememberMe' => '下次自动登录',
