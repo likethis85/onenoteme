@@ -17,9 +17,9 @@ class LoginForm extends CFormModel
     public function rules()
     {
         return array(
-            array('username', 'required', 'message'=>'请输入您的邮箱'),
+            array('username', 'required', 'message'=>'请输入您的邮箱/手机'),
             array('username', 'unique', 'className'=>'User', 'attributeName'=>'username', 'on'=>'signup', 'message'=>'用户名已经存在'),
-            array('username', 'checkUserName'),
+            array('username', 'checkUserName', 'on'=>'signup'),
             array('screen_name', 'required', 'message'=>'请输入您的大名', 'on'=>'signup'),
             array('screen_name', 'unique', 'className'=>'User', 'attributeName'=>'screen_name', 'on'=>'signup', 'message'=>'大名已经存在'),
             array('screen_name', 'checkReserveWords'),
