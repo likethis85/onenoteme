@@ -37,7 +37,7 @@ class LoginForm extends CFormModel
     
     public function checkUserName($attribute, $params)
     {
-        $value = $this->attributes;
+        $value = $this->$attribute;
         $emailPattern = '/^[a-zA-Z0-9!#$%&\'*+\\/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&\'*+\\/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/';
         $mobilePattern = '/^1[3458]\d{9}$/';
         
