@@ -16,7 +16,7 @@ class ExportController extends AdminController
                 $criteria = new CDbCriteria();
                 $criteria->select = array('title', 'content', 'create_time', 'state', 'channel_id');
                 $criteria->order = 'create_time asc';
-                $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED, 'channel_id'=>CHANNEL_DUANZI));
+                $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED, 'channel_id'=>CHANNEL_FUNNY, 'media_type'=>MEDIA_TYPE_TEXT));
                 $criteria->addBetweenCondition('create_time', $start, $end);
                 $models = Post::model()->findAll($criteria);
                 
