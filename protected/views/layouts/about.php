@@ -8,12 +8,6 @@
 <meta name="application-name" content="挖段子网"/>
 <meta name="msapplication-TileColor" content="#0c95f0"/>
 <meta name="msapplication-TileImage" content="35c7b7b9-f757-4e10-83a9-d18cc277e4da.png"/>
-<script type="text/javascript">
-var wdz_logined = <?php echo (int)!user()->isGuest;?>;
-var wdz_quick_login_url = '<?php echo aurl('site/quicklogin');?>';
-var _hmt = _hmt || [];
-_hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;?>, 2]);
-</script>
 <?php echo param('header_html');?>
 </head>
 <body>
@@ -38,13 +32,13 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 	        </a>
 	    </div>
     	<ul class="channel-nav fleft">
-    		<li<?php echo ($this->channel===CHANNEL_FUNNY . MEDIA_TYPE_TEXT) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/joke');?>">挖笑话</a></li>
+    		<li><a href="<?php echo aurl('channel/joke');?>">挖笑话</a></li>
     		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_FUNNY . MEDIA_TYPE_IMAGE) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/lengtu');?>">挖趣图</a></li>
+    		<li><a href="<?php echo aurl('channel/lengtu');?>">挖趣图</a></li>
     		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_FUNNY . MEDIA_TYPE_VIDEO) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/video');?>">挖视频</a></li>
+    		<li><a href="<?php echo aurl('channel/video');?>">挖视频</a></li>
     		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_GHOSTSTORY . MEDIA_TYPE_TEXT) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/ghost');?>">挖鬼故事</a></li>
+    		<li><a href="<?php echo aurl('channel/ghost');?>">挖鬼故事</a></li>
     	</ul>
     	<ul class="fright">
     	</ul>
@@ -53,24 +47,15 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     </div>
 </div>
 <div class="cd-wrapper cd-main">
-    <div class="alert alert-block alert-success alert-sitetip wx-help hide">
-        微信公众账号添加新功能：<br />
-        回复 1 返回笑话内容，现在是时候回复 13，14，1x ...了，猜的没错，现在可以返回多条了，14表示，返回 4 条笑话内容<br />
-        此功能当前只对笑话有效，趣图和女神还是只返回一条，但请记住：我们一直在努力！
-    </div>
 	<?php echo $content;?>
 </div>
 <?php echo param('footer_before_html');?>
 <?php $this->renderPartial('/public/footer');?>
 
-<div id="quick-login-modal" class="modal fade hide" role="dialog" aria-hidden="true">
-    <div class="modal-body"></div>
-</div>
 <?php
 echo param('footer_after_html');
 echo param('tongji_code');
 ?>
-<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21351161"></script>
 </body>
 </html>
 
@@ -82,8 +67,7 @@ cs()->registerMetaTag('text/html; charset=utf-8', null, 'content-type')
     ->registerCoreScript('jquery')
     ->registerScriptFile(sbu('libs/modernizr.min.js'), CClientScript::POS_END)
     ->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END)
-    ->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END)
-    ->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/index'), null, array('title'=>app()->name . ' » Feed'));
+    ->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END);
 
 CD_PRODUCT && cs()->scriptMap = array(
     'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=20130427001'),

@@ -1,6 +1,12 @@
 <?php
 class AboutController extends Controller
 {
+    public function init()
+    {
+        parent::init();
+        $this->layout = 'about';
+    }
+    
     public function filters()
     {
         return array(

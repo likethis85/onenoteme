@@ -33,16 +33,16 @@
 	        </a>
 	    </div>
     	<ul class="channel-nav fleft">
-    		<li<?php echo ($this->channel===CHANNEL_FUNNY . MEDIA_TYPE_TEXT) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/joke');?>">挖笑话</a></li>
+    		<li><a href="<?php echo aurl('channel/joke');?>">挖笑话</a></li>
     		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_FUNNY . MEDIA_TYPE_IMAGE) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/lengtu');?>">挖趣图</a></li>
+    		<li><a href="<?php echo aurl('channel/lengtu');?>">挖趣图</a></li>
     		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_FUNNY . MEDIA_TYPE_VIDEO) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/video');?>">挖视频</a></li>
+    		<li><a href="<?php echo aurl('channel/video');?>">挖视频</a></li>
     		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_GHOSTSTORY . MEDIA_TYPE_TEXT) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/ghost');?>">挖鬼故事</a></li>
+    		<li><a href="<?php echo aurl('channel/ghost');?>">挖鬼故事</a></li>
     		<?php if (user()->isVip):?>
     		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_GIRL) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/girl');?>">挖女神</a></li>
+    		<li><a href="<?php echo aurl('channel/girl');?>">挖女神</a></li>
     		<?php endif;?>
     	</ul>
     	<ul class="fright">
@@ -77,17 +77,7 @@
     <div class="clear"></div>
 </div>
 <?php echo param('footer_before_html');?>
-<div class="cd-footer">
-    <div class="cd-wrapper">
-    	<p class="fleft">内容版权所有 ©2011-2012 <a href="<?php echo CDBaseUrl::siteHomeUrl();?>">waduanzi.com</a>&nbsp;&nbsp;冀ICP备12006196号-5&nbsp;&nbsp;
-    	    <a href="<?php echo aurl('site/bdmap');?>" target="_blank">网站地图</a>&nbsp;&nbsp;
-    	    <a href="<?php echo aurl('site/links');?>" target="_blank">友情链接</a>&nbsp;&nbsp;
-    	    <a href="<?php echo aurl('tag/list');?>" target="_blank">全部标签</a>
-        </p>
-    	<p class="fright">笑死人不尝命&nbsp;<a href="#top">TOP</a></p>
-    	<div class="clear"></div>
-	</div>
-</div>
+<?php $this->renderPartial('//public/footer');?>
 
 <?php echo param('tongji_code');?>
 </body>
