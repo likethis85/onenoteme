@@ -96,12 +96,14 @@ return array(
             'cacheID' => 'cache',
             'rules' => array(
                 'http://api.waduanzi.com/<_a>' => 'api/<_a>',
+                
+                'archives/<id:\d+>' => 'post/show',
                     
+                'mobile/archives/<id:\d+>' => 'mobile/post/show',
                 'mobile/page/<page:\d+>' => 'mobile/default/index',
                 'mobile' => 'mobile/default/index',
                 'mobile/<_a:(joke|girl|lengtu|video|ghost)>/page/<page:\d+>' => 'mobile/channel/<_a>',
                 'mobile/<_a:(joke|girl|lengtu|video|ghost)>' => 'mobile/channel/<_a>',
-                'mobile/archives/<id:\d+>' => 'mobile/post/show',
                 'mobile/tag/<name:.+>' => 'mobile/tag/posts',
             
                 'page/<page:\d+>/<s:(fall|grid|line)>' => 'site/index',
@@ -116,7 +118,7 @@ return array(
                 'c/<token:\w+>' => 'channe/index',
                 
                 '<_a:(bdmap|links)>' => 'site/<_a>',
-                'archives/<id:\d+>' => 'post/show',
+                '<_a:(login|logout|signup|quicklogin|activate)>' => 'account/<_a>',
                 'originalpic/<id:\d+>' => 'post/bigpic',
 
                 'tags' => 'tag/list',
