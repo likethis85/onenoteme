@@ -1,7 +1,7 @@
 <div id="quick-login">
     <span href="#" data-dismiss="modal" class="site-bg quick-login-close"></span>
     <div class="column-login">
-        <?php echo CHtml::form(aurl('site/quicklogin'), 'post', array('id'=>'form-quick-login'));?>
+        <?php echo CHtml::form(CDBaseUrl::quickLoginUrl(), 'post', array('id'=>'form-quick-login'));?>
             <h1>欢迎回来</h1>
             <label>用户名或邮箱</label>
             <?php echo CHtml::activeTextField($form, 'username', array('class'=>'input-quick'));?>

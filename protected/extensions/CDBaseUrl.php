@@ -27,19 +27,41 @@ class CDBaseUrl
         return aurl('mobile/default/index');
     }
     
-    public static function loginUrl()
+    public static function loginUrl($url = '')
     {
-        return aurl('site/login');
+        $loginUrl = aurl('account/login');
+        if (CDBase::isHttpUrl($url))
+            $loginUrl = aurl('account/login', array('url'=>$url));
+        
+        return $loginUrl;
     }
     
-    public static function logoutUrl()
+    public static function quickLoginUrl()
     {
-        return aurl('site/logout');
+        return aurl('account/quicklogin');
     }
     
-    public static function singupUrl()
+    public static function logoutUrl($url = '')
     {
-        return aurl('site/signup');
+        $logoutUrl = aurl('account/logout');
+        if (CDBase::isHttpUrl($url))
+            $logoutUrl = aurl('account/logout', array('url'=>$url));
+        
+        return $logoutUrl;
+    }
+    
+    public static function singupUrl($url = '')
+    {
+        $signupUrl = aurl('account/signup');
+        if (CDBase::isHttpUrl($url))
+            $signupUrl = aurl('account/signup', array('url'=>$url));
+        
+        return $signupUrl;
+    }
+    
+    public static function activateUrl($code)
+    {
+        return aurl('account/activate', array('code'=>$code));
     }
     
     public static function userHomeUrl($uid)

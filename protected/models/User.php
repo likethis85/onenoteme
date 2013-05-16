@@ -162,7 +162,7 @@ class User extends CActiveRecord
                     '{useremail}' => $this->username,
                     '{userid}' => $this->id,
                     '{username}' => $this->screen_name ? $this->screen_name : $this->username,
-	                '{verify_url}' => aurl('site/activate', array('code'=>$code)),
+	                '{verify_url}' => CDBaseUrl::activateUrl($code),
                 );
                 $keys = array_keys($search);
                 $values = array_values($search);
