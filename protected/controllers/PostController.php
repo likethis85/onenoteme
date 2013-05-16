@@ -50,6 +50,9 @@ class PostController extends Controller
             $post = Post::model()->findByPk($id);
         else {
             $criteria = new CDbCriteria();
+            // 只有vip才可以查看GIRL频道
+            if (!user()->getIsVip())
+                $criteria->addCondition('t.channel_id != ' . CHANNEL_GIRL);
             // 管理员可以查看所有内容
             if (!user()->getIsAdmin())
                 $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));

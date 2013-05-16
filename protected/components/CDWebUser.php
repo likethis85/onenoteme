@@ -34,4 +34,9 @@ class CDWebUser extends CWebUser
     {
         return $this->checkAccess(self::AUTH_CHIEF_EDITOR_NAME);
     }
+
+    public function getIsVip()
+    {
+        return $this->getIsAdmin() && false;
+    }
 }

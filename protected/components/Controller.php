@@ -59,13 +59,15 @@ class Controller extends CController
         $html = '';
         $url = abu(request()->getUrl());
         if (user()->getIsGuest()) {
-            $html = sprintf('<li><a href="%s">注册</a></li>', CDBaseUrl::singupUrl($url));
+            $html .= sprintf('<li><a href="%s">注册</a></li>', CDBaseUrl::singupUrl($url));
 			$html .= sprintf('<li class="user-login"><a class="fleft" href="%s">登录</a></li>', CDBaseUrl::loginUrl($url));
 			$html .= sprintf('<li class="sns-icon"><a class="fright" href="%s"><img src="%s" alt="用新浪微博账号登录s" /></a>', aurl('weibo/sinat'), sbu('images/weibo24.png'));
 			$html .= sprintf('<a class="fright" href="%s"><img src="%s" alt="" /></a></li>', aurl('weibo/qqt'), sbu('images/qqt24.png'));
         }
         else {
-            $html = sprintf('<li class="user-name"><a href="%s" title="我的主页">我的主页</a></li>', user()->getHomeUrl());
+            
+            $html .= sprintf('<li><a href="%s" target="_blank">管理中心</a></li>', CDBaseUrl::adminHomeUrl());
+//             $html .= sprintf('<li class="user-name"><a href="%s" title="我的主页">我的主页</a></li>', user()->getHomeUrl());
             $html .= sprintf('<li class="user-name"><a href="%s" title="查看我的收藏">我的收藏</a></li>', aurl('member/post/favorite'));
             	
             if ($this->getProfile()->getMiniAvatarUrl())

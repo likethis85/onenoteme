@@ -87,6 +87,10 @@ class TagController extends Controller
         
         $criteria = new CDbCriteria();
         $criteria->addInCondition('id', $postIDs);
+        // 只有vip才可以查看GIRL频道
+        if (!user()->getIsVip())
+            $criteria->addCondition('t.channel_id != ' . CHANNEL_GIRL);
+        
         $models = Post::model()->findAll($criteria);
         
         if ($pages->currentPage > 1)

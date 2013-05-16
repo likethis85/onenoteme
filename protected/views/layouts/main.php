@@ -22,12 +22,9 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 		<li><a href="<?php echo CDBaseUrl::mobileHomeUrl();?>">手机版</a></li>
 		<li><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank">iPhone应用</a></li>
 		<li><a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank">安卓应用</a></li>
+		<li><a href="<?php echo aurl('sponsor/index');?>" target="_blank">赞助我们</a></li>
 	</ul>
 	<ul class="fright" id="user-mini-nav">
-	    <?php if (user()->getIsAdmin()):?>
-	    <li><a href="<?php echo CDBaseUrl::adminHomeUrl()?>" target="_blank">管理中心</a></li>
-	    <?php endif;?>
-	    <li><a href="<?php echo aurl('sponsor/index');?>" target="_blank">赞助我们</a></li>
 	    <?php echo $this->renderDynamic('userToolbar');?>
 	</ul>
 	<div class="clear"></div>
@@ -48,6 +45,10 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     		<li<?php echo ($this->channel===CHANNEL_FUNNY . MEDIA_TYPE_VIDEO) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/video');?>">挖视频</a></li>
     		<li>|</li>
     		<li<?php echo ($this->channel===CHANNEL_GHOSTSTORY . MEDIA_TYPE_TEXT) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/ghost');?>">挖鬼故事</a></li>
+    		<?php if (user()->isVip):?>
+    		<li>|</li>
+    		<li<?php echo ($this->channel===CHANNEL_GIRL) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/girl');?>">挖女神</a></li>
+    		<?php endif;?>
     	</ul>
     	<ul class="fright">
     	</ul>

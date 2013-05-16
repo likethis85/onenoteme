@@ -54,6 +54,9 @@ class ChannelController extends MobileController
 	
 	public function actionGirl($page = 1)
 	{
+	    if (!user()->getIsVip())
+	        throw new CHttpException(403, '该频道不存在');
+	    
 	    $data = self::fetchPosts(CHANNEL_GIRL, MEDIA_TYPE_IMAGE);
 	     
 	    $this->pageTitle = '挖福利 - 最新最全的女明星写真、清纯校花、美女模特、正妹性感自拍';
