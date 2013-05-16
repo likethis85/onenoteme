@@ -37,6 +37,6 @@ class CDWebUser extends CWebUser
 
     public function getIsVip()
     {
-        return $this->getIsAdmin() && false;
+        return $this->getIsAdmin();
     }
 }
