@@ -19,16 +19,22 @@ class AboutController extends Controller
     
     public function actionIndex()
     {
-        
+        $this->setSitePageTitle('关于我们');
+        $this->channel = 'about';
+        $this->render('index');
     }
     
     public function actionContact()
     {
-        
+        $this->setSitePageTitle('联系我们');
+        $this->channel = 'contact';
+        $this->render('contact');
     }
     
     public function actionPolicy()
     {
-        
+        $this->setSitePageTitle('免责声明');
+        $this->channel = 'policy';
+        $this->render('policy');
     }
 }

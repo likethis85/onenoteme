@@ -2,6 +2,7 @@
 
 /* panel */
 .panel {background-color:#FFFFFF; -webkit-box-shadow:#AAAAAA 0 1px 3px; box-shadow:#AAAAAA 0 1px 3px; -moz-box-shadow:#AAAAAA 0 1px 3px;}
+.panel30 {padding:30px;}
 .panel25 {padding:25px;}
 .panel20 {padding:20px;}
 .panel15 {padding:15px;}
@@ -267,21 +268,17 @@ a:hover .social-widget-content {color:#666666;}
 .cd-activate {margin:40px 50px 100px;}
 .cd-activate h4 {margin-bottom:30px;}
 
-/***** 以下暂时抛弃 *****/
-/*
-.post-detail .post-picture {text-align:center; overflow:hidden; margin-bottom:10px; position:relative; background:#FFFFFFF;}
-.post-detail .post-picture img {max-width:580px;}
-
-.btn-prev-next {position:absolute; top:0; display:block; width:40px; background:#FFFFFF; height:100%;}
-.btn-prev-next:hover {display:block; width:40px; background:#F5F5F5;}
-.btn-prev-next#btn-prev-post {left:0;}
-.btn-prev-next#btn-next-post {right:0;}
-.btn-prev-next .btn-prev-icon, .btn-prev-next .btn-next-icon {display:block; width:40px; height:47px; position:fixed;}
-.btn-prev-next .btn-prev-icon {background-position:-749px -7px;}
-.btn-prev-next:hover .btn-prev-icon {background-position:-749px -54px;}
-.btn-prev-next .btn-next-icon {background-position:-818px -7px;}
-.btn-prev-next:hover .btn-next-icon {background-position:-818px -54px;}
-*/
-
+/* about controller */
+.about-container {width:670px; border-right:1px solid #EFEFEF;}
+.about-content {width:640px;}
+.about-content h2 {font-size:20px; margin:0 0 15px;}
+.about-content h3 {font-size:16px; margin:0;}
+.about-content img.about-weixin {width:200px;}
+.about-sidebar {width:200px;}
+.about-sidebar ul {list-style:none; padding:0; margin:0;}
+.about-sidebar li:before {content:"»"; margin-right:7px; color:#999999;}
+.about-sidebar li {margin:10px 0;}
+.about-sidebar li a, .about-content a {text-decoration:underline; font-size:14px;}
+.about-sidebar li.active a {font-weight:bold; color:#000000;}
 
 

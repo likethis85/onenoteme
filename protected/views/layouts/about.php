@@ -12,16 +12,12 @@
 </head>
 <body>
 <div class="cd-mini-nav">
-    <ul class="fleft">
+    <ul>
 		<li><a href="<?php echo CDBaseUrl::mobileHomeUrl();?>">手机版</a></li>
 		<li><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank">iPhone应用</a></li>
 		<li><a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank">安卓应用</a></li>
 		<li><a href="<?php echo aurl('sponsor/index');?>" target="_blank">赞助我们</a></li>
 	</ul>
-	<ul class="fright" id="user-mini-nav">
-	    <?php echo $this->renderDynamic('userToolbar');?>
-	</ul>
-	<div class="clear"></div>
 </div>
 <div class="cd-header">
     <div class="cd-wrapper cd-header-inner">
@@ -47,7 +43,17 @@
     </div>
 </div>
 <div class="cd-wrapper cd-main">
-	<?php echo $content;?>
+    <div class="panel panel30">
+        <div class="about-container fleft"><div class="about-content"><?php echo $content;?></div></div>
+    	<div class="about-sidebar fright">
+    	    <ul>
+    	        <li <?php if ($this->channel == 'about') echo 'class="active"';?>><a href="<?php echo aurl('about');?>">关于我们</a></li>
+    	        <li <?php if ($this->channel == 'contact') echo 'class="active"';?>><a href="<?php echo aurl('about/contact');?>">联系我们</a></li>
+    	        <li <?php if ($this->channel == 'policy') echo 'class="active"';?>><a href="<?php echo aurl('about/policy');?>">免责声明</a></li>
+    	    </ul>
+    	</div>
+    	<div class="clear"></div>
+	</div>
 </div>
 <?php echo param('footer_before_html');?>
 <?php $this->renderPartial('/public/footer');?>

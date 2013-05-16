@@ -54,6 +54,15 @@ class Controller extends CController
         cs()->registerMetaTag($content, 'description');
     }
     
+    public function setSitePageTitle($text)
+    {
+        $title = app()->name;
+        if ($text)
+            $title = $text . ' - ' . app()->name;
+        
+        $this->setPageTitle($title);
+    }
+    
     public function userToolbar()
     {
         $html = '';
