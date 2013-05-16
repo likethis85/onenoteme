@@ -198,6 +198,11 @@ EOD;
         $mailer->send();
 //         var_dump($mailer);
     }
+    
+    public function actionUrl()
+    {
+        echo abu('http://a.com');
+    }
 }
 
 

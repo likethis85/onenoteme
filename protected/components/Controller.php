@@ -57,7 +57,7 @@ class Controller extends CController
     public function userToolbar()
     {
         $html = '';
-        $url = request()->getUrl();
+        $url = abu(request()->getUrl());
         if (user()->getIsGuest()) {
             $html = sprintf('<li><a href="%s">注册</a></li>', CDBaseUrl::singupUrl($url));
 			$html .= sprintf('<li class="user-login"><a class="fleft" href="%s">登录</a></li>', CDBaseUrl::loginUrl($url));

@@ -119,6 +119,9 @@ function bu($url = null)
  */
 function abu($url = null)
 {
+    if (filter_var($url, FILTER_VALIDATE_URL))
+        return $url;
+    
     static $baseUrl = null;
     if ($baseUrl === null)
         $baseUrl = rtrim(Yii::app()->request->getBaseUrl(true), '/') . '/';
