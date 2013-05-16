@@ -45,10 +45,6 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     		<li<?php echo ($this->channel===CHANNEL_FUNNY . MEDIA_TYPE_VIDEO) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/video');?>">挖视频</a></li>
     		<li>|</li>
     		<li<?php echo ($this->channel===CHANNEL_GHOSTSTORY . MEDIA_TYPE_TEXT) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/ghost');?>">挖鬼故事</a></li>
-    		<?php if (user()->isVip):?>
-    		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_GIRL) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/girl');?>">挖女神</a></li>
-    		<?php endif;?>
     	</ul>
     	<ul class="fright">
     	</ul>
