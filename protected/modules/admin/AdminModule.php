@@ -21,7 +21,7 @@ class AdminModule extends CWebModule
 		if (parent::beforeControllerAction($controller, $action)) {
 		    // @todo 此处会有登录次数限制条件处理，比如一分钟内只允许访问几次，如果超过直接抛出500错误
 			if (user()->getIsGuest()) {
-			    $url = aurl('site/login', array('url'=>request()->getUrl()));
+			    $url = CDBaseUrl::loginUrl(abu(request()->getUrl()));
     			request()->redirect($url);
     			exit(0);
 			}
