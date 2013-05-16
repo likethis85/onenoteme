@@ -76,9 +76,9 @@ cs()->registerMetaTag('text/html; charset=utf-8', null, 'content-type')
     ->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END);
 
 CD_PRODUCT && cs()->scriptMap = array(
-    'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=20130427001'),
-    'cd-basic.css' => sbu('styles/cd-all.min.css?t=20130427001'),
-    'cd-main.css' => sbu('styles/cd-all.min.css?t=20130427001'),
+    'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=20130516001'),
+    'cd-basic.css' => sbu('styles/cd-all.min.css?t=20130516001'),
+    'cd-main.css' => sbu('styles/cd-all.min.css?t=20130516001'),
     
     'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js',
     
