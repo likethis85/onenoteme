@@ -27,10 +27,10 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
     
     <ul class="more-post">
         <?php if ($post->getPrevChannelPost()):?>
-        <li><span>&larr;</span><?php echo $post->getPrevChannelPost()->titleLink;?></li>
+        <li><span>&uarr;</span><?php echo $post->getPrevChannelPost()->titleLink;?></li>
         <?php endif;?>
         <?php if ($post->getNextChannelPost()):?>
-        <li><span>&rarr;</span><?php echo $post->getNextChannelPost()->titleLink;?></li>
+        <li><span>&darr;</span><?php echo $post->getNextChannelPost()->titleLink;?></li>
         <?php endif;?>
     </ul>
     
