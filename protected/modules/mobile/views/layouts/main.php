@@ -47,7 +47,6 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     <a class="switch-version" href="<?php echo aurl('site/index', array('f'=>1));?>">切换到桌面版</a>
 </footer>
 <?php echo param('tongji_code');?>
-<script src="http://a.tbcdn.cn/apps/top/x/sdk.js?appkey=21351161"></script>
 </body>
 </html>
 
@@ -64,8 +63,8 @@ CD_PRODUCT && cs()->scriptMap = array(
     
     'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js',
     
-    'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130331001'),
-    'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130331001'),
-    'json2.js' => sbu('scripts/mobile-all.min.js?t=20130331001'),
+    'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130518001'),
+    'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130518001'),
+    'json2.js' => sbu('scripts/mobile-all.min.js?t=20130518001'),
 );
 ?>
