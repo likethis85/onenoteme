@@ -145,8 +145,8 @@ footer a.switch-version {float:right;}
 .post-detail .cdc-block {margin:15px auto 15px; list-style:none; text-align:center;}
 
 /* adert block */
-.top-banner {margin:0 auto 10px;}
-.bottom-banner {margin:10px auto;}
+.top-banner {margin:0 auto;}
+.bottom-banner {margin:10px auto 0;}
 
 
 
