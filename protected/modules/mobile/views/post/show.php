@@ -20,11 +20,12 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
     <div class="content-block video-player"><?php echo $post->videoHtml;?></div>
     <?php endif;?>
     <div class="item-content"><?php echo $post->filterContent;?></div>
-    <div class="line1px"></div>
+    
     <!-- 广告位 开始 -->
     <?php $this->widget('CDAdvert', array('solt'=>'mobile_post_content_bottom'));?>
     <!-- 广告位 结束 -->
     
+    <div class="line1px"></div>
     <ul class="more-post">
         <?php if ($post->getPrevChannelPost()):?>
         <li><span>&uarr;</span><?php echo $post->getPrevChannelPost()->titleLink;?></li>
@@ -33,6 +34,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         <li><span>&darr;</span><?php echo $post->getNextChannelPost()->titleLink;?></li>
         <?php endif;?>
     </ul>
+    <div class="line1px"></div>
     
     <a name="comments"></a>
     <div class="beta-create-form"><?php $this->renderPartial('/comment/_create_form', array('comment'=>$comment));?></div>
