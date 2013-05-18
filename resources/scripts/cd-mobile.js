@@ -309,8 +309,9 @@ var BetaComment = {
 		if (captchaEl.length > 0)
 			form.find('input.beta-captcha').blur();
 
+		var errorHtml = '请输入评论内容';
 		if (form.find('.help-block.error').length > 0) {
-			msgtext.html('请输入评论内容和验证码后再发布');
+			msgtext.html(errorHtml);
 			msg.removeClass('alert-success').addClass('alert-error').show();
 			return false;
 		}
@@ -320,7 +321,7 @@ var BetaComment = {
 			var minlen = parseInt(contentEl.attr('minlen'));
 			minlen = (isNaN(minlen) || minlen == 0) ? 5 : minlen;
 			if (content.length < minlen) {
-				msgtext.html('请输入评论内容和验证码后再发布');
+				msgtext.html(errorHtml);
 				msg.removeClass('alert-success').addClass('alert-error').show();
 				contentEl.focus();
 				return false;
@@ -328,7 +329,7 @@ var BetaComment = {
 			if (captchaEl.length > 0) {
 				var captcha = $.trim(captchaEl.val());
 				if (captcha.length != 4) {
-					msgtext.html('请输入评论内容和验证码后再发布');
+					msgtext.html(errorHtml);
 					msg.removeClass('alert-success').addClass('alert-error').show();
 					captchaEl.focus();
 					return false;
