@@ -145,7 +145,7 @@ footer a.switch-version {float:right;}
 .post-detail .cdc-block {margin:15px auto 15px; list-style:none; text-align:center;}
 .post-detail .more-post {list-style:none; margin:0 0 0 15px; padding:0;}
 .post-detail .more-post li {margin:5px 0;}
-.post-detail .more-post li span {font-size:14px; color:#BFBFBF; margin:0 3px 0 -15px; vertical-align:middle;}
+.post-detail .more-post li span {font-size:14px; color:#BFBFBF; margin:0 3px 0 -15px; vertical-align:top;}
 
 /* adert block */
 .top-banner {margin:0 auto;}
