@@ -33,9 +33,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 </div>
 
 <div class="cd-wrapper cd-main">
-    <div class="cdc-block">
-        <?php $this->widget('CDAdvert', array('solt'=>'mobile_top_banner'));?>
-    </div>
+    <?php $this->widget('CDAdvert', array('solt'=>'mobile_top_banner'));?>
 	<?php echo $content;?>
 </div>
 
