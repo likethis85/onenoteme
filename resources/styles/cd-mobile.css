@@ -143,6 +143,10 @@ footer a.switch-version {float:right;}
 .post-detail .post-content {line-height:24px; color:inherit; margin:0 0 15px;}
 .post-detail .post-picture {text-align:center; overflow:hidden; margin-bottom:10px; background-color:#F4F4F6;}
 .post-detail .cdc-block {margin:15px auto 15px; list-style:none; text-align:center;}
+.post-detail .more-post {list-style:none; margin:0; padding:0;}
+.post-detail .more-post li span {color:#BFBFBF;}
+.post-detail .more-post li a {display:inline-block; height:26px; line-height:26px;}
+
 
 /* adert block */
 .top-banner {margin:0 auto;}

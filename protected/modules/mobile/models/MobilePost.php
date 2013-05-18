@@ -63,4 +63,5 @@ class MobilePost extends Post
 	{
 	    return parent::getTagLinks('mobile/tag/posts', $operator, $target, $class);
 	}
+
 }

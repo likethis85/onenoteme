@@ -1244,6 +1244,42 @@ class Post extends CActiveRecord
         
         return $images;
     }
+
+    public function getNextChannelPost($columns = null)
+    {
+        static $data = array();
+        if (array_key_exists($this->id, $data))
+            return $data[$this->id];
+        
+        $duration = 60*60*24;
+        $criteria = new CDbCriteria();
+        if (empty($columns))
+            $criteria->select = array('id', 'title', 'create_time');
+        $criteria->addColumnCondition(array('channel_id'=>$this->channel_id, 'state'=>POST_STATE_ENABLED))
+            ->addCondition('create_time < ' . (int)$this->create_time);
+        $criteria->order = 'create_time desc, id desc';
+        $post = $this->cache($duration)->find($criteria);
+    
+        return $post;
+    }
+    
+    public function getPrevChannelPost($columns = null)
+    {
+        static $data = array();
+        if (array_key_exists($this->id, $data))
+            return $data[$this->id];
+        
+        $duration = 60*60*24;
+        $criteria = new CDbCriteria();
+        if (empty($columns))
+            $criteria->select = array('id', 'title', 'create_time');
+        $criteria->addColumnCondition(array('channel_id'=>$this->channel_id, 'state'=>POST_STATE_ENABLED))
+            ->addCondition('create_time > ' . (int)$this->create_time);
+        $criteria->order = 'create_time desc, id desc';
+        $post = $this->cache($duration)->find($criteria);
+    
+        return $post;
+    }
     
     
     /**

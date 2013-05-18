@@ -22,10 +22,18 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
     <div class="item-content"><?php echo $post->filterContent;?></div>
     <div class="line1px"></div>
     <!-- 广告位 开始 -->
-    <div class="cdc-block">
-        <?php $this->widget('CDAdvert', array('solt'=>'mobile_post_content_bottom'));?>
-    </div>
+    <?php $this->widget('CDAdvert', array('solt'=>'mobile_post_content_bottom'));?>
     <!-- 广告位 结束 -->
+    
+    <ul class="more-post">
+        <?php if ($post->getPrevChannelPost()):?>
+        <li><span>上一篇：</span><?php echo $post->getPrevChannelPost()->titleLink;?></li>
+        <?php endif;?>
+        <?php if ($post->getNextChannelPost()):?>
+        <li><span>下一篇：</span><?php echo $post->getNextChannelPost()->titleLink;?></li>
+        <?php endif;?>
+    </ul>
+    
     <a name="comments"></a>
     <div class="beta-create-form"><?php $this->renderPartial('/comment/_create_form', array('comment'=>$comment));?></div>
     <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'post'=>$post));?>
