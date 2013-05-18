@@ -18,9 +18,9 @@ class MobileCommentForm extends CFormModel
     public function attributeLabels()
     {
         return array(
-            'post_id' => t('post_id'),
-            'content' => t('content'),
-            'captcha' => t('captcha'),
+            'post_id' => '段子ID',
+            'content' => '评论内容',
+            'captcha' => '验证码',
         );
     }
     
@@ -29,7 +29,7 @@ class MobileCommentForm extends CFormModel
         $comment = new MobileComment();
         $comment->attributes = $this->attributes;
         $comment->user_id = (int)user()->id;
-        $comment->state = (int)param('defaultNewCommentState');
+        $comment->state = (int)param('default_mobile_new_comment_state');
         if (!user()->getIsGuest())
             $comment->user_name = (strip_tags(trim(user()->name)));
         

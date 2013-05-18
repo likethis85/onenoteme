@@ -31,7 +31,7 @@ return array(
      * 前台相关参数
     */
     // 默认评论是否需要审核, 1直接显示，0需要审核
-    'defaultNewCommentState' => 1,
+    'default_mobile_new_comment_state' => 1,
 
     // 简述中可以使用的html标签
     'summary_html_tags' => '<b><strong><img><p>',
