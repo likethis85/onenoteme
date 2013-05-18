@@ -38,9 +38,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 </div>
 
 <!-- 广告位 开始 -->
-<div class="cdc-block">
-    <?php $this->widget('CDAdvert', array('solt'=>'mobile_banner'));?>
-</div>
+<?php $this->widget('CDAdvert', array('solt'=>'mobile_bottom_banner'));?>
 <!-- 广告位 结束 -->
 
 <footer class="clearfix">

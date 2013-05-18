@@ -48,7 +48,7 @@ a:hover {color:#D14836; text-decoration:none;}
 .cd-content {width:600px;}
 .cd-main {margin-top:57px;}
 
-.cdc-block {margin:0px auto; background-color:white;}
+.cdc-block {text-align:center; padding:0; margin:0px auto;}
 .cdc-block h4 {margin:0; background:#EFEFEF; line-height:36px; text-indent:10px; font-size:14px; font-weight:normal;}
 .ad-block {text-align:center;}
 .ad-block.fixed {position:fixed; top:73px; z-index:99;}
@@ -75,8 +75,6 @@ footer a {display:block; padding:10px 15px;}
 footer a:link, footer a:hover, footer a:visited {color:white;}
 footer a.return-top {float:left;}
 footer a.switch-version {float:right;}
-
-.cdc-block {text-align:center; padding:0; margin:10px 0;}
 
 /* panel */
 .panel {background-color:#FFFFFF; margin:1px 1px 3px; -webkit-box-shadow:#666 0 1px 3px; box-shadow:#666 0 1px 3px; -moz-box-shadow:#666 0 1px 3px; -webkit-border-radius:5px; border-radius:5px; -moz-border-radius:5px;}
