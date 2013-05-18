@@ -45,9 +45,9 @@ class MobilePost extends Post
        return parent::getTitleLink($len, $target);
     }
 
-    public function getCommentsUrl()
+    public function getCommentUrl()
     {
-        return aurl('mobile/comment/list', array('pid'=>$this->id));
+        return aurl('mobile/post/show', array('id'=>$this->id), '', 'comments');
     }
 
     	

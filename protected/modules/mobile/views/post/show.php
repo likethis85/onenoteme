@@ -26,6 +26,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         <?php $this->widget('CDAdvert', array('solt'=>'mobile_post_content_bottom'));?>
     </div>
     <!-- 广告位 结束 -->
+    <a name="comments"></a>
     <div class="beta-create-form"><?php $this->renderPartial('/comment/_create_form', array('comment'=>$comment));?></div>
     <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'post'=>$post));?>
 </div>

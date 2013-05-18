@@ -59,8 +59,8 @@ cs()->registerCssFile(sbu('libs/bootstrap/css/bootstrap.min.css'))
     ->registerScriptFile(sbu('scripts/cd-mobile.js'), CClientScript::POS_END);
 
 CD_PRODUCT && cs()->scriptMap = array(
-    'bootstrap.min.css' => sbu('styles/mobile-all.min.css?t=20130412001'),
-    'cd-mobile.css' => sbu('styles/mobile-all.min.css?t=20130412001'),
+    'bootstrap.min.css' => sbu('styles/mobile-all.min.css?t=20130518001'),
+    'cd-mobile.css' => sbu('styles/mobile-all.min.css?t=20130518001'),
     
     'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js',
     

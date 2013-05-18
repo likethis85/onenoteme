@@ -61,7 +61,7 @@
             <ul>
             	<li class="fleft"><a rel="nofollow" href="javascript:void(0);" class="upscore site-bg" data-id="<?php echo $model->id;?>" data-score="1" data-url="<?php echo aurl('post/score');?>"><?php echo $model->up_score;?></a></li>
             	<li class="fleft"><a rel="nofollow" href="javascript:void(0);" class="downscore site-bg" data-id="<?php echo $model->id;?>" data-score="-1" data-url="<?php echo aurl('post/score');?>"><?php echo $model->downScore;?></a></li>
-            	<li class="fright"><a href="<?php echo $model->url;?>" class="view-detail" title="阅读全文内容">阅读全文</a></li>
+            	<li class="fright"><a href="<?php echo $model->getCommentUrl();?>" class="site-bg comment" title="查看评论"><?php echo $model->comment_nums > 0 ? $model->comment_nums : '吐槽';?></a></li>
             	<!--
             	<li class="fleft"><a href="<?php echo aurl('post/show', array('id' => $model->id));?>" data-url="<?php echo aurl('comment/list', array('id' => $model->id));?>" class="comment site-bg"><?php echo $model->comment_nums ? $model->comment_nums : '评论';?></a></li>
             	 -->
@@ -86,7 +86,7 @@ $(function(){
 	$('.item-toolbar').on('click', 'a.upscore, a.downscore', CDMobile.ratingPost);
 	$('.item-toolbar').on('mouseenter', 'a.share, .sharebox', CDMobile.showShareBox);
 	$('.item-toolbar').on('mouseleave', 'a.share, .sharebox', CDMobile.hideShareBox);
-	$('.item-toolbar').on('click', 'a.comment', CDMobile.fetchComments);
+// 	$('.item-toolbar').on('click', 'a.comment', CDMobile.fetchComments);
 
 	$(document).on('click', '.comment-arrows a', CDMobile.RatingComment);
 	$(document).on('click', 'input.submit-comment', CDMobile.PostComment);
