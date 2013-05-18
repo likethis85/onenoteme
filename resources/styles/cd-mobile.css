@@ -46,7 +46,7 @@ a:hover {color:#D14836; text-decoration:none;}
 .cd-container {overflow:hidden;}
 .cd-entry {background:#FFFFFF; margin:0 auto;}
 .cd-content {width:600px;}
-.cd-main {margin-top:57px;}
+.cd-main {margin-top:55px;}
 
 .cdc-block {text-align:center; padding:0; margin:0px auto;}
 .cdc-block h4 {margin:0; background:#EFEFEF; line-height:36px; text-indent:10px; font-size:14px; font-weight:normal;}
@@ -144,8 +144,9 @@ footer a.switch-version {float:right;}
 .post-detail .post-picture {text-align:center; overflow:hidden; margin-bottom:10px; background-color:#F4F4F6;}
 .post-detail .cdc-block {margin:15px auto 15px; list-style:none; text-align:center;}
 
-
-
+/* adert block */
+.top-banner {margin:0 auto 10px;}
+.bottom-banner {margin:10px auto;}
 
 
 

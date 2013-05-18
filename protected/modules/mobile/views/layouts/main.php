@@ -33,12 +33,16 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 </div>
 
 <div class="cd-wrapper cd-main">
+    <div class="top-banner">
     <?php $this->widget('CDAdvert', array('solt'=>'mobile_top_banner'));?>
+    </div>
 	<?php echo $content;?>
 </div>
 
 <!-- 广告位 开始 -->
+<div class="bottom-banner">
 <?php $this->widget('CDAdvert', array('solt'=>'mobile_bottom_banner'));?>
+</div>
 <!-- 广告位 结束 -->
 
 <footer class="clearfix">
