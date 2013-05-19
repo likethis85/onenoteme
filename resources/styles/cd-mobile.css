@@ -55,7 +55,7 @@ a:hover {color:#D14836; text-decoration:none;}
 .cd-border {border:1px solid #DFDFDF;}
 
 /* header */
-.cd-header {position:fixed; top:0px; z-index:999; height:40px; background-color:#545652; width:100%; overflow:hidden; border-bottom:1px solid black;}
+.cd-header {position:fixed; top:0px; z-index:999; height:40px; background-color:#545652; width:100%; overflow:hidden;}
 .cd-header .cd-wrapper {margin:0;}
 .cd-header ul {list-style:none;}
 .cd-header .channel-nav {margin:0 0 0 43px; padding:0; list-style:none; height:40px; overflow:hidden;}
@@ -149,7 +149,7 @@ footer a.switch-version {float:right;}
 .post-detail .more-post li span {font-size:14px; color:#BFBFBF; margin:0 3px 0 -15px; vertical-align:top;}
 
 /* adert block */
-.top-banner {margin:0 auto; line-height:0; font-size:0;}
+.top-banner {margin:0 -5px; line-height:0; font-size:0;}
 .bottom-banner {margin:10px auto 0;}
 
 
