@@ -42,7 +42,7 @@ a:hover {color:#D14836; text-decoration:none;}
 .line3px {display:block; clear:both; height:3px; line-height:3px; font-size:1px; overflow:hidden; background-color:#DFDFDF; margin:5px 0px;}
 
 /* container */
-.cd-wrapper {margin:0px 5px; overflow:hidden;}
+.cd-wrapper {margin:10px 5px 0; overflow:hidden;}
 .cd-container {overflow:hidden;}
 .cd-entry {margin:0 auto;}
 .cd-main {margin-top:40px;}
