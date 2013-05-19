@@ -88,7 +88,7 @@ footer a.switch-version {float:right;}
 .panel-pages {padding:5px 20px;}
 
 /* post line list */
-.post-line-list .post-item {margin-bottom:10px; position:relative; z-index:1;}
+.post-line-list .post-item {margin-bottom:0; position:relative; z-index:1;}
 .post-line-list .post-item .post-image {margin-top:10px;}
 .post-line-list .post-item .post-image .thumbbox {position:relative;  z-index:1;}
 .post-image img.thumb {width:150px; max-height:250px; margin:0 auto;}
