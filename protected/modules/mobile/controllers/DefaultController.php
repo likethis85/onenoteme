@@ -9,6 +9,7 @@ class DefaultController extends MobileController
                 'COutputCache + index',
                 'duration' => 120,
                 'varyByParam' => array('page'),
+                'varyByExpression' => array(request(), 'getServerName'),
             ),
         );
     }

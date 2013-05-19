@@ -8,6 +8,7 @@ class TagController extends MobileController
                 'COutputCache + posts',
                 'duration' => param('mobile_post_list_cache_expire'),
                 'varyByParam' => array('name', 'page'),
+                'varyByExpression' => array(request(), 'getServerName'),
             ),
         );
     }

@@ -9,12 +9,13 @@ class PostController extends MobileController
             array(
                 'COutputCache + show, detail',
                 'duration' => param('mobile_post_show_cache_expire'),
-                'varyByParam' => array('id'),
+                'varyByParam' => array('id', 'source'),
+                'varyByExpression' => array(request(), 'getServerName'),
             ),
         );
     }
     
-    public function actionShow($id)
+    public function actionShow($id, $source = '')
     {
         $id = (int)$id;
         // 只有vip才可以查看GIRL频道
