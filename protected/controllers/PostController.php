@@ -102,24 +102,8 @@ class PostController extends Controller
     public function actionBigPic($id)
     {
         $id = (int)$id;
-        if ($id <= 0)
-            throw new CHttpException(503, '非法请求');
-        
-        $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
-        $model = Post::model()->findByPk($id, $criteria);
-            
-        if (null === $model || empty($model->originalPic))
-            throw new CHttpException(403, '该段子不存在或未被审核');
-
-        $this->pageTitle = '原始图片' . ' - ' . trim(strip_tags($model->title)) . '  ' . $model->tagText;
-        $pageKeyword = '美女写真,美女图片,美女写真,性感美女,清纯少女,大学校花,淘女郎,微女郎';
-        if ($model->tags)
-            $pageKeyword = $model->getTagText(',') . ',' . $pageKeyword;
-        $this->setKeywords($pageKeyword);
-        $this->setDescription($model->content);
-        $this->layout = 'blank';
-        $this->render('/post/original_pic', array('model'=>$model));
+        $url = aurl('post/show', array('id'=>$id));
+        $this->redirect($url, true, 301);
     }
     
     public function actionViews()

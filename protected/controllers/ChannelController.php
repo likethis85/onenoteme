@@ -6,13 +6,13 @@ class ChannelController extends Controller
         $duration = 120;
         return array(
             array(
-                'COutputCache + joke, lengtu, girl, video, ghost',
+                'COutputCache + joke, lengtu, video, ghost',
                 'duration' => $duration,
                 'varyByParam' => array('page', 's'),
                 'requestTypes' => array('POST'),
             ),
             array(
-                'COutputCache + joke, lengtu, girl, video, ghost',
+                'COutputCache + joke, lengtu, video, ghost',
                 'duration' => $duration,
                 'varyByParam' => array('page', 's'),
                 'varyByExpression' => array(user(), 'getIsGuest'),
@@ -84,32 +84,7 @@ class ChannelController extends Controller
     
     public function actionGirl($page = 1, $s = POST_LIST_STYLE_LINE)
     {
-        if (!user()->getIsVip())
-            throw new CHttpException(403, '该频道不存在');
-        
-        cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/girl'), null, array('title'=>app()->name . ' » 挖女神 Feed'));
-        $this->pageTitle = param('channel_girl_title');
-        $this->setDescription(param('channel_girl_description'));
-        $this->setKeywords(param('channel_girl_keywords'));
-        $this->channel = CHANNEL_GIRL . MEDIA_TYPE_IMAGE;
-        
-        $list_view = 'line_list';
-        if (($s == POST_LIST_STYLE_GRID)) {
-            $list_view = 'grid_list';
-            $count = param('grid_post_count_page');
-        }
-        elseif ($s == POST_LIST_STYLE_WATERFALL)
-            $count = param('waterfall_post_count_page');
-        else
-            $count = param('girl_count_page');
-        
-        $data = $this->fetchPosts(CHANNEL_GIRL, MEDIA_TYPE_IMAGE, null, $count, array('uploadImages', 'uploadImagesCount'));
-        $data['list_view'] = '/post/' . $list_view;
-        $view = (($s == POST_LIST_STYLE_WATERFALL)) ? '/post/mixed_list' : 'girl_list';
-        if (request()->getIsAjaxRequest())
-            $this->renderPartial($view, $data);
-        else
-            $this->render($view, $data);
+        $this->redirect(CDBaseUrl::siteHomeUrl(), true, 301);
     }
     
     public function actionVideo($page = 1)

@@ -14,7 +14,7 @@ class FeedController extends Controller
         $duration = 600;
         return array(
             array(
-                'COutputCache + index, joke, lengtu, girl, video, ghost, funny',
+                'COutputCache + index, joke, lengtu, video, ghost, funny',
                 'duration' => $duration,
                 'varyByParam' => array('source'),
             ),
@@ -28,7 +28,7 @@ class FeedController extends Controller
     
     public function actionIndex($source = 'feed')
     {
-        $channels = array(CHANNEL_FUNNY, CHANNEL_GIRL, CHANNEL_GHOSTSTORY);
+        $channels = array(CHANNEL_FUNNY, CHANNEL_GHOSTSTORY);
         $mediaTypes = array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE, MEDIA_TYPE_VIDEO);
         echo self::channelPosts($channels, $mediaTypes, app()->name, $source, 600);
     }
@@ -58,16 +58,17 @@ class FeedController extends Controller
         echo self::channelPosts(CHANNEL_FUNNY, MEDIA_TYPE_IMAGE, $feedname, $source, 600);
     }
     
-    public function actionGirl($source = 'feed')
-    {
-        $feedname = app()->name . ' » 挖女神';
-        echo self::channelPosts(CHANNEL_GIRL, MEDIA_TYPE_IMAGE, $feedname, $source, 600);
-    }
-    
     public function actionVideo($source = 'feed')
     {
         $feedname = app()->name . ' » 挖短片';
         echo self::channelPosts(CHANNEL_FUNNY, MEDIA_TYPE_VIDEO, $feedname, $source, 600);
+    }
+    
+    public function actionGirl($source = 'feed')
+    {
+        $source = trim(strip_tags($source));
+        $url = aurl('feed/funny', array('source'=>$source));
+        $this->redirect($url, true, 301);
     }
     
     private static function channelPosts($channelID, $mediatype, $feedname, $source, $expire = 600)
