@@ -46,7 +46,7 @@ a:hover {color:#D14836; text-decoration:none;}
 .cd-container {overflow:hidden;}
 .cd-entry {background:#FFFFFF; margin:0 auto;}
 .cd-content {width:600px;}
-.cd-main {margin-top:55px;}
+.cd-main {margin-top:50px;}
 
 .cdc-block {text-align:center; padding:0; margin:0px auto;}
 .cdc-block h4 {margin:0; background:#EFEFEF; line-height:36px; text-indent:10px; font-size:14px; font-weight:normal;}
@@ -55,12 +55,13 @@ a:hover {color:#D14836; text-decoration:none;}
 .cd-border {border:1px solid #DFDFDF;}
 
 /* header */
-.cd-header {position:fixed; top:0px; z-index:999; margin-bottom:15px; height:45px; background-color:#545652; width:100%; overflow:hidden; border-bottom:1px solid black;}
+.cd-header {position:fixed; top:0px; z-index:999; height:40px; background-color:#545652; width:100%; overflow:hidden; border-bottom:1px solid black;}
+.cd-header .cd-wrapper {margin:0;}
 .cd-header ul {list-style:none;}
-.cd-header .channel-nav {margin:0 0 0 30px; padding:0; list-style:none; height:45px; overflow:hidden;}
-.cd-header .channel-nav li {list-style:none; float:left; color:#CFCFCF; height:45px; line-height:45px; margin:auto 1px;}
+.cd-header .channel-nav {margin:0 0 0 43px; padding:0; list-style:none; height:40px; overflow:hidden;}
+.cd-header .channel-nav li {list-style:none; float:left; color:#CFCFCF; height:40px; line-height:40px; margin:auto 1px;}
 .cd-header .channel-nav li a {display:block; color:#E0E0E0; padding:0 5px; font-size:16px; font-family:"微软雅黑";}
-.cd-header .channel-nav li a:hover, .cd-header .channel-nav li.active a {color:white; background:#454544; margin-top:5px; height:35px; line-height:35px; border-radius:5px; -webkite-border-radius:5px; -moz-border-radius:5px;}
+.cd-header .channel-nav li a:hover, .cd-header .channel-nav li.active a {color:white; background:#454544; margin-top:5px; height:30px; line-height:30px; border-radius:5px; -webkite-border-radius:5px; -moz-border-radius:5px;}
 .cd-header .logo a {display:block;}
 .cd-header .logo a h2 {display:none;}
 .cd-header .logo img {height:100%; vertical-align:top;}
