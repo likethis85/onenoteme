@@ -6,7 +6,7 @@ class ChannelController extends MobileController
     {
         return array(
             array(
-                'COutputCache + joke, lengtu, girl, video, ghost',
+                'COutputCache + joke, lengtu, girl, video, ghost, hot, latest',
                 'duration' => param('mobile_post_list_cache_expire'),
                 'varyByParam' => array('page'),
                 'varyByExpression' => array(request(), 'getServerName'),
@@ -33,6 +33,7 @@ class ChannelController extends MobileController
         $criteria = new CDbCriteria();
         $criteria->scopes = array('homeshow', 'published');
         $criteria->addColumnCondition(array('channel_id' => CHANNEL_FUNNY));
+        $criteria->addInCondition('t.media_type', array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE));
         $criteria->order = 't.istop desc, t.create_time desc';
         $criteria->limit = (int)p('line_post_count_page');
     
