@@ -40,7 +40,7 @@ class ChannelController extends Controller
         $mobileUrl = ($page > 1) ? aurl('mobile/default/index', array('page'=>$page)) : CDBaseUrl::mobileHomeUrl();
         cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
     
-        $this->fetchFunnyHotPosts(12);
+        $this->fetchFunnyHotPosts(8);
     }
     
     public function actionDay($page = 1)
@@ -128,7 +128,7 @@ class ChannelController extends Controller
         $this->redirect(CDBaseUrl::siteHomeUrl(), true, 301);
     }
     
-    private function fetchFunnyHotPosts($hours = 12)
+    private function fetchFunnyHotPosts($hours)
     {
         $this->channel = 'hot';
         $this->setKeywords(p('home_index_keywords'));
