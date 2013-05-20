@@ -7,6 +7,8 @@ class FeedController extends Controller
     {
         parent::init();
         header('Content-Type:application/xml; charset=' . app()->charset);
+        
+        self::log();
     }
     
     public function filters()
@@ -216,6 +218,18 @@ class FeedController extends Controller
     private static function checkSource($source)
     {
         return in_array($source, self::sources());
+    }
+    
+    private static function log()
+    {
+        $file = app()->getRuntimePath() . DS . 'feed.log';
+        $log = date('Y-m-d H:i:s') . ' - ' . request()->getUserHostAddress() . ' - ' . request()->getUserAgent() . ' - ' . request()->getUrl() . "\n";
+        $handle = fopen($file, 'a+');
+        if (flock($handle, LOCK_EX)) {
+            fwrite($handle, $log);
+            flock($handle, LOCK_UN);
+        }
+        fclose($handle);
     }
     
 }
