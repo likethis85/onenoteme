@@ -18,12 +18,7 @@ class PostController extends MobileController
     public function actionShow($id, $source = '')
     {
         $id = (int)$id;
-        // 只有vip才可以查看GIRL频道
-        if (!user()->getIsVip()) {
-            $criteria = new CDbCriteria();
-            $criteria->addCondition('t.channel_id != ' . CHANNEL_GIRL);
-        }
-        $post = MobilePost::model()->findByPk($id, $criteria);
+        $post = MobilePost::model()->findByPk($id);
         if ($post === null)
             throw new CHttpException(403, '内容不存在');
         

@@ -56,9 +56,9 @@ class Controller extends CController
     
     public function setSitePageTitle($text)
     {
-        $title = app()->name;
+        $title = app()->name . ' - ' . p('shortdesc');
         if ($text)
-            $title = $text . ' - ' . app()->name;
+            $title = $text . ' - ' . $title;
         
         $this->setPageTitle($title);
     }

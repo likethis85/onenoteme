@@ -19,8 +19,6 @@ define('CHANNEL_FUNNY', 1);
 define('CHANNEL_DUANZI', 0);
 define('CHANNEL_LENGTU', 20);
 define('CHANNEL_VIDEO', 40);
-define('CHANNEL_GIRL', 30);
-define('CHANNEL_GHOSTSTORY', 25);
 
 // 以下是表名
 define('TABLE_CATEGORY', '{{category}}');
@@ -71,7 +69,6 @@ define('LINK_NOT_IN_HOME', 0);
 
 define('POST_LIST_STYLE_LINE', 'line');
 define('POST_LIST_STYLE_GRID', 'grid');
-define('POST_LIST_STYLE_WATERFALL', 'fall');
 
 /*
  * 这些尺寸与又拍云里的自定义版本相对应

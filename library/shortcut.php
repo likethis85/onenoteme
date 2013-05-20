@@ -138,6 +138,16 @@ function param($name)
 {
     return Yii::app()->params[$name];
 }
+
+/**
+ * alias param
+ * @param string $name 参数名称
+ * @return mixed 参数值
+ */
+function p($name)
+{
+    return Yii::app()->params[$name];
+}
  
 /**
  * This is the shortcut to Yii::app()->user.

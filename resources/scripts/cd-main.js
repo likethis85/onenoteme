@@ -344,6 +344,12 @@ Waduanzi.fetchComments = function(event) {
 
 $(function(){
 	Waduanzi.fixedAdBlock();
+	$('.channel-nav .top-menu').on('mouseenter', function(){
+		$(this).css('height', 'auto');
+	});
+	$('.channel-nav .top-menu').on('mouseleave', function(){
+		$(this).css('height', '45px');
+	});
 });
 
 

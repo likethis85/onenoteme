@@ -38,15 +38,20 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 	        </a>
 	    </div>
     	<ul class="channel-nav fleft">
-    		<li<?php echo ($this->channel===CHANNEL_FUNNY . MEDIA_TYPE_TEXT) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/joke');?>">挖笑话</a></li>
-    		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_FUNNY . MEDIA_TYPE_IMAGE) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/lengtu');?>">挖趣图</a></li>
-    		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_FUNNY . MEDIA_TYPE_VIDEO) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/video');?>">挖视频</a></li>
-    		<li>|</li>
-    		<li<?php echo ($this->channel===CHANNEL_GHOSTSTORY . MEDIA_TYPE_TEXT) ? ' class="active"' : '';?>><a href="<?php echo aurl('channel/ghost');?>">挖鬼故事</a></li>
+    		<li class="top-menu">
+    		    <a href="<?php echo url('channel/hot');?>" <?php if ($this->channel=='hot') echo 'class="active"';?>>最热门</a>
+    		    <ul class="submenu">
+        		    <li><a href="<?php echo url('channel/day');?>">24小时内</a></li>
+        		    <li><a href="<?php echo url('channel/week');?>">一周内</a></li>
+        		    <li><a href="<?php echo url('channel/month');?>">一月内</a></li>
+    		    </ul>
+		    </li>
+    		<li class="top-menu"><a <?php if ($this->channel=='latest') echo ' class="active"';?> href="<?php echo aurl('channel/latest');?>">刚出炉</a></li>
+    	    <li class="top-menu"><a <?php if ($this->channel==CHANNEL_FUNNY.MEDIA_TYPE_TEXT) echo ' class="active"';?> href="<?php echo url('channel/joke');?>">挖笑话</a></li>
+    		<li class="top-menu"><a <?php if ($this->channel==CHANNEL_FUNNY.MEDIA_TYPE_IMAGE) echo ' class="active"';?> href="<?php echo url('channel/lengtu');?>">挖趣图</a></li>
+    		<li class="top-menu"><a <?php if ($this->channel==CHANNEL_FUNNY.MEDIA_TYPE_VIDEO) echo ' class="active"';?> href="<?php echo url('channel/video');?>">挖视频</a></li>
     	</ul>
-    	<ul class="fright">
+    	<ul class="channel-nav fright">
     	</ul>
     	<a href="javascript:void(0);" id="wxqrcode"><img src="<?php echo sbu('images/qrcode_wx.jpg');?>" alt="挖段子公众账号二维码" /></a>
     	<div class="clear"></div>
@@ -70,7 +75,6 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 echo param('footer_after_html');
 echo param('tongji_code');
 ?>
-<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21351161"></script>
 </body>
 </html>
 
@@ -95,8 +99,6 @@ CD_PRODUCT && cs()->scriptMap = array(
     'modernizr.min.js' => sbu('scripts/cd-all.min.js?t=20130412001'),
     'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=20130412001'),
     'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=20130412001'),
-    'jquery.infinitescroll.min.js' => sbu('scripts/cd-all.min.js?t=20130412001'),
-    'jquery.masonry.min.js' => sbu('scripts/cd-all.min.js?t=20130412001'),
     'cd-main.js' => sbu('scripts/cd-all.min.js?t=20130412001'),
     'json2.js' => sbu('scripts/cd-all.min.js?t=20130412001'),
 );

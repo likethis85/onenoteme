@@ -9,7 +9,7 @@ class CDCurl
     private $_data;
     private $_timeout = 60;
     private $_connection_timeout = 60;
-    private $user_agent = 'Mozilla/5.0 (Windows NT 6.1; rv:2.0) Gecko/20100101 Firefox/4.0';
+    private $user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1312.57 Safari/537.17';
 
     public function __construct()
     {
@@ -102,16 +102,44 @@ class CDCurl
 
     public final function headers(array $headers)
     {
-        if (!empty($headers) && is_array($var))
+        if (!empty($headers) && is_array($headers))
             $this->add_option(CURLOPT_HTTPHEADER, $headers);
     
         return $this;
+    }
+    
+    public final function http_cookies()
+    {
+        $cookies = array();
+    
+        $_cookies = $this->_headers['set_cookie'];
+        if (is_array($_cookies)) {
+            foreach ($_cookies as $_cookie) {
+                $temp = explode(';', $_cookie);
+                $temp = $temp[0];
+                $temp = explode('=', $temp);
+                $cookies[$temp[0]] = $temp[1];
+            }
+        }
+        else
+            $cookies = $_cookies;
+    
+        return $cookies;
     }
     
     public function user_agent($agent)
     {
         if ($agent)
             $this->user_agent = $agent;
+    }
+
+    public function cookiefile($file)
+    {
+        if ($file) {
+            $this->add_option(CURLOPT_COOKIEFILE, $file);
+            $this->add_option(CURLOPT_COOKIEJAR, $file);
+        }
+        return $this;
     }
     
     public final function revert()

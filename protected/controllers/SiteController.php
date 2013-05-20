@@ -25,57 +25,11 @@ class SiteController extends Controller
         );
     }
     
-    public function actionIndex($page = 1, $s = POST_LIST_STYLE_LINE)
+    public function actionIndex($page = 1)
     {
-        $s = strip_tags(trim($s));
-        $limit = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('line_post_count_page');
-        
-        $channels = array(CHANNEL_FUNNY);
-        $mediaTypes = array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE);
-        $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('t.state'=>POST_STATE_ENABLED));
-        $criteria->addInCondition('channel_id', $channels);
-        
-        if ($s != POST_LIST_STYLE_WATERFALL)
-            $mediaTypes[] = MEDIA_TYPE_VIDEO;
-        
-        $criteria->addInCondition('media_type', $mediaTypes);
-        $criteria->order = 't.istop desc, t.create_time desc, t.id desc';
-        $criteria->limit = $limit;
-        
-        $duration = 60*60*24;
-        $count = Post::model()->cache($duration)->count($criteria);
-        $pages = new CPagination($count);
-        $pages->setPageSize($limit);
-        $pages->applyLimit($criteria);
-
-        if ($pages->getCurrentPage() < $_GET[$pages->pageVar]-1)
-            $models = array();
-        else
-            $models = Post::model()->findAll($criteria);
-        
-        $this->channel = 'home';
-        if (request()->getIsAjaxRequest()) {
-            $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : '/post/line_list';
-            $this->renderPartial($view, array(
-                'models' => $models,
-                'pages' => $pages,
-            ));
-        } else {
-            $this->pageTitle = param('sitename') . ' - ' . param('shortdesc');
-            $this->setKeywords(param('home_index_keywords'));
-            $this->setDescription(param('home_index_description'));
-            
-            $mobileUrl = ($page > 1) ? aurl('mobile/default/index', array('page'=>$page)) : $mobileUrl = aurl('mobile/default/index');;
-            cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
-            
-            $view = ($s == POST_LIST_STYLE_WATERFALL) ? 'fall_index' : 'grid_index';
-            $this->render($view, array(
-                'models' => $models,
-                'pages' => $pages,
-            ));
-        }
+        $this->forward('channel/hot');
     }
+    
     
     public function actionBdmap()
     {

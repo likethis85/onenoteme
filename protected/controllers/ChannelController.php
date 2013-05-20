@@ -6,150 +6,190 @@ class ChannelController extends Controller
         $duration = 120;
         return array(
             array(
-                'COutputCache + joke, lengtu, video, ghost',
+                'COutputCache + joke, lengtu, video, ghost, latest, hot, day, week, month',
                 'duration' => $duration,
-                'varyByParam' => array('page', 's'),
-                'requestTypes' => array('POST'),
-            ),
-            array(
-                'COutputCache + joke, lengtu, video, ghost',
-                'duration' => $duration,
-                'varyByParam' => array('page', 's'),
+                'varyByParam' => array('page'),
                 'varyByExpression' => array(user(), 'getIsGuest'),
                 'requestTypes' => array('GET'),
             ),
         );
     }
     
-    public function actionJoke($page = 1, $s = POST_LIST_STYLE_LINE)
-    {
-        cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/joke'), null, array('title'=>app()->name . ' » 挖笑话 Feed'));
-        $this->pageTitle = param('channel_joke_title');
-        $this->setDescription(param('channel_joke_description'));
-        $this->setKeywords(param('channel_joke_keywords'));
-        $this->channel = CHANNEL_FUNNY . MEDIA_TYPE_TEXT;
-        
-        $count = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('duanzi_count_page');
-        $data = $this->fetchPosts(CHANNEL_FUNNY, MEDIA_TYPE_TEXT, null, $count);
-        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'text_list';
-        if (request()->getIsAjaxRequest())
-            $this->renderPartial($view, $data);
-        else
-            $this->render($view, $data);
-    }
 
-    public function actionGhost($page = 1, $s = POST_LIST_STYLE_LINE)
+    public function actionLatest($page = 1)
     {
-        cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/joke'), null, array('title'=>app()->name . ' » 挖鬼故事 Feed'));
-        $this->pageTitle = param('channel_ghost_title');
-        $this->setDescription(param('channel_ghost_description'));
-        $this->setKeywords(param('channel_ghost_keywords'));
-        $this->channel = CHANNEL_GHOSTSTORY . MEDIA_TYPE_TEXT;
-        
-        $count = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('ghost_story_count_page');
-        $data = $this->fetchPosts(CHANNEL_GHOSTSTORY, MEDIA_TYPE_TEXT, null, $count);
-        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'text_list';
-        if (request()->getIsAjaxRequest())
-            $this->renderPartial($view, $data);
-        else
-            $this->render($view, $data);
+        $this->channel = 'latest';
+        $this->setSitePageTitle('最新发布的笑话');
+    
+        $criteria = new CDbCriteria();
+        $criteria->scopes = array('homeshow', 'published');
+        $criteria->addColumnCondition(array('channel_id' => CHANNEL_FUNNY));
+        $criteria->order = 't.istop desc, t.create_time desc';
+    
+        $data = self::fetchPosts($criteria);
+        $this->render('funny_hot', array(
+                'models' => $data['models'],
+                'pages' => $data['pages'],
+        ));
     }
     
-    public function actionLengtu($page = 1, $s = POST_LIST_STYLE_LINE)
+    public function actionHot($page = 1)
     {
+        $this->setSitePageTitle('12小时内人最热门笑话');
+    
+        $mobileUrl = ($page > 1) ? aurl('mobile/default/index', array('page'=>$page)) : CDBaseUrl::mobileHomeUrl();
+        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
+    
+        $this->fetchFunnyHotPosts(12);
+    }
+    
+    public function actionDay($page = 1)
+    {
+        $this->setSitePageTitle('24小时内人最热门笑话');
+    
+        $mobileUrl = ($page > 1) ? aurl('mobile/default/index', array('page'=>$page)) : CDBaseUrl::mobileHomeUrl();
+        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
+    
+        $this->fetchFunnyHotPosts(24);
+    }
+    
+    public function actionWeek($page = 1)
+    {
+        $this->setSitePageTitle('一周内人最热门笑话');
+    
+        $mobileUrl = ($page > 1) ? aurl('mobile/default/index', array('page'=>$page)) : CDBaseUrl::mobileHomeUrl();
+        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
+    
+        $this->fetchFunnyHotPosts(7*24);
+    }
+    
+    public function actionMonth($page = 1)
+    {
+        $this->setSitePageTitle('一月内人最热门笑话');
+    
+        $mobileUrl = ($page > 1) ? aurl('mobile/default/index', array('page'=>$page)) : CDBaseUrl::mobileHomeUrl();
+        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
+    
+        $this->fetchFunnyHotPosts(30*24);
+    }
+    
+    public function actionJoke($page = 1)
+    {
+        $mobileUrl = ($page > 1) ? aurl('mobile/channel/joke', array('page'=>$page)) : aurl('mobile/channel/joke');
+        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
+        
+        cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/joke'), null, array('title'=>app()->name . ' » 挖笑话 Feed'));
+        $this->pageTitle = p('channel_joke_title');
+        $this->setDescription(p('channel_joke_description'));
+        $this->setKeywords(p('channel_joke_keywords'));
+        
+        $count = (int)p('duanzi_count_page');
+        $data = $this->fetchFunnyMediaPosts(MEDIA_TYPE_TEXT, $count);
+        $this->render('text_list', $data);
+    }
+    
+    public function actionLengtu($page = 1)
+    {
+        $mobileUrl = ($page > 1) ? aurl('mobile/channel/lengtu', array('page'=>$page)) : aurl('mobile/channel/lengtu');
+        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
+        
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/lengtu'), null, array('title'=>app()->name . ' » 挖趣图 Feed'));
-        $this->pageTitle = param('channel_lengtu_title');
-        $this->setDescription(param('channel_lengtu_description'));
-        $this->setKeywords(param('channel_lengtu_keywords'));
-        $this->channel = CHANNEL_FUNNY . MEDIA_TYPE_IMAGE;
+        $this->pageTitle = p('channel_lengtu_title');
+        $this->setDescription(p('channel_lengtu_description'));
+        $this->setKeywords(p('channel_lengtu_keywords'));
         
-        $list_view = 'line_list';
-        if (($s == POST_LIST_STYLE_GRID)) {
-            $list_view = 'grid_list';
-            $count = param('grid_post_count_page');
-        }
-        elseif ($s == POST_LIST_STYLE_WATERFALL)
-            $count = param('waterfall_post_count_page');
-        else
-            $count = param('lengtu_count_page');
-        
-        $data = $this->fetchPosts(CHANNEL_FUNNY, MEDIA_TYPE_IMAGE, null, $count, 'uploadImagesCount');
-        $data['list_view'] = '/post/' . $list_view;
-        $view = (($s == POST_LIST_STYLE_WATERFALL)) ? '/post/mixed_list' : 'lengtu_list';
-        if (request()->getIsAjaxRequest())
-            $this->renderPartial($view, $data);
-        else
-            $this->render($view, $data);
-    }
-    
-    public function actionGirl($page = 1, $s = POST_LIST_STYLE_LINE)
-    {
-        $this->redirect(CDBaseUrl::siteHomeUrl(), true, 301);
+        $count = (int)p('lengtu_count_page');
+        $data = $this->fetchFunnyMediaPosts(MEDIA_TYPE_IMAGE, $count, 'uploadImagesCount');
+        $this->render('lengtu_list', $data);
     }
     
     public function actionVideo($page = 1)
     {
-        cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/video'), null, array('title'=>app()->name . ' » 挖视频 Feed'));
-        $this->pageTitle = param('channel_video_title');
-        $this->setDescription(param('channel_video_description'));
-        $this->setKeywords(param('channel_video_keywords'));
-        $this->channel = CHANNEL_FUNNY . MEDIA_TYPE_VIDEO;
+        $mobileUrl = ($page > 1) ? aurl('mobile/channel/video', array('page'=>$page)) : aurl('mobile/channel/video');
+        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
         
-        $data = $this->fetchPosts(CHANNEL_FUNNY, MEDIA_TYPE_VIDEO, null, param('video_count_page'));
+        cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/video'), null, array('title'=>app()->name . ' » 挖视频 Feed'));
+        $this->pageTitle = p('channel_video_title');
+        $this->setDescription(p('channel_video_description'));
+        $this->setKeywords(p('channel_video_keywords'));
+        
+        $count = (int)p('video_count_page');
+        $data = $this->fetchFunnyMediaPosts(MEDIA_TYPE_VIDEO, $count);
         $this->render('video_list', $data);
     }
 
-    private function fetchPosts($channelid = null, $typeid = null, $categoryid = null, $limit = 0, $with = '')
+    public function actionGhost()
     {
-        $duration = 60 * 60 * 24;
-        $limit = (int)$limit;
-        if ($limit === 0)
-            $limit = param('line_post_count_page');
-        
+        $this->redirect(CDBaseUrl::siteHomeUrl(), true, 301);
+    }
+    
+    public function actionGirl()
+    {
+        $this->redirect(CDBaseUrl::siteHomeUrl(), true, 301);
+    }
+    
+    private function fetchFunnyHotPosts($hours = 12)
+    {
+        $this->channel = 'hot';
+        $this->setKeywords(p('home_index_keywords'));
+        $this->setDescription(p('home_index_description'));
+    
         $criteria = new CDbCriteria();
-        $criteria->order = 't.istop desc, t.create_time desc, t.id desc';
+        $criteria->scopes = array('homeshow', 'published');
+        $criteria->addColumnCondition(array('channel_id' => CHANNEL_FUNNY));
+        if ($hours > 0) {
+            $fromtime = $_SERVER['REQUEST_TIME'] - $hours * 3600;
+            $criteria->addCondition('t.create_time > :fromtime');
+            $criteria->params[':fromtime'] = $fromtime;
+        }
+        $criteria->order = 't.istop desc, (t.up_score-t.down_score) desc, t.create_time desc';
+        $limit = (int)p('line_post_count_page');
         $criteria->limit = $limit;
-        if ($categoryid !== null) {
-            $categoryid = (int)$categoryid;
-            $criteria->addColumnCondition(array('t.category_id'=>$categoryid));
-        }
-        if ($channelid !== null) {
-            $channelid = (int)$channelid;
-            $criteria->addColumnCondition(array('t.channel_id'=>$channelid));
-        }
-        if ($typeid !== null) {
-            $typeid = (int)$typeid;
-            $criteria->addColumnCondition(array('t.media_type'=>$typeid));
-        }
-        $criteria->addColumnCondition(array('t.state'=>POST_STATE_ENABLED));
-
+    
+        $data = self::fetchPosts($criteria, $hours);
+        $this->render('funny_hot', array(
+                'models' => $data['models'],
+                'pages' => $data['pages'],
+        ));
+    }
+    
+    private static function fetchPosts(CDbCriteria $criteria)
+    {
+        $duration = 60*60*24;
         $count = Post::model()->cache($duration)->count($criteria);
         $pages = new CPagination($count);
-        $pages->setPageSize($limit);
+        $pages->setPageSize($criteria->limit);
         $pages->applyLimit($criteria);
-        
-        $page = $pages->getCUrrentPage();
-        if ($page < $_GET[$pages->pageVar]-1)
-            return array();
     
-        if ($with)
-            $models = Post::model()->with($with)->findAll($criteria);
-        else
-            $models = Post::model()->findAll($criteria);
+        $models = Post::model()->findAll($criteria);
     
-        if ($page > 1)
-            $mobileUrl = aurl('mobile/'. $this->id . '/' . $this->action->id, array('page'=>$page));
-        else
-            $mobileUrl = aurl('mobile/'. $this->id . '/' . $this->action->id);
-        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
-            
-        $data  = array(
+        return array(
             'models' => $models,
             'pages' => $pages,
         );
-        
-        return $data;
     }
+    
+
+    private function fetchFunnyMediaPosts($typeid, $limit, $with = null)
+    {
+        $this->channel = CHANNEL_FUNNY . $typeid;
+        $this->setKeywords(p('home_index_keywords'));
+        $this->setDescription(p('home_index_description'));
+    
+        $criteria = new CDbCriteria();
+        $criteria->scopes = array('published');
+        $criteria->addColumnCondition(array('channel_id' => CHANNEL_FUNNY, 'media_type'=>(int)$typeid));
+        $criteria->order = 't.istop desc, t.create_time desc';
+        if (!empty($with))
+            $criteria->with = $with;
+    
+        $data = self::fetchPosts($criteria);
+        $this->render('funny_hot', array(
+                'models' => $data['models'],
+                'pages' => $data['pages'],
+        ));
+    }
+
 
 }
 

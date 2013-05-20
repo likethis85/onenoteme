@@ -1,13 +1,8 @@
 <?php if ($this->channel != CHANNEL_VIDEO):?>
 <div class="panel panel10 bottom10px">
-    <ul class="fleft hot-keyword">
+    <ul class="hot-keyword">
         <li><span class="cred announce">24小时更新：<?php echo Post::todayUpdateCount();?>篇。&nbsp;&nbsp;&nbsp;QQ群：49401589</span></li>
         <li><a href="<?php echo aurl('app/taijiong');?>" target="_blank">王宝强超贱表情制作器</a></li>
-    </ul>
-    <ul class="mode-switch fright">
-        <li class="fall"><a href="<?php echo CDBaseUrl::fallStyleUrl($this);?>">瀑布流</a></li>
-        <li class="grid"><a href="<?php echo CDBaseUrl::gridStyleUrl($this);?>">表格</a></li>
-        <li class="list on"><a href="<?php echo CDBaseUrl::lineStyleUrl($this);?>">列表</a></li>
     </ul>
     <div class="clear"></div>
 </div>
