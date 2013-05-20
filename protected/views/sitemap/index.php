@@ -22,18 +22,9 @@
 </sitemap>
 
 <sitemap>
-<loc><?php echo aurl('sitemap/girl');?></loc>
-<lastmod><?php echo date('Y-m-d');?></lastmod>
-</sitemap>
-
-<sitemap>
 <loc><?php echo aurl('sitemap/video');?></loc>
 <lastmod><?php echo date('Y-m-d');?></lastmod>
 </sitemap>
 
-<sitemap>
-<loc><?php echo aurl('sitemap/ghost');?></loc>
-<lastmod><?php echo date('Y-m-d');?></lastmod>
-</sitemap>
 
 </sitemapindex>

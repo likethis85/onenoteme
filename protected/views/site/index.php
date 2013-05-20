@@ -54,9 +54,9 @@
     <!-- 首页侧边栏广告位2 开始 -->
     <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_second'));?>
     <!-- 首页侧边栏广告位2 结束 -->
-    <!-- 最新女神图 开始 -->
-    <?php $this->widget('CDPostSearch', array('title'=>'最新内涵图', 'channel'=>CHANNEL_FUNNY, 'mediaType'=>MEDIA_TYPE_IMAGE));//@todo 应为GIRL，暂时修改为LENGTU?>
-    <!-- 最新女神图 结束 -->
+    <!-- 最新笑话 开始 -->
+    <?php $this->widget('CDPostSearch', array('title'=>'最新内涵图', 'channel'=>CHANNEL_FUNNY, 'mediaType'=>MEDIA_TYPE_IMAGE));?>
+    <!-- 最新笑话 结束 -->
 </div>
 <div class="clear"></div>
 

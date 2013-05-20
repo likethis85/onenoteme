@@ -58,16 +58,6 @@ class SitemapController extends Controller
         $this->fetchChannelPosts(CHANNEL_FUNNY, MEDIA_TYPE_VIDEO);
     }
     
-    public function actionGirl()
-    {
-        $this->fetchChannelPosts(CHANNEL_GIRL);
-    }
-    
-    public function actionGhost()
-    {
-        $this->fetchChannelPosts(CHANNEL_GHOSTSTORY);
-    }
-    
     private function fetchChannelPosts($channel = null, $mediatype = null, $duration = 3600)
     {
         $conditions = 'state = :enabled';

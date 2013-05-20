@@ -13,15 +13,7 @@
     <priority>1.0</priority>
 </url>
 <url>
-    <loc><?php echo aurl('channel/girl');?></loc>
-    <priority>1.0</priority>
-</url>
-<url>
     <loc><?php echo aurl('channel/video');?></loc>
-    <priority>1.0</priority>
-</url>
-<url>
-    <loc><?php echo aurl('channel/ghost');?></loc>
     <priority>1.0</priority>
 </url>
 

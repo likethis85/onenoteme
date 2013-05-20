@@ -48,12 +48,6 @@ class FeedController extends Controller
         echo self::channelPosts(CHANNEL_FUNNY, MEDIA_TYPE_TEXT, '挖笑话', $source, 600);
     }
     
-    public function actionGhost($source = 'feed')
-    {
-        $feedname = app()->name . ' » 挖鬼故事';
-        echo self::channelPosts(CHANNEL_GHOSTSTORY, MEDIA_TYPE_TEXT, $feedname, $source, 600);
-    }
-    
     public function actionLengtu($source = 'feed')
     {
         $feedname = app()->name . ' » 挖趣图';
@@ -64,13 +58,6 @@ class FeedController extends Controller
     {
         $feedname = app()->name . ' » 挖短片';
         echo self::channelPosts(CHANNEL_FUNNY, MEDIA_TYPE_VIDEO, $feedname, $source, 600);
-    }
-    
-    public function actionGirl($source = 'feed')
-    {
-        $source = trim(strip_tags($source));
-        $url = aurl('feed/funny', array('source'=>$source));
-        $this->redirect($url, true, 301);
     }
     
     private static function channelPosts($channelID, $mediatype, $feedname, $source, $expire = 600)
