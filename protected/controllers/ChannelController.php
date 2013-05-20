@@ -183,11 +183,7 @@ class ChannelController extends Controller
         if (!empty($with))
             $criteria->with = $with;
     
-        $data = self::fetchPosts($criteria);
-        $this->render('funny_hot', array(
-                'models' => $data['models'],
-                'pages' => $data['pages'],
-        ));
+        return self::fetchPosts($criteria);
     }
 
 
