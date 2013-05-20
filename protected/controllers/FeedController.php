@@ -158,8 +158,6 @@ class FeedController extends Controller
         $rss = $dom->createElement('rss');
         $dom->appendChild($rss);
         $rss->setAttribute('version', '2.0');
-        //$rss->setAttributeNS($namespaceURI ,'xmlns:itunes', 'http://www.itunes.com/dtds/podcast-1.0.dtd');
-        $rss->setAttributeNS($namespaceURI ,'xmlns:content', 'http://purl.org/rss/1.0/modules/content/');
         $rss->setAttributeNS($namespaceURI ,'xmlns:wfw', 'http://wellformedweb.org/CommentAPI/');
         $rss->setAttributeNS($namespaceURI ,'xmlns:dc', $ns_dc);
         $rss->setAttributeNS($namespaceURI ,'xmlns:atom', 'http://www.w3.org/2005/Atom');
@@ -194,17 +192,12 @@ class FeedController extends Controller
             if ($model->user_name)
                 $item->appendChild(new DOMElement('dc:creator', utf8ForXml($model->user_name)));
     
-            $summary = $dom->createElement('summary');
-            $summaryText = $model->getFilterSummary(300);
-            $summary->appendChild($dom->createCDATASection(utf8ForXml($summaryText)));
-            $item->appendChild($summary);
-    
-            $content = $dom->createElement('content:encoded');
-            $contentText = $model->getFilterContent();
+            $desc = $dom->createElement('description');
+            $descText = $model->getFilterContent();
             if ($model->getIsVideoType())
-                $contentText = '<p>' . $model->getVideoHtml() . '</p>' . $contentText;
-            $content->appendChild($dom->createCDATASection(utf8ForXml($contentText)));
-            $item->appendChild($content);
+                $descText = '<p>' . $model->getVideoHtml() . '</p>' . $descText;
+            $desc->appendChild($dom->createCDATASection(utf8ForXml($descText)));
+            $item->appendChild($desc);
         }
     
         return $dom->saveXML();
