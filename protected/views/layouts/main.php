@@ -95,12 +95,12 @@ CD_PRODUCT && cs()->scriptMap = array(
     'cd-main.css' => sbu('styles/cd-all.min.css?t=20130516001'),
     
     'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js',
-    
-    'modernizr.min.js' => sbu('scripts/cd-all.min.js?t=20130521001'),
-    'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=20130521001'),
-    'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=20130521001'),
-    'cd-main.js' => sbu('scripts/cd-all.min.js?t=20130521001'),
-    'json2.js' => sbu('scripts/cd-all.min.js?t=20130521001'),
+
+    'json2.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
+    'modernizr.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
+    'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
+    'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
+    'cd-main.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
 );
 ?>
 
