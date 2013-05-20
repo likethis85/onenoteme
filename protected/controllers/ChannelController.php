@@ -25,11 +25,12 @@ class ChannelController extends Controller
         $criteria->scopes = array('homeshow', 'published');
         $criteria->addColumnCondition(array('channel_id' => CHANNEL_FUNNY));
         $criteria->order = 't.istop desc, t.create_time desc';
+        $criteria->limit = (int)p('line_post_count_page');
     
         $data = self::fetchPosts($criteria);
         $this->render('funny_hot', array(
-                'models' => $data['models'],
-                'pages' => $data['pages'],
+            'models' => $data['models'],
+            'pages' => $data['pages'],
         ));
     }
     
@@ -180,6 +181,7 @@ class ChannelController extends Controller
         $criteria->scopes = array('published');
         $criteria->addColumnCondition(array('channel_id' => CHANNEL_FUNNY, 'media_type'=>(int)$typeid));
         $criteria->order = 't.istop desc, t.create_time desc';
+        $criteria->limit = $limit;
         if (!empty($with))
             $criteria->with = $with;
     
