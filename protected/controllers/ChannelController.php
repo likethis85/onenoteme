@@ -20,6 +20,8 @@ class ChannelController extends Controller
     {
         $this->channel = 'latest';
         $this->setSitePageTitle('最新发布的笑话');
+        $this->setKeywords(p('home_index_keywords'));
+        $this->setDescription(p('home_index_description'));
     
         $criteria = new CDbCriteria();
         $criteria->scopes = array('homeshow', 'published');

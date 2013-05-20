@@ -75,7 +75,7 @@ class ChannelController extends MobileController
 	public function actionVideo($page = 1)
 	{
 	    $count = (int)p('mobile_post_list_page_count');
-	    $data = self::fetchPosts(MEDIA_TYPE_VIDEO, $count);
+	    $data = self::fetchFunnyMediaPosts(MEDIA_TYPE_VIDEO, $count);
 	     
 	    $this->pageTitle = '挖短片 - 各种有趣的，新奇的，经典的，有意思的精品视频短片';
         $this->setDescription($this->pageTitle);
@@ -102,7 +102,7 @@ class ChannelController extends MobileController
 	        $criteria->params[':fromtime'] = $fromtime;
 	    }
 	    $criteria->order = 't.istop desc, (t.up_score-t.down_score) desc, t.create_time desc';
-	    $limit = (int)p('line_post_count_page');
+	    $limit = (int)p('mobile_post_list_page_count');
 	    $criteria->limit = $limit;
 	
 	    $data = self::fetchPosts($criteria, $hours);
