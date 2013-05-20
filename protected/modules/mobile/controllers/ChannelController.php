@@ -14,9 +14,39 @@ class ChannelController extends MobileController
         );
     }
 
+    public function actionHot($page = 1)
+    {
+        $this->pageTitle = '12小时内人最热门笑话';
+    
+        $mobileUrl = ($page > 1) ? aurl('mobile/default/index', array('page'=>$page)) : CDBaseUrl::mobileHomeUrl();
+        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
+    
+        $this->fetchFunnyHotPosts(8);
+    }
+    
+
+    public function actionLatest($page = 1)
+    {
+        $this->channel = 'latest';
+        $this->pageTitle = '最新发布的笑话';
+    
+        $criteria = new CDbCriteria();
+        $criteria->scopes = array('homeshow', 'published');
+        $criteria->addColumnCondition(array('channel_id' => CHANNEL_FUNNY));
+        $criteria->order = 't.istop desc, t.create_time desc';
+        $criteria->limit = (int)p('line_post_count_page');
+    
+        $data = self::fetchPosts($criteria);
+        $this->render('posts', array(
+            'models' => $data['models'],
+            'pages' => $data['pages'],
+        ));
+    }
+    
 	public function actionJoke($page = 1)
 	{
-	    $data = self::fetchPosts(CHANNEL_FUNNY, MEDIA_TYPE_TEXT);
+	    $count = (int)p('mobile_post_list_page_count');
+	    $data = self::fetchFunnyMediaPosts(MEDIA_TYPE_TEXT, $count);
 	     
 	    $this->pageTitle = '挖笑话 - 最冷笑话精选，每天分享笑话N枚，你的贴身开心果';
         $this->setDescription($this->pageTitle);
@@ -29,7 +59,8 @@ class ChannelController extends MobileController
 
 	public function actionLengtu($page = 1)
 	{
-	    $data = self::fetchPosts(CHANNEL_FUNNY, MEDIA_TYPE_IMAGE);
+	    $count = (int)p('mobile_post_list_page_count');
+	    $data = self::fetchFunnyMediaPosts(MEDIA_TYPE_IMAGE, $count);
 	     
 	    $this->pageTitle = '挖趣图 - 最搞笑的，最好玩的，最内涵的图片精选';
         $this->setDescription($this->pageTitle);
@@ -42,7 +73,8 @@ class ChannelController extends MobileController
 	
 	public function actionVideo($page = 1)
 	{
-	    $data = self::fetchPosts(CHANNEL_FUNNY, MEDIA_TYPE_VIDEO);
+	    $count = (int)p('mobile_post_list_page_count');
+	    $data = self::fetchPosts(MEDIA_TYPE_VIDEO, $count);
 	     
 	    $this->pageTitle = '挖短片 - 各种有趣的，新奇的，经典的，有意思的精品视频短片';
         $this->setDescription($this->pageTitle);
@@ -53,46 +85,64 @@ class ChannelController extends MobileController
 	    $this->render('posts', $data);
 	}
 
-	private static function fetchPosts($channelid = null, $typeid = null, $categoryid = null, $with = '')
+
+	private function fetchFunnyHotPosts($hours)
 	{
-	    $duration = 60 * 60 * 24;
-	    $limit = (int)$limit;
-	    
-	    $criteria = new CDbCriteria();
-	    $criteria->order = 't.istop desc, t.create_time desc';
-	    $criteria->limit = param('mobile_post_list_page_count');
-	    $criteria->scopes = array('published');
-	    
-	    if ($categoryid !== null) {
-	        $categoryid = (int)$categoryid;
-	        $criteria->addColumnCondition(array('t.category_id'=>$categoryid));
-	    }
-	    if ($channelid !== null) {
-	        $channelid = (int)$channelid;
-	        $criteria->addColumnCondition(array('t.channel_id'=>$channelid));
-	    }
-	    if ($typeid !== null) {
-	        $typeid = (int)$typeid;
-	        $criteria->addColumnCondition(array('t.media_type'=>$typeid));
-	    }
+	    $this->channel = 'hot';
+	    $this->setKeywords(p('home_index_keywords'));
+	    $this->setDescription(p('home_index_description'));
 	
+	    $criteria = new CDbCriteria();
+	    $criteria->scopes = array('homeshow', 'published');
+	    $criteria->addColumnCondition(array('channel_id' => CHANNEL_FUNNY));
+	    if ($hours > 0) {
+	        $fromtime = $_SERVER['REQUEST_TIME'] - $hours * 3600;
+	        $criteria->addCondition('t.create_time > :fromtime');
+	        $criteria->params[':fromtime'] = $fromtime;
+	    }
+	    $criteria->order = 't.istop desc, (t.up_score-t.down_score) desc, t.create_time desc';
+	    $limit = (int)p('line_post_count_page');
+	    $criteria->limit = $limit;
+	
+	    $data = self::fetchPosts($criteria, $hours);
+	    $this->render('posts', array(
+            'models' => $data['models'],
+            'pages' => $data['pages'],
+	    ));
+	}
+	
+	private static function fetchPosts(CDbCriteria $criteria)
+	{
+	    $duration = 60*60*24;
 	    $count = MobilePost::model()->cache($duration)->count($criteria);
 	    $pages = new CPagination($count);
-	    $pages->setPageSize(param('mobile_post_list_page_count'));
+	    $pages->setPageSize($criteria->limit);
 	    $pages->applyLimit($criteria);
-	    
-	    if ($with)
-	        $models = MobilePost::model()->with($with)->findAll($criteria);
-	    else
-	        $models = MobilePost::model()->findAll($criteria);
-	    
+	
+	    $models = MobilePost::model()->findAll($criteria);
+	
 	    return array(
-	        'models' => $models,
-	        'pages' => $pages,
+            'models' => $models,
+            'pages' => $pages,
 	    );
 	}
-
-
+	
+	
+	private function fetchFunnyMediaPosts($typeid, $limit, $with = null)
+	{
+	    $this->channel = CHANNEL_FUNNY . $typeid;
+	
+	    $criteria = new CDbCriteria();
+	    $criteria->scopes = array('published');
+	    $criteria->addColumnCondition(array('channel_id' => CHANNEL_FUNNY, 'media_type'=>(int)$typeid));
+	    $criteria->order = 't.istop desc, t.create_time desc';
+	    $criteria->limit = $limit;
+	    if (!empty($with))
+	        $criteria->with = $with;
+	
+	    return self::fetchPosts($criteria);
+	}
+	
 	public function actionGhost($page = 1)
 	{
 	    $this->redirect(CDBaseUrl::mobileHomeUrl(), true, 301);
@@ -103,3 +153,6 @@ class ChannelController extends MobileController
 	    $this->redirect(CDBaseUrl::mobileHomeUrl(), true, 301);
 	}
 }
+
+
+

@@ -23,9 +23,10 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 	        </a>
 	    </div>
     	<ul class="channel-nav">
-    		<li<?php echo ($this->channel==CHANNEL_FUNNY . MEDIA_TYPE_TEXT) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/joke');?>">挖笑话</a></li>
-    		<li>|</li>
-    		<li<?php echo ($this->channel==CHANNEL_FUNNY . MEDIA_TYPE_IMAGE) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/lengtu');?>">挖趣图</a></li>
+    		<li<?php echo ($this->channel=='latest') ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/latest');?>">最新</a></li>
+    		<li<?php echo ($this->channel=='hot') ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/hot');?>">热门</a></li>
+    		<li<?php echo ($this->channel==CHANNEL_FUNNY.MEDIA_TYPE_TEXT) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/joke');?>">笑话</a></li>
+    		<li<?php echo ($this->channel==CHANNEL_FUNNY.MEDIA_TYPE_IMAGE) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/lengtu');?>">趣图</a></li>
     	</ul>
     </div>
 </div>

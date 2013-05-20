@@ -26,5 +26,4 @@
 <lastmod><?php echo date('Y-m-d');?></lastmod>
 </sitemap>
 
-
 </sitemapindex>
