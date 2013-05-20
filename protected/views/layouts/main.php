@@ -89,7 +89,7 @@ cs()->registerMetaTag('text/html; charset=utf-8', null, 'content-type')
     ->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END)
     ->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/index'), null, array('title'=>app()->name . ' » Feed'));
 
-!CD_PRODUCT && cs()->scriptMap = array(
+CD_PRODUCT && cs()->scriptMap = array(
     'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=20130516001'),
     'cd-basic.css' => sbu('styles/cd-all.min.css?t=20130516001'),
     'cd-main.css' => sbu('styles/cd-all.min.css?t=20130516001'),
