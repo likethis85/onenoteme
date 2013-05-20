@@ -38,7 +38,8 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 	        </a>
 	    </div>
     	<ul class="channel-nav fleft">
-    		<li class="top-menu">
+    		<li class="top-menu"><a <?php if ($this->channel=='latest') echo ' class="active"';?> href="<?php echo aurl('channel/latest');?>">刚出炉</a></li>
+    	    <li class="top-menu">
     		    <a href="<?php echo url('channel/hot');?>" <?php if ($this->channel=='hot') echo 'class="active"';?>>最热门</a>
     		    <ul class="submenu">
         		    <li><a href="<?php echo url('channel/day');?>">24小时内</a></li>
@@ -46,8 +47,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
         		    <li><a href="<?php echo url('channel/month');?>">一月内</a></li>
     		    </ul>
 		    </li>
-    		<li class="top-menu"><a <?php if ($this->channel=='latest') echo ' class="active"';?> href="<?php echo aurl('channel/latest');?>">刚出炉</a></li>
-    	    <li class="top-menu"><a <?php if ($this->channel==CHANNEL_FUNNY.MEDIA_TYPE_TEXT) echo ' class="active"';?> href="<?php echo url('channel/joke');?>">挖笑话</a></li>
+    		<li class="top-menu"><a <?php if ($this->channel==CHANNEL_FUNNY.MEDIA_TYPE_TEXT) echo ' class="active"';?> href="<?php echo url('channel/joke');?>">挖笑话</a></li>
     		<li class="top-menu"><a <?php if ($this->channel==CHANNEL_FUNNY.MEDIA_TYPE_IMAGE) echo ' class="active"';?> href="<?php echo url('channel/lengtu');?>">挖趣图</a></li>
     		<li class="top-menu"><a <?php if ($this->channel==CHANNEL_FUNNY.MEDIA_TYPE_VIDEO) echo ' class="active"';?> href="<?php echo url('channel/video');?>">挖视频</a></li>
     	</ul>

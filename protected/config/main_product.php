@@ -102,24 +102,18 @@ return array(
                 'mobile/archives/<id:\d+>' => 'mobile/post/show',
                 'mobile/page/<page:\d+>' => 'mobile/default/index',
                 'mobile' => 'mobile/default/index',
-                'mobile/<_a:(joke|girl|lengtu|video|ghost)>/page/<page:\d+>' => 'mobile/channel/<_a>',
-                'mobile/<_a:(joke|girl|lengtu|video|ghost)>' => 'mobile/channel/<_a>',
+                'mobile/<_a:(joke|lengtu|video|ghost|girl)>/page/<page:\d+>' => 'mobile/channel/<_a>',
+                'mobile/<_a:(joke|lengtu|video|ghost|girl)>' => 'mobile/channel/<_a>',
                 'mobile/tag/<name:.+>' => 'mobile/tag/posts',
             
-                'page/<page:\d+>/<s:(fall|grid|line)>' => 'site/index',
                 'page/<page:\d+>' => 'site/index',
-                '<s:(fall|grid|line)>' => 'site/index',
                 '/' => 'site/index',
                 
-                '<_a:(joke|lengtu|girl|video|ghost)>/page/<page:\d+>/<s:(fall|grid|line)>' => 'channel/<_a>',
-                '<_a:(joke|lengtu|girl|video|ghost)>/page/<page:\d+>' => 'channel/<_a>',
-                '<_a:(joke|lengtu|girl|video|ghost)>/<s:(fall|grid|line)>' => 'channel/<_a>',
-                '<_a:(joke|lengtu|girl|video|ghost)>' => 'channel/<_a>',
-                'c/<token:\w+>' => 'channe/index',
+                '<_a:(joke|lengtu|video|hot|day|week|month|latest|gril|ghost)>/page/<page:\d+>' => 'channel/<_a>',
+                '<_a:(joke|lengtu|video|hot|day|week|month|latest|gril|ghost)>' => 'channel/<_a>',
                 
                 '<_a:(bdmap|links)>' => 'site/<_a>',
                 '<_a:(login|logout|signup|quicklogin|activate)>' => 'account/<_a>',
-                'originalpic/<id:\d+>' => 'post/bigpic',
 
                 'tags' => 'tag/list',
                 'tag/<name:.+>' => 'tag/posts',

@@ -12,22 +12,16 @@ class SiteController extends Controller
             array(
                 'COutputCache + index',
                 'duration' => 120,
-                'varyByParam' => array('page', 's'),
+                'varyByParam' => array('page'),
                 'varyByExpression' => array(user(), 'getIsGuest'),
                 'requestTypes' => array('GET'),
-            ),
-            array(
-                'COutputCache + index',
-                'duration' => 120,
-                'varyByParam' => array('page', 's'),
-                'requestTypes' => array('POST'),
             ),
         );
     }
     
     public function actionIndex($page = 1)
     {
-        $this->forward('channel/hot');
+        $this->forward('channel/latest');
     }
     
     

@@ -63,8 +63,8 @@ return array(
     'line_post_count_page' => 20,
     'tag_posts_count_page' => 15,
 
-    'video_count_page' => 15,
-    'duanzi_count_page' => 30,
+    'video_count_page' => 10,
+    'duanzi_count_page' => 25,
     'lengtu_count_page' => 20,
     'comment_count_page' => 20,
 
