@@ -148,8 +148,8 @@ class ChannelController extends Controller
     
         $data = self::fetchPosts($criteria, $hours);
         $this->render('funny_hot', array(
-                'models' => $data['models'],
-                'pages' => $data['pages'],
+            'models' => $data['models'],
+            'pages' => $data['pages'],
         ));
     }
     
