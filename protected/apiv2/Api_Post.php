@@ -272,7 +272,6 @@ class Api_Post extends ApiBase
             return $rows;
         }
         catch (Exception $e) {
-            echo $e->getMessage();
             throw new ApiException('系统错误', ApiError::SYSTEM_ERROR, $params['debug']);
         }
     }
@@ -558,7 +557,7 @@ class Api_Post extends ApiBase
                 $mediaType = MEDIA_TYPE_TEXT;
                 break;
             case 30:
-                $channel = CHANNEL_GIRL;
+                $channel = 30;
                 $mediaType = MEDIA_TYPE_IMAGE;
                 break;
             case 40:
