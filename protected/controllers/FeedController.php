@@ -127,7 +127,7 @@ class FeedController extends Controller
     
     private static function fetchPosts(CDbCriteria $criteria)
     {
-        $criteria->select = array('t.id', 't.channel_id', 't.title', 't.original_pic', 't.content', 't.create_time', 't.original_frames', 'extra02', 'extra03');
+        $criteria->select = array('t.id', 't.channel_id', 't.media_type', 't.title', 't.original_pic', 't.original_width', 't.original_height', 't.content', 't.create_time', 't.original_frames', 'extra02', 'extra03');
         $criteria->order = 't.create_time desc, t.id desc';
         $criteria->limit = self::POST_COUNT;
             
