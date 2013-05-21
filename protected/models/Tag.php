@@ -136,9 +136,11 @@ class Tag extends CActiveRecord
 	        $model = self::model()->findByPk($tagid);
 	        if ($model !== null) {
 	            $model->post_nums = $model->post_nums - 1;
-	            $model->post_nums = $model->post_nums < 0 ? 0 : $model->post_nums;
-	            if ($model->save(true, array('post_nums')))
-	                $count++;
+	            if ($model->post_nums <= 0)
+	                $model->delete() && $count++;
+	            else
+    	            $model->save(true, array('post_nums')) && $count++;
+	            
 	            $model = null;
 	        }
 	    }
