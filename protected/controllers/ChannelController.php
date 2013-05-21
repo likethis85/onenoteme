@@ -19,7 +19,7 @@ class ChannelController extends Controller
     public function actionLatest($page = 1)
     {
         $this->channel = 'latest';
-        $this->setSitePageTitle('最新发布的笑话');
+        $this->setSitePageTitle('');
         $this->setKeywords(p('home_index_keywords'));
         $this->setDescription(p('home_index_description'));
     
