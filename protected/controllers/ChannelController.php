@@ -63,7 +63,7 @@ class ChannelController extends Controller
     {
         $this->setSitePageTitle('一周内人最热门笑话');
     
-        $mobileUrl = ($page > 1) ? aurl('mobile/channel/week', array('page'=>$page)) : CDBaseUrl::aurl('mobile/channel/week');
+        $mobileUrl = ($page > 1) ? aurl('mobile/channel/week', array('page'=>$page)) : aurl('mobile/channel/week');
         cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
     
         $this->fetchFunnyHotPosts(7*24);

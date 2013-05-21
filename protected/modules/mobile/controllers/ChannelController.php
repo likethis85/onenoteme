@@ -43,6 +43,28 @@ class ChannelController extends MobileController
         $this->fetchFunnyHotPosts(8);
     }
     
+    public function actionDay($page = 1)
+    {
+        $this->setSitePageTitle('24小时内人最热门笑话');
+    
+        $this->fetchFunnyHotPosts(24);
+    }
+    
+    public function actionWeek($page = 1)
+    {
+        $this->setSitePageTitle('一周内人最热门笑话');
+    
+        $this->fetchFunnyHotPosts(7*24);
+    }
+    
+    public function actionMonth($page = 1)
+    {
+        $this->setSitePageTitle('一月内人最热门笑话');
+    
+        $this->fetchFunnyHotPosts(30*24);
+    }
+    
+    
 	public function actionJoke($page = 1)
 	{
 	    $count = (int)p('mobile_post_list_page_count');
