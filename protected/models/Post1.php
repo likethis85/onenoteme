@@ -146,7 +146,7 @@ class Post1 extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{post_copy}}';
+		return '{{post_copy_copy}}';
 	}
 
 	/**

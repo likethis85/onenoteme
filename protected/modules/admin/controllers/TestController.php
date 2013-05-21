@@ -1,6 +1,10 @@
 <?php
 class TestController extends AdminController
 {
+    public function init()
+    {
+        exit('exit');
+    }
     public function actionDel($page = 1, $count = 500)
     {
         $criteria = new CDbCriteria();
