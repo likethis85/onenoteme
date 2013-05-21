@@ -22,6 +22,9 @@ class ChannelController extends Controller
         $this->setSitePageTitle('');
         $this->setKeywords(p('home_index_keywords'));
         $this->setDescription(p('home_index_description'));
+
+        $mobileUrl = ($page > 1) ? aurl('mobile/channel/latest', array('page'=>$page)) : aurl('mobile/channel/latest');
+        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
     
         $criteria = new CDbCriteria();
         $criteria->scopes = array('homeshow', 'published');
@@ -40,7 +43,7 @@ class ChannelController extends Controller
     {
         $this->setSitePageTitle('12小时内人最热门笑话');
     
-        $mobileUrl = ($page > 1) ? aurl('mobile/default/index', array('page'=>$page)) : CDBaseUrl::mobileHomeUrl();
+        $mobileUrl = ($page > 1) ? aurl('mobile/channel/hot', array('page'=>$page)) : aurl('mobile/channel/hot');
         cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
     
         $this->fetchFunnyHotPosts(8);
@@ -50,7 +53,7 @@ class ChannelController extends Controller
     {
         $this->setSitePageTitle('24小时内人最热门笑话');
     
-        $mobileUrl = ($page > 1) ? aurl('mobile/default/index', array('page'=>$page)) : CDBaseUrl::mobileHomeUrl();
+        $mobileUrl = ($page > 1) ? aurl('mobile/channel/day', array('page'=>$page)) : aurl('mobile/channel/day');
         cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
     
         $this->fetchFunnyHotPosts(24);
@@ -60,7 +63,7 @@ class ChannelController extends Controller
     {
         $this->setSitePageTitle('一周内人最热门笑话');
     
-        $mobileUrl = ($page > 1) ? aurl('mobile/default/index', array('page'=>$page)) : CDBaseUrl::mobileHomeUrl();
+        $mobileUrl = ($page > 1) ? aurl('mobile/channel/week', array('page'=>$page)) : CDBaseUrl::aurl('mobile/channel/week');
         cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
     
         $this->fetchFunnyHotPosts(7*24);
@@ -70,7 +73,7 @@ class ChannelController extends Controller
     {
         $this->setSitePageTitle('一月内人最热门笑话');
     
-        $mobileUrl = ($page > 1) ? aurl('mobile/default/index', array('page'=>$page)) : CDBaseUrl::mobileHomeUrl();
+        $mobileUrl = ($page > 1) ? aurl('mobile/channel/week', array('page'=>$page)) : aurl('mobile/channel/week');
         cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
     
         $this->fetchFunnyHotPosts(30*24);

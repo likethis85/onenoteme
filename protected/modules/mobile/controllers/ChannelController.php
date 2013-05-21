@@ -14,21 +14,12 @@ class ChannelController extends MobileController
         );
     }
 
-    public function actionHot($page = 1)
-    {
-        $this->setSiteTitle('12小时内人最热门笑话');
-    
-        $mobileUrl = ($page > 1) ? aurl('mobile/default/index', array('page'=>$page)) : CDBaseUrl::mobileHomeUrl();
-        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
-    
-        $this->fetchFunnyHotPosts(8);
-    }
-    
-
     public function actionLatest($page = 1)
     {
         $this->channel = 'latest';
         $this->setSiteTitle('');
+        $this->setKeywords(p('home_index_keywords'));
+        $this->setDescription(p('home_index_description'));
     
         $criteria = new CDbCriteria();
         $criteria->scopes = array('homeshow', 'published');
@@ -42,6 +33,14 @@ class ChannelController extends MobileController
             'models' => $data['models'],
             'pages' => $data['pages'],
         ));
+    }
+    
+
+    public function actionHot($page = 1)
+    {
+        $this->setSiteTitle('12小时内人最热门笑话');
+    
+        $this->fetchFunnyHotPosts(8);
     }
     
 	public function actionJoke($page = 1)
