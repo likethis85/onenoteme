@@ -1,7 +1,7 @@
 <?php
 class CDHotTags extends CWidget
 {
-    const TAG_NUMS = 25;
+    const TAG_NUMS = 30;
     const CACHE_DURATION = 86400;
     
     public $title = null;

@@ -243,7 +243,7 @@ class Api_Post extends ApiBase
             // @todo ios客户端现在不支持gif动画，所以先屏蔽
             if ($platform != 'android')
                 $condition[] = 'original_frames <= 1';
-            
+            return array();
             $channelMediaType = self::switchChannelMediaType($channelID);
             $param = array(':enalbed' => POST_STATE_ENABLED, ':channelid'=>$channelMediaType[0], ':mediatype'=>$channelMediaType[1], ':randid'=>0);
             $rows = array();
