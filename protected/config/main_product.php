@@ -109,8 +109,8 @@ return array(
                 'page/<page:\d+>' => 'site/index',
                 '/' => 'site/index',
                 
-                '<_a:(joke|lengtu|video|hot|day|week|month|latest|gril|ghost)>/page/<page:\d+>' => 'channel/<_a>',
-                '<_a:(joke|lengtu|video|hot|day|week|month|latest|gril|ghost)>' => 'channel/<_a>',
+                '<_a:(joke|lengtu|video|hot|day|week|month|latest|girl|ghost)>/page/<page:\d+>' => 'channel/<_a>',
+                '<_a:(joke|lengtu|video|hot|day|week|month|latest|girl|ghost)>' => 'channel/<_a>',
                 
                 '<_a:(bdmap|links)>' => 'site/<_a>',
                 '<_a:(login|logout|signup|quicklogin|activate)>' => 'account/<_a>',
