@@ -214,6 +214,8 @@ class Api_Post extends ApiBase
         $channelID = (int)$params['channelid'];
         $platform = strtolower(strip_tags(trim($params['platform'])));
         
+        $channelMediaType = self::switchChannelMediaType($channelID);
+        
         // @todo test data
         $version = $this->_params['version'];
         $rows = self::fetchTestRows($channelID, $version);
@@ -222,14 +224,14 @@ class Api_Post extends ApiBase
         try {
             $fields = empty($params['fields']) ? '*' : $params['fields'];
             
-            $conditions = array('and', 't.state = :enalbed',  'channel_id = :channelid');
+            $conditions = array('and', 't.state = :enalbed',  'channel_id = :channelid', 'media_type = :mediatype');
             // @todo ios客户端现在不支持gif动画，所以先屏蔽
             if ($platform != 'android')
                 $condition[] = 'original_frames <= 1';
             $maxIdMinId = app()->getDb()->createCommand()
                 ->select(array('max(id) maxid', 'min(id) minid'))
                 ->from(TABLE_POST . ' t')
-                ->where($conditions, array(':enalbed' => POST_STATE_ENABLED, ':channelid'=>$channelID))
+                ->where($conditions, array(':enalbed' => POST_STATE_ENABLED, ':channelid'=>$channelMediaType[0], ':mediatype'=>$channelMediaType[1]))
                 ->queryRow();
             
             $count = (int)$params['count'];
@@ -239,12 +241,12 @@ class Api_Post extends ApiBase
             $minid = (int)$maxIdMinId['minid'];
             $maxid = (int)$maxIdMinId['maxid'];
             
-            $conditoins = array('and', 't.state = :enalbed',  'channel_id = :channelid', 'media_type = :mediatype', 'id = :randid');
+            $conditoins = array('and', 't.state = :enalbed', 'channel_id = :channelid', 'media_type = :mediatype', 'id = :randid');
             // @todo ios客户端现在不支持gif动画，所以先屏蔽
             if ($platform != 'android')
                 $condition[] = 'original_frames <= 1';
 //             return array();
-            $channelMediaType = self::switchChannelMediaType($channelID);
+            
             $param = array(':enalbed' => POST_STATE_ENABLED, ':channelid'=>$channelMediaType[0], ':mediatype'=>$channelMediaType[1], ':randid'=>0);
             $rows = array();
             for ($i=0; $i<$maxid; $i++) {
