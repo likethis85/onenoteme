@@ -82,11 +82,13 @@
             </ul>
             <div class="sharebox">
                 <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" data="">
+                    <a class="bds_renren">人人网</a>
+                    <a class="bds_sqq">QQ好友</a>
+                    <a class="bds_huaban">花瓣网</a>
+                    <a class="bds_tqq">腾讯微博</a>
                     <a class="bds_qzone">QQ空间</a>
                     <a class="bds_tsina">新浪微博</a>
-                    <a class="bds_tqq">腾讯微博</a>
-                    <a class="bds_renren">人人网</a>
-                    <div class="arrow"></div>
+                    <div class="arrow site-bg"></div>
                 </div>
             </div>
         </div>
