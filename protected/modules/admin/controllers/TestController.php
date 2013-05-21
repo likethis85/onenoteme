@@ -8,12 +8,15 @@ class TestController extends AdminController
         $criteria->order = 'id asc';
         
         $models = Post1::model()->findAll($criteria);
-        if (count($models))
+        if (count($models) == 0)
             echo 'no more posts.<br />';
         
         foreach ($models as $model) {
             try {
-                $model->delete();
+                if ($model->delete())
+                    echo 'del success.<br />';
+                else
+                    echo 'del failed.<br />';
             }
             catch (Exception $e) {
                 echo $e->getMessage() . '<br />';
