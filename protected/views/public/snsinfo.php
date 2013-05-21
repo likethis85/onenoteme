@@ -2,7 +2,7 @@
     <h2 class="content-title">关注我们</h2>
     <ul class="social-widget-list">
         <li class="social-widget-item first">
-            <a class="clearfix" href="javascript:void(0);" title="微信公众账号" id="sidebar-wx">
+            <a class="clearfix" href="javascript:void(0);">
                 <span class="social-widget-img"> <img src="<?php echo sbu('images/qrcode_wx.jpg');?>" alt=""></span>
                 <span class="social-widget-right clearfix">
                     <span class="social-widget-title">微信公众账号</span>
