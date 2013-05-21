@@ -51,6 +51,8 @@ class AdminConfig extends Config
             self::CATEGORY_SNS_INTERFACE => 'SNS接口',
             self::CATEGORY_SNS_STATS => 'SNS统计',
             self::CATEGORY_SNS_TEMPLATE => 'SNS模板',
+                
+            self::CATEGORY_SEO_KEYWORD_DESC => '关键字与描述',
         );
     }
     

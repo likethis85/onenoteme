@@ -57,7 +57,7 @@ return array(
     'mobile_post_list_page_count' => 12,
 
     'sitename' => '挖段子网',
-    'shortdesc' => '每日精品笑话、搞笑趣图、微博漫画、校花女神、搞笑视频',
+    'shortdesc' => '每日精品笑话、搞笑趣图、微博漫画、搞笑视频',
     
     'autoLoginDuration' => 3600 * 24 * 7,
     'line_post_count_page' => 20,
