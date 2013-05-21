@@ -139,7 +139,7 @@ class Api_Post extends ApiBase
             $condition = array('and', 'state = :enabled', 'channel_id = :channelid', 'media_type = :mediatype', 'create_time < :beforetime');
             // @todo ios客户端现在不支持gif动画，所以先屏蔽
             if ($platform != 'android')
-                $condition[] = 'original_frames = 0';
+                $condition[] = 'original_frames <= 1';
             $param = array(':enabled'=>POST_STATE_ENABLED, ':channelid' => $channelMediaType[0], ':mediatype'=>$channelMediaType[1], ':beforetime'=>$beforeTime);
             $cmd = app()->getDb()->createCommand()
                 ->select($fields)
@@ -243,7 +243,7 @@ class Api_Post extends ApiBase
             // @todo ios客户端现在不支持gif动画，所以先屏蔽
             if ($platform != 'android')
                 $condition[] = 'original_frames <= 1';
-            return array();
+//             return array();
             $channelMediaType = self::switchChannelMediaType($channelID);
             $param = array(':enalbed' => POST_STATE_ENABLED, ':channelid'=>$channelMediaType[0], ':mediatype'=>$channelMediaType[1], ':randid'=>0);
             $rows = array();
