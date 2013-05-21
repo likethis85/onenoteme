@@ -23,4 +23,34 @@ class TestController extends AdminController
             }
         }
     }
+    
+    public function actionDeltags()
+    {
+        $sql = "select DISTINCT tags from cd_post where tags != '' order by id asc";
+        $rows = app()->getDb()->createCommand($sql)
+            ->from('cd_post')
+            ->queryColumn();
+        
+        $tags = array();
+        foreach ($rows as $row) {
+            $tags = array_merge($tags, explode(',', $row));
+        }
+        $tags = array_unique($tags);
+        $tags = array_map('trim', $tags);
+        
+        $models = Tag::model()->findAll();
+        $count1 = $count2 = 0;
+        foreach ($models as $model) {
+            if (!in_array($model->name, $tags)) {
+                $model->delete() && $count1++;
+            }
+            else
+                $count2++;
+        }
+        
+        echo 'count1: ' . $count1 . '<br />';
+        echo 'count2: ' . $count2 . '<br />';
+            
+    }
 }
+
