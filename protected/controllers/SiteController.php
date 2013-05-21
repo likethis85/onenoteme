@@ -24,7 +24,6 @@ class SiteController extends Controller
         $this->forward('channel/latest');
     }
     
-    
     public function actionBdmap()
     {
         $pageSize = 100;

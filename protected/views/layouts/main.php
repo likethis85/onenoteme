@@ -40,7 +40,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     	<ul class="channel-nav fleft">
     		<li class="top-menu"><a <?php if ($this->channel=='latest') echo ' class="active"';?> href="<?php echo aurl('channel/latest');?>">刚出炉</a></li>
     	    <li class="top-menu">
-    		    <a href="<?php echo url('channel/hot');?>" <?php if ($this->channel=='hot') echo 'class="active"';?>>最热门</a>
+    		    <a href="<?php echo url('channel/hot');?>" class="site-bg dropmenu<?php if ($this->channel=='hot') echo ' active';?>">最热门</a>
     		    <ul class="submenu">
         		    <li><a href="<?php echo url('channel/day');?>">24小时内</a></li>
         		    <li><a href="<?php echo url('channel/week');?>">一周内</a></li>
@@ -53,16 +53,10 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     	</ul>
     	<ul class="channel-nav fright">
     	</ul>
-    	<a href="javascript:void(0);" id="wxqrcode"><img src="<?php echo sbu('images/qrcode_wx.jpg');?>" alt="挖段子公众账号二维码" /></a>
     	<div class="clear"></div>
     </div>
 </div>
 <div class="cd-wrapper cd-main">
-    <div class="alert alert-block alert-success alert-sitetip wx-help hide">
-        微信公众账号添加新功能：<br />
-        回复 1 返回笑话内容，现在是时候回复 13，14，1x ...了，猜的没错，现在可以返回多条了，14表示，返回 4 条笑话内容<br />
-        此功能当前只对笑话有效，趣图和女神还是只返回一条，但请记住：我们一直在努力！
-    </div>
 	<?php echo $content;?>
 </div>
 <?php echo param('footer_before_html');?>

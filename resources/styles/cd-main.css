@@ -207,20 +207,22 @@ input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 /* weixin qrcode */
 .weixin-qrcode {width:100%;}
 
-
 /* social list */
+.social-widget { position:relative;}
 .social-widget-list {list-style:none; margin:0;}
 .social-widget-list span {display:block;}
-.social-widget-item {border-bottom:1px dotted #DDD; margin:6px 0 0; padding:0 0 6px;}
+.social-widget-item {border-bottom:1px dotted #DDD; margin:0; padding:0;}
 .social-widget-item.last {border-bottom:none;}
-.social-widget-item a {font-size:12px; display:block; margin:10px 0; color:#333333;}
+.social-widget-item a {font-size:12px; display:block; padding:10px 0; color:#333333;}
 .social-widget-img {float:left; line-height:0;}
 .social-widget-img img {width:40px;}
 .social-widget-right {margin-left:50px;}
-.social-widget-title {line-height:20px; font-weight:bold; color:#555555;}
-a:hover .social-widget-title {color:#111111;}
+.social-widget-title {line-height:20px; font-weight:bold; color:#888888;}
+a:hover .social-widget-title {color:#000000;}
 .social-widget-content {line-height:1.5;}
-a:hover .social-widget-content {color:#666666;}
+a:hover .social-widget-content {color:#BBBBBB;}
+#big-qrcode {position:absolute; top:0; left:10px; width:280px; background:white; z-index:2; display:none;}
+a:hover #big-qrcode {display:block;}
 
 /* quick create */
 .quick-create {margin-bottom:15px; overflow-x:hidden; overflow-y:auto;}
