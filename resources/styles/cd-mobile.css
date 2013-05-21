@@ -59,7 +59,7 @@ a:hover {color:#D14836; text-decoration:none;}
 .cd-header ul {list-style:none;}
 .cd-header .channel-nav {margin:0 0 0 43px; padding:0; list-style:none; overflow-x:hidden;}
 .cd-header .channel-nav li {list-style:none; float:left; color:#CFCFCF; height:40px; overflow:hidden;}
-.cd-header .channel-nav li a {display:block; color:#E0E0E0; padding:0 5px; font-size:16px; font-family:"微软雅黑"; height:40px; line-height:40px;}
+.cd-header .channel-nav li a {display:block; color:#E0E0E0; padding:0 10px; font-size:16px; font-family:"微软雅黑"; height:40px; line-height:40px;}
 .cd-header .channel-nav li a:hover, .cd-header .channel-nav li.active a {color:white; background:#454544;}
 .cd-header .logo a {display:block;}
 .cd-header .logo a h2 {display:none;}
