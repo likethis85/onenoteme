@@ -32,7 +32,7 @@ class PostController extends MemberController
     
     public function actionFavorite()
     {
-        $count = 15;
+        $count = 25;
         $pages = new CPagination($this->user->favoritePostsCount);
         $pages->setPageSize($count);
         $posts = $this->user->getFavoritePosts($pages->currentPage+1, $count);
