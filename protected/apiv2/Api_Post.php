@@ -249,7 +249,7 @@ class Api_Post extends ApiBase
             $rows = array();
             for ($i=0; $i<$maxid; $i++) {
                 $randid = mt_rand($minid, $maxid);
-                $param['randid'] = $randid;
+                $param[':randid'] = $randid;
                 $cmd = app()->getDb()->createCommand()
                     ->select($fields)
                     ->from(TABLE_POST . ' t')
