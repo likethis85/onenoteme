@@ -16,7 +16,7 @@ class ChannelController extends MobileController
 
     public function actionHot($page = 1)
     {
-        $this->pageTitle = '12小时内人最热门笑话';
+        $this->setSiteTitle('12小时内人最热门笑话');
     
         $mobileUrl = ($page > 1) ? aurl('mobile/default/index', array('page'=>$page)) : CDBaseUrl::mobileHomeUrl();
         cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
@@ -28,7 +28,7 @@ class ChannelController extends MobileController
     public function actionLatest($page = 1)
     {
         $this->channel = 'latest';
-        $this->pageTitle = '最新发布的笑话';
+        $this->setSiteTitle('');
     
         $criteria = new CDbCriteria();
         $criteria->scopes = array('homeshow', 'published');
