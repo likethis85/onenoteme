@@ -50,9 +50,6 @@ class PostController extends Controller
             $post = Post::model()->findByPk($id);
         else {
             $criteria = new CDbCriteria();
-            // 只有vip才可以查看GIRL频道
-            if (!user()->getIsVip())
-                $criteria->addCondition('t.channel_id != ' . CHANNEL_GIRL);
             // 管理员可以查看所有内容
             if (!user()->getIsAdmin())
                 $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
@@ -97,13 +94,6 @@ class PostController extends Controller
             'pages' => $commentsData['pages'],
             'shareData' => $shareData,
         ));
-    }
-    
-    public function actionBigPic($id)
-    {
-        $id = (int)$id;
-        $url = aurl('post/show', array('id'=>$id));
-        $this->redirect($url, true, 301);
     }
     
     public function actionViews()
@@ -252,9 +242,6 @@ class PostController extends Controller
         $createTime = (int)$post->create_time;
         $channelID = (int)$post->channel_id;
         
-        if ($channelID == CHANNEL_DUANZI)
-            return array();
-        
         $count = (int)$count;
         $column = (int)$column;
         
@@ -265,7 +252,7 @@ class PostController extends Controller
         
         $criteria = new CDbCriteria();
         $criteria->addCondition("create_time < $createTime");
-        $criteria->addColumnCondition(array('channel_id'=>$channelID, 'state'=>POST_STATE_ENABLED));
+        $criteria->addColumnCondition(array('channel_id'=>$channelID, 'media_type'=>MEDIA_TYPE_IMAGE, 'state'=>POST_STATE_ENABLED));
         $criteria->order = 'create_time desc, id desc';
         $criteria->limit = $count;
         
