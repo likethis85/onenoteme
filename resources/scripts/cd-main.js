@@ -111,6 +111,7 @@ Waduanzi.PostComment = function(event) {
 	xhr.done(function(data){
 		loadingElement.hide();
 		if (data.errno == 0) {
+			$('.nocomments').remove();
 			errorElement.after(data.html);
 			contentElement.val('').removeClass('expand');
 			_hmt && _hmt.push(['_trackEvent', '评论', '评论成功']);
