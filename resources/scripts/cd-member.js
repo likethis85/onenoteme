@@ -36,3 +36,13 @@ CDMember.executeAjaxDelete = function(event, success, fail){
 		$('#ajax-tip').html('删除失败').addClass('cred').delay(5000).fadeOut('slow').html();
 	});
 };
+
+
+$(function(){
+	$('.channel-nav .top-menu').on('mouseenter', function(){
+		$(this).css('height', 'auto');
+	});
+	$('.channel-nav .top-menu').on('mouseleave', function(){
+		$(this).css('height', '45px');
+	});
+});

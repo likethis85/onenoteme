@@ -33,17 +33,18 @@
 	        </a>
 	    </div>
     	<ul class="channel-nav fleft">
-    		<li><a href="<?php echo aurl('channel/joke');?>">挖笑话</a></li>
-    		<li>|</li>
-    		<li><a href="<?php echo aurl('channel/lengtu');?>">挖趣图</a></li>
-    		<li>|</li>
-    		<li><a href="<?php echo aurl('channel/video');?>">挖视频</a></li>
-    		<li>|</li>
-    		<li><a href="<?php echo aurl('channel/ghost');?>">挖鬼故事</a></li>
-    		<?php if (user()->isVip):?>
-    		<li>|</li>
-    		<li><a href="<?php echo aurl('channel/girl');?>">挖女神</a></li>
-    		<?php endif;?>
+    		<li class="top-menu"><a <?php if ($this->channel=='latest') echo ' class="active"';?> href="<?php echo aurl('channel/latest');?>">刚出炉</a></li>
+    	    <li class="top-menu">
+    		    <a href="<?php echo url('channel/hot');?>">最热门</a>
+    		    <ul class="submenu">
+        		    <li><a href="<?php echo url('channel/day');?>">24小时内</a></li>
+        		    <li><a href="<?php echo url('channel/week');?>">一周内</a></li>
+        		    <li><a href="<?php echo url('channel/month');?>">一月内</a></li>
+    		    </ul>
+		    </li>
+    		<li class="top-menu"><a href="<?php echo url('channel/joke');?>">挖笑话</a></li>
+    		<li class="top-menu"><a href="<?php echo url('channel/lengtu');?>">挖趣图</a></li>
+    		<li class="top-menu"><a href="<?php echo url('channel/video');?>">挖视频</a></li>
     	</ul>
     	<ul class="fright">
     	</ul>

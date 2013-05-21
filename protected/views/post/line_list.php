@@ -128,8 +128,4 @@ $(function(){
 });
 </script>
 
-<?php
-cs()->registerScriptFile(sbu('libs/json2.js'), CClientScript::POS_END);
-?>
-
 
