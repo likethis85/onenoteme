@@ -1,7 +1,7 @@
 <?php
 class CDHotTags extends CWidget
 {
-    const TAG_NUMS = 50;
+    const TAG_NUMS = 25;
     const CACHE_DURATION = 86400;
     
     public $title = null;
@@ -26,10 +26,10 @@ class CDHotTags extends CWidget
         
         if (!empty($tags)) {
             foreach ($tags as $key => $tag) {
-                if ($key < 5) {
+                if ($key < 3) {
                     $tag_level = 'tag-level3';
                 }
-                elseif ($key < 15) {
+                elseif ($key < 10) {
                     $tag_level = 'tag-level2';
                 }
                 else
