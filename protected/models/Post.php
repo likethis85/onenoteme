@@ -88,9 +88,7 @@
  * @property bool $hasTitle
  * @property bool $isJoke
  * @property bool $isLengtu
- * @property bool $isGirl
  * @property bool $isVideo
- * @property bool $isGhost
  * @property bool $isTextType
  * @property bool $isImageType
  * @property bool $isVideoType
@@ -984,7 +982,7 @@ class Post extends CActiveRecord
      */
     public function getIsJoke()
     {
-        return $this->channel_id == CHANNEL_DUANZI;
+        return $this->channel_id == CHANNEL_FUNNY && $this->getIsTextType();
     }
     
     /**
@@ -993,34 +991,16 @@ class Post extends CActiveRecord
      */
     public function getIsLengtu()
     {
-        return $this->channel_id == CHANNEL_LENGTU;
+        return $this->channel_id == CHANNEL_FUNNY && $this->getIsImageType();
     }
-    
-    /**
-     * 判断是不是女神
-     * @return boolean
-     */
-    public function getIsGirl()
-    {
-        return $this->channel_id == CHANNEL_GIRL;
-    }
-    
+
     /**
      * 判断是否是短片
      * @return boolean
      */
     public function getIsVideo()
     {
-        return $this->channel_id == CHANNEL_VIDEO;
-    }
-    
-    /**
-     * 判断是否是鬼故事
-     * @return boolean
-     */
-    public function getIsGhost()
-    {
-        return $this->channel_id == CHANNEL_GHOSTSTORY;
+        return $this->channel_id == CHANNEL_FUNNY && $this->getIsVideoType();
     }
     
     /**

@@ -265,15 +265,13 @@ class CDBase
     
     public static function channels()
     {
-        return array(CHANNEL_FUNNY, CHANNEL_GIRL, CHANNEL_GHOSTSTORY);
+        return array(CHANNEL_FUNNY);
     }
     
     public static function channelLabels($channelID = null)
     {
         $labels = array(
             CHANNEL_FUNNY => '挖笑话',
-            CHANNEL_GIRL => '挖女神',
-            CHANNEL_GHOSTSTORY => '挖鬼故事',
         );
     
         return $channelID === null ? $labels : $labels[$channelID];

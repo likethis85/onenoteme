@@ -63,7 +63,7 @@ class PostController extends Controller
         
         // 获取后几个Post
         $nextPosts = array();
-        if ($post->getIsLengtu() || $post->getIsGirl())
+        if ($post->getIsImageType())
             $nextPosts = self::fetchNextPosts($post, 9);
         
         // 获取评论
