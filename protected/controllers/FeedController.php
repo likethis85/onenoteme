@@ -169,6 +169,7 @@ class FeedController extends Controller
             $item = $dom->createElement('item');
             $channel->appendChild($item);
             $title = $model->getFilterTitle();
+            if ($model->getImageIsLong()) $title .= '【长图】';
             if ($model->getImageIsAnimation()) $title .= '【动画】';
             $item->appendChild(new DOMElement('title', utf8ForXml($title)));
             $posturl = aurl('post/show', array('id'=>$model->id, 'source'=>$source));
