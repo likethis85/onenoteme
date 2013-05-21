@@ -1,3 +1,7 @@
+<?php if (empty($comments)):?>
+<div class="nocomments">当前暂无评论</div>
+<?php endif;?>
+
 <?php foreach ((array)$comments as $model):?>
 <div class="content-block comment-item">
     <div class="comment-arrows fleft radius4px">
