@@ -49,12 +49,10 @@ class TagController extends Controller
         ));
     }
     
-    public function actionPosts($name, $s = POST_LIST_STYLE_LINE, $page = 1)
+    public function actionPosts($name, $page = 1)
     {
-        $s = strip_tags(trim($s));
-        
         $duration = 120;
-        $limit = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('tag_posts_count_page');
+        $limit = (int)p('tag_posts_count_page');
         
         $name = urldecode($name);
         
@@ -87,10 +85,6 @@ class TagController extends Controller
         
         $criteria = new CDbCriteria();
         $criteria->addInCondition('id', $postIDs);
-        // 只有vip才可以查看GIRL频道
-        if (!user()->getIsVip())
-            $criteria->addCondition('t.channel_id != ' . CHANNEL_GIRL);
-        
         $models = Post::model()->findAll($criteria);
         
         if ($pages->currentPage > 1)
@@ -104,8 +98,7 @@ class TagController extends Controller
         $this->setDescription("与{$name}有关的相关段子、笑话、冷笑话、糗事、经典语录、冷图、美女写真、视频");
         
         $this->channel = 'tag';
-        $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'posts';
-        $this->render($view, array(
+        $this->render('posts', array(
         	'models' => $models,
             'pages' => $pages,
             'fallTitle' => h($name),
