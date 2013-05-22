@@ -70,8 +70,8 @@ class Controller extends CController
         if (user()->getIsGuest()) {
             $html .= sprintf('<li><a href="%s">注册</a></li>', CDBaseUrl::singupUrl($url));
 			$html .= sprintf('<li class="user-login"><a class="fleft" href="%s">登录</a></li>', CDBaseUrl::loginUrl($url));
-			$html .= sprintf('<li class="sns-icon"><a class="fright" href="%s"><img src="%s" alt="用新浪微博账号登录s" /></a>', aurl('weibo/sinat'), sbu('images/weibo24.png'));
-			$html .= sprintf('<a class="fright" href="%s"><img src="%s" alt="" /></a></li>', aurl('weibo/qqt'), sbu('images/qqt24.png'));
+// 			$html .= sprintf('<li class="sns-icon"><a class="fright" href="%s"><img src="%s" alt="用新浪微博账号登录s" /></a>', aurl('weibo/sinat'), sbu('images/weibo24.png'));
+// 			$html .= sprintf('<a class="fright" href="%s"><img src="%s" alt="" /></a></li>', aurl('weibo/qqt'), sbu('images/qqt24.png'));
         }
         else {
             
@@ -86,19 +86,6 @@ class Controller extends CController
         }
         
         return $html;
-    }
-
-    protected function autoSwitchMobile($url = null)
-    {
-        $mark = strip_tags(trim($_GET['f']));
-        if (empty($mark) && CDBase::isMobileDevice()) {
-            if (empty($url)) {
-                $route = 'mobile/' . $this->id . '/' . $this->action->id;
-                $url = aurl($route, $this->actionParams);
-            }
-            $this->redirect($url);
-            exit(0);
-        }
     }
 
     public function getUserID()
@@ -134,19 +121,6 @@ class Controller extends CController
         return $this->user->profile;
     }
 
-
-    /**
-     * 判断是否是手机用户，自动跳转到手机版，此方法目前没有用上，直接使用nginx的rewrite进行了跳转，效率更高
-     * @param CFilterChain $filterChain
-     */
-    public function filterSwitchMobile($filterChain)
-    {
-        $url = url('mobile/' . $filterChain->controller->id . '/' . $filterChain->action->id, $filterChain->controller->getActionParams());
-        $this->autoSwitchMobile($url);
-    
-        $filterChain->run();
-    }
-    
     protected function beforeRender($view)
     {
         cs()->defaultScriptFilePosition = CClientScript::POS_END;
