@@ -138,8 +138,8 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
             </ul>
             <ul class="nav pull-right">
                 <li><?php echo l(user()->name, url('admin/user/current'));?></li>
-                <li><?php echo l('退出登录', url('site/logout'));?></li>
-                <li><?php echo l('网站首页', url('site/index'), array('target'=>'_blank'));?></li>
+                <li><?php echo l('退出登录', CDBaseUrl::logoutUrl());?></li>
+                <li><?php echo l('网站首页', CDBaseUrl::siteHomeUrl(), array('target'=>'_blank'));?></li>
             </ul>
         </div>
     </div>
