@@ -65,9 +65,9 @@ class WdzWeixin extends CDWeixin
         $post->content = strip_tags($this->_data->Content);
         $post->create_time = $_SERVER['REQUEST_TIME'];
         $post->state = POST_STATE_UNVERIFY;
-        $post->up_score = mt_rand(150, 500);
-        $post->down_score = mt_rand(10, 50);
-        $post->view_nums = mt_rand(500, 1000);
+        $post->up_score = mt_rand(param('init_up_score_min'), param('init_up_score_max'));
+        $post->down_score = mt_rand(param('init_down_score_min'), param('init_down_score_max'));
+        $post->view_nums = mt_rand(param('init_view_nums_min'), param('init_view_nums_max'));
         $post->original_pic = '';
         try {
             $result = $post->save();
