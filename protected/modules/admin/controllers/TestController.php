@@ -3,10 +3,31 @@ class TestController extends AdminController
 {
     public function init()
     {
-        exit('exit');
+//         exit('exit');
     }
+    
+    public function actionRedis()
+    {
+        $key = 'username';
+        
+//         $data = app()->redis->set($key, 'cdcchen', 50);
+//         var_dump($data);
+//         echo '<hr />';
+
+//         $data = app()->redis->add($key, 'cdcchen', 20);
+//         var_dump($data);
+//         echo '<hr />';
+        
+        $data = app()->redis->get($key);
+        var_dump($data);
+        
+        echo '<hr />';
+        var_dump(app()->redis);
+    }
+    
     public function actionDel($page = 1, $count = 500)
     {
+        exit;
         $criteria = new CDbCriteria();
         $criteria->limit = $count;
         $criteria->order = 'id asc';
@@ -30,6 +51,7 @@ class TestController extends AdminController
     
     public function actionDeltags()
     {
+        exit;
         $sql = "select DISTINCT tags from cd_post where tags != '' order by id asc";
         $rows = app()->getDb()->createCommand($sql)
             ->from('cd_post')

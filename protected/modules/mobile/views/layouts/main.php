@@ -3,9 +3,11 @@
 <head>
 <meta charset="utf-8">
 <title><?php echo $this->pageTitle;?></title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="<?php echo sbu('images/icon.png');?>" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo sbu('images/icon.png');?>" />
 <script type="text/javascript">
 var wdz_logined = <?php echo (int)!user()->isGuest;?>;
 var wdz_quick_login_url = '<?php echo aurl('site/quicklogin');?>';

@@ -83,6 +83,12 @@ return array(
 //             'class' => 'CFileCache',
 // 		    'directoryLevel' => 2,
 //         ),
+        'redis' => array(
+            'class' => 'application.extensions.CDRedisCache',
+            'host' => '127.0.0.1',
+            'port' => 6379,
+            'timeout' => 2,
+        ),
         'assetManager' => array(
             'basePath' => $params['resourceBasePath'] . 'assets',
             'baseUrl' => $params['resourceBaseUrl'] . 'assets',
