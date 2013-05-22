@@ -179,8 +179,6 @@ class ChannelController extends Controller
     private function fetchFunnyMediaPosts($typeid, $limit, $with = null)
     {
         $this->channel = CHANNEL_FUNNY . $typeid;
-        $this->setKeywords(p('home_index_keywords'));
-        $this->setDescription(p('home_index_description'));
     
         $criteria = new CDbCriteria();
         $criteria->scopes = array('published');

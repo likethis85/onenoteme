@@ -61,7 +61,7 @@ return array(
 //             'enableProfiling' => true,
 		    'schemaCacheID' => 'cache',
 		    'schemaCachingDuration' => 3600 * 24,    // metadata 缓存超时时间(s)
-		    'queryCacheID' => 'cache',
+		    'queryCacheID' => 'redis',
 		    'queryCachingDuration' => 60,
         ),
         'cache' => array(
@@ -76,6 +76,16 @@ return array(
             'serializer' => array('igbinary_serialize', 'igbinary_unserialize'),
             'class' => 'CFileCache',
 		    'directoryLevel' => 2,
+        ),
+        'redis' => array(
+            'class' => 'application.extensions.CDRedisCache',
+            'host' => '127.0.0.1',
+            'port' => 6379,
+            'timeout' => 3,
+            'options' => array(
+                Redis::OPT_PREFIX => 'wdz_',
+                Redis::OPT_SERIALIZER => extension_loaded('igbinary') ? Redis::SERIALIZER_IGBINARY : Redis::SERIALIZER_PHP,
+            ),
         ),
         'assetManager' => array(
             'basePath' => $params['resourceBasePath'] . 'assets',

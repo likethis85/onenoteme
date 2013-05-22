@@ -8,21 +8,40 @@ class TestController extends AdminController
     
     public function actionRedis()
     {
-        $key = 'username';
+        $key1 = 'user111';
+        $key2 = 'user222';
+        $key3 = 'user333';
+        $data1 = array('cdcchen', 50, 'male');
+        $data2 = array('chris', 40, 'famale');
+        $data3 = array('dong', 30, 'male');
         
-//         $data = app()->redis->set($key, 'cdcchen', 50);
-//         var_dump($data);
-//         echo '<hr />';
-
-//         $data = app()->redis->add($key, 'cdcchen', 20);
-//         var_dump($data);
-//         echo '<hr />';
-        
-        $data = app()->redis->get($key);
-        var_dump($data);
-        
+        $result1 = app()->redis->set($key1, $data1, 10);
+        $result2 = app()->redis->set($key2, $data2, 20);
+        $result3 = app()->redis->set($key3, $data3, 30);
+        print_r($result1); echo '<br />';
+        print_r($result2); echo '<br />';
+        print_r($result3);
         echo '<hr />';
-        var_dump(app()->redis);
+
+        $data = app()->redis->get($key1);
+        print_r($data); echo '<br />';
+        $data = app()->redis->get($key2);
+        print_r($data); echo '<br />';
+        $data = app()->redis->get($key3);
+        print_r($data);
+        echo '<hr />';
+        
+        $dump = app()->redis->dump($key1);
+        print_r($dump); echo '<br />';
+        $dump = app()->redis->dump($key2);
+        print_r($dump); echo '<br />';
+        $dump = app()->redis->dump($key3);
+        print_r($dump);
+        echo '<hr />';
+        
+        $keys = app()->redis->keys('wdz*');
+        print_r($keys);
+        echo '<hr />';
     }
     
     public function actionDel($page = 1, $count = 500)

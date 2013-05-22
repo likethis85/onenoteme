@@ -37,6 +37,12 @@ class CDRedisCache extends CCache
      */
     public $password;
     
+    /**
+     * redis server options
+     * @var array
+     */
+    public $options;
+    
     
     /**
      * redis instance
@@ -45,25 +51,33 @@ class CDRedisCache extends CCache
     private $_client;
     
     
-    
     public function init()
     {
         if (empty($this->host) || filter_var($this->host, FILTER_VALIDATE_IP) === false)
             throw new RedisException('host is invalid.');
         
         parent::init();
+        $this->serializer = false; // please set Redis::OPT_SERIALIZER option
+        $this->keyPrefix = null; // please set Redis::OPT_PREFIX option
         
         $this->_client = new Redis();
-        if ($this->persistent)
-            $result = $this->_client->pconnect($this->host, $this->port, $this->timeout);
-        else
-            $result = $this->_client->connect($this->host, $this->port, $this->timeout);
+        $result = $this->persistent
+            ? $this->_client->pconnect($this->host, $this->port, $this->timeout)
+            : $this->_client->connect($this->host, $this->port, $this->timeout);
         
         if (!$result)
             throw new RedisException($this->_client->getLastError());
         
-        if ($this->password)
-            $this->_client->auth($this->password);
+        if ($this->password) {
+            $result = $this->_client->auth($this->password);
+            if (!$result)
+                throw new RedisException($this->_client->getLastError());
+        }
+        
+        if ($this->options)
+            $this->setOptions($this->options);
+        
+        $this->selectDb($this->dbindex);
     }
     
     public function setValue($key, $value, $expire, $milliseconds = false)
@@ -108,7 +122,6 @@ class CDRedisCache extends CCache
         return $alldb ? $this->_client->flushAll() : $this->_client->flushDB();
     }
     
-    
     public function client()
     {
         return $this->_client;
@@ -116,7 +129,52 @@ class CDRedisCache extends CCache
     
     public function selectDb($index)
     {
-        $this->_client->select($index);
+        return $this->_client->select($index);
+    }
+    
+    public function setOptions(array $options)
+    {
+        $result = true;
+        foreach ($options as $name => $value)
+            $result = $result && $this->setOption($name, $value);
+        
+        return $result;
+    }
+    
+    public function setOption($name, $value)
+    {
+        if ($this->_client->IsConnected()) {
+            return $this->_client->setOption($name, $value);
+        }
+        else
+            throw new RedisException('redis client is invalid.');
+    }
+    
+    public function getOption($name)
+    {
+        if ($this->_client->IsConnected())
+            return $this->_client->getOption($name);
+        else
+            throw new RedisException('redis client is invalid.');
+    }
+    
+    public function close()
+    {
+        $this->persistent || $this->_client->close();
+    }
+    
+    public function __call($name, $parameters)
+    {
+        if ($this->_client->IsConnected() && method_exists($this->_client, $name)) {
+            return call_user_func_array(array($this->_client,$name), $parameters);
+        }
+        
+        parent::__call($name, $parameters);
+    }
+    
+    protected function generateUniqueKey($key)
+    {
+        return $key;
     }
 }
 

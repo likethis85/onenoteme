@@ -87,7 +87,11 @@ return array(
             'class' => 'application.extensions.CDRedisCache',
             'host' => '127.0.0.1',
             'port' => 6379,
-            'timeout' => 2,
+            'timeout' => 3,
+            'options' => array(
+                Redis::OPT_PREFIX => 'wdz_',
+                Redis::OPT_SERIALIZER => extension_loaded('igbinary') ? Redis::SERIALIZER_IGBINARY : Redis::SERIALIZER_PHP,
+            ),
         ),
         'assetManager' => array(
             'basePath' => $params['resourceBasePath'] . 'assets',
