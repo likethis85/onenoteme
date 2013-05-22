@@ -33,7 +33,7 @@ class CDAdvert extends CWidget
         
         $index = 0;
         if ($this->multi && count($data) > 1)
-            $index = mt_rand(0, count($data)-1);
+            $index = self::getIndexByWeight($data);
         
         $adcode = $data[$index];
         if (empty($adcode)) return;
@@ -46,4 +46,25 @@ class CDAdvert extends CWidget
         
         echo $html;
     }
+    
+    private static function getIndexByWeight($data)
+    {
+        $newWeights = array();
+        $start = 0;
+        foreach ($data as $i => $row) {
+            $weight = (int)$row['weight'];
+            if ($row['weight'] < 1) continue;
+            $newWeights = array_merge($newWeights, array_fill($start, $weight, $i));
+            $start = $weight;
+        }
+        
+        $randKey = (int)array_rand($newWeights);
+        $index = (int)$newWeights[$randKey];
+        $newWeights = null;
+        return $index;
+    }
+    
 }
+
+
+

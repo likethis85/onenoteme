@@ -21,7 +21,10 @@
                 <?php echo $model->editLink;?><br />
                 <?php echo $model->deleteLink;?>
             </td>
-            <td><?php echo $model->intro;?></td>
+            <td>
+                <div><label class="label label-info">权重：<?php echo $model->weight;?></label></div>
+                <?php echo $model->intro;?>
+            </td>
             <td><textarea name="adcode" class="span6" rows="10" readonly="readonly"><?php echo $model->adcode;?></textarea></td>
         </tr>
         <?php endforeach;?>

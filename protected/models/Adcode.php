@@ -8,7 +8,10 @@
  * @property string $ad_id
  * @property string $adcode
  * @property string $intro
+ * @property integer $weight
  * @property integer $state
+ *
+ * @property Advert $advert
  */
 class Adcode extends CActiveRecord
 {
@@ -36,7 +39,7 @@ class Adcode extends CActiveRecord
 	{
 		return array(
 			array('ad_id, intro, adcode', 'required'),
-			array('state, ad_id', 'numerical', 'integerOnly'=>true),
+			array('weight, state, ad_id', 'numerical', 'integerOnly'=>true),
 			array('intro', 'length', 'max'=>250),
 			array('adcode', 'safe'),
 		);
@@ -61,6 +64,7 @@ class Adcode extends CActiveRecord
 			'id' => 'ID',
 			'ad_id' => '广告位ID',
 			'adcode' => '广告代码',
+	        'weight' => '权重',
 			'intro' => '说明',
 			'state' => '状态',
 		);
@@ -76,13 +80,22 @@ class Adcode extends CActiveRecord
 	    $data = array();
 	    $cmd = app()->getDb()->createCommand()
 	        ->from(TABLE_ADCODE)
-	        ->where(array('and', 'ad_id = :adid', 'state = :enabled'), array(':adid'=>$adid, ':enabled'=>CD_YES));
+	        ->where(array('and', 'ad_id = :adid', 'state = :enabled'), array(':adid'=>$adid, ':enabled'=>CD_YES))
+	        ->order(array('weight desc', 'id asc'));
 	     
 	    $data = $cmd->queryAll();
 	     
 	    return $data;
 	}
 
+	protected function beforeSave()
+	{
+	    if ($this->weight < 1)
+	        $this->weight = 1;
+	    
+	    return true;
+	}
+	
     protected function afterFind()
     {
         $this->intro = nl2br($this->intro);

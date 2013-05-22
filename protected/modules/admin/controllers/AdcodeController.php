@@ -28,10 +28,13 @@ class AdcodeController extends AdminController
     {
         $id = (int)$id;
         $adid = (int)$adid;
+        if (empty($adid) && empty($id))
+            throw new CDException('无效请求');
+        
         if ($adid > 0) {
             $advert = AdminAdvert::model()->findByPk($adid);
             if ($advert === null)
-                throw new CHttpException(404, '广告位不存在');
+                throw new CDException(404, '广告位不存在');
         }
         
         if ($id > 0) {
@@ -49,7 +52,7 @@ class AdcodeController extends AdminController
             if ($model->save()) {
                 user()->setFlash('save_adcode_result', '保存广告成功');
                 $model->advert->clearCache();
-                $this->redirect(request()->getUrl());
+                $this->redirect(url('admin/adcode/list', array('adid'=>$model->ad_id)));
             }
         }
         

@@ -13,7 +13,7 @@ class AdvertController extends AdminController
     {
         $criteria = new CDbCriteria();
         $sort = new CSort('AdminAdvert');
-        $sort->defaultOrder = 't.id asc';
+        $sort->defaultOrder = 't.solt asc, t.id asc';
         $sort->applyOrder($criteria);
         
         $models = AdminAdvert::model()->findAll($criteria);

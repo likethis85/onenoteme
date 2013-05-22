@@ -22,11 +22,19 @@
             <?php if ($model->hasErrors('adcode')):?><p class="help-block"><?php echo $model->getError('adcode');?></p><?php endif;?>
         </div>
     </div>
+    <div class="control-group bottom10px <?php if ($model->hasErrors('weight')) echo 'error';?>">
+        <label class="control-label"><?php echo CHtml::activeLabel($model, 'weight');?></label>
+        <div class="controls">
+            <?php echo CHtml::activeTextField($model, 'weight', array('class'=>'input-small'));?>
+            <span class="help-inline">权重只对启用的广告有效</span>
+            <?php if ($model->hasErrors('weight')):?><p class="help-block"><?php echo $model->getError('weight');?></p><?php endif;?>
+        </div>
+    </div>
     <div class="control-group <?php if($model->hasErrors('state')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'state', array('class'=>'control-label'));?>
         <div class="controls">
             <label class="checkbox inline">
-                <?php echo CHtml::activeCheckBox($model, 'state');?>启用
+                <?php echo CHtml::activeCheckBox($model, 'state');?><?php echo CHtml::activeLabel($model, 'state', array('label'=>'启用'));?>
             </label>
             <?php if($model->hasErrors('state')):?><p class="help-block"><?php echo $model->getError('state');?></p><?php endif;?>
         </div>

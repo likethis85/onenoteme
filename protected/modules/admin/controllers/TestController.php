@@ -3,7 +3,7 @@ class TestController extends AdminController
 {
     public function init()
     {
-//         exit('exit');
+        exit('exit');
     }
     
     public function actionRedis()
@@ -96,6 +96,52 @@ class TestController extends AdminController
         echo 'count1: ' . $count1 . '<br />';
         echo 'count2: ' . $count2 . '<br />';
             
+    }
+
+    public function actionWeight()
+    {
+        $temp = array(30=>1, 31=>1, 10=>2, 13=>0, 5=>3, 8=>0, 3=>4);
+        $weights = array_filter($temp);
+        asort($weights);
+        
+        /*
+        $data = array();
+        $start = 0;
+        foreach ($weights as $key => $weight) {
+            $data = array_merge($data, array_fill($start, $weight, $key));
+            $start = $weight;
+        }
+        print_r($data);
+        echo (int)$data[array_rand($data)];
+        exit;
+        */
+        
+        print_r($weights);
+//         exit;
+        $rand = mt_rand(0, array_sum($weights)-1);
+        echo $rand . '<br />';exit;
+        
+        $num = 0;
+        $index = null;
+        foreach (temp as $i => $weight) {
+            if ($weight < 1) continue;
+            $num += $weight;
+            if ($rand/$num < 1) {
+                $index = $i;
+                break;
+            }
+        }
+        for ($i=0; $i<count($weights); $i++) {
+            if ($weights[$i] == 0) continue;
+            $num += $weights[$i];
+            if ($rand/$num < 1) {
+                $index = $i;
+                break;
+            }
+        }
+        echo $index . '<br />';
+        
+        exit;
     }
 }
 
