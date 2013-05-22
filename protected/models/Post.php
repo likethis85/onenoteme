@@ -1255,7 +1255,7 @@ class Post extends CActiveRecord
             $criteria->select = array('id', 'title', 'create_time');
         $criteria->addColumnCondition(array('channel_id'=>$this->channel_id, 'state'=>POST_STATE_ENABLED))
             ->addCondition('create_time > ' . (int)$this->create_time);
-        $criteria->order = 'create_time desc, id desc';
+        $criteria->order = 'create_time asc, id asc';
         $post = $this->cache($duration)->find($criteria);
     
         return $post;
