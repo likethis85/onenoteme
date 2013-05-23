@@ -13,7 +13,7 @@
             <?php if ($model->channel_id == CHANNEL_FUNNY && $model->getOriginalPic()): // 趣图?>
             <div class="post-image">
                 <div class="thumbbox">
-                    <?php if ($model->getImageIsLong(150)):?>
+                    <?php if ($model->getImageIsLong(MOBILE_POST_LIST_IMAGE_MAX_WIDTH)):?>
                     <a href="<?php echo $model->getMiddlePic();?>" class="size-switcher" title="点击查看详细内容" data-bmiddle-url="<?php echo $model->getMiddlePic();?>">
                         <?php echo CHtml::image($model->getFixThumb(), $model->title, array('class'=>'thumb'));?>
                         <img class="bmiddle hide" alt="<?php echo $model->title;?>" />
@@ -24,14 +24,14 @@
                         <?php echo CHtml::image($model->getMiddlePic(), $model->title, array('class'=>'bmiddle'));?>
                     </a>
                     <?php endif;?>
-                    <?php if ($model->getImageIsLong(150)):?>
+                    <?php if ($model->getImageIsLong(MOBILE_POST_LIST_IMAGE_MAX_WIDTH)):?>
                     <div class="thumb-pall"></div>
                     <?php endif;?>
                 </div>
-                <?php if ($model->getImageIsLong(150)):?>
+                <?php if ($model->getImageIsLong(MOBILE_POST_LIST_IMAGE_MAX_WIDTH)):?>
                 <div class="thumbnail-more">
                     <div class="lines">
-                        <?php for ($i=0; $i<$model->getLineCount(150); $i++):?>
+                        <?php for ($i=0; $i<$model->getLineCount(MOBILE_POST_LIST_IMAGE_MAX_WIDTH); $i++):?>
                         <div class="line3"></div>
                         <?php endfor;?>
                         <div class="sjx"></div>

@@ -112,6 +112,7 @@ define('IMAGE_WATER_SITENAME_SIZE', 350);
  * 内容列表页，图片最大尺寸
  */
 define('POST_LIST_IMAGE_MAX_WIDTH', 600);
+define('MOBILE_POST_LIST_IMAGE_MAX_WIDTH', 300);
 
 define('GENDER_UNKOWN', 0);
 define('GENDER_FEMALE', 1);
