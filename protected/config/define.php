@@ -97,9 +97,21 @@ define('UPYUN_AVATAR_CUSTOM_LARGE', 'lavatar');
 define('UPYUN_AVATAR_CUSTOM_SMALL', 'savatar');
 define('UPYUN_AVATAR_CUSTOM_MINI', 'mavatar');
 
+/*
+ * 列表页，图片尺寸超过多大会折叠
+ */
 define('IMAGE_MAX_HEIGHT_FOLDING', 700);
+
+/*
+ * 图片尺寸添加水印阀值
+ */
 define('IMAGE_WATER_URL_SIZE', 200);
 define('IMAGE_WATER_SITENAME_SIZE', 350);
+
+/*
+ * 内容列表页，图片最大尺寸
+ */
+define('POST_LIST_IMAGE_MAX_WIDTH', 600);
 
 define('GENDER_UNKOWN', 0);
 define('GENDER_FEMALE', 1);

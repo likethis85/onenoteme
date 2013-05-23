@@ -22,7 +22,7 @@
             <?php if ($model->channel_id == CHANNEL_FUNNY && $model->getOriginalPic()): // 趣图?>
             <div class="post-image">
                 <div class="thumbbox">
-                    <?php if ($model->getImageIsLong(150)):?>
+                    <?php if ($model->getImageIsLong(POST_LIST_IMAGE_MAX_WIDTH)):?>
                     <a href="<?php echo $model->getMiddlePic();?>" class="size-switcher" target="_blank" data-bmiddle-url="<?php echo $model->getMiddlePic();?>">
                         <?php echo CHtml::image($model->getFixThumb(), $model->title, array('class'=>'thumb', 'title'=>'点击析大图'));?>
                         <img class="bmiddle hide" alt="<?php echo $model->title;?>" title="点击查看缩略图" />
@@ -33,14 +33,14 @@
                         <?php echo $model->getMiddleImage();?>
                     </a>
                     <?php endif;?>
-                    <?php if ($model->getImageIsLong(150)):?>
+                    <?php if ($model->getImageIsLong(POST_LIST_IMAGE_MAX_WIDTH)):?>
                     <div class="thumb-pall"></div>
                     <?php endif;?>
                 </div>
-                <?php if ($model->getImageIsLong(150)):?>
+                <?php if ($model->getImageIsLong(POST_LIST_IMAGE_MAX_WIDTH)):?>
                 <div class="thumbnail-more">
                     <div class="lines">
-                        <?php for ($i=0; $i<$model->getLineCount(150); $i++):?>
+                        <?php for ($i=0; $i<$model->getLineCount(POST_LIST_IMAGE_MAX_WIDTH); $i++):?>
                         <div class="line3"></div>
                         <?php endfor;?>
                         <div class="sjx"></div>

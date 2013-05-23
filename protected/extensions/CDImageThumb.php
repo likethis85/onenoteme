@@ -33,19 +33,24 @@ class CDImageThumb
         $width = (int)$width;
         if ($this->_width > 0 && $this->_height > 0 && $width > 0) {
             if ($width > $this->_width)
-                $height = $this->_height * $width / $this->_width;
-            else
                 $height = $this->_height;
+            else
+                $height = $this->_height * $width / $this->_width;
         }
-        
+//         var_dump($height);exit;
         return (int)$height;
     }
     
     public function widthByHeight($height)
     {
         $width = 0;
-        if ($this->_width > 0 && $this->_height > 0)
-            $width = $this->_width * $height / $this->_height;
+        $height = (int)$height;
+        if ($this->_width > 0 && $this->_height > 0 && $height > 0) {
+            if ($height > $this->_height)
+                $width = $this->_width;
+            else
+                $width = $this->_width * $height / $this->_height;
+        }
         
         return (int)$width;
     }
