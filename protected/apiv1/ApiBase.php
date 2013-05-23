@@ -56,13 +56,14 @@ class ApiBase
     {
         $params = (array)$params;
         
+        $data = array();
         $params[] = 'debug';
         foreach ($params as $key) {
             if (array_key_exists($key, $this->_params))
                 $data[$key] = $this->_params[$key];
         }
 
-        return (array)$data;
+        return $data;
     }
     
     protected function requireLogin()

@@ -7,11 +7,17 @@
  */
 class ApiBase
 {
+    protected $_apiparams;
     protected $_params;
     
     public function __construct($params)
     {
-        unset($params['method'], $params['sig'], $params['apikey'], $params['format']);
+        $this->_apiparams['method'] = $params['method'];
+        $this->_apiparams['sig'] = $params['sig'];
+        $this->_apiparams['apikey'] = $params['apikey'];
+        $this->_apiparams['format'] = $params['format'];
+        
+        unset($params['format'], $params['sig'], $params['apikey'], $params['format']);
         $this->_params = $params;
         $this->init();
     }
@@ -37,7 +43,7 @@ class ApiBase
         $methods = array_map('strtoupper', $methods);
         if (!isset($_SERVER['REQUEST_METHOD']) || !in_array($_SERVER['REQUEST_METHOD'], $methods, true)) {
             $methodString = join('|', $methods);
-            throw new ApiException("此方法必须使用{$methodString}请求", ApiError::HTTP_METHOD_ERROR);
+            throw new CDApiException(ApiError::HTTP_METHOD_ERROR, "此方法必须使用{$methodString}请求");
         }
     }
     
@@ -46,9 +52,9 @@ class ApiBase
         $params = (array)$params;
         
         $allParams = array_keys($this->_params);
-        $diff = join('|', array_diff($params, $allParams));
+        $diff = join(',', array_diff($params, $allParams));
         if ($diff) {
-            throw new ApiException("请求参数不完整，缺少参数：{$diff}", ApiError::PARAM_NOT_COMPLETE);
+            throw new CDApiException(ApiError::PARAM_NOT_COMPLETE, "缺少参数：{$diff}");
         }
     }
     
@@ -68,7 +74,19 @@ class ApiBase
     protected function requireLogin()
     {
     	if (!isset($this->_params['token']) || empty($this->_params['token']))
-    		throw new ApiException('此api需要用户登录', ApiError::USER_TOKEN_ERROR);
+    		throw new CDApiException(ApiError::USER_TOKEN_ERROR, 'user token 无效');
+    }
+
+    protected static function joinModelErrors(CActiveRecord $model)
+    {
+        foreach ($model->getErrors() as $column => $errors) {
+            $errors = array_filter($errors);
+            $content .= "$column: " . join(';', $errors);
+        }
+        
+        return $content;
     }
 }
-?>
+
+
+

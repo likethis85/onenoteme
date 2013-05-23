@@ -41,10 +41,8 @@ class ApiBase
         }
     }
     
-    protected function requiredParams($params)
+    protected function requiredParams(array $params)
     {
-        $params = (array)$params;
-        
         $allParams = array_keys($this->_params);
         $diff = join('|', array_diff($params, $allParams));
         if ($diff) {
@@ -52,10 +50,8 @@ class ApiBase
         }
     }
     
-    protected function filterParams($params = array())
+    protected function filterParams(array $params = array())
     {
-        $params = (array)$params;
-        
         $params[] = 'debug';
         foreach ($params as $key) {
             if (array_key_exists($key, $this->_params))

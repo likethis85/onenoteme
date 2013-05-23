@@ -1,77 +1,64 @@
 <?php
 class Api_Device extends ApiBase
 {
-    public function token()
+    public function create()
     {
-        self::requirePost();
-        $this->requiredParams(array('device_token'));
-        $params = $this->filterParams(array('device_token'));
+        $this->requirePost();
+        $this->requiredParams(array('device_udid', 'device_model', 'sys_name', 'sys_version', 'app_version'));
+        $params = $this->filterParams(array('device_udid', 'device_model', 'sys_name', 'sys_version', 'app_version', 'device_name', 'language', 'country'));
         
-        $token = IOSDevice::convertToken($params['device_token']);
-    
-        if (empty($token))
-            $data = array('errno'=>-1);
+        $udid = $params['device_udid'];
+        $device = MobileDevice::model()->findByAttributes(array('udid'=>$udid));
+        if ($device === null) {
+            $device = new MobileDevice();
+            $device->udid = $udid;
+            $device->model = $params['device_model'];
+            $device->sys_name = $params['sys_name'];
+            $device->language = $params['language'];
+            $device->country = $params['country'];
+            $device->sys_version = $params['sys_version'];
+            $device->app_version = $params['app_version'];
+            $device->name = $params['device_name'];
+            $attributes = null;
+        }
         else {
-            $model = IOSDevice::model()->findByAttributes(array('device_token'=>$token));
-            if ($model === null) {
-                $model = new IOSDevice();
-                $model->device_token = $token;
-                $model->udid = '';
-                $model->last_time = $_SERVER['REQUEST_TIME'];
-                $result = (int)!$model->save();
-            }
-            else
-                $result = 2;
-    
-            $data = array('errno'=>$result);
+            $device->last_time = time();
+            $device->connect_count += 1;
+            $attributes = array('last_time', 'connect_count', 'sys_version', 'app_version', 'device_name');
         }
         
-        return $data;
+        
+        
+        
+        if ($device->save(true, $attributes)) {
+            $this->saveDeviceConnectHistory($device);
+            return $device->attributes;
+        }
+        else {
+            $errors = self::joinModelErrors($device);
+            
+            throw new CDApiException(ApiError::DEVICE_SAVE_ERROR, $errors);
+        }
     }
     
-    public function pushstate(/*$device_token, $state*/)
+    private function saveDeviceConnectHistory(MobileDevice $device)
     {
-        self::requirePost();
-        $this->requiredParams(array('device_token', 'state'));
-        $params = $this->filterParams(array('device_token', 'state'));
+        $history = new DeviceConnectHistory();
+        $history->device_id = $device->id;
+        $history->sys_version = $device->sys_version;
+        $history->app_version = $device->app_version;
+        $history->apikey = $this->_apiparams['apikey'];
+        $history->method = $this->_apiparams['method'];
+        $history->format = $this->_apiparams['format'];
         
-        $token = IOSDevice::convertToken($params['device_token']);
-        $state = (int)$params['state'];
-        
-        if (empty($token))
-            $result = -1;
-        else {
-            $model = IOSDevice::model()->findByAttributes(array('device_token'=>$token));
-            if ($model === null) {
-                $result = -2;
-            }
-            else {
-                $model->close_push = $state ? CD_YES : CD_NO;
-                $result = (int)!$model->save(true, array('close_push'));
-            }
-        }
-        
-        $data = array('errno'=>$result);
-        return $data;
-    }
-    
-    public function getpushstate(/*$device_token*/)
-    {
-        $this->requiredParams(array('device_token'));
-        $params = $this->filterParams(array('device_token'));
-        
-        $token = IOSDevice::convertToken($params['device_token']);
-        
-        if (empty($token))
-            $result = 0;
-        else {
-            $cmd = app()->getDb()->createCommand()
-                ->select('close_push')
-                ->from(TABLE_DEVICE)
-                ->where('device_token = :token', array(':token'=>$token));
-            $result = (int)$cmd->queryScalar();
-        }
-        
-        return $result;
+        return $history->save() ? $history : false;
     }
 }
+
+/*
+
+&device_udid=testudid2&device_model=iPhone&sys_name=iPhone OS&sys_version=6.1.2&app_version=2.2.2&device_name&language=zh-Hans&country=zh
+
+
+
+ */

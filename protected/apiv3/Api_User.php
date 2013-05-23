@@ -22,8 +22,8 @@ class Api_User extends ApiBase
 	        $criteria->addCondition('state = ' . User::STATE_ENABLED);
 	        $user = User::model()->find($criteria);
         }
-        catch (ApiException $e) {
-        	throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
+        catch (CDApiException $e) {
+        	throw new CDApiException('系统错误', ApiError::SYSTEM_ERROR);
         }
         
 	    if (null !== $user) {
@@ -37,7 +37,7 @@ class Api_User extends ApiBase
         }
         else {
         	// @todo 此处处理错误
-        	throw new ApiException('user or password is error');
+        	throw new CDApiException('user or password is error');
         }
     }
     
@@ -48,8 +48,8 @@ class Api_User extends ApiBase
     	    $key = 'app_user_info_' . $user->id;
     		app()->cache->set($key, $data, 3600*24*30);
     	}
-    	catch (ApiException $e) {
-    		throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
+    	catch (CDApiException $e) {
+    		throw new CDApiException('系统错误', ApiError::SYSTEM_ERROR);
     	}
     }
     
@@ -68,7 +68,7 @@ class Api_User extends ApiBase
         	return (int)$result;
         }
         else
-        	throw new ApiException('$token 验证失败', ApiError::USER_TOKEN_ERROR);
+        	throw new CDApiException('$token 验证失败', ApiError::USER_TOKEN_ERROR);
     }
     
     public function create()
@@ -94,11 +94,11 @@ class Api_User extends ApiBase
         	else {
         	    $messages = $user->getErrors();
         	    $message = current($messages);
-        	    throw new ApiException($message);
+        	    throw new CDApiException($message);
         	}
         }
-        catch (ApiException $e) {
-        	throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
+        catch (CDApiException $e) {
+        	throw new CDApiException('系统错误', ApiError::SYSTEM_ERROR);
         }
     }
     

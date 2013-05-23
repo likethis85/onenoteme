@@ -1,4 +1,9 @@
 <?php
+
+defined('DS') || define('DS', DIRECTORY_SEPARATOR);
+
+require dirname(__FILE__) . DS . 'define.php';
+
 class AppApi
 {
     const FORMAT_XML = 'xml';
@@ -21,6 +26,9 @@ class AppApi
     
     private $_class;
     private $_function;
+    
+    private $_debug = false;
+    
     
     /**
      * 构造函数
@@ -49,7 +57,7 @@ class AppApi
     /**
      * 设置api类所在的路径
      * @param string $path
-     * @throws ApiException
+     * @throws CDApiException
      * @return AppApi
      */
     public function setApiPath($path)
@@ -60,7 +68,7 @@ class AppApi
             set_include_path(get_include_path() . PATH_SEPARATOR . self::$_apiPath);
         }
         else
-            throw new ApiException("{$path}目录不存在", ApiError::API_PATH_NO_EXIST);
+            throw new CDApiException(ApiError::API_PATH_NO_EXIST, "{$path}目录不存在");
             
         return $this;
     }
@@ -93,13 +101,13 @@ class AppApi
     
     /**
      * 执行method对应的命令
-     * @throws ApiException
+     * @throws CDApiException
      */
     private function execute()
     {
         $result = call_user_func($this->parsekMethods());
         if (false === $result)
-            throw new ApiException('$class->$method 执行错误', ApiError::CLASS_METHOD_EXECUTE_ERROR);
+            throw new CDApiException(ApiError::CLASS_METHOD_EXECUTE_ERROR, '$class->$method 执行错误');
         else {
             $data = array('error'=>0, 'data'=>$result);
             self::output($data, self::$_format);
@@ -125,7 +133,7 @@ class AppApi
     
     /**
      * 检查必需的参数
-     * @throws ApiException
+     * @throws CDApiException
      * @return AppApi
      */
     private function checkRequiredParams()
@@ -133,14 +141,14 @@ class AppApi
         $params = array('apikey', 'sig', 'method', 'timestamp');
         $keys = array_keys($this->_params);
         if (array_diff($params, $keys)) {
-            throw new ApiException('缺少必须的参数', ApiError::PARAM_NOT_COMPLETE);
+            throw new CDApiException(ApiError::PARAM_NOT_COMPLETE);
         }
         return $this;
     }
 
     /**
      * 检查apikey
-     * @throws ApiException
+     * @throws CDApiException
      * @return AppApi
      */
     private function checkApiKey()
@@ -150,34 +158,37 @@ class AppApi
             $this->_secretKey = $keys[$this->_apikey];
         }
         else
-            throw new ApiException('apikey不存在', ApiError::APIKEY_INVALID);
+            throw new CDApiException(ApiError::APIKEY_INVALID, "apikey: {$this->_apikey}无效");
         return $this;
     }
     
     /**
      * 检查format参数
-     * @throws ApiException
+     * @throws CDApiException
      * @return AppApi
      */
     private function checkFormat()
     {
         $format = strtolower(trim(self::$_format));
         if (!in_array($format, self::$_formats)) {
-            throw new ApiException('format 参数错误', ApiError::FORMAT_INVALID);
+            throw new CDApiException(ApiError::FORMAT_INVALID, '无效的数据输出格式: ' . $format);
         }
+        else
+            $this->_params['format'] = $format;
+        
         return $this;
     }
     
     /**
      * 解析method参数
-     * @throws ApiException
+     * @throws CDApiException
      * @return array 0=>object, 1=>method
      */
     private function parsekMethods()
     {
         list($class, $method) = explode('.', $this->_method);
         if (empty($class) || empty($method)) {
-            throw new ApiException('method参数格式不正确', ApiError::METHOD_FORMAT_ERROR);
+            throw new CDApiException(ApiError::METHOD_FORMAT_ERROR);
         }
         
         $class = 'Api_' . ucfirst($class);
@@ -185,11 +196,11 @@ class AppApi
             self::importClass($class);
 
         if (!class_exists($class, false))
-            throw new ApiException('$class 类定义不存在', ApiError::CLASS_FILE_NOT_EXIST);
+            throw new CDApiException(ApiError::CLASS_FILE_NOT_EXIST, "$class 类定义不存在");
             
         $object = new $class($this->_params);
         if (!method_exists($object, $method))
-            throw new ApiException('$method 方法不存在', ApiError::CLASS_METHOD_NOT_EXIST);
+            throw new CDApiException(ApiError::CLASS_METHOD_NOT_EXIST, "{$class}->{$method}方法不存在");
         
         return array($object, $method);
     }
@@ -197,7 +208,7 @@ class AppApi
     /**
      * 导入api类
      * @param string $class
-     * @throws ApiException
+     * @throws CDApiException
      */
     private static function importClass($class)
     {
@@ -205,12 +216,12 @@ class AppApi
         if (file_exists($filename))
             require($filename);
         else
-            throw new ApiException('$class 文件导入错误', ApiError::CLASS_FILE_NOT_EXIST);
+            throw new CDApiException(ApiError::CLASS_FILE_NOT_EXIST, "{$class} 类定义文件 $filename 不存在");
     }
     
     /**
      * 验证用户提交签名是否正确
-     * @throws ApiException
+     * @throws CDApiException
      * @return AppApi
      */
     private function checkSignature()
@@ -218,7 +229,7 @@ class AppApi
         $sig1 = $this->_sig;
         $sig2 = $this->makeSignature();
         if ($sig1 != $sig2) {
-            throw new ApiException('$sig 签名不正确', ApiError::SIGNATURE_ERROR);
+            throw new CDApiException(ApiError::SIGNATURE_ERROR, "签名: {$sig1}");
         }
         return $this;
     }
@@ -272,7 +283,13 @@ class AppApi
             return true;
         }
         else
-            throw new ApiException('format 参数错误', ApiError::FORMAT_INVALID);
+            throw new CDApiException(ApiError::FORMAT_INVALID, '无效的数据输出格式: ' . $format);
+    }
+    
+    public function debug($debug = true)
+    {
+        $this->_debug = (bool)$debug;
+        return $this;
     }
     
     public function errorHandler($errno, $message, $file, $line)
@@ -280,7 +297,7 @@ class AppApi
         $data = array(
             'error' => 1,
             'errno'=>$errno,
-            'message'=>$error,
+            'message'=>$message,
             'line'=>$line,
             'file'=>$file,
         );
@@ -288,13 +305,18 @@ class AppApi
     	exit(0);
     }
     
-    public function exceptionHandler($e)
+    public function exceptionHandler(Exception $e)
     {
         $data = array(
             'error' => 1,
             'errno'=>$e->getCode(),
             'message'=>$e->getMessage(),
         );
+        if ($this->_debug) {
+            $data['file'] = $e->getFile();
+            $data['line'] = $e->getLine();
+        }
+        
         echo self::outputJson($data);
     	exit(0);
     }
