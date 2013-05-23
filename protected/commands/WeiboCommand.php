@@ -345,11 +345,9 @@ class WeiboCommand extends CConsoleCommand
     
         $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
-        $tail = '...' . $sinatShortUrl . ' @挖段子网';
-        if ($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_LENGTU)
+        $tail = '...' . $sinatShortUrl;
+        if ($model->channel_id == CHANNEL_FUNNY)
             $tail = '#搞笑#' . $tail;
-        elseif ($model->channel_id == CHANNEL_GIRL)
-            $tail = '#美女#' . $tail;
         $accounts = self::fetchSinatRelativeAccounts(2);
         $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
@@ -384,12 +382,10 @@ class WeiboCommand extends CConsoleCommand
     
         $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
-        $tail = '...' . $sinatShortUrl . ' @挖段子网';
-        if ($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_LENGTU)
+        $tail = '...' . $sinatShortUrl;
+        if ($model->channel_id == CHANNEL_FUNNY)
             $tail = '#搞笑#' . $tail;
-        elseif ($model->channel_id == CHANNEL_GIRL)
-            $tail = '#美女#' . $tail;
-        $accounts = self::fetchSinatRelativeAccounts(3);
+        $accounts = self::fetchSinatRelativeAccounts2);
         $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
         $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags. $accounts;
@@ -436,11 +432,9 @@ class WeiboCommand extends CConsoleCommand
     
         $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
-        $tail = '...' . $sinatShortUrl . ' @挖段子网';
-        if ($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_LENGTU)
+        $tail = '...' . $sinatShortUrl;
+        if ($model->channel_id == CHANNEL_FUNNY)
             $tail = '#搞笑#' . $tail;
-        elseif ($model->channel_id == CHANNEL_GIRL)
-            $tail = '#美女#' . $tail;
         $accounts = self::fetchSinatRelativeAccounts(2);
         $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
@@ -472,11 +466,9 @@ class WeiboCommand extends CConsoleCommand
     
         $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
-        $tail = '...' . $sinatShortUrl . ' @waduanzi';
-        if ($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_LENGTU)
+        $tail = '...' . $sinatShortUrl;
+        if ($model->channel_id == CHANNEL_FUNNY)
             $tail = '#搞笑#' . $tail;
-        elseif ($model->channel_id == CHANNEL_GIRL)
-            $tail = '#美女#' . $tail;
         $accounts = self::fetchQQtRelativeAccounts(2);
         $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
@@ -516,11 +508,9 @@ class WeiboCommand extends CConsoleCommand
     
         $postUrl = 'http://www.waduanzi.com/archives/' . $model->id;
         $sinatShortUrl = self::sinatShortUrl($postUrl);
-        $tail = '...' . $sinatShortUrl . ' @waduanzi';
-        if ($model->channel_id == CHANNEL_DUANZI || $model->channel_id == CHANNEL_LENGTU)
+        $tail = '...' . $sinatShortUrl;
+        if ($model->channel_id == CHANNEL_FUNNY)
             $tail = '#搞笑#' . $tail;
-        elseif ($model->channel_id == CHANNEL_GIRL)
-            $tail = '#美女#' . $tail;
         $accounts = self::fetchQQtRelativeAccounts(2);
         $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);

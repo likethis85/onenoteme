@@ -37,6 +37,7 @@ define('TABLE_LINK', '{{link}}');
 define('TABLE_ADVERT', '{{advert}}');
 define('TABLE_ADCODE', '{{adcode}}');
 define('TABLE_UPLOAD', '{{upload}}');
+define('TABLE_MOBILE_DEVICE', '{{mobile_device}}');
 define('TABLE_IOS_DEVICE', '{{ios_device}}');
 define('TABLE_POST_TEMP', '{{post_temp}}');
 define('TABLE_WEIBO_ACCOUNT', '{{weibo_account}}');
