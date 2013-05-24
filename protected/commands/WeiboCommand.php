@@ -351,7 +351,7 @@ class WeiboCommand extends CConsoleCommand
         $accounts = self::fetchSinatRelativeAccounts(2);
         $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
-        $content = mb_substr(strip_tags($model->content), 0, $subLen, app()->charset) . $tail . $tags . $accounts;
+        $content = mb_substr(strip_tags($model->content), 0, $subLen, app()->charset) . $accounts . $tail . $tags;
         
         $data = array(
             'source' => WEIBO_APP_KEY,
@@ -438,7 +438,7 @@ class WeiboCommand extends CConsoleCommand
         $accounts = self::fetchSinatRelativeAccounts(2);
         $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
-        $content = mb_substr(strip_tags($model->content), 0, $subLen, app()->charset) . $tail . $tags. $accounts;
+        $content = mb_substr(strip_tags($model->content), 0, $subLen, app()->charset) . $tags. $accounts . $tail;
         $data = array(
             'source' => WEIBO_APP_KEY,
             'access_token' => app()->cache->get('sina_weibo_access_token'),
@@ -472,7 +472,7 @@ class WeiboCommand extends CConsoleCommand
         $accounts = self::fetchQQtRelativeAccounts(2);
         $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
-        $content = mb_substr(strip_tags($model->content), 0, $subLen, app()->charset) . $tail . $tags . $accounts;
+        $content = mb_substr(strip_tags($model->content), 0, $subLen, app()->charset) . $tags . $accounts . $tail;
         $data = array(
             'oauth_consumer_key' => QQT_APP_KEY,
             'access_token' => app()->cache->get('qq_weibo_access_token'),
@@ -514,7 +514,7 @@ class WeiboCommand extends CConsoleCommand
         $accounts = self::fetchQQtRelativeAccounts(2);
         $tags = self::fetchPostTags($model, 2);
         $subLen = 140 - mb_strlen($tags, app()->charset) - mb_strlen($tail, app()->charset) - mb_strlen($accounts, app()->charset);
-        $content = mb_substr(strip_tags($model->content), 0, $subLen, app()->charset) . $tail . $tags . $accounts;
+        $content = mb_substr(strip_tags($model->content), 0, $subLen, app()->charset) . $tags . $accounts . $tail;
         $data = array(
             'oauth_consumer_key' => QQT_APP_KEY,
             'access_token' => app()->cache->get('qq_weibo_access_token'),

@@ -6,7 +6,7 @@
  * @package api
  */
 
-class Api_User extends ApiBase
+class CDApi_User extends ApiBase
 {
     public function login()
     {

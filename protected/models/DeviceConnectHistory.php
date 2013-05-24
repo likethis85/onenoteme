@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table '{{device_connect_history}}':
  * @property integer $id
- * @property integer $device_id
+ * @property integer $device_udid
  * @property string $sys_version
  * @property string $app_version
  * @property string $apikey
@@ -38,11 +38,9 @@ class DeviceConnectHistory extends CActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
-	        array('device_id, sys_version, app_version, apikey, method', 'required'),
-			array('method', 'length', 'max'=>100),
+	        array('sys_version, app_version, apikey, method', 'required'),
+			array('device_udid, method', 'length', 'max'=>100),
 			array('sys_version, app_version, format', 'length', 'max'=>20),
 			array('apikey', 'length', 'max'=>64),
 			array('create_ip', 'length', 'max'=>15),
@@ -56,7 +54,7 @@ class DeviceConnectHistory extends CActiveRecord
 	public function relations()
 	{
 		return array(
-	        'device' => array(self::BELONGS_TO, 'MobileDevice', 'device_id'),
+	        'device' => array(self::BELONGS_TO, 'MobileDevice', 'device_udid'),
 		);
 	}
 
@@ -67,7 +65,7 @@ class DeviceConnectHistory extends CActiveRecord
 	{
 		return array(
 			'id' => 'Id',
-			'device_id' => '设备ID',
+			'device_udid' => '设备UDID',
 			'sys_version' => '系统版本',
 			'app_version' => '应用版本',
 			'apikey' => 'ApiKey',

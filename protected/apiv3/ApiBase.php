@@ -1,11 +1,21 @@
 <?php
+
+defined('DS') || define('DS', DIRECTORY_SEPARATOR);
+
+interface ICDApiBase
+{
+    public function fieldAttributeMap();
+    public function fieldColumnMap();
+}
+
 /**
  * Api 基础类
  * @author Chris
  * @copyright cdcchen@gmail.com
  * @package api
  */
-class ApiBase
+
+class ApiBase implements ICDApiBase
 {
     protected $_apiparams;
     protected $_params;
@@ -17,8 +27,11 @@ class ApiBase
         $this->_apiparams['apikey'] = $params['apikey'];
         $this->_apiparams['format'] = $params['format'];
         
-        unset($params['format'], $params['sig'], $params['apikey'], $params['format']);
+        unset($params['method'], $params['sig'], $params['apikey'], $params['format']);
         $this->_params = $params;
+        
+        $this->requiredParams(self::defaultRequiredAppParams());
+        
         $this->init();
     }
     
@@ -58,9 +71,10 @@ class ApiBase
         }
     }
     
-    protected function filterParams($params = array())
+    protected function filterParams(array $params = array())
     {
-        $params = (array)$params;
+        $params = array_merge($params, self::defaultRequiredAppParams());
+        $params = array_unique($params);
         
         $params[] = 'debug';
         foreach ($params as $key) {
@@ -85,6 +99,50 @@ class ApiBase
         }
         
         return $content;
+    }
+
+    protected function saveDeviceConnectHistory()
+    {
+        $history = new DeviceConnectHistory();
+        $history->device_udid = $this->_params['device_udid'];
+        $history->sys_version = $this->_params['sys_version'];
+        $history->app_version = $this->_params['app_version'];
+        $history->apikey = $this->_apiparams['apikey'];
+        $history->method = $this->_apiparams['method'];
+        $history->format = $this->_apiparams['format'];
+        
+        return $history->save() ? $history : false;
+    }
+    
+    protected static function defaultRequiredAppParams()
+    {
+        return array('device_udid', 'sys_version', 'app_version');
+    }
+
+    protected static function dump($var, $exit = false)
+    {
+        var_dump($var);
+        $exit && exit();
+    }
+    
+    public function fieldAttributeMap()
+    {
+        throw new CDException('fieldAttributeMap method is required override.');
+    }
+    
+    public function fieldColumnMap()
+    {
+        throw new CDException('fieldColumnMap method is required override.');
+    }
+
+    public function fields()
+    {
+        return array_keys($this->fieldColumnMap());
+    }
+    
+    public function selectColumns()
+    {
+        return array_unique(array_values($this->fieldColumnMap()));
     }
 }
 

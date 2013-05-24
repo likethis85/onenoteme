@@ -1,4 +1,4 @@
 <?php
-class Api_Comment extends ApiBase
+class CDApi_Comment extends ApiBase
 {
 }

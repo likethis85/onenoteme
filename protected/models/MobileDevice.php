@@ -4,7 +4,6 @@
  * This is the model class for table "{{mobile_device}}".
  *
  * The followings are the available columns in table '{{mobile_device}}':
- * @property integer $id
  * @property string $udid
  * @property string $model
  * @property string $sys_name
@@ -68,7 +67,6 @@ class MobileDevice extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
 			'udid' => 'UDID',
 			'model' => '设备型号',
 			'sys_name' => '系统名称',

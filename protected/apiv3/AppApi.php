@@ -191,7 +191,7 @@ class AppApi
             throw new CDApiException(ApiError::METHOD_FORMAT_ERROR);
         }
         
-        $class = 'Api_' . ucfirst($class);
+        $class = 'CDApi_' . ucfirst($class);
         if (!class_exists($class, false))
             self::importClass($class);
 
@@ -307,18 +307,28 @@ class AppApi
     
     public function exceptionHandler(Exception $e)
     {
-        $data = array(
-            'error' => 1,
-            'errno'=>$e->getCode(),
-            'message'=>$e->getMessage(),
-        );
-        if ($this->_debug) {
-            $data['file'] = $e->getFile();
-            $data['line'] = $e->getLine();
+        if ($e instanceof CDApiException) {
+            $data = array(
+                'error' => 1,
+                'errno'=>$e->getCode(),
+                'message'=>$e->getMessage(),
+            );
+            if ($this->_debug) {
+                $data['file'] = $e->getFile();
+                $data['line'] = $e->getLine();
+            }
+            
+            echo self::outputJson($data);
+        	exit(0);
         }
-        
-        echo self::outputJson($data);
-    	exit(0);
+        else {
+            $text[] = 'Message: ' . $e->getMessage();
+            $text[] = 'Code: ' . $e->getCode();
+            $text[] = 'Line: ' . $e->getLine();
+            $text[] = 'File: ' . $e->getFile();
+            echo join("\n", $text);
+        }
     }
-    
 }
+
+
