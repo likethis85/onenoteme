@@ -98,8 +98,27 @@ class CDApi_Post extends ApiBase
      */
     public function create()
     {
-        
+        // @todo 上传图片功能未确定，稍候开发
     }
+    
+    public function user_timeline()
+    {
+        // @todo 二期，获取某一个用户发布的内容
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     /**
      * 获取当前段子的最早发布时间和最晚发布时间
