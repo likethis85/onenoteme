@@ -72,6 +72,10 @@ return array(
 		    'charset' => 'utf8',
 		    'persistent' => true,
 		    'tablePrefix' => 'cd_',
+            'attributes' => array(
+                PDO::ATTR_ORACLE_NULLS => PDO::NULL_TO_STRING,
+                PDO::ATTR_EMULATE_PREPARES => true,
+            ),
             'enableParamLogging' => true,
             'enableProfiling' => true,
 //		    'schemaCacheID' => 'cache',

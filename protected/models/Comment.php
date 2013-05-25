@@ -77,7 +77,8 @@ class Comment extends CActiveRecord
 	{
 		return array(
 	        'post' => array(self::BELONGS_TO, 'Post', 'post_id'),
-	        'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+	        'user' => array(self::BELONGS_TO, 'User', 'user_id',
+	            'select' => array('id', 'username', 'screen_name', 'create_time', 'create_ip', 'state', 'token', 'token_time', 'source')),
 		);
 	}
 

@@ -144,6 +144,17 @@ class ApiBase implements ICDApiBase
     {
         return array_unique(array_values($this->fieldColumnMap()));
     }
+
+    protected static function execRelation($model, $attribute)
+    {
+        if (is_array($attribute)) {
+            return $attribute[2]
+            ? $model->$attribute[0]->$attribute[1]()
+            : self::execRelation($model->$attribute[0], $attribute[1]);
+        }
+        else
+            return $model->$attribute;
+    }
 }
 
 

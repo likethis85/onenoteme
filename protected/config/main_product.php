@@ -55,8 +55,12 @@ return array(
 			'username' => 'root',
 		    'password' => 'cdc_790406',
 		    'charset' => 'utf8',
-		    'persistent' => true,
+		    'persistent' => false,
 		    'tablePrefix' => 'cd_',
+            'attributes' => array(
+                PDO::ATTR_ORACLE_NULLS => PDO::NULL_TO_STRING,
+                PDO::ATTR_EMULATE_PREPARES => true,
+            ),
 //             'enableParamLogging' => true,
 //             'enableProfiling' => true,
 		    'schemaCacheID' => 'cache',

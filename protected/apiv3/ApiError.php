@@ -83,6 +83,7 @@ class ApiError
     // 以下为段子相关错误代码，以21开头
     
     // 以下为评论相关错误代码，以22开头
+    const COMMENT_SAVE_ERROR = 22000;
     
     // 以下为设备相关蓑代码，以23开头
     
@@ -115,6 +116,9 @@ class ApiError
                 
             // user
             self::USER_TOKEN_ERROR => '用户验证出错',
+                
+            // comment
+            self::COMMENT_SAVE_ERROR => '评论保存出错',
         );
     }
     

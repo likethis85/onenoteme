@@ -180,7 +180,8 @@ class Post extends CActiveRecord
 	{
 		return array(
 		    'category' => array(self::BELONGS_TO, 'Category', 'category_id'),
-		    'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+		    'user' => array(self::BELONGS_TO, 'User', 'user_id',
+		        'select' => array('id', 'username', 'screen_name', 'create_time', 'create_ip', 'state', 'token', 'token_time', 'source')),
 		    'profile' => array(self::BELONGS_TO, 'UserProfile', 'user_id'),
 		    'comments' => array(self::HAS_MANY, 'Comment', 'post_id'),
 		    'uploadImages' => array(self::HAS_MANY, 'Upload', 'post_id',

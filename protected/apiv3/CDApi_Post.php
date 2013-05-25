@@ -34,6 +34,7 @@ class CDApi_Post extends ApiBase
         $criteria->select = $this->selectColumns();
         $criteria->limit = $this->timelineRowCount();
         $criteria->order = 't.create_time desc';
+        $criteria->with = array('user.profile');
         
         $columns = array('channel_id' => (int)$params['channel_id']);
         if ($params['media_type'])
@@ -155,8 +156,9 @@ class CDApi_Post extends ApiBase
     {
         $data = array();
         $fieldMap = $this->fieldAttributeMap();
-        foreach ($fieldMap as $key => $field)
-            $data[$key] = $model->$field;
+        foreach ($fieldMap as $key => $field) {
+            $data[$key] = self::execRelation($model, $field);
+        }
         
         return $data;
     }
@@ -182,7 +184,8 @@ class CDApi_Post extends ApiBase
             'tags' => 'tags',
             'small_pic' => 'fixThumb',
             'middle_pic' => 'middlePic',
-            'largePic' => 'largePic',
+            'large_pic' => 'largePic',
+            'author' => array('user', 'profile'), // relations
         );
     }
     
@@ -207,7 +210,7 @@ class CDApi_Post extends ApiBase
             'tags' => 'tags',
             'small_pic' => 'original_pic',
             'middle_pic' => 'original_pic',
-            'largePic' => 'original_pic',
+            'large_pic' => 'original_pic',
         );
     }
     
