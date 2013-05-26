@@ -124,14 +124,13 @@ class Channel1Controller extends MobileController
 	    $limit = (int)p('mobile_post_list_page_count');
 	    $criteria->limit = $limit;
 	
-	    $data = self::fetchPosts($criteria, $hours);
+	    $data = self::fetchPosts($criteria);
 	    $this->render('posts', $data);
 	}
 	
 	
 	private function fetchFunnyMediaPosts($typeid, $limit, $with = null)
 	{
-	    var_dump($limit);
 	    $this->channel = CHANNEL_FUNNY . $typeid;
 	
 	    $criteria = new CDbCriteria();
@@ -149,6 +148,7 @@ class Channel1Controller extends MobileController
 	{
 	    $duration = 60*60*24;
 	    $count = MobilePost::model()->cache($duration)->count($criteria);
+	    echo '<hr />';var_dump($count);echo '<hr />';
 	    $pages = new CPagination($count);
 	    $pages->setPageSize($criteria->limit);
 	    $pages->applyLimit($criteria);
