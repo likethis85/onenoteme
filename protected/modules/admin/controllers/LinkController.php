@@ -79,8 +79,9 @@ class LinkController extends AdminController
 	
 	private static function clearLinksCache()
 	{
-	    if (app()->getCache()) {
-	        $result = app()->getCache()->delete('cache_friend_links');
+	    $redis = cache('redis');
+	    if ($redis) {
+	        $result = $redis->delete('cache_friend_links');
 	        return $result;
 	    }
 	    return true;

@@ -106,12 +106,13 @@ class Link extends CActiveRecord
 
 	public static function fetchLinks(CDbCriteria $criteria = null)
 	{
-	    if (app()->getCache()) {
-	        $models = app()->getCache()->get('cache_friend_links');
+	    $redis = cache('redis');
+	    if ($redis) {
+	        $models = $redis->get('cache_friend_links');
 	        if ($models === false) {
 	            $models = self::fetchModels($criteria);
 	            if (count($models) > 0) {
-	                app()->getCache()->set('cache_friend_links', $models);
+	                $redis->set('cache_friend_links', $models);
 	            }
 	        }
 	    }
@@ -131,6 +132,5 @@ class Link extends CActiveRecord
 	    $models = Link::model()->findAll($criteria);
 	    return $models;
 	}
-	
-	
 }
+
