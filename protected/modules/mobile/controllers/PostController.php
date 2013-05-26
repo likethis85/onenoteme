@@ -72,10 +72,6 @@ class PostController extends MobileController
 
     private static function prevPostUrl(Post $post)
     {
-        static $urls = array();
-        if (array_key_exists($post->id, $urls))
-            return $urls[$post->id];
-        
         $duration = 60*60;
         $createTime = (int)$post->create_time;
         $channelID = (int)$post->channel_id;
@@ -90,20 +86,15 @@ class PostController extends MobileController
             ->limit(1)
             ->queryScalar();
     
-        $urls[$post->id] = ($id > 0) ? aurl('mobile/post/show', array('id' => $id)) : '';
-        return $urls[$post->id];
+        return ($id > 0) ? aurl('mobile/post/show', array('id' => $id)) : '';
     }
     
     private static function nextPostUrl(Post $post)
     {
-        static $urls = array();
-        if (array_key_exists($post->id, $urls))
-            return $urls[$post->id];
-        
         $duration = 60*60;
         $createTime = (int)$post->create_time;
         $channelID = (int)$post->channel_id;
-        $conditions = array('and', 'create_time > :createtime', 'channel_id = :channelid', 'state = :enabled');
+        $conditions = array('and', 'create_time < :createtime', 'channel_id = :channelid', 'state = :enabled');
         $params = array(':createtime' => $createTime, ':enabled' => POST_STATE_ENABLED, ':channelid'=>$channelID);
         $id = app()->getDb()->cache($duration)->createCommand()
             ->select('id')
@@ -114,7 +105,6 @@ class PostController extends MobileController
             ->limit(1)
             ->queryScalar();
     
-        $urls[$post->id] = ($id > 0) ? aurl('mobile/post/show', array('id' => $id)) : '';
-        return $urls[$post->id];
+        return ($id > 0) ? aurl('mobile/post/show', array('id' => $id)) : '';
     }
 }
