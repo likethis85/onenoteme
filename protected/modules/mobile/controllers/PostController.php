@@ -7,7 +7,7 @@ class PostController extends MobileController
             'ajaxOnly + views, score',
             'postOnly + views, score',
             array(
-                'COutputCache + show, detail',
+                'COutputCache + show',
                 'duration' => param('mobile_post_show_cache_expire'),
                 'varyByParam' => array('id', 'source'),
                 'varyByExpression' => array(request(), 'getServerName'),
@@ -71,7 +71,7 @@ class PostController extends MobileController
 
     private static function prevPostUrl(Post $post)
     {
-        $duration = 60*60;
+        $duration = 10;
         $createTime = (int)$post->create_time;
         $channelID = (int)$post->channel_id;
         $conditions = array('and', 'create_time > :createtime', 'channel_id = :channelid', 'state = :enabled');
@@ -107,3 +107,5 @@ class PostController extends MobileController
         return ($id > 0) ? aurl('mobile/post/show', array('id' => $id, 'source'=>'next')) : '';
     }
 }
+
+
