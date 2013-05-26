@@ -162,18 +162,7 @@ class ChannelController extends Controller
     private static function fetchPosts(CDbCriteria $criteria)
     {
         $duration = 60*60*24;
-	    $cacheID = md5(var_export($criteria->toArray(), true));
-	    $redis = cache('redis');
-	    if ($redis) {
-	        $count = $redis->get($cacheID);
-	        if ($count === false) {
-	            $count = MobilePost::model()->count($criteria);
-	            $redis->set($cacheID, $count, $duration);
-	        }
-	    }
-	    else
-	        $count = MobilePost::model()->count($criteria);
-	    
+        $count = Post::model()->cache($duration)->count($criteria);
         $pages = new CPagination($count);
         $pages->setPageSize($criteria->limit);
         $pages->applyLimit($criteria);
