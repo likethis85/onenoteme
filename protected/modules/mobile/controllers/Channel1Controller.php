@@ -135,7 +135,7 @@ class Channel1Controller extends MobileController
 	    $pages = new CPagination($count);
 	    $pages->setPageSize($criteria->limit);
 	    $pages->applyLimit($criteria);
-	    echo $pages->pageCount;exit;
+
 	    $models = MobilePost::model()->findAll($criteria);
 	
 	    echo $pages->pageSize.'<br />';
