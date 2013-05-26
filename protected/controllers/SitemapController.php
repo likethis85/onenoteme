@@ -30,7 +30,7 @@ class SitemapController extends Controller
     
     public function actionTags()
     {
-        $duration = 3600;
+        $duration = 86400;
         $cmd = db()->cache($duration)->createCommand()
             ->from(TABLE_TAG)
             ->where('post_nums > 0')
