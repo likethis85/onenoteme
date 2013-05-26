@@ -42,6 +42,8 @@ class PostController extends MobileController
             'post' => $post,
             'comments' => $comments,
             'comment' => $comment,
+            'prevUrl' => self::prevPostUrl($post),
+            'nextUrl' => self::nextPostUrl($post),
         ));
     }
     
@@ -66,5 +68,53 @@ class PostController extends MobileController
         echo CJSON::encode($data);
         exit(0);
     }
+
+
+    private static function prevPostUrl(Post $post)
+    {
+        static $urls = array();
+        if (array_key_exists($post->id, $urls))
+            return $urls[$post->id];
+        
+        $duration = 60*60;
+        $createTime = (int)$post->create_time;
+        $channelID = (int)$post->channel_id;
+        $conditions = array('and', 'create_time > :createtime', 'channel_id = :channelid', 'state = :enabled');
+        $params = array(':createtime' => $createTime, ':enabled' => POST_STATE_ENABLED, ':channelid'=>$channelID);
+        $id = app()->getDb()->cache($duration)->createCommand()
+            ->select('id')
+            ->from(TABLE_POST)
+            ->where($conditions, $params)
+            ->andWhere(array('in', 'media_type', array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE)))
+            ->order('create_time asc, id asc')
+            ->limit(1)
+            ->queryScalar();
     
+        $urls[$post->id] = ($id > 0) ? aurl('mobile/post/show', array('id' => $id)) : '';
+        return $urls[$post->id];
+    }
+    
+    private static function nextPostUrl(Post $post)
+    {
+        static $urls = array();
+        if (array_key_exists($post->id, $urls))
+            return $urls[$post->id];
+        
+        $duration = 60*60;
+        $createTime = (int)$post->create_time;
+        $channelID = (int)$post->channel_id;
+        $conditions = array('and', 'create_time > :createtime', 'channel_id = :channelid', 'state = :enabled');
+        $params = array(':createtime' => $createTime, ':enabled' => POST_STATE_ENABLED, ':channelid'=>$channelID);
+        $id = app()->getDb()->cache($duration)->createCommand()
+            ->select('id')
+            ->from(TABLE_POST)
+            ->where($conditions, $params)
+            ->andWhere(array('in', 'media_type', array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE)))
+            ->order('create_time desc, id desc')
+            ->limit(1)
+            ->queryScalar();
+    
+        $urls[$post->id] = ($id > 0) ? aurl('mobile/post/show', array('id' => $id)) : '';
+        return $urls[$post->id];
+    }
 }

@@ -26,11 +26,11 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
     <!-- 广告位 结束 -->
     
     <div class="change-post clearfix">
-        <?php if ($post->getPrevChannelPost()):?>
-        <a class="site-bg prev" href="<?php echo $post->getPrevChannelPost()->getUrl();?>"></a>
+        <?php if ($prevUrl):?>
+        <a class="site-bg prev" href="<?php echo $prevUrl;?>"></a>
         <?php endif;?>
-        <?php if ($post->getNextChannelPost()):?>
-        <a class="site-bg next" href="<?php echo $post->getNextChannelPost()->getUrl();?>"></a>
+        <?php if ($nextUrl):?>
+        <a class="site-bg next" href="<?php echo $nextUrl;?>"></a>
         <?php endif;?>
     </div>
     
