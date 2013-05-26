@@ -85,7 +85,7 @@ class PostController extends MobileController
             ->limit(1)
             ->queryScalar();
     
-        return ($id > 0) ? aurl('mobile/post/show', array('id' => $id)) : '';
+        return ($id > 0) ? aurl('mobile/post/show', array('id' => $id, 'source'=>'prev')) : '';
     }
     
     private static function nextPostUrl(Post $post)
@@ -104,6 +104,6 @@ class PostController extends MobileController
             ->limit(1)
             ->queryScalar();
     
-        return ($id > 0) ? aurl('mobile/post/show', array('id' => $id)) : '';
+        return ($id > 0) ? aurl('mobile/post/show', array('id' => $id, 'source'=>'next')) : '';
     }
 }
