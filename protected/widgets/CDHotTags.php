@@ -26,12 +26,10 @@ class CDHotTags extends CWidget
         
         if (!empty($tags)) {
             foreach ($tags as $key => $tag) {
-                if ($key < 3) {
+                if ($key < 3)
                     $tag_level = 'tag-level3';
-                }
-                elseif ($key < 10) {
+                elseif ($key < 10)
                     $tag_level = 'tag-level2';
-                }
                 else
                     $tag_level = 'tag-level1';
                 
@@ -51,7 +49,7 @@ class CDHotTags extends CWidget
         $criteria->select = 'id, name';
         $criteria->limit = $this->tagsNums;
         $criteria->order = 'post_nums desc';
-        $models = Tag::model()->cache(self::CACHE_DURATION)->findAll($criteria);
+        $models = Tag::model()->findAll($criteria);
         return $models;
     }
 }

@@ -58,8 +58,8 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         <div class="content-block cnzz-box">
             <script  type="text/javascript" charset="utf-8"  src="http://tui.cnzz.net/cs.php?id=1000021164"></script>
         </div>
-        <!-- 个性化推荐 start -->
         <a name="comments"></a>
+        <!-- 个性化推荐 start -->
         <div class="comment-list bottom15px">
         <?php $this->renderPartial('/comment/create', array('postid'=>(int)$post->id));?>
         <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'pages'=>$pages));?>
