@@ -137,7 +137,7 @@ class ChannelController extends MobileController
 	        $count = $redis->get($cacheID);
 	        if ($count === false) {
 	            $count = MobilePost::model()->count($criteria);
-	            $redis->set($cacheID, $count);
+	            $redis->set($cacheID, $count, $duration);
 	        }
 	    }
 	    else
