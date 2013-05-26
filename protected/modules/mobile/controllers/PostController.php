@@ -69,7 +69,6 @@ class PostController extends MobileController
         exit(0);
     }
 
-
     private static function prevPostUrl(Post $post)
     {
         $duration = 60*60;

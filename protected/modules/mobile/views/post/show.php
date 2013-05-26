@@ -25,6 +25,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
     <?php $this->widget('CDAdvert', array('solt'=>'mobile_post_content_bottom'));?>
     <!-- 广告位 结束 -->
     
+    <a name="comments"></a>
     <div class="change-post clearfix">
         <?php if ($prevUrl):?>
         <a class="site-bg prev" href="<?php echo $prevUrl;?>"></a>
@@ -34,16 +35,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         <?php endif;?>
     </div>
     
-    <a name="comments"></a>
-    <div class="line1px"></div>
-    <ul class="more-post">
-        <?php //if ($post->getPrevChannelPost()):?>
-        <li><span>&uarr;</span><?php //echo $post->getPrevChannelPost()->titleLink;?></li>
-        <?php //endif;?>
-        <?php //if ($post->getNextChannelPost()):?>
-        <li><span>&darr;</span><?php //echo $post->getNextChannelPost()->titleLink;?></li>
-        <?php //endif;?>
-    </ul>
+    <!-- <ul class="more-post"></ul> 以后用来添加相关笑话 -->
     <div class="line1px"></div>
 
     <div class="beta-create-form"><?php $this->renderPartial('/comment/_create_form', array('comment'=>$comment));?></div>
