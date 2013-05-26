@@ -6,7 +6,7 @@ class ChannelController extends MobileController
     {
         return array(
             array(
-                'COutputCache + joke, lengtu, girl, video, ghost, hot, latest',
+                'COutputCache + joke, lengtu, girl, video, ghost, hot, latest, day, week, month',
                 'duration' => param('mobile_post_list_cache_expire'),
                 'varyByParam' => array('page'),
                 'varyByExpression' => array(request(), 'getServerName'),
@@ -42,21 +42,21 @@ class ChannelController extends MobileController
     
     public function actionDay($page = 1)
     {
-        $this->setSitePageTitle('24小时内人最热门笑话');
+        $this->setSiteTitle('24小时内人最热门笑话');
     
         $this->fetchFunnyHotPosts(24);
     }
     
     public function actionWeek($page = 1)
     {
-        $this->setSitePageTitle('一周内人最热门笑话');
+        $this->setSiteTitle('一周内人最热门笑话');
     
         $this->fetchFunnyHotPosts(7*24);
     }
     
     public function actionMonth($page = 1)
     {
-        $this->setSitePageTitle('一月内人最热门笑话');
+        $this->setSiteTitle('一月内人最热门笑话');
     
         $this->fetchFunnyHotPosts(30*24);
     }
@@ -125,10 +125,7 @@ class ChannelController extends MobileController
 	    $criteria->limit = $limit;
 	
 	    $data = self::fetchPosts($criteria, $hours);
-	    $this->render('posts', array(
-            'models' => $data['models'],
-            'pages' => $data['pages'],
-	    ));
+	    $this->render('posts', $data);
 	}
 	
 	private static function fetchPosts(CDbCriteria $criteria)
