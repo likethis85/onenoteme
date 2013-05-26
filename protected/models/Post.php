@@ -1241,7 +1241,7 @@ class Post extends CActiveRecord
         $criteria->addColumnCondition(array('channel_id'=>$this->channel_id, 'state'=>POST_STATE_ENABLED))
             ->addCondition('create_time < ' . (int)$this->create_time);
         
-        $data[$this->id] = $this->cache($duration)->find($criteria);
+        $data[$this->id] = self::model()->cache($duration)->find($criteria);
     
         return $data[$this->id];
     }
@@ -1261,7 +1261,7 @@ class Post extends CActiveRecord
         $criteria->addColumnCondition(array('channel_id'=>$this->channel_id, 'state'=>POST_STATE_ENABLED))
             ->addCondition('create_time > ' . (int)$this->create_time);
         
-        $data[$this->id] = $this->cache($duration)->find($criteria);
+        $data[$this->id] = self::model()->cache($duration)->find($criteria);
     
         return $data[$this->id];
     }
