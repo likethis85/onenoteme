@@ -42,8 +42,8 @@ class PostController extends MobileController
             'post' => $post,
             'comments' => $comments,
             'comment' => $comment,
-//             'prevUrl' => self::prevPostUrl($post),
-//             'nextUrl' => self::nextPostUrl($post),
+            'prevUrl' => self::prevPostUrl($post),
+            'nextUrl' => self::nextPostUrl($post),
         ));
     }
     
