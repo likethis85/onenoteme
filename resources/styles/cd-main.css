@@ -45,6 +45,11 @@ ul.mode-switch .list.on a {background-position:-913px 5px;}
 .post-detail .post-content {line-height:24px; color:inherit; margin:10px auto 15px;}
 .post-detail .cdc-block {margin:25px auto 15px; list-style:none; text-align:left;}
 
+.post-detail .change-post {width:185px; height:50px; margin:10px auto;}
+.post-detail .change-post a {display:inline-block; height:100%;}
+.post-detail .change-post a.prev {width:75px; float:left; background-position:-19px -574px;}
+.post-detail .change-post a.next {width:100px; float:right; background-position:-94px -574px;}
+
 .comment-form {display:block; position:relative; overflow:hidden; background-color:#ECECEC; padding:8px; margin:10px 0;}
 .comment-form textarea {width:490px; border:0; color:#888; margin:0; padding:7px 5px 6px; font-size:12px;}
 .comment-form textarea.mini-content {height:20px; resize:none;}

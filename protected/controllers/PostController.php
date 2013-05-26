@@ -171,7 +171,7 @@ class PostController extends Controller
     
     private static function prevPostUrl(Post $post)
     {
-        $duration = 60*60;
+        $duration = 15;
         $createTime = (int)$post->create_time;
         $channelID = (int)$post->channel_id;
         $id = app()->getDb()->cache($duration)->createCommand()

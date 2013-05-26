@@ -22,6 +22,16 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
 		<?php endif;?>
         <div class="item-content"><?php echo $post->filterContent;?></div>
         
+        <div class="change-post clearfix">
+            <?php if ($prevUrl):?>
+            <a class="site-bg prev" href="<?php echo $prevUrl;?>"></a>
+            <?php endif;?>
+            <?php if ($nextUrl):?>
+            <a class="site-bg next" href="<?php echo $nextUrl;?>"></a>
+            <?php endif;?>
+            <div class="clear"></div>
+        </div>
+        
         <div class="item-toolbar">
             <ul>
             	<li class="fleft"><a rel="nofollow" href="javascript:void(0);" class="upscore site-bg" data-id="<?php echo $post->id;?>" data-score="1" data-url="<?php echo aurl('post/score');?>"><?php echo $post->up_score;?></a></li>
