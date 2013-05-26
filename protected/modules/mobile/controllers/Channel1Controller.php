@@ -147,7 +147,7 @@ class Channel1Controller extends MobileController
 	private static function fetchPosts(CDbCriteria $criteria)
 	{
 	    $duration = 60*60*24;
-	    $count = MobilePost::model()->cache($duration)->count($criteria);
+	    $count = MobilePost::model()->count($criteria);
 	    var_dump($criteria->toArray());
 	    echo '<hr />';var_dump($count);echo '<hr />';
 	    $pages = new CPagination($count);
