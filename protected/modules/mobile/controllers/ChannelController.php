@@ -29,10 +29,7 @@ class ChannelController extends MobileController
         $criteria->limit = (int)p('line_post_count_page');
     
         $data = self::fetchPosts($criteria);
-        $this->render('posts', array(
-            'models' => $data['models'],
-            'pages' => $data['pages'],
-        ));
+        $this->render('posts', $data);
     }
     
 
@@ -117,6 +114,7 @@ class ChannelController extends MobileController
 	    $criteria = new CDbCriteria();
 	    $criteria->scopes = array('homeshow', 'published');
 	    $criteria->addColumnCondition(array('channel_id' => CHANNEL_FUNNY));
+	    $criteria->addInCondition('t.media_type', array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE));
 	    if ($hours > 0) {
 	        $fromtime = $_SERVER['REQUEST_TIME'] - $hours * 3600;
 	        $criteria->addCondition('t.create_time > :fromtime');

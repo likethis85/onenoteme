@@ -116,8 +116,8 @@ return array(
                 'mobile/archives/<id:\d+>' => 'mobile/post/show',
                 'mobile/page/<page:\d+>' => 'mobile/default/index',
                 'mobile' => 'mobile/default/index',
-                'mobile/<_a:(joke|lengtu|video|latest|hot|ghost|girl)>/page/<page:\d+>' => 'mobile/channel/<_a>',
-                'mobile/<_a:(joke|lengtu|video|latest|hot|ghost|girl)>' => 'mobile/channel/<_a>',
+                'mobile/<_a:(joke|lengtu|video|latest|hot|day|week|month|ghost|girl)>/page/<page:\d+>' => 'mobile/channel/<_a>',
+                'mobile/<_a:(joke|lengtu|video|latest|hot|day|week|month|ghost|girl)>' => 'mobile/channel/<_a>',
                 'mobile/tag/<name:.+>' => 'mobile/tag/posts',
             
                 'page/<page:\d+>' => 'site/index',
