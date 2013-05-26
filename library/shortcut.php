@@ -385,6 +385,36 @@ function cache($component = 'cache')
 }
 
 /**
+ * 获取缓存组件
+ * @param string $component
+ * @return CFileCache | null
+ */
+function fcache()
+{
+    return app()->getComponent('fcache');
+}
+
+/**
+ * 获取缓存组件
+ * @param string $component
+ * @return CMemCache | null
+ */
+function memcache()
+{
+    return app()->getComponent('memcache');
+}
+
+/**
+ * 获取缓存组件
+ * @param string $component
+ * @return CDRedisCache | null
+ */
+function pcache()
+{
+    return app()->getComponent('redis');
+}
+
+/**
  * 获取数据库组件
  * @param string $component
  * @return CDbConnection | null
