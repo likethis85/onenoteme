@@ -25,6 +25,15 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
     <?php $this->widget('CDAdvert', array('solt'=>'mobile_post_content_bottom'));?>
     <!-- 广告位 结束 -->
     
+    <div class="change-post clearfix">
+        <?php if ($post->getPrevChannelPost()):?>
+        <a class="site-bg prev" href="<?php echo $post->getPrevChannelPost()->getUrl();?>"></a>
+        <?php endif;?>
+        <?php if ($post->getNextChannelPost()):?>
+        <a class="site-bg next" href="<?php echo $post->getNextChannelPost()->getUrl();?>"></a>
+        <?php endif;?>
+    </div>
+    
     <a name="comments"></a>
     <div class="line1px"></div>
     <ul class="more-post">

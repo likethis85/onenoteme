@@ -146,6 +146,10 @@ footer a.switch-version {float:right;}
 .post-detail .more-post {list-style:none; margin:10px 0 10px 15px; padding:0;}
 .post-detail .more-post li {margin:5px 0;}
 .post-detail .more-post li span {font-size:14px; color:#BFBFBF; margin:0 3px 0 -15px; vertical-align:top;}
+.post-detail .change-post {width:185px; height:50px; margin:10px auto;}
+.post-detail .change-post a {display:inline-block; height:100%;}
+.post-detail .change-post a.prev {width:75px; float:left; background-position:-19px -574px;}
+.post-detail .change-post a.next {width:100px; float:right; background-position:-94px -574px;}
 
 /* adert block */
 .top-banner, .bottom-banner {margin:0 auto; line-height:0; font-size:0;}

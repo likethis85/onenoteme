@@ -3,7 +3,7 @@
 _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->channel;?>, 3]);
 //-->
 </script>
-<div class="fleft cd-container">
+<div class="fleft cd-container detail-container">
 	<div class="panel panel20 post-detail post-box">
 		<div class="content-block post-content">
 		    <div class="post-author">

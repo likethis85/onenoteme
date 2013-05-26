@@ -89,7 +89,7 @@ class PostController extends Controller
             'nextPosts' => $nextPosts,
             'prevUrl' => self::prevPostUrl($post),
             'nextUrl' => self::nextPostUrl($post),
-            'returnUrl' => self::returnUrl($post->channel_id),
+            'returnUrl' => self::returnUrl($post->channel_id, $post->media_type),
             'comments' => $commentsData['comments'],
             'pages' => $commentsData['pages'],
             'shareData' => $shareData,
@@ -205,30 +205,25 @@ class PostController extends Controller
         return $url;
     }
     
-    private static function returnUrl($channel_id)
+    private static function returnUrl($channel_id, $mediatype)
     {
         $channelID = (int)$channel_id;
-        if (!in_array($channelID, Post::channels()))
+        if (!in_array($channelID, CDBase::channels()))
             return false;
         
-        switch ($channelID) {
-            case CHANNEL_DUANZI:
+        $mediatype = (int)$mediatype;
+        switch ($mediatype) {
+            case MEDIA_TYPE_TEXT:
                 $url = aurl('channel/joke');
                 break;
-            case CHANNEL_LENGTU:
+            case MEDIA_TYPE_IMAGE:
                 $url = aurl('channel/lengtu');
                 break;
-            case CHANNEL_GIRL:
-                $url = aurl('channel/girl');
-                break;
-            case CHANNEL_VIDEO:
+            case MEDIA_TYPE_VIDEO:
                 $url = aurl('channel/video');
                 break;
-            case CHANNEL_GHOSTSTORY:
-                $url = aurl('channel/ghost');
-                break;
             default:
-                $url = app()->homeUrl;
+                $url = CDBaseUrl::siteHomeUrl();
                 break;
         }
         
