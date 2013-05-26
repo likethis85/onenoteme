@@ -1,6 +1,6 @@
 <?php
 
-class ChannelController extends MobileController
+class Channel1Controller extends MobileController
 {
     public function filters()
     {
@@ -138,6 +138,9 @@ class ChannelController extends MobileController
 	    echo $pages->pageCount;exit;
 	    $models = MobilePost::model()->findAll($criteria);
 	
+	    echo $pages->pageSize.'<br />';
+	    echo $pages->pageCount.'<br />';
+	    exit;
 	    return array(
             'models' => $models,
             'pages' => $pages,
