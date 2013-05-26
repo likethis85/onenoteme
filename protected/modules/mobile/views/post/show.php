@@ -37,12 +37,12 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
     <a name="comments"></a>
     <div class="line1px"></div>
     <ul class="more-post">
-        <?php if ($post->getPrevChannelPost()):?>
-        <li><span>&uarr;</span><?php echo $post->getPrevChannelPost()->titleLink;?></li>
-        <?php endif;?>
-        <?php if ($post->getNextChannelPost()):?>
-        <li><span>&darr;</span><?php echo $post->getNextChannelPost()->titleLink;?></li>
-        <?php endif;?>
+        <?php //if ($post->getPrevChannelPost()):?>
+        <li><span>&uarr;</span><?php //echo $post->getPrevChannelPost()->titleLink;?></li>
+        <?php //endif;?>
+        <?php //if ($post->getNextChannelPost()):?>
+        <li><span>&darr;</span><?php //echo $post->getNextChannelPost()->titleLink;?></li>
+        <?php //endif;?>
     </ul>
     <div class="line1px"></div>
 
