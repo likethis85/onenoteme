@@ -148,6 +148,7 @@ class Channel1Controller extends MobileController
 	{
 	    $duration = 60*60*24;
 	    $count = MobilePost::model()->cache($duration)->count($criteria);
+	    var_dump($criteria->toArray());
 	    echo '<hr />';var_dump($count);echo '<hr />';
 	    $pages = new CPagination($count);
 	    $pages->setPageSize($criteria->limit);
