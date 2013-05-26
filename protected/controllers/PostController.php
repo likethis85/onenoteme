@@ -183,7 +183,7 @@ class PostController extends Controller
             ->limit(1)
             ->queryScalar();
         
-        $url = ($id > 0) ? aurl('post/show', array('id' => $id)) : '';
+        $url = ($id > 0) ? aurl('post/show', array('id' => $id, 'source' => 'prev')) : '';
         return $url;
     }
     
@@ -201,7 +201,7 @@ class PostController extends Controller
             ->limit(1)
             ->queryScalar();
         
-        $url = ($id > 0) ? aurl('post/show', array('id' => $id)) : '';
+        $url = ($id > 0) ? aurl('post/show', array('id' => $id, 'source' => 'next')) : '';
         return $url;
     }
     
