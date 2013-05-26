@@ -49,7 +49,7 @@ class CDHotTags extends CWidget
         $criteria->select = 'id, name';
         $criteria->limit = $this->tagsNums;
         $criteria->order = 'post_nums desc';
-        $models = Tag::model()->findAll($criteria);
+        $models = Tag::model()->cache(self::CACHE_DURATION)->findAll($criteria);
         return $models;
     }
 }
