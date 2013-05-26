@@ -128,6 +128,23 @@ class Channel1Controller extends MobileController
 	    $this->render('posts', $data);
 	}
 	
+	
+	private function fetchFunnyMediaPosts($typeid, $limit, $with = null)
+	{
+	    var_dump($limit);
+	    $this->channel = CHANNEL_FUNNY . $typeid;
+	
+	    $criteria = new CDbCriteria();
+	    $criteria->scopes = array('published');
+	    $criteria->addColumnCondition(array('channel_id' => CHANNEL_FUNNY, 'media_type'=>(int)$typeid));
+	    $criteria->order = 't.istop desc, t.create_time desc';
+	    $criteria->limit = (int)$limit;
+	    if (!empty($with))
+	        $criteria->with = $with;
+	
+	    return self::fetchPosts($criteria);
+	}
+	
 	private static function fetchPosts(CDbCriteria $criteria)
 	{
 	    $duration = 60*60*24;
@@ -145,22 +162,6 @@ class Channel1Controller extends MobileController
             'models' => $models,
             'pages' => $pages,
 	    );
-	}
-	
-	
-	private function fetchFunnyMediaPosts($typeid, $limit, $with = null)
-	{
-	    $this->channel = CHANNEL_FUNNY . $typeid;
-	
-	    $criteria = new CDbCriteria();
-	    $criteria->scopes = array('published');
-	    $criteria->addColumnCondition(array('channel_id' => CHANNEL_FUNNY, 'media_type'=>(int)$typeid));
-	    $criteria->order = 't.istop desc, t.create_time desc';
-	    $criteria->limit = $limit;
-	    if (!empty($with))
-	        $criteria->with = $with;
-	
-	    return self::fetchPosts($criteria);
 	}
 	
 	public function actionGhost($page = 1)
