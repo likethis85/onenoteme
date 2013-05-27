@@ -73,6 +73,8 @@ class ApiError
      * @var integer
      */
     const USER_NOT_EXIST = 20001;
+    const USER_NOT_AUTHENTICATED = 20002;
+    const USER_LOGIN_ERROR = 20003;
     
     /**
      * 用户$token错误
@@ -87,8 +89,10 @@ class ApiError
     
     // 以下为设备相关蓑代码，以23开头
     
+    
     // 以下为系统配置相关错误代码，以24开头
     const DEVICE_SAVE_ERROR = 240001;
+    const DEVICE_NOT_EXIST = 240002;
     
     // 以下为用户配置相关错误代码，以25开头
     
@@ -112,10 +116,15 @@ class ApiError
             self::SIGNATURE_ERROR => '签名错误',
                 
             // device
+            self::DEVICE_NOT_EXIST => '设备信息不存在',
             self::DEVICE_SAVE_ERROR => '设备信息保存出错',
                 
             // user
             self::USER_TOKEN_ERROR => '用户验证出错',
+            self::USER_NOT_AUTHENTICATED => '用户名或密码错误',
+            self::USER_LOGIN_ERROR => '登录过程出错',
+            self::USER_NOT_EXIST => '用户不存在',
+            
                 
             // comment
             self::COMMENT_SAVE_ERROR => '评论保存出错',

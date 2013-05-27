@@ -158,7 +158,11 @@ return array(
             'class' => 'CDWebUser',
             'allowAutoLogin' => true,
             'loginUrl' => array('/site/login'),
-            'guestName' => '匿名人士',
+            'guestName' => '匿名段友',
+        ),
+        'appuser' => array(
+            'class' => 'CDAppUser',
+            'guestName' => '匿名段友',
         ),
         'mailer' => array(
             'class' => 'application.extensions.CDSendCloudMailer',

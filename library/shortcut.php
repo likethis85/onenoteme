@@ -424,4 +424,12 @@ function db($component = 'db')
     return app()->getComponent($component);
 }
 
+/**
+ * 应用用户
+ * @return CDAppUser
+ */
+function appuser()
+{
+    return app()->getComponent('appuser');
+}
 

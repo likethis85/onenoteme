@@ -1,18 +1,19 @@
 <?php
-class UserIdentity extends CUserIdentity
+class AppUserIdentity extends CUserIdentity
 {
     const ERROR_USER_FORBIDDEN = 4;
     const ERROR_USER_UNVERIFY = 5;
     
     private $_id;
     private $_name;
+    
     /**
      * 用户model
-     * @var User
+     * @var ApiUser
      */
     private $_user;
     
-    public function authenticate($md5 = false)
+    public function authenticate($md5 = true)
     {
         if ($this->isAuthenticated) {
             $this->errorCode = self::ERROR_NONE;
@@ -23,7 +24,7 @@ class UserIdentity extends CUserIdentity
             $criteria = new CDbCriteria();
             $criteria->select = array('t.id', 't.username', 't.screen_name', 't.password', 't.state');
             $criteria->addColumnCondition(array('username'=>$this->username));
-            $this->_user = User::model()->find($criteria);
+            $this->_user = ApiUser::model()->find($criteria);
             
             $password = $md5 ? $this->password : md5($this->password);
             if ($this->_user === null) {
@@ -42,7 +43,7 @@ class UserIdentity extends CUserIdentity
                 $this->_id = $this->_user->id;
                 $this->_name = $this->_user->getDisplayName();
                 $this->errorCode = self::ERROR_NONE;
-                $this->afterAuthSuccess();
+                $this->afterAuthenticate();
             }
         }
         catch (Exception $e) {
@@ -56,7 +57,7 @@ class UserIdentity extends CUserIdentity
     
     /**
      * 验证通过后返回当前用户
-     * @return Ambigous <NULL, User>
+     * @return ApiUser | null
      */
     public function getUser()
     {
@@ -73,12 +74,9 @@ class UserIdentity extends CUserIdentity
         return $this->_name;
     }
     
-    private function afterAuthSuccess()
+    private function afterAuthenticate()
     {
-        $s = app()->session;
-        $s['state'] = $this->_user->state;
-        $s['username'] = $this->username;
-        $s['image_url'] = $this->_user->profile->smallAvatarUrl;
+        
     }
 }
 
