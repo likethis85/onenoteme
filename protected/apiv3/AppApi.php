@@ -109,7 +109,7 @@ class AppApi
         if (false === $result)
             throw new CDApiException(ApiError::CLASS_METHOD_EXECUTE_ERROR, '$class->$method 执行错误');
         else {
-            $data = array('error'=>0, 'data'=>$result);
+            $data = array('error'=>0, 'response'=>$result);
             self::output($data, self::$_format);
         }
     }

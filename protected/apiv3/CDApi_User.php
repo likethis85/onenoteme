@@ -112,14 +112,15 @@ class CDApi_User extends ApiBase
     public function fieldAttributeMap()
     {
         return array(
-            'user_id' => 'id',
+            'id' => 'id',
             'username' => 'username',
             'screen_name' => 'screen_name',
-            'create_time' => 'createTime',
+            'create_time' => 'create_time',
+            'create_time_text' => 'createTime',
             'token' => 'token',
             'token_time' => 'token_time',
             'website' => array('profile', 'website'),
-            'description' => array('profile', 'description'),
+            'desc' => array('profile', 'description'),
             'mini_avatar' => array('profile', 'getMiniAvatarUrl', true),
             'small_avatar' => array('profile', 'getSmallAvatarUrl', true),
             'large_avatar' => array('profile', 'getLargeAvatarUrl', true),
@@ -133,7 +134,7 @@ class CDApi_User extends ApiBase
     public function fieldColumnMap()
     {
         return array(
-            'user_id' => 'id',
+            'id' => 'id',
             'username' => 'username',
             'screen_name' => 'screen_name',
             'create_time' => 'create_time',

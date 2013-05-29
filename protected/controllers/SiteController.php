@@ -77,4 +77,10 @@ class SiteController extends Controller
             }
         }
     }
+
+    public function actionUa()
+    {
+        echo $_SERVER['HTTP_USER_AGENT'];
+        exit;
+    }
 }
