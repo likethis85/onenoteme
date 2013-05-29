@@ -174,7 +174,8 @@ class CDApi_Post extends ApiBase
             'channel_id' => 'channel_id',
             'title' => 'title',
             'content' => 'apiContent',
-            'create_time' => 'createTime',
+            'create_time' => 'create_time',
+            'create_time_text' => 'createTime',
             'up_count' => 'up_score',
             'down_count' => 'down_score',
             'comment_count' => 'comment_nums',
@@ -185,7 +186,6 @@ class CDApi_Post extends ApiBase
             'small_pic' => 'fixThumb',
             'middle_pic' => 'middlePic',
             'large_pic' => 'largePic',
-            'author' => array('user', 'profile'), // relations
         );
     }
     
@@ -201,6 +201,7 @@ class CDApi_Post extends ApiBase
             'title' => 'title',
             'content' => 'content',
             'create_time' => 'create_time',
+            'create_time_text' => 'create_time',
             'up_count' => 'up_score',
             'down_count' => 'down_score',
             'comment_count' => 'comment_nums',

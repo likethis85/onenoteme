@@ -112,7 +112,7 @@ class CDApi_User extends ApiBase
     public function fieldAttributeMap()
     {
         return array(
-            'id' => 'id',
+            'user_id' => 'id',
             'username' => 'username',
             'screen_name' => 'screen_name',
             'create_time' => 'create_time',
@@ -134,10 +134,11 @@ class CDApi_User extends ApiBase
     public function fieldColumnMap()
     {
         return array(
-            'id' => 'id',
+            'user_id' => 'id',
             'username' => 'username',
             'screen_name' => 'screen_name',
             'create_time' => 'create_time',
+            'create_time_text' => 'create_time',
             'token' => 'token',
             'token_time' => 'token_time',
         );
