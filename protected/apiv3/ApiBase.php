@@ -19,6 +19,7 @@ class ApiBase implements ICDApiBase
 {
     protected $_apiparams;
     protected $_params;
+    protected $_headers;
     
     public function __construct($params)
     {
@@ -27,6 +28,10 @@ class ApiBase implements ICDApiBase
         $this->_apiparams['apikey'] = $params['apikey'];
         $this->_apiparams['format'] = $params['format'];
         $this->_apiparams['timestamp'] = $params['timestamp'];
+        
+        $this->_headers['device_udid'] = $_SERVER['HTTP_DEVICE_UDID'];
+        $this->_headers['sys_version'] = $_SERVER['HTTP_SYS_VERSION'];
+        $this->_headers['app_version'] = $_SERVER['HTTP_APP_VERSION'];
         
         unset($params['method'], $params['sig'], $params['apikey'], $params['format'], $params['timestamp']);
         $this->_params = $params;

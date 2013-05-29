@@ -54,7 +54,7 @@ class CDApi_Post extends ApiBase
         
         $posts = ApiPost::model()->findAll($criteria);
         $rows = $this->formatRows($posts);
-        
+        file_put_contents(app()->getRuntimePath().DS.'api.log', var_export($_SERVER, true));
         return $rows;
     }
     
