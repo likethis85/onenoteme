@@ -26,8 +26,9 @@ class ApiBase implements ICDApiBase
         $this->_apiparams['sig'] = $params['sig'];
         $this->_apiparams['apikey'] = $params['apikey'];
         $this->_apiparams['format'] = $params['format'];
+        $this->_apiparams['timestamp'] = $params['timestamp'];
         
-        unset($params['method'], $params['sig'], $params['apikey'], $params['format']);
+        unset($params['method'], $params['sig'], $params['apikey'], $params['format'], $params['timestamp']);
         $this->_params = $params;
         
         $this->requiredParams(self::defaultRequiredAppParams());

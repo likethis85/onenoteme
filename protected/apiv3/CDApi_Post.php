@@ -139,7 +139,7 @@ class CDApi_Post extends ApiBase
     
     protected function timelineRowCount()
     {
-        return 2;
+        return 20;
     }
     
     protected function formatRows(array $models)
