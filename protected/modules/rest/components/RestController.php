@@ -33,6 +33,8 @@ class RestController extends CController
             'errno' => 0,
             'reponse' => $value,
         );
+        
+        header('Content-Type: application/json; charset=utf-8');
         echo CDRestBase::outputJson($data);
         exit(0);
     }
