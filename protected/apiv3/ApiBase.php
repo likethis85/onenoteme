@@ -100,18 +100,6 @@ class ApiBase implements ICDApiBase
         return $content;
     }
 
-    protected function saveDeviceConnectHistory()
-    {
-        $history = new DeviceConnectHistory();
-        $history->device_udid = $this->_params['device_udid'];
-        $history->sys_version = $this->_params['sys_version'];
-        $history->app_version = $this->_params['app_version'];
-        $history->apikey = $this->_apiparams['apikey'];
-        $history->method = $this->_apiparams['method'];
-        $history->format = $this->_apiparams['format'];
-        
-        return $history->save() ? $history : false;
-    }
     
     protected static function defaultRequiredAppParams()
     {
@@ -124,17 +112,6 @@ class ApiBase implements ICDApiBase
         $exit && exit();
     }
 
-
-    protected static function execRelation($model, $attribute)
-    {
-        if (is_array($attribute)) {
-            return $attribute[2]
-            ? $model->$attribute[0]->$attribute[1]()
-            : self::execRelation($model->$attribute[0], $attribute[1]);
-        }
-        else
-            return $model->$attribute;
-    }
 }
 
 

@@ -44,6 +44,7 @@ return array(
         'app' => array(
             'layout' => 'main',
         ),
+        'rest',
     ),
     'components' => array(
         'errorHandler' => array(

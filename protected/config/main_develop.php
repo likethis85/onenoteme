@@ -44,6 +44,7 @@ return array(
         'app' => array(
             'layout' => 'main',
         ),
+        'rest',
     ),
     'preload' => array('log'),
     'components' => array(
@@ -111,10 +112,17 @@ return array(
             'enableSkin' => true,
         ),
         'urlManager' => array(
-            'urlFormat' => 'get',
+            'urlFormat' => 'path',
 		    'showScriptName' => false,
 //             'cacheID' => 'cache',
             'rules' => array(
+                    
+                'rest/post/timeline/<user_id:\d+>' => 'rest/post/timeline',
+                'rest/post/show/<post_id:\d+>' => 'rest/post/show',
+                'rest/user/show/<user_id:\d+>' => 'rest/user/show',
+                'rest/comment/show/<post_id:\d+>' => 'rest/comment/show',
+                'rest/comment/report/<comment_id:\d+>' => 'rest/comment/report',
+                    
                 'http://www.waduanzi.cn/' => 'site/index',
                 'http://www.waduanzi.cn/<_a:(login|signup|logout|bdmap|links)>' => 'site/<_a>',
                 'http://www.waduanzi.cn/<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',

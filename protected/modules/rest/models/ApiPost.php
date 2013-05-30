@@ -15,6 +15,7 @@ class ApiPost extends Post
         return array_merge(parent::relations(), array(
             'user' => array(self::BELONGS_TO, 'ApiUser', 'user_id',
     		        'select' => array('id', 'username', 'screen_name', 'create_time', 'create_ip', 'state', 'token', 'token_time', 'source')),
+            'comments' => array(self::HAS_MANY, 'ApiComment', 'post_id', 'limit'=>10),
         ));
     }
     

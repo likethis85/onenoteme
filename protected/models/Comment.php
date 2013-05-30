@@ -15,6 +15,7 @@
  * @property integer $down_score
  * @property integer $state
  * @property integer $recommend
+ * @property integer $report_count
  *
  * @property string $authorName
  * @property string $filterContent
@@ -64,7 +65,7 @@ class Comment extends CActiveRecord
 	    $commentMinLen = param('comment_min_length') ? param('comment_min_length') : 2;
 		return array(
 	        array('content', 'required'),
-			array('state, post_id, user_id, create_time, up_score, down_score, recommend', 'numerical', 'integerOnly'=>true),
+			array('state, post_id, user_id, create_time, up_score, down_score, recommend, report_count', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
 			array('create_ip', 'length', 'max'=>15),
 			array('content', 'length', 'min'=>$commentMinLen, 'max'=>2000),
@@ -120,6 +121,7 @@ class Comment extends CActiveRecord
 			'create_ip' => '创建IP',
 			'state' => '状态',
 		    'recommend' => '推荐',
+		    'report_count' => '举报次数',
 		);
 	}
 
