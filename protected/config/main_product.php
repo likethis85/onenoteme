@@ -148,6 +148,7 @@ return array(
                 'http://rest.waduanzi.com/user/show/<user_id:\d+>' => 'rest/user/show',
                 'http://rest.waduanzi.com/comment/show/<post_id:\d+>' => 'rest/comment/show',
                 'http://rest.waduanzi.com/comment/report/<comment_id:\d+>' => 'rest/comment/report',
+                'http://rest.waduanzi.com/<_c>/<_a>' => 'rest/<_c>/<_a>',
             ),
         ),
         'session' => array(
