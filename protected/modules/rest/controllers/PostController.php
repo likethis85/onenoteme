@@ -48,7 +48,7 @@ class PostController extends RestController
             $criteria->params[':maxtime'] = $maxtime;
         }
         
-        $posts = ApiPost::model()->findAll($criteria);
+        $posts = ApiPost::model()->published()->findAll($criteria);
         $rows = $this->formatRows($posts);
         
         $this->output($rows);
@@ -83,7 +83,7 @@ class PostController extends RestController
         $mintime = mktime(0, 0, 0, $randdate['mon'], $randdate['mday'], $randdate['year']);
         $criteria->addCondition('t.create_time >= ' . $mintime);
         
-        $posts = ApiPost::model()->findAll($criteria);
+        $posts = ApiPost::model()->published()->findAll($criteria);
         $rows = $this->formatRows($posts);
         
         $this->output($rows);
