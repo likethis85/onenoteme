@@ -69,8 +69,8 @@ class CommentController extends RestController
             $criteria->params[':lasttime'] = $lasttime;
         }
     
-        $posts = ApiComment::model()->findAll($criteria);
-        $rows = $this->formatRows($posts);
+        $posts = ApiComment::model()->published()->findAll($criteria);
+        $rows = CDRestDataFormat::formatComments($posts);
     
         $this->output($rows);
     }
@@ -87,16 +87,6 @@ class CommentController extends RestController
     protected function timelineRowCount()
     {
         return 10;
-    }
-    
-    protected function formatRows(array $models)
-    {
-        $rows = array();
-        foreach ($models as $index => $model)
-            $rows[$index] = CDRestDataFormat::formatComment($model);
-    
-        $models = null;
-        return $rows;
     }
     
     /**
