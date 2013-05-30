@@ -141,6 +141,13 @@ return array(
                     
                 'wap' => 'wap/index',
                 'member' => '/member/default/index',
+
+                    
+                'http://rest.waduanzi.com/post/timeline/<user_id:\d+>' => 'rest/post/timeline',
+                'http://rest.waduanzi.com/post/show/<post_id:\d+>' => 'rest/post/show',
+                'http://rest.waduanzi.com/user/show/<user_id:\d+>' => 'rest/user/show',
+                'http://rest.waduanzi.com/comment/show/<post_id:\d+>' => 'rest/comment/show',
+                'http://rest.waduanzi.com/comment/report/<comment_id:\d+>' => 'rest/comment/report',
             ),
         ),
         'session' => array(
