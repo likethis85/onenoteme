@@ -42,9 +42,9 @@ class CDApi_Comment extends ApiBase
         $criteria->limit = $this->timelineRowCount();
         $criteria->order = 't.create_time asc';
         $criteria->with = array('user', 'user.profile');
+        $criteria->addColumnCondition(array('post_id'=>(int)$params['post_id']));
         
         $lasttime = (int)$params['lasttime'];
-        $maxtime = (int)$params['maxtime'];
         if ($lasttime > 0) {
             $criteria->addCondition('t.create_time > :lasttime');
             $criteria->params[':lasttime'] = $lasttime;
