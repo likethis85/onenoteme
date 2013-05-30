@@ -4,8 +4,6 @@ defined('DS') || define('DS', DIRECTORY_SEPARATOR);
 
 interface ICDApiBase
 {
-    public function fieldAttributeMap();
-    public function fieldColumnMap();
 }
 
 /**
@@ -125,26 +123,7 @@ class ApiBase implements ICDApiBase
         var_dump($var);
         $exit && exit();
     }
-    
-    public function fieldAttributeMap()
-    {
-        throw new CDException('fieldAttributeMap method is required override.');
-    }
-    
-    public function fieldColumnMap()
-    {
-        throw new CDException('fieldColumnMap method is required override.');
-    }
 
-    public function fields()
-    {
-        return array_keys($this->fieldColumnMap());
-    }
-    
-    public function selectColumns()
-    {
-        return array_unique(array_values($this->fieldColumnMap()));
-    }
 
     protected static function execRelation($model, $attribute)
     {

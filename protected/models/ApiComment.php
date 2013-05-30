@@ -11,6 +11,15 @@ class ApiComment extends Comment
     }
     
 
+    public function relations()
+    {
+        return array_merge(parent::relations(), array(
+            'post' => array(self::BELONGS_TO, 'ApiPost', 'post_id'),
+            'user' => array(self::BELONGS_TO, 'ApiUser', 'user_id',
+                    'select' => array('id', 'username', 'screen_name', 'create_time', 'create_ip', 'state', 'token', 'token_time', 'source')),
+        ));
+    }
+
     public function getApiContent()
     {
         $content = str_replace(array('<p>', '<div>', '<br>', '<br />', '</div>', '</p>'), "\n", $this->content);

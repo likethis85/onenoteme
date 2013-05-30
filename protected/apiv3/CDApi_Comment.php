@@ -41,7 +41,7 @@ class CDApi_Comment extends ApiBase
         $criteria->select = $this->selectColumns();
         $criteria->limit = $this->timelineRowCount();
         $criteria->order = 't.create_time asc';
-        $criteria->with = array('user.profile');
+        $criteria->with = array('user', 'user.profile');
         
         $lasttime = (int)$params['lasttime'];
         $maxtime = (int)$params['maxtime'];
@@ -74,60 +74,19 @@ class CDApi_Comment extends ApiBase
     {
         $rows = array();
         foreach ($models as $index => $model)
-            $rows[$index] = $this->formatRow($model);
+            $rows[$index] = CDDataFormat::formatComment($model);
     
         $models = null;
         return $rows;
     }
     
-    protected function formatRow(ApiComment $model)
-    {
-        $data = array();
-        $fieldMap = $this->fieldAttributeMap();
-        foreach ($fieldMap as $key => $field) {
-            $data[$key] = self::execRelation($model, $field);
-        }
-    
-        return $data;
-    }
-    
     /**
-     * 返回字段与模型属性对应关系，包括自定义的getMethod方法
-     * @see ApiBase::fieldAttributeMap()
+     * 返回字段列表
      */
-    public function fieldAttributeMap()
+    public function selectColumns()
     {
-        return array(
-            'comment_id' => 'id',
-            'post_id' => 'post_id',
-            'content' => 'apiContent',
-            'create_time' => 'createTime',
-            'up_count' => 'up_score',
-            'down_count' => 'down_score',
-            'author_id' => 'user_id',
-            'author_name' => 'user_name',
-            'recommend' => 'recommend',
-            'author' => array('user', 'profile'), // relations
-        );
-    }
-    
-    /**
-     * 返回字段与数据库表字段的对应关系
-     * @see ApiBase::fieldColumnMap()
-     */
-    public function fieldColumnMap()
-    {
-        return array(
-            'comment_id' => 'id',
-            'post_id' => 'post_id',
-            'content' => 'content',
-            'create_time' => 'create_time',
-            'up_count' => 'up_score',
-            'down_count' => 'down_score',
-            'author_id' => 'user_id',
-            'author_name' => 'user_name',
-            'recommend' => 'recommend',
-        );
+        return array('id', 'post_id', 'content', 'create_time',
+                'up_score', 'down_score', 'user_id', 'user_name', 'recommend');
     }
 }
 

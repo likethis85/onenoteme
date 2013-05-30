@@ -19,6 +19,8 @@
  * @property string $authorName
  * @property string $filterContent
  * @property string $stateLabel
+ * @property Post $post
+ * @property User $user
  */
 class Comment extends CActiveRecord
 {
