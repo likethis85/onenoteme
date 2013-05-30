@@ -37,7 +37,7 @@ class CDDataFormat
                 'mini_avatar' => '',
                 'small_avatar' => '',
                 'large_avatar' => '',
-                );
+            );
         else
             $row = array(
                 'user_id' => $model->id,
