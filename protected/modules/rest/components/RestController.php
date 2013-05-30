@@ -31,7 +31,7 @@ class RestController extends CController
     {
         $data = array(
             'errno' => 0,
-            'reponse' => $value,
+            'response' => $value,
         );
         
         header('Content-Type: application/json; charset=utf-8');
