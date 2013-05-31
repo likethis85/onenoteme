@@ -52,14 +52,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
                 </div>
             </div>
         </div>
-        <div class="line3px"></div>
-        <!-- 个性化推荐 start -->
-        <script type="text/javascript" id="wumiiRelatedItems"></script>
-        <div class="content-block cnzz-box">
-            <script  type="text/javascript" charset="utf-8"  src="http://tui.cnzz.net/cs.php?id=1000021164"></script>
-        </div>
         <a name="comments"></a>
-        <!-- 个性化推荐 start -->
         <div class="comment-list bottom15px">
         <?php $this->renderPartial('/comment/create', array('postid'=>(int)$post->id));?>
         <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'pages'=>$pages));?>
@@ -86,26 +79,11 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
     <!-- 详情页侧边栏广告位开始 -->
     <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_first'));?>
     <!-- 详情页侧边栏广告位结束 -->
-	<div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
     <!-- 详情页侧边栏广告位开始 -->
-    <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_second'));?>
+    <?php //$this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_second'));?>
     <!-- 详情页侧边栏广告位结束 -->
 </div>
 <div class="clear"></div>
-
-<!-- wumii start -->
-<script type="text/javascript">
-    var wumiiPermaLink = "<?php echo $post->url;?>";
-    var wumiiTitle = <?php echo json_encode($post->getFilterTitle());?>;
-    var wumiiTags = <?php echo json_encode($post->getTagText(','));?>;
-    var wumiiSitePrefix = "http://www.waduanzi.com/";
-    var wumiiParams = "&num=5&mode=2&pf=JAVASCRIPT";
-</script>
-<script type="text/javascript" src="http://widget.wumii.com/ext/relatedItemsWidget"></script>
-<a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
-    <img src="http://static.wumii.com/images/pixel.png" alt="无觅相关文章插件，快速提升流量" style="border:0;padding:0;margin:0;" />
-</a>
-<!-- wumii end -->
 
 <script type="text/javascript">
 $(function(){
@@ -136,51 +114,6 @@ $(function(){
     $(document).on('scroll', function(event) {
     	Waduanzi.setPrevNextButtonPosition();
     });
-    
-	var container = $('#comments');
-	container.infinitescroll({
-    	navSelector: '#page-nav',
-    	nextSelector: '#page-nav .next a',
-    	itemSelector: '.comment-item',
-    	dataType: 'html',
-    	infid: 0,
-    	loading: {
-    		finishedMsg: '已经载入全部内容。',
-    		msgText: '正在载入更多内容。。。',
-    		img: '<?php echo sbu('images/loading1.gif');?>'
-    	}
-    },
-    function(newElements) {
-        var newElems = $(newElements).css({opacity:0});
-        newElems.animate({opacity:1});
-        container.masonry('appended', newElems, true);
-
-        if (count >= 2) {
-        	$(window).unbind('.infscr');
-        	$(document).on('click', '#manual-load', function(event){
-                container.infinitescroll('retrieve');
-                return false;
-      	    });
-        	$('#manual-load').show();
-            count = 0;
-        }
-        else
-            count++;
-    });
-    
-    $(document).ajaxError(function(event, xhr, opt) {
-    	if (xhr.status == 404) $('div.pages').remove();
-	});
-	
 });
 </script>
-
-<?php cs()->registerScriptFile(sbu('libs/jquery.infinitescroll.min.js'), CClientScript::POS_END);?>
-
-<?php if ($post->channel_id != CHANNEL_DUANZI):?>
-<!--cnzz tui-->
-<script  type="text/javascript" charset="utf-8"  src="http://tui.cnzz.net/cs.php?id=1000021159"></script>
-<!--cnzz tui-->
-<?php endif;?>
-
 
