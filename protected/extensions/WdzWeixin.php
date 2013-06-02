@@ -163,21 +163,6 @@ class WdzWeixin extends CDWeixin
         $this->nextLengtu();
     }
     
-    private function method_3()
-    {
-        $this->nextGirl();
-    }
-    
-    private function method_4()
-    {
-        $this->nextGhost();
-    }
-    
-    private function method_5()
-    {
-        $this->nextVideo();
-    }
-    
     private function method_0()
     {
         $text = '您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，与大家一起分享哟～' . self::helpInfo();
@@ -304,157 +289,6 @@ class WdzWeixin extends CDWeixin
         echo $xml;
     }
     
-    private function nextGirl()
-    {
-        $wxid = $this->_data->FromUserName;
-        $lastID = app()->getDb()->createCommand()
-            ->select('last_girl_pid')
-            ->from(TABLE_USER_WEIXIN)
-            ->where('wx_token = :wxid', array(':wxid'=>$wxid))
-            ->queryScalar();
-        
-        $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_GIRL, ':lastID' => (int)$lastID);
-        $cmd = app()->getDb()->createCommand()
-            ->select(array('id', 'title', 'content', 'original_pic'))
-            ->from(TABLE_POST)
-            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), $params)
-            ->order('id asc');
-        $row = $cmd->queryRow();
-        
-        if (empty($row['content'])) return ;
-        
-        if ($lastID === false) {
-            $columns = array(
-                'wx_token' => $wxid,
-                'create_time' => time(),
-                'last_time' => time(),
-                'last_girl_pid' => 0,
-            );
-            app()->getDb()->createCommand()
-                ->insert(TABLE_USER_WEIXIN, $columns);
-        }
-        else {
-            $columns = array(
-                'last_time' => time(),
-                'last_girl_pid' => (int)$row['id'],
-            );
-            app()->getDb()->createCommand()
-                ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
-        }
-        
-        $text = strip_tags($row['title']);
-        $thumb = new CDImageThumb($row['original_pic']);
-        $posts = array(
-            array(
-                'Title' => $text,
-                'Discription' => mb_strimwidth(strip_tags($row['content']), 0, 150, '...', app()->charset),
-                'PicUrl' => $thumb->middleImageUrl(),
-                'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
-            )
-        );
-        $posts = array_merge($posts, self::advert());
-        $xml = $this->outputNews($text, $posts);
-        header('Content-Type: application/xml');
-        echo $xml;
-    }
-    
-    private function nextGhost()
-    {
-        $wxid = $this->_data->FromUserName;
-        $lastID = app()->getDb()->createCommand()
-            ->select('last_ghost_pid')
-            ->from(TABLE_USER_WEIXIN)
-            ->where('wx_token = :wxid', array(':wxid'=>$wxid))
-            ->queryScalar();
-        
-        $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_GHOSTSTORY, ':lastID' => (int)$lastID);
-        $cmd = app()->getDb()->createCommand()
-            ->select(array('id', 'title', 'content'))
-            ->from(TABLE_POST)
-            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'id > :lastID'), $params)
-            ->order('id asc');
-        $row = $cmd->queryRow();
-        
-        if (empty($row['content'])) return ;
-        
-        if ($lastID === false) {
-            $columns = array(
-                'wx_token' => $wxid,
-                'create_time' => time(),
-                'last_time' => time(),
-                'last_ghost_pid' => 0,
-            );
-            app()->getDb()->createCommand()
-                ->insert(TABLE_USER_WEIXIN, $columns);
-        }
-        else {
-            $columns = array(
-                'last_time' => time(),
-                'last_ghost_pid' => (int)$row['id'],
-            );
-            app()->getDb()->createCommand()
-                ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
-        }
-        
-        $content = trim(strip_tags($row['content'])) . self::helpInfo(true);
-        $xml = $this->outputText($content);
-        header('Content-Type: application/xml');
-        echo $xml;
-    }
-    
-    private function nextVideo()
-    {
-        $wxid = $this->_data->FromUserName;
-        $lastID = app()->getDb()->createCommand()
-            ->select('last_video_pid')
-            ->from(TABLE_USER_WEIXIN)
-            ->where('wx_token = :wxid', array(':wxid'=>$wxid))
-            ->queryScalar();
-        
-        $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_FUNNY, ':mediatype'=>MEDIA_TYPE_VIDEO, ':lastID' => (int)$lastID);
-        $cmd = app()->getDb()->createCommand()
-            ->select(array('id', 'title', 'content', 'original_pic'))
-            ->from(TABLE_POST)
-            ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'media_type = :meidatype', 'id > :lastID'), $params)
-            ->order('id asc');
-        $row = $cmd->queryRow();
-        
-        if (empty($row['content'])) return ;
-        
-        if ($lastID === false) {
-            $columns = array(
-                'wx_token' => $wxid,
-                'create_time' => time(),
-                'last_time' => time(),
-                'last_video_pid' => 0,
-            );
-            app()->getDb()->createCommand()
-                ->insert(TABLE_USER_WEIXIN, $columns);
-        }
-        else {
-            $columns = array(
-                'last_time' => time(),
-                'last_video_pid' => (int)$row['id'],
-            );
-            app()->getDb()->createCommand()
-                ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
-        }
-        
-        $text = strip_tags($row['title']);
-        // @todo 此处视频还没有缩略图
-//         $thumb = new CDImageThumb($row['original_pic']);
-        $posts = array(
-            array(
-                'Title' => $text,
-                'Discription' => mb_strimwidth(strip_tags($row['content']), 0, 150, '...', app()->charset),
-                'PicUrl' => '', //$thumb->middleImageUrl(),
-                'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
-            )
-        );
-        $xml = $this->outputNews($text, $posts);
-        header('Content-Type: application/xml');
-        echo $xml;
-    }
     
     private static function helpInfo($classic = false)
     {
@@ -464,8 +298,6 @@ class WdzWeixin extends CDWeixin
         else {
             $text .= "①回复 1 查看笑话\n";
             $text .= "②回复 2 查看趣图\n";
-            $text .= "③回复 3 查看女神\n";
-            $text .= "④回复 4 查看鬼故事\n";
             $text .= "⑤回复 0 查看帮助\n";
             $text .= '⑥投递笑话，请直接发送笑话内容，笑话必须要大于' . self::POST_JOKE_CONTENT_MIN_LEN . "字\n";
             $text .= "\n喜欢我们就召唤好友添加'挖段子'或'waduanzi'为好友关注我们吧！";

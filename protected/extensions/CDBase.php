@@ -247,7 +247,7 @@ class CDBase
     
     public static function mediatypes()
     {
-        return array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE, MEDIA_TYPE_AUDIO, MEDIA_TYPE_VIDEO, MEDIA_TYPE_UNKOWN);
+        return array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE, MEDIA_TYPE_UNKOWN);
     }
     
     public static function mediaTypeLabels($typeID = null)
@@ -255,8 +255,6 @@ class CDBase
         $labels = array(
             MEDIA_TYPE_TEXT => '文字',
             MEDIA_TYPE_IMAGE => '图文',
-            MEDIA_TYPE_AUDIO => '音频',
-            MEDIA_TYPE_VIDEO => '视频',
             MEDIA_TYPE_UNKOWN => '未知',
         );
     

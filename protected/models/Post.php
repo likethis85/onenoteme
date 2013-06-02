@@ -31,10 +31,6 @@
  * @property integer $recommend
  * @property integer $hottest
  * @property integer $disable_comment
- * @property string $extra01
- * @property string $extra02
- * @property string $extra03
- * @property string $extra04
  *
  * @property User $user
  * @property UserProfile $profile
@@ -78,8 +74,6 @@
  * @property string $originalPic
  * @property bool $imageIsAnimation
  *
- * @property string $videoHtml
- * @property string $videoSourceUrl
  * @property string $imageIsLong
  * @property string $lineCount
  * @property string $baiduShareData
@@ -88,10 +82,8 @@
  * @property bool $hasTitle
  * @property bool $isJoke
  * @property bool $isLengtu
- * @property bool $isVideo
  * @property bool $isTextType
  * @property bool $isImageType
- * @property bool $isVideoType
  * @property array $uploadImages
  */
 class Post extends CActiveRecord
@@ -154,8 +146,6 @@ class Post extends CActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		$rules = array(
 		    array('channel_id, media_type, title, content', 'required', 'message'=>'段子内容必须填写'),
 			array('channel_id, category_id, media_type, view_nums, up_score, down_score, comment_nums, disable_comment, state, favorite_count, create_time, user_id, original_width, original_height, original_frames, istop, homeshow, recommend, hottest', 'numerical', 'integerOnly'=>true),
@@ -163,12 +153,9 @@ class Post extends CActiveRecord
 			array('weibo_id', 'length', 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
 			array('title, tags', 'length', 'max'=>250),
-			array('content, original_pic, extra01, extra02, extra03, extra04', 'safe'),
+			array('content, original_pic', 'safe'),
 		    array('original_width, original_height, istop, homeshow, recommend, hottest, favorite_count', 'filter', 'filter'=>'intval'),
 		);
-		
-		if ($this->getIsVideoType())
-		    $rules[] = array('extra02, extra03', 'required');
 		
 		return $rules;
 	}
@@ -200,21 +187,6 @@ class Post extends CActiveRecord
 	 */
 	public function attributeLabels()
 	{
-	    $extra01 = '备用01';
-	    $extra02 = '备用02';
-	    $extra03 = '备用03';
-	    $extra04 = '备用04';
-	    switch ($this->media_type)
-	    {
-	        case MEDIA_TYPE_VIDEO:
-	            $extra01 = '视频HTML5';
-	            $extra02 = 'Flash代码';
-	            $extra03 = '视频来源';
-	            break;
-	        default:
-	            break;
-	    }
-	    
 		return array(
 			'id' => 'ID',
 		    'channel_id' => '频道',
@@ -243,10 +215,6 @@ class Post extends CActiveRecord
 	        'recommend' => '推荐',
 	        'hottest' => '热门',
 		    'disable_comment' => '评论',
-		    'extra01' => $extra01,
-		    'extra02' => $extra02,
-		    'extra03' => $extra03,
-		    'extra04' => $extra04,
 		);
 	}
 
@@ -864,46 +832,6 @@ class Post extends CActiveRecord
     }
 
     /**
-     * 返回视频html5地址
-     * @return string
-     * @todo 暂未实现
-     */
-    public function getVideoHtml5Url()
-    {
-        $url = '';
-        if ($this->media_type == MEDIA_TYPE_VIDEO && $this->extra01)
-            $url = $this->extra02;
-        
-        return $url;
-    }
-    
-    /**
-     * 返回视频flash html代码
-     * @return string
-     */
-    public function getVideoHtml()
-    {
-        $html = '';
-        if ($this->media_type == MEDIA_TYPE_VIDEO && $this->extra02)
-            $html = $this->extra02;
-        
-        return $html;
-    }
-    
-    /**
-     * 返回视频来源页面地址
-     * @return string
-     */
-    public function getVideoSourceUrl()
-    {
-        $url = '';
-        if ($this->media_type == MEDIA_TYPE_VIDEO && $this->extra03)
-            $url = $this->extra03;
-        
-        return $url;
-    }
-    
-    /**
      * 判断图片长度是否超过最大折叠地址
      * @param integer $width
      * @return boolean
@@ -994,15 +922,6 @@ class Post extends CActiveRecord
     {
         return $this->channel_id == CHANNEL_FUNNY && $this->getIsImageType();
     }
-
-    /**
-     * 判断是否是短片
-     * @return boolean
-     */
-    public function getIsVideo()
-    {
-        return $this->channel_id == CHANNEL_FUNNY && $this->getIsVideoType();
-    }
     
     /**
      * 判断是否是纯文字内容，此处只是默认笑话和鬼故事为纯文字的，并不是真正判断
@@ -1020,15 +939,6 @@ class Post extends CActiveRecord
     public function getIsImageType()
     {
         return $this->media_type == MEDIA_TYPE_IMAGE;
-    }
-    
-    /**
-     * 判断是不是视频内容
-     * @return boolean
-     */
-    public function getIsVideoType()
-    {
-        return $this->media_type == MEDIA_TYPE_VIDEO;
     }
     
     /**

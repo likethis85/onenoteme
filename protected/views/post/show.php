@@ -17,9 +17,6 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
             </div>
 		    <?php if ($post->tags):?><div class="post-tags">标签：<?php echo $post->tagLinks;?></div><?php endif;?>
         </div>
-        <?php if ($post->getIsVideoType() && $post->videoHtml):?>
-        <div class="content-block video-player"><?php echo $post->videoHtml;?></div>
-		<?php endif;?>
         <div class="item-content"><?php echo $post->filterContent;?></div>
         
         <div class="change-post clearfix">

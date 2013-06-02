@@ -30,8 +30,8 @@ class FeedController extends Controller
     
     public function actionIndex($source = 'feed')
     {
-        $channels = array(CHANNEL_FUNNY, CHANNEL_GHOSTSTORY);
-        $mediaTypes = array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE, MEDIA_TYPE_VIDEO);
+        $channels = array(CHANNEL_FUNNY);
+        $mediaTypes = array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE);
         echo self::channelPosts($channels, $mediaTypes, app()->name, $source, 600);
     }
     
@@ -52,12 +52,6 @@ class FeedController extends Controller
     {
         $feedname = app()->name . ' » 挖趣图';
         echo self::channelPosts(CHANNEL_FUNNY, MEDIA_TYPE_IMAGE, $feedname, $source, 600);
-    }
-    
-    public function actionVideo($source = 'feed')
-    {
-        $feedname = app()->name . ' » 挖短片';
-        echo self::channelPosts(CHANNEL_FUNNY, MEDIA_TYPE_VIDEO, $feedname, $source, 600);
     }
     
     private static function channelPosts($channelID, $mediatype, $feedname, $source, $expire = 600)

@@ -39,16 +39,6 @@
                 </div>
                 <?php endif;?>
             </div>
-            <?php elseif ($model->channel_id == CHANNEL_GIRL && $model->getMiddlePic()): // 女神?>
-            <div class="post-image">
-                <div class="thumb">
-                    <a href="<?php echo $model->url;?>" title="点击查看详细内容" data-bmiddle-url="<?php echo $model->getMiddlePic();?>">
-                        <?php echo CHtml::image($model->getMiddlePic(), $model->title, array('class'=>'bmiddle'));?>
-                    </a>
-                </div>
-            </div>
-            <?php elseif ($model->channel_id == CHANNEL_FUNNY && $model->isVideoType && $model->videoHtml):?>
-            <div class="content-block video-player"><?php echo $model->videoHtml;?></div>
             <?php endif;?>
             
             <a href="<?php echo $model->url;?>">

@@ -232,9 +232,6 @@ class PostController extends Controller
             case MEDIA_TYPE_IMAGE:
                 $url = aurl('channel/lengtu');
                 break;
-            case MEDIA_TYPE_VIDEO:
-                $url = aurl('channel/video');
-                break;
             default:
                 $url = CDBaseUrl::siteHomeUrl();
                 break;
