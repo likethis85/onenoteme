@@ -28,6 +28,7 @@ class PostController extends Controller
         if (request()->getIsPostRequest() && isset($_POST['PostForm'])) {
             $model->attributes = $_POST['PostForm'];
             if ($model->validate() && $model->save()) {
+                user()->setFlash('allow_author_view', '1');
                 user()->setFlash('publish_post_success', '您的笑话已经成功提交！如果您是会员，审核通过后我们会发邮箱通知您。');
                 $this->redirect(request()->getUrl());
             }
@@ -36,6 +37,7 @@ class PostController extends Controller
             }
         }
         
+        $this->setSitePageTitle('分享我的笑话');
         $this->render('publish', array('model'=>$model));
     }
     
@@ -59,13 +61,11 @@ class PostController extends Controller
         if ($id <= 0)
             throw new CHttpException(500, '非法请求');
         
-        if (user()->getFlash('allowUserView'))
+        if (user()->getIsAdmin() || user()->getFlash('allow_author_view'))
             $post = Post::model()->findByPk($id);
         else {
             $criteria = new CDbCriteria();
-            // 管理员可以查看所有内容
-            if (!user()->getIsAdmin())
-                $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
+            $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
             $post = Post::model()->cache($duration)->findByPk($id, $criteria);
         }
         if (null === $post)
