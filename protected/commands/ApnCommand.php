@@ -82,7 +82,7 @@ class ApnCommand extends CConsoleCommand
     {
         $lasttime = (int)$lasttime;
         
-        $channels = array(CHANNEL_DUANZI, CHANNEL_LENGTU, CHANNEL_GIRL, CHANNEL_VIDEO);
+        $channels = array(CHANNEL_FUNNY);
         foreach ($channels as $id) {
             $count[$id] = app()->getDb()->createCommand()
                 ->select('count(*)')

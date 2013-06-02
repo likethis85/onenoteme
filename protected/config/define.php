@@ -18,7 +18,6 @@ define('MEDIA_TYPE_VIDEO', 40);
 define('CHANNEL_FUNNY', 1);
 define('CHANNEL_DUANZI', 0);
 define('CHANNEL_LENGTU', 20);
-define('CHANNEL_VIDEO', 40);
 
 // 以下是表名
 define('TABLE_CATEGORY', '{{category}}');

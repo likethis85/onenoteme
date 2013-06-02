@@ -18,14 +18,6 @@ return array(
     'formatDate' => 'Y-m-d',
     'formatTime' => 'H:i:s',
     'formatShortTime' => 'H:i',
-        
-    'channels' => array(
-        CHANNEL_DUANZI => '挖笑话',
-        CHANNEL_LENGTU => '挖趣图',
-        CHANNEL_GIRL => '挖女神',
-        CHANNEL_VIDEO => '挖短片',
-        CHANNEL_GHOSTSTORY => '挖鬼故事',
-    ),
 
     /*
      * 前台相关参数

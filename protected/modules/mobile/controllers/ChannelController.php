@@ -24,7 +24,6 @@ class ChannelController extends MobileController
         $criteria = new CDbCriteria();
         $criteria->scopes = array('homeshow', 'published');
         $criteria->addColumnCondition(array('channel_id' => CHANNEL_FUNNY));
-        $criteria->addInCondition('t.media_type', array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE));
         $criteria->order = 't.istop desc, t.create_time desc';
         $criteria->limit = (int)p('line_post_count_page');
     
@@ -92,16 +91,7 @@ class ChannelController extends MobileController
 	
 	public function actionVideo($page = 1)
 	{
-	    $count = (int)p('mobile_post_list_page_count');
-	    $data = self::fetchFunnyMediaPosts(MEDIA_TYPE_VIDEO, $count);
-	     
-	    $this->pageTitle = '挖短片 - 各种有趣的，新奇的，经典的，有意思的精品视频短片';
-        $this->setDescription($this->pageTitle);
-        $this->setKeywords('搞笑视频短片,cf搞笑视频,lol搞笑视频,搞笑视频,疯狂恶搞,爆笑童趣,雷人囧事,动物奇趣,优酷搞笑视频,娱乐搞笑视频,土豆搞笑视频,激动搞笑视频');
-        
-        $this->channel = CHANNEL_FUNNY . MEDIA_TYPE_VIDEO;
-	    cs()->registerMetaTag('all', 'robots');
-	    $this->render('posts', $data);
+	    $this->redirect(CDBaseUrl::mobileHomeUrl(), true, 301);
 	}
 
 
@@ -114,7 +104,6 @@ class ChannelController extends MobileController
 	    $criteria = new CDbCriteria();
 	    $criteria->scopes = array('homeshow', 'published');
 	    $criteria->addColumnCondition(array('channel_id' => CHANNEL_FUNNY));
-	    $criteria->addInCondition('t.media_type', array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE));
 	    if ($hours > 0) {
 	        $fromtime = $_SERVER['REQUEST_TIME'] - $hours * 3600;
 	        $criteria->addCondition('t.create_time > :fromtime');

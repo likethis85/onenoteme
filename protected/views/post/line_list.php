@@ -1,4 +1,3 @@
-<?php if ($this->channel != CHANNEL_VIDEO):?>
 <div class="panel panel10 bottom10px">
     <ul class="hot-keyword">
         <li><span class="cred announce">24小时更新：<?php echo Post::todayUpdateCount();?>篇。&nbsp;&nbsp;&nbsp;QQ群：49401589</span></li>
@@ -6,7 +5,7 @@
     </ul>
     <div class="clear"></div>
 </div>
-<?php endif;?>
+
 <div class="post-line-list">
     <?php foreach ((array)$models as $key => $model):?>
     <div class="panel panel20 post-item post-box">
