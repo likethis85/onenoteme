@@ -44,7 +44,6 @@
 		    </li>
     		<li class="top-menu"><a href="<?php echo url('channel/joke');?>">挖笑话</a></li>
     		<li class="top-menu"><a href="<?php echo url('channel/lengtu');?>">挖趣图</a></li>
-    		<li class="top-menu"><a href="<?php echo url('channel/video');?>">挖视频</a></li>
     	</ul>
     	<ul class="fright">
     	</ul>
