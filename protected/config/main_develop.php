@@ -191,7 +191,7 @@ return array(
             'class' => 'application.extensions.CDUpyunUploader',
             'isImageBucket' => true,
             'endpoint' => 'v2.api.upyun.com',
-            'bucket' => 'wdzimage',
+            'bucket' => 'wdztest',
             'username' => 'cdcchen',
             'password' => 'cdc790406',
             'basePath' => '/',

@@ -4,7 +4,7 @@ return array(
     'dataPath' => CD_CONFIG_ROOT . DS . '..' . DS . 'data' . DS,
     'localUploadBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'uploads' . DS,
     'localUploadBaseUrl' => 'http://f.waduanzi.cn/',
-    'upyunImageBaseUrl' => 'http://f0.wabao.me/',
+    'upyunImageBaseUrl' => 'http://wdztest.b0.upaiyun.com/',
     'upyunFileBaseUrl' => 'http://f2.wabao.me/',
     'resourceBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'resources' . DS,
     'resourceBaseUrl' => 'http://s.waduanzi.cn/',
