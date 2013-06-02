@@ -1,7 +1,7 @@
 <div class="panel panel20">
     <div class="cd-content fleft login-signup">
         <h2>欢迎加入<?php echo app()->name;?></h2>
-        <?php echo CHtml::form('', 'post', array('class'=>'form-horizontal login-form'));?>
+        <?php echo CHtml::form('', 'post', array('class'=>'form-horizontal cd-form login-form'));?>
         <?php echo CHtml::activeHiddenField($form, 'returnUrl');?>
         <div class="control-group <?php echo $form->hasErrors('username') ? 'error' : '';?>">
             <label class="control-label"><?php echo CHtml::activeLabel($form, 'username');?></label>

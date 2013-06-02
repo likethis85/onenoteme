@@ -86,13 +86,13 @@ input.button:active, .button:active {background-position:-389px 0;}
 /* site/signup, user signup */
 
 /* login form */
-.login-form {margin-top:20px;}
+.cd-form {margin-top:20px;}
 .login-signup h2 {font-size:20px;}
-.login-form .control-label {width:80px;}
-.login-form .controls {margin-left:100px;}
-.login-form .form-actions {padding-left:100px;}
-.login-form .controls label, .login-form .controls span, .login-form .controls p {font-size:12px;}
-.login-form .suggestion {color:gray; clear:both; margin-top:2px;}
+.cd-form .control-label {width:80px;}
+.cd-form .controls {margin-left:100px;}
+.cd-form .form-actions {padding-left:100px;}
+.cd-form .controls label, .cd-form .controls span, .cd-form .controls p {font-size:12px;}
+.cd-form .suggestion {color:gray; clear:both; margin-top:2px;}
 input.cd-text.cd-captcha {font-size:16px!important; width:50px; color:darkred;}
 .quick-login-signup {margin-top:100px;}
 
@@ -273,5 +273,9 @@ a:hover #big-qrcode {display:block;}
 .about-sidebar li {margin:10px 0;}
 .about-sidebar li a, .about-content a {text-decoration:underline; font-size:14px;}
 .about-sidebar li.active a {font-weight:bold; color:#000000;}
+
+/* publish */
+.publish-post h2 {font-size:20px;}
+.publish-post .site-notice li {margin:7px 0;}
 
 

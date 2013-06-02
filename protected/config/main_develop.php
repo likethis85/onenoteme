@@ -123,6 +123,8 @@ return array(
                 'rest/comment/show/<post_id:\d+>' => 'rest/comment/show',
                 'rest/comment/report/<comment_id:\d+>' => 'rest/comment/report',
                     
+                '<_a:(login|logout|signup|quicklogin|activate)>' => 'account/<_a>',
+                    
                 'http://www.waduanzi.cn/' => 'site/index',
                 'http://www.waduanzi.cn/<_a:(login|signup|logout|bdmap|links)>' => 'site/<_a>',
                 'http://www.waduanzi.cn/<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',

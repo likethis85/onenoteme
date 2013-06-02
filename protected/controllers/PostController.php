@@ -23,7 +23,20 @@ class PostController extends Controller
     
     public function actionPublish()
     {
+        $model = new PostForm();
         
+        if (request()->getIsPostRequest() && isset($_POST['PostForm'])) {
+            $model->attributes = $_POST['PostForm'];
+            if ($model->validate()) {
+                user()->setFlash('publish_post_success', '您的笑话已经成功提交！如果您是会员，审核通过后我们会发邮箱通知您。');
+                $this->redirect(request()->getUrl());
+            }
+            else {
+                
+            }
+        }
+        
+        $this->render('publish', array('model'=>$model));
     }
     
     public function actionScore()
