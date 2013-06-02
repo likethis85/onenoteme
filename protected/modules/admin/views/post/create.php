@@ -52,25 +52,6 @@
         </div>
     </div>
     
-    
-    <!-- extra column start -->
-    <?php if ($model->getIsVideoType()):?>
-    <div class="control-group bottom10px <?php if ($model->hasErrors('extra03')) echo 'error';?>">
-        <?php echo CHtml::activeLabel($model, 'extra03', array('class'=>'control-label'));?>
-        <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'extra03', array('id'=>'extra03', 'class'=>'span6'));?>
-            <?php if ($model->hasErrors('extra03')):?><p class="help-block"><?php echo $model->getError('extra03');?></p><?php endif;?>
-        </div>
-    </div>
-    <div class="control-group bottom10px <?php if ($model->hasErrors('extra02')) echo 'error';?>">
-        <?php echo CHtml::activeLabel($model, 'extra02', array('class'=>'control-label'));?>
-        <div class="controls">
-            <?php echo CHtml::activeTextArea($model, 'extra02', array('id'=>'extra02', 'class'=>'span6'));?>
-            <?php if ($model->hasErrors('extra02')):?><p class="help-block"><?php echo $model->getError('extra02');?></p><?php endif;?>
-        </div>
-    </div>
-    <?php endif;?>
-    <!-- extra column end -->
     <div class="form-actions">
         <?php echo CHtml::submitButton('保存段子', array('class'=>'btn btn-primary'));?>
     </div>
@@ -150,16 +131,8 @@ $(function(){
         KEConfig.adminfull.cssPath = cssPath;
     	KEConfig.adminfull.uploadJson = imageUploadUrl;
     	
-    	<?php if ($model->getIsTextType()):?>
-    	KEConfig.adminfull.designMode = false;
-    	<?php elseif ($model->getIsVideoType()):?>
-    	KEConfig.adminfull.designMode = false;
-    	KEConfig.adminfull.height = 200;
-    	<?php endif;?>
-    	
     	var contentEditor = K.create('#content', KEConfig.adminfull);
-        
-    	$(document).on('click', '.post-pictures li', function(event){
+        $(document).on('click', '.post-pictures li', function(event){
             var html = $(this).html();
             contentEditor.insertHtml(html);
             

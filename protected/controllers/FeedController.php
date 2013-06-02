@@ -177,8 +177,6 @@ class FeedController extends Controller
     
             $desc = $dom->createElement('description');
             $descText = $model->getFilterContent();
-            if ($model->getIsVideoType())
-                $descText = '<p>' . $model->getVideoHtml() . '</p>' . $descText;
             $desc->appendChild($dom->createCDATASection(utf8ForXml($descText)));
             $item->appendChild($desc);
         }

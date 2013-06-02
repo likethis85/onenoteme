@@ -23,17 +23,19 @@ class PostController extends Controller
     
     public function actionPublish()
     {
+        if (user()->getIsGuest()) {
+	        $url = CDBaseUrl::loginUrl(abu(request()->getUrl()));
+	        request()->redirect($url);
+	        exit(0);
+	    }
+	    
         $model = new PostForm();
-        
         if (request()->getIsPostRequest() && isset($_POST['PostForm'])) {
             $model->attributes = $_POST['PostForm'];
             if ($model->validate() && $model->save()) {
                 user()->setFlash('allow_author_view', '1');
                 user()->setFlash('publish_post_success', '您的笑话已经成功提交！如果您是会员，审核通过后我们会发邮箱通知您。');
                 $this->redirect(request()->getUrl());
-            }
-            else {
-                
             }
         }
         

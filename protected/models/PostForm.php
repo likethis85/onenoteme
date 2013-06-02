@@ -78,7 +78,7 @@ class PostForm extends CFormModel
         $upload = CUploadedFile::getInstance($this, 'image');
         if ($upload === null) return null;
         
-        $result = CDUploadedFile::saveImage(false, $upload->getTempName(), '', '', array('water_position'=>CDWaterMark::POS_BOTTOM_LEFT));
+        $result = CDUploadedFile::saveImage(true, $upload->getTempName(), '', '', array('water_position'=>CDWaterMark::POS_BOTTOM_LEFT));
         return $result ? $result : false;
     }
     
