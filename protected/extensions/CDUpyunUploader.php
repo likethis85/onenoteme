@@ -1,5 +1,5 @@
 <?php
-class CDUpyunUploader extends CDBaseUploader  implements ICDUploader
+class CDUpyunUploader extends CDBaseUploader implements ICDUploader
 {
     public $endpoint = null;
     public $username;
@@ -15,7 +15,7 @@ class CDUpyunUploader extends CDBaseUploader  implements ICDUploader
      * @var UpYun
      */
     private $_client;
-    
+
     public function init()
     {
         parent::init();
@@ -45,6 +45,11 @@ class CDUpyunUploader extends CDBaseUploader  implements ICDUploader
         $filename = '/' . $files['relative_url'];
         $this->setFilename($filename);
         return $files;
+    }
+    
+    public function setFilename($filename)
+    {
+        return parent::setFilename($filename);
     }
     
     /**

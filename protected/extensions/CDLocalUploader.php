@@ -1,5 +1,5 @@
 <?php
-class CDLocalUploader extends CDBaseUploader
+class CDLocalUploader extends CDBaseUploader implements ICDUploader
 {
     public function init()
     {
@@ -33,7 +33,7 @@ class CDLocalUploader extends CDBaseUploader
             throw new CDUploaderException($path .' is not exists or is not writable');
         }
             
-        parent::setFilename($filename);
+        return parent::setFilename($filename);
     }
     
     /**
@@ -107,7 +107,7 @@ class CDLocalUploader extends CDBaseUploader
     public function delete($path)
     {
         $path = $this->getPathByUrl($path);
-        return $this->_client->deleteFile($path);
+        return @unlink($path);
     }
     
 

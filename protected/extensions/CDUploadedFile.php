@@ -1,34 +1,6 @@
 <?php
-class CDUploadedFile extends CUploadedFile
+class CDUploadedFile
 {
-    private $_upyunEnabled = false;
-    
-    public function saveFileAs($file, $isImageFile = false, $deleteTempFile = true, $opts = null)
-    {
-        if ($this->_error == UPLOAD_ERR_OK) {
-            $uploader = $this->_upyunEnabled ? upyunUploader($isImageFile) : app()->getComponent('localUploader', false);
-            $content = file_get_contents($this->_tempName);
-            $infos = $uploader->save($content, $file, $opts);
-            if ($deleteTempFile)
-                @unlink($this->_tempName);
-            
-            $infos['url'] = $uploader->getFileUrl();
-            return $infos;
-        }
-        else
-            return false;
-    }
-    
-    public function saveImageAs($file, $deleteTempFile = true, $opts = null)
-    {
-        return $this->saveFileAs($file, true, $deleteTempFile, $opts);
-    }
-    
-    public function setUpyunEnabled($enabled = true)
-    {
-        $this->_upyunEnabled = $enabled;
-    }
-    
     public static function saveImage($upyunEnabled, $file, $pathPrefix = '', $referer = '', $opts = array())
     {
         $image = array();
@@ -55,69 +27,7 @@ class CDUploadedFile extends CUploadedFile
         $im = new CDImage();
         $im->load($data);
         
-        /* 检查是否有额外的参数选项，主要是去除头尾的版本水印及LOGO
-         * 如果是动画，不作相关处理
-         */
-        if (!$im->isAnimateGif()) {
-            if (!empty($opts)) {
-                $defaultOptions = array(
-                    'padding_top' => 0,
-                    'padding_bottom' => 0,
-                    'water_position' => 0,
-                );
-                if (is_array($opts)) {
-                    foreach ($opts as $key => $value) {
-                        if (!array_key_exists($key, $defaultOptions))
-                            throw new CDException($key . ' is invalid.');
-                    }
-                }
-                else
-                    throw new CDException('$opts must be an array.');
-                
-                // 裁剪图片
-                $top = (int)$opts['padding_top'];
-                $bottom = (int)$opts['padding_bottom'];
-                if ((array_key_exists('padding_top', $opts) && $top > 0) ||
-                    (array_key_exists('padding_bottom', $opts) && $bottom > 0)) {
-                    $width = $im->width();
-                    $height = $im->height() - $top - $bottom;
-                    $im->cropByFrame($width, $height, 0, $top);
-                    $im->setCurrentRawData();
-                }
-                
-                // 添加水印
-                $waterPosition = (int)$opts['water_position'];
-                if (array_key_exists('water_position', $opts) && $waterPosition > 0) {
-                    $imWidth = $im->width();
-                    if ($imWidth > IMAGE_WATER_SITENAME_SIZE) {
-                        $cnfont = Yii::getPathOfAlias('application.fonts') . DS . 'Hiragino_Sans_GB_W6.otf';
-                        $water = new CDWaterMark(CDWaterMark::TYPE_TEXT);
-                        $water->position($waterPosition)
-                            ->color('#F0F0F0')
-                            ->borderColor('#333333')
-                            ->font($cnfont)
-                            ->fontsize(22)
-                            ->setText('挖段子网')
-                            ->applyText($im, 5, 10);
-                    
-                        $im->setCurrentRawData();
-                    }
-                    elseif ($imWidth > IMAGE_WATER_URL_SIZE) {
-                        $enfont = Yii::getPathOfAlias('application.fonts') . DS . 'HelveticaNeueLTPro-Hv.otf';
-                        $water = new CDWaterMark(CDWaterMark::TYPE_TEXT);
-                        $water->position($waterPosition)
-                        ->color('#F0F0F0')
-                        ->borderColor('#333333')
-                        ->font($enfont)
-                        ->fontsize(12)
-                        ->setText('waduanzi.com')
-                        ->applyText($im, 5, 10);
-                    
-                        $im->setCurrentRawData();
-                    }
-                }
-            }
-        }
+        self::processImage($im, $opts);
         
         if ($upyunEnabled)
             $image = self::saveImageToUpyun($im, $pathPrefix);
@@ -139,7 +49,7 @@ class CDUploadedFile extends CUploadedFile
             $paths = $uploader->autoFilename($im->getExtName(), $pathPrefix, 'original');
             
             $infos = $uploader->save($im->rawData());
-            
+
             if (is_array($infos)) {
                 $original = $infos;
                 $original['url'] = $paths['absolute_url'];
@@ -195,6 +105,75 @@ class CDUploadedFile extends CUploadedFile
         $im = null;
     
         return $original;
+    }
+    
+    public function processImage($im, $opts)
+    {
+        /* 检查是否有额外的参数选项，主要是去除头尾的版本水印及LOGO
+         * 如果是动画，不作相关处理
+        */
+        if (!$im->isAnimateGif()) {
+            if (!empty($opts)) {
+                $defaultOptions = array(
+                    'padding_top' => 0,
+                    'padding_bottom' => 0,
+                    'water_position' => 0,
+                );
+                if (is_array($opts)) {
+                    foreach ($opts as $key => $value) {
+                        if (!array_key_exists($key, $defaultOptions))
+                            throw new CDException($key . ' is invalid.');
+                    }
+                }
+                else
+                    throw new CDException('$opts must be an array.');
+        
+                // 裁剪图片
+                $top = (int)$opts['padding_top'];
+                $bottom = (int)$opts['padding_bottom'];
+                if ((array_key_exists('padding_top', $opts) && $top > 0) ||
+                (array_key_exists('padding_bottom', $opts) && $bottom > 0)) {
+                    $width = $im->width();
+                    $height = $im->height() - $top - $bottom;
+                    $im->cropByFrame($width, $height, 0, $top);
+                    $im->setCurrentRawData();
+                }
+        
+                // 添加水印
+                $waterPosition = (int)$opts['water_position'];
+                if (array_key_exists('water_position', $opts) && $waterPosition > 0) {
+                    $imWidth = $im->width();
+                    if ($imWidth > IMAGE_WATER_SITENAME_SIZE) {
+                        $cnfont = Yii::getPathOfAlias('application.fonts') . DS . 'Hiragino_Sans_GB_W6.otf';
+                        $water = new CDWaterMark(CDWaterMark::TYPE_TEXT);
+                        $water->position($waterPosition)
+                            ->color('#F0F0F0')
+                            ->borderColor('#333333')
+                            ->font($cnfont)
+                            ->fontsize(22)
+                            ->setText('挖段子网')
+                            ->applyText($im, 5, 10);
+        
+                        $im->setCurrentRawData();
+                    }
+                    elseif ($imWidth > IMAGE_WATER_URL_SIZE) {
+                        $enfont = Yii::getPathOfAlias('application.fonts') . DS . 'HelveticaNeueLTPro-Hv.otf';
+                        $water = new CDWaterMark(CDWaterMark::TYPE_TEXT);
+                        $water->position($waterPosition)
+                            ->color('#F0F0F0')
+                            ->borderColor('#333333')
+                            ->font($enfont)
+                            ->fontsize(12)
+                            ->setText('waduanzi.com')
+                            ->applyText($im, 5, 10);
+        
+                        $im->setCurrentRawData();
+                    }
+                }
+            }
+        }
+        
+        return $im;
     }
 }
 

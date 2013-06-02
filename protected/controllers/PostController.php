@@ -27,7 +27,7 @@ class PostController extends Controller
         
         if (request()->getIsPostRequest() && isset($_POST['PostForm'])) {
             $model->attributes = $_POST['PostForm'];
-            if ($model->validate()) {
+            if ($model->validate() && $model->save()) {
                 user()->setFlash('publish_post_success', '您的笑话已经成功提交！如果您是会员，审核通过后我们会发邮箱通知您。');
                 $this->redirect(request()->getUrl());
             }

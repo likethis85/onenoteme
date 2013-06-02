@@ -9,7 +9,9 @@ interface ICDUploader
 {
     public function init();
     public function autoFilename($extension = '', $pathPrefix = '', $filePrefix = '', $autoMkDir = false);
+    public function setFilename($filename);
     public function save($file, $filename);
+    public function delete($path);
     public function getPathByUrl($url);
 }
 
@@ -85,6 +87,7 @@ class CDBaseUploader extends CApplicationComponent
             throw new CDUploaderException('$filename is required.');
         
         $this->_filename = $filename;
+        return $this;
     }
     
     public function getFilename()
