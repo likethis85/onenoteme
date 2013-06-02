@@ -61,11 +61,13 @@ class PostController extends Controller
         if ($id <= 0)
             throw new CHttpException(500, '非法请求');
         
-        if (user()->getIsAdmin() || user()->getFlash('allow_author_view'))
+        if (user()->getIsAdmin() || user()->hasFlash('allow_author_view'))
             $post = Post::model()->findByPk($id);
         else {
             $criteria = new CDbCriteria();
             $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
+            if (!user()->getIsGuest())
+                $criteria->addColumnCondition(array('user_id'=>user()->id, 'AND', 'OR'));
             $post = Post::model()->cache($duration)->findByPk($id, $criteria);
         }
         if (null === $post)
