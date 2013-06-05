@@ -4,7 +4,7 @@ class CommentController extends RestController
     public function filters()
     {
         return array(
-            'postOnly + create, report'
+//             'postOnly + create, report'
         );
     }
     
@@ -15,8 +15,8 @@ class CommentController extends RestController
      */
     public function actionCreate()
     {
-        $post_id = (int)request()->getPost('post_id');
-        $content = trim(request()->getPost('content'));
+        $post_id = (int)request()->getQuery('post_id');
+        $content = trim(request()->getQuery('content'));
         if (empty($post_id) || empty($content))
             throw new CDRestException(CDRestError::PARAM_NOT_COMPLETE, 'post_id, content is required');
         
