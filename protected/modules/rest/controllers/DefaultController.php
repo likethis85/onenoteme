@@ -8,10 +8,10 @@ class DefaultController extends RestController
             $data = array(
                 'errcode' => $error['code'],
                 'message' => $error['message'],
-                'type' => $error['type'],
             );
             
             if (REST_DEBUG) {
+                $data['type'] = $error['type'];
                 $data['trace'] = $error['trace'];
             }
             

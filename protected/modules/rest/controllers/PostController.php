@@ -33,7 +33,7 @@ class PostController extends RestController
         $criteria->order = 't.create_time desc';
         $criteria->with = array('user', 'user.profile');
         
-        $columns = array('t.chann2el_id' => $channel_id);
+        $columns = array('t.channel_id' => $channel_id);
         if ($user_id > 0)
             $columns['t.user_id'] = $user_id;
         if ($media_type)
