@@ -23,8 +23,11 @@ class CommentController extends RestController
         $comment = new ApiComment();
         $comment->post_id = $post_id;
         $comment->content = $content;
-        if ($comment->save())
-            $this->output(CDRestDataFormat::formatComment($comment));
+        if ($comment->save()) {
+            var_dump(CDRestDataFormat::formatComment($comment));
+            $data = CDRestDataFormat::formatComment($comment);
+            $this->output($data);
+        }
         else
             throw new CDRestException(CDRestError::COMMENT_SAVE_ERROR);
     }
