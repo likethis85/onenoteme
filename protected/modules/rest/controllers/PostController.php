@@ -49,7 +49,7 @@ class PostController extends RestController
             $criteria->params[':maxtime'] = $maxtime;
         }
         
-        $posts = ApiPost::model()->published()->findAll($criteria);
+        $posts = Api2Post::model()->published()->findAll($criteria);
         $rows = $this->formatRows($posts);
         
         $this->output($rows);
