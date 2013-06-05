@@ -135,7 +135,8 @@ class PostController extends RestController
         
         $post->up_score++;
         $result = $post->save(true, array('up_score'));
-        $this->output((int)$result);
+        $data = array('success' => (int)$result);
+        $this->output($data);
     }
     
     public function actionDown()
@@ -153,7 +154,8 @@ class PostController extends RestController
         
         $post->down_score++;
         $result = $post->save(true, array('down_score'));
-        $this->output((int)$result);
+        $data = array('success' => (int)$result);
+        $this->output($data);
     }
     
     

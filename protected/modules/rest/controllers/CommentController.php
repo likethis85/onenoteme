@@ -45,8 +45,8 @@ class CommentController extends RestController
         $criteria->addColumnCondition(array('id'=>$comment_id));
         $counters = array('report_count' => 1);
         $result = ApiComment::model()->updateCounters($counters, $criteria);
-        
-        $this->output($result);
+        $data = array('success' => (int)$result);
+        $this->output($data);
     }
     
     /**
