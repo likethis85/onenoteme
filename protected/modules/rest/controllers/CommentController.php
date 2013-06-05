@@ -20,7 +20,7 @@ class CommentController extends RestController
         if (empty($post_id) || empty($content))
             throw new CDRestException(CDRestError::PARAM_NOT_COMPLETE, 'post_id, content is required');
         
-        $comment = new ApiComment;
+        $comment = new ApiComment();
         $comment->post_id = $post_id;
         $comment->content = $content;
         if ($comment->save())

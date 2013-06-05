@@ -64,7 +64,7 @@ class CDRestDataFormat
     
     public static function formatComment(ApiComment $model, $includeUser = true)
     {
-        return array(
+        $data = array(
             'comment_id' => $model->id,
             'post_id' => $model->post_id,
             'content' => $model->getApiContent(),
@@ -75,8 +75,12 @@ class CDRestDataFormat
             'author_id' => $model->user_id,
             'author_name' => $model->user_name,
             'recommend' => $model->recommend,
-            'user' => self::formatUser($model->user),
         );
+        
+        if ($includeUser)
+            $data['user'] = self::formatUser($model->user);
+        
+        return $data;
     }
     
     public static function formatComments(array $models)
