@@ -171,6 +171,7 @@ class Post extends CActiveRecord
 		        'select' => array('id', 'username', 'screen_name', 'create_time', 'create_ip', 'state', 'token', 'token_time', 'source')),
 		    'profile' => array(self::BELONGS_TO, 'UserProfile', 'user_id'),
 		    'comments' => array(self::HAS_MANY, 'Comment', 'post_id'),
+	        'commentCount' => array(self::STAT, 'Comment', 'post_id',),
 		    'uploadImages' => array(self::HAS_MANY, 'Upload', 'post_id',
                 'condition' => 'file_type = :filetype',
 	            'params' => array(':filetype' => Upload::TYPE_IMAGE),

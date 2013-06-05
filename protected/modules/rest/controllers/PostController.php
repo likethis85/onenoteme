@@ -7,6 +7,7 @@ class PostController extends RestController
     {
         return array(
             'postOnly + create',
+            'putOnly + up, down',
         );
     }
     
@@ -119,7 +120,41 @@ class PostController extends RestController
         // @todo 上传图片功能未确定，稍候开发
     }
     
+    public function actionUp()
+    {
+        $postID = request()->getPost('post_id');
+        if (empty($postID))
+            throw new CHttpException(500, 'request is invalid');
+        
+        $criteria = new CDbCriteria();
+        $criteria->select = array('id', 'up_score');
+        $post = ApiPost::model()->published()->findByPk($postID, $criteria);
+        
+        if ($post === null)
+            throw new CHttpException(404, 'post is not found');
+        
+        $post->up_score++;
+        $result = $post->save(true, array('up_score'));
+        return (int)$result;
+    }
     
+    public function actionDown()
+    {
+        $postID = request()->getPost('post_id');
+        if (empty($postID))
+            throw new CHttpException(500, 'request is invalid');
+        
+        $criteria = new CDbCriteria();
+        $criteria->select = array('id', 'down_score');
+        $post = ApiPost::model()->published()->findByPk($postID, $criteria);
+        
+        if ($post === null)
+            throw new CHttpException(404, 'post is not found');
+        
+        $post->down_score++;
+        $result = $post->save(true, array('down_score'));
+        return (int)$result;
+    }
     
     
     
