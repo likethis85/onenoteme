@@ -104,7 +104,7 @@ class PostController extends RestController
         if ($post === null)
             throw new CHttpException(404, 'post is not found');
         else {
-            $row = CDRestDataFormat::formatPost($post, true, true);
+            $row = CDRestDataFormat::formatPost($post, true, false);
             $this->output($row);
         }
     }
