@@ -15,14 +15,14 @@ class CommentController extends RestController
      */
     public function actionCreate()
     {
-        $post_id = (int)request()->getQuery('post_id');
-        $content = trim(request()->getQuery('content'));
-        if (empty($post_id) || empty($content))
-            throw new CDRestException(CDRestError::PARAM_NOT_COMPLETE, 'post_id, content is required');
+//         $post_id = (int)request()->getQuery('post_id');
+//         $content = trim(request()->getQuery('content'));
+//         if (empty($post_id) || empty($content))
+//             throw new CDRestException(CDRestError::PARAM_NOT_COMPLETE, 'post_id, content is required');
         
         $comment = new ApiComment();
-        $comment->post_id = $post_id;
-        $comment->content = $content;
+        $comment->post_id = 46858;
+        $comment->content = '真搞笑';
         if ($comment->save()) {
             var_dump(CDRestDataFormat::formatComment($comment));
             $data = CDRestDataFormat::formatComment($comment);
