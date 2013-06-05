@@ -122,7 +122,7 @@ class PostController extends RestController
     
     public function actionUp()
     {
-        $postID = request()->getPost('post_id');
+        $postID = request()->getPut('post_id');
         if (empty($postID))
             throw new CHttpException(500, 'request is invalid');
         
@@ -140,7 +140,7 @@ class PostController extends RestController
     
     public function actionDown()
     {
-        $postID = request()->getPost('post_id');
+        $postID = request()->getPut('post_id');
         if (empty($postID))
             throw new CHttpException(500, 'request is invalid');
         
