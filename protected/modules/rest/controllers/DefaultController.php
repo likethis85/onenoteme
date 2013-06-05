@@ -6,8 +6,7 @@ class DefaultController extends RestController
         $error = app()->errorHandler->error;
         if ($error) {
             $data = array(
-                'error' => 1,
-                'errno'=>$error['code'],
+                'errcode'=>$error['code'],
                 'message'=>$error['message'],
             );
             

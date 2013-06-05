@@ -30,7 +30,7 @@ class RestController extends CController
     protected function output($value)
     {
         $data = array(
-            'errno' => 0,
+            'errcode' => 0,
             'response' => $value,
         );
         
