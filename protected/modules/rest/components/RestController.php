@@ -27,13 +27,8 @@ class RestController extends CController
             throw new CHttpException(400,Yii::t('yii','Your request is invalid.'));
     }
     
-    protected function output($value)
+    protected function output($data)
     {
-        $data = array(
-            'errcode' => 0,
-            'response' => $value,
-        );
-        
         header('Content-Type: application/json; charset=utf-8');
         echo CJSON::encode($data);
         exit(0);
