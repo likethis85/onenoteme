@@ -72,6 +72,7 @@ class CDRestDataFormat
             'create_time_at' => $model->getCreateTime(),
             'up_count' => $model->up_score,
             'down_count' => $model->down_score,
+            'report_count' => $model->report_count,
             'author_id' => $model->user_id,
             'author_name' => $model->user_name,
             'recommend' => $model->recommend,
