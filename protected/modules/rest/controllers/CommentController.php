@@ -4,7 +4,8 @@ class CommentController extends RestController
     public function filters()
     {
         return array(
-            'postOnly + create, report'
+            'postOnly + create',
+            'putOnly + report',
         );
     }
     
@@ -37,15 +38,23 @@ class CommentController extends RestController
      */
     public function actionReport()
     {
-        $comment_id = (int)request()->getPost('comment_id');
-        if (empty($comment_id))
-            throw new CDRestException(CDRestError::PARAM_NOT_COMPLETE, 'comment_id is required');
+        $commentID = (int)request()->getPut('comment_id');
+        if (empty($commentID))
+            throw new CHttpException(500, 'request is invalid');
         
         $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('id'=>$comment_id));
-        $counters = array('report_count' => 1);
-        $result = ApiComment::model()->updateCounters($counters, $criteria);
-        $data = array('success' => (int)$result);
+        $criteria->select = array('id', 'report_count');
+        $comment = ApiComment::model()->published()->findByPk($commentID, $criteria);
+        
+        if ($comment === null)
+            throw new CHttpException(404, 'comment is not found');
+        
+        $post->down_score++;
+        $result = $comment->save(true, array('down_score'));
+        $data = array(
+            'comment_id' => $comment->id,
+            'report_count' => $comment->report_count,
+        );
         $this->output($data);
     }
     
