@@ -26,9 +26,9 @@ class ApiPost extends Post
     
     public function getApiContent()
     {
-        $content = nl2br($this->content);
-        $content = str_replace(array('<p>', '<div>', '<br>', '<br />', '</div>', '</p>'), "\n", $content);
+        $content = str_replace(array('<p>', '<div>', '<br>', '<br />', '</div>', '</p>'), "\n", $this->content);
         $content = trim(strip_tags($content));
+        $content = str_replace('/\s{2,}/gi', "\n", $content);
         return $content;
     }
 }
