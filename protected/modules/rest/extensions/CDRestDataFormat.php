@@ -20,8 +20,10 @@ class CDRestDataFormat
             'small_pic' => $model->getSquareThumb(),
             'middle_pic' => $model->getMiddleImage(),
             'larget_pic' => $model->getLargeImage(),
-            'user' => self::formatUser($model->user),
         );
+        
+        if ($includeUser)
+            $data['user'] = self::formatUser($model->user);
         
         if ($includeComment)
             $data['comments'] = self::formatComments($model->comments);
@@ -42,9 +44,9 @@ class CDRestDataFormat
                 'token_time' => 0,
                 'website' => '',
                 'desc' => '',
-                'mini_avatar' => sbu(param('default_mini_avatar')),
-                'small_avatar' => sbu(param('default_small_avatar')),
-                'large_avatar' => sbu(param('default_large_avatar')),
+                'mini_avatar' => '',
+                'small_avatar' => '',
+                'large_avatar' => '',
             );
         else
             $row = array(
