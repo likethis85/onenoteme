@@ -19,6 +19,11 @@ class ApiPost extends Post
         ));
     }
     
+    public function getApiTitle()
+    {
+        return trim(strip_tags(nl2br($this->title)));
+    }
+    
     public function getApiContent()
     {
         $content = str_replace(array('<p>', '<div>', '<br>', '<br />', '</div>', '</p>'), "\n", $this->content);

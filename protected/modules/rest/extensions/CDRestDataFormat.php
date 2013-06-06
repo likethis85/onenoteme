@@ -6,10 +6,10 @@ class CDRestDataFormat
         $data = array(
             'post_id' => $model->id,
             'channel_id' => $model->channel_id,
-            'title' => $model->title,
+            'title' => $model->getApiTitle(),
             'content' => $model->getApiContent(),
             'create_time' => $model->create_time,
-            'create_time_at' => $model->create_time,
+            'create_time_at' => $model->getCreateTime(),
             'up_count' => $model->up_score,
             'down_count' => $model->down_score,
             'comment_count' => $model->comment_nums,
@@ -44,9 +44,9 @@ class CDRestDataFormat
                 'token_time' => 0,
                 'website' => '',
                 'desc' => '',
-                'mini_avatar' => '',
-                'small_avatar' => '',
-                'large_avatar' => '',
+                'mini_avatar' => sbu(param('default_mini_avatar')),
+                'small_avatar' => sbu(param('default_small_avatar')),
+                'large_avatar' => sbu(param('default_large_avatar')),
             );
         else
             $row = array(
