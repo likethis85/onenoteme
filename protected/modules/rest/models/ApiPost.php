@@ -21,7 +21,7 @@ class ApiPost extends Post
     
     public function getApiTitle()
     {
-        return trim(strip_tags(nl2br($this->title)));
+        return trim(strip_tags($this->title));
     }
     
     public function getApiContent()
