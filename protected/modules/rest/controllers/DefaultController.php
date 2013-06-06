@@ -5,19 +5,19 @@ class DefaultController extends RestController
     {
         $error = app()->errorHandler->error;
         if ($error) {
-            $error = array(
+            $data = array(
                 'errcode' => $error['code'],
                 'message' => $error['message'],
             );
             
             if (REST_DEBUG) {
-                $error['type'] = $error['type'];
-                $error['trace'] = $error['trace'];
+                $data['type'] = $error['type'];
+                $data['trace'] = $error['trace'];
             }
             
-            $data['error'] = $error;
+            $value['error'] = $data;
             
-            echo CJSON::encode($data);
+            echo CJSON::encode($value);
         	exit(0);
         }
     }
