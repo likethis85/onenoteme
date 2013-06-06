@@ -32,7 +32,7 @@ class PostController extends RestController
         $criteria->limit = $this->timelineRowCount();
         $criteria->order = 't.create_time desc';
         $criteria->with = array('user', 'user.profile');
-        $criteria->addCondition('t.original_frames <= 1');
+//         $criteria->addCondition('t.original_frames <= 1');
         
         $columns = array('t.channel_id' => $channel_id);
         if ($user_id > 0)
