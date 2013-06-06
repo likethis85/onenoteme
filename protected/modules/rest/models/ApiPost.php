@@ -28,7 +28,7 @@ class ApiPost extends Post
     {
         $content = str_replace(array('<p>', '<div>', '<br>', '<br />', '</div>', '</p>'), "\n", $this->content);
         $content = trim(strip_tags($content));
-        $content = str_replace('/\s{2,}/gim', "\n", $content);
+        $content = str_replace('/\n+/gim', "\n", $content);
         return $content;
     }
 }
