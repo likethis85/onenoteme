@@ -191,6 +191,7 @@ class FeedController extends Controller
             'zaker',
             'yuedu163',
             'qqmb',
+            'xianguo',
         );
     }
     
