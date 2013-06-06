@@ -9,13 +9,13 @@ class CDRestDataFormat
             'title' => $model->title,
             'content' => $model->getApiContent(),
             'create_time' => $model->create_time,
-            'create_time_at' => $model->getCreateTime(),
+            'create_time_at' => $model->create_time(),
             'up_count' => $model->up_score,
             'down_count' => $model->down_score,
             'comment_count' => $model->comment_nums,
             'favorite_count' => $model->favorite_count,
             'author_id' => $model->user_id,
-            'author_name' => $model->user_name,
+            'author_name' => $model->getAuthorName(),
             'tags' => $model->tags,
             'small_pic' => $model->getSquareThumb(),
             'middle_pic' => $model->getMiddleImage(),
@@ -34,7 +34,7 @@ class CDRestDataFormat
         if (empty($model))
             $row = array(
                 'user_id' => 0,
-                'username' => '',
+                'username' => 'Guest',
                 'screen_name' => 'Guest',
                 'create_time' => 0,
                 'create_time_at' => '',
@@ -50,7 +50,7 @@ class CDRestDataFormat
             $row = array(
                 'user_id' => $model->id,
                 'username' => $model->username,
-                'screen_name' => $model->screen_name,
+                'screen_name' => $model->getDisplayName(),
                 'create_time' => $model->create_time,
                 'create_time_at' => $model->getCreateTime(),
                 'token' => $model->token,

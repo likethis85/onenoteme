@@ -197,11 +197,11 @@ class PostController extends RestController
         return 20;
     }
     
-    protected function formatRows(array $models)
+    protected function formatRows(array $models, $includeUser = true, $includeComment = false)
     {
         $rows = array();
         foreach ($models as $index => $model)
-            $rows[$index] = CDRestDataFormat::formatPost($model);;
+            $rows[$index] = CDRestDataFormat::formatPost($model, $includeUser, $includeComment);;
     
         $models = null;
         return $rows;
