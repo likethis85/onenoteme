@@ -17,6 +17,9 @@ class CDRestDataFormat
             'author_id' => $model->user_id,
             'author_name' => $model->user_name,
             'tags' => $model->tags,
+            'small_pic' => $model->getSquareThumb(),
+            'middle_pic' => $model->getMiddleImage(),
+            'larget_pic' => $model->getLargeImage(),
             'user' => self::formatUser($model->user),
         );
         
