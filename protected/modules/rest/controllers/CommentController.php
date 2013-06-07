@@ -49,7 +49,7 @@ class CommentController extends RestController
         if ($comment === null)
             throw new CHttpException(404, 'comment is not found');
         
-        $post->down_score++;
+        $comment->report_count++;
         $result = $comment->save(true, array('report_count'));
         $data = array(
             'comment_id' => $comment->id,
@@ -75,7 +75,7 @@ class CommentController extends RestController
         if ($comment === null)
             throw new CHttpException(404, 'comment is not found');
     
-        $post->up_score++;
+        $comment->up_score++;
         $result = $comment->save(true, array('up_score'));
         $data = array(
             'comment_id' => $comment->id,
@@ -84,33 +84,7 @@ class CommentController extends RestController
         $this->output($data);
     }
     
-    /**
-     * 获取一条段子的评论
-     * @param integer $post_id 段子ID，required.
-     * @param integer $lasttime 最后更新时间，optional.
-     */
-    public function actionShow($post_id, $lasttime = 0)
-    {
-        $post_id = (int)$post_id;
-        $lasttime = (int)$lasttime;
-        
-        $criteria = new CDbCriteria();
-        $criteria->select = $this->selectColumns();
-        $criteria->limit = $this->timelineRowCount();
-        $criteria->order = 't.create_time asc';
-        $criteria->with = array('user', 'user.profile');
-        $criteria->addColumnCondition(array('post_id'=>$post_id));
     
-        if ($lasttime > 0) {
-            $criteria->addCondition('t.create_time > :lasttime');
-            $criteria->params[':lasttime'] = $lasttime;
-        }
-    
-        $posts = ApiComment::model()->published()->findAll($criteria);
-        $rows = CDRestDataFormat::formatComments($posts);
-    
-        $this->output($rows);
-    }
     
     
     
