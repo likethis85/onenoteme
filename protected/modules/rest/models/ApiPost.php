@@ -19,6 +19,11 @@ class ApiPost extends Post
         ));
     }
     
+    public function getApiCreateTime()
+    {
+        return parent::getShortDateTime();
+    }
+    
     public function getApiTitle()
     {
         return trim(strip_tags($this->title));
