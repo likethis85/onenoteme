@@ -21,7 +21,8 @@ class ApiPost extends Post
     
     public function getApiCreateTime()
     {
-        return parent::getShortDateTime();
+        $format = 'd日 H:i';
+        return parent::getCreateTime($format);
     }
     
     public function getApiTitle()
