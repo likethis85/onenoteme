@@ -20,6 +20,7 @@ class CDRestDataFormat
             'small_pic' => $model->getSquareThumb(),
             'middle_pic' => $model->getMiddleImage(),
             'larget_pic' => $model->getLargeImage(),
+            'pic_frames' => $model->original_frames,
         );
         
         if ($includeUser)
