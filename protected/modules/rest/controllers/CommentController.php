@@ -50,10 +50,36 @@ class CommentController extends RestController
             throw new CHttpException(404, 'comment is not found');
         
         $post->down_score++;
-        $result = $comment->save(true, array('down_score'));
+        $result = $comment->save(true, array('report_count'));
         $data = array(
             'comment_id' => $comment->id,
             'report_count' => $comment->report_count,
+        );
+        $this->output($data);
+    }
+    
+    /**
+     * 举报评论
+     * @param string $comment_id, required
+     */
+    public function actionSupport()
+    {
+        $commentID = (int)request()->getPut('comment_id');
+        if (empty($commentID))
+            throw new CHttpException(500, 'request is invalid');
+    
+        $criteria = new CDbCriteria();
+        $criteria->select = array('id', 'up_score');
+        $comment = ApiComment::model()->published()->findByPk($commentID, $criteria);
+    
+        if ($comment === null)
+            throw new CHttpException(404, 'comment is not found');
+    
+        $post->up_score++;
+        $result = $comment->save(true, array('up_score'));
+        $data = array(
+            'comment_id' => $comment->id,
+            'up_score' => $comment->up_score,
         );
         $this->output($data);
     }
