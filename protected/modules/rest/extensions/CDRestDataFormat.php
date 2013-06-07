@@ -74,12 +74,12 @@ class CDRestDataFormat
             'post_id' => $model->post_id,
             'content' => $model->getApiContent(),
             'create_time' => $model->create_time,
-            'create_time_at' => $model->getCreateTime(),
+            'create_time_at' => $model->getApiCreateTime(),
             'up_count' => $model->up_score,
             'down_count' => $model->down_score,
             'report_count' => $model->report_count,
             'author_id' => $model->user_id,
-            'author_name' => $model->user_name,
+            'author_name' => $model->getAuthorName(),
             'recommend' => $model->recommend,
         );
         

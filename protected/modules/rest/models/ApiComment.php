@@ -20,6 +20,12 @@ class ApiComment extends Comment
         ));
     }
 
+    public function getApiCreateTime()
+    {
+        $format = 'd日 H:i';
+        return parent::getCreateTime($format);
+    }
+    
     public function getApiContent()
     {
         $content = str_replace(array('<p>', '<div>', '<br>', '<br />', '</div>', '</p>'), "\n", $this->content);
