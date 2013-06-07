@@ -18,8 +18,8 @@ class CDRestDataFormat
             'author_name' => $model->getAuthorName(),
             'tags' => $model->tags,
             'small_pic' => $model->getSquareThumb(),
-            'middle_pic' => $model->getMiddleImage(),
-            'larget_pic' => $model->getLargeImage(),
+            'middle_pic' => $model->getMiddlePic(),
+            'larget_pic' => $model->getLargePic(),
             'pic_frames' => $model->original_frames,
         );
         
