@@ -50,6 +50,7 @@
  * @property string $createTime
  * @property string $shortDate
  * @property string $shortTime
+ * @property string $shortDateTime
  * @property string $authorName
  * @property string $subTitle
  * @property string $titleLink
@@ -416,6 +417,17 @@ class Post extends CActiveRecord
     public function getShortDate()
     {
         $format = param('formatShortDate');
+         
+        return $this->getCreateTime($format);
+    }
+    
+    /**
+     * 段子发布时间，只包括月和日
+     * @return string
+     */
+    public function getShortDateTime()
+    {
+        $format = param('formatShortDateTime');
          
         return $this->getCreateTime($format);
     }

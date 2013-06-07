@@ -9,7 +9,7 @@ class CDRestDataFormat
             'title' => $model->getApiTitle(),
             'content' => $model->getApiContent(),
             'create_time' => $model->create_time,
-            'create_time_at' => $model->getCreateTime(),
+            'create_time_at' => $model->getShortDateTime(),
             'up_count' => $model->up_score,
             'down_count' => $model->down_score,
             'comment_count' => $model->comment_nums,
