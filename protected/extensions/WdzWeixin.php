@@ -69,6 +69,7 @@ class WdzWeixin extends CDWeixin
         $post->down_score = mt_rand(param('init_down_score_min'), param('init_down_score_max'));
         $post->view_nums = mt_rand(param('init_view_nums_min'), param('init_view_nums_max'));
         $post->original_pic = '';
+        $post->homeshow = CD_YES;
         try {
             $result = $post->save();
         }
