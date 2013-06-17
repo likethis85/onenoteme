@@ -38,7 +38,7 @@ class PostController extends RestController
         if ($user_id > 0)
             $columns['t.user_id'] = $user_id;
         if ($media_type)
-            $columns['t.media_type'] =$media_type;
+            $columns['t.media_type'] = $media_type;
         $criteria->addColumnCondition($columns);
         
         if ($lasttime > 0) {
