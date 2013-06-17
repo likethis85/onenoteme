@@ -167,9 +167,18 @@ class PostController extends RestController
     
     public function actionRandom()
     {
+        $duration = 24*60*60;
+        $count = db()->cache($duration)->createCommand()
+            ->select('count(*)')
+            ->from(TABLE_POST)
+            ->where(array('and', 'media_type = :mediatype', 'state = :enabled'), array(':mediatype' => MEDIA_TYPE_TEXT, ':enabled'=>POST_STATE_ENABLED))
+            ->order('create_time desc')
+            ->queryScalar();
+        
         $criteria = new CDbCriteria();
         $criteria->order = 't.create_time desc';
         $criteria->addColumnCondition(array('t.media_type'=>MEDIA_TYPE_TEXT, 't.state' => POST_STATE_ENABLED));
+        $criteria->offset = mt_rand(0, $count-1);
         $model = ApiPost::model()->find($criteria);
         $data = CDRestDataFormat::formatPost($model, false, false);
         $this->output($data);

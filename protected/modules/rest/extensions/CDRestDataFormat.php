@@ -21,6 +21,7 @@ class CDRestDataFormat
             'middle_pic' => $model->getMiddlePic(),
             'larget_pic' => $model->getLargePic(),
             'pic_frames' => $model->original_frames,
+            'url' => $model->getUrl(),
         );
         
         if ($trimUser)
