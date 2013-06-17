@@ -1,9 +1,9 @@
 <?php
 class CDDataFormat
 {
-    public static function formatPost(ApiPost $model)
+    public static function formatPost(ApiPost $model, $trimUser = true)
     {
-        return array(
+        $data = array(
             'post_id' => $model->id,
             'channel_id' => $model->channel_id,
             'title' => $model->title,
@@ -17,8 +17,12 @@ class CDDataFormat
             'author_id' => $model->user_id,
             'author_name' => $model->user_name,
             'tags' => $model->tags,
-            'user' => self::formatUser($model->user),
         );
+        
+        if ($trimUser)
+            $data['user'] = self::formatUser($model->user);
+        
+        return $data;
     }
    
     public static function formatUser(ApiUser $model)

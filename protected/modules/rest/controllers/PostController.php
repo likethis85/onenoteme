@@ -171,7 +171,8 @@ class PostController extends RestController
         $criteria->order = 't.create_time desc';
         $criteria->addColumnCondition(array('t.media_type'=>MEDIA_TYPE_TEXT, 't.state' => POST_STATE_ENABLED));
         $model = ApiPost::model()->find($criteria);
-        $this->output(CDDataFormat::formatPost($model));
+        $data = CDDataFormat::CDRestDataFormat($model, false);
+        $this->output($data);
     }
     
     

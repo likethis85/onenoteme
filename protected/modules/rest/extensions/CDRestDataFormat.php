@@ -1,7 +1,7 @@
 <?php
 class CDRestDataFormat
 {
-    public static function formatPost(ApiPost $model, $includeUser = true, $includeComment = false)
+    public static function formatPost(ApiPost $model, $trimUser = true, $trimComment = false)
     {
         $data = array(
             'post_id' => $model->id,
@@ -23,10 +23,10 @@ class CDRestDataFormat
             'pic_frames' => $model->original_frames,
         );
         
-        if ($includeUser)
+        if ($trimUser)
             $data['user'] = self::formatUser($model->user);
         
-        if ($includeComment)
+        if ($trimComment)
             $data['comments'] = self::formatComments($model->comments);
         
         return $data;
