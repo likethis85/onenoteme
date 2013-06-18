@@ -66,9 +66,9 @@ define('ADCODE_STATE_ENABLED', 1);
 define('LINK_IN_HOME', 1);
 define('LINK_NOT_IN_HOME', 0);
 
-
-define('POST_LIST_STYLE_LINE', 'line');
-define('POST_LIST_STYLE_GRID', 'grid');
+/* score */
+define('PUBLISH_SCORE', 10);
+define('POST_COMMENT', 1);
 
 /*
  * 这些尺寸与又拍云里的自定义版本相对应

@@ -1250,7 +1250,7 @@ class Post extends CActiveRecord
             }
             
             if ($this->profile && $this->profile instanceof UserProfile) {
-                $this->profile->score += 1;
+                $this->profile->score += PUBLISH_SCORE;
                 $this->profile->save(true, array('score'));
             }
         }
@@ -1267,7 +1267,7 @@ class Post extends CActiveRecord
         Tag::deletePostTags($this->id);
 
         if ($this->profile && $this->profile instanceof UserProfile) {
-            $this->profile->score -= 1;
+            $this->profile->score -= PUBLISH_SCORE;
             $this->profile->save(true, array('score'));
         }
         
