@@ -27,7 +27,7 @@ class CDUploadedFile
         $im = new CDImage();
         $im->load($data);
         
-        $this->processImage($im, $opts);
+        self::processImage($im, $opts);
         
         if ($upyunEnabled)
             $image = self::saveImageToUpyun($im, $pathPrefix);
@@ -107,7 +107,7 @@ class CDUploadedFile
         return $original;
     }
     
-    public function processImage($im, $opts)
+    public static function processImage($im, $opts)
     {
         /* 检查是否有额外的参数选项，主要是去除头尾的版本水印及LOGO
          * 如果是动画，不作相关处理
