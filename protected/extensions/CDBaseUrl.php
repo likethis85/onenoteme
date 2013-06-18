@@ -68,24 +68,11 @@ class CDBaseUrl
     {
         return aurl('user/index', array('id'=>(int)$uid));
     }
-    
-    public static function fallStyleUrl(CController $controller)
+
+    public static function publishUrl()
     {
-        return aurl($controller->route, array_merge($controller->actionParams, array('s'=>POST_LIST_STYLE_WATERFALL)));
+        return aurl('post/publish');
     }
-    
-    
-    public static function gridStyleUrl(CController $controller)
-    {
-        return aurl($controller->route, array_merge($controller->actionParams, array('s'=>POST_LIST_STYLE_GRID)));
-    }
-    
-    
-    public static function lineStyleUrl(CController $controller)
-    {
-        return aurl($controller->route, array_merge($controller->actionParams, array('s'=>POST_LIST_STYLE_LINE)));
-    }
-    
 }
 
 

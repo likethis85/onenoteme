@@ -23,6 +23,8 @@ class PostController extends Controller
     
     public function actionPublish()
     {
+        $this->channel = 'publish';
+        
         if (user()->getIsGuest()) {
 	        $url = CDBaseUrl::loginUrl(abu(request()->getUrl()));
 	        request()->redirect($url);
