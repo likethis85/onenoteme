@@ -54,6 +54,7 @@
 <div class="cd-wrapper cd-main">
     
     <div class="cd-sidebar fleft sidebar-nav">
+        <div class="user-score">积分：<b><?php echo (int)$this->profile->score;?></b></div>
         <div class="user-avatar">
             <a href="<?php echo aurl('member/profile/avatar');?>"><?php echo $this->profile->largeAvatar;?></a>
             <h5><?php echo $this->nickname;?></h5>

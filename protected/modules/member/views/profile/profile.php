@@ -40,6 +40,7 @@
         <?php if($model->hasErrors('description')):?><p class="help-block"><?php echo $model->getError('description');?></p><?php endif;?>
     </div>
 </div>
+
 <?php if ($this->user->getUnVerified()):?>
 <div class="control-group">
     <div class="controls">
