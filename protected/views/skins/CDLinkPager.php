@@ -11,7 +11,7 @@ return array(
     'mobile' => array(
         'header' => '',
         'footer' => '',
-        'maxButtonCount' => 0,
+        'maxButtonCount' => 1,
         'prevPageLabel' => '&larr;上一页',
         'nextPageLabel' => '下一页&rarr;',
         'firstPageLabel' => '',
