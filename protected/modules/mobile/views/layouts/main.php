@@ -47,6 +47,8 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 </div>
 <!-- 广告位 结束 -->
 
+<a href="http://r.m.taobao.com/m3?p=mm_33101612_4072630_13256245&c=1043" class="tb-mobile-cdc"></a>
+
 <footer class="clearfix">
     <a class="return-top" href="#top">返回顶部</a>
     <a class="switch-version" href="<?php echo aurl('site/index', array('f'=>1));?>">切换到桌面版</a>
@@ -63,13 +65,13 @@ cs()->registerCssFile(sbu('libs/bootstrap/css/bootstrap.min.css'))
     ->registerScriptFile(sbu('scripts/cd-mobile.js'), CClientScript::POS_END);
 
 CD_PRODUCT && cs()->scriptMap = array(
-    'bootstrap.min.css' => sbu('styles/mobile-all.min.css?t=20130518001'),
-    'cd-mobile.css' => sbu('styles/mobile-all.min.css?t=20130518001'),
+    'bootstrap.min.css' => sbu('styles/mobile-all.min.css?t=20130618001'),
+    'cd-mobile.css' => sbu('styles/mobile-all.min.css?t=20130618001'),
     
     'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js',
     
-    'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130518001'),
-    'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130518001'),
-    'json2.js' => sbu('scripts/mobile-all.min.js?t=20130518001'),
+    'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130618001'),
+    'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130618001'),
+    'json2.js' => sbu('scripts/mobile-all.min.js?t=20130618001'),
 );
 ?>

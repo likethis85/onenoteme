@@ -153,7 +153,7 @@ footer a.switch-version {float:right;}
 
 /* adert block */
 .top-banner, .bottom-banner {margin:0 auto; line-height:0; font-size:0;}
-
+.tb-mobile-cdc {display:block; height:40px; background:url(http://a.tbcdn.cn/mw/app/tejia/h5/image/logo.png) no-repeat top center; text-align:center;}
 
 
 
