@@ -33,4 +33,8 @@
         <td class="column-label"><?php echo CHtml::activeLabel($model, 'token');?></td>
         <td><?php echo $model->token;?></td>
     </tr>
+    <tr>
+        <td class="column-label"><?php echo CHtml::activeLabel($model->profile, 'score');?></td>
+        <td><?php echo (int)$model->profile->score;?></td>
+    </tr>
 </table>
