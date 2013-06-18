@@ -52,7 +52,7 @@
         <?php echo chtml::endForm();?>
     </div>
     <div class="cd-sidebar fright">
-        <p class="quick-login-signup">&gt;&nbsp;还没有<?php echo app()->name;?>账号？<a href="<?php echo url('site/signup');?>">立即注册</a></p>
+        <p class="quick-login-signup">&gt;&nbsp;还没有<?php echo app()->name;?>账号？<a href="<?php echo CDBaseUrl::singupUrl();?>">立即注册</a></p>
     </div>
     <div class="clear"></div>
 </div>

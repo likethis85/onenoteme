@@ -54,7 +54,7 @@
         <?php echo chtml::endForm();?>
     </div>
     <div class="cd-sidebar fright">
-        <p class="quick-login-signup">&gt;&nbsp;已经拥有<?php echo app()->name;?>账号？<a href="<?php echo url('site/login');?>">直接登录</a></p>
+        <p class="quick-login-signup">&gt;&nbsp;已经拥有<?php echo app()->name;?>账号？<a href="<?php echo CDBaseUrl::loginUrl();?>">直接登录</a></p>
     </div>
     <div class="clear"></div>
 </div>
