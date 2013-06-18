@@ -25,7 +25,7 @@ class ChannelController extends MobileController
         $criteria->scopes = array('homeshow', 'published');
         $criteria->addColumnCondition(array('channel_id' => CHANNEL_FUNNY));
         $criteria->order = 't.istop desc, t.create_time desc';
-        $criteria->limit = 2;//(int)p('line_post_count_page');
+        $criteria->limit = (int)p('line_post_count_page');
     
         $data = self::fetchPosts($criteria);
         $this->render('posts', $data);
