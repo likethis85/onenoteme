@@ -64,7 +64,7 @@ class ProfileController extends MemberController
     {
         $model = $this->getProfile();
         if (request()->getIsPostRequest() && isset($_POST['MemberUserProfile'])) {
-            $upload = CDUploadedFile::getInstance($model, 'original_avatar');
+            $upload = CUploadedFile::getInstance($model, 'original_avatar');
             if ($upload === null)
                 $model->addError('original_avatar', '请选择头像图片');
             else {

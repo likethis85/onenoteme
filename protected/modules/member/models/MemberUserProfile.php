@@ -18,7 +18,7 @@ class MemberUserProfile extends UserProfile
             return false;
         
         try {
-            $avatar = CDUploadedFile::saveImage(upyunEnabled(), $tempName, 'avatars', '', array(), false);
+            $avatar = CDUploadedFile::saveImage(upyunEnabled(), $tempName, 'avatars', '', array());
             $this->original_avatar = $avatar['url'];
             return true;
         }
