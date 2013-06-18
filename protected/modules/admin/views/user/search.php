@@ -11,14 +11,18 @@
         <?php echo CHtml::activeLabel($form, 'username', array('class'=>'control-label'));?>
         <div class="controls">
             <?php echo CHtml::activeTextField($form, 'username');?>
-            <span class="help-inline"><label class="checkbox"><?php echo CHtml::activeCheckBox($form, 'usernameFuzzy');?>模糊查询</label></span>
+            <div class="input-append">
+                <label class="checkbox"><?php echo CHtml::activeCheckBox($form, 'usernameFuzzy');?>模糊查询</label>
+            </div>
         </div>
     </div>
     <div class="control-group">
         <?php echo CHtml::activeLabel($form, 'screen_name', array('class'=>'control-label'));?>
         <div class="controls">
             <?php echo CHtml::activeTextField($form, 'screen_name');?>
-            <span class="help-inline"><label class="checkbox"><?php echo CHtml::activeCheckBox($form, 'screenNameFuzzy');?>模糊查询</label></span>
+            <div class="input-append">
+                <label class="checkbox"><?php echo CHtml::activeCheckBox($form, 'screenNameFuzzy');?>模糊查询</label>
+            </div>
         </div>
     </div>
     <div class="control-group">

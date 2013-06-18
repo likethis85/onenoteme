@@ -32,7 +32,7 @@
     <div class="control-group <?php if($model->hasErrors('state')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'state', array('class'=>'control-label'));?>
         <div class="controls">
-            <label class="checkbox inline">
+            <label class="checkbox">
                 <?php echo CHtml::activeCheckBox($model, 'state');?>启用
             </label>
             <?php if($model->hasErrors('state')):?><p class="help-block"><?php echo $model->getError('state');?></p><?php endif;?>
