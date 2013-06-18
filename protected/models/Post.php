@@ -1062,7 +1062,6 @@ class Post extends CActiveRecord
                 $model->post_id = $this->id;
                 $model->file_type  = Upload::TYPE_IMAGE;
                 $model->url = $file['url'];
-                $model->user_id = user()->id;
                 $model->desc = $this->filterTitle;
                 $model->user_id = $this->user_id;
                 $model->width = $file['width'];

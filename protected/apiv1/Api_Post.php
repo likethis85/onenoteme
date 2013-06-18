@@ -17,6 +17,7 @@ class Api_Post extends ApiBase
     	$this->requiredParams(array('title', 'content', 'token', 'channel_id'));
     	$params = $this->filterParams(array('title', 'content', 'tags', 'channel_id', 'category_id', 'pic', 'token', 'onreferer', 'padding_top', 'padding_bottom', 'water_position', 'media_type'));
     	
+    	$vestUser = self::randomVestAuthor();
     	$post = new Post();
     	$post->channel_id = (int)$params['channel_id'];
     	$post->media_type = (int)$params['media_type'];
@@ -30,6 +31,8 @@ class Api_Post extends ApiBase
         $post->homeshow = CD_YES;
     	$post->original_pic = $params['pic'];
     	$post->title = $params['title'];
+    	$post->user_id = $vestUser[0];
+    	$post->user_name = $vestUser[1];
     	if (empty($post->title))
     	    $post->title = mb_substr(strip_tags($post->content), 0, 30, app()->charset);
     	
@@ -53,6 +56,27 @@ class Api_Post extends ApiBase
     	catch (ApiException $e) {
     		throw new ApiException('系统错误', ApiError::SYSTEM_ERROR);
     	}
+    }
+    
+    private static function randomVestAuthor()
+    {
+        $accounts = array(
+            64 => '超邪恶',
+            65 => '中高艺',
+            66 => '笑料百科',
+            67 => '邪恶漫画大湿',
+            68 => '糗事万科',
+            69 => '画画吃',
+            70 => '叉叉小明',
+            71 => '段子大湿',
+            72 => '二逼青年世界',
+            73 => '萌漫画',
+            74 => '邪恶微漫画',
+        );
+        
+        $userID = mt_rand(64, 74);
+        
+        return array($userID, $accounts[$userID]);
     }
 
 }
