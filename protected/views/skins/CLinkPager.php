@@ -28,13 +28,13 @@ return array(
     'mobile' => array(
         'header' => '',
         'footer' => '',
-        'maxButtonCount' => 3,
-        'nextPageLabel' => '&gt;',
-        'prevPageLabel' => '&lt;',
+        'maxButtonCount' => 0,
+        'nextPageLabel' => '上一页',
+        'prevPageLabel' => '下一页',
         'firstPageLabel' => '&lt;&lt;',
         'lastPageLabel' => '&gt;&gt;',
         'cssFile' => false,
-        'hiddenPageCssClass' => 'disabled',
+        'hiddenPageCssClass' => 'invisible',
         'selectedPageCssClass' => 'active',
     ),
 );

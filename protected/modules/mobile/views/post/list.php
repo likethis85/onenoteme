@@ -65,9 +65,7 @@
 </div>
 
 <?php if ($pages->pageCount > 1):?>
-<div class="panel-rect panel-pages">
-    <div class="pagination pagination-centered"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'skin'=>'mobile'));?></div>
-</div>
+<div class="pagination pagination-large pagination-centered cd-pagination"><?php $this->widget('CLinkPager', array('pages'=>$pages, 'skin'=>'mobile'));?></div>
 <?php endif;?>
 
 <script type="text/javascript">

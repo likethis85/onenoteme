@@ -86,6 +86,7 @@ footer a.switch-version {float:right;}
 .panel.bottom10px {margin-bottom:10px;}
 .panel.bottom15px {margin-bottom:15px;}
 .panel-pages {padding:5px 20px;}
+.cd-pagination {margin:10px 0;}
 
 /* post line list */
 .post-line-list .post-item {margin-bottom:0; position:relative; z-index:1;}
