@@ -16,8 +16,22 @@ class PostForm extends CFormModel
 			array('content', 'safe'),
             array('image', 'file', 'allowEmpty'=>true),
             array('tags', 'length', 'max'=>50),
+            array('tags', 'checkTags'),
             array('captcha', 'captcha', 'allowEmpty'=>!$this->getEnableCaptcha()),
         );
+    }
+    
+    public function checkTags($attribute, $params)
+    {
+        $value = $this->$attribute;
+        if (empty($value)) return true;
+        
+        $tags = explode(',', $value);
+        if (count($tags) > 5) {
+            $this->addError($attribute, '标签最多允许5个');
+        }
+        else
+            return true;
     }
     
     public function attributeLabels()
@@ -91,4 +105,16 @@ class PostForm extends CFormModel
     {
         return user()->getIsGuest();
     }
+
+    protected function beforeValidate()
+    {
+        $tags = str_replace('，', ',', $this->tags);
+        $tags = explode(',', $tags);
+        $tags = array_map('trim', $tags);
+        $tags =  array_unique(array_filter($tags));
+        $this->tags = join(',', $tags);
+        
+        return true;
+    }
 }
+

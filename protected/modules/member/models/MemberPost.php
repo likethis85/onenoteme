@@ -44,8 +44,9 @@ class MemberPost extends Post
     {
         $classes = array(
             POST_STATE_ENABLED => 'label label-success',
-            POST_STATE_DISABLED => 'label',
+            POST_STATE_DISABLED => 'label label-inverse',
             POST_STATE_UNVERIFY => 'label label-important',
+            POST_STATE_TRASH => 'label',
         );
         $class = $classes[$this->state];
         

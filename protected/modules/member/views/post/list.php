@@ -12,7 +12,7 @@
             <td class="acenter"><?php echo $model->id;?></td>
             <td><?php echo $model->stateHtml . $model->titleLink;?></td>
             <td>
-                <?php echo $model->editLink;?>
+                <?php //echo $model->editLink;?>
                 <?php echo $model->deleteLink;?>
             </td>
         </tr>

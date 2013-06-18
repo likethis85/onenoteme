@@ -120,6 +120,7 @@ class Post extends CActiveRecord
             POST_STATE_ENABLED => '已上线',
             POST_STATE_DISABLED => '未显示',
             POST_STATE_UNVERIFY => '未审核',
+            POST_STATE_TRASH => '回收站',
         );
         
         return $state === null ? $labels : $labels[$state];
@@ -1247,6 +1248,11 @@ class Post extends CActiveRecord
                 $upload->user_id = $this->user_id;
                 $upload->save();
             }
+            
+            if ($this->profile && $this->profile instanceof UserProfile) {
+                $this->profile->score += 1;
+                $this->profile->save(true, array('score'));
+            }
         }
         
         Tag::savePostTags($this->id, $this->tags);
@@ -1259,12 +1265,18 @@ class Post extends CActiveRecord
             ->delete(TABLE_POST_FAVORITE, 'post_id = :postid', array(':postid' => $this->id));
         
         Tag::deletePostTags($this->id);
-            
+
+        if ($this->profile && $this->profile instanceof UserProfile) {
+            $this->profile->score -= 1;
+            $this->profile->save(true, array('score'));
+        }
+        
 	    foreach ((array)$this->uploadImages as $file) {
 	        if ($file instanceof Upload)
     	        $file->delete();
 	    }
     }
 }
+
 
 

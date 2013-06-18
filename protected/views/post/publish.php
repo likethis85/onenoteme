@@ -8,7 +8,7 @@
             <label class="control-label"><?php echo CHtml::activeLabel($model, 'content', array('label'=>'内容<p class="cred">(必填)</p>'));?></label>
             <div class="controls">
                 <?php echo CHtml::activeTextArea($model, 'content', array('class'=>'span7', 'rows'=>8, 'tabindex'=>1));?>
-                <?php if ($model->hasErrors('content')):?><span class="help-inline"><?php echo $model->getError('content');?></span><?php endif;?>
+                <?php if ($model->hasErrors('content')):?><p class="help-block"><?php echo $model->getError('content');?></p><?php endif;?>
             </div>
         </div>
         
@@ -16,7 +16,11 @@
             <label class="control-label"><?php echo CHtml::activeLabel($model, 'tags');?></label>
             <div class="controls">
                 <?php echo CHtml::activeTextField($model, 'tags', array('class'=>'span5', 'tabindex'=>2));?>
-                <?php if ($model->hasErrors('tags')):?><span class="help-inline"><?php echo $model->getError('tags');?></span><?php endif;?>
+                <?php if ($model->hasErrors('tags')):?>
+                    <span class="help-inline"><?php echo $model->getError('tags');?></span>
+                <?php else:?>
+                    <span class="help-inline cgray">最多允许5个标签，多个标签使用逗号(,)分隔</span>
+                <?php endif;?>
             </div>
         </div>
         
@@ -49,7 +53,7 @@
 		<h2>发贴说明</h2>
 		<ul class="site-notice cgray">
 			<li>禁止发广告贴。文章不得出现广告倾向；文章不得包含网站链接。</li>
-			<li>不推荐低俗内容。过于恶心或者私密可能会引起人反感的内容请慎重考虑后再决定发表与否，此类内容的通过率可能会非常低。此类内容包括但不仅限于：过于低俗的粗口、和排泄物有关、和生殖器官有关、和性有关的内容等。</li>
+			<li>不推荐低俗内容。过于恶心或者私密可能会引起人反感的内容请慎重考虑后再决定发表与否，此类内容的通过率可能会非常低。此类内容包括但不仅限于：过于低俗的粗口、与排泄物有关、与生殖器官有关、与性有关的内容等。</li>
 			<li>不推荐敏感内容：与政治、时政、政府、国家制度、国家领导人相关的内容请慎重考虑后再决定发表与否，避免出现对于敏感内容的描述，避免出现对于此类内容的不恰当评论和隐射。</li>
 		</ul>
 </div>

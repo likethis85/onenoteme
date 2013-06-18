@@ -14,6 +14,7 @@
  * @property string $original_avatar
  * @property integer $weibo_uid
  * @property integer $qqt_uid
+ * @property integer $score
  *
  * @property string $homeUrl
  * @property string $largeAvatarUrl
@@ -67,7 +68,7 @@ class UserProfile extends CActiveRecord
 		return array(
     		array('user_id', 'unique'),
 			array('user_id', 'required'),
-			array('user_id, province, city', 'numerical', 'integerOnly'=>true),
+			array('user_id, province, city, score', 'numerical', 'integerOnly'=>true),
 			array('location', 'length', 'max'=>100),
 			array('weibo_uid, qqt_uid', 'length', 'max'=>50),
 			array('description, website, original_avatar', 'length', 'max'=>250),
@@ -103,6 +104,7 @@ class UserProfile extends CActiveRecord
 		    'weibo_uid' => '新浪微博UID',
 		    'qqt_uid' => '腾讯微博UID',
 	        'original_avatar' => '原始头像',
+	        'score' => '积分',
 		);
 	}
 	
