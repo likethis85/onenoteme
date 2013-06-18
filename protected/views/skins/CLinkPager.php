@@ -34,7 +34,7 @@ return array(
         'firstPageLabel' => '&lt;&lt;',
         'lastPageLabel' => '&gt;&gt;',
         'cssFile' => false,
-        'hiddenPageCssClass' => 'invisible',
+        'hiddenPageCssClass' => 'disabled',
         'selectedPageCssClass' => 'active',
     ),
 );
