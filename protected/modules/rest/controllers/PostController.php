@@ -6,9 +6,8 @@ class PostController extends RestController
     public function filters()
     {
         return array(
-            'postOnly + create, like',
+            'postOnly + create, like, unlike',
             'putOnly + up, down',
-            'deleteOnly + unlike',
         );
     }
     
