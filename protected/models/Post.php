@@ -1191,8 +1191,18 @@ class Post extends CActiveRecord
 
     public function addFavorite($userid)
     {
+        $userid = (int)$userid;
+        $row = app()->getDb()->createCommand()
+            ->from(TABLE_POST_FAVORITE)
+            ->select('id')
+            ->where(array('and', 'user_id = :userid', 'post_id = :postid'), array(':userid'=>$userid, ':postid'=>$this->id))
+            ->queryScalar();
+        
+        if ($row === false)
+            return $this->favorite_count;
+        
         $columns = array(
-            'user_id' => (int)$userid,
+            'user_id' => $userid,
             'post_id' => $this->id,
             'create_time' => $_SERVER['REQUEST_TIME'],
             'create_ip' => CDBase::getClientIp(),
@@ -1211,18 +1221,19 @@ class Post extends CActiveRecord
     
     public function delFavorite($userid)
     {
-        $result = db()->createCommand()
-            ->delete(TABLE_POST_FAVORITE,
-                    array('and', 'user_id = :userid', 'post_id = :postid'),
-                    array(':userid'=>$userid, ':postid'=>$this->id));
-        
-        if ($result > 0) {
+        try {
+            $result = db()->createCommand()
+                ->delete(TABLE_POST_FAVORITE,
+                        array('and', 'user_id = :userid', 'post_id = :postid'),
+                        array(':userid'=>$userid, ':postid'=>$this->id));
+            
             $this->favorite_count--;
             $result = $this->save(true, array('favorite_count'));
             return $this->favorite_count;
         }
-        else
+        catch (Exception $e) {
             return false;
+        }
     }
     
     /**
