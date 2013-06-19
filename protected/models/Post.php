@@ -1215,7 +1215,14 @@ class Post extends CActiveRecord
             ->delete(TABLE_POST_FAVORITE,
                     array('and', 'user_id = :userid', 'post_id = :postid'),
                     array(':userid'=>$userid, ':postid'=>$this->id));
-        return $result;
+        
+        if ($result > 0) {
+            $this->favorite_count--;
+            $result = $this->save(true, array('favorite_count'));
+            return $this->favorite_count;
+        }
+        else
+            return false;
     }
     
     /**
