@@ -71,7 +71,8 @@ class PostController extends Controller
             $criteria = new CDbCriteria();
             $criteria->addColumnCondition(array('state'=>POST_STATE_ENABLED));
             if (!user()->getIsGuest())
-                $criteria->addColumnCondition(array('user_id'=>user()->id, 'AND', 'OR'));
+                $criteria->addColumnCondition(array('user_id'=>(int)user()->id), 'AND', 'OR');
+            echo $criteria->condition;exit;
             $post = Post::model()->cache($duration)->findByPk($id, $criteria);
         }
         if (null === $post)
