@@ -6,8 +6,9 @@ class PostController extends RestController
     public function filters()
     {
         return array(
-            'postOnly + create',
+            'postOnly + create, like',
             'putOnly + up, down',
+            'deleteOnly + unlike',
         );
     }
     
@@ -184,7 +185,47 @@ class PostController extends RestController
         $this->output($data);
     }
     
+    public function actionLike()
+    {
+        $post_id = (int)request()->getPost('post_id');
+        $criteria = new CDbCriteria();
+        $criteria->select = array('id', 'favorite_count');
+        $post = ApiPost::model()->findByPk($post_id, $criteria);
+        if (null === $post)
+            throw new CHttpException(404, 'post is not exist');
+        
+        $userID = request()->getPost('user_id');
+        if (empty($userID))
+            $userID = $this->getUserID();
+        $result = $post->addFavorite((int)$userID);
+        if ($result === false)
+            throw new CDRestException(CDRestError::CLASS_METHOD_EXECUTE_ERROR);
+        else {
+            $data = array('post_favorite_count' => (int)$post->favorite_count);
+            $this->output($data);
+        }
+    }
     
+    public function actionUnlike($post_id)
+    {
+        $post_id = (int)request()->getDelete('post_id');
+        $criteria = new CDbCriteria();
+        $criteria->select = array('id', 'favorite_count');
+        $post = ApiPost::model()->findByPk($post_id, $criteria);
+        if (null === $post)
+            throw new CHttpException(404, 'post is not exist');
+        
+        $userID = request()->getDelete('user_id');
+        if (empty($userID))
+            $userID = $this->getUserID();
+        $result = $post->delFavorite((int)$userID);
+        if ($result === false)
+            throw new CDRestException(CDRestError::CLASS_METHOD_EXECUTE_ERROR);
+        else {
+            $data = array('post_favorite_count' => (int)$post->favorite_count);
+            $this->output($data);
+        }
+    }
     
     
     

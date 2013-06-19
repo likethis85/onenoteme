@@ -2,6 +2,8 @@
 /**
  * Controller is the customized base controller class.
  * All controller classes for this application should extend from this base class.
+ *
+ * @param ApiUser $user
  */
 class RestController extends CController
 {
@@ -9,6 +11,32 @@ class RestController extends CController
     {
         parent::init();
 //         $this->saveDeviceConnectHistory();
+    }
+
+    /**
+     * 用户ID
+     * @return Ambigous <NULL, number> 用户注册返回ID，否则返回null
+     */
+    public function getUserID()
+    {
+        $uid = null;
+        if ($this->getUser())
+            $uid = $this->getUser()->id;
+        
+        return $uid;
+    }
+    
+    /**
+     * 用户
+     * @return ApiUser
+     */
+    public function getUser()
+    {
+        static $user;
+        if ($user === null)
+            $user = 0;
+        
+        return $user;;
     }
     
     public function filterPutOnly($filterChain)

@@ -1188,7 +1188,35 @@ class Post extends CActiveRecord
     
         return $data[$this->id];
     }
+
+    public function addFavorite($userid)
+    {
+        $columns = array(
+            'user_id' => (int)$userid,
+            'post_id' => $this->id,
+            'create_time' => $_SERVER['REQUEST_TIME'],
+            'create_ip' => CDBase::getClientIp(),
+        );
+        $result = app()->getDb()->createCommand()
+            ->insert(TABLE_POST_FAVORITE, $columns);
     
+        if ($result > 0) {
+            $this->favorite_count++;
+            $result = $this->save(true, array('favorite_count'));
+            return $this->favorite_count;
+        }
+        else
+            return false;
+    }
+    
+    public function delFavorite($userid)
+    {
+        $result = db()->createCommand()
+            ->delete(TABLE_POST_FAVORITE,
+                    array('and', 'user_id = :userid', 'post_id = :postid'),
+                    array(':userid'=>$userid, ':postid'=>$this->id));
+        return $result;
+    }
     
     /**
      * 将段子放入回收站
