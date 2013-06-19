@@ -205,7 +205,7 @@ class PostController extends RestController
         }
     }
     
-    public function actionUnlike($post_id)
+    public function actionUnlike()
     {
         $post_id = (int)request()->getPost('post_id');
         $criteria = new CDbCriteria();
