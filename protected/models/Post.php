@@ -1198,7 +1198,7 @@ class Post extends CActiveRecord
             ->where(array('and', 'user_id = :userid', 'post_id = :postid'), array(':userid'=>$userid, ':postid'=>$this->id))
             ->queryScalar();
         
-        if ($row === false)
+        if ($row !== false)
             return $this->favorite_count;
         
         $columns = array(
