@@ -53,7 +53,7 @@ class PostForm extends CFormModel
         $post->content = $this->content;
         $post->tags = $this->tags;
         $post->title = $this->title;
-        $post->state = user()->checkAccess('author');
+        $post->state = user()->checkAccess('author') ? POST_STATE_DISABLED : POST_STATE_UNVERIFY;
         $post->user_id = user()->id;
         $post->user_name = user()->name;
         $post->up_score = mt_rand(param('init_up_score_min'), param('init_up_score_max'));
