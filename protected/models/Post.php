@@ -1227,8 +1227,10 @@ class Post extends CActiveRecord
                         array('and', 'user_id = :userid', 'post_id = :postid'),
                         array(':userid'=>$userid, ':postid'=>$this->id));
             
-            $this->favorite_count--;
-            $result = $this->save(true, array('favorite_count'));
+            if ($result > 0) {
+                $this->favorite_count--;
+                $result = $this->save(true, array('favorite_count'));
+            }
             return $this->favorite_count;
         }
         catch (Exception $e) {
