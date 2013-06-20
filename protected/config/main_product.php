@@ -147,7 +147,7 @@ return array(
                 'http://rest.waduanzi.com/post/show/<post_id:\d+>' => 'rest/post/show',
                 'http://rest.waduanzi.com/comment/show/<post_id:\d+>' => 'rest/comment/show',
                 'http://rest.waduanzi.com/post/<_a:(support|oppose|like|unlike)>/<post_id:\d+>' => 'rest/post/<_a>',
-                'http://rest.waduanzi.com/comment/<_a:(support|report)>/<post_id:\d+>' => 'rest/comment/<_a>',
+                'http://rest.waduanzi.com/comment/<_a:(support|report)>/<comment_id:\d+>' => 'rest/comment/<_a>',
                 'http://rest.waduanzi.com/user/show/<user_id:\d+>' => 'rest/user/show',
                 'http://rest.waduanzi.com/<_c>/<_a>' => 'rest/<_c>/<_a>',
             ),
