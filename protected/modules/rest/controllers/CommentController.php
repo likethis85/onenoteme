@@ -5,7 +5,7 @@ class CommentController extends RestController
     {
         return array(
             'postOnly + create',
-            'putOnly + report',
+            'putOnly + support, report',
         );
     }
     
@@ -36,15 +36,15 @@ class CommentController extends RestController
      * 举报评论
      * @param string $comment_id, required
      */
-    public function actionReport()
+    public function actionReport($comment_id)
     {
-        $commentID = (int)request()->getPut('comment_id');
-        if (empty($commentID))
+        $comment_id = (int)$comment_id;
+        if (empty($comment_id))
             throw new CHttpException(500, 'request is invalid');
         
         $criteria = new CDbCriteria();
         $criteria->select = array('id', 'report_count');
-        $comment = ApiComment::model()->published()->findByPk($commentID, $criteria);
+        $comment = ApiComment::model()->published()->findByPk($comment_id, $criteria);
         
         if ($comment === null)
             throw new CHttpException(404, 'comment is not found');
@@ -62,15 +62,15 @@ class CommentController extends RestController
      * 举报评论
      * @param string $comment_id, required
      */
-    public function actionSupport()
+    public function actionSupport($comment_id)
     {
-        $commentID = (int)request()->getPut('comment_id');
-        if (empty($commentID))
+        $comment_id = (int)$comment_id;
+        if (empty($comment_id))
             throw new CHttpException(500, 'request is invalid');
     
         $criteria = new CDbCriteria();
         $criteria->select = array('id', 'up_score');
-        $comment = ApiComment::model()->published()->findByPk($commentID, $criteria);
+        $comment = ApiComment::model()->published()->findByPk($comment_id, $criteria);
     
         if ($comment === null)
             throw new CHttpException(404, 'comment is not found');

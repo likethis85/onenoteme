@@ -11,7 +11,8 @@ class UserController extends RestController
     
     public function actionCreate()
     {
-    
+        $username = request()->getPost('username');
+        $password = request()->getPost('password');
     }
     
     /**

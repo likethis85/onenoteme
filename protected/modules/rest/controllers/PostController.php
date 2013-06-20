@@ -6,8 +6,8 @@ class PostController extends RestController
     public function filters()
     {
         return array(
-            'postOnly + create, like, unlike',
-            'putOnly + up, down',
+            'postOnly + create',
+            'putOnly + support, oppose, like, unlike',
         );
     }
     
@@ -121,15 +121,15 @@ class PostController extends RestController
         // @todo 上传图片功能未确定，稍候开发
     }
     
-    public function actionUp()
+    public function actionSupport($post_id)
     {
-        $postID = request()->getPut('post_id');
-        if (empty($postID))
+        $post_id = (int)$post_id;
+        if (empty($post_id))
             throw new CHttpException(500, 'request is invalid');
         
         $criteria = new CDbCriteria();
         $criteria->select = array('id', 'up_score');
-        $post = ApiPost::model()->published()->findByPk($postID, $criteria);
+        $post = ApiPost::model()->published()->findByPk($post_id, $criteria);
         
         if ($post === null)
             throw new CHttpException(404, 'post is not found');
@@ -143,15 +143,15 @@ class PostController extends RestController
         $this->output($data);
     }
     
-    public function actionDown()
+    public function actionOppose($post_id)
     {
-        $postID = request()->getPut('post_id');
-        if (empty($postID))
+        $post_id = (int)$post_id;
+        if (empty($post_id))
             throw new CHttpException(500, 'request is invalid');
         
         $criteria = new CDbCriteria();
         $criteria->select = array('id', 'down_score');
-        $post = ApiPost::model()->published()->findByPk($postID, $criteria);
+        $post = ApiPost::model()->published()->findByPk($post_id, $criteria);
         
         if ($post === null)
             throw new CHttpException(404, 'post is not found');
@@ -184,16 +184,16 @@ class PostController extends RestController
         $this->output($data);
     }
     
-    public function actionLike()
+    public function actionLike($post_id)
     {
-        $post_id = (int)request()->getPost('post_id');
+        $post_id = (int)$post_id;
         $criteria = new CDbCriteria();
         $criteria->select = array('id', 'favorite_count');
         $post = ApiPost::model()->findByPk($post_id, $criteria);
         if (null === $post)
             throw new CHttpException(404, 'post is not exist');
         
-        $userID = request()->getPost('user_id');
+        $userID = request()->getPut('user_id');
         if (empty($userID))
             $userID = $this->getUserID();
         $result = $post->addFavorite((int)$userID);
@@ -205,16 +205,16 @@ class PostController extends RestController
         }
     }
     
-    public function actionUnlike()
+    public function actionUnlike($post_id)
     {
-        $post_id = (int)request()->getPost('post_id');
+        $post_id = (int)$post_id;
         $criteria = new CDbCriteria();
         $criteria->select = array('id', 'favorite_count');
         $post = ApiPost::model()->findByPk($post_id, $criteria);
         if (null === $post)
             throw new CHttpException(404, 'post is not exist');
         
-        $userID = request()->getPost('user_id');
+        $userID = request()->getPut('user_id');
         if (empty($userID))
             $userID = $this->getUserID();
         $result = $post->delFavorite((int)$userID);
