@@ -4,8 +4,7 @@ class UserController extends RestController
     public function filters()
     {
         return array(
-            'postOnly + create',
-            'putOnly + login, logout',
+            'postOnly + create, login, logout',
         );
     }
     
@@ -20,14 +19,16 @@ class UserController extends RestController
      * @param string $username
      * @param string $password md5加密后的密码
      */
-    public function actionLogin($username, $password)
+    public function actionLogin()
     {
-        $username = trim($username);
-        $password = trim($password);
+        $username = trim(request()->getPost('username'));
+        $password = trim(request()->getPost('password'));
         $identity = new AppUserIdentity($username, $password);
         if ($identity->authenticate(true)) {
-            if (appuser()->login($identity))
-                return $this->formatRow($identity->getUser());
+            if (appuser()->login($identity)) {
+                $data = CDRestDataFormat::formatUser($identity->getUser());
+                $this->output($data);
+            }
             else
                 throw new CDRestException(CDRestError::USER_LOGIN_ERROR);
         }
