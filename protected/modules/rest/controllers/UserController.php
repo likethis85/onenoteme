@@ -25,7 +25,7 @@ class UserController extends RestController
         $password = trim(request()->getPost('password'));
         $identity = new AppUserIdentity($username, $password);
         if ($identity->authenticate(true)) {
-            if (appuser()->login($identity)) {
+            if (user()->login($identity)) {
                 $data = CDRestDataFormat::formatUser($identity->getUser());
                 $this->output($data);
             }
