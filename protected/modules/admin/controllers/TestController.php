@@ -143,5 +143,10 @@ class TestController extends AdminController
         
         exit;
     }
+
+    public function actionException()
+    {
+        throw new CHttpException(500013,  'fuck you');
+    }
 }
 
