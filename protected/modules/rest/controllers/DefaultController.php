@@ -16,9 +16,7 @@ class DefaultController extends RestController
                 $data['trace'] = $error['trace'];
             }
             
-            $value['error'] = $data;
-            
-            echo CJSON::encode($value);
+            echo CJSON::encode($data);
         	exit(0);
         }
     }
