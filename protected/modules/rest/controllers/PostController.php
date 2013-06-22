@@ -50,7 +50,7 @@ class PostController extends RestController
         }
         
         $posts = ApiPost::model()->published()->findAll($criteria);
-        $rows = $this->formatRows($posts);
+        $rows = $this->formatPosts($posts);
         
         $this->output($rows);
     }
@@ -102,12 +102,14 @@ class PostController extends RestController
         $offset = ($page - 1) *  $this->timelineRowCount();
         $posts = $user->favorites(array(
             'condition' => 'favorites.state = ' . POST_STATE_ENABLED,
+            'select' => $this->selectColumns(),
             'limit' => $this->timelineRowCount(),
             'offset' => $offset,
             'with' => array('user', 'user.profile'),
         ));
         
-        echo count($posts);
+        $data = $this->formatPosts($posts);
+        $this->output($data);
     }
     
     public function actionMyshare($user_id, $channel_id = 0, $page = 1)
@@ -304,7 +306,7 @@ class PostController extends RestController
         return 20;
     }
     
-    protected function formatRows(array $models, $includeUser = true, $includeComment = false)
+    protected function formatPosts(array $models, $includeUser = true, $includeComment = false)
     {
         $rows = array();
         foreach ($models as $index => $model)
