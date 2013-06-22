@@ -133,7 +133,7 @@ class PostController extends RestController
         $criteria->addColumnCondition($columns);
         
         $posts = ApiPost::model()->published()->findAll($criteria);
-        $rows = $this->formatRows($posts);
+        $rows = $this->formatPosts($posts);
         
         $this->output($rows);
     }
