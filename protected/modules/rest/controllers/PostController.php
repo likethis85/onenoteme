@@ -19,7 +19,7 @@ class PostController extends RestController
      * @param integer $media_type optional，类型，MEDIA_TEXT | MEDIA_IMAGE | MEDIA_VIDEO
      * @return array 内容列表，数组结构
      */
-    public function actionTimeline($channel_id, $lasttime = 0, $maxtime = 0, $media_type = 0, $user_id = 0)
+    public function actionTimeline($channel_id, $lasttime = 0, $maxtime = 0, $media_type = 0)
     {
         $channel_id = (int)$channel_id;
         $lasttime = (float)$lasttime;
@@ -32,7 +32,6 @@ class PostController extends RestController
         $criteria->limit = $this->timelineRowCount();
         $criteria->order = 't.create_time desc';
         $criteria->with = array('user', 'user.profile');
-//         $criteria->addCondition('t.original_frames <= 1');
         
         $columns = array('t.channel_id' => $channel_id);
         if ($user_id > 0)
@@ -89,6 +88,57 @@ class PostController extends RestController
         $rows = $this->formatRows($posts);
         
         $this->output($rows);
+    }
+    
+    public function actionFavorite($user_id, $page = 1)
+    {
+        $user_id = (int)$user_id;
+        $criteria = new CDbCriteria();
+        $criteria->select = 'id';
+        $user = ApiUser::model()->findByPk($user_id, $criteria);
+        if ($user === null)
+            throw new CDRestException('user is not exist');
+        
+        $offset = ($page - 1) *  $this->timelineRowCount();
+        $posts = $user->favorites(array(
+            'condition' => 'favorites.state = ' . POST_STATE_ENABLED,
+            'limit' => $this->timelineRowCount(),
+            'offset' => $offset,
+            'with' => array('posts.user', 'posts.user.profile'),
+        ));
+        
+        echo count($posts);
+    }
+    
+    public function actionMyshare($user_id, $channel_id = 0, $page = 1)
+    {
+        $channel_id = (int)$channel_id;
+        $user_id = (int)$user_id;
+        $page = (int)$page;
+        $page = $page < 1 ? 1 : $page;
+        
+        $criteria = new CDbCriteria();
+        $criteria->select = self::selectColumns();
+        $criteria->limit = $this->timelineRowCount();
+        $criteria->order = 't.create_time desc';
+        $criteria->with = array('user', 'user.profile');
+        $offset = ($page - 1) *  $this->timelineRowCount();
+        $criteria->offset = $offset;
+        
+        $columns = array('t.user_id' => $user_id);
+        if ($channel_id > 0)
+            $columns['t.channel_id'] = $channel_id;
+        $criteria->addColumnCondition($columns);
+        
+        $posts = ApiPost::model()->published()->findAll($criteria);
+        $rows = $this->formatRows($posts);
+        
+        $this->output($rows);
+    }
+    
+    public function actionMydigg()
+    {
+        
     }
     
     /**

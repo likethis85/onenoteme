@@ -17,6 +17,8 @@
  *
  * @property string $homeUrl
  * @property UserProfile $profile
+ * @property array $posts
+ * @property array $favorites
  */
 class User extends CActiveRecord
 {
@@ -71,6 +73,8 @@ class User extends CActiveRecord
 	{
 		return array(
 		    'profile' => array(self::HAS_ONE, 'UserProfile', 'user_id'),
+	        'favorites' => array(self::MANY_MANY, 'User', '{{post_favorite}}(user_id, post_id)', 'order'=>'favorites.create_time desc'),
+	        'posts' => array(self::HAS_MANY, 'Post', 'user_id', 'order'=>'posts.create_time desc'),
 		);
 	}
 
