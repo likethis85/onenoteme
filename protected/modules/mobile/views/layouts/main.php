@@ -47,8 +47,6 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 </div>
 <!-- 广告位 结束 -->
 
-<a href="http://r.m.taobao.com/m3?p=mm_33101612_4072630_13256245&c=1043" class="tb-mobile-cdc"></a>
-
 <footer class="clearfix">
     <a class="return-top" href="#top">返回顶部</a>
     <a class="switch-version" href="<?php echo aurl('site/index', array('f'=>1));?>">切换到桌面版</a>
