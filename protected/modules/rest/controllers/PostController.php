@@ -104,7 +104,7 @@ class PostController extends RestController
             'condition' => 'favorites.state = ' . POST_STATE_ENABLED,
             'limit' => $this->timelineRowCount(),
             'offset' => $offset,
-            'with' => array('posts.user', 'posts.user.profile'),
+            'with' => array('user', 'user.profile'),
         ));
         
         echo count($posts);
