@@ -82,7 +82,10 @@ class PostController extends RestController
         $randtime = mt_rand($mmtime['mintime'], $mmtime['maxtime']);
         $randdate = getdate($randtime);
         $mintime = mktime(0, 0, 0, $randdate['mon'], $randdate['mday'], $randdate['year']);
-        $criteria->addCondition('t.create_time >= ' . $mintime);
+        $maxtime = mktime(23, 59, 59, $randdate['mon'], $randdate['mday'], $randdate['year']);
+        $criteria->addCondition('t.create_time >= :mintime and t.create_time < :maxtime');
+        $criteria->params[':mintime'] = $mintime;
+        $criteria->params[':maxtime'] = $maxtime;
         
         $posts = ApiPost::model()->published()->findAll($criteria);
         $rows = $this->formatPosts($posts);
