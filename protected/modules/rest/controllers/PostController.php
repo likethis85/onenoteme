@@ -29,7 +29,7 @@ class PostController extends RestController
         
         $criteria = new CDbCriteria();
         $criteria->select = self::selectColumns();
-        $criteria->limit = $this->timelineRowCount();
+        $criteria->limit = $this->postRowCount();
         $criteria->order = 't.create_time desc';
         $criteria->with = array('user', 'user.profile');
         
@@ -61,7 +61,7 @@ class PostController extends RestController
      * @param integer $media_type optional，类型，MEDIA_TEXT | MEDIA_IMAGE | MEDIA_VIDEO
      * @return array 内容列表，数组结构
      */
-    public function actionHistory($channel_id, $media_type = 0)
+    public function actionHistory($channel_id = 0, $media_type = 0)
     {
         $channel_id = (int)$channel_id;
         $media_type = (int)$media_type;
@@ -72,10 +72,10 @@ class PostController extends RestController
         $criteria->order = 't.create_time desc';
         $criteria->with = array('user', 'user.profile');
         
-        $columns = array('t.channel_id' => $channel_id);
+        if ($channel_id > 0)
+            $criteria->addColumnCondition(array('channel_id' => $channel_id));
         if ($media_type > 0)
-            $columns['t.media_type'] = $media_type;
-        $criteria->addColumnCondition($columns);
+            $criteria->addColumnCondition(array('media_type' => $media_type));
         
         // 取随机一天，计算出此日期凌晨的时间戳
         $mmtime = self::getMaxMinCreatetime();
@@ -85,7 +85,7 @@ class PostController extends RestController
         $criteria->addCondition('t.create_time >= ' . $mintime);
         
         $posts = ApiPost::model()->published()->findAll($criteria);
-        $rows = $this->formatRows($posts);
+        $rows = $this->formatPosts($posts);
         
         $this->output($rows);
     }
@@ -99,17 +99,47 @@ class PostController extends RestController
         if ($user === null)
             throw new CDRestException('user is not exist');
         
-        $offset = ($page - 1) *  $this->timelineRowCount();
+        $offset = ($page - 1) *  $this->postRowCount();
         $posts = $user->favorites(array(
             'condition' => 'favorites.state = ' . POST_STATE_ENABLED,
             'select' => $this->selectColumns(),
-            'limit' => $this->timelineRowCount(),
+            'limit' => $this->postRowCount(),
             'offset' => $offset,
             'with' => array('user', 'user.profile'),
         ));
         
         $data = $this->formatPosts($posts);
         $this->output($data);
+    }
+    
+    public function actionBest($hours = 24, $channel_id = 0, $page = 1)
+    {
+        $hours = (int)$hours;
+        $channel_id = (int)$channel_id;
+        $page = (int)$page;
+        $page = $page < 1 ? 1 : $page;
+        
+        $criteria = new CDbCriteria();
+        if ($channel_id > 0)
+            $criteria->addColumnCondition(array('t.channel_id' => $channel_id));
+        
+        if ($hours > 0) {
+            $fromtime = $_SERVER['REQUEST_TIME'] - $hours * 3600;
+            $criteria->addCondition('t.create_time > :fromtime');
+            $criteria->params[':fromtime'] = $fromtime;
+        }
+
+        $criteria->order = 't.istop desc, (t.up_score-t.down_score) desc, t.create_time desc';
+        $criteria->select = self::selectColumns();
+        $criteria->limit = $this->postRowCount();
+        $criteria->with = array('user', 'user.profile');
+        $offset = ($page - 1) *  $this->postRowCount();
+        $criteria->offset = $offset;
+        
+        $posts = ApiPost::model()->published()->findAll($criteria);
+        $rows = $this->formatPosts($posts);
+        
+        $this->output($rows);
     }
     
     public function actionMyshare($user_id, $channel_id = 0, $page = 1)
@@ -121,10 +151,10 @@ class PostController extends RestController
         
         $criteria = new CDbCriteria();
         $criteria->select = self::selectColumns();
-        $criteria->limit = $this->timelineRowCount();
+        $criteria->limit = $this->postRowCount();
         $criteria->order = 't.create_time desc';
         $criteria->with = array('user', 'user.profile');
-        $offset = ($page - 1) *  $this->timelineRowCount();
+        $offset = ($page - 1) *  $this->postRowCount();
         $criteria->offset = $offset;
         
         $columns = array('t.user_id' => $user_id);
@@ -278,7 +308,32 @@ class PostController extends RestController
         }
     }
     
+    private static function fetchPosts(CDbCriteria $criteria)
+    {
+        $duration = 60*60*24;
+        $cacheID = md5(var_export($criteria->toArray(), true));
+        $redis = cache('redis');
+        if ($redis) {
+            $count = $redis->get($cacheID);
+            if ($count === false) {
+                $count = Post::model()->count($criteria);
+                $redis->set($cacheID, $count, $duration);
+            }
+        }
+        else
+            $count = Post::model()->count($criteria);
+         
+        $pages = new CPagination($count);
+        $pages->setPageSize($criteria->limit);
+        $pages->applyLimit($criteria);
     
+        $models = Post::model()->findAll($criteria);
+    
+        return array(
+                'models' => $models,
+                'pages' => $pages,
+        );
+    }
     
     
     
@@ -301,7 +356,7 @@ class PostController extends RestController
         return $row;
     }
     
-    protected function timelineRowCount()
+    protected function postRowCount()
     {
         return 20;
     }
