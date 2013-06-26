@@ -18,11 +18,10 @@ class RestController extends CController
         parent::init();
         
         $headers = getallheaders();
-        file_put_contents(app()->getRuntimePath().DS.'server.txt', var_export($headers, true));
-        $this->deviceUDID = $headers['DEVICE_UDID'];
-        $this->osVersion = $headers['OS_VERSION'];
-        $this->appVersion = $headers['APP_VERSION'];
-        $this->userToken = $headers['USER_TOKEN'];
+        $this->deviceUDID = $headers['Device_Udid'];
+        $this->osVersion = $headers['Os_Version'];
+        $this->appVersion = $headers['App_Version'];
+        $this->userToken = $headers['User_Token'];
         
 //         $this->saveDeviceConnectHistory();
     }
