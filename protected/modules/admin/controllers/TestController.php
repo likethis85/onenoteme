@@ -3,7 +3,7 @@ class TestController extends AdminController
 {
     public function init()
     {
-        exit('exit');
+//         exit('exit');
     }
     
     public function actionRedis()
@@ -151,7 +151,8 @@ class TestController extends AdminController
 
     public function actionHeaders()
     {
-        var_dump(getallheaders());
+//         var_dump(getallheaders());
+        var_dump($_SERVER);
     }
 }
 
