@@ -18,6 +18,7 @@ class RestController extends CController
         parent::init();
         
         $headers = getallheaders();
+        file_put_contents(app()->getRuntimePath().DS.'server.txt', $headers);
         $this->deviceUDID = $headers['DEVICE_UDID'];
         $this->osVersion = $headers['OS_VERSION'];
         $this->appVersion = $headers['APP_VERSION'];
