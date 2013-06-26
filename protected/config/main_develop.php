@@ -171,7 +171,7 @@ return array(
             'guestName' => '匿名段友',
         ),
         'appuser' => array(
-            'class' => 'CDAppUser',
+            'class' => 'application.components.CDAppUser',
             'guestName' => '匿名段友',
         ),
         'mailer' => array(

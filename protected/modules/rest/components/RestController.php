@@ -4,6 +4,7 @@
  * All controller classes for this application should extend from this base class.
  *
  * @param ApiUser $user
+ * @param MobileDevice $device
  */
 class RestController extends CController
 {
@@ -11,6 +12,8 @@ class RestController extends CController
     {
         parent::init();
 //         $this->saveDeviceConnectHistory();
+
+        file_put_contents(app()->getRuntimePath() . DS . 'server.txt', var_export($_SERVER, true));
     }
 
     /**
@@ -37,6 +40,11 @@ class RestController extends CController
             $user = 0;
         
         return $user;;
+    }
+    
+    public function getDevice()
+    {
+        
     }
     
     public function filterPutOnly($filterChain)

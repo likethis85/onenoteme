@@ -148,5 +148,10 @@ class TestController extends AdminController
     {
         throw new CHttpException(500013,  'fuck you');
     }
+
+    public function actionHeaders()
+    {
+        var_dump($_SERVER());
+    }
 }
 

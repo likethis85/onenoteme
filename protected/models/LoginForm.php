@@ -157,7 +157,6 @@ class LoginForm extends CFormModel
 
     public function afterLogin()
     {
-        
         $returnUrl = urldecode($this->returnUrl);
         if (empty($returnUrl))
             $returnUrl = strip_tags(trim($_GET['url']));
