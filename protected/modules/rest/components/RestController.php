@@ -13,7 +13,7 @@ class RestController extends CController
         parent::init();
 //         $this->saveDeviceConnectHistory();
 
-        file_put_contents(app()->getRuntimePath() . DS . 'server.txt', var_export($_SERVER, true));
+        file_put_contents(app()->getRuntimePath() . DS . 'server.txt', var_export(getallheaders(), true));
     }
 
     /**
