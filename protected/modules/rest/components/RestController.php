@@ -33,7 +33,7 @@ class RestController extends CController
      */
     public function getUserID()
     {
-        $uid = null;
+        $uid = 0;
         if ($this->getUser())
             $uid = $this->getUser()->id;
         

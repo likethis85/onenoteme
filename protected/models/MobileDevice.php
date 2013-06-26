@@ -114,7 +114,12 @@ class MobileDevice extends CActiveRecord
     {
         if ($this->getIsNewRecord()) {
             $this->create_time = time();
+            $this->connect_count = 1;
+            $this->push_token = '';
+            $this->push_enabled = 0;
+            $this->user_token = '';
         }
+        $this->last_time = time();
         
         return true;
     }
