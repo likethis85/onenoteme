@@ -25,12 +25,26 @@ class UserController extends RestController
         $password = trim(request()->getPost('password'));
         $identity = new AppUserIdentity($username, $password);
         if ($identity->authenticate(true)) {
-            if (appuser()->login($identity)) {
-                $data = CDRestDataFormat::formatUser($identity->getUser());
-                $this->output($data);
+            $userID = $identity->getId();
+            $attributes = array(
+                'user_id' => $userID,
+                'udid' => $this->deviceUDID,
+            );
+            $device = RestMobileDevice::model()->findByAttributes($attributes);
+            if ($device === null) {
+                //@todo 这里需要额外处理，此情况逻辑上不会发生
             }
-            else
-                throw new CDRestException(CDRestError::USER_LOGIN_ERROR);
+            else {
+                $userToken = RestUser::generateUserToken($identity->getId(), $username);
+                $device->user_token = $userToken;
+                $result = $device->save(true, array('user_token'));
+                if ($result) {
+                    $data = CDRestDataFormat::formatUser($identity->getUser(), $userToken);
+                    $this->output($data);
+                }
+                else
+                    throw new CDRestException(CDRestError::USER_LOGIN_ERROR);
+            }
         }
         else
             throw new CDRestException(CDRestError::USER_NOT_AUTHENTICATED);
@@ -41,12 +55,17 @@ class UserController extends RestController
      * @param integer $user_id
      * @param string $username
      */
-    public function actionLogout($user_id, $username = '')
+    public function actionLogout()
     {
-        $user_id = (int)$user_id;
-        
-        appuser()->logout();
-        exit(0);
+        try {
+            $device = $this->getDevice();
+            $device->user_token = '';
+            $device->save(true, array('user_token'));
+            $this->output(array('success' => 1));
+        }
+        catch (Exception $e) {
+            throw new CDRestException(CDRestError::CLASS_METHOD_EXECUTE_ERROR);
+        }
     }
     
     /**
@@ -56,10 +75,8 @@ class UserController extends RestController
      */
     public function actionLogined()
     {
-        $user_id = (int)$user_id;
-        
-        return appuser()->getIsGuest();
-        exit(0);
+        $data = array('logined' => (int)$this->getUser());
+        $this->output($data);
     }
     
     /**

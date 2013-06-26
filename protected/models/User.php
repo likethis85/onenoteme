@@ -212,7 +212,7 @@ class User extends CActiveRecord
 	
 	public static function generateUserToken($userid, $username)
 	{
-	    return md5($username . $userid . time());
+	    return md5($username . $userid . time() . uniqid());
 	}
 	
 	protected function beforeSave()

@@ -11,6 +11,7 @@ class RestController extends CController
     public $deviceUDID;
     public $osVersion;
     public $appVersion;
+    public $userToken;
     
     public function init()
     {
@@ -20,6 +21,7 @@ class RestController extends CController
         $this->deviceUDID = $headers['DEVICE_UDID'];
         $this->osVersion = $headers['OS_VERSION'];
         $this->appVersion = $headers['APP_VERSION'];
+        $this->userToken = $headers['USER_TOKEN'];
         
 //         $this->saveDeviceConnectHistory();
     }
@@ -39,20 +41,32 @@ class RestController extends CController
     
     /**
      * 用户
-     * @return RestUser
+     * @return RestUser|null 如果没有登录返回null，如果登录并且token一致返回对应的user，否则返回null
      */
     public function getUser()
     {
-        static $user;
-        if ($user === null)
-            $user = 0;
-        
+        static $user = false;
+        if ($user === false) {
+            if (empty($this->userToken))
+                $user = null;
+            else {
+                $device = $this->getDevice();
+                if (empty($device))
+                    $user = null;
+                else
+                    $user = $device->user;
+            }
+        }
         return $user;;
     }
     
     public function getDevice()
     {
+        static $device = false;
+        if ($device === false)
+            $device = RestMobileDevice::model()->findByPk($this->deviceUDID);
         
+        return $device;
     }
     
     public function filterPutOnly($filterChain)

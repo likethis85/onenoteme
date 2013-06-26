@@ -18,6 +18,9 @@
  * @property integer $connect_count
  * @property string $push_token
  * @property integer $push_enabled
+ * @property string $user_token
+ *
+ * @property User $user
  */
 class MobileDevice extends CActiveRecord
 {
@@ -46,7 +49,7 @@ class MobileDevice extends CActiveRecord
 		return array(
 			array('udid, sys_name, sys_version, app_version', 'required'),
 			array('udid', 'unique'),
-			array('udid, model, push_token', 'length', 'max'=>100),
+			array('udid, model, push_token, user_token', 'length', 'max'=>100),
 			array('sys_name, name, language, country, app_version', 'length', 'max'=>45),
 			array('sys_version', 'length', 'max'=>20),
 			array('create_time, last_time, user_id, connect_count, push_enabled', 'numerical', 'integerOnly'=>true),
@@ -83,6 +86,7 @@ class MobileDevice extends CActiveRecord
 	        'connect_count' => '请求次数',
 	        'push_token' => 'PUSH TOKEN',
 	        'push_enabled' => '是否允许PUSH',
+	        'user_token' => '设备TOKEN',
 		);
 	}
 

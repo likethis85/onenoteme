@@ -33,7 +33,7 @@ class CDRestDataFormat
         return $data;
     }
    
-    public static function formatUser($model)
+    public static function formatUser($model, $token = '')
     {
         if (empty($model))
             $row = array(
@@ -42,8 +42,6 @@ class CDRestDataFormat
                 'screen_name' => 'Guest',
                 'create_time' => 0,
                 'create_time_at' => '',
-                'token' => '',
-                'token_time' => 0,
                 'website' => '',
                 'desc' => '',
                 'mini_avatar' => sbu(param('default_mini_avatar')),
@@ -57,8 +55,6 @@ class CDRestDataFormat
                 'screen_name' => $model->getDisplayName(),
                 'create_time' => $model->create_time,
                 'create_time_at' => $model->getCreateTime(),
-                'token' => $model->token,
-                'token_time' => $model->token_time,
                 'website' => $model->profile->website,
                 'desc' => $model->profile->description,
                 'mini_avatar' => $model->profile->getMiniAvatarUrl(),
@@ -66,6 +62,7 @@ class CDRestDataFormat
                 'large_avatar' => $model->profile->getLargeAvatarUrl(),
             );
         
+        $row['token'] = $token;
         return $row;
     }
     
