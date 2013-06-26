@@ -30,7 +30,6 @@ class UserController extends RestController
                 'user_id' => $userID,
                 'udid' => $this->deviceUDID,
             );
-            echo CJSON::encode($attributes);exit;
             $device = RestMobileDevice::model()->findByAttributes($attributes);
             if ($device === null) {
                 //@todo 这里需要额外处理，此情况逻辑上不会发生
