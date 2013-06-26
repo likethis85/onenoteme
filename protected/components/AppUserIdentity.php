@@ -9,7 +9,7 @@ class AppUserIdentity extends CUserIdentity
     
     /**
      * 用户model
-     * @var ApiUser
+     * @var RestUser
      */
     private $_user;
     
@@ -24,7 +24,7 @@ class AppUserIdentity extends CUserIdentity
             $criteria = new CDbCriteria();
             $criteria->select = array('t.id', 't.username', 't.screen_name', 't.password', 't.state');
             $criteria->addColumnCondition(array('username'=>$this->username));
-            $this->_user = ApiUser::model()->find($criteria);
+            $this->_user = RestUser::model()->find($criteria);
             
             $password = $md5 ? $this->password : md5($this->password);
             if ($this->_user === null) {
@@ -57,7 +57,7 @@ class AppUserIdentity extends CUserIdentity
     
     /**
      * 验证通过后返回当前用户
-     * @return ApiUser | null
+     * @return RestUser | null
      */
     public function getUser()
     {
