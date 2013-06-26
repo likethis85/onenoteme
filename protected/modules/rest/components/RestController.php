@@ -51,7 +51,7 @@ class RestController extends CController
             if (empty($this->userToken))
                 $user = null;
             else {
-                $device = $this->getDevice();
+                $device = $this->getCurrentDevice();
                 if (empty($device))
                     $user = null;
                 else
@@ -61,7 +61,7 @@ class RestController extends CController
         return $user;;
     }
     
-    public function getDevice()
+    public function getCurrentDevice()
     {
         static $device = false;
         if ($device === false)

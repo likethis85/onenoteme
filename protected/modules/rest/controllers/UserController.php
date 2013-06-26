@@ -26,19 +26,12 @@ class UserController extends RestController
         $identity = new AppUserIdentity($username, $password);
         if ($identity->authenticate(true)) {
             $userID = $identity->getId();
-            $attributes = array(
-                'user_id' => $userID,
-                'udid' => $this->deviceUDID,
-            );
-            $device = RestMobileDevice::model()->findByAttributes($attributes);
-            if ($device === null) {
-                //@todo 这里需要额外处理，此情况逻辑上不会发生
-                throw new CDRestException(CDRestError::USER_NOT_EXIST);
-            }
-            else {
+            $device = $this->getCurrentDevice();
+            if ($device) {
                 $userToken = RestUser::generateUserToken($identity->getId(), $username);
                 $device->user_token = $userToken;
-                $result = $device->save(true, array('user_token'));
+                $device->user_id = $userID;
+                $result = $device->save(true, array('user_id', 'user_token'));
                 if ($result) {
                     $data = CDRestDataFormat::formatUser($identity->getUser(), $userToken);
                     $this->output($data);
@@ -46,6 +39,11 @@ class UserController extends RestController
                 else
                     throw new CDRestException(CDRestError::USER_LOGIN_ERROR);
             }
+            else {
+                //@todo 这里需要额外处理，此情况逻辑上不会发生
+                throw new CDRestException(CDRestError::USER_NOT_EXIST);
+            }
+            
         }
         else
             throw new CDRestException(CDRestError::USER_NOT_AUTHENTICATED);
@@ -59,7 +57,7 @@ class UserController extends RestController
     public function actionLogout()
     {
         try {
-            $device = $this->getDevice();
+            $device = $this->getCurrentDevice();
             $device->user_token = '';
             $device->save(true, array('user_token'));
             $this->output(array('success' => 1));
