@@ -33,6 +33,7 @@ class UserController extends RestController
             $device = RestMobileDevice::model()->findByAttributes($attributes);
             if ($device === null) {
                 //@todo 这里需要额外处理，此情况逻辑上不会发生
+                throw new CDRestException(CDRestError::USER_NOT_EXIST);
             }
             else {
                 $userToken = RestUser::generateUserToken($identity->getId(), $username);
