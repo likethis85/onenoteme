@@ -70,7 +70,7 @@ class UserController extends RestController
     public function actionShow($user_id, $username = '')
     {
         $user_id = (int)$user_id;
-        $user = ApiUser::model()->findByPk($user_id);
+        $user = RestUser::model()->findByPk($user_id);
         if ($user === null)
             throw new CDRestException(CDRestError::USER_NOT_EXIST);
         else

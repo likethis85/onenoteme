@@ -21,7 +21,7 @@ class CommentController extends RestController
         if (empty($post_id) || empty($content))
             throw new CDRestException(CDRestError::PARAM_NOT_COMPLETE, 'post_id, content is required');
         
-        $comment = new ApiComment();
+        $comment = new RestComment();
         $comment->post_id = $post_id;
         $comment->content = $content;
         if ($comment->save()) {
@@ -44,7 +44,7 @@ class CommentController extends RestController
         
         $criteria = new CDbCriteria();
         $criteria->select = array('id', 'report_count');
-        $comment = ApiComment::model()->published()->findByPk($comment_id, $criteria);
+        $comment = RestComment::model()->published()->findByPk($comment_id, $criteria);
         
         if ($comment === null)
             throw new CHttpException(404, 'comment is not found');
@@ -70,7 +70,7 @@ class CommentController extends RestController
     
         $criteria = new CDbCriteria();
         $criteria->select = array('id', 'up_score');
-        $comment = ApiComment::model()->published()->findByPk($comment_id, $criteria);
+        $comment = RestComment::model()->published()->findByPk($comment_id, $criteria);
     
         if ($comment === null)
             throw new CHttpException(404, 'comment is not found');
@@ -106,7 +106,7 @@ class CommentController extends RestController
             $criteria->params[':lasttime'] = $lasttime;
         }
     
-        $posts = ApiComment::model()->published()->findAll($criteria);
+        $posts = RestComment::model()->published()->findAll($criteria);
         $rows = CDRestDataFormat::formatComments($posts);
     
         $this->output($rows);

@@ -3,17 +3,25 @@
  * Controller is the customized base controller class.
  * All controller classes for this application should extend from this base class.
  *
- * @param ApiUser $user
+ * @param RestUser $user
  * @param MobileDevice $device
  */
 class RestController extends CController
 {
+    public $deviceUDID;
+    public $osVersion;
+    public $appVersion;
+    
     public function init()
     {
         parent::init();
+        
+        $headers = getallheaders();
+        $this->deviceUDID = $headers['DEVICE_UDID'];
+        $this->osVersion = $headers['OS_VERSION'];
+        $this->appVersion = $headers['APP_VERSION'];
+        
 //         $this->saveDeviceConnectHistory();
-
-        file_put_contents(app()->getRuntimePath() . DS . 'server.txt', var_export(getallheaders(), true));
     }
 
     /**
@@ -31,7 +39,7 @@ class RestController extends CController
     
     /**
      * 用户
-     * @return ApiUser
+     * @return RestUser
      */
     public function getUser()
     {
@@ -73,9 +81,9 @@ class RestController extends CController
     protected function saveDeviceConnectHistory()
     {
         $history = new DeviceConnectHistory();
-        $history->device_udid = $this->_params['device_udid'];
-        $history->sys_version = $this->_params['sys_version'];
-        $history->app_version = $this->_params['app_version'];
+        $history->device_udid = $this->deviceUDID;
+        $history->sys_version = $this->osVersion;
+        $history->app_version = $this->appVersion;
         $history->apikey = $this->_apiparams['apikey'];
         $history->method = $this->_apiparams['method'];
         $history->format = $this->_apiparams['format'];
@@ -83,3 +91,5 @@ class RestController extends CController
         return $history->save() ? $history : false;
     }
 }
+
+

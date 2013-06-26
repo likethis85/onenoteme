@@ -49,7 +49,7 @@ class PostController extends RestController
             $criteria->params[':maxtime'] = $maxtime;
         }
         
-        $posts = ApiPost::model()->published()->findAll($criteria);
+        $posts = RestPost::model()->published()->findAll($criteria);
         $rows = $this->formatPosts($posts);
         
         $this->output($rows);
@@ -85,7 +85,7 @@ class PostController extends RestController
         $criteria->addCondition('t.create_time >= :mintime');
         $criteria->params[':mintime'] = $mintime;
         
-        $posts = ApiPost::model()->published()->findAll($criteria);
+        $posts = RestPost::model()->published()->findAll($criteria);
         $rows = $this->formatPosts($posts);
         
         $this->output($rows);
@@ -96,7 +96,7 @@ class PostController extends RestController
         $user_id = (int)$user_id;
         $criteria = new CDbCriteria();
         $criteria->select = 'id';
-        $user = ApiUser::model()->findByPk($user_id, $criteria);
+        $user = RestUser::model()->findByPk($user_id, $criteria);
         if ($user === null)
             throw new CDRestException('user is not exist');
         
@@ -137,7 +137,7 @@ class PostController extends RestController
         $offset = ($page - 1) *  $this->postRowCount();
         $criteria->offset = $offset;
         
-        $posts = ApiPost::model()->published()->findAll($criteria);
+        $posts = RestPost::model()->published()->findAll($criteria);
         $rows = $this->formatPosts($posts);
         
         $this->output($rows);
@@ -163,7 +163,7 @@ class PostController extends RestController
             $columns['t.channel_id'] = $channel_id;
         $criteria->addColumnCondition($columns);
         
-        $posts = ApiPost::model()->published()->findAll($criteria);
+        $posts = RestPost::model()->published()->findAll($criteria);
         $rows = $this->formatPosts($posts);
         
         $this->output($rows);
@@ -184,7 +184,7 @@ class PostController extends RestController
         $criteria = new CDbCriteria();
         $criteria->addColumnCondition(array('t.state' => POST_STATE_ENABLED));
         $criteria->with = array('user', 'user.profile');
-        $post = ApiPost::model()->findByPk($post_id, $criteria);
+        $post = RestPost::model()->findByPk($post_id, $criteria);
         
         if ($post === null)
             throw new CHttpException(404, 'post is not found');
@@ -212,7 +212,7 @@ class PostController extends RestController
         
         $criteria = new CDbCriteria();
         $criteria->select = array('id', 'up_score');
-        $post = ApiPost::model()->published()->findByPk($post_id, $criteria);
+        $post = RestPost::model()->published()->findByPk($post_id, $criteria);
         
         if ($post === null)
             throw new CHttpException(404, 'post is not found');
@@ -234,7 +234,7 @@ class PostController extends RestController
         
         $criteria = new CDbCriteria();
         $criteria->select = array('id', 'down_score');
-        $post = ApiPost::model()->published()->findByPk($post_id, $criteria);
+        $post = RestPost::model()->published()->findByPk($post_id, $criteria);
         
         if ($post === null)
             throw new CHttpException(404, 'post is not found');
@@ -262,7 +262,7 @@ class PostController extends RestController
         $criteria->order = 't.create_time desc';
         $criteria->addColumnCondition(array('t.media_type'=>MEDIA_TYPE_TEXT, 't.state' => POST_STATE_ENABLED));
         $criteria->offset = mt_rand(0, $count-1);
-        $model = ApiPost::model()->find($criteria);
+        $model = RestPost::model()->find($criteria);
         $data = CDRestDataFormat::formatPost($model, false, false);
         $this->output($data);
     }
@@ -272,7 +272,7 @@ class PostController extends RestController
         $post_id = (int)$post_id;
         $criteria = new CDbCriteria();
         $criteria->select = array('id', 'favorite_count');
-        $post = ApiPost::model()->findByPk($post_id, $criteria);
+        $post = RestPost::model()->findByPk($post_id, $criteria);
         if (null === $post)
             throw new CHttpException(404, 'post is not exist');
         
@@ -293,7 +293,7 @@ class PostController extends RestController
         $post_id = (int)$post_id;
         $criteria = new CDbCriteria();
         $criteria->select = array('id', 'favorite_count');
-        $post = ApiPost::model()->findByPk($post_id, $criteria);
+        $post = RestPost::model()->findByPk($post_id, $criteria);
         if (null === $post)
             throw new CHttpException(404, 'post is not exist');
         

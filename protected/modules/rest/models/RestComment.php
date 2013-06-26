@@ -1,9 +1,9 @@
 <?php
-class ApiComment extends Comment
+class RestComment extends Comment
 {
     /**
      * Returns the static model of the specified AR class.
-     * @return ApiComment the static model class
+     * @return RestComment the static model class
      */
     public static function model($className=__CLASS__)
     {
@@ -14,8 +14,8 @@ class ApiComment extends Comment
     public function relations()
     {
         return array_merge(parent::relations(), array(
-            'post' => array(self::BELONGS_TO, 'ApiPost', 'post_id'),
-            'user' => array(self::BELONGS_TO, 'ApiUser', 'user_id',
+            'post' => array(self::BELONGS_TO, 'RestPost', 'post_id'),
+            'user' => array(self::BELONGS_TO, 'RestUser', 'user_id',
                     'select' => array('id', 'username', 'screen_name', 'create_time', 'create_ip', 'state', 'token', 'token_time', 'source')),
         ));
     }

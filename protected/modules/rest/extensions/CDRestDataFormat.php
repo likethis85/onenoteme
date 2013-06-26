@@ -1,7 +1,7 @@
 <?php
 class CDRestDataFormat
 {
-    public static function formatPost(ApiPost $model, $trimUser = true, $trimComment = false)
+    public static function formatPost(RestPost $model, $trimUser = true, $trimComment = false)
     {
         $data = array(
             'post_id' => $model->id,
@@ -69,7 +69,7 @@ class CDRestDataFormat
         return $row;
     }
     
-    public static function formatComment(ApiComment $model, $includeUser = true)
+    public static function formatComment(RestComment $model, $includeUser = true)
     {
         $data = array(
             'comment_id' => $model->id,

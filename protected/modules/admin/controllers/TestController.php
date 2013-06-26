@@ -151,7 +151,7 @@ class TestController extends AdminController
 
     public function actionHeaders()
     {
-        var_dump($_SERVER());
+        var_dump(getallheaders());
     }
 }
 

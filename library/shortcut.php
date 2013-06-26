@@ -11,7 +11,22 @@ defined('LIBRARY_ROOT') or define('LIBRARY_ROOT', dirname(__FILE__));
  * This is the shortcut to DIRECTORY_SEPARATOR
  */
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
- 
+
+if (!function_exists('getallheaders'))
+{
+    function getallheaders()
+    {
+        $headers = array();
+        foreach ($_SERVER as $name => $value) {
+            if (substr($name, 0, 5) == 'HTTP_') {
+                $headerName = str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))));
+                $headers[$headerName] = $value;
+            }
+        }
+        return $headers;
+    }
+}
+
 /**
  * This is the shortcut to Yii::app()
  * @return CApplication Yii::app()

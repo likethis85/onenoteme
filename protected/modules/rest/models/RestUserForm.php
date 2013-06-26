@@ -7,13 +7,13 @@
  * @param string $username
  * @param string $password
  */
-class ApiUserForm extends CFormModel
+class RestUserForm extends CFormModel
 {
     public function rules()
     {
         return array(
             array('username, password', 'required', 'message'=>'您总得填用户名和密码吧'),
-            array('username', 'unique', 'caseSensitive'=>false, 'className'=>'ApiUser', 'attributeName'=>'username', 'message'=>'啊，被抢注了，换个名字吧'),
+            array('username', 'unique', 'caseSensitive'=>false, 'className'=>'RestUser', 'attributeName'=>'username', 'message'=>'啊，被抢注了，换个名字吧'),
         );
     }
     
@@ -32,7 +32,7 @@ class ApiUserForm extends CFormModel
     
     public function save()
     {
-        $user = new ApiUser();
+        $user = new RestUser();
         $user->username = $this->username;
         $user->password = $this->password;
     }
