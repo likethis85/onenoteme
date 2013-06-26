@@ -8,7 +8,7 @@ class FeedController extends Controller
         parent::init();
         header('Content-Type:application/xml; charset=' . app()->charset);
         
-        self::log();
+//         self::log();
     }
     
     public function filters()
