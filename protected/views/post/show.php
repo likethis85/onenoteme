@@ -74,10 +74,11 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
     </div>
     
     <!-- 详情页侧边栏广告位开始 -->
-    <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_first'));?>
+    <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_01'));?>
     <!-- 详情页侧边栏广告位结束 -->
+    <div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
     <!-- 详情页侧边栏广告位开始 -->
-    <?php //$this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_second'));?>
+    <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_02'));?>
     <!-- 详情页侧边栏广告位结束 -->
 </div>
 <div class="clear"></div>
