@@ -11,7 +11,7 @@ class PostController extends Controller
                 'COutputCache + show',
                 'duration' => 600,
                 'varyByParam' => array('id'),
-                'varyByExpression' => array(user(), 'getIsGuest'),
+                'varyByExpression' => array(self, 'showPageCacheFilterCallback'),
             ),
             array(
                 'COutputCache + bigPic',
@@ -19,6 +19,11 @@ class PostController extends Controller
                 'varyByParam' => array('id'),
             ),
         );
+    }
+    
+    private static function showPageCacheFilterCallback()
+    {
+        return request()->getServerName() . (int)user()->getIsGuest();
     }
     
     public function actionPublish()
