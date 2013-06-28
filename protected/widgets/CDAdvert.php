@@ -19,6 +19,8 @@ class CDAdvert extends CWidget
      */
     public $multi = true;
     
+    public $boxClass = '';
+    
     public function init()
     {
         $this->title = strip_tags(trim($this->title));
@@ -38,7 +40,7 @@ class CDAdvert extends CWidget
         $adcode = $data[$index];
         if (empty($adcode)) return;
         
-        $html = '<div class="cdc-block ad-block">';
+        $html = sprintf('<div class="cdc-block ad-block %s">', $this->boxClass);
         if ($this->title)
             $html .= '<h2>' . $this->title . '</h2>';
         
