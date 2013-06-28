@@ -13,11 +13,6 @@ class PostController extends Controller
                 'varyByParam' => array('id'),
                 'varyByExpression' => array(self, 'showPageCacheFilterCallback'),
             ),
-            array(
-                'COutputCache + bigPic',
-                'duration' => 24*60*60*7,
-                'varyByParam' => array('id'),
-            ),
         );
     }
     
