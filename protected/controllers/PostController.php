@@ -11,12 +11,12 @@ class PostController extends Controller
                 'COutputCache + show',
                 'duration' => 600,
                 'varyByParam' => array('id'),
-                'varyByExpression' => array(self, 'showPageCacheFilterCallback'),
+                'varyByExpression' => array($this, 'getIsGuest'),
             ),
         );
     }
     
-    private static function showPageCacheFilterCallback()
+    private function showPageCacheFilterCallback()
     {
         return request()->getServerName() . (int)user()->getIsGuest();
     }
