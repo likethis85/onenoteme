@@ -11,7 +11,7 @@ class PostController extends Controller
                 'COutputCache + show',
                 'duration' => 600,
                 'varyByParam' => array('id'),
-                'varyByExpression' => array($this, 'getIsGuest'),
+                'varyByExpression' => array(user(), 'getIsGuest'),
             ),
         );
     }
