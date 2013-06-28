@@ -63,7 +63,7 @@ a:hover {color:#D14836; text-decoration:none;}
 .cd-header .channel-nav li a:hover, .cd-header .channel-nav li.active a {color:white; background:#454544;}
 .cd-header .logo a {display:block;}
 .cd-header .logo a h2 {display:none;}
-.cd-header .logo img {height:100%; vertical-align:top;}
+.cd-header .logo img {height:40px; vertical-align:top;}
 
 
 .beta-alert {font-size:14px; margin:1px; padding:4px 35px 4px 10px;}
