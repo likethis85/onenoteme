@@ -55,6 +55,9 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'pages'=>$pages));?>
         </div>
 	</div>
+	<!-- 详情页侧边栏广告位开始 -->
+    <?php $this->widget('CDAdvert', array('solt'=>'main_container_bottom'));?>
+    <!-- 详情页侧边栏广告位结束 -->
 </div>
 
 <div class="fright cd-sidebar">
