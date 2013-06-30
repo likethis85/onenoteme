@@ -297,6 +297,14 @@ class CDBase
         }
         return true;
     }
+
+    public static function convertPunctuation($text)
+    {
+        $en_US = array(',', '.', ';', ':', '?', '!', '-',);
+        $zh_CN = array('，', '。', '；', '：', '？', '！', '－');
+        return str_replace($en_US, $zh_CN, $text);
+        
+    }
 }
 
 

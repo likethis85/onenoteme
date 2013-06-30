@@ -1278,6 +1278,12 @@ class Post extends CActiveRecord
             $tags = join(',', Tag::filterTagsArray($this->tags));
             $this->tags = $tags;
         }
+        
+        if ($this->title)
+            $this->title = CDBase::convertPunctuation($this->title);
+        if ($this->content)
+            $this->content = CDBase::convertPunctuation($this->content);
+        
         return true;
     }
     
