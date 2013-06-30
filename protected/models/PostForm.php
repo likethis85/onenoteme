@@ -50,9 +50,9 @@ class PostForm extends CFormModel
     {
         $post = new Post();
         $post->channel_id = CHANNEL_FUNNY;
-        $post->content = $this->content;
+        $post->content = CDBase::convertPunctuation($this->content);
         $post->tags = $this->tags;
-        $post->title = $this->title;
+        $post->title = CDBase::convertPunctuation($this->title);
         $post->state = user()->checkAccess('author') ? POST_STATE_DISABLED : POST_STATE_UNVERIFY;
         $post->user_id = user()->id;
         $post->user_name = user()->name;

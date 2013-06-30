@@ -300,6 +300,8 @@ class CDBase
 
     public static function convertPunctuation($text)
     {
+        if (empty($text)) return '';
+        
         $en_US = array(',', '.', ';', ':', '?', '!', '-',);
         $zh_CN = array('，', '。', '；', '：', '？', '！', '－');
         return str_replace($en_US, $zh_CN, $text);
