@@ -20,10 +20,10 @@ class PostCommand extends CConsoleCommand
         $ids = array_merge($duanziIDs, $lengtuIDs);
         
         $nums = 0;
-        foreach ($ids as $id) {
+        foreach ($ids as $index => $id) {
             $num = app()->getDb()->createCommand()
                 ->update('{{post}}',
-                    array('state'=>POST_STATE_ENABLED, 'create_time'=>(int)$_SERVER['REQUEST_TIME'] + $nums*2),
+                    array('state'=>POST_STATE_ENABLED, 'create_time'=>(int)$_SERVER['REQUEST_TIME'] - $index*60),
                     'id = :pid',
                     array(':pid' => $id)
                 );
