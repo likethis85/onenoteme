@@ -19,7 +19,7 @@ class AboutController extends MobileController
     
     public function actionIndex()
     {
-        $this->setSitePageTitle('关于我们');
+        $this->setSiteTitle('关于我们');
         $this->channel = 'about';
         $this->render('index');
     }
