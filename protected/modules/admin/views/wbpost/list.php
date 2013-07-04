@@ -3,6 +3,7 @@
         <tr>
             <th class="span7">内容</th>
             <th class="span1">#</th>
+            <th class="span1">#</th>
             <th>#</th>
         </tr>
     </thead>
@@ -14,11 +15,18 @@
                 <?php echo l(image($model->thumbnail_pic, ''), $model->bmiddle_pic, array('target'=>'_blank'));?>
             </td>
             <td>
-                <p><a href="<?php echo aurl('admin/wbpost/weiboVerify', array('id'=>$model->id, 'media_type'=>MEDIA_TYPE_TEXT));?>" class="btn btn-small btn-success row-verify">段子</a></p>
-                <p><a href="<?php echo aurl('admin/wbpost/weiboVerify', array('id'=>$model->id, 'media_type'=>MEDIA_TYPE_IMAGE));?>" class="btn btn-small btn-success row-verify">趣图</a></p>
+                <p><a href="<?php echo aurl('admin/wbpost/weiboDelete', array('id'=>$model->id));?>" class="btn btn-small btn-warning row-delete">删除</a></p>
             </td>
             <td>
-                <p><a href="<?php echo aurl('admin/wbpost/weiboDelete', array('id'=>$model->id));?>" class="btn btn-small btn-warning row-delete">删除</a></p>
+                <p><a href="<?php echo aurl('admin/wbpost/weiboVerify', array('id'=>$model->id, 'media_type'=>MEDIA_TYPE_TEXT));?>" class="btn btn-small btn-success row-verify">段子</a></p>
+            </td>
+            <td>
+            <?php echo CHtml::beginForm(null, 'post');?>
+                <input type="text" class="input-small" name="padding_top" value="0" /><br />
+                <input type="text" class="input-small" name="padding_bottom" value="0" /><br />
+                <select class="input-small" name="water_position" id="onwaterpos"><option value="0">不加水印</option><option value="7" selected="selected">左下角</option><option value="5">右下角</option><option value="1">左上角</option><option value="3">右上角</option></select>
+                <p><a href="<?php echo aurl('admin/wbpost/weiboVerify', array('id'=>$model->id, 'media_type'=>MEDIA_TYPE_IMAGE));?>" class="btn btn-small btn-success row-verify">趣图</a></p>
+            <?php echo CHtml::endForm();?>
             </td>
         </tr>
         <?php endforeach;?>
@@ -44,7 +52,8 @@ $(function(){
 			url: tthis.attr('href'),
 			type: 'post',
 			dataType: 'jsonp',
-			cache: false
+			cache: false,
+			data: tthis.parents('form').serialize()
 		};
 		if (tthis.parents('tr').find('.weibo-text textarea').length > 0)
 			jqXhrOptions.data = 'weibotext=' + tthis.parents('tr').find('.weibo-text textarea').val();

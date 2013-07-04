@@ -63,6 +63,9 @@ class WbpostController extends AdminController
                 }
                 
                 $opts['water_position'] = CDWaterMark::POS_BOTTOM_RIGHT;
+                $opts['padding_top'] = (int)$_POST['padding_top'];
+                $opts['padding_bottom'] = (int)$_POST['padding_bottom'];
+                $opts['water_position'] = (int)$_POST['water_position'];
                 $referer = 'http://weibo.com';
                 $result = $post->fetchRemoteImagesBeforeSave($referer, $opts) && $post->save();
                 if ($result) {
