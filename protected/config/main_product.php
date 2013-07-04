@@ -108,6 +108,7 @@ return array(
         'urlManager' => array(
             'urlFormat' => 'path',
 		    'showScriptName' => false,
+            'caseSensitive' => false,
             'cacheID' => 'cache',
             'rules' => array(
                 'http://api.waduanzi.com/<_a>' => 'api/<_a>',

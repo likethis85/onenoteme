@@ -114,6 +114,7 @@ return array(
         'urlManager' => array(
             'urlFormat' => 'path',
 		    'showScriptName' => false,
+            'caseSensitive' => false,
 //             'cacheID' => 'cache',
             'rules' => array(
                     
