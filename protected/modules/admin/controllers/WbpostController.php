@@ -1,5 +1,5 @@
 <?php
-class WBPostController extends AdminController
+class WbpostController extends AdminController
 {
     public function filters()
     {
