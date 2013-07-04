@@ -31,7 +31,7 @@ class PostSearchForm extends CFormModel
             $criteria->addColumnCondition(array('t.id'=>$this->postid));
         else {
             if ($this->author)
-                $criteria->addColumnCondition(array('t.contributor'=>$author, 't.user_name'=>$this->author), 'OR');
+                $criteria->addColumnCondition(array('t.user_id'=>$this->author, 't.user_name'=>$this->author), 'OR');
             if ($this->keyword)
                 $criteria->addSearchCondition('t.title', $this->keyword);
         }
