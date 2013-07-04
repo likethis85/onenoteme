@@ -33,7 +33,7 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
                         <li class="nav-header">操作</li>
                         <li><?php echo l('审核文章', url('admin/post/verify'));?></li>
                         <li><?php echo l('搜索文章', url('admin/post/search'));?></li>
-                        <li><?php echo l('导出文章', url('admin/export/joke'));?></li>
+                        <li><?php echo l('抓取审核', url('admin/wbpost/index'));?></li>
                         <li class="divider"></li>
                         <li class="nav-header">列表</li>
                         <li><?php echo l('最新文章', url('admin/post/latest'));?></li>
@@ -148,6 +148,7 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
             <?php echo l('发布图文', url('admin/post/create', array('media_type'=>MEDIA_TYPE_IMAGE, 'channel_id'=>CHANNEL_FUNNY)));?>
         </li>
         <li class="nav-header">文章</li>
+        <li <?php if ($this->channel == 'weibo_verify_post') echo 'class="active"';?>><?php echo l('抓取审核', url('admin/wbpost/index'));?></li>
         <li <?php if ($this->channel == 'verify_post') echo 'class="active"';?>><?php echo l('审核文章', url('admin/post/verify'));?></li>
         <li <?php if ($this->channel == 'post_latest') echo 'class="active"';?>><?php echo l('最新文章', url('admin/post/latest'));?></li>
         <li <?php if ($this->channel == 'search_post') echo 'class="active"';?>><?php echo l('搜索文章', url('admin/post/search'));?></li>

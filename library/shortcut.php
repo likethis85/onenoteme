@@ -386,7 +386,7 @@ function localuploader()
  */
 function upyunEnabled()
 {
-    return (bool)param('upyun_enabled');
+    return 1;//(bool)param('upyun_enabled');
 }
 
 /**

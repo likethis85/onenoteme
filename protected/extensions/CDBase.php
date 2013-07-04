@@ -307,6 +307,31 @@ class CDBase
         return str_replace($en_US, $zh_CN, $text);
         
     }
+
+
+    // 马甲账号
+    public static function randomVestAuthor()
+    {
+        $accounts = array(
+            64 => '超邪恶',
+            65 => '中高艺',
+            66 => '笑料百科',
+            67 => '邪恶漫画大湿',
+            68 => '糗事万科',
+            69 => '画画吃',
+            70 => '叉叉小明',
+            71 => '段子大湿',
+            72 => '二逼青年世界',
+            73 => '萌漫画',
+            74 => '邪恶微漫画',
+        );
+    
+        $userID = mt_rand(64, 74);
+    
+        return array($userID, $accounts[$userID]);
+    }
+
+
 }
 
 

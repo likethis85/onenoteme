@@ -5,68 +5,9 @@ class WeiboCommand extends CConsoleCommand
     
     const ACCOUNT_SLEEP_TIME = 30;
     const WEIBO_ROWS_COUNT = 50;
-    const JINGXUAN_SLEEP_TIME = 60;
-    const WEIBO_JINGXUAN_ROWS_COUNT = 100;
     
     const APP_KEY = '456860706';
     const APP_SECERET = '19168ffef668231aa22f74683d3d18e7';
-    
-    public function actionJingxuan()
-    {
-        $types = array(2, 3, 6);
-        foreach ($types as $type) {
-            self::collectJingxuanWithType($type);
-            sleep(self::JINGXUAN_SLEEP_TIME);
-        }
-    }
-    
-    private static function collectJingxuanWithType($typeID)
-    {
-        $url = 'https://api.weibo.com/2/suggestions/statuses/hot.json';
-        $params = array(
-            'source' => self::APP_KEY,
-            'is_pic' => 0,
-            'count' => self::WEIBO_JINGXUAN_ROWS_COUNT,
-            'type' => (int)$typeID,
-        );
-        
-        $fetch = new CDCurl();
-        $fetch->ssl()->get($url, $params);
-        $jsonData = $fetch->rawdata();
-        
-        $text = date('Y-m-d H:i:s', time()) . ' - ';
-        $errno = $fetch->errno();
-        if ($errno !== 0) {
-            $text .= 'access api error: ' . $fetch->error() . "\n";
-            echo $text;
-            return false;
-        }
-        
-        $rows = json_decode($jsonData, true);
-        if (empty($rows['statuses'])) {
-            $text .= "no latest posts.\n";
-            echo $text;
-            return false;
-        }
-//         print_r($rows);
-        $count = 0;
-        foreach ((array)$rows['statuses'] as $index => $row) {
-            $row = $row['status'];
-            $pid = $row['idstr'];
-            try {
-                $result = self::saveRow($row);
-                if ($result) $count++;
-            }
-            catch (Exception $e) {
-                var_dump($e->getMessage());
-                $text .= "ID: $pid - Save Exception\n";
-                echo $text;
-                continue;
-            }
-        }
-        $text .= "Jingxuan Type: {$typeID}, Total Count: {$count}\n";
-        echo $text;
-    }
     
     public function actionCollect()
     {
@@ -119,7 +60,7 @@ class WeiboCommand extends CConsoleCommand
             
             try {
                 $result = self::saveRow($row);
-                if ($result) $count++;
+                if ($result === true) $count++;
                 if ($index == 0)
                     self::updateLastTimeAndPID($account, $pid);
             }
@@ -135,7 +76,7 @@ class WeiboCommand extends CConsoleCommand
     
     private static function saveRow($row)
     {
-        $prompt = date('Y-m-d H:i:s', time()) . ' - ID: ' . $idstr . ' - ';
+        $prompt = date('Y-m-d H:i:s', time()) . ' - ID: ' . $row['idstr'] . ' - ';
         
         $idstr = strip_tags(trim($row['idstr']));
         $exist = self::checkWeiboExist($idstr);

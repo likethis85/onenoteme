@@ -66,11 +66,8 @@ class CDUploadedFile
     
     /**
      * 将远程图片保存在本地服务器
-     * @param string $url
-     * @param integer $thumbWidth
-     * @param integer $thumbHeight
-     * @param boolean $cropFromTop
-     * @param boolean $cropFromLeft
+     * @param resource $im
+     * @param string $pathPrefix
      * @throws Exception
      * @return multitype:array boolean Ambigous <array, boolean>
      */

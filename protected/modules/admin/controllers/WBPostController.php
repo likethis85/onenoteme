@@ -1,7 +1,15 @@
 <?php
-class PostController extends AdminController
+class WBPostController extends AdminController
 {
-    public function actionWeibo()
+    public function filters()
+    {
+        return array(
+            'ajaxOnly + weiboVerify, weiboDelete',
+            'postOnly + weiboVerify, weiboDelete',
+        );
+    }
+    
+    public function actionIndex()
     {
         $pageSize = 20;
         $criteria = new CDbCriteria();
@@ -12,13 +20,13 @@ class PostController extends AdminController
         $data = array(
             'models' => $models,
         );
-        $this->render('weibo', $data);
+        $this->render('list', $data);
     }
     
-    public function actionWeiboVerify($id, $channel_id, $callback)
+    public function actionWeiboVerify($id, $media_type, $callback)
     {
         $id = (int)$id;
-        $channel_id = (int)$channel_id;
+        $media_type = (int)$media_type;
         $temp = PostTemp::model()->findByPk($id);
         if ($temp === null)
             $data = 1;
@@ -31,24 +39,32 @@ class PostController extends AdminController
                     ->where('screen_name = :username', array(':username' => $username))
                     ->queryScalar();
                 
-                $content = trim($_POST['weibotext']);
+                $content = CDBase::convertPunctuation(nl2br(trim($_POST['weibotext'])));
                 $content = empty($content) ? $temp->content : $content;
                 $post = new Post();
                 $post->content = $content;
-                $post->channel_id = $channel_id;
-                $post->up_score = mt_rand(100, 300);
-                $post->down_score = mt_rand(10, 40);
-                $post->view_nums = mt_rand(100, 500);
+                $post->channel_id = CHANNEL_FUNNY;
+                $post->media_type = $media_type;
+                $post->up_score = mt_rand(param('init_up_score_min'), param('init_up_score_max'));
+                $post->down_score = mt_rand(param('init_down_score_min'), param('init_down_score_max'));
+                $post->view_nums = mt_rand(param('init_view_nums_min'), param('init_view_nums_max'));
+                $post->homeshow = CD_YES;
+                $post->state = POST_STATE_DISABLED;
+                $vestUser = CDBase::randomVestAuthor();
+            	$post->user_id = $vestUser[0];
+            	$post->user_name = $vestUser[1];
+                
                 if ($userid > 0) {
                     $post->user_id = (int)$userid;
                     $post->user_name = $username;
                 }
-                if ($channel_id == CHANNEL_LENGTU || $channel_id == CHANNEL_GIRL) {
-                    $post->thumbnail_pic = $temp->thumbnail_pic;
-                    $post->bmiddle_pic = $temp->bmiddle_pic;
+                if ($media_type == MEDIA_TYPE_IMAGE && $temp->original_pic) {
                     $post->original_pic = $temp->original_pic;
                 }
-                $result = $post->save();
+                
+                $opts['water_position'] = CDWaterMark::POS_BOTTOM_RIGHT;
+                $referer = 'http://weibo.com';
+                $result = $post->fetchRemoteImagesBeforeSave($referer, $opts) && $post->save();
                 if ($result) {
                     $temp->delete();
                     self::saveWeiboComments($post->id, $temp->weibo_id);
@@ -61,6 +77,13 @@ class PostController extends AdminController
             }
         }
         CDBase::jsonp($callback, $data);
+    }
+
+    public function actionWeiboDelete($id, $callback)
+    {
+        $id = (int)$id;
+        $result = PostTemp::model()->findByPk($id)->delete();
+        CDBase::jsonp($callback, (int)$result);
     }
     
     private static function saveWeiboComments($pid, $wid)
@@ -147,74 +170,10 @@ class PostController extends AdminController
         }
     }
     
-    public function actionWeiboDelete($id, $callback)
+    private static function uploadImage($url)
     {
-        $id = (int)$id;
-        $result = PostTemp::model()->findByPk($id)->delete();
-        CDBase::jsonp($callback, (int)$result);
-    }
-    
-    public function actionVerify()
-    {
-        $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('state'=>Post::STATE_DISABLED));
-        $data = self::fetchPostList($criteria, true, true);
-
-        $this->render('verify', $data);
-    }
-    
-    public function actionToday()
-    {
-        $date = getdate();
-        $timestamp = mktime(0, 0, 0, $date['mon'], $date['mday'], $date['year']);
-        $criteria = new CDbCriteria();
-        $criteria->addCondition('create_time > :timestamp');
-        $criteria->params = array(':timestamp' => $timestamp);
-        $data = self::fetchPostList($criteria, true, true);
-        
-        $this->render('list', $data);
-    }
-    
-    public function actionList()
-    {
-        $data = self::fetchPostList(null, true, true);
-        
-        $this->render('list', $data);
-    }
-    
-    public function actionSearch()
-    {
-        
-    }
-    
-    private static function fetchPostList(CDbCriteria $criteria = null, $pages = true, $sort = false)
-    {
-        $pageSize = 30;
-        $criteria = ($criteria === null) ? new CDbCriteria() : $criteria;
-        
-        if ($pages) {
-            $count = Post::model()->count($criteria);
-            $pages = new CPagination($count);
-            $pages->setPageSize($pageSize);
-            $pages->applyLimit($criteria);
-        }
-        else
-            $criteria->limit = $pageSize;
-        
-        if ($sort) {
-            $sort = new CSort('Post');
-            $sort->defaultOrder = 't.id desc';
-            $sort->applyOrder($criteria);
-        }
-        else
-            $criteria->order = 't.id desc';
-        
-        $models = Post::model()->findAll($criteria);
-        $data = array(
-            'sort' => $sort,
-            'pages' => $pages,
-            'models' => $models,
-        );
-        return $data;
+        return CDUploadedFile::saveImage(upyunEnabled(), $url, 'pics', 'http://www.weibo.com');
     }
 }
+
+
