@@ -12,7 +12,7 @@ class AboutController extends Controller
         return array(
             array(
                 'COutputCache',
-                'duration' => 3600,
+                'duration' => 3600 * 24,
             ),
         );
     }

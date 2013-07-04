@@ -30,7 +30,7 @@
     	<ul class="channel-nav fleft">
     		<li class="top-menu"><a <?php if ($this->channel=='latest') echo ' class="active"';?> href="<?php echo aurl('channel/latest');?>">刚出炉</a></li>
     	    <li class="top-menu">
-    		    <a href="<?php echo url('channel/hot');?>">最热门</a>
+    		    <a class="site-bg dropmenu" href="<?php echo url('channel/hot');?>">最热门</a>
     		    <ul class="submenu">
         		    <li><a href="<?php echo url('channel/day');?>">24小时内</a></li>
         		    <li><a href="<?php echo url('channel/week');?>">一周内</a></li>
