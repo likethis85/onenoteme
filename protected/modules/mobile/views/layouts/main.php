@@ -15,6 +15,7 @@ var wdz_quick_login_url = '<?php echo aurl('site/quicklogin');?>';
 var _hmt = _hmt || [];
 _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;?>, 2]);
 </script>
+<?php echo param('mobile_header_html');?>
 </head>
 <body>
 <div class="cd-header">
@@ -51,6 +52,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     <a class="return-top" href="#top">返回顶部</a>
     <a class="switch-version" href="<?php echo aurl('site/index', array('f'=>1));?>">切换到桌面版</a>
 </footer>
+<?php echo param('mobile_footer_html');?>
 <?php echo param('tongji_code');?>
 </body>
 </html>
