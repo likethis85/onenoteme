@@ -49,6 +49,7 @@ class WbpostController extends AdminController
                     $vestUser = CDBase::randomVestAuthor();
             	$post->user_id = $vestUser[0];
             	$post->user_name = $vestUser[1];
+            	$post->tags = $vestUser[1];
                 
                 if ($media_type == MEDIA_TYPE_IMAGE && $temp->original_pic) {
                     $post->original_pic = $temp->original_pic;

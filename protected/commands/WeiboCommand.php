@@ -49,7 +49,7 @@ class WeiboCommand extends CConsoleCommand
 
         $rows = json_decode($jsonData, true);
         if (empty($rows['statuses'])) {
-            $text .= "no latest posts.\n";
+            $text .= "$accountName, no latest posts.\n";
             echo $text;
             return false;
         }
@@ -74,6 +74,7 @@ class WeiboCommand extends CConsoleCommand
         }
         $text .= "Account: {$accountName}, Total Count: {$count}\n";
         echo $text;
+        return $count;
     }
     
     private static function saveRow($row, $account)
