@@ -62,7 +62,8 @@ class WdzWeixin extends CDWeixin
         $post = new Post();
         $post->channel_id = CHANNEL_FUNNY;
         $post->media_type = MEDIA_TYPE_TEXT;
-        $post->content = strip_tags($this->_data->Content);
+        $content = trim(strip_tags($this->_data->Content));
+        $post->content = CDBase::convertPunctuation($content);
         $post->create_time = $_SERVER['REQUEST_TIME'];
         $post->state = POST_STATE_UNVERIFY;
         $post->up_score = mt_rand(param('init_up_score_min'), param('init_up_score_max'));
