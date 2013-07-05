@@ -14,20 +14,22 @@ class WeiboCommand extends CConsoleCommand
         $weiboAccouts = self::fetchWeiboAccounts();
         $count = count($weiboAccouts);
         foreach ($weiboAccouts as $index => $account) {
-            $this->collectOnce($account['display_name'], $account['last_pid']);
+            $this->collectOnce($account);
             echo date('Y-m-d H:i:s', time()) . ' - sleep ' . self::ACCOUNT_SLEEP_TIME . " seconds\n";
             if ($index < $count-1)
                 sleep(self::ACCOUNT_SLEEP_TIME);
         }
     }
     
-    private function collectOnce($account, $since_id)
+    private function collectOnce($account)
     {
-        $since_id = $since_id ? $since_id : 0;
+        $accountName = $account['display_name'];
+        $since_id = $account['last_pid'] ? $account['last_pid'] : 0;
+        
         $url = 'https://api.weibo.com/2/statuses/user_timeline.json';
         $params = array(
             'source' => self::APP_KEY,
-            'screen_name' => $account,
+            'screen_name' => $accountName,
             'since_id' => $since_id,
             'count' => self::WEIBO_ROWS_COUNT,
             'trim_user' => 0,
@@ -59,10 +61,10 @@ class WeiboCommand extends CConsoleCommand
                 $row = $row['retweeted_status'];
             
             try {
-                $result = self::saveRow($row);
+                $result = self::saveRow($row, $account);
                 if ($result === true) $count++;
                 if ($index == 0)
-                    self::updateLastTimeAndPID($account, $pid);
+                    self::updateLastTimeAndPID($accountName, $pid);
             }
             catch (Exception $e) {
                 $text .= "ID: $pid - Save Exception\n";
@@ -70,11 +72,11 @@ class WeiboCommand extends CConsoleCommand
                 continue;
             }
         }
-        $text .= "Account: {$account}, Total Count: {$count}\n";
+        $text .= "Account: {$accountName}, Total Count: {$count}\n";
         echo $text;
     }
     
-    private static function saveRow($row)
+    private static function saveRow($row, $account)
     {
         $prompt = date('Y-m-d H:i:s', time()) . ' - ID: ' . $row['idstr'] . ' - ';
         
@@ -106,8 +108,11 @@ class WeiboCommand extends CConsoleCommand
         
         $temp['repost_count'] = (int)$row['repost_count'];
         $temp['comment_count'] = (int)$row['comment_count'];
-        $temp['username'] = $row['user']['screen_name'];
         $temp['weibo_id'] = $idstr;
+        $temp['user_id'] = $account['user_id'];
+        $temp['user_name'] = $account['user_name'];
+        $temp['account_id'] = $account['id'];
+        
         $model = new PostTemp();
         $model->attributes = $temp;
         
@@ -143,7 +148,6 @@ class WeiboCommand extends CConsoleCommand
     private static function fetchWeiboAccounts()
     {
         $rows = app()->getDb()->createCommand()
-            ->select('display_name, last_pid')
             ->from(TABLE_WEIBO_ACCOUNT)
             ->order('id asc')
             ->queryAll();

@@ -32,13 +32,6 @@ class WbpostController extends AdminController
             $data = 1;
         else {
             try {
-                $username = $temp['username'];
-                $userid = app()->getDb()->createCommand()
-                    ->select('id')
-                    ->from(TABLE_USER)
-                    ->where('screen_name = :username', array(':username' => $username))
-                    ->queryScalar();
-                
                 $content = CDBase::convertPunctuation(nl2br(trim($_POST['weibotext'])));
                 $content = empty($content) ? $temp->content : $content;
                 $post = new Post();
@@ -50,14 +43,13 @@ class WbpostController extends AdminController
                 $post->view_nums = mt_rand(param('init_view_nums_min'), param('init_view_nums_max'));
                 $post->homeshow = CD_YES;
                 $post->state = POST_STATE_DISABLED;
-                $vestUser = CDBase::randomVestAuthor();
+                if ($temp->wbaccount)
+                    $vestUser = array($temp->wbaccount->user_id, $temp->wbaccount->user_name);
+                else
+                    $vestUser = CDBase::randomVestAuthor();
             	$post->user_id = $vestUser[0];
             	$post->user_name = $vestUser[1];
                 
-                if ($userid > 0) {
-                    $post->user_id = (int)$userid;
-                    $post->user_name = $username;
-                }
                 if ($media_type == MEDIA_TYPE_IMAGE && $temp->original_pic) {
                     $post->original_pic = $temp->original_pic;
                 }

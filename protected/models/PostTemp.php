@@ -13,8 +13,13 @@
  * @property string $content
  * @property integer $repost_count
  * @property integer $comment_count
- * @property string $username
+ * @property integer $user_id
+ * @property string $user_name
+ * @property integer $account_id
  * @property string $weibo_id
+ *
+ * @property User $user
+ * @property WeiboAccount $wbaccount
  */
 class PostTemp extends CActiveRecord
 {
@@ -43,9 +48,9 @@ class PostTemp extends CActiveRecord
 	{
 		return array(
 		    array('content', 'required'),
-			array('channel_id, create_time, repost_count, comment_count', 'numerical', 'integerOnly'=>true),
+			array('channel_id, create_time, repost_count, comment_count, user_id, account_id', 'numerical', 'integerOnly'=>true),
 			array('thumbnail_pic, bmiddle_pic, original_pic', 'length', 'max'=>250),
-			array('username, weibo_id', 'length', 'max'=>50),
+			array('user_name, weibo_id', 'length', 'max'=>50),
 			array('content', 'safe'),
 		);
 	}
@@ -56,6 +61,8 @@ class PostTemp extends CActiveRecord
 	public function relations()
 	{
 		return array(
+	        'user' => array(self::BELONGS_TO, 'User', 'user_id'),
+	        'wbaccount' => array(self::BELONGS_TO, 'WeiboAccount', 'account_id'),
 		);
 	}
 
@@ -74,9 +81,27 @@ class PostTemp extends CActiveRecord
 			'create_time' => '创建时间',
 	        'repost_count' => '转发数',
 	        'comment_count' => '评论数',
-	        'username' => '微博名字',
+	        'user_id' => '绑定用户ID',
+	        'user_name' => '绑定用户名字',
+    		'account_id' => '抓取账号ID',
     		'weibo_id' => '微博ID',
 		);
+	}
+	
+	protected function afterSave()
+	{
+	    if ($this->wbaccount) {
+	        $this->wbaccount->post_nums++;
+	        $this->wbaccount->save(true, array('post_nums'));
+	    }
+	}
+	
+	protected function afterDelete()
+	{
+	    if ($this->wbaccount) {
+	        $this->wbaccount->post_nums--;
+	        $this->wbaccount->save(true, array('post_nums'));
+	    }
 	}
 }
 

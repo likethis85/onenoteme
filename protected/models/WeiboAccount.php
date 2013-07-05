@@ -8,6 +8,10 @@
  * @property string $display_name
  * @property integer $last_time
  * @property string $last_pid
+ * @property integer $user_id
+ * @property string $user_name
+ * @property integer $post_nums
+ * @property string $desc
  */
 class WeiboAccount extends CActiveRecord
 {
@@ -36,9 +40,9 @@ class WeiboAccount extends CActiveRecord
 	{
 		return array(
 	        array('display_name', 'required'),
-			array('last_time', 'numerical', 'integerOnly'=>true),
-			array('display_name', 'length', 'max'=>250),
-			array('last_pid', 'length', 'max'=>30),
+			array('last_time, user_id, post_nums', 'numerical', 'integerOnly'=>true),
+			array('display_name, desc', 'length', 'max'=>250),
+			array('last_pid, user_name', 'length', 'max'=>50),
 		);
 	}
 
@@ -48,6 +52,7 @@ class WeiboAccount extends CActiveRecord
 	public function relations()
 	{
 		return array(
+	        'user' => array(self::BELONGS_TO, 'User', 'user_id'),
 		);
 	}
 
@@ -58,9 +63,13 @@ class WeiboAccount extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'display_name' => 'Display Name',
-			'last_time' => 'Last Time',
-			'last_pid' => 'Last Pid',
+			'display_name' => '微博名字',
+			'last_time' => '最后抓取时间',
+			'last_pid' => '最后微博ID',
+			'user_id' => '绑定用户ID',
+			'user_name' => '绑定用户名',
+			'post_nums' => '数量',
+			'desc' => '备注',
 		);
 	}
 
