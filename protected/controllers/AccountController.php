@@ -105,22 +105,21 @@ class AccountController extends Controller
             $data['errno'] = 1;
             $data['message'] = '激活链接已经失效。';
         }
-        elseif (user()->getIsGuest()) {
-            $identity = new UserIdentity($user->username, $user->password);
-            if ($identity->authenticate(true)) {
-                user()->login($identity);
-                $data['errno'] = 0;
-                $data['user'] = $user;
-            }
-            else {
-                $data['errno'] = 1;
-                $data['message'] = '激活成功，但您的账号状态不可用，请<a href="'. aurl('help/contact').'" target="_blank">联系客服人员</a>';
-            }
+        elseif (!user()->getIsGuest()) {
+            user()->logout();
         }
-        else {
+        
+        $identity = new UserIdentity($user->username, $user->password);
+        if ($identity->authenticate(true)) {
+            user()->login($identity);
             $data['errno'] = 0;
             $data['user'] = $user;
         }
+        else {
+            $data['errno'] = 1;
+            $data['message'] = '激活成功，但您的账号状态不可用，请<a href="'. aurl('help/contact').'" target="_blank">联系客服人员</a>';
+        }
+        
         $this->setPageTitle('邮箱确认激活');
         $this->render('activate', $data);
     }

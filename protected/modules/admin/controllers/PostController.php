@@ -365,7 +365,7 @@ class PostController extends AdminController
 	    else {
 	        $data = array(
 	            'errno' => CD_NO,
-	            'label' => t($model->state == POST_STATE_ENABLED ? 'sethide' : 'setshow', 'admin')
+	            'label' => $model->state == POST_STATE_ENABLED ? '隐藏' : '显示',
 	        );
 	        CDBase::jsonp($callback, $data);
 	    }
