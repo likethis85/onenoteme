@@ -75,7 +75,8 @@ class Controller extends CController
         }
         else {
             
-            $html .= sprintf('<li><a href="%s" target="_blank">管理中心</a></li>', CDBaseUrl::adminHomeUrl());
+            if (user()->getIsEditor())
+                $html .= sprintf('<li><a href="%s" target="_blank">管理中心</a></li>', CDBaseUrl::adminHomeUrl());
 //             $html .= sprintf('<li class="user-name"><a href="%s" title="我的主页">我的主页</a></li>', user()->getHomeUrl());
             $html .= sprintf('<li class="user-name"><a href="%s" title="查看我的收藏">我的收藏</a></li>', aurl('member/post/favorite'));
             	
