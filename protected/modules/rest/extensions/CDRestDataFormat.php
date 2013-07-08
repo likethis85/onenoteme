@@ -47,6 +47,7 @@ class CDRestDataFormat
                 'mini_avatar' => sbu(param('default_mini_avatar')),
                 'small_avatar' => sbu(param('default_small_avatar')),
                 'large_avatar' => sbu(param('default_large_avatar')),
+                'score' => 0,
             );
         else
             $row = array(
@@ -60,6 +61,7 @@ class CDRestDataFormat
                 'mini_avatar' => $model->profile->getMiniAvatarUrl(),
                 'small_avatar' => $model->profile->getSmallAvatarUrl(),
                 'large_avatar' => $model->profile->getLargeAvatarUrl(),
+                'score' => $model->score,
             );
         
         $row['token'] = $token;
