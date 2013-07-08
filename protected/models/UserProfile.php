@@ -31,7 +31,7 @@ class UserProfile extends CActiveRecord
     {
         return array(GENDER_UNKOWN, GENDER_FEMALE, GENDER_MALE);
     }
-    
+
     public static function genderLabel($gender = null)
     {
         $labels = array(
@@ -42,7 +42,7 @@ class UserProfile extends CActiveRecord
     
         return ($gender === null) ? $labels : $labels[$gender];
     }
-    
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return UserProfile the static model class
@@ -107,7 +107,7 @@ class UserProfile extends CActiveRecord
 	        'score' => '积分',
 		);
 	}
-	
+
 	public function getGenderLabel()
 	{
 	    return self::genderLabel($this->gender);
@@ -117,7 +117,7 @@ class UserProfile extends CActiveRecord
 	{
 	    return CDBaseUrl::userHomeUrl($this->user_id);
 	}
-	
+
 	/**
 	 * 获取自定义缩略图对象
 	 * @return Ambigous <NULL, string, CDImageThumb>
@@ -134,7 +134,7 @@ class UserProfile extends CActiveRecord
 	    
 	    return $thumbs[$this->user_id];
 	}
-	
+
 	public function getMiniAvatarUrl()
 	{
 	    $url = sbu(param('default_mini_avatar'));
@@ -144,7 +144,7 @@ class UserProfile extends CActiveRecord
 	    
 	    return $url;
 	}
-	
+
 	public function getSmallAvatarUrl()
 	{
 	    $url = sbu(param('default_small_avatar'));
@@ -176,7 +176,7 @@ class UserProfile extends CActiveRecord
 	
 	    return $html;
 	}
-	
+
 	public function getSmallAvatar($alt = '', $htmlOptions = array())
 	{
 	    $html = '';
@@ -188,7 +188,7 @@ class UserProfile extends CActiveRecord
 	
 	    return $html;
 	}
-	
+
 	public function getMiniAvatar($alt = '', $htmlOptions = array())
 	{
 	    $html = '';

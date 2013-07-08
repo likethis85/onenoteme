@@ -61,7 +61,7 @@ class CDRestDataFormat
                 'mini_avatar' => $model->profile->getMiniAvatarUrl(),
                 'small_avatar' => $model->profile->getSmallAvatarUrl(),
                 'large_avatar' => $model->profile->getLargeAvatarUrl(),
-                'score' => $model->score,
+                'score' => $model->profile->score,
             );
         
         $row['token'] = $token;
