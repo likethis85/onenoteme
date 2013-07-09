@@ -18,12 +18,16 @@ class CommentController extends RestController
     {
         $post_id = (int)request()->getPost('post_id');
         $content = trim(request()->getPost('content'));
+        $userid = (int)request()->getPost('user_id');
+        $username = trim(request()->getPost('user_name'));
         if (empty($post_id) || empty($content))
             throw new CDRestException(CDRestError::PARAM_NOT_COMPLETE, 'post_id, content is required');
         
         $comment = new RestComment();
         $comment->post_id = $post_id;
         $comment->content = $content;
+        $comment->user_id = $userid;
+        $comment->user_name = $username;
         if ($comment->save()) {
             $data = CDRestDataFormat::formatComment($comment);
             $this->output($data);
