@@ -22,7 +22,6 @@ class AppUserIdentity extends CUserIdentity
         
         try {
             $criteria = new CDbCriteria();
-            $criteria->select = array('t.id', 't.username', 't.screen_name', 't.password', 't.state');
             $criteria->addColumnCondition(array('username'=>$this->username));
             $this->_user = RestUser::model()->find($criteria);
             
