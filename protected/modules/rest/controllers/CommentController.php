@@ -28,6 +28,7 @@ class CommentController extends RestController
         $comment->content = $content;
         $comment->user_id = $userid;
         $comment->user_name = $username;
+        $comment->state = COMMENT_STATE_ENABLED;
         if ($comment->save()) {
             $data = CDRestDataFormat::formatComment($comment);
             $this->output($data);
