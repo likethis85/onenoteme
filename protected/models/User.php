@@ -101,7 +101,7 @@ class User extends CActiveRecord
 
 	public function getDisplayName()
 	{
-	    return empty($this->screen_name) ? $this->username : $this->screen_name;
+	    return empty($this->screen_name) ? $this->username : h($this->screen_name);
 	}
 	
 	public function getHomeUrl()
@@ -234,8 +234,15 @@ class User extends CActiveRecord
 	    }
 	}
 	
-	public function beforeDelete()
+	protected function beforeDelete()
 	{
 	    throw new CException('用户不允许删除');
 	}
+	
+	protected function afterFind()
+	{
+	    $this->screen_name = h($this->screen_name);
+	}
 }
+
+

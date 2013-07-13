@@ -146,6 +146,11 @@ class LoginForm extends CFormModel
         return $errorNums >= self::$_maxLoginErrorNums;
     }
 
+    protected function beforeValidate()
+    {
+        $this->username = trim(strip_tags($this->username));
+        $this->screen_name = trim(strip_tags($this->screen_name));
+    }
     public function afterValidate()
     {
         parent::afterValidate();
