@@ -17,7 +17,7 @@ class CDRestDataFormat
             'author_id' => $model->user_id,
             'author_name' => $model->getAuthorName(),
             'tags' => $model->tags,
-            'small_pic' => $model->getSquareThumb(),
+            'small_pic' => $model->getFixThumb(),
             'middle_pic' => $model->getMiddlePic(),
             'large_pic' => $model->getLargePic(),
             'pic_frames' => $model->original_frames,
