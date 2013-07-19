@@ -3,7 +3,7 @@
         <?php if ($form->hasErrors('state')):?>
         <div class="alert alert-error"><?php echo $form->getError('state');?></div>
         <?php endif;?>
-        <?php echo CHtml::errorSummary($form);?>
+        
         <h2>欢迎加入<?php echo app()->name;?></h2>
         <?php echo CHtml::form('', 'post', array('class'=>'form-horizontal cd-form login-form'));?>
         <?php echo CHtml::activeHiddenField($form, 'returnUrl');?>

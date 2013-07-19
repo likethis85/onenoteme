@@ -46,7 +46,7 @@ class LoginForm extends CFormModel
     
     public function checkReserveWords($attribute, $params)
     {
-        if ($this->hasErrors('screen_name')) return false;
+        if ($this->hasErrors($attribute)) return false;
         $words = (array)param('reservedWords');
         foreach ($words as $v) {
             $pos = stripos($this->$attribute, $v);
@@ -150,8 +150,10 @@ class LoginForm extends CFormModel
     {
         $this->username = trim(strip_tags($this->username));
         $this->screen_name = trim(strip_tags($this->screen_name));
+        return true;
     }
-    public function afterValidate()
+    
+    protected function afterValidate()
     {
         parent::afterValidate();
         if ($this->hasErrors())
