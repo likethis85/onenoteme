@@ -10,7 +10,7 @@
 <meta name="msapplication-TileImage" content="35c7b7b9-f757-4e10-83a9-d18cc277e4da.png"/>
 <script type="text/javascript">
 var wdz_logined = <?php echo (int)!user()->isGuest;?>;
-var wdz_quick_login_url = '<?php echo aurl('site/quicklogin');?>';
+var wdz_quick_login_url = '<?php echo aurl('account/quicklogin');?>';
 var _hmt = _hmt || [];
 _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;?>, 2]);
 </script>
