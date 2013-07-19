@@ -48,7 +48,7 @@ class UserIdentity extends CUserIdentity
         catch (Exception $e) {
             $this->errorCode = self::ERROR_UNKNOWN_IDENTITY;
             $this->errorMessage = '未知错误';
-            echo $e->getMessage();
+//             echo $e->getMessage();
         }
         
         return !$this->errorCode;
