@@ -29,11 +29,14 @@ class PostSearchForm extends CFormModel
         $criteria = new CDbCriteria();
         if ($this->postid)
             $criteria->addColumnCondition(array('t.id'=>$this->postid));
-        elseif ($this->author) {
-            if (is_numeric($this->author))
-                $criteria->addColumnCondition(array('t.user_id'=>$this->author));
-            elseif (is_string($this->author))
-                $criteria->addColumnCondition(array('t.user_name'=>$this->author));
+        else {
+            if ($this->author) {
+                if (is_numeric($this->author))
+                    $criteria->addColumnCondition(array('t.user_id'=>$this->author));
+                elseif (is_string($this->author))
+                    $criteria->addColumnCondition(array('t.user_name'=>$this->author));
+            }
+            
             if ($this->keyword)
                 $criteria->addSearchCondition('t.title', $this->keyword);
         }
