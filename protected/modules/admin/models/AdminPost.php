@@ -69,8 +69,7 @@ class AdminPost extends Post
             $pages->setPageSize($criteria->limit);
             $pages->applyLimit($criteria);
         }
-        $filename = app()->getRuntimePath().DS.'db.log';
-file_put_contents($filename, $criteria->condition);
+
         $models = self::model()->findAll($criteria);
 
         $data = array(
