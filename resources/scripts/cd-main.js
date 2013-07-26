@@ -274,7 +274,8 @@ Waduanzi.favoritePost = function(event){
 	
 	jqXhr.done(function(data){
 		if (data.errno == 0) {
-			var count = parseInt(tthis.text()) + 1;
+			var current = parseInt(tthis.text());
+			var count = isNaN(current) ? current + 1 : 1;
 			tthis.text(count).addClass('disabled');
 			itemDiv.find('.item-toolbar').off('click', 'a.favorite');
 		}
