@@ -10,13 +10,13 @@ class UserController extends RestController
     
     public function actionCreate()
     {
-        $username = request()->getPost('username');
-        $password = request()->getPost('password');
+        $username = request()->getQuery('username');
+        $password = request()->getQuery('password');
         $form = new RestUserForm();
         $form->username = $username;
         $form->password = $password;
         if ($form->validate() && $user = $form->save()) {
-            $this->afterSave($user);
+//             $this->afterSave($user);
             $token = RestUser::generateUserToken($user->id, $username);
             $data = CDRestDataFormat::formatUser($user, $token);
             $this->output($data);
