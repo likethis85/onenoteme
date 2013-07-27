@@ -17,7 +17,7 @@ class RestUserForm extends CFormModel
         return array(
             array('username, password', 'required', 'message'=>'您总得填用户名和密码吧'),
             array('username', 'length', 'min'=>2, 'max'=>30, 'message'=>'用户名允许的长度为2-30个字'),
-            array('password', 'length', 'min'=>3, 'max'=>30, 'message'=>'用户名允许的长度为3-30个字'),
+            array('password', 'length', 'is'=>32, 'message'=>'密码必须为MD5加密后的32位字符串'),
             array('username', 'checkUserName'),
             array('username', 'unique', 'caseSensitive'=>false, 'className'=>'RestUser', 'attributeName'=>'username', 'message'=>'啊，被抢注了，换个名字吧'),
         );

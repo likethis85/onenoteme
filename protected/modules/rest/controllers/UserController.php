@@ -4,19 +4,19 @@ class UserController extends RestController
     public function filters()
     {
         return array(
-            'postOnly + login, logout',
+            'postOnly + create, login, logout',
         );
     }
     
     public function actionCreate()
     {
-        $username = request()->getQuery('username');
-        $password = request()->getQuery('password');
+        $username = request()->getPost('username');
+        $password = request()->getPost('password');
         $form = new RestUserForm();
         $form->username = $username;
         $form->password = $password;
         if ($form->validate() && $user = $form->save()) {
-//             $this->afterSave($user);
+            $this->afterSave($user);
             $token = RestUser::generateUserToken($user->id, $username);
             $data = CDRestDataFormat::formatUser($user, $token);
             $this->output($data);
@@ -32,7 +32,7 @@ class UserController extends RestController
         if ($device === null) {
             $device = new RestMobileDevice();
             $device->udid = $this->deviceUDID;
-            $device->user_id = 0;
+            $device->user_id = $user->id;
             $device->sys_version = $this->osVersion;
             $device->sys_name = $this->osName;
             $device->app_version = $this->appVersion;
