@@ -4,7 +4,7 @@ class UserController extends RestController
     public function filters()
     {
         return array(
-            'postOnly + create, login, logout',
+            'postOnly + login, logout',
         );
     }
     
