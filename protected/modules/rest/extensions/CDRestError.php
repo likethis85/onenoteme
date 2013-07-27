@@ -75,6 +75,7 @@ class CDRestError
     const USER_NOT_EXIST = 20001;
     const USER_NOT_AUTHENTICATED = 20002;
     const USER_LOGIN_ERROR = 20003;
+    const USER_CREATE_ERROR = 20004;
     
     /**
      * 用户$token错误
@@ -125,6 +126,7 @@ class CDRestError
             self::USER_NOT_AUTHENTICATED => '用户名或密码错误',
             self::USER_LOGIN_ERROR => '登录过程出错',
             self::USER_NOT_EXIST => '用户不存在',
+            self::USER_CREATE_ERROR => '用户注册出错',
             
             // post
             self::POST_SAVE_ERROR => '段子保存出错',

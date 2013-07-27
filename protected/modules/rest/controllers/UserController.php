@@ -12,7 +12,40 @@ class UserController extends RestController
     {
         $username = request()->getPost('username');
         $password = request()->getPost('password');
+        $form = new RestUserForm();
+        $form->username = $username;
+        $form->password = $password;
+        if ($form->validate() && $user = $form->save()) {
+            $this->afterSave($user);
+            $token = RestUser::generateUserToken($user->id, $username);
+            $data = CDRestDataFormat::formatUser($user, $token);
+            $this->output($data);
+        }
+        else
+            throw new CDRestException(CDRestError::USER_CREATE_ERROR);
+            
     }
+    
+    protected function afterSave(RestUser $user)
+    {
+        $device = RestMobileDevice::model()->findByPk($this->deviceUDID);
+        if ($device === null) {
+            $device = new RestMobileDevice();
+            $device->udid = $this->deviceUDID;
+            $device->user_id = 0;
+            $device->sys_version = $this->osVersion;
+            $device->sys_name = $this->osName;
+            $device->app_version = $this->appVersion;
+            $result = $device->save();
+        }
+        else {
+            $device->user_id = $user->id;
+            $result = $device->save(true, array('user_id'));
+        }
+        
+        return $result ? $device : false;
+    }
+    
     
     /**
      * 用户验证

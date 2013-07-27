@@ -10,6 +10,7 @@ class RestController extends CController
 {
     public $deviceUDID;
     public $osVersion;
+    public $osName;
     public $appVersion;
     public $userToken;
     
@@ -18,9 +19,9 @@ class RestController extends CController
         parent::init();
         
         $headers = getallheaders();
-        file_put_contents(app()->getRuntimePath().DS.'server.txt', var_export($headers, true));
         $this->deviceUDID = $headers['DEVICE-UDID'];
         $this->osVersion = $headers['OS-VERSION'];
+        $this->osName = $headers['OS-NAME'];
         $this->appVersion = $headers['APP-VERSION'];
         $this->userToken = $headers['USER-TOKEN'];
         
