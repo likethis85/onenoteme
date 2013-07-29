@@ -76,6 +76,8 @@ class CDRestError
     const USER_NOT_AUTHENTICATED = 20002;
     const USER_LOGIN_ERROR = 20003;
     const USER_CREATE_ERROR = 20004;
+    const USER_NAME_INVALID = 20010;
+    const USER_NAME_EXIST = 20011;
     
     /**
      * 用户$token错误
