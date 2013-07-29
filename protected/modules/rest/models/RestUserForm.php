@@ -51,6 +51,7 @@ class RestUserForm extends CFormModel
         $user = new RestUser();
         $user->username = $user->screen_name = $this->username;
         $user->password = $this->password;
+        $user->state = USER_STATE_ENABLED;
         if ($user->getUserNameIsEmail()) {
             $pos = mb_stripos($this->username, '@', null, app()->charset);
             $user->screen_name = mb_substr($this->username, 0, $pos, app()->charset);
