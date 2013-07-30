@@ -5,6 +5,7 @@ class UserController extends RestController
     {
         return array(
             'postOnly + create, login, logout',
+            'putOnly + update',
         );
     }
     
@@ -45,7 +46,20 @@ class UserController extends RestController
         
         return $result ? $device : false;
     }
-    
+
+    public function actionUpdate()
+    {
+        $userID = (int)request()->getPut('user_id');
+        $screenName = trim(request()->getPut('screen_name'));
+        $user = RestUser::model()->findByPk($userID);
+        if ($user === null)
+            throw new CDRestException(CDRestError::USER_NOT_EXIST);
+        else {
+            $user->screen_name = $screenName;
+            $result = $user->save(true, array('screen_name'));
+            $this->output(array('success'=>(int)$result));
+        }
+    }
     
     /**
      * 用户验证
@@ -127,7 +141,6 @@ class UserController extends RestController
         
         exit(0);
     }
-    
     
     /**
      * 返回字段列表
