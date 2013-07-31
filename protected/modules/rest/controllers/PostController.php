@@ -190,10 +190,10 @@ class PostController extends RestController
         if (count($pids) > 0) {
             $criteria = new CDbCriteria();
             $criteria->scopes = array('published');
-            $criteria->select = $this->selectColumns();
+            $criteria->select = self::selectColumns();
             $criteria->with = array('user', 'user.profile');
             $criteria->order = 't.create_time desc';
-            $criteria->addInCondition('id', $pids);
+            $criteria->addInCondition('t.id', $pids);
             
             $posts = RestPost::model()->findAll($criteria);
             $data = $this->formatPosts($posts);
