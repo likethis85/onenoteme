@@ -182,11 +182,11 @@ class PostController extends RestController
         
         $offset = ($page - 1) *  $this->postRowCount();
         $cmd = db()->createCommand()
-            ->selectDistinct('post_id')
-            ->from(TABLE_COMMENT)
+            ->selectDistinct('c.post_id')
+            ->from(TABLE_COMMENT . ' c')
             ->limit($this->postRowCount(), $offset)
-            ->order('create_time desc')
-            ->where('user_id = :userID', array(':userID' => $user_id));
+            ->order('c.create_time desc')
+            ->where('c.user_id = :userID', array(':userID' => $user_id));
         
         if ($channel_id > 0)
             $cmd->join(TABLE_POST . ' p', 'p.channel_id = :channelID', array(':channelID' => $channel_id));
