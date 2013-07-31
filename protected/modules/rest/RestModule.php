@@ -1,6 +1,8 @@
 <?php
 define('REST_DEBUG', true);
 
+require(dirname(__FILE__) . DS . 'extensions' . DS . 'define.php');
+
 class RestModule extends CWebModule
 {
 	public function init()

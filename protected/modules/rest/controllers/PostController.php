@@ -169,9 +169,26 @@ class PostController extends RestController
         $this->output($rows);
     }
     
-    public function actionMydigg()
+    public function actionFeedback($user_id, $page = 1)
     {
+        $user_id = (int)$user_id;
+        $criteria = new CDbCriteria();
+        $criteria->select = 'id';
+        $user = RestUser::model()->findByPk($user_id, $criteria);
+        if ($user === null)
+            throw new CDRestException('user is not exist');
         
+        $offset = ($page - 1) *  $this->postRowCount();
+        
+        $criteria = new CDbCriteria();
+        $criteria->addColumnCondition(array('comments.user_id'=>$user_id));
+        $criteria->scopes = array('published');
+        $criteria->select = $this->selectColumns();
+        $criteria->offset = $offset;
+        $criteria->limit = $this->postRowCount();
+        $criteria->with = array('user', 'user.profile');
+        
+        $posts = RestPost::model()->findAll($criteria);
     }
     
     /**
@@ -332,7 +349,7 @@ class PostController extends RestController
     
     protected function postRowCount()
     {
-        return 20;
+        return DEFAULT_POST_FEEDBACK_COUNT;
     }
     
     protected function formatPosts(array $models, $includeUser = true, $includeComment = false)
