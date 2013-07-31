@@ -187,6 +187,7 @@ class PostController extends RestController
         $criteria->offset = $offset;
         $criteria->limit = $this->postRowCount();
         $criteria->with = array('user', 'user.profile');
+        $criteria->together = true;
         
         $posts = RestPost::model()->findAll($criteria);
     }
