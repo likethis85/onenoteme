@@ -169,9 +169,11 @@ class PostController extends RestController
         $this->output($rows);
     }
     
-    public function actionFeedback($user_id, $page = 1)
+    public function actionFeedback($user_id, $channel_id = 0, $page = 1)
     {
         $user_id = (int)$user_id;
+        $channel_id = (int)$channel_id;
+        
         $criteria = new CDbCriteria();
         $criteria->select = 'id';
         $user = RestUser::model()->findByPk($user_id, $criteria);
@@ -185,6 +187,10 @@ class PostController extends RestController
             ->limit($this->postRowCount(), $offset)
             ->order('create_time desc')
             ->where('user_id = :userID', array(':userID' => $user_id));
+        
+        if ($channel_id > 0)
+            $cmd->join(TABLE_POST . ' p', 'p.channel_id = :channelID', array(':channelID' => $channel_id));
+        
         $pids = $cmd->queryColumn();
         
         if (count($pids) > 0) {
