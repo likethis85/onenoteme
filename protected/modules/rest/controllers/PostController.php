@@ -179,18 +179,28 @@ class PostController extends RestController
             throw new CDRestException('user is not exist');
         
         $offset = ($page - 1) *  $this->postRowCount();
+        $cmd = db()->createCommand()
+            ->selectDistinct('post_id')
+            ->from(TABLE_COMMENT)
+            ->limit($this->postRowCount(), $offset)
+            ->order('create_time desc')->distinct
+            ->where('user_id = :userID', array(':userID' => $user_id));
+        $pids = $cmd->queryColumn();
         
-        $criteria = new CDbCriteria();
-        $criteria->scopes = array('published');
-        $criteria->select = $this->selectColumns();
-        $criteria->offset = $offset;
-        $criteria->limit = $this->postRowCount();
-        $criteria->with = array('user', 'user.profile');
-        $criteria->join = 'LEFT JOIN ' . TABLE_COMMENT . ' c on c.user_id = ' . $user_id;
-        $criteria->order = 't.create_time desc';
+        if (count($pids) > 0) {
+            $criteria = new CDbCriteria();
+            $criteria->scopes = array('published');
+            $criteria->select = $this->selectColumns();
+            $criteria->with = array('user', 'user.profile');
+            $criteria->order = 't.create_time desc';
+            $criteria->addInCondition('id', $pids);
+            
+            $posts = RestPost::model()->findAll($criteria);
+            $data = $this->formatPosts($posts);
+        }
+        else
+            $data = array();
         
-        $posts = RestPost::model()->findAll($criteria);
-        $data = $this->formatPosts($posts);
         $this->output($data);
     }
     
