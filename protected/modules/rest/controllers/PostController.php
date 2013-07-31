@@ -183,7 +183,7 @@ class PostController extends RestController
             ->selectDistinct('post_id')
             ->from(TABLE_COMMENT)
             ->limit($this->postRowCount(), $offset)
-            ->order('create_time desc')->distinct
+            ->order('create_time desc')
             ->where('user_id = :userID', array(':userID' => $user_id));
         $pids = $cmd->queryColumn();
         
