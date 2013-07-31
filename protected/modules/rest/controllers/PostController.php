@@ -190,6 +190,8 @@ class PostController extends RestController
         $criteria->order = 't.create_time desc';
         
         $posts = RestPost::model()->findAll($criteria);
+        $data = $this->formatPosts($posts);
+        $this->output($data);
     }
     
     /**
