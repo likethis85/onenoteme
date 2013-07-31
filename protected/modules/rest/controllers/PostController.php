@@ -181,13 +181,13 @@ class PostController extends RestController
         $offset = ($page - 1) *  $this->postRowCount();
         
         $criteria = new CDbCriteria();
-        $criteria->addColumnCondition(array('comments.user_id'=>$user_id));
         $criteria->scopes = array('published');
         $criteria->select = $this->selectColumns();
         $criteria->offset = $offset;
         $criteria->limit = $this->postRowCount();
         $criteria->with = array('user', 'user.profile');
-        $criteria->together = true;
+        $criteria->join = 'LEFT JOIN ' . TABLE_COMMENT . ' c on c.user_id = ' . $user_id;
+        $criteria->order = 't.create_time desc';
         
         $posts = RestPost::model()->findAll($criteria);
     }
