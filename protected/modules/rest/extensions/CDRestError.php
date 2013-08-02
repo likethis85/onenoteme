@@ -69,7 +69,7 @@ class CDRestError
     
     // 以下为用户相关错误代码，20开头
     /**
-     * 用户不存在
+     * 用户相关
      * @var integer
      */
     const USER_NOT_EXIST = 20001;
@@ -78,6 +78,7 @@ class CDRestError
     const USER_CREATE_ERROR = 20004;
     const USER_NAME_INVALID = 20010;
     const USER_NAME_EXIST = 20011;
+    const USER_NICKNAME_EXIST = 20021;
     
     /**
      * 用户$token错误
@@ -129,6 +130,7 @@ class CDRestError
             self::USER_LOGIN_ERROR => '登录过程出错',
             self::USER_NOT_EXIST => '用户不存在',
             self::USER_CREATE_ERROR => '用户注册出错',
+            self::USER_NICKNAME_EXIST => '昵称已经被人抢去啦',
             
             // post
             self::POST_SAVE_ERROR => '段子保存出错',

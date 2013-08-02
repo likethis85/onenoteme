@@ -54,6 +54,9 @@ class UserController extends RestController
         $user = RestUser::model()->findByPk($userID);
         if ($user === null)
             throw new CDRestException(CDRestError::USER_NOT_EXIST);
+        else if ($user->screen_name == $screenName) {
+            throw new CDRestException(self::USER_NICKNAME_EXIST);
+        }
         else {
             $user->screen_name = $screenName;
             $result = $user->save(true, array('screen_name'));
