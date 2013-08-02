@@ -55,16 +55,14 @@ class UserController extends RestController
         if ($user === null)
             throw new CDRestException(CDRestError::USER_NOT_EXIST);
         else {
-            $this->output(array($user->screen_name, $screenName));
+            $user->screen_name = $screenName;
+            if ($user->validate(array('screen_name'))) {
+                $result = $user->update(array('screen_name'));
+                $this->output(array('success'=>(int)$result));
+            }
+            else
+                throw new CDRestException(CDRestError::USER_NICKNAME_EXIST);
         }
-//         elseif ($user->screen_name == $screenName) {
-//             throw new CDRestException(CDRestError::USER_NICKNAME_EXIST);
-//         }
-//         else {
-//             $user->screen_name = $screenName;
-//             $result = $user->save(true, array('screen_name'));
-//             $this->output(array('success'=>(int)$result));
-//         }
     }
     
     /**
