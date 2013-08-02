@@ -57,7 +57,7 @@ class User extends CActiveRecord
 			array('username', 'required', 'message'=>'用户名 必须要填写'),
 		    array('screen_name', 'required', 'message'=>'大名 必须要填写'),
 		    array('password', 'required', 'message'=>'密码 必须要填写'),
-		    array('username', 'unique'),
+		    array('username, screen_name', 'unique'),
 			array('create_time, state, token_time, source', 'numerical', 'integerOnly'=>true),
 			array('username, screen_name', 'length', 'min'=>2, 'max'=>50),
 			array('password', 'length', 'min'=>3, 'max'=>32),
