@@ -55,7 +55,7 @@ class UserController extends RestController
         if ($user === null)
             throw new CDRestException(CDRestError::USER_NOT_EXIST);
         else if ($user->screen_name == $screenName) {
-            throw new CDRestException(self::USER_NICKNAME_EXIST);
+            throw new CDRestException(CDRestError::USER_NICKNAME_EXIST);
         }
         else {
             $user->screen_name = $screenName;
