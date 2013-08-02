@@ -50,18 +50,21 @@ class UserController extends RestController
     public function actionUpdate()
     {
         $userID = (int)request()->getPut('user_id');
-        $screenName = trim(urldecode(request()->getPut('screen_name')));
+        $screenName = trim(request()->getPut('screen_name'));
         $user = RestUser::model()->findByPk($userID);
         if ($user === null)
             throw new CDRestException(CDRestError::USER_NOT_EXIST);
-        elseif ($user->screen_name == $screenName) {
-            throw new CDRestException(CDRestError::USER_NICKNAME_EXIST);
-        }
         else {
-            $user->screen_name = $screenName;
-            $result = $user->save(true, array('screen_name'));
-            $this->output(array('success'=>(int)$result));
+            $this->output(array($user->screen_name, $screenName));
         }
+//         elseif ($user->screen_name == $screenName) {
+//             throw new CDRestException(CDRestError::USER_NICKNAME_EXIST);
+//         }
+//         else {
+//             $user->screen_name = $screenName;
+//             $result = $user->save(true, array('screen_name'));
+//             $this->output(array('success'=>(int)$result));
+//         }
     }
     
     /**
