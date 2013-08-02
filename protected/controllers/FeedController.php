@@ -193,6 +193,7 @@ class FeedController extends Controller
             'qqmb',
             'xianguo',
             'wumii',
+            'ucweb',
         );
     }
     
