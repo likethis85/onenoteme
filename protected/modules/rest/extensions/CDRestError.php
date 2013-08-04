@@ -78,6 +78,7 @@ class CDRestError
     const USER_CREATE_ERROR = 20004;
     const USER_NAME_INVALID = 20010;
     const USER_NAME_EXIST = 20011;
+    const USER_PASSWORD_INVALID = 20013;
     const USER_NICKNAME_EXIST = 20021;
     
     /**

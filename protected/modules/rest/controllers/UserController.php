@@ -102,7 +102,7 @@ class UserController extends RestController
             
         }
         elseif ($identity->errorCode == AppUserIdentity::ERROR_USERNAME_INVALID)
-            throw new CDRestException(CDRestError::USER_NAME_INVALID);
+            throw new CDRestException(CDRestError::USER_NOT_EXIST);
         elseif ($identity->errorCode == AppUserIdentity::ERROR_PASSWORD_INVALID)
             throw new CDRestException(CDRestError::USER_NOT_AUTHENTICATED);
     }
