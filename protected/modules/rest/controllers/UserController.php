@@ -16,14 +16,19 @@ class UserController extends RestController
         $form = new RestUserForm();
         $form->username = $username;
         $form->password = $password;
-        if ($form->validate() && $user=$form->save()) {
-            $this->afterSave($user);
-            $token = RestUser::generateUserToken($user->id, $username);
-            $data = CDRestDataFormat::formatUser($user, $token);
-            $this->output($data);
+        
+        if ($form->checkUserNameExist())
+            throw new CDRestException(CDRestError::USER_NAME_EXIST);
+        else {
+            if ($form->validate() && $user=$form->save()) {
+                $this->afterSave($user);
+                $token = RestUser::generateUserToken($user->id, $username);
+                $data = CDRestDataFormat::formatUser($user, $token);
+                $this->output($data);
+            }
+            else
+                throw new CDRestException(CDRestError::USER_CREATE_ERROR);
         }
-        else
-            throw new CDRestException(CDRestError::USER_CREATE_ERROR);
             
     }
     
