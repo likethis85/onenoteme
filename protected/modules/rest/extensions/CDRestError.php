@@ -126,7 +126,7 @@ class CDRestError
                 
             // user
             self::USER_TOKEN_ERROR => '用户验证出错',
-            self::USER_NOT_AUTHENTICATED => '用户名或密码错误',
+            self::USER_NOT_AUTHENTICATED => '密码错误',
             self::USER_LOGIN_ERROR => '登录过程出错',
             self::USER_NOT_EXIST => '用户不存在',
             self::USER_CREATE_ERROR => '用户注册出错',
