@@ -35,14 +35,14 @@ class DeviceController extends RestController
     
     public function actionPushState()
     {
-        $state = request()->getPost('state');
+        $state = (int)(bool)request()->getPost('state');
         $device = RestMobileDevice::model()->findByPk($this->deviceUDID);
         if ($device === null)
             $data = array('success' => 0);
         else {
-            $device->push_enabled = (int)(bool)$state;
+            $device->push_enabled = $state;
             $result = $device->save(true, array('push_enabled'));
-            $data = array('success' => (int)$result);
+            $data = array('success' => (int)$result, 'state'=>$state);
         }
         
         $this->output($data);
