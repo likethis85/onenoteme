@@ -4,7 +4,7 @@ class DeviceController extends RestController
     public function filters()
     {
         return array(
-            'postOnly + update',
+            'postOnly + update, activePush',
         );
     }
     
@@ -30,6 +30,21 @@ class DeviceController extends RestController
         $device->country = $country;
         
         $data = array('success' => (int)$device->save());
+        $this->output($data);
+    }
+    
+    public function actionPushState()
+    {
+        $state = request()->getPost('state');
+        $device = RestMobileDevice::model()->findByPk($this->deviceUDID);
+        if ($device === null)
+            $data = array('success' => 0);
+        else {
+            $device->push_enabled = (int)(bool)$state;
+            $result = $device->save(true, array('push_enabled'));
+            $data = array('success' => (int)$result);
+        }
+        
         $this->output($data);
     }
 }
