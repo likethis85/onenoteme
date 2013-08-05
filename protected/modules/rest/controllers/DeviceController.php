@@ -4,7 +4,7 @@ class DeviceController extends RestController
     public function filters()
     {
         return array(
-            'postOnly + update, activePush',
+            'postOnly + update, pushstate',
         );
     }
     

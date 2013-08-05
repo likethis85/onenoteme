@@ -1,5 +1,5 @@
 <?php
-class AserConfigController extends RestController
+class AserController extends RestController
 {
     public function filters()
     {
