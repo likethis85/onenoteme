@@ -41,6 +41,8 @@ define('TABLE_IOS_DEVICE', '{{ios_device}}');
 define('TABLE_POST_TEMP', '{{post_temp}}');
 define('TABLE_WEIBO_ACCOUNT', '{{weibo_account}}');
 define('TABLE_WEIBO_ID', '{{weibo_id}}');
+define('TABLE_APP_SYSTEM_CONFIG_TABLE', '{{app_system_config}}');
+define('TABLE_APP_USER_CONFIG_TABLE', '{{app_user_config}}');
 
 define('POST_STATE_ENABLED', 1);
 define('POST_STATE_DISABLED', 0);

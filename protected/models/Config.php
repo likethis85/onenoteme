@@ -35,12 +35,10 @@ class Config extends CActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
 	        array('name, config_name', 'required'),
 	        array('config_name', 'unique'),
-	        array('config_name', 'match', 'pattern'=>'/^[a-z][\w\d\_]{4,99}/i', 'message'=>t('config_name_pattern')),
+	        array('config_name', 'match', 'pattern'=>'/^[a-z][\w\d\_]{4,99}/i', 'message'=>'参数名只能是字母数字下划线组合，且只能以字母开头'),
 	        array('category_id', 'numerical', 'integerOnly'=>true),
 			array('config_name', 'length', 'max'=>100),
 			array('config_value, desc', 'safe'),
@@ -52,8 +50,6 @@ class Config extends CActiveRecord
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
 		);
 	}
