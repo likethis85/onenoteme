@@ -11,8 +11,8 @@ class UserConfigController extends RestController
     public function actionUpdate()
     {
         $userID = (int)request()->getPost('user_id');
-        
         $configs = request()->getPost('AppUserConfig');
+        
         foreach ($configs as $name => $value) {
             $attributes = array('config_name' => $name);
             if ($userID > 0)
