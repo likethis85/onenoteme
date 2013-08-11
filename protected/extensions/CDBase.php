@@ -255,6 +255,7 @@ class CDBase
         $labels = array(
             MEDIA_TYPE_TEXT => '文字',
             MEDIA_TYPE_IMAGE => '图文',
+            MEDIA_TYPE_VIDEO => '视频',
             MEDIA_TYPE_UNKOWN => '未知',
         );
     
