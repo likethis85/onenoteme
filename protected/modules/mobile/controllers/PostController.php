@@ -68,7 +68,7 @@ class PostController extends MobileController
         echo CJSON::encode($data);
         exit(0);
     }
-
+    
     private static function prevPostUrl(Post $post)
     {
         $duration = 10;

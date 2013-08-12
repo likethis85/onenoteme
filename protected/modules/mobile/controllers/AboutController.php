@@ -23,4 +23,9 @@ class AboutController extends MobileController
         $this->channel = 'about';
         $this->render('index');
     }
+
+    public function actionTest()
+    {
+        $this->render('test');
+    }
 }
