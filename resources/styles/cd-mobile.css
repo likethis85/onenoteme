@@ -159,7 +159,7 @@ footer a.switch-version {float:right;}
 .cdc-inner-block {margin:0 -10px;}
 
 
-.app-online a {display:block; color:#D14836; text-align:center; height:40px; line-height:50px; background:#ECD5D8;}
+.app-online a {display:block; color:#D14836; text-align:center; height:40px; line-height:40px; background:#ECD5D8; font-weight:bold; font-size:18px;}
 
 
 
