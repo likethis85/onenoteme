@@ -127,6 +127,7 @@ define('QQT_APP_SECRET', '4e0c4ac86b36120efac4c44a9ac9e895');
 
 define('USER_DEFAULT_AVATAR_URL', 'images/default_avatar.png');
 
+define('IPHONE_APP_URL', 'http://itunes.apple.com/cn/app/id486268988?mt=8');
 
 
 

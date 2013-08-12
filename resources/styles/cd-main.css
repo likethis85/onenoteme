@@ -15,6 +15,8 @@
 .hot-keyword li {display:block; float:left; margin-right:10px; height:25px; line-height:25px;}
 .hot-keyword .announce {margin-left:10px;}
 
+.app-online {text-align:center; font-size:22px; margin:15px 0 25px;}
+
 /* view mode switcher */
 ul.mode-switch {display:inline-block; height:25px; overflow:hidden; margin:0; list-style:none; list-style-image:none; border-radius:10px;}
 ul.mode-switch li {width:35px; height:25px; display:block; float:left; overflow:hidden; margin:0;}
@@ -283,6 +285,8 @@ a:hover #big-qrcode {display:block;}
 
 /* blank layout */
 body.blank-body {margin:0; padding:0;}
+
+
 
 /* apps */
 .apps-container {background:#FFFFFF; color:#5d4023;}

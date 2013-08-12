@@ -1,7 +1,7 @@
 <div class="panel panel10 bottom10px">
+    <div class="app-online"><a href="<?php echo IPHONE_APP_URL?>" target="_blank">挖段子iPhone应用3.0版全新上线！！点击马下安装！！</a></div>
     <ul class="hot-keyword">
-        <li><span class="cred announce">24小时更新：<?php echo Post::todayUpdateCount();?>篇。&nbsp;&nbsp;&nbsp;QQ群：49401589</span></li>
-        <li><a href="<?php echo aurl('app/taijiong');?>" target="_blank">王宝强超贱表情制作器</a></li>
+        <li><span class="cred announce">24小时更新：<?php echo Post::todayUpdateCount();?>篇，&nbsp;QQ群：49401589</span></li>
     </ul>
     <div class="clear"></div>
 </div>
