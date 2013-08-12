@@ -281,3 +281,21 @@ a:hover #big-qrcode {display:block;}
 .publish-post .site-notice li {margin:7px 0;}
 
 
+/* blank layout */
+body.blank-body {margin:0; padding:0;}
+
+/* apps */
+.apps-container {background:#FFFFFF; color:#5d4023;}
+.apps-head {background:#F2EEE5;}
+.apps-row {margin:0 auto; padding:40px 0; width:850px;}
+.apps-row .title h1 {font-size:24px;}
+.apps-row .title h2 {font-size:50px;}
+.apps-img {}
+.apps-row .qrcode {margin:50px 0 0;}
+.apps-row .qrcode p {padding:30px; margin:0 0 0 130px; font-size:16px;}
+.apps-download {background:#FFFFFF; padding:50px 0;}
+.apps-items {margin:0 auto; width:850px;}
+.apps-items a {display:block; width:293px; height:121px; background:url(../images/app-download.png) no-repeat 0 -250px;}
+.apps-items a span {visibility:hidden;}
+
+
