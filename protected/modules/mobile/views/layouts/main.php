@@ -54,6 +54,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 
 <footer class="clearfix">
     <a class="return-top" href="#top">返回顶部</a>
+    <a href="/mobile/about/test">测试</a>
     <a class="switch-version" href="<?php echo aurl('site/index', array('f'=>1));?>">切换到桌面版</a>
 </footer>
 <?php echo param('mobile_footer_html');?>
