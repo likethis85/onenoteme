@@ -6,6 +6,7 @@
 <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-itunes-app" content="app-id=486268988">
 <link rel="apple-touch-icon-precomposed" sizes="57x57" href="<?php echo sbu('images/icon.png');?>" />
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo sbu('images/icon.png');?>" />
 <link rel="apple-touch-startup-image" href="<?php echo sbu('images/startup.png');?>">
