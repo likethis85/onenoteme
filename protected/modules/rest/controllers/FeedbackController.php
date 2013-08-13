@@ -12,11 +12,19 @@ class FeedbackController extends RestController
     {
         $content = request()->getPost('content');
         $content = trim(strip_tags($content));
-        $data = array(
-            'success' => 1,
-            'content' => $content,
-            'device_id' => $this->deviceUDID,
-        );
+        if (empty($content)) {
+            $data = array('success' => 0);
+        }
+        else {
+            $feedback = new RestFeedback();
+            $feedback->content = $content;
+            $feedback->device_udid = $this->deviceUDID;
+            $result = $feedback->save();
+            $data = array(
+                'success' => (int)$result,
+                'content' => $content,
+            );
+        }
         $this->output($data);
     }
 }

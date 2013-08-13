@@ -43,6 +43,7 @@ define('TABLE_WEIBO_ACCOUNT', '{{weibo_account}}');
 define('TABLE_WEIBO_ID', '{{weibo_id}}');
 define('TABLE_APP_SYSTEM_CONFIG_TABLE', '{{app_system_config}}');
 define('TABLE_APP_USER_CONFIG_TABLE', '{{app_user_config}}');
+define('TABLE_FEEDBACK', '{{feedback}}');
 
 define('POST_STATE_ENABLED', 1);
 define('POST_STATE_DISABLED', 0);
