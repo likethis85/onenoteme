@@ -41,7 +41,7 @@ class FeedbackController extends AdminController
      * @param array $ids 留言ID数组
      * @param string $callback jsonp回调函数，自动赋值
      */
-    public function actionMultiDelete($callback)
+    public function actionBatchDelete($callback)
     {
         $ids = (array)request()->getPost('ids');
         $successIds = $failedIds = array();
