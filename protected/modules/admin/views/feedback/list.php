@@ -11,7 +11,7 @@
             <th class="item-checkbox align-center">#</th>
             <th class="span1 align-center"><?php echo $sort->link('id');?></th>
             <th class="span8">内容</th>
-            <th class="span2"><?php echo $sort->link('create_time');?></th>
+            <th class="span2">设备&nbsp;/&nbsp;<?php echo $sort->link('create_time');?></th>
             <th>#</th>
         </tr>
     </thead>
@@ -22,6 +22,7 @@
             <td class="align-center"><?php echo $model->id;?></td>
             <td class="comment-content"><?php echo $model->content;?></td>
             <td class="cgray">
+                <?php echo $model->device_model;?><br />
                 <span class="f12px"><?php echo $model->createTime;?></span>
             </td>
             <td class="align-cent2er">
