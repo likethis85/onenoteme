@@ -12,6 +12,6 @@ class AdminFeedback extends Feedback
 
     public function getDeleteUrl()
     {
-        return url('admin/feedback/delete', array('id'=>$this->id));
+        return l('删除', url('admin/feedback/delete', array('id'=>$this->id)), array('class'=>'set-delete'));
     }
 }
