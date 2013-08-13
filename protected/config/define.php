@@ -73,6 +73,13 @@ define('LINK_NOT_IN_HOME', 0);
 define('PUBLISH_SCORE', 10);
 define('POST_COMMENT', 1);
 
+/* feedback */
+define('NETWORK_STATUS_UNKOWN', -1);
+define('NETWORK_STATUS_NOT_REACHABLE', 0);
+define('NETWORK_STATUS_WWAN', -1);
+define('NETWORK_STATUS_WIFI', 2);
+define('NETWORK_STATUS_LAN', 9);
+
 /*
  * 这些尺寸与又拍云里的自定义版本相对应
  */
