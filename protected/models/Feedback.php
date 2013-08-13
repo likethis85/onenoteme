@@ -69,6 +69,26 @@ class Feedback extends CActiveRecord
 			'network_status' => '网络状态',
 		);
 	}
+	
+	public function getCreateTime()
+	{
+	    if (empty($this->create_time)) return '';
+	     
+	    if (empty($format))
+	        $format = param('formatShortDateTime');
+	     
+	    return date($format, $this->create_time);
+	}
+	
+	protected function beforeSave()
+	{
+	    if ($this->getIsNewRecord()) {
+	        $this->create_time = time();
+	        $this->create_ip = CDBase::getClientIp();
+	    }
+	    
+	    return true;
+	}
 }
 
 
