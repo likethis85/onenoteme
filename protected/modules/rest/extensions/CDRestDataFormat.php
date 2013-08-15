@@ -22,7 +22,7 @@ class CDRestDataFormat
             'large_pic' => $model->getLargePic(),
             'pic_frames' => (int)$model->original_frames,
             'pic_height' => (int)$model->original_height,
-            'pic_width' => (int)$model->original_height,
+            'pic_width' => (int)$model->original_width,
             'url' => $model->getUrl(),
         );
         
