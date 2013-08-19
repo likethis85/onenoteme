@@ -87,7 +87,7 @@ class FeedController extends Controller
         
         //@todo 临时给ucweb做的兼容，提一条图片段子加在文字笑话最前面
         $lengtu = self::fetchLatestLengtuRow();
-//         array_unshift($models, $lengtu);
+        array_unshift($models, $lengtu);
         
         $xml = self::outputXml($feedname, $models, $source);
         self::cacheData($channelID, $mediatype, $source, $xml, $expire);
@@ -136,8 +136,9 @@ class FeedController extends Controller
     private static function fetchLatestLengtuRow()
     {
         $criteria = new CDbCriteria();
+        $criteria->select = array('t.id', 't.channel_id', 't.title', 't.original_pic', 't.content', 't.create_time', 't.original_frames');
         $criteria->addColumnCondition(array('t.state'=> POST_STATE_ENABLED,'t.channel_id'=>CHANNEL_FUNNY, 't.media_type' => MEDIA_TYPE_IMAGE));
-        $criteria->order = 't.create_time desc';
+        $criteria->order = 't.create_time desc, t.id desc';
         $model = Post::model()->find($criteria);
         return $model;
     }
