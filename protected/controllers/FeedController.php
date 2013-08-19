@@ -139,6 +139,7 @@ class FeedController extends Controller
         $criteria->addColumnCondition(array('t.state'=> POST_STATE_ENABLED,'t.channel_id'=>CHANNEL_FUNNY, 't.media_type' => MEDIA_TYPE_IMAGE));
         $criteria->order = 't.create_time desc';
         $model = Post::model()->find($criteria);
+        return $model;
     }
 
     private static function outputXml($feedname, array $models, $source)
