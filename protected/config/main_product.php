@@ -140,9 +140,7 @@ return array(
                 'u/<id:\d+>' => 'user/index',
                 'sitemap/<_a>' => array('sitemap/<_a>', 'urlSuffix'=>'.xml', 'caseSensitive'=>false),
                     
-                'wap' => 'wap/index',
                 'member' => '/member/default/index',
-
                     
                 'http://rest.waduanzi.com/post/timeline/<user_id:\d+>' => 'rest/post/timeline',
                 'http://rest.waduanzi.com/post/show/<post_id:\d+>' => 'rest/post/show',

@@ -1,1 +1,0 @@
-<div class="post-detail"><?php echo $model->filterContent;?></div>

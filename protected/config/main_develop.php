@@ -139,9 +139,6 @@ return array(
                 'http://www.waduanzi.cn/feed/<cid:\d+>' => 'feed/channel',
                 'http://www.waduanzi.cn/u/<id:\d+>' => 'user/index',
                     
-                'http://wap.waduanzi.cn/' => 'wap/index',
-                'http://wap.waduanzi.cn/<_a>' => 'wap/<_a>',
-            
                 'http://m.waduanzi.cn/' => 'mobile/default/index',
                 'http://m.waduanzi.cn/<_a:(duanzi|girl|lengtu|video)>-<page:\d+>' => 'mobile/channel/<_a>',
                 'http://m.waduanzi.cn/<_a:(duanzi|girl|lengtu|video)>' => 'mobile/channel/<_a>',
