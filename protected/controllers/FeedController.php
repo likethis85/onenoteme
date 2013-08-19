@@ -142,6 +142,7 @@ class FeedController extends Controller
         $criteria->addColumnCondition(array('t.state'=> POST_STATE_ENABLED,'t.channel_id'=>CHANNEL_FUNNY, 't.media_type' => MEDIA_TYPE_IMAGE));
         $criteria->order = 't.create_time desc, t.id desc';
         $model = Post::model()->find($criteria);
+        $model->original_pic = str_replace('http://f0.wabao.me', 'http://unicom.f0.wabao.me', $model->original_pic);
         return $model;
     }
 
