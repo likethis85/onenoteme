@@ -264,13 +264,14 @@ class CDBase
     
     public static function channels()
     {
-        return array(CHANNEL_FUNNY);
+        return array(CHANNEL_FUNNY, CHANNEL_FOCUS);
     }
     
     public static function channelLabels($channelID = null)
     {
         $labels = array(
             CHANNEL_FUNNY => '挖笑话',
+            CHANNEL_FOCUS => '挖热点',
         );
     
         return $channelID === null ? $labels : $labels[$channelID];

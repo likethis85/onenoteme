@@ -86,7 +86,7 @@ class FeedController extends Controller
         $models = self::fetchPosts($criteria);
         
         //@todo 临时给ucweb做的兼容，提一条图片段子加在文字笑话最前面
-        if ($mediatype == MEDIA_TYPE_TEXT && $channelID == CHANNEL_FUNNY) {
+        if ($source == 'ucweb' && $mediatype == MEDIA_TYPE_TEXT && $channelID == CHANNEL_FUNNY) {
             $lengtu = self::fetchLatestLengtuRow();
             array_unshift($models, $lengtu);
         }
