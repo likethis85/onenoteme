@@ -118,15 +118,15 @@ return array(
                 'mobile/archives/<id:\d+>' => 'mobile/post/show',
                 'mobile/page/<page:\d+>' => 'mobile/default/index',
                 'mobile' => 'mobile/default/index',
-                'mobile/<_a:(joke|lengtu|video|latest|hot|day|week|month|ghost|girl)>/page/<page:\d+>' => 'mobile/channel/<_a>',
-                'mobile/<_a:(joke|lengtu|video|latest|hot|day|week|month|ghost|girl)>' => 'mobile/channel/<_a>',
+                'mobile/<_a:(joke|lengtu|video|latest|hot|day|week|month|girl|focus)>/page/<page:\d+>' => 'mobile/channel/<_a>',
+                'mobile/<_a:(joke|lengtu|video|latest|hot|day|week|month|girl|focus)>' => 'mobile/channel/<_a>',
                 'mobile/tag/<name:.+>' => 'mobile/tag/posts',
             
                 'page/<page:\d+>' => 'site/index',
                 '/' => 'site/index',
                 
-                '<_a:(joke|lengtu|video|hot|day|week|month|latest|girl|ghost)>/page/<page:\d+>' => 'channel/<_a>',
-                '<_a:(joke|lengtu|video|hot|day|week|month|latest|girl|ghost)>' => 'channel/<_a>',
+                '<_a:(joke|lengtu|video|hot|day|week|month|latest|girl|focus)>/page/<page:\d+>' => 'channel/<_a>',
+                '<_a:(joke|lengtu|video|hot|day|week|month|latest|girl|focus)>' => 'channel/<_a>',
                 
                 '<_a:(bdmap|links)>' => 'site/<_a>',
                 '<_a:(login|logout|signup|quicklogin|activate)>' => 'account/<_a>',
