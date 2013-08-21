@@ -107,5 +107,5 @@ class AdminUser extends User
          
         return $data;
     }
-    
 }
+

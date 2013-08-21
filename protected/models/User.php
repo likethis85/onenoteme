@@ -105,7 +105,7 @@ class User extends CActiveRecord
 	    
 	    if ($source === null)
 	        return $labels;
-	    elseif (array_key_exists($labels, $source))
+	    elseif (array_key_exists($source, $labels))
 	        return $labels[$source];
 	    else
 	        return null;
