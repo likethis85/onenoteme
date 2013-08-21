@@ -17,7 +17,7 @@ class Api_User extends ApiBase
         try {
 	        $criteria = new CDbCriteria();
 	        $criteria->select = array('id', 'username', 'screen_name', 'create_time', 'state');
-	        $columns = array('username'=>$params['username'], 'password'=>$params['password']);
+	        $columns = array('username'=>$params['username'], 'password'=>md5($params['password']));
 	        $criteria->addColumnCondition($columns);
 	        $criteria->addCondition('state = ' . User::STATE_ENABLED);
 	        $user = User::model()->find($criteria);
@@ -84,6 +84,7 @@ class Api_User extends ApiBase
         $user->state = USER_STATE_ENABLED;
         $user->source = USER_SOURCE_IPHONE;
         $user->token = self::makeToken($user->username);
+        $user->encryptPassword();
         try {
         	if ($user->save()) {
         	    $this->afterLogin($user, $params);

@@ -5,11 +5,7 @@ class CDBase
 
     public static function encryptPassword($password)
     {
-        $pwd = '';
-        if (!empty($password))
-            $pwd = md5($password);
-        
-        return $pwd;
+        return empty($password) ? '' : md5($password);
     }
     
     /**
