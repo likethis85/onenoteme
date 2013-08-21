@@ -19,6 +19,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         </div>
         <div class="item-content"><?php echo $post->filterContent;?></div>
         
+        <?php if ($prevUrl || $nextUrl):?>
         <div class="change-post clearfix">
             <?php if ($prevUrl):?>
             <a class="site-bg prev" href="<?php echo $prevUrl;?>"></a>
@@ -28,6 +29,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
             <?php endif;?>
             <div class="clear"></div>
         </div>
+        <?php endif;?>
         
         <div class="item-toolbar">
             <ul>

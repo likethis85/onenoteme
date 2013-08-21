@@ -30,7 +30,7 @@ class FeedController extends Controller
     
     public function actionIndex($source = 'feed')
     {
-        $channels = array(CHANNEL_FUNNY);
+        $channels = array(CHANNEL_FUNNY, CHANNEL_FOCUS);
         $mediaTypes = array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE);
         echo self::channelPosts($channels, $mediaTypes, app()->name, $source, 600);
     }
