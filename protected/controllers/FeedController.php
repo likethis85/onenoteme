@@ -54,6 +54,12 @@ class FeedController extends Controller
         echo self::channelPosts(CHANNEL_FUNNY, MEDIA_TYPE_IMAGE, $feedname, $source, 600);
     }
     
+    public function actionFocus($source = 'feed')
+    {
+        $feedname = app()->name . ' » 挖热点';
+        echo self::channelPosts(CHANNEL_FOCUS, null, $feedname, $source, 600);
+    }
+    
     private static function channelPosts($channelID, $mediatype, $feedname, $source, $expire = 600)
     {
         $source = trim(strip_tags(strtolower($source)));
@@ -112,8 +118,10 @@ class FeedController extends Controller
             sort($mediaType, SORT_NUMERIC);
             $mediaType = join('_', $mediaType);
         }
-        else
+        elseif (is_numeric($mediaType))
             $mediaType = (int)$mediaType;
+        else
+            $mediaType = '';
             
         $cacheID = sprintf('feed_cache_%s_%s_%s', $channelID, $mediaType, $source);
         
