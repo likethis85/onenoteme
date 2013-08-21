@@ -123,6 +123,14 @@ class ChannelController extends Controller
     {
         $this->channel = CHANNEL_FOCUS;
         
+//         $mobileUrl = ($page > 1) ? aurl('mobile/channel/lengtu', array('page'=>$page)) : aurl('mobile/channel/lengtu');
+//         cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
+        
+        cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/focus'), null, array('title'=>app()->name . ' » 挖热点 Feed'));
+        $this->pageTitle = p('channel_focus_title');
+        $this->setDescription(p('channel_focus_description'));
+        $this->setKeywords(p('channel_focus_keywords'));
+        
         $criteria = new CDbCriteria();
         $criteria->scopes = array('published');
         $criteria->addColumnCondition(array('channel_id' => CHANNEL_FOCUS));
