@@ -113,15 +113,26 @@ class ChannelController extends Controller
     {
         $this->redirect(CDBaseUrl::siteHomeUrl(), true, 301);
     }
-
-    public function actionGhost()
-    {
-        $this->redirect(CDBaseUrl::siteHomeUrl(), true, 301);
-    }
     
     public function actionGirl()
     {
         $this->redirect(CDBaseUrl::siteHomeUrl(), true, 301);
+    }
+    
+    public function actionFocus()
+    {
+        $this->channel = CHANNEL_FOCUS;
+        
+        $criteria = new CDbCriteria();
+        $criteria->scopes = array('published');
+        $criteria->addColumnCondition(array('channel_id' => CHANNEL_FOCUS));
+        $criteria->order = 't.istop desc, t.create_time desc';
+        $criteria->limit = (int)p('focus_count_page');
+        $criteria->with = 'uploadImagesCount';
+        
+        $data = self::fetchPosts($criteria);
+        
+        $this->render('funny_hot', $data);
     }
     
     private function fetchFunnyHotPosts($hours)
