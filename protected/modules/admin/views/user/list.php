@@ -13,6 +13,7 @@
             <th class="span1 align-center"><?php echo $sort->link('id');?></th>
             <th class="span3"><?php echo $sort->link('username');?></th>
             <th class="span3"><?php echo $sort->link('screen_name');?></th>
+            <th class="span1"><?php echo $sort->link('source');?></th>
             <th class="span1 align-center"><?php echo $sort->link('state');?></th>
             <th class="span2 align-center"><?php echo $sort->link('create_time');?></th>
             <th>#</th>
@@ -25,6 +26,7 @@
             <td class="align-center"><?php echo $model->id;?></td>
             <td><?php echo l($model->username, $model->getInfoUrl());?></td>
             <td><?php echo $model->screen_name;?></td>
+            <td><?php echo $model->sourceLabel;?></td>
             <td class="span1 align-center"><?php echo $model->stateAjaxLink;?></td>
             <td class="align-center"><?php echo $model->createTime;?></td>
             <td>

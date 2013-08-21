@@ -11,6 +11,7 @@ class RestUserForm extends CFormModel
 {
     public $username;
     public $password;
+    public $source;
     
     public function rules()
     {
@@ -61,6 +62,7 @@ class RestUserForm extends CFormModel
         $user = new RestUser();
         $user->username = $user->screen_name = $this->username;
         $user->password = $this->password;
+        $user->source = $this->source;
         $user->state = USER_STATE_ENABLED;
         if ($user->getUserNameIsEmail()) {
             $pos = mb_stripos($this->username, '@', null, app()->charset);

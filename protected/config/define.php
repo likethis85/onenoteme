@@ -57,6 +57,14 @@ define('COMMENT_STATE_DISABLED', 0);
 define('USER_STATE_UNVERIFY', 0);
 define('USER_STATE_ENABLED', 1);
 define('USER_STATE_FORBIDDEN', -1);
+
+define('USER_SOURCE_UNKNOWN', 0);
+define('USER_SOURCE_PC_WEB', 1);
+define('USER_SOURCE_MOBILE_WEB', 2);
+define('USER_SOURCE_IPHONE', 3);
+define('USER_SOURCE_IPAD', 4);
+define('USER_SOURCE_ANDROID', 5);
+
 /* advert state */
 define('ADVERT_STATE_DISABLED', 0);
 define('ADVERT_STATE_ENABLED', 1);

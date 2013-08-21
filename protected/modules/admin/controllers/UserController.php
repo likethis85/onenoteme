@@ -92,7 +92,6 @@ class UserController extends AdminController
 	    $view = $model->getIsNewRecord() ? 'create' : 'edit';
 	    $this->render($view, array(
 	        'model' => $model,
-	        'userStates' => $userStates,
 	    ));
 	}
 	

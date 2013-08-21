@@ -22,13 +22,6 @@
  */
 class User extends CActiveRecord
 {
-    const SOURCE_UNKNOWN = 0;
-    const SOURCE_PC_WEB = 1;
-    const SOURCE_MOBILE_WEB = 2;
-    const SOURCE_IPHONE = 3;
-    const SOURCE_IPAD = 4;
-    const SOURCE_ANDROID = 5;
-    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return User the static model class
@@ -99,6 +92,30 @@ class User extends CActiveRecord
 		);
 	}
 
+	public static function sourceLabels($source = null)
+	{
+	    $labels = array(
+            USER_SOURCE_IPHONE => 'iPhone',
+            USER_SOURCE_IPAD => 'iPad',
+            USER_SOURCE_ANDROID => 'Android',
+            USER_SOURCE_PC_WEB => 'PC版网站',
+            USER_SOURCE_MOBILE_WEB => '移动版网站',
+            USER_SOURCE_UNKNOWN => '未知',
+	    );
+	    
+	    if ($source === null)
+	        return $labels;
+	    elseif (array_key_exists($labels, $source))
+	        return $labels[$source];
+	    else
+	        return null;
+	}
+	
+	public function getSourceLabel()
+	{
+	    return self::sourceLabels($this->source);
+	}
+	
 	public function getDisplayName()
 	{
 	    return empty($this->screen_name) ? $this->username : h($this->screen_name);

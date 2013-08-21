@@ -16,6 +16,7 @@ class UserController extends RestController
         $form = new RestUserForm();
         $form->username = $username;
         $form->password = $password;
+        $form->source = $this->fetchUserSource();
         
         if ($form->checkUserNameExist())
             throw new CDRestException(CDRestError::USER_NAME_EXIST);
@@ -30,6 +31,20 @@ class UserController extends RestController
                 throw new CDRestException(CDRestError::USER_CREATE_ERROR);
         }
             
+    }
+    
+    private function fetchUserSource()
+    {
+        $source = USER_SOURCE_UNKNOWN;
+        $osname = strtolower($this->osName);
+        if (stripos($osname, 'android') !== false)
+            $source = USER_SOURCE_ANDROID;
+        elseif (stripos($osname, 'iphone') !== false)
+            $source = USER_SOURCE_IPHONE;
+        elseif (stripos($osname, 'ipad') !== false)
+            $source = USER_SOURCE_IPAD;
+        
+        return $source;
     }
     
     protected function afterSave(RestUser $user)
