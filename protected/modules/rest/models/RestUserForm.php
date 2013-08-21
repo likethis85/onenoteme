@@ -21,6 +21,7 @@ class RestUserForm extends CFormModel
             array('password', 'length', 'is'=>32, 'message'=>'密码必须为MD5加密后的32位字符串'),
 //             array('username', 'checkUserName'),
             array('username', 'unique', 'caseSensitive'=>false, 'className'=>'RestUser', 'attributeName'=>'username', 'message'=>'啊，被抢注了，换个名字吧'),
+            array('source', 'numerical', 'integerOnly'=>true),
         );
     }
     
@@ -29,6 +30,7 @@ class RestUserForm extends CFormModel
         return array(
             'username' => '名字',
             'password' => '密码',
+            'source' => '来源',
         );
     }
     
