@@ -49,8 +49,11 @@ class RestUserForm extends CFormModel
         if (empty($this->username))
             throw new Exception('username 不能为空');
         else {
-            $user = RestUser::model()->findByAttributes(array('username'=>$this->username));
-            return ($user !== null) && ($user instanceof RestUser);
+            $criteria = new CDbCriteria();
+            $criteria->addColumnCondition(array('username'=>$this->username));
+            $criteria->addColumnCondition(array('screen_name'=>$this->username), 'AND', 'OR');
+            $user = RestUser::model()->find($criteria);
+            return $user !== null;
         }
     }
     
