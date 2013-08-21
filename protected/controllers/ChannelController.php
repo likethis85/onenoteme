@@ -6,7 +6,7 @@ class ChannelController extends Controller
         $duration = 120;
         return array(
             array(
-                'COutputCache + joke, lengtu, video, ghost, latest, hot, day, week, month',
+                'COutputCache + joke, lengtu, video, focus, latest, hot, day, week, month',
                 'duration' => $duration,
                 'varyByParam' => array('page'),
                 'varyByExpression' => array(user(), 'getIsGuest'),
