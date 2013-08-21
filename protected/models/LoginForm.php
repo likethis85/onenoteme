@@ -109,7 +109,7 @@ class LoginForm extends CFormModel
 	    $user->password = $this->password;
 	    $user->state = (param('user_required_admin_verfiy') || param('user_required_email_verfiy')) ? USER_STATE_UNVERIFY : USER_STATE_ENABLED;
 	    $user->encryptPassword();
-	    $user->source = User::SOURCE_PC_WEB;
+	    $user->source = USER_SOURCE_PC_WEB;
 	    $result = $user->save();
 
 	    if ($result) {
