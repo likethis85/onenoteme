@@ -67,7 +67,8 @@
             <th class="span1 align-center"><?php echo $sort->link('id');?></th>
             <th class="span6"><?php echo $sort->link('title');?></th>
             <th class="span1">频道</th>
-            <th class="span1 align-center"><?php echo $sort->link('comment_nums');?>/<?php echo $sort->link('view_nums');?></th>
+            <th class="span1 align-center"><?php echo $sort->link('comment_nums');?></th>
+            <th class="span1 align-center"><?php echo $sort->link('view_nums');?></th>
             <th class="span2 align-center"><?php echo $sort->link('create_time');?></th>
             <th class="span1 align-center">#</th>
             <th>#</th>
@@ -106,7 +107,8 @@
                 </form>
             </td>
             <td><?php echo l($model->getChannelLabel(), $this->channelUrl($model->channel_id));?></td>
-            <td class="align-center"><?php echo $model->commentNumsBadgeHtml;?><br /><?php echo (int)$model->view_nums;?></td>
+            <td class="align-center"><?php echo $model->commentNumsBadgeHtml;?><br /></td>
+            <td class="align-center"><?php echo $model->viewNumsBadgeHtml;?><br /></td>
             <td class="cgray">
                 <?php echo $model->authorName;?><br />
                 <span class="f12px"><?php echo $model->createTime;?></span>

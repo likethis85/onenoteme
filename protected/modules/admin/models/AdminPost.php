@@ -13,6 +13,7 @@
  * @property string $commentUrl
  * @property string $topLink
  * @property string $commentNumsBadgeHtml
+ * @property string $viewNumsBadgeHtml
  * @property string $previewLink
  */
 class AdminPost extends Post
@@ -153,6 +154,20 @@ class AdminPost extends Post
         
         $html = sprintf('<span class="badge beta-badge %s">%s</span>', $class, $count);
         $html = l($html, $this->commentUrl, array('title'=>'点击查看评论列表'));
+        return $html;
+    }
+
+    public function getViewNumsBadgeHtml()
+    {
+        $count = (int)$this->view_nums;
+        if ($count <= 2000)
+            $class = '';
+        elseif ($count <= 5000)
+            $class = 'badge-warning';
+        else
+            $class = 'badge-error';
+        
+        $html = sprintf('<span class="badge beta-badge %s">%s</span>', $class, $count);
         return $html;
     }
 
