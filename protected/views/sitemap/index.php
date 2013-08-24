@@ -20,5 +20,9 @@
 <loc><?php echo aurl('sitemap/lengtu');?></loc>
 <lastmod><?php echo date('Y-m-d');?></lastmod>
 </sitemap>
+<sitemap>
+<loc><?php echo aurl('sitemap/focus');?></loc>
+<lastmod><?php echo date('Y-m-d');?></lastmod>
+</sitemap>
 
 </sitemapindex>

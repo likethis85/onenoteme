@@ -52,6 +52,11 @@ class SitemapController extends Controller
     {
         $this->fetchChannelPosts(CHANNEL_FUNNY, MEDIA_TYPE_IMAGE);
     }
+    
+    public function actionFocus()
+    {
+        $this->fetchChannelPosts(CHANNEL_FOCUS);
+    }
         
     private function fetchChannelPosts($channel = null, $mediatype = null, $duration = 3600)
     {
