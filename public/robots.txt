@@ -1,5 +1,5 @@
 #
-# robots.txt for 24beta.com
+# robots.txt for waduanzi.com
 #
 
 User-agent: *
