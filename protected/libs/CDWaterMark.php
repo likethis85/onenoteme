@@ -23,6 +23,8 @@ class CDWaterMark
     private $_fontsize;
     private $_angle = 0;
     private $_borderColor = false;
+    private $_minWidth = 0;
+    private $_minHeight = 0;
 
     public function __construct($type)
     {
@@ -330,6 +332,7 @@ class CDWaterMark
             return $this;
         }
     }
+    
     public function borderColor($color = null)
     {
         if ($color === null)
@@ -341,6 +344,25 @@ class CDWaterMark
             throw new CDWaterMarkException('border color value is required array');
     }
     
+    public function minWidth($width = null)
+    {
+        if ($width === null)
+            return $this->_minWidth;
+        else {
+            $this->_minWidth = (int)$width;
+            return $this;
+        }
+    }
+    
+    public function minHeight($height = null)
+    {
+        if ($height === null)
+            return $this->_minHeight;
+        else {
+            $this->_minHeight = (int)$height;
+            return $this;
+        }
+    }
     
     public function isImage()
     {

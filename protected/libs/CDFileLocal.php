@@ -135,8 +135,10 @@ class CDFileLocal extends CComponent
         if ($this->_watermarks) {
             $im = new CDImage();
             $im->load($data);
-            foreach ($this->_watermarks as $water)
-                $water->apply($im, 5);
+            foreach ($this->_watermarks as $water) {
+                if ($im->width() > $water->minWidth() && $im->height() > $water->minHeight())
+                    $water->apply($im, 5);
+            }
             
             $data = $im->outputRaw();
             $im = null;
@@ -144,9 +146,12 @@ class CDFileLocal extends CComponent
         return $data;
     }
     
-    public function addWaterMark($type, $position, $data, $font = '', $size = 18, $color = array(255, 255, 255), $borderColor = array(0, 0, 0))
+    public function addWaterMark($type, $position, $data, $font = '', $size = 18, $color = array(255, 255, 255), $borderColor = array(0, 0, 0), $minWidth = 0, $minHeight = 0)
     {
         $water = new CDWaterMark($type);
+        $water->minWidth((int)$minWidth);
+        $water->minHeight((int)$minHeight);
+        
         if ($water->isImage()) {
             $water->position($position)
                 ->setImage($data);

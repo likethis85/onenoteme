@@ -1009,8 +1009,8 @@ class Post extends CActiveRecord
             $fetch->referer($referer)->setLocalDomains(CDBase::localDomains());
             $cnfont = yii::getPathOfAlias('application.fonts') . DS . 'Hiragino_Sans_GB_W6.otf';
             $enfont = yii::getPathOfAlias('application.fonts') . DS . 'HelveticaNeueLTPro-Hv.otf';
-            $fetch->addWaterMark(CDWaterMark::TYPE_TEXT, CDWaterMark::POS_BOTTOM_LEFT, '挖段子网', $cnfont, 22, '#F0F0F0', '#333333');
-            $fetch->addWaterMark(CDWaterMark::TYPE_TEXT, CDWaterMark::POS_BOTTOM_RIGHT, 'waduanzi.com', $enfont, 12, '#F0F0F0', '#333333');
+            $fetch->addWaterMark(CDWaterMark::TYPE_TEXT, CDWaterMark::POS_BOTTOM_LEFT, '挖段子网', $cnfont, 20, '#F0F0F0', '#333333', IMAGE_WATER_SITENAME_SIZE, IMAGE_WATER_SITENAME_SIZE);
+            $fetch->addWaterMark(CDWaterMark::TYPE_TEXT, CDWaterMark::POS_BOTTOM_RIGHT, 'waduanzi.com', $enfont, 12, '#F0F0F0', '#333333', IMAGE_WATER_URL_SIZE, IMAGE_WATER_URL_SIZE);
             $data = $fetch->fetchReplacedHtml($this->content);
         }
         else
