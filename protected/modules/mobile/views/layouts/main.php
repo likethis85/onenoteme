@@ -32,6 +32,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     		<li<?php echo ($this->channel=='hot') ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/hot');?>">热门</a></li>
     		<li<?php echo ($this->channel==CHANNEL_FUNNY.MEDIA_TYPE_TEXT) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/joke');?>">笑话</a></li>
     		<li<?php echo ($this->channel==CHANNEL_FUNNY.MEDIA_TYPE_IMAGE) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/lengtu');?>">趣图</a></li>
+    		<li<?php echo ($this->channel==CHANNEL_FOCUS) ? ' class="active"' : '';?>><a href="<?php echo aurl('mobile/channel/focus');?>">热点</a></li>
     	</ul>
     </div>
 </div>

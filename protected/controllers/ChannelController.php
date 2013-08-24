@@ -119,12 +119,12 @@ class ChannelController extends Controller
         $this->redirect(CDBaseUrl::siteHomeUrl(), true, 301);
     }
     
-    public function actionFocus()
+    public function actionFocus($page = 1)
     {
         $this->channel = CHANNEL_FOCUS;
         
-//         $mobileUrl = ($page > 1) ? aurl('mobile/channel/lengtu', array('page'=>$page)) : aurl('mobile/channel/lengtu');
-//         cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
+        $mobileUrl = ($page > 1) ? aurl('mobile/channel/focus', array('page'=>$page)) : aurl('mobile/channel/focus');
+        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
         
         cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/focus'), null, array('title'=>app()->name . ' » 挖热点 Feed'));
         $this->pageTitle = p('channel_focus_title');
@@ -140,7 +140,7 @@ class ChannelController extends Controller
         
         $data = self::fetchPosts($criteria);
         
-        $this->render('funny_hot', $data);
+        $this->render('focus_list', $data);
     }
     
     private function fetchFunnyHotPosts($hours)

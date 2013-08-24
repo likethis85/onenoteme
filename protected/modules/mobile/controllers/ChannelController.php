@@ -94,6 +94,22 @@ class ChannelController extends MobileController
 	    $this->redirect(CDBaseUrl::mobileHomeUrl(), true, 301);
 	}
 
+	public function actionFocus($page = 1)
+	{
+	    $this->channel = CHANNEL_FOCUS;
+	    $this->setSiteTitle(p('channel_focus_title'));
+	    $this->setKeywords(p('channel_focus_keywords'));
+	    $this->setDescription(p('channel_focus_description'));
+	
+	    $criteria = new CDbCriteria();
+	    $criteria->scopes = array('homeshow', 'published');
+	    $criteria->addColumnCondition(array('channel_id' => CHANNEL_FOCUS));
+	    $criteria->order = 't.istop desc, t.create_time desc';
+	    $criteria->limit = (int)p('focus_count_page');
+	
+	    $data = self::fetchPosts($criteria);
+	    $this->render('posts', $data);
+	}
 
 	private function fetchFunnyHotPosts($hours)
 	{
