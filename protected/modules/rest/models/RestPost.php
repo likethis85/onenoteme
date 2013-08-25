@@ -43,12 +43,7 @@ class RestPost extends Post
     
     public function getApiContentHtml()
     {
-        $css = <<<EOD
-        <style type="text/css">
-            img {margin:10px 0;}
-        </style>
-EOD;
-        $html = '<!doctype html><html><head><meta charset="utf-8" /><title>' . $this->title . '</title>' . $css . '</head><body>';
+        $html = '<!doctype html><html><head><meta charset="utf-8" /><title>' . $this->title . '</title></head><body>';
         $html .= '<h3>' . $this->title . '</h3>';
         
         $content = strip_tags($this->content, '<p><b><strong><span><img><br>');
