@@ -51,7 +51,7 @@ class RestPost extends Post
         $result = preg_match_all($pattern, $content, $matches);
         if ((int)$result > 0) {
             foreach ($matches[1] as $url) {
-                $imgs[] = '<img src="' . $url . '" width="300" height="250" />';
+                $imgs[] = '<img src="' . $url . '" width="300" />';
             }
             $content = str_replace($matches[0], $imgs, $content);
         }
