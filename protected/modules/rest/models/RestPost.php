@@ -43,7 +43,10 @@ class RestPost extends Post
     
     public function getApiContentHtml()
     {
-        $content = strip_tags($this->content, '<p><b><strong><span><img>');
-        return $content;
+        $html = '<!doctype html><html><head><meta charset="utf-8" /><title>' . $this->title . '</title></head><body>';
+        $html .= strip_tags($this->content, '<p><b><strong><span><img>');
+        $html .= '</body></html>';
+        
+        return $html;
     }
 }
