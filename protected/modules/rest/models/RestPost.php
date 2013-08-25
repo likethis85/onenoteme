@@ -44,7 +44,8 @@ class RestPost extends Post
     public function getApiContentHtml()
     {
         $html = '<!doctype html><html><head><meta charset="utf-8" /><title>' . $this->title . '</title></head><body>';
-        $html .= '<h3>' . $this->title . '</h3>';
+        $html .= '<h1>' . $this->title . '</h1>';
+        $html .= sprintf('<p id="time-author">%s&nbsp;&nbsp;%s</p>', $this->getCreateTime(), $this->getAuthorName());
         
         $content = strip_tags($this->content, '<p><b><strong><span><img><br>');
         $matches = array();
