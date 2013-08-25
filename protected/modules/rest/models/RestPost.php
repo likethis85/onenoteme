@@ -40,4 +40,10 @@ class RestPost extends Post
         $content = join("\n", $lines);
         return $content;
     }
+    
+    public function getApiContentHtml()
+    {
+        $content = strip_tags($this->content, '<p><b><strong><span><img>');
+        return $content;
+    }
 }

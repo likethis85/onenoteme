@@ -8,6 +8,7 @@ class CDRestDataFormat
             'channel_id' => (int)$model->channel_id,
             'title' => $model->getApiTitle(),
             'content' => $model->getApiContent(),
+            'content_html' => $model->getApiContentHtml(),
             'create_time' => (int)$model->create_time,
             'create_time_at' => $model->getApiCreateTime(),
             'up_count' => (int)$model->up_score,
