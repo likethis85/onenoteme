@@ -58,7 +58,7 @@ class RestPost extends Post
             $content = str_replace($matches[0], $imgs, $content);
         }
         
-        $html .= $content;
+        $html .= '<div class="container">' . $content . '</div>';
         $html .= '</body></html>';
         
         return $html;
