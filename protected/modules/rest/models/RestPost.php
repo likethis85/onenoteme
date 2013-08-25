@@ -44,7 +44,19 @@ class RestPost extends Post
     public function getApiContentHtml()
     {
         $html = '<!doctype html><html><head><meta charset="utf-8" /><title>' . $this->title . '</title></head><body>';
-        $html .= strip_tags($this->content, '<p><b><strong><span><img><br>');
+        
+        $content = strip_tags($this->content, '<p><b><strong><span><img><br>');
+        $matches = array();
+        $pattern = '/<img.*?src="?(.+?)["\s]{1}?.*?>/is';
+        $result = preg_match_all($pattern, $content, $matches);
+        if ((int)$result > 0) {
+            foreach ($matches[1] as $url) {
+                $imgs[] = '<img src="" width="300" height="250" />';
+            }
+            $content = str_replace($matches[0], $imgs, $content);
+        }
+        
+        $html .= $content;
         $html .= '</body></html>';
         
         return $html;
