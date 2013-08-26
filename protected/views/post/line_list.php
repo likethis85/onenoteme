@@ -14,11 +14,11 @@
         	<?php echo $model->getAuthorNameLink();?>
     	</div>
         <div class="item-detail">
-            <?php if (!$model->isTextType || $model->hasTitle): // 不是笑话并且不是鬼故事或是有单独标题的?>
+            <?php if (!$model->isTextType || $model->hasTitle): // 不是纯文字笑话或是有单独标题的 ?>
             <h2 class="item-title"><?php echo $model->titleLink;?></h2>
             <?php endif;?>
             
-            <?php if ($model->channel_id == CHANNEL_FUNNY && $model->getOriginalPic()): // 趣图?>
+            <?php if (in_array($model->channel_id, array(CHANNEL_FUNNY, CHANNEL_FOCUS)) && $model->getOriginalPic()): // 趣图?>
             <div class="post-image">
                 <div class="thumbbox">
                     <?php if ($model->getImageIsLong(POST_LIST_IMAGE_MAX_WIDTH)):?>
