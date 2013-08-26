@@ -10,7 +10,7 @@
             <h2 class="item-title"><?php echo $model->getTitleLink(0, '_self');?></h2>
             <?php endif;?>
             
-            <?php if ($model->channel_id == CHANNEL_FUNNY && $model->getOriginalPic()): // 趣图?>
+            <?php if (in_array($model->channel_id, array(CHANNEL_FUNNY, CHANNEL_FOCUS)) && $model->getOriginalPic()): // 趣图?>
             <div class="post-image">
                 <div class="thumbbox">
                     <?php if ($model->getImageIsLong(MOBILE_POST_LIST_IMAGE_MAX_WIDTH)):?>
