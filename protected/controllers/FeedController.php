@@ -96,6 +96,10 @@ class FeedController extends Controller
             $lengtu = self::fetchLatestLengtuRow();
             array_unshift($models, $lengtu);
         }
+
+        //@todo 把图片url地址都替换成商务厅服务器地址
+        if ($source == 'ucweb')
+            $models = self::replacePicUrlWithPosts($models);
         
         $xml = self::outputXml($feedname, $models, $source);
         self::cacheData($channelID, $mediatype, $source, $xml, $expire);
@@ -140,8 +144,6 @@ class FeedController extends Controller
         $criteria->limit = self::POST_COUNT;
             
         $models = Post::model()->findAll($criteria);
-        //@todo 把图片url地址都替换成商务厅服务器地址
-        $models = self::replacePicUrlWithPosts($models);
         return $models;
     }
     
@@ -152,8 +154,7 @@ class FeedController extends Controller
         $criteria->addColumnCondition(array('t.state'=> POST_STATE_ENABLED,'t.channel_id'=>CHANNEL_FUNNY, 't.media_type' => MEDIA_TYPE_IMAGE));
         $criteria->order = 't.create_time desc, t.id desc';
         $model = Post::model()->find($criteria);
-        //@todo 把图片url地址都替换成商务厅服务器地址
-        $model = self::replacePicUrlWithPost($model);
+        
         return $model;
     }
 
