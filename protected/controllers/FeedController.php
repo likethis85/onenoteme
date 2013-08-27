@@ -98,7 +98,7 @@ class FeedController extends Controller
         }
 
         //@todo 把图片url地址都替换成商务厅服务器地址
-        if ($source == 'ucweb')
+        if ($source == 'ucweb' || $source == 'qqmb')
             $models = self::replacePicUrlWithPosts($models);
         
         $xml = self::outputXml($feedname, $models, $source);
