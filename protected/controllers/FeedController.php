@@ -140,6 +140,8 @@ class FeedController extends Controller
         $criteria->limit = self::POST_COUNT;
             
         $models = Post::model()->findAll($criteria);
+        //@todo 把图片url地址都替换成商务厅服务器地址
+        $models = self::replacePicUrlWithPosts($models);
         return $models;
     }
     
@@ -150,7 +152,8 @@ class FeedController extends Controller
         $criteria->addColumnCondition(array('t.state'=> POST_STATE_ENABLED,'t.channel_id'=>CHANNEL_FUNNY, 't.media_type' => MEDIA_TYPE_IMAGE));
         $criteria->order = 't.create_time desc, t.id desc';
         $model = Post::model()->find($criteria);
-        $model->original_pic = str_replace('http://f0.wabao.me', 'http://unicom.f0.wabao.me', $model->original_pic);
+        //@todo 把图片url地址都替换成商务厅服务器地址
+        $model = self::replacePicUrlWithPost($model);
         return $model;
     }
 
@@ -239,6 +242,22 @@ class FeedController extends Controller
         fclose($handle);
     }
     
+    private static function replacePicUrlWithPosts(array $posts)
+    {
+        if ($posts) {
+            foreach ($posts as $index => $post)
+                $posts[$index] = self::replacePicUrlWithPost($post);
+        }
+        
+        return $posts;
+    }
+    
+    private static function replacePicUrlWithPost(Post $post)
+    {
+        $post->original_pic = str_replace('http://f0.wabao.me', 'http://unicom.f0.wabao.me', $post->original_pic);
+        $post->content = str_replace('http://f0.wabao.me', 'http://unicom.f0.wabao.me', $post->content);
+        return $post;
+    }
 }
 
 function utf8ForXml($string)
