@@ -74,6 +74,7 @@ class PostController extends RestController
         
         if ($channel_id > 0)
             $criteria->addColumnCondition(array('channel_id' => $channel_id));
+        
         if ($media_type > 0)
             $criteria->addColumnCondition(array('media_type' => $media_type));
         
@@ -89,28 +90,6 @@ class PostController extends RestController
         $rows = $this->formatPosts($posts);
         
         $this->output($rows);
-    }
-    
-    public function actionFavorite($user_id, $page = 1)
-    {
-        $user_id = (int)$user_id;
-        $criteria = new CDbCriteria();
-        $criteria->select = 'id';
-        $user = RestUser::model()->findByPk($user_id, $criteria);
-        if ($user === null)
-            throw new CDRestException('user is not exist');
-        
-        $offset = ($page - 1) *  $this->postRowCount();
-        $posts = $user->favorites(array(
-            'condition' => 'favorites.state = ' . POST_STATE_ENABLED,
-            'select' => $this->selectColumns(),
-            'limit' => $this->postRowCount(),
-            'offset' => $offset,
-            'with' => array('user', 'user.profile'),
-        ));
-        
-        $data = $this->formatPosts($posts);
-        $this->output($data);
     }
     
     public function actionBest($hours = 24, $channel_id = 0, $page = 1)
@@ -141,6 +120,28 @@ class PostController extends RestController
         $rows = $this->formatPosts($posts);
         
         $this->output($rows);
+    }
+    
+    public function actionFavorite($user_id, $channel_id = 0, $page = 1)
+    {
+        $user_id = (int)$user_id;
+        $criteria = new CDbCriteria();
+        $criteria->select = 'id';
+        $user = RestUser::model()->findByPk($user_id, $criteria);
+        if ($user === null)
+            throw new CDRestException('user is not exist');
+        
+        $offset = ($page - 1) *  $this->postRowCount();
+        $posts = $user->favorites(array(
+            'condition' => 'favorites.state = ' . POST_STATE_ENABLED,
+            'select' => $this->selectColumns(),
+            'limit' => $this->postRowCount(),
+            'offset' => $offset,
+            'with' => array('user', 'user.profile'),
+        ));
+        
+        $data = $this->formatPosts($posts);
+        $this->output($data);
     }
     
     public function actionMyshare($user_id, $channel_id = 0, $page = 1)
@@ -284,6 +285,7 @@ class PostController extends RestController
         $this->output($data);
     }
     
+    // 此接口目前只给bevin的chrome扩展使用了
     public function actionRandom()
     {
         $duration = 24*60*60;

@@ -35,6 +35,8 @@
  * @property User $user
  * @property UserProfile $profile
  * @property array $comments
+ * @property array $videos
+ * @property integer $videoCount
  * @property string $stateLabel
  * @property string $url
  * @property string $filterTitle
@@ -174,6 +176,8 @@ class Post extends CActiveRecord
 		    'profile' => array(self::BELONGS_TO, 'UserProfile', 'user_id'),
 		    'comments' => array(self::HAS_MANY, 'Comment', 'post_id'),
 	        'commentCount' => array(self::STAT, 'Comment', 'post_id',),
+		    'videos' => array(self::HAS_MANY, 'PostVideo', 'post_id'),
+		    'videoCount' => array(self::STAT, 'PostVideo', 'post_id'),
 		    'uploadImages' => array(self::HAS_MANY, 'Upload', 'post_id',
                 'condition' => 'file_type = :filetype',
 	            'params' => array(':filetype' => Upload::TYPE_IMAGE),

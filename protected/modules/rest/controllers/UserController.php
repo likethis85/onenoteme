@@ -32,40 +32,6 @@ class UserController extends RestController
         }
             
     }
-    
-    private function fetchUserSource()
-    {
-        $source = USER_SOURCE_UNKNOWN;
-        $osname = strtolower($this->osName);
-        if (stripos($osname, 'android') !== false)
-            $source = USER_SOURCE_ANDROID;
-        elseif (stripos($osname, 'iphone') !== false)
-            $source = USER_SOURCE_IPHONE;
-        elseif (stripos($osname, 'ipad') !== false)
-            $source = USER_SOURCE_IPAD;
-        
-        return $source;
-    }
-    
-    protected function afterSave(RestUser $user)
-    {
-        $device = RestMobileDevice::model()->findByPk($this->deviceUDID);
-        if ($device === null) {
-            $device = new RestMobileDevice();
-            $device->udid = $this->deviceUDID;
-            $device->user_id = $user->id;
-            $device->sys_version = $this->osVersion;
-            $device->sys_name = $this->osName;
-            $device->app_version = $this->appVersion;
-            $result = $device->save();
-        }
-        else {
-            $device->user_id = $user->id;
-            $result = $device->save(true, array('user_id'));
-        }
-        
-        return $result ? $device : false;
-    }
 
     public function actionUpdate()
     {
@@ -175,5 +141,41 @@ class UserController extends RestController
     {
         return array('id', 'username', 'screen_name', 'create_time', 'create_time', 'token', 'token_time');
     }
+
+
+    private function fetchUserSource()
+    {
+        $source = USER_SOURCE_UNKNOWN;
+        $osname = strtolower($this->osName);
+        if (stripos($osname, 'android') !== false)
+            $source = USER_SOURCE_ANDROID;
+        elseif (stripos($osname, 'iphone') !== false)
+        $source = USER_SOURCE_IPHONE;
+        elseif (stripos($osname, 'ipad') !== false)
+        $source = USER_SOURCE_IPAD;
+    
+        return $source;
+    }
+    
+    protected function afterSave(RestUser $user)
+    {
+        $device = RestMobileDevice::model()->findByPk($this->deviceUDID);
+        if ($device === null) {
+            $device = new RestMobileDevice();
+            $device->udid = $this->deviceUDID;
+            $device->user_id = $user->id;
+            $device->sys_version = $this->osVersion;
+            $device->sys_name = $this->osName;
+            $device->app_version = $this->appVersion;
+            $result = $device->save();
+        }
+        else {
+            $device->user_id = $user->id;
+            $result = $device->save(true, array('user_id'));
+        }
+    
+        return $result ? $device : false;
+    }
+
 }
 
