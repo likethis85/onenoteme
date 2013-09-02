@@ -18,6 +18,10 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
     </div>
     <div class="item-content"><?php echo $post->filterContent;?></div>
     
+    <!-- 广告位 开始 -->
+    <div class="cdc-inner-block"><?php $this->widget('CDAdvert', array('solt'=>'mobile_post_content_bottom'));?></div>
+    <!-- 广告位 结束 -->
+    
     <a name="comments"></a>
     <div class="change-post clearfix">
         <?php if ($prevUrl):?>
@@ -27,10 +31,6 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         <a class="site-bg next" href="<?php echo $nextUrl;?>"></a>
         <?php endif;?>
     </div>
-    
-    <!-- 广告位 开始 -->
-    <div class="cdc-inner-block"><?php $this->widget('CDAdvert', array('solt'=>'mobile_post_content_bottom'));?></div>
-    <!-- 广告位 结束 -->
     
     <!-- <ul class="more-post"></ul> 以后用来添加相关笑话 -->
     <div class="line1px"></div>
