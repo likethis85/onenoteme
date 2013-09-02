@@ -66,10 +66,10 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 <div id="quick-login-modal" class="modal fade hide" role="dialog" aria-hidden="true">
     <div class="modal-body"></div>
 </div>
-<?php
-echo param('footer_after_html');
-echo param('tongji_code');
-?>
+
+<?php echo param('footer_after_html');?>
+<?php $this->widget('CDAdvert', array('solt'=>'post_content_bottom', 'onlyCode'=>true));?>
+<?php echo param('tongji_code');?>
 </body>
 </html>
 

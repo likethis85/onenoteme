@@ -13,6 +13,9 @@ class CDAdvert extends CWidget
      */
     public $solt;
     
+    // 直接输出广告代码
+    public $onlyCode = false;
+    
     /**
      * 如果一个广告位有多个广告启用，是否支持多个广告随机显示，默认为开启
      * @var boolean
@@ -40,13 +43,17 @@ class CDAdvert extends CWidget
         $adcode = $data[$index];
         if (empty($adcode)) return;
         
-        $html = sprintf('<div class="cdc-block ad-block %s">', $this->boxClass);
-        if ($this->title)
-            $html .= '<h2>' . $this->title . '</h2>';
-        
-        $html .= $adcode['adcode'] . '</div>';
-        
-        echo $html;
+        if ($this->onlyCode)
+            echo $adcode['adcode'];
+        else {
+            $html = sprintf('<div class="cdc-block ad-block %s">', $this->boxClass);
+            if ($this->title)
+                $html .= '<h2>' . $this->title . '</h2>';
+            
+            $html .= $adcode['adcode'] . '</div>';
+            
+            echo $html;
+        }
     }
     
     private static function getIndexByWeight($data)
