@@ -256,7 +256,9 @@ class FeedController extends Controller
     private static function replacePicUrlWithPost(Post $post)
     {
         $post->original_pic = str_replace('http://f0.wabao.me', 'http://unicom.f0.wabao.me', $post->original_pic);
-        $post->content = str_replace('http://f0.wabao.me', 'http://unicom.f0.wabao.me', $post->content);
+        $search = array('http://f0.wabao.me', 'http://f1.wabao.me', 'http://f2.wabao.me', 'http://f3.wabao.me', 'http://f4.wabao.me');
+        $replace = array('http://unicom.f0.wabao.me', 'http://unicom.f1.wabao.me', 'http://unicom.f2.wabao.me', 'http://unicom.f3.wabao.me', 'http://unicom.f4.wabao.me');
+        $post->content = str_replace($search, $replace, $post->content);
         return $post;
     }
 }
