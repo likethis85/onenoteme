@@ -68,7 +68,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 </div>
 
 <?php echo param('footer_after_html');?>
-<?php $this->widget('CDAdvert', array('solt'=>'post_content_bottom', 'onlyCode'=>true));?>
+<?php $this->widget('CDAdvert', array('solt'=>'page_right_corner', 'onlyCode'=>true));?>
 <?php echo param('tongji_code');?>
 </body>
 </html>
