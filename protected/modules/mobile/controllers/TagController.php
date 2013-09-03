@@ -58,10 +58,6 @@ class TagController extends MobileController
         $criteria = new CDbCriteria();
         $criteria->addInCondition('id', $postIDs);
         
-        // 只有vip才可以查看GIRL频道
-        if (!user()->getIsVip())
-            $criteria->addCondition('t.channel_id != ' . CHANNEL_GIRL);
-        
         $models = MobilePost::model()->findAll($criteria);
         
         $this->pageTitle = "与{$name}相关的笑话、冷图、视频 - 挖段子";
