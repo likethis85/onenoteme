@@ -52,17 +52,15 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
                 </div>
             </div>
         </div>
-        
-        <!-- wumii widget start -->
-        <script type="text/javascript" id="wumiiRelatedItems"></script>
-        <!-- wumii widget end -->
-        
         <a name="comments"></a>
         <div class="comment-list bottom15px">
         <?php $this->renderPartial('/comment/create', array('postid'=>(int)$post->id));?>
         <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'pages'=>$pages));?>
         </div>
         
+        <!-- wumii widget start -->
+        <script type="text/javascript" id="wumiiRelatedItems"></script>
+        <!-- wumii widget end -->
 	</div>
 	<!-- 详情页侧边栏广告位开始 -->
     <?php $this->widget('CDAdvert', array('solt'=>'main_container_bottom'));?>
