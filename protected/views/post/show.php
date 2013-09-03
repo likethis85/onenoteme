@@ -52,15 +52,17 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
                 </div>
             </div>
         </div>
+        
+        <!-- wumii widget start -->
+        <script type="text/javascript" id="wumiiRelatedItems"></script>
+        <!-- wumii widget end -->
+        
         <a name="comments"></a>
         <div class="comment-list bottom15px">
         <?php $this->renderPartial('/comment/create', array('postid'=>(int)$post->id));?>
         <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'pages'=>$pages));?>
         </div>
         
-        <!-- wumii widget start -->
-        <script type="text/javascript" id="wumiiRelatedItems"></script>
-        <!-- wumii widget end -->
 	</div>
 	<!-- 详情页侧边栏广告位开始 -->
     <?php $this->widget('CDAdvert', array('solt'=>'main_container_bottom'));?>
@@ -132,12 +134,12 @@ $(function(){
 
 <!-- wumii widget start -->
 <script type="text/javascript">
-    var wumiiPermaLink = "<?php echo $post->url;?>"; //请用代码生成文章永久的链接
-    var wumiiTitle = "<?php echo $post->filterTitle;?>"; //请用代码生成文章标题
-    var wumiiTags = "<?php echo $post->getTagText(',');?>"; //请用代码生成文章标签，以英文逗号分隔，如："标签1,标签2"
-    var wumiiCategories = []; //请用代码生成文章分类，分类名放在 JSONArray 中，如: ["分类1", "分类2"]
+    var wumiiPermaLink = "<?php echo $post->url;?>";
+    var wumiiTitle = <?php echo json_encode($post->filterTitle);?>;
+    var wumiiTags = <?php echo json_encode($post->getTagText(','));?>;
+    var wumiiCategories = [];
     var wumiiSitePrefix = "http://www.waduanzi.com/";
-    var wumiiParams = "&num=5&mode=3&pf=JAVASCRIPT";
+    var wumiiParams = "&num=6&mode=3&pf=JAVASCRIPT";
 </script>
 <script type="text/javascript" src="http://widget.wumii.cn/ext/relatedItemsWidget"></script>
 <a href="http://www.wumii.com/widget/relatedItems" style="border:0;">
