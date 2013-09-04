@@ -17,7 +17,7 @@
     </div>
     <div class="apps-download">
         <div class="apps-items">
-            <a href="<?php echo APP_STORE_VERIFY?>" target="_blank"><span>点击访问App Store下载</span></a>
+            <a href="<?php echo IPHONE_APP_URL?>" target="_blank"><span>点击访问App Store下载</span></a>
         </div>
     </div>
 </div>
