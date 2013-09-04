@@ -44,6 +44,18 @@
     <?php endif;?>
     <!-- 缩略图 end -->
     
+    <!-- 缩略图 start -->
+    <?php if (!$model->getIsVideoType()):?>
+    <div class="control-group bottom10px <?php if ($model->hasErrors('original_pic')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'original_pic', array('class'=>'control-label'));?>
+        <div class="controls">
+            <?php echo CHtml::activeTextField($model, 'original_pic', array('class'=>'span6'));?>
+            <?php if ($model->hasErrors('original_pic')):?><p class="help-block"><?php echo $model->getError('original_pic');?></p><?php endif;?>
+        </div>
+    </div>
+    <?php endif;?>
+    <!-- 缩略图 end -->
+    
     <div class="control-group bottom10px <?php if ($model->hasErrors('content')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'content', array('class'=>'control-label'));?>
         <div class="controls">

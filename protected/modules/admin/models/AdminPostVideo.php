@@ -1,0 +1,15 @@
+<?php
+
+class AdminPostVideo extends PostVideo
+{
+    /**
+     * Returns the static model of the specified AR class.
+     * @return AdminPostVideo the static model class
+     */
+    public static function model($className=__CLASS__)
+    {
+        return parent::model($className);
+    }
+}
+
+?>

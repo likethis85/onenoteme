@@ -10,9 +10,29 @@ class CDBase
     
     /**
      * 获取客户端IP地址
+     * @deprecated Replaced by getClientIPAddress
      * @return string 客户端IP地址
      */
     public static function getClientIp()
+    {
+        static $ip = null;
+        if ($ip !== null) return $ip;
+        
+        if ($_SERVER['HTTP_CLIENT_IP'])
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+	 	elseif ($_SERVER['HTTP_X_FORWARDED_FOR'])
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	 	else
+            $ip = $_SERVER['REMOTE_ADDR'];
+
+        return $ip;
+    }
+    
+    /**
+     * 获取客户端IP地址，getClientIp别名
+     * @return string 客户端IP地址
+     */
+    public static function getClientIPAddress()
     {
         static $ip = null;
         if ($ip !== null) return $ip;
@@ -75,7 +95,7 @@ class CDBase
     public static function setClientLastVisit()
     {
         $values[] = $_SERVER['REQUEST_TIME'];
-        $values[] = ip2long(self::getClientIp());
+        $values[] = ip2long(self::getClientIPAddress());
         $value = join(',', $values);
         $cookie = new CHttpCookie(CD_LAST_VISIT, $value);
         $cookie->path = GLOBAL_COOKIE_PATH;
@@ -243,7 +263,7 @@ class CDBase
     
     public static function mediatypes()
     {
-        return array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE, MEDIA_TYPE_UNKOWN);
+        return array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE, MEDIA_TYPE_VIDEO, MEDIA_TYPE_UNKOWN);
     }
     
     public static function mediaTypeLabels($typeID = null)
@@ -306,7 +326,6 @@ class CDBase
         
     }
 
-
     // 马甲账号
     public static function randomVestAuthor()
     {
@@ -328,7 +347,6 @@ class CDBase
     
         return array($userID, $accounts[$userID]);
     }
-
 
 }
 

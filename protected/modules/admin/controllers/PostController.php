@@ -83,6 +83,8 @@ class PostController extends AdminController
 	    }
 	    elseif ($id > 0) {
 	        $model = AdminPost::model()->findByPk($id);
+	        if ($model === null)
+	            throw new CException($id . '：此文章不存在');
 	        $this->adminTitle = '编辑段子';
 	    }
 	    else
@@ -99,7 +101,8 @@ class PostController extends AdminController
 	            if ($model->fetchContentRemoteImagesAfterSave() === false)
 	                $resultHtml .= '(远程图片抓取出错)';
 	            user()->setFlash('save_post_result', $resultHtml);
-                $this->redirect(request()->getUrl());
+	            $goUrl = $model->getIsVideoType() ? url('admin/post/createVideo', array('postid'=>$model->id)) : request()->getUrl();
+                $this->redirect($goUrl);
 	        }
 	    }
 	    
@@ -119,6 +122,30 @@ class PostController extends AdminController
 	    $summary === false or $post->summary = $summary;
 	    $content === false or $post->content = $content;
 	    return $post->save(true, array('summary', 'content'));
+	}
+	
+	public function actionCreateVideo($postid)
+	{
+	    $postid = (int)$postid;
+	    if ($postid <= 0)
+	        throw new CException('$postid 不合法');
+	    
+	    $post = AdminPost::model()->findByPk($postid);
+	    if ($post === null)
+	        throw new CException($postid . '：文章不存在');
+	    
+	    $model = new AdminPostVideo();
+	    $model->post_id = $postid;
+	    
+	    if (request()->getIsPostRequest() && isset($_POST['AdminPostVideo'])) {
+	        
+	    }
+	    
+	    $this->adminTitle = '添加视频';
+	    $this->channel = 'create_post_' . MEDIA_TYPE_VIDEO;
+	    $this->render('create_video', array(
+            'model' => $model,
+	    ));
 	}
 	
 	public function actionLatest($channel = null, $mediatype = null, $state = null)

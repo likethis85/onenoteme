@@ -942,7 +942,7 @@ class Post extends CActiveRecord
     }
     
     /**
-     * 判断是否是纯文字内容，此处只是默认笑话和鬼故事为纯文字的，并不是真正判断
+     * 判断是否是纯文字内容
      * @return boolean
      */
     public function getIsTextType()
@@ -951,12 +951,21 @@ class Post extends CActiveRecord
     }
     
     /**
-     * 判断是否为图片内容，只是默认趣图和女神为图片内容，并不是真正判断
+     * 判断是否为图片内容
      * @return boolean
      */
     public function getIsImageType()
     {
         return $this->media_type == MEDIA_TYPE_IMAGE;
+    }
+    
+    /**
+     * 判断是否为视频
+     * @return boolean
+     */
+    public function getIsVideoType()
+    {
+        return $this->media_type == MEDIA_TYPE_VIDEO;
     }
     
     /**
