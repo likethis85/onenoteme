@@ -97,8 +97,8 @@ class CDRestError
     
     
     // 以下为系统配置相关错误代码，以24开头
-    const DEVICE_SAVE_ERROR = 240001;
-    const DEVICE_NOT_EXIST = 240002;
+    const DEVICE_SAVE_ERROR = 24001;
+    const DEVICE_NOT_EXIST = 24002;
     
     // 以下为用户配置相关错误代码，以25开头
     

@@ -1,5 +1,5 @@
 <?php
-define('REST_DEBUG', true);
+define('REST_DEBUG', YII_DEBUG);
 
 require(dirname(__FILE__) . DS . 'extensions' . DS . 'define.php');
 

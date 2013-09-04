@@ -78,7 +78,7 @@ class UserController extends RestController
             }
             else {
                 //@todo 这里需要额外处理，此情况逻辑上不会发生
-                throw new CDRestException(CDRestError::USER_NOT_EXIST);
+                throw new CDRestException(CDRestError::DEVICE_NOT_EXIST);
             }
             
         }
