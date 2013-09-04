@@ -17,7 +17,7 @@
     </div>
     <div class="apps-download">
         <div class="apps-items">
-            <a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank"><span>点击访问App Store下载</span></a>
+            <a href="<?php echo APP_STORE_VERIFY?>" target="_blank"><span>点击访问App Store下载</span></a>
         </div>
     </div>
 </div>
