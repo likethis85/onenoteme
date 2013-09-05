@@ -40,10 +40,13 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 <div class="cd-entry cd-main">
     <div class="top-banner">
     <?php $this->widget('CDAdvert', array('solt'=>'mobile_top_banner'));?>
+    <?php $this->widget('CDAdvert', array('solt'=>'mobile_top2_banner'));?>
     </div>
+    <!--
     <div class="app-online hide">
         <a href="<?php echo IPHONE_APP_URL;?>" target="_blank">挖段子iPhone应用3.0全新上线！！</a>
     </div>
+    -->
     <div class="cd-wrapper"><?php echo $content;?></div>
 </div>
 
