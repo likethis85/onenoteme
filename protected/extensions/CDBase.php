@@ -92,7 +92,7 @@ class CDBase
         return $values;
     }
     
-    public static function setClientLastVisit()
+    public static function setClientLastVisit($expire = 0)
     {
         $values[] = $_SERVER['REQUEST_TIME'];
         $values[] = ip2long(self::getClientIPAddress());
@@ -100,7 +100,8 @@ class CDBase
         $cookie = new CHttpCookie(CD_LAST_VISIT, $value);
         $cookie->path = GLOBAL_COOKIE_PATH;
         $cookie->domain = GLOBAL_COOKIE_DOMAIN;
-        $cookie->expire = $_SERVER['REQUEST_TIME'] + 3600*24*30;
+        if ($expire > 0)
+            $cookie->expire = $_SERVER['REQUEST_TIME'] + $expire;
         $cookie->httpOnly = true;
         request()->cookies->add(CD_LAST_VISIT, $cookie);
         return $values;

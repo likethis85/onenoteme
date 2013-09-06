@@ -163,6 +163,7 @@ return array(
         'user' => array(
             'class' => 'CDWebUser',
             'allowAutoLogin' => true,
+            'autoLoginDuration' => $params['autoLoginDuration'],
             'loginUrl' => array('/account/login'),
             'guestName' => '匿名段友',
         ),

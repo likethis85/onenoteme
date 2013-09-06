@@ -89,9 +89,9 @@ class LoginForm extends CFormModel
      */
     public function login($afterLogin = true)
     {
-        $duration = (user()->allowAutoLogin && $this->rememberMe) ? param('autoLoginDuration') : 0;
+        $duration = (user()->allowAutoLogin && $this->rememberMe) ? user()->autoLoginDuration : 0;
         if (user()->login($this->_identity, $duration)) {
-            $afterLogin && $this->afterLogin();
+            $afterLogin && $this->afterLogin($duration);
             return true;
         }
         else
@@ -162,8 +162,9 @@ class LoginForm extends CFormModel
             $this->clearErrorLoginNums();
     }
 
-    public function afterLogin()
+    public function afterLogin($duration)
     {
+        CDBase::setClientLastVisit($duration);
         $returnUrl = urldecode($this->returnUrl);
         if (empty($returnUrl))
             $returnUrl = strip_tags(trim($_GET['url']));
@@ -180,8 +181,10 @@ class LoginForm extends CFormModel
         $identity = new UserIdentity($user->username, $user->password);
         if ($identity->authenticate(true)) {
             $result = user()->login($identity);
-            if ($result)
-                $this->afterLogin();
+            if ($result) {
+                $duration = user()->allowAutoLogin ? user()->autoLoginDuration : 0;
+                $this->afterLogin($duration);
+            }
         }
     }
 }

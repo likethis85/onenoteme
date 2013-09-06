@@ -6,6 +6,8 @@ class CDWebUser extends CWebUser
     const AUTH_AUTHOR_NAME = 'author';
     const AUTH_CHIEF_EDITOR_NAME = 'chief_editor';
     
+    public $autoLoginDuration = 0;
+    
     public function getHomeUrl()
     {
         $url = '';
