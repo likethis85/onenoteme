@@ -62,10 +62,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         <script type="text/javascript" id="wumiiRelatedItems"></script>
         <!-- wumii widget end -->
         
-        <?php $this->widget('CDAdvert', array('solt'=>'post_comments_bottom'));?>
-        
-        <?php $this->widget('CDAdvert', array('solt'=>'main_container_bottom'));?>
-        
+        <?php $this->widget('CDAdvert', array('solt'=>'post_comments_bottom_2'));?>
 	</div>
 	<!-- 详情页侧边栏广告位开始 -->
     <?php $this->widget('CDAdvert', array('solt'=>'main_container_bottom'));?>
