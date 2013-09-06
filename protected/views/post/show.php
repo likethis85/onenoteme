@@ -58,11 +58,11 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'pages'=>$pages));?>
         </div>
         
-        <?php $this->widget('CDAdvert', array('solt'=>'post_comments_bottom'));?>
-        
         <!-- wumii widget start -->
         <script type="text/javascript" id="wumiiRelatedItems"></script>
         <!-- wumii widget end -->
+        
+        <?php $this->widget('CDAdvert', array('solt'=>'post_comments_bottom'));?>
 	</div>
 	<!-- 详情页侧边栏广告位开始 -->
     <?php $this->widget('CDAdvert', array('solt'=>'main_container_bottom'));?>
