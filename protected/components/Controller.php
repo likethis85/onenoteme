@@ -37,7 +37,8 @@ class Controller extends CController
 	public function init()
 	{
 	    parent::init();
-	    $this->lastVisit = CDBase::setClientLastVisit();
+	    $this->lastVisit = CDBase::getClientLastVisit();
+	    CDBase::setClientLastVisit();
 	    
 	    $this->clientID = CDBase::getClientID();
 	    if (empty($this->clientID))

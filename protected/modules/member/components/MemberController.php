@@ -22,8 +22,7 @@ class MemberController extends Controller
         parent::init();
          
         $this->lastVisit = CDBase::getClientLastVisit();
-        if (empty($this->lastVisit))
-            $this->lastVisit = CDBase::setClientLastVisit();
+	    CDBase::setClientLastVisit();
          
         $this->clientID = CDBase::getClientID();
         if (empty($this->clientID))

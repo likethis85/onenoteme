@@ -63,7 +63,7 @@ class CDBase
     
     public static function setClientID()
     {
-        $value = md5(self::getClientIp() . uniqid());
+        $value = md5(self::getClientIPAddress() . uniqid());
         $cookie = new CHttpCookie(CD_CLIENT_ID, $value);
         $cookie->path = GLOBAL_COOKIE_PATH;
         $cookie->domain = GLOBAL_COOKIE_DOMAIN;
