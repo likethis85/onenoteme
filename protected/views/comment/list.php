@@ -15,7 +15,9 @@
     <div class="clear"></div>
 </div>
 <?php endforeach;?>
+
 <?php if ($pages && $pages->pageCount > 1):?>
+<?php $this->widget('CDAdvert', array('solt'=>'post_comments_bottom_01'));?>
 <div class="cd-pages" id="page-nav"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
 <?php endif;?>
 
