@@ -54,6 +54,13 @@ define('POST_STATE_TRASH', -99);
 define('COMMENT_STATE_ENABLED', 1);
 define('COMMENT_STATE_DISABLED', 0);
 
+define('COMMENT_SOURCE_UNKNOWN', 0);
+define('COMMENT_SOURCE_PC_WEB', 1);
+define('COMMENT_SOURCE_MOBILE_WEB', 2);
+define('COMMENT_SOURCE_IPHONE', 3);
+define('COMMENT_SOURCE_IPAD', 4);
+define('COMMENT_SOURCE_ANDROID', 5);
+
 /* user state */
 define('USER_STATE_UNVERIFY', 0);
 define('USER_STATE_ENABLED', 1);

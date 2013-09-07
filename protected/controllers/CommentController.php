@@ -41,6 +41,7 @@ class CommentController extends Controller
         $c->user_id = user()->isGuest ? 0 : user()->id;
         $c->user_name = user()->isGuest ? '' : user()->name;
         $c->state = COMMENT_STATE_ENABLED;
+        $c->source = COMMENT_SOURCE_PC_WEB;
         $result = (int)$c->save();
         $data['errno'] = (int)!$result;
         if ($result)

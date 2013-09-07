@@ -29,6 +29,8 @@ class CommentController extends RestController
         $comment->user_id = $userid;
         $comment->user_name = $username;
         $comment->state = COMMENT_STATE_ENABLED;
+        $comment->source = $this->fetchCommentSource();
+        
         if ($comment->save()) {
             $data = CDRestDataFormat::formatComment($comment);
             $this->output($data);
@@ -124,7 +126,19 @@ class CommentController extends RestController
     
     
     
+    private function fetchCommentSource()
+    {
+        $source = COMMENT_SOURCE_UNKNOWN;
+        $osname = strtolower($this->osName);
+        if (stripos($osname, 'android') !== false)
+            $source = COMMENT_SOURCE_ANDROID;
+        elseif (stripos($osname, 'iphone') !== false)
+            $source = COMMENT_SOURCE_IPHONE;
+        elseif (stripos($osname, 'ipad') !== false)
+            $source = COMMENT_SOURCE_IPAD;
     
+        return $source;
+    }
     
     protected function timelineRowCount()
     {
