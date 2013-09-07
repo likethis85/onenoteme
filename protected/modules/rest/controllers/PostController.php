@@ -39,7 +39,7 @@ class PostController extends RestController
         $criteria->addColumnCondition($columns);
         
         $mediaTypes = $this->processMediaType($media_type);
-        $criteria->addInCondition('t.media_type', $mediaTypes);
+//         $criteria->addInCondition('t.media_type', $mediaTypes);
         
         if ($lasttime > 0) {
             $criteria->addCondition('t.create_time > :lasttime');
@@ -368,8 +368,7 @@ class PostController extends RestController
                 $mediaTypes[] = MEDIA_TYPE_VIDEO;
         }
         else {
-            $mediaTypes = explode(MEDIA_TYPE_DELIMITER, $media_type);
-            $mediaTypes = array_map('intval', $mediaTypes);
+            $mediaTypes = array_map('intval', explode(MEDIA_TYPE_DELIMITER, $media_type));
         }
         
         return $mediaTypes;
