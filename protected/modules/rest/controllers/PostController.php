@@ -369,7 +369,7 @@ class PostController extends RestController
         }
         else {
             $mediaTypes = explode(MEDIA_TYPE_DELIMITER, $media_type);
-            array_walk($mediaTypes, 'intval');
+            $mediaTypes = array_map('intval', $mediaTypes);
         }
         
         return $mediaTypes;
