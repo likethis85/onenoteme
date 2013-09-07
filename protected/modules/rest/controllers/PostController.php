@@ -39,15 +39,15 @@ class PostController extends RestController
         $criteria->addColumnCondition($columns);
         
         if ($this->appVersion > '3.1.0') {
-        $mediaTypes = ($media_type == 0) ? array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE) : explode(MEDIA_TYPE_DELIMITER, $media_type);
-        if (count($mediaTypes) > 0) {
-            array_walk($mediaTypes, 'intval');
-            $criteria->addInCondition('t.media_type', $mediaTypes);
-        }
-        else
-            $criteria->addColumnCondition(array('t.media_type'=>(int)$media_type));
-        }
-        else
+            $mediaTypes = ($media_type == 0) ? array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE) : explode(MEDIA_TYPE_DELIMITER, $media_type);
+            if (count($mediaTypes) > 0) {
+                array_walk($mediaTypes, 'intval');
+                $criteria->addInCondition('t.media_type', $mediaTypes);
+            }
+            else
+                $criteria->addColumnCondition(array('t.media_type'=>(int)$media_type));
+            }
+        elseif ($media_type > 0)
             $criteria->addColumnCondition(array('t.media_type'=>(int)$media_type));
         
         if ($lasttime > 0) {
