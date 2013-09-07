@@ -126,6 +126,31 @@ class Comment extends CActiveRecord
 	        'source' => '来源',
 		);
 	}
+	
+
+	public static function sourceLabels($source = null)
+	{
+	    $labels = array(
+            COMMENT_SOURCE_IPHONE => 'iPhone',
+            COMMENT_SOURCE_IPAD => 'iPad',
+            COMMENT_SOURCE_ANDROID => 'Android',
+            COMMENT_SOURCE_PC_WEB => 'PC版网站',
+            COMMENT_SOURCE_MOBILE_WEB => '移动版网站',
+            COMMENT_SOURCE_UNKNOWN => '未知',
+	    );
+	     
+	    if ($source === null)
+	        return $labels;
+	    elseif (array_key_exists($source, $labels))
+    	    return $labels[$source];
+	    else
+	        return null;
+	}
+	
+	public function getSourceLabel()
+	{
+	    return self::sourceLabels($this->source);
+	}
 
 	public function getAuthorName()
 	{

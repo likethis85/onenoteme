@@ -13,6 +13,7 @@
             <th class="item-checkbox align-center">#</th>
             <th class="span1 align-center"><?php echo $sort->link('id');?></th>
             <th class="span8">内容</th>
+            <th class="span1">来源</th>
             <th class="span2">评论人&nbsp;/&nbsp;<?php echo $sort->link('create_time');?></th>
             <th class="span2 align-center"><?php echo $sort->link('recommend');?>&nbsp;/&nbsp;<?php echo $sort->link('state');?></th>
             <th>#</th>
@@ -24,6 +25,7 @@
             <td class="item-checkbox"><input type="checkbox" name="itemids" value="<?php echo $model->id;?>" /></td>
             <td class="align-center"><?php echo $model->id;?></td>
             <td class="comment-content"><?php echo $model->content;?></td>
+            <td><?php echo $model->sourceLabel;?></td>
             <td class="cgray">
                 <?php echo $model->authorName;?><br />
                 <span class="f12px"><?php echo $model->createTime;?></span>
