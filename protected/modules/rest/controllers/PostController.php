@@ -2,6 +2,7 @@
 class PostController extends RestController
 {
     const HISTORY_COUNT = 50;
+    const MEDIA_TYPE_DELIMITER = ',';
     
     public function filters()
     {
@@ -16,7 +17,7 @@ class PostController extends RestController
      * @param integer $channel_id required，频道ID
      * @param integer $lasttime optional，用户最后更新时间，取应用内容列表最新一条内容的create_time
      * @param integer $maxtime optional，段子截止发布时间，取应用内容列表最后一条内容的create_time
-     * @param integer $media_type optional，类型，MEDIA_TEXT | MEDIA_IMAGE | MEDIA_VIDEO
+     * @param string $media_type optional，类型，MEDIA_TEXT | MEDIA_IMAGE | MEDIA_VIDEO，默认为文字和图片，可以是单个，也可以是多个，多个用英文半角逗号(,)分隔
      * @return array 内容列表，数组结构
      */
     public function actionTimeline($channel_id, $lasttime = 0, $maxtime = 0, $media_type = 0)
@@ -24,7 +25,6 @@ class PostController extends RestController
         $channel_id = (int)$channel_id;
         $lasttime = (float)$lasttime;
         $maxtime = (float)$maxtime;
-        $media_type = (int)$media_type;
         $user_id = (int)$user_id;
         
         $criteria = new CDbCriteria();
@@ -36,9 +36,19 @@ class PostController extends RestController
         $columns = array('t.channel_id' => $channel_id);
         if ($user_id > 0)
             $columns['t.user_id'] = $user_id;
-        if ($media_type)
-            $columns['t.media_type'] = $media_type;
         $criteria->addColumnCondition($columns);
+        
+        if ($this->appVersion > '3.1.0') {
+        $mediaTypes = ($media_type == 0) ? array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE) : explode(MEDIA_TYPE_DELIMITER, $media_type);
+        if (count($mediaTypes) > 0) {
+            array_walk($mediaTypes, 'intval');
+            $criteria->addInCondition('t.media_type', $mediaTypes);
+        }
+        else
+            $criteria->addColumnCondition(array('t.media_type'=>(int)$media_type));
+        }
+        else
+            $criteria->addColumnCondition(array('t.media_type'=>(int)$media_type));
         
         if ($lasttime > 0) {
             $criteria->addCondition('t.create_time > :lasttime');
@@ -58,13 +68,12 @@ class PostController extends RestController
     /**
      * 获取以前的内容，服务器随机选取一天的内容返回固定条数，条数不够的，取前一天内容补足
      * @param integer $channel_id required，频道ID
-     * @param integer $media_type optional，类型，MEDIA_TEXT | MEDIA_IMAGE | MEDIA_VIDEO
+     * @param string $media_type optional，类型，MEDIA_TEXT | MEDIA_IMAGE | MEDIA_VIDEO，可以是单个，也可以是多个，多个用英文半角逗号(,)分隔
      * @return array 内容列表，数组结构
      */
     public function actionHistory($channel_id = 0, $media_type = 0)
     {
         $channel_id = (int)$channel_id;
-        $media_type = (int)$media_type;
         
         $criteria = new CDbCriteria();
         $criteria->select = self::selectColumns();
@@ -75,8 +84,13 @@ class PostController extends RestController
         if ($channel_id > 0)
             $criteria->addColumnCondition(array('channel_id' => $channel_id));
         
-        if ($media_type > 0)
-            $criteria->addColumnCondition(array('media_type' => $media_type));
+//         $mediaTypes = ($media_type == 0) ? array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE) : explode(MEDIA_TYPE_DELIMITER, $media_type);
+//         if (count($mediaTypes) > 0) {
+//             array_walk($mediaTypes, 'intval');
+//             $criteria->addInCondition('t.media_type', $mediaTypes);
+//         }
+//         else
+//             $criteria->addColumnCondition(array('t.media_type'=>(int)$media_type));
         
         // 取随机一天，计算出此日期凌晨的时间戳
         $mmtime = self::getMaxMinCreatetime();
