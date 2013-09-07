@@ -137,7 +137,7 @@ class PostController extends RestController
         $mediaTypes = $this->processMediaType($media_type);
         $offset = ($page - 1) *  $this->postRowCount();
         $posts = $user->favorites(array(
-            'condition' => sprintf('favorites.state = %d AND favorites.media_type in (:%s)', POST_STATE_ENABLED, join(self::MEDIA_TYPE_DELIMITER, $mediaTypes)),
+            'condition' => sprintf('favorites.state = %d AND favorites.media_type in (%s)', POST_STATE_ENABLED, join(self::MEDIA_TYPE_DELIMITER, $mediaTypes)),
             'select' => $this->selectColumns(),
             'limit' => $this->postRowCount(),
             'offset' => $offset,
