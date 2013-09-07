@@ -39,8 +39,10 @@ class PostController extends RestController
         $criteria->addColumnCondition($columns);
         
         $mediaTypes = $this->processMediaType($media_type);
-        if ($this->appVersion > '3.1.0')
+        if ($this->appVersion > '3.1.0') {
             print_r($mediaTypes);
+            print_r($media_type);
+        }
 //         $criteria->addInCondition('t.media_type', $mediaTypes);
         
         if ($lasttime > 0) {
