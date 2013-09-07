@@ -38,7 +38,8 @@ class PostController extends RestController
             $columns['t.user_id'] = $user_id;
         $criteria->addColumnCondition($columns);
         
-        $this->processMediaType($criteria, $media_type);
+        $mediaTypes = $this->processMediaType($media_type);
+        $criteria->addInCondition('t.media_type', $mediaTypes);
         
         if ($lasttime > 0) {
             $criteria->addCondition('t.create_time > :lasttime');
@@ -74,7 +75,8 @@ class PostController extends RestController
         if ($channel_id > 0)
             $criteria->addColumnCondition(array('channel_id' => $channel_id));
         
-        $this->processMediaType($criteria, $media_type);
+        $mediaTypes = $this->processMediaType($media_type);
+        $criteria->addInCondition('t.media_type', $mediaTypes);
         
         // 取随机一天，计算出此日期凌晨的时间戳
         $mmtime = self::getMaxMinCreatetime();
@@ -90,7 +92,7 @@ class PostController extends RestController
         $this->output($rows);
     }
     
-    public function actionBest($hours = 24, $channel_id = 0, $page = 1)
+    public function actionBest($hours = 24, $channel_id = 0, $page = 1, $media_type = 0)
     {
         $hours = (int)$hours;
         $channel_id = (int)$channel_id;
@@ -100,6 +102,9 @@ class PostController extends RestController
         $criteria = new CDbCriteria();
         if ($channel_id > 0)
             $criteria->addColumnCondition(array('t.channel_id' => $channel_id));
+        
+        $mediaTypes = $this->processMediaType($media_type);
+        $criteria->addInCondition('t.media_type', $mediaTypes);
         
         if ($hours > 0) {
             $fromtime = $_SERVER['REQUEST_TIME'] - $hours * 3600;
@@ -120,7 +125,7 @@ class PostController extends RestController
         $this->output($rows);
     }
     
-    public function actionFavorite($user_id, $channel_id = 0, $page = 1)
+    public function actionFavorite($user_id, $channel_id = 0, $page = 1, $media_type = 0)
     {
         $user_id = (int)$user_id;
         $criteria = new CDbCriteria();
@@ -129,9 +134,11 @@ class PostController extends RestController
         if ($user === null)
             throw new CDRestException('user is not exist');
         
+        $mediaTypes = $this->processMediaType($media_type);
         $offset = ($page - 1) *  $this->postRowCount();
         $posts = $user->favorites(array(
-            'condition' => 'favorites.state = ' . POST_STATE_ENABLED,
+            'condition' => 'favorites.state = :enabled and favorites.media_type in (:mediatypes)',
+            'params' => array(':mediatypes' => join(self::MEDIA_TYPE_DELIMITER, $mediaTypes), ':enabled' => POST_STATE_ENABLED),
             'select' => $this->selectColumns(),
             'limit' => $this->postRowCount(),
             'offset' => $offset,
@@ -142,7 +149,7 @@ class PostController extends RestController
         $this->output($data);
     }
     
-    public function actionMyshare($user_id, $channel_id = 0, $page = 1)
+    public function actionMyshare($user_id, $channel_id = 0, $page = 1, $media_type = 0)
     {
         $channel_id = (int)$channel_id;
         $user_id = (int)$user_id;
@@ -162,13 +169,16 @@ class PostController extends RestController
             $columns['t.channel_id'] = $channel_id;
         $criteria->addColumnCondition($columns);
         
+        $mediaTypes = $this->processMediaType($media_type);
+        $criteria->addInCondition('t.media_type', $mediaTypes);
+        
         $posts = RestPost::model()->published()->findAll($criteria);
         $rows = $this->formatPosts($posts);
         
         $this->output($rows);
     }
     
-    public function actionFeedback($user_id, $channel_id = 0, $page = 1)
+    public function actionFeedback($user_id, $channel_id = 0, $page = 1, $media_type = 0)
     {
         $user_id = (int)$user_id;
         $channel_id = (int)$channel_id;
@@ -187,8 +197,12 @@ class PostController extends RestController
             ->order('c.create_time desc')
             ->where('c.user_id = :userID', array(':userID' => $user_id));
         
+        $mediaTypes = $this->processMediaType($media_type);
+        
         if ($channel_id > 0)
-            $cmd->join(TABLE_POST . ' p', 'p.channel_id = :channelID', array(':channelID' => $channel_id));
+            $cmd->join(TABLE_POST . ' p', 'p.channel_id = :channelID AND p.media_type in (:mediatypes)', array(':channelID' => $channel_id, ':mediatypes' => join(self::MEDIA_TYPE_DELIMITER, $mediaTypes)));
+        else
+            $cmd->join(TABLE_POST . ' p', 'p.media_type in (:mediatypes)', array(':mediatypes' => join(self::MEDIA_TYPE_DELIMITER, $mediaTypes)));
         
         $pids = $cmd->queryColumn();
         
@@ -347,22 +361,19 @@ class PostController extends RestController
     
     
     
-    private function processMediaType($criteria, $media_type)
+    private function processMediaType($media_type)
     {
         if ($media_type == 0) {
             $mediaTypes = array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE);
             if ($this->appVersion > '3.1.0')
                 $mediaTypes[] = MEDIA_TYPE_VIDEO;
         }
-        else
+        else {
             $mediaTypes = explode(MEDIA_TYPE_DELIMITER, $media_type);
-        
-        if (count($mediaTypes) > 0) {
             array_walk($mediaTypes, 'intval');
-            $criteria->addInCondition('t.media_type', $mediaTypes);
         }
-        else
-            $criteria->addColumnCondition(array('t.media_type'=>(int)$media_type));
+        
+        return $mediaTypes;
     }
     
     
