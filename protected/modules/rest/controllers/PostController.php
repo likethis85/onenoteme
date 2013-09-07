@@ -38,13 +38,7 @@ class PostController extends RestController
             $columns['t.user_id'] = $user_id;
         $criteria->addColumnCondition($columns);
         
-        $mediaTypes = ($media_type == 0) ? array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE) : explode(MEDIA_TYPE_DELIMITER, $media_type);
-        if (count($mediaTypes) > 0) {
-            array_walk($mediaTypes, 'intval');
-            $criteria->addInCondition('t.media_type', $mediaTypes);
-        }
-        else
-            $criteria->addColumnCondition(array('t.media_type'=>(int)$media_type));
+        $this->processMediaType($criteria, $media_type);
         
         if ($lasttime > 0) {
             $criteria->addCondition('t.create_time > :lasttime');
@@ -80,13 +74,7 @@ class PostController extends RestController
         if ($channel_id > 0)
             $criteria->addColumnCondition(array('channel_id' => $channel_id));
         
-//         $mediaTypes = ($media_type == 0) ? array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE) : explode(MEDIA_TYPE_DELIMITER, $media_type);
-//         if (count($mediaTypes) > 0) {
-//             array_walk($mediaTypes, 'intval');
-//             $criteria->addInCondition('t.media_type', $mediaTypes);
-//         }
-//         else
-//             $criteria->addColumnCondition(array('t.media_type'=>(int)$media_type));
+        $this->processMediaType($criteria, $media_type);
         
         // 取随机一天，计算出此日期凌晨的时间戳
         $mmtime = self::getMaxMinCreatetime();
@@ -359,7 +347,23 @@ class PostController extends RestController
     
     
     
-    
+    private function processMediaType($criteria, $media_type)
+    {
+        if ($media_type == 0) {
+            $mediaTypes = array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE);
+            if ($this->appVersion > '3.1.0')
+                $mediaTypes[] = MEDIA_TYPE_VIDEO;
+        }
+        else
+            $mediaTypes = explode(MEDIA_TYPE_DELIMITER, $media_type);
+        
+        if (count($mediaTypes) > 0) {
+            array_walk($mediaTypes, 'intval');
+            $criteria->addInCondition('t.media_type', $mediaTypes);
+        }
+        else
+            $criteria->addColumnCondition(array('t.media_type'=>(int)$media_type));
+    }
     
     
     /**
