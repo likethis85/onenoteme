@@ -7,7 +7,7 @@
     </p>
     <p>
         有&nbsp;<b><?php echo $hidePostCount;?></b>&nbsp;个段子待显示。
-        <a class="btn btn-primary btn-small" href="<?php echo url('admin/post/latest');?>">查看列表</a>
+        <a class="btn btn-primary btn-small" href="<?php echo url('admin/post/latest', array('state'=>POST_STATE_DISABLED));?>">查看列表</a>
     </p>
     <p>
         有&nbsp;<b><?php echo $commentCount;?></b>&nbsp;个评论未审核。
