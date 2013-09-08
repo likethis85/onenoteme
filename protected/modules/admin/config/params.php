@@ -21,5 +21,8 @@ return array(
     'adminUploadFilesCountOfPage' => 30,
     // 每页显示的链接数量
     'adminLinkCountOfPage' => 20,
+    // 应用联盟日志每页显示数量
+    'adminAppUnionLogCountOfPage' => 30,
+        
         
 );

@@ -16,6 +16,8 @@
  * @property string $promoter
  * @property integer $create_time
  * @property string $create_ip
+ *
+ * @property string $createTime;
  */
 class AppUnionLog extends CActiveRecord
 {
@@ -78,6 +80,15 @@ class AppUnionLog extends CActiveRecord
 			'create_time' => '点击时间',
 			'create_ip' => '点击IP',
 		);
+	}
+	
+	public function getCreateTime($format = null)
+	{
+	    if (empty($this->create_time))
+	        return '';
+	
+	    $format = $format ? $format : param('formatDateTime');
+	    return date($format, $this->create_time);
 	}
 	
 	protected function beforeSave()
