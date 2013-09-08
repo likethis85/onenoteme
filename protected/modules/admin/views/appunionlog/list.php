@@ -23,6 +23,7 @@
             <td><?php echo $model->mac_address;?></td>
             <td><?php echo $model->promoter;?></td>
             <td class="align-center"><?php echo $model->createTime;?></td>
+            <td>&nbsp;</td>
         </tr>
         <?php endforeach;?>
     </tbody>
