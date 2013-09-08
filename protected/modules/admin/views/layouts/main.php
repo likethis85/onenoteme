@@ -101,8 +101,9 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">工具<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><?php echo l('友情链接', url('admin/link/list'));?></li>
-                        <li><?php echo l('广告管理', url('admin/advert/list'));?></li>
                         <li><?php echo l('留言管理', url('admin/feedback/list'));?></li>
+                        <li><?php echo l('广告管理', url('admin/advert/list'));?></li>
+                        <li><?php echo l('应用联盟日志', url('admin/appunionlog/list'));?></li>
                     </ul>
                 </li>
                 <li class="dropdown">
