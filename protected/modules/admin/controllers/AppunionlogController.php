@@ -1,6 +1,6 @@
 <?php
 
-class AppUnionLogController extends AdminController
+class AppunionlogController extends AdminController
 {
     public function actionList()
     {
