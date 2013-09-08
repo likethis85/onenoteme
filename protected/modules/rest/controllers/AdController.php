@@ -22,12 +22,12 @@ class AdController extends RestController
         $model->promoter = $_POST['promoter'];
         
         try {
-            $success = (int)$model->save();
+            $result = (int)$model->save();
+            $data = array('success' => (int)$result);
         } catch (Exception $e) {
-            $success = 0;
+            $data = array('success' => $result, 'message'=>$e->getMessage());
         }
         
-        $data = array('success' => $success);
         $this->output($data);
     }
 }
