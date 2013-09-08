@@ -40,10 +40,11 @@ define('TABLE_IOS_DEVICE', '{{ios_device}}');
 define('TABLE_POST_TEMP', '{{post_temp}}');
 define('TABLE_WEIBO_ACCOUNT', '{{weibo_account}}');
 define('TABLE_WEIBO_ID', '{{weibo_id}}');
-define('TABLE_APP_SYSTEM_CONFIG_TABLE', '{{app_system_config}}');
-define('TABLE_APP_USER_CONFIG_TABLE', '{{app_user_config}}');
+define('TABLE_APP_SYSTEM_CONFIG', '{{app_system_config}}');
+define('TABLE_APP_USER_CONFIG', '{{app_user_config}}');
 define('TABLE_FEEDBACK', '{{feedback}}');
 define('TABLE_POST_VIDEO', '{{post_video}}');
+define('TABLE_APP_UNION_LOG', '{{app_union_log}}');
 
 define('POST_STATE_ENABLED', 1);
 define('POST_STATE_DISABLED', 0);

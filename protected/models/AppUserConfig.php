@@ -28,7 +28,7 @@ class AppUserConfig extends CActiveRecord
      */
     public function tableName()
     {
-        return TABLE_APP_USER_CONFIG_TABLE;
+        return TABLE_APP_USER_CONFIG;
     }
     
     public function rules()
