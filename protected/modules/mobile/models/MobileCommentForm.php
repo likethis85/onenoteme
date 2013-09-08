@@ -30,6 +30,7 @@ class MobileCommentForm extends CFormModel
         $comment->attributes = $this->attributes;
         $comment->user_id = (int)user()->id;
         $comment->state = (int)param('default_mobile_new_comment_state');
+        $comment->source = COMMENT_SOURCE_MOBILE_WEB;
         if (!user()->getIsGuest())
             $comment->user_name = (strip_tags(trim(user()->name)));
         

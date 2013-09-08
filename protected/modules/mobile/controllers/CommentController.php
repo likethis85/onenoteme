@@ -22,7 +22,6 @@ class CommentController extends MobileController
         $model = new MobileCommentForm();
         $model->attributes = $_POST['MobileCommentForm'];
         $model->content = h($model->content);
-        $model->source = COMMENT_SOURCE_MOBILE_WEB;
     
         if ($id > 0 && $quote = Comment::model()->findByPk($id)) {
             $quoteTitle = sprintf('', $quote->authorName);
