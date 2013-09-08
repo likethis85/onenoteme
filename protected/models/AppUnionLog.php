@@ -79,5 +79,16 @@ class AppUnionLog extends CActiveRecord
 			'create_ip' => '点击IP',
 		);
 	}
+	
+	protected function beforeSave()
+	{
+	    if ($this->getIsNewRecord()) {
+	        $this->create_time = time();
+	        $this->create_ip = CDBase::getClientIPAddress();
+	    }
+	    return true;
+	}
 }
+
+
 
