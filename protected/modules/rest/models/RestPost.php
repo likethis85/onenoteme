@@ -21,7 +21,7 @@ class RestPost extends Post
     
     public function getApiCreateTime()
     {
-        $format = 'd日 H:i';
+        $format = 'm月d日 H:i';
         return parent::getCreateTime($format);
     }
     
