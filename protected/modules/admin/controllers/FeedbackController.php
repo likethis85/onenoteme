@@ -14,6 +14,9 @@ class FeedbackController extends AdminController
         $sort->applyOrder($criteria);
         
         $models = AdminFeedback::model()->findAll($criteria);
+        
+        $this->channel = 'feedback';
+        $this->adminTitle = '用户留言';
         $this->render('list', array(
             'pages' => $pages,
             'sort' => $sort,
