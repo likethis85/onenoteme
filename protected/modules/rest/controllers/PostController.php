@@ -412,7 +412,7 @@ class PostController extends RestController
      */
     public static function selectColumns()
     {
-        return array('id', 'channel_id', 'title', 'content', 'create_time', 'up_score', 'down_score', 'comment_nums',
+        return array('id', 'channel_id', 'media_type', 'title', 'content', 'create_time', 'up_score', 'down_score', 'comment_nums',
                 'favorite_count', 't.user_id', 'user_name', 'tags', 'original_pic', 'original_height', 'original_width', 'original_frames',
         );
     }

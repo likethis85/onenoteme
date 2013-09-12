@@ -27,6 +27,9 @@ class CDRestDataFormat
             'url' => $model->getUrl(),
         );
         
+        if ($model->getIsVideoType() && $model->video && $model->video instanceof RestPostVideo)
+            $data['video'] = self::formatVideo($model->video);
+        
         if ($trimUser)
             $data['user'] = self::formatUser($model->user);
         
@@ -36,6 +39,20 @@ class CDRestDataFormat
         return $data;
     }
    
+    public static function formatVideo(RestPostVideo $model)
+    {
+        $data = array(
+            'video_id' => $model->id,
+            'post_id' => $model->post_id,
+            'html5_url' => $model->html5_url,
+            'flash_url' => $model->flash_url,
+            'source_url' => $model->source_url,
+            'desc' => $model->desc,
+        );
+        
+        return $data;
+    }
+    
     public static function formatUser($model, $token = '')
     {
         if (empty($model))

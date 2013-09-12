@@ -1,4 +1,12 @@
 <?php
+/**
+ *
+ * @author chendong
+ *
+ * @property RestUser $user
+ * @property array $comments
+ * @property RestPostVideo $video
+ */
 class RestPost extends Post
 {
     /**
@@ -16,6 +24,7 @@ class RestPost extends Post
             'user' => array(self::BELONGS_TO, 'RestUser', 'user_id',
     		        'select' => array('id', 'username', 'screen_name', 'create_time', 'create_ip', 'state', 'token', 'token_time', 'source')),
             'comments' => array(self::HAS_MANY, 'RestComment', 'post_id', 'limit'=>10),
+            'video' => array(self::HAS_ONE, 'RestPostVideo', 'post_id'),
         ));
     }
     
