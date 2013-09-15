@@ -244,7 +244,23 @@ class CDBase
     
         return false;
     }
+
+    public static function networkStatus()
+    {
+        return array_keys(self::networkStatusLabels());
+    }
     
+    public static function networkStatusLabels($status = null)
+    {
+        $labels = array(
+            NETWORK_STATUS_WIFI => 'WIFI',
+            NETWORK_STATUS_WWAN => '蜂窝数据',
+            NETWORK_STATUS_NOT_REACHABLE => '不可用',
+            NETWORK_STATUS_UNKOWN => '未知',
+        );
+        
+        return $status === null ? $labels : $labels[$status];
+    }
     
     public static function jsonp($callback, $data, $exit = true)
     {
@@ -264,7 +280,11 @@ class CDBase
     
     public static function mediatypes()
     {
-        return array(MEDIA_TYPE_TEXT, MEDIA_TYPE_IMAGE, MEDIA_TYPE_VIDEO, MEDIA_TYPE_UNKOWN);
+        return array(MEDIA_TYPE_TEXT,
+            MEDIA_TYPE_IMAGE,
+            MEDIA_TYPE_VIDEO,
+            MEDIA_TYPE_UNKOWN,
+        );
     }
     
     public static function mediaTypeLabels($typeID = null)

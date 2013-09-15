@@ -11,7 +11,7 @@
             <th class="span2"><?php echo $sort->link('mac_address');?></th>
             <th class="span2"><?php echo $sort->link('promoter');?></th>
             <th class="span2 align-center"><?php echo $sort->link('create_time');?></th>
-            <th>#</th>
+            <th>设备信息</th>
         </tr>
     </thead>
     <tbody>
@@ -23,7 +23,7 @@
             <td><?php echo $model->mac_address;?></td>
             <td><?php echo $model->promoter;?></td>
             <td class="align-center"><?php echo $model->createTime;?></td>
-            <td>&nbsp;</td>
+            <td><?php echo l('设备信息', $model->deviceUrl, array('target'=>'_blank'));?></td>
         </tr>
         <?php endforeach;?>
     </tbody>

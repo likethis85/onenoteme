@@ -80,6 +80,11 @@ class Feedback extends CActiveRecord
 	    return date($format, $this->create_time);
 	}
 	
+	public function getNetworkStatus()
+	{
+	    return CDBase::networkStatusLabels($this->network_status);
+	}
+	
 	protected function beforeSave()
 	{
 	    if ($this->getIsNewRecord()) {

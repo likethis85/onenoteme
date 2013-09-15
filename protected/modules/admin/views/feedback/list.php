@@ -11,7 +11,8 @@
             <th class="item-checkbox align-center">#</th>
             <th class="span1 align-center"><?php echo $sort->link('id');?></th>
             <th class="span8">内容</th>
-            <th class="span2">设备&nbsp;/&nbsp;<?php echo $sort->link('create_time');?></th>
+            <th class="span2"><?php echo $sort->link('device_model');?>&nbsp;/&nbsp;<?php echo $sort->link('network_status');?></th>
+            <th class="span2"><?php echo $sort->link('create_time');?></th>
             <th>#</th>
         </tr>
     </thead>
@@ -23,7 +24,10 @@
             <td class="comment-content"><?php echo $model->content;?></td>
             <td class="cgray">
                 <?php echo $model->device_model;?><br />
-                <span class="f12px"><?php echo $model->createTime;?></span>
+                <?php echo $model->networkStatus;?>
+            </td>
+            <td class="cgray">
+                <?php echo $model->createTime;?>
             </td>
             <td class="align-cent2er">
                 <?php echo $model->deleteUrl;?>

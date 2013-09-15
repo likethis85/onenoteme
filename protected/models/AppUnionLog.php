@@ -21,6 +21,10 @@
  */
 class AppUnionLog extends CActiveRecord
 {
+    /**
+     * Returns the static model of the specified AR class.
+     * @return AppUnionLog the static model class
+     */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -55,9 +59,8 @@ class AppUnionLog extends CActiveRecord
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
+	        'device' => array(self::BELONGS_TO, 'MobileDevice', 'device_udid'),
 		);
 	}
 
