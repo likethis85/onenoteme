@@ -47,7 +47,7 @@
  * <pre>
  *	 include '/path/to/sendcloud_php/SendCloudLoader.php';//或者 导入SendCloud依赖
  *	
- *	// X-SMTPAPI 请参照 @link http://sendcloud.sohu.com/v2/api-doc/smtp-api-extension.jsp
+ *	// X-SMTPAPI 请参照 @link http://sendcloud.sohu.com/sendcloud/api-doc/x-smtpapi
  *	try {
  *		$sendCloud = new SendCloud('username', 'password');
  * // 		$sendCloud->setDebug(true); // 设置SMTP Debug, 默认关闭
@@ -55,8 +55,6 @@
  *
  *		// 使用SmtpApiHeader辅助类，生成X-SMTPAPI字段的json形式。
  *		$xSmtpApiHeader = new SendCloud\SmtpApiHeader();
- *		// 设置分类
- *		$xSmtpApiHeader->addCategory('你的分类名称'); // 可以在网站看到统计信息
  *		// 设置开启取消订阅，打开跟踪，点击链接跟踪
  *		$xSmtpApiHeader->addFilterSetting(SendCloud\AppFilter::$ADD_UNSUBSCRIBE, 'enable', '1') //取消订阅
  *						->addFilterSetting(SendCloud\AppFilter::$ADD_HIDDEN_IMAGE, 'enable', '1') //打开跟踪

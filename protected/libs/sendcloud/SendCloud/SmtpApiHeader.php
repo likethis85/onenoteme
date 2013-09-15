@@ -1,13 +1,13 @@
 <?php
 /**
- * 该类用于辅助生成<a href="http://sendcloud.sohu.com/v2/api-doc/smtp-api-extension.jsp">
+ * 该类用于辅助生成<a href="http://sendcloud.sohu.com/sendcloud/api-doc/x-smtpapi">
  * X-SMTPAPI</a>的字符串。
  * @package SendCloud
  */
 namespace SendCloud;
 
 /**
- * <a href="http://sendcloud.sohu.com/v2/api-doc/smtp-api-extension.jsp">
+ * <a href="http://sendcloud.sohu.com/sendcloud/api-doc/x-smtpapi">
  * X-SMTPAPI</a>的扩展字段操作类。用于生成的X-SMTPAPI JSON字符串。
  *
  * @author delong
@@ -65,26 +65,6 @@ class SmtpApiHeader {
 
 		$this->xHeaderArray['to'] = array_merge($this->xHeaderArray['to'], (array)$addresses);
 
-		return $this;
-	}
-
-	/**
-	 * 添加分类。可以在<a href="http://sendcloud.sohu.com/stat_email.do">
-	 * SendCloud Stat</a>看到分类信息。
-	 * @param string $categoryName 分类名称。
-	 */
-	public function addCategory($categoryName){
-		$this->xHeaderArray['category'][] = $categoryName;
-		return $this;
-	}
-
-	/**
-	 * 清除原来的分类，增加新的分类。
-	 * @param string $categoryName 分类名称。
-	 * @return self \SendCloud\SmtpApiHeader
-	 */
-	public function setCategory($categoryName){
-		$this->xHeaderArray['category'] = array($category);
 		return $this;
 	}
 

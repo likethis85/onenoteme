@@ -59,13 +59,16 @@ class CDRedisCache extends CCache
         parent::init();
         $this->serializer = false; // please set Redis::OPT_SERIALIZER option
         $this->keyPrefix = null; // please set Redis::OPT_PREFIX option
-        
+    }
+    
+    protected function connect()
+    {
         $this->_client = new Redis();
         $result = $this->persistent
             ? $this->_client->pconnect($this->host, $this->port, $this->timeout)
             : $this->_client->connect($this->host, $this->port, $this->timeout);
         
-        if (!$result)
+        if ($result === false)
             throw new RedisException($this->_client->getLastError());
         
         if ($this->password) {
@@ -80,21 +83,34 @@ class CDRedisCache extends CCache
         $this->selectDb($this->dbindex);
     }
     
+    public function executeCommand($name, $params = array())
+    {
+        if ($this->_client === null)
+            $this->connect();
+        
+        if (method_exists($this->_client, $name)) {
+            return call_user_func_array(array($this->_client, $name), $params);
+        }
+        else
+            throw new CException('redis server is not connected or command is invalid.');
+        
+    }
+    
     public function setValue($key, $value, $expire, $milliseconds = false)
     {
         if ($expire > 0) {
-            return $milliseconds ? $this->_client->psetex($key, $expire, $value) : $this->_client->setex($key, $expire, $value);
+            return $milliseconds ? $this->executeCommand('psetex', array($key, $expire, $value)) : $this->executeCommand('setex', array($key, $expire, $value));
         }
         else
-            return $this->_client->set($key, $value);
+            return $this->executeCommand('set', array($key, $value));
     }
     
     public function addValue($key, $value, $expire, $milliseconds = false)
     {
-        if ($this->_client->setnx($key, $value)) {
+        if ($this->executeCommand('setnx', array($key, $value))) {
             if ($expire > 0) {
-                $result = $milliseconds ? $this->_client->pexpire($key, $expire) : $this->_client->expire($key, $expire);
-                if (!$result && !$this->_client->del($key))
+                $result = $milliseconds ? $this->executeCommand('pexpire', array($key, $expire)) : $this->executeCommand('expire', array($key, $expire));
+                if (!$result && !$this->executeCommand('del', array($key)))
                     throw new RedisException('setnx success, but expire failed');
             }
             return true;
@@ -104,22 +120,22 @@ class CDRedisCache extends CCache
     
     public function getValue($key)
     {
-        return $this->client()->get($key);
+        return $this->executeCommand('get', array($key));
     }
     
     public function getValues($keys)
     {
-        return $this->client()->mget($keys);
+        return $this->executeCommand('mget', array($keys));
     }
     
     public function deleteValue($key)
     {
-        return $this->_client->del($key);
+        return $this->executeCommand('del', array($key));
     }
     
     public function flushValues($alldb = false)
     {
-        return $alldb ? $this->_client->flushAll() : $this->_client->flushDB();
+        return $alldb ? $this->executeCommand('flushAll') : $this->executeCommand('flushDb');
     }
     
     public function client()
@@ -129,7 +145,7 @@ class CDRedisCache extends CCache
     
     public function selectDb($index)
     {
-        return $this->_client->select($index);
+        return $this->executeCommand('select', array($index));
     }
     
     public function setOptions(array $options)
@@ -143,33 +159,24 @@ class CDRedisCache extends CCache
     
     public function setOption($name, $value)
     {
-        if ($this->_client->IsConnected()) {
-            return $this->_client->setOption($name, $value);
-        }
-        else
-            throw new RedisException('redis client is invalid.');
+        return $this->executeCommand('setOption', array($name, $value));
     }
     
     public function getOption($name)
     {
-        if ($this->_client->IsConnected())
-            return $this->_client->getOption($name);
-        else
-            throw new RedisException('redis client is invalid.');
+        return $this->executeCommand('getOption', array($name));
     }
     
     public function close()
     {
-        $this->persistent || $this->_client->close();
+        $this->executeCommand('IsConnected') && $this->executeCommand('close');
     }
     
-    public function __call($name, $parameters)
+    public function __call($name, $params)
     {
-        if ($this->_client->IsConnected() && method_exists($this->_client, $name)) {
-            return call_user_func_array(array($this->_client,$name), $parameters);
-        }
+        $this->executeCommand($name, $params);
         
-        parent::__call($name, $parameters);
+        parent::__call($name, $params);
     }
     
     protected function generateUniqueKey($key)

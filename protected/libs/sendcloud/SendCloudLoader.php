@@ -6,7 +6,7 @@
  */
 
 /** 定义目录为当前目录 */
-define("ROOT_DIR", __dir__ . DIRECTORY_SEPARATOR);
+define("ROOT_DIR", __DIR__ . DIRECTORY_SEPARATOR);
 
 /**
  * SendClou自动加载依赖类。
@@ -14,18 +14,16 @@ define("ROOT_DIR", __dir__ . DIRECTORY_SEPARATOR);
  */
 function sendCloudLoader() {
 	/** PHP Mailer依赖 */
-    if (!class_exists('PHPMailer', false))
-    	require ROOT_DIR . '/lib/phpmailer/class.phpmailer.php';
-    if (!class_exists('SMTP', false))
-	require ROOT_DIR . '/lib/phpmailer/class.smtp.php';
-	require ROOT_DIR . '/lib/phpmailer/language/phpmailer.lang-zh_cn.php';
-	// SendCloud依赖
+	require_once ROOT_DIR . '/lib/phpmailer/class.phpmailer.php';
+	require_once ROOT_DIR . '/lib/phpmailer/class.smtp.php';
+	require_once ROOT_DIR . '/lib/phpmailer/language/phpmailer.lang-zh_cn.php';
+
 	/** SendCloud依赖 */
-	require 'SendCloud.php';
-	require 'SendCloud/Smtp.php';
-	require 'SendCloud/Message.php';
-	require 'SendCloud/AppFilter.php';
-	require 'SendCloud/SmtpApiHeader.php';
+	require_once 'SendCloud.php';
+	require_once 'SendCloud/Smtp.php';
+	require_once 'SendCloud/Message.php';
+	require_once 'SendCloud/AppFilter.php';
+	require_once 'SendCloud/SmtpApiHeader.php';
 }
 
-// spl_autoload_register("sendCloudLoader", true, true);
+spl_autoload_register("sendCloudLoader");

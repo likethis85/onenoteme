@@ -8,7 +8,7 @@ namespace SendCloud;
 /**
  * 邮件信息类, 加入发送邮件所需要的信息, 包括收、发信人, 邮件的标题, 正文, 附件, 以及可选的信息
  * 
- * <a href="http://sendcloud.sohu.com/v2/api-doc/smtp-api-extension.jsp">
+ * <a href="http://sendcloud.sohu.com/sendcloud/api-doc/x-smtpapi">
  * X-SMTPAPI</a>扩展字段。
  *
  * @author delong
