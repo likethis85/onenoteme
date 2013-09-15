@@ -92,7 +92,7 @@ define('POST_COMMENT', 1);
 /* feedback */
 define('NETWORK_STATUS_UNKOWN', -1);
 define('NETWORK_STATUS_NOT_REACHABLE', 0);
-define('NETWORK_STATUS_WWAN', -1);
+define('NETWORK_STATUS_WWAN', 1);
 define('NETWORK_STATUS_WIFI', 2);
 
 /*
