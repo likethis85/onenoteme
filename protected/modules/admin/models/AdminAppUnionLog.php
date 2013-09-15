@@ -12,6 +12,6 @@ class AdminAppUnionLog extends AppUnionLog
     
     public function getDeviceUrl()
     {
-        return url('admin/device/info');
+        return url('admin/device/info', array('udid'=>$this->device_udid));
     }
 }
