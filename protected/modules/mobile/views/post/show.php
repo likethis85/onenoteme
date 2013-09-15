@@ -18,11 +18,12 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
     </div>
     <div class="item-content"><?php echo $post->filterContent;?></div>
     
+    <a name="comments"></a>
+    
     <!-- 广告位 开始 -->
     <div class="cdc-inner-block"><?php $this->widget('CDAdvert', array('solt'=>'mobile_post_content_bottom'));?></div>
     <!-- 广告位 结束 -->
     
-    <a name="comments"></a>
     <div class="change-post clearfix">
         <?php if ($prevUrl):?>
         <a class="site-bg prev" href="<?php echo $prevUrl;?>"></a>
