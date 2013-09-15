@@ -7,8 +7,6 @@
 
 <script type="text/javascript">
 $(function(){
-	if (window.location.hash.length > 0)
-		$('#comment-content').focus();
 	$(document).on('submit', '.beta-comment-form', BetaComment.create);
 	$(document).on('blur', '.beta-comment-form .comment-content', BetaComment.contentValidate);
 });
