@@ -6,7 +6,7 @@ class ChannelController extends MobileController
     {
         return array(
             array(
-                'COutputCache + joke, lengtu, girl, video, ghost, hot, latest, day, week, month',
+                'COutputCache + joke, lengtu, video, hot, latest, day, week, month',
                 'duration' => param('mobile_post_list_cache_expire'),
                 'varyByParam' => array('page'),
                 'varyByExpression' => array(request(), 'getServerName'),
@@ -91,7 +91,16 @@ class ChannelController extends MobileController
 	
 	public function actionVideo($page = 1)
 	{
-	    $this->redirect(CDBaseUrl::mobileHomeUrl(), true, 301);
+	    $count = (int)p('mobile_post_list_page_count');
+	    $data = self::fetchFunnyMediaPosts(MEDIA_TYPE_VIDEO, $count);
+	     
+	    $this->pageTitle = '挖视频 - 最搞笑的，最有意思的，最爆笑的视频精选';
+        $this->setDescription($this->pageTitle);
+        $this->setKeywords('挖视频,搞笑视频,爆笑视频,搞笑短片,爆笑短片');
+        
+        $this->channel = CHANNEL_FUNNY . MEDIA_TYPE_VIDEO;
+	    cs()->registerMetaTag('all', 'robots');
+	    $this->render('posts', $data);
 	}
 
 	public function actionFocus($page = 1)

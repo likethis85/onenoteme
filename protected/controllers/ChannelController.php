@@ -111,12 +111,17 @@ class ChannelController extends Controller
     
     public function actionVideo($page = 1)
     {
-        $this->redirect(CDBaseUrl::siteHomeUrl(), true, 301);
-    }
-    
-    public function actionGirl()
-    {
-        $this->redirect(CDBaseUrl::siteHomeUrl(), true, 301);
+        $mobileUrl = ($page > 1) ? aurl('mobile/channel/video', array('page'=>$page)) : aurl('mobile/channel/video');
+        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
+        
+        cs()->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/video'), null, array('title'=>app()->name . ' » 挖视频 Feed'));
+        $this->pageTitle = param('channel_video_title');
+        $this->setDescription(param('channel_video_description'));
+        $this->setKeywords(param('channel_video_keywords'));
+        
+        $count = (int)p('video_count_page');
+        $data = $this->fetchFunnyMediaPosts(MEDIA_TYPE_VIDEO, $count);
+        $this->render('video_list', $data);
     }
     
     public function actionFocus($page = 1)

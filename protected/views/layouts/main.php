@@ -49,6 +49,8 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 		    </li>
     		<li class="top-menu"><a <?php if ($this->channel==CHANNEL_FUNNY.MEDIA_TYPE_TEXT) echo ' class="active"';?> href="<?php echo url('channel/joke');?>">挖笑话</a></li>
     		<li class="top-menu"><a <?php if ($this->channel==CHANNEL_FUNNY.MEDIA_TYPE_IMAGE) echo ' class="active"';?> href="<?php echo url('channel/lengtu');?>">挖趣图</a></li>
+    		<li class="top-menu"><a <?php if ($this->channel==CHANNEL_FUNNY.MEDIA_TYPE_VIDEO) echo ' class="active"';?> href="<?php echo url('channel/video');?>">挖视频</a></li>
+    		<li class="top-menu"><div class="menu-divider"></div></li>
     		<li class="top-menu"><a <?php if ($this->channel==CHANNEL_FOCUS) echo ' class="active"';?> href="<?php echo url('channel/focus');?>">挖热点</a></li>
     		<li class="top-menu"><a <?php if ($this->channel=='publish') echo ' class="active"';?> href="<?php echo CDBaseUrl::publishUrl()?>">投稿</a></li>
     	</ul>

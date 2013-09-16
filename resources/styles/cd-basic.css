@@ -87,6 +87,7 @@ a:hover {color:#D14836; text-decoration:none;}
 .cd-header ul {list-style:none; margin:0; padding:0;}
 .cd-header .channel-nav {margin:0 0 0 20px; padding:0; list-style:none; overflow-x:hidden;}
 .cd-header .channel-nav li.top-menu {list-style:none; float:left; background:#545652; height:45px; overflow:hidden;}
+.cd-header .channel-nav li.top-menu .menu-divider {width:1px; background:#BFBFBF; padding:0;margin:10px 15px 0; height:25px;}
 .cd-header .channel-nav li a {display:block; color:#E0E0E0; padding:0 20px; font-size:18px; font-family:"微软雅黑"; height:45px; line-height:45px;}
 .cd-header .channel-nav li a:hover, .cd-header .channel-nav li a.active {color:white; background-color:#454544;}
 .cd-header .channel-nav li.top-menu .dropmenu {background-position:-228px -580px;}

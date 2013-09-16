@@ -7,6 +7,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo $this->channel;?
 <div class="fleft cd-container">
     <?php $this->renderPartial('/post/line_list', array('models'=>$models, 'pages'=>$pages, 'channel'=>$this->channel));?>
 </div>
+
 <div class="fright cd-sidebar">
     <?php $this->widget('CDAdvert', array('solt'=>'channel_home_sidebar_01'));?>
     <div class="panel panel10 bottom15px">
