@@ -18,6 +18,11 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
 		    <?php if ($post->tags):?><div class="post-tags">标签：<?php echo $post->tagLinks;?></div><?php endif;?>
         </div>
         <div class="item-content"><?php echo $post->filterContent;?></div>
+        
+        <?php if ($post->getIsVideoType() && $post->video):?>
+        <div class="post-video"><?php echo $post->video->getIframeHTML(600, 460);?></div>
+        <?php endif;?>
+            
         <?php $this->widget('CDAdvert', array('solt'=>'post_content_bottom'));?>
         
         <?php if ($prevUrl || $nextUrl):?>

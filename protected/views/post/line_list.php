@@ -49,6 +49,10 @@
             </div>
             <?php endif;?>
             
+            <?php if ($post->getIsVideoType() && $post->video):?>
+            <div class="post-video"><?php echo $post->video->getIframeHTML(600, 460);?></div>
+            <?php endif;?>
+            
             <div class="item-content"><?php echo $model->filterSummary;?></div>
         </div>
         <?php if ($model->tags):?><div class="post-tags"><span class="cgray">标签：</span><?php echo $model->tagLinks;?></div><?php endif;?>
