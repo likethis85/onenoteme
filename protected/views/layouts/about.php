@@ -39,6 +39,10 @@
 		    </li>
     		<li class="top-menu"><a href="<?php echo url('channel/joke');?>">挖笑话</a></li>
     		<li class="top-menu"><a href="<?php echo url('channel/lengtu');?>">挖趣图</a></li>
+    		<li class="top-menu"><a href="<?php echo url('channel/video');?>">挖视频</a></li>
+    		<li class="top-menu"><div class="menu-divider"></div></li>
+    		<li class="top-menu"><a href="<?php echo url('channel/focus');?>">挖热点</a></li>
+    		<li class="top-menu"><a href="<?php echo CDBaseUrl::publishUrl()?>">投稿</a></li>
     	</ul>
     	<ul class="fright">
     	</ul>
