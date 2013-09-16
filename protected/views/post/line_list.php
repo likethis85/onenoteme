@@ -49,8 +49,8 @@
             </div>
             <?php endif;?>
             
-            <?php if ($post->getIsVideoType() && $post->video):?>
-            <div class="post-video"><?php echo $post->video->getIframeHTML(600, 460);?></div>
+            <?php if ($model->getIsVideoType() && $model->video):?>
+            <div class="post-video"><?php echo $model->video->getIframeHTML(600, 460);?></div>
             <?php endif;?>
             
             <div class="item-content"><?php echo $model->filterSummary;?></div>
