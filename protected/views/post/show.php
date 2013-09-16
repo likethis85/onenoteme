@@ -20,7 +20,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         <div class="item-content"><?php echo $post->filterContent;?></div>
         
         <?php if ($post->getIsVideoType() && $post->video):?>
-        <div class="post-video"><?php echo $post->video->getIframeHTML(600, 460);?></div>
+        <div class="post-video"><?php echo $post->video->getIframeHTML(600, 400);?></div>
         <?php endif;?>
             
         <?php $this->widget('CDAdvert', array('solt'=>'post_content_bottom'));?>
