@@ -85,22 +85,34 @@ class PostVideo extends CActiveRecord
 		);
 	}
 	
-	public function getIframeHTML($width = 550, $height = 350, $border = 0)
+	public function getIframeHTML($width = 600, $height = 400, $border = 0)
 	{
         return empty($this->iframe_url) ? ''
                 : sprintf('<iframe width="%d" height="%d" src="%s" frameborder="%d" allowfullscreen></iframe>', $width, $height, $this->iframe_url, $border);
 	}
 	
-	public function getFlashHTML($width = 550, $height = 350)
+	public function getFlashHTML($width = 600, $height = 400)
 	{
 	    return empty($this->flash_url) ? ''
 	            : sprintf('<embed src="%s"  type="application/x-shockwave-flash" width="%d" height="%d" allowFullScreen="true" allowNetworking="all" allowScriptAccess="always"></embed>', $this->flash_url, $width, $height);
 	}
 	
-	public function getHtml5VideoHTML($width = 300, $height = 250)
+	public function getHtml5VideoHTML($width = 280, $height = 180)
 	{
 	    return empty($this->html5_url) ? ''
 	            : sprintf('<video src="%s" controls="controls" width="%d" height="%d">您的浏览器不支持HTML5视频播放。</video>', $this->html5_url, $width, $height);
+	}
+	
+	public function getDesktopVideoHTML($width = 600, $height = 400, $border = 0)
+	{
+	    $html = $this->getIframeHTML($width, $height, $border);
+	    return empty($html) ? $this->getFlashHTML($width, $height) : $html;
+	}
+	
+	public function getMobileVideoHTML($width = 280, $height = 180, $border = 0)
+	{
+	    $html = $this->getIframeHTML($width, $height, $border);
+	    return empty($html) ? $this->getHtml5VideoHTML($width, $height) : $html;
 	}
 	
 	protected function afterSave()

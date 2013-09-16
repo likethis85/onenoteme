@@ -50,7 +50,7 @@
             <?php endif;?>
             
             <?php if ($model->getIsVideoType() && $model->video):?>
-            <div class="post-video"><?php echo $model->video->getIframeHTML(600, 400);?></div>
+            <div class="post-video"><?php echo $model->video->getDesktopVideoHTML(600, 400);?></div>
             <?php endif;?>
             
             <div class="item-content"><?php echo $model->filterSummary;?></div>

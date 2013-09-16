@@ -18,7 +18,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
     </div>
     <div class="item-content">
         <?php if ($post->getIsVideoType() && $post->video):?>
-        <div><?php echo $post->video->getIframeHTML(290, 180);?></div>
+        <div><?php echo $post->video->getMobileVideoHTML(290, 180);?></div>
         <?php endif;?>
         
         <?php echo $post->filterContent;?>

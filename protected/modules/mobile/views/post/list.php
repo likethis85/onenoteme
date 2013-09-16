@@ -42,7 +42,7 @@
             <?php endif;?>
             
             <?php if ($model->getIsVideoType() && $model->video):?>
-            <div><?php echo $model->video->getIframeHTML(290, 180);?></div>
+            <div><?php echo $model->video->getMobileVideoHTML(290, 180);?></div>
             <?php endif;?>
             
             <a href="<?php echo $model->url;?>">
