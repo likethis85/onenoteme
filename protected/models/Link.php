@@ -106,7 +106,7 @@ class Link extends CActiveRecord
 
 	public static function fetchLinks(CDbCriteria $criteria = null)
 	{
-	    $redis = cache('redis');
+	    $redis = redis();
 	    if ($redis) {
 	        $models = $redis->get('cache_friend_links');
 	        if ($models === false) {

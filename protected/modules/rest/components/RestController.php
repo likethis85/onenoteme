@@ -87,11 +87,14 @@ class RestController extends CController
             throw new CHttpException(400,Yii::t('yii','Your request is invalid.'));
     }
     
-    protected function output($data)
+    protected function output($data, $expire = 60, $cacheID = null)
     {
-        header('Content-Type: application/json; charset=utf-8');
-        echo CJSON::encode($data);
-        exit(0);
+        if ($expire > 0) {
+            $cacheID = ($cacheID === null) ? md5($this->route . var_export($_REQUEST, true)) : $cacheID;
+            redis()->set($cacheID, $data, $expire);
+        }
+        
+        $this->outputJSON($data);
     }
 
     protected function saveDeviceConnectHistory()
@@ -106,6 +109,26 @@ class RestController extends CController
     
         return $history->save() ? $history : false;
     }
+
+    protected function beforeAction($action)
+    {
+        $cacheID = md5($this->route . var_export($_REQUEST, true));
+        $data = redis()->get($cacheID);
+        if ($data === false)
+            return true;
+        else {
+            $this->outputJSON($data);
+            return false;
+        }
+    }
+    
+    private function outputJSON($data)
+    {
+        header('Content-Type: application/json; charset=utf-8');
+        echo CJSON::encode($data);
+        exit(0);
+    }
+
 }
 
 

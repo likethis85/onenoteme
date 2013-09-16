@@ -424,7 +424,7 @@ function memcache()
  * @param string $component
  * @return CDRedisCache | null
  */
-function pcache()
+function redis()
 {
     return app()->getComponent('redis');
 }

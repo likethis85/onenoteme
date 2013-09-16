@@ -96,7 +96,7 @@ class CDRedisCache extends CCache
         
     }
     
-    public function setValue($key, $value, $expire, $milliseconds = false)
+    protected function setValue($key, $value, $expire, $milliseconds = false)
     {
         if ($expire > 0) {
             return $milliseconds ? $this->executeCommand('psetex', array($key, $expire, $value)) : $this->executeCommand('setex', array($key, $expire, $value));
@@ -105,7 +105,7 @@ class CDRedisCache extends CCache
             return $this->executeCommand('set', array($key, $value));
     }
     
-    public function addValue($key, $value, $expire, $milliseconds = false)
+    protected function addValue($key, $value, $expire, $milliseconds = false)
     {
         if ($this->executeCommand('setnx', array($key, $value))) {
             if ($expire > 0) {
@@ -118,22 +118,22 @@ class CDRedisCache extends CCache
         return false;
     }
     
-    public function getValue($key)
+    protected function getValue($key)
     {
         return $this->executeCommand('get', array($key));
     }
     
-    public function getValues($keys)
+    protected function getValues($keys)
     {
         return $this->executeCommand('mget', array($keys));
     }
     
-    public function deleteValue($key)
+    protected function deleteValue($key)
     {
         return $this->executeCommand('del', array($key));
     }
     
-    public function flushValues($alldb = false)
+    protected function flushValues($alldb = false)
     {
         return $alldb ? $this->executeCommand('flushAll') : $this->executeCommand('flushDb');
     }

@@ -146,7 +146,7 @@ class ChannelController extends MobileController
 	{
 	    $duration = 60*60*24;
 	    $cacheID = md5(var_export($criteria->toArray(), true));
-	    $redis = cache('redis');
+	    $redis = redis();
 	    if ($redis) {
 	        $count = $redis->get($cacheID);
 	        if ($count === false) {
