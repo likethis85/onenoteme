@@ -16,7 +16,13 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         </div>
 	    <?php if ($post->tags):?><div class="post-tags">标签：<?php echo $post->tagLinks;?></div><?php endif;?>
     </div>
-    <div class="item-content"><?php echo $post->filterContent;?></div>
+    <div class="item-content">
+        <?php if ($post->getIsVideoType() && $post->video):?>
+        <div><?php echo $post->video->getIframeHTML(280, 180);?></div>
+        <?php endif;?>
+        
+        <?php echo $post->filterContent;?>
+    </div>
     
     <a name="comments"></a>
     
@@ -33,7 +39,6 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         <?php endif;?>
     </div>
     
-    <!-- <ul class="more-post"></ul> 以后用来添加相关笑话 -->
     <div class="line1px"></div>
 
     <div class="beta-create-form"><?php $this->renderPartial('/comment/_create_form', array('comment'=>$comment));?></div>
