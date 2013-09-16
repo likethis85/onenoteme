@@ -101,8 +101,12 @@ class PostController extends AdminController
 	            if ($model->fetchContentRemoteImagesAfterSave() === false)
 	                $resultHtml .= '(远程图片抓取出错)';
 	            user()->setFlash('save_post_result', $resultHtml);
-	            $goUrl = $model->getIsVideoType() ? url('admin/post/createVideo', array('postid'=>$model->id)) : request()->getUrl();
-                $this->redirect($goUrl);
+	            
+	            $backUrl = $_POST['backurl'] ? $_POST['backurl'] : request()->getUrl();
+	            $returnUrl = isset($_POST['submit-post']) ? url('admin/post/create') : $backUrl;
+	            $createVideoUrl = url('admin/post/createVideo', array('postid'=>$model->id));
+	            $returnUrl = $model->getIsVideoType() && isset($_POST['submit-video']) ? $createVideoUrl : $returnUrl;
+                $this->redirect($returnUrl);
 	        }
 	    }
 	    
@@ -130,21 +134,34 @@ class PostController extends AdminController
 	    if ($postid <= 0)
 	        throw new CException('$postid 不合法');
 	    
-	    $post = AdminPost::model()->findByPk($postid);
+	    $criteria = new CDbCriteria();
+	    $criteria->select = array('title', 'media_type');
+	    $post = AdminPost::model()->findByPk($postid, $criteria);
 	    if ($post === null)
-	        throw new CException($postid . '：文章不存在');
+	        throw new CDException($postid . '：文章不存在');
+	    elseif (!$post->getIsVideoType())
+	        throw new CDException('此段子内容类型不是视频，请先修改段子内容类型');
 	    
 	    $model = new AdminPostVideo();
 	    $model->post_id = $postid;
 	    
 	    if (request()->getIsPostRequest() && isset($_POST['AdminPostVideo'])) {
-	        
+	        $model->attributes = $_POST['AdminPostVideo'];
+	        if ($model->save()) {
+	            $resultHtml = sprintf('%s&nbsp;视频添加成功，<a href="%s" target="_blank">点击查看</a>', $post->title, $post->url);
+	            user()->setFlash('save_post_video_result', $resultHtml);
+	            
+	            $backUrl = $_POST['backurl'] ? $_POST['backurl'] : request()->getUrl();
+	            $returnUrl = isset($_POST['submit-post']) ? url('admin/post/create') : $backUrl;
+	            $this->redirect($returnUrl);
+	        }
 	    }
 	    
 	    $this->adminTitle = '添加视频';
 	    $this->channel = 'create_post_' . MEDIA_TYPE_VIDEO;
 	    $this->render('create_video', array(
             'model' => $model,
+            'post' => $post,
 	    ));
 	}
 	

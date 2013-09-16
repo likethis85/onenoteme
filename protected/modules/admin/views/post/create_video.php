@@ -1,4 +1,4 @@
-<?php if (user()->hasFlash('save_post_result')):?>
+<?php if (user()->hasFlash('save_post_video_result')):?>
 <div class="alert alert-success fade in">
     <a href="javascript:void(0);" data-dismiss="alert" class="close">&times;</a>
     <?php echo user()->getFlash('save_post_video_result');?>
@@ -9,6 +9,12 @@
 <input type="hidden" name="returnurl" value="<?php echo request()->getUrlReferrer();?>" />
 <fieldset>
     <legend><?php echo $this->adminTitle;?></legend>
+    <div class="control-group bottom10px">
+        <?php echo CHtml::activeLabel($post, 'title', array('class'=>'control-label'));?>
+        <div class="controls">
+            <?php echo CHtml::activeTextField($post, 'title', array('class'=>'span6', 'disabled'=>'disabled'));?>
+        </div>
+    </div>
     <div class="control-group bottom10px <?php if ($model->hasErrors('flash_url')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'flash_url', array('class'=>'control-label'));?>
         <div class="controls">

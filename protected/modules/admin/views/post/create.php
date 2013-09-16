@@ -6,7 +6,7 @@
 <?php endif;?>
 
 <?php echo CHtml::form('',  'post', array('class'=>'form-horizontal post-form'));?>
-<input type="hidden" name="returnurl" value="<?php echo request()->getUrlReferrer();?>" />
+<input type="hidden" name="backurl" value="<?php echo request()->getUrlReferrer();?>" />
 <fieldset>
     <legend><?php echo $this->adminTitle;?></legend>
     <div class="control-group bottom10px">
@@ -51,9 +51,11 @@
             <?php if ($model->hasErrors('content')):?><p class="help-block"><?php echo $model->getError('content');?></p><?php endif;?>
         </div>
     </div>
-    
+
     <div class="form-actions">
-        <?php echo CHtml::submitButton('保存段子', array('class'=>'btn btn-primary'));?>
+        <?php echo CHtml::submitButton('保存段子', array('class'=>'btn btn-primary', 'name'=>'submit-back'));?>
+        <?php echo CHtml::submitButton('保存并继续发布', array('class'=>'btn', 'name'=>'submit-post'));?>
+        <?php if ($model->getIsVideoType()) echo CHtml::submitButton('保存并添加视频', array('class'=>'btn', 'name'=>'submit-video'));?>
     </div>
     
     <div class="control-group bottom10px">
@@ -113,7 +115,9 @@
         </div>
     </div>
     <div class="form-actions">
-        <?php echo CHtml::submitButton('保存段子', array('class'=>'btn btn-primary'));?>
+        <?php echo CHtml::submitButton('保存段子', array('class'=>'btn btn-primary', 'name'=>'submit-back'));?>
+        <?php echo CHtml::submitButton('保存并继续发布', array('class'=>'btn', 'name'=>'submit-post'));?>
+        <?php if ($model->getIsVideoType()) echo CHtml::submitButton('保存并添加视频', array('class'=>'btn', 'name'=>'submit-video'));?>
     </div>
 </fieldset>
 <?php echo CHtml::endForm();?>
