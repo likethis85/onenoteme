@@ -115,6 +115,16 @@ class PostVideo extends CActiveRecord
 	    return empty($html) ? $this->getHtml5VideoHTML($width, $height) : $html;
 	}
 	
+	protected function beforeSave()
+	{
+	    if ($this->getIsNewRecord()) {
+	        $this->create_time = time();
+	        $this->create_ip = CDBase::getClientIPAddress();
+	    }
+	    
+	    return true;
+	}
+	
 	protected function afterSave()
 	{
 	    if ($this->screenshot_url && $this->post && empty($this->post->original_pic)) {

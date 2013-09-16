@@ -1341,6 +1341,9 @@ class Post extends CActiveRecord
 	        if ($file instanceof Upload)
     	        $file->delete();
 	    }
+	    
+	    foreach ((array)$this->videos as $video)
+	        $video->delete();
     }
 }
 
