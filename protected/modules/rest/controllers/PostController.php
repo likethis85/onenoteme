@@ -89,7 +89,7 @@ class PostController extends RestController
         $posts = RestPost::model()->published()->findAll($criteria);
         $rows = $this->formatPosts($posts);
         
-        $this->output($rows);
+        $this->output($rows, 30);
     }
     
     public function actionBest($hours = 24, $channel_id = 0, $page = 1, $media_type = 0)
@@ -122,7 +122,7 @@ class PostController extends RestController
         $posts = RestPost::model()->published()->findAll($criteria);
         $rows = $this->formatPosts($posts);
         
-        $this->output($rows);
+        $this->output($rows, 600);
     }
     
     public function actionFavorite($user_id, $channel_id = 0, $page = 1, $media_type = 0)
@@ -145,7 +145,7 @@ class PostController extends RestController
         ));
         
         $data = $this->formatPosts($posts);
-        $this->output($data);
+        $this->output($data, 600);
     }
     
     public function actionMyshare($user_id, $channel_id = 0, $page = 1, $media_type = 0)
@@ -174,7 +174,7 @@ class PostController extends RestController
         $posts = RestPost::model()->published()->findAll($criteria);
         $rows = $this->formatPosts($posts);
         
-        $this->output($rows);
+        $this->output($rows, 300);
     }
     
     public function actionFeedback($user_id, $channel_id = 0, $page = 1, $media_type = 0)
@@ -219,7 +219,7 @@ class PostController extends RestController
         else
             $data = array();
         
-        $this->output($data);
+        $this->output($data, 300);
     }
     
     /**
@@ -238,7 +238,7 @@ class PostController extends RestController
             throw new CHttpException(404, 'post is not found');
         else {
             $row = CDRestDataFormat::formatPost($post, true, false);
-            $this->output($row);
+            $this->output($row, 3600);
         }
     }
     
