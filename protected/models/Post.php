@@ -1284,9 +1284,6 @@ class Post extends CActiveRecord
             $this->comment_nums = 0;
         }
         
-        $this->title = CDBase::convertPunctuation($this->title);
-        $this->content = CDBase::convertPunctuation($this->content);
-        
         $this->user_name = strip_tags(trim($this->user_name));
         if (empty($this->title))
             $this->title = mb_substr(strip_tags($this->content), 0, 30, app()->charset);
