@@ -41,6 +41,10 @@
             </div>
             <?php endif;?>
             
+            <?php if ($model->getIsVideoType() && $model->video):?>
+            <div><?php echo $model->video->getIframeHTML(280, 180);?></div>
+            <?php endif;?>
+            
             <a href="<?php echo $model->url;?>">
                 <div class="item-content"><?php echo $model->filterSummary;?></div>
             </a>

@@ -176,6 +176,7 @@ class Post extends CActiveRecord
 		    'profile' => array(self::BELONGS_TO, 'UserProfile', 'user_id'),
 		    'comments' => array(self::HAS_MANY, 'Comment', 'post_id'),
 	        'commentCount' => array(self::STAT, 'Comment', 'post_id',),
+		    'video' => array(self::HAS_ONE, 'PostVideo', 'post_id'),
 		    'videos' => array(self::HAS_MANY, 'PostVideo', 'post_id'),
 		    'videoCount' => array(self::STAT, 'PostVideo', 'post_id'),
 		    'uploadImages' => array(self::HAS_MANY, 'Upload', 'post_id',
