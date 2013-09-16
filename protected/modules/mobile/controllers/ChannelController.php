@@ -6,7 +6,7 @@ class ChannelController extends MobileController
     {
         return array(
             array(
-                'COutputCache + joke, lengtu, video, hot, latest, day, week, month',
+                'COutputCache + joke, lengtu, video, hot, latest, day, week, month, focus',
                 'duration' => param('mobile_post_list_cache_expire'),
                 'varyByParam' => array('page'),
                 'varyByExpression' => array(request(), 'getServerName'),
