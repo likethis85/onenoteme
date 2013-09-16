@@ -53,7 +53,7 @@ class PostController extends RestController
         $posts = RestPost::model()->published()->findAll($criteria);
         $rows = $this->formatPosts($posts);
         
-        $this->output($rows);
+        $this->output($rows, 60);
     }
     
     /**

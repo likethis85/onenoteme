@@ -116,7 +116,7 @@ class CommentController extends RestController
         $posts = RestComment::model()->published()->findAll($criteria);
         $rows = CDRestDataFormat::formatComments($posts);
     
-        $this->output($rows);
+        $this->output($rows, 60);
     }
     
     

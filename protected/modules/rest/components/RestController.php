@@ -87,10 +87,10 @@ class RestController extends CController
             throw new CHttpException(400,Yii::t('yii','Your request is invalid.'));
     }
     
-    protected function output($data, $expire = 60, $cacheID = null)
+    protected function output($data, $expire = 0)
     {
         if ($expire > 0) {
-            $cacheID = ($cacheID === null) ? md5($this->route . var_export($_REQUEST, true)) : $cacheID;
+            $cacheID = md5($this->route . var_export($_GET, true));
             redis()->set($cacheID, $data, $expire);
         }
         
@@ -112,7 +112,7 @@ class RestController extends CController
 
     protected function beforeAction($action)
     {
-        $cacheID = md5($this->route . var_export($_REQUEST, true));
+        $cacheID = md5($this->route . var_export($_GET, true));
         $data = redis()->get($cacheID);
         if ($data === false)
             return true;
