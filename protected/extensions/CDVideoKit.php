@@ -1,8 +1,12 @@
 <?php
 class CDVideoKit
 {
-    private $_clientID;
+    const PLATFORM_YOUKU = 'youku.com';
+    const PLATFORM_56 = '56.com';
+    
     private $_vid;
+    private $_platform;
+    private $_keyMap = array();
     
     /**
      * 视频对象
@@ -10,36 +14,130 @@ class CDVideoKit
      */
     private $_video;
     
-    public function __construct($vid, $client_id = null)
+    public function __construct()
     {
-        $this->_video = new CDYoukuVideo($vid, $client_id);
+    }
+    
+    public function setVideoID($vid, $platform)
+    {
+        if ($vid)
+            $this->_vid = $vid;
+        else
+            throw new Exception('video id is required.');
+        
+        if (array_key_exists($platform, self::videoClassMap())) {
+            $this->_platform = $platform;
+            $className = self::videoClassMap($this->_platform);
+            $this->_video = new $className($this->_vid, $this->_clientID);
+        }
+        else
+            throw new Exception('platform is invalid.');
+    }
+    
+    public function setVideoUrl($url)
+    {
+        $this->_platform = self::parseVideoPlatform($url);
+        if ($this->_platform === false)
+            throw new Exception($url . ', this platform is supported.');
+        
+        $this->_vid = self::parseVideoID($url, $this->_platform);
+        if ($this->_vid === false)
+            throw new Exception('An error occurred when parse video id.');
+        
+        if (array_key_exists($this->_platform, $this->_keyMap))
+            $clientID = $this->_keyMap[$this->_platform];
+        $className = self::videoClassMap($this->_platform);
+        $this->_video = new $className($this->_vid, $clientID);
+    }
+
+    public function setAppKeysMap(array $map)
+    {
+        $this->_keyMap = $map;
     }
     
     public function getDesktopPlayerHTML($width = 600, $height = 400, $autoplay = false)
     {
-        return $this->_video->getDesktopVideoHTML($width, $height, $autoplay);
+        return $this->_video->getDesktopPlayerHTML($width, $height, $autoplay);
     }
     
     public function getMobilePlayerHTML($width = 600, $height = 400, $autoplay = false)
     {
-        return $this->_video->getMobileVideoHTML($width, $height, $autoplay);
+        return $this->_video->getMobilePlayerHTML($width, $height, $autoplay);
+    }
+    
+    public static function parseVideoPlatform($url)
+    {
+        if (filter_var($url, FILTER_VALIDATE_URL)) {
+            $host = parse_url($url, PHP_URL_HOST);
+            $maps = self::videoClassMap();
+            foreach ($maps as $key => $class) {
+                if (stripos($host, $key) !== false)
+                    return $key;
+            }
+    
+            return false;
+        }
+        else
+            throw new Exception($url . ' is a invalid url');
+    }
+    
+    public static function parseVideoID($url, $platform)
+    {
+        if (filter_var($url, FILTER_VALIDATE_URL)) {
+            $pattern = self::patternMap($platform);
+            if (empty($pattern))
+                throw new Exception($platform . ' is not supported');
+            
+            $result = preg_match($pattern, $url, $matches);
+            return $result ? $matches[1] : false;
+            
+        }
+        else
+            throw new Exception($url . ' is a invalid url');
+    }
+    
+    protected static function videoClassMap($key = null)
+    {
+        $maps = array(
+                self::PLATFORM_YOUKU => 'CDYoukuVideo',
+                self::PLATFORM_56 => 'CD56Video',
+        );
+    
+        return ($key === null) ? $maps : $maps[$key];
+    }
+    
+    protected static function patternMap($key = null)
+    {
+        $maps = array(
+            self::PLATFORM_YOUKU => '/id_(.+?)\.html/i',
+            self::PLATFORM_56 => '/v_(.+?)\.html/i',
+        );
+        
+        return ($key === null) ? $maps : $maps[$key];
     }
 }
 
 interface ICDVideo
 {
+    public function __construct($vid, $client_id);
     public function getFlashUrl();
     public function getSourceUrl();
     public function getIframeUrl();
     public function getHtml5Url();
-    public function getDesktopVideoHTML($width = 600, $height = 400);
-    public function getMobileVideoHTML($width = 280, $height = 180);
+    public function getDesktopPlayerHTML($width = 600, $height = 400);
+    public function getMobilePlayerHTML($width = 280, $height = 180);
 }
 
-class CDYoukuVideo implements ICDVideo
+
+/**
+ * 视频播放基础组件
+ * @author chendong
+ *
+ */
+abstract class CDVideoBase
 {
-    private $_vid;
-    private $_clientID;
+    protected $_vid;
+    protected $_clientID;
     
     public function __construct($vid, $client_id)
     {
@@ -47,10 +145,69 @@ class CDYoukuVideo implements ICDVideo
             $this->_vid = $vid;
         else
             throw new Exception('video id is required.');
-
+    
         $this->_clientID = $client_id;
     }
 
+    protected function getIframeHTML($width = 600, $height = 400)
+    {
+        $html = '';
+        if ($this->getIframeUrl())
+            $html = sprintf('<iframe width="%d" height="%d" src="%s" frameborder="0" allowfullscreen></iframe>', $width, $height, $this->getIframeUrl());
+    
+        return $html;
+    }
+    
+    protected function getFlashHTML($width = 600, $height = 400)
+    {
+        $html = '';
+        if ($this->getFlashUrl())
+            $html = sprintf('<embed src="%s"  type="application/x-shockwave-flash" width="%d" height="%d" allowFullScreen="true" allowNetworking="all" allowScriptAccess="always"></embed>', $this->getFlashUrl(), $width, $height);
+    
+        return $html;
+    }
+    
+    protected function getHtml5VideoHTML($width = 280, $height = 180)
+    {
+        $html = '';
+        if ($this->getHtml5Url())
+            $html = sprintf('<video src="%s" controls="controls" width="%d" height="%d">您的浏览器不支持HTML5视频播放。</video>', $this->getHtml5Url(), $width, $height);
+    
+        return $html;
+    }
+
+    public function getDesktopPlayerHTML($width = 600, $height = 400, $autoplay = false)
+    {
+        if (empty($this->_clientID)) {
+            $html = $this->getFlashHTML($width, $height);
+            return empty($html) ? $this->getIframeHTML($width, $height) : $html;
+        }
+        else
+            return $this->getDesktopOpenPlayerHTML($width, $height, $autoplay);
+    }
+
+    public function getMobilePlayerHTML($width = 280, $height = 180, $autoplay = false)
+    {
+        if (empty($this->_clientID)) {
+            $html = $this->getIframeHTML($width, $height);
+            return empty($html) ? $this->getHtml5VideoHTML($width, $height) : $html;
+        }
+        else
+            return $this->getMobileOpenPlayerHTML($width, $height, $autoplay);
+    }
+    
+    abstract protected function getDesktopOpenPlayerHTML($width, $height, $autoplay = false);
+    abstract protected function getMobileOpenPlayerHTML($width, $height, $autoplay = false);
+}
+
+
+/**
+ * 优酷视频
+ * @author chendong
+ *
+ */
+class CDYoukuVideo extends CDVideoBase implements ICDVideo
+{
     public function getFlashUrl()
     {
         return sprintf('http://player.youku.com/player.php/sid/%s/v.swf', $this->_vid);
@@ -71,19 +228,62 @@ class CDYoukuVideo implements ICDVideo
         return null;
     }
     
-    public function getDesktopVideoHTML($width = 600, $height = 400, $autoplay = false)
+    protected function getDesktopOpenPlayerHTML($width, $height, $autoplay = false)
     {
-        $elementID = 'youkuplayer' . $this->_vid;
+        $elementID = 'youkuplayer-' . $this->_vid;
         $html = '<div id="%s"></div><script type="text/javascript">';
-        $html .= "player = new YKU.Player('%s',{client_id: '%s',vid:'%s',width:%d,height:%d,autoplay:%s});";
+        $html .= "var player = new YKU.Player('%s',{client_id: '%s',vid:'%s',width:%d,height:%d,autoplay:%s});";
         $html .= '</script>';
-
+        
         return sprintf($html, $elementID, $elementID, $this->_clientID, $this->_vid, $width, $height, $autoplay?'true':'false');
     }
-
-    public function getMobileVideoHTML($width = 280, $height = 180, $autoplay = false)
+    
+    protected function getMobileOpenPlayerHTML($width, $height, $autoplay = false)
     {
+        return $this->getDesktopPlayerHTML($width, $height, $autoplay);
+    }
 
+}
+
+
+/**
+ * 56网视频
+ * @author chendong
+ *
+ */
+class CD56Video extends CDVideoBase implements ICDVideo
+{
+    public function getFlashUrl()
+    {
+        $format = $this->_clientID ? 'http://player.56.com/3000003067/open_%s.swf' : 'http://player.56.com/v_%s.swf';
+        return sprintf($format, $this->_vid) . '/1030_r239612568.swf';
+    }
+
+    public function getSourceUrl()
+    {
+        return sprintf('http://www.56.com/u/v_%s.html/1030_r239612568.html', $this->_vid);
+    }
+
+    public function getIframeUrl()
+    {
+        return sprintf('http://www.56.com/iframe/%s', $this->_vid);
+    }
+
+    public function getHtml5Url()
+    {
+        return null;
+    }
+
+    protected function getDesktopOpenPlayerHTML($width, $height, $autoplay = false)
+    {
+        $html = $this->getFlashHTML($width, $height);
+        return empty($html) ? $this->getIframeHTML($width, $height) : $html;
+    }
+    
+    protected function getMobileOpenPlayerHTML($width, $height, $autoplay = false)
+    {
+        $html = $this->getIframeHTML($width, $height);
+        return empty($html) ? $this->getHtml5VideoHTML($width, $height) : $html;
     }
 }
 

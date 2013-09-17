@@ -143,6 +143,9 @@ define('GENDER_UNKOWN', 0);
 define('GENDER_FEMALE', 1);
 define('GENDER_MALE', 2);
 
+define('CLIENT_ID_YOUKU', '1f2d57f9b5ea2ce9');
+define('CLIENT_ID_56', '3000003067');
+
 define('WEIBO_APP_KEY', '2981913360');
 define('WEIBO_APP_SECRET', 'f06fd0b530f3d9daa56db67e5e8610e1');
 define('QQT_APP_KEY', '801080691');

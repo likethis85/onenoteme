@@ -10,9 +10,8 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo $this->channel;?
 
 <div class="fright cd-sidebar">
     <?php $this->widget('CDAdvert', array('solt'=>'channel_home_sidebar_01'));?>
-    <div class="panel panel10 bottom15px">
-        <iframe width="100%" height="250" frameborder="0" scrolling="no" src="http://app.wumii.com/ext/widget/hot?prefix=http%3A%2F%2Fwww.waduanzi.com%2F&num=10&t=1"></iframe>
-    </div>
+    <!-- 56.com榜单 -->
+    <iframe frameborder="0" id="customMoudle" name="customMoudle" width="300" height="360" src="http://s1.56img.com/style/i/admin/v4/tpl/gq_share/v1/share_layer_list.html?style=rank_list&title=%E6%8C%96%E8%A7%86%E9%A2%91%E6%8E%92%E8%A1%8C%E6%A6%9C&width=300&height=360&border=true&usrId=r239612568"></iframe>
     <?php $this->widget('CDAdvert', array('solt'=>'channel_home_sidebar_02'));?>
 	<div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
     <?php $this->widget('CDAdvert', array('solt'=>'channel_home_sidebar_03'));?>

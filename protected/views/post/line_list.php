@@ -1,3 +1,5 @@
+<script type="text/javascript" src="http://player.youku.com/jsapi"></script>
+
 <div class="panel panel10 bottom10px">
     <div class="app-online"><a href="<?php echo aurl('apps/index')?>" target="_blank">挖段子iPhone应用3.1.0版全新上线！！点击马下安装！！</a></div>
     <ul class="hot-keyword">

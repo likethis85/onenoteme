@@ -337,6 +337,14 @@ class CDBase
         return true;
     }
 
+    public static function videoAppKeysMap()
+    {
+        return array(
+            CDVideoKit::PLATFORM_YOUKU => CLIENT_ID_YOUKU,
+            CDVideoKit::PLATFORM_56 => CLIENT_ID_56,
+        );
+    }
+    
     public static function convertPunctuation($text)
     {
         if (empty($text)) return '';
