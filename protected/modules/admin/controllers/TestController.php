@@ -6,6 +6,15 @@ class TestController extends AdminController
 //         exit('exit');
     }
     
+    public function actionVideo()
+    {
+        $vid = 'XNjA5NTQxOTky';
+        $video = new CDVideoKit($vid, '1f2d57f9b5ea2ce9');
+        echo '<script type="text/javascript" src="http://player.youku.com/jsapi"></script>';
+        echo $video->getDesktopPlayerHTML();
+        exit(0);
+    }
+    
     public function actionRedis()
     {
         $key1 = 'user111';

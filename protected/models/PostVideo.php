@@ -137,5 +137,3 @@ class PostVideo extends CActiveRecord
 
 }
 
-
-
