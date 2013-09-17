@@ -89,7 +89,7 @@ class PostVideo extends CActiveRecord
 	{
 	    $vk = new CDVideoKit();
 	    $vk->setAppKeysMap(CDBase::videoAppKeysMap());
-	    $vk->setVideoUrl($this->source_url);
+	    $vk->setVideoUrl($this->flash_url);
 	    return $vk->getDesktopPlayerHTML($width, $height, $autoplay);
 	}
 	
@@ -97,7 +97,7 @@ class PostVideo extends CActiveRecord
 	{
 	    $vk = new CDVideoKit();
 	    $vk->setAppKeysMap(CDBase::videoAppKeysMap());
-	    $vk->setVideoUrl($this->source_url);
+	    $vk->setVideoUrl($this->flash_url);
 	    return $vk->getMobilePlayerHTML($width, $height, $autoplay);
 	}
 	
