@@ -1,3 +1,5 @@
+<script type="text/javascript" src="http://player.youku.com/jsapi"></script>
+
 <script type="text/javascript">
 <!--
 _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->channel;?>, 3]);

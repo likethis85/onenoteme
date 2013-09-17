@@ -1,3 +1,5 @@
+<script type="text/javascript" src="http://player.youku.com/jsapi"></script>
+
 <div class="post-line-list">
     <?php foreach ((array)$models as $key => $model):?>
     <div class="panel panel10 post-item post-box">
