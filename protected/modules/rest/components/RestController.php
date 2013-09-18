@@ -112,8 +112,10 @@ class RestController extends CController
 
     protected function beforeAction($action)
     {
+        // 因为sig和timestamp是每个请求都不一样的，所以删掉这两个元素
         $get = $_GET;
         unset($get['sig'], $get['timestamp']);
+        
         $cacheID = md5($this->route . var_export($get, true));
         $data = redis()->get($cacheID);
         if ($data === false)
