@@ -59,7 +59,7 @@ class CDVideoKit
         $this->_keyMap = $map;
     }
     
-    public function getDestopSourceUrl()
+    public function getMobileSourceUrl()
     {
         $url = $this->_video->getIframeUrl();
         if (empty($url))
@@ -68,7 +68,7 @@ class CDVideoKit
         return $url;
     }
     
-    public function getMobileSourceUrl()
+    public function getDestopSourceUrl()
     {
         $url = $this->_video->getSourceUrl();
         if (empty($url))
