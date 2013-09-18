@@ -110,7 +110,7 @@ class RestController extends CController
         return $history->save() ? $history : false;
     }
 
-    protected function beforeAction($action)
+    protected function beforeAc2tion($action)
     {
         $cacheID = md5($this->route . var_export($_GET, true));
         $data = redis()->get($cacheID);
