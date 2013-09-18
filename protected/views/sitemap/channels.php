@@ -13,6 +13,10 @@
     <priority>1.0</priority>
 </url>
 <url>
+    <loc><?php echo aurl('channel/video');?></loc>
+    <priority>1.0</priority>
+</url>
+<url>
     <loc><?php echo aurl('channel/focus');?></loc>
     <priority>1.0</priority>
 </url>

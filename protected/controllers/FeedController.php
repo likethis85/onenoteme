@@ -54,6 +54,12 @@ class FeedController extends Controller
         echo self::channelPosts(CHANNEL_FUNNY, MEDIA_TYPE_IMAGE, $feedname, $source, 600);
     }
     
+    public function actionVideo($source = 'feed')
+    {
+        $feedname = app()->name . ' » 挖视频';
+        echo self::channelPosts(CHANNEL_FUNNY, MEDIA_TYPE_VIDEO, $feedname, $source, 600);
+    }
+    
     public function actionFocus($source = 'feed')
     {
         $feedname = app()->name . ' » 挖热点';
@@ -267,3 +273,4 @@ function utf8ForXml($string)
 {
     return preg_replace ('/[^\x{0009}\x{000a}\x{000d}\x{0020}-\x{D7FF}\x{E000}-\x{FFFD}]+/u', ' ', $string);
 }
+

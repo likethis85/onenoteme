@@ -7,12 +7,11 @@ class SitemapController extends Controller
         header('Content-Type:application/xml; charset=' . app()->charset);
     }
     
-    
     public function filters()
     {
         return array(
             array(
-                'COutputCache + index, channels, tags',
+                'COutputCache + index, channels, tags, joke, lengtu, video, focus',
                 'duration' => 600,
             ),
         );
@@ -51,6 +50,11 @@ class SitemapController extends Controller
     public function actionLengtu()
     {
         $this->fetchChannelPosts(CHANNEL_FUNNY, MEDIA_TYPE_IMAGE);
+    }
+    
+    public function actionVideo()
+    {
+        $this->fetchChannelPosts(CHANNEL_FUNNY, MEDIA_TYPE_VIDEO);
     }
     
     public function actionFocus()
