@@ -90,7 +90,9 @@ class RestController extends CController
     protected function output($data, $expire = 0)
     {
         if ($expire > 0) {
-            $cacheID = md5($this->route . var_export($_GET, true));
+            $get = $_GET;
+            unset($get['sig'], $get['timestamp']);
+            $cacheID = md5($this->route . var_export($get, true));
             redis()->set($cacheID, $data, $expire);
         }
         
