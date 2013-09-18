@@ -9,4 +9,12 @@ class RestPostVideo extends PostVideo
     {
         return parent::model($className);
     }
+    
+    public function getApiSourceUrl()
+    {
+        $vk = new CDVideoKit();
+	    $vk->setAppKeysMap(CDBase::videoAppKeysMap());
+	    $vk->setVideoUrl($this->flash_url);
+	    return $vk->getMobileSourceUrl();
+    }
 }

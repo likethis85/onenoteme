@@ -47,12 +47,34 @@ class CDVideoKit
         if (array_key_exists($this->_platform, $this->_keyMap))
             $clientID = $this->_keyMap[$this->_platform];
         $className = self::videoClassMap($this->_platform);
-        $this->_video = new $className($this->_vid, $clientID);
+        
+        if (class_exists($className, true))
+            $this->_video = new $className($this->_vid, $clientID);
+        else
+            throw new Exception($className . ' is not exists.');
     }
 
     public function setAppKeysMap(array $map)
     {
         $this->_keyMap = $map;
+    }
+    
+    public function getDestopSourceUrl()
+    {
+        $url = $this->_video->getIframeUrl();
+        if (empty($url))
+            $url = $this->_video->getSourceUrl();
+        
+        return $url;
+    }
+    
+    public function getMobileSourceUrl()
+    {
+        $url = $this->_video->getSourceUrl();
+        if (empty($url))
+            $url = $this->_video->getIframeUrl();
+        
+        return $url;
     }
     
     public function getDesktopPlayerHTML($width = 600, $height = 400, $autoplay = false)

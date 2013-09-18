@@ -46,7 +46,7 @@ class CDRestDataFormat
             'post_id' => $model->post_id,
             'html5_url' => $model->html5_url,
             'flash_url' => $model->flash_url,
-            'source_url' => $model->source_url,
+            'source_url' => $model->getApiSourceUrl(),
             'desc' => $model->desc,
         );
         
