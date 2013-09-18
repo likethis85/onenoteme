@@ -89,6 +89,7 @@ class RestController extends CController
     
     protected function output($data, $expire = 0)
     {
+        $data = CJSON::encode($data);
         if ($expire > 0) {
             $get = $_GET;
             unset($get['sig'], $get['timestamp']);
@@ -96,7 +97,7 @@ class RestController extends CController
             redis()->set($cacheID, $data, $expire);
         }
         
-        $this->outputJSON($data);
+        $this->outputData($data);
     }
 
     protected function saveDeviceConnectHistory()
@@ -128,10 +129,10 @@ class RestController extends CController
         }
     }
     
-    private function outputJSON($data)
+    private function outputData($data)
     {
         header('Content-Type: application/json; charset=utf-8');
-        echo CJSON::encode($data);
+        echo $data;
         exit(0);
     }
 
