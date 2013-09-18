@@ -124,7 +124,7 @@ class RestController extends CController
         if ($data === false)
             return true;
         else {
-            $this->outputJSON($data);
+            $this->outputData($data);
             return false;
         }
     }
