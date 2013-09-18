@@ -11,23 +11,33 @@ class PostCommand extends CConsoleCommand
         
         $conditions = array('and', 'channel_id = :channelID', 'media_type = :mediatype', 'state = :disable_state');
         
+        // 文字
         $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_FUNNY, ':mediatype'=>MEDIA_TYPE_TEXT);
         $duanziIDs = $cmd->where($conditions, $params)->queryColumn();
         
+        // 图片
         $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_FUNNY, ':mediatype'=>MEDIA_TYPE_IMAGE);
         $lengtuIDs = $cmd->where($conditions, $params)->queryColumn();
         
+        // 视频
+        $cmd->limit(1);
+        $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_FUNNY, ':mediatype'=>MEDIA_TYPE_VIDEO);
+        $videoIDs = $cmd->where($conditions, $params)->queryColumn();
+        
+        // 挖热点
+        $cmd->limit($count);
         $conditions = array('and', 'channel_id = :channelID', 'state = :disable_state');
         $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_FOCUS);
         $focusIDs = $cmd->where($conditions, $params)->queryColumn();
         
-        $ids = array_merge($duanziIDs, $lengtuIDs, $focusIDs);
+        $ids = array_merge($duanziIDs, $lengtuIDs, $videoIDs, $focusIDs);
+        $ids = array_unique($ids);
         
         $nums = 0;
         foreach ($ids as $index => $id) {
             $num = app()->getDb()->createCommand()
                 ->update('{{post}}',
-                    array('state'=>POST_STATE_ENABLED, 'create_time'=>(int)$_SERVER['REQUEST_TIME'] - $index*60),
+                    array('state'=>POST_STATE_ENABLED, 'create_time'=>time() - $index*60),
                     'id = :pid',
                     array(':pid' => $id)
                 );
