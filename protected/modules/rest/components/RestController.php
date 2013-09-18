@@ -112,7 +112,9 @@ class RestController extends CController
 
     protected function beforeAction($action)
     {
-        $cacheID = md5($this->route . var_export($_GET, true));
+        $get = $_GET;
+        unset($get['sig'], $get['timestamp']);
+        $cacheID = md5($this->route . var_export($get, true));
         $data = redis()->get($cacheID);
         if ($data === false)
             return true;
