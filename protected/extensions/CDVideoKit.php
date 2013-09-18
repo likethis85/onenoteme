@@ -111,9 +111,7 @@ class CDVideoKit
                 throw new Exception($platform . ' is not supported');
             
             $result = preg_match($pattern, $url, $matches);
-            var_dump($result, $pattern, $url, $matches);exit;
             return $result ? $matches[1] : false;
-            
         }
         else
             throw new Exception($url . ' is a invalid url');

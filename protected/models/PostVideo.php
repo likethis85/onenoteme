@@ -87,18 +87,28 @@ class PostVideo extends CActiveRecord
 	
 	public function getDesktopVideoHTML($width = 600, $height = 400, $autoplay = false)
 	{
-	    $vk = new CDVideoKit();
-	    $vk->setAppKeysMap(CDBase::videoAppKeysMap());
-	    $vk->setVideoUrl($this->flash_url);
-	    return $vk->getDesktopPlayerHTML($width, $height, $autoplay);
+	    try {
+    	    $vk = new CDVideoKit();
+    	    $vk->setAppKeysMap(CDBase::videoAppKeysMap());
+    	    $vk->setVideoUrl($this->flash_url);
+    	    return $vk->getDesktopPlayerHTML($width, $height, $autoplay);
+	    }
+	    catch (Exception $e) {
+	        return false;
+	    }
 	}
 	
 	public function getMobileVideoHTML($width = 280, $height = 180, $autoplay = false)
 	{
-	    $vk = new CDVideoKit();
-	    $vk->setAppKeysMap(CDBase::videoAppKeysMap());
-	    $vk->setVideoUrl($this->flash_url);
-	    return $vk->getMobilePlayerHTML($width, $height, $autoplay);
+	    try {
+    	    $vk = new CDVideoKit();
+    	    $vk->setAppKeysMap(CDBase::videoAppKeysMap());
+    	    $vk->setVideoUrl($this->flash_url);
+    	    return $vk->getMobilePlayerHTML($width, $height, $autoplay);
+	    }
+	    catch (Exception $e) {
+	        return false;
+	    }
 	}
 	
 	protected function beforeSave()

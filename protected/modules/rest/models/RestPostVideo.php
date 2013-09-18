@@ -12,9 +12,14 @@ class RestPostVideo extends PostVideo
     
     public function getApiSourceUrl()
     {
-        $vk = new CDVideoKit();
-	    $vk->setAppKeysMap(CDBase::videoAppKeysMap());
-	    $vk->setVideoUrl($this->flash_url);
-	    return $vk->getMobileSourceUrl();
+        try {
+            $vk = new CDVideoKit();
+    	    $vk->setAppKeysMap(CDBase::videoAppKeysMap());
+    	    $vk->setVideoUrl($this->flash_url);
+    	    return $vk->getMobileSourceUrl();
+        }
+        catch (Exception $e) {
+            return false;
+        }
     }
 }
