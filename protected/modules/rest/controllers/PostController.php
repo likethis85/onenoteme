@@ -145,7 +145,7 @@ class PostController extends RestController
         ));
         
         $data = $this->formatPosts($posts);
-        $this->output($data, 600);
+        $this->output($data, 300);
     }
     
     public function actionMyshare($user_id, $channel_id = 0, $page = 1, $media_type = 0)
