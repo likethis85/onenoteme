@@ -108,7 +108,7 @@
             </td>
             <td>
                 <?php echo l($model->getChannelLabel(), $this->channelUrl($model->channel_id));?><br />
-                <?php echo $model->getMediaTypeLabel();?>
+                <span class="cgray"><?php echo $model->getMediaTypeLabel();?></span>
             </td>
             <td class="align-center"><?php echo $model->commentNumsBadgeHtml;?><br /></td>
             <td class="align-center"><?php echo $model->viewNumsBadgeHtml;?><br /></td>
