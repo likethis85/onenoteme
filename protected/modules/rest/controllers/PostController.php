@@ -123,7 +123,7 @@ class PostController extends RestController
         $posts = RestPost::model()->published()->findAll($criteria);
         $rows = $this->formatPosts($posts);
         
-        $this->output($rows, 600);
+        $this->output($rows, 300);
     }
     
     public function actionFavorite($user_id, $channel_id = 0, $page = 1, $media_type = 0)
