@@ -142,7 +142,7 @@ class CommentController extends RestController
     
     protected function timelineRowCount()
     {
-        return 10;
+        return 20;
     }
     
     /**

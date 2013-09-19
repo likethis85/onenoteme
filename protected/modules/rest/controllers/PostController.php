@@ -107,12 +107,13 @@ class PostController extends RestController
         $criteria->addInCondition('t.media_type', $mediaTypes);
         
         if ($hours > 0) {
-            $fromtime = $_SERVER['REQUEST_TIME'] - $hours * 3600;
+            $fromtime = time() - $hours * 3600;
             $criteria->addCondition('t.create_time > :fromtime');
             $criteria->params[':fromtime'] = $fromtime;
         }
 
-        $criteria->order = 't.istop desc, (t.up_score-t.down_score) desc, t.create_time desc';
+        // @todo 目前的应用版本中只加了赞的功能，所以此处排序只按up_score倒序，以后加了踩的功能，可以修改为up_score-down_score
+        $criteria->order = 't.istop desc, t.up_score desc, t.create_time desc';
         $criteria->select = self::selectColumns();
         $criteria->limit = $this->postRowCount();
         $criteria->with = array('user', 'user.profile');
