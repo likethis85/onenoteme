@@ -149,8 +149,6 @@ class PostController extends AdminController
 	    
 	    if (request()->getIsPostRequest() && isset($_POST['AdminPostVideo'])) {
 	        $model->attributes = $_POST['AdminPostVideo'];
-            $model->desc = CDBase::convertPunctuation($model->desc);
-        
 	        if ($model->save()) {
 	            $resultHtml = sprintf('%s&nbsp;视频添加成功，<a href="%s" target="_blank">点击查看</a>', $post->title, $post->url);
 	            user()->setFlash('save_post_video_result', $resultHtml);
