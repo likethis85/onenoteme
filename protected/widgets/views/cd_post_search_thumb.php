@@ -4,7 +4,7 @@
 <?php endif;?>
 <?php foreach ((array)$models as $model):?>
     <div class="thumb">
-        <?php echo $model->getSquareThumbLink($this->linkTarget);?>
+        <?php echo $model->getSquareThumbLink($this->linkTarget, 0, $this->trace);?>
     </div>
     <?php endforeach;?>
     <div class="clear"></div>
