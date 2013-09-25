@@ -88,7 +88,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         </div>
         <?php foreach ($nextPosts as $next):?>
         <div class="thumb">
-            <?php echo $next->getSquareThumbLink('_self');?>
+            <?php echo $next->getSquareThumbLink('_self', 0, 'sidebar');?>
         </div>
         <?php endforeach;?>
         <div class="clear"></div>

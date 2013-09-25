@@ -270,9 +270,14 @@ class Post extends CActiveRecord
 	 * @param boolean $absolute 是否返回绝对地址，默认为true
 	 * @return string
 	 */
-	public function getUrl($absolute = true)
+	public function getUrl($absolute = true, $trace = null)
 	{
-	    return $absolute ? aurl('post/show', array('id' => $this->id)) : url('post/show', array('id' => $this->id));
+	    $params = array('id' => $this->id);
+	    $trace = trim(strip_tags($trace));
+	    if ($trace)
+	        $params['trace'] = $trace;
+	    
+	    return $absolute ? aurl('post/show', $params) : url('post/show', $params);
 	}
 	
 	/**
@@ -783,11 +788,11 @@ class Post extends CActiveRecord
      * @param integer $width 图片宽度
      * @return string
      */
-    public function getSquareThumbLink($target = '_blank', $width = 0)
+    public function getSquareThumbLink($target = '_blank', $width = 0, $trace = '')
     {
         $html = '';
         if ($this->getSquareThumb())
-            $html = l($this->getSquareThumbImage($width), $this->getUrl(), array('target'=>$target, 'title'=>$this->getFilterTitle()));
+            $html = l($this->getSquareThumbImage($width), $this->getUrl(true, $trace), array('target'=>$target, 'title'=>$this->getFilterTitle()));
         
         return $html;
     }
