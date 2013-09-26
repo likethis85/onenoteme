@@ -112,6 +112,15 @@ class CDImageThumb
         return $this->urlByVersion(UPYUN_AVATAR_CUSTOM_LARGE);
     }
     
+    public function appThumbUrl()
+    {
+        return $this->urlByVersion(UPYUN_IMAGE_CUSTOM_APP_THUMB);
+    }
+    
+    public function appMiddleUrl()
+    {
+        return $this->urlByVersion(UPYUN_IMAGE_CUSTOM_APP_MIDDLE);
+    }
     
     
     private static function imageVersions()
@@ -129,6 +138,9 @@ class CDImageThumb
             UPYUN_AVATAR_CUSTOM_MINI,
             UPYUN_AVATAR_CUSTOM_SMALL,
             UPYUN_AVATAR_CUSTOM_LARGE,
+            // app
+            UPYUN_IMAGE_CUSTOM_APP_THUMB,
+            UPYUN_IMAGE_CUSTOM_APP_MIDDLE,
         );
     }
     

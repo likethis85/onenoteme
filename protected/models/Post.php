@@ -571,6 +571,27 @@ class Post extends CActiveRecord
         return $thumbs[$this->id];
     }
     
+
+    public function getAppThumb()
+    {
+        $url = '';
+        $thumb = $this->getImageThumb();
+        if ($thumb)
+            $url = $thumb->appThumbUrl();
+        
+        return $url;
+    }
+
+    public function getAppMiddle()
+    {
+        $url = '';
+        $thumb = $this->getImageThumb();
+        if ($thumb)
+            $url = $thumb->appMiddleUrl();
+        
+        return $url;
+    }
+    
     /**
      * 获取缩略图地址，限定宽度，高度自适应
      * @return string

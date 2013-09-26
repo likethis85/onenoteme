@@ -56,7 +56,7 @@ class RestPost extends Post
         $html .= '<h1>' . $this->title . '</h1>';
         $html .= sprintf('<div class="timeauthor">%s&nbsp;&nbsp;%s</div>', $this->getCreateTime(p('formatShortDateTime')), $this->getAuthorName());
         
-        $content = strip_tags($this->content, '<p><b><strong><span><img><br><iframe>');
+        $content = strip_tags($this->content, '<p><b><strong><span><img><br><iframe><video>');
         $matches = array();
         $pattern = '/<img.*?src="?(.+?)["\s]{1}?.*?>/is';
         $result = preg_match_all($pattern, $content, $matches);

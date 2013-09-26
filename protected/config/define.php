@@ -102,6 +102,11 @@ define('IMAGE_THUMBNAIL_WIDTH', 200);
 define('IMAGE_THUMBNAIL_HEIGHT', 260);
 define('IMAGE_THUMBNAIL_SQUARE_SIZE', 200);
 
+// APP 专用
+define('IMAGE_APP_THUMB_WIDTH', 200);
+define('IMAGE_APP_THUMB_HEIGHT', 260);
+define('IMAGE_APP_MIDDLE_WIDTH', 640);
+
 define('IMAGE_THUMB_WIDTH', 200);
 define('IMAGE_SMALL_WIDTH', 320);
 define('IMAGE_MIDDLE_WIDTH', 640);
@@ -121,6 +126,10 @@ define('UPYUN_IMAGE_CUSTOM_SQUARETHUBM', 'squarethumb');
 define('UPYUN_AVATAR_CUSTOM_LARGE', 'lavatar');
 define('UPYUN_AVATAR_CUSTOM_SMALL', 'savatar');
 define('UPYUN_AVATAR_CUSTOM_MINI', 'mavatar');
+
+// app
+define('UPYUN_IMAGE_CUSTOM_APP_THUMB', 'appthumb');
+define('UPYUN_IMAGE_CUSTOM_APP_MIDDLE', 'appmiddle');
 
 /*
  * 列表页，图片尺寸超过多大会折叠

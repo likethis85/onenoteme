@@ -10,9 +10,6 @@
     <?php $this->widget('CDAdvert', array('solt'=>'posts_list_sidebar_02'));?>
 	<div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
 	<?php $this->widget('CDAdvert', array('solt'=>'posts_list_sidebar_03'));?>
-    <!-- 最新趣图 开始 -->
-    <?php $this->widget('CDPostSearch', array('title'=>'最新趣图', 'channel'=>CHANNEL_FUNNY, 'mediaType'=>MEDIA_TYPE_IMAGE));?>
-    <!-- 最新趣图 结束 -->
 </div>
 <div class="clear"></div>
 
