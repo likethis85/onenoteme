@@ -881,11 +881,13 @@ class Post extends CActiveRecord
      * @param integer $width
      * @return boolean
      */
-    public function getImageIsLong($width = IMAGE_MIDDLE_WIDTH)
+    public function getImageIsLong($width = POST_LIST_IMAGE_MAX_WIDTH)
     {
         $middleHeight = (int)$this->getThumbHeightByWidth($width);
         if (($this->getIsImageType())
-            && ($middleHeight > IMAGE_THUMBNAIL_HEIGHT) && ($middleHeight > IMAGE_MAX_HEIGHT_FOLDING) && $this->getMiddlePic())
+            && ($middleHeight > IMAGE_THUMBNAIL_HEIGHT)
+            && ($middleHeight > IMAGE_MAX_HEIGHT_FOLDING)
+            && $this->getMiddlePic())
             return true;
         else
             return false;
@@ -896,11 +898,11 @@ class Post extends CActiveRecord
      * @param integer $width 图片宽度
      * @return integer
      */
-    public function getLineCount($width = IMAGE_MIDDLE_WIDTH)
+    public function getLineCount($width = POST_LIST_IMAGE_MAX_WIDTH)
     {
         $count = 0;
         if ($this->getImageIsLong($width)) {
-            $count = ($this->getThumbHeightByWidth($width) - IMAGE_MAX_HEIGHT_FOLDING) / IMAGE_MAX_HEIGHT_FOLDING;
+            $count = $this->getThumbHeightByWidth($width) / IMAGE_MAX_HEIGHT_FOLDING;
         }
         return (int)$count;
     }
