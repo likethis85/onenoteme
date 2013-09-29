@@ -8,7 +8,7 @@
                     <span class="social-widget-title">微信公众账号</span>
                     <span class="social-widget-content">超过 10000 位朋友在关注微信公众账号<span class="clear"></span></span>
                 </span>
-                <img src="<?php echo sbu('images/qrcode_wx_300.jpg');?>" id="big-qrcode" />
+                <img src="<?php echo sbu('images/qrcode_wx_300.png');?>" id="big-qrcode" />
             </a>
         </li>
         <li class="social-widget-item">
