@@ -6,7 +6,6 @@
     <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_01'));?>
     <!-- 首页侧边栏广告位1 结束 -->
     
-    <?php $this->renderPartial('/public/snsinfo');?>
     <div class="cdc-block cd-border app-list">
         <a href="http://itunes.apple.com/cn/app//id486268988?mt=8" target="_blank" title="挖段子iPhone应用, 最新版本 2.2.2"><img src="<?php echo sbu('images/app_ios.png');?>" alt="挖段子iPhone应用" /></a>
         <a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank" title="挖段子Andoird应用 最新版本 1.1.0"><img src="<?php echo sbu('images/app_android.png');?>" alt="挖段子Andoird应用" /></a>
