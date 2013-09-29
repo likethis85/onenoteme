@@ -8,7 +8,8 @@ class CDRestDataFormat
             'channel_id' => (int)$model->channel_id,
             'title' => $model->getApiTitle(),
             'content' => $model->getApiContent(),
-            'content_html' => $model->getApiContentHtml(),
+            // @todo 因为只有挖热点用到了content_html，所以此处做一下判断，如果以后都使用content_html的话，此处需要修改
+            'content_html' => $model->channel_id == CHANNEL_FOCUS ? $model->getApiContentHtml() : '',
             'create_time' => (int)$model->create_time,
             'create_time_at' => $model->getApiCreateTime(),
             'up_count' => (int)$model->up_score,
