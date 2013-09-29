@@ -65,6 +65,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 <?php echo param('footer_before_html');?>
 <?php $this->renderPartial('/public/footer');?>
 
+<img id="fixed-qrcode" src="<?php echo sbu('images/qrcode_wx_200.png');?>" />
 <div id="quick-login-modal" class="modal fade hide" role="dialog" aria-hidden="true">
     <div class="modal-body"></div>
 </div>

@@ -286,6 +286,8 @@ a:hover #big-qrcode {display:block;}
 /* blank layout */
 body.blank-body {margin:0; padding:0;}
 
+/* fixed qrcode */
+#fixed-qrcode {margin:0; padding:0 border:0; position:absolute; top:76px; right:0;}
 
 
 /* apps */

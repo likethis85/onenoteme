@@ -17,7 +17,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 <?php echo $content;?>
 
 <?php $this->renderPartial('/public/footer');?>
-
+<img id="fixed-qrcode" src="<?php echo sbu('images/qrcode_wx_200.png');?>" />
 <?php echo param('tongji_code');?>
 </body>
 </html>

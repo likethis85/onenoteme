@@ -3,12 +3,12 @@
     <ul class="social-widget-list">
         <li class="social-widget-item first">
             <a class="clearfix" href="javascript:void(0);">
-                <span class="social-widget-img"> <img src="<?php echo sbu('images/qrcode_wx.jpg');?>" alt=""></span>
+                <span class="social-widget-img"> <img src="<?php echo sbu('images/qrcode_wx_300.png');?>" alt=""></span>
                 <span class="social-widget-right clearfix">
                     <span class="social-widget-title">微信公众账号</span>
                     <span class="social-widget-content">超过 10000 位朋友在关注微信公众账号<span class="clear"></span></span>
                 </span>
-                <img src="<?php echo sbu('images/qrcode_wx.jpg');?>" id="big-qrcode" />
+                <img src="<?php echo sbu('images/qrcode_wx_300.jpg');?>" id="big-qrcode" />
             </a>
         </li>
         <li class="social-widget-item">
