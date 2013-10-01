@@ -45,6 +45,8 @@ define('TABLE_APP_USER_CONFIG', '{{app_user_config}}');
 define('TABLE_FEEDBACK', '{{feedback}}');
 define('TABLE_POST_VIDEO', '{{post_video}}');
 define('TABLE_APP_UNION_LOG', '{{app_union_log}}');
+define('TABLE_APP_ADSLOT', '{{app_adslot}}');
+define('TABLE_APP_ADVERT', '{{app_advert}}');
 
 define('POST_STATE_ENABLED', 1);
 define('POST_STATE_DISABLED', 0);
@@ -67,6 +69,7 @@ define('USER_STATE_UNVERIFY', 0);
 define('USER_STATE_ENABLED', 1);
 define('USER_STATE_FORBIDDEN', -1);
 
+/* source */
 define('USER_SOURCE_UNKNOWN', 0);
 define('USER_SOURCE_PC_WEB', 1);
 define('USER_SOURCE_MOBILE_WEB', 2);
@@ -81,6 +84,13 @@ define('ADVERT_STATE_ENABLED', 1);
 define('ADCODE_STATE_DISABLED', 0);
 define('ADCODE_STATE_ENABLED', 1);
 
+/* app adslot state */
+define('APP_ADSLOT_STATE_DISABLED', 0);
+define('APP_ADSLOT_STATE_ENABLED', 1);
+/* app advert state */
+define('APP_ADVERT_STATE_DISABLED', 0);
+define('APP_ADVERT_STATE_ENABLED', 1);
+
 /* link ishome */
 define('LINK_IN_HOME', 1);
 define('LINK_NOT_IN_HOME', 0);
@@ -94,6 +104,11 @@ define('NETWORK_STATUS_UNKOWN', -1);
 define('NETWORK_STATUS_NOT_REACHABLE', 0);
 define('NETWORK_STATUS_WWAN', 1);
 define('NETWORK_STATUS_WIFI', 2);
+
+/* app platform */
+define('PLATFORM_IPHONE', 1);
+define('PLATFORM_IPAD', 2);
+define('PLATFORM_ANDROID', 3);
 
 /*
  * 这些尺寸与又拍云里的自定义版本相对应
