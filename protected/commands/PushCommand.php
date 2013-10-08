@@ -11,7 +11,7 @@ class PushCommand extends CConsoleCommand
     public function actionTest()
     {
         $channel = new Channel(BAIDU_APP_WDZ_APP_KEY, BAIDU_APP_WDZ_SECRET_KEY);
-//         $channel->setHost(Channel::HOST_IOS_DEV);
+        $channel->setHost(Channel::HOST_IOS_DEV);
         $optional[Channel::USER_ID] = '1032337158820187361';
         $optional[Channel::DEVICE_TYPE] = BAIDU_DEVICE_TYPE_IOS;
         $optional[Channel::MESSAGE_TYPE] = BAIDU_MESSAGE_TYPE_ALERT;
