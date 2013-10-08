@@ -175,7 +175,7 @@ define('WEIBO_APP_SECRET', 'f06fd0b530f3d9daa56db67e5e8610e1');
 define('QQT_APP_KEY', '801080691');
 define('QQT_APP_SECRET', '4e0c4ac86b36120efac4c44a9ac9e895');
 define('BAIDU_APP_WDZ_APP_KEY', 'bGGXpA6v8UVnwdUEZkNgde4o');
-define('BAIDU_APP_WDZ_SECRET_KEY', 'bGGXpA6v8UVnwdUEZkNgde4o');
+define('BAIDU_APP_WDZ_SECRET_KEY', 'BtbYXKyVGiwT8toE3Mdiwpa1p00DbAqd');
 
 define('BAIDU_PUSH_TYPE_SINGLE', 1);
 define('BAIDU_PUSH_TYPE_TAG', 2);
