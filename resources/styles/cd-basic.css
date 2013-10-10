@@ -28,9 +28,9 @@ a:hover {color:#D14836; text-decoration:none;}
 .lh20px {line-height:20px;}
 .lh24px {line-height:24px;}
 
-.indent10px {text-indent:10px;}
-.bottom10px {margin-bottom:10px;}
-.bottom15px {margin-bottom:15px;}
+.indent10px {text-indent:10px !important;}
+.bottom10px {margin-bottom:10px !important;}
+.bottom15px {margin-bottom:15px !important;}
 
 .site-icon {background-image:url(../images/icons.png); background-repeat:no-repeat;}
 

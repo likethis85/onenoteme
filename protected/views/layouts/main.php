@@ -61,7 +61,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     </div>
 </div>
 <div class="cd-wrapper cd-main">
-    <div class="cdc-block bottom15px"><?php $this->widget('CDAdvert', array('solt'=>'top_banner', 'onlyCode'=>true));?></div>
+    <div class="cdc-block bottom10px"><?php $this->widget('CDAdvert', array('solt'=>'top_banner', 'onlyCode'=>true));?></div>
 	<?php echo $content;?>
 </div>
 <?php echo param('footer_before_html');?>
@@ -91,9 +91,9 @@ cs()->registerMetaTag('text/html; charset=utf-8', null, 'content-type')
     ->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/index'), null, array('title'=>app()->name . ' » Feed'));
 
 CD_PRODUCT && cs()->scriptMap = array(
-    'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=20130929001'),
-    'cd-basic.css' => sbu('styles/cd-all.min.css?t=20130929001'),
-    'cd-main.css' => sbu('styles/cd-all.min.css?t=20130929001'),
+    'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=20131010001'),
+    'cd-basic.css' => sbu('styles/cd-all.min.css?t=20131010001'),
+    'cd-main.css' => sbu('styles/cd-all.min.css?t=20131010001'),
     
     'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js',
 
