@@ -64,6 +64,9 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     <?php $this->widget('CDAdvert', array('solt'=>'top_banner', 'boxClass'=>'bottom15px'));?>
 	<?php echo $content;?>
 </div>
+
+<?php $this->widget('CDAdvert', array('solt'=>'bottom_banner', 'boxClass'=>'top15px'));?>
+
 <?php echo param('footer_before_html');?>
 <?php $this->renderPartial('/public/footer');?>
 
