@@ -61,7 +61,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     </div>
 </div>
 <div class="cd-wrapper cd-main">
-    <div class="cdc-block bottom10px"><?php $this->widget('CDAdvert', array('solt'=>'top_banner', 'onlyCode'=>true));?></div>
+    <?php $this->widget('CDAdvert', array('solt'=>'top_banner', 'boxClass'=>'bottom15px'));?>
 	<?php echo $content;?>
 </div>
 <?php echo param('footer_before_html');?>
