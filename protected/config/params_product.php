@@ -5,7 +5,7 @@ return array(
     'localUploadBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'uploads' . DS,
     'localUploadBaseUrl' => 'http://f10.wabao.me/',
 //     'upyunImageBaseUrl' => 'http://f0.wabao.me/',
-    'upyunImageBaseUrl' => 'http://f4.wabao.me/',
+    'upyunImageBaseUrl' => 'http://f2.wabao.me/',
     'upyunFileBaseUrl' => 'http://f11.wabao.me/',
     'resourceBasePath' => dirname(__FILE__) . DS . '..' . DS . '..' . DS . 'resources' . DS,
     'resourceBaseUrl' => 'http://s0.wabao.me/',
