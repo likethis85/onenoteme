@@ -131,7 +131,7 @@ class CDVideoKit
     {
         $maps = array(
             self::PLATFORM_YOUKU => '/id_([\w\d]+?)\.html/i',
-            self::PLATFORM_56 => '/v_([\w\d+?])\.html/i',
+            self::PLATFORM_56 => '/v_([\w\d]+?)\.html/i',
         );
         
         return ($key === null) ? $maps : $maps[$key];
