@@ -146,10 +146,10 @@ class CDVideoKit
 interface ICDVideo
 {
     public function __construct($vid, $client_id);
-    public function getFlashUrl();
-    public function getSourceUrl();
-    public function getIframeUrl();
-    public function getHtml5Url();
+    public function getFlashUrl($open = true);
+    public function getSourceUrl($open = true);
+    public function getIframeUrl($open = true);
+    public function getHtml5Url($open = true);
     public function getDesktopPlayerHTML($width = 600, $height = 400);
     public function getMobilePlayerHTML($width = 280, $height = 180);
 }
@@ -234,22 +234,22 @@ abstract class CDVideoBase
  */
 class CDYoukuVideo extends CDVideoBase implements ICDVideo
 {
-    public function getFlashUrl()
+    public function getFlashUrl($open = true)
     {
         return sprintf('http://player.youku.com/player.php/sid/%s/v.swf', $this->_vid);
     }
     
-    public function getSourceUrl()
+    public function getSourceUrl($open = true)
     {
         return sprintf('http://v.youku.com/v_show/id_%s.html', $this->_vid);
     }
     
-    public function getIframeUrl()
+    public function getIframeUrl($open = true)
     {
         return sprintf('http://player.youku.com/embed/%s', $this->_vid);
     }
     
-    public function getHtml5Url()
+    public function getHtml5Url($open = true)
     {
         return null;
     }
@@ -279,23 +279,23 @@ class CDYoukuVideo extends CDVideoBase implements ICDVideo
  */
 class CD56Video extends CDVideoBase implements ICDVideo
 {
-    public function getFlashUrl()
+    public function getFlashUrl($open = true)
     {
-        $format = $this->_clientID ? 'http://player.56.com/3000003067/open_%s.swf' : 'http://player.56.com/v_%s.swf';
-        return sprintf($format, $this->_vid) . '/1030_r239612568.swf';
+        $format = ($open && $this->_clientID) ? 'http://player.56.com/3000003067/open_%s.swf' : 'http://player.56.com/v_%s.swf';
+        return sprintf($format, $this->_vid) . ($open ? '/1030_r239612568.swf' : '');
     }
 
-    public function getSourceUrl()
+    public function getSourceUrl($open = true)
     {
         return sprintf('http://www.56.com/u/v_%s.html/1030_r239612568.html', $this->_vid);
     }
 
-    public function getIframeUrl()
+    public function getIframeUrl($open = true)
     {
         return sprintf('http://www.56.com/iframe/%s', $this->_vid);
     }
 
-    public function getHtml5Url()
+    public function getHtml5Url($open = true)
     {
         return null;
     }

@@ -657,10 +657,10 @@ class PostController extends AdminController
 	        $vk->setVideoUrl($url);
 	        $video = $vk->getVideo();
 	        $urls = array(
-	            'source_url' => $video->getSourceUrl(),
-    	        'flash_url' => $video->getFlashUrl(),
-    	        'iframe_url' => $video->getIframeUrl(),
-    	        'html5_url' => $video->getHtml5Url(),
+	            'source_url' => $video->getSourceUrl(false),
+    	        'flash_url' => $video->getFlashUrl(false),
+    	        'iframe_url' => $video->getIframeUrl(false),
+    	        'html5_url' => $video->getHtml5Url(false),
 	        );
 	        
 	        return CDBase::jsonp($callback, $urls);
