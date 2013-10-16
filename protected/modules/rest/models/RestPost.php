@@ -42,7 +42,7 @@ class RestPost extends Post
     public function getApiContent()
     {
         $content = strip_tags($this->content);
-        $content = str_replace(array('&nbsp;', '　', ' ', "\t"), '', $content);
+        $content = str_replace(array('&nbsp;', '&nbsp；', '　', ' ', "\t"), '', $content);
         $lines = explode("\n", $content);
         $lines = array_map('trim', $lines);
         $lines = array_filter($lines);
