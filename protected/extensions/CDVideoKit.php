@@ -130,8 +130,8 @@ class CDVideoKit
     protected static function patternMap($key = null)
     {
         $maps = array(
-            self::PLATFORM_YOUKU => '/sid\/(.+?)\/v\.swf/i',
-            self::PLATFORM_56 => '/_(.+?)\.swf/i',
+            self::PLATFORM_YOUKU => '/id_([\w\d]+?)\.html/i',
+            self::PLATFORM_56 => '/v_([\w\d+?])\.html/i',
         );
         
         return ($key === null) ? $maps : $maps[$key];
