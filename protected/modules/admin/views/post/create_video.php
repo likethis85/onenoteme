@@ -78,7 +78,7 @@ $(function(){
 	    if (url.length == 0) return;
 
 	    var xhr = $.ajax({
-			url: '<?php echo aurl('admin/post/parse');?>',
+			url: '<?php echo aurl('admin/post/parseVideoUrl');?>',
 			type: 'POST',
 			dataType: 'jsonp',
 			data: {url: url}
