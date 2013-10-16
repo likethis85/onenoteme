@@ -18,6 +18,11 @@ class CDVideoKit
     {
     }
     
+    public function getVideo()
+    {
+        return $this->_video;
+    }
+    
     public function setVideoID($vid, $platform)
     {
         if ($vid)

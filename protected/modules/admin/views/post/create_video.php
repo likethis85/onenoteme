@@ -10,6 +10,15 @@
 <fieldset>
     <legend><?php echo $this->adminTitle;?></legend>
     <div class="control-group bottom10px">
+        <label class="control-label">抓取地址</label>
+        <div class="controls">
+            <div class="input-append">
+                <?php echo CHtml::textField('original_url', array('class'=>'span5', 'id'=>'original-url'));?>
+                <input type="button" id="parse-url" value="抓取" />
+            </div>
+        </div>
+    </div>
+    <div class="control-group bottom10px">
         <?php echo CHtml::activeLabel($post, 'title', array('class'=>'control-label'));?>
         <div class="controls">
             <?php echo CHtml::activeTextField($post, 'title', array('class'=>'span6', 'disabled'=>'disabled'));?>
@@ -64,6 +73,23 @@
 <script type="text/javascript">
 $(function(){
 	$(':text:first').focus();
+	$('#parse-url').on('click', function(){
+	    var url = $.trim($('#original-url').val());
+	    if (url.length == 0) return;
+
+	    var xhr = $.ajax({
+			url: '<?php echo aurl('admin/post/parse');?>',
+			type: 'POST',
+			dataType: 'jsonp',
+			data: {url: url}
+		});
+		xhr.done(function(data){
+			console.log(data);
+		});
+		xhr.fail(function(error){
+			console.log(error);
+		});
+	});
 });
 </script>
 

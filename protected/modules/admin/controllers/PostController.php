@@ -11,7 +11,7 @@ class PostController extends AdminController
     {
         return array(
             'ajaxOnly + setVerify, quickUpdate, setDelete, setTrash, multiTrash, multiDelete, multiVerify, multiRecommend, multiHottest',
-            'postOnly + setVerify, quickUpdate, setDelete, setTrash, multiTrash,, multiDelete, multiVerify, multiRecommend, multiHottest',
+            'postOnly + setVerify, quickUpdate, setDelete, setTrash, multiTrash,, multiDelete, multiVerify, multiRecommend, multiHottest, parseVideoUrl',
         );
     }
     
@@ -648,4 +648,26 @@ class PostController extends AdminController
 	    return $model;
 	}
 	
+	public function actionParseVideoUrl($callback)
+	{
+	    $url = request()->getPost('url');
+	    if (filter_var($url, FILTER_VALIDATE_URL)) {
+	        $vk = new CDVideoKit();
+    	    $vk->setAppKeysMap(CDBase::videoAppKeysMap());
+	        $vk->setVideoUrl($url);
+	        $video = $vk->getVideo();
+	        $urls = array(
+	            'source_url' => $video->getSourceUrl(),
+    	        'flash_url' => $video->getFlashUrl(),
+    	        'iframe_url' => $video->getIframeUrl(),
+    	        'html5_url' => $video->getHtml5Url(),
+	        );
+	        
+	        return CDBase::jsonp($callback, $urls);
+	    }
+	    else
+	        throw new CHttpException(500, 'url is invalid.');
+	}
 }
+
+
