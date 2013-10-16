@@ -27,7 +27,7 @@
     <div class="control-group bottom10px <?php if ($model->hasErrors('flash_url')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'flash_url', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'flash_url', array('class'=>'span6'));?>
+            <?php echo CHtml::activeTextField($model, 'flash_url', array('class'=>'span6', 'id'=>'flash-url'));?>
             <?php if ($model->hasErrors('flash_url')):?><p class="help-block"><?php echo $model->getError('flash_url');?></p><?php endif;?>
         </div>
     </div>
@@ -35,7 +35,7 @@
     <div class="control-group bottom10px <?php if ($model->hasErrors('source_url')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'source_url', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'source_url', array('class'=>'span6'));?>
+            <?php echo CHtml::activeTextField($model, 'source_url', array('class'=>'span6', 'id'=>'source-url'));?>
             <?php if ($model->hasErrors('source_url')):?><p class="help-block"><?php echo $model->getError('source_url');?></p><?php endif;?>
         </div>
     </div>
@@ -43,7 +43,7 @@
     <div class="control-group bottom10px <?php if ($model->hasErrors('iframe_url')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'iframe_url', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'iframe_url', array('class'=>'span6'));?>
+            <?php echo CHtml::activeTextField($model, 'iframe_url', array('class'=>'span6', 'id'=>'iframe-url'));?>
             <?php if ($model->hasErrors('iframe_url')):?><p class="help-block"><?php echo $model->getError('iframe_url');?></p><?php endif;?>
         </div>
     </div>
@@ -51,7 +51,7 @@
     <div class="control-group bottom10px <?php if ($model->hasErrors('html5_url')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'html5_url', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'html5_url', array('class'=>'span6'));?>
+            <?php echo CHtml::activeTextField($model, 'html5_url', array('class'=>'span6', 'id'=>'html5-url'));?>
             <?php if ($model->hasErrors('html5_url')):?><p class="help-block"><?php echo $model->getError('html5_url');?></p><?php endif;?>
         </div>
     </div>
@@ -84,10 +84,13 @@ $(function(){
 			data: {url: url}
 		});
 		xhr.done(function(data){
-			console.log(data);
+			$('#source-url').val(data.source_url);
+			$('#flash-url').val(data.flash_url);
+			$('#iframe-url').val(data.iframe_url);
+			$('#html5-url').val(data.html5_url);
 		});
 		xhr.fail(function(error){
-			console.log(error);
+			alert('抓取出错');
 		});
 	});
 });
