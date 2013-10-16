@@ -13,7 +13,7 @@
         <label class="control-label">抓取地址</label>
         <div class="controls">
             <div class="input-append">
-                <?php echo CHtml::textField('original_url', array('class'=>'span6', 'id'=>'original-url'));?>
+                <input type="text" name="original_url" id="original-url" />
                 <input type="button" class="btn" id="parse-url" value="抓取" />
             </div>
         </div>
