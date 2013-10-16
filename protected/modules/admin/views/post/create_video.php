@@ -13,8 +13,8 @@
         <label class="control-label">抓取地址</label>
         <div class="controls">
             <div class="input-append">
-                <?php echo CHtml::textField('original_url', array('class'=>'span5', 'id'=>'original-url'));?>
-                <input type="button" id="parse-url" value="抓取" />
+                <?php echo CHtml::textField('original_url', array('class'=>'span6', 'id'=>'original-url'));?>
+                <input type="button" class="btn" id="parse-url" value="抓取" />
             </div>
         </div>
     </div>
@@ -73,7 +73,7 @@
 <script type="text/javascript">
 $(function(){
 	$(':text:first').focus();
-	$('#parse-url').on('click', function(){
+	$(document).on('click', '#parse-url', function(){
 	    var url = $.trim($('#original-url').val());
 	    if (url.length == 0) return;
 
