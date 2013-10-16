@@ -149,6 +149,7 @@ class PostController extends AdminController
 	    
 	    $model = new AdminPostVideo();
 	    $model->post_id = $postid;
+	    $model->desc = $post->title;
 	    
 	    if (request()->getIsPostRequest() && isset($_POST['AdminPostVideo'])) {
 	        $model->attributes = $_POST['AdminPostVideo'];
