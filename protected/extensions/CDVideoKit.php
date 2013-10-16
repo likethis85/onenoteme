@@ -287,7 +287,7 @@ class CD56Video extends CDVideoBase implements ICDVideo
 
     public function getSourceUrl($open = true)
     {
-        return sprintf('http://www.56.com/u/v_%s.html/1030_r239612568.html', $this->_vid);
+        return sprintf('http://www.56.com/u/v_%s.html', $this->_vid) . $open ? '/1030_r239612568.html' : '';
     }
 
     public function getIframeUrl($open = true)
