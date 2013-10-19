@@ -49,6 +49,7 @@ class CDRestDataFormat
             'flash_url' => $model->flash_url,
             'source_url' => $model->getApiSourceUrl(),
             'desc' => $model->desc,
+        	'simple_page' => (int)!empty($model->iframe_url),
         );
         
         return $data;
