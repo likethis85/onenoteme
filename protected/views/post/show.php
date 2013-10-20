@@ -27,7 +27,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         <div class="post-video"><?php echo $post->video->getDesktopVideoHTML(600, 370);?></div>
         <?php endif;?>
 		
-        <?php $this->widget('CDAdvert', array('solt'=>'post_content_bottom_01'));?>
+        <?php $this->widget('CDAdvert', array('solt'=>'post_content_bottom_01', 'boxClass'=>'aleft'));?>
         
         <?php if ($prevUrl || $nextUrl):?>
         <div class="change-post clearfix">
