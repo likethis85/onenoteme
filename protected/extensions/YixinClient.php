@@ -105,7 +105,7 @@ class YixinClient extends CDYixin
      */
     private function welcome()
     {
-        $text = "没错！这里就是要啥有啥，想啥有啥的挖段子微信大本营！\n\n您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，也可以发送给我们与大家一起分享哟～" . self::helpInfo();
+        $text = "没错！这里就是要啥有啥，想啥有啥的挖段子易信大本营！\n\n您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接易信投稿，也可以发送给我们与大家一起分享哟～" . self::helpInfo();
         $xml = $this->outputText($text);
         header('Content-Type: application/xml');
         echo $xml;
@@ -116,7 +116,7 @@ class YixinClient extends CDYixin
      */
     private function subscribe()
     {
-        $text = "没错！这里就是要啥有啥，想啥有啥的挖段子微信大本营！\n\n您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，也可以发送给我们与大家一起分享哟～" . self::helpInfo();
+        $text = "没错！这里就是要啥有啥，想啥有啥的挖段子易信大本营！\n\n您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接易信投稿，也可以发送给我们与大家一起分享哟～" . self::helpInfo();
         $xml = $this->outputText($text);
         header('Content-Type: application/xml');
         echo $xml;
@@ -149,7 +149,7 @@ class YixinClient extends CDYixin
      */
     private function unSupportEvent()
     {
-        $text = "Sorry，我们收到了一个无法识别的事件请求，请您关闭微信进程，重新启动微信试试。" . self::helpInfo();
+        $text = "Sorry，我们收到了一个无法识别的事件请求，请您关闭易信进程，重新启动易信试试。" . self::helpInfo();
         $xml = $this->outputText($text);
         header('Content-Type: application/xml');
         echo $xml;
@@ -167,7 +167,7 @@ class YixinClient extends CDYixin
     
     private function method_0()
     {
-        $text = '您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，与大家一起分享哟～' . self::helpInfo();
+        $text = '您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接易信投稿，与大家一起分享哟～' . self::helpInfo();
         $xml = $this->outputText($text);
         header('Content-Type: application/xml');
         echo $xml;

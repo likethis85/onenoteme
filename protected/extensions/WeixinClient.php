@@ -239,6 +239,7 @@ class WeixinClient extends CDWeixin
     
     private function nextLengtu()
     {
+        $count = 3;
         $wxid = $this->_data->FromUserName;
         $lastID = app()->getDb()->createCommand()
             ->select('last_lengtu_pid')
@@ -251,11 +252,13 @@ class WeixinClient extends CDWeixin
             ->select(array('id', 'title', 'content', 'original_pic'))
             ->from(TABLE_POST)
             ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'media_type = :mediatype', 'id > :lastID'), $params)
-            ->order('id asc');
-        $row = $cmd->queryRow();
+            ->order('id asc')
+            ->limit($count);
+        $rows = $cmd->queryAll();
         
-        if (empty($row['content'])) return ;
+        if (empty($rows)) return ;
         
+        $lastRow = end($rows);
         if ($lastID === false) {
             $columns = array(
                 'wx_token' => $wxid,
@@ -269,23 +272,28 @@ class WeixinClient extends CDWeixin
         else {
             $columns = array(
                 'last_time' => time(),
-                'last_lengtu_pid' => (int)$row['id'],
+                'last_lengtu_pid' => (int)$lastRow['id'],
             );
             app()->getDb()->createCommand()
                 ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
         }
         
-        $text = strip_tags($row['title']);
-        $thumb = new CDImageThumb($row['original_pic']);
-        $posts = array(
-            array(
+        reset($rows);
+        foreach ($rows as $row) {
+            if (empty($row['content'])) return ;
+            $text = strip_tags($row['title']);
+            $thumb = new CDImageThumb($row['original_pic']);
+            $posts[] = array(
                 'Title' => $text,
                 'Discription' => mb_strimwidth(strip_tags($row['content']), 0, 150, '...', app()->charset),
                 'PicUrl' => $thumb->middleImageUrl(),
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
-            )
-        );
-        $posts = array_merge($posts, self::advert());
+            );
+        }
+        
+        $advertRow = self::advert();
+        if ($advertRow)
+            $posts[] = self::advert();
         $xml = $this->outputNews($text, $posts);
         header('Content-Type: application/xml');
         echo $xml;
