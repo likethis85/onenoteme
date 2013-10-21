@@ -175,7 +175,7 @@ class CDYixin
                 throw new Exception('$posts 数据结构错误');
         }
         
-        $text = sprintf($textTpl, $this->_data->FromUserName, $this->_data->ToUserName, time(), self::REPLY_TYPE_NEWS, $content, count($posts), $items);
+        $text = sprintf($textTpl, $this->_data->FromUserName, $this->_data->ToUserName, time(), self::REPLY_TYPE_NEWS, count($posts), $items);
         return $text;
     }
     

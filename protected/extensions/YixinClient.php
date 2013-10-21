@@ -200,7 +200,7 @@ class YixinClient extends CDYixin
         
         foreach ($rows as $row)
             $contents[] = trim(strip_tags($row['content']));
-        $content = join("\n--------------------\n\n", $contents);
+        $content = join("\n--------------------------\n\n", $contents);
         $lastRow = array_pop($rows);
         $lastID = (int)$lastRow['id'];
         
@@ -229,7 +229,7 @@ class YixinClient extends CDYixin
         if ($i === 0)
             $content .= self::helpInfo();
         elseif ($i === 1) {
-            $tip = "\n\n-------------------------\n段友们，是时候回复一下13，14，1x 。。。了，或许更能满足您的需求哦！";
+            $tip = "\n\n-------------------------------\n段友们，是时候回复一下13，14，1x 。。。了，或许更能满足您的需求哦！";
             $content .= $tip;
         }
         $xml = $this->outputText($content);
@@ -291,6 +291,7 @@ class YixinClient extends CDYixin
             );
         }
         
+        // 添加广告
         $advertRow = self::advert();
         if ($advertRow)
             $posts[] = self::advert();
@@ -303,7 +304,7 @@ class YixinClient extends CDYixin
     
     private static function helpInfo($classic = false)
     {
-        $text = "\n\n-------------------------\n";
+        $text = "\n\n-------------------------------\n";
         if ($classic)
             $text .= "回复 0 查看帮助\n";
         else {
