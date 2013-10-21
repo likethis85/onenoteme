@@ -183,7 +183,7 @@ class YixinClient extends CDYixin
         $wxid = $this->_data->FromUserName;
         $lastID = app()->getDb()->createCommand()
             ->select('last_joke_pid')
-            ->from(TABLE_USER_WEIXIN)
+            ->from(TABLE_USER_YIXIN)
             ->where('wx_token = :wxid', array(':wxid'=>$wxid))
             ->queryScalar();
         
@@ -214,7 +214,7 @@ class YixinClient extends CDYixin
                 'last_joke_pid' => 0,
             );
             app()->getDb()->createCommand()
-                ->insert(TABLE_USER_WEIXIN, $columns);
+                ->insert(TABLE_USER_YIXIN, $columns);
         }
         else {
             $columns = array(
@@ -222,7 +222,7 @@ class YixinClient extends CDYixin
                 'last_joke_pid' => $lastID,
             );
             app()->getDb()->createCommand()
-                ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
+                ->update(TABLE_USER_YIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
         }
         
         $i = mt_rand(0, 2);
@@ -242,7 +242,7 @@ class YixinClient extends CDYixin
         $wxid = $this->_data->FromUserName;
         $lastID = app()->getDb()->createCommand()
             ->select('last_lengtu_pid')
-            ->from(TABLE_USER_WEIXIN)
+            ->from(TABLE_USER_YIXIN)
             ->where('wx_token = :wxid', array(':wxid'=>$wxid))
             ->queryScalar();
         
@@ -264,7 +264,7 @@ class YixinClient extends CDYixin
                 'last_lengtu_pid' => 0,
             );
             app()->getDb()->createCommand()
-                ->insert(TABLE_USER_WEIXIN, $columns);
+                ->insert(TABLE_USER_YIXIN, $columns);
         }
         else {
             $columns = array(
@@ -272,7 +272,7 @@ class YixinClient extends CDYixin
                 'last_lengtu_pid' => (int)$row['id'],
             );
             app()->getDb()->createCommand()
-                ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
+                ->update(TABLE_USER_YIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
         }
         
         $text = strip_tags($row['title']);

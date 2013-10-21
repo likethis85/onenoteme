@@ -30,6 +30,7 @@ define('TABLE_POST_FAVORITE', '{{post_favorite}}');
 define('TABLE_USER', '{{user}}');
 define('TABLE_USER_PROFILE', '{{user_profile}}');
 define('TABLE_USER_WEIXIN', '{{user_weixin}}');
+define('TABLE_USER_YIXIN', '{{user_yixin}}');
 define('TABLE_FILTER_KEYWORD', '{{filter_keyword}}');
 define('TABLE_LINK', '{{link}}');
 define('TABLE_ADVERT', '{{advert}}');
