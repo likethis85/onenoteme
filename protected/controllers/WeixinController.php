@@ -4,8 +4,8 @@ class WeixinController extends Controller
     public function actionIndex()
     {
         $token = 'waduanzi';
-        $weixin = new WeixinClient($token);
-        $weixin->run();
+        $client = new WeixinClient($token);
+        $client->run();
         exit(0);
     }
 }
