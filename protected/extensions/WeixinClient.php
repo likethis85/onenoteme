@@ -239,7 +239,7 @@ class WeixinClient extends CDWeixin
     
     private function nextLengtu()
     {
-        $count = 3;
+        $count = 4;
         $wxid = $this->_data->FromUserName;
         $lastID = app()->getDb()->createCommand()
             ->select('last_lengtu_pid')
@@ -291,9 +291,11 @@ class WeixinClient extends CDWeixin
             );
         }
         
+        // 添加广告
         $advertRow = self::advert();
         if ($advertRow)
             $posts[] = self::advert();
+        
         $xml = $this->outputNews($text, $posts);
         header('Content-Type: application/xml');
         echo $xml;
