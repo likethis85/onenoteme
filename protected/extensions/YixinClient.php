@@ -1,5 +1,5 @@
 <?php
-class WdzWeixin extends CDWeixin
+class YixinClient extends CDYixin
 {
     const POST_JOKE_CONTENT_MIN_LEN = 20;
     
