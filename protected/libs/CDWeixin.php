@@ -129,7 +129,7 @@ class CDWeixin
      * @param string $content
      * @return string xml字符串
      */
-    public function outputText($content, $funcflag = 0)
+    public function outputText($content)
     {
         $textTpl = '<xml>
                 <ToUserName><![CDATA[%s]]></ToUserName>
@@ -137,10 +137,9 @@ class CDWeixin
                 <CreateTime>%s</CreateTime>
                 <MsgType><![CDATA[%s]]></MsgType>
                 <Content><![CDATA[%s]]></Content>
-                <FuncFlag>%s</FuncFlag>
             </xml>';
     
-        $text = sprintf($textTpl, $this->_data->FromUserName, $this->_data->ToUserName, time(), self::REPLY_TYPE_TEXT, $content, $funcflag);
+        $text = sprintf($textTpl, $this->_data->FromUserName, $this->_data->ToUserName, time(), self::REPLY_TYPE_TEXT, $content);
         return $text;
     }
     
@@ -150,7 +149,7 @@ class CDWeixin
      * @param arrry $posts 文章数组，每一个元素是一个文章数组，索引跟微信官方接口说明一致
      * @return string xml字符串
      */
-    public function outputNews($content, $posts = array(), $funcflag = 0)
+    public function outputNews($content, $posts = array())
     {
         $textTpl = '<xml>
              <ToUserName><![CDATA[%s]]></ToUserName>
@@ -160,7 +159,6 @@ class CDWeixin
              <Content><![CDATA[%s]]></Content>
              <ArticleCount>%d</ArticleCount>
              <Articles>%s</Articles>
-             <FuncFlag>%s<FuncFlag>
          </xml>';
         
         $itemTpl = '<item>
@@ -178,11 +176,11 @@ class CDWeixin
                 throw new Exception('$posts 数据结构错误');
         }
         
-        $text = sprintf($textTpl, $this->_data->FromUserName, $this->_data->ToUserName, time(), self::REPLY_TYPE_NEWS, $content, count($posts), $items, $funcflag);
+        $text = sprintf($textTpl, $this->_data->FromUserName, $this->_data->ToUserName, time(), self::REPLY_TYPE_NEWS, $content, count($posts), $items);
         return $text;
     }
     
-    public function outputMusic($title, $desc, $music_url, $hq_music_url, $funcflag = 0)
+    public function outputMusic($title, $desc, $music_url, $hq_music_url)
     {
         $textTpl = '<xml>
              <ToUserName><![CDATA[%s]]></ToUserName>
@@ -195,10 +193,9 @@ class CDWeixin
                  <MusicUrl><![CDATA[%s]]></MusicUrl>
                  <HQMusicUrl><![CDATA[%s]]></HQMusicUrl>
              </Music>
-             <FuncFlag>%s<FuncFlag>
          </xml>';
         
-        $text = sprintf($textTpl, $this->_data->FromUserName, $this->_data->ToUserName, time(), self::REPLY_TYPE_MUSIC, $title, $desc, $music_url, $hq_music_url, $funcflag);
+        $text = sprintf($textTpl, $this->_data->FromUserName, $this->_data->ToUserName, time(), self::REPLY_TYPE_MUSIC, $title, $desc, $music_url, $hq_music_url);
         return $text;
     }
     
