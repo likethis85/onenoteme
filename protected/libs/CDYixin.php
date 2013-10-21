@@ -162,7 +162,7 @@ class CDYixin
         
         $itemTpl = '<item>
              <Title><![CDATA[%s]]></Title>
-             <Discription><![CDATA[%s]]></Discription>
+             <Description><![CDATA[%s]]></Description>
              <PicUrl><![CDATA[%s]]></PicUrl>
              <Url><![CDATA[%s]]></Url>
          </item>';
@@ -170,7 +170,7 @@ class CDYixin
         $items = '';
         foreach ((array)$posts as $p) {
             if (is_array($p))
-                $items .= sprintf($itemTpl, $p['Title'], $p['Discription'], $p['PicUrl'], $p['Url']);
+                $items .= sprintf($itemTpl, $p['Title'], $p['Description'], $p['PicUrl'], $p['Url']);
             else
                 throw new Exception('$posts 数据结构错误');
         }
