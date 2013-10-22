@@ -533,7 +533,7 @@ class Post extends CActiveRecord
     public function getTitleLink($len = 0, $target = '_blank')
     {
         if ($this->channel_id == CHANNEL_FOCUS)
-            $prepend = '<strong class="corange">【挖热点】</span>';
+            $prepend = '<strong class="corange">【挖热点】</strong>';
         else
             $prepend = '';
             
