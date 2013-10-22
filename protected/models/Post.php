@@ -514,7 +514,10 @@ class Post extends CActiveRecord
      */
     public function getSubTitle($len = 35)
     {
-        $title = strip_tags(trim($this->title));
+        if ($this->channel_id == CHANNEL_FOCUS)
+            $title = '<strong class="corange">【挖热点】</span>';
+        
+        $title .= strip_tags(trim($this->title));
         if ($len > 0)
             $title = mb_strimwidth($title, 0, $len, '...', app()->charset);
         
