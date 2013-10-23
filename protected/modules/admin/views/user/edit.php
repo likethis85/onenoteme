@@ -8,6 +8,12 @@
 <?php echo CHtml::form('', 'post', array('class'=>'form-horizontal', 'enctype'=>'multipart/form-data'));?>
 <fieldset>
     <legend><?php echo $this->adminTitle;?></legend>
+    <div class="control-group">
+        <?php echo CHtml::activeLabel($model, 'id', array('class'=>'control-label'));?>
+        <div class="controls">
+            <input type="text" value="<?php echo $model->id;?>" disabled="disabled" />
+        </div>
+    </div>
     <div class="control-group <?php if($model->hasErrors('username')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'username', array('class'=>'control-label'));?>
         <div class="controls">

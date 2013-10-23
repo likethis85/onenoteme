@@ -11,6 +11,7 @@
         <?php foreach ((array)$models as $model):?>
         <tr>
             <td class="weibo-text">
+                <blockquote><?php echo $model->user_id . '&nbsp;/&nbsp;' . $model->user_name;?></blockquote>
                 <p><?php echo $model->content;?></p>
                 <?php echo l(image($model->thumbnail_pic, ''), $model->bmiddle_pic, array('target'=>'_blank'));?>
             </td>
@@ -39,7 +40,7 @@ $(function(){
     $(document).on('dblclick', '.weibo-text', function(event){
         event.preventDefault();
         var p = $(this).find('p');
-        var html = '<textarea name="newtext">' + $.trim(p.html()) + '</textarea>';
+        var html = '<textarea class="span5" name="newtext">' + $.trim(p.html()) + '</textarea>';
         p.html(html);
         p.find('textarea').height(p.height() + 30);
     });
