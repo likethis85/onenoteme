@@ -117,6 +117,8 @@ define('PLATFORM_ANDROID', 3);
 define('IMAGE_THUMBNAIL_WIDTH', 200);
 define('IMAGE_THUMBNAIL_HEIGHT', 260);
 define('IMAGE_THUMBNAIL_SQUARE_SIZE', 200);
+define('IMAGE_RECT_IMAGE_WIDTH', 200);
+define('IMAGE_RECT_IMAGE_HEIGHT', 112);
 
 // APP 专用
 define('IMAGE_APP_THUMB_WIDTH', 200);
@@ -139,6 +141,7 @@ define('UPYUN_IMAGE_CUSTOM_MIDDLE', 'middle');
 define('UPYUN_IMAGE_CUSTOM_LARGE', 'large');
 define('UPYUN_IMAGE_CUSTOM_FIXTHUBM', 'fixthumb');
 define('UPYUN_IMAGE_CUSTOM_SQUARETHUBM', 'squarethumb');
+define('UPYUN_IMAGE_CUSTOM_RECTTHUBM', 'rectthumb');
 define('UPYUN_AVATAR_CUSTOM_LARGE', 'lavatar');
 define('UPYUN_AVATAR_CUSTOM_SMALL', 'savatar');
 define('UPYUN_AVATAR_CUSTOM_MINI', 'mavatar');

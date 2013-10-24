@@ -82,6 +82,11 @@ class CDImageThumb
         return $this->urlByVersion(UPYUN_IMAGE_CUSTOM_SQUARETHUBM);
     }
     
+    public function rectThumbImageUrl()
+    {
+        return $this->urlByVersion(UPYUN_IMAGE_CUSTOM_RECTTHUBM);
+    }
+    
     public function smallImageUrl()
     {
         return $this->urlByVersion(UPYUN_IMAGE_CUSTOM_SMALL);
@@ -134,6 +139,7 @@ class CDImageThumb
             UPYUN_IMAGE_CUSTOM_THUMB,
             UPYUN_IMAGE_CUSTOM_FIXTHUBM,
             UPYUN_IMAGE_CUSTOM_SQUARETHUBM,
+            UPYUN_IMAGE_CUSTOM_RECTTHUBM,
             // avatar version
             UPYUN_AVATAR_CUSTOM_MINI,
             UPYUN_AVATAR_CUSTOM_SMALL,

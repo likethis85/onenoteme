@@ -21,7 +21,52 @@ class SiteController extends Controller
     
     public function actionIndex($page = 1)
     {
-        $this->forward('channel/latest');
+        $this->channel = 'siteindex';
+        $this->setSitePageTitle('');
+        $this->setKeywords(p('home_index_keywords'));
+        $this->setDescription(p('home_index_description'));
+
+        $mobileUrl = ($page > 1) ? aurl('mobile/channel/latest', array('page'=>$page)) : aurl('mobile/channel/latest');
+        cs()->registerMetaTag('format=html5;url=' . $mobileUrl, null, 'mobile-agent');
+    
+        $criteria = new CDbCriteria();
+        $criteria->scopes = array('homeshow', 'published');
+        $criteria->addInCondition('t.channel_id', array(CHANNEL_FUNNY, CHANNEL_FOCUS));
+        $criteria->order = 't.istop desc, t.create_time desc';
+        $criteria->limit = (int)p('line_post_count_page');
+    
+        $data = self::fetchPosts($criteria);
+        $this->render('index', array(
+            'models' => $data['models'],
+            'pages' => $data['pages'],
+        ));
+    }
+    
+    private static function fetchPosts(CDbCriteria $criteria)
+    {
+        $duration = 60*60*24;
+	    $cacheID = md5(var_export($criteria->toArray(), true));
+	    $redis = redis();
+	    if ($redis) {
+	        $count = $redis->get($cacheID);
+	        if ($count === false) {
+	            $count = Post::model()->count($criteria);
+	            $redis->set($cacheID, $count, $duration);
+	        }
+	    }
+	    else
+	        $count = Post::model()->count($criteria);
+	    
+        $pages = new CPagination($count);
+        $pages->setPageSize($criteria->limit);
+        $pages->applyLimit($criteria);
+    
+        $models = Post::model()->findAll($criteria);
+    
+        return array(
+            'models' => $models,
+            'pages' => $pages,
+        );
     }
     
     public function actionBdmap()

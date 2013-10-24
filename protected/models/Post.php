@@ -538,7 +538,7 @@ class Post extends CActiveRecord
             $prepend = '';
             
         $title = $this->getSubTitle($len);
-        return l($prepend . h($title), $this->getUrl(), array('target'=>$target));
+        return l($prepend . h($title), $this->getUrl(), array('class'=>'cd-title-link', 'target'=>$target, 'title'=>$this->getFilterTitle()));
     }
 
     /**
@@ -635,6 +635,20 @@ class Post extends CActiveRecord
         $thumb = $this->getImageThumb();
         if ($thumb)
             $url = $thumb->squareThumbImageUrl();
+        
+        return $url;
+    }
+    
+    /**
+     * 获取矩形缩略图
+     * @return string
+     */
+    public function getRectThumb()
+    {
+        $url = '';
+        $thumb = $this->getImageThumb();
+        if ($thumb)
+            $url = $thumb->rectThumbImageUrl();
         
         return $url;
     }
@@ -819,6 +833,42 @@ class Post extends CActiveRecord
         $html = '';
         if ($this->getSquareThumb())
             $html = l($this->getSquareThumbImage($width), $this->getUrl(true, $trace), array('target'=>$target, 'title'=>$this->getFilterTitle()));
+        
+        return $html;
+    }
+    
+    /**
+     * 获取矩形缩略图<img>代码
+     * @param integer $width 图片宽度
+     * @return string
+     */
+    public function getRectThumbImage($width = 0)
+    {
+        $html = '';
+        if ($this->getRectThumb()) {
+            $htmlOptions = array('class'=>'cd-rectthumb');
+            $width = (int)$width;
+            if ($width > 0) {
+                $htmlOptions['width'] = $width;
+                $htmlOptions['height'] = $this->getThumbHeightByWidth($width);
+            }
+            $html = image($this->getRectThumb(), $this->title, $htmlOptions);
+        }
+    
+        return $html;
+    }
+    
+    /**
+     * 获取矩形缩略图链接代码
+     * @param string $target 链接打开页面
+     * @param integer $width 图片宽度
+     * @return string
+     */
+    public function getRectThumbLink($target = '_blank', $width = 0, $trace = '')
+    {
+        $html = '';
+        if ($this->getRectThumb())
+            $html = l($this->getRectThumbImage($width), $this->getUrl(true, $trace), array('target'=>$target, 'title'=>$this->getFilterTitle()));
         
         return $html;
     }

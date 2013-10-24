@@ -17,14 +17,13 @@ catch (Exception $e) {
 
 return array(
     'basePath' => dirname(__FILE__) . DS . '..',
-    'id' => 'waduanzi.com',
+    'id' => 'waduanzi.cn',
     'name' => '挖段子',
     'language' => 'zh_cn',
     'charset' => 'utf-8',
     'timezone' => 'Asia/Shanghai',
 
     'import' => array(
-        'application.dmodels.*',
         'application.models.*',
         'application.extensions.*',
         'application.components.*',
@@ -84,10 +83,10 @@ return array(
 //		    'queryCacheID' => 'cache',
 //		    'queryCachingDuration' => 3600,
         ),
-//         'cache' => array(
-//             'class' => 'CFileCache',
-// 		    'directoryLevel' => 2,
-//         ),
+        'cache' => array(
+            'class' => 'CFileCache',
+		    'directoryLevel' => 2,
+        ),
         'redis' => array(
             'class' => 'application.extensions.CDRedisCache',
             'host' => '127.0.0.1',
