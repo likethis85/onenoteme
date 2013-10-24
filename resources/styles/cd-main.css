@@ -259,13 +259,13 @@ a:hover #big-qrcode {display:block;}
 .best-posts h4 {margin-top:0; padding-top:0;}
 .best-left {width:710px;}
 .best-right {width:215px; border-left:1px solid #EFEFEF;}
-.best-right .author-list {height:370px; margin-left:15px;}
+.best-right .author-list {height:320px; margin-left:15px;}
 .best-right h4 {text-indent:15px;}
 .best-posts ul {list-style:none; padding:0; margin:0;}
 .best-posts ul.best-text {padding:10px; margin-bottom:20px; background-color:#EFEFEF;}
 .best-posts ul li {float:left; padding:3px 0;}
 .best-posts ul.best-text li {width:33%;}
-.best-posts ul.best-image li {width:25%; margin:5px 0;}
+.best-posts ul.best-image li {width:20%; margin:5px 0;}
 .best-posts a:hover {text-decoration:underline;}
 .best-posts .best-image a {display:block; text-align:center;}
 .best-posts .best-image img {width:85%;}

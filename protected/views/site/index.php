@@ -2,7 +2,7 @@
     <div class="fleft best-left">
         <h4>编辑推荐</h4>
         <?php $this->widget('CDPostSearch', array('channel'=>CHANNEL_FUNNY, 'recommend'=>true, 'mediaType'=>MEDIA_TYPE_TEXT, 'duration'=>3600*24, 'view'=>CDPostSearch::VIEW_RECOMMEND_TEXT));?>
-        <?php $this->widget('CDPostSearch', array('channel'=>CHANNEL_FUNNY, 'recommend'=>true, 'mediaType'=>MEDIA_TYPE_IMAGE, 'count'=>8, 'duration'=>3600*24, 'view'=>CDPostSearch::VIEW_RECOMMEND_IMAGE));?>
+        <?php $this->widget('CDPostSearch', array('channel'=>CHANNEL_FUNNY, 'recommend'=>true, 'mediaType'=>MEDIA_TYPE_IMAGE, 'count'=>5, 'duration'=>3600*24, 'view'=>CDPostSearch::VIEW_RECOMMEND_IMAGE));?>
     </div>
     <div class="fright best-right">
         <h4>专题推荐</h4>
