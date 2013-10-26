@@ -54,11 +54,11 @@ class PostController extends RestController
         
         if ($image_filter == 0) {
             $criteria->addCondition('t.original_width == 0 or t.original_height == 0 or (t.original_height * 300 / t.original_width) < :longheight');
-            $criteria->params['longheight'] = self::LONG_IMAGE_HEIGHT;
+            $criteria->params[':longheight'] = self::LONG_IMAGE_HEIGHT;
         }
         elseif ($image_filter > 0) {
             $criteria->addCondition('t.original_width > 0 and t.original_height > 0 and (t.original_height * 300 / t.original_width) >= :longheight');
-            $criteria->params['longheight'] = self::LONG_IMAGE_HEIGHT;
+            $criteria->params[':longheight'] = self::LONG_IMAGE_HEIGHT;
         }
         
         $posts = RestPost::model()->published()->findAll($criteria);
