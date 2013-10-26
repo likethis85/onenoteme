@@ -22,7 +22,7 @@ class PostController extends RestController
      * @param string $media_type optional，类型，MEDIA_TEXT | MEDIA_IMAGE | MEDIA_VIDEO，默认为文字和图片，可以是单个，也可以是多个，多个用英文半角逗号(,)分隔
      * @return array 内容列表，数组结构
      */
-    public function actionTimeline($channel_id, $lasttime = 0, $maxtime = 0, $media_type = 0, $long_image=-1)
+    public function actionTimeline($channel_id, $lasttime = 0, $maxtime = 0, $media_type = 0, $image_filter=-1)
     {
         $channel_id = (int)$channel_id;
         $lasttime = (float)$lasttime;
@@ -52,11 +52,11 @@ class PostController extends RestController
             $criteria->params[':maxtime'] = $maxtime;
         }
         
-        if ($long_image == 0) {
+        if ($image_filter == 0) {
             $criteria->addCondition('t.original_width == 0 or t.original_height == 0 or (t.original_height * 300 / t.original_width) < :longheight');
             $criteria->params['longheight'] = self::LONG_IMAGE_HEIGHT;
         }
-        elseif ($long_image > 0) {
+        elseif ($image_filter > 0) {
             $criteria->addCondition('t.original_width > 0 and t.original_height > 0 and (t.original_height * 300 / t.original_width) >= :longheight');
             $criteria->params['longheight'] = self::LONG_IMAGE_HEIGHT;
         }
