@@ -395,7 +395,7 @@ class PostController extends RestController
     
     protected function postRowCount()
     {
-        return DEFAULT_POST_FEEDBACK_COUNT;
+        return DEFAULT_POST_LATEST_COUNT;
     }
     
     protected function formatPosts(array $models, $includeUser = true, $includeComment = false)

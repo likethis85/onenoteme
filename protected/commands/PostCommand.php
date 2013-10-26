@@ -25,18 +25,19 @@ class PostCommand extends CConsoleCommand
         $focusIDs = $cmd->where($conditions, $params)->queryColumn();
         
         $ids = array_merge($duanziIDs, $lengtuIDs, $focusIDs);
+        var_dump($ids);
         $ids = array_unique($ids);
-        
+        var_dump($ids);
         $nums = 0;
         foreach ($ids as $index => $id) {
-            $num = app()->getDb()->createCommand()
+            $rowCount = app()->getDb()->createCommand()
                 ->update(TABLE_POST,
                     array('state'=>POST_STATE_ENABLED, 'create_time'=>time() - $index*60),
                     'id = :pid',
                     array(':pid' => $id)
                 );
             
-            if ($num > 0) $nums++;
+            if ($rowCount > 0) $nums++;
         }
         printf("update %d rows\n", $nums);
     }
