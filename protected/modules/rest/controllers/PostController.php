@@ -3,7 +3,6 @@ class PostController extends RestController
 {
     const APP_IMAGE_WIDTH = 300;
     const LONG_IMAGE_HEIGHT = 800;
-    const HISTORY_COUNT = 50;
     const MEDIA_TYPE_DELIMITER = ',';
     
     public function filters()
@@ -82,7 +81,7 @@ class PostController extends RestController
         
         $criteria = new CDbCriteria();
         $criteria->select = self::selectColumns();
-        $criteria->limit = self::HISTORY_COUNT;
+        $criteria->limit = DEFAULT_POST_HISTORY_COUNT;
         $criteria->order = 't.create_time asc';
         $criteria->with = array('user', 'user.profile');
         
