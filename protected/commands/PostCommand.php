@@ -8,6 +8,7 @@ class PostCommand extends CConsoleCommand
             ->from(TABLE_POST)
             ->order('create_time desc, id desc')
             ->limit($count);
+        $focusCmd = clone $cmd;
         
         $conditions = array('and', 'channel_id = :channelID', 'media_type = :mediatype', 'state = :disable_state');
         
@@ -16,15 +17,13 @@ class PostCommand extends CConsoleCommand
         $duanziIDs = $cmd->where($conditions, $params)->queryColumn();
         
         // 图片
-        $cmd->where = null;
         $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_FUNNY, ':mediatype'=>MEDIA_TYPE_IMAGE);
         $lengtuIDs = $cmd->where($conditions, $params)->queryColumn();
         
         // 挖热点
-        $cmd->where = null;
         $conditions = array('and', 'channel_id = :channelID', 'state = :disable_state');
         $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_FOCUS);
-        $focusIDs = $cmd->where($conditions, $params)->queryColumn();
+        $focusIDs = $focusCmd->where($conditions, $params)->queryColumn();
         
         $ids = array_merge($duanziIDs, $lengtuIDs, $focusIDs);
         $ids = array_unique($ids);
