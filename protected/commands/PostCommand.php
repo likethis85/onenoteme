@@ -19,7 +19,13 @@ class PostCommand extends CConsoleCommand
         $lengtuParams = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_FUNNY, ':mediatype'=>MEDIA_TYPE_IMAGE);
         $lengtuIDs = $cmd->where($jokeConditions, $lengtuParams)->queryColumn();
         var_dump($cmd->text);
+        
         // 挖热点
+        $cmd = app()->getDb()->createCommand()
+            ->select('id')
+            ->from(TABLE_POST)
+            ->order('create_time desc, id desc')
+            ->limit($count);
         $focusConditions = array('and', 'channel_id = :channelID', 'state = :disable_state');
         $foucsParams = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_FOCUS);
         $focusIDs = $cmd->where($focusConditions, $foucsParams)->queryColumn();
