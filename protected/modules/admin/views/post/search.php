@@ -4,19 +4,19 @@
     <div class="control-group">
         <?php echo CHtml::activeLabel($form, 'postid', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($form, 'postid', array('class'=>'input-small'));?>
+            <?php echo CHtml::activeTextField($form, 'postid', array('class'=>'span2'));?>
         </div>
     </div>
     <div class="control-group">
         <?php echo CHtml::activeLabel($form, 'keyword', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($form, 'keyword');?>
+            <?php echo CHtml::activeTextField($form, 'keyword', array('class'=>'span4'));?>
         </div>
     </div>
     <div class="control-group">
         <?php echo CHtml::activeLabel($form, 'author', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($form, 'author');?>
+            <?php echo CHtml::activeTextField($form, 'author', array('class'=>'span4'));?>
         </div>
     </div>
     <div class="form-actions">

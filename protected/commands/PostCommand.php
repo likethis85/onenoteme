@@ -8,6 +8,7 @@ class PostCommand extends CConsoleCommand
             ->from(TABLE_POST)
             ->order('create_time desc, id desc')
             ->limit($count);
+        
         $focusCmd = clone $cmd;
         
         $conditions = array('and', 'channel_id = :channelID', 'media_type = :mediatype', 'state = :disable_state');
