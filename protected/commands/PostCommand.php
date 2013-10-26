@@ -14,16 +14,16 @@ class PostCommand extends CConsoleCommand
         // 文字
         $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_FUNNY, ':mediatype'=>MEDIA_TYPE_TEXT);
         $duanziIDs = $cmd->where($conditions, $params)->queryColumn();
-        
+        var_dump($cmd->text);
         // 图片
         $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_FUNNY, ':mediatype'=>MEDIA_TYPE_IMAGE);
         $lengtuIDs = $cmd->where($conditions, $params)->queryColumn();
-        
+        var_dump($cmd->text);
         // 挖热点
         $conditions = array('and', 'channel_id = :channelID', 'state = :disable_state');
         $params = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_FOCUS);
         $focusIDs = $cmd->where($conditions, $params)->queryColumn();
-        
+        var_dump($cmd->text);
         $ids = array_merge($duanziIDs, $lengtuIDs, $focusIDs);
         var_dump($ids);
         $ids = array_unique($ids);
