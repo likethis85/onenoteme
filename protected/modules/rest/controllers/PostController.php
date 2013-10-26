@@ -52,13 +52,16 @@ class PostController extends RestController
             $criteria->params[':maxtime'] = $maxtime;
         }
         
+        // 是否过滤图片长度
         if ($image_filter == 0) {
-            $criteria->addCondition('t.original_width = 0 or t.original_height = 0 or (t.original_height * 300 / t.original_width) < :longheight');
+            $criteria->addCondition('t.original_width = 0 OR t.original_height = 0 OR (t.original_height * :app_image_width / t.original_width) < :longheight');
             $criteria->params[':longheight'] = self::LONG_IMAGE_HEIGHT;
+            $criteria->params[':app_image_width'] = self::APP_IMAGE_WIDTH;
         }
         elseif ($image_filter > 0) {
-            $criteria->addCondition('t.original_width > 0 and t.original_height > 0 and (t.original_height * 300 / t.original_width) >= :longheight');
+            $criteria->addCondition('t.original_width > 0 AND t.original_height > 0 AND (t.original_height * :app_image_width / t.original_width) >= :longheight');
             $criteria->params[':longheight'] = self::LONG_IMAGE_HEIGHT;
+            $criteria->params[':app_image_width'] = self::APP_IMAGE_WIDTH;
         }
         
         $posts = RestPost::model()->published()->findAll($criteria);
@@ -73,7 +76,7 @@ class PostController extends RestController
      * @param string $media_type optional，类型，MEDIA_TEXT | MEDIA_IMAGE | MEDIA_VIDEO，可以是单个，也可以是多个，多个用英文半角逗号(,)分隔
      * @return array 内容列表，数组结构
      */
-    public function actionHistory($channel_id = 0, $media_type = 0)
+    public function actionHistory($channel_id = 0, $media_type = 0, $image_filter = -1)
     {
         $channel_id = (int)$channel_id;
         
@@ -97,13 +100,25 @@ class PostController extends RestController
         $criteria->addCondition('t.create_time >= :mintime');
         $criteria->params[':mintime'] = $mintime;
         
+        // 是否过滤图片长度
+        if ($image_filter == 0) {
+            $criteria->addCondition('t.original_width = 0 OR t.original_height = 0 OR (t.original_height * :app_image_width / t.original_width) < :longheight');
+            $criteria->params[':longheight'] = self::LONG_IMAGE_HEIGHT;
+            $criteria->params[':app_image_width'] = self::APP_IMAGE_WIDTH;
+        }
+        elseif ($image_filter > 0) {
+            $criteria->addCondition('t.original_width > 0 AND t.original_height > 0 AND (t.original_height * :app_image_width / t.original_width) >= :longheight');
+            $criteria->params[':longheight'] = self::LONG_IMAGE_HEIGHT;
+            $criteria->params[':app_image_width'] = self::APP_IMAGE_WIDTH;
+        }
+        
         $posts = RestPost::model()->published()->findAll($criteria);
         $rows = $this->formatPosts($posts);
         
         $this->output($rows, 30);
     }
     
-    public function actionBest($hours = 24, $channel_id = 0, $page = 1, $media_type = 0)
+    public function actionBest($hours = 24, $channel_id = 0, $page = 1, $media_type = 0, $image_filter = -1)
     {
         $hours = (int)$hours;
         $channel_id = (int)$channel_id;
@@ -121,6 +136,18 @@ class PostController extends RestController
             $fromtime = time() - $hours * 3600;
             $criteria->addCondition('t.create_time > :fromtime');
             $criteria->params[':fromtime'] = $fromtime;
+        }
+        
+        // 是否过滤图片长度
+        if ($image_filter == 0) {
+            $criteria->addCondition('t.original_width = 0 OR t.original_height = 0 OR (t.original_height * :app_image_width / t.original_width) < :longheight');
+            $criteria->params[':longheight'] = self::LONG_IMAGE_HEIGHT;
+            $criteria->params[':app_image_width'] = self::APP_IMAGE_WIDTH;
+        }
+        elseif ($image_filter > 0) {
+            $criteria->addCondition('t.original_width > 0 AND t.original_height > 0 AND (t.original_height * :app_image_width / t.original_width) >= :longheight');
+            $criteria->params[':longheight'] = self::LONG_IMAGE_HEIGHT;
+            $criteria->params[':app_image_width'] = self::APP_IMAGE_WIDTH;
         }
 
         // @todo 目前的应用版本中只加了赞的功能，所以此处排序只按up_score倒序，以后加了踩的功能，可以修改为up_score-down_score
