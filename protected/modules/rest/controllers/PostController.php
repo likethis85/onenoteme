@@ -2,7 +2,7 @@
 class PostController extends RestController
 {
     const APP_IMAGE_WIDTH = 300;
-    const LONG_IMAGE_HEIGHT = 500;
+    const LONG_IMAGE_HEIGHT = 800;
     const HISTORY_COUNT = 50;
     const MEDIA_TYPE_DELIMITER = ',';
     
