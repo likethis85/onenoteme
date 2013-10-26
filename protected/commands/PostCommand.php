@@ -22,12 +22,11 @@ class PostCommand extends CConsoleCommand
         // 挖热点
         $focusConditions = array('and', 'channel_id = :channelID', 'state = :disable_state');
         $foucsParams = array(':disable_state'=>POST_STATE_DISABLED, ':channelID'=>CHANNEL_FOCUS);
-        $focusIDs = $cmd->where($focusConditions, $lengtuParams)->queryColumn();
+        $focusIDs = $cmd->where($focusConditions, $foucsParams)->queryColumn();
         var_dump($cmd->text);
         $ids = array_merge($duanziIDs, $lengtuIDs, $focusIDs);
-        var_dump($ids);
         $ids = array_unique($ids);
-        var_dump($ids);
+        
         $nums = 0;
         foreach ($ids as $index => $id) {
             $rowCount = app()->getDb()->createCommand()
