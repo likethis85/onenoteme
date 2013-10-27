@@ -530,7 +530,7 @@ class Post extends CActiveRecord
      * @param string $target 链接打开页面
      * @return string
      */
-    public function getTitleLink($len = 0, $target = '_blank')
+    public function getTitleLink($len = 0, $target = '_blank', $trace = '')
     {
         if ($this->channel_id == CHANNEL_FOCUS)
             $prepend = '<strong class="corange">【挖热点】</strong>';
@@ -538,7 +538,7 @@ class Post extends CActiveRecord
             $prepend = '';
             
         $title = $this->getSubTitle($len);
-        return l($prepend . h($title), $this->getUrl(), array('class'=>'cd-title-link', 'target'=>$target, 'title'=>$this->getFilterTitle()));
+        return l($prepend . h($title), $this->getUrl(true, $trace), array('class'=>'cd-title-link', 'target'=>$target, 'title'=>$this->getFilterTitle()));
     }
 
     /**
@@ -756,11 +756,11 @@ class Post extends CActiveRecord
      * @param integer $width 图片宽度
      * @return string
      */
-    public function getThumbnailLink($target = '_blank', $width = 0)
+    public function getThumbnailLink($target = '_blank', $width = 0, $trace = '')
     {
         $html = '';
         if ($this->getThumbnail())
-            $html = l($this->getThumbnailImage($width), $this->getUrl(), array('target'=>$target, 'title'=>$this->getFilterTitle()));
+            $html = l($this->getThumbnailImage($width), $this->getUrl(true, $trace), array('target'=>$target, 'title'=>$this->getFilterTitle()));
         
         return $html;
     }
@@ -792,11 +792,11 @@ class Post extends CActiveRecord
      * @param integer $width 图片宽度
      * @return string
      */
-    public function getFixThumbLink($target = '_blank', $width = 0)
+    public function getFixThumbLink($target = '_blank', $width = 0, $trace = '')
     {
         $html = '';
         if ($this->getFixThumb())
-            $html = l($this->getFixThumbImage($width), $this->getUrl(), array('target'=>$target, 'title'=>$this->getFilterTitle()));
+            $html = l($this->getFixThumbImage($width), $this->getUrl(true, $trace), array('target'=>$target, 'title'=>$this->getFilterTitle()));
         
         return $html;
     }
@@ -893,11 +893,11 @@ class Post extends CActiveRecord
      * @param string $target
      * @return string 链接html代码，url为段子url详情页
      */
-    public function getMiddleImageLink($target = '_blank')
+    public function getMiddleImageLink($target = '_blank', $trace = '')
     {
         $html = '';
         if ($this->getMiddlePic())
-            $html = l($this->getMiddleImage(), $this->getUrl(), array('target'=>$target));
+            $html = l($this->getMiddleImage(), $this->getUrl(true, $trace), array('target'=>$target));
         
         return $html;
     }
@@ -922,11 +922,11 @@ class Post extends CActiveRecord
      * @param string $target 页面打开页面
      * @return string
      */
-    public function getLargeImageLink($target = '_blank')
+    public function getLargeImageLink($target = '_blank', $trace = '')
     {
         $html = '';
         if ($this->getLargePic())
-            $html = l($this->getLargeImage(), $this->getUrl(), array('target'=>$target));
+            $html = l($this->getLargeImage(), $this->getUrl(true, $trace), array('target'=>$target));
         
         return $html;
     }
