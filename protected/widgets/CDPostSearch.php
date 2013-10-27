@@ -83,7 +83,7 @@ class CDPostSearch extends CWidget
         
         if ($this->duration > 0) {
             $staticModels[$cacheID] = $models;
-            app()->cache->set($cacheID, $models);
+            app()->cache->set($cacheID, $models, $this->duration);
         }
         
         return $models;
