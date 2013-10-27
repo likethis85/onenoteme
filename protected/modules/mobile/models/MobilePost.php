@@ -40,7 +40,7 @@ class MobilePost extends Post
         return $summary;
     }
     
-    public function getTitleLink($len = 50, $target = '_self')
+    public function getTitleLink($len = 50, $target = '_self', $trace = '')
     {
        return parent::getTitleLink($len, $target);
     }
