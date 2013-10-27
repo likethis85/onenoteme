@@ -52,6 +52,7 @@ class CDPostSearch extends CWidget
         $cacheID = 'cd_post_search' . $this->channel . $this->count . $this->page
                     . $this->order . $this->duration . $this->mediaType . $this->linkTarget
                     . $this->trace . $this->hours . $this->recommend . $this->hottest;
+        $cacheID = md5($cacheID);
         if ($this->duration > 0 && array_key_exists($cacheID, $staticModels))
             return $staticModels[$cacheID];
         
