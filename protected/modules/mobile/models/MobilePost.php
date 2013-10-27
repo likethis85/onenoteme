@@ -18,7 +18,7 @@ class MobilePost extends Post
         return parent::model($className);
     }
     
-    public function getUrl($absolute = true)
+    public function getUrl($absolute = true, $trace = null)
     {
         return $absolute ? aurl('mobile/post/show', array('id'=>$this->id)) : url('mobile/post/show', array('id'=>$this->id));
     }
