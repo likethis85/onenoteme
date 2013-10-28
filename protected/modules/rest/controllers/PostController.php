@@ -13,6 +13,12 @@ class PostController extends RestController
         );
     }
     
+    public function actionTimelineCount($channel_id, $lasttime = 0, $media_type = 0, $image_filter=-1)
+    {
+        $criteria = $this->buildTimelineCriteria($channel_id, $lasttime, 0, $media_type, $image_filter);
+        $count = RestPost::model()->count($criteria);
+    }
+    
     /**
      * 获取最新内容，如果lasttime>0表示获取最新的，如果maxtime>0表示获取更多内容，lasttime优先
      * @param integer $channel_id required，频道ID
@@ -22,6 +28,16 @@ class PostController extends RestController
      * @return array 内容列表，数组结构
      */
     public function actionTimeline($channel_id, $lasttime = 0, $maxtime = 0, $media_type = 0, $image_filter=-1)
+    {
+        $criteria = $this->buildTimelineCriteria($channel_id, $lasttime, $maxtime, $media_type, $image_filter);
+        
+        $posts = RestPost::model()->findAll($criteria);
+        $rows = $this->formatPosts($posts);
+        
+        $this->output($rows, 60);
+    }
+    
+    private function buildTimelineCriteria($channel_id, $lasttime = 0, $maxtime = 0, $media_type = 0, $image_filter=-1)
     {
         $channel_id = (int)$channel_id;
         $lasttime = (float)$lasttime;
@@ -63,10 +79,9 @@ class PostController extends RestController
             $criteria->params[':app_image_width'] = self::APP_IMAGE_WIDTH;
         }
         
-        $posts = RestPost::model()->published()->findAll($criteria);
-        $rows = $this->formatPosts($posts);
+        $criteria->scopes = array('published');
         
-        $this->output($rows, 60);
+        return $criteria;
     }
     
     /**
