@@ -17,6 +17,9 @@ class PostController extends RestController
     {
         $criteria = $this->buildTimelineCriteria($channel_id, $lasttime, 0, $media_type, $image_filter);
         $count = RestPost::model()->count($criteria);
+        $data = array('count'=>$count);
+        
+        $this->output($data);
     }
     
     /**
