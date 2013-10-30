@@ -10,6 +10,7 @@
  * @property string $intro
  * @property integer $weight
  * @property integer $state
+ * @property integer $check_bizrule
  *
  * @property Advert $advert
  */
@@ -39,7 +40,7 @@ class Adcode extends CActiveRecord
 	{
 		return array(
 			array('ad_id, intro, adcode', 'required'),
-			array('weight, state, ad_id', 'numerical', 'integerOnly'=>true),
+			array('weight, state, ad_id, check_bizrule', 'numerical', 'integerOnly'=>true),
 			array('intro', 'length', 'max'=>250),
 			array('adcode', 'safe'),
 		);
@@ -67,6 +68,7 @@ class Adcode extends CActiveRecord
 	        'weight' => '权重',
 			'intro' => '说明',
 			'state' => '状态',
+			'check_bizrule' => '检查规则',
 		);
 	}
 
@@ -92,6 +94,9 @@ class Adcode extends CActiveRecord
 	{
 	    if ($this->weight < 1)
 	        $this->weight = 1;
+	    
+	    $this->state = $this->state ? ADCODE_STATE_ENABLED : ADCODE_STATE_DISABLED;
+	    $this->check_bizrule = $this->check_bizrule ? CD_YES : CD_NO;
 	    
 	    return true;
 	}

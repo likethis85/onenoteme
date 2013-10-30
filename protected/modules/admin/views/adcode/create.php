@@ -30,6 +30,15 @@
             <?php if ($model->hasErrors('weight')):?><p class="help-block"><?php echo $model->getError('weight');?></p><?php endif;?>
         </div>
     </div>
+    <div class="control-group <?php if($model->hasErrors('check_bizrule')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'check_bizrule', array('class'=>'control-label'));?>
+        <div class="controls">
+            <label class="checkbox inline">
+                <?php echo CHtml::activeCheckBox($model, 'check_bizrule');?><?php echo CHtml::activeLabel($model, 'check_bizrule');?>
+            </label>
+            <?php if($model->hasErrors('check_bizrule')):?><p class="help-block"><?php echo $model->getError('check_bizrule');?></p><?php endif;?>
+        </div>
+    </div>
     <div class="control-group <?php if($model->hasErrors('state')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'state', array('class'=>'control-label'));?>
         <div class="controls">

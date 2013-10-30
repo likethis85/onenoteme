@@ -35,8 +35,6 @@ class CDAdvert extends CWidget
     
     public function run()
     {
-        if (!$this->bizrule) return ;
-        
         $data = Advert::fetchAdcodesWithSolt($this->solt);
         if (empty($data)) return;
         
@@ -66,7 +64,8 @@ class CDAdvert extends CWidget
         $start = 0;
         foreach ($data as $i => $row) {
             $weight = (int)$row['weight'];
-            if ($row['weight'] < 1) continue;
+            if ($row['weight'] < 1 || (!$this->bizrule && $row['check_bizrule']))
+                continue;
             $newWeights = array_merge($newWeights, array_fill($start, $weight, $i));
             $start = $weight;
         }
