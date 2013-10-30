@@ -20,6 +20,7 @@ class ChannelController extends MobileController
         $this->setSiteTitle('');
         $this->setKeywords(p('home_index_keywords'));
         $this->setDescription(p('home_index_description'));
+        $this->showAdvert = false;
     
         $criteria = new CDbCriteria();
         $criteria->scopes = array('homeshow', 'published');
@@ -35,6 +36,7 @@ class ChannelController extends MobileController
     public function actionHot($page = 1)
     {
         $this->setSiteTitle('12小时内人最热门笑话');
+        $this->showAdvert = false;
     
         $this->fetchFunnyHotPosts(8);
     }
@@ -42,6 +44,7 @@ class ChannelController extends MobileController
     public function actionDay($page = 1)
     {
         $this->setSiteTitle('24小时内人最热门笑话');
+        $this->showAdvert = false;
     
         $this->fetchFunnyHotPosts(24);
     }
@@ -49,6 +52,7 @@ class ChannelController extends MobileController
     public function actionWeek($page = 1)
     {
         $this->setSiteTitle('一周内人最热门笑话');
+        $this->showAdvert = false;
     
         $this->fetchFunnyHotPosts(7*24);
     }
@@ -56,6 +60,7 @@ class ChannelController extends MobileController
     public function actionMonth($page = 1)
     {
         $this->setSiteTitle('一月内人最热门笑话');
+        $this->showAdvert = false;
     
         $this->fetchFunnyHotPosts(30*24);
     }
@@ -71,6 +76,7 @@ class ChannelController extends MobileController
         $this->setKeywords('挖笑话,糗事,内涵笑话,爆笑笑话,幽默笑话,笑话大全,爆笑短信,xiaohua,冷笑话,短信笑话,小笑话,笑话短信,经典笑话,冷笑话大全,短笑话,搞笑短信,笑话大全乐翻天,搞笑笑话,疯狂恶搞,爆笑童趣,雷人囧事');
         
         $this->channel = CHANNEL_FUNNY . MEDIA_TYPE_TEXT;
+        $this->showAdvert = true;
 	    cs()->registerMetaTag('all', 'robots');
 	    $this->render('posts', $data);
 	}
@@ -85,6 +91,7 @@ class ChannelController extends MobileController
         $this->setKeywords('挖趣图,搞笑图片,内涵图,邪恶图片,色色图,暴走漫画,微漫画,4格漫画,8格漫画,搞笑漫画,内涵漫画,邪恶漫画,疯狂恶搞,爆笑童趣,雷人囧事,动画萌图,狗狗萌图,猫咪萌图,喵星人萌图,汪星人萌图');
         
         $this->channel = CHANNEL_FUNNY . MEDIA_TYPE_IMAGE;
+        $this->showAdvert = false;
 	    cs()->registerMetaTag('all', 'robots');
 	    $this->render('posts', $data);
 	}
@@ -99,6 +106,7 @@ class ChannelController extends MobileController
         $this->setKeywords('挖视频,搞笑视频,爆笑视频,搞笑短片,爆笑短片');
         
         $this->channel = CHANNEL_FUNNY . MEDIA_TYPE_VIDEO;
+        $this->showAdvert = true;
 	    cs()->registerMetaTag('all', 'robots');
 	    $this->render('posts', $data);
 	}
@@ -109,6 +117,7 @@ class ChannelController extends MobileController
 	    $this->setSiteTitle(p('channel_focus_title'));
 	    $this->setKeywords(p('channel_focus_keywords'));
 	    $this->setDescription(p('channel_focus_description'));
+        $this->showAdvert = true;
 	
 	    $criteria = new CDbCriteria();
 	    $criteria->scopes = array('homeshow', 'published');

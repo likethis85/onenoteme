@@ -96,6 +96,11 @@ define('APP_ADVERT_STATE_ENABLED', 1);
 define('LINK_IN_HOME', 1);
 define('LINK_NOT_IN_HOME', 0);
 
+/* post content level */
+define('CONTENT_LEVEL_NORMAL', 0);
+define('CONTENT_LEVEL_SLIGHT', 1);
+define('CONTENT_LEVEL_FORBIDDEN', 10);
+
 /* score */
 define('PUBLISH_SCORE', 10);
 define('POST_COMMENT', 1);

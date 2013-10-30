@@ -13,9 +13,11 @@ class TagController extends MobileController
         );
     }
     
-    public function actionIndex($name, $page = 1)
+    public function actionIndex($name = '', $page = 1)
     {
-        $this->redirect(url('mobile/tag/posts', array('name'=>$name, 'page'=>$page)));
+        $url =  empty($name) ? CDBaseUrl::mobileHomeUrl() : url('mobile/tag/posts', array('name'=>$name, 'page'=>$page));
+        
+        $this->redirect($url);
     }
     
     public function actionArchives($name, $page = 1)
@@ -65,6 +67,7 @@ class TagController extends MobileController
         $this->setDescription("与{$name}有关的相关段子、笑话、冷笑话、糗事、经典语录、冷图、美女写真、视频");
         
         $this->channel = 'tag';
+        $this->showAdvert = false;
         $this->render('/post/list', array(
             'models' => $models,
             'pages' => $pages,

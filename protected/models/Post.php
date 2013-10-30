@@ -31,6 +31,7 @@
  * @property integer $recommend
  * @property integer $hottest
  * @property integer $disable_comment
+ * @property integer $content_level
  *
  * @property User $user
  * @property UserProfile $profile
@@ -88,6 +89,9 @@
  * @property bool $isTextType
  * @property bool $isImageType
  * @property array $uploadImages
+ *
+ * @property bool contentLevelAllow
+ * @property bool contentLevelDeny
  */
 class Post extends CActiveRecord
 {
@@ -152,13 +156,13 @@ class Post extends CActiveRecord
 	{
 		$rules = array(
 		    array('channel_id, media_type, title, content', 'required', 'message'=>'段子内容必须填写'),
-			array('channel_id, category_id, media_type, view_nums, up_score, down_score, comment_nums, disable_comment, state, favorite_count, create_time, user_id, original_width, original_height, original_frames, istop, homeshow, recommend, hottest', 'numerical', 'integerOnly'=>true),
+			array('channel_id, category_id, media_type, view_nums, up_score, down_score, comment_nums, disable_comment, state, favorite_count, create_time, user_id, original_width, original_height, original_frames, istop, homeshow, recommend, hottest, content_level', 'numerical', 'integerOnly'=>true),
 			array('user_name', 'length', 'max'=>50),
 			array('weibo_id', 'length', 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
 			array('title, tags', 'length', 'max'=>250),
 			array('content, original_pic', 'safe'),
-		    array('original_width, original_height, istop, homeshow, recommend, hottest, favorite_count', 'filter', 'filter'=>'intval'),
+		    array('original_width, original_height, istop, homeshow, recommend, hottest, favorite_count, content_level', 'filter', 'filter'=>'intval'),
 		);
 		
 		return $rules;
@@ -223,6 +227,7 @@ class Post extends CActiveRecord
 	        'recommend' => '推荐',
 	        'hottest' => '热门',
 		    'disable_comment' => '评论',
+	        'content_level' => '评级',
 		);
 	}
 
@@ -1284,6 +1289,16 @@ class Post extends CActiveRecord
         $data[$this->id] = self::model()->cache($duration)->find($criteria);
     
         return $data[$this->id];
+    }
+    
+    public function getContentLevelAllow()
+    {
+        return $this->content_level == CONTENT_LEVEL_NORMAL;
+    }
+    
+    public function getContentLevelDeny()
+    {
+        return $this->content_level > CONTENT_LEVEL_NORMAL;
     }
 
     public function addFavorite($userid)

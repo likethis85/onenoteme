@@ -22,6 +22,8 @@ class CDAdvert extends CWidget
      */
     public $multi = true;
     
+    public $bizrule = true;
+    
     public $boxClass = '';
     
     public function init()
@@ -33,6 +35,8 @@ class CDAdvert extends CWidget
     
     public function run()
     {
+        if (!$this->bizrule) return ;
+        
         $data = Advert::fetchAdcodesWithSolt($this->solt);
         if (empty($data)) return;
         

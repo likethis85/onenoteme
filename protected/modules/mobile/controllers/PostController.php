@@ -37,6 +37,7 @@ class PostController extends MobileController
         $this->setDescription($post->getPlainSummary());
         
         $this->channel = $post->channel_id . $post->media_type;
+        $this->showAdvert = $post->getContentLevelAllow();
         cs()->registerMetaTag('all', 'robots');
         $this->render('show', array(
             'post' => $post,
