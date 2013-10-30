@@ -52,7 +52,7 @@ class CDAdvert extends CWidget
             if ($this->title)
                 $html .= '<h2>' . $this->title . '</h2>';
             
-            $html .= $adcode['adcode'] . (int)$adcode['check_bizrule'] . '</div>';
+            $html .= $adcode['adcode'] . (int)$this->bizrule . '</div>';
             
             echo $html;
         }
