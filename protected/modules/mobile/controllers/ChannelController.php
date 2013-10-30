@@ -23,7 +23,7 @@ class ChannelController extends MobileController
     
         $criteria = new CDbCriteria();
         $criteria->scopes = array('homeshow', 'published');
-        $criteria->addColumnCondition(array('channel_id' => CHANNEL_FUNNY));
+        $criteria->addInColumnCondition(array('channel_id' => CHANNEL_FUNNY, CHANNEL_FOCUS));
         $criteria->order = 't.istop desc, t.create_time desc';
         $criteria->limit = (int)p('line_post_count_page');
     
@@ -160,8 +160,6 @@ class ChannelController extends MobileController
 	    $pages = new CPagination($count);
 	    $pages->setPageSize($criteria->limit);
 	    $pages->applyLimit($criteria);
-	    // @todo fixed
-        $criteria->addInCondition('media_type', array(MEDIA_TYPE_TEXT, MEDIA_TYPE_VIDEO));
 	    
 	    $models = MobilePost::model()->findAll($criteria);
 	
