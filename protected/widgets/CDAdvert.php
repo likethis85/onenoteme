@@ -41,7 +41,7 @@ class CDAdvert extends CWidget
         $index = 0;
         if (!$this->multi)
             $data = $data[0];
-        $adcode = self::getAdcodeByWeight($data);
+        $adcode = $this->getAdcodeByWeight($data);
         
         if (empty($adcode)) return ;
         
@@ -58,7 +58,7 @@ class CDAdvert extends CWidget
         }
     }
     
-    private static function getAdcodeByWeight($data)
+    private function getAdcodeByWeight($data)
     {
         $newWeights = array();
         foreach ($data as $i => $row) {
