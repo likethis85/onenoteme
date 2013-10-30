@@ -160,6 +160,8 @@ class ChannelController extends MobileController
 	    $pages = new CPagination($count);
 	    $pages->setPageSize($criteria->limit);
 	    $pages->applyLimit($criteria);
+	    // @todo fixed
+        $criteria->addInCondition('media_type', array(MEDIA_TYPE_TEXT, MEDIA_TYPE_VIDEO));
 	    
 	    $models = MobilePost::model()->findAll($criteria);
 	
