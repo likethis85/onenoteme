@@ -23,7 +23,7 @@ class ChannelController extends MobileController
     
         $criteria = new CDbCriteria();
         $criteria->scopes = array('homeshow', 'published');
-        $criteria->addInColumnCondition('channel_id', array(CHANNEL_FUNNY, CHANNEL_FOCUS));
+        $criteria->addInCondition('channel_id', array(CHANNEL_FUNNY, CHANNEL_FOCUS));
         $criteria->order = 't.istop desc, t.create_time desc';
         $criteria->limit = (int)p('line_post_count_page');
     
