@@ -43,7 +43,7 @@ class CDAdvert extends CWidget
             $index = self::getIndexByWeight($data);
         
         $adcode = $data[$index];
-        if (empty($adcode)) return;
+        if (empty($adcode) || (!$this->bizrule && $adcode['check_bizrule'])) return;
         
         if ($this->onlyCode)
             echo $adcode['adcode'];
@@ -52,7 +52,7 @@ class CDAdvert extends CWidget
             if ($this->title)
                 $html .= '<h2>' . $this->title . '</h2>';
             
-            $html .= $adcode['adcode'] . (int)$this->bizrule . '</div>';
+            $html .= $adcode['adcode'] . '</div>';
             
             echo $html;
         }
