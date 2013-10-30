@@ -59,7 +59,7 @@ class CDAdvert extends CWidget
     }
     
     private static function getIndexByWeight($data)
-    {
+    {var_dump($data);
         $newWeights = array();
         $start = 0;
         foreach ($data as $i => $row) {
