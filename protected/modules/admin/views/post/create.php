@@ -93,6 +93,13 @@
             </label>
         </div>
     </div>
+    <div class="control-group bottom10px">
+        <?php echo CHtml::activeLabel($model, 'content_level', array('class'=>'control-label'));?>
+        <div class="controls">
+            <?php echo CHtml::activeDropDownList($model, 'content_level', AdminPost::levelLabels());?>
+            <?php if ($model->hasErrors('content_level')):?><p class="help-block"><?php echo $model->getError('content_level');?></p><?php endif;?>
+        </div>
+    </div>
     <div class="control-group bottom10px <?php if ($model->hasErrors('view_nums')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'view_nums', array('class'=>'control-label'));?>
         <div class="controls">

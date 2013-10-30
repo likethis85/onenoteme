@@ -132,6 +132,22 @@ class Post extends CActiveRecord
         return $state === null ? $labels : $labels[$state];
     }
     
+    public static function levels()
+    {
+        return array_keys(self::levelLabels());
+    }
+    
+    public static function levelLabels($level = null)
+    {
+        $labels = array(
+        	CONTENT_LEVEL_NORMAL => '正常',
+            CONTENT_LEVEL_SLIGHT => '轻微',
+            CONTENT_LEVEL_FORBIDDEN => '严重',
+        );
+        
+        return $level === null ? $labels : $labels[$level];
+    }
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Post the static model class
@@ -227,7 +243,7 @@ class Post extends CActiveRecord
 	        'recommend' => '推荐',
 	        'hottest' => '热门',
 		    'disable_comment' => '评论',
-	        'content_level' => '评级',
+	        'content_level' => '内容等级',
 		);
 	}
 
