@@ -69,6 +69,10 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         <?php $this->renderPartial('/comment/list', array('comments'=>$comments, 'pages'=>$pages));?>
         </div>
         
+        <!-- baidu tuijian start -->
+        <div id="hm_t_10141"></div>
+        <!-- baidu tuijian end -->
+        
         <!-- wumii widget start -->
         <script type="text/javascript" id="wumiiRelatedItems"></script>
         <!-- wumii widget end -->
