@@ -39,11 +39,11 @@ class CDAdvert extends CWidget
         if (empty($data)) return;
         
         $index = 0;
-        if ($this->multi && count($data) > 1)
-            $index = self::getIndexByWeight($data);
+        if (!$this->multi)
+            $data = $data[0];
+        $adcode = self::getAdcodeByWeight($data);
         
-        $adcode = $data[$index];
-        if (empty($adcode) || (!$this->bizrule && $adcode['check_bizrule'])) return;
+        if (empty($adcode)) return ;
         
         if ($this->onlyCode)
             echo $adcode['adcode'];
@@ -58,22 +58,27 @@ class CDAdvert extends CWidget
         }
     }
     
-    private static function getIndexByWeight($data)
+    private static function getAdcodeByWeight($data)
     {
         $newWeights = array();
-        $start = 0;
         foreach ($data as $i => $row) {
             $weight = (int)$row['weight'];
-            if ($row['weight'] < 1 || (!$this->bizrule && $row['check_bizrule']))
+            if ($weight < 1 || (!$this->bizrule && $row['check_bizrule']))
                 continue;
-            $newWeights = array_merge($newWeights, array_fill($start, $weight, $i));
-            $start = $weight;
+            $newWeights = array_merge($newWeights, array_fill(0, $weight, $i));
         }
         
-        $randKey = (int)array_rand($newWeights);
-        $index = (int)$newWeights[$randKey];
-        $newWeights = null;
-        return $index;
+        if (empty($newWeights)) {
+            $newWeights = null;
+            return null;
+        }
+        else {
+            $randKey = (int)array_rand($newWeights);
+            $index = (int)$newWeights[$randKey];
+            $newWeights = null;
+            return $data[$index];
+        }
+        
     }
     
 }
