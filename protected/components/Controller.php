@@ -5,6 +5,7 @@ class Controller extends CController
     public $channel;
     public $clientID = null;
     public $lastVisit = array();
+    public $showAdvert = true;
 
     public function actions()
 	{

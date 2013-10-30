@@ -27,7 +27,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         <div class="post-video"><?php echo $post->video->getDesktopVideoHTML(600, 370);?></div>
         <?php endif;?>
 		
-        <?php $this->widget('CDAdvert', array('solt'=>'post_content_bottom_01', 'boxClass'=>'aleft'));?>
+        <?php $this->widget('CDAdvert', array('solt'=>'post_content_bottom_01', 'boxClass'=>'aleft', 'bizrule'=>$this->showAdvert));?>
         
         <?php if ($prevUrl || $nextUrl):?>
         <div class="change-post clearfix">
@@ -41,7 +41,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         </div>
         <?php endif;?>
         
-        <?php $this->widget('CDAdvert', array('solt'=>'post_content_bottom_02'));?>
+        <?php $this->widget('CDAdvert', array('solt'=>'post_content_bottom_02', 'bizrule'=>$this->showAdvert));?>
         
         <div class="item-toolbar">
             <ul>
@@ -73,10 +73,10 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
         <script type="text/javascript" id="wumiiRelatedItems"></script>
         <!-- wumii widget end -->
         
-        <?php $this->widget('CDAdvert', array('solt'=>'post_comments_bottom_2'));?>
+        <?php $this->widget('CDAdvert', array('solt'=>'post_comments_bottom_2', 'bizrule'=>$this->showAdvert));?>
 	</div>
 	<!-- 详情页侧边栏广告位开始 -->
-    <?php $this->widget('CDAdvert', array('solt'=>'main_container_bottom'));?>
+    <?php $this->widget('CDAdvert', array('solt'=>'main_container_bottom', 'bizrule'=>$this->showAdvert));?>
     <!-- 详情页侧边栏广告位结束 -->
 </div>
 
@@ -104,11 +104,11 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
     <?php endif;?>
     
     <!-- 详情页侧边栏第1个广告位开始 -->
-    <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_01'));?>
+    <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_01', 'bizrule'=>$this->showAdvert));?>
     <!-- 详情页侧边栏广告位结束 -->
     <div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
     <!-- 详情页侧边栏第2个广告位开始 -->
-    <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_02'));?>
+    <?php $this->widget('CDAdvert', array('solt'=>'sidebar_post_detail_02', 'bizrule'=>$this->showAdvert));?>
     <!-- 详情页侧边栏广告位结束 -->
 </div>
 <div class="clear"></div>
