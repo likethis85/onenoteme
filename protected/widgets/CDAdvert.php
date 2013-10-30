@@ -38,9 +38,6 @@ class CDAdvert extends CWidget
         $data = Advert::fetchAdcodesWithSolt($this->solt);
         if (empty($data)) return;
         
-        $index = 0;
-        if (!$this->multi)
-            $data = $data[0];
         $adcode = $this->getAdcodeByWeight($data);
         
         if (empty($adcode)) return ;
@@ -63,15 +60,17 @@ class CDAdvert extends CWidget
         $newWeights = array();
         foreach ($data as $i => $row) {
             $weight = (int)$row['weight'];
-            if ($weight < 1 || (!$this->bizrule && $row['check_bizrule']))
+            if ($weight < 1 || (!$this->bizrule && $row['check_bizrule'])) {
+                unset($data[$i]);
                 continue;
+            }
             $newWeights = array_merge($newWeights, array_fill(0, $weight, $i));
         }
         
-        if (empty($newWeights)) {
-            $newWeights = null;
+        if (empty($data))
             return null;
-        }
+        elseif (!$this->multi)
+            return current($data);
         else {
             $randKey = (int)array_rand($newWeights);
             $index = (int)$newWeights[$randKey];
