@@ -24,8 +24,4 @@ class AboutController extends MobileController
         $this->render('index');
     }
 
-    public function actionTest()
-    {
-        $this->render('test');
-    }
 }
