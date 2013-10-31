@@ -1,7 +1,14 @@
 <?php
 class PushController extends RestController
 {
-    public function actionBind($app_id, $user_id, $channel_id, $request_id)
+    public function filters()
+    {
+        return array(
+                'postOnly + bind',
+        );
+    }
+    
+    public function actionBind()
     {
         $result = array('errcode' => 0);
         
