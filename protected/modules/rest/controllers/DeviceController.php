@@ -47,4 +47,21 @@ class DeviceController extends RestController
         
         $this->output($data);
     }
+    
+    public function actionPushtoken()
+    {
+        $token = request()->getPost('device_token');
+        $device = RestMobileDevice::model()->findByPk($this->deviceUDID);
+        if ($device === null)
+            $data = array('success' => 0);
+        else {
+            $device->push_token = $token;
+            $result = $device->save(true, array('push_token'));
+            $data = array('success' => (int)$result);
+        }
+        
+        $this->output($data);
+    }
 }
+
+
