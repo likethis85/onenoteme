@@ -27,7 +27,7 @@
             <td class="align-center"><?php echo $model->id;?></td>
             <td><?php echo $model->nameLink;?></td>
             <td><?php echo $model->solt;?></td>
-            <td><?php echo $model->width;?>x<?php echo $this->height;?></td>
+            <td><?php echo $model->width;?>x<?php echo $model->height;?></td>
             <td class="align-center"><?php echo $model->stateLink;?></td>
             <td>
                 <?php echo $model->editLink;?>
