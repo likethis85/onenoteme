@@ -92,6 +92,8 @@ class ChannelController extends Controller
         
         $count = (int)p('duanzi_count_page');
         $data = $this->fetchFunnyMediaPosts(MEDIA_TYPE_TEXT, $count);
+        
+        $this->showAdvert = true;
         $this->render('text_list', $data);
     }
     
