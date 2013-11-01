@@ -132,7 +132,7 @@ class PostController extends RestController
         $posts = RestPost::model()->published()->findAll($criteria);
         $rows = $this->formatPosts($posts);
         
-        $this->output($rows, 30);
+        $this->output($rows, 10);
     }
     
     public function actionBest($hours = 24, $channel_id = 0, $page = 1, $media_type = 0, $image_filter = -1)
