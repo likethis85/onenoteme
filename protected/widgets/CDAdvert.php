@@ -20,7 +20,7 @@ class CDAdvert extends CWidget
      * 如果一个广告位有多个广告启用，是否支持多个广告随机显示，默认为开启
      * @var boolean
      */
-    public $multi = true;
+    public $multi = false;
     
     public $bizrule = true;
     

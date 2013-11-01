@@ -150,7 +150,7 @@ class AdminPost extends Post
         elseif ($count <= 50)
             $class = 'badge-warning';
         else
-            $class = 'badge-error';
+            $class = 'badge-important';
         
         $html = sprintf('<span class="badge beta-badge %s">%s</span>', $class, $count);
         $html = l($html, $this->commentUrl, array('title'=>'点击查看评论列表'));
@@ -165,7 +165,7 @@ class AdminPost extends Post
         elseif ($count <= 5000)
             $class = 'badge-warning';
         else
-            $class = 'badge-error';
+            $class = 'badge-important';
         
         $html = sprintf('<span class="badge beta-badge %s">%s</span>', $class, $count);
         return $html;
