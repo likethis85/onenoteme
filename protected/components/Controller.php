@@ -132,7 +132,7 @@ class Controller extends CController
     protected function fetchShowAlertValueFromPostModels($models)
     {
         foreach ((array)$models as $index => $model) {
-        	if ($model instanceof Post && $model->getContentLevelDeny()) {
+        	if ($model instanceof Post && ($model->create_time < SITE_ADD_CONTENT_LEVEL_TIMESTAMP || $model->getContentLevelDeny())) {
         	    return false;
         	    break;
         	}

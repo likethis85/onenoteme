@@ -199,7 +199,9 @@ define('USER_DEFAULT_AVATAR_URL', 'images/default_avatar.png');
 
 define('IPHONE_APP_URL', 'http://itunes.apple.com/cn/app/id486268988?mt=8');
 
-
+// @todo 此常量值是添加内容分级功能的时间戳，因为此时间以前内容比较多，无法手动修改，只能将其全部归成敏感内容，不显示adsense广告。
+// 2013-10-30 20:00:00
+define('SITE_ADD_CONTENT_LEVEL_TIMESTAMP', '1383163200');
 
 
 
