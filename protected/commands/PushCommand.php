@@ -77,7 +77,8 @@ class PushCommand extends CConsoleCommand
         $channel = new Channel(BAIDU_APP_WDZ_APP_KEY, BAIDU_APP_WDZ_SECRET_KEY);
         $channel->setHost(Channel::HOST_IOS_DEV);
     
-        $ret = $channel->queryUserTags('924028076706842347');
+//         $ret = $channel->queryUserTags('924028076706842347');
+        $ret = $channel->queryBindList('924028076706842347');
     
         if (false === $ret) {
             echo 'WRONG, ' . __FUNCTION__ . ' ERROR!!!!!';
