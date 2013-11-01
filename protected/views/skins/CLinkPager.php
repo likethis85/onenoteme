@@ -12,6 +12,8 @@ return array(
         'header' => '',
         'footer' => '',
         'maxButtonCount' => 6,
+        'firstPageLabel' => '首页',
+        'firstPageLabel' => '',
         'nextPageLabel' => '下页',
         'prevPageLabel' => '上页',
         'cssFile' => false,
