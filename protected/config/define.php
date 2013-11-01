@@ -186,10 +186,6 @@ define('QQT_APP_SECRET', '4e0c4ac86b36120efac4c44a9ac9e895');
 define('BAIDU_APP_WDZ_APP_KEY', 'bGGXpA6v8UVnwdUEZkNgde4o');
 define('BAIDU_APP_WDZ_SECRET_KEY', 'BtbYXKyVGiwT8toE3Mdiwpa1p00DbAqd');
 
-define('BAIDU_PUSH_TYPE_SINGLE', 1);
-define('BAIDU_PUSH_TYPE_TAG', 2);
-define('BAIDU_PUSH_TYPE_ALL', 3);
-
 define('BAIDU_DEVICE_TYPE_BROWSER', 1);
 define('BAIDU_DEVICE_TYPE_PC', 2);
 define('BAIDU_DEVICE_TYPE_ANDROID', 3);
