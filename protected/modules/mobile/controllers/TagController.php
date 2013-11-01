@@ -20,11 +20,6 @@ class TagController extends MobileController
         $this->redirect($url);
     }
     
-    public function actionArchives($name, $page = 1)
-    {
-        $this->forward('tag/posts');
-    }
-    
     public function actionPosts($name, $page = 1)
     {
         $limit = 10;

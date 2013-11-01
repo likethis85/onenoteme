@@ -42,8 +42,8 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 
 <div class="cd-entry cd-main">
     <div class="top-banner">
-    <?php $this->widget('CDAdvert', array('solt'=>'mobile_top_banner', 'multi'=>false, 'bizrule'=>$this->showAdvert));?>
-    <?php $this->widget('CDAdvert', array('solt'=>'mobile_top2_banner', 'multi'=>false,  'bizrule'=>$this->showAdvert));?>
+    <?php $this->widget('CDAdvert', array('solt'=>'mobile_top_banner', 'bizrule'=>$this->showAdvert));?>
+    <?php $this->widget('CDAdvert', array('solt'=>'mobile_top2_banner', 'bizrule'=>$this->showAdvert));?>
     </div>
     <!--
     <div class="app-online hide">

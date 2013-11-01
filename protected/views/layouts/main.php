@@ -61,12 +61,12 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
     </div>
 </div>
 <div class="cd-wrapper cd-main">
-    <?php $this->widget('CDAdvert', array('solt'=>'top_banner', 'boxClass'=>'bottom15px'));?>
+    <?php $this->widget('CDAdvert', array('solt'=>'top_banner', 'boxClass'=>'bottom15px', 'bizrule'=>$this->showAdvert));?>
 	<?php echo $content;?>
 </div>
 
 <div class="cd-wrapper">
-    <?php $this->widget('CDAdvert', array('solt'=>'bottom_banner', 'boxClass'=>'top15px'));?>
+    <?php $this->widget('CDAdvert', array('solt'=>'bottom_banner', 'boxClass'=>'top15px', 'bizrule'=>$this->showAdvert));?>
 </div>
 <?php echo param('footer_before_html');?>
 <?php $this->renderPartial('/public/footer');?>
@@ -77,7 +77,7 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 </div>
 
 <?php echo param('footer_after_html');?>
-<?php $this->widget('CDAdvert', array('solt'=>'page_right_corner', 'onlyCode'=>true));?>
+<?php $this->widget('CDAdvert', array('solt'=>'page_right_corner', 'onlyCode'=>true, 'bizrule'=>true));?>
 <?php echo param('tongji_code');?>
 </body>
 </html>

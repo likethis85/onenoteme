@@ -29,7 +29,7 @@ _hmt && _hmt.push(['_setCustomVar', 2, 'channel_id', <?php echo (int)$this->chan
     <a name="comments"></a>
     
     <!-- 广告位 开始 -->
-    <div class="cdc-inner-block"><?php $this->widget('CDAdvert', array('solt'=>'mobile_post_content_bottom', 'multi'=>false,  'bizrule'=>$this->showAdvert));?></div>
+    <div class="cdc-inner-block"><?php $this->widget('CDAdvert', array('solt'=>'mobile_post_content_bottom', 'bizrule'=>$this->showAdvert));?></div>
     <!-- 广告位 结束 -->
     
     <div class="change-post clearfix">
