@@ -17,7 +17,7 @@
 </div>
 <div class="fright cd-sidebar">
     <!-- 首页侧边栏广告位1 开始 -->
-    <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_01'));?>
+    <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_01', 'bizrule'=>$this->showAdvert));?>
     <!-- 首页侧边栏广告位1 结束 -->
     
     <div class="cdc-block cd-border app-list">
@@ -30,11 +30,11 @@
         <iframe width="270" height="250" frameborder="0" scrolling="no" src="http://app.wumii.com/ext/widget/hot?prefix=http%3A%2F%2Fwww.waduanzi.com%2F&num=10&t=1"></iframe>
     </div>
     <!-- 首页侧边栏广告位2 开始 -->
-    <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_02'));?>
+    <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_02', 'bizrule'=>$this->showAdvert));?>
     <!-- 首页侧边栏广告位2 结束 -->
     <div class="panel panel15 bottom15px"><?php $this->widget('CDHotTags', array('title'=>'热门标签'));?></div>
     <!-- 首页侧边栏广告位3 开始 -->
-    <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_03'));?>
+    <?php $this->widget('CDAdvert', array('solt'=>'home_sidebar_03', 'bizrule'=>$this->showAdvert));?>
     <!-- 首页侧边栏广告位3 结束 -->
 </div>
 <div class="clear"></div>
