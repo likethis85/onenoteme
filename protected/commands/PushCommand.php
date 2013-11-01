@@ -12,7 +12,7 @@ class PushCommand extends CConsoleCommand
     {
         $channel = new Channel(BAIDU_APP_WDZ_APP_KEY, BAIDU_APP_WDZ_SECRET_KEY);
         $channel->setHost(Channel::HOST_IOS_DEV);
-        $optional[Channel::USER_ID] = '924028076706842347';
+//         $optional[Channel::USER_ID] = '924028076706842347';
         $optional[Channel::DEVICE_TYPE] = BAIDU_DEVICE_TYPE_IOS;
         $optional[Channel::MESSAGE_TYPE] = BAIDU_MESSAGE_TYPE_ALERT;
         $message = array(
