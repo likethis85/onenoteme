@@ -8,6 +8,8 @@
  * @property string $name
  * @property string $solt
  * @property string $intro
+ * @property integer $width
+ * @property integer $height
  * @property integer $state
  * @property array $adcodes
  * @property array $validAdcodes
@@ -39,7 +41,7 @@ class Advert extends CActiveRecord
 		return array(
 		    array('name, solt', 'required'),
 		    array('name, solt', 'unique'),
-			array('state', 'numerical', 'integerOnly'=>true),
+			array('width, height, state', 'numerical', 'integerOnly'=>true),
 			array('name, solt', 'length', 'max'=>50),
 			array('intro', 'length', 'max'=>250),
 		);
@@ -65,6 +67,8 @@ class Advert extends CActiveRecord
 			'name' => '广告位名称',
 			'solt' => '广告位标识',
 			'intro' => '描述',
+			'width' => '宽度',
+			'height' => '高度',
 			'state' => '状态',
 		);
 	}
@@ -172,6 +176,9 @@ class Advert extends CActiveRecord
 	protected function beforeSave()
 	{
 	    $this->intro = strip_tags(trim($this->intro));
+	    $this->width = (int)$this->width;
+	    $this->height = (int)$this->height;
+	    
 	    return true;
 	}
 	
