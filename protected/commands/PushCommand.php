@@ -23,7 +23,7 @@ class PushCommand extends CConsoleCommand
             ),
         );
         
-        $ret = $channel->pushMessage (BAIDU_PUSH_TYPE_SINGLE, $message, 'test_key', $optional);
+        $ret = $channel->pushMessage (Channel::PUSH_TO_ALL, $message, 'test_key', $optional);
         
         if (false === $ret) {
             echo 'WRONG, ' . __FUNCTION__ . ' ERROR!!!!!';
