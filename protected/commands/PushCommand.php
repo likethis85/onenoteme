@@ -71,5 +71,25 @@ class PushCommand extends CConsoleCommand
             echo 'result: ' . print_r($ret2, true);
         }
     }
+    
+    public function actionFetchtags()
+    {
+        $channel = new Channel(BAIDU_APP_WDZ_APP_KEY, BAIDU_APP_WDZ_SECRET_KEY);
+        $channel->setHost(Channel::HOST_IOS_DEV);
+    
+        $ret = $channel->queryUserTags('924028076706842347');
+    
+        if (false === $ret) {
+            echo 'WRONG, ' . __FUNCTION__ . ' ERROR!!!!!';
+            echo 'ERROR NUMBER: ' . $channel->errno ();
+            echo 'ERROR MESSAGE: ' . $channel->errmsg ();
+            echo 'REQUEST ID: ' . $channel->getRequestId ();
+        }
+        else
+        {
+            echo 'SUCC, ' . __FUNCTION__ . ' OK!!!!!';
+            echo 'result: ' . print_r($ret, true);
+        }
+    }
 }
 
