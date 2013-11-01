@@ -12,8 +12,8 @@ class PushCommand extends CConsoleCommand
     {
         $channel = new Channel(BAIDU_APP_WDZ_APP_KEY, BAIDU_APP_WDZ_SECRET_KEY);
         $channel->setHost(Channel::HOST_IOS_DEV);
-//         $optional[Channel::USER_ID] = '924028076706842347';
-        $optional[Channel::TAG_NAME] = 'has_logined';
+        $optional[Channel::USER_ID] = '924028076706842347';
+//         $optional[Channel::TAG_NAME] = 'has_logined';
         $optional[Channel::DEVICE_TYPE] = BAIDU_DEVICE_TYPE_IOS;
         $optional[Channel::MESSAGE_TYPE] = BAIDU_MESSAGE_TYPE_ALERT;
         $message = array(
@@ -24,7 +24,7 @@ class PushCommand extends CConsoleCommand
             ),
         );
         
-        $ret = $channel->pushMessage (Channel::PUSH_TO_TAG, $message, 'test_key', $optional);
+        $ret = $channel->pushMessage (Channel::PUSH_TO_USER, $message, 'test_key', $optional);
         
         if (false === $ret) {
             echo 'WRONG, ' . __FUNCTION__ . ' ERROR!!!!!';
