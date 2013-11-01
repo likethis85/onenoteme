@@ -3,7 +3,7 @@ return array(
     'default' => array(
         'header' => '',
         'footer' => '',
-        'maxButtonCount' => 8,
+        'maxButtonCount' => 6,
         'nextPageLabel' => '下页',
         'prevPageLabel' => '上页',
         'cssFile' => false,
@@ -11,19 +11,12 @@ return array(
     'bootstrap' => array(
         'header' => '',
         'footer' => '',
-        'maxButtonCount' => 8,
+        'maxButtonCount' => 6,
         'nextPageLabel' => '下页',
         'prevPageLabel' => '上页',
         'cssFile' => false,
         'hiddenPageCssClass' => 'disabled',
         'selectedPageCssClass' => 'active',
-    ),
-    'wap' => array(
-        'header' => '',
-        'footer' => '',
-        'maxButtonCount' => 5,
-        'nextPageLabel' => '&gt;',
-        'prevPageLabel' => '&lt;',
     ),
     'mobile' => array(
         'header' => '',
