@@ -38,14 +38,21 @@ class CDAdvert extends CWidget
         $data = Advert::fetchAdcodesWithSolt($this->solt);
         if (empty($data)) return;
         
-        $adcode = $this->getAdcodeByWeight($data);
+        $advert = $data['advert'];
+        $adcodes = $data['adcodes'];
+        
+        $adcode = $this->getAdcodeByWeight($adcodes);
         
         if (empty($adcode)) return ;
         
         if ($this->onlyCode)
             echo $adcode['adcode'];
         else {
-            $html = sprintf('<div class="cdc-block ad-block %s">', $this->boxClass);
+            $width = (int)$advert['width'];
+            $height = (int)$advert['height'];
+            if ($width > 0 && $height > 0)
+                $style = sprintf('style="width:%dpx; height:%dpx;"', $width, $height);
+            $html = sprintf('<div class="cdc-block ad-block %s" %s>', $this->boxClass, $style);
             if ($this->title)
                 $html .= '<h2>' . $this->title . '</h2>';
             

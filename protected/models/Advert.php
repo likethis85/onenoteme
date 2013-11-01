@@ -112,13 +112,13 @@ class Advert extends CActiveRecord
 
 	    $data = array();
 	    $cmd = app()->getDb()->createCommand()
-	        ->select('id')
 	        ->from(TABLE_ADVERT)
 	        ->where(array('and', 'solt = :adsolt', 'state = :enabled'), array(':adsolt'=>$solt, ':enabled'=>CD_YES));
 	    
-	    $adid = $cmd->queryScalar();
-	    if ($adid !== false) {
-    	    $data = Adcode::fetchAdcodes($adid);
+	    $advert = $cmd->queryRow();
+	    if ($advert !== false) {
+	        $data['advert'] = $advert;
+    	    $data['adcodes'] = Adcode::fetchAdcodes($advert['id']);
     	    if (app()->getCache())
     	        app()->getCache()->set($cacheID, $data);
 	    }
