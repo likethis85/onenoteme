@@ -1,6 +1,7 @@
 <?php
 class CategoryController extends Controller
 {
+    // @todo 暂时没用
     public function actionIndex($cid, $page = 1, $s = POST_LIST_STYLE_LINE)
     {
         if (is_numeric($cid)) {
@@ -22,6 +23,7 @@ class CategoryController extends Controller
         $count = ($s == POST_LIST_STYLE_WATERFALL) ? param('waterfall_post_count_page') : param('duanzi_count_page');
         $data = $this->fetchPosts($category->id, null, $count);
         $view = ($s == POST_LIST_STYLE_WATERFALL) ? '/post/mixed_list' : 'text_list';
+        
         if (request()->getIsAjaxRequest())
             $this->renderPartial($view, $data);
         else

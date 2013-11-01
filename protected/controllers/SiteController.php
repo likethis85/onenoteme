@@ -36,6 +36,7 @@ class SiteController extends Controller
         $criteria->limit = (int)p('line_post_count_page');
     
         $data = self::fetchPosts($criteria);
+        $this->showAdvert = $this->fetchShowAlertValueFromPostModels($data['models']);
         $this->render('index', array(
             'models' => $data['models'],
             'pages' => $data['pages'],

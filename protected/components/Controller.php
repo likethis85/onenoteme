@@ -128,6 +128,17 @@ class Controller extends CController
         cs()->defaultScriptFilePosition = CClientScript::POS_END;
         return true;
     }
+    
+    protected function fetchShowAlertValueFromPostModels($models)
+    {
+        foreach ((array)$models as $index => $model) {
+        	if ($model instanceof Post && $model->getContentLevelDeny()) {
+        	    return false;
+        	    break;
+        	}
+        }
+        return true;
+    }
 }
 
 

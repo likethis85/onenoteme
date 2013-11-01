@@ -33,7 +33,7 @@ class ChannelController extends Controller
         $criteria->order = 't.istop desc, t.create_time desc';
         $criteria->limit = (int)p('line_post_count_page');
     
-        $data = self::fetchPosts($criteria);
+        $data = $this->fetchPosts($criteria);
         $this->render('funny_hot', array(
             'models' => $data['models'],
             'pages' => $data['pages'],
@@ -144,7 +144,7 @@ class ChannelController extends Controller
         $criteria->limit = (int)p('focus_count_page');
         $criteria->with = 'uploadImagesCount';
         
-        $data = self::fetchPosts($criteria);
+        $data = $this->fetchPosts($criteria);
         
         $this->render('focus_list', $data);
     }
@@ -167,7 +167,7 @@ class ChannelController extends Controller
         $limit = (int)p('line_post_count_page');
         $criteria->limit = $limit;
     
-        $data = self::fetchPosts($criteria, $hours);
+        $data = $this->fetchPosts($criteria, $hours);
         $this->render('funny_hot', array(
             'models' => $data['models'],
             'pages' => $data['pages'],
@@ -194,7 +194,8 @@ class ChannelController extends Controller
         $pages->applyLimit($criteria);
     
         $models = Post::model()->findAll($criteria);
-    
+        $this->showAdvert = $this->fetchShowAlertValueFromPostModels($models);
+        
         return array(
             'models' => $models,
             'pages' => $pages,
@@ -214,7 +215,7 @@ class ChannelController extends Controller
         if (!empty($with))
             $criteria->with = $with;
     
-        return self::fetchPosts($criteria);
+        return $this->fetchPosts($criteria);
     }
 
 
