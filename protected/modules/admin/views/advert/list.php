@@ -16,6 +16,7 @@
             <th class="span1 align-center"><?php echo $sort->link('id');?></th>
             <th class="span3"><?php echo $sort->link('name');?></th>
             <th class="span3"><?php echo $sort->link('solt');?></th>
+            <th class="span1 align-center">尺寸</th>
             <th class="span1 align-center"><?php echo $sort->link('state');?></th>
             <th>&nbsp;</th>
         </tr>
@@ -26,6 +27,7 @@
             <td class="align-center"><?php echo $model->id;?></td>
             <td><?php echo $model->nameLink;?></td>
             <td><?php echo $model->solt;?></td>
+            <td><?php echo $model->width;?>x<?php echo $this->height;?></td>
             <td class="align-center"><?php echo $model->stateLink;?></td>
             <td>
                 <?php echo $model->editLink;?>

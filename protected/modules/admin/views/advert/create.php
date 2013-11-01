@@ -25,7 +25,7 @@
     <div class="control-group <?php if($model->hasErrors('width') || $model->hasErrors('height')) echo 'error';?>">
         <label class="control-label">尺寸</label>
         <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'width', array('class'=>'input-mini'));?>&nbsp;X&nbsp;<?php echo CHtml::activeTextField($model, 'height', array('class'=>'input-mini'));?>
+            <?php echo CHtml::activeTextField($model, 'width', array('class'=>'input-mini'));?>&nbsp;x&nbsp;<?php echo CHtml::activeTextField($model, 'height', array('class'=>'input-mini'));?>
             <?php if($model->hasErrors('width')):?><p class="help-block"><?php echo $model->getError('width');?></p><?php endif;?>
             <?php if($model->hasErrors('height')):?><p class="help-block"><?php echo $model->getError('height');?></p><?php endif;?>
         </div>
