@@ -174,7 +174,7 @@ class ChannelController extends Controller
         ));
     }
     
-    private static function fetchPosts(CDbCriteria $criteria)
+    private function fetchPosts(CDbCriteria $criteria)
     {
         $duration = 60*60*24;
 	    $cacheID = md5(var_export($criteria->toArray(), true));
