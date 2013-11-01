@@ -3,7 +3,7 @@ return array(
     'default' => array(
         'header' => '',
         'footer' => '',
-        'maxButtonCount' => 5,
+        'maxButtonCount' => 6,
         'firstPageLabel' => '首页',
         'lastPageLabel' => '末页',
         'nextPageLabel' => '下页',
@@ -13,7 +13,7 @@ return array(
     'bootstrap' => array(
         'header' => '',
         'footer' => '',
-        'maxButtonCount' => 5,
+        'maxButtonCount' => 6,
         'firstPageLabel' => '首页',
         'lastPageLabel' => '末页',
         'nextPageLabel' => '下页',
