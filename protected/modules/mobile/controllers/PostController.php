@@ -39,7 +39,9 @@ class PostController extends MobileController
         $this->channel = $post->channel_id . $post->media_type;
         
         // @todo 此处把2013-10-30 20:00:00之前的都不显示google广告
-        $this->showAdvert = ($post->create_time > SITE_ADD_CONTENT_LEVEL_TIMESTAMP) && $post->getContentLevelAllow();
+        $this->showAdvert = ($post->getContentLevelAllow() && $post->create_time > SITE_ADD_CONTENT_LEVEL_TIMESTAMP)
+            || ($post->create_time < SITE_ADD_CONTENT_LEVEL_TIMESTAMP && ($post->channel_id != CHANNEL_FUNNY || $post->media_type != MEDIA_TYPE_IMAGE));
+        
         cs()->registerMetaTag('all', 'robots');
         
         $this->render('show', array(

@@ -104,7 +104,9 @@ class PostController extends Controller
             $shareData = sprintf("{'text':'%s', 'pic':'%s'}", $post->content, $post->getMiddlePic());
         
         $this->channel = $post->channel_id . $post->media_type;
-        $this->showAdvert = ($post->create_time > SITE_ADD_CONTENT_LEVEL_TIMESTAMP) && $post->getContentLevelAllow();
+        $this->showAdvert = ($post->getContentLevelAllow() && $post->create_time > SITE_ADD_CONTENT_LEVEL_TIMESTAMP)
+            || ($post->create_time < SITE_ADD_CONTENT_LEVEL_TIMESTAMP && ($post->channel_id != CHANNEL_FUNNY || $post->media_type != MEDIA_TYPE_IMAGE));
+        
         $this->render('show', array(
             'post' => $post,
             'nextPosts' => $nextPosts,
