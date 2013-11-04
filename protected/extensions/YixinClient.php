@@ -292,7 +292,7 @@ class YixinClient extends CDYixin
         $wxid = $this->_data->FromUserName;
         $lastID = app()->getDb()->createCommand()
         ->select('last_video_pid')
-        ->from(TABLE_USER_WEIXIN)
+        ->from(TABLE_USER_YIXIN)
         ->where('wx_token = :wxid', array(':wxid'=>$wxid))
         ->queryScalar();
     
@@ -316,7 +316,7 @@ class YixinClient extends CDYixin
                     'last_video_pid' => 0,
             );
             app()->getDb()->createCommand()
-            ->insert(TABLE_USER_WEIXIN, $columns);
+            ->insert(TABLE_USER_YIXIN, $columns);
         }
         else {
             $columns = array(
@@ -324,7 +324,7 @@ class YixinClient extends CDYixin
                     'last_video_pid' => (int)$lastRow['id'],
             );
             app()->getDb()->createCommand()
-            ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
+            ->update(TABLE_USER_YIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
         }
     
         reset($rows);
