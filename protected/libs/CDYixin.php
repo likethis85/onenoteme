@@ -40,7 +40,13 @@ class CDYixin
     {
         if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
             if ($this->_data && $this->beforeProcess() === true) {
-                $this->processRequest();
+                if ($this->isSubscribeEvent())
+                	$this->subscribe();
+                elseif ($this->isUnSubscribeEvent())
+                    $this->unsubscribe();
+                else
+                    $this->processRequest();
+                
                 $this->afterProcess();
             }
             else
@@ -156,6 +162,7 @@ class CDYixin
              <FromUserName><![CDATA[%s]]></FromUserName>
              <CreateTime>%s</CreateTime>
              <MsgType><![CDATA[%s]]></MsgType>
+             <Content><![CDATA[%s]]></Content>
              <ArticleCount>%d</ArticleCount>
              <Articles>%s</Articles>
          </xml>';
@@ -170,12 +177,12 @@ class CDYixin
         $items = '';
         foreach ((array)$posts as $p) {
             if (is_array($p))
-                $items .= sprintf($itemTpl, $p['Title'], $p['Description'], $p['PicUrl'], $p['Url']);
+                $items .= sprintf($itemTpl, $p['Title'], $p['Discription'], $p['PicUrl'], $p['Url']);
             else
                 throw new Exception('$posts 数据结构错误');
         }
         
-        $text = sprintf($textTpl, $this->_data->FromUserName, $this->_data->ToUserName, time(), self::REPLY_TYPE_NEWS, count($posts), $items);
+        $text = sprintf($textTpl, $this->_data->FromUserName, $this->_data->ToUserName, time(), self::REPLY_TYPE_NEWS, $content, count($posts), $items);
         return $text;
     }
     
@@ -231,6 +238,16 @@ class CDYixin
     }
 
     protected function processRequest()
+    {
+        throw new Exception('此方法必须被重写');
+    }
+    
+    protected function subscribe()
+    {
+        throw new Exception('此方法必须被重写');
+    }
+    
+    protected function unsubscribe()
     {
         throw new Exception('此方法必须被重写');
     }

@@ -95,18 +95,7 @@ class WeixinClient extends CDWeixin
     }
     
     /**
-     * 用户关注时消息处理
-     */
-    private function welcome()
-    {
-        $text = "没错！这里就是要啥有啥，想啥有啥的挖段子微信大本营！\n\n您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，也可以发送给我们与大家一起分享哟～" . self::helpInfo();
-        $xml = $this->outputText($text);
-        header('Content-Type: application/xml');
-        echo $xml;
-    }
-    
-    /**
-     * 用户订阅时消息处理，目前官方未启用
+     * 用户订阅时消息处理
      */
     protected function subscribe()
     {
@@ -117,14 +106,11 @@ class WeixinClient extends CDWeixin
     }
     
     /**
-     * 用户取消订阅时消息处理，目前官方未启用
+     * 用户取消订阅时消息处理
      */
     protected function unsubscribe()
     {
-        $text = "Sorry，我们的服务留住了您的过去，却没能留住您的将来，请给我们提些建议吧，让我们做的更好！\n";
-        $xml = $this->outputText($text);
-        header('Content-Type: application/xml');
-        echo $xml;
+        // 此处处理取消订阅
     }
     
     /**
@@ -373,7 +359,7 @@ class WeixinClient extends CDWeixin
         else {
             $text .= "①回复 1 查看笑话\n";
             $text .= "②回复 2 查看趣图\n";
-            $text .= "③回复 3 查看趣图\n";
+            $text .= "③回复 3 查看视频\n";
             $text .= "④回复 0 查看帮助\n";
             $text .= '⑤投递笑话，请直接发送笑话内容，笑话必须要大于' . self::POST_JOKE_CONTENT_MIN_LEN . "字\n";
             $text .= "\n喜欢我们就召唤好友添加'挖段子'或'waduanzi'为好友关注我们吧！";
@@ -389,6 +375,11 @@ class WeixinClient extends CDWeixin
         header('Content-Type: application/xml');
         echo $xml;
     }
+    
+    private function menuClick()
+    {
+        
+    }
 
     private static function advert()
     {
@@ -400,11 +391,6 @@ class WeixinClient extends CDWeixin
 //                 'Url' => 'http://t.cn/zj37mMZ',
 //             )
         );
-    }
-    
-    private function menuClick()
-    {
-        
     }
 }
 

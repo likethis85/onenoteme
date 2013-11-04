@@ -2,17 +2,17 @@
 class YixinClient extends CDYixin
 {
     const POST_JOKE_CONTENT_MIN_LEN = 20;
+    const EVENT_KEY_NEWEST_TEXT_JOKE = 'KEY_NEWEST_TEXT_JOKE';
+    const EVENT_KEY_NEWEST_IMAGE = 'KEY_NEWEST_IMAGE';
+    const EVENT_KEY_NEWEST_VIDEO = 'KEY_NEWEST_VIDEO';
     
     public function processRequest()
     {
-        if ($this->isTextMsg())
+        if ($this->isTextMsg()) {
             $this->textMsgRequest();
+        }
         elseif ($this->isEventMsg()) {
-            if ($this->isSubscribeEvent())
-                $this->subscribe();
-            elseif ($this->isUnSubscribeEvent())
-                $this->unsubscribe();
-            elseif ($this->isMenuClickEvent())
+            if ($this->isMenuClickEvent())
                 $this->menuClick();
             else
                 $this->unSupportEvent();
@@ -25,14 +25,8 @@ class YixinClient extends CDYixin
     
     private function textMsgRequest()
     {
-        $subscribeMessage = 'subscribe';
         $input = strtolower(trim($this->_data->Content));
     
-        if ($input == $subscribeMessage) {
-            $this->welcome();
-            exit(0);
-        }
-        
         if (is_numeric($input)) {
             $method = 'method_' . $input[0]; // 取第一个数字
             $result = false;
@@ -101,9 +95,9 @@ class YixinClient extends CDYixin
     }
     
     /**
-     * 用户关注时消息处理
+     * 用户订阅时消息处理
      */
-    private function welcome()
+    protected function subscribe()
     {
         $text = "没错！这里就是要啥有啥，想啥有啥的挖段子易信大本营！\n\n您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接易信投稿，也可以发送给我们与大家一起分享哟～" . self::helpInfo();
         $xml = $this->outputText($text);
@@ -112,25 +106,11 @@ class YixinClient extends CDYixin
     }
     
     /**
-     * 用户订阅时消息处理，目前官方未启用
+     * 用户取消订阅时消息处理
      */
-    private function subscribe()
+    protected function unsubscribe()
     {
-        $text = "没错！这里就是要啥有啥，想啥有啥的挖段子易信大本营！\n\n您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接易信投稿，也可以发送给我们与大家一起分享哟～" . self::helpInfo();
-        $xml = $this->outputText($text);
-        header('Content-Type: application/xml');
-        echo $xml;
-    }
-    
-    /**
-     * 用户取消订阅时消息处理，目前官方未启用
-     */
-    private function unsubscribe()
-    {
-        $text = "Sorry，我们的服务留住了您的过去，却没能留住您的将来，请给我们提些建议吧，让我们做的更好！\n";
-        $xml = $this->outputText($text);
-        header('Content-Type: application/xml');
-        echo $xml;
+        // 此处处理取消订阅
     }
     
     /**
@@ -163,6 +143,11 @@ class YixinClient extends CDYixin
     private function method_2()
     {
         $this->nextLengtu();
+    }
+    
+    private function method_3()
+    {
+        $this->nextVideo();
     }
     
     private function method_0()
@@ -301,21 +286,104 @@ class YixinClient extends CDYixin
         echo $xml;
     }
     
+    private function nextVideo()
+    {
+        $count = 4;
+        $wxid = $this->_data->FromUserName;
+        $lastID = app()->getDb()->createCommand()
+        ->select('last_video_pid')
+        ->from(TABLE_USER_WEIXIN)
+        ->where('wx_token = :wxid', array(':wxid'=>$wxid))
+        ->queryScalar();
+    
+        $params = array(':enabled' => POST_STATE_ENABLED, ':channelID'=>CHANNEL_FUNNY, ':mediatype'=>MEDIA_TYPE_VIDEO, ':lastID' => (int)$lastID);
+        $cmd = app()->getDb()->createCommand()
+        ->select(array('id', 'title', 'content', 'original_pic'))
+        ->from(TABLE_POST)
+        ->where(array('and', 'state = :enabled', 'channel_id = :channelID', 'media_type = :mediatype', 'id > :lastID'), $params)
+        ->order('id asc')
+        ->limit($count);
+        $rows = $cmd->queryAll();
+    
+        if (empty($rows)) return ;
+    
+        $lastRow = end($rows);
+        if ($lastID === false) {
+            $columns = array(
+                    'wx_token' => $wxid,
+                    'create_time' => time(),
+                    'last_time' => time(),
+                    'last_video_pid' => 0,
+            );
+            app()->getDb()->createCommand()
+            ->insert(TABLE_USER_WEIXIN, $columns);
+        }
+        else {
+            $columns = array(
+                    'last_time' => time(),
+                    'last_video_pid' => (int)$lastRow['id'],
+            );
+            app()->getDb()->createCommand()
+            ->update(TABLE_USER_WEIXIN, $columns, 'wx_token = :wxid', array(':wxid' => $wxid));
+        }
+    
+        reset($rows);
+        foreach ($rows as $row) {
+            if (empty($row['content'])) return ;
+            $text = strip_tags($row['title']);
+            $thumb = empty($row['original_pic']) ? false : new CDImageThumb($row['original_pic']);
+            $posts[] = array(
+                    'Title' => $text,
+                    'Discription' => mb_strimwidth(strip_tags($row['content']), 0, 150, '...', app()->charset),
+                    'PicUrl' => $thumb ? $thumb->middleImageUrl() : '',
+                    'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
+            );
+        }
+    
+        // 添加广告
+        $advertRow = self::advert();
+        if ($advertRow)
+            $posts[] = self::advert();
+    
+        $xml = $this->outputNews($text, $posts);
+        header('Content-Type: application/xml');
+        echo $xml;
+    }
+    
     
     private static function helpInfo($classic = false)
     {
-        $text = "\n\n-------------------------------\n";
+        $text = "\n\n-------------------------\n";
         if ($classic)
             $text .= "回复 0 查看帮助\n";
         else {
             $text .= "①回复 1 查看笑话\n";
             $text .= "②回复 2 查看趣图\n";
-            $text .= "③回复 0 查看帮助\n";
-            $text .= '④投递笑话，请直接发送笑话内容，笑话必须要大于' . self::POST_JOKE_CONTENT_MIN_LEN . "字\n";
+            $text .= "③回复 3 查看视频\n";
+            $text .= "④回复 0 查看帮助\n";
+            $text .= '⑤投递笑话，请直接发送笑话内容，笑话必须要大于' . self::POST_JOKE_CONTENT_MIN_LEN . "字\n";
             $text .= "\n喜欢我们就召唤好友添加'挖段子'或'waduanzi'为好友关注我们吧！";
         }
-        
+    
         return $text;
+    }
+    
+    private function menuClick()
+    {
+        $input = strtoupper(trim($this->_data->Content));
+        switch ($input) {
+            case self::EVENT_KEY_NEWEST_TEXT_JOKE:
+                $this->nextJoke();
+                break;
+            case self::EVENT_KEY_NEWEST_IMAGE:
+                $this->nextLengtu();
+                break;
+            case self::EVENT_KEY_NEWEST_VIDEO:
+                break;
+            default:
+                $this->unSupportEvent();
+                brea;
+        }
     }
     
     private static function error()
