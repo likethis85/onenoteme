@@ -379,6 +379,7 @@ class YixinClient extends CDYixin
                 $this->nextLengtu();
                 break;
             case self::EVENT_KEY_NEWEST_VIDEO:
+                $this->nextVideo();
                 break;
             default:
                 $this->unSupportEvent();
