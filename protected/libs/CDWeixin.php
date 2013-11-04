@@ -40,7 +40,13 @@ class CDWeixin
     {
         if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
             if ($this->_data && $this->beforeProcess() === true) {
-                $this->processRequest();
+                if ($this->isSubscribeEvent())
+                	$this->subscribe();
+                elseif ($this->isUnSubscribeEvent())
+                    $this->unsubscribe();
+                else
+                    $this->processRequest();
+                
                 $this->afterProcess();
             }
             else
@@ -110,7 +116,7 @@ class CDWeixin
      * 判断是否是事件消息中的进入unsubscribe事件
      * @return boolean
      */
-    public function isUnsubscribeEvent()
+    public function isUnSubscribeEvent()
     {
         return $this->isEventMsg() && strtolower($this->_data->Event) == self::MSG_EVENT_UNSUBSCRIBE;
     }
@@ -232,6 +238,16 @@ class CDWeixin
     }
 
     protected function processRequest()
+    {
+        throw new Exception('此方法必须被重写');
+    }
+    
+    protected function subscribe()
+    {
+        throw new Exception('此方法必须被重写');
+    }
+    
+    protected function unsubscribe()
     {
         throw new Exception('此方法必须被重写');
     }

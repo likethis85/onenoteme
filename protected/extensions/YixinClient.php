@@ -10,7 +10,7 @@ class YixinClient extends CDYixin
         elseif ($this->isEventMsg()) {
             if ($this->isSubscribeEvent())
                 $this->subscribe();
-            elseif ($this->isUnsubscribeEvent())
+            elseif ($this->isUnSubscribeEvent())
                 $this->unsubscribe();
             elseif ($this->isMenuClickEvent())
                 $this->menuClick();
