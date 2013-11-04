@@ -345,11 +345,11 @@ class WeixinClient extends CDWeixin
         foreach ($rows as $row) {
             if (empty($row['content'])) return ;
             $text = strip_tags($row['title']);
-            $thumb = new CDImageThumb($row['original_pic']);
+            $thumb = empty($row['original_pic']) ? false : new CDImageThumb($row['original_pic']);
             $posts[] = array(
                 'Title' => $text,
                 'Discription' => mb_strimwidth(strip_tags($row['content']), 0, 150, '...', app()->charset),
-                'PicUrl' => $thumb->middleImageUrl(),
+                'PicUrl' => $thumb ? $thumb->middleImageUrl() : '',
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
             );
         }
