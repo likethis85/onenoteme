@@ -370,7 +370,7 @@ class YixinClient extends CDYixin
     
     private function menuClick()
     {
-        $input = strtoupper(trim($this->_data->Content));
+        $input = strtoupper(trim($this->_data->EventKey));
         switch ($input) {
             case self::EVENT_KEY_NEWEST_TEXT_JOKE:
                 $this->nextJoke();
