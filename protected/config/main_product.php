@@ -194,7 +194,7 @@ return array(
             'class' => 'application.extensions.CDUpyunUploader',
             'isImageBucket' => true,
             'endpoint' => 'v1.api.upyun.com',
-            'bucket' => 'img0002',
+            'bucket' => 'wtimg001',
             'username' => 'cdcchen',
             'password' => 'cdc790406',
             'basePath' => '/',
