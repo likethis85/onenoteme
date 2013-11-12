@@ -272,7 +272,7 @@ class CDWeixin
     private function sourceCheck()
     {
         if ($this->checkSignature()) {
-            $echostr = trim(strip_tags($_GET['echostr']));
+            $echostr = htmlspecialchars($_GET['echostr']);
             echo $echostr;
         }
         else
