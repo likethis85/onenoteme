@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3452a2ff-c78a-47eb-8544-d770a449235a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php" afterPath="$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="waduanzi.com.iws" />
@@ -29,7 +28,7 @@
       <file leaf-file-name="PostController.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="132" column="27" selection-start="4665" selection-end="4665" vertical-scroll-proportion="0.46304348" vertical-offset="1767" max-vertical-offset="10080">
+            <state line="144" column="8" selection-start="5139" selection-end="5139" vertical-scroll-proportion="0.8543478" vertical-offset="1767" max-vertical-offset="10080">
               <folding />
             </state>
           </provider>
@@ -293,7 +292,8 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="wef" />
+    <option name="LAST_COMMIT_MESSAGE" value="wef" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -328,7 +328,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="27" selection-start="4665" selection-end="4665" vertical-scroll-proportion="0.46304348" vertical-offset="1767" max-vertical-offset="10080">
+        <state line="144" column="8" selection-start="5139" selection-end="5139" vertical-scroll-proportion="0.8543478" vertical-offset="1767" max-vertical-offset="10080">
           <folding />
         </state>
       </provider>
