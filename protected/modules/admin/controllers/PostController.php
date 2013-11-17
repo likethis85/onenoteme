@@ -242,14 +242,15 @@ class PostController extends AdminController
 	public function actionSearch()
 	{
 	    $form = new PostSearchForm();
-	    $data = array();
 	    if (isset($_GET['PostSearchForm'])) {
 	        $form->attributes = $_GET['PostSearchForm'];
 	        if ($form->validate())
 	            $data = $form->search();
 	        user()->setFlash('table_caption', '文章搜索结果');
 	    }
-	    
+	    else
+            $data = array();
+        
 	    $this->channel = 'search_post';
         $this->render('search', array('form'=>$form, 'data'=>$data));
 	}
