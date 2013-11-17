@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3452a2ff-c78a-47eb-8544-d770a449235a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php" afterPath="$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/modules/admin/views/post/create_video.php" afterPath="$PROJECT_DIR$/protected/modules/admin/views/post/create_video.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -27,28 +26,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PostController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="645" column="19" selection-start="20383" selection-end="20383" vertical-scroll-proportion="-13.041667" vertical-offset="9362" max-vertical-offset="10080">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="create_video.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/protected/modules/admin/views/post/create_video.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="50" selection-start="4397" selection-end="4397" vertical-scroll-proportion="0.66573817" vertical-offset="842" max-vertical-offset="1560">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CDVideoKit.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/extensions/CDVideoKit.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="287" column="20" selection-start="8555" selection-end="8555" vertical-scroll-proportion="-9.958333" vertical-offset="4066" max-vertical-offset="4830">
+            <state line="77" column="45" selection-start="4110" selection-end="4110" vertical-scroll-proportion="0.46935934" vertical-offset="818" max-vertical-offset="1575">
               <folding />
             </state>
           </provider>
@@ -111,6 +92,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -241,7 +223,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -309,7 +290,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14729242" sideWeight="0.6704981" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23682311" sideWeight="0.6704981" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20866425" sideWeight="0.6704981" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -341,6 +322,27 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="645" column="19" selection-start="20383" selection-end="20383" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10080">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/modules/admin/views/post/create_video.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="50" selection-start="4397" selection-end="4397" vertical-scroll-proportion="0.0" vertical-offset="842" max-vertical-offset="1560">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/extensions/CDVideoKit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="287" column="20" selection-start="8555" selection-end="8555" vertical-scroll-proportion="0.0" vertical-offset="4066" max-vertical-offset="4830">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/PostForm.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="91" column="50" selection-start="3008" selection-end="3008" vertical-scroll-proportion="0.37465182" vertical-offset="1096" max-vertical-offset="1890" />
@@ -363,28 +365,26 @@
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_1.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="281" column="3" selection-start="7944" selection-end="7944" vertical-scroll-proportion="0.46648428" vertical-offset="3874" max-vertical-offset="16890">
-          <folding />
-        </state>
+        <state line="281" column="3" selection-start="7944" selection-end="7944" vertical-scroll-proportion="0.46648428" vertical-offset="3874" max-vertical-offset="16890" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/extensions/CDVideoKit.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="287" column="20" selection-start="8555" selection-end="8555" vertical-scroll-proportion="-9.958333" vertical-offset="4066" max-vertical-offset="4830">
+        <state line="117" column="59" selection-start="3415" selection-end="3415" vertical-scroll-proportion="0.47910863" vertical-offset="1411" max-vertical-offset="4830">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="645" column="19" selection-start="20383" selection-end="20383" vertical-scroll-proportion="-13.041667" vertical-offset="9362" max-vertical-offset="10080">
+        <state line="654" column="60" selection-start="20807" selection-end="20807" vertical-scroll-proportion="0.6239554" vertical-offset="9362" max-vertical-offset="10080">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/modules/admin/views/post/create_video.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="50" selection-start="4397" selection-end="4397" vertical-scroll-proportion="0.66573817" vertical-offset="842" max-vertical-offset="1560">
+        <state line="77" column="45" selection-start="4110" selection-end="4110" vertical-scroll-proportion="0.46935934" vertical-offset="818" max-vertical-offset="1575">
           <folding />
         </state>
       </provider>
