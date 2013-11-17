@@ -75,7 +75,7 @@ $(function(){
 	$(':text:first').focus();
 	$(document).on('click', '#parse-url', function(){
 	    var url = $.trim($('#original-url').val());
-        url = url.slice(0, str.indexOf('#'));
+        url = url.slice(0, url.indexOf('#'));
 	    if (url.length == 0) return;
 
 	    var xhr = $.ajax({
