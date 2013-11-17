@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3452a2ff-c78a-47eb-8544-d770a449235a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php" afterPath="$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/modules/admin/views/post/create_video.php" afterPath="$PROJECT_DIR$/protected/modules/admin/views/post/create_video.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="waduanzi.com.iws" />
@@ -26,10 +27,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PostController.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PostController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="645" column="18" selection-start="20382" selection-end="20382" vertical-scroll-proportion="0.43593314" vertical-offset="9362" max-vertical-offset="10080">
+            <state line="645" column="19" selection-start="20383" selection-end="20383" vertical-scroll-proportion="-13.041667" vertical-offset="9362" max-vertical-offset="10080">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="create_video.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/protected/modules/admin/views/post/create_video.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="88" column="50" selection-start="4397" selection-end="4397" vertical-scroll-proportion="0.66573817" vertical-offset="842" max-vertical-offset="1560">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CDVideoKit.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/extensions/CDVideoKit.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="287" column="20" selection-start="8555" selection-end="8555" vertical-scroll-proportion="-9.958333" vertical-offset="4066" max-vertical-offset="4830">
               <folding />
             </state>
           </provider>
@@ -56,6 +75,7 @@
         <option value="$PROJECT_DIR$/protected/models/PostForm.php" />
         <option value="$PROJECT_DIR$/protected/libs/CDFileLocal.php" />
         <option value="$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php" />
+        <option value="$PROJECT_DIR$/protected/modules/admin/views/post/create_video.php" />
       </list>
     </option>
   </component>
@@ -185,7 +205,37 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="waduanzi.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="waduanzi.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="post" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -318,9 +368,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/protected/extensions/CDVideoKit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="287" column="20" selection-start="8555" selection-end="8555" vertical-scroll-proportion="-9.958333" vertical-offset="4066" max-vertical-offset="4830">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="645" column="18" selection-start="20382" selection-end="20382" vertical-scroll-proportion="0.43593314" vertical-offset="9362" max-vertical-offset="10080">
+        <state line="645" column="19" selection-start="20383" selection-end="20383" vertical-scroll-proportion="-13.041667" vertical-offset="9362" max-vertical-offset="10080">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/modules/admin/views/post/create_video.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="50" selection-start="4397" selection-end="4397" vertical-scroll-proportion="0.66573817" vertical-offset="842" max-vertical-offset="1560">
           <folding />
         </state>
       </provider>

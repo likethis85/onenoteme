@@ -84,7 +84,7 @@ $(function(){
 			data: {url: url}
 		});
 		xhr.done(function(data){
-			$('#source-url').val(url);
+			$('#source-url').val(data.source_url);
 			$('#flash-url').val(data.flash_url);
 			$('#iframe-url').val(data.iframe_url);
 			$('#html5-url').val(data.html5_url);
