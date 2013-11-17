@@ -120,19 +120,7 @@ class PostController extends AdminController
 		    'model'=>$model,
 		));
 	}
-	
-	private function imagesLocal(AdminPost $post)
-	{
-	    set_time_limit(0);
-	    $summary = CDFileLocal::fetchAndReplaceMultiWithHtml($post->summary);
-	    $content = CDFileLocal::fetchAndReplaceMultiWithHtml($post->content);
-	    if ($summary === false and $content === false) return false;
-	    
-	    $summary === false or $post->summary = $summary;
-	    $content === false or $post->content = $content;
-	    return $post->save(true, array('summary', 'content'));
-	}
-	
+
 	public function actionCreateVideo($postid)
 	{
 	    $postid = (int)$postid;
@@ -141,7 +129,7 @@ class PostController extends AdminController
 	    
 	    $criteria = new CDbCriteria();
 	    $criteria->select = array('title', 'media_type');
-	    $post = AdminPost::model()->findByPk($postid, $criteria);
+        $post = AdminPost::model()->findByPk($postid, $criteria);
 	    if ($post === null)
 	        throw new CDException($postid . '：文章不存在');
 	    elseif (!$post->getIsVideoType())
@@ -205,18 +193,19 @@ class PostController extends AdminController
 	
 	public function actionVerify($channel = null, $mediatype = null)
 	{
+        $channelLabel = '';
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_UNVERIFY));
     	if ($channel !== null) {
 	        $channel = (int)$channel;
 	        $criteria->addColumnCondition(array('channel_id' => $channel));
-	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
+	        $channelLabel .= ' - 频道：' . CDBase::channelLabels($channel);
 	    }
 
 	    if ($mediatype !== null) {
 	        $mediatype = (int)$mediatype;
 	        $criteria->addColumnCondition(array('media_type' => $mediatype));
-	        $titleLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
+            $channelLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
@@ -228,18 +217,19 @@ class PostController extends AdminController
 	
 	public function actionTrash($channel = null, $mediatype = null)
 	{
+        $channelLabel = '';
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('t.state'=>POST_STATE_TRASH));
     	if ($channel !== null) {
 	        $channel = (int)$channel;
 	        $criteria->addColumnCondition(array('channel_id' => $channel));
-	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
+	        $channelLabel .= ' - 频道：' . CDBase::channelLabels($channel);
 	    }
 
 	    if ($mediatype !== null) {
 	        $mediatype = (int)$mediatype;
 	        $criteria->addColumnCondition(array('media_type' => $mediatype));
-	        $titleLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
+            $channelLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
@@ -252,7 +242,7 @@ class PostController extends AdminController
 	public function actionSearch()
 	{
 	    $form = new PostSearchForm();
-	    
+	    $data = array();
 	    if (isset($_GET['PostSearchForm'])) {
 	        $form->attributes = $_GET['PostSearchForm'];
 	        if ($form->validate())
@@ -266,24 +256,25 @@ class PostController extends AdminController
 	
 	public function actionHottest($channel = null, $mediatype = null, $state = null)
 	{
+        $channelLabel = '';
 	    $criteria = new CDbCriteria();
 	    $criteria->addColumnCondition(array('hottest'=>CD_YES));
     	if ($channel !== null) {
 	        $channel = (int)$channel;
 	        $criteria->addColumnCondition(array('channel_id' => $channel));
-	        $channelLabel = ' - 频道：' . CDBase::channelLabels($channel);
+	        $channelLabel .= ' - 频道：' . CDBase::channelLabels($channel);
 	    }
 
 	    if ($mediatype !== null) {
 	        $mediatype = (int)$mediatype;
 	        $criteria->addColumnCondition(array('media_type' => $mediatype));
-	        $titleLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
+            $channelLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
 	    }
 	     
 	    if ($state !== null) {
 	        $state = (int)$state;
 	        $criteria->addColumnCondition(array('t.state' => $state));
-	        $titleLabel = ' - 状态：' . AdminPost::stateLabels($state);
+            $channelLabel = ' - 状态：' . AdminPost::stateLabels($state);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
@@ -306,13 +297,13 @@ class PostController extends AdminController
 	    if ($mediatype !== null) {
 	        $mediatype = (int)$mediatype;
 	        $criteria->addColumnCondition(array('media_type' => $mediatype));
-	        $titleLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
+            $channelLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
 	    }
 	     
 	    if ($state !== null) {
 	        $state = (int)$state;
 	        $criteria->addColumnCondition(array('t.state' => $state));
-	        $titleLabel = ' - 状态：' . AdminPost::stateLabels($state);
+            $channelLabel = ' - 状态：' . AdminPost::stateLabels($state);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
@@ -335,13 +326,13 @@ class PostController extends AdminController
 	    if ($mediatype !== null) {
 	        $mediatype = (int)$mediatype;
 	        $criteria->addColumnCondition(array('media_type' => $mediatype));
-	        $titleLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
+            $channelLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
 	    }
 	     
 	    if ($state !== null) {
 	        $state = (int)$state;
 	        $criteria->addColumnCondition(array('t.state' => $state));
-	        $titleLabel = ' - 状态：' . AdminPost::stateLabels($state);
+            $channelLabel = ' - 状态：' . AdminPost::stateLabels($state);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
@@ -364,13 +355,13 @@ class PostController extends AdminController
 	    if ($mediatype !== null) {
 	        $mediatype = (int)$mediatype;
 	        $criteria->addColumnCondition(array('media_type' => $mediatype));
-	        $titleLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
+            $channelLabel .= ' - 类型：' . CDBase::mediaTypeLabels($mediatype);
 	    }
 	     
 	    if ($state !== null) {
 	        $state = (int)$state;
 	        $criteria->addColumnCondition(array('t.state' => $state));
-	        $titleLabel = ' - 状态：' . AdminPost::stateLabels($state);
+            $channelLabel = ' - 状态：' . AdminPost::stateLabels($state);
 	    }
 	    
 	    $data = AdminPost::fetchList($criteria);
@@ -652,6 +643,7 @@ class PostController extends AdminController
 	public function actionParseVideoUrl($callback)
 	{
 	    $url = request()->getPost('url');
+        $url = stristr($url, '#', true);
 	    if (filter_var($url, FILTER_VALIDATE_URL)) {
 	        $vk = new CDVideoKit();
     	    $vk->setAppKeysMap(CDBase::videoAppKeysMap());
