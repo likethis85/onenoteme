@@ -249,8 +249,8 @@ class PostController extends AdminController
 	        user()->setFlash('table_caption', '文章搜索结果');
 	    }
 	    else
-            $data = array();
-        
+            $data = null;
+
 	    $this->channel = 'search_post';
         $this->render('search', array('form'=>$form, 'data'=>$data));
 	}
