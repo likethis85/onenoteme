@@ -643,7 +643,7 @@ class PostController extends AdminController
 	public function actionParseVideoUrl($callback)
 	{
 	    $url = request()->getPost('url');
-        $url = stristr($url, '#', true);
+        $url = strstr($url, '#', true);
 	    if (filter_var($url, FILTER_VALIDATE_URL)) {
 	        $vk = new CDVideoKit();
     	    $vk->setAppKeysMap(CDBase::videoAppKeysMap());
