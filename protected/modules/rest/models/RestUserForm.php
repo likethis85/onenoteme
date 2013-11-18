@@ -19,7 +19,7 @@ class RestUserForm extends CFormModel
             array('username, password', 'required', 'message'=>'您总得填用户名和密码吧'),
             array('username', 'length', 'min'=>3, 'max'=>30, 'message'=>'用户名允许的长度为3-30个字'),
             array('password', 'length', 'is'=>32, 'message'=>'密码必须为MD5加密后的32位字符串'),
-//             array('username', 'checkUserName'),
+            array('username', 'checkUserName'),
             array('username', 'unique', 'caseSensitive'=>false, 'className'=>'RestUser', 'attributeName'=>'username', 'message'=>'啊，被抢注了，换个名字吧'),
             array('source', 'numerical', 'integerOnly'=>true),
         );
@@ -38,10 +38,11 @@ class RestUserForm extends CFormModel
     public function checkUserName($attribute, $params)
     {
         $value = $this->$attribute;
-        if (CDBase::checkEmail($value) || CDBase::checkMobilePhone($value))
+        $pattern = '/^\w[\w\d\-\_]{2,30}$/i';
+        if (CDBase::checkEmail($value) || CDBase::checkMobilePhone($value) || preg_match($pattern, $value) > 0)
             return true;
         else
-            $this->addError($attribute, '用户名必须为邮箱或手机号');
+            $this->addError($attribute, '用户名必须为邮箱或手机号，或字母数字组合并且以字母开头');
     }
     
     public function checkUserNameExist()
