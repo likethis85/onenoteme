@@ -20,8 +20,8 @@ _hmt && _hmt.push(['_setCustomVar', 1, 'guest', <?php echo (int)user()->isGuest;
 <div class="cd-mini-nav">
     <ul class="fleft">
 		<li><a href="<?php echo CDBaseUrl::mobileHomeUrl();?>">手机版</a></li>
-		<li><a href="http://itunes.apple.com/cn/app/id486268988?mt=8" target="_blank">iPhone应用</a></li>
-		<li><a href="<?php echo sbu('android/waduanzi.apk');?>" target="_blank">安卓应用</a></li>
+		<li><a href="<?php echo IPHONE_APP_URL;?>" target="_blank">iPhone应用</a></li>
+		<li><a href="<?php echo ANDROID_APP_URL;?>" target="_blank">安卓应用</a></li>
 		<li><a href="http://e.weibo.com/cdcchen" title="新浪微博" target="_blank">腾讯微博</a></li>
 		<li><a href="http://t.qq.com/waduanzi" title="腾讯微博" target="_blank">新浪微博</a></li>
 	</ul>
