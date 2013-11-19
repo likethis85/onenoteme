@@ -9,4 +9,4 @@
     <li><a href="http://s3.24url.net/android/waduanzi.apk" target="_blank">下载Android应用</a></li>
 </ul>
 <div class="divider"></div>
-<p><img src="<?php echo sbu('images/qrcode_250x250.jpg');?>" alt="挖段子网微信公众账号" title="用微信扫描此二维码关注我们" /></p>
+<p><img src="<?php echo sbu('images/qrcode_wx_300.png');?>" alt="挖段子网微信公众账号" title="用微信扫描此二维码关注我们" /></p>

@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3452a2ff-c78a-47eb-8544-d770a449235a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/main_product.php" afterPath="$PROJECT_DIR$/protected/config/main_product.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/params_product.php" afterPath="$PROJECT_DIR$/protected/config/params_product.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/system/error.php" afterPath="$PROJECT_DIR$/protected/views/system/error.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="waduanzi.com.iws" />
@@ -86,6 +85,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -94,19 +94,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="waduanzi.com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="waduanzi.com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -285,7 +274,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/config/main_product.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="188" column="38" selection-start="7383" selection-end="7383" vertical-scroll-proportion="0.97948015" vertical-offset="2104" max-vertical-offset="3240">
+        <state line="48" column="26" selection-start="1235" selection-end="1235" vertical-scroll-proportion="0.28180575" vertical-offset="514" max-vertical-offset="3240">
           <folding />
         </state>
       </provider>
