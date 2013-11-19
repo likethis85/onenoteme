@@ -38,7 +38,7 @@ class RestUserForm extends CFormModel
     public function checkUserName($attribute, $params)
     {
         $value = $this->$attribute;
-        $pattern = '/^[a-z\x{4e00}-\x{9fa5}][\w\x{4e00}-\x{9fa5}]{2,30}$/iu';
+        $pattern = '/^[\w\x{4e00}-\x{9fa5}]{3,30}$/iu';
         if (CDBase::checkEmail($value) || CDBase::checkMobilePhone($value) || preg_match($pattern, $value) > 0)
             return true;
         else
