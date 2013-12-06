@@ -1,16 +1,16 @@
 <?php
 
-//define('MYSQL_HOST', 'waduanzi.mysql.rds.aliyuncs.com');
-//define('MYSQL_PORT', '3306');
-//define('MYSQL_DBNAME', 'cd_waduanzi');
-//define('MYSQL_USER', 'waduanzi');
-//define('MYSQL_PASSWORD', 'cd_790406');
-
-define('MYSQL_HOST', 'localhost');
+define('MYSQL_HOST', 'waduanzi.mysql.rds.aliyuncs.com');
 define('MYSQL_PORT', '3306');
 define('MYSQL_DBNAME', 'cd_waduanzi');
-define('MYSQL_USER', 'root');
+define('MYSQL_USER', 'waduanzi');
 define('MYSQL_PASSWORD', 'cdc_790406');
+
+//define('MYSQL_HOST', 'localhost');
+//define('MYSQL_PORT', '3306');
+//define('MYSQL_DBNAME', 'cd_waduanzi');
+//define('MYSQL_USER', 'root');
+//define('MYSQL_PASSWORD', 'cdc_790406');
 
 define('CD_YES', 1);
 define('CD_NO', 0);
