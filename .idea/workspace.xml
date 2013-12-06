@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3452a2ff-c78a-47eb-8544-d770a449235a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/system/error.php" afterPath="$PROJECT_DIR$/protected/views/system/error.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/console_product.php" afterPath="$PROJECT_DIR$/protected/config/console_product.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/define.php" afterPath="$PROJECT_DIR$/protected/config/define.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/main_product.php" afterPath="$PROJECT_DIR$/protected/config/main_product.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="waduanzi.com.iws" />
@@ -48,8 +50,10 @@
         <option value="$PROJECT_DIR$/protected/modules/admin/views/post/create_video.php" />
         <option value="$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php" />
         <option value="$PROJECT_DIR$/protected/modules/rest/models/RestUserForm.php" />
-        <option value="$PROJECT_DIR$/protected/config/main_product.php" />
         <option value="$PROJECT_DIR$/protected/config/params_product.php" />
+        <option value="$PROJECT_DIR$/protected/config/main_product.php" />
+        <option value="$PROJECT_DIR$/protected/config/console_product.php" />
+        <option value="$PROJECT_DIR$/protected/config/define.php" />
       </list>
     </option>
   </component>
@@ -85,7 +89,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -94,8 +97,19 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="waduanzi.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="waduanzi.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -195,16 +209,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/protected/modules/admin/views/post/create_video.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="50" selection-start="4397" selection-end="4397" vertical-scroll-proportion="0.0" vertical-offset="842" max-vertical-offset="1560" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/extensions/CDVideoKit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="287" column="20" selection-start="8555" selection-end="8555" vertical-scroll-proportion="0.0" vertical-offset="4066" max-vertical-offset="4830" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/PostForm.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="91" column="50" selection-start="3008" selection-end="3008" vertical-scroll-proportion="0.37465182" vertical-offset="1096" max-vertical-offset="1890" />
@@ -267,14 +271,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/config/params_product.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="6" selection-start="522" selection-end="522" vertical-scroll-proportion="-0.8878249" vertical-offset="829" max-vertical-offset="1560">
-          <folding />
-        </state>
+        <state line="12" column="6" selection-start="522" selection-end="522" vertical-scroll-proportion="-0.8878249" vertical-offset="829" max-vertical-offset="1560" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/console_product.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="41" selection-start="774" selection-end="774" vertical-scroll-proportion="0.47195622" vertical-offset="0" max-vertical-offset="930" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/config/main_product.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="26" selection-start="1235" selection-end="1235" vertical-scroll-proportion="0.28180575" vertical-offset="514" max-vertical-offset="3240">
+        <state line="63" column="14" selection-start="1810" selection-end="1810" vertical-scroll-proportion="0.2872777" vertical-offset="735" max-vertical-offset="3240" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/define.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="248" selection-end="248" vertical-scroll-proportion="0.20519836" vertical-offset="0" max-vertical-offset="3345">
           <folding />
         </state>
       </provider>

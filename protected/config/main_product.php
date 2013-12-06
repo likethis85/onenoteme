@@ -52,9 +52,9 @@ return array(
         ),
         'db' => array(
             'class' => 'CDbConnection',
-			'connectionString' => 'mysql:host=localhost; port=3306; dbname=cd_waduanzi',
-			'username' => 'root',
-		    'password' => 'cdc_790406',
+			'connectionString' => sprintf('mysql:host=%s; port=%s; dbname=%s', MYSQL_HOST, MYSQL_PORT, MYSQL_DBNAME),
+			'username' => MYSQL_USER,
+		    'password' => MYSQL_PASSWORD,
 		    'charset' => 'utf8',
 		    'persistent' => false,
 		    'tablePrefix' => 'cd_',
