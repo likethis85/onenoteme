@@ -52,9 +52,9 @@ return array(
         ),
         'db' => array(
             'class' => 'CDbConnection',
-			'connectionString' => sprintf('mysql:host=%s; port=%s; dbname=%s', MYSQL_HOST, MYSQL_PORT, MYSQL_DBNAME),
-			'username' => MYSQL_USER,
-		    'password' => MYSQL_PASSWORD,
+			'connectionString' => sprintf('mysql:host=%s; port=%s; dbname=%s', DB_MYSQL_HOST, DB_MYSQL_PORT, DB_MYSQL_DBNAME),
+			'username' => DB_MYSQL_USER,
+		    'password' => DB_MYSQL_PASSWORD,
 		    'charset' => 'utf8',
 		    'persistent' => false,
 		    'tablePrefix' => 'cd_',
