@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3452a2ff-c78a-47eb-8544-d770a449235a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/console_product.php" afterPath="$PROJECT_DIR$/protected/config/console_product.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/define.php" afterPath="$PROJECT_DIR$/protected/config/define.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/main_product.php" afterPath="$PROJECT_DIR$/protected/config/main_product.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="waduanzi.com.iws" />
@@ -27,7 +25,28 @@
     <favorites_list name="waduanzi.com" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="define.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/protected/config/define.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="29" selection-start="281" selection-end="281" vertical-scroll-proportion="0.18467852" vertical-offset="0" max-vertical-offset="3435">
+              <folding>
+                <element signature="e#7#65#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main_product.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/config/main_product.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="55" column="36" selection-start="1522" selection-end="1522" vertical-scroll-proportion="-12.5" vertical-offset="525" max-vertical-offset="3240">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -107,6 +126,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="waduanzi.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="waduanzi.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="waduanzi.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="waduanzi.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -170,14 +221,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1385" height="878" extended-state="6" />
-    <editor active="false" />
+    <frame x="0" y="22" width="1385" height="878" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14729242" sideWeight="0.6704981" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20866425" sideWeight="0.6704981" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20866425" sideWeight="0.6704981" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -281,13 +332,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/config/main_product.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="14" selection-start="1810" selection-end="1810" vertical-scroll-proportion="0.2872777" vertical-offset="735" max-vertical-offset="3240" />
+        <state line="55" column="36" selection-start="1522" selection-end="1522" vertical-scroll-proportion="-12.5" vertical-offset="525" max-vertical-offset="3240">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/config/define.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="248" selection-end="248" vertical-scroll-proportion="0.20519836" vertical-offset="0" max-vertical-offset="3345">
-          <folding />
+        <state line="9" column="29" selection-start="281" selection-end="281" vertical-scroll-proportion="0.18467852" vertical-offset="0" max-vertical-offset="3435">
+          <folding>
+            <element signature="e#7#65#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
