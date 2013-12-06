@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3452a2ff-c78a-47eb-8544-d770a449235a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/define.php" afterPath="$PROJECT_DIR$/protected/config/define.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="waduanzi.com.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,7 +28,7 @@
       <file leaf-file-name="define.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/protected/config/define.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="29" selection-start="281" selection-end="281" vertical-scroll-proportion="0.18467852" vertical-offset="0" max-vertical-offset="3435">
+            <state line="11" column="29" selection-start="350" selection-end="350" vertical-scroll-proportion="0.2257182" vertical-offset="0" max-vertical-offset="3435">
               <folding>
                 <element signature="e#7#65#0" expanded="true" />
               </folding>
@@ -339,7 +338,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/config/define.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="29" selection-start="281" selection-end="281" vertical-scroll-proportion="0.18467852" vertical-offset="0" max-vertical-offset="3435">
+        <state line="11" column="29" selection-start="350" selection-end="350" vertical-scroll-proportion="0.2257182" vertical-offset="0" max-vertical-offset="3435">
           <folding>
             <element signature="e#7#65#0" expanded="true" />
           </folding>
