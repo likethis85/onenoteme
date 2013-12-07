@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3452a2ff-c78a-47eb-8544-d770a449235a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/modules/rest/models/RestPostVideo.php" afterPath="$PROJECT_DIR$/protected/modules/rest/models/RestPostVideo.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/extensions/CDVideoKit.php" afterPath="$PROJECT_DIR$/protected/extensions/CDVideoKit.php" />
     </list>
     <ignored path="waduanzi.com.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,10 +34,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RestPostVideo.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="RestPostVideo.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/protected/modules/rest/models/RestPostVideo.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="48" selection-start="482" selection-end="482" vertical-scroll-proportion="0.3488372" vertical-offset="0" max-vertical-offset="731">
+            <state line="19" column="36" selection-start="561" selection-end="561" vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="465">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CDVideoKit.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/protected/extensions/CDVideoKit.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="291" column="0" selection-start="8705" selection-end="8705" vertical-scroll-proportion="0.3523677" vertical-offset="4112" max-vertical-offset="4830">
               <folding />
             </state>
           </provider>
@@ -71,6 +80,7 @@
         <option value="$PROJECT_DIR$/protected/config/console_product.php" />
         <option value="$PROJECT_DIR$/protected/config/main_product.php" />
         <option value="$PROJECT_DIR$/protected/modules/rest/models/RestPostVideo.php" />
+        <option value="$PROJECT_DIR$/protected/extensions/CDVideoKit.php" />
       </list>
     </option>
   </component>
@@ -380,16 +390,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/extensions/CDVideoKit.php">
+    <entry file="file://$PROJECT_DIR$/protected/modules/rest/models/RestPostVideo.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="5" selection-start="2009" selection-end="2009" vertical-scroll-proportion="0.4902507" vertical-offset="743" max-vertical-offset="4830">
+        <state line="19" column="36" selection-start="561" selection-end="561" vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="465">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/modules/rest/models/RestPostVideo.php">
+    <entry file="file://$PROJECT_DIR$/protected/extensions/CDVideoKit.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="48" selection-start="482" selection-end="482" vertical-scroll-proportion="0.3488372" vertical-offset="0" max-vertical-offset="731">
+        <state line="291" column="0" selection-start="8705" selection-end="8705" vertical-scroll-proportion="0.3523677" vertical-offset="4112" max-vertical-offset="4830">
           <folding />
         </state>
       </provider>
