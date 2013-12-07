@@ -16,8 +16,8 @@ class RestPostVideo extends PostVideo
             $vk = new CDVideoKit();
     	    $vk->setAppKeysMap(CDBase::videoAppKeysMap());
     	    $vk->setVideoUrl($this->source_url);
-//    	    return $vk->getMobileSourceUrl();
-    	    return $vk->getDestopSourceUrl();
+    	    return $vk->getMobileSourceUrl();
+//    	    return $vk->getDestopSourceUrl();
         }
         catch (Exception $e) {
             return false;
