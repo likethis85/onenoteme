@@ -147,9 +147,10 @@ class PostController extends AdminController
 	            $resultHtml = sprintf('%s&nbsp;视频添加成功，<a href="%s" target="_blank">点击查看</a>', $post->title, $post->url);
 	            user()->setFlash('save_post_video_result', $resultHtml);
 	            
-	            $backUrl = $_POST['backurl'] ? $_POST['backurl'] : request()->getUrl();
-	            $returnUrl = isset($_POST['submit-post']) ? url('admin/post/create') : $backUrl;
-	            $this->redirect($returnUrl);
+	            $backUrl = request()->getUrl();
+                $backUrl = isset($_POST['save-create-post']) ? url('admin/post/create', array('media_type'=>$model->media_type, 'channel_id'=>$model->channel_id)) : $backUrl;
+                $backUrl = isset($_POST['save-create-video']) ? url('admin/post/createVideo', array('postid'=>$model->id)) : $backUrl;
+	            $this->redirect($backUrl);
 	        }
 	    }
 	    

@@ -1,7 +1,7 @@
 <script type="text/javascript" src="http://player.youku.com/jsapi"></script>
 
 <div class="panel panel10 bottom15px">
-    <div class="app-online"><a href="<?php echo aurl('apps/index')?>" target="_blank">挖段子iPhone应用3.3.0视 涨姿势版全新上线！！</a></div>
+    <div class="app-online"><a href="<?php echo aurl('apps/index')?>" target="_blank">挖段子iPhone应用3.3.0涨姿势版全新上线！！</a></div>
     <ul class="hot-keyword">
         <li><span class="cred announce">24小时更新：<?php echo Post::todayUpdateCount();?>篇，&nbsp;QQ群：49401589</span></li>
     </ul>

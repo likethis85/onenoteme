@@ -141,6 +141,7 @@ $(function(){
     	var imageUploadUrl = '<?php echo aurl('upload/image');?>';
         KEConfig.adminfull.cssPath = cssPath;
     	KEConfig.adminfull.uploadJson = imageUploadUrl;
+        KEConfig.designMode = <?php echo $model->getIsVideoType() ? 'false' : 'true';?>;
     	
     	var contentEditor = K.create('#content', KEConfig.adminfull);
         $(document).on('click', '.post-pictures li', function(event){

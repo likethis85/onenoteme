@@ -66,6 +66,8 @@
     
     <div class="form-actions">
         <?php echo CHtml::submitButton('保存视频', array('class'=>'btn btn-primary'));?>
+        <?php echo CHtml::submitButton('保存视频并继续添加', array('class'=>'btn', 'name'=>'save-create-video'));?>
+        <?php echo CHtml::submitButton('保存并添加新短片', array('class'=>'btn', 'name'=>'save-create-post'));?>
     </div>
 </fieldset>
 <?php echo CHtml::endForm();?>
@@ -75,7 +77,9 @@ $(function(){
 	$(':text:first').focus();
 	$(document).on('click', '#parse-url', function(){
 	    var url = $.trim($('#original-url').val());
-        url = url.slice(0, url.indexOf('#'));
+        var poundIndex = url.indexOf('#');
+        if (poundIndex > 0)
+            url.slice(0, poundIndex);
 	    if (url.length == 0) return;
 
 	    var xhr = $.ajax({

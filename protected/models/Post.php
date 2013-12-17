@@ -82,7 +82,6 @@
  * @property string $lineCount
  * @property string $baiduShareData
  * @property string $channelLabel
- * @property string $channelLabel
  * @property bool $hasTitle
  * @property bool $isJoke
  * @property bool $isLengtu
@@ -328,7 +327,7 @@ class Post extends CActiveRecord
 	    if ($moreCount > 0) {
 	    	$content = strip_tags($this->content, $tags);
 	        $summary = mb_strimwidth($content, 0, $len, '......', app()->charset);
-    	    $text .= '<i class="cgray">(剩余' . (int)$moreCount . '字)</i>&nbsp;&nbsp;<span class="cgreen">继续阅读全文&gt;&gt;&gt;</span>';
+    	    $text = '<i class="cgray">(剩余' . (int)$moreCount . '字)</i>&nbsp;&nbsp;<span class="cgreen">继续阅读全文&gt;&gt;&gt;</span>';
     	    $summary .= '<br />' . l($text, $this->getUrl(), array('target'=>'_blank', 'class'=>'aright'));
 	    }
 	    else
