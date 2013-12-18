@@ -148,8 +148,8 @@ class PostController extends AdminController
 	            user()->setFlash('save_post_video_result', $resultHtml);
 	            
 	            $backUrl = request()->getUrl();
-                $backUrl = isset($_POST['save-create-post']) ? url('admin/post/create', array('media_type'=>$model->media_type, 'channel_id'=>$model->channel_id)) : $backUrl;
-                $backUrl = isset($_POST['save-create-video']) ? url('admin/post/createVideo', array('postid'=>$model->id)) : $backUrl;
+                $backUrl = isset($_POST['save-create-post']) ? url('admin/post/create', array('media_type'=>$post->media_type, 'channel_id'=>$post->channel_id)) : $backUrl;
+                $backUrl = isset($_POST['save-create-video']) ? url('admin/post/createVideo', array('postid'=>$post->id)) : $backUrl;
 	            $this->redirect($backUrl);
 	        }
 	    }
