@@ -21,7 +21,7 @@ class Api_Post extends ApiBase
     	$post = new Post();
     	$post->channel_id = (int)$params['channel_id'];
     	$post->media_type = (int)$params['media_type'];
-    	$post->content = nl2br(trim($params['content']));
+    	$post->content = CDBase::convertPunctuation(nl2br(trim($params['content'])));
     	$post->tags = $params['tags'];
     	$post->create_time = $_SERVER['REQUEST_TIME'];
     	$post->state = POST_STATE_DISABLED;
@@ -30,7 +30,7 @@ class Api_Post extends ApiBase
         $post->view_nums = mt_rand(param('init_view_nums_min'), param('init_view_nums_max'));
         $post->homeshow = CD_YES;
     	$post->original_pic = $params['pic'];
-    	$post->title = trim($params['title']);
+    	$post->title = CDBase::convertPunctuation(trim($params['title']));
     	$post->user_id = $vestUser[0];
     	$post->user_name = $vestUser[1];
     	if (empty($post->title))
