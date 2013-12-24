@@ -50,7 +50,8 @@ class CDAdvert extends CWidget
         else {
             $width = (int)$advert['width'];
             $height = (int)$advert['height'];
-            if ($width > 0 && $height > 0)
+            $showSize = (bool)$advert['show_size'];
+            if ($width > 0 && $height > 0 && $showSize)
                 $style = sprintf('style="width:%dpx; height:%dpx;"', $width, $height);
             $html = sprintf('<div class="cdc-block ad-block %s" %s>', $this->boxClass, $style);
             if ($this->title)
