@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3452a2ff-c78a-47eb-8544-d770a449235a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/apiv1/Api_Post.php" afterPath="$PROJECT_DIR$/protected/apiv1/Api_Post.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/extensions/CDBase.php" afterPath="$PROJECT_DIR$/protected/extensions/CDBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php" afterPath="$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/system/error.php" afterPath="$PROJECT_DIR$/protected/views/system/error.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="waduanzi.com.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,7 +43,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/protected/models/PostForm.php" />
         <option value="$PROJECT_DIR$/protected/libs/CDFileLocal.php" />
         <option value="$PROJECT_DIR$/protected/modules/rest/models/RestUserForm.php" />
         <option value="$PROJECT_DIR$/protected/config/params_product.php" />
@@ -60,6 +58,7 @@
         <option value="$PROJECT_DIR$/protected/apiv1/Api_Post.php" />
         <option value="$PROJECT_DIR$/protected/extensions/CDBase.php" />
         <option value="$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php" />
+        <option value="$PROJECT_DIR$/protected/views/system/error.php" />
       </list>
     </option>
   </component>
@@ -95,7 +94,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -142,7 +140,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -160,34 +158,17 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="waduanzi.com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="waduanzi.com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apiv1" />
+              <option name="myItemId" value="system" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -295,11 +276,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/protected/config/main_product.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="29" selection-start="1559" selection-end="1559" vertical-scroll-proportion="0.43091655" vertical-offset="525" max-vertical-offset="3240" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/protected/config/console_product.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="23" column="29" selection-start="774" selection-end="774" vertical-scroll-proportion="0.47195622" vertical-offset="0" max-vertical-offset="930" />
@@ -332,16 +308,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/modules/admin/models/AdminPost.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="26" selection-start="534" selection-end="534" vertical-scroll-proportion="0.36935705" vertical-offset="0" max-vertical-offset="3390">
-          <folding />
-        </state>
+        <state line="18" column="26" selection-start="534" selection-end="534" vertical-scroll-proportion="0.36935705" vertical-offset="0" max-vertical-offset="3390" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/Post.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="333" column="46" selection-start="9877" selection-end="9877" vertical-scroll-proportion="0.41643453" vertical-offset="4696" max-vertical-offset="22005">
-          <folding />
-        </state>
+        <state line="333" column="46" selection-start="9877" selection-end="9877" vertical-scroll-proportion="0.41643453" vertical-offset="4696" max-vertical-offset="22005" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/libs/json2.js">
@@ -366,21 +338,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/extensions/CDBase.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="352" column="51" selection-start="10196" selection-end="10196" vertical-scroll-proportion="0.44846797" vertical-offset="4958" max-vertical-offset="5850">
-          <folding />
-        </state>
+        <state line="352" column="51" selection-start="10196" selection-end="10196" vertical-scroll-proportion="0.44846797" vertical-offset="4958" max-vertical-offset="5850" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/apiv1/Api_Post.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="45" selection-start="1282" selection-end="1282" vertical-scroll-proportion="0.30083567" vertical-offset="174" max-vertical-offset="990">
-          <folding />
-        </state>
+        <state line="31" column="45" selection-start="1282" selection-end="1282" vertical-scroll-proportion="0.30083567" vertical-offset="174" max-vertical-offset="990" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/modules/admin/controllers/PostController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="74" selection-start="3544" selection-end="3544" vertical-scroll-proportion="0.5064935" vertical-offset="1224" max-vertical-offset="10125">
+        <state line="105" column="74" selection-start="3544" selection-end="3544" vertical-scroll-proportion="0.5064935" vertical-offset="1224" max-vertical-offset="10125" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/system/error.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="48" selection-start="437" selection-end="437" vertical-scroll-proportion="0.16415869" vertical-offset="0" max-vertical-offset="731">
           <folding />
         </state>
       </provider>
