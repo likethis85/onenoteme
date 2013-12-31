@@ -7,16 +7,16 @@
     <div class="fright best-right">
         <h4>专题推荐</h4>
         <ul class="author-list">
-            <li><a href="<?php echo aurl('tag/posts', array('name'=>'寸土吧邪恶漫画'));?>">寸土吧邪恶漫画</a></li>
-            <li><a href="<?php echo aurl('tag/posts', array('name'=>'暴走漫画'));?>">暴走漫画</a></li>
-            <li><a href="<?php echo aurl('tag/posts', array('name'=>'色系军团'));?>">色系军团</a></li>
-            <li><a href="<?php echo aurl('tag/posts', array('name'=>'郭斯特'));?>">郭斯特</a></li>
-            <li><a href="<?php echo aurl('tag/posts', array('name'=>'夫妻笑话'));?>">夫妻笑话</a></li>
-            <li><a href="<?php echo aurl('tag/posts', array('name'=>'高帅富VS屌丝'));?>">高帅富VS屌丝</a></li>
-            <li><a href="<?php echo aurl('tag/posts', array('name'=>'大象ROV'));?>">大象ROV</a></li>
-            <li><a href="<?php echo aurl('tag/posts', array('name'=>'罗罗布'));?>">罗罗布</a></li>
-            <li><a href="<?php echo aurl('tag/posts', array('name'=>'内涵漫画'));?>">内涵漫画</a></li>
-            <li><a href="<?php echo aurl('tag/posts', array('name'=>'彼格梨'));?>">彼格梨</a></li>
+            <li><span class="hot">1</span><a href="<?php echo aurl('tag/posts', array('name'=>'寸土吧邪恶漫画'));?>">寸土吧邪恶漫画</a></li>
+            <li><span class="hot">2</span><a href="<?php echo aurl('tag/posts', array('name'=>'暴走漫画'));?>">暴走漫画</a></li>
+            <li><span class="hot">3</span><a href="<?php echo aurl('tag/posts', array('name'=>'色系军团'));?>">色系军团</a></li>
+            <li><span>4</span><a href="<?php echo aurl('tag/posts', array('name'=>'郭斯特'));?>">郭斯特</a></li>
+            <li><span>5</span><a href="<?php echo aurl('tag/posts', array('name'=>'夫妻笑话'));?>">夫妻笑话</a></li>
+            <li><span>6</span><a href="<?php echo aurl('tag/posts', array('name'=>'高帅富VS屌丝'));?>">高帅富VS屌丝</a></li>
+            <li><span>7</span><a href="<?php echo aurl('tag/posts', array('name'=>'大象ROV'));?>">大象ROV</a></li>
+            <li><span>8</span><a href="<?php echo aurl('tag/posts', array('name'=>'罗罗布'));?>">罗罗布</a></li>
+            <li><span>9</span><a href="<?php echo aurl('tag/posts', array('name'=>'内涵漫画'));?>">内涵漫画</a></li>
+            <li><span>10</span><a href="<?php echo aurl('tag/posts', array('name'=>'彼格梨'));?>">彼格梨</a></li>
         </ul>
     </div>
     <div class="clear"></div>
