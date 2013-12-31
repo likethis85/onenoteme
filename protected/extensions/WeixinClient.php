@@ -374,7 +374,7 @@ class WeixinClient extends CDWeixin
         return $text;
     }
     
-    private static function error()
+    private function error()
     {
         $text = '系统接口整在升级中，请稍候再试。。。' . self::helpInfo();
         $xml = $this->outputText($text);
