@@ -363,6 +363,9 @@ class WeixinClient extends CDWeixin
             $text .= "④回复 0 查看帮助\n";
             $text .= '⑤投递笑话，请直接发送笑话内容，笑话必须要大于' . self::POST_JOKE_CONTENT_MIN_LEN . "字\n";
             $text .= "\n喜欢我们就召唤好友添加'挖段子'或'waduanzi'为好友关注我们吧！";
+
+            // @todo 元旦快乐
+            $text = '祝各位小伙伴伴心想事成，愿望成真，全家幸福！！！！';
         }
         
         return $text;
