@@ -94,18 +94,20 @@ cs()->registerMetaTag('text/html; charset=utf-8', null, 'content-type')
     ->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END)
     ->registerLinkTag('alternate', 'application/rss+xml', aurl('feed/index'), null, array('title'=>app()->name . ' » Feed'));
 
-CD_PRODUCT && cs()->scriptMap = array(
-    'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=20131010001'),
-    'cd-basic.css' => sbu('styles/cd-all.min.css?t=20131010001'),
-    'cd-main.css' => sbu('styles/cd-all.min.css?t=20131010001'),
-    
-    'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js',
+if (CD_PRODUCT) {
+    cs()->scriptMap = array(
+        'bootstrap.min.css' => sbu('styles/cd-all.min.css?t=20140101001'),
+        'cd-basic.css' => sbu('styles/cd-all.min.css?t=20140101001'),
+        'cd-main.css' => sbu('styles/cd-all.min.css?t=20140101001'),
 
-    'json2.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
-    'modernizr.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
-    'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
-    'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
-    'cd-main.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
-);
+        'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js',
+
+        'json2.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
+        'modernizr.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
+        'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
+        'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
+        'cd-main.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
+    );
+}
 ?>
 
