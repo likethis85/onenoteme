@@ -1,6 +1,3 @@
-@CHARSET "UTF-8";
-
-/* panel */
 .panel {background-color:#FFFFFF; -webkit-box-shadow:#AAAAAA 0 1px 3px; box-shadow:#AAAAAA 0 1px 3px; -moz-box-shadow:#AAAAAA 0 1px 3px;}
 .panel30 {padding:30px;}
 .panel25 {padding:25px;}
