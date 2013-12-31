@@ -53,14 +53,16 @@ class WbpostController extends AdminController
                 
                 if ($media_type == MEDIA_TYPE_IMAGE && $temp->original_pic) {
                     $post->original_pic = $temp->original_pic;
+                    $opts['water_position'] = CDWaterMark::POS_BOTTOM_RIGHT;
+                    $opts['padding_top'] = (int)$_POST['padding_top'];
+                    $opts['padding_bottom'] = (int)$_POST['padding_bottom'];
+                    $opts['water_position'] = (int)$_POST['water_position'];
+                    $referrer = 'http://weibo.com';
+                    $result = $post->fetchRemoteImagesBeforeSave($referrer, $opts) && $post->save();
                 }
-                
-                $opts['water_position'] = CDWaterMark::POS_BOTTOM_RIGHT;
-                $opts['padding_top'] = (int)$_POST['padding_top'];
-                $opts['padding_bottom'] = (int)$_POST['padding_bottom'];
-                $opts['water_position'] = (int)$_POST['water_position'];
-                $referer = 'http://weibo.com';
-                $result = $post->fetchRemoteImagesBeforeSave($referer, $opts) && $post->save();
+                else
+                    $result = $post->save();
+
                 if ($result) {
                     $temp->delete();
                     self::saveWeiboComments($post->id, $temp->weibo_id);
