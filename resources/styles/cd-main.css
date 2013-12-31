@@ -268,7 +268,7 @@ a:hover #big-qrcode {display:block;}
 .best-right .author-list {height:320px; margin-left:15px;}
 .best-right h4 {text-indent:15px;}
 .best-right .author-list li {clear:both;}
-.best-right .author-list span {width:16px; height:16px; margin:2px 5px 0 0; line-height:16px; background:transparent url(../images/num_bg.gif) no-repeat 0 0;}
+.best-right .author-list span {display:inline-block; width:16px; height:16px; margin-right:5px; line-height:16px; text-align:center; color:#FFFFFF; font-size:12px; background:transparent url(../images/num_bg.gif) no-repeat 0 0;}
 .best-right .author-list span.hot {background-position:-16px 0;}
 
 /* user activate */
