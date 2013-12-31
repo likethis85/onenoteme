@@ -107,8 +107,8 @@ class WeiboCommand extends CConsoleCommand
         else
             return false;
         
-        $temp['repost_count'] = (int)$row['repost_count'];
-        $temp['comment_count'] = (int)$row['comment_count'];
+        $temp['repost_count'] = (int)$row['reposts_count'];
+        $temp['comment_count'] = (int)$row['comments_count'];
         $temp['weibo_id'] = $idstr;
         $temp['user_id'] = $account['user_id'];
         $temp['user_name'] = $account['user_name'];

@@ -12,7 +12,7 @@
         <tr>
             <td class="weibo-text">
                 <blockquote>
-                    <?php echo sprintf('%s&nbsp;/&nbsp;%s&nbsp;/&nbsp;转发：%d&nbsp;/&nbsp;评论：%d', $model->user_id ,$model->user_name, (int)$model->repost_count, (int)$model->comment_count);?>
+                    <?php echo sprintf('%s&nbsp;/&nbsp;%s&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;转发：%d&nbsp;&nbsp;评论：%d', $model->user_id ,$model->user_name, (int)$model->repost_count, (int)$model->comment_count);?>
                 </blockquote>
                 <p><?php echo $model->content;?></p>
                 <?php echo l(image($model->thumbnail_pic, ''), $model->bmiddle_pic, array('target'=>'_blank'));?>

@@ -65,7 +65,8 @@ class WbpostController extends AdminController
 
                 if ($result) {
                     $temp->delete();
-                    self::saveWeiboComments($post->id, $temp->weibo_id);
+                    if ($temp->comment_count > 0)
+                        self::saveWeiboComments($post->id, $temp->weibo_id);
                 }
                 $data = (int)$result;
             }
