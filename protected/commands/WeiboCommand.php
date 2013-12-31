@@ -3,7 +3,7 @@ class WeiboCommand extends CConsoleCommand
 {
     const ERROR_WEIBO_EXIST = -1;
     
-    const ACCOUNT_SLEEP_TIME = 30;
+    const ACCOUNT_SLEEP_TIME = 10;
     const WEIBO_ROWS_COUNT = 50;
     
     const APP_KEY = '456860706';
