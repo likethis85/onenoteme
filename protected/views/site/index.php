@@ -7,7 +7,7 @@
     <div class="fright best-right">
         <h4>专题推荐</h4>
         <ul class="author-list">
-            <li><span class="hot">1</span><a href="<?php echo aurl('tag/posts', array('name'=>'寸土吧邪恶漫画'));?>">寸土吧邪恶漫画</a></li>
+            <li><span class="hot">1</span><a href="<?php echo aurl('tag/posts', array('name'=>'邪恶漫画'));?>">邪恶漫画</a></li>
             <li><span class="hot">2</span><a href="<?php echo aurl('tag/posts', array('name'=>'暴走漫画'));?>">暴走漫画</a></li>
             <li><span class="hot">3</span><a href="<?php echo aurl('tag/posts', array('name'=>'色系军团'));?>">色系军团</a></li>
             <li><span>4</span><a href="<?php echo aurl('tag/posts', array('name'=>'郭斯特'));?>">郭斯特</a></li>
