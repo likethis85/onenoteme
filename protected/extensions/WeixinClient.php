@@ -32,7 +32,7 @@ class WeixinClient extends CDWeixin
             $result = false;
             if (method_exists($this, $method)) {
                 if (false === call_user_func(array($this, $method)))
-                    self::error();
+                    $this->error();
             }
             else
                 $this->method_0();

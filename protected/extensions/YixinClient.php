@@ -32,7 +32,7 @@ class YixinClient extends CDYixin
             $result = false;
             if (method_exists($this, $method)) {
                 if (false === call_user_func(array($this, $method)))
-                    self::error();
+                    $this->error();
             }
             else
                 $this->method_0();
@@ -387,7 +387,7 @@ class YixinClient extends CDYixin
         }
     }
     
-    private static function error()
+    private function error()
     {
         $text = '系统接口整在升级中，请稍候再试。。。' . self::helpInfo();
         $xml = $this->outputText($text);
