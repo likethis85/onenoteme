@@ -97,8 +97,8 @@ class WbpostController extends AdminController
         foreach ((array)$comments as $index => $row) {
             $text = self::filterComment($row['text']);
             if (empty($text)) continue;
-
-            self::saveCommentRow($pid, $text, time() + $index);
+            $create_time = strtotime($row['created_at']);
+            self::saveCommentRow($pid, $text, $create_time);
         }
     }
     
