@@ -153,9 +153,6 @@ class WeixinClient extends CDWeixin
     private function method_0()
     {
         $text = '您有推荐的冷笑话或、搞笑图片或有意思的视频欢迎直接微信投稿，与大家一起分享哟～' . self::helpInfo();
-
-        // @todo 元旦快乐
-        $text = self::helpInfo();
         $xml = $this->outputText($text);
         header('Content-Type: application/xml');
         echo $xml;
@@ -366,11 +363,8 @@ class WeixinClient extends CDWeixin
             $text .= "④回复 0 查看帮助\n";
             $text .= '⑤投递笑话，请直接发送笑话内容，笑话必须要大于' . self::POST_JOKE_CONTENT_MIN_LEN . "字\n";
             $text .= "\n喜欢我们就召唤好友添加'挖段子'或'waduanzi'为好友关注我们吧！";
-
-            // @todo 元旦快乐
-            $text = '祝各位小伙伴伴新年快乐，心想事成，愿望成真，全家幸福！！！！';
         }
-        
+
         return $text;
     }
     
