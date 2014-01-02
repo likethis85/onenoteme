@@ -212,8 +212,9 @@ class Comment extends CActiveRecord
 	protected function beforeSave()
 	{
 	    if ($this->getIsNewRecord()) {
-	        $this->create_time = $_SERVER['REQUEST_TIME'];
-	        $this->create_ip = CDBase::getClientIp();
+            if (empty($this->create_time))
+	            $this->create_time = $_SERVER['REQUEST_TIME'];
+	        $this->create_ip = CDBase::getClientIPAddress();
 	    }
 	    $this->content = strip_tags(trim($this->content), '<fieldset><legend>');
 	    

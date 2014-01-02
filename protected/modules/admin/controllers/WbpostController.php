@@ -94,11 +94,11 @@ class WbpostController extends AdminController
         if (empty($data)) return false;
         
         $comments = $data['comments'];
-        foreach ((array)$comments as $row) {
+        foreach ((array)$comments as $index => $row) {
             $text = self::filterComment($row['text']);
             if (empty($text)) continue;
 
-            self::saveCommentRow($pid, $text);
+            self::saveCommentRow($pid, $text, time() + $index);
         }
     }
     
@@ -127,7 +127,7 @@ class WbpostController extends AdminController
         return trim($text);
     }
     
-    private static function saveCommentRow($pid, $text)
+    private static function saveCommentRow($pid, $text, $create_time)
     {
         $pid = (int)$pid;
         if (empty($pid) || empty($text)) return false;
@@ -139,6 +139,7 @@ class WbpostController extends AdminController
             $model->up_score = mt_rand(20, 70);
             $model->down_score = mt_rand(0, 10);
             $model->state = COMMENT_STATE_ENABLED;
+            $model->create_time = $create_time;
             return $model->save();
         }
         catch (Exception $e) {
