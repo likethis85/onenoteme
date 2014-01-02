@@ -156,7 +156,7 @@ class WbpostController extends AdminController
             'id' => $wid,
             'count' => 100,
         );
-        
+        var_dump($data);
         $curl = new CdCurl();
         $curl->get($url, $data);
         if ($curl->errno() == 0) {
