@@ -61,10 +61,10 @@ class WbpostController extends AdminController
                     $result = $post->fetchRemoteImagesBeforeSave($referrer, $opts) && $post->save();
                 }
                 else
-                    $result = $post->save();
+                    $result = 1;//$post->save();
 
                 if ($result) {
-                    $temp->delete();
+//                    $temp->delete();
                     if ($temp->comment_count > 0)
                         self::saveWeiboComments($post->id, $temp->weibo_id);
                 }
@@ -95,9 +95,10 @@ class WbpostController extends AdminController
         
         $comments = $data['comments'];
         foreach ((array)$comments as $row) {
+            var_dump($row);
             $text = self::filterComment($row['text']);
             if (empty($text)) continue;
-            
+            var_dump($row);
             self::saveCommentRow($pid, $text);
         }
     }
