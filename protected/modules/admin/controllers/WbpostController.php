@@ -140,6 +140,9 @@ class WbpostController extends AdminController
             $model->down_score = mt_rand(0, 10);
             $model->state = COMMENT_STATE_ENABLED;
             $model->create_time = $create_time;
+            $sources = Comment::sources();
+            $index = mt_rand(0, count($sources)-1);
+            $model->source = $sources[$index];
             return $model->save();
         }
         catch (Exception $e) {

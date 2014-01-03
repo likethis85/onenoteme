@@ -126,7 +126,11 @@ class Comment extends CActiveRecord
 	        'source' => '来源',
 		);
 	}
-	
+
+    public static function sources()
+    {
+        return array_keys(self::sourceLabels());
+    }
 
 	public static function sourceLabels($source = null)
 	{
@@ -139,12 +143,7 @@ class Comment extends CActiveRecord
             COMMENT_SOURCE_UNKNOWN => '未知',
 	    );
 	     
-	    if ($source === null)
-	        return $labels;
-	    elseif (array_key_exists($source, $labels))
-    	    return $labels[$source];
-	    else
-	        return null;
+        return $source === null ? $labels : $labels[$source];
 	}
 	
 	public function getSourceLabel()
