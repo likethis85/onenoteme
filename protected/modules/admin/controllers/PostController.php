@@ -98,8 +98,10 @@ class PostController extends AdminController
     	        $model->content = CDBase::convertPunctuation($model->content);
 
 	        if ($model->getIsNewRecord() && ($model->user_id == 0 || empty($model->user_name))) {
-	            $model->user_id = user()->id;
-	            $model->user_name = user()->name;
+                // 随机取马甲
+                $vestUser = CDBase::randomVestAuthor();
+	            $model->user_id = $vestUser[0];
+	            $model->user_name = $vestUser[1];
 	        }
 	        if ($model->save()) {
 	            $resultHtml = sprintf('%s&nbsp;发表成功，<a href="%s" target="_blank">点击查看</a>', $model->title, $model->url);
