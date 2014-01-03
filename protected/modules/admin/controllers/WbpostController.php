@@ -104,10 +104,10 @@ class WbpostController extends AdminController
     
     private static function filterComment($text)
     {
+        $text = str_replace(array('互粉', '转发', '微博', '沙发', '回覆', '回复'), '', $text);
+
         if (mb_strlen($text) < 3) return false;
-        
-        $text = str_replace(array('互粉', '转发', '微博', '沙发', '回覆'), '', $text);
-        
+
         $pattern = '/\[.+?\]/is';
         $text = preg_replace($pattern, '', $text);
         $pos = mb_strpos($text, '//', 0, app()->charset);
