@@ -167,10 +167,6 @@ return array(
             'loginUrl' => array('/account/login'),
             'guestName' => '匿名段友',
         ),
-        'appuser' => array(
-            'class' => 'application.components.CDAppUser',
-            'guestName' => '匿名段友',
-        ),
         'mailer' => array(
             'class' => 'application.extensions.CDSendCloudMailer',
             'username' => 'postmaster@wdztrigger.sendcloud.org',

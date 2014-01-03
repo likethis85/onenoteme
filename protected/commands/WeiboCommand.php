@@ -192,8 +192,8 @@ class WeiboCommand extends CConsoleCommand
     
     public function actionTestToken()
     {
-        $sinaToken = app()->cache->get('sina_weibo_access_token');
-        $qqToken = app()->cache->get('qq_weibo_access_token');
+        $sinaToken = redis()->get('sina_weibo_access_token');
+        $qqToken = redis()->get('qq_weibo_access_token');
 
         var_dump($sinaToken);
         var_dump($qqToken);
@@ -202,8 +202,8 @@ class WeiboCommand extends CConsoleCommand
     public function actionPostToWeibo()
     {
         $prompt = date('Y-m-d H:i:s - ', time());
-        $sinaToken = app()->cache->get('sina_weibo_access_token');
-        $qqToken = app()->cache->get('qq_weibo_access_token');
+        $sinaToken = redis()->get('sina_weibo_access_token');
+        $qqToken = redis()->get('qq_weibo_access_token');
         if (empty($sinaToken) || empty($qqToken)) {
             echo $prompt . "token expired.\n";
             exit(0);
@@ -302,7 +302,7 @@ class WeiboCommand extends CConsoleCommand
         
         $data = array(
             'source' => WEIBO_APP_KEY,
-            'access_token' => app()->cache->get('sina_weibo_access_token'),
+            'access_token' => redis()->get('sina_weibo_access_token'),
             'status' => urlencode($content),
         );
         foreach ($data as $key => $item)
@@ -338,7 +338,7 @@ class WeiboCommand extends CConsoleCommand
         $content = mb_substr($model->content, 0, $subLen, app()->charset) . $tail . $tags. $accounts;
         $data = array(
             'source' => WEIBO_APP_KEY,
-            'access_token' => app()->cache->get('sina_weibo_access_token'),
+            'access_token' => redis()->get('sina_weibo_access_token'),
             'status' => urlencode($content),
             'url' => $model->getOriginalPic(),
         );
@@ -388,7 +388,7 @@ class WeiboCommand extends CConsoleCommand
         $content = mb_substr(strip_tags($model->content), 0, $subLen, app()->charset) . $tags. $accounts . $tail;
         $data = array(
             'source' => WEIBO_APP_KEY,
-            'access_token' => app()->cache->get('sina_weibo_access_token'),
+            'access_token' => redis()->get('sina_weibo_access_token'),
             'status' => $content,
             'pic' => '@' . $picfile,
         );
@@ -422,8 +422,8 @@ class WeiboCommand extends CConsoleCommand
         $content = mb_substr(strip_tags($model->content), 0, $subLen, app()->charset) . $tags . $accounts . $tail;
         $data = array(
             'oauth_consumer_key' => QQT_APP_KEY,
-            'access_token' => app()->cache->get('qq_weibo_access_token'),
-            'openid' => app()->cache->get('qq_weibo_user_id'),
+            'access_token' => redis()->get('qq_weibo_access_token'),
+            'openid' => redis()->get('qq_weibo_user_id'),
             'clientip' => request()->getUserHostAddress(),
             'oauth_version' => '2.a',
             'scope' => 'all',
@@ -464,8 +464,8 @@ class WeiboCommand extends CConsoleCommand
         $content = mb_substr(strip_tags($model->content), 0, $subLen, app()->charset) . $tags . $accounts . $tail;
         $data = array(
             'oauth_consumer_key' => QQT_APP_KEY,
-            'access_token' => app()->cache->get('qq_weibo_access_token'),
-            'openid' => app()->cache->get('qq_weibo_user_id'),
+            'access_token' => redis()->get('qq_weibo_access_token'),
+            'openid' => redis()->get('qq_weibo_user_id'),
             'clientip' => request()->getUserHostAddress(),
             'oauth_version' => '2.a',
             'scope' => 'all',
@@ -506,7 +506,7 @@ class WeiboCommand extends CConsoleCommand
         
         $args = array(
             'source' => WEIBO_APP_KEY,
-            'access_token' => app()->cache->get('sina_weibo_access_token'),
+            'access_token' => redis()->get('sina_weibo_access_token'),
             'count' => $count,
         );
         
@@ -537,8 +537,8 @@ class WeiboCommand extends CConsoleCommand
         
         $args = array(
             'oauth_consumer_key' => QQT_APP_KEY,
-            'access_token' => app()->cache->get('qq_weibo_access_token'),
-            'openid' => app()->cache->get('qq_weibo_user_id'),
+            'access_token' => redis()->get('qq_weibo_access_token'),
+            'openid' => redis()->get('qq_weibo_user_id'),
             'clientip' => request()->getUserHostAddress(),
             'oauth_version' => '2.a',
             'scope' => 'all',

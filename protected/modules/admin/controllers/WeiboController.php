@@ -26,9 +26,9 @@ class WeiboController extends AdminController
         
             $expires_in = $data['expires_in'];
             $cacheTokenKey = 'sina_weibo_access_token';
-            $result1 = app()->cache->set($cacheTokenKey, $data['access_token'], $expires_in);
+            $result1 = redis()->set($cacheTokenKey, $data['access_token'], $expires_in);
             $cacheUserIDKey = 'sina_weibo_user_id';
-            $result2 = app()->cache->set($cacheUserIDKey, $data['uid'], $expires_in);
+            $result2 = redis()->set($cacheUserIDKey, $data['uid'], $expires_in);
             echo $result1 && $result2 ? '授权登录成功' : '授权登录失败';
         }
     }
@@ -63,9 +63,9 @@ class WeiboController extends AdminController
             parse_str($returnString);
         
             $cacheTokenKey = 'qq_weibo_access_token';
-            $result1 = app()->cache->set($cacheTokenKey, $access_token, $expires_in);
+            $result1 = redis()->set($cacheTokenKey, $access_token, $expires_in);
             $cacheUserIDKey = 'qq_weibo_user_id';
-            $result2 = app()->cache->set($cacheUserIDKey, $openid, $expires_in);
+            $result2 = redis()->set($cacheUserIDKey, $openid, $expires_in);
             echo $result1 && $result2 ? '授权登录成功' : '授权登录失败';
         }
     }
@@ -74,12 +74,12 @@ class WeiboController extends AdminController
     public function actionTest()
     {
 
-        echo app()->cache->get('sina_weibo_user_id') . '<br />';
-        echo app()->cache->get('sina_weibo_access_token') . '<br />';
-        echo app()->cache->get('qq_weibo_user_id') . '<br />';
-        echo app()->cache->get('qq_weibo_access_token') . '<br />';
-        echo app()->cache->get('netease_weibo_user_id') . '<br />';
-        echo app()->cache->get('netease_weibo_access_token') . '<br />';
+        echo redis()->get('sina_weibo_user_id') . '<br />';
+        echo redis()->get('sina_weibo_access_token') . '<br />';
+        echo redis()->get('qq_weibo_user_id') . '<br />';
+        echo redis()->get('qq_weibo_access_token') . '<br />';
+        echo redis()->get('netease_weibo_user_id') . '<br />';
+        echo redis()->get('netease_weibo_access_token') . '<br />';
     }
     
     
@@ -154,7 +154,7 @@ class WeiboController extends AdminController
         $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子网';
         $data = array(
             'source' => WEIBO_APP_KEY,
-            'access_token' => app()->cache->get('sina_weibo_access_token'),
+            'access_token' => redis()->get('sina_weibo_access_token'),
             'status' => $content,
         );
         foreach ($data as $key => $item)
@@ -195,7 +195,7 @@ class WeiboController extends AdminController
         $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子网';
         $data = array(
             'source' => WEIBO_APP_KEY,
-            'access_token' => app()->cache->get('sina_weibo_access_token'),
+            'access_token' => redis()->get('sina_weibo_access_token'),
             'status' => $content,
             'pic' => '@' . $picfile,
         );
@@ -241,8 +241,8 @@ class WeiboController extends AdminController
         $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @cdcchen';
         $data = array(
             'oauth_consumer_key' => QQT_APP_KEY,
-            'access_token' => app()->cache->get('qq_weibo_access_token'),
-            'openid' => app()->cache->get('qq_weibo_user_id'),
+            'access_token' => redis()->get('qq_weibo_access_token'),
+            'openid' => redis()->get('qq_weibo_user_id'),
             'clientip' => request()->getUserHostAddress(),
             'oauth_version' => '2.a',
             'scope' => 'all',
@@ -277,8 +277,8 @@ class WeiboController extends AdminController
         $content = mb_substr($model->content, 0, 130 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @cdcchen';
         $data = array(
             'oauth_consumer_key' => QQT_APP_KEY,
-            'access_token' => app()->cache->get('qq_weibo_access_token'),
-            'openid' => app()->cache->get('qq_weibo_user_id'),
+            'access_token' => redis()->get('qq_weibo_access_token'),
+            'openid' => redis()->get('qq_weibo_user_id'),
             'clientip' => request()->getUserHostAddress(),
             'oauth_version' => '2.a',
             'scope' => 'all',
@@ -328,7 +328,7 @@ class WeiboController extends AdminController
         
             $expires_in = $data['expires_in'];
             $cacheTokenKey = 'netease_weibo_access_token';
-            $result = app()->cache->set($cacheTokenKey, $data['access_token'], $expires_in);
+            $result = redis()->set($cacheTokenKey, $data['access_token'], $expires_in);
             echo $result ? '授权登录成功' : '授权登录失败';
         }
     }
@@ -348,7 +348,7 @@ class WeiboController extends AdminController
         $content = mb_substr($model->content, 0, 150 - $urlLen, app()->charset) . '...' . $sinatShortUrl . ' @挖段子冷笑话';
         $data = array(
             'oauth_consumer_key' => NETEASE_APP_KEY,
-            'access_token' => app()->cache->get('netease_weibo_access_token'),
+            'access_token' => redis()->get('netease_weibo_access_token'),
             'status' => $content . $imageUrl,
         );
         foreach ($data as $key => $item)
@@ -384,7 +384,7 @@ class WeiboController extends AdminController
     
         $data = array(
             'oauth_consumer_key' => NETEASE_APP_KEY,
-            'access_token' => app()->cache->get('netease_weibo_access_token'),
+            'access_token' => redis()->get('netease_weibo_access_token'),
             'pic' => '@' . $picfile,
         );
     

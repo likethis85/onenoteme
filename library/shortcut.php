@@ -307,7 +307,7 @@ function fbu($file = null, $imageFile = true)
 /**
  * 此函数返回附件保存在本地服务器时地址的BaseUrl
  * @param string $file 附件文件相对url地址
- * @return string
+ * @return string 本地存储文件的URL
  */
 function localbu($file = null)
 {
@@ -329,6 +329,8 @@ function localbu($file = null)
 /**
  * 此函数返回使用又拍云时附件地址的BaseUrl
  * @param string $file 附件文件相对url地址
+ * @param bool $imageFile
+ * @throws CDException
  * @return string
  */
 function upyunbu($file = null, $imageFile = true)
@@ -351,6 +353,7 @@ function upyunbu($file = null, $imageFile = true)
 
 /**
  * 返回当前使用的uploader
+ * @param bool $image
  * @return CDUpyunUploader | CDLocalUploader 如果使用又拍云存储，则返回CDUpyunUploader，存储在硬盘，返回CDLocalUploader
  */
 function uploader($image = true)
@@ -361,7 +364,7 @@ function uploader($image = true)
 
 /**
  * 获取又拍云uploader component
- * @param string $image 如果为true, 则返回upyunImageUploader，否则返回upyunFileUploader
+ * @param bool|string $image 如果为true, 则返回upyunImageUploader，否则返回upyunFileUploader
  * @return CDUpyunUploader 如果找不到组件，则返回null
  */
 function upyunUploader($image = true)
@@ -401,7 +404,6 @@ function cache($component = 'cache')
 
 /**
  * 获取缓存组件
- * @param string $component
  * @return CFileCache | null
  */
 function fcache()
@@ -411,7 +413,6 @@ function fcache()
 
 /**
  * 获取缓存组件
- * @param string $component
  * @return CMemCache | null
  */
 function memcache()
@@ -421,7 +422,6 @@ function memcache()
 
 /**
  * 获取缓存组件
- * @param string $component
  * @return CDRedisCache | null
  */
 function redis()
@@ -438,13 +438,3 @@ function db($component = 'db')
 {
     return app()->getComponent($component);
 }
-
-/**
- * 应用用户
- * @return CDAppUser
- */
-function appuser()
-{
-    return app()->getComponent('appuser');
-}
-

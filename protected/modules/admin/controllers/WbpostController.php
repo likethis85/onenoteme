@@ -159,7 +159,7 @@ class WbpostController extends AdminController
         $url = 'https://api.weibo.com/2/comments/show.json';
         $data = array(
             'source' => WEIBO_APP_KEY,
-            'access_token' => app()->cache->get('sina_weibo_access_token'),
+            'access_token' => redis()->get('sina_weibo_access_token'),
             'id' => $wid,
             'count' => 100,
         );
