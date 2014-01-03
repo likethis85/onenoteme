@@ -8,7 +8,11 @@ class TestController extends AdminController
 
     public function actionAliyunOCS()
     {
-        var_dump(app()->cache1);
+        $r = app()->cache->set('test', 'test', 30);
+        var_dump($r);
+        var_dump(app()->cache);
+
+        var_dump(app()->cache->get('test'));
     }
     
     public function actionVideo()
