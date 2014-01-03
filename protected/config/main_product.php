@@ -73,7 +73,7 @@ return array(
         ),
         'cache1' => array(
 //            'class'=>'CMemCache',
-            'class'=>'application.extensions.CDMemCache',
+            'class'=>'application.extensions.CDMemCached',
             'serializer' => $cacheSerializer,
             'useMemcached' => extension_loaded('memcached'),
             'username' => '131ce938744011e3',
