@@ -5,6 +5,11 @@ class TestController extends AdminController
     {
 //         exit('exit');
     }
+
+    public function actionAliyunOCS()
+    {
+        var_dump(app()->cache1);
+    }
     
     public function actionVideo()
     {
