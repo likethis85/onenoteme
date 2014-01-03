@@ -131,8 +131,12 @@ class WbpostController extends AdminController
     {
         $pid = (int)$pid;
         if (empty($pid) || empty($text)) return false;
-        
+
+        static $sources = null;
         try {
+            if ($sources === null)
+                $sources = Comment::sources();
+
             $model = new Comment();
             $model->content = $text;
             $model->post_id = $pid;
@@ -140,7 +144,6 @@ class WbpostController extends AdminController
             $model->down_score = mt_rand(0, 10);
             $model->state = COMMENT_STATE_ENABLED;
             $model->create_time = $create_time;
-            $sources = Comment::sources();
             $index = mt_rand(0, count($sources)-1);
             $model->source = $sources[$index];
             return $model->save();

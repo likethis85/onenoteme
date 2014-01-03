@@ -138,8 +138,8 @@ class Comment extends CActiveRecord
             COMMENT_SOURCE_IPHONE => 'iPhone',
             COMMENT_SOURCE_IPAD => 'iPad',
             COMMENT_SOURCE_ANDROID => 'Android',
-            COMMENT_SOURCE_PC_WEB => 'PC版网站',
-            COMMENT_SOURCE_MOBILE_WEB => '移动版网站',
+            COMMENT_SOURCE_PC_WEB => 'PC版',
+            COMMENT_SOURCE_MOBILE_WEB => '移动版',
             COMMENT_SOURCE_UNKNOWN => '未知',
 	    );
 	     
