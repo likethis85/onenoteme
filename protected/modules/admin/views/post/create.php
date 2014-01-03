@@ -103,22 +103,36 @@
     <div class="control-group bottom10px <?php if ($model->hasErrors('view_nums')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'view_nums', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'view_nums', array('class'=>'span6'));?>
+            <?php echo CHtml::activeTextField($model, 'view_nums', array('class'=>'input-large'));?>
             <?php if ($model->hasErrors('view_nums')):?><p class="help-block"><?php echo $model->getError('view_nums');?></p><?php endif;?>
         </div>
     </div>
     <div class="control-group bottom10px <?php if ($model->hasErrors('up_score')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'up_score', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'up_score', array('class'=>'span6'));?>
+            <?php echo CHtml::activeTextField($model, 'up_score', array('class'=>'input-large'));?>
             <?php if ($model->hasErrors('up_score')):?><p class="help-block"><?php echo $model->getError('up_score');?></p><?php endif;?>
         </div>
     </div>
     <div class="control-group bottom10px <?php if ($model->hasErrors('down_score')) echo 'error';?>">
         <?php echo CHtml::activeLabel($model, 'down_score', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'down_score', array('class'=>'span6'));?>
+            <?php echo CHtml::activeTextField($model, 'down_score', array('class'=>'input-large'));?>
             <?php if ($model->hasErrors('down_score')):?><p class="help-block"><?php echo $model->getError('down_score');?></p><?php endif;?>
+        </div>
+    </div>
+    <div class="control-group bottom10px <?php if ($model->hasErrors('user_id')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'user_id', array('class'=>'control-label'));?>
+        <div class="controls">
+            <?php echo CHtml::activeTextField($model, 'user_id', array('class'=>'input-xlarge'));?>
+            <?php if ($model->hasErrors('user_id')):?><p class="help-block"><?php echo $model->getError('user_id');?></p><?php endif;?>
+        </div>
+    </div>
+    <div class="control-group bottom10px <?php if ($model->hasErrors('user_name')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'user_name', array('class'=>'control-label'));?>
+        <div class="controls">
+            <?php echo CHtml::activeTextField($model, 'user_name', array('class'=>'input-xlarge'));?>
+            <?php if ($model->hasErrors('user_name')):?><p class="help-block"><?php echo $model->getError('user_name');?></p><?php endif;?>
         </div>
     </div>
     <div class="form-actions">
