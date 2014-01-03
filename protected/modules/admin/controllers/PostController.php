@@ -97,7 +97,7 @@ class PostController extends AdminController
 	        if ($model->getIsTextType())
     	        $model->content = CDBase::convertPunctuation($model->content);
 
-	        if ($model->getIsNewRecord()) {
+	        if ($model->getIsNewRecord() && ($model->user_id == 0 || empty($model->user_name))) {
 	            $model->user_id = user()->id;
 	            $model->user_name = user()->name;
 	        }
