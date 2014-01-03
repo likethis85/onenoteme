@@ -9,14 +9,19 @@ class TestController extends AdminController
     public function actionAliyunOCS()
     {
         $connect = new Memcached;
-        $connect->setOption(Memcached::OPT_COMPRESSION, false);
-        $connect->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
-        $connect->addServer('131ce938744011e3.m.cnhzalicm10pub001.ocs.aliyuncs.com', 11211);
+        var_dump($connect);
+        $r = $connect->setOption(Memcached::OPT_COMPRESSION, false);
+        var_dump($r);
+        $r = $connect->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
+        var_dump($r);
+        $r = $connect->addServer('131ce938744011e3.m.cnhzalicm10pub001.ocs.aliyuncs.com', 11211);
+        var_dump($r);
         $connect->setSaslAuthData('131ce938744011e3', 'cdc_wdz_790406');
-        $connect->set("hello", "world", 30);
-        echo 'hello: ',$connect->get("hello");
+        $r = $connect->set("hello", "world", 30);
+        var_dump($r);
+        echo 'hello: ',var_dump($connect->get("hello"));
         $connect->quit();
-
+exit;
         $r = app()->cache1->set('test', 'test', 30);
         var_dump($r);
         var_dump(app()->cache1);
