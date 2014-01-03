@@ -6,6 +6,12 @@ class TestController extends AdminController
 //         exit('exit');
     }
 
+    public function actionRedis()
+    {
+        $s = redis()->get('sina_weibo_access_token');
+        var_dump($s);
+    }
+
     public function actionAliyunOCS()
     {
         $connect = new Memcached;
