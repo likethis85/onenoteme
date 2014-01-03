@@ -15,6 +15,8 @@ catch (Exception $e) {
     exit(0);
 }
 
+$cacheSerializer = extension_loaded('igbinary') ? array('igbinary_serialize', 'igbinary_unserialize') : null;
+
 return array(
     'basePath' => dirname(__FILE__) . DS . '..',
     'id' => 'waduanzi.com',
@@ -69,8 +71,23 @@ return array(
 		    'queryCacheID' => 'redis',
 		    'queryCachingDuration' => 60,
         ),
+        'cache1' => array(
+            'serializer' => $cacheSerializer,
+//            'class'=>'CMemCache',
+            'class'=>'application.extensions.CDMemCache',
+            'useMemcached' => extension_loaded('memcached'),
+            'username' => '131ce938744011e3',
+            'password' => 'cdc_wdz_790406',
+            'options' => array(
+                Memcached::OPT_COMPRESSION => false,
+                Memcached::OPT_BINARY_PROTOCOL => true,
+            ),
+            'servers'=>array(
+                array('host'=>'localhost', 'port'=>11211, 'weight'=>100),
+            ),
+        ),
         'cache' => array(
-            'serializer' => array('igbinary_serialize', 'igbinary_unserialize'),
+            'serializer' => $cacheSerializer,
             'class'=>'CMemCache',
             'useMemcached' => extension_loaded('memcached'),
             'servers'=>array(
@@ -78,7 +95,7 @@ return array(
             ),
         ),
         'fcache' => array(
-            'serializer' => array('igbinary_serialize', 'igbinary_unserialize'),
+            'serializer' => $cacheSerializer,
             'class' => 'CFileCache',
 		    'directoryLevel' => 2,
         ),
