@@ -9,7 +9,7 @@
  */
 
 /**
- * CMemCache implements a cache application component based on {@link http://memcached.org/ memcached}.
+ * CDMemCached implements a cache application component based on {@link http://memcached.org/ memcached}.
  *
  * CMemCache can be configured with a list of memcache servers by settings
  * its {@link setServers servers} property. By default, CMemCache assumes
@@ -58,7 +58,7 @@
  * @package system.caching
  * @since 1.0
  */
-class CMemCache extends CCache
+class CDMemCached extends CCache
 {
 	/**
 	 * @var boolean whether to use memcached or memcache as the underlying caching extension.
