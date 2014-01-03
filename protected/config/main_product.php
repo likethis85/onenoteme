@@ -71,9 +71,8 @@ return array(
 		    'queryCacheID' => 'redis',
 		    'queryCachingDuration' => 60,
         ),
-        'cache1' => array(
-//            'class'=>'CMemCache',
-            'class'=>'application.extensions.CDMemCached',
+        'cache' => array(
+            'class'=>'application.extensions.CDMemCache',
             'serializer' => $cacheSerializer,
             'useMemcached' => extension_loaded('memcached'),
             'username' => '131ce938744011e3',
@@ -87,7 +86,7 @@ return array(
                 array('host'=>'131ce938744011e3.m.cnhzalicm10pub001.ocs.aliyuncs.com', 'port'=>11211, 'weight'=>100),
             ),
         ),
-        'cache' => array(
+        'cache1' => array(
             'class'=>'CMemCache',
             'serializer' => $cacheSerializer,
             'useMemcached' => extension_loaded('memcached'),
