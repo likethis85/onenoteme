@@ -3,29 +3,9 @@ class TestController extends AdminController
 {
     public function init()
     {
-//         exit('exit');
+         exit('exit');
     }
 
-    public function actionAliyunOCS()
-    {
-        $connect = new Memcached;
-        $connect->setOption(Memcached::OPT_COMPRESSION, false);
-        $connect->setOption(Memcached::OPT_BINARY_PROTOCOL, true);
-        $connect->addServer('131ce938744011e3.m.cnhzalicm10pub001.ocs.aliyuncs.com', 11211);
-        $connect->setSaslAuthData('131ce938744011e3', 'cdc_wdz_790406');
-        $r = $connect->set("hello", "world", time()+30);
-        var_dump($r);
-        $r = $connect->get("hello");
-        var_dump($r);
-        $connect->quit();
-exit;
-        $r = app()->cache1->set('test', 'test', 30);
-        var_dump($r);
-        var_dump(app()->cache1);
-
-        var_dump(app()->cache1->get('test'));
-    }
-    
     public function actionVideo()
     {
         $url = 'http://v.youku.com/v_show/id_XNjA5NTQxOTky_ev_1.html';
