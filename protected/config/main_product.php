@@ -71,24 +71,25 @@ return array(
 		    'queryCacheID' => 'redis',
 		    'queryCachingDuration' => 60,
         ),
-        'cache1' => array(
-            'serializer' => $cacheSerializer,
+        'cache' => array(
 //            'class'=>'CMemCache',
             'class'=>'application.extensions.CDMemCache',
+            'serializer' => $cacheSerializer,
             'useMemcached' => extension_loaded('memcached'),
             'username' => '131ce938744011e3',
             'password' => 'cdc_wdz_790406',
             'options' => array(
                 Memcached::OPT_COMPRESSION => false,
                 Memcached::OPT_BINARY_PROTOCOL => true,
+                Memcached::OPT_SERIALIZER => extension_loaded('igbinary') ? Memcached::SERIALIZER_IGBINARY : Memcached::SERIALIZER_PHP,
             ),
             'servers'=>array(
                 array('host'=>'localhost', 'port'=>11211, 'weight'=>100),
             ),
         ),
-        'cache' => array(
-            'serializer' => $cacheSerializer,
+        'cache2' => array(
             'class'=>'CMemCache',
+            'serializer' => $cacheSerializer,
             'useMemcached' => extension_loaded('memcached'),
             'servers'=>array(
                 array('host'=>'localhost', 'port'=>22122, 'weight'=>100),
@@ -104,6 +105,7 @@ return array(
             'host' => '127.0.0.1',
             'port' => 6379,
             'timeout' => 3,
+            'serializer' => $cacheSerializer,
             'options' => array(
                 Redis::OPT_PREFIX => 'wdz_',
                 Redis::OPT_SERIALIZER => extension_loaded('igbinary') ? Redis::SERIALIZER_IGBINARY : Redis::SERIALIZER_PHP,
