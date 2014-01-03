@@ -6,7 +6,7 @@ class TestController extends AdminController
 //         exit('exit');
     }
 
-    public function actionRedis()
+    public function actionRedis1()
     {
         $s = redis()->get('sina_weibo_access_token');
         var_dump($s);
