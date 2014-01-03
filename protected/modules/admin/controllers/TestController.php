@@ -17,7 +17,7 @@ class TestController extends AdminController
         $r = $connect->addServer('131ce938744011e3.m.cnhzalicm10pub001.ocs.aliyuncs.com', 11211);
         var_dump($r);
         $connect->setSaslAuthData('131ce938744011e3', 'cdc_wdz_790406');
-        $r = $connect->set("hello", "world", 30);
+        $r = $connect->set("hello", "world", time()+30);
         var_dump($r);
         echo 'hello: ',var_dump($connect->get("hello"));
         $connect->quit();
