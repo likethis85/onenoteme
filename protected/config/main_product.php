@@ -83,7 +83,7 @@ return array(
                 Memcached::OPT_SERIALIZER => extension_loaded('igbinary') ? Memcached::SERIALIZER_IGBINARY : Memcached::SERIALIZER_PHP,
             ),
             'servers'=>array(
-                array('host'=>'131ce938744011e3.m.cnhzalicm10pub001.ocs.aliyuncs.com', 'port'=>11211, 'weight'=>100),
+                array('host'=>'131ce938744011e3.m.cnhzalicm10pub001.ocs.aliyuncs.com', 'port'=>11211, 'timeout' =>3, 'weight'=>100),
             ),
         ),
         'cache1' => array(
@@ -91,7 +91,7 @@ return array(
             'serializer' => $cacheSerializer,
             'useMemcached' => extension_loaded('memcached'),
             'servers'=>array(
-                array('host'=>'localhost', 'port'=>22122, 'weight'=>100),
+                array('host'=>'localhost', 'port'=>22122, 'timeout' =>3, 'weight'=>100),
             ),
         ),
         'fcache' => array(
