@@ -1,4 +1,5 @@
 <?php
+defined('WEBROOT') or define('WEBROOT', dirname(__FILE__));
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 defined('CD_PRODUCT') or define('CD_PRODUCT', false);
 defined('YII_DEBUG') or define('YII_DEBUG', true);
