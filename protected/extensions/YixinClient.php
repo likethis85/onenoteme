@@ -12,8 +12,8 @@ class YixinClient extends CDYixin
             $this->textMsgRequest();
         }
         elseif ($this->isEventMsg()) {
-            if ($this->isMenuClickEvent())
-                $this->menuClick();
+            if ($this->isClickEvent())
+                $this->clickEventRequest();
             else
                 $this->unSupportEvent();
         }
@@ -368,7 +368,7 @@ class YixinClient extends CDYixin
         return $text;
     }
     
-    private function menuClick()
+    private function clickEventRequest()
     {
         $input = strtoupper(trim($this->_data->EventKey));
         switch ($input) {
