@@ -270,7 +270,7 @@ class WeixinClient extends CDWeixin
             $thumb = new CDImageThumb($row['original_pic']);
             $posts[] = array(
                 'Title' => $text,
-                'Discription' => mb_strimwidth(strip_tags($row['content']), 0, 150, '...', app()->charset),
+                'Description' => mb_strimwidth(strip_tags($row['content']), 0, 150, '...', app()->charset),
                 'PicUrl' => $thumb->middleImageUrl(),
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
             );
@@ -333,8 +333,8 @@ class WeixinClient extends CDWeixin
             $text = strip_tags($row['title']);
             $thumb = empty($row['original_pic']) ? false : new CDImageThumb($row['original_pic']);
             $posts[] = array(
-                'Title' => $text,
-                'Discription' => mb_strimwidth(strip_tags($row['content']), 0, 150, '...', app()->charset),
+                'Title' => '视频：' . $text,
+                'Description' => mb_strimwidth(strip_tags($row['content']), 0, 150, '...', app()->charset),
                 'PicUrl' => $thumb ? $thumb->middleImageUrl() : '',
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
             );
@@ -403,7 +403,7 @@ class WeixinClient extends CDWeixin
         return array(
 //             array(
 //                 'Title' => '天猫年货大街！春节前，天猫年货最后一拨啦！',
-//                 'Discription' => '春节前，天猫年货最后一拨啦，干完这一票，风光过大年！',
+//                 'Description' => '春节前，天猫年货最后一拨啦，干完这一票，风光过大年！',
 //                 'PicUrl' => 'http://t2.qpic.cn/mblogpic/ef659973621af6747cf2/160',
 //                 'Url' => 'http://t.cn/zj37mMZ',
 //             )
