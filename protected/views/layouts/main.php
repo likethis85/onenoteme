@@ -88,7 +88,7 @@ cs()->registerMetaTag('text/html; charset=utf-8', null, 'content-type')
     ->registerCssFile(sbu('styles/cd-basic.css'))
     ->registerCssFile(sbu('styles/cd-main.css'))
     ->registerCoreScript('jquery')
-    ->registerScriptFile(sbu('libs/json2.js'), CClientScript::POS_END)
+    ->registerScriptFile(sbu('libs/json3.min.js'), CClientScript::POS_END)
     ->registerScriptFile(sbu('libs/modernizr.min.js'), CClientScript::POS_END)
     ->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END)
     ->registerScriptFile(sbu('scripts/cd-main.js'), CClientScript::POS_END)
@@ -102,7 +102,7 @@ if (CD_PRODUCT) {
 
         'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js',
 
-        'json2.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
+        'json3.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
         'modernizr.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
         'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
         'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),

@@ -44,14 +44,7 @@ class AdminConfig extends Config
             self::CATEGORY_SYSTEM_CACHE => '缓存设置',
             self::CATEGORY_SYSTEM_ATTACHMENTS => '附件设置',
             self::CATEGORY_SYSTEM_EMAIL => '邮件设置',
-        
-            self::CATEGORY_DISPLAY_TEMPLATE => '模板配置',
             self::CATEGORY_DISPLAY_UI => '界面元素',
-        
-            self::CATEGORY_SNS_INTERFACE => 'SNS接口',
-            self::CATEGORY_SNS_STATS => 'SNS统计',
-            self::CATEGORY_SNS_TEMPLATE => 'SNS模板',
-                
             self::CATEGORY_SEO_KEYWORD_DESC => '关键字与描述',
         );
     }

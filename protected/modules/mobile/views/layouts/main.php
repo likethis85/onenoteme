@@ -75,14 +75,20 @@ cs()->registerCssFile(sbu('libs/bootstrap/css/bootstrap.min.css'))
     ->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END)
     ->registerScriptFile(sbu('scripts/cd-mobile.js'), CClientScript::POS_END);
 
-CD_PRODUCT && cs()->scriptMap = array(
-    'bootstrap.min.css' => sbu('styles/mobile-all.min.css?t=20130812001'),
-    'cd-mobile.css' => sbu('styles/mobile-all.min.css?t=20130812001'),
-    
-    'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js',
-    
-    'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130812001'),
-    'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130812001'),
-    'json2.js' => sbu('scripts/mobile-all.min.js?t=20130812001'),
-);
+if (CD_PRODUCT)
+    cs()->scriptMap = array(
+        'bootstrap.min.css' => sbu('styles/mobile-all.min.css?t=20130812001'),
+        'cd-mobile.css' => sbu('styles/mobile-all.min.css?t=20130812001'),
+
+        'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js',
+
+        'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130812001'),
+        'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130812001'),
+        'json3.min.js' => sbu('scripts/mobile-all.min.js?t=20130812001'),
+    );
+else
+    cs()->scriptMap = array(
+        'jquery.min.js' => sbu('libs/jquery2.min.js'),
+        'jquery.js' => sbu('libs/jquery2.min.js'),
+    );
 ?>

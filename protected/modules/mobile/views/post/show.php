@@ -55,4 +55,4 @@ $(function(){
 </script>
 
 <?php cs()->registerCoreScript('cookie');?>
-<?php cs()->registerScriptFile(sbu('libs/json2.js'), CClientScript::POS_END);?>
+<?php cs()->registerScriptFile(sbu('libs/json3.min.js'), CClientScript::POS_END);?>

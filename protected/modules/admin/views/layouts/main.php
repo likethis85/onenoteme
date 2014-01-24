@@ -117,16 +117,11 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
                         <li><?php echo l('邮件设置', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SYSTEM_EMAIL)));?></li>
                         <li class="divider"></li>
                         <li class="nav-header">网站显示</li>
-                        <li><?php echo l('模板配置', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_DISPLAY_TEMPLATE)));?></li>
                         <li><?php echo l('界面元素', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_DISPLAY_UI)));?></li>
                         <li class="divider"></li>
                         <li class="nav-header">敏感词管理</li>
                         <li><?php echo l('批量添加', url('admin/keyword/create'));?></li>
                         <li><?php echo l('敏感词列表', url('admin/keyword/list'));?></li>
-                        <li class="nav-header">SNS配置</li>
-                        <li><?php echo l('SNS接口', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SNS_INTERFACE)));?></li>
-                        <li><?php echo l('SNS统计', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SNS_STATS)));?></li>
-                        <li><?php echo l('SNS模板', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SNS_TEMPLATE)));?></li>
                         <li class="nav-header">SEO设置</li>
                         <li><?php echo l('关键字与描述', url('admin/config/view', array('categoryid'=>AdminConfig::CATEGORY_SEO_KEYWORD_DESC)));?></li>
                         <li class="divider"></li>
@@ -178,7 +173,7 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
 </html>
 
 <?php
-cs()->registerCoreScript('jquery');
+cs()->registerScriptFile(sbu('libs/jquery2.min.js'), CClientScript::POS_HEAD);
 cs()->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END);
 cs()->registerScriptFile(sbu('scripts/cd-admin.js'), CClientScript::POS_END);
 ?>
