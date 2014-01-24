@@ -100,13 +100,13 @@ if (CD_PRODUCT) {
         'cd-basic.css' => sbu('styles/cd-all.min.css?t=20140101001'),
         'cd-main.css' => sbu('styles/cd-all.min.css?t=20140101001'),
 
-        'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/1.9.0/jquery.min.js',
+        'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js',
 
-        'json3.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
-        'modernizr.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
-        'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
-        'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
-        'cd-main.js' => sbu('scripts/cd-all.min.js?t=20130521002'),
+        'json3.min.js' => sbu('scripts/cd-all.min.js?t=20140124001'),
+        'modernizr.min.js' => sbu('scripts/cd-all.min.js?t=20140124001'),
+        'bootstrap.min.js' => sbu('scripts/cd-all.min.js?t=20140124001'),
+        'jquery.lazyload.min.js' => sbu('scripts/cd-all.min.js?t=20140124001'),
+        'cd-main.js' => sbu('scripts/cd-all.min.js?t=20140124001'),
     );
 }
 ?>

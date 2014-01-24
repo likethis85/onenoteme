@@ -77,13 +77,13 @@ cs()->registerCssFile(sbu('libs/bootstrap/css/bootstrap.min.css'))
 
 if (CD_PRODUCT)
     cs()->scriptMap = array(
-        'bootstrap.min.css' => sbu('styles/mobile-all.min.css?t=20130812001'),
-        'cd-mobile.css' => sbu('styles/mobile-all.min.css?t=20130812001'),
+        'bootstrap.min.css' => sbu('styles/mobile-all.min.css?t=20140124001'),
+        'cd-mobile.css' => sbu('styles/mobile-all.min.css?t=20140124001'),
 
         'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js',
 
-        'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20130812001'),
-        'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130812001'),
-        'json3.min.js' => sbu('scripts/mobile-all.min.js?t=20130812001'),
+        'bootstrap.min.js' => sbu('scripts/mobile-all.min.js?t=20140124001'),
+        'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20140124001'),
+        'json3.min.js' => sbu('scripts/mobile-all.min.js?t=20140124001'),
     );
 ?>
