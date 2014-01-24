@@ -333,7 +333,7 @@ class WeixinClient extends CDWeixin
             $text = strip_tags($row['title']);
             $thumb = empty($row['original_pic']) ? false : new CDImageThumb($row['original_pic']);
             $posts[] = array(
-                'Title' => '视频：' . $text,
+                'Title' => '【视频】' . $text,
                 'Description' => mb_strimwidth(strip_tags($row['content']), 0, 150, '...', app()->charset),
                 'PicUrl' => $thumb ? $thumb->middleImageUrl() : '',
                 'Url' => aurl('mobile/post/show', array('id'=>$row['id'])),
