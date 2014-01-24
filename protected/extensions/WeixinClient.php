@@ -12,8 +12,8 @@ class WeixinClient extends CDWeixin
             $this->textMsgRequest();
         }
         elseif ($this->isEventMsg()) {
-            if ($this->isMenuClickEvent())
-                $this->menuClick();
+            if ($this->isClickEvent())
+                $this->clickEventRequest();
             else
                 $this->unSupportEvent();
         }
@@ -376,9 +376,26 @@ class WeixinClient extends CDWeixin
         echo $xml;
     }
     
-    private function menuClick()
+    private function clickEventRequest()
     {
-        
+        $eventKey = strtoupper(trim($this->_data->EventKey));
+
+        switch ($eventKey) {
+            case 'V10_LEVEL1_JOKE':
+                $this->nextJoke();
+            case 'V10_LEVEL1_LENGTU':
+                $this->nextLengtu();
+                break;
+            case 'V10_LEVEL1_VIDEO':
+                $this->nextVideo();
+                break;
+            default:
+                $xml = $this->outputText(self::helpInfo());
+                header('Content-Type: application/xml');
+                echo $xml;
+                break;
+        }
+        exit;
     }
 
     private static function advert()
