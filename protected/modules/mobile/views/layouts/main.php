@@ -86,9 +86,4 @@ if (CD_PRODUCT)
         'cd-mobile.js' => sbu('scripts/mobile-all.min.js?t=20130812001'),
         'json3.min.js' => sbu('scripts/mobile-all.min.js?t=20130812001'),
     );
-else
-    cs()->scriptMap = array(
-        'jquery.min.js' => sbu('libs/jquery2.min.js'),
-        'jquery.js' => sbu('libs/jquery2.min.js'),
-    );
 ?>

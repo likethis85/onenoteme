@@ -3,8 +3,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo app()->charset;?>" />
 <title><?php echo app()->name;?>管理中心</title>
-<link rel="stylesheet" type="text/css" href="<?php echo sbu('libs/bootstrap/css/bootstrap.min.css');?>" />
-<link rel="stylesheet" type="text/css" href="<?php echo sbu('styles/cd-admin.css');?>" />
 <script type="text/javascript">
 /*<![CDATA[*/
 var CD_YES = <?php echo CD_YES;?>;
@@ -173,9 +171,16 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
 </html>
 
 <?php
-cs()->registerScriptFile(sbu('libs/jquery2.min.js'), CClientScript::POS_HEAD);
-cs()->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END);
-cs()->registerScriptFile(sbu('scripts/cd-admin.js'), CClientScript::POS_END);
+cs()->registerCssFile(sbu('libs/bootstrap/css/bootstrap.min.css'))
+    ->registerCssFile(sbu('styles/cd-admin.css'))
+    ->registerCoreScript('jquery')
+    ->registerScriptFile(sbu('libs/bootstrap/js/bootstrap.min.js'), CClientScript::POS_END)
+    ->registerScriptFile(sbu('scripts/cd-admin.js'), CClientScript::POS_END);
+
+if (CD_PRODUCT)
+    cs()->scriptMap = array(
+        'jquery.min.js' => 'http://lib.sinaapp.com/js/jquery/2.0.3/jquery-2.0.3.min.js',
+    );
 ?>
 
 
