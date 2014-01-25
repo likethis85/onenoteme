@@ -125,7 +125,7 @@ class CDYixin
      * 判断是否是事件消息中的进入menu click事件
      * @return boolean
      */
-    public function islickEvent()
+    public function isClickEvent()
     {
         return $this->isEventMsg() && strtolower($this->_data->Event) == self::MSG_EVENT_MENUCLICK;
     }
