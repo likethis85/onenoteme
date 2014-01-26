@@ -99,6 +99,7 @@ class CDFileLocal extends CComponent
             set_time_limit($this->timeout);
             
             $fetch = new CDCurl();
+            $fetch->referer(empty($this->_referer) ? true : $this->_referer);
             $fetch->get($url);
             if ($fetch->errno() !== 0) return false;
             
