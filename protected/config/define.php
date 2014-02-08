@@ -1,6 +1,6 @@
 <?php
 
-define('DB_MYSQL_HOST', 'cdcchen.mysql.rds.aliyuncs.com');
+define('DB_MYSQL_HOST', 'cdcchendb.mysql.rds.aliyuncs.com');
 define('DB_MYSQL_PORT', '3306');
 define('DB_MYSQL_DBNAME', 'cd_waduanzi');
 define('DB_MYSQL_USER', 'waduanzi');
