@@ -35,7 +35,7 @@ class WbpostController extends AdminController
                 $content = CDBase::convertPunctuation(nl2br(trim($_POST['weibotext'])));
                 $content = empty($content) ? $temp->content : $content;
                 $post = new Post();
-                $post->content = $content;
+                $post->title = $post->content = $content;
                 $post->channel_id = CHANNEL_FUNNY;
                 $post->media_type = $media_type;
                 $post->up_score = mt_rand(param('init_up_score_min'), param('init_up_score_max'));
@@ -53,6 +53,7 @@ class WbpostController extends AdminController
                 
                 if ($media_type == MEDIA_TYPE_IMAGE && $temp->original_pic) {
                     $post->original_pic = $temp->original_pic;
+                    $post->weibo_pic = $temp->bmiddle_pic;
                     $opts['water_position'] = CDWaterMark::POS_BOTTOM_RIGHT;
                     $opts['padding_top'] = (int)$_POST['padding_top'];
                     $opts['padding_bottom'] = (int)$_POST['padding_bottom'];
