@@ -320,7 +320,6 @@ class CDBase
             'wabao.me',
             'waduanzi.com',
             'waduanzi.cn',
-            'sinaimg.cn',
         );
     }
     
