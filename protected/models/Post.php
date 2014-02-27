@@ -327,14 +327,14 @@ class Post extends CActiveRecord
 	    $moreCount = mb_strlen($content, app()->charset) - mb_strlen($summary, app()->charset);
 	    
 	    $tags = param('summary_html_tags');
+        $content = empty($tags) ? $this->content : strip_tags($this->content, $tags);
 	    if ($moreCount > 0) {
-	    	$content = empty($tags) ? $this->content : strip_tags($this->content, $tags);
 	        $summary = mb_strimwidth($content, 0, $len, '......', app()->charset);
     	    $text = '<i class="cgray">(剩余' . (int)$moreCount . '字)</i>&nbsp;&nbsp;<span class="cgreen">继续阅读全文&gt;&gt;&gt;</span>';
     	    $summary .= '<br />' . l($text, $this->getUrl(), array('target'=>'_blank', 'class'=>'aright'));
 	    }
 	    else
-	    	$summary = strip_tags($this->content, $tags);
+	    	$summary = $content;
 	    return trim($summary);
 	}
 	
@@ -1408,7 +1408,7 @@ class Post extends CActiveRecord
     protected function beforeValidate()
     {
         if (empty($this->title))
-            $this->title = mb_substr(strip_tags($this->content), 0, 30, app()->charset);
+            $this->title = mb_substr(strip_tags($this->content), 0, 40, app()->charset);
         
         return true;
     }

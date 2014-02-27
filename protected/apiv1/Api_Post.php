@@ -29,12 +29,12 @@ class Api_Post extends ApiBase
         $post->down_score = mt_rand(param('init_down_score_min'), param('init_down_score_max'));
         $post->view_nums = mt_rand(param('init_view_nums_min'), param('init_view_nums_max'));
         $post->homeshow = CD_YES;
-    	$post->original_pic = $post->weibo_pic = $params['pic'];
+    	$post->original_pic = $params['pic'];
     	$post->title = CDBase::convertPunctuation(trim($params['title']));
     	$post->user_id = $vestUser[0];
     	$post->user_name = $vestUser[1];
     	if (empty($post->title))
-    	    $post->title = mb_substr(strip_tags($post->content), 0, 30, app()->charset);
+    	    $post->title = mb_substr(strip_tags($post->content), 0, 40, app()->charset);
     	
     	try {
     	    $referer = strip_tags(trim($params['onreferer']));
@@ -50,7 +50,12 @@ class Api_Post extends ApiBase
     	        $opts['padding_bottom'] = $bottom;
     	    }
     	    
-    		$result = $post->fetchRemoteImagesBeforeSave($referer, $opts) && $post->save();
+    		if ($post->fetchRemoteImagesBeforeSave($referer, $opts)) {
+                $post->weibo_pic = $params['pic'];
+                $result = $post->save();
+            }
+            else
+                $result = false;
     		return (int)$result;
     	}
     	catch (ApiException $e) {
