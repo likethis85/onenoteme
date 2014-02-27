@@ -690,7 +690,7 @@ class Post extends CActiveRecord
     {
         //@todo 首先判断新浪微博图床图片是否存在
         if ($this->weibo_pic && filter_var($this->weibo_pic, FILTER_VALIDATE_URL) !== false) {
-            return $this->weibo_pic;
+            return str_replace('large', 'bmiddle', $this->weibo_pic);
         }
 
         $url = '';
@@ -726,6 +726,11 @@ class Post extends CActiveRecord
      */
     public function getOriginalPic()
     {
+        //@todo 首先判断新浪微博图床图片是否存在
+        if ($this->weibo_pic && filter_var($this->weibo_pic, FILTER_VALIDATE_URL) !== false) {
+            return str_replace('bmiddle', 'large', $this->weibo_pic);
+        }
+
         return $this->original_pic;
     }
     
