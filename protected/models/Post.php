@@ -1426,7 +1426,7 @@ class Post extends CActiveRecord
         }
 
         // @todo 强制要求weibo_pic只存放新浪微博图床的地址，如果不是，直接清空不保存
-        if ($this->weibo_pic && stripos($this->weibo_pic, SINA_WEIBO_PIC_DOMAIN) == 0)
+        if ($this->weibo_pic && stripos($this->weibo_pic, SINA_WEIBO_IMAGE_DOMAIN) == 0)
             $this->weibo_pic = '';
         
         return true;
