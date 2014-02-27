@@ -41,6 +41,14 @@
             <?php if ($model->hasErrors('original_pic')):?><p class="help-block"><?php echo $model->getError('original_pic');?></p><?php endif;?>
         </div>
     </div>
+
+    <div class="control-group bottom10px <?php if ($model->hasErrors('weibo_pic')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'weibo_pic', array('class'=>'control-label'));?>
+        <div class="controls">
+            <?php echo CHtml::activeTextField($model, 'weibo_pic', array('class'=>'span6'));?>
+            <?php if ($model->hasErrors('weibo_pic')):?><p class="help-block"><?php echo $model->getError('weibo_pic');?></p><?php endif;?>
+        </div>
+    </div>
     <?php endif;?>
     <!-- 缩略图 end -->
     

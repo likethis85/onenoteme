@@ -6,11 +6,11 @@ define('DB_MYSQL_DBNAME', 'cd_waduanzi');
 define('DB_MYSQL_USER', 'waduanzi');
 define('DB_MYSQL_PASSWORD', 'cdc_790406');
 
-//define('MYSQL_HOST', 'localhost');
-//define('MYSQL_PORT', '3306');
-//define('MYSQL_DBNAME', 'cd_waduanzi');
-//define('MYSQL_USER', 'root');
-//define('MYSQL_PASSWORD', 'cdc_790406');
+//define('DB_MYSQL_HOST', 'localhost');
+//define('DB_MYSQL_PORT', '3306');
+//define('DB_MYSQL_DBNAME', 'cd_waduanzi');
+//define('DB_MYSQL_USER', 'root');
+//define('DB_MYSQL_PASSWORD', 'cdc_790406');
 
 define('CD_YES', 1);
 define('CD_NO', 0);
@@ -179,6 +179,7 @@ define('IMAGE_MAX_HEIGHT_FOLDING', 1000);
 define('IMAGE_WATER_URL_SIZE', 200);
 define('IMAGE_WATER_SITENAME_SIZE', 400);
 
+define('SINA_WEIBO_IMAGE_DOMAIN', 'sinaimg.cn');
 /*
  * 内容列表页，图片最大尺寸
  */

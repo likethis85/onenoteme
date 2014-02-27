@@ -29,7 +29,7 @@ class Api_Post extends ApiBase
         $post->down_score = mt_rand(param('init_down_score_min'), param('init_down_score_max'));
         $post->view_nums = mt_rand(param('init_view_nums_min'), param('init_view_nums_max'));
         $post->homeshow = CD_YES;
-    	$post->original_pic = $params['pic'];
+    	$post->original_pic = $post->weibo_pic = $params['pic'];
     	$post->title = CDBase::convertPunctuation(trim($params['title']));
     	$post->user_id = $vestUser[0];
     	$post->user_name = $vestUser[1];
