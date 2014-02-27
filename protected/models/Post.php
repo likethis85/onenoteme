@@ -32,6 +32,7 @@
  * @property integer $hottest
  * @property integer $disable_comment
  * @property integer $content_level
+ * @property string $weibo_pic
  *
  * @property User $user
  * @property UserProfile $profile
@@ -176,6 +177,7 @@ class Post extends CActiveRecord
 			array('weibo_id', 'length', 'max'=>30),
 			array('create_ip', 'length', 'max'=>15),
 			array('title, tags', 'length', 'max'=>250),
+			array('weibo_pic', 'length', 'max'=>200),
 			array('content, original_pic', 'safe'),
 		    array('original_width, original_height, istop, homeshow, recommend, hottest, favorite_count, content_level', 'filter', 'filter'=>'intval'),
 		);
@@ -243,6 +245,7 @@ class Post extends CActiveRecord
 	        'hottest' => '热门',
 		    'disable_comment' => '评论',
 	        'content_level' => '内容等级',
+            'weibo_pic' => '微博图片',
 		);
 	}
 
@@ -325,7 +328,7 @@ class Post extends CActiveRecord
 	    
 	    $tags = param('summary_html_tags');
 	    if ($moreCount > 0) {
-	    	$content = strip_tags($this->content, $tags);
+	    	$content = empty($tags) ? $this->content : strip_tags($this->content, $tags);
 	        $summary = mb_strimwidth($content, 0, $len, '......', app()->charset);
     	    $text = '<i class="cgray">(剩余' . (int)$moreCount . '字)</i>&nbsp;&nbsp;<span class="cgreen">继续阅读全文&gt;&gt;&gt;</span>';
     	    $summary .= '<br />' . l($text, $this->getUrl(), array('target'=>'_blank', 'class'=>'aright'));
@@ -342,8 +345,14 @@ class Post extends CActiveRecord
 	public function getFilterContent()
 	{
 	    $tags = param('content_html_tags');
-	    $content = strip_tags($this->content, $tags);
-	    return trim($content);
+	    $content = empty($tags) ? $this->content : trim(strip_tags($this->content, $tags));
+
+        //@todo 首先判断新浪微博图床图片是否存在
+        if ($this->weibo_pic && filter_var($this->weibo_pic, FILTER_VALIDATE_URL) !== false) {
+            $content = str_replace($this->original_pic, $this->weibo_pic, $content);
+        }
+
+        return $content;
 	}
 	
 	/**
@@ -679,6 +688,11 @@ class Post extends CActiveRecord
      */
     public function getMiddlePic()
     {
+        //@todo 首先判断新浪微博图床图片是否存在
+        if ($this->weibo_pic && filter_var($this->weibo_pic, FILTER_VALIDATE_URL) !== false) {
+            return $this->weibo_pic;
+        }
+
         $url = '';
         $thumb = $this->getImageThumb();
         if ($thumb)
@@ -693,6 +707,11 @@ class Post extends CActiveRecord
      */
     public function getLargePic()
     {
+        //@todo 首先判断新浪微博图床图片是否存在
+        if ($this->weibo_pic && filter_var($this->weibo_pic, FILTER_VALIDATE_URL) !== false) {
+            return str_replace('bmiddle', 'large', $this->weibo_pic);
+        }
+
         $url = '';
         $thumb = $this->getImageThumb();
         if ($thumb)

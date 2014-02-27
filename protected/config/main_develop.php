@@ -83,7 +83,7 @@ return array(
 //		    'queryCacheID' => 'cache',
 //		    'queryCachingDuration' => 3600,
         ),
-        'cache' => array(
+        'cache1' => array(
             'class' => 'CFileCache',
 		    'directoryLevel' => 2,
         ),
