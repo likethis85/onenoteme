@@ -348,8 +348,9 @@ class Post extends CActiveRecord
 	    $content = empty($tags) ? $this->content : trim(strip_tags($this->content, $tags));
 
         //@todo 首先判断新浪微博图床图片是否存在
-        if ($this->weibo_pic && filter_var($this->weibo_pic, FILTER_VALIDATE_URL) !== false) {
-            $content = str_replace($this->original_pic, $this->weibo_pic, $content);
+        $thumb = $this->getImageThumb();
+        if ($this->weibo_pic && $thumb && filter_var($this->weibo_pic, FILTER_VALIDATE_URL) !== false) {
+            $content = str_replace($thumb->middleImageUrl(), $this->weibo_pic, $content);
         }
 
         return $content;
@@ -1417,7 +1418,7 @@ class Post extends CActiveRecord
     {
         if ($this->getIsNewRecord()) {
             $this->create_time = $_SERVER['REQUEST_TIME'];
-	        $this->create_ip = CDBase::getClientIp();
+	        $this->create_ip = CDBase::getClientIPAddress();
             $this->comment_nums = 0;
         }
         
