@@ -358,6 +358,7 @@ class Post extends CActiveRecord
 	
 	/**
 	 * 获取内容中的图片列表
+     * @param boolean $cache 是否允许从静态变量中读取
 	 * @return boolean|array 图片列表，如果正则匹配出错，返回false
 	 */
 	public function getContentImages($cache = true)
