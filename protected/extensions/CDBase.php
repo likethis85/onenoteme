@@ -322,19 +322,48 @@ class CDBase
             'waduanzi.cn',
         );
     }
-    
-    public static function externalUrl($url, $domains = array())
+
+    public static function validExternalImageUrlDomains()
     {
-        if (empty($domains))
-            $domains = self::localDomains();
-        
+        return array(
+            'sinaimg.cn',
+            'qhimg.com',
+            'kl688.com',
+            'qiushibaike.com',
+        );
+    }
+    
+    public static function externalUrl($url)
+    {
+        if (empty($url) || filter_var($url, FILTER_VALIDATE_URL) === false)
+            return false;
+
+        $domains = self::localDomains();
         $domains[] = $_SERVER['HTTP_HOST'];
         $domains = array_unique($domains);
+
         foreach ($domains as $domain) {
             if (stripos($url, $domain) !== false)
                 return false;
         }
         return true;
+    }
+
+    public static function validExternalImageUrl($url)
+    {
+        if (empty($url) || filter_var($url, FILTER_VALIDATE_URL) === false)
+            return false;
+
+        $domains = self::validExternalImageUrlDomains();
+        $domains = array_unique($domains);
+
+        if (empty($domains)) return false;
+
+        foreach ($domains as $domain) {
+            if (stripos($url, $domain) > 0)
+                return true;
+        }
+        return false;
     }
 
     public static function videoAppKeysMap()

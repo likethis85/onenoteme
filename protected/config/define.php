@@ -179,7 +179,6 @@ define('IMAGE_MAX_HEIGHT_FOLDING', 1000);
 define('IMAGE_WATER_URL_SIZE', 200);
 define('IMAGE_WATER_SITENAME_SIZE', 400);
 
-define('SINA_WEIBO_IMAGE_DOMAIN', 'sinaimg.cn');
 /*
  * 内容列表页，图片最大尺寸
  */
