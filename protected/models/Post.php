@@ -1107,7 +1107,7 @@ class Post extends CActiveRecord
     public function fetchRemoteImagesBeforeSave($referer = '', $opts = array())
     {
         $url = strip_tags(trim($this->original_pic));
-        if (!empty($url) && CDBase::externalUrl($url, CDBase::localDomains())) {
+        if (!empty($url) && CDBase::externalUrl($url)) {
             $image = CDUploadedFile::saveImage(upyunEnabled(), $url, 'pics', $referer, $opts);
             if ($image) {
                 $this->original_pic = $image['url'];
