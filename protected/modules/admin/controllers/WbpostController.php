@@ -57,8 +57,7 @@ class WbpostController extends AdminController
                     $opts['padding_top'] = (int)$_POST['padding_top'];
                     $opts['padding_bottom'] = (int)$_POST['padding_bottom'];
                     $opts['water_position'] = (int)$_POST['water_position'];
-                    $referrer = 'http://weibo.com';
-                    if (1){//$result = $post->fetchRemoteImagesBeforeSave($referrer, $opts)) {
+                    if ($result = $post->fetchRemoteImagesBeforeSave('', $opts)) {
                         $post->weibo_pic = $temp->bmiddle_pic;
                         $result = $post->save();
                     }
