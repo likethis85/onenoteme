@@ -1117,8 +1117,10 @@ class Post extends CActiveRecord
                 $this->content = '<p>' . $this->getMiddleImage() . '</p>' . $this->content;
                 return true;
             }
-            else
-                return false;
+            else {
+                throw new CHttpException(503, 'xx');
+//                return false;
+            }
         }
         else
             return true;
