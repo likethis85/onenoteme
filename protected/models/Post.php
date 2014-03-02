@@ -1104,11 +1104,11 @@ class Post extends CActiveRecord
      * @param array $opts UpYun writeFile方法参数
      * @return boolean
      */
-    public function fetchRemoteImagesBeforeSave($referer = '', $opts = array())
+    public function fetchRemoteImagesBeforeSave($referrer = '', $opts = array())
     {
         $url = strip_tags(trim($this->original_pic));
         if (!empty($url) && CDBase::externalUrl($url)) {
-            $image = CDUploadedFile::saveImage(upyunEnabled(), $url, 'pics', $referer, $opts);
+            $image = CDUploadedFile::saveImage(upyunEnabled(), $url, 'pics', $referrer, $opts);
             if ($image) {
                 $this->original_pic = $image['url'];
                 $this->original_width = $image['width'];
