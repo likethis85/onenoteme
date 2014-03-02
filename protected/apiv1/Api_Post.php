@@ -15,7 +15,7 @@ class Api_Post extends ApiBase
     	self::requirePost();
 //        	$this->requireLogin();
     	$this->requiredParams(array('title', 'content', 'token', 'channel_id'));
-    	$params = $this->filterParams(array('title', 'content', 'tags', 'channel_id', 'category_id', 'pic', 'token', 'onreferer', 'padding_top', 'padding_bottom', 'water_position', 'media_type'));
+    	$params = $this->filterParams(array('title', 'content', 'tags', 'channel_id', 'category_id', 'pic', 'token', 'onreferrer', 'padding_top', 'padding_bottom', 'water_position', 'media_type'));
     	
     	$vestUser = CDBase::randomVestAuthor();
     	$post = new Post();
@@ -37,9 +37,9 @@ class Api_Post extends ApiBase
     	    $post->title = mb_substr(strip_tags($post->content), 0, 40, app()->charset);
     	
     	try {
-    	    $referer = strip_tags(trim($params['onreferer']));
-    	    if (empty($referer))
-    	        $referer = $params['pic'];
+    	    $referrer = strip_tags(trim($params['onreferrer']));
+    	    if (empty($referrer))
+    	        $referrer = $params['pic'];
     	    
     	    $opts = array();
     	    $opts['water_position'] = (int)$params['water_position'];
@@ -50,12 +50,13 @@ class Api_Post extends ApiBase
     	        $opts['padding_bottom'] = $bottom;
     	    }
     	    
-    		if ($post->fetchRemoteImagesBeforeSave($referer, $opts)) {
+    		if ($result = $post->fetchRemoteImagesBeforeSave($referrer, $opts)) {
                 $post->weibo_pic = $params['pic'];
                 $result = $post->save();
             }
             else
                 $result = false;
+
     		return (int)$result;
     	}
     	catch (ApiException $e) {

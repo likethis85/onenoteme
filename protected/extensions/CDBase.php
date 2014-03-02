@@ -343,7 +343,7 @@ class CDBase
         $domains = array_unique($domains);
 
         foreach ($domains as $domain) {
-            if (stripos($url, $domain) !== false)
+            if (stripos($url, $domain) > 0)
                 return false;
         }
         return true;
