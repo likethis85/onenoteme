@@ -28,7 +28,7 @@ class CDUploadedFile
         $im->load($data);
         
         self::processImage($im, $opts);
-        var_dump('ok');return;
+
         if ($upyunEnabled)
             $image = self::saveImageToUpyun($im, $pathPrefix);
         else
@@ -47,16 +47,16 @@ class CDUploadedFile
         try {
             $uploader = upyunUploader(true);
             $paths = $uploader->autoFilename($im->getExtName(), $pathPrefix, 'original');
-            
+            var_dump('ok111');
             $infos = $uploader->save($im->rawData());
-
+            var_dump('ok222');
             if (is_array($infos)) {
                 $original = $infos;
                 $original['url'] = $paths['absolute_url'];
             }
         }
         catch (Exception $e) {
-            throw new Exception($e->getMessage());
+            throw new Exception($e->getMessage().'xxxx');
         }
     
         $im = null;
