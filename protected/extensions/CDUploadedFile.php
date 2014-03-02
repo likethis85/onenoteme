@@ -28,7 +28,7 @@ class CDUploadedFile
         $im->load($data);
         
         self::processImage($im, $opts);
-        
+        var_dump('ok');return;
         if ($upyunEnabled)
             $image = self::saveImageToUpyun($im, $pathPrefix);
         else

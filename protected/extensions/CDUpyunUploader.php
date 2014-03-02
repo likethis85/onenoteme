@@ -71,7 +71,6 @@ class CDUpyunUploader extends CDBaseUploader implements ICDUploader
             $file = fopen($file, 'rb');
         
         $result =  $this->_client->writeFile($this->_filename, $file, $this->autoMkdir, $opts);
-        var_dump($result);
         if (is_array($result)) {
             $image['width'] = (int)$result['x-upyun-width'];
             $image['height'] = (int)$result['x-upyun-height'];
