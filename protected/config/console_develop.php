@@ -11,7 +11,6 @@ return array(
     'timezone' => 'Asia/Shanghai',
 
     'import' => array(
-        'application.dmodels.*',
         'application.models.*',
         'application.extensions.*',
         'application.libs.*',
@@ -40,6 +39,22 @@ return array(
         'cache' => array(
             'class' => 'CFileCache',
 		    'directoryLevel' => 2,
+        ),
+        'fcache' => array(
+            'serializer' => array('igbinary_serialize', 'igbinary_unserialize'),
+            'class' => 'CFileCache',
+            'directoryLevel' => 2,
+        ),
+        'redis' => array(
+            'class' => 'application.extensions.CDRedisCache',
+            'host' => '127.0.0.1',
+            'port' => 6379,
+            'timeout' => 3,
+            'serializer' => $cacheSerializer,
+            'options' => array(
+                Redis::OPT_PREFIX => 'wdz_',
+                Redis::OPT_SERIALIZER => extension_loaded('igbinary') ? Redis::SERIALIZER_IGBINARY : Redis::SERIALIZER_PHP,
+            ),
         ),
         'apn' => array(
             'class' => 'CDApnProvider',
