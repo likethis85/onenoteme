@@ -330,6 +330,7 @@ class CDBase
             'qhimg.com',
             'kl688.com',
             'qiushibaike.com',
+            'hao123.com',
         );
     }
     
