@@ -1443,16 +1443,8 @@ class Post extends CActiveRecord
     {
         if ($this->getIsNewRecord()) {
             if ($this->original_pic && !CDBase::externalUrl($this->original_pic)) {
-                $upload = new Upload();
-                $upload->post_id = $this->id;
-                $upload->file_type = Upload::TYPE_IMAGE;
-                $upload->url = $this->original_pic;
-                $upload->width = $this->original_width;
-                $upload->height = $this->original_height;
-                $upload->frames = $this->original_frames;
-                $upload->desc = strip_tags(trim($this->title));
-                $upload->user_id = $this->user_id;
-                $upload->save();
+                $this->saveUploadFile();
+                $this->sinatUploadImage();
             }
             
             if ($this->profile && $this->profile instanceof UserProfile) {
@@ -1484,6 +1476,54 @@ class Post extends CActiveRecord
 	    
 	    foreach ((array)$this->videos as $video)
 	        $video->delete();
+    }
+
+    private function saveUploadFile()
+    {
+        $upload = new Upload();
+        $upload->post_id = $this->id;
+        $upload->file_type = Upload::TYPE_IMAGE;
+        $upload->url = $this->original_pic;
+        $upload->width = $this->original_width;
+        $upload->height = $this->original_height;
+        $upload->frames = $this->original_frames;
+        $upload->desc = strip_tags(trim($this->title));
+        $upload->user_id = $this->user_id;
+        return $upload->save();
+    }
+
+    private function sinatUploadImage()
+    {
+        $curl = new CDCurl();
+        $curl->get($this->original_pic);
+        if ($curl->errno() == 0) {
+            $picData = $curl->rawdata();
+            $tempfile = app()->getRuntimePath() . DS . uniqid();
+            $result = file_put_contents($tempfile, $picData);
+            if ($result === false)
+                throw new CException('生成临时文件出错', 0);
+        }
+        else
+            return false;
+
+        $url = 'https://upload.api.weibo.com/2/statuses/upload.json';
+        $data = array(
+            'source' => WEIBO_APP_KEY,
+            'access_token' => redis()->get('sina_weibo_image_store_access_token'),
+            'status' => $this->title,
+            'pic' => '@' . $tempfile,
+        );
+
+        $curl = new CDCurl();
+        $curl->post($url, $data);
+        @unlink($tempfile);
+        if ($curl->errno() == 0) {
+            $result = json_decode($curl->rawdata(), true);
+            $this->weibo_pic = $result['bmiddle_pic'];
+            return $this->save(true, array('weibo_pic'));
+        }
+        else
+            return false;
     }
 }
 

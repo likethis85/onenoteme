@@ -8,6 +8,13 @@ class WeiboController extends AdminController
         $this->redirect($url);
         exit(0);
     }
+    public function actionSinat2()
+    {
+        $callback = aurl('admin/weibo/sinacb2');
+        $url = sprintf('https://api.weibo.com/oauth2/authorize?client_id=%s&response_type=code&redirect_uri=%s', WEIBO_APP_KEY, $callback);
+        $this->redirect($url);
+        exit(0);
+    }
     
     public function actionSinacb($code)
     {
@@ -28,6 +35,30 @@ class WeiboController extends AdminController
             $cacheTokenKey = 'sina_weibo_access_token';
             $result1 = redis()->set($cacheTokenKey, $data['access_token'], $expires_in);
             $cacheUserIDKey = 'sina_weibo_user_id';
+            $result2 = redis()->set($cacheUserIDKey, $data['uid'], $expires_in);
+            echo $result1 && $result2 ? '授权登录成功' : '授权登录失败';
+        }
+    }
+
+    public function actionSinacb2($code)
+    {
+        $code = strip_tags(trim($code));
+        $callback = aurl('admin/weibo/sinacb2');
+        $url = sprintf('https://api.weibo.com/oauth2/access_token?grant_type=authorization_code&redirect_uri=%s&code=%s', $callback, $code);
+        $curl = new CDCurl();
+        $curl->basic_auth(WEIBO_APP_KEY, WEIBO_APP_SECRET);
+        $curl->post($url);
+        if ($curl->errno() != 0)
+            throw new CException(503, '获取access_token出错');
+        else {
+            $data = json_decode($curl->rawdata(), true);
+            if (empty($data))
+                throw new CException('获取access_token错误');
+
+            $expires_in = $data['expires_in'];
+            $cacheTokenKey = 'sina_weibo_image_store_access_token';
+            $result1 = redis()->set($cacheTokenKey, $data['access_token'], $expires_in);
+            $cacheUserIDKey = 'sina_weibo_image_store_user_id';
             $result2 = redis()->set($cacheUserIDKey, $data['uid'], $expires_in);
             echo $result1 && $result2 ? '授权登录成功' : '授权登录失败';
         }
