@@ -9,7 +9,7 @@ class TestController extends AdminController
     public function actionUpyun()
     {
         $uploader = upyunUploader(true);
-        $uploader->autoFilename('.png', 'test', 'original');
+        $uploader->setFilename(sprintf('/test/%s.png', time()));
         $infos = $uploader->save(sbp('images/app_ios.png'));
         var_dump($infos);
     }
