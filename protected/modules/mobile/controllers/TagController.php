@@ -42,7 +42,7 @@ class TagController extends MobileController
         
         $pages = new CPagination($count);
         $pages->setPageSize($limit);
-        $offset = ($pages->currentPage - 1) * $limit;
+        $offset = $pages->currentPage * $limit;
         $postIDs = app()->getDb()->createCommand()
             ->select('post_id')
             ->from(TABLE_POST_TAG)

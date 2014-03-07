@@ -46,9 +46,8 @@ class TagController extends Controller
     public function actionPosts($name, $page = 1)
     {
         $duration = 120;
+        $name = trim(strip_tags(urldecode($name)));
         $limit = (int)param('tag_posts_count_page');
-        
-        $name = urldecode($name);
 
         $tagID = app()->getDb()->createCommand()
             ->select('id')
