@@ -1,228 +1,135 @@
 <?php
-define('CD_CONFIG_ROOT', dirname(__FILE__));
-defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 
-try {
-    $params = require(CD_CONFIG_ROOT . DS . 'params_product.php');
-    $cachefile = $params['dataPath'] . DS . 'setting.config.php';
-    if (file_exists($cachefile)) {
-        $customSetting = require($cachefile);
-        $params = array_merge($params, $customSetting);
-    }
-}
-catch (Exception $e) {
-    echo $e->getMessage();
-    exit(0);
-}
+$c['id']  = 'waduanzi.com';
 
-$cacheSerializer = extension_loaded('igbinary') ? array('igbinary_serialize', 'igbinary_unserialize') : null;
-
-return array(
-    'basePath' => dirname(__FILE__) . DS . '..',
-    'id' => 'waduanzi.com',
-    'name' => '挖段子网',
-    'language' => 'zh_cn',
-    'charset' => 'utf-8',
-    'timezone' => 'Asia/Shanghai',
-
-    'import' => array(
-        'application.dmodels.*',
-        'application.models.*',
-        'application.extensions.*',
-        'application.components.*',
-        'application.libs.*',
-        'application.widgets.*',
+$c['components.log'] = array(
+    'class'=>'CLogRouter',
+    'routes'=>array(
+        array(
+            'class'=>'CFileLogRoute',
+            'categories'=>'system.db.*',
+        ),
+        /* array(
+            'class'=>'CWebLogRoute',
+            'levels'=>'trace,info,error,notice',
+            'categories'=>'system.db.*',
+        ), */
     ),
-    'modules' => array(
-        'admin' => array(
-            'layout' => 'main',
-        ),
-        'member' => array(
-            'layout' => 'main',
-        ),
-        'mobile' => array(
-            'layout' => 'main',
-        ),
-        'app' => array(
-            'layout' => 'main',
-        ),
-        'rest',
-    ),
-    'components' => array(
-        'errorHandler' => array(
-            'errorAction' => 'site/error',
-        ),
-        'db' => array(
-            'class' => 'CDbConnection',
-			'connectionString' => sprintf('mysql:host=%s; port=%s; dbname=%s', DB_MYSQL_HOST, DB_MYSQL_PORT, DB_MYSQL_DBNAME),
-			'username' => DB_MYSQL_USER,
-		    'password' => DB_MYSQL_PASSWORD,
-		    'charset' => 'utf8',
-		    'persistent' => false,
-		    'tablePrefix' => 'cd_',
-            'attributes' => array(
-                PDO::ATTR_ORACLE_NULLS => PDO::NULL_TO_STRING,
-                PDO::ATTR_EMULATE_PREPARES => true,
-            ),
-//             'enableParamLogging' => true,
-//             'enableProfiling' => true,
-		    'schemaCacheID' => 'cache',
-		    'schemaCachingDuration' => 3600 * 24,    // metadata 缓存超时时间(s)
-		    'queryCacheID' => 'redis',
-		    'queryCachingDuration' => 60,
-        ),
-        'cache' => array(
-            'class'=>'application.extensions.CDMemCache',
-            'serializer' => $cacheSerializer,
-            'useMemcached' => extension_loaded('memcached'),
-            'username' => '131ce938744011e3',
-            'password' => 'cdc_wdz_790406',
-            'options' => array(
-                Memcached::OPT_COMPRESSION => false,
-                Memcached::OPT_BINARY_PROTOCOL => true,
-                Memcached::OPT_SERIALIZER => extension_loaded('igbinary') ? Memcached::SERIALIZER_IGBINARY : Memcached::SERIALIZER_PHP,
-            ),
-            'servers'=>array(
-                array('host'=>'131ce938744011e3.m.cnhzalicm10pub001.ocs.aliyuncs.com', 'port'=>11211, 'timeout' =>3, 'weight'=>100),
-            ),
-        ),
-        'cache1' => array(
-            'class'=>'CMemCache',
-            'serializer' => $cacheSerializer,
-            'useMemcached' => extension_loaded('memcached'),
-            'servers'=>array(
-                array('host'=>'localhost', 'port'=>22122, 'timeout' =>3, 'weight'=>100),
-            ),
-        ),
-        'fcache' => array(
-            'serializer' => $cacheSerializer,
-            'class' => 'CFileCache',
-		    'directoryLevel' => 2,
-        ),
-        'redis' => array(
-            'class' => 'application.extensions.CDRedisCache',
-            'host' => '127.0.0.1',
-            'port' => 6379,
-            'timeout' => 3,
-            'serializer' => $cacheSerializer,
-            'options' => array(
-                Redis::OPT_PREFIX => 'wdz_',
-                Redis::OPT_SERIALIZER => extension_loaded('igbinary') ? Redis::SERIALIZER_IGBINARY : Redis::SERIALIZER_PHP,
-            ),
-        ),
-        'assetManager' => array(
-            'basePath' => $params['resourceBasePath'] . 'assets',
-            'baseUrl' => $params['resourceBaseUrl'] . 'assets',
-        ),
-        'authManager' => array(
-            'class' => 'CDbAuthManager',
-            'assignmentTable' => '{{auth_assignment}}',
-            'itemChildTable' => '{{auth_itemchild}}',
-            'itemTable' => '{{auth_item}}',
-        ),
-        'widgetFactory'=>array(
-            'enableSkin' => true,
-        ),
-        'urlManager' => array(
-            'urlFormat' => 'path',
-		    'showScriptName' => false,
-            'caseSensitive' => false,
-            'cacheID' => 'cache',
-            'rules' => array(
-                'http://api.waduanzi.com/<_a>' => 'api/<_a>',
-                
-                'archives/<id:\d+>' => 'post/show',
-                    
-                'mobile/archives/<id:\d+>' => 'mobile/post/show',
-                'mobile/page/<page:\d+>' => 'mobile/default/index',
-                'mobile' => 'mobile/default/index',
-                'mobile/<_a:(joke|lengtu|video|latest|hot|day|week|month|girl|focus)>/page/<page:\d+>' => 'mobile/channel/<_a>',
-                'mobile/<_a:(joke|lengtu|video|latest|hot|day|week|month|girl|focus)>' => 'mobile/channel/<_a>',
-                'mobile/tag/<name:.+>' => 'mobile/tag/posts',
-            
-                'page/<page:\d+>' => 'site/index',
-                '/' => 'site/index',
-                
-                '<_a:(joke|lengtu|video|hot|day|week|month|latest|girl|focus)>/page/<page:\d+>' => 'channel/<_a>',
-                '<_a:(joke|lengtu|video|hot|day|week|month|latest|girl|focus)>' => 'channel/<_a>',
-                
-                '<_a:(bdmap|links)>' => 'site/<_a>',
-                '<_a:(login|logout|signup|quicklogin|activate)>' => 'account/<_a>',
-
-                'tags' => 'tag/list',
-                'tag/<name:.+>' => 'tag/posts',
-                
-                'sponsor/' => 'sponsor/index',
-                
-                'feed' => 'feed/index',
-                'u/<id:\d+>' => 'user/index',
-                'sitemap/<_a>' => array('sitemap/<_a>', 'urlSuffix'=>'.xml', 'caseSensitive'=>false),
-                    
-                'member' => '/member/default/index',
-                    
-                'http://rest.waduanzi.com/post/timeline/<user_id:\d+>' => 'rest/post/timeline',
-                'http://rest.waduanzi.com/post/show/<post_id:\d+>' => 'rest/post/show',
-                'http://rest.waduanzi.com/comment/show/<post_id:\d+>' => 'rest/comment/show',
-                'http://rest.waduanzi.com/post/<_a:(support|oppose|like|unlike)>/<post_id:\d+>' => 'rest/post/<_a>',
-                'http://rest.waduanzi.com/comment/<_a:(support|report)>/<comment_id:\d+>' => 'rest/comment/<_a>',
-                'http://rest.waduanzi.com/user/show/<user_id:\d+>' => 'rest/user/show',
-                'http://rest.waduanzi.com/<_c>/<_a>' => 'rest/<_c>/<_a>',
-            ),
-        ),
-        'session' => array(
-            'autoStart' => true,
-            'sessionName' => 'wdz_ssid',
-            'cookieParams' => array(
-                'lifetime' => $params['autoLoginDuration'],
-                'domain' => GLOBAL_COOKIE_DOMAIN,
-                'path' => GLOBAL_COOKIE_PATH,
-            ),
-        ),
-        'user' => array(
-            'class' => 'CDWebUser',
-            'allowAutoLogin' => true,
-            'autoLoginDuration' => $params['autoLoginDuration'],
-            'loginUrl' => array('/account/login'),
-            'guestName' => '匿名段友',
-        ),
-        'mailer' => array(
-            'class' => 'application.extensions.CDSendCloudMailer',
-            'username' => 'postmaster@wdztrigger.sendcloud.org',
-            'password' => 'voQh3RP5',
-            'fromName' => '挖段子网',
-            'fromAddress' => 'noreply@waduanzi.com',
-            'replyTo' => 'service@waduanzi.com',
-        ),
-        'localUploader' => array(
-            'class' => 'application.extensions.CDLocalUploader',
-            'basePath' => $params['localUploadBasePath'],
-            'baseUrl' => $params['localUploadBaseUrl'],
-        ),
-        'upyunImageUploader' => array(
-            'class' => 'application.extensions.CDUpyunUploader',
-            'isImageBucket' => true,
-            'endpoint' => 'v1.api.upyun.com',
-            'bucket' => 'wdzimage',
-            'username' => 'cdcchen',
-            'password' => 'cdc790406',
-            'basePath' => '/',
-            'baseUrl' => $params['upyunImageBaseUrl'],
-        ),
-        'upyunFileUploader' => array(
-            'class' => 'application.extensions.CDUpyunUploader',
-            'isImageBucket' => false,
-            'endpoint' => 'v1.api.upyun.com',
-            'bucket' => 'wdzfile',
-            'username' => 'cdcchen',
-            'password' => 'cdc790406',
-            'basePath' => '/',
-            'baseUrl' => $params['upyunFileBaseUrl'],
-        ),
-    ),
-    
-    'params' => $params,
 );
 
+$c['components.db'] = array(
+    'class' => 'CDbConnection',
+    'connectionString' => sprintf('mysql:host=%s; port=%s; dbname=%s', DB_MYSQL_HOST, DB_MYSQL_PORT, DB_MYSQL_DBNAME),
+    'username' => DB_MYSQL_USER,
+    'password' => DB_MYSQL_PASSWORD,
+    'charset' => 'utf8',
+    'persistent' => false,
+    'tablePrefix' => 'cd_',
+    'attributes' => array(
+        PDO::ATTR_ORACLE_NULLS => PDO::NULL_TO_STRING,
+        PDO::ATTR_EMULATE_PREPARES => true,
+    ),
+//    'enableParamLogging' => true,
+//    'enableProfiling' => true,
+    'schemaCacheID' => 'cache',
+    'schemaCachingDuration' => 3600 * 24,    // metadata 缓存超时时间(s)
+    'queryCacheID' => 'redis',
+    'queryCachingDuration' => 60,
+);
+
+$c['components.cache'] = array(
+    'class'=>'application.extensions.CDMemCache',
+    'serializer' => ccacheSerializer(),
+    'useMemcached' => extension_loaded('memcached'),
+    'username' => '131ce938744011e3',
+    'password' => 'cdc_wdz_790406',
+    'options' => array(
+        Memcached::OPT_COMPRESSION => false,
+        Memcached::OPT_BINARY_PROTOCOL => true,
+        Memcached::OPT_SERIALIZER => extension_loaded('igbinary') ? Memcached::SERIALIZER_IGBINARY : Memcached::SERIALIZER_PHP,
+    ),
+    'servers'=>array(
+        array('host'=>'131ce938744011e3.m.cnhzalicm10pub001.ocs.aliyuncs.com', 'port'=>11211, 'timeout' =>3, 'weight'=>100),
+//        array('host'=>'localhost', 'port'=>22122, 'timeout' =>3, 'weight'=>100),
+    ),
+);
+
+$c['components.fcache'] = array(
+    'serializer' => $cacheSerializer,
+    'class' => 'CFileCache',
+    'directoryLevel' => 2,
+);
+
+$c['components.redis'] = array(
+    'class' => 'application.extensions.CDRedisCache',
+    'host' => '127.0.0.1',
+    'port' => 6379,
+    'timeout' => 3,
+    'serializer' => ccacheSerializer(),
+    'options' => array(
+        Redis::OPT_PREFIX => 'wdz_',
+        Redis::OPT_SERIALIZER => extension_loaded('igbinary') ? Redis::SERIALIZER_IGBINARY : Redis::SERIALIZER_PHP,
+    ),
+);
+
+$c['components.urlManager'] = array(
+    'urlFormat' => 'path',
+    'showScriptName' => false,
+    'caseSensitive' => false,
+    'cacheID' => 'cache',
+    'rules' => array(
+        'http://api.waduanzi.com/<_a>' => 'api/<_a>',
+
+        'archives/<id:\d+>' => 'post/show',
+
+        'mobile/archives/<id:\d+>' => 'mobile/post/show',
+        'mobile/page/<page:\d+>' => 'mobile/default/index',
+        'mobile' => 'mobile/default/index',
+        'mobile/<_a:(joke|lengtu|video|latest|hot|day|week|month|girl|focus)>/page/<page:\d+>' => 'mobile/channel/<_a>',
+        'mobile/<_a:(joke|lengtu|video|latest|hot|day|week|month|girl|focus)>' => 'mobile/channel/<_a>',
+        'mobile/tag/<name:.+>' => 'mobile/tag/posts',
+
+        'page/<page:\d+>' => 'site/index',
+        '/' => 'site/index',
+
+        '<_a:(joke|lengtu|video|hot|day|week|month|latest|girl|focus)>/page/<page:\d+>' => 'channel/<_a>',
+        '<_a:(joke|lengtu|video|hot|day|week|month|latest|girl|focus)>' => 'channel/<_a>',
+
+        '<_a:(bdmap|links)>' => 'site/<_a>',
+        '<_a:(login|logout|signup|quicklogin|activate)>' => 'account/<_a>',
+
+        'tags' => 'tag/list',
+        'tag/<name:.+>' => 'tag/posts',
+
+        'sponsor/' => 'sponsor/index',
+
+        'feed' => 'feed/index',
+        'u/<id:\d+>' => 'user/index',
+        'sitemap/<_a>' => array('sitemap/<_a>', 'urlSuffix'=>'.xml', 'caseSensitive'=>false),
+
+        'member' => '/member/default/index',
+
+        'http://rest.waduanzi.com/post/timeline/<user_id:\d+>' => 'rest/post/timeline',
+        'http://rest.waduanzi.com/post/show/<post_id:\d+>' => 'rest/post/show',
+        'http://rest.waduanzi.com/comment/show/<post_id:\d+>' => 'rest/comment/show',
+        'http://rest.waduanzi.com/post/<_a:(support|oppose|like|unlike)>/<post_id:\d+>' => 'rest/post/<_a>',
+        'http://rest.waduanzi.com/comment/<_a:(support|report)>/<comment_id:\d+>' => 'rest/comment/<_a>',
+        'http://rest.waduanzi.com/user/show/<user_id:\d+>' => 'rest/user/show',
+        'http://rest.waduanzi.com/<_c>/<_a>' => 'rest/<_c>/<_a>',
+    ),
+);
+
+$c['components.session'] = array(
+    'autoStart' => true,
+    'sessionName' => 'wdz_ssid',
+    'cookieParams' => array(
+        'lifetime' => $params['autoLoginDuration'],
+        'domain' => GLOBAL_COOKIE_DOMAIN,
+        'path' => GLOBAL_COOKIE_PATH,
+    ),
+);
+
+return $c;
 
 
     

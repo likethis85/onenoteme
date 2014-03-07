@@ -1,4 +1,5 @@
 <?php
+defined('CD_CONFIG_ROOT') or define('CD_CONFIG_ROOT', dirname(__FILE__));
 
 define('DB_MYSQL_HOST', 'cdcchendb.mysql.rds.aliyuncs.com');
 define('DB_MYSQL_PORT', '3306');
@@ -32,6 +33,9 @@ define('CHANNEL_FUNNY', 1);
 define('CHANNEL_FOCUS', 2);
 
 // 以下是表名
+define('TABLE_AUTH_ASSIGMENT', '{{auth_assignment}}');
+define('TABLE_AUTH_ITEMCHILD', '{{auth_itemchild}}');
+define('TABLE_AUTH_ITEM', '{{auth_item}}');
 define('TABLE_CATEGORY', '{{category}}');
 define('TABLE_POST', '{{post}}');
 define('TABLE_CONFIG', '{{config}}');

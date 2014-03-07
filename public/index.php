@@ -1,19 +1,19 @@
 <?php
-defined('WEBROOT') or define('WEBROOT', dirname(__FILE__));
-defined('DS') or define('DS', DIRECTORY_SEPARATOR);
-defined('CD_PRODUCT') or define('CD_PRODUCT', false);
-defined('YII_DEBUG') or define('YII_DEBUG', true);
 YII_DEBUG or error_reporting(0);
 
+define('DS', DIRECTORY_SEPARATOR);
+define('CD_DOCUMENT_ROOT', dirname(__FILE__));
+defined('CD_PRODUCT') or define('CD_PRODUCT', false);
+defined('YII_DEBUG') or define('YII_DEBUG', true);
+define('CD_CONFIG_ROOT', CD_DOCUMENT_ROOT . '/../protected/config');
+
 $yii = CD_PRODUCT && extension_loaded('apc') ? 'yiilite.php' : 'yii.php';
-$cdc = dirname(__FILE__) . '/../library/framework/' . $yii;
-$short = dirname(__FILE__) . '/../library/shortcut.php';
-$define = dirname(__FILE__) . '/../protected/config/define.php';
-require_once($define);
-require_once($cdc);
-require_once($short);
+$cdc = CD_DOCUMENT_ROOT . '/../library/framework/' . $yii;
+$short = CD_DOCUMENT_ROOT . '/../library/shortcut.php';
+$define = CD_CONFIG_ROOT . '/define.php';
+require($define);
+require($cdc);
+require($short);
 
-$config = dirname(__FILE__) . '/../protected/config/' . (CD_PRODUCT ? 'main_product.php' : 'main_develop.php');
-
-$app = Yii::createWebApplication($config);
+$app = Yii::createWebApplication(CD_CONFIG_ROOT . DS . 'main.php');
 $app->run();

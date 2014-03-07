@@ -444,3 +444,8 @@ function db($component = 'db')
 {
     return app()->getComponent($component);
 }
+
+function ccacheSerializer()
+{
+    return extension_loaded('igbinary') ? array('igbinary_serialize', 'igbinary_unserialize') : null;
+}
