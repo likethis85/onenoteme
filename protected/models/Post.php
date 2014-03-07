@@ -1493,6 +1493,11 @@ class Post extends CActiveRecord
 
     public function sinatUploadImage()
     {
+        $sinaToken = redis()->get('sina_weibo_access_token');
+        if (empty($sinaToken)) {
+            return false;
+        }
+
         $curl = new CDCurl();
         $curl->get($this->original_pic);
         if ($curl->errno() == 0) {
