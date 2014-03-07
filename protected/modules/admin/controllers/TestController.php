@@ -3,7 +3,15 @@ class TestController extends AdminController
 {
     public function init()
     {
-         exit('exit');
+//         exit('exit');
+    }
+
+    public function actionUpyun()
+    {
+        $uploader = upyunUploader(true);
+        $uploader->autoFilename('.png', 'test', 'original');
+        $infos = $uploader->save(sbp('images/app_ios.png'));
+        var_dump($infos);
     }
 
     public function actionVideo()

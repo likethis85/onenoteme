@@ -54,7 +54,7 @@ class CDUploadedFile
             }
         }
         catch (Exception $e) {
-            throw new Exception($e->getMessage().'xxxx');
+            throw new Exception($e->getMessage());
         }
     
         $im = null;

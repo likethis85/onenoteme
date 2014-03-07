@@ -51,9 +51,13 @@ class CDUpyunUploader extends CDBaseUploader implements ICDUploader
     {
         return parent::setFilename($filename);
     }
-    
+
     /**
      * 将文件保存到阿里去中
+     * @param string $file
+     * @param string $filename
+     * @param array | null $opts
+     * @throws CDUploaderException
      * @see ICDUploader::save()
      * @return array | null 如果是图片bucket，则返回图片的信息，如果是文件bucket，则不返回内容
      */
