@@ -107,6 +107,11 @@ class PostController extends AdminController
 	            $resultHtml = sprintf('%s&nbsp;发表成功，<a href="%s" target="_blank">点击查看</a>', $model->title, $model->url);
 	            if ($model->fetchContentRemoteImagesAfterSave() === false)
 	                $resultHtml .= '(远程图片抓取出错)';
+
+                if ($model->getIsNewRecord() && $model->original_pic && !CDBase::externalUrl($model->original_pic)) {
+                    $model->sinatUploadImage();
+                }
+
 	            user()->setFlash('save_post_result', $resultHtml);
 	            
 	            $backUrl = $_POST['backurl'] ? $_POST['backurl'] : request()->getUrl();
