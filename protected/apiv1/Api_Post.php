@@ -53,6 +53,9 @@ class Api_Post extends ApiBase
     		if ($result = $post->fetchRemoteImagesBeforeSave($referrer, $opts)) {
                 $post->weibo_pic = $params['pic'];
                 $result = $post->save();
+                if ($post->original_pic && !CDBase::externalUrl($post->original_pic)) {
+                    $this->sinatUploadImage();
+                }
             }
             else
                 $result = false;

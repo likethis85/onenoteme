@@ -1444,7 +1444,6 @@ class Post extends CActiveRecord
         if ($this->getIsNewRecord()) {
             if ($this->original_pic && !CDBase::externalUrl($this->original_pic)) {
                 $this->saveUploadImage();
-                $this->sinatUploadImage();
             }
             
             if ($this->profile && $this->profile instanceof UserProfile) {
@@ -1492,7 +1491,7 @@ class Post extends CActiveRecord
         return $upload->save();
     }
 
-    private function sinatUploadImage()
+    public function sinatUploadImage()
     {
         $curl = new CDCurl();
         $curl->get($this->original_pic);
