@@ -1491,7 +1491,7 @@ class Post extends CActiveRecord
         return $upload->save();
     }
 
-    public function sinatUploadImage()
+    public function sinatUploadImage($defautPic = null)
     {
         $sinaToken = redis()->get('sina_weibo_access_token');
         if (empty($sinaToken)) {
@@ -1524,6 +1524,10 @@ class Post extends CActiveRecord
         if ($curl->errno() == 0) {
             $result = json_decode($curl->rawdata(), true);
             $this->weibo_pic = $result['bmiddle_pic'];
+            return $this->save(true, array('weibo_pic'));
+        }
+        elseif ($defautPic) {
+            $this->weibo_pic = $defautPic;
             return $this->save(true, array('weibo_pic'));
         }
         else

@@ -108,7 +108,7 @@ class PostController extends AdminController
 	            if ($model->fetchContentRemoteImagesAfterSave() === false)
 	                $resultHtml .= '(远程图片抓取出错)';
 
-                if ($model->getIsNewRecord() && $model->original_pic && !CDBase::externalUrl($model->original_pic)) {
+                if (empty($model->weibo_pic) && $model->original_pic && !CDBase::externalUrl($model->original_pic)) {
                     $model->sinatUploadImage();
                 }
 
