@@ -54,7 +54,7 @@ class Api_Post extends ApiBase
                 $post->weibo_pic = $params['pic'];
                 $result = $post->save();
                 if ($result && $post->original_pic && !CDBase::externalUrl($post->original_pic)) {
-                    $post->sinatUploadImage();
+                    var_dump($post->sinatUploadImage());
                 }
             }
             else

@@ -1500,7 +1500,7 @@ class Post extends CActiveRecord
             $tempfile = app()->getRuntimePath() . DS . uniqid();
             $result = file_put_contents($tempfile, $picData);
             if ($result === false)
-                throw new CException('生成临时文件出错', 0);
+                return false;
         }
         else
             return false;
