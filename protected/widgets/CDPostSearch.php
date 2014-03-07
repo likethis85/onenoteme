@@ -58,7 +58,7 @@ class CDPostSearch extends CWidget
         
         $models = array();
         if ($this->duration > 0) {
-            $models = app()->cache->get($cacheID);
+            $models = redis()->get($cacheID);
             if ($models !== false)
                 return $models;
         }
@@ -84,7 +84,7 @@ class CDPostSearch extends CWidget
         
         if ($this->duration > 0) {
             $staticModels[$cacheID] = $models;
-            app()->cache->set($cacheID, $models, $this->duration);
+            redis()->set($cacheID, $models, $this->duration);
         }
         
         return $models;

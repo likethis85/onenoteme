@@ -116,41 +116,40 @@ return array(
             'caseSensitive' => false,
 //             'cacheID' => 'cache',
             'rules' => array(
-                    
+                'archives/<id:\d+>' => 'post/show',
+
+                'mobile/archives/<id:\d+>' => 'mobile/post/show',
+                'mobile/page/<page:\d+>' => 'mobile/default/index',
+                'mobile' => 'mobile/default/index',
+                'mobile/<_a:(joke|lengtu|video|latest|hot|day|week|month|girl|focus)>/page/<page:\d+>' => 'mobile/channel/<_a>',
+                'mobile/<_a:(joke|lengtu|video|latest|hot|day|week|month|girl|focus)>' => 'mobile/channel/<_a>',
+                'mobile/tag/<name:.+>' => 'mobile/tag/posts',
+
+                'page/<page:\d+>' => 'site/index',
+                '/' => 'site/index',
+
+                '<_a:(joke|lengtu|video|hot|day|week|month|latest|girl|focus)>/page/<page:\d+>' => 'channel/<_a>',
+                '<_a:(joke|lengtu|video|hot|day|week|month|latest|girl|focus)>' => 'channel/<_a>',
+
+                '<_a:(bdmap|links)>' => 'site/<_a>',
+                '<_a:(login|logout|signup|quicklogin|activate)>' => 'account/<_a>',
+
+                'tags' => 'tag/list',
+                'tag/<name:.+>' => 'tag/posts',
+
+                'sponsor/' => 'sponsor/index',
+
+                'feed' => 'feed/index',
+                'u/<id:\d+>' => 'user/index',
+                'sitemap/<_a>' => array('sitemap/<_a>', 'urlSuffix'=>'.xml', 'caseSensitive'=>false),
+
+                'member' => '/member/default/index',
+
                 'rest/post/timeline/<user_id:\d+>' => 'rest/post/timeline',
                 'rest/post/show/<post_id:\d+>' => 'rest/post/show',
                 'rest/user/show/<user_id:\d+>' => 'rest/user/show',
                 'rest/comment/show/<post_id:\d+>' => 'rest/comment/show',
                 'rest/comment/report/<comment_id:\d+>' => 'rest/comment/report',
-                    
-                '<_a:(login|logout|signup|quicklogin|activate)>' => 'account/<_a>',
-                    
-                'http://www.waduanzi.cn/' => 'site/index',
-                'http://www.waduanzi.cn/<_a:(login|signup|logout|bdmap|links)>' => 'site/<_a>',
-                'http://www.waduanzi.cn/<_a:(duanzi|lengtu|girl|video)>-<page:\d+>' => 'channel/<_a>',
-                'http://www.waduanzi.cn/<_a:(duanzi|lengtu|girl|video)>' => 'channel/<_a>',
-                'http://www.waduanzi.cn/archives/<id:\d+>' => 'post/show',
-                'http://www.waduanzi.cn/post-<id:\d+>' => 'post/detail',
-                'http://www.waduanzi.cn/post/<_a>' => 'post/<_a>',
-                'http://www.waduanzi.cn/originalpic/<id:\d+>' => 'post/bigpic',
-                'http://www.waduanzi.cn/tags' => 'tag/list',
-                'http://www.waduanzi.cn/tag-<name:.+>' => 'tag/posts',
-                'http://www.waduanzi.cn/feed/<cid:\d+>' => 'feed/channel',
-                'http://www.waduanzi.cn/u/<id:\d+>' => 'user/index',
-                    
-                'http://m.waduanzi.cn/' => 'mobile/default/index',
-                'http://m.waduanzi.cn/<_a:(duanzi|girl|lengtu|video)>-<page:\d+>' => 'mobile/channel/<_a>',
-                'http://m.waduanzi.cn/<_a:(duanzi|girl|lengtu|video)>' => 'mobile/channel/<_a>',
-                'http://m.waduanzi.cn/post-<id:\d+>' => 'mobile/post/show',
-                'http://m.waduanzi.cn/tag-<name:.+>' => 'mobile/tag/posts',
-                'http://m.waduanzi.cn/<_c>' => 'mobile/<_c>',
-                'http://m.waduanzi.cn/<_c>/<_a>' => 'mobile/<_c>/<_a>',
-            
-                'http://my.waduanzi.cn/' => '/member/default/index',
-                'http://my.waduanzi.cn/<_c>' => 'member/<_c>',
-                'http://my.waduanzi.cn/<_c>/<_a>' => 'member/<_c>/<_a>',
-                    
-//                 'http://<_a:(joke|lengtu|girl|video)>.waduanzi.cn/' => 'channel/<_a>',
             ),
         ),
         'session' => array(

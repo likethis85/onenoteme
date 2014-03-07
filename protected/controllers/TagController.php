@@ -3,7 +3,7 @@ class TagController extends Controller
 {
     public function filters()
     {
-        $duration = 24*60*60;
+        $duration = 12 * 60*60;
         return array(
 //             'switchMobile + posts',
             array(
@@ -13,15 +13,9 @@ class TagController extends Controller
             array(
                 'COutputCache + posts',
                 'duration' => $duration,
-                'varyByParam' => array('name', 'page', 's'),
+                'varyByParam' => array('name', 'page'),
                 'requestTypes' => array('GET'),
                 'varyByExpression' => array(user(), 'getIsGuest'),
-            ),
-            array(
-                'COutputCache + posts',
-                'duration' => $duration,
-                'varyByParam' => array('name', 'page', 's'),
-                'requestTypes' => array('POST'),
             ),
         );
     }
@@ -33,7 +27,7 @@ class TagController extends Controller
             $tags = cache()->get($cacheKey);
             if ($tags === false) {
                 $tags = Tag::model()->findAll();
-                cache()->set($cacheKey, $tags, 24*60*60);
+                cache()->set($cacheKey, $tags, 12*60*60);
             }
         }
         else
@@ -52,10 +46,10 @@ class TagController extends Controller
     public function actionPosts($name, $page = 1)
     {
         $duration = 120;
-        $limit = (int)p('tag_posts_count_page');
+        $limit = (int)param('tag_posts_count_page');
         
         $name = urldecode($name);
-        
+
         $tagID = app()->getDb()->createCommand()
             ->select('id')
             ->from(TABLE_TAG)
@@ -70,10 +64,10 @@ class TagController extends Controller
             ->from(TABLE_POST_TAG)
             ->where('tag_id = :tagid', array(':tagid' => $tagID))
             ->queryScalar();
-        
+
         $pages = new CPagination($count);
         $pages->setPageSize($limit);
-        $offset = ($pages->currentPage - 1) * $limit;
+        $offset = $pages->currentPage * $limit;
         $postIDs = app()->getDb()->createCommand()
             ->select('post_id')
             ->from(TABLE_POST_TAG)
@@ -82,11 +76,11 @@ class TagController extends Controller
             ->limit($limit)
             ->offset($offset)
             ->queryColumn();
-        
+
         $criteria = new CDbCriteria();
         $criteria->addInCondition('id', $postIDs);
         $models = Post::model()->findAll($criteria);
-        
+
         if ($pages->currentPage > 1)
             $mobileUrl = aurl('mobile/'. $this->id . '/' . $this->action->id, array('page'=>$pages->currentPage));
         else

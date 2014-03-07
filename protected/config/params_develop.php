@@ -50,7 +50,7 @@ return array(
     'shortdesc' => '笑死人不偿命',
     
     'autoLoginDuration' => 3600 * 24 * 7,
-    'waterfall_post_count_page' => 20,
+    'tag_posts_count_page' => 15,
     'line_post_count_page' => 20,
     'grid_post_count_page' => 28,
     'video_count_page' => 15,

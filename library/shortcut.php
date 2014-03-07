@@ -147,21 +147,26 @@ function abu($url = null)
  * Returns the named application parameter.
  * This is the shortcut to Yii::app()->params[$name].
  * @param string $name 参数名称
+ * @param mixed $defaultValue
  * @return mixed 参数值
  */
-function param($name)
+function param($name, $defaultValue = null)
 {
-    return Yii::app()->params[$name];
+    if (Yii::app()->params->contains($name))
+        return Yii::app()->params[$name];
+    else
+        return $defaultValue;
 }
 
 /**
  * alias param
  * @param string $name 参数名称
+ * @param mixed $defaultValue
  * @return mixed 参数值
  */
-function p($name)
+function p($name, $defaultValue = null)
 {
-    return Yii::app()->params[$name];
+    return param($name, $defaultValue);
 }
  
 /**
@@ -176,6 +181,7 @@ function user()
 /**
  * this is the shortcut to Yii::app()->theme->baseUrl
  * @param string $url
+ * @param boolean $useDefault
  * @return string Yii::app()->theme->baseUrl
  */
 function tbu($url = null, $useDefault = true)
