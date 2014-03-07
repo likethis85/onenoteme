@@ -1181,7 +1181,7 @@ class Post extends CActiveRecord
                 }
                 $result = $this->save(true, array('content', 'original_pic', 'original_width', 'original_height', 'original_frames'));
                 if ($result && $data[1]) {
-                    $this->saveUploadFile($data[1]);
+                    $this->saveUploadFiles($data[1]);
                 }
             }
             else
@@ -1196,7 +1196,7 @@ class Post extends CActiveRecord
      * 保存内容图片本地化后的图片
      * @param array $files
      */
-    private function saveUploadFile($files)
+    private function saveUploadFiles($files)
     {
         if (empty($files)) return;
         
@@ -1443,7 +1443,7 @@ class Post extends CActiveRecord
     {
         if ($this->getIsNewRecord()) {
             if ($this->original_pic && !CDBase::externalUrl($this->original_pic)) {
-                $this->saveUploadFile();
+                $this->saveUploadImage();
                 $this->sinatUploadImage();
             }
             
@@ -1478,7 +1478,7 @@ class Post extends CActiveRecord
 	        $video->delete();
     }
 
-    private function saveUploadFile()
+    private function saveUploadImage()
     {
         $upload = new Upload();
         $upload->post_id = $this->id;
