@@ -1,6 +1,7 @@
 <?php
 
 $c['id'] = 'waduanzi.com';
+
 $c['components.db'] = array(
     'class' => 'CDbConnection',
     'connectionString' => sprintf('mysql:host=%s; port=%s; dbname=%s', DB_MYSQL_HOST, DB_MYSQL_PORT, DB_MYSQL_DBNAME),
@@ -18,7 +19,7 @@ $c['components.db'] = array(
 );
 
 $c['components.cache'] = array(
-    'serializer' => array('igbinary_serialize', 'igbinary_unserialize'),
+    'serializer' => ccacheSerializer(),
     'class'=>'CMemCache',
     'useMemcached' => extension_loaded('memcached'),
     'servers'=>array(
@@ -27,7 +28,7 @@ $c['components.cache'] = array(
 );
 
 $c['components.fcache'] = array(
-    'serializer' => array('igbinary_serialize', 'igbinary_unserialize'),
+    'serializer' => ccacheSerializer(),
     'class' => 'CFileCache',
     'directoryLevel' => 2,
 );
@@ -37,7 +38,7 @@ $c['components.redis'] = array(
     'host' => '127.0.0.1',
     'port' => 6379,
     'timeout' => 3,
-    'serializer' => $cacheSerializer,
+    'serializer' => ccacheSerializer(),
     'options' => array(
         Redis::OPT_PREFIX => 'wdz_',
         Redis::OPT_SERIALIZER => extension_loaded('igbinary') ? Redis::SERIALIZER_IGBINARY : Redis::SERIALIZER_PHP,
