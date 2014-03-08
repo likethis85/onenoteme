@@ -141,7 +141,7 @@ class FeedController extends Controller
     
     private static function fetchPosts(CDbCriteria $criteria)
     {
-        $criteria->select = array('t.id', 't.channel_id', 't.title', 't.original_pic', 't.content', 't.create_time', 't.original_frames');
+        $criteria->select = array('t.id', 't.channel_id', 't.title', 't.original_pic', 't.content', 't.create_time', 't.original_frames', 't.weibo_pic');
         $criteria->order = 't.create_time desc, t.id desc';
         $criteria->limit = self::POST_COUNT;
             
@@ -152,7 +152,7 @@ class FeedController extends Controller
     private static function fetchLatestLengtuRow()
     {
         $criteria = new CDbCriteria();
-        $criteria->select = array('t.id', 't.channel_id', 't.title', 't.original_pic', 't.content', 't.create_time', 't.original_frames');
+        $criteria->select = array('t.id', 't.channel_id', 't.title', 't.original_pic', 't.content', 't.create_time', 't.original_frames', 't.weibo_pic');
         $criteria->addColumnCondition(array('t.state'=> POST_STATE_ENABLED,'t.channel_id'=>CHANNEL_FUNNY, 't.media_type' => MEDIA_TYPE_IMAGE));
         $criteria->order = 't.create_time desc, t.id desc';
         $model = Post::model()->find($criteria);
