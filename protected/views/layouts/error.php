@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><?php echo $this->pageTitle;?></title>
+<meta name="renderer" content="webkit" />
 <style>
 body {background:#f1f1f1; font-family:"HelveticaNeue", Helvetica, Arial, sans-serif; text-rendering:optimizeLegibility; margin:0;}
 .container {margin:50px auto 40px auto; width:600px; text-align:center;}

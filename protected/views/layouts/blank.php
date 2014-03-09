@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title><?php echo $this->pageTitle;?></title>
+<meta name="renderer" content="webkit" />
 <meta name="author" content="waduanzi.com" />
 <meta name="copyright" content="Copyright (c) 2011-2913 waduanzi.com All Rights Reserved." />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
