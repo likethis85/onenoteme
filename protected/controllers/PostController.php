@@ -10,7 +10,7 @@ class PostController extends Controller
             array(
                 'COutputCache + show',
                 'duration' => 600,
-                'varyByParam' => array('id'),
+                'varyByParam' => array('id', 'page'),
                 'varyByExpression' => array($this, 'showPageCacheFilterCallback'),
             ),
         );
@@ -58,7 +58,7 @@ class PostController extends Controller
         exit(0);
     }
     
-    public function actionShow($id)
+    public function actionShow($id, $page = 0)
     {
         $duration = 60*60;
         $id = (int)$id;
