@@ -17,4 +17,11 @@
         有&nbsp;<b><?php echo $userCount;?></b>&nbsp;个用户注册请求未处理。
         <a class="btn btn-primary btn-small" href="<?php echo url('admin/user/verify');?>">审核用户</a>
     </p>
+    <hr />
+    <h3>微博开放平台：</h3>
+    <ul>
+        <li>新浪微博AccessToken：<?php echo redis()->get('sina_weibo_access_token');?></li>
+        <li>图床微博AccessToken：<?php echo redis()->get('sina_weibo_image_store_access_token');?></li>
+        <li>腾讯微博AccessToken：<?php echo redis()->get('qq_weibo_access_token');?></li>
+    </ul>
 </div>
