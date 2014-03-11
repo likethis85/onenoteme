@@ -22,7 +22,7 @@ class RestController extends CController
     {
         parent::init();
 
-        $this->processQueryParams();
+//        $this->processQueryParams();
         
         $headers = getallheaders();
         $this->deviceUDID = $headers['DEVICE-UDID'];
@@ -134,8 +134,8 @@ class RestController extends CController
             return false;
         }
     }
-    
-    private function outputData($data)
+
+    protected function outputData($data)
     {
         header('Content-Type: application/json; charset=utf-8');
         echo $data;
