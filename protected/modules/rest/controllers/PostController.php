@@ -40,7 +40,7 @@ class PostController extends RestController
         $this->output($rows, 60);
     }
     
-    private function buildTimelineCriteria($channel_id, $lasttime = 0, $maxtime = 0, $media_type = 0, $image_filter = -1)
+    private function buildTimelineCriteria($channel_id, $lasttime = 0, $maxtime = 0, $media_type = 0, $image_filter = -1, $user_id = 0)
     {
         $channel_id = (int)$channel_id;
         $lasttime = (float)$lasttime;
@@ -425,11 +425,9 @@ class PostController extends RestController
         }
         else {
             $mediaTypes = explode(self::MEDIA_TYPE_DELIMITER, $media_type);
-            array_walk($mediaTypes, 'intval');
         }
-//        $mediaTypes = array_intersect($mediaTypes, CDBase::mediatypes());
         
-        return $mediaTypes;
+        return array_intersect($mediaTypes, CDBase::mediatypes());
     }
     
     
