@@ -142,14 +142,14 @@ class RestController extends CController
         exit(0);
     }
 
-    private function processQueryParams()
+    protected function processQueryParams()
     {
         $this->processApiKey();
 
         $this->timestamp = (int)$_GET['timestamp'];
     }
 
-    private function processApiKey()
+    protected function processApiKey()
     {
         $this->apiKey = h($_GET['apikey']);
     }
