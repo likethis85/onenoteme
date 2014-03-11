@@ -427,7 +427,7 @@ class PostController extends RestController
             $mediaTypes = explode(self::MEDIA_TYPE_DELIMITER, $media_type);
             array_walk($mediaTypes, 'intval');
         }
-        $mediaTypes = array_intersect($mediaTypes, CDBase::mediatypes());
+//        $mediaTypes = array_intersect($mediaTypes, CDBase::mediatypes());
         
         return $mediaTypes;
     }
