@@ -22,7 +22,7 @@ class RestController extends CController
     {
         parent::init();
 
-//        $this->processQueryParams();
+        $this->processQueryParams();
         
         $headers = getallheaders();
         $this->deviceUDID = $headers['DEVICE-UDID'];
