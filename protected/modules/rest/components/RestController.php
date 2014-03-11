@@ -151,7 +151,7 @@ class RestController extends CController
 
     private function processApiKey()
     {
-        $this->apiKey = h($_GET('apikey'));
+        $this->apiKey = h($_GET['apikey']);
     }
 
 }
