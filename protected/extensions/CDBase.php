@@ -280,7 +280,8 @@ class CDBase
     
     public static function mediatypes()
     {
-        return array(MEDIA_TYPE_TEXT,
+        return array(
+            MEDIA_TYPE_TEXT,
             MEDIA_TYPE_IMAGE,
             MEDIA_TYPE_VIDEO,
             MEDIA_TYPE_UNKOWN,

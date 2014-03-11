@@ -8,6 +8,10 @@
  */
 class RestController extends CController
 {
+    public $apiKey;
+    public $secretKey;
+    public $timestamp;
+
     public $deviceUDID;
     public $osVersion;
     public $osName;
@@ -17,6 +21,8 @@ class RestController extends CController
     public function init()
     {
         parent::init();
+
+        $this->processQueryParams();
         
         $headers = getallheaders();
         $this->deviceUDID = $headers['DEVICE-UDID'];
@@ -106,7 +112,7 @@ class RestController extends CController
         $history->device_udid = $this->deviceUDID;
         $history->sys_version = $this->osVersion;
         $history->app_version = $this->appVersion;
-        $history->apikey = $this->_apiparams['apikey'];
+        $history->apikey = $this->apiKey;
         $history->method = $this->_apiparams['method'];
         $history->format = $this->_apiparams['format'];
     
@@ -134,6 +140,18 @@ class RestController extends CController
         header('Content-Type: application/json; charset=utf-8');
         echo $data;
         exit(0);
+    }
+
+    private function processQueryParams()
+    {
+        $this->processApiKey();
+
+        $this->timestamp = (int)$_GET['timestamp'];
+    }
+
+    private function processApiKey()
+    {
+        $this->apiKey = h($_GET('apikey'));
     }
 
 }
