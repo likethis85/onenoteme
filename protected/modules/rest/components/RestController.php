@@ -22,7 +22,7 @@ class RestController extends CController
     {
         parent::init();
 
-//        $this->processQueryParams();
+        $this->processQueryParams();
         
         $headers = getallheaders();
         $this->deviceUDID = $headers['DEVICE-UDID'];
@@ -151,7 +151,7 @@ class RestController extends CController
 
     protected function processApiKey()
     {
-        $this->apiKey = h($_GET['apikey']);
+        $this->apiKey = htmlspecialchars($_GET['apikey'], ENT_QUOTES, app()->charset);
     }
 
 }
