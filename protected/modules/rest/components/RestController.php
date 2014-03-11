@@ -144,14 +144,21 @@ class RestController extends CController
 
     protected function processQueryParams()
     {
-        $this->processApiKey();
+        if (!$this->validateApiKey()) {
+            throw new CHttpException(500, 'apikey无效');
+        }
 
         $this->timestamp = (int)$_GET['timestamp'];
     }
 
-    protected function processApiKey()
+    protected function validateApiKey()
     {
+        static $keys;
+        if ($keys === null)
+            $keys = require(dirname(__FILE__) . '/../config/keys.php');
+
         $this->apiKey = htmlspecialchars($_GET['apikey'], ENT_QUOTES, app()->charset);
+        return array_key_exists($this->apiKey, $keys);
     }
 
 }
