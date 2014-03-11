@@ -6,13 +6,7 @@ class CDRestError
 	 * @var integer
 	 */
 	const SYSTEM_ERROR = 10001;
-	
-    /**
-     * api 路径不存在
-     * @var integer
-     */
-    const API_PATH_NO_EXIST = 11001;
-    
+
     /**
      * http 请求方式错误
      * @var integer
@@ -107,7 +101,6 @@ class CDRestError
     {
         return array(
             self::SYSTEM_ERROR => '系统错误',
-            self::API_PATH_NO_EXIST => 'API脚本路径不存在',
             self::PARAM_NOT_COMPLETE => '请求参数不完整',
             self::HTTP_METHOD_ERROR => '请求方法不正确',
             self::CLASS_METHOD_EXECUTE_ERROR => '接口处理方法执行错误',
