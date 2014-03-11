@@ -145,10 +145,10 @@ class RestController extends CController
     protected function processQueryParams()
     {
         if (!$this->validateApiKey()) {
-            throw new CHttpException(500, 'apikey无效');
+            throw new CDRestException(CDRestError::APIKEY_INVALID);
         }
 
-        $this->timestamp = (int)$_GET['timestamp'];
+        $this->timestamp = (int)request()->getParam('timestamp');
     }
 
     protected function validateApiKey()
@@ -157,7 +157,7 @@ class RestController extends CController
         if ($keys === null)
             $keys = require(dirname(__FILE__) . '/../config/keys.php');
 
-        $this->apiKey = htmlspecialchars($_GET['apikey'], ENT_QUOTES, app()->charset);
+        $this->apiKey = htmlspecialchars(request()->getParam('apikey'), ENT_QUOTES, app()->charset);
         return array_key_exists($this->apiKey, $keys);
     }
 

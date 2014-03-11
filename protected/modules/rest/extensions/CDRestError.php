@@ -110,7 +110,6 @@ class CDRestError
             self::API_PATH_NO_EXIST => 'API脚本路径不存在',
             self::PARAM_NOT_COMPLETE => '请求参数不完整',
             self::HTTP_METHOD_ERROR => '请求方法不正确',
-            self::API_PATH_NO_EXIST => 'API脚本设置错误',
             self::CLASS_METHOD_EXECUTE_ERROR => '接口处理方法执行错误',
             self::PARAM_NOT_COMPLETE => '缺少必须的参数',
             self::APIKEY_INVALID => 'apikey 无效',
