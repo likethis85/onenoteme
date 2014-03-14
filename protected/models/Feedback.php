@@ -70,7 +70,7 @@ class Feedback extends CActiveRecord
 		);
 	}
 	
-	public function getCreateTime($format)
+	public function getCreateTime($format = '')
 	{
 	    if (empty($this->create_time)) return '';
 	     
