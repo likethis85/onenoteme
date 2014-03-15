@@ -62,10 +62,7 @@ class WeiboCommand extends CConsoleCommand
             
             try {
                 $result = self::saveRow($row, $account);
-                if ($result === true) {
-                    $count++;
-                    WeiboAccount::model()->updateCounters(array('post_nums'=>1), 'id = :accountID', array(':accountID' => $account['id']));
-                }
+                if ($result === true) $count++;
                 if ($index == 0)
                     self::updateLastTimeAndPID($accountName, $pid);
             }

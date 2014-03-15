@@ -87,9 +87,7 @@ class WbpostController extends AdminController
     {
         $id = (int)$id;
         $temp = PostTemp::model()->findByPk($id);
-
-        if ($result = $temp->delete())
-            $temp->wbaccount->post_nums--;
+        $result = $temp->delete();
 
         CDBase::jsonp($callback, (int)$result);
     }
