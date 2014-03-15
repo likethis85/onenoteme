@@ -43,7 +43,7 @@ class WbpostController extends AdminController
                 $post->view_nums = mt_rand(param('init_view_nums_min'), param('init_view_nums_max'));
                 $post->homeshow = CD_YES;
                 $post->state = POST_STATE_DISABLED;
-                if ($temp->wbaccount)
+                if ($temp->wbaccount && $temp->wbaccount->user_id > 0)
                     $vestUser = array($temp->wbaccount->user_id, $temp->wbaccount->user_name);
                 else
                     $vestUser = CDBase::randomVestAuthor();

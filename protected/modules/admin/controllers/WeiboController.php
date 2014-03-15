@@ -461,10 +461,29 @@ class WeiboController extends AdminController
     {
         $id = (int)$id;
 
-        if ($id > 0)
+        if ($id > 0) {
             $model = AdminWeiboAccount::model()->findByPk($id);
-        else
+            $this->adminTitle = '编辑账号：' . $model->display_name;
+            if ($model === null)
+                throw new CHttpException(500, '该账号不存在');
+        }
+        else {
             $model = new AdminWeiboAccount();
+            $this->adminTitle = '添加账号';
+        }
+
+        if (request()->getIsPostRequest() && isset($_POST['AdminWeiboAccount'])) {
+            $model->attributes = $_POST['AdminWeiboAccount'];
+            if ($model->save()) {
+                user()->setFlash('user_create_weib_account_result', $model->display_name . '&nbsp;保存成功');
+                if (isset($_POST['submit_return']))
+                    $backURL = aurl('admin/weibo/accounts');
+                else
+                    $backURL = aurl('admin/weibo/createaccount');
+
+                $this->redirect($backURL);
+            }
+        }
 
         $this->render('create_account', array(
             'model' => $model,

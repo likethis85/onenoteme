@@ -1,45 +1,45 @@
 <?php if (user()->hasFlash('user_create_result')):?>
 <div class="alert alert-success fade in">
     <a href="javascript:void(0);" data-dismiss="alert" class="close">&times;</a>
-    <?php echo user()->getFlash('user_create_result');?>
+    <?php echo user()->getFlash('user_create_weib_account_result');?>
 </div>
 <?php endif;?>
 
-<?php echo CHtml::form('', 'post', array('class'=>'form-horizontal', 'enctype'=>'multipart/form-data'));?>
+<?php echo CHtml::form('', 'post', array('class'=>'form-horizontal'));?>
 <fieldset>
     <legend><?php echo $this->adminTitle;?></legend>
-    <div class="control-group <?php if($model->hasErrors('username')) echo 'error';?>">
-        <?php echo CHtml::activeLabel($model, 'username', array('class'=>'control-label'));?>
+    <div class="control-group <?php if($model->hasErrors('display_name')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'display_name', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'username');?>
-            <?php if($model->hasErrors('username')):?><p class="help-block"><?php echo $model->getError('username');?></p><?php endif;?>
+            <?php echo CHtml::activeTextField($model, 'display_name', array('class'=>'span3'));?>
+            <?php if($model->hasErrors('display_name')):?><p class="help-block"><?php echo $model->getError('display_name');?></p><?php endif;?>
         </div>
     </div>
-    <div class="control-group <?php if($model->hasErrors('screen_name')) echo 'error';?>">
-        <?php echo CHtml::activeLabel($model, 'screen_name', array('class'=>'control-label'));?>
+    <div class="control-group <?php if($model->hasErrors('user_id')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'user_id', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activeTextField($model, 'screen_name');?>
-            <?php if($model->hasErrors('screen_name')):?><p class="help-block"><?php echo $model->getError('screen_name');?></p><?php endif;?>
+            <?php echo CHtml::activeTextField($model, 'user_id', array('class'=>'span3'));?>
+            <?php if($model->hasErrors('user_id')):?><p class="help-block"><?php echo $model->getError('user_id');?></p><?php endif;?>
         </div>
     </div>
-    <div class="control-group <?php if($model->hasErrors('password')) echo 'error';?>">
-        <?php echo CHtml::activeLabel($model, 'password', array('class'=>'control-label'));?>
+    <div class="control-group <?php if($model->hasErrors('user_name')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'user_name', array('class'=>'control-label'));?>
         <div class="controls">
-            <?php echo CHtml::activePasswordField($model, 'password');?>
-            <?php if($model->hasErrors('password')):?><p class="help-block"><?php echo $model->getError('password');?></p><?php endif;?>
+            <?php echo CHtml::activeTextField($model, 'user_name', array('class'=>'span3'));?>
+            <?php if($model->hasErrors('user_name')):?><p class="help-block"><?php echo $model->getError('user_name');?></p><?php endif;?>
         </div>
     </div>
-    <div class="control-group <?php if($model->hasErrors('state')) echo 'error';?>">
-        <?php echo CHtml::activeLabel($model, 'state', array('class'=>'control-label'));?>
+    <div class="control-group <?php if($model->hasErrors('desc')) echo 'error';?>">
+        <?php echo CHtml::activeLabel($model, 'desc', array('class'=>'control-label'));?>
         <div class="controls">
-            <label class="checkbox">
-                <?php echo CHtml::activeCheckBox($model, 'state');?>启用
-            </label>
-            <?php if($model->hasErrors('state')):?><p class="help-block"><?php echo $model->getError('state');?></p><?php endif;?>
+            <?php echo CHtml::activeTextArea($model, 'desc', array('class'=>'span6', 'rows'=>3));?>
+            <?php if($model->hasErrors('desc')):?><p class="help-block"><?php echo $model->getError('desc');?></p><?php endif;?>
         </div>
     </div>
     <div class="form-actions">
-        <input type="submit" value="提交" class="btn btn-primary" />
+        <a href="<?php echo aurl('admin/weibo/accounts');?>" class="btn">返回列表</a>
+        <input type="submit" name="submit_return" value="提交返回列表" class="btn" />
+        <input type="submit" name="submit_continue" value="提交继续添加" class="btn btn-primary" />
     </div>
 </fieldset>
 <?php echo CHtml::endForm();?>
