@@ -457,10 +457,18 @@ class WeiboController extends AdminController
         ));
     }
 
-    public function actionCreateAccount()
+    public function actionCreateAccount($id = 0)
     {
+        $id = (int)$id;
 
-        $this->render('create_account');
+        if ($id > 0)
+            $model = AdminWeiboAccount::model()->findByPk($id);
+        else
+            $model = new AdminWeiboAccount();
+
+        $this->render('create_account', array(
+            'model' => $model,
+        ));
     }
 }
 

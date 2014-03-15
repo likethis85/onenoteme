@@ -73,4 +73,13 @@ class WeiboAccount extends CActiveRecord
 		);
 	}
 
+    public function getLastTime($format = null)
+    {
+        if (empty($this->last_time))
+            return '';
+
+        $format = $format ? $format : param('formatShortDateTime');
+        return date($format, $this->last_time);
+    }
+
 }

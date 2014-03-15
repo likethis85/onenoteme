@@ -20,10 +20,10 @@
         <?php foreach ($models as $model):?>
         <tr>
             <td class="span1 align-center"><?php echo $model->id;?></td>
-            <td class="span3"><?php echo l(h($model->display_name, $model->getEditUrl()));?></td>
+            <td class="span3"><?php echo l(h($model->display_name), $model->getEditUrl());?></td>
             <td class="span3"><?php echo l($model->user_name, $model->user->getInfoUrl());?></td>
-            <td class="span2 align-center"><?php echo $model->post_nums;?></td>
-            <td class="span3 align-center"><?php echo $model->last_time;?></td>
+            <td class="span2 align-center"><?php echo (int)$model->post_nums;?></td>
+            <td class="span3 align-center"><?php echo $model->getLastTime();?></td>
             <td class="span2"><?php echo $model->last_pid;?></td>
             <td>
                 <?php echo $model->getEditLink();?>
