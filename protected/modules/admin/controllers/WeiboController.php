@@ -1,6 +1,14 @@
 <?php
 class WeiboController extends AdminController
 {
+    public function filters()
+    {
+        return array(
+            'postOnly + deleteAccount',
+            'ajaxOnly + deleteAccount',
+        );
+    }
+
     public function actionIndex()
     {
         $this->render('index');
@@ -488,6 +496,24 @@ class WeiboController extends AdminController
         $this->render('create_account', array(
             'model' => $model,
         ));
+    }
+
+    public function actionDeleteAccount($id, $callback)
+    {
+        $id = (int)$id;
+        if ($id == 0)
+            throw new CHttpException(500, '非法操作');
+
+        $model = WeiboAccount::model()->findByPk($id);
+        if ($model->delete()) {
+            $data = array(
+                'errno' => CD_NO,
+                'label' => '删除',
+            );
+            CDBase::jsonp($callback, $data);
+        }
+        else
+            throw new CHttpException(500);
     }
 }
 

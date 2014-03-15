@@ -86,7 +86,11 @@ class WbpostController extends AdminController
     public function actionWeiboDelete($id, $callback)
     {
         $id = (int)$id;
-        $result = PostTemp::model()->findByPk($id)->delete();
+        $temp = PostTemp::model()->findByPk($id);
+
+        if ($result = $temp->delete())
+            $temp->wbaccount->post_nums--;
+
         CDBase::jsonp($callback, (int)$result);
     }
     

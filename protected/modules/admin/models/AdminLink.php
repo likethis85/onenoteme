@@ -22,6 +22,16 @@ class AdminLink extends Link
         
         return $html;
     }
+
+    public function getEditURL()
+    {
+        return aurl('admin/link/create', array('id'=>$this->id));
+    }
+
+    public function getDeleteURL()
+    {
+        return aurl('admin/link/delete', array('id'=>$this->id));
+    }
     
     /**
      * 以后备用，现在友链的图全是url，以后可以直接上传图片

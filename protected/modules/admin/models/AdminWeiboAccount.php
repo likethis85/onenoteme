@@ -33,8 +33,18 @@ class AdminWeiboAccount extends WeiboAccount
         return aurl('admin/weibo/createaccount', array('id'=>$this->id));
     }
 
+    public function getDeleteUrl()
+    {
+        return aurl('admin/weibo/deleteaccount', array('id'=>$this->id));
+    }
+
     public function getEditLink()
     {
         return l('编辑', $this->getEditUrl(), array('class'=>'btn btn-small'));
+    }
+
+    public function getDeleteLink()
+    {
+        return l('删除', $this->getDeleteUrl(), array('class'=>'btn btn-small btn-danger set-delete'));
     }
 } 

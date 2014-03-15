@@ -37,7 +37,8 @@
             <td><?php echo $model->logoImage;?></td>
             <td><?php echo $model->ishomeLabel;?></td>
             <td>
-                <?php echo l('编辑', url('admin/link/create', array('id'=>$model->id)));?>
+                <?php echo l('编辑', $model->getEditURL());?>
+                <?php echo l('删除', $model->getDeleteURL(), array('class'=>'set-delete'));?>
             </td>
         </tr>
         <?php endforeach;?>
@@ -63,3 +64,9 @@
     排序提示：数字越小，排的越靠前
 </div>
 
+
+<script type="text/javascript">
+$(function(){
+    $(document).on('click', '.set-delete', {confirmText:confirmAlertText}, BetaAdmin.deleteRow);
+});
+</script>

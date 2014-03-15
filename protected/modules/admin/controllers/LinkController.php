@@ -4,7 +4,8 @@ class LinkController extends AdminController
     public function filters()
     {
         return array(
-            'postOnly + updateOrderID',
+            'postOnly + updateOrderID, delete',
+            'ajaxOnly + delete',
         );
     }
     
@@ -86,5 +87,23 @@ class LinkController extends AdminController
 	    }
 	    return true;
 	}
+
+    public function actionDelete($id, $callback)
+    {
+        $id = (int)$id;
+        if ($id == 0)
+            throw new CHttpException(500, '非法操作');
+
+        $model = Link::model()->findByPk($id);
+        if ($model->delete()) {
+            $data = array(
+                'errno' => CD_NO,
+                'label' => '删除',
+            );
+            CDBase::jsonp($callback, $data);
+        }
+        else
+            throw new CHttpException(500);
+    }
 }
 

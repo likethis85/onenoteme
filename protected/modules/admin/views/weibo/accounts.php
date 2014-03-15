@@ -11,7 +11,7 @@
             <th class="span3"><?php echo $sort->link('display_name');?></th>
             <th class="span3"><?php echo $sort->link('user_name');?></th>
             <th class="span2 align-center"><?php echo $sort->link('post_nums');?></th>
-            <th class="span3 align-center"><?php echo $sort->link('last_time');?></th>
+            <th class="span2 align-center"><?php echo $sort->link('last_time');?></th>
             <th class="span2"><?php echo $sort->link('last_pid');?></th>
             <th>#</th>
         </tr>
@@ -21,12 +21,13 @@
         <tr>
             <td class="span1 align-center"><?php echo $model->id;?></td>
             <td class="span3"><?php echo l(h($model->display_name), $model->getEditUrl());?></td>
-            <td class="span3"><?php echo l($model->user_name, $model->user->getInfoUrl());?></td>
+            <td class="span3"><?php echo $model->user ? l($model->user_name, $model->user->getInfoUrl()) : $model->user_name;?></td>
             <td class="span2 align-center"><?php echo (int)$model->post_nums;?></td>
-            <td class="span3 align-center"><?php echo $model->getLastTime();?></td>
+            <td class="span2 align-center"><?php echo $model->getLastTime();?></td>
             <td class="span2"><?php echo $model->last_pid;?></td>
             <td>
                 <?php echo $model->getEditLink();?>
+                <?php echo $model->getDeleteLink();?>
             </td>
         </tr>
         <?php endforeach;?>
@@ -36,3 +37,8 @@
 <div class="pagination"><?php $this->widget('CLinkPager', array('pages'=>$pages));?></div>
 <?php endif;?>
 
+<script type="text/javascript">
+$(function(){
+    $(document).on('click', '.set-delete', {confirmText:confirmAlertText}, BetaAdmin.deleteRow);
+});
+</script>
