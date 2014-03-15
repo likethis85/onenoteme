@@ -93,6 +93,9 @@ var confirmAlertText = '<?php echo t('delete_confirm', 'admin');?>';
                         <li><?php echo l('今日注册', url('admin/user/today'));?></li>
                         <li><?php echo l('用户列表', url('admin/user/list'));?></li>
                         <li><?php echo l('禁用用户', url('admin/user/forbidden'));?></li>
+                        <li class="divider"></li>
+                        <li><?php echo l('网站微博账号', url('admin/weibo/index'));?></li>
+                        <li><?php echo l('微博抓取账号', url('admin/weibo/accounts'));?></li>
                     </ul>
                 </li>
                 <li class="dropdown">

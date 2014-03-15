@@ -1,6 +1,11 @@
 <?php
 class WeiboController extends AdminController
 {
+    public function actionIndex()
+    {
+        $this->render('index');
+    }
+
     public function actionSinat()
     {
         $callback = aurl('admin/weibo/sinacb');
@@ -428,6 +433,34 @@ class WeiboController extends AdminController
         }
         else
             return false;
+    }
+
+    public function actionAccounts()
+    {
+        $criteria = new CDbCriteria();
+
+        $pages = new CPagination(WeiboAccount::model()->count());
+        $pages->setPageSize(20);
+        $pages->applyLimit($criteria);
+
+        $sort = new CSort('AdminWeiboAccount');
+        $sort->defaultOrder = 't.id asc';
+        $sort->applyOrder($criteria);
+
+        $models = AdminWeiboAccount::model()->findAll($criteria);
+
+        $this->adminTitle = '微博抓取账号列表';
+        $this->render('accounts', array(
+            'models' => $models,
+            'pages' => $pages,
+            'sort' => $sort,
+        ));
+    }
+
+    public function actionCreateAccount()
+    {
+
+        $this->render('create_account');
     }
 }
 
