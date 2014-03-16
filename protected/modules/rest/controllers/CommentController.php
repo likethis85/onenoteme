@@ -120,10 +120,7 @@ class CommentController extends RestController
     }
     
     
-    
-    
-    
-    
+
     
     
     private function fetchCommentSource()

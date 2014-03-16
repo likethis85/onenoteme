@@ -157,7 +157,16 @@ class RestController extends CController
         if ($keys === null)
             $keys = require(dirname(__FILE__) . '/../config/keys.php');
 
-        $this->apiKey = htmlspecialchars(request()->getParam('apikey'), ENT_QUOTES, app()->charset);
+        if (request()->getIsPutRequest())
+            $apikey = request()->getPut('apikey');
+        elseif (request()->getIsDeleteRequest())
+            $apikey = request()->getDelete('apikey');
+        elseif (request()->getIsPostRequest())
+            $apikey = request()->getPost('apikey');
+        else
+            $apikey = request()->getQuery('apikey');
+        $this->apiKey = htmlspecialchars($apikey, ENT_QUOTES, app()->charset);
+
         return array_key_exists($this->apiKey, $keys);
     }
 
