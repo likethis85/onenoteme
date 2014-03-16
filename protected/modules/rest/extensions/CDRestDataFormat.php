@@ -98,16 +98,16 @@ class CDRestDataFormat
             'content' => $model->getApiContent(),
             'create_time' => $model->create_time,
             'create_time_at' => $model->getApiCreateTime(),
-            'up_count' => $model->up_score,
-            'down_count' => $model->down_score,
-            'report_count' => $model->report_count,
-            'author_id' => $model->user_id,
+            'up_count' => (int)$model->up_score,
+            'down_count' => (int)$model->down_score,
+            'report_count' => (int)$model->report_count,
+            'author_id' => (int)$model->user_id,
             'author_name' => $model->getAuthorName(),
             'recommend' => $model->recommend,
         );
         
         if ($includeUser)
-            $data['user'] = self::formatUser($model->user);
+            $data['user'] = self::formatUser($model->user_id > 0 ? $model->user : null);
         
         return $data;
     }
