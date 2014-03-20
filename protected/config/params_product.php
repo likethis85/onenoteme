@@ -76,7 +76,7 @@ return array(
     /* cache setting */
     'mobile_post_list_cache_expire' => 120,
     'mobile_comment_list_cache_expire' => 30,
-    'mobile_post_show_cache_expire' => 30,
+    'mobile_post_show_cache_expire' => 600,
         
     'wdz_weixin_account_name' => '挖段子搞笑',
     'wdz_weixin_account_id' => 'gh_9261dce78e9f',
