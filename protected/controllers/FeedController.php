@@ -195,7 +195,7 @@ class FeedController extends Controller
             $channel->appendChild($item);
             $title = $model->getFilterTitle();
             if ($model->getImageIsAnimation()) $title .= '【动画】';
-            $item->appendChild(new DOMElement('title', utf8ForXml($title)));
+            $item->appendChild(new DOMElement('title', htmlentities(utf8ForXml($title))));
             $posturl = aurl('post/show', array('id'=>$model->id, 'source'=>$source));
 //             $commentUrl = aurl('comment/list', array('pid'=>$model->id, 'source'=>$source));
             $commentUrl = aurl('post/show', array('id'=>$model->id, 'source'=>$source), '', 'comments');
