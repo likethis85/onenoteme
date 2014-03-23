@@ -25,7 +25,7 @@ class AdController extends RestController
             $result = (int)$model->save();
             $data = array('success' => (int)$result);
         } catch (Exception $e) {
-            $data = array('success' => $result, 'message'=>$e->getMessage());
+            $data = array('success' => 0, 'message'=>$e->getMessage());
         }
         
         $this->output($data);

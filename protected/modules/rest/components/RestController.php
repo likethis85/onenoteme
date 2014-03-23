@@ -144,7 +144,7 @@ class RestController extends CController
 
     protected function processQueryParams()
     {
-        if (!$this->validateApiKey()) {
+        if ($this->appVersion && !$this->validateApiKey()) {
             throw new CDRestException(CDRestError::APIKEY_INVALID);
         }
 
