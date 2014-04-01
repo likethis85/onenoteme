@@ -164,7 +164,8 @@ $(function(){
         KEConfig.adminfull.cssPath = cssPath;
     	KEConfig.adminfull.uploadJson = imageUploadUrl;
         KEConfig.adminfull.designMode = <?php echo $model->getIsVideoType() ? 'false' : 'true';?>;
-        KEConfig.adminfull.height = 200;
+        if (!KEConfig.adminfull.designMode)
+            KEConfig.adminfull.height = 200;
     	
     	var contentEditor = K.create('#content', KEConfig.adminfull);
         $(document).on('click', '.post-pictures li', function(event){
