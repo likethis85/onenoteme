@@ -41,7 +41,7 @@ $c['components.cache'] = array(
     'class'=>'application.extensions.CDMemCache',
     'serializer' => ccacheSerializer(),
     'useMemcached' => extension_loaded('memcached'),
-    'username' => '131ce938744011e3',
+    'username' => 'cb190624cf5b11e3',
     'password' => 'cdc_wdz_790406',
     'options' => array(
         Memcached::OPT_COMPRESSION => false,
@@ -49,7 +49,7 @@ $c['components.cache'] = array(
         Memcached::OPT_SERIALIZER => extension_loaded('igbinary') ? Memcached::SERIALIZER_IGBINARY : Memcached::SERIALIZER_PHP,
     ),
     'servers'=>array(
-        array('host'=>'131ce938744011e3.m.cnhzalicm10pub001.ocs.aliyuncs.com', 'port'=>11211, 'timeout' =>3, 'weight'=>100),
+        array('host'=>'cb190624cf5b11e3.m.cnhzalicm10pub001.ocs.aliyuncs.com', 'port'=>11211, 'timeout' =>3, 'weight'=>100),
 //        array('host'=>'localhost', 'port'=>22122, 'timeout' =>3, 'weight'=>100),
     ),
 );
