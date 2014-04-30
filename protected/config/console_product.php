@@ -23,7 +23,8 @@ $c['components.cache'] = array(
     'class'=>'CMemCache',
     'useMemcached' => extension_loaded('memcached'),
     'servers'=>array(
-        array('host'=>'localhost', 'port'=>22122, 'weight'=>100),
+        array('host'=>'cb190624cf5b11e3.m.cnhzalicm10pub001.ocs.aliyuncs.com', 'port'=>11211, 'timeout' =>3, 'weight'=>100),
+//        array('host'=>'localhost', 'port'=>22122, 'weight'=>100),
     ),
 );
 

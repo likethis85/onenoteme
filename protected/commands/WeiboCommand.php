@@ -32,7 +32,6 @@ class WeiboCommand extends CConsoleCommand
             'screen_name' => $accountName,
             'since_id' => $since_id,
             'count' => self::WEIBO_ROWS_COUNT,
-            'trim_user' => 0,
         );
         
         $fetch = new CDCurl();
