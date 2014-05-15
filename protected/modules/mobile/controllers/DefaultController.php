@@ -14,7 +14,7 @@ class DefaultController extends MobileController
         );
     }
     
-	public function actionIndex()
+	public function actionIndex($page = 1)
 	{
 	    $this->forward('channel/latest');
 	}
