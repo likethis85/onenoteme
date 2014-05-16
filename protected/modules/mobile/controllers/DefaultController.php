@@ -2,19 +2,19 @@
 
 class DefaultController extends MobileController
 {
-//    public function filters()
-//    {
-//        return array(
-//            array(
-//                'COutputCache + index',
-//                'duration' => 120,
-//                'varyByParam' => array('page'),
-//                'varyByExpression' => array(request(), 'getServerName'),
-//            ),
-//        );
-//    }
+    public function filters()
+    {
+        return array(
+            array(
+                'COutputCache + index',
+                'duration' => 120,
+                'varyByParam' => array('page'),
+                'varyByExpression' => array(request(), 'getServerName'),
+            ),
+        );
+    }
     
-	public function actionIndex($page = 1)
+	public function actionIndex()
 	{
 	    $this->forward('channel/latest');
 	}
