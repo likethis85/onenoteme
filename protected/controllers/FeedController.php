@@ -225,6 +225,7 @@ class FeedController extends Controller
             'xianguo',
             'wumii',
             'ucweb',
+            'yidian',
         );
     }
     
