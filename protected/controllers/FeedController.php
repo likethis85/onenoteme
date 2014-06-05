@@ -11,23 +11,6 @@ class FeedController extends Controller
 //         self::log();
     }
     
-    public function filters()
-    {
-        $duration = 600;
-        return array(
-            array(
-                'COutputCache + index, joke, lengtu, video, funny, focus',
-                'duration' => $duration,
-                'varyByParam' => array('source'),
-            ),
-            array(
-                'COutputCache + channel',
-                'duration' => $duration,
-                'varyByParam' => array('cid'),
-            ),
-        );
-    }
-    
     public function actionIndex($source = 'feed')
     {
         $channels = array(CHANNEL_FUNNY, CHANNEL_FOCUS);
