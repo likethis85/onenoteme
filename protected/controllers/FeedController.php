@@ -209,6 +209,7 @@ class FeedController extends Controller
             'wumii',
             'ucweb',
             'yidian',
+            'dongni',
         );
     }
     
